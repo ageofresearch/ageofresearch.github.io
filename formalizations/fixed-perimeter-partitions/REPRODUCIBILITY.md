@@ -66,7 +66,11 @@ The repository's `Lean verification` workflow:
 - uses Mathlib's upstream binary cache;
 - disables reuse of this project's `.lake` cache;
 - builds the complete `FixedPerimeter` target;
-- runs Lean's environment checker and the independent `nanoda` checker;
+- runs Lean's environment checker;
+- runs the independent `nanoda` checker against the explicit
+  `FixedPerimeter` root, with both `lean4export` and `nanoda` pinned to
+  immutable commits;
+- executes the guarded public-theorem axiom audit explicitly;
 - rejects `sorryAx`.
 
 ## Reproduction report

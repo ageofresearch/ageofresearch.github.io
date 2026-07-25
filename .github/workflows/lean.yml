@@ -5,11 +5,13 @@ on:
     branches: [main]
     paths:
       - "formalizations/fixed-perimeter-partitions/lean4/**"
+      - ".github/scripts/**"
       - ".github/workflows/lean.yml"
   pull_request:
     branches: [main]
     paths:
       - "formalizations/fixed-perimeter-partitions/lean4/**"
+      - ".github/scripts/**"
       - ".github/workflows/lean.yml"
   workflow_dispatch:
 

@@ -1,0 +1,52 @@
+name: Lean verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "formalizations/fixed-perimeter-partitions/lean4/**"
+      - ".github/workflows/lean.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "formalizations/fixed-perimeter-partitions/lean4/**"
+      - ".github/workflows/lean.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fixed-perimeter-partitions:
+    name: Fixed-perimeter — build and check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build and independently type-check Lean artifact
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          lake-package-directory: formalizations/fixed-perimeter-partitions/lean4
+          auto-config: false
+          build: true
+          build-args: FixedPerimeter
+          test: false
+          lint: false
+          mk_all-check: true
+          use-mathlib-cache: true
+          use-github-cache: false
+          leanchecker: true
+          nanoda: true
+          nanoda-allow-sorry: false
+      - name: Verify dependency pins were not rewritten
+        working-directory: formalizations/fixed-perimeter-partitions/lean4
+        run: |
+          diff -u lean-toolchain .lake/packages/mathlib/lean-toolchain
+          git diff --exit-code -- lean-toolchain lakefile.toml lake-manifest.json

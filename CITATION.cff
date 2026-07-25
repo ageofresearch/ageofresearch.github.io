@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Please cite the archive and the individual formalization record."
+title: "Formagization: A Reproducible Lean-First Formalization Archive"
+type: software
+authors:
+  - name: "Age of Research"
+    website: "https://github.com/ageofresearch"
+repository-code: "https://github.com/ageofresearch/formagization"
+url: "https://github.com/ageofresearch/formagization"
+version: 0.1.0
+license: MIT
+keywords:
+  - formal mathematics
+  - artificial intelligence
+  - proof assistants
+  - reproducibility
+  - Lean

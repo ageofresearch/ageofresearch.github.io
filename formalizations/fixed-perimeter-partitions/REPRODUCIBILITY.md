@@ -69,7 +69,7 @@ The repository's `Lean verification` workflow:
 - runs Lean's environment checker;
 - runs the independent `nanoda` checker against the explicit
   `FixedPerimeter` root, with both `lean4export` and `nanoda` pinned to
-  immutable commits;
+  immutable, mutually compatible commits using export format 3.1;
 - executes the guarded public-theorem axiom audit explicitly;
 - rejects `sorryAx`.
 

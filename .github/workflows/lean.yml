@@ -43,10 +43,16 @@ jobs:
           use-mathlib-cache: true
           use-github-cache: false
           leanchecker: true
-          nanoda: true
-          nanoda-allow-sorry: false
       - name: Verify dependency pins were not rewritten
         working-directory: formalizations/fixed-perimeter-partitions/lean4
         run: |
           diff -u lean-toolchain .lake/packages/mathlib/lean-toolchain
           git diff --exit-code -- lean-toolchain lakefile.toml lake-manifest.json
+      - name: Run guarded public-theorem axiom audit
+        working-directory: formalizations/fixed-perimeter-partitions/lean4
+        run: lake env lean FixedPerimeter/AxiomAudit.lean
+      - name: Independently type-check with pinned nanoda
+        run: |
+          bash .github/scripts/check-nanoda.sh \
+            formalizations/fixed-perimeter-partitions/lean4 \
+            FixedPerimeter

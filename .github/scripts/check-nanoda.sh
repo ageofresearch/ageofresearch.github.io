@@ -13,11 +13,11 @@ root_module="$2"
 readonly lean4export_repository="https://github.com/leanprover/lean4export.git"
 readonly lean4export_commit="af5aa64bb914c3c2c781f378088dbd38acf4f804"
 readonly nanoda_repository="https://github.com/ammkrn/nanoda_lib.git"
-readonly nanoda_commit="e5438ac0a85a036b6dfe093aa457bc3448498014"
+readonly nanoda_commit="f58f2f6d535e189a40fcb02ede8eb95f97a92d37"
 
 # lean-action v1.5.0 cannot infer the library root from Lake's current
-# top-level TOML package format. Resolve the exact sources here and export the
-# explicit module instead of relying on that wrapper's package-name heuristic.
+# top-level TOML package format. Resolve mutually compatible immutable
+# lean4export and nanoda revisions here, and export the explicit root module.
 project_directory="$(cd "$project_directory" && pwd)"
 checker_directory="$(mktemp -d "${RUNNER_TEMP:-/tmp}/formagization-nanoda.XXXXXX")"
 

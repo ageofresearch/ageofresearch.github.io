@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ageofresearch/formagization/raw/main/registry/artifact.schema.json",
+  "title": "Formagization mathematical formalization artifact",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "version",
+    "date",
+    "maintainer",
+    "subjects",
+    "keywords",
+    "sources",
+    "formal_system",
+    "public_theorems",
+    "trusted_computing_base",
+    "ai_assistance",
+    "evidence",
+    "release",
+    "license"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 10
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "maintainer": {
+      "type": "object",
+      "required": ["github", "name"],
+      "properties": {
+        "github": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "orcid": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "subjects": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "kind", "url"],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "snapshot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "normalized_characters": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "formal_system": {
+      "type": "object",
+      "required": ["name", "version", "project_directory", "build_command"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "toolchain": {
+          "type": "string"
+        },
+        "project_directory": {
+          "type": "string",
+          "minLength": 1
+        },
+        "build_command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audit_command": {
+          "type": "string"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "repository": {
+                "type": "string",
+                "format": "uri"
+              },
+              "commit": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{40}$"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "public_theorems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["declaration", "interpretation", "source_file"],
+        "properties": {
+          "declaration": {
+            "type": "string",
+            "minLength": 1
+          },
+          "interpretation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_file": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "trusted_computing_base": {
+      "type": "object",
+      "required": ["kernel", "public_theorem_axioms"],
+      "properties": {
+        "kernel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_theorem_axioms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "ai_assistance": {
+      "type": "object",
+      "required": ["material", "accountable_human_maintainer"],
+      "properties": {
+        "material": {
+          "type": "boolean"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "reasoning_effort": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "accountable_human_maintainer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transcripts_included": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "source_capture",
+        "clean_build",
+        "kernel_checking",
+        "semantic_alignment",
+        "proof_assistant_review",
+        "subject_matter_review",
+        "independent_reproduction",
+        "novelty"
+      ],
+      "properties": {
+        "source_capture": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "clean_build": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "kernel_checking": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "semantic_alignment": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "proof_assistant_review": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "subject_matter_review": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "independent_reproduction": {
+          "$ref": "#/$defs/evidenceRecord"
+        },
+        "novelty": {
+          "$ref": "#/$defs/evidenceRecord"
+        }
+      },
+      "additionalProperties": true
+    },
+    "release": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["pending", "released", "withdrawn"]
+        },
+        "planned_tag": {
+          "type": ["string", "null"]
+        },
+        "tag": {
+          "type": ["string", "null"]
+        },
+        "archive_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "doi": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "evidenceState": {
+      "enum": [
+        "present",
+        "pending",
+        "author-run",
+        "passed",
+        "failed",
+        "disputed",
+        "not-reviewed",
+        "not-independently-reviewed",
+        "independently-reviewed",
+        "not-reproduced",
+        "reproduced",
+        "not-assessed",
+        "assessed"
+      ]
+    },
+    "evidenceRecord": {
+      "type": "object",
+      "required": ["state"],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/evidenceState"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

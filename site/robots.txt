@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ageofresearch.github.io/formagization/sitemap.xml

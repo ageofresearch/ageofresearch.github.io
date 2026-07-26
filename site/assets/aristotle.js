@@ -147,6 +147,12 @@ import {
     formStatus.classList.toggle("is-success", kind === "success");
   };
 
+  const announceProject = (message) => {
+    if (projectAnnouncement && projectAnnouncement.textContent !== message) {
+      projectAnnouncement.textContent = message;
+    }
+  };
+
   const setPromptCount = () => {
     const length = promptInput.value.length;
     if (promptCount) {
@@ -251,12 +257,11 @@ import {
       payload?.can_download === true ||
       SUCCESS_STATUSES.has(status);
     downloadButton.hidden = !canDownload;
-    if (projectAnnouncement) {
-      projectAnnouncement.textContent =
-        `Project ${displayStatus(status)}. Completion ${
-          percent === null ? "not reported" : `${percent}%`
-        }.${canDownload ? " The result is ready to download." : ""}`;
-    }
+    announceProject(
+      `Project ${displayStatus(status)}. Completion ${
+        percent === null ? "not reported" : `${percent}%`
+      }.${canDownload ? " The result is ready to download." : ""}`,
+    );
     if (payload?.terminal === true || TERMINAL_STATUSES.has(status)) {
       clearPolling();
       if (canDownload || SUCCESS_STATUSES.has(status)) {
@@ -505,7 +510,7 @@ import {
       window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
       setFormStatus("Result archive downloaded.", "success");
       if (pollingNote) pollingNote.textContent = "Result archive downloaded.";
-      if (projectAnnouncement) projectAnnouncement.textContent = "Result archive downloaded.";
+      announceProject("Result archive downloaded.");
     } catch (error) {
       const message =
         error instanceof Error
@@ -513,7 +518,7 @@ import {
           : "The result archive could not be downloaded.";
       setFormStatus(message, "error");
       if (pollingNote) pollingNote.textContent = message;
-      if (projectAnnouncement) projectAnnouncement.textContent = message;
+      announceProject(message);
     } finally {
       requestInFlight = false;
       downloadButton.disabled = false;

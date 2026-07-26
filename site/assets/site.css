@@ -310,6 +310,7 @@ h3 {
   font-weight: 750;
   line-height: 1.25;
   text-decoration: none;
+  cursor: pointer;
   transition:
     color 160ms ease,
     background-color 160ms ease,

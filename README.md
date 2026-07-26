@@ -6,6 +6,11 @@
 [![Lean verification](https://github.com/ageofresearch/formagization/actions/workflows/lean.yml/badge.svg)](https://github.com/ageofresearch/formagization/actions/workflows/lean.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+[Project website](https://ageofresearch.github.io/formagization/) ·
+[Formalization archive](https://ageofresearch.github.io/formagization/formalizations/) ·
+[Evidence standards](https://ageofresearch.github.io/formagization/standards/) ·
+[Review an artifact](https://ageofresearch.github.io/formagization/review/)
+
 This repository is an evidence-graded archive of reproducible mathematical
 formalizations developed with AI assistance. It is designed for contributions
 in Lean, Isabelle, Rocq/Coq, HOL, Agda, Mizar, and other proof systems.

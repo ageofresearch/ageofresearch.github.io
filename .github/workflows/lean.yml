@@ -1,25 +1,15 @@
 name: Lean verification
 
+# The canonical verification workflow runs in ageofresearch/formagization.
+# This imported publishing mirror keeps a manual copy for provenance only.
 on:
-  push:
-    branches: [main]
-    paths:
-      - "formalizations/fixed-perimeter-partitions/lean4/**"
-      - ".github/scripts/**"
-      - ".github/workflows/lean.yml"
-  pull_request:
-    branches: [main]
-    paths:
-      - "formalizations/fixed-perimeter-partitions/lean4/**"
-      - ".github/scripts/**"
-      - ".github/workflows/lean.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: lean-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: lean-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

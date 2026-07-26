@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="Submit a mathematical request to Aristotle and follow its progress without adding it to the formAGIzation evidence ledger.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Aristotle workspace — formAGIzation">
+    <meta property="og:description" content="A private-in-your-tab workspace for submitting mathematical requests to Harmonic’s Aristotle service.">
+    <meta property="og:url" content="https://ageofresearch.github.io/aristotle/">
+    <title>Aristotle workspace — formAGIzation</title>
+    <link rel="canonical" href="https://ageofresearch.github.io/aristotle/">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/site.css">
+    <script src="../assets/site.js" defer></script>
+    <script src="../assets/aristotle.js" type="module"></script>
+  </head>
+  <body data-page="aristotle">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="../" aria-label="formAGIzation home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span class="brand-name">formAGIzation</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="../formalizations/">Formalizations</a>
+          <a href="../standards/">Evidence standards</a>
+          <a href="../review/">Review</a>
+          <a href="./" aria-current="page">Aristotle</a>
+          <a class="nav-github" href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell aristotle-hero">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><span>Aristotle</span></div>
+        <p class="eyebrow">Harmonic workspace</p>
+        <h1>Give Aristotle a mathematical request.</h1>
+        <p>
+          Submit text directly to Harmonic’s Aristotle service, follow the latest task,
+          and download the completed project archive. Your key is cached only in this
+          browser tab; the key and request transit formAGIzation’s stateless HTTPS relay
+          to Harmonic and never enter the evidence ledger.
+        </p>
+      </section>
+
+      <section class="section aristotle-section">
+        <div class="shell aristotle-layout">
+          <form class="aristotle-form" data-aristotle-form novalidate>
+            <div class="form-heading">
+              <p class="eyebrow">New project</p>
+              <h2>Submission</h2>
+              <p>Version one accepts a text request only. Lean projects and paper uploads are not sent.</p>
+            </div>
+
+            <div class="field-group">
+              <div class="field-label-row">
+                <label for="aristotle-key">Aristotle API key</label>
+                <span>Required</span>
+              </div>
+              <div class="key-field">
+                <input
+                  id="aristotle-key"
+                  name="aristotle-key"
+                  type="password"
+                  autocomplete="off"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  aria-describedby="key-help"
+                  data-aristotle-key
+                  required
+                >
+                <button type="button" class="field-action" data-key-toggle aria-pressed="false">Show</button>
+                <button type="button" class="field-action field-action-muted" data-key-forget>Forget</button>
+              </div>
+              <p class="field-help" id="key-help">
+                Cached only in this tab’s <code>sessionStorage</code>. Each request sends
+                it in a protected header to our stateless HTTPS relay, which forwards it
+                to Harmonic without retaining it.
+              </p>
+            </div>
+
+            <div class="field-group">
+              <div class="field-label-row">
+                <label for="aristotle-prompt">Mathematical request</label>
+                <span data-prompt-count>0 / 100,000</span>
+              </div>
+              <textarea
+                id="aristotle-prompt"
+                name="aristotle-prompt"
+                rows="16"
+                maxlength="100000"
+                aria-describedby="prompt-help prompt-limit-status"
+                data-aristotle-prompt
+                required
+              ></textarea>
+              <p class="field-help" id="prompt-help">
+                Sent as entered through the same stateless relay, with no silent
+                truncation or storage by formAGIzation. Interactive agent questions are
+                disabled for this workflow.
+              </p>
+              <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>
+            </div>
+
+            <div class="form-submit-row">
+              <button class="button button-primary" type="submit" data-submit-button>
+                Submit to Aristotle <span aria-hidden="true">→</span>
+              </button>
+              <p class="form-status" role="status" aria-live="polite" data-form-status>Ready to submit.</p>
+            </div>
+          </form>
+
+          <aside class="aristotle-progress" aria-labelledby="project-progress-title" data-project-panel hidden>
+            <div class="progress-heading">
+              <div>
+                <p class="eyebrow">Latest project</p>
+                <h2 id="project-progress-title">Progress</h2>
+              </div>
+              <span class="project-state" data-project-state>Queued</span>
+            </div>
+
+            <dl class="project-details">
+              <div>
+                <dt>Project ID</dt>
+                <dd data-project-id>—</dd>
+              </div>
+              <div>
+                <dt>Task status</dt>
+                <dd data-task-status>—</dd>
+              </div>
+              <div>
+                <dt>Completion</dt>
+                <dd><span data-project-percent>—</span></dd>
+              </div>
+            </dl>
+
+            <div class="progress-track" aria-hidden="true">
+              <span data-progress-bar></span>
+            </div>
+
+            <div class="project-summary">
+              <strong>Output summary</strong>
+              <p data-project-summary>No output has been reported yet.</p>
+            </div>
+
+            <div class="project-actions">
+              <a class="button button-secondary" href="#" target="_blank" rel="noopener noreferrer" data-dashboard-link hidden>
+                Open Harmonic dashboard <span aria-hidden="true">↗</span>
+              </a>
+              <button class="button button-primary" type="button" data-download-button hidden>
+                Download result <span aria-hidden="true">↓</span>
+              </button>
+            </div>
+            <p class="polling-note" data-polling-note>
+              Progress refreshes only while this page is visible.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section shell scientific-boundary" aria-labelledby="scientific-boundary-title">
+        <p class="eyebrow">Scientific boundary</p>
+        <h2 id="scientific-boundary-title">An Aristotle result is a working artifact—not a ledger verdict.</h2>
+        <div>
+          <p>
+            Submission, progress, and completion statuses describe Harmonic’s project
+            workflow only. They do not establish semantic alignment, expert review,
+            independent reproduction, novelty, publication, or formal verification.
+          </p>
+          <p>
+            Nothing on this page automatically becomes a public claim, proof,
+            reproduction record, or formAGIzation artifact. Publication requires the
+            archive’s ordinary evidence and review process.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">formAGIzation</span></a>
+          <p>A reproducible, evidence-graded archive of machine-checked mathematics.</p>
+        </div>
+        <div class="footer-links">
+          <div><strong>Archive</strong><a href="../formalizations/">Formalizations</a><a href="../standards/">Evidence standards</a><a href="../review/">Review</a><a href="./">Aristotle</a></div>
+          <div><strong>Repository</strong><a href="https://github.com/ageofresearch/formagization/blob/main/CHARTER.md">Charter</a><a href="https://github.com/ageofresearch/formagization/blob/main/GOVERNANCE.md">Governance</a><a href="https://github.com/ageofresearch/formagization/blob/main/CITATION.cff">Citation</a></div>
+        </div>
+      </div>
+      <div class="shell footer-bottom"><span>Maintained by Age of Research · MIT License</span><span>Aristotle activity is not ledger evidence</span></div>
+    </footer>
+  </body>
+</html>

@@ -124,9 +124,14 @@
       "report": "source/README.md"
     },
     "clean_build": {
-      "state": "pending",
-      "note": "A local build passed with an existing pinned dependency cache; clean GitHub CI is pending.",
-      "report": "reviews/author-check-2026-07-25.md"
+      "state": "passed",
+      "date": "2026-07-25",
+      "runner": "GitHub-hosted Ubuntu 24.04 x86_64 clean checkout",
+      "run_id": 30180068398,
+      "run_url": "https://github.com/ageofresearch/formagization/actions/runs/30180068398",
+      "head_sha": "3452c0b8c3b392802658b1d768f19b5199955bfd",
+      "report": "reviews/github-ci-2026-07-25.md",
+      "note": "Automated clean CI passed. This is not an independent human reproduction."
     },
     "local_build": {
       "state": "passed",
@@ -135,13 +140,19 @@
       "report": "reviews/author-check-2026-07-25.md"
     },
     "kernel_checking": {
-      "state": "author-run",
+      "state": "passed",
       "date": "2026-07-25",
-      "axiom_report": "lean4/FixedPerimeter/AxiomAudit.lean"
+      "axiom_report": "lean4/FixedPerimeter/AxiomAudit.lean",
+      "report": "reviews/github-ci-2026-07-25.md",
+      "checkers": ["Lean kernel", "leanchecker", "nanoda"]
     },
     "github_ci": {
-      "state": "pending",
-      "workflow": ".github/workflows/lean.yml"
+      "state": "passed",
+      "workflow": ".github/workflows/lean.yml",
+      "run_id": 30180068398,
+      "run_url": "https://github.com/ageofresearch/formagization/actions/runs/30180068398",
+      "head_sha": "3452c0b8c3b392802658b1d768f19b5199955bfd",
+      "report": "reviews/github-ci-2026-07-25.md"
     },
     "semantic_alignment": {
       "state": "not-independently-reviewed",

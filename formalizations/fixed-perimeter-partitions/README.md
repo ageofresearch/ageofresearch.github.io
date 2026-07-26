@@ -20,10 +20,12 @@ The current source:
 - reports only `propext`, `Classical.choice`, and `Quot.sound` for the three
   public conclusions.
 
-These facts describe an author-run local build and audit. A clean GitHub CI
-reproduction is pending. **Independent semantic alignment, subject-matter
-review, independent reproduction, and novelty assessment have not yet been
-recorded.**
+Automated clean [GitHub CI](reviews/github-ci-2026-07-25.md) passed on a fresh
+checkout: all 2,822 Lean build jobs, the bundled `leanchecker`, dependency-pin
+integrity, the guarded axiom audit, and nanoda's independent type-check
+completed successfully. **Independent semantic alignment, subject-matter
+review, independent human reproduction, and novelty assessment have not yet
+been recorded.**
 
 ## Public declarations
 

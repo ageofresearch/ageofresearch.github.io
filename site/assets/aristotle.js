@@ -39,6 +39,11 @@ import {
   const dashboardLink = document.querySelector("[data-dashboard-link]");
   const downloadButton = document.querySelector("[data-download-button]");
   const pollingNote = document.querySelector("[data-polling-note]");
+  const projectAnnouncement = document.querySelector("[data-project-announcement]");
+  const workspace = document.querySelector("[data-aristotle-workspace]");
+  const workspacePanes = [...document.querySelectorAll("[data-aristotle-pane]")];
+  const viewButtons = [...document.querySelectorAll("[data-aristotle-view]")];
+  const narrowWorkspace = window.matchMedia("(max-width: 900px)");
 
   if (
     !(keyInput instanceof HTMLInputElement) ||
@@ -54,6 +59,42 @@ import {
   let pollTimer = 0;
   let requestInFlight = false;
   let lastProjectData = null;
+  let activeWorkspaceView = "request";
+
+  const setWorkspaceView = (view, { focus = false } = {}) => {
+    if (view !== "request" && view !== "progress") return;
+    activeWorkspaceView = view;
+
+    if (workspace instanceof HTMLElement) workspace.dataset.mobileView = view;
+    for (const button of viewButtons) {
+      if (!(button instanceof HTMLButtonElement)) continue;
+      const isActive = button.dataset.aristotleView === view;
+      button.setAttribute("aria-pressed", String(isActive));
+      if (focus && isActive) button.focus();
+    }
+
+    for (const pane of workspacePanes) {
+      if (!(pane instanceof HTMLElement)) continue;
+      if (!narrowWorkspace.matches) {
+        pane.hidden = false;
+        pane.removeAttribute("aria-hidden");
+        pane.removeAttribute("inert");
+        continue;
+      }
+      const isInactive = pane.dataset.aristotlePane !== view;
+      pane.hidden = isInactive;
+      pane.setAttribute("aria-hidden", String(isInactive));
+      pane.toggleAttribute("inert", isInactive);
+    }
+  };
+
+  for (const button of viewButtons) {
+    button.addEventListener("click", () => {
+      setWorkspaceView(button.dataset.aristotleView, { focus: true });
+    });
+  }
+  narrowWorkspace.addEventListener("change", () => setWorkspaceView(activeWorkspaceView));
+  setWorkspaceView(activeWorkspaceView);
 
   const readStoredKey = () => {
     try {
@@ -187,6 +228,7 @@ import {
     const percent = getPercent(payload);
     const dashboardUrl = getDashboardUrl(payload);
 
+    if (workspace instanceof HTMLElement) workspace.dataset.hasProject = "true";
     if (projectPanel instanceof HTMLElement) projectPanel.hidden = false;
     if (projectIdOutput) projectIdOutput.textContent = activeProjectId || "—";
     if (taskStatusOutput) taskStatusOutput.textContent = displayStatus(status);
@@ -209,6 +251,12 @@ import {
       payload?.can_download === true ||
       SUCCESS_STATUSES.has(status);
     downloadButton.hidden = !canDownload;
+    if (projectAnnouncement) {
+      projectAnnouncement.textContent =
+        `Project ${displayStatus(status)}. Completion ${
+          percent === null ? "not reported" : `${percent}%`
+        }.${canDownload ? " The result is ready to download." : ""}`;
+    }
     if (payload?.terminal === true || TERMINAL_STATUSES.has(status)) {
       clearPolling();
       if (canDownload || SUCCESS_STATUSES.has(status)) {
@@ -282,6 +330,7 @@ import {
   activeProjectId = readStoredProjectId();
   setPromptCount();
   if (activeProjectId) {
+    setWorkspaceView("progress");
     updateProjectPanel(
       { projectId: activeProjectId, projectStatus: 1 },
       { initial: true },
@@ -389,6 +438,7 @@ import {
       }
       activeProjectId = projectId;
       storeProjectId(projectId);
+      setWorkspaceView("progress", { focus: narrowWorkspace.matches });
       updateProjectPanel(payload, { initial: true });
       if (payload?.terminal !== true && !TERMINAL_STATUSES.has(getStatus(payload))) {
         setFormStatus("Project accepted. Progress will refresh while this page is visible.", "success");
@@ -407,6 +457,7 @@ import {
     const key = keyInput.value;
     const keyError = validateKey(key);
     if (keyError) {
+      setWorkspaceView("request");
       setFormStatus(keyError, "error");
       keyInput.focus();
       return;
@@ -415,6 +466,7 @@ import {
     requestInFlight = true;
     downloadButton.disabled = true;
     setFormStatus("Preparing the result archive…");
+    if (pollingNote) pollingNote.textContent = "Preparing the result archive…";
     try {
       const response = await fetch(
         `${ARISTOTLE_PROXY_URL}/api/projects/${encodeURIComponent(activeProjectId)}/result`,
@@ -452,8 +504,16 @@ import {
       link.remove();
       window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
       setFormStatus("Result archive downloaded.", "success");
+      if (pollingNote) pollingNote.textContent = "Result archive downloaded.";
+      if (projectAnnouncement) projectAnnouncement.textContent = "Result archive downloaded.";
     } catch (error) {
-      setFormStatus(error instanceof Error ? error.message : "The result archive could not be downloaded.", "error");
+      const message =
+        error instanceof Error
+          ? error.message
+          : "The result archive could not be downloaded.";
+      setFormStatus(message, "error");
+      if (pollingNote) pollingNote.textContent = message;
+      if (projectAnnouncement) projectAnnouncement.textContent = message;
     } finally {
       requestInFlight = false;
       downloadButton.disabled = false;

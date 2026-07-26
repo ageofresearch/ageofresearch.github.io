@@ -99,6 +99,7 @@ for (const path of requiredFiles) {
 const aristotlePage = readFileSync(join(siteRoot, "aristotle/index.html"), "utf8");
 const aristotleScript = readFileSync(join(siteRoot, "assets/aristotle.js"), "utf8");
 const aristotleCore = readFileSync(join(siteRoot, "assets/aristotle-core.mjs"), "utf8");
+const siteStyles = readFileSync(join(siteRoot, "assets/site.css"), "utf8");
 const sessionStorageWrites = [
   ...aristotleScript.matchAll(/sessionStorage\.setItem\(([^,\n]+)/g),
 ].map((match) => match[1].trim());
@@ -157,6 +158,26 @@ const aristotleRequirements = [
   [aristotlePage.includes('maxlength="100000"'), "Aristotle prompt must declare its 100,000-character limit"],
   [aristotlePage.includes("data-key-forget"), "Aristotle page must provide a Forget control"],
   [aristotlePage.includes("data-key-toggle"), "Aristotle page must provide a Show control"],
+  [
+    aristotlePage.includes('class="aristotle-document"') &&
+      aristotlePage.includes("data-aristotle-workspace") &&
+      aristotlePage.includes('data-aristotle-view="request"') &&
+      aristotlePage.includes('data-aristotle-view="progress"'),
+    "Aristotle page must retain its viewport-locked, two-view workspace",
+  ],
+  [
+    siteStyles.includes("html.aristotle-document") &&
+      siteStyles.includes('body[data-page="aristotle"]') &&
+      siteStyles.includes("height: 100dvh") &&
+      siteStyles.includes("overflow: hidden"),
+    "Aristotle workspace must prevent document-level scrolling",
+  ],
+  [
+    aristotleScript.includes('window.matchMedia("(max-width: 900px)")') &&
+      aristotleScript.includes("pane.hidden = isInactive") &&
+      aristotleScript.includes('setWorkspaceView("progress")'),
+    "Aristotle mobile layout must switch between request and progress panes",
+  ],
   [Boolean(proxyMatch), "Aristotle core must export one proxy URL constant"],
   [
     aristotleCore.includes('"X-Formagization-Aristotle-Key"'),

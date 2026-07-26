@@ -10,6 +10,51 @@ This repository is an evidence-graded archive of reproducible mathematical
 formalizations developed with AI assistance. It is designed for contributions
 in Lean, Isabelle, Rocq/Coq, HOL, Agda, Mizar, and other proof systems.
 
+## First published formalization
+
+### Fixed-perimeter partition counts
+
+For a nonempty integer partition, define its *perimeter* as its largest part
+plus its number of parts minus one. For natural numbers `j`, `k`, and `n`, let
+`FO(j,k,n)` count partitions of perimeter `n` having exactly `j` distinct
+present part sizes divisible by `k`, and let `FD(j,k,n)` count those having
+exactly `j` distinct part sizes that occur at least `k` times.
+
+The first Lean 4 + Mathlib artifact establishes three related formal
+statements:
+
+1. **Exact equality at `k = 2`:** `FD(j,2,n) = FO(j,2,n)` for every natural
+   `j` and `n`.
+2. **Asymptotic separation for `k ≥ 3`:** for each fixed `j` and `k ≥ 3`,
+   `FO(j,k,n) / FD(j,k,n) → 0` as `n → ∞`, with the quotient taken in `ℝ`.
+3. **Eventual strict inequality:** consequently, for each fixed `j` and
+   `k ≥ 3`, `FO(j,k,n) < FD(j,k,n)` for all sufficiently large `n`.
+
+**Proof architecture.** The `k = 2` result is obtained from a recursive,
+perimeter-preserving bijection together with a proved support-statistic
+correspondence. For `k ≥ 3`, the development derives fixed-`j` generating
+functions from executable finite definitions, proves the required
+dominant-root separation, develops a claim-specific rational
+coefficient-transfer argument with positive leading constants, and transports
+the resulting asymptotics back to `FO` and `FD`.
+
+**Recorded evidence.** A clean GitHub Actions run built all 2,822 Lean jobs and
+passed Lean's environment checker, the guarded axiom audit, and nanoda's
+independent type-check. The three public declarations contain no proof
+placeholders or explicit local axioms; their guarded axiom output is exactly
+`propext`, `Classical.choice`, and `Quot.sound`.
+
+**Review status.** Independent semantic alignment, subject-matter review,
+independent human reproduction, and novelty assessment have not yet been
+recorded.
+
+[Artifact overview](formalizations/fixed-perimeter-partitions/) ·
+[Exact statement and conventions](formalizations/fixed-perimeter-partitions/STATEMENT_MAPPING.md) ·
+[Proof architecture](formalizations/fixed-perimeter-partitions/PROOF_OVERVIEW.md) ·
+[Lean source](formalizations/fixed-perimeter-partitions/lean4/FixedPerimeter/) ·
+[Reproduction guide](formalizations/fixed-perimeter-partitions/REPRODUCIBILITY.md) ·
+[CI report](formalizations/fixed-perimeter-partitions/reviews/github-ci-2026-07-25.md)
+
 ## Scientific boundary
 
 Inclusion in this archive means that an artifact satisfies the archive's

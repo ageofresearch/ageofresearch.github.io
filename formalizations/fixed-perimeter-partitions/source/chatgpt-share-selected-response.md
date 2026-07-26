@@ -161,7 +161,11 @@ similarly rules out $\mid z \mid < \rho_{O}$, and equality on the boundary again
 The decisive comparison is
 
 $$
-A_{O} \left(\right. q \left.\right) - A_{D} \left(\right. q \left.\right) & = \left(\right. 1 - q \left.\right)^{k - 1} - 1 + q + q^{2} + \hdots + q^{k - 1} \\ & = q \sum_{ℓ = 0}^{k - 2} \left(\right. q^{ℓ} - \left(\right. 1 - q \left.\right)^{ℓ} \left.\right) .
+\begin{aligned}
+A_O(q)-A_D(q)
+&=(1-q)^{k-1}-1+q+q^2+\cdots+q^{k-1} \\
+&=q\sum_{\ell=0}^{k-2}\left(q^\ell-(1-q)^\ell\right).
+\end{aligned}
 $$
 
 For $q > 1 / 2$ and $k \geq 3$, this quantity is strictly positive. Since $\rho_{D} > 1 / 2$,

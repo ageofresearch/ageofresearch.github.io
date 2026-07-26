@@ -7,13 +7,13 @@
     <meta name="description" content="Submit a mathematical request to Aristotle and follow its progress without adding it to the formAGIzation evidence ledger.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Aristotle workspace — formAGIzation">
-    <meta property="og:description" content="A private-in-your-tab workspace for submitting mathematical requests to Harmonic’s Aristotle service.">
+    <meta property="og:description" content="A tab-scoped-key workspace for submitting mathematical requests to Harmonic’s Aristotle service.">
     <meta property="og:url" content="https://ageofresearch.github.io/aristotle/">
     <title>Aristotle workspace — formAGIzation</title>
     <link rel="canonical" href="https://ageofresearch.github.io/aristotle/">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../assets/site.css">
-    <script src="../assets/aristotle.js" type="module"></script>
+    <link rel="stylesheet" href="../assets/site.css?build=20260726-send-link-lock">
+    <script src="../assets/aristotle.js?build=20260726-send-link-lock" type="module"></script>
   </head>
   <body data-page="aristotle" class="aristotle-app">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -38,7 +38,7 @@
           <h1 id="aristotle-title">Formalize a mathematical request.</h1>
         </div>
         <p class="aristotle-intro-note">
-          <span>Private in this tab</span>
+          <span>Key stored in this tab</span>
           <span aria-hidden="true">·</span>
           Working artifact—not ledger verification.
         </p>
@@ -108,20 +108,16 @@
               required
             ></textarea>
             <p class="field-help" id="prompt-help">
-              Plain text remains unchanged. For a standalone ChatGPT Share link, choose <strong>Test of link</strong> to replace it with conversation-only <code>PERSON:</code> and <code>LLM:</code> turns.
+              Plain text stays editable. A standalone ChatGPT Share link changes the action to <strong>Send Link</strong>; a public reader imports <code>PERSON:</code> and <code>LLM:</code> turns without your Aristotle key, then locks them while preserving scroll.
             </p>
             <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>
           </div>
 
           <div class="form-submit-row">
-            <div class="form-action-buttons">
-              <button class="button button-secondary" type="button" data-share-import>
-                Test of link
-              </button>
-              <button class="button button-primary" type="submit" data-submit-button>
-                Submit to Aristotle <span aria-hidden="true">→</span>
-              </button>
-            </div>
+            <button class="button button-primary" type="submit" data-submit-button>
+              <span data-submit-label>Submit to Aristotle</span>
+              <span aria-hidden="true">→</span>
+            </button>
             <p class="form-status" role="status" aria-live="polite" data-form-status>Ready to submit.</p>
           </div>
         </form>

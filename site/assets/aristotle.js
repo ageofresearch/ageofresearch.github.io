@@ -32,6 +32,7 @@ import {
   const keyForget = form.querySelector("[data-key-forget]");
   const promptCount = form.querySelector("[data-prompt-count]");
   const promptLimitStatus = form.querySelector("[data-prompt-limit-status]");
+  const shareImportButton = form.querySelector("[data-share-import]");
   const submitButton = form.querySelector("[data-submit-button]");
   const formStatus = form.querySelector("[data-form-status]");
   const projectPanel = document.querySelector("[data-project-panel]");
@@ -53,6 +54,7 @@ import {
   if (
     !(keyInput instanceof HTMLInputElement) ||
     !(promptInput instanceof HTMLTextAreaElement) ||
+    !(shareImportButton instanceof HTMLButtonElement) ||
     !(submitButton instanceof HTMLButtonElement) ||
     !(downloadButton instanceof HTMLButtonElement)
   ) {
@@ -171,6 +173,7 @@ import {
 
   const updateSubmitAvailability = () => {
     submitButton.disabled = requestInFlight || shareImportInFlight;
+    shareImportButton.disabled = requestInFlight || shareImportInFlight;
   };
 
   const readLimitedShareResponse = async (response) => {
@@ -554,19 +557,18 @@ import {
       setFormStatus("The request was not pasted because it would exceed 100,000 characters.", "error");
       return;
     }
-
-    const sharedLink = parseChatGPTShareUrl(nextValue);
-    if (!sharedLink) return;
-    event.preventDefault();
-    promptInput.value = nextValue.trim();
-    setPromptCount();
-    void importChatGPTShare(sharedLink).catch(() => {
-      // The import function reports a safe, user-facing error.
-    });
   });
-  promptInput.addEventListener("change", () => {
+
+  shareImportButton.addEventListener("click", () => {
     const sharedLink = parseChatGPTShareUrl(promptInput.value);
-    if (!sharedLink || shareImportInFlight) return;
+    if (!sharedLink) {
+      const message = looksLikeChatGPTShareUrl(promptInput.value)
+        ? "Enter a complete public ChatGPT Share link without query parameters or fragments."
+        : "Paste one standalone official ChatGPT Share link to test it. Plain text was left unchanged.";
+      setFormStatus(message, "error");
+      promptInput.focus();
+      return;
+    }
     void importChatGPTShare(sharedLink).catch(() => {
       // The import function reports a safe, user-facing error.
     });
@@ -577,16 +579,15 @@ import {
     if (requestInFlight || shareImportInFlight) return;
 
     const key = keyInput.value;
-    let prompt = promptInput.value;
+    const prompt = promptInput.value;
     const sharedLink = parseChatGPTShareUrl(prompt);
     if (sharedLink) {
-      try {
-        await importChatGPTShare(sharedLink);
-        prompt = promptInput.value;
-      } catch {
-        promptInput.focus();
-        return;
-      }
+      setFormStatus(
+        "Choose Test of link to import and review this conversation before submitting.",
+        "error",
+      );
+      promptInput.focus();
+      return;
     } else if (looksLikeChatGPTShareUrl(prompt)) {
       setFormStatus(
         "Enter a complete public ChatGPT Share link without query parameters or fragments.",

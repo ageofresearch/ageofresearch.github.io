@@ -108,15 +108,20 @@
               required
             ></textarea>
             <p class="field-help" id="prompt-help">
-              Plain text is sent as entered. A standalone ChatGPT Share link is first replaced with conversation-only <code>PERSON:</code> and <code>LLM:</code> turns.
+              Plain text remains unchanged. For a standalone ChatGPT Share link, choose <strong>Test of link</strong> to replace it with conversation-only <code>PERSON:</code> and <code>LLM:</code> turns.
             </p>
             <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>
           </div>
 
           <div class="form-submit-row">
-            <button class="button button-primary" type="submit" data-submit-button>
-              Submit to Aristotle <span aria-hidden="true">→</span>
-            </button>
+            <div class="form-action-buttons">
+              <button class="button button-secondary" type="button" data-share-import>
+                Test of link
+              </button>
+              <button class="button button-primary" type="submit" data-submit-button>
+                Submit to Aristotle <span aria-hidden="true">→</span>
+              </button>
+            </div>
             <p class="form-status" role="status" aria-live="polite" data-form-status>Ready to submit.</p>
           </div>
         </form>

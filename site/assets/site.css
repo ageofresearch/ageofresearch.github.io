@@ -1375,87 +1375,245 @@ h3 {
 
 /* Aristotle workspace */
 
-.aristotle-hero {
-  padding-bottom: clamp(58px, 7vw, 88px);
+html.aristotle-document {
+  height: 100%;
+  overflow: hidden;
+  scroll-padding-top: 0;
+  overscroll-behavior: none;
 }
 
-.aristotle-hero h1 {
-  max-width: 850px;
-}
-
-.aristotle-section {
-  padding-top: 0;
-}
-
-.aristotle-layout {
+body[data-page="aristotle"] {
+  --ink-faint: #5f6b67;
+  --copper: #a34729;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-  align-items: start;
-  gap: clamp(26px, 5vw, 64px);
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
-.aristotle-form,
-.aristotle-progress {
-  border: 1px solid var(--line);
-  background: var(--paper-light);
-  box-shadow: 0 18px 55px rgba(34, 42, 38, 0.06);
+body[data-page="aristotle"]::before {
+  opacity: 0.2;
 }
 
-.aristotle-form {
-  padding: clamp(24px, 5vw, 54px);
-}
-
-.form-heading {
-  padding-bottom: 34px;
-  margin-bottom: 36px;
+.aristotle-topbar {
+  z-index: 50;
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
   border-bottom: 1px solid var(--line);
+  background: rgba(244, 240, 231, 0.94);
+  backdrop-filter: blur(16px);
 }
 
-.form-heading h2,
-.progress-heading h2 {
-  margin-bottom: 12px;
-  font-size: clamp(2.1rem, 3.7vw, 3.2rem);
+.aristotle-topbar-inner {
+  display: grid;
+  width: min(1480px, calc(100% - 40px));
+  height: 56px;
+  margin-inline: auto;
+  align-items: center;
+  grid-template-columns: 1fr auto 1fr;
 }
 
-.form-heading p:last-child {
-  max-width: 650px;
-  margin-bottom: 0;
-  color: var(--ink-soft);
-  font-size: 0.9rem;
+.aristotle-topbar .brand {
+  width: max-content;
+  gap: 9px;
 }
 
-.field-group + .field-group {
-  margin-top: 34px;
+.aristotle-topbar .brand-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  font-size: 1.1rem;
 }
 
-.field-label-row {
+.aristotle-topbar .brand-name {
+  font-size: 1.05rem;
+}
+
+.aristotle-product-name {
+  color: var(--ink-faint);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.aristotle-topbar-links {
   display: flex;
-  margin-bottom: 10px;
-  align-items: baseline;
-  justify-content: space-between;
+  justify-self: end;
   gap: 20px;
 }
 
-.field-label-row label {
+.aristotle-topbar-links a {
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.aristotle-topbar-links a:hover,
+.aristotle-topbar-links a:focus-visible {
+  color: var(--forest);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.aristotle-screen {
+  display: grid;
+  width: min(1480px, calc(100% - 40px));
+  height: 100%;
+  min-height: 0;
+  padding: clamp(12px, 2.2vh, 22px) 0 max(clamp(12px, 2.2vh, 22px), env(safe-area-inset-bottom, 0px));
+  margin-inline: auto;
+  overflow: hidden;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(10px, 1.8vh, 18px);
+}
+
+.aristotle-intro {
+  display: flex;
+  min-width: 0;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.aristotle-intro .eyebrow {
+  margin-bottom: 5px;
+  font-size: 0.64rem;
+}
+
+.aristotle-intro h1 {
+  margin-bottom: 0;
+  font-size: clamp(1.75rem, 3vw, 2.85rem);
+  line-height: 1;
+}
+
+.aristotle-intro-note {
+  display: flex;
+  margin: 0 0 2px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+  color: var(--ink-faint);
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.aristotle-intro-note span:first-child {
+  color: var(--forest);
+  font-weight: 800;
+}
+
+.aristotle-view-tabs {
+  display: none;
+}
+
+.aristotle-workspace {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.65fr);
+  gap: clamp(12px, 1.8vw, 24px);
+}
+
+.aristotle-pane {
+  min-width: 0;
+  min-height: 0;
+}
+
+.aristotle-pane[hidden] {
+  display: none !important;
+}
+
+.aristotle-form,
+.aristotle-progress,
+.aristotle-idle,
+.aristotle-boundary {
+  border: 1px solid var(--line);
+  background: rgba(251, 249, 244, 0.94);
+}
+
+.aristotle-form {
+  display: grid;
+  height: 100%;
+  padding: clamp(14px, 2.2vw, 24px);
+  overflow: hidden;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: clamp(10px, 1.5vh, 16px);
+  box-shadow: 0 14px 42px rgba(34, 42, 38, 0.055);
+}
+
+.aristotle-form .form-heading {
+  display: flex;
+  padding-bottom: clamp(8px, 1.2vh, 12px);
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.aristotle-form .form-heading .eyebrow {
+  margin-bottom: 2px;
+  font-size: 0.58rem;
+}
+
+.aristotle-form .form-heading h2,
+.aristotle-progress .progress-heading h2,
+.aristotle-idle h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+}
+
+.aristotle-form .form-heading > p {
+  margin: 0;
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  text-align: right;
+}
+
+.aristotle-form .field-group {
+  min-width: 0;
+  margin: 0;
+}
+
+.aristotle-form .field-group-prompt {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.aristotle-form .field-label-row {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.aristotle-form .field-label-row label {
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 1.15rem;
+  font-size: 0.92rem;
   font-weight: 650;
 }
 
-.field-label-row span {
+.aristotle-form .field-label-row span {
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 0.67rem;
-  letter-spacing: 0.03em;
+  font-size: 0.59rem;
+  letter-spacing: 0.02em;
 }
 
-.field-label-row span.is-over-limit {
+.aristotle-form .field-label-row span.is-over-limit {
   color: var(--copper);
   font-weight: 800;
 }
 
-.key-field {
+.aristotle-form .key-field {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
 }
@@ -1463,8 +1621,9 @@ h3 {
 .aristotle-form input,
 .aristotle-form textarea {
   width: 100%;
+  min-width: 0;
   border: 1px solid var(--line-dark);
-  border-radius: 0;
+  border-radius: 2px;
   color: var(--ink);
   background: var(--white);
   outline: none;
@@ -1474,18 +1633,25 @@ h3 {
 }
 
 .aristotle-form input {
-  min-width: 0;
-  padding: 13px 14px;
+  height: 40px;
+  padding: 8px 11px;
   border-right: 0;
+  border-radius: 2px 0 0 2px;
   font-family: var(--mono);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
 }
 
 .aristotle-form textarea {
-  min-height: 340px;
-  padding: 17px;
-  line-height: 1.62;
-  resize: vertical;
+  height: 100%;
+  min-height: 0;
+  padding: 12px 13px;
+  overflow: auto;
+  line-height: 1.48;
+  resize: none;
+}
+
+.aristotle-form textarea::placeholder {
+  color: var(--ink-faint);
 }
 
 .aristotle-form input:focus,
@@ -1493,54 +1659,62 @@ h3 {
   position: relative;
   z-index: 1;
   border-color: var(--forest);
-  box-shadow: 0 0 0 3px rgba(23, 63, 54, 0.12);
+  box-shadow: 0 0 0 3px rgba(23, 63, 54, 0.11);
 }
 
 .aristotle-form textarea[aria-invalid="true"] {
   border-color: var(--copper);
 }
 
-.field-action {
-  padding: 0 13px;
+.aristotle-form .field-action {
+  min-width: 56px;
+  padding: 0 10px;
   border: 1px solid var(--line-dark);
   color: var(--forest);
   background: var(--paper);
-  font-size: 0.73rem;
+  font-size: 0.66rem;
   font-weight: 780;
   cursor: pointer;
 }
 
-.field-action + .field-action {
+.aristotle-form .field-action + .field-action {
   border-left: 0;
+  border-radius: 0 2px 2px 0;
 }
 
-.field-action:hover,
-.field-action:focus-visible {
+.aristotle-form .field-action:hover,
+.aristotle-form .field-action:focus-visible {
   color: var(--paper-light);
   border-color: var(--forest);
   background: var(--forest);
 }
 
-.field-action-muted {
+.aristotle-form .field-action-muted {
   color: var(--copper);
 }
 
-.field-help {
-  margin: 9px 0 0;
+.aristotle-form .field-help {
+  min-height: 1.2em;
+  margin: 4px 0 0;
   color: var(--ink-faint);
-  font-size: 0.75rem;
+  font-size: 0.64rem;
+  line-height: 1.35;
 }
 
-.form-submit-row {
-  display: flex;
-  padding-top: 30px;
-  margin-top: 34px;
+.aristotle-form .form-submit-row {
+  display: grid;
+  min-width: 0;
+  padding-top: clamp(8px, 1.2vh, 12px);
+  margin: 0;
   border-top: 1px solid var(--line);
   align-items: center;
-  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
 }
 
-.form-submit-row .button {
+.aristotle-form .form-submit-row .button {
+  min-height: 40px;
+  padding: 9px 15px;
   flex: none;
 }
 
@@ -1551,57 +1725,108 @@ h3 {
   transform: none;
 }
 
-.form-status {
+.aristotle-form .form-status {
+  max-height: 2.9em;
   margin: 0;
+  overflow: auto;
   color: var(--ink-faint);
-  font-size: 0.76rem;
-  line-height: 1.45;
+  font-size: 0.67rem;
+  line-height: 1.4;
 }
 
-.form-status.is-error {
+.aristotle-form .form-status.is-error {
   color: #8c3c24;
 }
 
-.form-status.is-success {
+.aristotle-form .form-status.is-success {
   color: var(--forest);
 }
 
+.aristotle-rail {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: clamp(9px, 1.4vh, 13px);
+}
+
+.aristotle-progress,
+.aristotle-idle {
+  min-height: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
 .aristotle-progress {
-  position: sticky;
-  top: 110px;
-  padding: 30px;
-  border-top: 4px solid var(--forest);
+  display: grid;
+  padding: clamp(16px, 2vw, 24px);
+  overflow: hidden;
+  border-top: 3px solid var(--forest);
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
 }
 
 .aristotle-progress[hidden] {
   display: none;
 }
 
-.progress-heading {
+.aristotle-progress:not([hidden]) + .aristotle-idle {
+  display: none;
+}
+
+.aristotle-idle {
   display: flex;
-  padding-bottom: 24px;
+  padding: clamp(20px, 3.2vw, 38px);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 14px 42px rgba(34, 42, 38, 0.04);
+}
+
+.aristotle-idle .idle-mark {
+  width: 26px;
+  height: 3px;
+  margin-bottom: 18px;
+  background: var(--forest);
+}
+
+.aristotle-idle .eyebrow {
+  margin-bottom: 6px;
+  font-size: 0.58rem;
+}
+
+.aristotle-idle > p:last-child {
+  max-width: 300px;
+  margin: 12px 0 0;
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.aristotle-progress .progress-heading {
+  display: flex;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
   align-items: flex-start;
   justify-content: space-between;
-  gap: 20px;
+  gap: 14px;
 }
 
-.progress-heading .eyebrow {
-  margin-bottom: 10px;
-}
-
-.progress-heading h2 {
-  margin-bottom: 0;
+.aristotle-progress .progress-heading .eyebrow {
+  margin-bottom: 4px;
+  font-size: 0.58rem;
 }
 
 .project-state {
-  padding: 6px 9px;
+  max-width: 46%;
+  padding: 5px 8px;
+  overflow: hidden;
   color: var(--forest);
   background: var(--forest-light);
-  font-size: 0.65rem;
+  font-size: 0.58rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .project-state[data-state="failed"],
@@ -1613,20 +1838,20 @@ h3 {
 }
 
 .project-details {
-  margin: 22px 0;
+  margin: 10px 0;
 }
 
 .project-details div {
   display: grid;
-  padding: 10px 0;
+  padding: 6px 0;
   border-bottom: 1px solid var(--line);
-  grid-template-columns: 94px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 10px;
 }
 
 .project-details dt {
   color: var(--ink-faint);
-  font-size: 0.64rem;
+  font-size: 0.56rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1634,15 +1859,21 @@ h3 {
 
 .project-details dd {
   margin: 0;
+  overflow: hidden;
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.63rem;
   font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-details dd[data-project-id] {
   overflow-wrap: anywhere;
 }
 
 .progress-track {
-  height: 5px;
-  margin: 25px 0 28px;
+  height: 4px;
+  margin: 3px 0 12px;
   overflow: hidden;
   background: var(--paper-deep);
 }
@@ -1655,31 +1886,46 @@ h3 {
   transition: width 280ms ease;
 }
 
+.project-summary {
+  display: grid;
+  min-height: 0;
+  overflow: hidden;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
 .project-summary strong {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   color: var(--copper);
-  font-size: 0.67rem;
+  font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .project-summary p {
+  min-height: 0;
   margin-bottom: 0;
+  padding-right: 4px;
+  overflow: auto;
   color: var(--ink-soft);
-  font-size: 0.82rem;
+  font-size: 0.69rem;
+  line-height: 1.45;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
 .project-actions {
   display: grid;
-  margin-top: 28px;
-  gap: 9px;
+  margin-top: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
 }
 
 .project-actions .button {
   width: 100%;
+  min-height: 38px;
+  padding: 8px 9px;
+  font-size: 0.68rem;
 }
 
 .project-actions [hidden] {
@@ -1687,36 +1933,36 @@ h3 {
 }
 
 .polling-note {
-  margin: 17px 0 0;
+  margin: 9px 0 0;
+  overflow: hidden;
   color: var(--ink-faint);
-  font-size: 0.7rem;
-  line-height: 1.45;
+  font-size: 0.58rem;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.scientific-boundary {
+.aristotle-boundary {
   display: grid;
-  border-top: 1px solid var(--line);
-  grid-template-columns: minmax(210px, 0.55fr) minmax(0, 1.45fr);
-  gap: clamp(30px, 7vw, 100px);
+  padding: 11px 13px;
+  align-items: start;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  color: var(--ink-faint);
 }
 
-.scientific-boundary > .eyebrow {
-  grid-column: 1;
+.aristotle-boundary strong {
+  color: var(--copper);
+  font-size: 0.57rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.scientific-boundary h2 {
-  grid-column: 2;
-  margin-bottom: 26px;
-  font-size: clamp(2.1rem, 4vw, 3.45rem);
-}
-
-.scientific-boundary > div {
-  grid-column: 2;
-  color: var(--ink-soft);
-}
-
-.scientific-boundary > div p:last-child {
-  margin-bottom: 0;
+.aristotle-boundary p {
+  margin: 0;
+  font-size: 0.61rem;
+  line-height: 1.4;
 }
 
 @media (max-width: 980px) {
@@ -1805,24 +2051,6 @@ h3 {
     border-bottom: 1px solid var(--line);
   }
 
-  .aristotle-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .aristotle-progress {
-    position: static;
-  }
-
-  .scientific-boundary {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .scientific-boundary > .eyebrow,
-  .scientific-boundary h2,
-  .scientific-boundary > div {
-    grid-column: 1;
-  }
 }
 
 @media (max-width: 700px) {
@@ -1995,27 +2223,374 @@ h3 {
     padding-top: 58px;
   }
 
-  .key-field {
-    grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 900px) {
+  .aristotle-topbar-inner,
+  .aristotle-screen {
+    width: calc(100% - 24px);
+  }
+
+  .aristotle-screen {
+    padding-block: 10px max(10px, env(safe-area-inset-bottom, 0px));
+    grid-template-rows: auto auto minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .aristotle-intro h1 {
+    font-size: clamp(1.45rem, 5vw, 2rem);
+  }
+
+  .aristotle-intro-note {
+    max-width: 45%;
+    font-size: 0.6rem;
+  }
+
+  .aristotle-view-tabs {
+    display: grid;
+    padding: 3px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    grid-template-columns: repeat(2, 1fr);
+    background: var(--paper-deep);
+  }
+
+  .aristotle-view-tabs button {
+    min-height: 30px;
+    padding: 4px 10px;
+    border: 0;
+    border-radius: 2px;
+    color: var(--ink-faint);
+    background: transparent;
+    font-size: 0.68rem;
+    font-weight: 780;
+    cursor: pointer;
+  }
+
+  .aristotle-view-tabs button[aria-pressed="true"] {
+    color: var(--forest);
+    background: var(--paper-light);
+    box-shadow: 0 2px 7px rgba(34, 42, 38, 0.08);
+  }
+
+  .view-status-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-left: 4px;
+    border-radius: 50%;
+    background: var(--line-dark);
+    vertical-align: middle;
+  }
+
+  .aristotle-workspace[data-has-project="true"] .view-status-dot {
+    background: var(--forest);
+    box-shadow: 0 0 0 3px rgba(23, 63, 54, 0.1);
+  }
+
+  .aristotle-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aristotle-workspace > .aristotle-pane {
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 1;
+    transition:
+      opacity 140ms ease,
+      visibility 140ms ease;
+  }
+
+  .aristotle-workspace[data-mobile-view="request"] > [data-aristotle-pane="progress"],
+  .aristotle-workspace[data-mobile-view="progress"] > [data-aristotle-pane="request"] {
+    z-index: 0;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .aristotle-form,
+  .aristotle-rail {
+    height: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .aristotle-topbar {
+    height: calc(50px + env(safe-area-inset-top, 0px));
+  }
+
+  .aristotle-topbar-inner {
+    width: calc(100% - 20px);
+    height: 50px;
+  }
+
+  .aristotle-topbar .brand-name {
+    display: none;
+  }
+
+  .aristotle-product-name {
+    font-size: 0.62rem;
+  }
+
+  .aristotle-topbar-links {
+    gap: 10px;
+  }
+
+  .aristotle-topbar-links a:first-child {
+    display: none;
+  }
+
+  .aristotle-screen {
+    width: calc(100% - 20px);
+  }
+
+  .aristotle-intro {
+    gap: 10px;
+  }
+
+  .aristotle-intro .eyebrow {
+    font-size: 0.54rem;
+  }
+
+  .aristotle-intro h1 {
+    font-size: clamp(1.25rem, 6vw, 1.7rem);
+  }
+
+  .aristotle-intro-note {
+    max-width: 40%;
+    font-size: 0.55rem;
+  }
+
+  .aristotle-intro-note span:first-child,
+  .aristotle-intro-note span:nth-child(2) {
+    display: none;
+  }
+
+  .aristotle-form {
+    padding: 12px;
+    gap: 9px;
+  }
+
+  .aristotle-form .form-heading > p {
+    display: none;
+  }
+
+  .aristotle-form .field-label-row label {
+    font-size: 0.84rem;
+  }
+
+  .aristotle-form .field-label-row span {
+    font-size: 0.53rem;
+  }
+
+  .aristotle-form .field-action {
+    min-width: 50px;
+    padding-inline: 7px;
+  }
+
+  .aristotle-form .field-help {
+    font-size: 0.58rem;
+  }
+
+  .aristotle-form .form-submit-row {
+    gap: 9px;
+  }
+
+  .aristotle-form .form-submit-row .button {
+    font-size: 0.76rem;
+  }
+
+  .aristotle-boundary {
+    padding: 9px 10px;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+@media (max-height: 650px) {
+  .aristotle-screen {
+    padding-block: 7px max(7px, env(safe-area-inset-bottom, 0px));
+    gap: 6px;
+  }
+
+  .aristotle-intro .eyebrow {
+    display: none;
+  }
+
+  .aristotle-intro h1 {
+    font-size: 1.35rem;
+  }
+
+  .aristotle-form {
+    padding: 10px;
+    gap: 7px;
+  }
+
+  .aristotle-form .form-heading {
+    padding-bottom: 6px;
+  }
+
+  .aristotle-form .form-heading > p {
+    display: none;
+  }
+
+  .aristotle-form .field-help {
+    margin-top: 2px;
+    font-size: 0.56rem;
   }
 
   .aristotle-form input {
-    grid-column: 1 / -1;
-    border-right: 1px solid var(--line-dark);
-    border-bottom: 0;
+    height: 36px;
   }
 
-  .field-action + .field-action {
-    border-left: 0;
+  .aristotle-form textarea {
+    padding: 9px 10px;
+    font-size: 0.8rem;
   }
 
-  .form-submit-row {
-    align-items: stretch;
-    flex-direction: column;
+  .aristotle-form .form-submit-row {
+    padding-top: 6px;
   }
 
-  .form-submit-row .button {
-    width: 100%;
+  .aristotle-form .form-submit-row .button {
+    min-height: 36px;
+    padding-block: 7px;
+  }
+
+  .aristotle-progress {
+    padding: 12px;
+  }
+
+  .aristotle-progress .progress-heading {
+    padding-bottom: 7px;
+  }
+
+  .project-details {
+    display: grid;
+    margin: 6px 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .project-details div {
+    display: block;
+    min-width: 0;
+    padding: 4px 0;
+  }
+
+  .project-details dd {
+    margin-top: 2px;
+  }
+
+  .progress-track {
+    margin: 2px 0 7px;
+  }
+
+  .project-actions {
+    margin-top: 7px;
+  }
+
+  .project-actions .button {
+    min-height: 34px;
+  }
+
+  .polling-note {
+    margin-top: 5px;
+  }
+
+  .aristotle-idle {
+    padding: 18px;
+  }
+
+  .aristotle-idle .idle-mark {
+    margin-bottom: 10px;
+  }
+
+  .aristotle-idle > p:last-child {
+    margin-top: 7px;
+  }
+
+  .aristotle-boundary {
+    padding-block: 7px;
+  }
+}
+
+@media (max-height: 520px) {
+  .aristotle-topbar {
+    height: calc(44px + env(safe-area-inset-top, 0px));
+  }
+
+  .aristotle-topbar-inner {
+    height: 44px;
+  }
+
+  .aristotle-screen {
+    padding-block: 5px max(5px, env(safe-area-inset-bottom, 0px));
+    gap: 5px;
+  }
+
+  .aristotle-intro h1 {
+    font-size: 1.08rem;
+  }
+
+  .aristotle-intro-note {
+    font-size: 0.5rem;
+  }
+
+  .aristotle-view-tabs {
+    padding: 2px;
+  }
+
+  .aristotle-view-tabs button {
+    min-height: 25px;
+    padding-block: 2px;
+  }
+
+  .aristotle-form .form-heading {
+    display: none;
+  }
+
+  .aristotle-form {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .aristotle-form .field-help {
+    display: none;
+  }
+
+  .aristotle-form input {
+    height: 33px;
+  }
+
+  .aristotle-form .form-submit-row {
+    padding-top: 4px;
+  }
+
+  .aristotle-form .form-submit-row .button {
+    min-height: 33px;
+  }
+
+  .aristotle-form .form-status {
+    max-height: 2.6em;
+    font-size: 0.58rem;
+  }
+
+  .aristotle-boundary p {
+    display: none;
+  }
+}
+
+@media (max-height: 380px) {
+  .aristotle-form,
+  .aristotle-rail {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .aristotle-form .field-group-prompt {
+    min-height: 92px;
   }
 }
 

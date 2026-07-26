@@ -16,8 +16,8 @@
       ],
       "evidence": {
         "source_capture": "present",
-        "clean_build": "pending",
-        "kernel_checking": "author-run",
+        "clean_build": "passed",
+        "kernel_checking": "passed",
         "semantic_alignment": "not-independently-reviewed",
         "proof_assistant_review": "not-reviewed",
         "subject_matter_review": "not-reviewed",

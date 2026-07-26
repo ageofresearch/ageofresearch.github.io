@@ -159,6 +159,12 @@ const aristotleRequirements = [
   [aristotlePage.includes("data-key-forget"), "Aristotle page must provide a Forget control"],
   [aristotlePage.includes("data-key-toggle"), "Aristotle page must provide a Show control"],
   [
+    aristotlePage.includes("standalone ChatGPT Share link") &&
+      aristotlePage.includes("<code>PERSON:</code>") &&
+      aristotlePage.includes("<code>LLM:</code>"),
+    "Aristotle page must explain standalone ChatGPT conversation imports and role labels",
+  ],
+  [
     aristotlePage.includes('class="aristotle-document"') &&
       aristotlePage.includes("data-aristotle-workspace") &&
       aristotlePage.includes('data-aristotle-view="request"') &&
@@ -182,6 +188,23 @@ const aristotleRequirements = [
   [
     aristotleCore.includes('"X-Formagization-Aristotle-Key"'),
     "Aristotle requests must use the dedicated key header",
+  ],
+  [
+    aristotleCore.includes('"https://r.jina.ai"') &&
+      aristotleScript.includes("fetchPublicChatGPTShare") &&
+      aristotleScript.includes('"X-Engine": "browser"') &&
+      aristotleScript.includes('"X-No-Cache": "true"') &&
+      aristotleScript.includes('credentials: "omit"') &&
+      aristotleScript.includes('referrerPolicy: "no-referrer"') &&
+      aristotleScript.includes("response.body.getReader()") &&
+      aristotleScript.includes("receivedBytes > CHATGPT_SHARE_MAX_BYTES"),
+    "ChatGPT Share imports must use the credential-free, size-limited public reader",
+  ],
+  [
+    aristotleScript.includes("parseChatGPTShareUrl(nextValue)") &&
+      aristotleScript.includes("let prompt = promptInput.value") &&
+      aristotleScript.includes("prompt = promptInput.value"),
+    "ChatGPT Share links must be replaced with imported conversation text before submission",
   ],
   [aristotleScript.includes("window.sessionStorage"), "Aristotle key must use tab-scoped sessionStorage"],
   [!aristotleScript.includes("localStorage"), "Aristotle script must not use persistent localStorage"],

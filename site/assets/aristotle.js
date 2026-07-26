@@ -1,14 +1,19 @@
 import {
   ARISTOTLE_PROXY_URL,
+  CHATGPT_SHARE_MAX_BYTES,
   KEY_HEADER_NAME,
   PROJECT_ID_PATTERN,
   PROMPT_LIMIT,
   SUCCESS_STATUSES,
   TERMINAL_STATUSES,
+  extractChatGPTConversation,
+  getChatGPTShareRelayUrl,
   getDashboardUrl,
   getErrorMessage,
   getPollDelay,
   getStatus,
+  looksLikeChatGPTShareUrl,
+  parseChatGPTShareUrl,
   validateKey,
 } from "./aristotle-core.mjs";
 
@@ -58,6 +63,8 @@ import {
   let pollCount = 0;
   let pollTimer = 0;
   let requestInFlight = false;
+  let shareImportInFlight = false;
+  let shareImportPromise = null;
   let lastProjectData = null;
   let activeWorkspaceView = "request";
 
@@ -160,6 +167,153 @@ import {
       promptCount.classList.toggle("is-over-limit", length > PROMPT_LIMIT);
     }
     promptInput.setAttribute("aria-invalid", String(length > PROMPT_LIMIT));
+  };
+
+  const updateSubmitAvailability = () => {
+    submitButton.disabled = requestInFlight || shareImportInFlight;
+  };
+
+  const readLimitedShareResponse = async (response) => {
+    if (!response.body || typeof response.body.getReader !== "function") {
+      throw new Error(
+        "This browser cannot safely read the shared conversation response.",
+      );
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let receivedBytes = 0;
+    let text = "";
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        receivedBytes += value.byteLength;
+        if (receivedBytes > CHATGPT_SHARE_MAX_BYTES) {
+          await reader.cancel();
+          throw new Error("The shared conversation is too large to import.");
+        }
+        text += decoder.decode(value, { stream: true });
+      }
+      text += decoder.decode();
+      return text;
+    } finally {
+      reader.releaseLock();
+    }
+  };
+
+  const fetchPublicChatGPTShare = async (sharedLink) => {
+    const relayUrl = getChatGPTShareRelayUrl(sharedLink);
+    let response;
+    try {
+      response = await fetch(relayUrl, {
+        method: "GET",
+        headers: {
+          Accept: "text/plain",
+          "X-Engine": "browser",
+          "X-No-Cache": "true",
+          "X-Timeout": "20",
+          "X-Respond-With": "markdown",
+          "X-Retain-Links": "text",
+          "X-Retain-Images": "none",
+        },
+        cache: "no-store",
+        credentials: "omit",
+        referrerPolicy: "no-referrer",
+      });
+    } catch {
+      throw new Error(
+        "The public ChatGPT conversation could not be reached. Check the link or your connection.",
+      );
+    }
+
+    let finalUrl = null;
+    try {
+      finalUrl = new URL(response.url);
+    } catch {
+      // The response is rejected below.
+    }
+    if (
+      !response.ok ||
+      !finalUrl ||
+      finalUrl.protocol !== "https:" ||
+      finalUrl.hostname.toLowerCase() !== "r.jina.ai" ||
+      finalUrl.href !== relayUrl ||
+      !/^text\/plain(?:;|$)/i.test(response.headers.get("content-type") ?? "")
+    ) {
+      if (response.status === 429) {
+        throw new Error(
+          "The public conversation reader is temporarily rate-limited. Wait a minute and try again.",
+        );
+      }
+      throw new Error(
+        `The public ChatGPT conversation could not be imported${
+          response.status ? ` (${response.status})` : ""
+        }.`,
+      );
+    }
+
+    const declaredLength = Number(response.headers.get("content-length") ?? 0);
+    if (
+      Number.isFinite(declaredLength) &&
+      declaredLength > CHATGPT_SHARE_MAX_BYTES
+    ) {
+      await response.body?.cancel?.();
+      throw new Error("The shared conversation is too large to import.");
+    }
+    const markdown = await readLimitedShareResponse(response);
+    if (
+      !markdown ||
+      markdown.length > CHATGPT_SHARE_MAX_BYTES ||
+      markdown.includes("\u0000")
+    ) {
+      throw new Error(
+        "The public conversation reader returned an empty, unsafe, or oversized response.",
+      );
+    }
+    return markdown;
+  };
+
+  const importChatGPTShare = (sharedLink) => {
+    if (shareImportPromise) return shareImportPromise;
+
+    shareImportInFlight = true;
+    promptInput.readOnly = true;
+    promptInput.setAttribute("aria-busy", "true");
+    updateSubmitAvailability();
+    setFormStatus("Importing the public ChatGPT conversation…");
+
+    shareImportPromise = (async () => {
+      try {
+        const markdown = await fetchPublicChatGPTShare(sharedLink);
+        const conversation = extractChatGPTConversation(markdown);
+        promptInput.value = conversation.text;
+        setPromptCount();
+        setFormStatus(
+          `Conversation imported: ${conversation.turnCount} turns (${conversation.personTurnCount} person, ${conversation.llmTurnCount} LLM). Review it before submitting.`,
+          "success",
+        );
+        return conversation;
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "The public ChatGPT conversation could not be imported.";
+        setFormStatus(
+          `${message} The link was not submitted to Aristotle.`,
+          "error",
+        );
+        throw error;
+      } finally {
+        shareImportInFlight = false;
+        shareImportPromise = null;
+        promptInput.readOnly = false;
+        promptInput.removeAttribute("aria-busy");
+        updateSubmitAvailability();
+      }
+    })();
+
+    return shareImportPromise;
   };
 
   const displayStatus = (value) =>
@@ -307,6 +461,7 @@ import {
     }
 
     requestInFlight = true;
+    updateSubmitAvailability();
     pollCount += 1;
     if (pollingNote) pollingNote.textContent = "Refreshing project status…";
     try {
@@ -327,6 +482,7 @@ import {
       if (pollingNote) pollingNote.textContent = "Status refresh failed; polling will retry while the page is visible.";
     } finally {
       requestInFlight = false;
+      updateSubmitAvailability();
       schedulePoll();
     }
   };
@@ -384,21 +540,62 @@ import {
   promptInput.addEventListener("input", setPromptCount);
   promptInput.addEventListener("paste", (event) => {
     const pastedText = event.clipboardData?.getData("text") ?? "";
-    const selectionLength = promptInput.selectionEnd - promptInput.selectionStart;
-    if (promptInput.value.length - selectionLength + pastedText.length <= PROMPT_LIMIT) return;
-    event.preventDefault();
-    if (promptLimitStatus) {
-      promptLimitStatus.textContent = "Paste rejected: the request would exceed 100,000 characters.";
+    const selectionStart = promptInput.selectionStart ?? 0;
+    const selectionEnd = promptInput.selectionEnd ?? selectionStart;
+    const nextValue =
+      promptInput.value.slice(0, selectionStart) +
+      pastedText +
+      promptInput.value.slice(selectionEnd);
+    if (nextValue.length > PROMPT_LIMIT) {
+      event.preventDefault();
+      if (promptLimitStatus) {
+        promptLimitStatus.textContent = "Paste rejected: the request would exceed 100,000 characters.";
+      }
+      setFormStatus("The request was not pasted because it would exceed 100,000 characters.", "error");
+      return;
     }
-    setFormStatus("The request was not pasted because it would exceed 100,000 characters.", "error");
+
+    const sharedLink = parseChatGPTShareUrl(nextValue);
+    if (!sharedLink) return;
+    event.preventDefault();
+    promptInput.value = nextValue.trim();
+    setPromptCount();
+    void importChatGPTShare(sharedLink).catch(() => {
+      // The import function reports a safe, user-facing error.
+    });
+  });
+  promptInput.addEventListener("change", () => {
+    const sharedLink = parseChatGPTShareUrl(promptInput.value);
+    if (!sharedLink || shareImportInFlight) return;
+    void importChatGPTShare(sharedLink).catch(() => {
+      // The import function reports a safe, user-facing error.
+    });
   });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (requestInFlight) return;
+    if (requestInFlight || shareImportInFlight) return;
 
     const key = keyInput.value;
-    const prompt = promptInput.value;
+    let prompt = promptInput.value;
+    const sharedLink = parseChatGPTShareUrl(prompt);
+    if (sharedLink) {
+      try {
+        await importChatGPTShare(sharedLink);
+        prompt = promptInput.value;
+      } catch {
+        promptInput.focus();
+        return;
+      }
+    } else if (looksLikeChatGPTShareUrl(prompt)) {
+      setFormStatus(
+        "Enter a complete public ChatGPT Share link without query parameters or fragments.",
+        "error",
+      );
+      promptInput.focus();
+      return;
+    }
+
     const keyError = validateKey(key);
     if (keyError) {
       setFormStatus(keyError, "error");
@@ -420,7 +617,7 @@ import {
     clearPolling();
     pollCount = 0;
     requestInFlight = true;
-    submitButton.disabled = true;
+    updateSubmitAvailability();
     setFormStatus("Submitting the project to Aristotle…");
 
     try {
@@ -452,7 +649,7 @@ import {
       setFormStatus(error instanceof Error ? error.message : "The project could not be submitted.", "error");
     } finally {
       requestInFlight = false;
-      submitButton.disabled = false;
+      updateSubmitAvailability();
       schedulePoll();
     }
   });
@@ -469,6 +666,7 @@ import {
     }
 
     requestInFlight = true;
+    updateSubmitAvailability();
     downloadButton.disabled = true;
     setFormStatus("Preparing the result archive…");
     if (pollingNote) pollingNote.textContent = "Preparing the result archive…";
@@ -521,6 +719,7 @@ import {
       announceProject(message);
     } finally {
       requestInFlight = false;
+      updateSubmitAvailability();
       downloadButton.disabled = false;
     }
   });

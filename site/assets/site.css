@@ -1717,8 +1717,20 @@ body[data-page="aristotle"]::before {
   flex: none;
 }
 
+.aristotle-form .form-action-buttons {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.aristotle-form .form-action-buttons .button {
+  white-space: nowrap;
+}
+
 .button:disabled,
-.field-action:disabled {
+.field-action:disabled,
+.aristotle-form .form-action-buttons .button:disabled {
   opacity: 0.52;
   cursor: wait;
   transform: none;
@@ -2370,7 +2382,18 @@ body[data-page="aristotle"]::before {
   }
 
   .aristotle-form .form-submit-row {
+    grid-template-columns: 1fr;
     gap: 9px;
+  }
+
+  .aristotle-form .form-action-buttons {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.35fr);
+  }
+
+  .aristotle-form .form-action-buttons .button {
+    width: 100%;
+    padding-inline: 9px;
   }
 
   .aristotle-form .form-submit-row .button {

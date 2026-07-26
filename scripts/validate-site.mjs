@@ -100,6 +100,8 @@ const aristotlePage = readFileSync(join(siteRoot, "aristotle/index.html"), "utf8
 const aristotleScript = readFileSync(join(siteRoot, "assets/aristotle.js"), "utf8");
 const aristotleCore = readFileSync(join(siteRoot, "assets/aristotle-core.mjs"), "utf8");
 const siteStyles = readFileSync(join(siteRoot, "assets/site.css"), "utf8");
+const shareImportCalls =
+  aristotleScript.match(/importChatGPTShare\(sharedLink\)/g) ?? [];
 const sessionStorageWrites = [
   ...aristotleScript.matchAll(/sessionStorage\.setItem\(([^,\n]+)/g),
 ].map((match) => match[1].trim());
@@ -159,6 +161,11 @@ const aristotleRequirements = [
   [aristotlePage.includes("data-key-forget"), "Aristotle page must provide a Forget control"],
   [aristotlePage.includes("data-key-toggle"), "Aristotle page must provide a Show control"],
   [
+    aristotlePage.includes("data-share-import") &&
+      aristotlePage.includes("Test of link"),
+    "Aristotle page must provide the explicit Test of link import control",
+  ],
+  [
     aristotlePage.includes("standalone ChatGPT Share link") &&
       aristotlePage.includes("<code>PERSON:</code>") &&
       aristotlePage.includes("<code>LLM:</code>"),
@@ -201,10 +208,12 @@ const aristotleRequirements = [
     "ChatGPT Share imports must use the credential-free, size-limited public reader",
   ],
   [
-    aristotleScript.includes("parseChatGPTShareUrl(nextValue)") &&
-      aristotleScript.includes("let prompt = promptInput.value") &&
-      aristotleScript.includes("prompt = promptInput.value"),
-    "ChatGPT Share links must be replaced with imported conversation text before submission",
+    aristotleScript.includes('shareImportButton.addEventListener("click"') &&
+      !aristotleScript.includes("parseChatGPTShareUrl(nextValue)") &&
+      !aristotleScript.includes('promptInput.addEventListener("change"') &&
+      shareImportCalls.length === 1 &&
+      aristotleScript.includes("Choose Test of link to import and review"),
+    "ChatGPT Share links must wait for the explicit test control and raw links must be blocked at submission",
   ],
   [aristotleScript.includes("window.sessionStorage"), "Aristotle key must use tab-scoped sessionStorage"],
   [!aristotleScript.includes("localStorage"), "Aristotle script must not use persistent localStorage"],

@@ -35,7 +35,7 @@ There is deliberately no generic “verified” badge.
 
 | Artifact | System | Build | Kernel/checker | Semantic alignment | Independent reproduction |
 |---|---|---|---|---|---|
-| [Fixed-perimeter partition counts](formalizations/fixed-perimeter-partitions/) | Lean 4 + Mathlib | Local build passed; clean CI pending | Local audit passed; CI pending | Not independently reviewed | Not recorded |
+| [Fixed-perimeter partition counts](formalizations/fixed-perimeter-partitions/) | Lean 4 + Mathlib | Clean GitHub CI passed | Lean, leanchecker, and nanoda CI passed | Not independently reviewed | Not recorded |
 
 Machine-readable records live in [`registry/artifacts.json`](registry/artifacts.json).
 

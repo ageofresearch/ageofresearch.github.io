@@ -1,0 +1,16 @@
+{
+  "name": "Formagization",
+  "short_name": "Formagization",
+  "description": "A reproducible, evidence-graded archive of machine-checked mathematics.",
+  "start_url": "/formagization/",
+  "display": "standalone",
+  "background_color": "#f4f0e7",
+  "theme_color": "#173f36",
+  "icons": [
+    {
+      "src": "/formagization/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

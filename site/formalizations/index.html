@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="Browse formal mathematical artifacts in the Formagization archive.">
+    <title>Formalizations — Formagization</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/site.css">
+    <script src="../assets/site.js" defer></script>
+  </head>
+  <body data-page="formalizations">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="../" aria-label="Formagization home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span class="brand-name">Formagization</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="./" aria-current="page">Formalizations</a>
+          <a href="../standards/">Evidence standards</a>
+          <a href="../review/">Review</a>
+          <a class="nav-github" href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><span>Formalizations</span></div>
+        <p class="eyebrow">The archive</p>
+        <h1>Formal artifacts, presented as evidence dossiers.</h1>
+        <p>
+          Every entry carries its exact theorem declarations, source provenance,
+          toolchain pins, trusted-base audit, reproduction instructions, and current
+          review state. Inclusion is not a blanket correctness or novelty claim.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="archive-grid">
+          <article class="archive-card">
+            <div class="archive-card-meta">
+              <span>Artifact 001</span>
+              <span>Lean 4 · Mathlib</span>
+            </div>
+            <p class="eyebrow">Enumerative combinatorics</p>
+            <h2>Fixed-perimeter partition counts</h2>
+            <p>
+              Exact equality at <em>k</em> = 2, asymptotic ratio separation for
+              <em>k</em> ≥ 3, and the resulting eventual strict inequality.
+            </p>
+            <div aria-label="Evidence summary">
+              <span class="state state-recorded">Source present</span>
+              <span class="state state-passed">Clean build passed</span>
+              <span class="state state-passed">Kernel checks passed</span>
+              <span class="state state-open">Independent review open</span>
+            </div>
+            <a class="button button-primary" href="./fixed-perimeter-partitions/">Open artifact dossier</a>
+          </article>
+
+          <article class="archive-card">
+            <div class="archive-card-meta">
+              <span>Submission pathway</span>
+              <span>Proof-assistant open</span>
+            </div>
+            <p class="eyebrow">Contribute</p>
+            <h2>Propose the next formalization.</h2>
+            <p>
+              New artifacts may use Lean, Isabelle, Rocq/Coq, HOL, Agda, Mizar,
+              or another proof system. They must provide an accountable maintainer,
+              a reproducible environment, complete source, and explicit evidence states.
+            </p>
+            <a class="button button-secondary" href="https://github.com/ageofresearch/formagization/blob/main/CONTRIBUTING.md">Read submission requirements</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-cta">
+        <div class="shell page-cta-inner">
+          <h2>Machine-readable artifact records are public, too.</h2>
+          <a class="button button-secondary" href="https://github.com/ageofresearch/formagization/blob/main/registry/artifacts.json">Open registry JSON</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">Formagization</span></a>
+          <p>A reproducible, evidence-graded archive of machine-checked mathematics.</p>
+        </div>
+        <div class="footer-links">
+          <div><strong>Archive</strong><a href="./">Formalizations</a><a href="../standards/">Evidence standards</a><a href="../review/">Review</a></div>
+          <div><strong>Repository</strong><a href="https://github.com/ageofresearch/formagization/blob/main/CHARTER.md">Charter</a><a href="https://github.com/ageofresearch/formagization/blob/main/GOVERNANCE.md">Governance</a><a href="https://github.com/ageofresearch/formagization/blob/main/CITATION.cff">Citation</a></div>
+        </div>
+      </div>
+      <div class="shell footer-bottom"><span>Maintained by Age of Research · MIT License</span><span>Last evidence snapshot: 25 July 2026</span></div>
+    </footer>
+  </body>
+</html>

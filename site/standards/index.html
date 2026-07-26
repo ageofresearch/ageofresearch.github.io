@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="The evidence and publication standards used by the Formagization archive.">
+    <title>Evidence standards — Formagization</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/site.css">
+    <script src="../assets/site.js" defer></script>
+  </head>
+  <body data-page="standards">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="../" aria-label="Formagization home"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">Formagization</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="../formalizations/">Formalizations</a>
+          <a href="./" aria-current="page">Evidence standards</a>
+          <a href="../review/">Review</a>
+          <a class="nav-github" href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><span>Evidence standards</span></div>
+        <p class="eyebrow">Archive method</p>
+        <h1>Formal proof is powerful evidence. It is not every kind of evidence.</h1>
+        <p>
+          Formagization keeps technical acceptance, semantic interpretation,
+          reproduction, expert review, and novelty assessment separate. The
+          archive records evidence; its maintainers do not certify mathematics by fiat.
+        </p>
+      </section>
+
+      <section class="section evidence-section">
+        <div class="shell">
+          <div class="section-heading section-heading-wide">
+            <p class="eyebrow">The evidence vector</p>
+            <h2>Each dimension answers a different question.</h2>
+            <p>An artifact can be strong in one dimension and unresolved in another without contradiction.</p>
+          </div>
+          <div class="evidence-table-wrap">
+            <table class="evidence-table">
+              <thead><tr><th scope="col">Dimension</th><th scope="col">Question</th><th scope="col">Typical evidence</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Source capture</th><td>What exactly was selected for formalization?</td><td>Snapshot, canonical URL, access date, normalized hash</td></tr>
+                <tr><th scope="row">Clean build</th><td>Can the artifact be reconstructed in its pinned environment?</td><td>Fresh checkout, dependency pins, build transcript</td></tr>
+                <tr><th scope="row">Kernel / checker</th><td>Does the formal proposition pass the proof system’s trusted checker?</td><td>Kernel acceptance, secondary checkers, axiom report</td></tr>
+                <tr><th scope="row">Axioms / trusted base</th><td>What foundations and external components must be trusted?</td><td>Axiom output, unsafe-feature scan, checker and certificate inventory</td></tr>
+                <tr><th scope="row">Semantic alignment</th><td>Does the formal theorem mean what the source claim intended?</td><td>Statement mapping and independent line-by-line review</td></tr>
+                <tr><th scope="row">Proof-assistant review</th><td>Is the implementation technically sound and maintainable?</td><td>Expert code and library review</td></tr>
+                <tr><th scope="row">Subject-matter review</th><td>Are definitions, conventions, and mathematical scope appropriate?</td><td>Domain-specialist report</td></tr>
+                <tr><th scope="row">Independent reproduction</th><td>Has an external person obtained the recorded result?</td><td>Environment, commands, output, and reviewer identity</td></tr>
+                <tr><th scope="row">Novelty</th><td>What is new relative to the mathematical literature?</td><td>Literature search and scoped priority analysis</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell content-grid">
+        <aside class="content-aside">
+          <strong>Core distinction</strong>
+          Kernel acceptance is a relation between formal syntax, definitions,
+          foundations, and a checker. Semantic alignment is a relation between
+          that formal object and intended mathematics.
+        </aside>
+        <article class="prose">
+          <h2>Why there is no “verified” badge</h2>
+          <p>
+            A single green label encourages readers to infer more than the
+            underlying evidence establishes. A compiled theorem may still formalize
+            a weakened proposition. A semantically faithful theorem may not be novel.
+            A novel result may not yet have been independently reproduced.
+          </p>
+          <div class="prose-blockquote">
+            The archive publishes the strongest warranted statement in each
+            dimension and leaves the other dimensions visibly unresolved.
+          </div>
+
+          <h2>Publication principles</h2>
+          <ol class="principle-list">
+            <li><span>01</span><div><h3>Statements before tactics</h3><p>Each artifact maps informal objects, quantifiers, hypotheses, conclusions, and boundary conventions to formal declarations before celebrating proof completion.</p></div></li>
+            <li><span>02</span><div><h3>Reproducibility is part of the artifact</h3><p>Compiler versions, library commits, manifests, commands, and expected audit output travel with the proof source.</p></div></li>
+            <li><span>03</span><div><h3>The trusted base is disclosed</h3><p>Kernel acceptance is reported together with axioms, external checkers, unsafe features, certificates, and any nonstandard trusted components.</p></div></li>
+            <li><span>04</span><div><h3>AI participation is explicit</h3><p>Models are development tools, not accountable authors or independent reviewers. A human maintainer remains responsible for publication.</p></div></li>
+            <li><span>05</span><div><h3>Reviews are attributable and scoped</h3><p>A report identifies who reviewed what, against which artifact version, using which evidence, with which conflicts of interest.</p></div></li>
+            <li><span>06</span><div><h3>Corrections are append-only</h3><p>Statement-changing corrections receive new versions. Previous releases, failed reproductions, disputes, and withdrawals remain visible.</p></div></li>
+          </ol>
+
+          <h2>What inclusion means</h2>
+          <p>
+            Inclusion means that an artifact meets the archive’s structural,
+            disclosure, and reproducibility requirements. It does not establish
+            publication priority, correctness of the source, semantic equivalence,
+            subject-matter endorsement, or novelty unless those states are separately
+            supported by recorded evidence.
+          </p>
+          <p>
+            Natural-language proofs, LLM transcripts, finite experiments, and
+            unreviewed theorem translations can be valuable source material. None is
+            itself a formal proof artifact.
+          </p>
+
+          <h2>System scope</h2>
+          <p>
+            The archive is Lean-first rather than Lean-exclusive. A submission may
+            use Isabelle, Rocq/Coq, HOL, Agda, Mizar, SAT/SMT certificates, or another
+            checker, provided its trusted base and reproduction route are explicit.
+          </p>
+          <div class="button-row">
+            <a class="button button-primary" href="https://github.com/ageofresearch/formagization/blob/main/CHARTER.md">Read the charter</a>
+            <a class="button button-secondary" href="https://github.com/ageofresearch/formagization/blob/main/GOVERNANCE.md">Governance policy</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="page-cta">
+        <div class="shell page-cta-inner">
+          <h2>Evidence is strongest when another person can challenge it.</h2>
+          <a class="button button-primary" href="../review/">Review an artifact</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">Formagization</span></a><p>A reproducible, evidence-graded archive of machine-checked mathematics.</p></div>
+        <div class="footer-links">
+          <div><strong>Archive</strong><a href="../formalizations/">Formalizations</a><a href="./">Evidence standards</a><a href="../review/">Review</a></div>
+          <div><strong>Repository</strong><a href="https://github.com/ageofresearch/formagization/blob/main/CHARTER.md">Charter</a><a href="https://github.com/ageofresearch/formagization/blob/main/GOVERNANCE.md">Governance</a><a href="https://github.com/ageofresearch/formagization/blob/main/CITATION.cff">Citation</a></div>
+        </div>
+      </div>
+      <div class="shell footer-bottom"><span>Maintained by Age of Research · MIT License</span><span>Last evidence snapshot: 25 July 2026</span></div>
+    </footer>
+  </body>
+</html>

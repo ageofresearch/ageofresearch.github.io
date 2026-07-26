@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="Evidence dossier for the Lean formalization of fixed-perimeter partition counts.">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Fixed-perimeter partition counts — Formagization">
+    <meta property="og:description" content="Three Lean theorems, a pinned environment, complete provenance, and an explicit review record.">
+    <title>Fixed-perimeter partition counts — Formagization</title>
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/site.css">
+    <script src="../../assets/site.js" defer></script>
+  </head>
+  <body data-page="artifact">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="../../" aria-label="Formagization home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span class="brand-name">Formagization</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="../" aria-current="page">Formalizations</a>
+          <a href="../../standards/">Evidence standards</a>
+          <a href="../../review/">Review</a>
+          <a class="nav-github" href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell artifact-hero-grid">
+        <div>
+          <div class="breadcrumb"><a href="../../">Home</a><span>/</span><a href="../">Formalizations</a><span>/</span><span>Artifact 001</span></div>
+          <p class="eyebrow">Artifact 001 · Enumerative combinatorics</p>
+          <h1>Fixed-perimeter partition counts</h1>
+          <p>
+            A Lean 4 and Mathlib development proving an exact equality at
+            <em>k</em> = 2 and asymptotic separation for fixed <em>j</em> and
+            <em>k</em> ≥ 3.
+          </p>
+          <div class="button-row">
+            <a class="button button-primary" href="https://github.com/ageofresearch/formagization/tree/main/formalizations/fixed-perimeter-partitions/lean4">Browse Lean source</a>
+            <a class="button button-secondary" href="#reproduce">Reproduce</a>
+          </div>
+        </div>
+        <aside class="dossier-meta" aria-label="Artifact metadata">
+          <dl>
+            <div><dt>System</dt><dd>Lean 4 + Mathlib</dd></div>
+            <div><dt>Toolchain</dt><dd>Lean v4.32.1</dd></div>
+            <div><dt>Record</dt><dd>Metadata v1.0.0</dd></div>
+            <div><dt>Maintainer</dt><dd>Age of Research</dd></div>
+            <div><dt>AI assistance</dt><dd>Material; disclosed</dd></div>
+            <div><dt>License</dt><dd>MIT</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <nav class="subnav" aria-label="Artifact sections">
+        <div class="shell subnav-inner">
+          <a href="#statement">Statement</a>
+          <a href="#definitions">Definitions</a>
+          <a href="#proof">Proof architecture</a>
+          <a href="#evidence">Evidence</a>
+          <a href="#reproduce">Reproduce</a>
+          <a href="#provenance">Provenance</a>
+          <a href="#open-review">Open review</a>
+        </div>
+      </nav>
+
+      <section class="section shell content-grid">
+        <aside class="content-aside">
+          <strong>Reading note</strong>
+          This is the maintainer’s evidence dossier. Machine checks are recorded
+          as passed; independent semantic and subject-matter review remain open.
+        </aside>
+        <article class="prose">
+          <h2 id="statement">Formal target</h2>
+          <p>
+            For a nonempty integer partition, define its <em>perimeter</em> as
+            the largest part plus the number of parts minus one. Let
+            <code>FO j k n</code> count perimeter-<em>n</em> partitions having
+            exactly <em>j</em> distinct present part sizes divisible by
+            <em>k</em>. Let <code>FD j k n</code> count those having exactly
+            <em>j</em> distinct part sizes whose multiplicity is at least
+            <em>k</em>.
+          </p>
+
+          <div class="declaration-list">
+            <div class="declaration">
+              <span>Public declaration 01</span>
+              <code>FixedPerimeter.fixedPerimeter_eq_two</code>
+              <p>For every natural <em>j</em> and <em>n</em>, FD j 2 n = FO j 2 n.</p>
+            </div>
+            <div class="declaration">
+              <span>Public declaration 02</span>
+              <code>FixedPerimeter.fixedPerimeter_ratio_tendsto_zero</code>
+              <p>For fixed <em>j</em> and <em>k</em> ≥ 3, the real sequence FO / FD tends to zero.</p>
+            </div>
+            <div class="declaration">
+              <span>Public declaration 03</span>
+              <code>FixedPerimeter.fixedPerimeter_eventually_strict</code>
+              <p>For fixed <em>j</em> and <em>k</em> ≥ 3, there is a threshold after which FO &lt; FD.</p>
+            </div>
+          </div>
+
+          <div class="prose-blockquote">
+            The quotient in the limit theorem is formed in the real numbers.
+            The quantifiers fix <em>j</em> and <em>k</em> before the limit in
+            <em>n</em>; no uniformity in either parameter is claimed.
+          </div>
+
+          <h2 id="definitions">Definitions and boundaries</h2>
+          <div class="detail-grid">
+            <div class="detail-card">
+              <strong>Finite representation</strong>
+              <p>A partition at perimeter index <em>n</em> is a nonzero bounded multiplicity vector on part sizes 1 through <em>n</em>.</p>
+            </div>
+            <div class="detail-card">
+              <strong>Distinct sizes</strong>
+              <p>Both statistics count supported part sizes—not total occurrences or excess multiplicity.</p>
+            </div>
+            <div class="detail-card">
+              <strong>Boundary at n = 0</strong>
+              <p>The empty multiplicity vector is excluded, so both counts are zero. The <em>k</em> = 2 equality includes this case.</p>
+            </div>
+            <div class="detail-card">
+              <strong>Natural subtraction</strong>
+              <p>Nonemptiness supplies positive largest part and part count, making the perimeter identity safe on counted objects.</p>
+            </div>
+          </div>
+          <p>
+            The complete author-prepared semantic map is available in
+            <a href="https://github.com/ageofresearch/formagization/blob/main/formalizations/fixed-perimeter-partitions/STATEMENT_MAPPING.md">STATEMENT_MAPPING.md</a>.
+            It is documentation, not an independent semantic review.
+          </p>
+
+          <h2 id="proof">Proof architecture</h2>
+          <ol class="principle-list">
+            <li><span>01</span><div><h3>Executable finite model</h3><p>Bounded multiplicity vectors define perimeter, both statistics, and concrete finite counts. Bridge modules connect them to canonical fibers.</p></div></li>
+            <li><span>02</span><div><h3>Exact k = 2 correspondence</h3><p>A recursive map adapted from Lin–Xiong–Yan is formalized together with its inverse, perimeter preservation, and an additional support-statistic identity.</p></div></li>
+            <li><span>03</span><div><h3>Generating functions</h3><p>Fixed-<em>j</em> formal power-series identities are derived from the finite combinatorial definitions rather than assumed.</p></div></li>
+            <li><span>04</span><div><h3>Dominant-root analysis</h3><p>The development proves positive roots, simplicity, complex minimum-modulus uniqueness, and the strict root comparison for <em>k</em> ≥ 3.</p></div></li>
+            <li><span>05</span><div><h3>Coefficient asymptotics</h3><p>A claim-specific rational transfer argument controls non-dominant terms and establishes positive leading constants.</p></div></li>
+            <li><span>06</span><div><h3>Final comparison and transport</h3><p>Positive asymptotic equivalents yield the ratio limit and eventual positivity needed for strict inequality, then transport the conclusions back to executable FO and FD.</p></div></li>
+          </ol>
+          <p><a href="https://github.com/ageofresearch/formagization/blob/main/formalizations/fixed-perimeter-partitions/PROOF_OVERVIEW.md">Read the module-by-module proof overview →</a></p>
+
+          <h2 id="evidence">Recorded evidence</h2>
+          <div class="audit-callout">
+            <strong>Automated clean build and checker evidence: passed.</strong>
+            <p>
+              GitHub CI completed 2,822 Lean build jobs. Lean’s environment
+              checker, the guarded axiom audit, and nanoda’s independent
+              type-check all completed successfully. Nanoda checked 365,409
+              declarations in the exported environment.
+            </p>
+          </div>
+
+          <div class="evidence-table-wrap">
+            <table class="evidence-table">
+              <thead><tr><th scope="col">Dimension</th><th scope="col">State</th><th scope="col">Record</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Source capture</th><td><span class="state state-recorded">Present</span></td><td>Selected public source snapshot and SHA-256</td></tr>
+                <tr><th scope="row">Clean build</th><td><span class="state state-passed">Passed</span></td><td>GitHub-hosted Ubuntu clean checkout</td></tr>
+                <tr><th scope="row">Kernel checking</th><td><span class="state state-passed">Passed</span></td><td>Lean, leanchecker, guarded audit, nanoda</td></tr>
+                <tr><th scope="row">Axioms / trusted base</th><td><span class="state state-recorded">Disclosed</span></td><td>Exact public-theorem output and pinned environment</td></tr>
+                <tr><th scope="row">Semantic alignment</th><td><span class="state state-open">Not independently reviewed</span></td><td>Author mapping available</td></tr>
+                <tr><th scope="row">Lean-expert review</th><td><span class="state state-open">Not reviewed</span></td><td>No external report recorded</td></tr>
+                <tr><th scope="row">Subject-matter review</th><td><span class="state state-open">Not reviewed</span></td><td>No external report recorded</td></tr>
+                <tr><th scope="row">Independent reproduction</th><td><span class="state state-open">Not reproduced</span></td><td>Automated maintainer CI is not human reproduction</td></tr>
+                <tr><th scope="row">Novelty</th><td><span class="state state-neutral">Not assessed</span></td><td>No priority claim</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Trusted computing base</h3>
+          <p>
+            The public declarations contain no <code>sorry</code>,
+            <code>admit</code>, explicit local <code>axiom</code>,
+            <code>unsafe</code> declaration, or explicit
+            <code>opaque</code> declaration. The guarded output for each public
+            theorem is exactly:
+          </p>
+          <div class="prose-blockquote"><code>[propext, Classical.choice, Quot.sound]</code></div>
+          <p>
+            These are standard Lean/Mathlib foundational dependencies; the
+            artifact does not claim to be axiom-free.
+          </p>
+
+          <h2 id="reproduce">Clean reproduction</h2>
+          <p>
+            Clone the repository, enter the pinned Lean project, obtain the
+            Mathlib cache, and run the full build and audit:
+          </p>
+          <div class="terminal-card">
+            <div class="terminal-top"><span>shell</span><button type="button" data-copy-target="artifact-reproduce">Copy</button></div>
+            <pre id="artifact-reproduce"><code>git clone https://github.com/ageofresearch/formagization.git
+cd formagization/formalizations/fixed-perimeter-partitions/lean4
+lake exe cache get
+lake exe mk_all --check
+lake build FixedPerimeter
+lake env lean FixedPerimeter/AxiomAudit.lean</code></pre>
+            <p data-copy-status aria-live="polite"></p>
+          </div>
+          <p>
+            Expected output, dependency-integrity checks, and a from-scratch
+            procedure are documented in the
+            <a href="https://github.com/ageofresearch/formagization/blob/main/formalizations/fixed-perimeter-partitions/REPRODUCIBILITY.md">reproduction guide</a>.
+          </p>
+
+          <h2 id="provenance">Source and AI provenance</h2>
+          <p>
+            The strengthened target was recovered from a public ChatGPT shared
+            response. The selected rendered response, normalization procedure,
+            and SHA-256 hash are preserved. The source is treated as
+            formalization input—not as evidence for the mathematical result.
+          </p>
+          <p>
+            OpenAI’s <code>gpt-5.6-sol</code> through Codex materially assisted
+            statement extraction, architecture, Mathlib search, source
+            generation, compiler-guided repair, checking, and documentation.
+            The human maintainer remains accountable for the artifact. AI is
+            neither listed as an author nor accepted as an independent reviewer.
+          </p>
+          <p>
+            Read the complete
+            <a href="https://github.com/ageofresearch/formagization/blob/main/formalizations/fixed-perimeter-partitions/AI_DISCLOSURE.md">AI disclosure</a>
+            and
+            <a href="https://github.com/ageofresearch/formagization/blob/main/formalizations/fixed-perimeter-partitions/source/README.md">source record</a>.
+          </p>
+
+          <h2 id="open-review">What remains open</h2>
+          <div class="warning-callout">
+            <strong>Machine checking is complete; the broader scientific record is not.</strong>
+            <p>
+              The archive still seeks independent semantic-alignment review,
+              Lean-expert review, subject-matter review, an external clean
+              reproduction, and a separate novelty assessment.
+            </p>
+          </div>
+          <p>
+            Reviews are append-only and scope-specific. A report should identify
+            the artifact version, reviewer, conflicts of interest, methods,
+            evidence examined, findings, and date.
+          </p>
+          <div class="button-row">
+            <a class="button button-primary" href="../../review/">Choose a review scope</a>
+            <a class="button button-secondary" href="https://github.com/ageofresearch/formagization/issues">Open a review issue</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="../../"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">Formagization</span></a><p>A reproducible, evidence-graded archive of machine-checked mathematics.</p></div>
+        <div class="footer-links">
+          <div><strong>Artifact</strong><a href="#statement">Statement</a><a href="#evidence">Evidence</a><a href="#reproduce">Reproduce</a></div>
+          <div><strong>Repository</strong><a href="https://github.com/ageofresearch/formagization/tree/main/formalizations/fixed-perimeter-partitions">Source dossier</a><a href="https://github.com/ageofresearch/formagization/blob/main/formalizations/fixed-perimeter-partitions/CITATION.cff">Citation</a><a href="https://github.com/ageofresearch/formagization/issues">Issues</a></div>
+        </div>
+      </div>
+      <div class="shell footer-bottom"><span>Maintained by Age of Research · MIT License</span><span>Evidence snapshot: 25 July 2026</span></div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="Formagization is a public, evidence-graded archive of reproducible machine-checked mathematics.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Formagization — Evidence-graded formal mathematics">
+    <meta property="og:description" content="Machine-checked mathematics, published with its evidence and uncertainty intact.">
+    <meta property="og:url" content="https://ageofresearch.github.io/formagization/">
+    <meta property="og:image" content="https://ageofresearch.github.io/formagization/assets/social-card.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Formagization — Evidence-graded formal mathematics</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="stylesheet" href="./assets/site.css">
+    <script src="./assets/site.js" defer></script>
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="./" aria-label="Formagization home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span class="brand-name">Formagization</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span>
+          <span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="./formalizations/">Formalizations</a>
+          <a href="./standards/">Evidence standards</a>
+          <a href="./review/">Review</a>
+          <a class="nav-github" href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-rule"></span> Lean-first · proof-assistant open</p>
+          <h1>Machine-checked mathematics, with the evidence kept separate.</h1>
+          <p class="hero-lede">
+            Formagization is a public archive of reproducible formal mathematics.
+            Every artifact publishes its statement, proof source, pinned environment,
+            provenance, trusted base, and outstanding review status—side by side.
+          </p>
+          <div class="button-row">
+            <a class="button button-primary" href="./formalizations/fixed-perimeter-partitions/">
+              Explore the first artifact <span aria-hidden="true">→</span>
+            </a>
+            <a class="button button-secondary" href="./standards/">How evidence works</a>
+          </div>
+          <p class="hero-note">
+            Developed with material AI assistance. Accountable human maintenance.
+            No generic “verified” badge.
+          </p>
+        </div>
+
+        <aside class="artifact-sheet" aria-labelledby="featured-artifact-title">
+          <div class="sheet-topline">
+            <span>Artifact 001</span>
+            <span>Lean 4 · Mathlib</span>
+          </div>
+          <div class="sheet-rule"></div>
+          <p class="sheet-kicker">Enumerative combinatorics</p>
+          <h2 id="featured-artifact-title">Fixed-perimeter partition counts</h2>
+          <div class="theorem-display" aria-label="Main asymptotic theorem">
+            <span class="theorem-label">For fixed j and k ≥ 3</span>
+            <span class="theorem-formula">
+              <span class="fraction"><span>FO(j,k,n)</span><span>FD(j,k,n)</span></span>
+              <span class="arrow">⟶</span>
+              <span>0</span>
+            </span>
+            <span class="theorem-limit">as n → ∞</span>
+          </div>
+          <div class="sheet-evidence" aria-label="Selected evidence states">
+            <div>
+              <span class="status-dot status-passed" aria-hidden="true"></span>
+              <span>Clean build</span>
+              <strong>Passed</strong>
+            </div>
+            <div>
+              <span class="status-dot status-passed" aria-hidden="true"></span>
+              <span>Kernel checking</span>
+              <strong>Passed</strong>
+            </div>
+            <div>
+              <span class="status-dot status-open" aria-hidden="true"></span>
+              <span>Semantic review</span>
+              <strong>Open</strong>
+            </div>
+          </div>
+          <a class="sheet-link" href="./formalizations/fixed-perimeter-partitions/">
+            Open artifact dossier <span aria-hidden="true">↗</span>
+          </a>
+        </aside>
+      </section>
+
+      <section class="metrics-band" aria-label="Repository facts">
+        <div class="shell metrics-grid">
+          <div class="metric">
+            <strong>1</strong>
+            <span>current artifact</span>
+          </div>
+          <div class="metric">
+            <strong>3</strong>
+            <span>public Lean theorems</span>
+          </div>
+          <div class="metric">
+            <strong>2,822</strong>
+            <span>Lean build jobs completed</span>
+          </div>
+          <div class="metric">
+            <strong>365,409</strong>
+            <span>exported declarations checked by nanoda</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell boundary-intro">
+        <div class="section-heading">
+          <p class="eyebrow">The scientific boundary</p>
+          <h2>“The kernel accepted it” is one fact—not the whole verdict.</h2>
+        </div>
+        <div class="boundary-copy">
+          <p>
+            A proof assistant can establish that a formal proposition follows from
+            stated definitions and foundations. That does not automatically establish
+            that the proposition matches the original conjecture, that a domain expert
+            endorses the definitions, that another person reproduced the build, or that
+            the result is novel.
+          </p>
+          <p>
+            Formagization records those questions independently, so strong evidence
+            remains visible without turning missing evidence into an implied claim.
+          </p>
+        </div>
+      </section>
+
+      <section class="section evidence-section">
+        <div class="shell">
+          <div class="section-heading section-heading-wide">
+            <p class="eyebrow">A vector, not a badge</p>
+            <h2>Nine evidence dimensions. Each says exactly one thing.</h2>
+            <p>
+              The current artifact has strong machine-checking evidence and explicitly
+              open human-review dimensions.
+            </p>
+          </div>
+
+          <div class="evidence-table-wrap">
+            <table class="evidence-table">
+              <thead>
+                <tr>
+                  <th scope="col">Evidence dimension</th>
+                  <th scope="col">Current record</th>
+                  <th scope="col">What it answers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Source capture</th>
+                  <td><span class="state state-recorded">Present</span></td>
+                  <td>Can the exact formalization target be inspected?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Clean build</th>
+                  <td><span class="state state-passed">Passed</span></td>
+                  <td>Does the pinned project build from a clean checkout?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Kernel / checker</th>
+                  <td><span class="state state-passed">Passed</span></td>
+                  <td>Do Lean, leanchecker, and nanoda accept the artifact?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Axioms / trusted base</th>
+                  <td><span class="state state-recorded">Disclosed</span></td>
+                  <td>What must be trusted for those checks to carry force?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Semantic alignment</th>
+                  <td><span class="state state-open">Not independently reviewed</span></td>
+                  <td>Does the formal statement capture the intended mathematics?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Proof-assistant review</th>
+                  <td><span class="state state-open">Not reviewed</span></td>
+                  <td>Has a Lean expert examined the implementation?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Subject-matter review</th>
+                  <td><span class="state state-open">Not reviewed</span></td>
+                  <td>Has a specialist reviewed the mathematical modeling?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Independent reproduction</th>
+                  <td><span class="state state-open">Not recorded</span></td>
+                  <td>Has an external person rebuilt and audited it?</td>
+                </tr>
+                <tr>
+                  <th scope="row">Novelty</th>
+                  <td><span class="state state-neutral">Not assessed</span></td>
+                  <td>Is the mathematical contribution new?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <a class="text-link" href="./standards/">Read the evidence standard <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <section class="section shell featured">
+        <div class="featured-head">
+          <div class="section-heading">
+            <p class="eyebrow">Current formalization</p>
+            <h2>One artifact, three exact conclusions.</h2>
+          </div>
+          <a class="button button-secondary" href="./formalizations/">View archive</a>
+        </div>
+
+        <div class="theorem-grid">
+          <article class="theorem-card">
+            <span class="card-number">01</span>
+            <p class="theorem-kind">Exact equality · k = 2</p>
+            <h3>Two partition statistics agree pointwise.</h3>
+            <div class="formula-line">FD(j, 2, n) = FO(j, 2, n)</div>
+            <p>For every natural <em>j</em> and <em>n</em>, including the documented boundary convention at <em>n</em> = 0.</p>
+          </article>
+          <article class="theorem-card">
+            <span class="card-number">02</span>
+            <p class="theorem-kind">Asymptotic separation · k ≥ 3</p>
+            <h3>The real-valued ratio tends to zero.</h3>
+            <div class="formula-line">FO(j,k,n) / FD(j,k,n) ⟶ 0</div>
+            <p>For each fixed natural <em>j</em> and <em>k</em> ≥ 3 as <em>n</em> tends to infinity.</p>
+          </article>
+          <article class="theorem-card">
+            <span class="card-number">03</span>
+            <p class="theorem-kind">Eventual comparison · k ≥ 3</p>
+            <h3>The denominator statistic eventually dominates.</h3>
+            <div class="formula-line">FO(j,k,n) &lt; FD(j,k,n)</div>
+            <p>There is an explicit formal existence claim for a threshold beyond which the inequality holds.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section proof-path">
+        <div class="shell">
+          <div class="section-heading section-heading-wide">
+            <p class="eyebrow">Proof architecture</p>
+            <h2>From finite partitions to asymptotic comparison.</h2>
+            <p>Every arrow below is implemented as compiler-checked Lean modules, not imported as a conjecture-specific axiom.</p>
+          </div>
+          <ol class="proof-steps">
+            <li>
+              <span>01</span>
+              <div><strong>Executable model</strong><p>Finite bounded multiplicity vectors and concrete counts.</p></div>
+            </li>
+            <li>
+              <span>02</span>
+              <div><strong>k = 2 bijection</strong><p>A perimeter-preserving recursive correspondence.</p></div>
+            </li>
+            <li>
+              <span>03</span>
+              <div><strong>Generating functions</strong><p>Fixed-j series derived from the combinatorics.</p></div>
+            </li>
+            <li>
+              <span>04</span>
+              <div><strong>Dominant roots</strong><p>Simplicity, minimum-modulus uniqueness, and root separation.</p></div>
+            </li>
+            <li>
+              <span>05</span>
+              <div><strong>Coefficient transfer</strong><p>Claim-specific rational asymptotics with positive constants.</p></div>
+            </li>
+            <li>
+              <span>06</span>
+              <div><strong>Final transport</strong><p>The analytic result is returned to executable FO and FD.</p></div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section shell reproduce">
+        <div class="reproduce-copy">
+          <p class="eyebrow">Reproduce, don’t trust</p>
+          <h2>The artifact carries its environment with it.</h2>
+          <p>
+            Lean <code>v4.32.1</code> and Mathlib commit
+            <code>520045ab14e…</code> are pinned. The audit records exactly
+            <code>propext</code>, <code>Classical.choice</code>, and
+            <code>Quot.sound</code> for the public conclusions.
+          </p>
+          <div class="button-row">
+            <a class="button button-primary" href="./formalizations/fixed-perimeter-partitions/#reproduce">Reproduction guide</a>
+            <a class="button button-secondary" href="https://github.com/ageofresearch/formagization/tree/main/formalizations/fixed-perimeter-partitions/lean4">Browse Lean source</a>
+          </div>
+        </div>
+        <div class="terminal-card">
+          <div class="terminal-top">
+            <span>clean reproduction</span>
+            <button type="button" data-copy-target="reproduce-command">Copy</button>
+          </div>
+          <pre id="reproduce-command"><code>cd formalizations/fixed-perimeter-partitions/lean4
+lake exe cache get
+lake exe mk_all --check
+lake build FixedPerimeter
+lake env lean FixedPerimeter/AxiomAudit.lean</code></pre>
+          <p data-copy-status aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="section invitation">
+        <div class="shell invitation-inner">
+          <p class="eyebrow">The archive is open</p>
+          <h2>Review the statement. Reproduce the build. Challenge the evidence.</h2>
+          <p>
+            The most valuable next contributions are independent semantic review,
+            Lean-expert review, subject-matter review, and clean reproduction reports.
+          </p>
+          <div class="button-row">
+            <a class="button button-light" href="./review/">Choose a review scope</a>
+            <a class="button button-ghost-light" href="https://github.com/ageofresearch/formagization/issues">Open a GitHub issue</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="./">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            <span class="brand-name">Formagization</span>
+          </a>
+          <p>A reproducible, evidence-graded archive of machine-checked mathematics.</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <strong>Archive</strong>
+            <a href="./formalizations/">Formalizations</a>
+            <a href="./standards/">Evidence standards</a>
+            <a href="./review/">Review</a>
+          </div>
+          <div>
+            <strong>Repository</strong>
+            <a href="https://github.com/ageofresearch/formagization/blob/main/CHARTER.md">Charter</a>
+            <a href="https://github.com/ageofresearch/formagization/blob/main/GOVERNANCE.md">Governance</a>
+            <a href="https://github.com/ageofresearch/formagization/blob/main/CITATION.cff">Citation</a>
+          </div>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <span>Maintained by Age of Research · MIT License</span>
+        <span>Last evidence snapshot: 25 July 2026</span>
+      </div>
+    </footer>
+  </body>
+</html>

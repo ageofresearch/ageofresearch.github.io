@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="Review and reproduce formal mathematical artifacts in Formagization.">
+    <title>Review — Formagization</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/site.css">
+    <script src="../assets/site.js" defer></script>
+  </head>
+  <body data-page="review">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="shell header-inner">
+        <a class="brand" href="../" aria-label="Formagization home"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">Formagization</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+          <span class="sr-only">Toggle navigation</span><span></span><span></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation" data-nav>
+          <a href="../formalizations/">Formalizations</a>
+          <a href="../standards/">Evidence standards</a>
+          <a href="./" aria-current="page">Review</a>
+          <a class="nav-github" href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><span>Review</span></div>
+        <p class="eyebrow">Independent scrutiny</p>
+        <h1>Choose the question you are qualified to answer.</h1>
+        <p>
+          A useful report does not need to review everything. Formagization accepts
+          narrow, attributable reviews that state their scope precisely and avoid
+          implying conclusions outside it.
+        </p>
+      </section>
+
+      <section class="section shell">
+        <div class="section-heading section-heading-wide">
+          <p class="eyebrow">Five review scopes</p>
+          <h2>Different expertise produces different evidence.</h2>
+        </div>
+        <div class="review-scope-grid">
+          <article class="review-scope">
+            <span>01</span>
+            <h3>Reproduction review</h3>
+            <p>Run the documented commands in a clean environment and record the toolchain, platform, outputs, deviations, and result.</p>
+          </article>
+          <article class="review-scope">
+            <span>02</span>
+            <h3>Kernel and trusted-base review</h3>
+            <p>Inspect compiler and dependency pins, theorem axioms, unsafe features, external checkers, certificates, and the claimed trusted computing base.</p>
+          </article>
+          <article class="review-scope">
+            <span>03</span>
+            <h3>Semantic-alignment review</h3>
+            <p>Compare the informal target against formal domains, quantifiers, definitions, hypotheses, boundary conventions, and public conclusions.</p>
+          </article>
+          <article class="review-scope">
+            <span>04</span>
+            <h3>Subject-matter review</h3>
+            <p>Evaluate whether the definitions, argument architecture, conventions, and mathematical interpretation are appropriate for the field.</p>
+          </article>
+          <article class="review-scope">
+            <span>05</span>
+            <h3>Novelty review</h3>
+            <p>Compare the exact formalized statements and proof ingredients with the literature. State databases searched, date, and uncertainty.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section evidence-section">
+        <div class="shell content-grid">
+          <aside class="content-aside">
+            <strong>Current priority</strong>
+            Artifact 001 especially needs independent semantic alignment,
+            subject-matter review, Lean-expert review, and external clean reproduction.
+          </aside>
+          <article class="prose">
+            <h2>What a review report records</h2>
+            <ul>
+              <li>artifact identifier, version, and commit or release reviewed;</li>
+              <li>reviewer name or stable identity and relevant expertise;</li>
+              <li>declared conflicts of interest;</li>
+              <li>the exact review scope;</li>
+              <li>methods, environment, and evidence examined;</li>
+              <li>findings, limitations, and unresolved questions;</li>
+              <li>the review date.</li>
+            </ul>
+            <p>
+              Reports are preserved append-only. A later correction or disagreement
+              adds evidence to the record rather than deleting the original report.
+            </p>
+
+            <h2>How to begin</h2>
+            <ol class="principle-list">
+              <li><span>01</span><div><h3>Select an artifact and scope</h3><p>Start with the evidence dossier and identify the one dimension you intend to assess.</p></div></li>
+              <li><span>02</span><div><h3>Work from a fixed revision</h3><p>Record the commit, toolchain, dependencies, and any local changes before drawing conclusions.</p></div></li>
+              <li><span>03</span><div><h3>Publish the evidence</h3><p>Open a GitHub issue or pull request containing the report. Maintainers will preserve an accepted report under the artifact’s review directory.</p></div></li>
+            </ol>
+            <div class="button-row">
+              <a class="button button-primary" href="https://github.com/ageofresearch/formagization/issues/new">Open a review issue</a>
+              <a class="button button-secondary" href="https://github.com/ageofresearch/formagization/blob/main/REVIEWING.md">Read the complete protocol</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-cta">
+        <div class="shell page-cta-inner">
+          <h2>Start with the fixed-perimeter artifact’s open review record.</h2>
+          <a class="button button-primary" href="../formalizations/fixed-perimeter-partitions/#open-review">Open dossier</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">F</span><span class="brand-name">Formagization</span></a><p>A reproducible, evidence-graded archive of machine-checked mathematics.</p></div>
+        <div class="footer-links">
+          <div><strong>Archive</strong><a href="../formalizations/">Formalizations</a><a href="../standards/">Evidence standards</a><a href="./">Review</a></div>
+          <div><strong>Repository</strong><a href="https://github.com/ageofresearch/formagization/blob/main/REVIEWING.md">Review protocol</a><a href="https://github.com/ageofresearch/formagization/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/ageofresearch/formagization/issues">Issues</a></div>
+        </div>
+      </div>
+      <div class="shell footer-bottom"><span>Maintained by Age of Research · MIT License</span><span>Last evidence snapshot: 25 July 2026</span></div>
+    </footer>
+  </body>
+</html>

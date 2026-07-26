@@ -1,0 +1,6 @@
+* @ageofresearch
+/.github/workflows/ @ageofresearch
+/**/lean-toolchain @ageofresearch
+/**/lakefile.toml @ageofresearch
+/**/lake-manifest.json @ageofresearch
+/**/AxiomAudit.lean @ageofresearch

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "archive": "Formagization",
+  "artifacts": [
+    {
+      "id": "fixed-perimeter-partitions",
+      "title": "Fixed-perimeter partition counts: asymptotic separation and exact equality",
+      "path": "formalizations/fixed-perimeter-partitions",
+      "version": "1.0.0",
+      "proof_systems": ["Lean 4"],
+      "subjects": [
+        "enumerative combinatorics",
+        "integer partitions",
+        "generating functions",
+        "asymptotic analysis"
+      ],
+      "evidence": {
+        "source_capture": "present",
+        "clean_build": "passed",
+        "kernel_checking": "passed",
+        "semantic_alignment": "not-independently-reviewed",
+        "proof_assistant_review": "not-reviewed",
+        "subject_matter_review": "not-reviewed",
+        "independent_reproduction": "not-reproduced",
+        "novelty": "not-assessed"
+      }
+    }
+  ]
+}

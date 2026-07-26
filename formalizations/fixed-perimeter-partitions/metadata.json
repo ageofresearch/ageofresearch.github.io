@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "id": "fixed-perimeter-partitions",
+  "title": "Fixed-perimeter partition counts: asymptotic separation and exact equality",
+  "version": "1.0.0",
+  "date": "2026-07-25",
+  "maintainer": {
+    "github": "ageofresearch",
+    "name": "Age of Research",
+    "orcid": null
+  },
+  "subjects": [
+    "enumerative combinatorics",
+    "integer partitions",
+    "generating functions",
+    "asymptotic analysis"
+  ],
+  "keywords": [
+    "fixed perimeter",
+    "partition statistics",
+    "formal proof",
+    "Lean 4",
+    "Mathlib",
+    "AI-assisted formalization"
+  ],
+  "sources": [
+    {
+      "role": "informal-formalization-target",
+      "kind": "public-chatgpt-share",
+      "url": "https://chatgpt.com/share/6a61ff8e-ad64-83ea-9c46-9c238d377044",
+      "accessed": "2026-07-23",
+      "selected_response_id": "relay-selected-content",
+      "retrieval_method": "jina-reader-browser-public-share",
+      "source_fidelity": "rendered-markdown",
+      "snapshot": "source/chatgpt-share-selected-response.md",
+      "normalization": "CRLF-to-LF followed by trimming leading and trailing whitespace",
+      "normalized_characters": 7972,
+      "sha256": "7ef0e0820cf0bbd45c0c3788570f30170bea75b79e89bd0e8136bd4d620fd83f",
+      "note": "The public response supplied the strengthened k >= 3 asymptotic target and the k = 2 equality. The archive records its hash but does not treat it as mathematical evidence."
+    },
+    {
+      "role": "mathematical-precedent-and-k2-bijection",
+      "kind": "preprint",
+      "title": "Combinatorics of Integer Partitions With Prescribed Perimeter",
+      "authors": ["Zhicong Lin", "Huan Xiong", "Sherry H. F. Yan"],
+      "url": "https://arxiv.org/abs/2204.02879",
+      "doi": "10.48550/arXiv.2204.02879",
+      "version": "arXiv:2204.02879v1",
+      "accessed": "2026-07-25",
+      "note": "The recursive k = 2 map is adapted from Theorem 11. That theorem counts even-part occurrences and adjacent repetitions; the distinct-support statistic correspondence needed here is an additional result proved in Lean."
+    }
+  ],
+  "formal_system": {
+    "name": "Lean 4",
+    "version": "v4.32.1",
+    "toolchain": "leanprover/lean4:v4.32.1",
+    "project_directory": "lean4",
+    "build_command": "lake build",
+    "audit_command": "lake env lean FixedPerimeter/AxiomAudit.lean",
+    "dependencies": [
+      {
+        "name": "Mathlib",
+        "repository": "https://github.com/leanprover-community/mathlib4.git",
+        "commit": "520045ab14e26149ee970e2e617ca04b09bde5d6"
+      }
+    ]
+  },
+  "public_theorems": [
+    {
+      "declaration": "FixedPerimeter.fixedPerimeter_eq_two",
+      "source_file": "lean4/FixedPerimeter/CountBridge.lean",
+      "interpretation": "For every natural j and n, FD j 2 n equals FO j 2 n."
+    },
+    {
+      "declaration": "FixedPerimeter.fixedPerimeter_ratio_tendsto_zero",
+      "source_file": "lean4/FixedPerimeter/MainTheorems.lean",
+      "interpretation": "For fixed natural j and k with 3 <= k, the real sequence FO j k n / FD j k n tends to zero as n tends to infinity."
+    },
+    {
+      "declaration": "FixedPerimeter.fixedPerimeter_eventually_strict",
+      "source_file": "lean4/FixedPerimeter/MainTheorems.lean",
+      "interpretation": "For fixed natural j and k with 3 <= k, there is a threshold after which FO j k n is strictly less than FD j k n."
+    }
+  ],
+  "trusted_computing_base": {
+    "kernel": "Lean 4.32.1 kernel",
+    "dependency_declarations": "Pinned Mathlib environment",
+    "public_theorem_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "proof_placeholders": "none found",
+    "local_axioms": "none found",
+    "unsafe_declarations": "none found",
+    "external_checkers_in_ci": ["leanchecker", "nanoda"]
+  },
+  "ai_assistance": {
+    "material": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "interface": "Codex desktop",
+    "dates": {
+      "started": "2026-07-23",
+      "completed": "2026-07-25"
+    },
+    "scope": [
+      "statement extraction and formalization planning",
+      "formal architecture",
+      "Mathlib theorem search",
+      "Lean source generation",
+      "compiler-guided proof repair",
+      "build and axiom-audit execution",
+      "publication documentation"
+    ],
+    "accountable_human_maintainer": "ageofresearch",
+    "transcripts_included": false
+  },
+  "evidence": {
+    "source_capture": {
+      "state": "present",
+      "date": "2026-07-23",
+      "report": "source/README.md"
+    },
+    "clean_build": {
+      "state": "passed",
+      "date": "2026-07-25",
+      "runner": "GitHub-hosted Ubuntu 24.04 x86_64 clean checkout",
+      "run_id": 30180068398,
+      "run_url": "https://github.com/ageofresearch/formagization/actions/runs/30180068398",
+      "head_sha": "3452c0b8c3b392802658b1d768f19b5199955bfd",
+      "report": "reviews/github-ci-2026-07-25.md",
+      "note": "Automated clean CI passed. This is not an independent human reproduction."
+    },
+    "local_build": {
+      "state": "passed",
+      "date": "2026-07-25",
+      "runner": "macOS 14.6.1 arm64 with an existing pinned dependency cache",
+      "report": "reviews/author-check-2026-07-25.md"
+    },
+    "kernel_checking": {
+      "state": "passed",
+      "date": "2026-07-25",
+      "axiom_report": "lean4/FixedPerimeter/AxiomAudit.lean",
+      "report": "reviews/github-ci-2026-07-25.md",
+      "checkers": ["Lean kernel", "leanchecker", "nanoda"]
+    },
+    "github_ci": {
+      "state": "passed",
+      "workflow": ".github/workflows/lean.yml",
+      "run_id": 30180068398,
+      "run_url": "https://github.com/ageofresearch/formagization/actions/runs/30180068398",
+      "head_sha": "3452c0b8c3b392802658b1d768f19b5199955bfd",
+      "report": "reviews/github-ci-2026-07-25.md"
+    },
+    "semantic_alignment": {
+      "state": "not-independently-reviewed",
+      "author_mapping": "STATEMENT_MAPPING.md"
+    },
+    "proof_assistant_review": {
+      "state": "not-reviewed"
+    },
+    "subject_matter_review": {
+      "state": "not-reviewed"
+    },
+    "independent_reproduction": {
+      "state": "not-reproduced"
+    },
+    "novelty": {
+      "state": "not-assessed"
+    }
+  },
+  "conflicts_of_interest": {
+    "state": "none-recorded"
+  },
+  "release": {
+    "status": "pending",
+    "planned_tag": "fixed-perimeter-partitions-v1.0.0",
+    "archive_sha256": null,
+    "doi": null
+  },
+  "license": "MIT"
+}

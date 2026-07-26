@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Please cite this formalization artifact and its mathematical sources."
+title: "Fixed-perimeter partition counts: asymptotic separation and exact equality"
+type: software
+authors:
+  - name: "Age of Research"
+    website: "https://github.com/ageofresearch"
+repository-code: "https://github.com/ageofresearch/formagization"
+url: "https://github.com/ageofresearch/formagization/tree/main/formalizations/fixed-perimeter-partitions"
+version: 1.0.0
+license: MIT
+keywords:
+  - integer partitions
+  - fixed perimeter
+  - enumerative combinatorics
+  - Lean 4
+  - AI-assisted formalization
+references:
+  - type: article
+    title: "Combinatorics of Integer Partitions With Prescribed Perimeter"
+    authors:
+      - given-names: Zhicong
+        family-names: Lin
+      - given-names: Huan
+        family-names: Xiong
+      - given-names: "Sherry H. F."
+        family-names: Yan
+    year: 2022
+    doi: "10.48550/arXiv.2204.02879"
+    url: "https://arxiv.org/abs/2204.02879"

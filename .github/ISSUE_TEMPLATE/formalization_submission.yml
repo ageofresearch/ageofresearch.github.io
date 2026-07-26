@@ -1,0 +1,60 @@
+name: Propose a formalization
+description: Propose a reproducible AI-assisted mathematical formalization for the archive.
+title: "[Artifact]: "
+labels: ["artifact-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Inclusion records evidence; it does not imply novelty, semantic alignment, or mathematical acceptance.
+  - type: input
+    id: title
+    attributes:
+      label: Formalization title
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Informal source
+      description: Stable URL, citation, and version.
+    validations:
+      required: true
+  - type: input
+    id: prover
+    attributes:
+      label: Proof assistant and version
+    validations:
+      required: true
+  - type: textarea
+    id: statements
+    attributes:
+      label: Public formal statements
+      description: Declaration names and plain-language interpretations.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction command and environment
+    validations:
+      required: true
+  - type: textarea
+    id: ai
+    attributes:
+      label: AI assistance
+      description: Provider, model, interface, dates, and scope.
+    validations:
+      required: true
+  - type: textarea
+    id: review
+    attributes:
+      label: Existing reviews
+      description: Separate semantic, formal-methods, subject-matter, reproduction, and novelty review.
+  - type: checkboxes
+    id: responsibility
+    attributes:
+      label: Responsibility
+      options:
+        - label: I accept responsibility for the submitted statements, source, metadata, and licensing.
+          required: true

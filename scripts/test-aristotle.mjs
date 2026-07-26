@@ -170,6 +170,7 @@ const completeConversationPayload = {
   complete: true,
   completeness: "selected-public-branch",
   sourceSha256: `sha256:${"a".repeat(64)}`,
+  importToken: "b".repeat(43),
   retrievalMethod: "chatgpt-public-share-flat-payload",
   importerVersion: "formagization.chatgpt-share/v2",
 };
@@ -194,6 +195,7 @@ assert.equal(
   importedConversation.sourceSha256,
   `sha256:${"a".repeat(64)}`,
 );
+assert.equal(importedConversation.importToken, "b".repeat(43));
 
 assert.throws(
   () => validateImportedChatGPTConversation(null, sharedLink),
@@ -203,6 +205,17 @@ assert.throws(
   () =>
     validateImportedChatGPTConversation(
       { ...completeConversationPayload, complete: false },
+      sharedLink,
+    ),
+  /malformed or incomplete/,
+);
+assert.throws(
+  () =>
+    validateImportedChatGPTConversation(
+      {
+        ...completeConversationPayload,
+        importToken: "not-a-valid-import-token",
+      },
       sharedLink,
     ),
   /malformed or incomplete/,

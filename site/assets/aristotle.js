@@ -335,6 +335,7 @@ import {
           title: conversation.title,
           sourceSha256: conversation.sourceSha256,
           complete: true,
+          importToken: conversation.importToken,
         };
         promptInput.maxLength = CHATGPT_TRANSCRIPT_LIMIT;
         promptInput.dataset.locked = "true";

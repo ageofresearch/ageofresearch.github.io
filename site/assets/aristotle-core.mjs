@@ -107,7 +107,9 @@ export function validateImportedChatGPTConversation(payload, sharedLink) {
     !payload.title.trim() ||
     Array.from(payload.title).length > 240 ||
     typeof payload.sourceSha256 !== "string" ||
-    !/^sha256:[a-f0-9]{64}$/.test(payload.sourceSha256)
+    !/^sha256:[a-f0-9]{64}$/.test(payload.sourceSha256) ||
+    typeof payload.importToken !== "string" ||
+    !/^[A-Za-z0-9_-]{43}$/.test(payload.importToken)
   ) {
     throw new Error(
       "The complete public conversation response was malformed or incomplete.",
@@ -150,6 +152,7 @@ export function validateImportedChatGPTConversation(payload, sharedLink) {
     complete: true,
     completeness: "selected-public-branch",
     sourceSha256: payload.sourceSha256,
+    importToken: payload.importToken,
     retrievalMethod:
       typeof payload.retrievalMethod === "string"
         ? payload.retrievalMethod

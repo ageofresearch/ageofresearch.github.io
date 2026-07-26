@@ -244,6 +244,9 @@ const aristotleRequirements = [
       ) &&
       aristotleCore.includes("payload.sourceUrl !== sharedLink.url") &&
       aristotleCore.includes(
+        '!/^[A-Za-z0-9_-]{43}$/.test(payload.importToken)',
+      ) &&
+      aristotleCore.includes(
         "export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000",
       ) &&
       aristotleScript.includes("fetchPublicChatGPTShare") &&

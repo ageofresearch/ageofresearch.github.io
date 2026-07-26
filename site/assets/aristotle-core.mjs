@@ -33,9 +33,12 @@ export function validateKey(key) {
 }
 
 export function parseChatGPTShareUrl(value) {
+  const candidate = String(value ?? "").trim();
+  if (!candidate || /\s/u.test(candidate)) return null;
+
   let url;
   try {
-    url = new URL(String(value ?? "").trim());
+    url = new URL(candidate);
   } catch {
     return null;
   }
@@ -61,9 +64,12 @@ export function parseChatGPTShareUrl(value) {
 }
 
 export function looksLikeChatGPTShareUrl(value) {
+  const candidate = String(value ?? "").trim();
+  if (!candidate || /\s/u.test(candidate)) return false;
+
   let url;
   try {
-    url = new URL(String(value ?? "").trim());
+    url = new URL(candidate);
   } catch {
     return false;
   }

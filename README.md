@@ -31,11 +31,12 @@ deployment.
 
 The page at <https://ageofresearch.github.io/aristotle/> accepts either a
 plain-text mathematical request or one standalone official ChatGPT Share
-link. After a standalone link is pasted, **Test of link** reads the public
-conversation and replaces the request field with conversation-only `PERSON:`
-and `LLM:` turns; text that merely contains a link is left unchanged. The
-Aristotle key is never sent during conversation import, and an untested raw
-Share link is blocked at submission.
+link. A standalone link changes the primary action to **Send Link**. That
+first action imports conversation-only `PERSON:` and `LLM:` turns, locks the
+request field while preserving its internal scroll, and returns the action to
+**Submit to Aristotle**. Plain text remains editable, and text that merely
+contains a link is left unchanged. The Aristotle key is never sent during
+conversation import.
 
 During the Aristotle relay deployment, pin validation to the intended
 production origin so the placeholder cannot pass:

@@ -161,15 +161,18 @@ const aristotleRequirements = [
   [aristotlePage.includes("data-key-forget"), "Aristotle page must provide a Forget control"],
   [aristotlePage.includes("data-key-toggle"), "Aristotle page must provide a Show control"],
   [
-    aristotlePage.includes("data-share-import") &&
-      aristotlePage.includes("Test of link"),
-    "Aristotle page must provide the explicit Test of link import control",
+    aristotlePage.includes("data-submit-label") &&
+      !aristotlePage.includes("data-share-import") &&
+      !aristotlePage.includes("Test of link"),
+    "Aristotle page must use one dynamic primary action without a separate link-test control",
   ],
   [
     aristotlePage.includes("standalone ChatGPT Share link") &&
+      aristotlePage.includes("<strong>Send Link</strong>") &&
       aristotlePage.includes("<code>PERSON:</code>") &&
-      aristotlePage.includes("<code>LLM:</code>"),
-    "Aristotle page must explain standalone ChatGPT conversation imports and role labels",
+      aristotlePage.includes("<code>LLM:</code>") &&
+      aristotlePage.includes("locks them while preserving scroll"),
+    "Aristotle page must explain automatic link actions, role labels, and the locked scrollable import",
   ],
   [
     aristotlePage.includes('class="aristotle-document"') &&
@@ -208,12 +211,21 @@ const aristotleRequirements = [
     "ChatGPT Share imports must use the credential-free, size-limited public reader",
   ],
   [
-    aristotleScript.includes('shareImportButton.addEventListener("click"') &&
-      !aristotleScript.includes("parseChatGPTShareUrl(nextValue)") &&
-      !aristotleScript.includes('promptInput.addEventListener("change"') &&
+    !aristotleScript.includes("shareImportButton") &&
+      aristotleScript.includes('submitLabel.textContent = isLink ? "Send Link" : "Submit to Aristotle"') &&
+      aristotleScript.includes('promptInput.addEventListener("input"') &&
+      aristotleScript.includes("parseChatGPTShareUrl(promptInput.value)") &&
+      aristotleScript.includes('if (!promptLocked && promptMode === "link")') &&
       shareImportCalls.length === 1 &&
-      aristotleScript.includes("Choose Test of link to import and review"),
-    "ChatGPT Share links must wait for the explicit test control and raw links must be blocked at submission",
+      aristotleScript.includes('promptInput.dataset.locked = "true"') &&
+      aristotleScript.includes("promptInput.readOnly = promptLocked") &&
+      aristotleScript.includes('setPromptMode("imported")'),
+    "ChatGPT Share links must change the primary action, import on the first submit, lock the transcript, and restore the Aristotle action",
+  ],
+  [
+    siteStyles.includes('textarea[data-locked="true"]') &&
+      siteStyles.includes("overflow: auto"),
+    "Imported ChatGPT transcripts must remain internally scrollable while read-only",
   ],
   [aristotleScript.includes("window.sessionStorage"), "Aristotle key must use tab-scoped sessionStorage"],
   [!aristotleScript.includes("localStorage"), "Aristotle script must not use persistent localStorage"],

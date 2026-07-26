@@ -15,7 +15,7 @@ import {
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
   validateKey,
-} from "./aristotle-core.mjs";
+} from "./aristotle-core.mjs?build=20260726-send-link-lock";
 
 (() => {
   "use strict";
@@ -32,8 +32,8 @@ import {
   const keyForget = form.querySelector("[data-key-forget]");
   const promptCount = form.querySelector("[data-prompt-count]");
   const promptLimitStatus = form.querySelector("[data-prompt-limit-status]");
-  const shareImportButton = form.querySelector("[data-share-import]");
   const submitButton = form.querySelector("[data-submit-button]");
+  const submitLabel = form.querySelector("[data-submit-label]");
   const formStatus = form.querySelector("[data-form-status]");
   const projectPanel = document.querySelector("[data-project-panel]");
   const projectState = document.querySelector("[data-project-state]");
@@ -54,8 +54,8 @@ import {
   if (
     !(keyInput instanceof HTMLInputElement) ||
     !(promptInput instanceof HTMLTextAreaElement) ||
-    !(shareImportButton instanceof HTMLButtonElement) ||
     !(submitButton instanceof HTMLButtonElement) ||
+    !(submitLabel instanceof HTMLElement) ||
     !(downloadButton instanceof HTMLButtonElement)
   ) {
     return;
@@ -67,6 +67,8 @@ import {
   let requestInFlight = false;
   let shareImportInFlight = false;
   let shareImportPromise = null;
+  let promptMode = "text";
+  let promptLocked = false;
   let lastProjectData = null;
   let activeWorkspaceView = "request";
 
@@ -171,9 +173,20 @@ import {
     promptInput.setAttribute("aria-invalid", String(length > PROMPT_LIMIT));
   };
 
+  const setPromptMode = (mode) => {
+    promptMode = mode;
+    const isLink = mode === "link";
+    submitLabel.textContent = isLink ? "Send Link" : "Submit to Aristotle";
+    submitButton.dataset.submitMode = mode;
+  };
+
+  const syncPromptMode = () => {
+    if (promptLocked || shareImportInFlight) return;
+    setPromptMode(parseChatGPTShareUrl(promptInput.value) ? "link" : "text");
+  };
+
   const updateSubmitAvailability = () => {
     submitButton.disabled = requestInFlight || shareImportInFlight;
-    shareImportButton.disabled = requestInFlight || shareImportInFlight;
   };
 
   const readLimitedShareResponse = async (response) => {
@@ -291,9 +304,13 @@ import {
         const markdown = await fetchPublicChatGPTShare(sharedLink);
         const conversation = extractChatGPTConversation(markdown);
         promptInput.value = conversation.text;
+        promptLocked = true;
+        promptInput.dataset.locked = "true";
+        promptInput.setAttribute("aria-readonly", "true");
+        setPromptMode("imported");
         setPromptCount();
         setFormStatus(
-          `Conversation imported: ${conversation.turnCount} turns (${conversation.personTurnCount} person, ${conversation.llmTurnCount} LLM). Review it before submitting.`,
+          `Conversation imported and locked: ${conversation.turnCount} turns (${conversation.personTurnCount} person, ${conversation.llmTurnCount} LLM). Scroll to review it, then submit.`,
           "success",
         );
         return conversation;
@@ -310,8 +327,13 @@ import {
       } finally {
         shareImportInFlight = false;
         shareImportPromise = null;
-        promptInput.readOnly = false;
+        promptInput.readOnly = promptLocked;
         promptInput.removeAttribute("aria-busy");
+        if (!promptLocked) {
+          promptInput.removeAttribute("aria-readonly");
+          delete promptInput.dataset.locked;
+          syncPromptMode();
+        }
         updateSubmitAvailability();
       }
     })();
@@ -493,6 +515,7 @@ import {
   keyInput.value = readStoredKey();
   activeProjectId = readStoredProjectId();
   setPromptCount();
+  syncPromptMode();
   if (activeProjectId) {
     setWorkspaceView("progress");
     updateProjectPanel(
@@ -540,7 +563,10 @@ import {
     keyInput.focus();
   });
 
-  promptInput.addEventListener("input", setPromptCount);
+  promptInput.addEventListener("input", () => {
+    setPromptCount();
+    syncPromptMode();
+  });
   promptInput.addEventListener("paste", (event) => {
     const pastedText = event.clipboardData?.getData("text") ?? "";
     const selectionStart = promptInput.selectionStart ?? 0;
@@ -559,21 +585,6 @@ import {
     }
   });
 
-  shareImportButton.addEventListener("click", () => {
-    const sharedLink = parseChatGPTShareUrl(promptInput.value);
-    if (!sharedLink) {
-      const message = looksLikeChatGPTShareUrl(promptInput.value)
-        ? "Enter a complete public ChatGPT Share link without query parameters or fragments."
-        : "Paste one standalone official ChatGPT Share link to test it. Plain text was left unchanged.";
-      setFormStatus(message, "error");
-      promptInput.focus();
-      return;
-    }
-    void importChatGPTShare(sharedLink).catch(() => {
-      // The import function reports a safe, user-facing error.
-    });
-  });
-
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (requestInFlight || shareImportInFlight) return;
@@ -581,12 +592,24 @@ import {
     const key = keyInput.value;
     const prompt = promptInput.value;
     const sharedLink = parseChatGPTShareUrl(prompt);
-    if (sharedLink) {
-      setFormStatus(
-        "Choose Test of link to import and review this conversation before submitting.",
-        "error",
-      );
-      promptInput.focus();
+    if (!promptLocked && sharedLink && promptMode !== "link") {
+      setPromptMode("link");
+    }
+    if (!promptLocked && promptMode === "link") {
+      if (!sharedLink) {
+        syncPromptMode();
+        setFormStatus(
+          "Enter one complete public ChatGPT Share link without query parameters or fragments.",
+          "error",
+        );
+        promptInput.focus();
+        return;
+      }
+      try {
+        await importChatGPTShare(sharedLink);
+      } catch {
+        // The import function reports a safe, user-facing error.
+      }
       return;
     } else if (looksLikeChatGPTShareUrl(prompt)) {
       setFormStatus(

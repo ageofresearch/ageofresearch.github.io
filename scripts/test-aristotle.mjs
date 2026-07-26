@@ -85,6 +85,18 @@ assert.equal(
 );
 assert.equal(
   parseChatGPTShareUrl(
+    "https://chatgpt.com/share/6a61ff8e-ad64-83ea-9c46-9c238d377044\nextra-text",
+  ),
+  null,
+);
+assert.equal(
+  parseChatGPTShareUrl(
+    "https://chatgpt.com/share/6a61ff8e-ad64-\t83ea-9c46-9c238d377044",
+  ),
+  null,
+);
+assert.equal(
+  parseChatGPTShareUrl(
     "https://chatgpt.com/share/6a61ff8e-ad64-83ea-9c46-9c238d377044?utm_source=test",
   ),
   null,

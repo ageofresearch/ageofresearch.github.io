@@ -102,9 +102,20 @@ const aristotleCore = readFileSync(join(siteRoot, "assets/aristotle-core.mjs"), 
 const siteStyles = readFileSync(join(siteRoot, "assets/site.css"), "utf8");
 const shareImportCalls =
   aristotleScript.match(/importChatGPTShare\(sharedLink\)/g) ?? [];
+const loadingStops =
+  aristotleScript.match(/setSubmitLoading\(false\)/g) ?? [];
 const sessionStorageWrites = [
   ...aristotleScript.matchAll(/sessionStorage\.setItem\(([^,\n]+)/g),
 ].map((match) => match[1].trim());
+const hasScrollablePrompt =
+  /\.aristotle-form textarea\s*\{[\s\S]*?overflow:\s*auto\s*;/m.test(
+    siteStyles,
+  );
+const hasLoadingSpinner =
+  aristotlePage.includes('class="button-spinner"') &&
+  siteStyles.includes('.button[data-loading="true"] .button-spinner') &&
+  /\.button-spinner\s*\{[\s\S]*?animation\s*:/m.test(siteStyles) &&
+  /@keyframes\s+[A-Za-z0-9_-]*spin[A-Za-z0-9_-]*\s*\{/i.test(siteStyles);
 const proxyMatch = aristotleCore.match(
   /export const ARISTOTLE_PROXY_URL\s*=\s*"([^"]+)"/,
 );
@@ -157,7 +168,24 @@ if (configuredProxy) {
 
 const aristotleRequirements = [
   [aristotlePage.includes('type="password"'), "Aristotle API key input must be masked"],
-  [aristotlePage.includes('maxlength="100000"'), "Aristotle prompt must declare its 100,000-character limit"],
+  [
+    aristotlePage.includes('maxlength="100000"') &&
+      aristotleCore.includes("export const PROMPT_LIMIT = 100_000") &&
+      aristotleCore.includes(
+        "export const CHATGPT_TRANSCRIPT_LIMIT = 2_000_000",
+      ) &&
+      aristotleScript.includes(
+        "const limit = promptLocked ? CHATGPT_TRANSCRIPT_LIMIT : PROMPT_LIMIT",
+      ) &&
+      aristotleScript.includes(
+        "promptInput.maxLength = CHATGPT_TRANSCRIPT_LIMIT",
+      ) &&
+      aristotleScript.includes("promptInput.maxLength = PROMPT_LIMIT") &&
+      aristotleScript.includes(
+        "const activePromptLimit = promptLocked",
+      ),
+    "Aristotle must keep the 100,000-character manual limit and switch complete imported transcripts to the 2,000,000-character limit without truncation",
+  ],
   [aristotlePage.includes("data-key-forget"), "Aristotle page must provide a Forget control"],
   [aristotlePage.includes("data-key-toggle"), "Aristotle page must provide a Show control"],
   [
@@ -171,8 +199,10 @@ const aristotleRequirements = [
       aristotlePage.includes("<strong>Send Link</strong>") &&
       aristotlePage.includes("<code>PERSON:</code>") &&
       aristotlePage.includes("<code>LLM:</code>") &&
-      aristotlePage.includes("locks them while preserving scroll"),
-    "Aristotle page must explain automatic link actions, role labels, and the locked scrollable import",
+      aristotlePage.includes("complete selected public branch") &&
+      aristotlePage.includes("locks editing while preserving scroll") &&
+      aristotlePage.includes("Uploaded-file contents are not included"),
+    "Aristotle page must explain automatic link actions, complete-branch role labels, and the locked scrollable import",
   ],
   [
     aristotlePage.includes('class="aristotle-document"') &&
@@ -200,19 +230,41 @@ const aristotleRequirements = [
     "Aristotle requests must use the dedicated key header",
   ],
   [
-    aristotleCore.includes('"https://r.jina.ai"') &&
+    !aristotleCore.includes("r.jina.ai") &&
+      !aristotleScript.includes("r.jina.ai") &&
+      !aristotleScript.includes('"X-Engine"') &&
+      !aristotleScript.includes('"X-Respond-With"') &&
+      aristotleCore.includes(
+        'return `${ARISTOTLE_PROXY_URL}/api/chatgpt-share`',
+      ) &&
+      aristotleCore.includes("validateImportedChatGPTConversation") &&
+      aristotleCore.includes('payload.complete !== true') &&
+      aristotleCore.includes(
+        'payload.completeness !== "selected-public-branch"',
+      ) &&
+      aristotleCore.includes("payload.sourceUrl !== sharedLink.url") &&
+      aristotleCore.includes(
+        "export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000",
+      ) &&
       aristotleScript.includes("fetchPublicChatGPTShare") &&
-      aristotleScript.includes('"X-Engine": "browser"') &&
-      aristotleScript.includes('"X-No-Cache": "true"') &&
+      aristotleScript.includes('method: "POST"') &&
+      aristotleScript.includes(
+        "body: JSON.stringify({ url: sharedLink.url })",
+      ) &&
+      aristotleScript.includes('Accept: "application/json"') &&
       aristotleScript.includes('credentials: "omit"') &&
       aristotleScript.includes('referrerPolicy: "no-referrer"') &&
       aristotleScript.includes("response.body.getReader()") &&
-      aristotleScript.includes("receivedBytes > CHATGPT_SHARE_MAX_BYTES"),
-    "ChatGPT Share imports must use the credential-free, size-limited public reader",
+      aristotleScript.includes(
+        "receivedBytes > CHATGPT_SHARE_RESPONSE_MAX_BYTES",
+      ),
+    "ChatGPT Share imports must use the hidden, credential-free, size-limited complete selected-public-branch API instead of rendered Markdown",
   ],
   [
     !aristotleScript.includes("shareImportButton") &&
-      aristotleScript.includes('submitLabel.textContent = isLink ? "Send Link" : "Submit to Aristotle"') &&
+      aristotleScript.includes(
+        'promptMode === "link" ? "Send Link" : "Submit to Aristotle"',
+      ) &&
       aristotleScript.includes('promptInput.addEventListener("input"') &&
       aristotleScript.includes("parseChatGPTShareUrl(promptInput.value)") &&
       aristotleScript.includes('if (!promptLocked && promptMode === "link")') &&
@@ -224,8 +276,27 @@ const aristotleRequirements = [
   ],
   [
     siteStyles.includes('textarea[data-locked="true"]') &&
-      siteStyles.includes("overflow: auto"),
+      hasScrollablePrompt &&
+      aristotleScript.includes("promptInput.scrollTop = 0") &&
+      aristotleScript.includes(
+        'promptInput.setAttribute("aria-readonly", "true")',
+      ),
     "Imported ChatGPT transcripts must remain internally scrollable while read-only",
+  ],
+  [
+    aristotleScript.includes(
+      'setSubmitLoading(true, "Loading conversation…")',
+    ) &&
+      aristotleScript.includes('setSubmitLoading(true, "Submitting…")') &&
+      aristotleScript.includes(
+        'submitButton.dataset.loading = String(loading)',
+      ) &&
+      aristotleScript.includes(
+        'submitButton.setAttribute("aria-busy", String(loading))',
+      ) &&
+      loadingStops.length >= 2 &&
+      hasLoadingSpinner,
+    "The primary action must show an accessible animated spinner during both complete-conversation import and Aristotle submission",
   ],
   [aristotleScript.includes("window.sessionStorage"), "Aristotle key must use tab-scoped sessionStorage"],
   [!aristotleScript.includes("localStorage"), "Aristotle script must not use persistent localStorage"],

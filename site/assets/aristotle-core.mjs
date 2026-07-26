@@ -2,8 +2,8 @@ export const ARISTOTLE_PROXY_URL =
   "https://formagization-aristotle-proxy.ageofresearch.chatgpt.site";
 export const KEY_HEADER_NAME = "X-Formagization-Aristotle-Key";
 export const PROMPT_LIMIT = 100_000;
-export const CHATGPT_SHARE_RELAY_ORIGIN = "https://r.jina.ai";
-export const CHATGPT_SHARE_MAX_BYTES = 750_000;
+export const CHATGPT_TRANSCRIPT_LIMIT = 2_000_000;
+export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000;
 export const PROJECT_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/;
 
 export const TERMINAL_STATUSES = new Set([
@@ -79,7 +79,7 @@ export function looksLikeChatGPTShareUrl(value) {
   );
 }
 
-export function getChatGPTShareRelayUrl(sharedLink) {
+export function getChatGPTShareApiUrl(sharedLink) {
   if (
     !sharedLink ||
     typeof sharedLink.url !== "string" ||
@@ -87,138 +87,77 @@ export function getChatGPTShareRelayUrl(sharedLink) {
   ) {
     throw new Error("Enter a valid public ChatGPT Share link.");
   }
-  return `${CHATGPT_SHARE_RELAY_ORIGIN}/${sharedLink.url}`;
+  return `${ARISTOTLE_PROXY_URL}/api/chatgpt-share`;
 }
 
-function cleanSharedTurn(value, role) {
-  let text = String(value ?? "").trim();
-  if (role !== "llm") return text;
-
-  text = text
-    .replace(/^\s*(?:·\s*){3,}\n+/u, "")
-    .replace(/^\s*Worked for [^\n]+\n+/i, "")
-    .trimStart();
-
-  const actionKeyword =
-    /\b(?:download|proof|bundle|manuscript|pdf|latex|source|verifier|verification|output|audit|diff)\b/i;
-  while (text) {
-    const lineEnd = text.indexOf("\n");
-    const firstLine = lineEnd >= 0 ? text.slice(0, lineEnd) : text;
-    const segments = firstLine
-      .split(/[·•]/)
-      .map((segment) => segment.trim())
-      .filter(Boolean);
-    if (
-      segments.length < 3 ||
-      segments.some((segment) => !actionKeyword.test(segment))
-    ) {
-      break;
-    }
-    text = (lineEnd >= 0 ? text.slice(lineEnd + 1) : "").trimStart();
-  }
-
-  return text
-    .replace(/\n+\s*ChatGPT is AI and can make mistakes\.[\s\S]*$/i, "")
-    .replace(/\n+\s*Sources\s*$/i, "")
-    .trim();
-}
-
-function findConversationMarkers(markdown) {
-  const markerPattern =
-    /^####[ \t]+(You said|Tú dijiste|Tu dijiste|Dijiste|ChatGPT said|ChatGPT dijo):[ \t]*$/i;
-  const markers = [];
-  let offset = 0;
-  let fenceCharacter = "";
-
-  for (const lineWithEnding of markdown.match(/[^\n]*(?:\n|$)/g) ?? []) {
-    if (!lineWithEnding) continue;
-    const line = lineWithEnding.replace(/\r?\n$/, "");
-    const trimmed = line.trim();
-    const fence = trimmed.match(/^(`{3,}|~{3,})/);
-    if (fence) {
-      const character = fence[1][0];
-      if (!fenceCharacter) fenceCharacter = character;
-      else if (fenceCharacter === character) fenceCharacter = "";
-      offset += lineWithEnding.length;
-      continue;
-    }
-
-    if (!fenceCharacter) {
-      const marker = line.match(markerPattern);
-      if (marker) {
-        markers.push({
-          index: offset,
-          length: line.length,
-          role: /^ChatGPT/i.test(marker[1]) ? "llm" : "person",
-        });
-      }
-    }
-    offset += lineWithEnding.length;
-  }
-
-  for (let index = 1; index < markers.length; index += 1) {
-    if (markers[index - 1].role === markers[index].role) {
-      throw new Error(
-        "The shared page has an ambiguous speaker sequence. Paste the copied conversation text instead.",
-      );
-    }
-  }
-  return markers;
-}
-
-export function extractChatGPTConversation(markdown, { maxChars = PROMPT_LIMIT } = {}) {
+export function validateImportedChatGPTConversation(payload, sharedLink) {
   if (
-    typeof markdown !== "string" ||
-    !markdown ||
-    markdown.length > CHATGPT_SHARE_MAX_BYTES ||
-    markdown.includes("\u0000")
+    !payload ||
+    typeof payload !== "object" ||
+    Array.isArray(payload) ||
+    !sharedLink ||
+    payload.complete !== true ||
+    payload.completeness !== "selected-public-branch" ||
+    payload.sourceUrl !== sharedLink.url ||
+    typeof payload.text !== "string" ||
+    !payload.text ||
+    payload.text.includes("\u0000") ||
+    Array.from(payload.text).length > CHATGPT_TRANSCRIPT_LIMIT ||
+    typeof payload.title !== "string" ||
+    !payload.title.trim() ||
+    Array.from(payload.title).length > 240 ||
+    typeof payload.sourceSha256 !== "string" ||
+    !/^sha256:[a-f0-9]{64}$/.test(payload.sourceSha256)
   ) {
-    throw new Error("The public ChatGPT conversation is empty, unsafe, or too large.");
-  }
-
-  const markers = findConversationMarkers(markdown);
-  if (markers.length === 0) {
     throw new Error(
-      "This shared page does not expose a readable conversation transcript.",
+      "The complete public conversation response was malformed or incomplete.",
     );
   }
 
-  const turns = [];
-  for (let index = 0; index < markers.length; index += 1) {
-    const marker = markers[index];
-    const nextMarker = markers[index + 1];
-    const start = marker.index + marker.length;
-    const end = nextMarker ? nextMarker.index : markdown.length;
-    const text = cleanSharedTurn(markdown.slice(start, end), marker.role);
-    if (!text) continue;
-    turns.push({
-      role: marker.role,
-      text,
-    });
-  }
-
-  if (turns.length === 0) {
+  const integerFields = [
+    "turnCount",
+    "personTurnCount",
+    "llmTurnCount",
+    "attachmentCount",
+    "characters",
+    "branchNodeCount",
+  ];
+  if (
+    integerFields.some(
+      (field) =>
+        !Number.isSafeInteger(payload[field]) ||
+        payload[field] < 0,
+    ) ||
+    payload.turnCount < 1 ||
+    payload.personTurnCount + payload.llmTurnCount !== payload.turnCount ||
+    payload.characters !== Array.from(payload.text).length
+  ) {
     throw new Error(
-      "This shared page does not expose any readable conversation turns.",
-    );
-  }
-
-  const text = turns
-    .map((turn) => `${turn.role === "person" ? "PERSON" : "LLM"}:\n${turn.text}`)
-    .join("\n\n");
-  const characterLimit = Math.max(1, Math.min(PROMPT_LIMIT, Number(maxChars) || PROMPT_LIMIT));
-  if (text.length > characterLimit) {
-    throw new Error(
-      `The imported conversation contains ${text.length.toLocaleString("en-US")} characters and exceeds the ${characterLimit.toLocaleString("en-US")}-character request limit. Nothing was truncated.`,
+      "The complete public conversation response failed its completeness checks.",
     );
   }
 
   return {
-    text,
-    turns,
-    turnCount: turns.length,
-    personTurnCount: turns.filter((turn) => turn.role === "person").length,
-    llmTurnCount: turns.filter((turn) => turn.role === "llm").length,
+    title: payload.title.trim(),
+    sourceUrl: payload.sourceUrl,
+    text: payload.text,
+    turnCount: payload.turnCount,
+    personTurnCount: payload.personTurnCount,
+    llmTurnCount: payload.llmTurnCount,
+    attachmentCount: payload.attachmentCount,
+    characters: payload.characters,
+    branchNodeCount: payload.branchNodeCount,
+    complete: true,
+    completeness: "selected-public-branch",
+    sourceSha256: payload.sourceSha256,
+    retrievalMethod:
+      typeof payload.retrievalMethod === "string"
+        ? payload.retrievalMethod
+        : "complete-public-branch",
+    importerVersion:
+      typeof payload.importerVersion === "string"
+        ? payload.importerVersion
+        : "unknown",
   };
 }
 

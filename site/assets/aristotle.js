@@ -1,21 +1,22 @@
 import {
   ARISTOTLE_PROXY_URL,
-  CHATGPT_SHARE_MAX_BYTES,
+  CHATGPT_SHARE_RESPONSE_MAX_BYTES,
+  CHATGPT_TRANSCRIPT_LIMIT,
   KEY_HEADER_NAME,
   PROJECT_ID_PATTERN,
   PROMPT_LIMIT,
   SUCCESS_STATUSES,
   TERMINAL_STATUSES,
-  extractChatGPTConversation,
-  getChatGPTShareRelayUrl,
+  getChatGPTShareApiUrl,
   getDashboardUrl,
   getErrorMessage,
   getPollDelay,
   getStatus,
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
+  validateImportedChatGPTConversation,
   validateKey,
-} from "./aristotle-core.mjs?build=20260726-send-link-lock";
+} from "./aristotle-core.mjs?build=20260726-complete-chat";
 
 (() => {
   "use strict";
@@ -69,6 +70,9 @@ import {
   let shareImportPromise = null;
   let promptMode = "text";
   let promptLocked = false;
+  let importedShareSource = null;
+  let submitLoading = false;
+  let submitLoadingLabel = "";
   let lastProjectData = null;
   let activeWorkspaceView = "request";
 
@@ -165,19 +169,37 @@ import {
   };
 
   const setPromptCount = () => {
-    const length = promptInput.value.length;
+    const length = Array.from(promptInput.value).length;
+    const limit = promptLocked ? CHATGPT_TRANSCRIPT_LIMIT : PROMPT_LIMIT;
     if (promptCount) {
-      promptCount.textContent = `${length.toLocaleString("en-US")} / 100,000`;
-      promptCount.classList.toggle("is-over-limit", length > PROMPT_LIMIT);
+      promptCount.textContent =
+        `${length.toLocaleString("en-US")} / ${limit.toLocaleString("en-US")}`;
+      promptCount.classList.toggle("is-over-limit", length > limit);
     }
-    promptInput.setAttribute("aria-invalid", String(length > PROMPT_LIMIT));
+    promptInput.setAttribute("aria-invalid", String(length > limit));
+  };
+
+  const updateSubmitLabel = () => {
+    if (submitLoading) {
+      submitLabel.textContent = submitLoadingLabel;
+      return;
+    }
+    submitLabel.textContent =
+      promptMode === "link" ? "Send Link" : "Submit to Aristotle";
   };
 
   const setPromptMode = (mode) => {
     promptMode = mode;
-    const isLink = mode === "link";
-    submitLabel.textContent = isLink ? "Send Link" : "Submit to Aristotle";
     submitButton.dataset.submitMode = mode;
+    updateSubmitLabel();
+  };
+
+  const setSubmitLoading = (loading, label = "") => {
+    submitLoading = loading;
+    submitLoadingLabel = loading ? label : "";
+    submitButton.dataset.loading = String(loading);
+    submitButton.setAttribute("aria-busy", String(loading));
+    updateSubmitLabel();
   };
 
   const syncPromptMode = () => {
@@ -205,7 +227,7 @@ import {
         const { done, value } = await reader.read();
         if (done) break;
         receivedBytes += value.byteLength;
-        if (receivedBytes > CHATGPT_SHARE_MAX_BYTES) {
+        if (receivedBytes > CHATGPT_SHARE_RESPONSE_MAX_BYTES) {
           await reader.cancel();
           throw new Error("The shared conversation is too large to import.");
         }
@@ -219,20 +241,16 @@ import {
   };
 
   const fetchPublicChatGPTShare = async (sharedLink) => {
-    const relayUrl = getChatGPTShareRelayUrl(sharedLink);
+    const apiUrl = getChatGPTShareApiUrl(sharedLink);
     let response;
     try {
-      response = await fetch(relayUrl, {
-        method: "GET",
+      response = await fetch(apiUrl, {
+        method: "POST",
         headers: {
-          Accept: "text/plain",
-          "X-Engine": "browser",
-          "X-No-Cache": "true",
-          "X-Timeout": "20",
-          "X-Respond-With": "markdown",
-          "X-Retain-Links": "text",
-          "X-Retain-Images": "none",
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({ url: sharedLink.url }),
         cache: "no-store",
         credentials: "omit",
         referrerPolicy: "no-referrer",
@@ -253,41 +271,47 @@ import {
       !response.ok ||
       !finalUrl ||
       finalUrl.protocol !== "https:" ||
-      finalUrl.hostname.toLowerCase() !== "r.jina.ai" ||
-      finalUrl.href !== relayUrl ||
-      !/^text\/plain(?:;|$)/i.test(response.headers.get("content-type") ?? "")
+      finalUrl.href !== apiUrl ||
+      !/^application\/json(?:;|$)/i.test(
+        response.headers.get("content-type") ?? "",
+      )
     ) {
-      if (response.status === 429) {
-        throw new Error(
-          "The public conversation reader is temporarily rate-limited. Wait a minute and try again.",
-        );
+      let upstreamMessage = "";
+      try {
+        const errorPayload = await response.json();
+        upstreamMessage =
+          typeof errorPayload?.error?.message === "string"
+            ? errorPayload.error.message
+            : "";
+      } catch {
+        // The safe fallback below intentionally ignores unreadable details.
       }
       throw new Error(
-        `The public ChatGPT conversation could not be imported${
-          response.status ? ` (${response.status})` : ""
-        }.`,
+        upstreamMessage ||
+          `The complete public ChatGPT conversation could not be imported${
+            response.status ? ` (${response.status})` : ""
+          }.`,
       );
     }
 
     const declaredLength = Number(response.headers.get("content-length") ?? 0);
     if (
       Number.isFinite(declaredLength) &&
-      declaredLength > CHATGPT_SHARE_MAX_BYTES
+      declaredLength > CHATGPT_SHARE_RESPONSE_MAX_BYTES
     ) {
       await response.body?.cancel?.();
       throw new Error("The shared conversation is too large to import.");
     }
-    const markdown = await readLimitedShareResponse(response);
-    if (
-      !markdown ||
-      markdown.length > CHATGPT_SHARE_MAX_BYTES ||
-      markdown.includes("\u0000")
-    ) {
+    const responseText = await readLimitedShareResponse(response);
+    let payload;
+    try {
+      payload = JSON.parse(responseText);
+    } catch {
       throw new Error(
-        "The public conversation reader returned an empty, unsafe, or oversized response.",
+        "The complete public conversation response was unreadable.",
       );
     }
-    return markdown;
+    return validateImportedChatGPTConversation(payload, sharedLink);
   };
 
   const importChatGPTShare = (sharedLink) => {
@@ -296,21 +320,35 @@ import {
     shareImportInFlight = true;
     promptInput.readOnly = true;
     promptInput.setAttribute("aria-busy", "true");
+    setSubmitLoading(true, "Loading conversation…");
     updateSubmitAvailability();
-    setFormStatus("Importing the public ChatGPT conversation…");
+    setFormStatus("Loading and checking the complete public conversation…");
 
     shareImportPromise = (async () => {
       try {
-        const markdown = await fetchPublicChatGPTShare(sharedLink);
-        const conversation = extractChatGPTConversation(markdown);
+        const conversation = await fetchPublicChatGPTShare(sharedLink);
         promptInput.value = conversation.text;
         promptLocked = true;
+        importedShareSource = {
+          kind: "chatgpt-share",
+          url: conversation.sourceUrl,
+          title: conversation.title,
+          sourceSha256: conversation.sourceSha256,
+          complete: true,
+        };
+        promptInput.maxLength = CHATGPT_TRANSCRIPT_LIMIT;
         promptInput.dataset.locked = "true";
         promptInput.setAttribute("aria-readonly", "true");
+        promptInput.scrollTop = 0;
         setPromptMode("imported");
         setPromptCount();
+        const attachmentNote = conversation.attachmentCount
+          ? ` ${conversation.attachmentCount} uploaded file name${
+              conversation.attachmentCount === 1 ? " was" : "s were"
+            } recorded; attachment contents are not included.`
+          : "";
         setFormStatus(
-          `Conversation imported and locked: ${conversation.turnCount} turns (${conversation.personTurnCount} person, ${conversation.llmTurnCount} LLM). Scroll to review it, then submit.`,
+          `Complete conversation imported and locked: ${conversation.turnCount} turns · ${conversation.personTurnCount} person · ${conversation.llmTurnCount} LLM · ${conversation.characters.toLocaleString("en-US")} characters.${attachmentNote} Scroll to review it, then submit.`,
           "success",
         );
         return conversation;
@@ -329,7 +367,10 @@ import {
         shareImportPromise = null;
         promptInput.readOnly = promptLocked;
         promptInput.removeAttribute("aria-busy");
+        setSubmitLoading(false);
         if (!promptLocked) {
+          importedShareSource = null;
+          promptInput.maxLength = PROMPT_LIMIT;
           promptInput.removeAttribute("aria-readonly");
           delete promptInput.dataset.locked;
           syncPromptMode();
@@ -514,6 +555,7 @@ import {
 
   keyInput.value = readStoredKey();
   activeProjectId = readStoredProjectId();
+  promptInput.maxLength = PROMPT_LIMIT;
   setPromptCount();
   syncPromptMode();
   if (activeProjectId) {
@@ -575,7 +617,7 @@ import {
       promptInput.value.slice(0, selectionStart) +
       pastedText +
       promptInput.value.slice(selectionEnd);
-    if (nextValue.length > PROMPT_LIMIT) {
+    if (Array.from(nextValue).length > PROMPT_LIMIT) {
       event.preventDefault();
       if (promptLimitStatus) {
         promptLimitStatus.textContent = "Paste rejected: the request would exceed 100,000 characters.";
@@ -631,9 +673,22 @@ import {
       promptInput.focus();
       return;
     }
-    if (prompt.length > PROMPT_LIMIT) {
-      setFormStatus("The request exceeds the 100,000-character limit. Nothing was submitted.", "error");
+    const activePromptLimit = promptLocked
+      ? CHATGPT_TRANSCRIPT_LIMIT
+      : PROMPT_LIMIT;
+    if (Array.from(prompt).length > activePromptLimit) {
+      setFormStatus(
+        `The request exceeds the ${activePromptLimit.toLocaleString("en-US")}-character limit. Nothing was submitted.`,
+        "error",
+      );
       promptInput.focus();
+      return;
+    }
+    if (promptLocked && !importedShareSource) {
+      setFormStatus(
+        "The imported conversation lost its source metadata. Reload the page and import the link again.",
+        "error",
+      );
       return;
     }
 
@@ -641,10 +696,14 @@ import {
     clearPolling();
     pollCount = 0;
     requestInFlight = true;
+    setSubmitLoading(true, "Submitting…");
     updateSubmitAvailability();
     setFormStatus("Submitting the project to Aristotle…");
 
     try {
+      const requestBody = promptLocked
+        ? { prompt, source: importedShareSource }
+        : { prompt };
       const response = await fetch(`${ARISTOTLE_PROXY_URL}/api/projects`, {
         method: "POST",
         headers: {
@@ -652,7 +711,7 @@ import {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify(requestBody),
         cache: "no-store",
         credentials: "omit",
         referrerPolicy: "no-referrer",
@@ -673,6 +732,7 @@ import {
       setFormStatus(error instanceof Error ? error.message : "The project could not be submitted.", "error");
     } finally {
       requestInFlight = false;
+      setSubmitLoading(false);
       updateSubmitAvailability();
       schedulePoll();
     }

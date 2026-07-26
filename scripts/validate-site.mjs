@@ -3,7 +3,7 @@ import { dirname, join, normalize, relative, resolve } from "node:path";
 
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const siteRoot = join(repositoryRoot, "site");
-const projectBase = "/formagization/";
+const projectBase = "/";
 
 function walk(directory) {
   return readdirSync(directory).flatMap((entry) => {

@@ -102,13 +102,13 @@
               name="aristotle-prompt"
               rows="12"
               maxlength="100000"
-              placeholder="State the theorem, definitions, assumptions, and the artifact you want Aristotle to produce."
+              placeholder="State the request, or paste an official https://chatgpt.com/share/… link."
               aria-describedby="prompt-help prompt-limit-status"
               data-aristotle-prompt
               required
             ></textarea>
             <p class="field-help" id="prompt-help">
-              Sent exactly as entered through a stateless relay. Interactive questions are disabled.
+              Plain text is sent as entered. A standalone ChatGPT Share link is first replaced with conversation-only <code>PERSON:</code> and <code>LLM:</code> turns.
             </p>
             <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>
           </div>

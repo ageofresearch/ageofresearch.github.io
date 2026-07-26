@@ -1,10 +1,8 @@
 name: Registry validation
 
+# The canonical verification workflow runs in ageofresearch/formagization.
+# This imported publishing mirror keeps a manual copy for provenance only.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

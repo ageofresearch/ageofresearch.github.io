@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ageofresearch.github.io/formagization/sitemap.xml
+Sitemap: https://ageofresearch.github.io/sitemap.xml

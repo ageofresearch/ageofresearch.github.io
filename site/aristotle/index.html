@@ -12,8 +12,8 @@
     <title>Aristotle workspace — formAGIzation</title>
     <link rel="canonical" href="https://ageofresearch.github.io/aristotle/">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../assets/site.css?build=20260726-complete-chat">
-    <script src="../assets/aristotle.js?build=20260726-reader-recovery" type="module"></script>
+    <link rel="stylesheet" href="../assets/site.css?build=20260726-public-archive">
+    <script src="../assets/aristotle.js?build=20260726-public-archive" type="module"></script>
   </head>
   <body data-page="aristotle" class="aristotle-app">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -25,8 +25,8 @@
         </a>
         <span class="aristotle-product-name">Aristotle workspace</span>
         <nav class="aristotle-topbar-links" aria-label="Workspace navigation">
-          <a href="../formalizations/">Archive</a>
           <a href="https://github.com/ageofresearch/formagization">GitHub <span aria-hidden="true">↗</span></a>
+          <a href="./successes/">Successful runs</a>
         </nav>
       </div>
     </header>
@@ -38,9 +38,9 @@
           <h1 id="aristotle-title">Formalize a mathematical request.</h1>
         </div>
         <p class="aristotle-intro-note">
-          <span>Key stored in this tab</span>
+          <span>Key stays in this tab</span>
           <span aria-hidden="true">·</span>
-          Working artifact—not ledger verification.
+          Requests and results are archived publicly.
         </p>
       </section>
 
@@ -88,7 +88,7 @@
               <button type="button" class="field-action field-action-muted" data-key-forget>Forget</button>
             </div>
             <p class="field-help" id="key-help">
-              Held in tab-scoped <code>sessionStorage</code>; never committed to GitHub or the ledger.
+              The key is held only in tab-scoped <code>sessionStorage</code> and is never committed. Submitted prompts, status logs, and available results are public.
             </p>
           </div>
 
@@ -170,6 +170,9 @@
               <button class="button button-primary" type="button" data-download-button hidden>
                 Download result <span aria-hidden="true">↓</span>
               </button>
+              <a class="button button-secondary" href="#" target="_blank" rel="noopener noreferrer" data-archive-link hidden>
+                GitHub record <span aria-hidden="true">↗</span>
+              </a>
             </div>
             <p class="polling-note" data-polling-note>
               Refreshes only while this page is visible.

@@ -8,6 +8,7 @@ import {
   PROMPT_LIMIT,
   SUCCESS_STATUSES,
   TERMINAL_STATUSES,
+  createStatusSnapshot,
   getChatGPTShareApiUrl,
   getDashboardUrl,
   getErrorMessage,
@@ -17,14 +18,19 @@ import {
   parseChatGPTShareUrl,
   shouldRetryChatGPTShareStatus,
   validateImportedChatGPTConversation,
+  validateArchiveToken,
   validateKey,
-} from "./aristotle-core.mjs?build=20260726-reader-recovery";
+} from "./aristotle-core.mjs?build=20260726-public-archive";
 
 (() => {
   "use strict";
 
   const KEY_STORAGE_NAME = "formagization.aristotle.apiKey";
   const PROJECT_STORAGE_NAME = "formagization.aristotle.activeProjectId";
+  const SUBMISSION_STORAGE_NAME =
+    "formagization.aristotle.pendingSubmission";
+  const STATUS_HISTORY_STORAGE_NAME =
+    "formagization.aristotle.statusHistory";
 
   const form = document.querySelector("[data-aristotle-form]");
   if (!(form instanceof HTMLFormElement)) return;
@@ -47,6 +53,7 @@ import {
   const projectSummary = document.querySelector("[data-project-summary]");
   const dashboardLink = document.querySelector("[data-dashboard-link]");
   const downloadButton = document.querySelector("[data-download-button]");
+  const archiveLink = document.querySelector("[data-archive-link]");
   const pollingNote = document.querySelector("[data-polling-note]");
   const projectAnnouncement = document.querySelector("[data-project-announcement]");
   const workspace = document.querySelector("[data-aristotle-workspace]");
@@ -76,6 +83,13 @@ import {
   let submitLoading = false;
   let submitLoadingLabel = "";
   let lastProjectData = null;
+  let pendingPrompt = "";
+  let pendingSource = null;
+  let archiveToken = "";
+  let statusHistory = [];
+  let archiveInFlight = false;
+  let archiveComplete = false;
+  let archiveRetryTimer = 0;
   let activeWorkspaceView = "request";
 
   const setWorkspaceView = (view, { focus = false } = {}) => {
@@ -154,6 +168,86 @@ import {
       window.sessionStorage.setItem(PROJECT_STORAGE_NAME, projectId);
     } catch {
       // The in-memory project remains usable until this page is refreshed.
+    }
+  };
+
+  const readPendingSubmission = () => {
+    try {
+      const raw = window.sessionStorage.getItem(SUBMISSION_STORAGE_NAME);
+      if (!raw) return null;
+      const value = JSON.parse(raw);
+      if (
+        !value ||
+        typeof value !== "object" ||
+        value.projectId !== activeProjectId ||
+        typeof value.prompt !== "string" ||
+        !value.prompt ||
+        !validateArchiveToken(value.archiveToken) ||
+        (
+          value.source !== null &&
+          (
+            typeof value.source !== "object" ||
+            Array.isArray(value.source)
+          )
+        )
+      ) {
+        window.sessionStorage.removeItem(SUBMISSION_STORAGE_NAME);
+        return null;
+      }
+      return value;
+    } catch {
+      return null;
+    }
+  };
+
+  const storePendingSubmission = () => {
+    try {
+      window.sessionStorage.setItem(
+        SUBMISSION_STORAGE_NAME,
+        JSON.stringify({
+          projectId: activeProjectId,
+          prompt: pendingPrompt,
+          source: pendingSource,
+          archiveToken,
+        }),
+      );
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const readStatusHistory = () => {
+    try {
+      const raw = window.sessionStorage.getItem(STATUS_HISTORY_STORAGE_NAME);
+      const value = raw ? JSON.parse(raw) : [];
+      return Array.isArray(value) ? value.slice(-500) : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const storeStatusHistory = () => {
+    try {
+      window.sessionStorage.setItem(
+        STATUS_HISTORY_STORAGE_NAME,
+        JSON.stringify(statusHistory.slice(-500)),
+      );
+    } catch {
+      // The in-memory history is still exported if tab storage is unavailable.
+    }
+  };
+
+  const clearPendingSubmission = () => {
+    pendingPrompt = "";
+    pendingSource = null;
+    archiveToken = "";
+    statusHistory = [];
+    try {
+      window.sessionStorage.removeItem(SUBMISSION_STORAGE_NAME);
+      window.sessionStorage.removeItem(STATUS_HISTORY_STORAGE_NAME);
+    } catch {
+      // The in-memory copy has already been cleared.
     }
   };
 
@@ -373,6 +467,14 @@ import {
           sourceSha256: conversation.sourceSha256,
           complete: true,
           importToken: conversation.importToken,
+          turnCount: conversation.turnCount,
+          personTurnCount: conversation.personTurnCount,
+          llmTurnCount: conversation.llmTurnCount,
+          attachmentCount: conversation.attachmentCount,
+          characters: conversation.characters,
+          branchNodeCount: conversation.branchNodeCount,
+          retrievalMethod: conversation.retrievalMethod,
+          importerVersion: conversation.importerVersion,
         };
         promptInput.maxLength = CHATGPT_TRANSCRIPT_LIMIT;
         promptInput.dataset.locked = "true";
@@ -491,6 +593,19 @@ import {
     const status = getStatus(payload, { initial });
     const percent = getPercent(payload);
     const dashboardUrl = getDashboardUrl(payload);
+    const snapshot = createStatusSnapshot(payload);
+    const previous = statusHistory.at(-1);
+    if (
+      !previous ||
+      previous.projectStatus !== snapshot.projectStatus ||
+      previous.taskStatus !== snapshot.taskStatus ||
+      previous.percentComplete !== snapshot.percentComplete ||
+      previous.outputSummary !== snapshot.outputSummary
+    ) {
+      statusHistory.push(snapshot);
+      statusHistory = statusHistory.slice(-500);
+      storeStatusHistory();
+    }
 
     if (workspace instanceof HTMLElement) workspace.dataset.hasProject = "true";
     if (projectPanel instanceof HTMLElement) projectPanel.hidden = false;
@@ -522,11 +637,24 @@ import {
     );
     if (payload?.terminal === true || TERMINAL_STATUSES.has(status)) {
       clearPolling();
-      if (canDownload || SUCCESS_STATUSES.has(status)) {
-        setFormStatus("Aristotle reports that the project is complete.", "success");
-      } else {
-        setFormStatus(`The project reached the terminal status “${displayStatus(status)}”.`, "error");
+      if (pollingNote) {
+        pollingNote.textContent =
+          archiveComplete
+            ? "Saved in the public GitHub archive."
+            : "Terminal state reached. Saving the public archive…";
       }
+      if (canDownload || SUCCESS_STATUSES.has(status)) {
+        setFormStatus(
+          "Aristotle reports that the project is complete. Saving its public GitHub record…",
+          "success",
+        );
+      } else {
+        setFormStatus(
+          `The project reached “${displayStatus(status)}”. Saving its failure record to GitHub…`,
+          "error",
+        );
+      }
+      void archiveSubmission(payload);
     }
   };
 
@@ -591,8 +719,158 @@ import {
     }
   };
 
+  const scheduleArchiveRetry = (payload) => {
+    if (archiveRetryTimer) window.clearTimeout(archiveRetryTimer);
+    archiveRetryTimer = window.setTimeout(() => {
+      archiveRetryTimer = 0;
+      void archiveSubmission(payload);
+    }, 15_000);
+  };
+
+  const archiveSubmission = async (terminalPayload) => {
+    if (
+      archiveComplete ||
+      archiveInFlight ||
+      !activeProjectId ||
+      !pendingPrompt ||
+      !validateArchiveToken(archiveToken)
+    ) {
+      if (
+        !archiveComplete &&
+        !archiveInFlight &&
+        activeProjectId &&
+        (!pendingPrompt || !validateArchiveToken(archiveToken))
+      ) {
+        setFormStatus(
+          "The project finished, but this tab no longer has the authenticated submission needed to create its public archive record.",
+          "error",
+        );
+      }
+      return;
+    }
+    const key = keyInput.value;
+    const keyError = validateKey(key);
+    if (keyError) {
+      setFormStatus(
+        "The project finished. Re-enter the Aristotle API key so its public archive can be saved.",
+        "error",
+      );
+      return;
+    }
+
+    archiveInFlight = true;
+    if (pollingNote) pollingNote.textContent = "Saving files to the public GitHub archive…";
+    try {
+      const response = await fetch(
+        `${ARISTOTLE_PROXY_URL}/api/projects/${encodeURIComponent(activeProjectId)}/archive`,
+        {
+          method: "POST",
+          headers: {
+            [KEY_HEADER_NAME]: key,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: pendingPrompt,
+            source: pendingSource,
+            archiveToken,
+            statusHistory,
+          }),
+          cache: "no-store",
+          credentials: "omit",
+          referrerPolicy: "no-referrer",
+        },
+      );
+      let payload = null;
+      try {
+        payload = await response.json();
+      } catch {
+        // A normalized error is shown below.
+      }
+      if (!response.ok) {
+        const code = payload?.error?.code;
+        const message =
+          typeof payload?.error?.message === "string"
+            ? payload.error.message
+            : getErrorMessage(response.status, payload, "archive");
+        if (
+          code === "archive_result_pending" ||
+          response.status === 409 ||
+          response.status >= 500
+        ) {
+          setFormStatus(
+            `${message} Retrying automatically while this page remains open.`,
+            "error",
+          );
+          if (pollingNote) {
+            pollingNote.textContent =
+              "Public archive save will retry in 15 seconds.";
+          }
+          scheduleArchiveRetry(terminalPayload);
+          return;
+        }
+        throw new Error(message);
+      }
+
+      const archived = payload?.archive;
+      if (
+        !archived ||
+        typeof archived !== "object" ||
+        !["saved", "already-saved"].includes(archived.state) ||
+        !["success", "failure"].includes(archived.classification) ||
+        typeof archived.repositoryUrl !== "string" ||
+        !archived.repositoryUrl.startsWith(
+          "https://github.com/ageofresearch/ageofresearch.github.io/tree/main/submissions/",
+        )
+      ) {
+        throw new Error("The public archive returned an unreadable response.");
+      }
+      archiveComplete = true;
+      if (archiveLink instanceof HTMLAnchorElement) {
+        archiveLink.href = archived.repositoryUrl;
+        archiveLink.hidden = false;
+      }
+      clearPendingSubmission();
+      const isSuccess = archived.classification === "success";
+      setFormStatus(
+        isSuccess
+          ? "Completed and saved in the public GitHub success archive."
+          : "The failed run and its available evidence were saved in the GitHub failure archive.",
+        isSuccess ? "success" : "error",
+      );
+      if (pollingNote) {
+        pollingNote.textContent =
+          isSuccess
+            ? "Saved publicly and added to Successful runs."
+            : "Saved publicly in the failure folder; it is not listed on the webpage.";
+      }
+      announceProject(
+        isSuccess
+          ? "Successful project saved in the public GitHub archive."
+          : "Failed project saved in the public GitHub archive.",
+      );
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "The completed submission could not be saved to GitHub.";
+      setFormStatus(message, "error");
+      if (pollingNote) pollingNote.textContent = message;
+    } finally {
+      archiveInFlight = false;
+      void terminalPayload;
+    }
+  };
+
   keyInput.value = readStoredKey();
   activeProjectId = readStoredProjectId();
+  const storedSubmission = readPendingSubmission();
+  if (storedSubmission) {
+    pendingPrompt = storedSubmission.prompt;
+    pendingSource = storedSubmission.source;
+    archiveToken = storedSubmission.archiveToken;
+    statusHistory = readStatusHistory();
+  }
   promptInput.maxLength = PROMPT_LIMIT;
   setPromptCount();
   syncPromptMode();
@@ -760,7 +1038,23 @@ import {
         throw new Error("Aristotle returned a malformed project identifier.");
       }
       activeProjectId = projectId;
+      if (!validateArchiveToken(payload?.archiveToken)) {
+        throw new Error(
+          "The project was accepted, but its public archive proof was missing. Keep the Harmonic project ID before retrying.",
+        );
+      }
+      pendingPrompt = prompt;
+      pendingSource = promptLocked ? importedShareSource : null;
+      archiveToken = payload.archiveToken;
+      statusHistory = [];
       storeProjectId(projectId);
+      if (!storePendingSubmission()) {
+        setFormStatus(
+          "Project accepted, but this browser could not retain the public archive material for the duration of the run.",
+          "error",
+        );
+      }
+      storeStatusHistory();
       setWorkspaceView("progress", { focus: narrowWorkspace.matches });
       updateProjectPanel(payload, { initial: true });
       if (payload?.terminal !== true && !TERMINAL_STATUSES.has(getStatus(payload))) {

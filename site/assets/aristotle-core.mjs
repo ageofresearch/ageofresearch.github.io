@@ -1,11 +1,14 @@
 export const ARISTOTLE_PROXY_URL =
   "https://formagization-aristotle-proxy.ageofresearch.chatgpt.site";
+export const ARISTOTLE_SUCCESS_INDEX_URL =
+  "https://raw.githubusercontent.com/ageofresearch/ageofresearch.github.io/main/submissions/successes/index.json";
 export const KEY_HEADER_NAME = "X-Formagization-Aristotle-Key";
 export const PROMPT_LIMIT = 100_000;
 export const CHATGPT_TRANSCRIPT_LIMIT = 2_000_000;
 export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000;
 export const CHATGPT_SHARE_RETRY_DELAYS_MS = Object.freeze([0, 1_000, 3_000]);
 export const PROJECT_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/;
+export const ARCHIVE_TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 const CHATGPT_SHARE_TRANSIENT_STATUSES = new Set([
   408,
   425,
@@ -248,11 +251,103 @@ export function getErrorMessage(status, payload, action) {
     return "Aristotle did not respond in time. The project may still be running; try refreshing its status.";
   }
   if (status >= 500) {
-    return "The Aristotle service is temporarily unavailable. Please try again.";
+    return action === "archive"
+      ? "The public GitHub archive is temporarily unavailable. The page will retry while it remains open."
+      : "The Aristotle service is temporarily unavailable. Please try again.";
   }
   return action === "submit"
     ? "The project could not be submitted."
     : action === "download"
       ? "The result archive could not be downloaded."
+      : action === "archive"
+        ? "The completed submission could not be saved to the public GitHub archive."
       : "The project status could not be refreshed.";
+}
+
+export function createStatusSnapshot(payload, observedAt = new Date().toISOString()) {
+  const percent = payload?.percentComplete;
+  return {
+    observedAt,
+    projectStatus:
+      typeof payload?.projectStatus === "string" ||
+      typeof payload?.projectStatus === "number"
+        ? payload.projectStatus
+        : null,
+    taskId: typeof payload?.taskId === "string" ? payload.taskId : null,
+    taskStatus:
+      typeof payload?.taskStatus === "string" ? payload.taskStatus : null,
+    percentComplete:
+      typeof percent === "number" && Number.isFinite(percent)
+        ? Math.min(100, Math.max(0, percent))
+        : null,
+    outputSummary:
+      typeof payload?.outputSummary === "string"
+        ? payload.outputSummary.slice(0, 10_000)
+        : null,
+    projectUpdatedAt:
+      typeof payload?.updatedAt === "string" ? payload.updatedAt : null,
+    taskUpdatedAt:
+      typeof payload?.taskUpdatedAt === "string"
+        ? payload.taskUpdatedAt
+        : null,
+  };
+}
+
+export function validateArchiveToken(value) {
+  return typeof value === "string" && ARCHIVE_TOKEN_PATTERN.test(value);
+}
+
+export function validateSuccessIndex(payload) {
+  if (
+    !payload ||
+    typeof payload !== "object" ||
+    Array.isArray(payload) ||
+    payload.schemaVersion !== "formagization.aristotle-success-index/v1" ||
+    !Array.isArray(payload.items)
+  ) {
+    throw new Error("The public success index is unreadable.");
+  }
+  return payload.items.map((item) => {
+    if (
+      !item ||
+      typeof item !== "object" ||
+      Array.isArray(item) ||
+      typeof item.projectId !== "string" ||
+      !PROJECT_ID_PATTERN.test(item.projectId) ||
+      typeof item.title !== "string" ||
+      typeof item.taskStatus !== "string" ||
+      typeof item.archivedAt !== "string" ||
+      typeof item.sourceKind !== "string" ||
+      typeof item.repositoryUrl !== "string" ||
+      !item.repositoryUrl.startsWith(
+        "https://github.com/ageofresearch/ageofresearch.github.io/tree/main/submissions/successes/",
+      ) ||
+      (
+        item.resultUrl !== null &&
+        (
+          typeof item.resultUrl !== "string" ||
+          !item.resultUrl.startsWith(
+            "https://github.com/ageofresearch/ageofresearch.github.io/raw/main/submissions/successes/",
+          )
+        )
+      )
+    ) {
+      throw new Error("The public success index contains an invalid record.");
+    }
+    return {
+      projectId: item.projectId,
+      title: item.title.trim() || "Untitled mathematical request",
+      taskStatus: item.taskStatus,
+      submittedAt:
+        typeof item.submittedAt === "string" ? item.submittedAt : null,
+      completedAt:
+        typeof item.completedAt === "string" ? item.completedAt : null,
+      archivedAt: item.archivedAt,
+      sourceKind: item.sourceKind,
+      outputSummary:
+        typeof item.outputSummary === "string" ? item.outputSummary : null,
+      repositoryUrl: item.repositoryUrl,
+      resultUrl: item.resultUrl,
+    };
+  });
 }

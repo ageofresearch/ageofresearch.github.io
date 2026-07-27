@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" class="aristotle-document">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f0e7">
+    <meta name="description" content="Successful Aristotle formalization runs archived by Formagization.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Successful Aristotle runs — Formagization">
+    <meta property="og:description" content="Browse completed Aristotle submissions and their reproducible public artifacts.">
+    <meta property="og:url" content="https://ageofresearch.github.io/aristotle/successes/">
+    <title>Successful Aristotle runs — Formagization</title>
+    <link rel="canonical" href="https://ageofresearch.github.io/aristotle/successes/">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/site.css?build=20260726-public-archive">
+    <script src="../../assets/aristotle-successes.js?build=20260726-public-archive" type="module"></script>
+  </head>
+  <body data-page="aristotle-successes" class="aristotle-app">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="aristotle-topbar">
+      <div class="aristotle-topbar-inner">
+        <a class="brand" href="../../" aria-label="Formagization home">
+          <span class="brand-mark" aria-hidden="true">F</span>
+          <span class="brand-name">Formagization</span>
+        </a>
+        <span class="aristotle-product-name">Successful Aristotle runs</span>
+        <nav class="aristotle-topbar-links" aria-label="Archive navigation">
+          <a href="https://github.com/ageofresearch/ageofresearch.github.io/tree/main/submissions/successes">Repository <span aria-hidden="true">↗</span></a>
+          <a href="../">Workspace</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="success-archive-screen">
+      <section class="success-archive-intro" aria-labelledby="success-title">
+        <div>
+          <p class="eyebrow">Public archive</p>
+          <h1 id="success-title">Successful runs.</h1>
+        </div>
+        <div class="success-archive-tools">
+          <span data-success-count>Loading…</span>
+          <button type="button" class="button button-secondary" data-success-refresh>Refresh</button>
+        </div>
+      </section>
+
+      <section class="success-archive-panel" aria-label="Successful Aristotle submissions">
+        <p class="success-archive-status" role="status" aria-live="polite" data-success-status>
+          Loading the public GitHub index…
+        </p>
+        <ol class="success-run-list" data-success-list hidden></ol>
+        <div class="success-empty" data-success-empty hidden>
+          <span aria-hidden="true"></span>
+          <h2>No successful runs archived yet.</h2>
+          <p>A run appears here after Aristotle reports <code>COMPLETE</code> and its result is committed to GitHub.</p>
+          <a class="button button-primary" href="../">Open the workspace</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

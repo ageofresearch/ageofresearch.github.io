@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "formagization.aristotle-submission/v1",
+  "classification": "success",
+  "projectId": "3b0534b9-eef1-46d6-a617-6ca993839343",
+  "submittedAt": "2026-07-27T03:44:23.412254",
+  "completedAt": "2026-07-27T04:40:54.837219",
+  "archivedAt": "2026-07-27T04:42:00.155Z",
+  "dashboardUrl": "https://aristotle.harmonic.fun/dashboard/requests/3b0534b9-eef1-46d6-a617-6ca993839343",
+  "projectStatus": 2,
+  "taskId": "e6f87341-ce18-4f20-bee8-cae5c4a19b92",
+  "taskStatus": "COMPLETE",
+  "percentComplete": 100,
+  "outputSummary": "Formalized the corrected mathematical request in `RequestProject/Main.lean`:\n\n- Defined finite multiplicity profiles for fixed-perimeter partitions.\n- Defined perimeter, the two relevant part-size statistics, and the counting functions `FO` and `FD`.\n- Stated `StrengthenedClaim`: for fixed `j` and `k ≥ 3`, `FO j k n / FD j k n → 0`.\n- Stated `IntendedClaim`, including exact equality at `k = 2` and the strengthened asymptotic claim for `k ≥ 3`.\n- Machine-verified the corrected asymptotic endgame: polynomial-times-exponential upper bounds and a strictly larger exponential lower bound imply the ratio tends to zero.\n- Machine-verified that this limit, together with eventual positivity of `FD`, implies the eventual strict inequality `FO < FD`.\n- Specialized the abstract endgame directly to `FO` and `FD`.\n\nThe project builds successfully, contains no `sorry`/`admit`, and the proved theorems use only standard accepted Lean/Mathlib axioms. The transcript’s generating-function derivation and the bounds it supplies are represented as explicit hypotheses to the verified endgame theorem; the full conjecture itself is faithfully stated rather than falsely presented as completely machine-proved.",
+  "source": {
+    "kind": "chatgpt-share",
+    "url": "https://chatgpt.com/share/6a61ff8e-ad64-83ea-9c46-9c238d377044",
+    "title": "Mathematical Conjecture Challenge",
+    "sourceSha256": "sha256:32a07ab28d68dbfc376e3163b05b1c35547d316fe6560cb54d0eb0908dee7744",
+    "complete": true,
+    "turnCount": 6,
+    "personTurnCount": 3,
+    "llmTurnCount": 3,
+    "attachmentCount": 0,
+    "characters": 9427,
+    "branchNodeCount": 122,
+    "retrievalMethod": "jina-reader-raw-html",
+    "importerVersion": "formagization.chatgpt-share-full/v2"
+  },
+  "prompt": {
+    "filename": "prompt.txt",
+    "characters": 9427,
+    "bytes": 9482,
+    "sha256": "sha256:32a07ab28d68dbfc376e3163b05b1c35547d316fe6560cb54d0eb0908dee7744"
+  },
+  "statusHistory": {
+    "filename": "status-history.jsonl",
+    "snapshots": 7
+  },
+  "result": {
+    "filename": "result.tar.gz",
+    "available": true,
+    "bytes": 7703,
+    "sha256": "sha256:9d7f94fbaa9c55dbb17d66e986fb004884c9ca4cf5cd4c8e6a56690db7fa5773",
+    "unavailableReason": null
+  },
+  "publicListing": "submissions/successes/index.json",
+  "credentialFieldsArchived": false
+}

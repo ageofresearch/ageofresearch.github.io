@@ -1724,6 +1724,37 @@ body[data-page="aristotle"]::before {
   flex: none;
 }
 
+.button-spinner {
+  display: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: 0 0 auto;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: aristotle-spin 700ms linear infinite;
+}
+
+.button[data-loading="true"] .button-spinner {
+  display: inline-block;
+}
+
+.button[data-loading="true"] .button-arrow {
+  display: none;
+}
+
+@keyframes aristotle-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-spinner {
+    animation-duration: 1800ms;
+  }
+}
+
 .button:disabled,
 .field-action:disabled {
   opacity: 0.52;

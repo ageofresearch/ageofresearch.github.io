@@ -12,8 +12,8 @@
     <title>Aristotle workspace — formAGIzation</title>
     <link rel="canonical" href="https://ageofresearch.github.io/aristotle/">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../assets/site.css?build=20260726-button-pointer">
-    <script src="../assets/aristotle.js?build=20260726-send-link-lock" type="module"></script>
+    <link rel="stylesheet" href="../assets/site.css?build=20260726-complete-chat">
+    <script src="../assets/aristotle.js?build=20260726-complete-chat" type="module"></script>
   </head>
   <body data-page="aristotle" class="aristotle-app">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -64,7 +64,7 @@
               <p class="eyebrow">New project</p>
               <h2>Request</h2>
             </div>
-            <p>Text only · 100,000 characters maximum</p>
+            <p>Text or public ChatGPT Share</p>
           </div>
 
           <div class="field-group field-group-key">
@@ -108,7 +108,7 @@
               required
             ></textarea>
             <p class="field-help" id="prompt-help">
-              Plain text stays editable. A standalone ChatGPT Share link changes the action to <strong>Send Link</strong>; a public reader imports <code>PERSON:</code> and <code>LLM:</code> turns without your Aristotle key, then locks them while preserving scroll.
+              Plain text stays editable. A standalone ChatGPT Share link changes the action to <strong>Send Link</strong>; it imports and shows the complete selected public branch as <code>PERSON:</code> and <code>LLM:</code>, then locks editing while preserving scroll. Uploaded-file contents are not included.
             </p>
             <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>
           </div>
@@ -116,7 +116,8 @@
           <div class="form-submit-row">
             <button class="button button-primary" type="submit" data-submit-button>
               <span data-submit-label>Submit to Aristotle</span>
-              <span aria-hidden="true">→</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+              <span class="button-spinner" aria-hidden="true"></span>
             </button>
             <p class="form-status" role="status" aria-live="polite" data-form-status>Ready to submit.</p>
           </div>

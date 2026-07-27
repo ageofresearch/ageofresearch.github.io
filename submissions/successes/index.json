@@ -1,7 +1,19 @@
 {
   "schemaVersion": "formagization.aristotle-success-index/v1",
-  "generatedAt": "2026-07-27T03:20:45.728Z",
+  "generatedAt": "2026-07-27T04:42:00.155Z",
   "items": [
+    {
+      "projectId": "3b0534b9-eef1-46d6-a617-6ca993839343",
+      "title": "Pick a real open mathematical conjecture you can solve. Do the breakthrough and finish it.",
+      "taskStatus": "COMPLETE",
+      "submittedAt": "2026-07-27T03:44:23.412254",
+      "completedAt": "2026-07-27T04:40:54.837219",
+      "archivedAt": "2026-07-27T04:42:00.155Z",
+      "sourceKind": "chatgpt-share",
+      "outputSummary": "Formalized the corrected mathematical request in `RequestProject/Main.lean`:\n\n- Defined finite multiplicity profiles for fixed-perimeter partitions.\n- Defined perimeter, the two relevant part-size statistics, and the counting functions `FO` and `FD`.\n- Stated `StrengthenedClaim`: for fixed `j` and `k ≥ 3`, `FO j k n / FD j k n → 0`.\n- Stated `IntendedClaim`, including exact equality at `k = 2` and the strengthened asymptotic claim for `k ≥ 3`.\n- Machine-verified the corrected asymptotic endgame: polynomial-times-exponential upper bounds and a strictly larger exponential lower bound imply the ratio tends to zero.\n- Machine-verified that this limit, together with eventual positivity of `FD`, implies the eventual strict inequality `FO < FD`.\n- Specialized the abstract endgame directly to `FO` and `FD`.\n\nThe project builds successfully, contains no `sorry`/`admit`, and the proved theorems use only standard accepted Lean/Mathlib axioms. The transcript’s generating-function derivation and the bounds it supplies are represented as explicit hypotheses to the verified endgame theorem; the full conjecture itself is faithfully stated rather than falsely presented as completely machine-proved.",
+      "repositoryUrl": "https://github.com/ageofresearch/ageofresearch.github.io/tree/main/submissions/successes/3b0534b9-eef1-46d6-a617-6ca993839343",
+      "resultUrl": "https://github.com/ageofresearch/ageofresearch.github.io/raw/main/submissions/successes/3b0534b9-eef1-46d6-a617-6ca993839343/result.tar.gz"
+    },
     {
       "projectId": "ea5dcbe4-c445-49d6-8d42-a6e5b80298ac",
       "title": "50+50=100",

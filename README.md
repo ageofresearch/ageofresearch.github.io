@@ -35,8 +35,9 @@ link. A standalone link changes the primary action to **Send Link**. That
 first action imports conversation-only `PERSON:` and `LLM:` turns, locks the
 request field while preserving its internal scroll, and returns the action to
 **Submit to Aristotle**. Plain text remains editable, and text that merely
-contains a link is left unchanged. The Aristotle key is never sent during
-conversation import.
+contains a link is left unchanged. Transient reader and network failures are
+retried automatically while the loading animation remains active. The
+Aristotle key is never sent during conversation import.
 
 During the Aristotle relay deployment, pin validation to the intended
 production origin so the placeholder cannot pass:

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 
 import {
+  CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_TRANSCRIPT_LIMIT,
   getChatGPTShareApiUrl,
   getDashboardUrl,
@@ -9,9 +10,18 @@ import {
   getStatus,
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
+  shouldRetryChatGPTShareStatus,
   validateImportedChatGPTConversation,
   validateKey,
 } from "../site/assets/aristotle-core.mjs";
+
+assert.deepEqual(CHATGPT_SHARE_RETRY_DELAYS_MS, [0, 1_000, 3_000]);
+for (const status of [408, 425, 429, 500, 502, 503, 504]) {
+  assert.equal(shouldRetryChatGPTShareStatus(status), true);
+}
+for (const status of [0, 400, 401, 403, 404, 413, 422]) {
+  assert.equal(shouldRetryChatGPTShareStatus(status), false);
+}
 
 assert.equal(validateKey("unprefixed-key-value"), "");
 assert.equal(validateKey("x".repeat(512)), "");

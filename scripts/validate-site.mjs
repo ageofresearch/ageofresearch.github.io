@@ -301,6 +301,22 @@ const aristotleRequirements = [
       hasLoadingSpinner,
     "The primary action must show an accessible animated spinner during both complete-conversation import and Aristotle submission",
   ],
+  [
+    aristotleCore.includes(
+      "export const CHATGPT_SHARE_RETRY_DELAYS_MS = Object.freeze([0, 1_000, 3_000])",
+    ) &&
+      aristotleCore.includes("shouldRetryChatGPTShareStatus") &&
+      aristotleScript.includes(
+        "attempt < CHATGPT_SHARE_RETRY_DELAYS_MS.length",
+      ) &&
+      aristotleScript.includes(
+        "shouldRetryChatGPTShareStatus(response.status)",
+      ) &&
+      aristotleScript.includes(
+        "The public reader was temporarily unavailable. Retrying automatically",
+      ),
+    "Transient ChatGPT Share failures must retry automatically while the loading state remains active",
+  ],
   [aristotleScript.includes("window.sessionStorage"), "Aristotle key must use tab-scoped sessionStorage"],
   [!aristotleScript.includes("localStorage"), "Aristotle script must not use persistent localStorage"],
   [!aristotleScript.includes("console."), "Aristotle script must not log sensitive workflow data"],

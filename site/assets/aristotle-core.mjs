@@ -4,7 +4,17 @@ export const KEY_HEADER_NAME = "X-Formagization-Aristotle-Key";
 export const PROMPT_LIMIT = 100_000;
 export const CHATGPT_TRANSCRIPT_LIMIT = 2_000_000;
 export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000;
+export const CHATGPT_SHARE_RETRY_DELAYS_MS = Object.freeze([0, 1_000, 3_000]);
 export const PROJECT_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/;
+const CHATGPT_SHARE_TRANSIENT_STATUSES = new Set([
+  408,
+  425,
+  429,
+  500,
+  502,
+  503,
+  504,
+]);
 
 export const TERMINAL_STATUSES = new Set([
   "completed",
@@ -88,6 +98,10 @@ export function getChatGPTShareApiUrl(sharedLink) {
     throw new Error("Enter a valid public ChatGPT Share link.");
   }
   return `${ARISTOTLE_PROXY_URL}/api/chatgpt-share`;
+}
+
+export function shouldRetryChatGPTShareStatus(status) {
+  return CHATGPT_SHARE_TRANSIENT_STATUSES.has(status);
 }
 
 export function validateImportedChatGPTConversation(payload, sharedLink) {

@@ -1,5 +1,6 @@
 import {
   ARISTOTLE_PROXY_URL,
+  CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_SHARE_RESPONSE_MAX_BYTES,
   CHATGPT_TRANSCRIPT_LIMIT,
   KEY_HEADER_NAME,
@@ -14,9 +15,10 @@ import {
   getStatus,
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
+  shouldRetryChatGPTShareStatus,
   validateImportedChatGPTConversation,
   validateKey,
-} from "./aristotle-core.mjs?build=20260726-complete-chat";
+} from "./aristotle-core.mjs?build=20260726-reader-recovery";
 
 (() => {
   "use strict";
@@ -240,78 +242,106 @@ import {
     }
   };
 
-  const fetchPublicChatGPTShare = async (sharedLink) => {
+  const fetchPublicChatGPTShare = async (sharedLink, onRetry) => {
     const apiUrl = getChatGPTShareApiUrl(sharedLink);
-    let response;
-    try {
-      response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ url: sharedLink.url }),
-        cache: "no-store",
-        credentials: "omit",
-        referrerPolicy: "no-referrer",
-      });
-    } catch {
-      throw new Error(
-        "The public ChatGPT conversation could not be reached. Check the link or your connection.",
-      );
-    }
 
-    let finalUrl = null;
-    try {
-      finalUrl = new URL(response.url);
-    } catch {
-      // The response is rejected below.
-    }
-    if (
-      !response.ok ||
-      !finalUrl ||
-      finalUrl.protocol !== "https:" ||
-      finalUrl.href !== apiUrl ||
-      !/^application\/json(?:;|$)/i.test(
-        response.headers.get("content-type") ?? "",
-      )
+    for (
+      let attempt = 0;
+      attempt < CHATGPT_SHARE_RETRY_DELAYS_MS.length;
+      attempt += 1
     ) {
-      let upstreamMessage = "";
-      try {
-        const errorPayload = await response.json();
-        upstreamMessage =
-          typeof errorPayload?.error?.message === "string"
-            ? errorPayload.error.message
-            : "";
-      } catch {
-        // The safe fallback below intentionally ignores unreadable details.
+      if (CHATGPT_SHARE_RETRY_DELAYS_MS[attempt] > 0) {
+        onRetry?.(attempt + 1, CHATGPT_SHARE_RETRY_DELAYS_MS.length);
+        await new Promise((resolve) =>
+          window.setTimeout(
+            resolve,
+            CHATGPT_SHARE_RETRY_DELAYS_MS[attempt],
+          )
+        );
       }
-      throw new Error(
-        upstreamMessage ||
-          `The complete public ChatGPT conversation could not be imported${
-            response.status ? ` (${response.status})` : ""
-          }.`,
+
+      let response;
+      try {
+        response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url: sharedLink.url }),
+          cache: "no-store",
+          credentials: "omit",
+          referrerPolicy: "no-referrer",
+        });
+      } catch {
+        if (attempt + 1 < CHATGPT_SHARE_RETRY_DELAYS_MS.length) continue;
+        throw new Error(
+          "The public conversation reader is temporarily unreachable after automatic retries.",
+        );
+      }
+
+      let finalUrl = null;
+      try {
+        finalUrl = new URL(response.url);
+      } catch {
+        // The response is rejected below.
+      }
+      const isExpectedJson =
+        finalUrl?.protocol === "https:" &&
+        finalUrl.href === apiUrl &&
+        /^application\/json(?:;|$)/i.test(
+          response.headers.get("content-type") ?? "",
+        );
+      if (!response.ok || !isExpectedJson) {
+        let upstreamMessage = "";
+        try {
+          const errorPayload = await response.json();
+          upstreamMessage =
+            typeof errorPayload?.error?.message === "string"
+              ? errorPayload.error.message
+              : "";
+        } catch {
+          // The safe fallback below intentionally ignores unreadable details.
+        }
+        if (
+          shouldRetryChatGPTShareStatus(response.status) &&
+          attempt + 1 < CHATGPT_SHARE_RETRY_DELAYS_MS.length
+        ) {
+          continue;
+        }
+        throw new Error(
+          upstreamMessage ||
+            `The complete public ChatGPT conversation could not be imported${
+              response.status ? ` (${response.status})` : ""
+            }.`,
+        );
+      }
+
+      const declaredLength = Number(
+        response.headers.get("content-length") ?? 0,
       );
+      if (
+        Number.isFinite(declaredLength) &&
+        declaredLength > CHATGPT_SHARE_RESPONSE_MAX_BYTES
+      ) {
+        await response.body?.cancel?.();
+        throw new Error("The shared conversation is too large to import.");
+      }
+      const responseText = await readLimitedShareResponse(response);
+      let payload;
+      try {
+        payload = JSON.parse(responseText);
+      } catch {
+        throw new Error(
+          "The complete public conversation response was unreadable.",
+        );
+      }
+      return validateImportedChatGPTConversation(payload, sharedLink);
     }
 
-    const declaredLength = Number(response.headers.get("content-length") ?? 0);
-    if (
-      Number.isFinite(declaredLength) &&
-      declaredLength > CHATGPT_SHARE_RESPONSE_MAX_BYTES
-    ) {
-      await response.body?.cancel?.();
-      throw new Error("The shared conversation is too large to import.");
-    }
-    const responseText = await readLimitedShareResponse(response);
-    let payload;
-    try {
-      payload = JSON.parse(responseText);
-    } catch {
-      throw new Error(
-        "The complete public conversation response was unreadable.",
-      );
-    }
-    return validateImportedChatGPTConversation(payload, sharedLink);
+    throw new Error(
+      "The public conversation reader is temporarily unreachable after automatic retries.",
+    );
   };
 
   const importChatGPTShare = (sharedLink) => {
@@ -326,7 +356,14 @@ import {
 
     shareImportPromise = (async () => {
       try {
-        const conversation = await fetchPublicChatGPTShare(sharedLink);
+        const conversation = await fetchPublicChatGPTShare(
+          sharedLink,
+          (attempt, total) => {
+            setFormStatus(
+              `The public reader was temporarily unavailable. Retrying automatically (${attempt}/${total})…`,
+            );
+          },
+        );
         promptInput.value = conversation.text;
         promptLocked = true;
         importedShareSource = {
@@ -358,10 +395,10 @@ import {
           error instanceof Error
             ? error.message
             : "The public ChatGPT conversation could not be imported.";
-        setFormStatus(
-          `${message} The link was not submitted to Aristotle.`,
-          "error",
-        );
+        const safetyNote = /nothing was sent to aristotle/iu.test(message)
+          ? ""
+          : " Nothing was sent to Aristotle.";
+        setFormStatus(`${message}${safetyNote}`, "error");
         throw error;
       } finally {
         shareImportInFlight = false;

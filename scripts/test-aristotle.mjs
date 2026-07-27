@@ -4,7 +4,6 @@ import {
   ARISTOTLE_SUCCESS_INDEX_URL,
   CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_TRANSCRIPT_LIMIT,
-  MAX_AUTOMATIC_CONTINUATIONS,
   createStatusSnapshot,
   getCheckpointFingerprint,
   getContinuationPolicy,
@@ -15,6 +14,7 @@ import {
   getStatus,
   isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
+  normalizeAutoContinuationState,
   parseChatGPTShareUrl,
   reconcileContinuationAttempt,
   recordCheckpointObservation,
@@ -26,7 +26,6 @@ import {
 } from "../site/assets/aristotle-core.mjs";
 
 assert.deepEqual(CHATGPT_SHARE_RETRY_DELAYS_MS, [0, 1_000, 3_000]);
-assert.equal(MAX_AUTOMATIC_CONTINUATIONS, 3);
 for (const status of [408, 425, 429, 500, 502, 503, 504]) {
   assert.equal(shouldRetryChatGPTShareStatus(status), true);
 }
@@ -46,6 +45,25 @@ assert.equal(getPollDelay(6), 30_000);
 assert.equal(getPollDelay(15), 30_000);
 assert.equal(getPollDelay(16), 60_000);
 assert.equal(getPollDelay(1_000), 60_000);
+
+assert.deepEqual(normalizeAutoContinuationState(undefined, undefined), {
+  paused: false,
+  reason: "",
+});
+assert.deepEqual(normalizeAutoContinuationState(false, "automatic-limit"), {
+  paused: true,
+  reason: "user",
+});
+assert.deepEqual(normalizeAutoContinuationState(false, "no-progress"), {
+  paused: true,
+  reason: "user",
+});
+assert.deepEqual(normalizeAutoContinuationState(true, ""), {
+  paused: true,
+  reason: "user",
+});
+assert.equal(normalizeAutoContinuationState(false, "invalid-reason"), null);
+assert.equal(normalizeAutoContinuationState("false", ""), null);
 
 assert.equal(getStatus({ projectStatus: 1 }, { initial: true }), "submitted");
 assert.equal(getStatus({ projectStatus: 1 }), "running");
@@ -129,19 +147,19 @@ assert.deepEqual(
     autoContinuationPaused: false,
     checkpointObservations: twoCheckpointObservations,
   }),
-  { action: "manual", reason: "no-progress" },
+  { action: "auto-continue", reason: "checkpoint" },
 );
 assert.deepEqual(
   getContinuationPolicy({
     payload: changedCheckpoint,
-    automaticContinuationCount: MAX_AUTOMATIC_CONTINUATIONS,
+    automaticContinuationCount: Number.MAX_SAFE_INTEGER,
     autoContinuationPaused: false,
     checkpointObservations: recordCheckpointObservation(
       twoCheckpointObservations,
       changedCheckpoint,
     ),
   }),
-  { action: "manual", reason: "automatic-limit" },
+  { action: "auto-continue", reason: "checkpoint" },
 );
 assert.deepEqual(
   getContinuationPolicy({

@@ -382,9 +382,12 @@ const aristotleRequirements = [
       aristotleScript.includes("automaticContinuationCount") &&
       aristotleScript.includes("checkpointObservations") &&
       aristotleScript.includes("pendingContinuationAttempt") &&
-      aristotleCore.includes("MAX_AUTOMATIC_CONTINUATIONS = 3") &&
       aristotleCore.includes("getContinuationPolicy") &&
       aristotleCore.includes("reconcileContinuationAttempt") &&
+      aristotleCore.includes("normalizeAutoContinuationState") &&
+      aristotleScript.includes("storedAutoContinuationState") &&
+      aristotlePage.includes("There is no fixed follow-up limit") &&
+      aristotleScript.includes("without a fixed follow-up limit") &&
       aristotleScript.includes("Continuation ${continuationPassCount} accepted") &&
       aristotleScript.includes("continuationPassCount,") &&
       aristotleScript.includes(
@@ -393,7 +396,7 @@ const aristotleRequirements = [
       checkpointBranch.includes("return;") &&
       !checkpointBranch.includes("archiveSubmission") &&
       !checkpointBranch.includes("clearPendingSubmission"),
-    "Recoverable Aristotle checkpoints must continue automatically with duplicate guards, a visible pass count, pause control, manual fallback, quota disclosure, and tab recovery",
+    "Recoverable Aristotle checkpoints must continue automatically without an arbitrary pass cap, with duplicate guards, a visible pass count, pause control, manual fallback, quota disclosure, and tab recovery",
   ],
   [
     aristotlePage.includes("Requests and results are archived publicly") &&

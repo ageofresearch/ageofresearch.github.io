@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://ageofresearch.github.io/aristotle/">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../assets/site.css?build=20260726-public-archive">
-    <script src="../assets/aristotle.js?build=20260727-bounded-continue" type="module"></script>
+    <script src="../assets/aristotle.js?build=20260727-terminal-continue" type="module"></script>
   </head>
   <body data-page="aristotle" class="aristotle-app">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -109,7 +109,7 @@
             ></textarea>
             <p class="field-help" id="prompt-help">
               Plain text stays editable. A standalone ChatGPT Share link changes the action to <strong>Send Link</strong>; it imports and shows the complete selected public branch as <code>PERSON:</code> and <code>LLM:</code>, then locks editing while preserving scroll. Uploaded-file contents are not included.
-              Keep this tab open: an incomplete result can continue automatically for up to three follow-up tasks (four Aristotle tasks total). Every follow-up uses your Aristotle quota. The site pauses sooner when two consecutive checkpoints report the same summary, and a manual Continue project button remains available.
+              Keep this tab open: <code>COMPLETE_WITH_ERRORS</code> and <code>OUT_OF_BUDGET</code> checkpoints continue automatically in the same project until Aristotle reports <code>COMPLETE</code>, <code>FAILED</code>, or <code>CANCELED</code>. There is no fixed follow-up limit. Every follow-up uses your Aristotle quota. Pause automatic continuation at any time, or use Continue project manually.
             </p>
             <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>
           </div>

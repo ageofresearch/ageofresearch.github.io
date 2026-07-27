@@ -49,16 +49,13 @@ are excluded.
 `COMPLETE_WITH_ERRORS` and `OUT_OF_BUDGET` are treated as resumable
 checkpoints rather than final archive states. While the browser tab remains
 open, the workspace automatically sends an `INSTRUCT` continuation to the
-same Aristotle project for at most three automatic follow-ups (four tasks
-including the initial task), retains the continuation state in tab-scoped
-storage, and keeps polling even when the tab is in the background (subject to
-browser throttling). It stops sooner when two consecutive checkpoints report
-the same normalized summary. Users can pause or resume automatic continuation
-and can deliberately submit one more task with **Continue project**. Each
-follow-up consumes the user’s Aristotle quota. Browser Web Locks and a durable
-server reservation prevent the same checkpoint from being submitted twice.
-Exact `COMPLETE`, `FAILED`, and `CANCELED` states end the workflow; a bounded
-or no-progress stop is labeled incomplete and remains manually resumable.
+same Aristotle project without a fixed follow-up limit, retains continuation
+state in tab-scoped storage, and keeps polling even when the tab is in the
+background (subject to browser throttling). Users can pause or resume automatic
+continuation and can deliberately submit another task with **Continue project**.
+Each follow-up consumes the user’s Aristotle quota. Browser Web Locks and a
+durable server reservation prevent the same checkpoint from being submitted
+twice. Exact `COMPLETE`, `FAILED`, and `CANCELED` states end the workflow.
 
 The page at <https://ageofresearch.github.io/aristotle/successes/> reads only
 the append-oriented success index. Failure records remain public in GitHub for

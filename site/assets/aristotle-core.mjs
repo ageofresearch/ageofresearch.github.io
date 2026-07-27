@@ -7,8 +7,6 @@ export const PROMPT_LIMIT = 100_000;
 export const CHATGPT_TRANSCRIPT_LIMIT = 2_000_000;
 export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000;
 export const CHATGPT_SHARE_RETRY_DELAYS_MS = Object.freeze([0, 1_000, 3_000]);
-export const MAX_AUTOMATIC_CONTINUATIONS = 3;
-export const IDENTICAL_CHECKPOINT_LIMIT = 2;
 export const PROJECT_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/;
 export const ARCHIVE_TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 const CHATGPT_SHARE_TRANSIENT_STATUSES = new Set([
@@ -45,6 +43,25 @@ export const SUCCESS_STATUSES = new Set([
   "succeeded",
   "success",
 ]);
+
+export function normalizeAutoContinuationState(paused, reason) {
+  const normalizedPaused = paused === undefined ? false : paused;
+  const normalizedReason = reason === undefined ? "" : reason;
+  if (
+    typeof normalizedPaused !== "boolean" ||
+    typeof normalizedReason !== "string" ||
+    !["", "user", "automatic-limit", "no-progress"].includes(
+      normalizedReason,
+    )
+  ) {
+    return null;
+  }
+  const shouldPause = normalizedPaused || normalizedReason !== "";
+  return {
+    paused: shouldPause,
+    reason: shouldPause ? "user" : "",
+  };
+}
 
 export function validateKey(key) {
   if (!key) return "Enter your Aristotle API key.";
@@ -279,9 +296,7 @@ export function recordCheckpointObservation(observations, payload) {
 
 export function getContinuationPolicy({
   payload,
-  automaticContinuationCount = 0,
   autoContinuationPaused = false,
-  checkpointObservations = [],
 } = {}) {
   const status = getStatus(payload);
   if (SUCCESS_STATUSES.has(status)) {
@@ -298,26 +313,6 @@ export function getContinuationPolicy({
   }
   if (autoContinuationPaused) {
     return { action: "manual", reason: "paused" };
-  }
-  if (
-    !Number.isSafeInteger(automaticContinuationCount) ||
-    automaticContinuationCount < 0 ||
-    automaticContinuationCount >= MAX_AUTOMATIC_CONTINUATIONS
-  ) {
-    return { action: "manual", reason: "automatic-limit" };
-  }
-  const observations = recordCheckpointObservation(
-    checkpointObservations,
-    payload,
-  );
-  const latest = observations.at(-1);
-  const previous = observations.at(-2);
-  if (
-    observations.length >= IDENTICAL_CHECKPOINT_LIMIT &&
-    latest?.taskId !== previous?.taskId &&
-    latest?.fingerprint === previous?.fingerprint
-  ) {
-    return { action: "manual", reason: "no-progress" };
   }
   return { action: "auto-continue", reason: "checkpoint" };
 }

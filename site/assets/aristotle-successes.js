@@ -1,7 +1,7 @@
 import {
   ARISTOTLE_SUCCESS_INDEX_URL,
   validateSuccessIndex,
-} from "./aristotle-core.mjs?build=20260727-bounded-continue";
+} from "./aristotle-core.mjs?build=20260727-terminal-continue";
 
 (() => {
   "use strict";

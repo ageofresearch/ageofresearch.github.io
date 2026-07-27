@@ -3,7 +3,6 @@ import {
   CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_SHARE_RESPONSE_MAX_BYTES,
   CHATGPT_TRANSCRIPT_LIMIT,
-  MAX_AUTOMATIC_CONTINUATIONS,
   KEY_HEADER_NAME,
   PROJECT_ID_PATTERN,
   PROMPT_LIMIT,
@@ -19,6 +18,7 @@ import {
   getStatus,
   isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
+  normalizeAutoContinuationState,
   parseChatGPTShareUrl,
   reconcileContinuationAttempt,
   shouldRetryChatGPTShareStatus,
@@ -26,7 +26,7 @@ import {
   validateImportedChatGPTConversation,
   validateArchiveToken,
   validateKey,
-} from "./aristotle-core.mjs?build=20260727-bounded-continue";
+} from "./aristotle-core.mjs?build=20260727-terminal-continue";
 
 (() => {
   "use strict";
@@ -219,6 +219,10 @@ import {
         value?.pendingContinuationAttempt === undefined
           ? null
           : value.pendingContinuationAttempt;
+      const storedAutoContinuationState = normalizeAutoContinuationState(
+        value?.autoContinuationPaused,
+        value?.autoContinuationStopReason,
+      );
       if (
         !value ||
         typeof value !== "object" ||
@@ -266,16 +270,7 @@ import {
             typeof entry.fingerprint !== "string" ||
             Array.from(entry.fingerprint).length > 10_100,
         ) ||
-        (
-          value.autoContinuationPaused !== undefined &&
-          typeof value.autoContinuationPaused !== "boolean"
-        ) ||
-        (
-          value.autoContinuationStopReason !== undefined &&
-          !["", "user", "automatic-limit", "no-progress"].includes(
-            value.autoContinuationStopReason,
-          )
-        ) ||
+        storedAutoContinuationState === null ||
         (
           storedPendingContinuationAttempt !== null &&
           (
@@ -298,11 +293,8 @@ import {
         automaticContinuationCount: storedAutomaticContinuationCount,
         continuedCheckpointTaskIds: storedCheckpointTaskIds,
         checkpointObservations: storedCheckpointObservations,
-        autoContinuationPaused: value.autoContinuationPaused === true,
-        autoContinuationStopReason:
-          typeof value.autoContinuationStopReason === "string"
-            ? value.autoContinuationStopReason
-            : "",
+        autoContinuationPaused: storedAutoContinuationState.paused,
+        autoContinuationStopReason: storedAutoContinuationState.reason,
         pendingContinuationAttempt: storedPendingContinuationAttempt,
         legacyArchiveRecovery: storedLegacyRecovery,
       };
@@ -656,13 +648,7 @@ import {
       ? "Unknown"
       : value.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
 
-  const automaticPauseMessage = (reason) => {
-    if (reason === "automatic-limit") {
-      return `The formalization is still incomplete after ${MAX_AUTOMATIC_CONTINUATIONS + 1} Aristotle tasks. Automatic continuation stopped to limit quota use; press Continue project for one deliberate additional task.`;
-    }
-    if (reason === "no-progress") {
-      return "The formalization is still incomplete and two consecutive checkpoints reported the same summary. Automatic continuation stopped to avoid spending quota without visible progress; press Continue project for one deliberate additional task.";
-    }
+  const automaticPauseMessage = () => {
     return "Automatic continuation is paused. Continue manually or resume automatic continuation.";
   };
 
@@ -788,7 +774,7 @@ import {
     if (continuationPassOutput) {
       continuationPassOutput.textContent = continuationInFlight
         ? `Submitting follow-up ${continuationPassCount + 1}…`
-        : `${continuationPassCount} total · ${automaticContinuationCount}/${MAX_AUTOMATIC_CONTINUATIONS} automatic`;
+        : `${continuationPassCount} total · ${automaticContinuationCount} automatic`;
     }
 
     if (dashboardLink instanceof HTMLAnchorElement) {
@@ -826,32 +812,11 @@ import {
         checkpointObservations,
         payload,
       );
-      let continuationPolicy = getContinuationPolicy({
+      const continuationPolicy = getContinuationPolicy({
         payload,
-        automaticContinuationCount,
         autoContinuationPaused,
-        checkpointObservations,
       });
-      if (
-        continuationPolicy.action === "manual" &&
-        (
-          continuationPolicy.reason === "automatic-limit" ||
-          continuationPolicy.reason === "no-progress"
-        ) &&
-        !autoContinuationPaused
-      ) {
-        autoContinuationPaused = true;
-        autoContinuationStopReason = continuationPolicy.reason;
-        autoContinueToggle.textContent = "Resume automatic continuation";
-        storePendingSubmission();
-        continuationPolicy = getContinuationPolicy({
-          payload,
-          automaticContinuationCount,
-          autoContinuationPaused,
-          checkpointObservations,
-        });
-      }
-      const pauseMessage = automaticPauseMessage(autoContinuationStopReason);
+      const pauseMessage = automaticPauseMessage();
       if (pollingNote) {
         pollingNote.textContent = autoContinuationPaused
           ? pauseMessage
@@ -944,9 +909,7 @@ import {
     clearContinuationRetry();
     const policy = getContinuationPolicy({
       payload,
-      automaticContinuationCount,
       autoContinuationPaused,
-      checkpointObservations,
     });
     if (
       !activeProjectId ||
@@ -1132,7 +1095,7 @@ import {
       updateSubmitAvailability();
       if (continuationPassOutput) {
         continuationPassOutput.textContent =
-          `${continuationPassCount} total · ${automaticContinuationCount}/${MAX_AUTOMATIC_CONTINUATIONS} automatic`;
+          `${continuationPassCount} total · ${automaticContinuationCount} automatic`;
       }
       if (continuationOutcomeUncertain) {
         continueButton.hidden = false;
@@ -1603,13 +1566,6 @@ import {
     autoContinuationPaused = !autoContinuationPaused;
     if (autoContinuationPaused) {
       autoContinuationStopReason = "user";
-    } else if (
-      autoContinuationStopReason === "automatic-limit" ||
-      autoContinuationStopReason === "no-progress"
-    ) {
-      automaticContinuationCount = 0;
-      checkpointObservations = [];
-      autoContinuationStopReason = "";
     } else {
       autoContinuationStopReason = "";
     }
@@ -1633,7 +1589,7 @@ import {
     }
 
     setFormStatus(
-      `Automatic continuation resumed for up to ${MAX_AUTOMATIC_CONTINUATIONS} more follow-up tasks. Each one uses your Aristotle quota.`,
+      "Automatic continuation resumed without a fixed follow-up limit. Each task uses your Aristotle quota; press Pause automatic continuation whenever you want it to stop.",
       "success",
     );
     if (isRecoverableCheckpoint(lastProjectData)) {

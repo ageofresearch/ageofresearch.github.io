@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "formagization.aristotle-submission/v1",
+  "classification": "success",
+  "projectId": "e5799af0-f0d4-46a4-a007-94fffd5251d0",
+  "submittedAt": "2026-07-27T04:22:48.474925",
+  "completedAt": "2026-07-27T04:35:30.368123",
+  "archivedAt": "2026-07-27T04:42:23.799Z",
+  "dashboardUrl": "https://aristotle.harmonic.fun/dashboard/requests/e5799af0-f0d4-46a4-a007-94fffd5251d0",
+  "projectStatus": 2,
+  "taskId": "91faa4a2-a22b-4d0b-a3a0-7090e498c268",
+  "taskStatus": "COMPLETE",
+  "percentComplete": 100,
+  "outputSummary": "Formalized and proved the requested natural-number identity in `RequestProject/Main.lean`:\n\n```lean\ntheorem zero_mul_five : (0 : ℕ) * 5 = 0 := by\n  norm_num\n```\n\nThe project builds successfully, and the theorem contains no `sorry` or `admit`.",
+  "source": null,
+  "prompt": {
+    "filename": "prompt.txt",
+    "characters": 15,
+    "bytes": 15,
+    "sha256": "sha256:d345f1ddb7e6b622b5181d9afb985a168fdd798ed1113f917c68c0ec906f23c0"
+  },
+  "statusHistory": {
+    "filename": "status-history.jsonl",
+    "snapshots": 4
+  },
+  "result": {
+    "filename": "result.tar.gz",
+    "available": true,
+    "bytes": 1661,
+    "sha256": "sha256:a5d5e8dfd0fae4e02bd303deaa4b01aeb9f067a67a892a7530acea9003b1f4a3",
+    "unavailableReason": null
+  },
+  "publicListing": "submissions/successes/index.json",
+  "credentialFieldsArchived": false
+}

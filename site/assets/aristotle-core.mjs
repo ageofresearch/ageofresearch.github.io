@@ -7,6 +7,8 @@ export const PROMPT_LIMIT = 100_000;
 export const CHATGPT_TRANSCRIPT_LIMIT = 2_000_000;
 export const CHATGPT_SHARE_RESPONSE_MAX_BYTES = 2_100_000;
 export const CHATGPT_SHARE_RETRY_DELAYS_MS = Object.freeze([0, 1_000, 3_000]);
+export const MAX_AUTOMATIC_CONTINUATIONS = 3;
+export const IDENTICAL_CHECKPOINT_LIMIT = 2;
 export const PROJECT_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/;
 export const ARCHIVE_TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/;
 const CHATGPT_SHARE_TRANSIENT_STATUSES = new Set([
@@ -215,6 +217,148 @@ export function getStatus(payload, { initial = false } = {}) {
 
 export function isRecoverableCheckpoint(payload) {
   return RECOVERABLE_CHECKPOINT_STATUSES.has(getStatus(payload));
+}
+
+export function getTaskId(payload) {
+  const value =
+    payload?.taskId ??
+    payload?.task_id ??
+    payload?.latestTask?.taskId ??
+    payload?.latestTask?.agent_task_id ??
+    payload?.latestTask?.task_id ??
+    payload?.latest_task?.taskId ??
+    payload?.latest_task?.agent_task_id ??
+    payload?.latest_task?.task_id ??
+    payload?.task?.taskId ??
+    payload?.task?.agent_task_id ??
+    payload?.task?.task_id;
+  return typeof value === "string" && PROJECT_ID_PATTERN.test(value)
+    ? value
+    : "";
+}
+
+export function getCheckpointFingerprint(payload) {
+  if (!isRecoverableCheckpoint(payload)) return "";
+  const summary =
+    payload?.outputSummary ??
+    payload?.output_summary ??
+    payload?.summary ??
+    payload?.latestTask?.outputSummary ??
+    payload?.latestTask?.output_summary ??
+    payload?.latest_task?.outputSummary ??
+    payload?.latest_task?.output_summary ??
+    payload?.task?.outputSummary ??
+    payload?.task?.output_summary ??
+    "";
+  return String(summary)
+    .normalize("NFKC")
+    .replace(/\s+/gu, " ")
+    .trim()
+    .toLowerCase()
+    .slice(0, 10_000);
+}
+
+export function recordCheckpointObservation(observations, payload) {
+  const current = Array.isArray(observations)
+    ? observations.filter(
+        (entry) =>
+          entry &&
+          typeof entry === "object" &&
+          typeof entry.taskId === "string" &&
+          PROJECT_ID_PATTERN.test(entry.taskId) &&
+          typeof entry.fingerprint === "string",
+      )
+    : [];
+  const taskId = getTaskId(payload);
+  const fingerprint = getCheckpointFingerprint(payload);
+  if (!taskId || !fingerprint || current.some((entry) => entry.taskId === taskId)) {
+    return current.slice(-50);
+  }
+  return [...current, { taskId, fingerprint }].slice(-50);
+}
+
+export function getContinuationPolicy({
+  payload,
+  automaticContinuationCount = 0,
+  autoContinuationPaused = false,
+  checkpointObservations = [],
+} = {}) {
+  const status = getStatus(payload);
+  if (SUCCESS_STATUSES.has(status)) {
+    return { action: "final-success", reason: "complete" };
+  }
+  if (
+    TERMINAL_STATUSES.has(status) &&
+    !RECOVERABLE_CHECKPOINT_STATUSES.has(status)
+  ) {
+    return { action: "final-failure", reason: status };
+  }
+  if (!RECOVERABLE_CHECKPOINT_STATUSES.has(status)) {
+    return { action: "poll", reason: status };
+  }
+  if (autoContinuationPaused) {
+    return { action: "manual", reason: "paused" };
+  }
+  if (
+    !Number.isSafeInteger(automaticContinuationCount) ||
+    automaticContinuationCount < 0 ||
+    automaticContinuationCount >= MAX_AUTOMATIC_CONTINUATIONS
+  ) {
+    return { action: "manual", reason: "automatic-limit" };
+  }
+  const observations = recordCheckpointObservation(
+    checkpointObservations,
+    payload,
+  );
+  const latest = observations.at(-1);
+  const previous = observations.at(-2);
+  if (
+    observations.length >= IDENTICAL_CHECKPOINT_LIMIT &&
+    latest?.taskId !== previous?.taskId &&
+    latest?.fingerprint === previous?.fingerprint
+  ) {
+    return { action: "manual", reason: "no-progress" };
+  }
+  return { action: "auto-continue", reason: "checkpoint" };
+}
+
+export function reconcileContinuationAttempt({
+  pendingAttempt = null,
+  payload,
+  continuationPassCount = 0,
+  automaticContinuationCount = 0,
+  continuedCheckpointTaskIds = [],
+} = {}) {
+  const currentTaskId = getTaskId(payload);
+  if (
+    !pendingAttempt ||
+    typeof pendingAttempt !== "object" ||
+    typeof pendingAttempt.previousTaskId !== "string" ||
+    typeof pendingAttempt.manual !== "boolean" ||
+    !currentTaskId ||
+    currentTaskId === pendingAttempt.previousTaskId
+  ) {
+    return {
+      advanced: false,
+      pendingAttempt,
+      continuationPassCount,
+      automaticContinuationCount,
+      continuedCheckpointTaskIds,
+    };
+  }
+  return {
+    advanced: true,
+    pendingAttempt: null,
+    continuationPassCount: continuationPassCount + 1,
+    automaticContinuationCount:
+      automaticContinuationCount + (pendingAttempt.manual ? 0 : 1),
+    continuedCheckpointTaskIds: [
+      ...new Set([
+        ...continuedCheckpointTaskIds,
+        pendingAttempt.previousTaskId,
+      ]),
+    ].slice(-500),
+  };
 }
 
 export function getPollDelay(attemptCount) {

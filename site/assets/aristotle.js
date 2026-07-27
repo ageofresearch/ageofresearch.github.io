@@ -3,13 +3,16 @@ import {
   CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_SHARE_RESPONSE_MAX_BYTES,
   CHATGPT_TRANSCRIPT_LIMIT,
+  MAX_AUTOMATIC_CONTINUATIONS,
   KEY_HEADER_NAME,
   PROJECT_ID_PATTERN,
   PROMPT_LIMIT,
   SUCCESS_STATUSES,
   TERMINAL_STATUSES,
   createStatusSnapshot,
+  getContinuationPolicy,
   getChatGPTShareApiUrl,
+  getTaskId,
   getDashboardUrl,
   getErrorMessage,
   getPollDelay,
@@ -17,11 +20,13 @@ import {
   isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
+  reconcileContinuationAttempt,
   shouldRetryChatGPTShareStatus,
+  recordCheckpointObservation,
   validateImportedChatGPTConversation,
   validateArchiveToken,
   validateKey,
-} from "./aristotle-core.mjs?build=20260727-auto-continue";
+} from "./aristotle-core.mjs?build=20260727-bounded-continue";
 
 (() => {
   "use strict";
@@ -100,8 +105,13 @@ import {
   let continuationInFlight = false;
   let continuationRetryTimer = 0;
   let continuationPassCount = 0;
+  let automaticContinuationCount = 0;
   let continuedCheckpointTaskIds = [];
+  let checkpointObservations = [];
   let autoContinuationPaused = false;
+  let autoContinuationStopReason = "";
+  let pendingContinuationAttempt = null;
+  let legacyArchiveRecovery = false;
   let activeWorkspaceView = "request";
 
   const setWorkspaceView = (view, { focus = false } = {}) => {
@@ -196,13 +206,36 @@ import {
         value?.continuedCheckpointTaskIds === undefined
           ? []
           : value.continuedCheckpointTaskIds;
+      const storedAutomaticContinuationCount =
+        value?.automaticContinuationCount === undefined
+          ? 0
+          : value.automaticContinuationCount;
+      const storedCheckpointObservations =
+        value?.checkpointObservations === undefined
+          ? []
+          : value.checkpointObservations;
+      const storedLegacyRecovery = value?.legacyArchiveRecovery === true;
+      const storedPendingContinuationAttempt =
+        value?.pendingContinuationAttempt === undefined
+          ? null
+          : value.pendingContinuationAttempt;
       if (
         !value ||
         typeof value !== "object" ||
         value.projectId !== activeProjectId ||
-        typeof value.prompt !== "string" ||
-        !value.prompt ||
-        !validateArchiveToken(value.archiveToken) ||
+        (
+          storedLegacyRecovery
+            ? (
+              value.prompt !== "" ||
+              value.archiveToken !== "" ||
+              value.source !== null
+            )
+            : (
+              typeof value.prompt !== "string" ||
+              !value.prompt ||
+              !validateArchiveToken(value.archiveToken)
+            )
+        ) ||
         (
           value.source !== null &&
           (
@@ -212,6 +245,9 @@ import {
         ) ||
         !Number.isSafeInteger(storedContinuationPassCount) ||
         storedContinuationPassCount < 0 ||
+        !Number.isSafeInteger(storedAutomaticContinuationCount) ||
+        storedAutomaticContinuationCount < 0 ||
+        storedAutomaticContinuationCount > storedContinuationPassCount ||
         !Array.isArray(storedCheckpointTaskIds) ||
         storedCheckpointTaskIds.length > 500 ||
         storedCheckpointTaskIds.some(
@@ -219,9 +255,38 @@ import {
             typeof taskId !== "string" ||
             !PROJECT_ID_PATTERN.test(taskId),
         ) ||
+        !Array.isArray(storedCheckpointObservations) ||
+        storedCheckpointObservations.length > 50 ||
+        storedCheckpointObservations.some(
+          (entry) =>
+            !entry ||
+            typeof entry !== "object" ||
+            typeof entry.taskId !== "string" ||
+            !PROJECT_ID_PATTERN.test(entry.taskId) ||
+            typeof entry.fingerprint !== "string" ||
+            Array.from(entry.fingerprint).length > 10_100,
+        ) ||
         (
           value.autoContinuationPaused !== undefined &&
           typeof value.autoContinuationPaused !== "boolean"
+        ) ||
+        (
+          value.autoContinuationStopReason !== undefined &&
+          !["", "user", "automatic-limit", "no-progress"].includes(
+            value.autoContinuationStopReason,
+          )
+        ) ||
+        (
+          storedPendingContinuationAttempt !== null &&
+          (
+            typeof storedPendingContinuationAttempt !== "object" ||
+            Array.isArray(storedPendingContinuationAttempt) ||
+            typeof storedPendingContinuationAttempt.previousTaskId !== "string" ||
+            !PROJECT_ID_PATTERN.test(
+              storedPendingContinuationAttempt.previousTaskId,
+            ) ||
+            typeof storedPendingContinuationAttempt.manual !== "boolean"
+          )
         )
       ) {
         window.sessionStorage.removeItem(SUBMISSION_STORAGE_NAME);
@@ -230,8 +295,16 @@ import {
       return {
         ...value,
         continuationPassCount: storedContinuationPassCount,
+        automaticContinuationCount: storedAutomaticContinuationCount,
         continuedCheckpointTaskIds: storedCheckpointTaskIds,
+        checkpointObservations: storedCheckpointObservations,
         autoContinuationPaused: value.autoContinuationPaused === true,
+        autoContinuationStopReason:
+          typeof value.autoContinuationStopReason === "string"
+            ? value.autoContinuationStopReason
+            : "",
+        pendingContinuationAttempt: storedPendingContinuationAttempt,
+        legacyArchiveRecovery: storedLegacyRecovery,
       };
     } catch {
       return null;
@@ -248,8 +321,13 @@ import {
           source: pendingSource,
           archiveToken,
           continuationPassCount,
+          automaticContinuationCount,
           continuedCheckpointTaskIds: continuedCheckpointTaskIds.slice(-500),
+          checkpointObservations: checkpointObservations.slice(-50),
           autoContinuationPaused,
+          autoContinuationStopReason,
+          pendingContinuationAttempt,
+          legacyArchiveRecovery,
         }),
       );
       return true;
@@ -285,8 +363,13 @@ import {
     archiveToken = "";
     statusHistory = [];
     continuationPassCount = 0;
+    automaticContinuationCount = 0;
     continuedCheckpointTaskIds = [];
+    checkpointObservations = [];
     autoContinuationPaused = false;
+    autoContinuationStopReason = "";
+    pendingContinuationAttempt = null;
+    legacyArchiveRecovery = false;
     if (continuationRetryTimer) window.clearTimeout(continuationRetryTimer);
     continuationRetryTimer = 0;
     try {
@@ -573,6 +656,35 @@ import {
       ? "Unknown"
       : value.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
 
+  const automaticPauseMessage = (reason) => {
+    if (reason === "automatic-limit") {
+      return `The formalization is still incomplete after ${MAX_AUTOMATIC_CONTINUATIONS + 1} Aristotle tasks. Automatic continuation stopped to limit quota use; press Continue project for one deliberate additional task.`;
+    }
+    if (reason === "no-progress") {
+      return "The formalization is still incomplete and two consecutive checkpoints reported the same summary. Automatic continuation stopped to avoid spending quota without visible progress; press Continue project for one deliberate additional task.";
+    }
+    return "Automatic continuation is paused. Continue manually or resume automatic continuation.";
+  };
+
+  const reconcilePendingContinuation = (payload) => {
+    const reconciled = reconcileContinuationAttempt({
+      pendingAttempt: pendingContinuationAttempt,
+      payload,
+      continuationPassCount,
+      automaticContinuationCount,
+      continuedCheckpointTaskIds,
+    });
+    if (!reconciled.advanced) return false;
+    pendingContinuationAttempt = reconciled.pendingAttempt;
+    continuationPassCount = reconciled.continuationPassCount;
+    automaticContinuationCount =
+      reconciled.automaticContinuationCount;
+    continuedCheckpointTaskIds =
+      reconciled.continuedCheckpointTaskIds;
+    storePendingSubmission();
+    return true;
+  };
+
   const getProjectId = (payload) => {
     const value =
       payload?.projectId ??
@@ -582,21 +694,6 @@ import {
       payload?.project?.project_id ??
       payload?.project?.id;
     return typeof value === "string" ? value : "";
-  };
-
-  const getTaskId = (payload) => {
-    const value =
-      payload?.taskId ??
-      payload?.task_id ??
-      payload?.latestTask?.taskId ??
-      payload?.latestTask?.agent_task_id ??
-      payload?.latest_task?.task_id ??
-      payload?.latest_task?.agent_task_id ??
-      payload?.task?.taskId ??
-      payload?.task?.agent_task_id;
-    return typeof value === "string" && PROJECT_ID_PATTERN.test(value)
-      ? value
-      : "";
   };
 
   const getPercent = (payload) => {
@@ -651,6 +748,7 @@ import {
 
   const updateProjectPanel = (payload, { initial = false } = {}) => {
     lastProjectData = payload;
+    reconcilePendingContinuation(payload);
     const status = getStatus(payload, { initial });
     const checkpoint = isRecoverableCheckpoint(payload);
     const taskId = getTaskId(payload);
@@ -690,7 +788,7 @@ import {
     if (continuationPassOutput) {
       continuationPassOutput.textContent = continuationInFlight
         ? `Submitting follow-up ${continuationPassCount + 1}…`
-        : `${continuationPassCount} submitted`;
+        : `${continuationPassCount} total · ${automaticContinuationCount}/${MAX_AUTOMATIC_CONTINUATIONS} automatic`;
     }
 
     if (dashboardLink instanceof HTMLAnchorElement) {
@@ -724,14 +822,44 @@ import {
     );
     if (checkpoint) {
       clearPolling();
+      checkpointObservations = recordCheckpointObservation(
+        checkpointObservations,
+        payload,
+      );
+      let continuationPolicy = getContinuationPolicy({
+        payload,
+        automaticContinuationCount,
+        autoContinuationPaused,
+        checkpointObservations,
+      });
+      if (
+        continuationPolicy.action === "manual" &&
+        (
+          continuationPolicy.reason === "automatic-limit" ||
+          continuationPolicy.reason === "no-progress"
+        ) &&
+        !autoContinuationPaused
+      ) {
+        autoContinuationPaused = true;
+        autoContinuationStopReason = continuationPolicy.reason;
+        autoContinueToggle.textContent = "Resume automatic continuation";
+        storePendingSubmission();
+        continuationPolicy = getContinuationPolicy({
+          payload,
+          automaticContinuationCount,
+          autoContinuationPaused,
+          checkpointObservations,
+        });
+      }
+      const pauseMessage = automaticPauseMessage(autoContinuationStopReason);
       if (pollingNote) {
         pollingNote.textContent = autoContinuationPaused
-          ? "Automatic continuation is paused. Continue manually or resume automatic continuation."
+          ? pauseMessage
           : "Checkpoint reached. Preparing the next continuation pass…";
       }
       setFormStatus(
         autoContinuationPaused
-          ? `Aristotle returned “${displayStatus(status)}”. Automatic continuation is paused.`
+          ? pauseMessage
           : `Aristotle returned “${displayStatus(status)}”. Continuing automatically from the saved project files…`,
         autoContinuationPaused ? "error" : "",
       );
@@ -740,7 +868,7 @@ import {
         continuedCheckpointTaskIds.includes(taskId)
       ) {
         scheduleCheckpointRefresh();
-      } else if (!autoContinuationPaused) {
+      } else if (continuationPolicy.action === "auto-continue") {
         scheduleAutomaticContinuation(payload);
       }
       return;
@@ -814,11 +942,16 @@ import {
 
   const scheduleAutomaticContinuation = (payload, delay = 500) => {
     clearContinuationRetry();
+    const policy = getContinuationPolicy({
+      payload,
+      automaticContinuationCount,
+      autoContinuationPaused,
+      checkpointObservations,
+    });
     if (
       !activeProjectId ||
-      autoContinuationPaused ||
       continuationInFlight ||
-      !isRecoverableCheckpoint(payload)
+      policy.action !== "auto-continue"
     ) {
       return;
     }
@@ -826,6 +959,25 @@ import {
       continuationRetryTimer = 0;
       void continueProject(payload);
     }, delay);
+  };
+
+  const withContinuationDispatchLock = async (
+    projectId,
+    previousTaskId,
+    dispatch,
+  ) => {
+    const locks = globalThis.navigator?.locks;
+    if (!locks || typeof locks.request !== "function") {
+      return { acquired: true, value: await dispatch() };
+    }
+    return locks.request(
+      `formagization.aristotle.continue:${projectId}:${previousTaskId}`,
+      { mode: "exclusive", ifAvailable: true },
+      async (lock) =>
+        lock
+          ? { acquired: true, value: await dispatch() }
+          : { acquired: false, value: null },
+    );
   };
 
   const continueProject = async (checkpointPayload, { manual = false } = {}) => {
@@ -846,7 +998,14 @@ import {
       return;
     }
     if (requestInFlight) {
-      scheduleAutomaticContinuation(checkpointPayload, 1_000);
+      if (manual) {
+        setFormStatus(
+          "Another status request is finishing. The checkpoint will refresh before any continuation is submitted.",
+        );
+        scheduleCheckpointRefresh();
+      } else {
+        scheduleAutomaticContinuation(checkpointPayload, 1_000);
+      }
       return;
     }
 
@@ -864,6 +1023,13 @@ import {
     }
 
     clearContinuationRetry();
+    if (
+      !pendingContinuationAttempt ||
+      pendingContinuationAttempt.previousTaskId !== previousTaskId
+    ) {
+      pendingContinuationAttempt = { previousTaskId, manual };
+      storePendingSubmission();
+    }
     continuationInFlight = true;
     requestInFlight = true;
     continueButton.hidden = true;
@@ -890,37 +1056,62 @@ import {
     let continuationAccepted = false;
     let continuationOutcomeUncertain = false;
     try {
-      const response = await fetch(
-        `${ARISTOTLE_PROXY_URL}/api/projects/${encodeURIComponent(activeProjectId)}/continue`,
-        {
-          method: "POST",
-          headers: {
-            [KEY_HEADER_NAME]: key,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ previousTaskId }),
-          cache: "no-store",
-          credentials: "omit",
-          referrerPolicy: "no-referrer",
+      const lockedDispatch = await withContinuationDispatchLock(
+        activeProjectId,
+        previousTaskId,
+        async () => {
+          const response = await fetch(
+            `${ARISTOTLE_PROXY_URL}/api/projects/${encodeURIComponent(activeProjectId)}/continue`,
+            {
+              method: "POST",
+              headers: {
+                [KEY_HEADER_NAME]: key,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ previousTaskId }),
+              cache: "no-store",
+              credentials: "omit",
+              referrerPolicy: "no-referrer",
+            },
+          );
+          return readJsonResponse(response, "continue");
         },
       );
-      const payload = await readJsonResponse(response, "continue");
+      if (!lockedDispatch.acquired) {
+        continuationOutcomeUncertain = true;
+        setFormStatus(
+          "Another tab is already continuing this checkpoint. Checking Aristotle’s authoritative status instead of submitting it twice.",
+        );
+        if (pollingNote) {
+          pollingNote.textContent =
+            "A continuation is already being dispatched from another tab. Status will refresh shortly.";
+        }
+        return;
+      }
+      const payload = lockedDispatch.value;
+      if (payload?.continuationPending === true) {
+        continuationOutcomeUncertain = true;
+        setFormStatus(
+          "This checkpoint already has a continuation reservation. Waiting for the new Aristotle task to appear.",
+        );
+        if (pollingNote) {
+          pollingNote.textContent =
+            "A continuation dispatch is already in progress. Status will refresh shortly.";
+        }
+        return;
+      }
       const returnedProjectId = getProjectId(payload);
       if (returnedProjectId && returnedProjectId !== activeProjectId) {
         throw new Error("Aristotle returned a continuation for a different project.");
       }
 
-      continuedCheckpointTaskIds.push(previousTaskId);
-      continuedCheckpointTaskIds = [...new Set(continuedCheckpointTaskIds)].slice(-500);
-      continuationPassCount += 1;
       continuationAccepted = true;
-      storePendingSubmission();
+      updateProjectPanel(payload);
       setFormStatus(
         `Continuation ${continuationPassCount} accepted. Progress will refresh automatically.`,
         "success",
       );
-      updateProjectPanel(payload);
     } catch (error) {
       continuationOutcomeUncertain = true;
       const message =
@@ -941,7 +1132,7 @@ import {
       updateSubmitAvailability();
       if (continuationPassOutput) {
         continuationPassOutput.textContent =
-          `${continuationPassCount} submitted`;
+          `${continuationPassCount} total · ${automaticContinuationCount}/${MAX_AUTOMATIC_CONTINUATIONS} automatic`;
       }
       if (continuationOutcomeUncertain) {
         continueButton.hidden = false;
@@ -1022,18 +1213,22 @@ import {
   };
 
   const archiveSubmission = async (terminalPayload) => {
+    const hasCurrentArchiveProof =
+      Boolean(pendingPrompt) && validateArchiveToken(archiveToken);
+    const canRecoverLegacyArchive =
+      legacyArchiveRecovery && !pendingPrompt && !archiveToken;
     if (
       archiveComplete ||
       archiveInFlight ||
       !activeProjectId ||
-      !pendingPrompt ||
-      !validateArchiveToken(archiveToken)
+      (!hasCurrentArchiveProof && !canRecoverLegacyArchive)
     ) {
       if (
         !archiveComplete &&
         !archiveInFlight &&
         activeProjectId &&
-        (!pendingPrompt || !validateArchiveToken(archiveToken))
+        !hasCurrentArchiveProof &&
+        !canRecoverLegacyArchive
       ) {
         setFormStatus(
           "The project finished, but this tab no longer has the authenticated submission needed to create its public archive record.",
@@ -1065,9 +1260,13 @@ import {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            prompt: pendingPrompt,
-            source: pendingSource,
-            archiveToken,
+            ...(canRecoverLegacyArchive
+              ? { recoverLegacy: true }
+              : {
+                prompt: pendingPrompt,
+                source: pendingSource,
+                archiveToken,
+              }),
             statusHistory,
           }),
           cache: "no-store",
@@ -1165,9 +1364,23 @@ import {
     archiveToken = storedSubmission.archiveToken;
     statusHistory = readStatusHistory();
     continuationPassCount = storedSubmission.continuationPassCount;
+    automaticContinuationCount =
+      storedSubmission.automaticContinuationCount;
     continuedCheckpointTaskIds =
       storedSubmission.continuedCheckpointTaskIds;
+    checkpointObservations = storedSubmission.checkpointObservations;
     autoContinuationPaused = storedSubmission.autoContinuationPaused;
+    autoContinuationStopReason =
+      storedSubmission.autoContinuationStopReason;
+    pendingContinuationAttempt =
+      storedSubmission.pendingContinuationAttempt;
+    legacyArchiveRecovery = storedSubmission.legacyArchiveRecovery;
+  } else if (activeProjectId) {
+    // Older releases discarded the prompt and archive proof after incorrectly
+    // treating a resumable checkpoint as final. The proxy may recover that
+    // already-public record after authenticating project access.
+    legacyArchiveRecovery = true;
+    storePendingSubmission();
   }
   promptInput.maxLength = PROMPT_LIMIT;
   setPromptCount();
@@ -1346,8 +1559,13 @@ import {
       archiveToken = payload.archiveToken;
       statusHistory = [];
       continuationPassCount = 0;
+      automaticContinuationCount = 0;
       continuedCheckpointTaskIds = [];
+      checkpointObservations = [];
       autoContinuationPaused = false;
+      autoContinuationStopReason = "";
+      pendingContinuationAttempt = null;
+      legacyArchiveRecovery = false;
       clearContinuationRetry();
       storeProjectId(projectId);
       if (!storePendingSubmission()) {
@@ -1383,6 +1601,18 @@ import {
 
   autoContinueToggle.addEventListener("click", () => {
     autoContinuationPaused = !autoContinuationPaused;
+    if (autoContinuationPaused) {
+      autoContinuationStopReason = "user";
+    } else if (
+      autoContinuationStopReason === "automatic-limit" ||
+      autoContinuationStopReason === "no-progress"
+    ) {
+      automaticContinuationCount = 0;
+      checkpointObservations = [];
+      autoContinuationStopReason = "";
+    } else {
+      autoContinuationStopReason = "";
+    }
     autoContinueToggle.textContent = autoContinuationPaused
       ? "Resume automatic continuation"
       : "Pause automatic continuation";
@@ -1403,7 +1633,7 @@ import {
     }
 
     setFormStatus(
-      "Automatic continuation resumed. Incomplete checkpoints will continue using your Aristotle quota.",
+      `Automatic continuation resumed for up to ${MAX_AUTOMATIC_CONTINUATIONS} more follow-up tasks. Each one uses your Aristotle quota.`,
       "success",
     );
     if (isRecoverableCheckpoint(lastProjectData)) {

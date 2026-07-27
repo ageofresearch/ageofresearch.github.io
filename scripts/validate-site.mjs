@@ -370,13 +370,21 @@ const aristotleRequirements = [
       aristotlePage.includes("data-continuation-pass") &&
       aristotlePage.includes("data-continue-button") &&
       aristotlePage.includes("data-auto-continue-toggle") &&
-      aristotlePage.includes("every continuation uses your Aristotle quota") &&
+      aristotlePage.includes("Every follow-up uses your Aristotle quota") &&
       aristotleScript.includes("/continue`") &&
       aristotleScript.includes("JSON.stringify({ previousTaskId })") &&
       aristotleScript.includes("continuedCheckpointTaskIds.includes") &&
       aristotleScript.includes("scheduleAutomaticContinuation") &&
       aristotleScript.includes("scheduleCheckpointRefresh") &&
       aristotleScript.includes("autoContinuationPaused") &&
+      aristotleScript.includes("withContinuationDispatchLock") &&
+      aristotleScript.includes("navigator?.locks") &&
+      aristotleScript.includes("automaticContinuationCount") &&
+      aristotleScript.includes("checkpointObservations") &&
+      aristotleScript.includes("pendingContinuationAttempt") &&
+      aristotleCore.includes("MAX_AUTOMATIC_CONTINUATIONS = 3") &&
+      aristotleCore.includes("getContinuationPolicy") &&
+      aristotleCore.includes("reconcileContinuationAttempt") &&
       aristotleScript.includes("Continuation ${continuationPassCount} accepted") &&
       aristotleScript.includes("continuationPassCount,") &&
       aristotleScript.includes(
@@ -393,6 +401,7 @@ const aristotleRequirements = [
       aristotleScript.includes("/archive`") &&
       aristotleScript.includes("statusHistory") &&
       aristotleScript.includes("archiveToken") &&
+      aristotleScript.includes("recoverLegacy: true") &&
       aristotleScript.includes("clearPendingSubmission()"),
     "Terminal projects must publish their prompt, status history, and available result through the authenticated archive endpoint",
   ],

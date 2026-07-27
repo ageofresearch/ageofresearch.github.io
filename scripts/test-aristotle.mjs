@@ -4,7 +4,10 @@ import {
   ARISTOTLE_SUCCESS_INDEX_URL,
   CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_TRANSCRIPT_LIMIT,
+  MAX_AUTOMATIC_CONTINUATIONS,
   createStatusSnapshot,
+  getCheckpointFingerprint,
+  getContinuationPolicy,
   getChatGPTShareApiUrl,
   getDashboardUrl,
   getErrorMessage,
@@ -13,6 +16,8 @@ import {
   isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
+  reconcileContinuationAttempt,
+  recordCheckpointObservation,
   shouldRetryChatGPTShareStatus,
   validateImportedChatGPTConversation,
   validateArchiveToken,
@@ -21,6 +26,7 @@ import {
 } from "../site/assets/aristotle-core.mjs";
 
 assert.deepEqual(CHATGPT_SHARE_RETRY_DELAYS_MS, [0, 1_000, 3_000]);
+assert.equal(MAX_AUTOMATIC_CONTINUATIONS, 3);
 for (const status of [408, 425, 429, 500, 502, 503, 504]) {
   assert.equal(shouldRetryChatGPTShareStatus(status), true);
 }
@@ -70,6 +76,137 @@ assert.equal(
 assert.equal(
   isRecoverableCheckpoint({ terminal: true, taskStatus: "FAILED" }),
   false,
+);
+
+const firstCheckpoint = {
+  terminal: true,
+  taskId: "task_checkpoint_1",
+  taskStatus: "COMPLETE_WITH_ERRORS",
+  outputSummary: "  Remaining: prove theorem Foo.  ",
+};
+const repeatedCheckpoint = {
+  terminal: true,
+  taskId: "task_checkpoint_2",
+  taskStatus: "COMPLETE_WITH_ERRORS",
+  outputSummary: "Remaining:   prove theorem Foo.",
+};
+const changedCheckpoint = {
+  terminal: true,
+  taskId: "task_checkpoint_3",
+  taskStatus: "OUT_OF_BUDGET",
+  outputSummary: "Foo is proved; Bar remains.",
+};
+assert.equal(
+  getCheckpointFingerprint(firstCheckpoint),
+  "remaining: prove theorem foo.",
+);
+const oneCheckpointObservation = recordCheckpointObservation(
+  [],
+  firstCheckpoint,
+);
+assert.equal(oneCheckpointObservation.length, 1);
+assert.deepEqual(
+  recordCheckpointObservation(oneCheckpointObservation, firstCheckpoint),
+  oneCheckpointObservation,
+);
+const twoCheckpointObservations = recordCheckpointObservation(
+  oneCheckpointObservation,
+  repeatedCheckpoint,
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: firstCheckpoint,
+    automaticContinuationCount: 0,
+    autoContinuationPaused: false,
+    checkpointObservations: oneCheckpointObservation,
+  }),
+  { action: "auto-continue", reason: "checkpoint" },
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: repeatedCheckpoint,
+    automaticContinuationCount: 1,
+    autoContinuationPaused: false,
+    checkpointObservations: twoCheckpointObservations,
+  }),
+  { action: "manual", reason: "no-progress" },
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: changedCheckpoint,
+    automaticContinuationCount: MAX_AUTOMATIC_CONTINUATIONS,
+    autoContinuationPaused: false,
+    checkpointObservations: recordCheckpointObservation(
+      twoCheckpointObservations,
+      changedCheckpoint,
+    ),
+  }),
+  { action: "manual", reason: "automatic-limit" },
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: changedCheckpoint,
+    automaticContinuationCount: 1,
+    autoContinuationPaused: true,
+    checkpointObservations: [],
+  }),
+  { action: "manual", reason: "paused" },
+);
+assert.deepEqual(
+  getContinuationPolicy({ payload: { taskStatus: "COMPLETE" } }),
+  { action: "final-success", reason: "complete" },
+);
+assert.deepEqual(
+  getContinuationPolicy({ payload: { taskStatus: "FAILED" } }),
+  { action: "final-failure", reason: "failed" },
+);
+assert.deepEqual(
+  getContinuationPolicy({ payload: { taskStatus: "IN_PROGRESS" } }),
+  { action: "poll", reason: "in_progress" },
+);
+assert.deepEqual(
+  reconcileContinuationAttempt({
+    pendingAttempt: {
+      previousTaskId: "task_checkpoint_1",
+      manual: false,
+    },
+    payload: {
+      taskId: "task_followup_1",
+      taskStatus: "QUEUED",
+    },
+    continuationPassCount: 0,
+    automaticContinuationCount: 0,
+    continuedCheckpointTaskIds: [],
+  }),
+  {
+    advanced: true,
+    pendingAttempt: null,
+    continuationPassCount: 1,
+    automaticContinuationCount: 1,
+    continuedCheckpointTaskIds: ["task_checkpoint_1"],
+  },
+);
+assert.deepEqual(
+  reconcileContinuationAttempt({
+    pendingAttempt: {
+      previousTaskId: "task_checkpoint_1",
+      manual: true,
+    },
+    payload: firstCheckpoint,
+    continuationPassCount: 1,
+    automaticContinuationCount: 1,
+    continuedCheckpointTaskIds: ["task_older_1"],
+  }),
+  {
+    advanced: false,
+    pendingAttempt: {
+      previousTaskId: "task_checkpoint_1",
+      manual: true,
+    },
+    continuationPassCount: 1,
+    automaticContinuationCount: 1,
+    continuedCheckpointTaskIds: ["task_older_1"],
+  },
 );
 
 assert.equal(

@@ -1,0 +1,473 @@
+Use this public ChatGPT conversation as the source:
+
+"PERSON:
+Pick a real open mathematical conjecture you can solve. Do the breakthrough and finish it.
+
+LLM:
+[Complete proof bundle](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_bundle.zip) · [Proof manuscript PDF](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_proof.pdf) · [LaTeX source](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_proof.tex) · [Exact verifier](sandbox:/mnt/data/verify_fixed_perimeter_conjecture.py) · [Verification output](sandbox:/mnt/data/verification_output.txt)
+
+Adam, the proof is finished.
+
+## The conjecture
+
+I selected **Conjecture 1.2** from Gray, Payne, Swisher, and Watson’s *Fixed perimeter analogues of some partition results*, published in *Discrete Mathematics* in 2026.
+
+For a partition \(\pi\), define its perimeter by
+
+\[
+\operatorname{per}(\pi)
+=
+\text{largest part}
++
+\text{number of parts}
+-1.
+\]
+
+Let:
+
+\[
+\FO_{j,k}(n)
+\]
+
+count perimeter-\(n\) partitions having exactly \(j\) **present part sizes divisible by \(k\)**, and let
+
+\[
+\FD_{j,k}(n)
+\]
+
+count perimeter-\(n\) partitions having exactly \(j\) **part sizes occurring at least \(k\) times**.
+
+Their conjecture states that, for every fixed \(j\geq0\) and \(k\geq2\),
+
+\[
+\FD_{j,k}(n)\geq\FO_{j,k}(n)
+\]
+
+for all sufficiently large \(n\). The paper proves equality when \(k=2\), but leaves the general case as Conjecture 1.2. citeturn675832view0turn707962search3
+
+## Result
+
+The conjecture is true. In fact:
+
+\[
+\boxed{
+\frac{\FO_{j,k}(n)}{\FD_{j,k}(n)}
+\longrightarrow 0
+\qquad
+(k\geq3)
+}
+\]
+
+for every fixed \(j\).
+
+Thus the conjectured weak inequality can be strengthened to
+
+\[
+\FD_{j,k}(n)>\FO_{j,k}(n)
+\]
+
+for all sufficiently large \(n\) whenever \(k>2\).
+
+For \(k=2\), the two functions remain exactly equal for every \(n\), as already known.
+
+## Core proof
+
+Introduce the bivariate generating functions
+
+\[
+\mathcal O_k(z,q)
+=
+\sum_{n\geq1}\sum_{j\geq0}
+\FO_{j,k}(n)z^jq^n,
+\]
+
+\[
+\mathcal D_k(z,q)
+=
+\sum_{n\geq1}\sum_{j\geq0}
+\FD_{j,k}(n)z^jq^n.
+\]
+
+Writing a partition through its multiplicities and summing over its largest part gives the rational functions
+
+\[
+\mathcal O_k(z,q)
+=
+\frac{S_k(q)+zq^k}
+     {P_O(q)-zq^{k+1}},
+\]
+
+\[
+\mathcal D_k(z,q)
+=
+\frac{q(1-q^{k-1})+zq^k}
+     {P_D(q)-zq^{k+1}},
+\]
+
+where
+
+\[
+S_k(q)
+=
+\sum_{r=1}^{k-1}q^r(1-q)^{k-r},
+\]
+
+\[
+P_O(q)
+=
+(1-q)^k-q^k+q^{k+1},
+\qquad
+P_D(q)
+=
+1-2q+q^{k+1}.
+\]
+
+The denominators factor as
+
+\[
+P_D(q)
+=
+(1-q)A_D(q),
+\qquad
+A_D(q)
+=
+1-q-q^2-\cdots-q^k,
+\]
+
+and
+
+\[
+P_O(q)
+=
+(1-q)A_O(q),
+\qquad
+A_O(q)
+=
+(1-q)^{k-1}-q^k.
+\]
+
+Extracting the coefficient of \(z^j\) gives, for \(j\geq1\),
+
+\[
+\sum_{n\geq1}\FD_{j,k}(n)q^n
+=
+\frac{q^{(k+1)j-1}}
+     {(1-q)^{j-1}A_D(q)^{j+1}},
+\]
+
+and
+
+\[
+\sum_{n\geq1}\FO_{j,k}(n)q^n
+=
+\frac{q^{(k+1)j-1}R_k(q)}
+     {(1-q)^{j-1}A_O(q)^{j+1}},
+\]
+
+where
+
+\[
+R_k(q)
+=
+(1-q)^{k-2}
++
+\sum_{s=2}^{k-1}
+q^s(1-q)^{k-1-s}.
+\]
+
+Every term of \(R_k(q)\) is positive for \(0<q<1\).
+
+For \(j=0\), the corresponding formulas are
+
+\[
+\sum_{n\geq1}\FD_{0,k}(n)q^n
+=
+\frac{q(1+q+\cdots+q^{k-2})}{A_D(q)}
+\]
+
+and
+
+\[
+\sum_{n\geq1}\FO_{0,k}(n)q^n
+=
+\frac{T_k(q)}{A_O(q)},
+\]
+
+with
+
+\[
+T_k(q)
+=
+\sum_{r=1}^{k-1}q^r(1-q)^{k-r-1}>0
+\qquad (0<q<1).
+\]
+
+Therefore the asymptotic growth is governed by the smallest-modulus zeros of \(A_D\) and \(A_O\).
+
+Let their positive zeros be \(\rho_D\) and \(\rho_O\). Both lie in \((1/2,1)\). Each is also the unique zero of minimum modulus:
+
+For \(A_D\), a zero satisfies
+
+\[
+z+z^2+\cdots+z^k=1.
+\]
+
+The triangle inequality rules out \(|z|<\rho_D\), and equality on \(|z|=\rho_D\) forces \(z\) to be positive real.
+
+For \(A_O\), a zero satisfies
+
+\[
+(1-z)^{k-1}=z^k.
+\]
+
+The inequality
+
+\[
+|1-z|\geq1-|z|
+\]
+
+similarly rules out \(|z|<\rho_O\), and equality on the boundary again forces \(z\) to be positive real.
+
+The decisive comparison is
+
+\[
+\begin{aligned}
+A_O(q)-A_D(q)
+&=
+(1-q)^{k-1}-1+q+q^2+\cdots+q^{k-1}\\
+&=
+q\sum_{\ell=0}^{k-2}
+\left(q^\ell-(1-q)^\ell\right).
+\end{aligned}
+\]
+
+For \(q>1/2\) and \(k\geq3\), this quantity is strictly positive. Since \(\rho_D>1/2\),
+
+\[
+A_O(\rho_D)>A_D(\rho_D)=0.
+\]
+
+Because \(A_O\) is strictly decreasing on \((0,1)\), its zero occurs later:
+
+\[
+\boxed{\rho_D<\rho_O}.
+\]
+
+Standard rational singularity analysis now yields positive constants \(C_D(j,k)\) and \(C_O(j,k)\) such that
+
+\[
+\FD_{j,k}(n)
+\sim
+C_D(j,k)n^{e_j}\rho_D^{-n},
+\]
+
+\[
+\FO_{j,k}(n)
+\sim
+C_O(j,k)n^{e_j}\rho_O^{-n},
+\]
+
+where \(e_0=0\) and \(e_j=j\) for \(j\geq1\). Consequently,
+
+\[
+\frac{\FO_{j,k}(n)}{\FD_{j,k}(n)}
+\sim
+\frac{C_O(j,k)}{C_D(j,k)}
+\left(\frac{\rho_D}{\rho_O}\right)^n
+\longrightarrow0.
+\]
+
+That proves the conjecture.
+
+For \(k=2\),
+
+\[
+A_D(q)=A_O(q)=1-q-q^2,
+\qquad
+R_2(q)=1,
+\qquad
+T_2(q)=q,
+\]
+
+so the extracted generating functions coincide exactly.
+
+## Verification and priority
+
+The standalone verifier directly enumerates every fixed-perimeter partition and compares the counts with the rational generating functions for
+
+\[
+2\leq k\leq7,
+\qquad
+1\leq n\leq15,
+\]
+
+and every possible \(j\). Every coefficient agrees. The computation is independent support; the proof does not depend on it.
+
+I found no public resolution through exact-title and formula searches. There is, however, a separately listed submitted manuscript titled *Generating functions and sign conjectures for fixed perimeter partitions*, with no public text available for comparison. Therefore the mathematical proof is complete, but historical priority requires confirmation from the relevant authors or referees. citeturn174311view0turn174311view1
+
+PERSON:
+Try to kill this proof. If you can't, make it airtight.
+
+LLM:
+[Download the complete airtight bundle](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_air_tight_bundle.zip) · [Revised proof PDF](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_air_tight.pdf) · [Adversarial audit PDF](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_adversarial_audit.pdf)
+
+[LaTeX source](sandbox:/mnt/data/fixed_perimeter_conjecture_1_2_air_tight.tex) · [Exact verifier](sandbox:/mnt/data/verify_fixed_perimeter_conjecture_air_tight.py) · [Verification output](sandbox:/mnt/data/verification_air_tight_output.txt) · [Original-to-revised diff](sandbox:/mnt/data/original_to_air_tight.diff)
+
+Adam, **I could not kill the theorem. I did find one genuine gap in the original proof as written.**
+
+## The gap
+
+The original dominant-pole argument said that, after taking the leading principal-part term at a pole of order \(m\), everything remaining was exponentially smaller.
+
+That is false. The lower Laurent terms at the **same pole** contribute
+
+\[
+O\!\left(n^{m-2}\rho^{-n}\right),
+\]
+
+so they retain the same exponential factor \(\rho^{-n}\) and are only polynomially smaller.
+
+This did not contradict the claimed leading asymptotic, but the stated justification was incomplete.
+
+The revised proof now writes the complete partial fraction expansion
+
+\[
+F(q)=\sum_{\ell=1}^{m}c_\ell(1-q/\rho)^{-\ell}+G(q),
+\]
+
+where every pole of \(G\) has modulus greater than \(\rho\). It then obtains
+
+\[
+[q^n]F(q)
+=
+c_m\binom{n+m-1}{m-1}\rho^{-n}
++
+O\!\left(n^{m-2}\rho^{-n}\right)
++
+O(R^{-n}),
+\qquad R>\rho.
+\]
+
+That closes the gap.
+
+## What survived the attack
+
+I independently rederived both bivariate generating functions directly from partition multiplicities. I then rechecked:
+
+- every fixed-\(j\) coefficient extraction, including \(j=0\);
+- the exact \(k=2\) identity;
+- existence and simplicity of the proposed positive roots;
+- exclusion of every complex root on or inside the dominant circle;
+- the additional denominator root at \(q=1\);
+- the strict ordering \(\rho_D<\rho_O\) for every \(k\geq3\);
+- every possible numerator cancellation at the dominant poles;
+- positivity of the leading asymptotic constants.
+
+I found no failure in any of them.
+
+The strengthened result remains
+
+\[
+\boxed{
+\frac{\FO_{j,k}(n)}{\FD_{j,k}(n)}
+\longrightarrow 0
+\quad\text{for every fixed }j\geq0,\ k\geq3.
+}
+\]
+
+Therefore,
+
+\[
+\FD_{j,k}(n)>\FO_{j,k}(n)
+\]
+
+for all sufficiently large \(n\). For \(k=2\), equality holds for every \(n\).
+
+The published source identifies the eventual weak inequality as Conjecture 1.2. citeturn882316search2turn562718search5
+
+## Independent checks
+
+The replacement verifier uses exact rational and integer arithmetic and the Python standard library. Its default run checked:
+
+\[
+2\leq k\leq8,\qquad 1\leq n\leq20,
+\]
+
+including:
+
+- **7,340,025** directly enumerated boundary profiles;
+- **28,665** independently generated multiplicity vectors;
+- both bivariate rational functions;
+- the separately extracted fixed-\(j\) formulas;
+- all polynomial identities used in the proof.
+
+Every check passed.
+
+## Final assessment
+
+No unresolved mathematical gap remains that I could identify in the revised conventional proof. It is not formalized in Lean, Coq, or Isabelle, so it is not machine-checked.
+
+Historical priority remains unresolved. A separate manuscript titled *Generating functions and sign conjectures for fixed perimeter partitions* is publicly listed as a preprint/submitted work, but no text was publicly available for comparison during this audit. citeturn562718search0turn562718search3
+
+PERSON:
+Now give me the X post.
+
+LLM:
+```text
+I may have proved Conjecture 1.2 of Gray–Payne–Swisher–Watson (2026) on fixed-perimeter partitions—and strengthened it:
+
+For every fixed j and k≥3,
+FO_{j,k}(n)/FD_{j,k}(n) → 0,
+
+so FD_{j,k}(n) > FO_{j,k}(n) eventually.
+
+Proof + verifier below. Please try to break it.
+```"
+
+Produce a complete Lean 4 formalization of the fixed-perimeter partition result claimed in that conversation.
+
+Treat this as a continuing proof-development campaign, not a one-response exercise. Read the complete shared conversation, recover the exact definitions and theorem statements, audit the mathematical argument, and then implement every required proof in Lean.
+
+Work incrementally with Lean compiler feedback. Create as many modules, definitions, intermediate lemmas, and alternative proof attempts as necessary. Do not stop merely because the first approach fails or because Mathlib lacks a convenient general theorem. When general infrastructure is unavailable, prove the claim-specific result directly.
+
+Proceed through compiler-checked milestones:
+
+1. Formalize nonempty fixed-perimeter partitions and the two counting functions with explicit boundary conventions.
+2. Validate the definitions computationally on small cases.
+3. Prove the exact equality for k = 2.
+4. Derive the required generating-function or recurrence identities from the combinatorial definitions.
+5. Formalize the positive roots, simplicity, complex minimum-modulus uniqueness, and strict root comparison.
+6. Prove the coefficient bounds or rational asymptotics needed for the ratio limit.
+7. Prove eventual positivity of the denominator sequence.
+8. Prove the unconditional ratio limit and eventual strict inequality.
+9. Remove every temporary placeholder and perform a final axiom audit.
+
+The final public theorems must establish:
+
+- exact equality of the two counts for k = 2;
+- convergence of FO(j,k,n) / FD(j,k,n) to zero for every fixed j and k ≥ 3;
+- eventual strict inequality FO(j,k,n) < FD(j,k,n) for every fixed j and k ≥ 3.
+
+Do not replace missing mathematics with additional theorem hypotheses. Do not present a proposition definition, conditional theorem, finite computation, or theorem containing `sorry` as completion.
+
+Temporary `sorry`s may be used only while organizing internal development. Before completion, remove all `sorry`, `admit`, project-specific axioms, unsafe proof shortcuts, and unproved opaque declarations.
+
+Do not conclude “I could not complete the proof” while unexplored reasonable approaches remain. If one approach fails, preserve all compiling progress, record the exact Lean goal, try another representation or lemma decomposition, search Mathlib, and continue.
+
+If the execution platform forces the current run to end before completion, save and return the complete compiling checkpoint project together with:
+
+- the exact next unresolved Lean goal;
+- the module and line where work must resume;
+- approaches already attempted;
+- the precise next action for the following run.
+
+Label such an output `CHECKPOINT — CONTINUE`, not a final result. The following run must resume from that checkpoint rather than restarting.
+
+Only label the project complete after:
+
+- a clean `lake build` succeeds;
+- every requested final theorem is proved unconditionally;
+- `#print axioms` for each final theorem contains no `sorryAx` or project-specific axiom;
+- the informal definitions and Lean definitions have been compared explicitly.
+
+Continue until those completion conditions are satisfied, unless you discover a genuine mathematical counterexample or contradiction in the requested statement. In that case, formalize and report the counterexample instead of fabricating a proof.

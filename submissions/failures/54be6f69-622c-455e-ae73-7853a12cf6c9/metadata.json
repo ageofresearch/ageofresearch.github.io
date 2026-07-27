@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "formagization.aristotle-submission/v1",
+  "classification": "failure",
+  "projectId": "54be6f69-622c-455e-ae73-7853a12cf6c9",
+  "submittedAt": "2026-07-27T09:33:18.552597",
+  "completedAt": "2026-07-27T11:43:32.875173",
+  "archivedAt": "2026-07-27T16:11:02.959Z",
+  "dashboardUrl": "https://aristotle.harmonic.fun/dashboard/requests/54be6f69-622c-455e-ae73-7853a12cf6c9",
+  "projectStatus": 2,
+  "taskId": "968334ef-d68c-4989-8167-a19827e07d3e",
+  "taskStatus": "COMPLETE_WITH_ERRORS",
+  "percentComplete": 100,
+  "outputSummary": "CHECKPOINT — CONTINUE\n\nA compiling proof-development checkpoint has been created and pushed. It is not yet the requested complete formalization.\n\nCompleted:\n- `RequestProject/Definitions.lean`: formal definitions of nonempty fixed-perimeter multiplicity profiles, both statistics, and `FO`/`FD`, with compiler-checked small-case validations.\n- `RequestProject/Roots.lean`: proofs of existence and uniqueness of both positive roots in `(1/2,1)`, root membership, the denominator-difference identity, and the strict comparison `rhoD k < rhoO k` for `k ≥ 3`.\n- `RequestProject/Main.lean`: imports all development modules.\n- `lake build` succeeds.\n\nRemaining:\n- Exact `k=2` equality.\n- The coefficient/generating-function bridge from the combinatorial definitions.\n- Complex minimum-modulus root results and coefficient asymptotics/bounds.\n- The ratio limit and eventual strict inequality.\n\nThe three exact unresolved Lean goals, their locations, attempted approach, missing intermediate theory, and precise recommended next actions are recorded in `CHECKPOINT.md`. The remaining declarations are explicitly marked with `sorry`; no final axiom audit is claimed.",
+  "source": null,
+  "prompt": {
+    "filename": "prompt.txt",
+    "characters": 12879,
+    "bytes": 12944,
+    "sha256": "sha256:8355f99c957751c3876167bffbc3a3e0af026226494fd1c4263de10c6a34fe12"
+  },
+  "statusHistory": {
+    "filename": "status-history.jsonl",
+    "snapshots": 5
+  },
+  "result": {
+    "filename": "result.tar.gz",
+    "available": true,
+    "bytes": 6949,
+    "sha256": "sha256:7c20ed2422e2983ccb266ec45382963fb71842b2e578ea33ff401c251933a94e",
+    "unavailableReason": null
+  },
+  "publicListing": null,
+  "credentialFieldsArchived": false
+}

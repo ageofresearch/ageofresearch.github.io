@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "formagization.aristotle-submission/v1",
+  "classification": "success",
+  "projectId": "ea5dcbe4-c445-49d6-8d42-a6e5b80298ac",
+  "submittedAt": "2026-07-27T03:03:46.691684",
+  "completedAt": "2026-07-27T03:20:13.924931",
+  "archivedAt": "2026-07-27T03:20:45.728Z",
+  "dashboardUrl": "https://aristotle.harmonic.fun/dashboard/requests/ea5dcbe4-c445-49d6-8d42-a6e5b80298ac",
+  "projectStatus": 2,
+  "taskId": "a4385c97-6591-4029-8a0f-7f1d99ae2a13",
+  "taskStatus": "COMPLETE",
+  "percentComplete": 100,
+  "outputSummary": "Confirmed: **50 + 50 = 100**.\n\nAdded the machine-verified Lean theorem `fifty_add_fifty` to `RequestProject/Main.lean`. The project builds successfully with no `sorry` or `admit` placeholders.",
+  "source": null,
+  "prompt": {
+    "filename": "prompt.txt",
+    "characters": 9,
+    "bytes": 9,
+    "sha256": "sha256:b51f8fc5cc2210c77358555bb85d8370af7bd7b14b6ae76603bb5d9ab8ad9e1c"
+  },
+  "statusHistory": {
+    "filename": "status-history.jsonl",
+    "snapshots": 6
+  },
+  "result": {
+    "filename": "result.tar.gz",
+    "available": true,
+    "bytes": 1642,
+    "sha256": "sha256:4b043a5fbe4b2457f983f7922012fe90dda0abde5396e7d298c75a112ab40351",
+    "unavailableReason": null
+  },
+  "publicListing": "submissions/successes/index.json",
+  "credentialFieldsArchived": false
+}

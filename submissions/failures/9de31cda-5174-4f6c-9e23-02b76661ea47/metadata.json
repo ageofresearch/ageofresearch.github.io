@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "formagization.aristotle-submission/v1",
+  "classification": "failure",
+  "projectId": "9de31cda-5174-4f6c-9e23-02b76661ea47",
+  "submittedAt": "2026-07-27T05:15:08.855808",
+  "completedAt": "2026-07-27T06:13:21.276606",
+  "archivedAt": "2026-07-27T06:16:57.161Z",
+  "dashboardUrl": "https://aristotle.harmonic.fun/dashboard/requests/9de31cda-5174-4f6c-9e23-02b76661ea47",
+  "projectStatus": 2,
+  "taskId": "fce40f94-1d1b-44e6-9157-97949a610ae6",
+  "taskStatus": "COMPLETE_WITH_ERRORS",
+  "percentComplete": 100,
+  "outputSummary": "I could not complete the full unconditional proof. I have therefore not presented the result as finished.\n\nThe project contains a compiling partial formalization in `RequestProject/Main.lean` with:\n- a finite type of nonempty integer partitions indexed by perimeter;\n- definitions of largest part, number of parts, and perimeter;\n- a proof that each indexed partition has the specified perimeter;\n- definitions of the two distinct-part-size statistics;\n- finite counting functions `FO` and `FD`;\n- proofs that both counts are zero at `n = 0`;\n- faithful statements of all three requested final theorems;\n- `#print axioms` commands for those theorems.\n\nThe three final proofs remain `sorry`, so their axiom output includes `sorryAx`. The exact unresolved work is documented in `REMAINING_OBLIGATIONS.md`: the modulus-two equidistribution bijection/coefficient identity; the internally proved generating-function or recurrence machinery and coefficient asymptotics (including denominator nonvanishing); and eventual positivity needed to deduce strict inequality. The project builds successfully as a partial formalization, but it does not meet the requested no-`sorry` completion criterion.",
+  "source": null,
+  "prompt": {
+    "filename": "prompt.txt",
+    "characters": 1696,
+    "bytes": 1718,
+    "sha256": "sha256:07bfa40a16322a861e0cea5ee0a26e9dbfb9a85eee37daac9e23ad240b98c2f8"
+  },
+  "statusHistory": {
+    "filename": "status-history.jsonl",
+    "snapshots": 14
+  },
+  "result": {
+    "filename": "result.tar.gz",
+    "available": true,
+    "bytes": 3838,
+    "sha256": "sha256:6f60836e148938a379c3355331559f92d70e948e556f8e79736e4f7997c29b97",
+    "unavailableReason": null
+  },
+  "publicListing": null,
+  "credentialFieldsArchived": false
+}

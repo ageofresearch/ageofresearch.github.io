@@ -1,0 +1,37 @@
+Create a complete Lean 4 formalization of the following theorem.
+
+For a nonempty integer partition π, define
+
+  perimeter(π) = largest part of π + number of parts of π − 1.
+
+Let FO(j,k,n) be the number of partitions of perimeter n having exactly j distinct present part sizes divisible by k.
+
+Let FD(j,k,n) be the number of partitions of perimeter n having exactly j distinct part sizes whose multiplicity is at least k.
+
+Formalize these definitions and prove:
+
+1. For every j and n,
+
+   FD(j,2,n) = FO(j,2,n).
+
+2. For every fixed j and every k ≥ 3,
+
+   FO(j,k,n) / FD(j,k,n) → 0
+
+   as n → ∞, with the quotient interpreted in ℝ.
+
+3. Consequently, for every fixed j and every k ≥ 3, there exists N such that
+
+   FO(j,k,n) < FD(j,k,n)
+
+   for every n ≥ N.
+
+Use nonempty partitions and define both counting functions to be zero at n = 0. The statistics count distinct part sizes, not occurrences.
+
+This must be a full unconditional proof. Do not merely state or define the desired propositions. Do not assume generating-function identities, root properties, asymptotic estimates, eventual positivity, or other substantive parts of the argument; prove and discharge them internally.
+
+The final theorem statements must have no extra mathematical hypotheses beyond j, k, n, and k ≥ 3 as applicable.
+
+Return a complete reproducible Lean project that builds successfully and contains no `sorry`, `admit`, project-specific axioms, unsafe proof shortcuts, or unproved opaque declarations. Include `#print axioms` output for the three final theorems.
+
+If you cannot finish the complete proof, report the precise remaining obligations instead of presenting a conditional result as a completed formalization.

@@ -39,6 +39,16 @@ contains a link is left unchanged. Transient reader and network failures are
 retried automatically while the loading animation remains active. The
 Aristotle key is never sent during conversation import.
 
+Every terminal run is archived under [`submissions/`](submissions/). Exact
+`COMPLETE` tasks go to `submissions/successes/`; all other terminal states go
+to `submissions/failures/`. Each record contains normalized metadata, the exact
+submitted prompt or imported conversation, sanitized status and archival logs,
+and the Aristotle `.tar.gz` result when available. Credentials are excluded.
+
+The page at <https://ageofresearch.github.io/aristotle/successes/> reads only
+the append-oriented success index. Failure records remain public in GitHub for
+diagnosis, but are never included in that webpage.
+
 During the Aristotle relay deployment, pin validation to the intended
 production origin so the placeholder cannot pass:
 

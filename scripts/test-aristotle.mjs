@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 
 import {
+  ARISTOTLE_SUCCESS_INDEX_URL,
   CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_TRANSCRIPT_LIMIT,
+  createStatusSnapshot,
   getChatGPTShareApiUrl,
   getDashboardUrl,
   getErrorMessage,
@@ -12,7 +14,9 @@ import {
   parseChatGPTShareUrl,
   shouldRetryChatGPTShareStatus,
   validateImportedChatGPTConversation,
+  validateArchiveToken,
   validateKey,
+  validateSuccessIndex,
 } from "../site/assets/aristotle-core.mjs";
 
 assert.deepEqual(CHATGPT_SHARE_RETRY_DELAYS_MS, [0, 1_000, 3_000]);
@@ -75,6 +79,74 @@ assert.equal(
 assert.match(
   getErrorMessage(409, { error: { code: "concurrency_limit" } }, "submit"),
   /concurrency limit/,
+);
+assert.match(
+  getErrorMessage(503, { error: { code: "archive_upstream_error" } }, "archive"),
+  /GitHub archive/,
+);
+assert.equal(validateArchiveToken("a".repeat(43)), true);
+assert.equal(validateArchiveToken("a".repeat(42)), false);
+assert.equal(
+  ARISTOTLE_SUCCESS_INDEX_URL,
+  "https://raw.githubusercontent.com/ageofresearch/ageofresearch.github.io/main/submissions/successes/index.json",
+);
+
+assert.deepEqual(
+  createStatusSnapshot(
+    {
+      projectStatus: 2,
+      taskId: "task_12345678",
+      taskStatus: "COMPLETE",
+      percentComplete: 100,
+      outputSummary: "Finished.",
+      updatedAt: "2026-07-26T12:00:00Z",
+      taskUpdatedAt: "2026-07-26T12:00:01Z",
+    },
+    "2026-07-26T12:00:02Z",
+  ),
+  {
+    observedAt: "2026-07-26T12:00:02Z",
+    projectStatus: 2,
+    taskId: "task_12345678",
+    taskStatus: "COMPLETE",
+    percentComplete: 100,
+    outputSummary: "Finished.",
+    projectUpdatedAt: "2026-07-26T12:00:00Z",
+    taskUpdatedAt: "2026-07-26T12:00:01Z",
+  },
+);
+
+const successIndexItems = validateSuccessIndex({
+  schemaVersion: "formagization.aristotle-success-index/v1",
+  generatedAt: "2026-07-26T12:00:03Z",
+  items: [{
+    projectId: "project_12345678",
+    title: "A completed formalization",
+    taskStatus: "COMPLETE",
+    submittedAt: "2026-07-26T12:00:00Z",
+    completedAt: "2026-07-26T12:00:01Z",
+    archivedAt: "2026-07-26T12:00:03Z",
+    sourceKind: "manual-text",
+    outputSummary: "Finished.",
+    repositoryUrl:
+      "https://github.com/ageofresearch/ageofresearch.github.io/tree/main/submissions/successes/project_12345678",
+    resultUrl:
+      "https://github.com/ageofresearch/ageofresearch.github.io/raw/main/submissions/successes/project_12345678/result.tar.gz",
+  }],
+});
+assert.equal(successIndexItems.length, 1);
+assert.equal(successIndexItems[0].taskStatus, "COMPLETE");
+assert.throws(
+  () =>
+    validateSuccessIndex({
+      schemaVersion: "formagization.aristotle-success-index/v1",
+      items: [{
+        ...successIndexItems[0],
+        repositoryUrl:
+          "https://github.com/ageofresearch/ageofresearch.github.io/tree/main/submissions/failures/project_12345678",
+      }],
+    }),
+  /invalid record/,
 );
 
 const sharedLink = parseChatGPTShareUrl(

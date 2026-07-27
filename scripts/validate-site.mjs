@@ -84,8 +84,10 @@ const requiredFiles = [
   "assets/site.css",
   "assets/site.js",
   "assets/aristotle.js",
+  "assets/aristotle-successes.js",
   "assets/aristotle-core.mjs",
   "aristotle/index.html",
+  "aristotle/successes/index.html",
   "formalizations/index.html",
   "formalizations/fixed-perimeter-partitions/index.html",
   "standards/index.html",
@@ -98,6 +100,14 @@ for (const path of requiredFiles) {
 
 const aristotlePage = readFileSync(join(siteRoot, "aristotle/index.html"), "utf8");
 const aristotleScript = readFileSync(join(siteRoot, "assets/aristotle.js"), "utf8");
+const aristotleSuccessesScript = readFileSync(
+  join(siteRoot, "assets/aristotle-successes.js"),
+  "utf8",
+);
+const aristotleSuccessesPage = readFileSync(
+  join(siteRoot, "aristotle/successes/index.html"),
+  "utf8",
+);
 const aristotleCore = readFileSync(join(siteRoot, "assets/aristotle-core.mjs"), "utf8");
 const siteStyles = readFileSync(join(siteRoot, "assets/site.css"), "utf8");
 const shareImportCalls =
@@ -105,7 +115,7 @@ const shareImportCalls =
 const loadingStops =
   aristotleScript.match(/setSubmitLoading\(false\)/g) ?? [];
 const sessionStorageWrites = [
-  ...aristotleScript.matchAll(/sessionStorage\.setItem\(([^,\n]+)/g),
+  ...aristotleScript.matchAll(/sessionStorage\.setItem\(\s*([^,\n]+)/g),
 ].map((match) => match[1].trim());
 const hasScrollablePrompt =
   /\.aristotle-form textarea\s*\{[\s\S]*?overflow:\s*auto\s*;/m.test(
@@ -332,10 +342,30 @@ const aristotleRequirements = [
     "Aristotle polling must use the 10/30/60-second cadence",
   ],
   [
-    sessionStorageWrites.length === 2 &&
+    sessionStorageWrites.length === 4 &&
       sessionStorageWrites.includes("KEY_STORAGE_NAME") &&
-      sessionStorageWrites.includes("PROJECT_STORAGE_NAME"),
-    "Aristotle tab storage writes must be limited to the key and active project identifier",
+      sessionStorageWrites.includes("PROJECT_STORAGE_NAME") &&
+      sessionStorageWrites.includes("SUBMISSION_STORAGE_NAME") &&
+      sessionStorageWrites.includes("STATUS_HISTORY_STORAGE_NAME"),
+    "Aristotle tab storage must retain only the key, active project, authenticated pending submission, and sanitized status history",
+  ],
+  [
+    aristotlePage.includes("Requests and results are archived publicly") &&
+      aristotlePage.includes("data-archive-link") &&
+      aristotleScript.includes("/archive`") &&
+      aristotleScript.includes("statusHistory") &&
+      aristotleScript.includes("archiveToken") &&
+      aristotleScript.includes("clearPendingSubmission()"),
+    "Terminal projects must publish their prompt, status history, and available result through the authenticated archive endpoint",
+  ],
+  [
+    aristotlePage.includes('href="./successes/"') &&
+      aristotleSuccessesPage.includes("Successful runs.") &&
+      aristotleSuccessesScript.includes("ARISTOTLE_SUCCESS_INDEX_URL") &&
+      aristotleSuccessesScript.includes("validateSuccessIndex") &&
+      !aristotleSuccessesScript.includes("submissions/failures") &&
+      !aristotleSuccessesPage.includes("submissions/failures"),
+    "The GitHub Pages archive must list successful records only",
   ],
 ];
 

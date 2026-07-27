@@ -27,6 +27,9 @@ import {
   validateArchiveToken,
   validateKey,
 } from "./aristotle-core.mjs?build=20260727-terminal-continue";
+import {
+  renderEquationPreview,
+} from "./equation-preview.mjs?build=20260727-equation-preview";
 
 (() => {
   "use strict";
@@ -43,6 +46,17 @@ import {
 
   const keyInput = form.querySelector("[data-aristotle-key]");
   const promptInput = form.querySelector("[data-aristotle-prompt]");
+  const promptSurface = form.querySelector("[data-prompt-surface]");
+  const equationPreview = form.querySelector("[data-equation-preview]");
+  const equationPreviewContent = form.querySelector(
+    "[data-equation-preview-content]",
+  );
+  const equationPreviewToggle = form.querySelector(
+    "[data-equation-preview-toggle]",
+  );
+  const equationPreviewLabel = form.querySelector(
+    "[data-equation-preview-label]",
+  );
   const keyToggle = form.querySelector("[data-key-toggle]");
   const keyForget = form.querySelector("[data-key-forget]");
   const promptCount = form.querySelector("[data-prompt-count]");
@@ -74,6 +88,11 @@ import {
   if (
     !(keyInput instanceof HTMLInputElement) ||
     !(promptInput instanceof HTMLTextAreaElement) ||
+    !(promptSurface instanceof HTMLElement) ||
+    !(equationPreview instanceof HTMLElement) ||
+    !(equationPreviewContent instanceof HTMLElement) ||
+    !(equationPreviewToggle instanceof HTMLButtonElement) ||
+    !(equationPreviewLabel instanceof HTMLElement) ||
     !(submitButton instanceof HTMLButtonElement) ||
     !(submitLabel instanceof HTMLElement) ||
     !(downloadButton instanceof HTMLButtonElement) ||
@@ -113,6 +132,10 @@ import {
   let pendingContinuationAttempt = null;
   let legacyArchiveRecovery = false;
   let activeWorkspaceView = "request";
+  let equationPreviewRendered = false;
+  let equationPreviewVisible = false;
+  let promptSourceScrollTop = 0;
+  let equationPreviewScrollTop = 0;
 
   const setWorkspaceView = (view, { focus = false } = {}) => {
     if (view !== "request" && view !== "progress") return;
@@ -385,6 +408,94 @@ import {
     }
   };
 
+  const updateEquationPreviewToggle = () => {
+    equationPreviewToggle.setAttribute(
+      "aria-pressed",
+      String(equationPreviewVisible),
+    );
+    equationPreviewLabel.textContent = equationPreviewVisible
+      ? "Show source"
+      : "Preview equations";
+  };
+
+  const setEquationPreviewVisibility = (visible) => {
+    if (visible && !equationPreviewRendered) return;
+
+    if (visible) {
+      promptSourceScrollTop = promptInput.scrollTop;
+      promptInput.hidden = true;
+      equationPreview.hidden = false;
+      equationPreview.scrollTop = equationPreviewScrollTop;
+    } else {
+      equationPreviewScrollTop = equationPreview.scrollTop;
+      equationPreview.hidden = true;
+      promptInput.hidden = false;
+      promptInput.scrollTop = promptSourceScrollTop;
+    }
+    equationPreviewVisible = visible;
+    promptSurface.dataset.previewVisible = String(visible);
+    updateEquationPreviewToggle();
+  };
+
+  const setEquationPreviewAvailable = (available) => {
+    equationPreviewToggle.hidden = !available;
+    promptSurface.dataset.previewAvailable = String(available);
+    if (available) return;
+
+    setEquationPreviewVisibility(false);
+    equationPreviewContent.replaceChildren();
+    equationPreviewRendered = false;
+    promptSourceScrollTop = 0;
+    equationPreviewScrollTop = 0;
+  };
+
+  const openEquationPreview = async () => {
+    if (!promptLocked || equationPreviewToggle.hidden) return;
+    if (equationPreviewRendered) {
+      setEquationPreviewVisibility(true);
+      return;
+    }
+
+    equationPreviewToggle.disabled = true;
+    equationPreviewToggle.setAttribute("aria-busy", "true");
+    equationPreviewLabel.textContent = "Formatting…";
+    try {
+      const result = await renderEquationPreview(
+        equationPreviewContent,
+        promptInput.value,
+      );
+      equationPreviewRendered = true;
+      setEquationPreviewVisibility(true);
+
+      const renderedLabel =
+        `${result.renderedCount.toLocaleString("en-US")} equation${
+          result.renderedCount === 1 ? "" : "s"
+        }`;
+      const fallbackLabel = result.failedCount
+        ? ` ${result.failedCount.toLocaleString("en-US")} expression${
+            result.failedCount === 1 ? "" : "s"
+          } could not be typeset and remain as source text.`
+        : "";
+      const limitLabel = result.limited
+        ? " Additional expressions remain as source text to keep this tab responsive."
+        : "";
+      setFormStatus(
+        `${renderedLabel} formatted locally. The transcript submitted to Aristotle remains unchanged.${fallbackLabel}${limitLabel}`,
+        "success",
+      );
+    } catch {
+      setEquationPreviewVisibility(false);
+      setFormStatus(
+        "The local equation preview could not be opened. The imported transcript is unchanged and remains ready to submit.",
+        "error",
+      );
+    } finally {
+      equationPreviewToggle.disabled = false;
+      equationPreviewToggle.removeAttribute("aria-busy");
+      updateEquationPreviewToggle();
+    }
+  };
+
   const setPromptCount = () => {
     const length = Array.from(promptInput.value).length;
     const limit = promptLocked ? CHATGPT_TRANSCRIPT_LIMIT : PROMPT_LIMIT;
@@ -601,6 +712,7 @@ import {
         promptInput.dataset.locked = "true";
         promptInput.setAttribute("aria-readonly", "true");
         promptInput.scrollTop = 0;
+        setEquationPreviewAvailable(true);
         setPromptMode("imported");
         setPromptCount();
         const attachmentNote = conversation.attachmentCount
@@ -631,6 +743,7 @@ import {
         setSubmitLoading(false);
         if (!promptLocked) {
           importedShareSource = null;
+          setEquationPreviewAvailable(false);
           promptInput.maxLength = PROMPT_LIMIT;
           promptInput.removeAttribute("aria-readonly");
           delete promptInput.dataset.locked;
@@ -1346,6 +1459,7 @@ import {
     storePendingSubmission();
   }
   promptInput.maxLength = PROMPT_LIMIT;
+  setEquationPreviewAvailable(false);
   setPromptCount();
   syncPromptMode();
   if (activeProjectId) {
@@ -1398,6 +1512,13 @@ import {
   promptInput.addEventListener("input", () => {
     setPromptCount();
     syncPromptMode();
+  });
+  equationPreviewToggle.addEventListener("click", () => {
+    if (equationPreviewVisible) {
+      setEquationPreviewVisibility(false);
+      return;
+    }
+    void openEquationPreview();
   });
   promptInput.addEventListener("paste", (event) => {
     const pastedText = event.clipboardData?.getData("text") ?? "";

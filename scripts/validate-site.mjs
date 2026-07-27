@@ -86,6 +86,12 @@ const requiredFiles = [
   "assets/aristotle.js",
   "assets/aristotle-successes.js",
   "assets/aristotle-core.mjs",
+  "assets/equation-preview.mjs",
+  "assets/vendor/katex/katex.mjs",
+  "assets/vendor/katex/katex.min.css",
+  "assets/vendor/katex/LICENSE.txt",
+  "assets/vendor/katex/README.md",
+  "assets/vendor/katex/fonts/KaTeX_Main-Regular.woff2",
   "aristotle/index.html",
   "aristotle/successes/index.html",
   "formalizations/index.html",
@@ -109,6 +115,19 @@ const aristotleSuccessesPage = readFileSync(
   "utf8",
 );
 const aristotleCore = readFileSync(join(siteRoot, "assets/aristotle-core.mjs"), "utf8");
+const equationPreviewScript = readFileSync(
+  join(siteRoot, "assets/equation-preview.mjs"),
+  "utf8",
+);
+const katexStylesPath = join(
+  siteRoot,
+  "assets/vendor/katex/katex.min.css",
+);
+const katexStyles = readFileSync(katexStylesPath, "utf8");
+const katexLicense = readFileSync(
+  join(siteRoot, "assets/vendor/katex/LICENSE.txt"),
+  "utf8",
+);
 const siteStyles = readFileSync(join(siteRoot, "assets/site.css"), "utf8");
 const shareImportCalls =
   aristotleScript.match(/importChatGPTShare\(sharedLink\)/g) ?? [];
@@ -135,6 +154,28 @@ const hasLoadingSpinner =
   siteStyles.includes('.button[data-loading="true"] .button-spinner') &&
   /\.button-spinner\s*\{[\s\S]*?animation\s*:/m.test(siteStyles) &&
   /@keyframes\s+[A-Za-z0-9_-]*spin[A-Za-z0-9_-]*\s*\{/i.test(siteStyles);
+const equationPreviewRevealIndex = aristotleScript.indexOf(
+  "setEquationPreviewAvailable(true)",
+);
+const importedPromptLockIndex = aristotleScript.indexOf(
+  "promptLocked = true",
+);
+const katexAssetReferences = [
+  ...katexStyles.matchAll(/url\((?:["']?)([^"')]+)(?:["']?)\)/g),
+].map((match) => match[1]);
+for (const reference of katexAssetReferences) {
+  if (/^(?:data:|https?:|\/)/i.test(reference)) {
+    failures.push(`KaTeX stylesheet uses a non-local asset URL: ${reference}`);
+    continue;
+  }
+  const target = resolve(dirname(katexStylesPath), reference);
+  if (
+    !target.startsWith(join(siteRoot, "assets/vendor/katex")) ||
+    !existsSync(target)
+  ) {
+    failures.push(`KaTeX stylesheet references a missing local asset: ${reference}`);
+  }
+}
 const proxyMatch = aristotleCore.match(
   /export const ARISTOTLE_PROXY_URL\s*=\s*"([^"]+)"/,
 );
@@ -304,6 +345,89 @@ const aristotleRequirements = [
         'promptInput.setAttribute("aria-readonly", "true")',
       ),
     "Imported ChatGPT transcripts must remain internally scrollable while read-only",
+  ],
+  [
+    aristotlePage.includes(
+      'href="../assets/vendor/katex/katex.min.css?version=0.17.0"',
+    ) &&
+      !aristotlePage.includes("cdn.jsdelivr") &&
+      !aristotlePage.includes("cdnjs.cloudflare") &&
+      aristotlePage.includes("data-prompt-surface") &&
+      aristotlePage.includes("data-equation-preview") &&
+      aristotlePage.includes("data-equation-preview-content") &&
+      aristotlePage.includes("data-equation-preview-toggle") &&
+      aristotlePage.includes(
+        'aria-controls="aristotle-equation-preview"',
+      ) &&
+      aristotlePage.includes('aria-pressed="false"') &&
+      aristotlePage.includes(
+        'aria-label="Locally formatted equation preview"',
+      ) &&
+      aristotlePage.includes(
+        "typesets recognized mathematics locally in this tab without changing the submitted transcript",
+      ),
+    "Imported conversations must offer an accessible, explicitly local equation-preview surface",
+  ],
+  [
+    importedPromptLockIndex >= 0 &&
+      equationPreviewRevealIndex > importedPromptLockIndex &&
+      aristotleScript.includes("setEquationPreviewAvailable(false)") &&
+      aristotleScript.includes(
+        "renderEquationPreview(\n        equationPreviewContent,\n        promptInput.value",
+      ) &&
+      aristotleScript.includes("promptInput.hidden = true") &&
+      aristotleScript.includes("equationPreview.hidden = false") &&
+      aristotleScript.includes(
+        "The transcript submitted to Aristotle remains unchanged",
+      ) &&
+      aristotleScript.includes(
+        "const requestBody = promptLocked\n        ? { prompt, source: importedShareSource }\n        : { prompt }",
+      ),
+    "Equation preview must appear only after a complete import and leave the submitted transcript as the sole request source",
+  ],
+  [
+    equationPreviewScript.includes(
+      '"./vendor/katex/katex.mjs?version=0.17.0"',
+    ) &&
+      equationPreviewScript.includes("tokenizeEquationPreview") &&
+      equationPreviewScript.includes("createEquationPreviewRenderPlan") &&
+      equationPreviewScript.includes("EQUATION_PREVIEW_LIMITS") &&
+      equationPreviewScript.includes('"\\\\FO": "\\\\mathrm{FO}"') &&
+      equationPreviewScript.includes('"\\\\FD": "\\\\mathrm{FD}"') &&
+      equationPreviewScript.includes("document.createTextNode") &&
+      equationPreviewScript.includes('output: "htmlAndMathml"') &&
+      equationPreviewScript.includes("throwOnError: true") &&
+      equationPreviewScript.includes("trust: false") &&
+      equationPreviewScript.includes("maxExpand: 1_000") &&
+      equationPreviewScript.includes("maxSize: 100") &&
+      equationPreviewScript.includes("maxExpressions: 1_000") &&
+      equationPreviewScript.includes("maxExpressionCharacters: 20_000") &&
+      equationPreviewScript.includes("maxTotalMathCharacters: 100_000") &&
+      equationPreviewScript.includes(
+        "maxDelimiterSearchCharacters: 4_000_000",
+      ) &&
+      equationPreviewScript.includes("maxCodeSearchCharacters: 4_000_000") &&
+      equationPreviewScript.includes("yieldToBrowser") &&
+      !equationPreviewScript.includes(".innerHTML") &&
+      !equationPreviewScript.includes("fetch(") &&
+      !equationPreviewScript.includes("https://") &&
+      !equationPreviewScript.includes("http://") &&
+      katexAssetReferences.length > 0 &&
+      katexLicense.includes("The MIT License") &&
+      katexLicense.includes(
+        "Copyright (c) 2013-2020 Khan Academy and other contributors",
+      ),
+    "Equation rendering must use the pinned local KaTeX bundle with inert prose, safe project macros, bounded work, local fonts, and its license",
+  ],
+  [
+    siteStyles.includes(".aristotle-form .prompt-surface") &&
+      siteStyles.includes(".aristotle-form .equation-preview") &&
+      siteStyles.includes(".aristotle-form .equation-preview-toggle") &&
+      siteStyles.includes("overflow-x: auto") &&
+      siteStyles.includes(
+        '.prompt-surface[data-preview-available="true"] textarea',
+      ),
+    "Equation preview must share the prompt viewport, retain wide-equation scrolling, and keep its toggle visually attached",
   ],
   [
     aristotleScript.includes(

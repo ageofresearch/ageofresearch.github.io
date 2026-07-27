@@ -1588,6 +1588,13 @@ body[data-page="aristotle-successes"]::before {
   grid-template-rows: auto minmax(0, 1fr) auto;
 }
 
+.aristotle-form .prompt-surface {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
 .aristotle-form .field-label-row {
   display: flex;
   margin-bottom: 5px;
@@ -1672,6 +1679,114 @@ body[data-page="aristotle-successes"]::before {
   color: var(--ink);
   background: var(--paper);
   cursor: default;
+}
+
+.aristotle-form .prompt-surface[data-preview-available="true"] textarea {
+  padding-top: 48px;
+}
+
+.aristotle-form .equation-preview {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 48px 18px 18px;
+  overflow: auto;
+  border: 1px solid var(--line-dark);
+  border-radius: 2px;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(23, 63, 54, 0.018) 1px, transparent 1px),
+    var(--paper-light);
+  background-size: 100% 32px;
+  outline: none;
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.aristotle-form .equation-preview:focus-visible {
+  position: relative;
+  z-index: 1;
+  border-color: var(--forest);
+  box-shadow: 0 0 0 3px rgba(23, 63, 54, 0.11);
+}
+
+.aristotle-form .equation-preview[hidden],
+.aristotle-form .equation-preview-toggle[hidden] {
+  display: none;
+}
+
+.aristotle-form .equation-preview-content {
+  min-width: 0;
+}
+
+.aristotle-form .equation-preview-toggle {
+  position: absolute;
+  z-index: 3;
+  top: 9px;
+  right: 9px;
+  display: inline-flex;
+  min-height: 31px;
+  padding: 5px 10px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  align-items: center;
+  gap: 6px;
+  color: var(--forest);
+  background: rgba(251, 249, 244, 0.96);
+  box-shadow: 0 3px 12px rgba(24, 35, 31, 0.08);
+  font-size: 0.67rem;
+  font-weight: 790;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.aristotle-form .equation-preview-toggle:hover,
+.aristotle-form .equation-preview-toggle:focus-visible,
+.aristotle-form .equation-preview-toggle[aria-pressed="true"] {
+  color: var(--paper-light);
+  border-color: var(--forest);
+  background: var(--forest);
+}
+
+.aristotle-form .equation-preview-toggle:focus-visible {
+  outline: 3px solid rgba(23, 63, 54, 0.18);
+  outline-offset: 2px;
+}
+
+.aristotle-form .equation-preview-toggle:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.aristotle-form .equation-preview-symbol {
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.aristotle-form .equation-preview-math {
+  overflow-wrap: normal;
+}
+
+.aristotle-form .equation-preview-math-inline {
+  white-space: nowrap;
+}
+
+.aristotle-form .equation-preview-math-display {
+  max-width: 100%;
+  margin: 0.8rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: normal;
+}
+
+.aristotle-form .equation-preview-math-display .katex-display {
+  margin: 0.45rem 0;
 }
 
 .aristotle-form .field-action {
@@ -2647,6 +2762,24 @@ body[data-page="aristotle-successes"]::before {
   .aristotle-form textarea {
     padding: 9px 10px;
     font-size: 0.8rem;
+  }
+
+  .aristotle-form .prompt-surface[data-preview-available="true"] textarea,
+  .aristotle-form .equation-preview {
+    padding-top: 43px;
+  }
+
+  .aristotle-form .equation-preview {
+    padding-right: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    font-size: 0.86rem;
+  }
+
+  .aristotle-form .equation-preview-toggle {
+    top: 6px;
+    right: 6px;
+    min-height: 29px;
   }
 
   .aristotle-form .form-submit-row {

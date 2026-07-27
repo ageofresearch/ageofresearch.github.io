@@ -12,8 +12,9 @@
     <title>Aristotle workspace — formAGIzation</title>
     <link rel="canonical" href="https://ageofresearch.github.io/aristotle/">
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../assets/site.css?build=20260726-public-archive">
-    <script src="../assets/aristotle.js?build=20260727-terminal-continue" type="module"></script>
+    <link rel="stylesheet" href="../assets/vendor/katex/katex.min.css?version=0.17.0">
+    <link rel="stylesheet" href="../assets/site.css?build=20260727-equation-preview">
+    <script src="../assets/aristotle.js?build=20260727-equation-preview" type="module"></script>
   </head>
   <body data-page="aristotle" class="aristotle-app">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -97,18 +98,43 @@
               <label for="aristotle-prompt">Mathematical request</label>
               <span data-prompt-count>0 / 100,000</span>
             </div>
-            <textarea
-              id="aristotle-prompt"
-              name="aristotle-prompt"
-              rows="12"
-              maxlength="100000"
-              placeholder="State the request, or paste an official https://chatgpt.com/share/… link."
-              aria-describedby="prompt-help prompt-limit-status"
-              data-aristotle-prompt
-              required
-            ></textarea>
+            <div class="prompt-surface" data-prompt-surface>
+              <textarea
+                id="aristotle-prompt"
+                name="aristotle-prompt"
+                rows="12"
+                maxlength="100000"
+                placeholder="State the request, or paste an official https://chatgpt.com/share/… link."
+                aria-describedby="prompt-help prompt-limit-status"
+                data-aristotle-prompt
+                required
+              ></textarea>
+              <div
+                class="equation-preview"
+                id="aristotle-equation-preview"
+                role="region"
+                aria-label="Locally formatted equation preview"
+                tabindex="0"
+                data-equation-preview
+                hidden
+              >
+                <div class="equation-preview-content" data-equation-preview-content></div>
+              </div>
+              <button
+                class="equation-preview-toggle"
+                type="button"
+                aria-controls="aristotle-equation-preview"
+                aria-pressed="false"
+                data-equation-preview-toggle
+                hidden
+              >
+                <span class="equation-preview-symbol" aria-hidden="true">∑</span>
+                <span data-equation-preview-label>Preview equations</span>
+              </button>
+            </div>
             <p class="field-help" id="prompt-help">
               Plain text stays editable. A standalone ChatGPT Share link changes the action to <strong>Send Link</strong>; it imports and shows the complete selected public branch as <code>PERSON:</code> and <code>LLM:</code>, then locks editing while preserving scroll. Uploaded-file contents are not included.
+              After import, <strong>Preview equations</strong> typesets recognized mathematics locally in this tab without changing the submitted transcript.
               Keep this tab open: <code>COMPLETE_WITH_ERRORS</code> and <code>OUT_OF_BUDGET</code> checkpoints continue automatically in the same project until Aristotle reports <code>COMPLETE</code>, <code>FAILED</code>, or <code>CANCELED</code>. There is no fixed follow-up limit. Every follow-up uses your Aristotle quota. Pause automatic continuation at any time, or use Continue project manually.
             </p>
             <p class="sr-only" id="prompt-limit-status" role="status" data-prompt-limit-status></p>

@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
+import katex from "../site/assets/vendor/katex/katex.mjs";
 import {
   ARISTOTLE_SUCCESS_INDEX_URL,
   CHATGPT_SHARE_RETRY_DELAYS_MS,
@@ -24,6 +26,13 @@ import {
   validateKey,
   validateSuccessIndex,
 } from "../site/assets/aristotle-core.mjs";
+import {
+  EQUATION_PREVIEW_LIMITS,
+  EQUATION_PREVIEW_MACROS,
+  createEquationPreviewRenderPlan,
+  reconstructEquationPreviewSource,
+  tokenizeEquationPreview,
+} from "../site/assets/equation-preview.mjs";
 
 assert.deepEqual(CHATGPT_SHARE_RETRY_DELAYS_MS, [0, 1_000, 3_000]);
 for (const status of [408, 425, 429, 500, 502, 503, 504]) {
@@ -572,5 +581,202 @@ assert.throws(
     ),
   /malformed or incomplete/,
 );
+
+const equationPreviewSource = [
+  "The roots satisfy \\(\\rho_D < \\rho_O\\).",
+  "",
+  "\\[",
+  "\\frac{F_O(n)}{F_D(n)} \\longrightarrow 0",
+  "\\]",
+  "",
+  "Also $$\\sum_{r=1}^{k} q^r$$ and $x^2 + y^2$.",
+  "",
+  "`Inline code keeps $raw_math$ literal.`",
+  "",
+  "```lean",
+  "example : \"$not_math$\" = \"$not_math$\" := rfl",
+  "```",
+  "",
+  "<img src=x onerror=alert(1)>",
+].join("\n");
+const equationPreviewTokens = tokenizeEquationPreview(
+  equationPreviewSource,
+);
+assert.equal(
+  reconstructEquationPreviewSource(equationPreviewTokens),
+  equationPreviewSource,
+);
+const equationPreviewMath = equationPreviewTokens.filter(
+  (token) => token.type === "math",
+);
+assert.equal(equationPreviewMath.length, 4);
+assert.deepEqual(
+  equationPreviewMath.map(({ value, display }) => ({ value, display })),
+  [
+    { value: "\\rho_D < \\rho_O", display: false },
+    {
+      value: "\n\\frac{F_O(n)}{F_D(n)} \\longrightarrow 0\n",
+      display: true,
+    },
+    { value: "\\sum_{r=1}^{k} q^r", display: true },
+    { value: "x^2 + y^2", display: false },
+  ],
+);
+assert.equal(
+  equationPreviewTokens.some(
+    (token) => token.type === "math" && token.raw.includes("not_math"),
+  ),
+  false,
+);
+assert.equal(
+  equationPreviewTokens.some(
+    (token) => token.type === "math" && token.raw.includes("<img"),
+  ),
+  false,
+);
+
+const standaloneEnvironment =
+  "\\begin{align*}a &= b \\\\ c &= d\\end{align*}";
+const standaloneEnvironmentTokens = tokenizeEquationPreview(
+  standaloneEnvironment,
+);
+assert.equal(standaloneEnvironmentTokens.length, 1);
+assert.deepEqual(standaloneEnvironmentTokens[0], {
+  type: "math",
+  value: standaloneEnvironment,
+  raw: standaloneEnvironment,
+  display: true,
+});
+assert.equal(
+  reconstructEquationPreviewSource(standaloneEnvironmentTokens),
+  standaloneEnvironment,
+);
+
+for (const literalSource of [
+  "The price is $5 and the total is $10.",
+  "Escaped delimiters: \\$x$ and \\\\(not math\\).",
+  "Unmatched delimiters stay literal: \\(x + y and $$z.",
+  "A blank line prevents inline $x\n\n+ y$ rendering.",
+]) {
+  const literalTokens = tokenizeEquationPreview(literalSource);
+  assert.equal(
+    literalTokens.some((token) => token.type === "math"),
+    false,
+    literalSource,
+  );
+  assert.equal(
+    reconstructEquationPreviewSource(literalTokens),
+    literalSource,
+  );
+}
+
+const archivedTranscript = readFileSync(
+  new URL(
+    "../submissions/successes/3b0534b9-eef1-46d6-a617-6ca993839343/prompt.txt",
+    import.meta.url,
+  ),
+  "utf8",
+);
+const archivedTranscriptPlan =
+  createEquationPreviewRenderPlan(archivedTranscript);
+assert.equal(archivedTranscriptPlan.limited, false);
+assert.equal(archivedTranscriptPlan.expressionCount, 96);
+assert.equal(
+  reconstructEquationPreviewSource(archivedTranscriptPlan.tokens),
+  archivedTranscript,
+);
+const archivedRenderFailures = [];
+for (const token of archivedTranscriptPlan.tokens) {
+  if (token.type !== "math") continue;
+  try {
+    katex.renderToString(token.value, {
+      displayMode: token.display,
+      output: "htmlAndMathml",
+      throwOnError: true,
+      strict: "ignore",
+      trust: false,
+      maxExpand: 1_000,
+      maxSize: 100,
+      macros: { ...EQUATION_PREVIEW_MACROS },
+    });
+  } catch (error) {
+    archivedRenderFailures.push({
+      raw: token.raw,
+      message: error instanceof Error ? error.message : String(error),
+    });
+  }
+}
+assert.deepEqual(
+  archivedRenderFailures,
+  [],
+  "Every equation in the motivating archived transcript should typeset.",
+);
+
+const excessiveEquationSource =
+  "$x$\n".repeat(EQUATION_PREVIEW_LIMITS.maxExpressions + 25);
+const excessiveEquationPlan =
+  createEquationPreviewRenderPlan(excessiveEquationSource);
+assert.equal(excessiveEquationPlan.limited, true);
+assert.equal(
+  excessiveEquationPlan.tokens.filter((token) => token.type === "math").length,
+  EQUATION_PREVIEW_LIMITS.maxExpressions,
+);
+assert.equal(
+  reconstructEquationPreviewSource(excessiveEquationPlan.tokens),
+  excessiveEquationSource,
+);
+
+const oversizedEquationSource =
+  `$$${"x".repeat(
+    EQUATION_PREVIEW_LIMITS.maxExpressionCharacters + 1,
+  )}$$ then \\(y\\)`;
+const oversizedEquationPlan =
+  createEquationPreviewRenderPlan(oversizedEquationSource);
+assert.equal(oversizedEquationPlan.limited, true);
+assert.equal(oversizedEquationPlan.oversizedExpressionCount, 1);
+assert.equal(
+  oversizedEquationPlan.tokens.filter((token) => token.type === "math").length,
+  1,
+);
+assert.equal(
+  reconstructEquationPreviewSource(oversizedEquationPlan.tokens),
+  oversizedEquationSource,
+);
+
+const unmatchedDelimiterSource = "\\(".repeat(25_000);
+const unmatchedDelimiterPlan =
+  createEquationPreviewRenderPlan(unmatchedDelimiterSource);
+assert.equal(unmatchedDelimiterPlan.limited, true);
+assert.equal(
+  unmatchedDelimiterPlan.tokens.some((token) => token.type === "math"),
+  false,
+);
+assert.equal(
+  reconstructEquationPreviewSource(unmatchedDelimiterPlan.tokens),
+  unmatchedDelimiterSource,
+);
+
+const unmatchedBacktickSource = "`".repeat(250_000);
+const unmatchedBacktickPlan =
+  createEquationPreviewRenderPlan(unmatchedBacktickSource);
+assert.equal(
+  unmatchedBacktickPlan.tokens.some((token) => token.type === "math"),
+  false,
+);
+assert.equal(
+  reconstructEquationPreviewSource(unmatchedBacktickPlan.tokens),
+  unmatchedBacktickSource,
+);
+
+const untrustedLinkMarkup = katex.renderToString(
+  "\\href{https://attacker.example/}{x}",
+  {
+    throwOnError: false,
+    strict: "ignore",
+    trust: false,
+    macros: { ...EQUATION_PREVIEW_MACROS },
+  },
+);
+assert.equal(/<a(?:\s|>)/u.test(untrustedLinkMarkup), false);
 
 console.log("Aristotle behavior tests passed.");

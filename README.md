@@ -39,6 +39,13 @@ contains a link is left unchanged. Transient reader and network failures are
 retried automatically while the loading animation remains active. The
 Aristotle key is never sent during conversation import.
 
+After a successful share import, **Preview equations** opens a read-only,
+paper-style rendering of recognized TeX-delimited mathematics. KaTeX is
+bundled with the site and loaded from the same origin; the preview makes no
+external request, uploads no transcript data, treats imported HTML as inert
+text, and never replaces or modifies the exact transcript used for submission
+and archival.
+
 Every final run is archived under [`submissions/`](submissions/). Exact
 `COMPLETE` tasks go to `submissions/successes/`; final `FAILED` and `CANCELED`
 tasks go to `submissions/failures/`. Each record contains normalized metadata,
@@ -70,3 +77,6 @@ EXPECTED_ARISTOTLE_PROXY_URL=https://example.chatgpt.site node scripts/validate-
 
 The configured relay must be an HTTPS `*.chatgpt.site` origin. The undeployed
 placeholder is accepted only when `EXPECTED_ARISTOTLE_PROXY_URL` is unset.
+
+Third-party browser assets and their retained licenses are documented in
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

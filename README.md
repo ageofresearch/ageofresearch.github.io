@@ -39,11 +39,23 @@ contains a link is left unchanged. Transient reader and network failures are
 retried automatically while the loading animation remains active. The
 Aristotle key is never sent during conversation import.
 
-Every terminal run is archived under [`submissions/`](submissions/). Exact
-`COMPLETE` tasks go to `submissions/successes/`; all other terminal states go
-to `submissions/failures/`. Each record contains normalized metadata, the exact
-submitted prompt or imported conversation, sanitized status and archival logs,
-and the Aristotle `.tar.gz` result when available. Credentials are excluded.
+Every final run is archived under [`submissions/`](submissions/). Exact
+`COMPLETE` tasks go to `submissions/successes/`; final `FAILED` and `CANCELED`
+tasks go to `submissions/failures/`. Each record contains normalized metadata,
+the exact submitted prompt or imported conversation, sanitized status and
+archival logs, and the Aristotle `.tar.gz` result when available. Credentials
+are excluded.
+
+`COMPLETE_WITH_ERRORS` and `OUT_OF_BUDGET` are treated as resumable
+checkpoints rather than final archive states. While the browser tab remains
+open, the workspace automatically sends an `INSTRUCT` continuation to the
+same Aristotle project without a fixed follow-up limit, retains continuation
+state in tab-scoped storage, and keeps polling even when the tab is in the
+background (subject to browser throttling). Users can pause or resume automatic
+continuation and can deliberately submit another task with **Continue project**.
+Each follow-up consumes the user’s Aristotle quota. Browser Web Locks and a
+durable server reservation prevent the same checkpoint from being submitted
+twice. Exact `COMPLETE`, `FAILED`, and `CANCELED` states end the workflow.
 
 The page at <https://ageofresearch.github.io/aristotle/successes/> reads only
 the append-oriented success index. Failure records remain public in GitHub for

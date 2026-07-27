@@ -24,10 +24,17 @@ export const TERMINAL_STATUSES = new Set([
   "complete",
   "succeeded",
   "success",
+  "complete_with_errors",
+  "out_of_budget",
   "failed",
   "error",
   "cancelled",
   "canceled",
+]);
+
+export const RECOVERABLE_CHECKPOINT_STATUSES = new Set([
+  "complete_with_errors",
+  "out_of_budget",
 ]);
 
 export const SUCCESS_STATUSES = new Set([
@@ -36,6 +43,25 @@ export const SUCCESS_STATUSES = new Set([
   "succeeded",
   "success",
 ]);
+
+export function normalizeAutoContinuationState(paused, reason) {
+  const normalizedPaused = paused === undefined ? false : paused;
+  const normalizedReason = reason === undefined ? "" : reason;
+  if (
+    typeof normalizedPaused !== "boolean" ||
+    typeof normalizedReason !== "string" ||
+    !["", "user", "automatic-limit", "no-progress"].includes(
+      normalizedReason,
+    )
+  ) {
+    return null;
+  }
+  const shouldPause = normalizedPaused || normalizedReason !== "";
+  return {
+    paused: shouldPause,
+    reason: shouldPause ? "user" : "",
+  };
+}
 
 export function validateKey(key) {
   if (!key) return "Enter your Aristotle API key.";
@@ -206,6 +232,130 @@ export function getStatus(payload, { initial = false } = {}) {
   return normalizeStatus(projectStatus);
 }
 
+export function isRecoverableCheckpoint(payload) {
+  return RECOVERABLE_CHECKPOINT_STATUSES.has(getStatus(payload));
+}
+
+export function getTaskId(payload) {
+  const value =
+    payload?.taskId ??
+    payload?.task_id ??
+    payload?.latestTask?.taskId ??
+    payload?.latestTask?.agent_task_id ??
+    payload?.latestTask?.task_id ??
+    payload?.latest_task?.taskId ??
+    payload?.latest_task?.agent_task_id ??
+    payload?.latest_task?.task_id ??
+    payload?.task?.taskId ??
+    payload?.task?.agent_task_id ??
+    payload?.task?.task_id;
+  return typeof value === "string" && PROJECT_ID_PATTERN.test(value)
+    ? value
+    : "";
+}
+
+export function getCheckpointFingerprint(payload) {
+  if (!isRecoverableCheckpoint(payload)) return "";
+  const summary =
+    payload?.outputSummary ??
+    payload?.output_summary ??
+    payload?.summary ??
+    payload?.latestTask?.outputSummary ??
+    payload?.latestTask?.output_summary ??
+    payload?.latest_task?.outputSummary ??
+    payload?.latest_task?.output_summary ??
+    payload?.task?.outputSummary ??
+    payload?.task?.output_summary ??
+    "";
+  return String(summary)
+    .normalize("NFKC")
+    .replace(/\s+/gu, " ")
+    .trim()
+    .toLowerCase()
+    .slice(0, 10_000);
+}
+
+export function recordCheckpointObservation(observations, payload) {
+  const current = Array.isArray(observations)
+    ? observations.filter(
+        (entry) =>
+          entry &&
+          typeof entry === "object" &&
+          typeof entry.taskId === "string" &&
+          PROJECT_ID_PATTERN.test(entry.taskId) &&
+          typeof entry.fingerprint === "string",
+      )
+    : [];
+  const taskId = getTaskId(payload);
+  const fingerprint = getCheckpointFingerprint(payload);
+  if (!taskId || !fingerprint || current.some((entry) => entry.taskId === taskId)) {
+    return current.slice(-50);
+  }
+  return [...current, { taskId, fingerprint }].slice(-50);
+}
+
+export function getContinuationPolicy({
+  payload,
+  autoContinuationPaused = false,
+} = {}) {
+  const status = getStatus(payload);
+  if (SUCCESS_STATUSES.has(status)) {
+    return { action: "final-success", reason: "complete" };
+  }
+  if (
+    TERMINAL_STATUSES.has(status) &&
+    !RECOVERABLE_CHECKPOINT_STATUSES.has(status)
+  ) {
+    return { action: "final-failure", reason: status };
+  }
+  if (!RECOVERABLE_CHECKPOINT_STATUSES.has(status)) {
+    return { action: "poll", reason: status };
+  }
+  if (autoContinuationPaused) {
+    return { action: "manual", reason: "paused" };
+  }
+  return { action: "auto-continue", reason: "checkpoint" };
+}
+
+export function reconcileContinuationAttempt({
+  pendingAttempt = null,
+  payload,
+  continuationPassCount = 0,
+  automaticContinuationCount = 0,
+  continuedCheckpointTaskIds = [],
+} = {}) {
+  const currentTaskId = getTaskId(payload);
+  if (
+    !pendingAttempt ||
+    typeof pendingAttempt !== "object" ||
+    typeof pendingAttempt.previousTaskId !== "string" ||
+    typeof pendingAttempt.manual !== "boolean" ||
+    !currentTaskId ||
+    currentTaskId === pendingAttempt.previousTaskId
+  ) {
+    return {
+      advanced: false,
+      pendingAttempt,
+      continuationPassCount,
+      automaticContinuationCount,
+      continuedCheckpointTaskIds,
+    };
+  }
+  return {
+    advanced: true,
+    pendingAttempt: null,
+    continuationPassCount: continuationPassCount + 1,
+    automaticContinuationCount:
+      automaticContinuationCount + (pendingAttempt.manual ? 0 : 1),
+    continuedCheckpointTaskIds: [
+      ...new Set([
+        ...continuedCheckpointTaskIds,
+        pendingAttempt.previousTaskId,
+      ]),
+    ].slice(-500),
+  };
+}
+
 export function getPollDelay(attemptCount) {
   if (attemptCount < 6) return 10_000;
   if (attemptCount < 16) return 30_000;
@@ -244,6 +394,24 @@ export function getErrorMessage(status, payload, action) {
   ) {
     return "The result archive is not available yet.";
   }
+  if (action === "continue" && code.includes("stale_continuation")) {
+    return "The project advanced to a different task before this continuation was accepted.";
+  }
+  if (
+    action === "continue" &&
+    (
+      code.includes("project_not_idle") ||
+      code.includes("project_task_running")
+    )
+  ) {
+    return "The project already has a running task.";
+  }
+  if (action === "continue" && code.includes("already_complete")) {
+    return "The project is already complete.";
+  }
+  if (action === "continue" && code.includes("not_resumable")) {
+    return "The latest task is not a resumable checkpoint.";
+  }
   if (status === 409 || status === 429 || code.includes("concurrency")) {
     return "Aristotle’s concurrency limit is currently reached. Try again after an active project finishes.";
   }
@@ -261,7 +429,9 @@ export function getErrorMessage(status, payload, action) {
       ? "The result archive could not be downloaded."
       : action === "archive"
         ? "The completed submission could not be saved to the public GitHub archive."
-      : "The project status could not be refreshed.";
+        : action === "continue"
+          ? "The project could not be continued."
+          : "The project status could not be refreshed.";
 }
 
 export function createStatusSnapshot(payload, observedAt = new Date().toISOString()) {

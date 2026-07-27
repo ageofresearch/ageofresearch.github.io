@@ -9,18 +9,24 @@ import {
   SUCCESS_STATUSES,
   TERMINAL_STATUSES,
   createStatusSnapshot,
+  getContinuationPolicy,
   getChatGPTShareApiUrl,
+  getTaskId,
   getDashboardUrl,
   getErrorMessage,
   getPollDelay,
   getStatus,
+  isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
+  normalizeAutoContinuationState,
   parseChatGPTShareUrl,
+  reconcileContinuationAttempt,
   shouldRetryChatGPTShareStatus,
+  recordCheckpointObservation,
   validateImportedChatGPTConversation,
   validateArchiveToken,
   validateKey,
-} from "./aristotle-core.mjs?build=20260726-public-archive";
+} from "./aristotle-core.mjs?build=20260727-terminal-continue";
 
 (() => {
   "use strict";
@@ -53,6 +59,10 @@ import {
   const projectSummary = document.querySelector("[data-project-summary]");
   const dashboardLink = document.querySelector("[data-dashboard-link]");
   const downloadButton = document.querySelector("[data-download-button]");
+  const continueButton = document.querySelector("[data-continue-button]");
+  const autoContinueToggle = document.querySelector("[data-auto-continue-toggle]");
+  const continuationDetail = document.querySelector("[data-continuation-detail]");
+  const continuationPassOutput = document.querySelector("[data-continuation-pass]");
   const archiveLink = document.querySelector("[data-archive-link]");
   const pollingNote = document.querySelector("[data-polling-note]");
   const projectAnnouncement = document.querySelector("[data-project-announcement]");
@@ -66,7 +76,9 @@ import {
     !(promptInput instanceof HTMLTextAreaElement) ||
     !(submitButton instanceof HTMLButtonElement) ||
     !(submitLabel instanceof HTMLElement) ||
-    !(downloadButton instanceof HTMLButtonElement)
+    !(downloadButton instanceof HTMLButtonElement) ||
+    !(continueButton instanceof HTMLButtonElement) ||
+    !(autoContinueToggle instanceof HTMLButtonElement)
   ) {
     return;
   }
@@ -90,6 +102,16 @@ import {
   let archiveInFlight = false;
   let archiveComplete = false;
   let archiveRetryTimer = 0;
+  let continuationInFlight = false;
+  let continuationRetryTimer = 0;
+  let continuationPassCount = 0;
+  let automaticContinuationCount = 0;
+  let continuedCheckpointTaskIds = [];
+  let checkpointObservations = [];
+  let autoContinuationPaused = false;
+  let autoContinuationStopReason = "";
+  let pendingContinuationAttempt = null;
+  let legacyArchiveRecovery = false;
   let activeWorkspaceView = "request";
 
   const setWorkspaceView = (view, { focus = false } = {}) => {
@@ -176,25 +198,106 @@ import {
       const raw = window.sessionStorage.getItem(SUBMISSION_STORAGE_NAME);
       if (!raw) return null;
       const value = JSON.parse(raw);
+      const storedContinuationPassCount =
+        value?.continuationPassCount === undefined
+          ? 0
+          : value.continuationPassCount;
+      const storedCheckpointTaskIds =
+        value?.continuedCheckpointTaskIds === undefined
+          ? []
+          : value.continuedCheckpointTaskIds;
+      const storedAutomaticContinuationCount =
+        value?.automaticContinuationCount === undefined
+          ? 0
+          : value.automaticContinuationCount;
+      const storedCheckpointObservations =
+        value?.checkpointObservations === undefined
+          ? []
+          : value.checkpointObservations;
+      const storedLegacyRecovery = value?.legacyArchiveRecovery === true;
+      const storedPendingContinuationAttempt =
+        value?.pendingContinuationAttempt === undefined
+          ? null
+          : value.pendingContinuationAttempt;
+      const storedAutoContinuationState = normalizeAutoContinuationState(
+        value?.autoContinuationPaused,
+        value?.autoContinuationStopReason,
+      );
       if (
         !value ||
         typeof value !== "object" ||
         value.projectId !== activeProjectId ||
-        typeof value.prompt !== "string" ||
-        !value.prompt ||
-        !validateArchiveToken(value.archiveToken) ||
+        (
+          storedLegacyRecovery
+            ? (
+              value.prompt !== "" ||
+              value.archiveToken !== "" ||
+              value.source !== null
+            )
+            : (
+              typeof value.prompt !== "string" ||
+              !value.prompt ||
+              !validateArchiveToken(value.archiveToken)
+            )
+        ) ||
         (
           value.source !== null &&
           (
             typeof value.source !== "object" ||
             Array.isArray(value.source)
           )
+        ) ||
+        !Number.isSafeInteger(storedContinuationPassCount) ||
+        storedContinuationPassCount < 0 ||
+        !Number.isSafeInteger(storedAutomaticContinuationCount) ||
+        storedAutomaticContinuationCount < 0 ||
+        storedAutomaticContinuationCount > storedContinuationPassCount ||
+        !Array.isArray(storedCheckpointTaskIds) ||
+        storedCheckpointTaskIds.length > 500 ||
+        storedCheckpointTaskIds.some(
+          (taskId) =>
+            typeof taskId !== "string" ||
+            !PROJECT_ID_PATTERN.test(taskId),
+        ) ||
+        !Array.isArray(storedCheckpointObservations) ||
+        storedCheckpointObservations.length > 50 ||
+        storedCheckpointObservations.some(
+          (entry) =>
+            !entry ||
+            typeof entry !== "object" ||
+            typeof entry.taskId !== "string" ||
+            !PROJECT_ID_PATTERN.test(entry.taskId) ||
+            typeof entry.fingerprint !== "string" ||
+            Array.from(entry.fingerprint).length > 10_100,
+        ) ||
+        storedAutoContinuationState === null ||
+        (
+          storedPendingContinuationAttempt !== null &&
+          (
+            typeof storedPendingContinuationAttempt !== "object" ||
+            Array.isArray(storedPendingContinuationAttempt) ||
+            typeof storedPendingContinuationAttempt.previousTaskId !== "string" ||
+            !PROJECT_ID_PATTERN.test(
+              storedPendingContinuationAttempt.previousTaskId,
+            ) ||
+            typeof storedPendingContinuationAttempt.manual !== "boolean"
+          )
         )
       ) {
         window.sessionStorage.removeItem(SUBMISSION_STORAGE_NAME);
         return null;
       }
-      return value;
+      return {
+        ...value,
+        continuationPassCount: storedContinuationPassCount,
+        automaticContinuationCount: storedAutomaticContinuationCount,
+        continuedCheckpointTaskIds: storedCheckpointTaskIds,
+        checkpointObservations: storedCheckpointObservations,
+        autoContinuationPaused: storedAutoContinuationState.paused,
+        autoContinuationStopReason: storedAutoContinuationState.reason,
+        pendingContinuationAttempt: storedPendingContinuationAttempt,
+        legacyArchiveRecovery: storedLegacyRecovery,
+      };
     } catch {
       return null;
     }
@@ -209,6 +312,14 @@ import {
           prompt: pendingPrompt,
           source: pendingSource,
           archiveToken,
+          continuationPassCount,
+          automaticContinuationCount,
+          continuedCheckpointTaskIds: continuedCheckpointTaskIds.slice(-500),
+          checkpointObservations: checkpointObservations.slice(-50),
+          autoContinuationPaused,
+          autoContinuationStopReason,
+          pendingContinuationAttempt,
+          legacyArchiveRecovery,
         }),
       );
       return true;
@@ -243,6 +354,16 @@ import {
     pendingSource = null;
     archiveToken = "";
     statusHistory = [];
+    continuationPassCount = 0;
+    automaticContinuationCount = 0;
+    continuedCheckpointTaskIds = [];
+    checkpointObservations = [];
+    autoContinuationPaused = false;
+    autoContinuationStopReason = "";
+    pendingContinuationAttempt = null;
+    legacyArchiveRecovery = false;
+    if (continuationRetryTimer) window.clearTimeout(continuationRetryTimer);
+    continuationRetryTimer = 0;
     try {
       window.sessionStorage.removeItem(SUBMISSION_STORAGE_NAME);
       window.sessionStorage.removeItem(STATUS_HISTORY_STORAGE_NAME);
@@ -527,6 +648,29 @@ import {
       ? "Unknown"
       : value.replaceAll("_", " ").replace(/\b\w/g, (character) => character.toUpperCase());
 
+  const automaticPauseMessage = () => {
+    return "Automatic continuation is paused. Continue manually or resume automatic continuation.";
+  };
+
+  const reconcilePendingContinuation = (payload) => {
+    const reconciled = reconcileContinuationAttempt({
+      pendingAttempt: pendingContinuationAttempt,
+      payload,
+      continuationPassCount,
+      automaticContinuationCount,
+      continuedCheckpointTaskIds,
+    });
+    if (!reconciled.advanced) return false;
+    pendingContinuationAttempt = reconciled.pendingAttempt;
+    continuationPassCount = reconciled.continuationPassCount;
+    automaticContinuationCount =
+      reconciled.automaticContinuationCount;
+    continuedCheckpointTaskIds =
+      reconciled.continuedCheckpointTaskIds;
+    storePendingSubmission();
+    return true;
+  };
+
   const getProjectId = (payload) => {
     const value =
       payload?.projectId ??
@@ -590,7 +734,10 @@ import {
 
   const updateProjectPanel = (payload, { initial = false } = {}) => {
     lastProjectData = payload;
+    reconcilePendingContinuation(payload);
     const status = getStatus(payload, { initial });
+    const checkpoint = isRecoverableCheckpoint(payload);
+    const taskId = getTaskId(payload);
     const percent = getPercent(payload);
     const dashboardUrl = getDashboardUrl(payload);
     const snapshot = createStatusSnapshot(payload);
@@ -618,6 +765,17 @@ import {
     if (projectPercent) projectPercent.textContent = percent === null ? "Not reported" : `${percent}%`;
     if (progressBar instanceof HTMLElement) progressBar.style.width = `${percent ?? 0}%`;
     if (projectSummary) projectSummary.textContent = getSummary(payload);
+    if (continuationDetail instanceof HTMLElement) {
+      continuationDetail.hidden =
+        continuationPassCount === 0 &&
+        !checkpoint &&
+        !continuationInFlight;
+    }
+    if (continuationPassOutput) {
+      continuationPassOutput.textContent = continuationInFlight
+        ? `Submitting follow-up ${continuationPassCount + 1}…`
+        : `${continuationPassCount} total · ${automaticContinuationCount} automatic`;
+    }
 
     if (dashboardLink instanceof HTMLAnchorElement) {
       dashboardLink.hidden = !dashboardUrl;
@@ -626,17 +784,64 @@ import {
     }
 
     const canDownload =
-      payload?.canDownload === true ||
-      payload?.can_download === true ||
-      SUCCESS_STATUSES.has(status);
+      !checkpoint &&
+      (
+        payload?.canDownload === true ||
+        payload?.can_download === true ||
+        SUCCESS_STATUSES.has(status)
+      );
     downloadButton.hidden = !canDownload;
+    continueButton.hidden = !checkpoint || continuationInFlight;
+    autoContinueToggle.hidden =
+      !activeProjectId ||
+      (
+        (payload?.terminal === true || TERMINAL_STATUSES.has(status)) &&
+        !checkpoint
+      );
+    autoContinueToggle.textContent = autoContinuationPaused
+      ? "Resume automatic continuation"
+      : "Pause automatic continuation";
     announceProject(
       `Project ${displayStatus(status)}. Completion ${
         percent === null ? "not reported" : `${percent}%`
       }.${canDownload ? " The result is ready to download." : ""}`,
     );
+    if (checkpoint) {
+      clearPolling();
+      checkpointObservations = recordCheckpointObservation(
+        checkpointObservations,
+        payload,
+      );
+      const continuationPolicy = getContinuationPolicy({
+        payload,
+        autoContinuationPaused,
+      });
+      const pauseMessage = automaticPauseMessage();
+      if (pollingNote) {
+        pollingNote.textContent = autoContinuationPaused
+          ? pauseMessage
+          : "Checkpoint reached. Preparing the next continuation pass…";
+      }
+      setFormStatus(
+        autoContinuationPaused
+          ? pauseMessage
+          : `Aristotle returned “${displayStatus(status)}”. Continuing automatically from the saved project files…`,
+        autoContinuationPaused ? "error" : "",
+      );
+      if (
+        taskId &&
+        continuedCheckpointTaskIds.includes(taskId)
+      ) {
+        scheduleCheckpointRefresh();
+      } else if (continuationPolicy.action === "auto-continue") {
+        scheduleAutomaticContinuation(payload);
+      }
+      return;
+    }
     if (payload?.terminal === true || TERMINAL_STATUSES.has(status)) {
       clearPolling();
+      autoContinueToggle.hidden = true;
+      continueButton.hidden = true;
       if (pollingNote) {
         pollingNote.textContent =
           archiveComplete
@@ -667,20 +872,251 @@ import {
     clearPolling();
     if (
       !activeProjectId ||
-      document.hidden ||
       lastProjectData?.terminal === true ||
       TERMINAL_STATUSES.has(getStatus(lastProjectData))
     ) {
       return;
     }
     const delay = getPollDelay(pollCount);
-    if (pollingNote) pollingNote.textContent = `Next refresh in ${delay / 1000} seconds while this page remains visible.`;
+    if (pollingNote) {
+      pollingNote.textContent =
+        `Next refresh in ${delay / 1000} seconds while this tab remains open.`;
+    }
     pollTimer = window.setTimeout(pollStatus, delay);
+  };
+
+  const clearContinuationRetry = () => {
+    if (continuationRetryTimer) {
+      window.clearTimeout(continuationRetryTimer);
+    }
+    continuationRetryTimer = 0;
+  };
+
+  const scheduleCheckpointRefresh = () => {
+    clearContinuationRetry();
+    if (!activeProjectId) return;
+    if (pollingNote) {
+      pollingNote.textContent =
+        "Waiting for the continued task to appear. Refreshing again in 10 seconds…";
+    }
+    continuationRetryTimer = window.setTimeout(() => {
+      continuationRetryTimer = 0;
+      void pollStatus();
+    }, 10_000);
+  };
+
+  const scheduleAutomaticContinuation = (payload, delay = 500) => {
+    clearContinuationRetry();
+    const policy = getContinuationPolicy({
+      payload,
+      autoContinuationPaused,
+    });
+    if (
+      !activeProjectId ||
+      continuationInFlight ||
+      policy.action !== "auto-continue"
+    ) {
+      return;
+    }
+    continuationRetryTimer = window.setTimeout(() => {
+      continuationRetryTimer = 0;
+      void continueProject(payload);
+    }, delay);
+  };
+
+  const withContinuationDispatchLock = async (
+    projectId,
+    previousTaskId,
+    dispatch,
+  ) => {
+    const locks = globalThis.navigator?.locks;
+    if (!locks || typeof locks.request !== "function") {
+      return { acquired: true, value: await dispatch() };
+    }
+    return locks.request(
+      `formagization.aristotle.continue:${projectId}:${previousTaskId}`,
+      { mode: "exclusive", ifAvailable: true },
+      async (lock) =>
+        lock
+          ? { acquired: true, value: await dispatch() }
+          : { acquired: false, value: null },
+    );
+  };
+
+  const continueProject = async (checkpointPayload, { manual = false } = {}) => {
+    if (!activeProjectId || continuationInFlight) return;
+    const previousTaskId = getTaskId(checkpointPayload);
+    if (!previousTaskId) {
+      setFormStatus(
+        "Aristotle returned a checkpoint without a valid task identifier, so it could not be continued safely.",
+        "error",
+      );
+      continueButton.hidden = false;
+      return;
+    }
+    if (
+      continuedCheckpointTaskIds.includes(previousTaskId)
+    ) {
+      scheduleCheckpointRefresh();
+      return;
+    }
+    if (requestInFlight) {
+      if (manual) {
+        setFormStatus(
+          "Another status request is finishing. The checkpoint will refresh before any continuation is submitted.",
+        );
+        scheduleCheckpointRefresh();
+      } else {
+        scheduleAutomaticContinuation(checkpointPayload, 1_000);
+      }
+      return;
+    }
+
+    const key = keyInput.value;
+    const keyError = validateKey(key);
+    if (keyError) {
+      setWorkspaceView("request");
+      setFormStatus(
+        "Re-enter your Aristotle API key to continue this checkpoint.",
+        "error",
+      );
+      continueButton.hidden = false;
+      keyInput.focus();
+      return;
+    }
+
+    clearContinuationRetry();
+    if (
+      !pendingContinuationAttempt ||
+      pendingContinuationAttempt.previousTaskId !== previousTaskId
+    ) {
+      pendingContinuationAttempt = { previousTaskId, manual };
+      storePendingSubmission();
+    }
+    continuationInFlight = true;
+    requestInFlight = true;
+    continueButton.hidden = true;
+    autoContinueToggle.hidden = false;
+    updateSubmitAvailability();
+    if (continuationDetail instanceof HTMLElement) continuationDetail.hidden = false;
+    if (continuationPassOutput) {
+      continuationPassOutput.textContent =
+        `Submitting follow-up ${continuationPassCount + 1}…`;
+    }
+    if (projectState) {
+      projectState.textContent = "Continuing";
+      projectState.dataset.state = "running";
+    }
+    const continuationKind = manual ? "manual" : "automatic";
+    setFormStatus(
+      `Submitting ${continuationKind} continuation ${continuationPassCount + 1} to Aristotle…`,
+    );
+    if (pollingNote) {
+      pollingNote.textContent =
+        "Continuing from the current project files. Keep this tab open.";
+    }
+
+    let continuationAccepted = false;
+    let continuationOutcomeUncertain = false;
+    try {
+      const lockedDispatch = await withContinuationDispatchLock(
+        activeProjectId,
+        previousTaskId,
+        async () => {
+          const response = await fetch(
+            `${ARISTOTLE_PROXY_URL}/api/projects/${encodeURIComponent(activeProjectId)}/continue`,
+            {
+              method: "POST",
+              headers: {
+                [KEY_HEADER_NAME]: key,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ previousTaskId }),
+              cache: "no-store",
+              credentials: "omit",
+              referrerPolicy: "no-referrer",
+            },
+          );
+          return readJsonResponse(response, "continue");
+        },
+      );
+      if (!lockedDispatch.acquired) {
+        continuationOutcomeUncertain = true;
+        setFormStatus(
+          "Another tab is already continuing this checkpoint. Checking Aristotle’s authoritative status instead of submitting it twice.",
+        );
+        if (pollingNote) {
+          pollingNote.textContent =
+            "A continuation is already being dispatched from another tab. Status will refresh shortly.";
+        }
+        return;
+      }
+      const payload = lockedDispatch.value;
+      if (payload?.continuationPending === true) {
+        continuationOutcomeUncertain = true;
+        setFormStatus(
+          "This checkpoint already has a continuation reservation. Waiting for the new Aristotle task to appear.",
+        );
+        if (pollingNote) {
+          pollingNote.textContent =
+            "A continuation dispatch is already in progress. Status will refresh shortly.";
+        }
+        return;
+      }
+      const returnedProjectId = getProjectId(payload);
+      if (returnedProjectId && returnedProjectId !== activeProjectId) {
+        throw new Error("Aristotle returned a continuation for a different project.");
+      }
+
+      continuationAccepted = true;
+      updateProjectPanel(payload);
+      setFormStatus(
+        `Continuation ${continuationPassCount} accepted. Progress will refresh automatically.`,
+        "success",
+      );
+    } catch (error) {
+      continuationOutcomeUncertain = true;
+      const message =
+        error instanceof Error
+          ? error.message
+          : "The project could not be continued.";
+      setFormStatus(
+        `${message} Checking Aristotle’s authoritative status before any retry.`,
+        "error",
+      );
+      if (pollingNote) {
+        pollingNote.textContent =
+          "The continuation response was uncertain. Status will be checked again before retrying.";
+      }
+    } finally {
+      continuationInFlight = false;
+      requestInFlight = false;
+      updateSubmitAvailability();
+      if (continuationPassOutput) {
+        continuationPassOutput.textContent =
+          `${continuationPassCount} total · ${automaticContinuationCount} automatic`;
+      }
+      if (continuationOutcomeUncertain) {
+        continueButton.hidden = false;
+        scheduleCheckpointRefresh();
+      } else if (
+        isRecoverableCheckpoint(lastProjectData) &&
+        !continuedCheckpointTaskIds.includes(getTaskId(lastProjectData))
+      ) {
+        continueButton.hidden = false;
+        if (!autoContinuationPaused) {
+          scheduleAutomaticContinuation(lastProjectData, 15_000);
+        }
+      } else if (continuationAccepted) {
+        schedulePoll();
+      }
+    }
   };
 
   const pollStatus = async () => {
     clearPolling();
-    if (!activeProjectId || document.hidden || requestInFlight) {
+    if (!activeProjectId || requestInFlight) {
       schedulePoll();
       return;
     }
@@ -696,6 +1132,7 @@ import {
     updateSubmitAvailability();
     pollCount += 1;
     if (pollingNote) pollingNote.textContent = "Refreshing project status…";
+    let statusRefreshFailed = false;
     try {
       const response = await fetch(
         `${ARISTOTLE_PROXY_URL}/api/projects/${encodeURIComponent(activeProjectId)}/status`,
@@ -710,12 +1147,23 @@ import {
       const payload = await readJsonResponse(response, "status");
       updateProjectPanel(payload);
     } catch (error) {
+      statusRefreshFailed = true;
       setFormStatus(error instanceof Error ? error.message : "The project status could not be refreshed.", "error");
-      if (pollingNote) pollingNote.textContent = "Status refresh failed; polling will retry while the page is visible.";
+      if (pollingNote) {
+        pollingNote.textContent =
+          "Status refresh failed; polling will retry while this tab remains open.";
+      }
     } finally {
       requestInFlight = false;
       updateSubmitAvailability();
-      schedulePoll();
+      if (
+        statusRefreshFailed &&
+        isRecoverableCheckpoint(lastProjectData)
+      ) {
+        scheduleCheckpointRefresh();
+      } else if (!isRecoverableCheckpoint(lastProjectData)) {
+        schedulePoll();
+      }
     }
   };
 
@@ -728,18 +1176,22 @@ import {
   };
 
   const archiveSubmission = async (terminalPayload) => {
+    const hasCurrentArchiveProof =
+      Boolean(pendingPrompt) && validateArchiveToken(archiveToken);
+    const canRecoverLegacyArchive =
+      legacyArchiveRecovery && !pendingPrompt && !archiveToken;
     if (
       archiveComplete ||
       archiveInFlight ||
       !activeProjectId ||
-      !pendingPrompt ||
-      !validateArchiveToken(archiveToken)
+      (!hasCurrentArchiveProof && !canRecoverLegacyArchive)
     ) {
       if (
         !archiveComplete &&
         !archiveInFlight &&
         activeProjectId &&
-        (!pendingPrompt || !validateArchiveToken(archiveToken))
+        !hasCurrentArchiveProof &&
+        !canRecoverLegacyArchive
       ) {
         setFormStatus(
           "The project finished, but this tab no longer has the authenticated submission needed to create its public archive record.",
@@ -771,9 +1223,13 @@ import {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            prompt: pendingPrompt,
-            source: pendingSource,
-            archiveToken,
+            ...(canRecoverLegacyArchive
+              ? { recoverLegacy: true }
+              : {
+                prompt: pendingPrompt,
+                source: pendingSource,
+                archiveToken,
+              }),
             statusHistory,
           }),
           cache: "no-store",
@@ -870,6 +1326,24 @@ import {
     pendingSource = storedSubmission.source;
     archiveToken = storedSubmission.archiveToken;
     statusHistory = readStatusHistory();
+    continuationPassCount = storedSubmission.continuationPassCount;
+    automaticContinuationCount =
+      storedSubmission.automaticContinuationCount;
+    continuedCheckpointTaskIds =
+      storedSubmission.continuedCheckpointTaskIds;
+    checkpointObservations = storedSubmission.checkpointObservations;
+    autoContinuationPaused = storedSubmission.autoContinuationPaused;
+    autoContinuationStopReason =
+      storedSubmission.autoContinuationStopReason;
+    pendingContinuationAttempt =
+      storedSubmission.pendingContinuationAttempt;
+    legacyArchiveRecovery = storedSubmission.legacyArchiveRecovery;
+  } else if (activeProjectId) {
+    // Older releases discarded the prompt and archive proof after incorrectly
+    // treating a resumable checkpoint as final. The proxy may recover that
+    // already-public record after authenticating project access.
+    legacyArchiveRecovery = true;
+    storePendingSubmission();
   }
   promptInput.maxLength = PROMPT_LIMIT;
   setPromptCount();
@@ -880,7 +1354,7 @@ import {
       { projectId: activeProjectId, projectStatus: 1 },
       { initial: true },
     );
-    if (!validateKey(keyInput.value) && !document.hidden) {
+    if (!validateKey(keyInput.value)) {
       window.setTimeout(pollStatus, 0);
     } else if (pollingNote) {
       pollingNote.textContent = "Enter your API key to resume this project’s status checks.";
@@ -898,7 +1372,7 @@ import {
     } else {
       setFormStatus("API key retained for this tab only.");
     }
-    if (activeProjectId && !document.hidden && !requestInFlight) pollStatus();
+    if (activeProjectId && !requestInFlight) pollStatus();
   });
 
   keyToggle?.addEventListener("click", () => {
@@ -1047,6 +1521,15 @@ import {
       pendingSource = promptLocked ? importedShareSource : null;
       archiveToken = payload.archiveToken;
       statusHistory = [];
+      continuationPassCount = 0;
+      automaticContinuationCount = 0;
+      continuedCheckpointTaskIds = [];
+      checkpointObservations = [];
+      autoContinuationPaused = false;
+      autoContinuationStopReason = "";
+      pendingContinuationAttempt = null;
+      legacyArchiveRecovery = false;
+      clearContinuationRetry();
       storeProjectId(projectId);
       if (!storePendingSubmission()) {
         setFormStatus(
@@ -1058,7 +1541,10 @@ import {
       setWorkspaceView("progress", { focus: narrowWorkspace.matches });
       updateProjectPanel(payload, { initial: true });
       if (payload?.terminal !== true && !TERMINAL_STATUSES.has(getStatus(payload))) {
-        setFormStatus("Project accepted. Progress will refresh while this page is visible.", "success");
+        setFormStatus(
+          "Project accepted. Keep this tab open; progress and incomplete checkpoints will continue automatically.",
+          "success",
+        );
       }
     } catch (error) {
       setFormStatus(error instanceof Error ? error.message : "The project could not be submitted.", "error");
@@ -1066,6 +1552,49 @@ import {
       requestInFlight = false;
       setSubmitLoading(false);
       updateSubmitAvailability();
+      schedulePoll();
+    }
+  });
+
+  continueButton.addEventListener("click", () => {
+    if (!isRecoverableCheckpoint(lastProjectData)) return;
+    clearContinuationRetry();
+    void continueProject(lastProjectData, { manual: true });
+  });
+
+  autoContinueToggle.addEventListener("click", () => {
+    autoContinuationPaused = !autoContinuationPaused;
+    if (autoContinuationPaused) {
+      autoContinuationStopReason = "user";
+    } else {
+      autoContinuationStopReason = "";
+    }
+    autoContinueToggle.textContent = autoContinuationPaused
+      ? "Resume automatic continuation"
+      : "Pause automatic continuation";
+    storePendingSubmission();
+    if (autoContinuationPaused) {
+      clearContinuationRetry();
+      if (isRecoverableCheckpoint(lastProjectData)) {
+        continueButton.hidden = false;
+      }
+      setFormStatus(
+        "Automatic continuation paused. The current Aristotle task is not cancelled.",
+      );
+      if (pollingNote) {
+        pollingNote.textContent =
+          "Automatic continuation is paused. Status checks continue for a running task.";
+      }
+      return;
+    }
+
+    setFormStatus(
+      "Automatic continuation resumed without a fixed follow-up limit. Each task uses your Aristotle quota; press Pause automatic continuation whenever you want it to stop.",
+      "success",
+    );
+    if (isRecoverableCheckpoint(lastProjectData)) {
+      scheduleAutomaticContinuation(lastProjectData, 0);
+    } else {
       schedulePoll();
     }
   });
@@ -1142,16 +1671,24 @@ import {
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      clearPolling();
-      if (pollingNote && activeProjectId) pollingNote.textContent = "Polling paused while this page is hidden.";
+      if (pollingNote && activeProjectId) {
+        pollingNote.textContent =
+          "This tab remains active, but the browser may throttle background status checks.";
+      }
       return;
     }
-    if (
-      activeProjectId &&
+    if (!activeProjectId || requestInFlight) return;
+    if (isRecoverableCheckpoint(lastProjectData)) {
+      if (autoContinuationPaused) {
+        continueButton.hidden = false;
+      } else {
+        scheduleAutomaticContinuation(lastProjectData, 0);
+      }
+    } else if (
       lastProjectData?.terminal !== true &&
       !TERMINAL_STATUSES.has(getStatus(lastProjectData))
     ) {
-      pollStatus();
+      void pollStatus();
     }
   });
 })();

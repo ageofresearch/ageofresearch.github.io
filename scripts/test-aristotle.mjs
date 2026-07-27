@@ -5,13 +5,19 @@ import {
   CHATGPT_SHARE_RETRY_DELAYS_MS,
   CHATGPT_TRANSCRIPT_LIMIT,
   createStatusSnapshot,
+  getCheckpointFingerprint,
+  getContinuationPolicy,
   getChatGPTShareApiUrl,
   getDashboardUrl,
   getErrorMessage,
   getPollDelay,
   getStatus,
+  isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
+  normalizeAutoContinuationState,
   parseChatGPTShareUrl,
+  reconcileContinuationAttempt,
+  recordCheckpointObservation,
   shouldRetryChatGPTShareStatus,
   validateImportedChatGPTConversation,
   validateArchiveToken,
@@ -40,6 +46,25 @@ assert.equal(getPollDelay(15), 30_000);
 assert.equal(getPollDelay(16), 60_000);
 assert.equal(getPollDelay(1_000), 60_000);
 
+assert.deepEqual(normalizeAutoContinuationState(undefined, undefined), {
+  paused: false,
+  reason: "",
+});
+assert.deepEqual(normalizeAutoContinuationState(false, "automatic-limit"), {
+  paused: true,
+  reason: "user",
+});
+assert.deepEqual(normalizeAutoContinuationState(false, "no-progress"), {
+  paused: true,
+  reason: "user",
+});
+assert.deepEqual(normalizeAutoContinuationState(true, ""), {
+  paused: true,
+  reason: "user",
+});
+assert.equal(normalizeAutoContinuationState(false, "invalid-reason"), null);
+assert.equal(normalizeAutoContinuationState("false", ""), null);
+
 assert.equal(getStatus({ projectStatus: 1 }, { initial: true }), "submitted");
 assert.equal(getStatus({ projectStatus: 1 }), "running");
 assert.equal(getStatus({ projectStatus: 2 }), "idle");
@@ -47,6 +72,159 @@ assert.equal(getStatus({ projectStatus: "1" }), "running");
 assert.equal(
   getStatus({ projectStatus: 1, taskStatus: "Queued" }),
   "queued",
+);
+assert.equal(
+  isRecoverableCheckpoint({
+    terminal: true,
+    taskStatus: "COMPLETE_WITH_ERRORS",
+  }),
+  true,
+);
+assert.equal(
+  isRecoverableCheckpoint({
+    terminal: true,
+    taskStatus: "OUT_OF_BUDGET",
+  }),
+  true,
+);
+assert.equal(
+  isRecoverableCheckpoint({ terminal: true, taskStatus: "COMPLETE" }),
+  false,
+);
+assert.equal(
+  isRecoverableCheckpoint({ terminal: true, taskStatus: "FAILED" }),
+  false,
+);
+
+const firstCheckpoint = {
+  terminal: true,
+  taskId: "task_checkpoint_1",
+  taskStatus: "COMPLETE_WITH_ERRORS",
+  outputSummary: "  Remaining: prove theorem Foo.  ",
+};
+const repeatedCheckpoint = {
+  terminal: true,
+  taskId: "task_checkpoint_2",
+  taskStatus: "COMPLETE_WITH_ERRORS",
+  outputSummary: "Remaining:   prove theorem Foo.",
+};
+const changedCheckpoint = {
+  terminal: true,
+  taskId: "task_checkpoint_3",
+  taskStatus: "OUT_OF_BUDGET",
+  outputSummary: "Foo is proved; Bar remains.",
+};
+assert.equal(
+  getCheckpointFingerprint(firstCheckpoint),
+  "remaining: prove theorem foo.",
+);
+const oneCheckpointObservation = recordCheckpointObservation(
+  [],
+  firstCheckpoint,
+);
+assert.equal(oneCheckpointObservation.length, 1);
+assert.deepEqual(
+  recordCheckpointObservation(oneCheckpointObservation, firstCheckpoint),
+  oneCheckpointObservation,
+);
+const twoCheckpointObservations = recordCheckpointObservation(
+  oneCheckpointObservation,
+  repeatedCheckpoint,
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: firstCheckpoint,
+    automaticContinuationCount: 0,
+    autoContinuationPaused: false,
+    checkpointObservations: oneCheckpointObservation,
+  }),
+  { action: "auto-continue", reason: "checkpoint" },
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: repeatedCheckpoint,
+    automaticContinuationCount: 1,
+    autoContinuationPaused: false,
+    checkpointObservations: twoCheckpointObservations,
+  }),
+  { action: "auto-continue", reason: "checkpoint" },
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: changedCheckpoint,
+    automaticContinuationCount: Number.MAX_SAFE_INTEGER,
+    autoContinuationPaused: false,
+    checkpointObservations: recordCheckpointObservation(
+      twoCheckpointObservations,
+      changedCheckpoint,
+    ),
+  }),
+  { action: "auto-continue", reason: "checkpoint" },
+);
+assert.deepEqual(
+  getContinuationPolicy({
+    payload: changedCheckpoint,
+    automaticContinuationCount: 1,
+    autoContinuationPaused: true,
+    checkpointObservations: [],
+  }),
+  { action: "manual", reason: "paused" },
+);
+assert.deepEqual(
+  getContinuationPolicy({ payload: { taskStatus: "COMPLETE" } }),
+  { action: "final-success", reason: "complete" },
+);
+assert.deepEqual(
+  getContinuationPolicy({ payload: { taskStatus: "FAILED" } }),
+  { action: "final-failure", reason: "failed" },
+);
+assert.deepEqual(
+  getContinuationPolicy({ payload: { taskStatus: "IN_PROGRESS" } }),
+  { action: "poll", reason: "in_progress" },
+);
+assert.deepEqual(
+  reconcileContinuationAttempt({
+    pendingAttempt: {
+      previousTaskId: "task_checkpoint_1",
+      manual: false,
+    },
+    payload: {
+      taskId: "task_followup_1",
+      taskStatus: "QUEUED",
+    },
+    continuationPassCount: 0,
+    automaticContinuationCount: 0,
+    continuedCheckpointTaskIds: [],
+  }),
+  {
+    advanced: true,
+    pendingAttempt: null,
+    continuationPassCount: 1,
+    automaticContinuationCount: 1,
+    continuedCheckpointTaskIds: ["task_checkpoint_1"],
+  },
+);
+assert.deepEqual(
+  reconcileContinuationAttempt({
+    pendingAttempt: {
+      previousTaskId: "task_checkpoint_1",
+      manual: true,
+    },
+    payload: firstCheckpoint,
+    continuationPassCount: 1,
+    automaticContinuationCount: 1,
+    continuedCheckpointTaskIds: ["task_older_1"],
+  }),
+  {
+    advanced: false,
+    pendingAttempt: {
+      previousTaskId: "task_checkpoint_1",
+      manual: true,
+    },
+    continuationPassCount: 1,
+    automaticContinuationCount: 1,
+    continuedCheckpointTaskIds: ["task_older_1"],
+  },
 );
 
 assert.equal(
@@ -83,6 +261,30 @@ assert.match(
 assert.match(
   getErrorMessage(503, { error: { code: "archive_upstream_error" } }, "archive"),
   /GitHub archive/,
+);
+assert.match(
+  getErrorMessage(
+    409,
+    { error: { code: "stale_continuation" } },
+    "continue",
+  ),
+  /different task/,
+);
+assert.match(
+  getErrorMessage(
+    409,
+    { error: { code: "project_task_running" } },
+    "continue",
+  ),
+  /running task/,
+);
+assert.match(
+  getErrorMessage(
+    409,
+    { error: { code: "not_resumable" } },
+    "continue",
+  ),
+  /not a resumable checkpoint/,
 );
 assert.equal(validateArchiveToken("a".repeat(43)), true);
 assert.equal(validateArchiveToken("a".repeat(42)), false);

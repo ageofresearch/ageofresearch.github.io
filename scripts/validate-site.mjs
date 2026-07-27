@@ -117,6 +117,15 @@ const loadingStops =
 const sessionStorageWrites = [
   ...aristotleScript.matchAll(/sessionStorage\.setItem\(\s*([^,\n]+)/g),
 ].map((match) => match[1].trim());
+const checkpointBranchStart = aristotleScript.indexOf("if (checkpoint) {");
+const finalTerminalBranchStart = aristotleScript.indexOf(
+  "if (payload?.terminal === true || TERMINAL_STATUSES.has(status))",
+  checkpointBranchStart,
+);
+const checkpointBranch =
+  checkpointBranchStart >= 0 && finalTerminalBranchStart > checkpointBranchStart
+    ? aristotleScript.slice(checkpointBranchStart, finalTerminalBranchStart)
+    : "";
 const hasScrollablePrompt =
   /\.aristotle-form textarea\s*\{[\s\S]*?overflow:\s*auto\s*;/m.test(
     siteStyles,
@@ -332,8 +341,12 @@ const aristotleRequirements = [
   [!aristotleScript.includes("console."), "Aristotle script must not log sensitive workflow data"],
   [
     aristotleScript.includes("document.hidden") &&
-      aristotleScript.includes('"visibilitychange"'),
-    "Aristotle polling must pause when the page is hidden",
+      aristotleScript.includes('"visibilitychange"') &&
+      aristotleScript.includes(
+        "the browser may throttle background status checks",
+      ) &&
+      !aristotleScript.includes("Polling paused while this page is hidden."),
+    "Aristotle polling must remain scheduled in an open background tab while disclosing browser throttling",
   ],
   [
     aristotleCore.includes("10_000") &&
@@ -348,6 +361,31 @@ const aristotleRequirements = [
       sessionStorageWrites.includes("SUBMISSION_STORAGE_NAME") &&
       sessionStorageWrites.includes("STATUS_HISTORY_STORAGE_NAME"),
     "Aristotle tab storage must retain only the key, active project, authenticated pending submission, and sanitized status history",
+  ],
+  [
+    aristotleCore.includes('"complete_with_errors"') &&
+      aristotleCore.includes('"out_of_budget"') &&
+      aristotleCore.includes("isRecoverableCheckpoint") &&
+      aristotlePage.includes("data-continuation-detail") &&
+      aristotlePage.includes("data-continuation-pass") &&
+      aristotlePage.includes("data-continue-button") &&
+      aristotlePage.includes("data-auto-continue-toggle") &&
+      aristotlePage.includes("every continuation uses your Aristotle quota") &&
+      aristotleScript.includes("/continue`") &&
+      aristotleScript.includes("JSON.stringify({ previousTaskId })") &&
+      aristotleScript.includes("continuedCheckpointTaskIds.includes") &&
+      aristotleScript.includes("scheduleAutomaticContinuation") &&
+      aristotleScript.includes("scheduleCheckpointRefresh") &&
+      aristotleScript.includes("autoContinuationPaused") &&
+      aristotleScript.includes("Continuation ${continuationPassCount} accepted") &&
+      aristotleScript.includes("continuationPassCount,") &&
+      aristotleScript.includes(
+        "continuedCheckpointTaskIds: continuedCheckpointTaskIds.slice(-500)",
+      ) &&
+      checkpointBranch.includes("return;") &&
+      !checkpointBranch.includes("archiveSubmission") &&
+      !checkpointBranch.includes("clearPendingSubmission"),
+    "Recoverable Aristotle checkpoints must continue automatically with duplicate guards, a visible pass count, pause control, manual fallback, quota disclosure, and tab recovery",
   ],
   [
     aristotlePage.includes("Requests and results are archived publicly") &&

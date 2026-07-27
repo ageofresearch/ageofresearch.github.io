@@ -24,10 +24,17 @@ export const TERMINAL_STATUSES = new Set([
   "complete",
   "succeeded",
   "success",
+  "complete_with_errors",
+  "out_of_budget",
   "failed",
   "error",
   "cancelled",
   "canceled",
+]);
+
+export const RECOVERABLE_CHECKPOINT_STATUSES = new Set([
+  "complete_with_errors",
+  "out_of_budget",
 ]);
 
 export const SUCCESS_STATUSES = new Set([
@@ -206,6 +213,10 @@ export function getStatus(payload, { initial = false } = {}) {
   return normalizeStatus(projectStatus);
 }
 
+export function isRecoverableCheckpoint(payload) {
+  return RECOVERABLE_CHECKPOINT_STATUSES.has(getStatus(payload));
+}
+
 export function getPollDelay(attemptCount) {
   if (attemptCount < 6) return 10_000;
   if (attemptCount < 16) return 30_000;
@@ -244,6 +255,24 @@ export function getErrorMessage(status, payload, action) {
   ) {
     return "The result archive is not available yet.";
   }
+  if (action === "continue" && code.includes("stale_continuation")) {
+    return "The project advanced to a different task before this continuation was accepted.";
+  }
+  if (
+    action === "continue" &&
+    (
+      code.includes("project_not_idle") ||
+      code.includes("project_task_running")
+    )
+  ) {
+    return "The project already has a running task.";
+  }
+  if (action === "continue" && code.includes("already_complete")) {
+    return "The project is already complete.";
+  }
+  if (action === "continue" && code.includes("not_resumable")) {
+    return "The latest task is not a resumable checkpoint.";
+  }
   if (status === 409 || status === 429 || code.includes("concurrency")) {
     return "Aristotle’s concurrency limit is currently reached. Try again after an active project finishes.";
   }
@@ -261,7 +290,9 @@ export function getErrorMessage(status, payload, action) {
       ? "The result archive could not be downloaded."
       : action === "archive"
         ? "The completed submission could not be saved to the public GitHub archive."
-      : "The project status could not be refreshed.";
+        : action === "continue"
+          ? "The project could not be continued."
+          : "The project status could not be refreshed.";
 }
 
 export function createStatusSnapshot(payload, observedAt = new Date().toISOString()) {

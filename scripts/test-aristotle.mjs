@@ -10,6 +10,7 @@ import {
   getErrorMessage,
   getPollDelay,
   getStatus,
+  isRecoverableCheckpoint,
   looksLikeChatGPTShareUrl,
   parseChatGPTShareUrl,
   shouldRetryChatGPTShareStatus,
@@ -48,6 +49,28 @@ assert.equal(
   getStatus({ projectStatus: 1, taskStatus: "Queued" }),
   "queued",
 );
+assert.equal(
+  isRecoverableCheckpoint({
+    terminal: true,
+    taskStatus: "COMPLETE_WITH_ERRORS",
+  }),
+  true,
+);
+assert.equal(
+  isRecoverableCheckpoint({
+    terminal: true,
+    taskStatus: "OUT_OF_BUDGET",
+  }),
+  true,
+);
+assert.equal(
+  isRecoverableCheckpoint({ terminal: true, taskStatus: "COMPLETE" }),
+  false,
+);
+assert.equal(
+  isRecoverableCheckpoint({ terminal: true, taskStatus: "FAILED" }),
+  false,
+);
 
 assert.equal(
   getDashboardUrl({
@@ -83,6 +106,30 @@ assert.match(
 assert.match(
   getErrorMessage(503, { error: { code: "archive_upstream_error" } }, "archive"),
   /GitHub archive/,
+);
+assert.match(
+  getErrorMessage(
+    409,
+    { error: { code: "stale_continuation" } },
+    "continue",
+  ),
+  /different task/,
+);
+assert.match(
+  getErrorMessage(
+    409,
+    { error: { code: "project_task_running" } },
+    "continue",
+  ),
+  /running task/,
+);
+assert.match(
+  getErrorMessage(
+    409,
+    { error: { code: "not_resumable" } },
+    "continue",
+  ),
+  /not a resumable checkpoint/,
 );
 assert.equal(validateArchiveToken("a".repeat(43)), true);
 assert.equal(validateArchiveToken("a".repeat(42)), false);

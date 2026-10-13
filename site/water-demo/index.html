@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Water · 50 × 50 metres</title>
+  <link rel="icon" href="data:,">
+  <style>:root{color-scheme:light;color:#51483d;background:#e8dfd0;font:13px/1.5 system-ui,sans-serif}*{box-sizing:border-box}body{margin:0;overflow:hidden}canvas{touch-action:none;display:block}header{pointer-events:none;position:fixed;top:30px;left:34px}h1{letter-spacing:-.04em;margin:0;font:400 30px/1.2 Georgia,serif}header p{color:#796e5f;margin:8px 0}nav{background:#f5efe5e8;border:1px solid #cbbfaa;border-radius:30px;flex-wrap:wrap;gap:5px;padding:5px;display:flex;position:fixed;top:30px;right:34px}button{font:inherit;color:inherit;cursor:pointer;background:0 0;border:0;border-radius:24px;padding:8px 15px}button[aria-pressed=true]{color:#fff9ef;background:#51483d}button:focus-visible,a:focus-visible{outline-offset:3px;outline:2px solid #387e84}footer{color:#796e5f;justify-content:space-between;align-items:center;gap:20px;display:flex;position:fixed;bottom:26px;left:34px;right:34px}a{color:inherit;border-bottom:1px solid #b8a991;text-decoration:none}#status{text-align:center;background:#f5efe5;border-radius:12px;max-width:80vw;padding:16px 24px;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%)}.wave-control{align-items:center;gap:12px;display:flex}input[type=range]{accent-color:#51483d;width:110px}[hidden]{display:none!important}@media (width<=650px){header{top:20px;left:20px}nav{width:fit-content;top:106px;left:20px;right:20px}footer{bottom:20px;left:20px;right:20px}.hint{display:none}}</style>
+  <script type="module" crossorigin src="./assets/water-map-CXYmJTXu.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <header><h1>Water</h1><p>50 × 50 metres &nbsp;·&nbsp; 10 metres deep</p></header>
+  <nav aria-label="Water views">
+    <button data-view="overview" aria-pressed="true">Overview</button>
+    <button data-view="surface" aria-pressed="false">Surface</button>
+    <button data-view="underwater" aria-pressed="false">Underwater</button>
+    <button id="add-float">Add test float</button>
+    <button id="clear-floats" hidden>Clear floats</button>
+  </nav>
+  <div id="status" role="status">Preparing the water…</div>
+  <footer><a id="map-link" href="./">← Maps</a><label class="wave-control">Waves <input id="wave-size" type="range" min="0" max="2" step=".1" value="1" aria-label="Wave strength"></label><span class="hint">Drag to look around · Scroll to zoom</span><button id="pause" aria-pressed="false">Pause water</button></footer>
+</body>
+</html>

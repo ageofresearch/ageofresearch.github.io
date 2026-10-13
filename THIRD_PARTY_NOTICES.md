@@ -12,3 +12,12 @@ text is retained at
 Project: <https://katex.org/>
 
 Source: <https://github.com/KaTeX/KaTeX>
+
+## Water demo
+
+The standalone WebGPU demo at `site/water-demo/` includes Tidewater engine and
+water code, with water-map and buoyancy adaptations. The code is distributed
+under the MIT License; its copyright notice and license are retained at
+`site/water-demo/LICENSE.txt`.
+
+Upstream project: <https://github.com/dgreenheck/tidewater>

@@ -1,0 +1,447 @@
+{
+  "build": "water-safari-webgl-r11",
+  "scope": "Actual Chrome WebGL2 using SwiftShader, WebGPU absent; not physical Safari/WebKit.",
+  "physicalSafariTested": false,
+  "physicalPhoneFPSVerified": false,
+  "cpuTestsPassed": 28,
+  "reflectionTests": "pass",
+  "comparisons": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "beforeReflection": [
+        147,
+        317
+      ],
+      "nativeCrop": [
+        416,
+        160
+      ],
+      "nativeDensity": 1,
+      "cropPixelFraction": 0.20221169036334913,
+      "beforeMovingCaptures": 2,
+      "afterMovingCaptures": 12,
+      "beforePausedCameraCaptures": 0,
+      "afterPausedCameraCaptures": 1,
+      "beforePausedYachtCaptures": 0,
+      "afterPausedYachtCaptures": 1,
+      "actualTextureChanges": true
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "beforeReflection": [
+        480,
+        270
+      ],
+      "nativeCrop": [
+        864,
+        352
+      ],
+      "nativeDensity": 1,
+      "cropPixelFraction": 0.33,
+      "beforeMovingCaptures": 2,
+      "afterMovingCaptures": 12,
+      "beforePausedCameraCaptures": 0,
+      "afterPausedCameraCaptures": 1,
+      "beforePausedYachtCaptures": 0,
+      "afterPausedYachtCaptures": 1,
+      "actualTextureChanges": true
+    }
+  ],
+  "quality": [
+    {
+      "width": 390,
+      "meanChannelDelta255": 0.740982905982906,
+      "p99ChannelDelta255": 16.0,
+      "maximumChannelDelta255": 100,
+      "note": "Different mirror edge filtering in Full and Auto; main resolution, geometry and display AA unchanged."
+    },
+    {
+      "width": 1280,
+      "meanChannelDelta255": 0.27821412037037035,
+      "p99ChannelDelta255": 7.0,
+      "maximumChannelDelta255": 86,
+      "note": "Different mirror edge filtering in Full and Auto; main resolution, geometry and display AA unchanged."
+    }
+  ],
+  "cost": {
+    "summary": {
+      "scope": "Serial ABBA in one Chrome SwiftShader GPU process, native 390x844; real GPU fence completion, not phone/Safari FPS.",
+      "beforeMs": 304.950000000031,
+      "afterMs": 360.1083333333178,
+      "costRatio": 1.1808766464446012
+    },
+    "results": [
+      {
+        "variant": "before",
+        "build": "water-safari-webgl-r10",
+        "output": [
+          390,
+          844
+        ],
+        "frames": [
+          {
+            "cpu": 0.8999999985098839,
+            "completed": 211.7999999988824
+          },
+          {
+            "cpu": 0.900000000372529,
+            "completed": 208.30000000074506
+          },
+          {
+            "cpu": 0.900000000372529,
+            "completed": 215.7999999988824
+          },
+          {
+            "cpu": 1,
+            "completed": 199.90000000037253
+          },
+          {
+            "cpu": 0.900000000372529,
+            "completed": 208
+          },
+          {
+            "cpu": 1.099999999627471,
+            "completed": 224.90000000037253
+          },
+          {
+            "cpu": 1.199999999254942,
+            "completed": 226.59999999962747
+          },
+          {
+            "cpu": 1,
+            "completed": 225.40000000037253
+          },
+          {
+            "cpu": 1.5,
+            "completed": 211.19999999925494
+          },
+          {
+            "cpu": 0.8000000007450581,
+            "completed": 203.7000000011176
+          },
+          {
+            "cpu": 1.5,
+            "completed": 202.7999999988824
+          },
+          {
+            "cpu": 1,
+            "completed": 221.7000000011176
+          }
+        ],
+        "meanCompletedMs": 213.34166666663563,
+        "reflection": null
+      },
+      {
+        "variant": "after",
+        "build": "water-safari-webgl-r11",
+        "output": [
+          390,
+          844
+        ],
+        "frames": [
+          {
+            "cpu": 1.5,
+            "completed": 244
+          },
+          {
+            "cpu": 1.299999998882413,
+            "completed": 248
+          },
+          {
+            "cpu": 1.199999999254942,
+            "completed": 239.69999999925494
+          },
+          {
+            "cpu": 1,
+            "completed": 252.19999999925494
+          },
+          {
+            "cpu": 1.1000000014901161,
+            "completed": 239.90000000037253
+          },
+          {
+            "cpu": 1,
+            "completed": 258
+          },
+          {
+            "cpu": 1.099999999627471,
+            "completed": 245.40000000037253
+          },
+          {
+            "cpu": 0.900000000372529,
+            "completed": 256.59999999962747
+          },
+          {
+            "cpu": 1.200000001117587,
+            "completed": 244.2000000011176
+          },
+          {
+            "cpu": 1.199999999254942,
+            "completed": 256.59999999962747
+          },
+          {
+            "cpu": 1.300000000745058,
+            "completed": 240.40000000037253
+          },
+          {
+            "cpu": 1.400000000372529,
+            "completed": 261.59999999962747
+          }
+        ],
+        "meanCompletedMs": 248.8833333333023,
+        "reflection": {
+          "cadence": "on camera or object change; same rendered frame",
+          "pixelsPerOutputPixel": 1,
+          "samples": 0,
+          "antialiasing": "Trilinear mip filtering + display MSAA/FXAA",
+          "mipmapped": true,
+          "captures": 22,
+          "reused": 1,
+          "empty": 0,
+          "capturedTime": 0.33333333333333354,
+          "output": [
+            390,
+            844
+          ],
+          "crop": {
+            "x": -11,
+            "y": 423,
+            "width": 416,
+            "height": 160
+          },
+          "sourcePixels": 66560,
+          "fullFramePixels": 329160
+        }
+      },
+      {
+        "variant": "after",
+        "build": "water-safari-webgl-r11",
+        "output": [
+          390,
+          844
+        ],
+        "frames": [
+          {
+            "cpu": 1.699999999254942,
+            "completed": 249
+          },
+          {
+            "cpu": 1.900000000372529,
+            "completed": 244.2999999988824
+          },
+          {
+            "cpu": 1.1000000014901161,
+            "completed": 254.60000000149012
+          },
+          {
+            "cpu": 1.199999999254942,
+            "completed": 649.3999999985099
+          },
+          {
+            "cpu": 3.900000000372529,
+            "completed": 497.90000000037253
+          },
+          {
+            "cpu": 1.099999999627471,
+            "completed": 509.7000000011176
+          },
+          {
+            "cpu": 6,
+            "completed": 285.09999999962747
+          },
+          {
+            "cpu": 1.300000000745058,
+            "completed": 263.59999999962747
+          },
+          {
+            "cpu": 1.599999999627471,
+            "completed": 272.09999999962747
+          },
+          {
+            "cpu": 0.900000000372529,
+            "completed": 785.9000000003725
+          },
+          {
+            "cpu": 1.599999999627471,
+            "completed": 667.7000000011176
+          },
+          {
+            "cpu": 2.899999998509884,
+            "completed": 976.6999999992549
+          }
+        ],
+        "meanCompletedMs": 471.3333333333333,
+        "reflection": {
+          "cadence": "on camera or object change; same rendered frame",
+          "pixelsPerOutputPixel": 1,
+          "samples": 0,
+          "antialiasing": "Trilinear mip filtering + display MSAA/FXAA",
+          "mipmapped": true,
+          "captures": 42,
+          "reused": 1,
+          "empty": 0,
+          "capturedTime": 0.33333333333333354,
+          "output": [
+            390,
+            844
+          ],
+          "crop": {
+            "x": -11,
+            "y": 423,
+            "width": 416,
+            "height": 160
+          },
+          "sourcePixels": 66560,
+          "fullFramePixels": 329160
+        }
+      },
+      {
+        "variant": "before",
+        "build": "water-safari-webgl-r10",
+        "output": [
+          390,
+          844
+        ],
+        "frames": [
+          {
+            "cpu": 3.5,
+            "completed": 534.4000000003725
+          },
+          {
+            "cpu": 0.8000000007450581,
+            "completed": 398.59999999962747
+          },
+          {
+            "cpu": 1,
+            "completed": 455.7000000011176
+          },
+          {
+            "cpu": 0.8999999985098839,
+            "completed": 366.59999999962747
+          },
+          {
+            "cpu": 1.400000000372529,
+            "completed": 380.90000000037253
+          },
+          {
+            "cpu": 1,
+            "completed": 386
+          },
+          {
+            "cpu": 1.5,
+            "completed": 510.90000000037253
+          },
+          {
+            "cpu": 2,
+            "completed": 588.7999999988824
+          },
+          {
+            "cpu": 1.200000001117587,
+            "completed": 427.09999999962747
+          },
+          {
+            "cpu": 0.900000000372529,
+            "completed": 268
+          },
+          {
+            "cpu": 1.200000001117587,
+            "completed": 214.60000000149012
+          },
+          {
+            "cpu": 1.099999999627471,
+            "completed": 227.09999999962747
+          }
+        ],
+        "meanCompletedMs": 396.55833333342645,
+        "reflection": null
+      }
+    ]
+  },
+  "costNote": "A serial cloud ABBA shows about 18% extra completed-frame cost for fresh native mirrors relative to stale 12Hz low-resolution mirrors. Timing varies; no phone FPS or speedup is claimed. Duplicate mirror MSAA and mirror FXAA experiments were not selected for Auto.",
+  "artifacts": {
+    "water-demo": {
+      ".nojekyll": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "THIRD_PARTY_LICENSES.txt": {
+        "bytes": 1099,
+        "sha256": "b75eddf9c9571178b58d36484056e15b825640673f88a8f4ee5a6075fcc8b1cf"
+      },
+      "index.html": {
+        "bytes": 5804,
+        "sha256": "129346b15faa56e9b410815b724fa127dba4c40e5a2e30c84f9b9052167b5d29"
+      },
+      "LICENSE.txt": {
+        "bytes": 1083,
+        "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec"
+      },
+      "assets/WaterWebGLBackend-BTi9oyP4.js": {
+        "bytes": 567915,
+        "sha256": "96bf7ed10089ea859c6284d4209b25509c9b5b4a1c203f3ae5f149a61ca38b0d"
+      },
+      "assets/preload-helper-uBIymjUX.js": {
+        "bytes": 1233,
+        "sha256": "e1a22f3f73566f21ff932e058d32243e4a118f3491b91e96893aa5ab7eb49a00"
+      },
+      "assets/water-map-C67PkPkl.js": {
+        "bytes": 337687,
+        "sha256": "6a9f68f6901c603220d7542e97f0e73135dbb8edcf9f48afadf7f4fee61a8c22"
+      },
+      "assets/WaterDisplayColor-Cd3iiWcj.js": {
+        "bytes": 443112,
+        "sha256": "606649dd2ae3429d1fb795ada9ab0dea4d8a200b4a2747927f228bb8c9a8842d"
+      },
+      "assets/water-map-CHWys3WM.js": {
+        "bytes": 1356,
+        "sha256": "73bacc808c486822e54ecbbdcdec535d60f93a5d8baa980304f191fb9e19a65c"
+      }
+    },
+    "water-demo-r9": {
+      ".nojekyll": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "THIRD_PARTY_LICENSES.txt": {
+        "bytes": 1099,
+        "sha256": "b75eddf9c9571178b58d36484056e15b825640673f88a8f4ee5a6075fcc8b1cf"
+      },
+      "index.html": {
+        "bytes": 5804,
+        "sha256": "e56fce06b32a5611331bb31e65748b94cdaed937d4d679732588e9b0bd1f9513"
+      },
+      "LICENSE.txt": {
+        "bytes": 1083,
+        "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec"
+      },
+      "assets/water-map-8D-kIQ9B.js": {
+        "bytes": 1356,
+        "sha256": "d80284e2f05b112337b96cf5e220a50892e9637f039c26a02a2ad8cba7f33836"
+      },
+      "assets/WaterWebGLBackend-BTi9oyP4.js": {
+        "bytes": 567915,
+        "sha256": "96bf7ed10089ea859c6284d4209b25509c9b5b4a1c203f3ae5f149a61ca38b0d"
+      },
+      "assets/preload-helper-uBIymjUX.js": {
+        "bytes": 1233,
+        "sha256": "e1a22f3f73566f21ff932e058d32243e4a118f3491b91e96893aa5ab7eb49a00"
+      },
+      "assets/water-map-DtnsHD-R.js": {
+        "bytes": 339784,
+        "sha256": "547c8cfc24f29ca93176479f3754dbe8a69050ec141dd5bf19f83ea3ef57d760"
+      },
+      "assets/WaterDisplayColor-Cd3iiWcj.js": {
+        "bytes": 443112,
+        "sha256": "606649dd2ae3429d1fb795ada9ab0dea4d8a200b4a2747927f228bb8c9a8842d"
+      }
+    }
+  },
+  "controls": "pass",
+  "webgpuOriginalAndPreviewRegression": "pass"
+}

@@ -53,38 +53,38 @@
     },
     "index.html": {
       "bytes": 5804,
-      "sha256": "93cfa8d01df2a7dad757334040eda64134af480cd35be8368b5a1f7cb22bb5d0"
+      "sha256": "e56fce06b32a5611331bb31e65748b94cdaed937d4d679732588e9b0bd1f9513"
     },
     "LICENSE.txt": {
       "bytes": 1083,
       "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec"
     },
+    "assets/water-map-8D-kIQ9B.js": {
+      "bytes": 1356,
+      "sha256": "d80284e2f05b112337b96cf5e220a50892e9637f039c26a02a2ad8cba7f33836"
+    },
+    "assets/WaterWebGLBackend-BTi9oyP4.js": {
+      "bytes": 567915,
+      "sha256": "96bf7ed10089ea859c6284d4209b25509c9b5b4a1c203f3ae5f149a61ca38b0d"
+    },
     "assets/preload-helper-uBIymjUX.js": {
       "bytes": 1233,
       "sha256": "e1a22f3f73566f21ff932e058d32243e4a118f3491b91e96893aa5ab7eb49a00"
     },
-    "assets/water-map-D8XY9eN5.js": {
-      "bytes": 1356,
-      "sha256": "37f1f1f74d65a4ceda64575a159365e52b36a1ea513bcf24e3e2cfa004393c01"
+    "assets/water-map-DtnsHD-R.js": {
+      "bytes": 339784,
+      "sha256": "547c8cfc24f29ca93176479f3754dbe8a69050ec141dd5bf19f83ea3ef57d760"
     },
     "assets/WaterDisplayColor-Cd3iiWcj.js": {
       "bytes": 443112,
       "sha256": "606649dd2ae3429d1fb795ada9ab0dea4d8a200b4a2747927f228bb8c9a8842d"
-    },
-    "assets/water-map-DaSI6ssg.js": {
-      "bytes": 339715,
-      "sha256": "c1309fc4c07302ca33a281a24363f3b74aee58efce7126e66676b68626f009c2"
-    },
-    "assets/WaterWebGLBackend-BmfJJK-Q.js": {
-      "bytes": 562388,
-      "sha256": "1dd1b434f611b7da4e4633420284550762d74125034259d7e2d698e5f93e2899"
     }
   },
   "entrySourceSHA256": "f5c7e3dc19b530f8b1d604d623c90b00b95b3437474c5f992ddd59688785da8a",
   "previewPolicySourceSHA256": "2d308beba2a31bfa89bff615b918999f61f76e736a1066364a7314c1338437c3",
   "patchHelperPostGuardSHA256": "57ef79eb9a1045c078ee8a4f13583e66da1b8408231eed48cc92b2eaf5db6da8",
   "postBenchmarkGuardNote": "A CPU-tested overflow fallback was added after native timing; ordinary camera selections remain unchanged. Final Chrome build validates the updated guard.",
-  "compatibilityBuild": "water-safari-webgl-r10",
+  "compatibilityBuild": "water-safari-webgl-r11",
   "originalWebGPURenderingRetained": true,
-  "compatibilityNote": "Both demo entrypoints now include automatic WebGL2 startup for browsers without WebGPU; the original renderer still runs when WebGPU initializes."
+  "compatibilityNote": "Automatic WebGL2 startup is retained. R11 fixes stale and low-resolution WebGL mirrors; WebGPU rendering is unchanged."
 }

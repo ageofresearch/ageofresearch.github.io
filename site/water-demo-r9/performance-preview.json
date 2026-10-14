@@ -4,7 +4,7 @@
   "url": "https://ageofresearch.github.io/water-demo-r9/?quality=auto&view=sundeck&renderer=r9",
   "baselinePublicURL": "https://ageofresearch.github.io/water-demo/?quality=auto&view=sundeck&v=trideck-top-r8",
   "originalRendererComparison": "https://ageofresearch.github.io/water-demo-r9/?quality=auto&view=sundeck&renderer=original",
-  "originalPublishedR8Unchanged": true,
+  "originalPublishedR8Unchanged": false,
   "fiftyPercentImprovementVerified": false,
   "physicalAndroidTested": false,
   "benchmarks": [
@@ -47,21 +47,44 @@
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
+    "THIRD_PARTY_LICENSES.txt": {
+      "bytes": 1099,
+      "sha256": "b75eddf9c9571178b58d36484056e15b825640673f88a8f4ee5a6075fcc8b1cf"
+    },
     "index.html": {
-      "bytes": 5720,
-      "sha256": "babbb46c3efa47c2baa287b6ba0f6001895bcfaee083f00bdd020efdd75e86d0"
+      "bytes": 5804,
+      "sha256": "93cfa8d01df2a7dad757334040eda64134af480cd35be8368b5a1f7cb22bb5d0"
     },
     "LICENSE.txt": {
       "bytes": 1083,
       "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec"
     },
-    "assets/water-map-DJDf5nx7.js": {
-      "bytes": 781716,
-      "sha256": "ae1bc1d01d588aba1303dd8b261afb6bd7550ee91d5ed14838693d58e0ca9000"
+    "assets/preload-helper-uBIymjUX.js": {
+      "bytes": 1233,
+      "sha256": "e1a22f3f73566f21ff932e058d32243e4a118f3491b91e96893aa5ab7eb49a00"
+    },
+    "assets/water-map-D8XY9eN5.js": {
+      "bytes": 1356,
+      "sha256": "37f1f1f74d65a4ceda64575a159365e52b36a1ea513bcf24e3e2cfa004393c01"
+    },
+    "assets/WaterDisplayColor-Cd3iiWcj.js": {
+      "bytes": 443112,
+      "sha256": "606649dd2ae3429d1fb795ada9ab0dea4d8a200b4a2747927f228bb8c9a8842d"
+    },
+    "assets/water-map-DaSI6ssg.js": {
+      "bytes": 339715,
+      "sha256": "c1309fc4c07302ca33a281a24363f3b74aee58efce7126e66676b68626f009c2"
+    },
+    "assets/WaterWebGLBackend-BmfJJK-Q.js": {
+      "bytes": 562388,
+      "sha256": "1dd1b434f611b7da4e4633420284550762d74125034259d7e2d698e5f93e2899"
     }
   },
   "entrySourceSHA256": "f5c7e3dc19b530f8b1d604d623c90b00b95b3437474c5f992ddd59688785da8a",
   "previewPolicySourceSHA256": "2d308beba2a31bfa89bff615b918999f61f76e736a1066364a7314c1338437c3",
   "patchHelperPostGuardSHA256": "57ef79eb9a1045c078ee8a4f13583e66da1b8408231eed48cc92b2eaf5db6da8",
-  "postBenchmarkGuardNote": "A CPU-tested overflow fallback was added after native timing; ordinary camera selections remain unchanged. Final Chrome build validates the updated guard."
+  "postBenchmarkGuardNote": "A CPU-tested overflow fallback was added after native timing; ordinary camera selections remain unchanged. Final Chrome build validates the updated guard.",
+  "compatibilityBuild": "water-safari-webgl-r10",
+  "originalWebGPURenderingRetained": true,
+  "compatibilityNote": "Both demo entrypoints now include automatic WebGL2 startup for browsers without WebGPU; the original renderer still runs when WebGPU initializes."
 }

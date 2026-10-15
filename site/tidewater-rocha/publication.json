@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r8",
+  "build": "tidewater-rocha-public-r9",
   "worlds": [
     "tidewater",
     "rocha"
@@ -71,7 +71,8 @@
         "bridge": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Wheel-House_Low-res.jpg"
       },
       "basis": "Earlier Salvagni model photographs; owner-specific finishes unverified",
-      "sourceLayoutAndMasksUnchanged": true,
+      "sourceAssetsAndMasksUnchanged": true,
+      "derivedStairOpeningsAndLobbyDoorway": true,
       "additionalTextures": 0,
       "additionalRenderPasses": 0,
       "losslessIndexedInputs": true,
@@ -79,7 +80,18 @@
       "opaqueBackFaceCulling": true,
       "interDeckFurnitureFit": "service-ceiling-fit-1"
     },
-    "navigation": "Source deck collision masks; virtual room and deck jumps; optional sun deck hidden initially",
+    "stairs": {
+      "version": "photo-guided-stairs-1",
+      "routes": 4,
+      "references": {
+        "lobby": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Lobby_Low-res.jpg",
+        "inside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Stairs_Low-res.jpg",
+        "outside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Upper-Deck-2_Low-res.jpg"
+      },
+      "basis": "Model-series photographs and R03 plans; local rises and fits estimated",
+      "sunDeckInitiallyVisible": true
+    },
+    "navigation": "Source masks plus derived stair, landing, headroom and lobby doorway support; walk between all four decks; room jump remains optional",
     "assetBasis": "rocha/luz-de-mar/MODEL-BASIS.md"
   },
   "lakeYacht": {

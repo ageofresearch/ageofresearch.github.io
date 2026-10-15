@@ -1,0 +1,196 @@
+{
+  "scope": "Paired alternating A/B model-only GPU timestamps, 320x208, six warm-up pairs and ten measured pairs per view. Software Vulkan; no terrain, water, shadows or post chain. Diagnostic cost, not device/browser FPS.",
+  "reports": [
+    {
+      "room": "MD_R02",
+      "baselineMs": [
+        23.855104,
+        22.28224,
+        21.692416,
+        21.037056,
+        20.774912,
+        21.495808,
+        20.774912,
+        21.102592,
+        21.95456,
+        20.119552
+      ],
+      "refinedMs": [
+        15.335424,
+        15.335424,
+        14.221312,
+        14.483456,
+        14.024704,
+        14.41792,
+        14.7456,
+        15.07328,
+        14.024704,
+        14.811136
+      ],
+      "baselineMedianMs": 21.495808,
+      "refinedMedianMs": 14.7456,
+      "pairedRatioMedian": 0.688235294117647
+    },
+    {
+      "room": "MD_R04",
+      "baselineMs": [
+        11.730944,
+        10.682368,
+        11.403264,
+        10.81344,
+        12.320768,
+        10.944512,
+        11.075584,
+        10.944512,
+        10.944512,
+        11.4688
+      ],
+      "refinedMs": [
+        8.585216,
+        8.716288,
+        8.51968,
+        8.51968,
+        8.650752,
+        8.978432,
+        8.585216,
+        8.716288,
+        8.454144,
+        8.84736
+      ],
+      "baselineMedianMs": 11.075584,
+      "refinedMedianMs": 8.650752,
+      "pairedRatioMedian": 0.775147928994083
+    },
+    {
+      "room": "LD_R03",
+      "baselineMs": [
+        14.221312,
+        23.986176,
+        44.630016,
+        209.977344,
+        78.839808,
+        19.595264,
+        13.631488,
+        17.629184,
+        19.529728,
+        18.219008
+      ],
+      "refinedMs": [
+        25.821184,
+        45.154304,
+        27.918336,
+        38.273024,
+        26.738688,
+        14.09024,
+        12.45184,
+        15.40096,
+        9.50272,
+        9.633792
+      ],
+      "baselineMedianMs": 19.595264,
+      "refinedMedianMs": 25.821184,
+      "pairedRatioMedian": 0.7190635451505016
+    },
+    {
+      "room": "UD_R02",
+      "baselineMs": [
+        19.398656,
+        18.939904,
+        17.235968,
+        26.148864,
+        13.1072,
+        21.430272,
+        13.43488,
+        16.121856,
+        24.444928,
+        63.307776
+      ],
+      "refinedMs": [
+        9.371648,
+        16.71168,
+        11.272192,
+        63.111168,
+        13.828096,
+        13.76256,
+        15.204352,
+        25.493504,
+        10.223616,
+        26.345472
+      ],
+      "baselineMedianMs": 19.398656,
+      "refinedMedianMs": 15.204352,
+      "pairedRatioMedian": 0.8823529411764707
+    },
+    {
+      "room": "UD_R03",
+      "baselineMs": [
+        17.235968,
+        24.969216,
+        24.641536,
+        25.034752,
+        18.087936,
+        9.633792,
+        10.027008,
+        9.8304,
+        10.747904,
+        18.67776
+      ],
+      "refinedMs": [
+        13.303808,
+        15.532032,
+        12.582912,
+        19.791872,
+        14.614528,
+        8.716288,
+        7.340032,
+        7.405568,
+        7.143424,
+        11.665408
+      ],
+      "baselineMedianMs": 18.087936,
+      "refinedMedianMs": 12.582912,
+      "pairedRatioMedian": 0.7533333333333334
+    }
+  ],
+  "models": [
+    {
+      "version": "luz-de-mar-rocha-1",
+      "sourceComponents": 694,
+      "sourceTriangles": 159885,
+      "sourceDisplayRecords": 613,
+      "consumedProxies": 0,
+      "renderedComponents": 613,
+      "triangles": 59237,
+      "batches": 12,
+      "sourceBinaryBytes": 3837030,
+      "newTextures": 0,
+      "baseTriangles": 41645,
+      "interiorVersion": "salvagni-reference-1",
+      "refinedComponents": 109,
+      "detailParts": 135,
+      "indexedInputs": true,
+      "vertices": 57171,
+      "geometryBytes": 3328314
+    },
+    {
+      "version": "luz-de-mar-rocha-1",
+      "sourceComponents": 694,
+      "sourceTriangles": 159885,
+      "sourceDisplayRecords": 613,
+      "consumedProxies": 60,
+      "renderedComponents": 553,
+      "triangles": 62923,
+      "batches": 12,
+      "sourceBinaryBytes": 3837030,
+      "newTextures": 0,
+      "baseTriangles": 41645,
+      "interiorVersion": "salvagni-crafted-2",
+      "refinedComponents": 266,
+      "detailParts": 394,
+      "indexedInputs": true,
+      "vertices": 55967,
+      "geometryBytes": 3287822
+    }
+  ],
+  "errors": []
+}

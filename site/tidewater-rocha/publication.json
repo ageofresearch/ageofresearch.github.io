@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r6",
+  "build": "tidewater-rocha-public-r7",
   "worlds": [
     "tidewater",
     "rocha"
@@ -61,7 +61,7 @@
     },
     "walk": "walk=MD_R02",
     "interior": {
-      "version": "salvagni-reference-1",
+      "version": "salvagni-crafted-2",
       "references": {
         "saloon": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Salon-2_Low-res.jpg",
         "suite": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Owner-Suite-1_Low-res.jpg",
@@ -74,7 +74,9 @@
       "sourceLayoutAndMasksUnchanged": true,
       "additionalTextures": 0,
       "additionalRenderPasses": 0,
-      "losslessIndexedInputs": true
+      "losslessIndexedInputs": true,
+      "stableIndividualObjectIDs": true,
+      "opaqueBackFaceCulling": true
     },
     "navigation": "Source deck collision masks; virtual room and deck jumps; optional sun deck hidden initially",
     "assetBasis": "rocha/luz-de-mar/MODEL-BASIS.md"

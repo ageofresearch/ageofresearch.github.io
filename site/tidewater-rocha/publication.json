@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r2",
+  "build": "tidewater-rocha-public-r3",
   "worlds": [
     "tidewater",
     "rocha"
@@ -11,6 +11,14 @@
   "minimumSampledTexturesPerShaderStage": 32,
   "entry": "play.html",
   "renderingSettingsChanged": false,
+  "fastWater": {
+    "version": "rocha-fast-water-1",
+    "default": false,
+    "urlParameter": "fastWater=1",
+    "button": "Performance → Enable fast water",
+    "method": "Surface-only shading, baked scrolling ripple normals, same-frame yacht reflection; detailed underwater fallback",
+    "resolutionAndAAUnchanged": true
+  },
   "lakeYacht": {
     "version": "rocha-lake-yacht-1",
     "lakeId": "water-4",

@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r5",
+  "build": "tidewater-rocha-public-r6",
   "worlds": [
     "tidewater",
     "rocha"
@@ -73,7 +73,8 @@
       "basis": "Earlier Salvagni model photographs; owner-specific finishes unverified",
       "sourceLayoutAndMasksUnchanged": true,
       "additionalTextures": 0,
-      "additionalRenderPasses": 0
+      "additionalRenderPasses": 0,
+      "losslessIndexedInputs": true
     },
     "navigation": "Source deck collision masks; virtual room and deck jumps; optional sun deck hidden initially",
     "assetBasis": "rocha/luz-de-mar/MODEL-BASIS.md"

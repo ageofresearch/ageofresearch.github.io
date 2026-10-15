@@ -1,0 +1,4792 @@
+[
+  {
+    "id": "H01",
+    "boundaryBin": [
+      12,
+      4
+    ],
+    "localXYZ": [
+      625.8495,
+      25.184161464795128,
+      242.3395
+    ],
+    "sourceENH": [
+      855003.0235,
+      1612491.2134999998,
+      25.184161464795128
+    ],
+    "sampledRegionalNetVolumeM3": 1785.902291404006,
+    "sampledPeakM3s": 0.5562249488069383,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        642.9350625,
+        238.03468750000002
+      ],
+      [
+        631.5446875,
+        240.9045625
+      ],
+      [
+        620.1543125000001,
+        243.7744375
+      ],
+      [
+        608.7639375000001,
+        246.6443125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H02",
+    "boundaryBin": [
+      -14,
+      14
+    ],
+    "localXYZ": [
+      -690.2147142857144,
+      14.965457205801744,
+      727.239267857143
+    ],
+    "sourceENH": [
+      853686.9592857143,
+      1612006.3137321428,
+      14.965457205801744
+    ],
+    "sampledRegionalNetVolumeM3": 740.0446837425644,
+    "sampledPeakM3s": 0.08111193696892213,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -696.2055,
+        749.7
+      ],
+      [
+        -687.1591249999999,
+        719.7547812500001
+      ],
+      [
+        -678.930625,
+        704.7906562500001
+      ],
+      [
+        -683.044875,
+        712.2727187500001
+      ],
+      [
+        -691.273375,
+        727.23684375
+      ],
+      [
+        -699.5018749999999,
+        742.20096875
+      ],
+      [
+        -695.3876250000001,
+        734.71890625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H03",
+    "boundaryBin": [
+      13,
+      -3
+    ],
+    "localXYZ": [
+      677.2991875,
+      29.989234617938713,
+      -108.5219375
+    ],
+    "sourceENH": [
+      855054.4731875,
+      1612842.0749374998,
+      29.989234617938713
+    ],
+    "sampledRegionalNetVolumeM3": 641.3723958423077,
+    "sampledPeakM3s": 0.1900065292208599,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        677.2991875,
+        -108.5219375
+      ],
+      [
+        678.8570625,
+        -117.2013125
+      ],
+      [
+        684.0453749999999,
+        -143.526
+      ],
+      [
+        682.2816249999998,
+        -134.73199999999997
+      ],
+      [
+        680.517875,
+        -125.93799999999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H04",
+    "boundaryBin": [
+      -14,
+      13
+    ],
+    "localXYZ": [
+      -664.53075,
+      14.98819271082903,
+      678.6034375
+    ],
+    "sourceENH": [
+      853712.64325,
+      1612054.9495624998,
+      14.98819271082903
+    ],
+    "sampledRegionalNetVolumeM3": 632.2787570338785,
+    "sampledPeakM3s": 0.08106297681865775,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -670.702125,
+        689.82653125
+      ],
+      [
+        -666.5878749999999,
+        682.34446875
+      ],
+      [
+        -662.4736249999999,
+        674.8624062499999
+      ],
+      [
+        -654.2451249999999,
+        659.89828125
+      ],
+      [
+        -658.359375,
+        667.38034375
+      ],
+      [
+        -674.8163750000001,
+        697.3085937500001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H05",
+    "boundaryBin": [
+      13,
+      -2
+    ],
+    "localXYZ": [
+      671.846625,
+      29.9147214609146,
+      -78.14412499999999
+    ],
+    "sourceENH": [
+      855049.020625,
+      1612811.697125,
+      29.9147214609146
+    ],
+    "sampledRegionalNetVolumeM3": 612.8939105913112,
+    "sampledPeakM3s": 0.18965488687458604,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        674.1834375000001,
+        -91.1631875
+      ],
+      [
+        675.7413125,
+        -99.84256250000001
+      ],
+      [
+        669.5098125,
+        -65.12506249999998
+      ],
+      [
+        667.9519375,
+        -56.44568749999999
+      ],
+      [
+        672.6255624999999,
+        -82.48381249999998
+      ],
+      [
+        671.0676874999999,
+        -73.80443749999998
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H06",
+    "boundaryBin": [
+      -9,
+      4
+    ],
+    "localXYZ": [
+      -422.2302760416666,
+      21.003267755999737,
+      228.21870833333332
+    ],
+    "sourceENH": [
+      853954.9437239583,
+      1612505.3342916665,
+      21.003267755999737
+    ],
+    "sampledRegionalNetVolumeM3": 492.06903790327743,
+    "sampledPeakM3s": 0.15268072562016008,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -403.69896875,
+        207.45825000000002
+      ],
+      [
+        -421.25878124999997,
+        226.36465625
+      ],
+      [
+        -426.59434375,
+        232.95996874999997
+      ],
+      [
+        -431.92990625,
+        239.55528125
+      ],
+      [
+        -437.26546874999997,
+        246.15059374999998
+      ],
+      [
+        -412.6341875,
+        216.82350000000002
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H07",
+    "boundaryBin": [
+      -14,
+      15
+    ],
+    "localXYZ": [
+      -675.1822142857143,
+      14.978054598841567,
+      781.0698571428572
+    ],
+    "sourceENH": [
+      853701.9917857143,
+      1611952.483142857,
+      14.978054598841567
+    ],
+    "sampledRegionalNetVolumeM3": 436.93667938522714,
+    "sampledPeakM3s": 0.049655095584741765,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -685.4984999999999,
+        757.2160000000001
+      ],
+      [
+        -654.8736875,
+        795.107125
+      ],
+      [
+        -681.7725,
+        767.0907500000001
+      ],
+      [
+        -685.0274999999999,
+        779.32425
+      ],
+      [
+        -682.1148125,
+        786.8218750000001
+      ],
+      [
+        -663.9540625,
+        792.3453750000001
+      ],
+      [
+        -673.0344375,
+        789.583625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H08",
+    "boundaryBin": [
+      -11,
+      7
+    ],
+    "localXYZ": [
+      -511.37149999999997,
+      19.888500197572117,
+      373.77049999999997
+    ],
+    "sourceENH": [
+      853865.8025,
+      1612359.7824999997,
+      19.888500197572117
+    ],
+    "sampledRegionalNetVolumeM3": 263.7430406839856,
+    "sampledPeakM3s": 0.07525533531122541,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -508.5921875,
+        356.8285625
+      ],
+      [
+        -510.44506249999995,
+        368.1231875
+      ],
+      [
+        -512.2979375,
+        379.41781249999997
+      ],
+      [
+        -514.1508125,
+        390.71243749999996
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H09",
+    "boundaryBin": [
+      -2,
+      -9
+    ],
+    "localXYZ": [
+      -72.02562499999999,
+      40.76570041262714,
+      -422.51475
+    ],
+    "sourceENH": [
+      854305.148375,
+      1613156.06775,
+      40.76570041262714
+    ],
+    "sampledRegionalNetVolumeM3": 259.7667434530434,
+    "sampledPeakM3s": 0.07523948809480904,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -82.30681249999999,
+        -411.30337499999996
+      ],
+      [
+        -68.59856249999999,
+        -426.25187500000004
+      ],
+      [
+        -54.89031249999999,
+        -441.200375
+      ],
+      [
+        -61.74443749999999,
+        -433.726125
+      ],
+      [
+        -75.45268749999998,
+        -418.77762500000006
+      ],
+      [
+        -89.16093749999999,
+        -403.829125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H10",
+    "boundaryBin": [
+      -11,
+      8
+    ],
+    "localXYZ": [
+      -516.0036875,
+      19.81270710619076,
+      402.00706249999996
+    ],
+    "sourceENH": [
+      853861.1703125,
+      1612331.5459374997,
+      19.81270710619076
+    ],
+    "sampledRegionalNetVolumeM3": 233.3065973890723,
+    "sampledPeakM3s": 0.06807618547638342,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -516.0036875,
+        402.00706249999996
+      ],
+      [
+        -517.8565625,
+        413.30168749999996
+      ],
+      [
+        -534.222,
+        446.974875
+      ],
+      [
+        -527.39,
+        436.35875
+      ],
+      [
+        -521.652,
+        424.75225
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H11",
+    "boundaryBin": [
+      -4,
+      -5
+    ],
+    "localXYZ": [
+      -179.47204464285716,
+      34.8425408333687,
+      -223.17385714285712
+    ],
+    "sourceENH": [
+      854197.7019553571,
+      1612956.7268571428,
+      34.8425408333687
+    ],
+    "sampledRegionalNetVolumeM3": 200.40659975669692,
+    "sampledPeakM3s": 0.05728967006515964,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -177.81731249999999,
+        -227.64100000000002
+      ],
+      [
+        -187.08381250000002,
+        -202.625
+      ],
+      [
+        -182.4505625,
+        -215.13299999999998
+      ],
+      [
+        -184.7671875,
+        -208.87900000000002
+      ],
+      [
+        -180.1339375,
+        -221.387
+      ],
+      [
+        -174.342375,
+        -237.022
+      ],
+      [
+        -169.709125,
+        -249.53
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H12",
+    "boundaryBin": [
+      -3,
+      -8
+    ],
+    "localXYZ": [
+      -128.49480357142858,
+      39.555721365319656,
+      -373.7910178571429
+    ],
+    "sourceENH": [
+      854248.6791964286,
+      1613107.344017857,
+      39.555721365319656
+    ],
+    "sampledRegionalNetVolumeM3": 198.64326767105945,
+    "sampledPeakM3s": 0.05769814209447535,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -106.167125,
+        -392.582625
+      ],
+      [
+        -145.69,
+        -350.99075
+      ],
+      [
+        -140.86400000000003,
+        -359.29825
+      ],
+      [
+        -136.038,
+        -367.60575
+      ],
+      [
+        -131.212,
+        -375.91325
+      ],
+      [
+        -115.219875,
+        -387.576375
+      ],
+      [
+        -124.272625,
+        -382.570125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H13",
+    "boundaryBin": [
+      8,
+      5
+    ],
+    "localXYZ": [
+      426.51793749999996,
+      29.49168547090445,
+      292.5623125000001
+    ],
+    "sourceENH": [
+      854803.6919375,
+      1612440.9906874998,
+      29.49168547090445
+    ],
+    "sampledRegionalNetVolumeM3": 197.05739848156531,
+    "sampledPeakM3s": 0.05665442476543774,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        403.7371875,
+        298.30206250000003
+      ],
+      [
+        415.12756249999995,
+        295.43218750000005
+      ],
+      [
+        426.5179374999999,
+        292.5623125000001
+      ],
+      [
+        437.90831249999997,
+        289.69243750000004
+      ],
+      [
+        449.2986874999999,
+        286.82256250000006
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H14",
+    "boundaryBin": [
+      3,
+      7
+    ],
+    "localXYZ": [
+      151.36350000000002,
+      24.803535014191336,
+      383.54825
+    ],
+    "sourceENH": [
+      854528.5375,
+      1612350.0047499998,
+      24.803535014191336
+    ],
+    "sampledRegionalNetVolumeM3": 165.26616127352713,
+    "sampledPeakM3s": 0.04827949177848377,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        151.36350000000002,
+        383.54825
+      ],
+      [
+        183.86974999999998,
+        370.11962500000004
+      ],
+      [
+        193.0895,
+        367.39975000000004
+      ],
+      [
+        177.72324999999998,
+        371.932875
+      ],
+      [
+        168.50349999999997,
+        374.65275
+      ],
+      [
+        159.507,
+        378.0955
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H15",
+    "boundaryBin": [
+      12,
+      -9
+    ],
+    "localXYZ": [
+      633.2730625,
+      40.913140929435315,
+      -424.58306250000004
+    ],
+    "sourceENH": [
+      855010.4470625,
+      1613158.1360624998,
+      40.913140929435315
+    ],
+    "sampledRegionalNetVolumeM3": 109.83027278365466,
+    "sampledPeakM3s": 0.03181774863040664,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        639.99653125,
+        -411.80203125
+      ],
+      [
+        644.47884375,
+        -403.28134375
+      ],
+      [
+        635.5142187499999,
+        -420.32271875000004
+      ],
+      [
+        631.03190625,
+        -428.84340625000004
+      ],
+      [
+        626.54959375,
+        -437.36409375
+      ],
+      [
+        622.0672812500001,
+        -445.88478125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H16",
+    "boundaryBin": [
+      -6,
+      1
+    ],
+    "localXYZ": [
+      -284.0625,
+      27.461657569783895,
+      55.832
+    ],
+    "sourceENH": [
+      854093.1115,
+      1612677.721,
+      27.461657569783895
+    ],
+    "sampledRegionalNetVolumeM3": 109.17894226479402,
+    "sampledPeakM3s": 0.03142526352745313,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -284.0625,
+        55.832
+      ],
+      [
+        -291.71475000000004,
+        70.34062500000002
+      ],
+      [
+        -296.57125,
+        78.46837500000001
+      ],
+      [
+        -286.85825,
+        62.21287500000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H17",
+    "boundaryBin": [
+      -7,
+      1
+    ],
+    "localXYZ": [
+      -303.856,
+      25.462496323232244,
+      90.66
+    ],
+    "sourceENH": [
+      854073.318,
+      1612642.893,
+      25.462496323232244
+    ],
+    "sampledRegionalNetVolumeM3": 107.8594843337922,
+    "sampledPeakM3s": 0.03089556856148258,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -306.28425,
+        94.72387499999999
+      ],
+      [
+        -301.42775,
+        86.596125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H18",
+    "boundaryBin": [
+      -13,
+      16
+    ],
+    "localXYZ": [
+      -618.5521875,
+      14.995363723380173,
+      806.154125
+    ],
+    "sourceENH": [
+      853758.6218125,
+      1611927.398875,
+      14.995363723380173
+    ],
+    "sampledRegionalNetVolumeM3": 107.46634315584929,
+    "sampledPeakM3s": 0.02495769940507355,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -600.3914374999999,
+        811.677625
+      ],
+      [
+        -609.4718124999999,
+        808.9158750000001
+      ],
+      [
+        -627.6325625,
+        803.3923750000001
+      ],
+      [
+        -618.5521875,
+        806.154125
+      ],
+      [
+        -636.7129375,
+        800.630625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H19",
+    "boundaryBin": [
+      -4,
+      -6
+    ],
+    "localXYZ": [
+      -156.2466875,
+      36.23117374885142,
+      -293.1819375
+    ],
+    "sourceENH": [
+      854220.9273125,
+      1613026.7349374997,
+      36.23117374885142
+    ],
+    "sampledRegionalNetVolumeM3": 104.431598570985,
+    "sampledPeakM3s": 0.030208849364922498,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -156.2466875,
+        -293.1819375
+      ],
+      [
+        -157.49956250000002,
+        -284.92731249999997
+      ],
+      [
+        -160.44262500000002,
+        -274.54600000000005
+      ],
+      [
+        -165.075875,
+        -262.038
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H20",
+    "boundaryBin": [
+      13,
+      -1
+    ],
+    "localXYZ": [
+      667.7806562500001,
+      29.807179448021518,
+      -26.727562500000005
+    ],
+    "sourceENH": [
+      855044.95465625,
+      1612760.2805624998,
+      29.807179448021518
+    ],
+    "sampledRegionalNetVolumeM3": 101.74518671947607,
+    "sampledPeakM3s": 0.0333080364194313,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        668.02371875,
+        -16.576187500000003
+      ],
+      [
+        667.78065625,
+        -26.727562500000005
+      ],
+      [
+        668.26678125,
+        -6.4248125000000025
+      ],
+      [
+        667.53759375,
+        -36.8789375
+      ],
+      [
+        667.2945312500001,
+        -47.0303125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H21",
+    "boundaryBin": [
+      -5,
+      -3
+    ],
+    "localXYZ": [
+      -224.26510000000002,
+      34.07363439563997,
+      -124.3356
+    ],
+    "sourceENH": [
+      854152.9089,
+      1612857.8886,
+      34.07363439563997
+    ],
+    "sampledRegionalNetVolumeM3": 90.43837308612136,
+    "sampledPeakM3s": 0.025835981846079846,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -232.9505,
+        -106.103
+      ],
+      [
+        -228.8191875,
+        -115.9331875
+      ],
+      [
+        -224.3355625,
+        -124.57356250000001
+      ],
+      [
+        -215.3683125,
+        -141.8543125
+      ],
+      [
+        -219.85193750000002,
+        -133.21393750000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H22",
+    "boundaryBin": [
+      -7,
+      2
+    ],
+    "localXYZ": [
+      -320.85375,
+      25.339204606154386,
+      119.107125
+    ],
+    "sourceENH": [
+      854056.32025,
+      1612614.4458749997,
+      25.339204606154386
+    ],
+    "sampledRegionalNetVolumeM3": 87.47566840717447,
+    "sampledPeakM3s": 0.024970727836385057,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -320.85375,
+        119.107125
+      ],
+      [
+        -315.99724999999995,
+        110.97937499999999
+      ],
+      [
+        -332.21721875,
+        132.53625
+      ],
+      [
+        -341.15243749999996,
+        141.9015
+      ],
+      [
+        -326.26040624999996,
+        126.29275000000001
+      ],
+      [
+        -311.14074999999997,
+        102.85162499999998
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H23",
+    "boundaryBin": [
+      -4,
+      -7
+    ],
+    "localXYZ": [
+      -153.11450000000002,
+      36.998898738202946,
+      -313.8185
+    ],
+    "sourceENH": [
+      854224.0595,
+      1613047.3715,
+      36.998898738202946
+    ],
+    "sampledRegionalNetVolumeM3": 73.22048689484532,
+    "sampledPeakM3s": 0.02110117341517797,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -154.9938125,
+        -301.43656250000004
+      ],
+      [
+        -153.74093750000003,
+        -309.69118749999996
+      ],
+      [
+        -151.2351875,
+        -326.2004375
+      ],
+      [
+        -152.4880625,
+        -317.9458125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H24",
+    "boundaryBin": [
+      11,
+      5
+    ],
+    "localXYZ": [
+      568.8976250000001,
+      26.365914589955175,
+      256.688875
+    ],
+    "sourceENH": [
+      854946.071625,
+      1612476.8641249998,
+      26.365914589955175
+    ],
+    "sampledRegionalNetVolumeM3": 68.25132247549543,
+    "sampledPeakM3s": 0.019582649538469114,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        585.9831875,
+        252.38406250000003
+      ],
+      [
+        563.2024375000001,
+        258.1238125
+      ],
+      [
+        574.5928125,
+        255.2539375
+      ],
+      [
+        551.8120624999999,
+        260.9936875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H25",
+    "boundaryBin": [
+      4,
+      -15
+    ],
+    "localXYZ": [
+      202.89724999999999,
+      53.08679517203231,
+      -702.404875
+    ],
+    "sourceENH": [
+      854580.07125,
+      1613435.9578749998,
+      53.08679517203231
+    ],
+    "sampledRegionalNetVolumeM3": 67.29441676687982,
+    "sampledPeakM3s": 0.01921667875828611,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        202.89724999999999,
+        -702.404875
+      ],
+      [
+        242.33203125,
+        -748.227625
+      ],
+      [
+        236.33584374999998,
+        -740.479875
+      ],
+      [
+        230.33965625000002,
+        -732.732125
+      ],
+      [
+        212.35109375000002,
+        -709.488875
+      ],
+      [
+        218.34728124999998,
+        -717.236625
+      ],
+      [
+        224.34346875,
+        -724.984375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H26",
+    "boundaryBin": [
+      2,
+      8
+    ],
+    "localXYZ": [
+      113.82925,
+      24.548654009083894,
+      406.57034374999995
+    ],
+    "sourceENH": [
+      854491.00325,
+      1612326.9826562498,
+      24.548654009083894
+    ],
+    "sampledRegionalNetVolumeM3": 65.43462214501203,
+    "sampledPeakM3s": 0.01865565513679404,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        105.16774999999998,
+        411.19128125
+      ],
+      [
+        113.82925,
+        406.57034375
+      ],
+      [
+        122.49075,
+        401.94940625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H27",
+    "boundaryBin": [
+      -8,
+      3
+    ],
+    "localXYZ": [
+      -370.9365,
+      23.905259057264555,
+      173.11900000000003
+    ],
+    "sourceENH": [
+      854006.2375,
+      1612560.434,
+      23.905259057264555
+    ],
+    "sampledRegionalNetVolumeM3": 62.07894772558155,
+    "sampledPeakM3s": 0.0178317535459623,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -350.08765625,
+        151.26675
+      ],
+      [
+        -356.04446874999996,
+        157.51025
+      ],
+      [
+        -362.00128125000003,
+        163.75375000000003
+      ],
+      [
+        -373.91490625000006,
+        176.24075000000002
+      ],
+      [
+        -391.78534375000004,
+        194.97125
+      ],
+      [
+        -385.82853125,
+        188.72775000000001
+      ],
+      [
+        -367.95809375,
+        169.99725
+      ],
+      [
+        -379.87171875,
+        182.48425000000003
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H28",
+    "boundaryBin": [
+      -5,
+      -4
+    ],
+    "localXYZ": [
+      -206.4010625,
+      34.46423369701391,
+      -159.13506249999998
+    ],
+    "sourceENH": [
+      854170.7729375,
+      1612892.6880624997,
+      34.46423369701391
+    ],
+    "sampledRegionalNetVolumeM3": 57.45866313371448,
+    "sampledPeakM3s": 0.016500440976121827,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -206.40106250000002,
+        -159.13506249999998
+      ],
+      [
+        -210.88468750000004,
+        -150.4946875
+      ],
+      [
+        -201.9174375,
+        -167.77543749999998
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H29",
+    "boundaryBin": [
+      10,
+      -17
+    ],
+    "localXYZ": [
+      514.7490937499999,
+      50.70107694060601,
+      -827.3938854166668
+    ],
+    "sourceENH": [
+      854891.92309375,
+      1613560.9468854165,
+      50.70107694060601
+    ],
+    "sampledRegionalNetVolumeM3": 54.20671103160107,
+    "sampledPeakM3s": 0.016093038479116875,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        513.5455625,
+        -801.8943125000001
+      ],
+      [
+        515.283125,
+        -811.2226250000001
+      ],
+      [
+        517.599875,
+        -823.6603749999999
+      ],
+      [
+        506.07453125000006,
+        -847.4574062500001
+      ],
+      [
+        519.9166250000001,
+        -836.098125
+      ],
+      [
+        516.07484375,
+        -844.03046875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H30",
+    "boundaryBin": [
+      6,
+      -18
+    ],
+    "localXYZ": [
+      333.97556249999997,
+      55.16815169612059,
+      -866.5031875000001
+    ],
+    "sourceENH": [
+      854711.1495625,
+      1613600.0561874998,
+      55.16815169612059
+    ],
+    "sampledRegionalNetVolumeM3": 54.09405575588982,
+    "sampledPeakM3s": 0.016929017408189227,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        321.22731250000004,
+        -850.0924375
+      ],
+      [
+        327.6014375,
+        -858.2978125
+      ],
+      [
+        333.9755625,
+        -866.5031875
+      ],
+      [
+        340.34968749999996,
+        -874.7085625
+      ],
+      [
+        346.7238125,
+        -882.9139375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H31",
+    "boundaryBin": [
+      5,
+      -16
+    ],
+    "localXYZ": [
+      266.31678124999996,
+      55.91849406720082,
+      -779.218625
+    ],
+    "sourceENH": [
+      854643.49078125,
+      1613512.7716249998,
+      55.91849406720082
+    ],
+    "sampledRegionalNetVolumeM3": 50.61280717237725,
+    "sampledPeakM3s": 0.014759638974421454,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        254.32440624999998,
+        -763.723125
+      ],
+      [
+        266.31678124999996,
+        -779.218625
+      ],
+      [
+        260.32059375,
+        -771.470875
+      ],
+      [
+        272.31296875,
+        -786.966375
+      ],
+      [
+        278.30915624999994,
+        -794.714125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H32",
+    "boundaryBin": [
+      -4,
+      -4
+    ],
+    "localXYZ": [
+      -192.87537500000002,
+      34.82641585754901,
+      -186.99
+    ],
+    "sourceENH": [
+      854184.298625,
+      1612920.5429999998,
+      34.82641585754901
+    ],
+    "sampledRegionalNetVolumeM3": 50.51572823423397,
+    "sampledPeakM3s": 0.014326193455912722,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -192.87537500000002,
+        -186.99
+      ],
+      [
+        -197.43381250000002,
+        -176.4158125
+      ],
+      [
+        -189.4004375,
+        -196.37099999999998
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H33",
+    "boundaryBin": [
+      1,
+      8
+    ],
+    "localXYZ": [
+      74.85249999999999,
+      23.132834492922917,
+      427.3645625
+    ],
+    "sourceENH": [
+      854452.0265,
+      1612306.1884374998,
+      23.132834492922917
+    ],
+    "sampledRegionalNetVolumeM3": 49.391835891683826,
+    "sampledPeakM3s": 0.014225211198074265,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        53.198750000000004,
+        438.91690625
+      ],
+      [
+        87.84474999999998,
+        420.43315625
+      ],
+      [
+        70.52174999999998,
+        429.67503125
+      ],
+      [
+        96.50624999999998,
+        415.81221875
+      ],
+      [
+        79.18324999999999,
+        425.05409375
+      ],
+      [
+        61.86024999999999,
+        434.29596875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H34",
+    "boundaryBin": [
+      -3,
+      12
+    ],
+    "localXYZ": [
+      -143.53515625,
+      19.79995408676548,
+      614.35540625
+    ],
+    "sourceENH": [
+      854233.63884375,
+      1612119.1975937497,
+      19.79995408676548
+    ],
+    "sampledRegionalNetVolumeM3": 45.169575923786795,
+    "sampledPeakM3s": 0.012957957743950482,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -140.506296875,
+        609.479671875
+      ],
+      [
+        -146.56401562499997,
+        619.231140625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H35",
+    "boundaryBin": [
+      -2,
+      -8
+    ],
+    "localXYZ": [
+      -97.114375,
+      39.89184164777365,
+      -397.588875
+    ],
+    "sourceENH": [
+      854280.059625,
+      1613131.1418749997,
+      39.89184164777365
+    ],
+    "sampledRegionalNetVolumeM3": 42.619615379005516,
+    "sampledPeakM3s": 0.01261485503887501,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -97.114375,
+        -397.588875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H36",
+    "boundaryBin": [
+      7,
+      -18
+    ],
+    "localXYZ": [
+      372.6763229166666,
+      56.47693912765779,
+      -891.41346875
+    ],
+    "sourceENH": [
+      854749.8503229166,
+      1613624.9664687498,
+      56.47693912765779
+    ],
+    "sampledRegionalNetVolumeM3": 42.047641705543995,
+    "sampledPeakM3s": 0.012932402383573752,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        376.07046875,
+        -892.0075937500001
+      ],
+      [
+        386.07078125,
+        -888.5806562500002
+      ],
+      [
+        396.07109374999993,
+        -885.15371875
+      ],
+      [
+        366.07015624999997,
+        -895.43453125
+      ],
+      [
+        353.09793750000006,
+        -891.1193125
+      ],
+      [
+        358.6775,
+        -896.185
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H37",
+    "boundaryBin": [
+      13,
+      -5
+    ],
+    "localXYZ": [
+      695.6001249999999,
+      34.21930487024069,
+      -224.044875
+    ],
+    "sourceENH": [
+      855072.774125,
+      1612957.5978749997,
+      34.21930487024069
+    ],
+    "sampledRegionalNetVolumeM3": 38.90650422255113,
+    "sampledPeakM3s": 0.011144102630257365,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        695.6001249999999,
+        -224.044875
+      ],
+      [
+        695.070375,
+        -214.85862500000002
+      ],
+      [
+        694.540625,
+        -205.672375
+      ],
+      [
+        696.57675,
+        -232.29362500000002
+      ],
+      [
+        699.4237499999999,
+        -246.91612499999997
+      ],
+      [
+        698.00025,
+        -239.604875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H38",
+    "boundaryBin": [
+      9,
+      5
+    ],
+    "localXYZ": [
+      477.774625,
+      30.031895652461095,
+      279.647875
+    ],
+    "sourceENH": [
+      854854.948625,
+      1612453.9051249998,
+      30.031895652461095
+    ],
+    "sampledRegionalNetVolumeM3": 38.20946262530969,
+    "sampledPeakM3s": 0.011005805871779642,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        483.4698125,
+        278.2129375
+      ],
+      [
+        472.0794374999999,
+        281.08281250000005
+      ],
+      [
+        494.86018749999994,
+        275.34306250000003
+      ],
+      [
+        460.6890625,
+        283.9526875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H39",
+    "boundaryBin": [
+      12,
+      -10
+    ],
+    "localXYZ": [
+      612.3556041666666,
+      44.104782603771774,
+      -464.34627083333334
+    ],
+    "sourceENH": [
+      854989.5296041666,
+      1613197.8992708332,
+      44.104782603771774
+    ],
+    "sampledRegionalNetVolumeM3": 38.130678330177,
+    "sampledPeakM3s": 0.010921358000623781,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        606.3791875,
+        -475.70718750000003
+      ],
+      [
+        613.10265625,
+        -462.92615625
+      ],
+      [
+        617.58496875,
+        -454.40546875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H40",
+    "boundaryBin": [
+      -5,
+      -2
+    ],
+    "localXYZ": [
+      -241.00186979166665,
+      34.07868920476096,
+      -74.15357291666668
+    ],
+    "sourceENH": [
+      854136.1721302083,
+      1612807.7065729166,
+      34.07868920476096
+    ],
+    "sampledRegionalNetVolumeM3": 36.27554919614805,
+    "sampledPeakM3s": 0.01031742786749141,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -236.7295,
+        -95.083
+      ],
+      [
+        -239.26646875,
+        -85.6519375
+      ],
+      [
+        -243.15128124999998,
+        -62.125562499999994
+      ],
+      [
+        -241.85634375,
+        -69.96768749999998
+      ],
+      [
+        -244.44621874999999,
+        -54.2834375
+      ],
+      [
+        -240.56140625,
+        -77.80981249999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H41",
+    "boundaryBin": [
+      2,
+      7
+    ],
+    "localXYZ": [
+      135.96437500000002,
+      24.682447220477115,
+      394.261609375
+    ],
+    "sourceENH": [
+      854513.138375,
+      1612339.2913906248,
+      24.682447220477115
+    ],
+    "sampledRegionalNetVolumeM3": 35.581022851503015,
+    "sampledPeakM3s": 0.011243172010324713,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        140.7765,
+        391.19475
+      ],
+      [
+        131.15225,
+        397.32846874999996
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H42",
+    "boundaryBin": [
+      3,
+      -14
+    ],
+    "localXYZ": [
+      170.6185,
+      51.701210753491395,
+      -686.35425
+    ],
+    "sourceENH": [
+      854547.7925,
+      1613419.90725,
+      51.701210753491395
+    ],
+    "sampledRegionalNetVolumeM3": 34.761783208965625,
+    "sampledPeakM3s": 0.00988703334777456,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        151.25124999999997,
+        -676.7238749999999
+      ],
+      [
+        173.84637499999997,
+        -687.9593124999999
+      ],
+      [
+        180.30212499999996,
+        -691.1694375
+      ],
+      [
+        160.93487499999998,
+        -681.5390625
+      ],
+      [
+        167.390625,
+        -684.7491875000001
+      ],
+      [
+        189.98575,
+        -695.984625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H43",
+    "boundaryBin": [
+      -6,
+      0
+    ],
+    "localXYZ": [
+      -274.8588879246405,
+      28.9584188057636,
+      29.53102834738986
+    ],
+    "sourceENH": [
+      854102.3151120753,
+      1612704.0219716525,
+      28.9584188057636
+    ],
+    "sampledRegionalNetVolumeM3": 33.968745038524304,
+    "sampledPeakM3s": 0.009699979592554198,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -262.86047360638815,
+        33.78822511854443
+      ],
+      [
+        -284.99025000000006,
+        40.654375
+      ],
+      [
+        -284.12675,
+        49.228125
+      ],
+      [
+        -276.8581708191645,
+        25.39242535563327
+      ],
+      [
+        -269.90542081916453,
+        29.56267535563328
+      ],
+      [
+        -255.4531875,
+        12.374625000000004
+      ],
+      [
+        -258.0430625,
+        28.058875000000004
+      ],
+      [
+        -283.71872360638815,
+        21.27747511854442
+      ],
+      [
+        -286.7481701976494,
+        23.1998662627716
+      ],
+      [
+        -285.8846701976494,
+        31.773616262771604
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H44",
+    "boundaryBin": [
+      6,
+      -17
+    ],
+    "localXYZ": [
+      308.5420520833333,
+      55.63142501230945,
+      -833.7579583333332
+    ],
+    "sourceENH": [
+      854685.7160520833,
+      1613567.310958333,
+      55.63142501230945
+    ],
+    "sampledRegionalNetVolumeM3": 33.46020411274747,
+    "sampledPeakM3s": 0.010371385627088402,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        302.29390624999996,
+        -825.705125
+      ],
+      [
+        314.8531875,
+        -841.8870625
+      ],
+      [
+        308.47906249999994,
+        -833.6816875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H45",
+    "boundaryBin": [
+      -13,
+      15
+    ],
+    "localXYZ": [
+      -645.7933125,
+      14.984839409483508,
+      797.8688750000001
+    ],
+    "sourceENH": [
+      853731.3806875,
+      1611935.684125,
+      14.984839409483508
+    ],
+    "sampledRegionalNetVolumeM3": 33.06211524479422,
+    "sampledPeakM3s": 0.004259883283530633,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -645.7933125,
+        797.8688750000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H46",
+    "boundaryBin": [
+      5,
+      -17
+    ],
+    "localXYZ": [
+      290.30153125,
+      55.932807885930345,
+      -810.209625
+    ],
+    "sourceENH": [
+      854667.47553125,
+      1613543.7626249997,
+      55.932807885930345
+    ],
+    "sampledRegionalNetVolumeM3": 32.490760856598634,
+    "sampledPeakM3s": 0.009930530429448834,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        284.30534374999996,
+        -802.461875
+      ],
+      [
+        296.29771875,
+        -817.957375
+      ],
+      [
+        290.30153125,
+        -810.209625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H47",
+    "boundaryBin": [
+      -1,
+      -10
+    ],
+    "localXYZ": [
+      -34.111124999999994,
+      43.661488689886845,
+      -467.6471250000001
+    ],
+    "sourceENH": [
+      854343.062875,
+      1613201.2001249997,
+      43.661488689886845
+    ],
+    "sampledRegionalNetVolumeM3": 31.073550854330243,
+    "sampledPeakM3s": 0.00885691262190206,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -34.111124999999994,
+        -467.6471250000001
+      ],
+      [
+        -25.001437499999987,
+        -487.04993750000006
+      ],
+      [
+        -28.64531249999999,
+        -479.28881250000006
+      ],
+      [
+        -41.182062500000015,
+        -456.148875
+      ],
+      [
+        -19.535624999999992,
+        -498.69162500000004
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H48",
+    "boundaryBin": [
+      6,
+      6
+    ],
+    "localXYZ": [
+      312.61418749999996,
+      30.69246572236163,
+      321.26106250000004
+    ],
+    "sourceENH": [
+      854689.7881875,
+      1612412.2919374998,
+      30.69246572236163
+    ],
+    "sampledRegionalNetVolumeM3": 29.59011109361623,
+    "sampledPeakM3s": 0.00838683656161313,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        312.61418749999996,
+        321.26106250000004
+      ],
+      [
+        300.957125,
+        325.15000000000003
+      ],
+      [
+        335.39493749999997,
+        315.5213125
+      ],
+      [
+        324.0045625,
+        318.3911875
+      ],
+      [
+        346.78531250000003,
+        312.6514375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H49",
+    "boundaryBin": [
+      2,
+      -14
+    ],
+    "localXYZ": [
+      119.69061718749998,
+      50.45183279307188,
+      -660.442359375
+    ],
+    "sourceENH": [
+      854496.8646171875,
+      1613393.995359375,
+      50.45183279307188
+    ],
+    "sampledRegionalNetVolumeM3": 28.583522909827025,
+    "sampledPeakM3s": 0.008123368831956895,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        102.47771875000001,
+        -650.1193125
+      ],
+      [
+        125.42824999999999,
+        -663.883375
+      ],
+      [
+        138.33974999999995,
+        -670.303625
+      ],
+      [
+        112.51675,
+        -657.463125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H50",
+    "boundaryBin": [
+      -3,
+      11
+    ],
+    "localXYZ": [
+      -116.72420535714285,
+      19.77477391605297,
+      579.9239910714286
+    ],
+    "sourceENH": [
+      854260.4497946429,
+      1612153.6290089283,
+      19.77477391605297
+    ],
+    "sampledRegionalNetVolumeM3": 28.33969864771003,
+    "sampledPeakM3s": 0.009746631375789742,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -106.06724999999997,
+        568.318625
+      ],
+      [
+        -114.83424999999997,
+        580.490125
+      ],
+      [
+        -101.68375,
+        562.232875
+      ],
+      [
+        -121.19399999999999,
+        584.317
+      ],
+      [
+        -110.45074999999997,
+        574.404375
+      ],
+      [
+        -128.39085937500002,
+        589.976734375
+      ],
+      [
+        -134.44857812500004,
+        599.728203125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H51",
+    "boundaryBin": [
+      13,
+      -8
+    ],
+    "localXYZ": [
+      658.338975,
+      40.099245619856404,
+      -373.8148875
+    ],
+    "sourceENH": [
+      855035.512975,
+      1613107.3678874997,
+      40.099245619856404
+    ],
+    "sampledRegionalNetVolumeM3": 25.884456066409182,
+    "sampledPeakM3s": 0.007296126559821484,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        651.3064375,
+        -389.07121875
+      ],
+      [
+        657.4216875,
+        -375.80484375000003
+      ],
+      [
+        654.3640625,
+        -382.43803125
+      ],
+      [
+        662.0081250000001,
+        -365.85506250000003
+      ],
+      [
+        666.5945624999999,
+        -355.90528125000003
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H52",
+    "boundaryBin": [
+      -12,
+      10
+    ],
+    "localXYZ": [
+      -591.04525,
+      19.288028526732614,
+      518.9655
+    ],
+    "sourceENH": [
+      853786.12875,
+      1612214.5875,
+      19.288028526732614
+    ],
+    "sampledRegionalNetVolumeM3": 25.69715111316726,
+    "sampledPeakM3s": 0.007551185391124069,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -589.704,
+        514.355125
+      ],
+      [
+        -595.0082500000001,
+        523.7783750000001
+      ],
+      [
+        -581.778,
+        504.729375
+      ],
+      [
+        -597.69075,
+        532.999125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H53",
+    "boundaryBin": [
+      -6,
+      -1
+    ],
+    "localXYZ": [
+      -251.568375,
+      31.40492272996588,
+      -11.15175
+    ],
+    "sourceENH": [
+      854125.605625,
+      1612744.7047499998,
+      31.40492272996588
+    ],
+    "sampledRegionalNetVolumeM3": 24.65712713676502,
+    "sampledPeakM3s": 0.007042122294780253,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -250.2734375,
+        -18.993875000000003
+      ],
+      [
+        -252.8633125,
+        -3.3096249999999987
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H54",
+    "boundaryBin": [
+      11,
+      -11
+    ],
+    "localXYZ": [
+      579.0843333333333,
+      45.17906273503167,
+      -526.4285833333333
+    ],
+    "sourceENH": [
+      854956.2583333333,
+      1613259.981583333,
+      45.17906273503167
+    ],
+    "sampledRegionalNetVolumeM3": 23.10608673277163,
+    "sampledPeakM3s": 0.00658298171450775,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        590.69109375,
+        -505.52959375
+      ],
+      [
+        581.72646875,
+        -522.57096875
+      ],
+      [
+        566.4751249999999,
+        -546.32075
+      ],
+      [
+        586.20878125,
+        -514.0502812499999
+      ],
+      [
+        577.2441562500001,
+        -531.0916562499999
+      ],
+      [
+        572.1603749999999,
+        -539.00825
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H55",
+    "boundaryBin": [
+      -1,
+      -9
+    ],
+    "localXYZ": [
+      -48.03618750000001,
+      42.4580176687086,
+      -448.674625
+    ],
+    "sourceENH": [
+      854329.1378125,
+      1613182.2276249998,
+      42.4580176687086
+    ],
+    "sampledRegionalNetVolumeM3": 22.58835473103496,
+    "sampledPeakM3s": 0.006507185332969799,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -48.03618750000001,
+        -448.674625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H56",
+    "boundaryBin": [
+      -12,
+      9
+    ],
+    "localXYZ": [
+      -561.963,
+      19.646286622864203,
+      480.665
+    ],
+    "sourceENH": [
+      853815.211,
+      1612252.8879999998,
+      19.646286622864203
+    ],
+    "sampledRegionalNetVolumeM3": 22.198972592955275,
+    "sampledPeakM3s": 0.006291084979130873,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -565.9259999999999,
+        485.477875
+      ],
+      [
+        -550.0740000000001,
+        466.22637499999996
+      ],
+      [
+        -558.0,
+        475.852125
+      ],
+      [
+        -573.8520000000001,
+        495.10362499999997
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H57",
+    "boundaryBin": [
+      -13,
+      12
+    ],
+    "localXYZ": [
+      -633.7726250000001,
+      15.503314067070738,
+      621.842875
+    ],
+    "sourceENH": [
+      853743.401375,
+      1612111.7101249998,
+      15.503314067070738
+    ],
+    "sampledRegionalNetVolumeM3": 20.854840170970277,
+    "sampledPeakM3s": 0.005908740750477062,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -633.7726250000001,
+        621.842875
+      ],
+      [
+        -637.788125,
+        629.97003125
+      ],
+      [
+        -629.855875,
+        613.0706250000001
+      ],
+      [
+        -625.9391250000001,
+        604.2983750000001
+      ],
+      [
+        -641.9023749999999,
+        637.45209375
+      ],
+      [
+        -648.07375,
+        648.6751875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H58",
+    "boundaryBin": [
+      -5,
+      -1
+    ],
+    "localXYZ": [
+      -246.712359375,
+      32.79260021856677,
+      -40.55971875
+    ],
+    "sourceENH": [
+      854130.461640625,
+      1612774.1127187498,
+      32.79260021856677
+    ],
+    "sampledRegionalNetVolumeM3": 19.328533089185388,
+    "sampledPeakM3s": 0.0055148467356080765,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -245.74115625,
+        -46.441312499999995
+      ],
+      [
+        -247.6835625,
+        -34.678125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H59",
+    "boundaryBin": [
+      8,
+      -18
+    ],
+    "localXYZ": [
+      426.07203124999995,
+      58.895926063817875,
+      -874.87290625
+    ],
+    "sourceENH": [
+      854803.24603125,
+      1613608.4259062498,
+      58.895926063817875
+    ],
+    "sampledRegionalNetVolumeM3": 19.234129280051476,
+    "sampledPeakM3s": 0.005904740362915665,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        446.07265625,
+        -868.0190312500001
+      ],
+      [
+        426.07203125,
+        -874.8729062500001
+      ],
+      [
+        406.07140625,
+        -881.7267812500002
+      ],
+      [
+        416.07171874999995,
+        -878.29984375
+      ],
+      [
+        436.07234374999996,
+        -871.44596875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H60",
+    "boundaryBin": [
+      -4,
+      12
+    ],
+    "localXYZ": [
+      -158.67945312499998,
+      19.83551016092343,
+      638.734078125
+    ],
+    "sourceENH": [
+      854218.494546875,
+      1612094.8189218747,
+      19.83551016092343
+    ],
+    "sampledRegionalNetVolumeM3": 17.60622342150363,
+    "sampledPeakM3s": 0.005043759156695312,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -158.67945312499995,
+        638.734078125
+      ],
+      [
+        -164.737171875,
+        648.485546875
+      ],
+      [
+        -152.62173437499996,
+        628.9826093749999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H61",
+    "boundaryBin": [
+      -6,
+      16
+    ],
+    "localXYZ": [
+      -273.776109375,
+      20.002550111923213,
+      824.0119843750001
+    ],
+    "sourceENH": [
+      854103.397890625,
+      1611909.5410156248,
+      20.002550111923213
+    ],
+    "sampledRegionalNetVolumeM3": 16.77914353700848,
+    "sampledPeakM3s": 0.004798242544084423,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -285.891546875,
+        843.514921875
+      ],
+      [
+        -279.83382812499997,
+        833.7634531250001
+      ],
+      [
+        -273.77610937500003,
+        824.011984375
+      ],
+      [
+        -261.66067187500005,
+        804.509046875
+      ],
+      [
+        -267.718390625,
+        814.260515625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H62",
+    "boundaryBin": [
+      -8,
+      4
+    ],
+    "localXYZ": [
+      -397.74215625,
+      22.401647942455163,
+      201.21475000000004
+    ],
+    "sourceENH": [
+      853979.43184375,
+      1612532.3382499998,
+      22.401647942455163
+    ],
+    "sampledRegionalNetVolumeM3": 13.139475001199221,
+    "sampledPeakM3s": 0.003777071846773324,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -397.74215625,
+        201.21475000000004
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H63",
+    "boundaryBin": [
+      -11,
+      16
+    ],
+    "localXYZ": [
+      -527.7484375,
+      20.047400597559452,
+      833.7716250000001
+    ],
+    "sourceENH": [
+      853849.4255625,
+      1611899.7813749998,
+      20.047400597559452
+    ],
+    "sampledRegionalNetVolumeM3": 12.37474686236438,
+    "sampledPeakM3s": 0.0035097896668659038,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -518.6680625,
+        836.533375
+      ],
+      [
+        -509.5876875,
+        839.2951250000001
+      ],
+      [
+        -536.8288125,
+        831.009875
+      ],
+      [
+        -527.7484375,
+        833.7716250000001
+      ],
+      [
+        -545.9091874999999,
+        828.2481250000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H64",
+    "boundaryBin": [
+      14,
+      -6
+    ],
+    "localXYZ": [
+      701.0080833333335,
+      35.95622961493895,
+      -262.8077916666666
+    ],
+    "sourceENH": [
+      855078.1820833334,
+      1612996.3607916664,
+      35.95622961493895
+    ],
+    "sampledRegionalNetVolumeM3": 12.006275785205224,
+    "sampledPeakM3s": 0.007425048046980816,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        701.32375,
+        -262.4905
+      ],
+      [
+        700.8532500000001,
+        -271.7055
+      ],
+      [
+        700.84725,
+        -254.227375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H65",
+    "boundaryBin": [
+      11,
+      -10
+    ],
+    "localXYZ": [
+      597.4145625000001,
+      45.070093736852066,
+      -492.7485625
+    ],
+    "sourceENH": [
+      854974.5885625,
+      1613226.3015625,
+      45.070093736852066
+    ],
+    "sampledRegionalNetVolumeM3": 11.547259839980303,
+    "sampledPeakM3s": 0.003280895736018943,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        595.1734062500001,
+        -497.00890625
+      ],
+      [
+        599.65571875,
+        -488.48821875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H66",
+    "boundaryBin": [
+      13,
+      -6
+    ],
+    "localXYZ": [
+      696.2814583333334,
+      38.343296261802905,
+      -289.5753958333333
+    ],
+    "sourceENH": [
+      855073.4554583334,
+      1613023.128395833,
+      38.343296261802905
+    ],
+    "sampledRegionalNetVolumeM3": 11.12570931472397,
+    "sampledPeakM3s": 0.005423907433723647,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        692.584375,
+        -299.5231875
+      ],
+      [
+        699.374,
+        -280.45725
+      ],
+      [
+        696.8860000000001,
+        -288.74575
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H67",
+    "boundaryBin": [
+      10,
+      -16
+    ],
+    "localXYZ": [
+      529.3799375000001,
+      48.728967833343305,
+      -786.46925
+    ],
+    "sourceENH": [
+      854906.5539375,
+      1613520.02225,
+      48.728967833343305
+    ],
+    "sampledRegionalNetVolumeM3": 11.114290221025783,
+    "sampledPeakM3s": 0.0032264540135522176,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        529.3799375000001,
+        -786.46925
+      ],
+      [
+        541.0945624999999,
+        -782.40475
+      ],
+      [
+        517.6653125,
+        -790.53375
+      ],
+      [
+        512.3871875,
+        -795.6754375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H68",
+    "boundaryBin": [
+      11,
+      -16
+    ],
+    "localXYZ": [
+      576.2384374999999,
+      49.79884840089311,
+      -770.2112500000001
+    ],
+    "sourceENH": [
+      854953.4124375,
+      1613503.7642499998,
+      49.79884840089311
+    ],
+    "sampledRegionalNetVolumeM3": 10.889314970426506,
+    "sampledPeakM3s": 0.0030749290506203986,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        576.2384374999999,
+        -770.2112500000001
+      ],
+      [
+        564.5238125000001,
+        -774.27575
+      ],
+      [
+        552.8091875,
+        -778.34025
+      ],
+      [
+        587.9530625,
+        -766.1467499999999
+      ],
+      [
+        599.6676875,
+        -762.0822499999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H69",
+    "boundaryBin": [
+      9,
+      -18
+    ],
+    "localXYZ": [
+      476.07359375000004,
+      54.49169600716476,
+      -857.7382187500001
+    ],
+    "sourceENH": [
+      854853.24759375,
+      1613591.29121875,
+      54.49169600716476
+    ],
+    "sampledRegionalNetVolumeM3": 10.72696352633536,
+    "sampledPeakM3s": 0.003168386418111085,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        456.07296875,
+        -864.59209375
+      ],
+      [
+        466.07328125000004,
+        -861.1651562500001
+      ],
+      [
+        476.07359375,
+        -857.73821875
+      ],
+      [
+        496.07421875,
+        -850.88434375
+      ],
+      [
+        486.07390625000005,
+        -854.3112812500001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H70",
+    "boundaryBin": [
+      13,
+      -4
+    ],
+    "localXYZ": [
+      690.1156666666666,
+      32.6900639457478,
+      -174.3376875
+    ],
+    "sourceENH": [
+      855067.2896666666,
+      1612907.8906875,
+      32.6900639457478
+    ],
+    "sampledRegionalNetVolumeM3": 10.55227856553634,
+    "sampledPeakM3s": 0.0030184202418562754,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        694.0108749999999,
+        -196.48612500000002
+      ],
+      [
+        687.5728749999998,
+        -161.11399999999998
+      ],
+      [
+        691.100375,
+        -178.702
+      ],
+      [
+        692.864125,
+        -187.49599999999998
+      ],
+      [
+        689.3366249999999,
+        -169.90800000000002
+      ],
+      [
+        685.809125,
+        -152.32
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H71",
+    "boundaryBin": [
+      -11,
+      9
+    ],
+    "localXYZ": [
+      -542.1479999999999,
+      19.82386808189557,
+      456.600625
+    ],
+    "sourceENH": [
+      853835.026,
+      1612276.9523749999,
+      19.82386808189557
+    ],
+    "sampledRegionalNetVolumeM3": 10.471071335346943,
+    "sampledPeakM3s": 0.0029767395491790125,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -542.1479999999999,
+        456.600625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H72",
+    "boundaryBin": [
+      4,
+      -16
+    ],
+    "localXYZ": [
+      248.32821875000002,
+      56.12510035494162,
+      -755.975375
+    ],
+    "sourceENH": [
+      854625.50221875,
+      1613489.5283749998,
+      56.12510035494162
+    ],
+    "sampledRegionalNetVolumeM3": 10.451066615190605,
+    "sampledPeakM3s": 0.0030074919236606494,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        248.32821875000002,
+        -755.975375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H73",
+    "boundaryBin": [
+      -12,
+      16
+    ],
+    "localXYZ": [
+      -573.1503124999999,
+      17.292487191323524,
+      819.9628750000002
+    ],
+    "sourceENH": [
+      853804.0236875,
+      1611913.5901249999,
+      17.292487191323524
+    ],
+    "sampledRegionalNetVolumeM3": 10.395906706924853,
+    "sampledPeakM3s": 0.003463453486341437,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -554.9895624999999,
+        825.4863750000002
+      ],
+      [
+        -582.2306874999999,
+        817.201125
+      ],
+      [
+        -564.0699374999999,
+        822.7246250000001
+      ],
+      [
+        -573.1503124999999,
+        819.9628750000002
+      ],
+      [
+        -591.3110624999999,
+        814.4393750000002
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H74",
+    "boundaryBin": [
+      5,
+      6
+    ],
+    "localXYZ": [
+      271.14775,
+      29.59324061747217,
+      337.42
+    ],
+    "sourceENH": [
+      854648.32175,
+      1612396.133,
+      29.59324061747217
+    ],
+    "sampledRegionalNetVolumeM3": 10.088275545620883,
+    "sampledPeakM3s": 0.0028928856548471457,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        286.0524375,
+        331.285
+      ],
+      [
+        250.2811875,
+        346.009
+      ],
+      [
+        265.185875,
+        339.874
+      ],
+      [
+        292.01431249999996,
+        328.831
+      ],
+      [
+        277.109625,
+        334.966
+      ],
+      [
+        256.2430625,
+        343.55499999999995
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H75",
+    "boundaryBin": [
+      10,
+      5
+    ],
+    "localXYZ": [
+      523.336125,
+      28.912888661315176,
+      268.168375
+    ],
+    "sourceENH": [
+      854900.510125,
+      1612465.384625,
+      28.912888661315176
+    ],
+    "sampledRegionalNetVolumeM3": 9.925108763760884,
+    "sampledPeakM3s": 0.0028226685113810447,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        517.6409375000001,
+        269.6033125
+      ],
+      [
+        540.4216875,
+        263.8635625
+      ],
+      [
+        529.0313125,
+        266.7334375
+      ],
+      [
+        506.2505625,
+        272.4731875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H76",
+    "boundaryBin": [
+      7,
+      6
+    ],
+    "localXYZ": [
+      375.26125,
+      31.77841223546838,
+      305.47675000000004
+    ],
+    "sourceENH": [
+      854752.43525,
+      1612428.07625,
+      31.77841223546838
+    ],
+    "sampledRegionalNetVolumeM3": 9.497662630174016,
+    "sampledPeakM3s": 0.003316035259072202,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        392.34681249999994,
+        301.1719375
+      ],
+      [
+        358.1756875,
+        309.7815625
+      ],
+      [
+        380.9564375,
+        304.0418125
+      ],
+      [
+        369.56606250000004,
+        306.91168749999997
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H77",
+    "boundaryBin": [
+      -10,
+      16
+    ],
+    "localXYZ": [
+      -489.15684375,
+      20.251206607308358,
+      845.5090625
+    ],
+    "sourceENH": [
+      853888.01715625,
+      1611888.0439374999,
+      20.251206607308358
+    ],
+    "sampledRegionalNetVolumeM3": 9.27168078606613,
+    "sampledPeakM3s": 0.0026164125380812014,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -482.3465625,
+        847.580375
+      ],
+      [
+        -495.967125,
+        843.43775
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H78",
+    "boundaryBin": [
+      11,
+      4
+    ],
+    "localXYZ": [
+      597.3735624999999,
+      25.10678171993912,
+      249.5141875
+    ],
+    "sourceENH": [
+      854974.5475625,
+      1612484.0388124997,
+      25.10678171993912
+    ],
+    "sampledRegionalNetVolumeM3": 8.194253662357625,
+    "sampledPeakM3s": 0.003018823525479964,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        597.3735624999999,
+        249.5141875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H79",
+    "boundaryBin": [
+      -3,
+      -7
+    ],
+    "localXYZ": [
+      -149.35587500000003,
+      38.30092429120303,
+      -338.58237499999996
+    ],
+    "sourceENH": [
+      854227.818125,
+      1613072.1353749998,
+      38.30092429120303
+    ],
+    "sampledRegionalNetVolumeM3": 7.407823573628861,
+    "sampledPeakM3s": 0.002681998512110134,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -148.72943750000002,
+        -342.7096875
+      ],
+      [
+        -149.98231250000003,
+        -334.45506249999994
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H80",
+    "boundaryBin": [
+      4,
+      7
+    ],
+    "localXYZ": [
+      217.42933333333335,
+      26.886041177309863,
+      359.29241666666667
+    ],
+    "sourceENH": [
+      854594.6033333333,
+      1612374.2605833332,
+      26.886041177309863
+    ],
+    "sampledRegionalNetVolumeM3": 6.792428611714777,
+    "sampledPeakM3s": 0.0019297208701249575,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        205.3825,
+        363.77324999999996
+      ],
+      [
+        217.490875,
+        359.506
+      ],
+      [
+        229.414625,
+        354.598
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H81",
+    "boundaryBin": [
+      12,
+      -8
+    ],
+    "localXYZ": [
+      648.2488125,
+      40.03516807016359,
+      -395.70440625000003
+    ],
+    "sourceENH": [
+      855025.4228125,
+      1613129.2574062499,
+      40.03516807016359
+    ],
+    "sampledRegionalNetVolumeM3": 6.6974884661014595,
+    "sampledPeakM3s": 0.001907366729421436,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        648.2488125,
+        -395.70440625000003
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H82",
+    "boundaryBin": [
+      0,
+      8
+    ],
+    "localXYZ": [
+      40.206499999999984,
+      21.795084619655213,
+      445.8483125
+    ],
+    "sourceENH": [
+      854417.3805,
+      1612287.7046875,
+      21.795084619655213
+    ],
+    "sampledRegionalNetVolumeM3": 6.165295730025473,
+    "sampledPeakM3s": 0.0017701879514314732,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        44.537249999999986,
+        443.53784375
+      ],
+      [
+        35.87574999999998,
+        448.15878125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H83",
+    "boundaryBin": [
+      13,
+      -7
+    ],
+    "localXYZ": [
+      677.678453125,
+      40.133639603556645,
+      -331.85997656250004
+    ],
+    "sourceENH": [
+      855054.852453125,
+      1613065.4129765623,
+      40.133639603556645
+    ],
+    "sampledRegionalNetVolumeM3": 6.152706857383234,
+    "sampledPeakM3s": 0.0017302754689142894,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        669.6521875000001,
+        -349.27209375
+      ],
+      [
+        674.2386250000001,
+        -339.3223125
+      ],
+      [
+        680.353875,
+        -326.0559375
+      ],
+      [
+        686.4691250000001,
+        -312.7895625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H84",
+    "boundaryBin": [
+      -4,
+      13
+    ],
+    "localXYZ": [
+      -182.91032812500004,
+      19.55474501988116,
+      677.739953125
+    ],
+    "sourceENH": [
+      854194.263671875,
+      1612055.813046875,
+      19.55474501988116
+    ],
+    "sampledRegionalNetVolumeM3": 6.139134852223669,
+    "sampledPeakM3s": 0.0017350800532850213,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -170.79489062500002,
+        658.237015625
+      ],
+      [
+        -176.852609375,
+        667.988484375
+      ],
+      [
+        -182.910328125,
+        677.739953125
+      ],
+      [
+        -188.96804687500006,
+        687.491421875
+      ],
+      [
+        -195.02576562500008,
+        697.2428906250001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H85",
+    "boundaryBin": [
+      -6,
+      17
+    ],
+    "localXYZ": [
+      -294.97812500000003,
+      22.02170915215279,
+      858.1421250000001
+    ],
+    "sourceENH": [
+      854082.195875,
+      1611875.4108749998,
+      22.02170915215279
+    ],
+    "sampledRegionalNetVolumeM3": 6.0722129156140685,
+    "sampledPeakM3s": 0.0017697713361986122,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -298.006984375,
+        863.0178593750001
+      ],
+      [
+        -291.94926562500007,
+        853.2663906250001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H86",
+    "boundaryBin": [
+      11,
+      -15
+    ],
+    "localXYZ": [
+      590.982125,
+      49.88196899206746,
+      -720.7475625
+    ],
+    "sourceENH": [
+      854968.156125,
+      1613454.3005624998,
+      49.88196899206746
+    ],
+    "sampledRegionalNetVolumeM3": 5.655944786621414,
+    "sampledPeakM3s": 0.0015877021406471385,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        597.4456250000001,
+        -738.2153125
+      ],
+      [
+        594.2138749999999,
+        -729.4814374999999
+      ],
+      [
+        590.982125,
+        -720.7475625
+      ],
+      [
+        587.7503750000001,
+        -712.0136874999998
+      ],
+      [
+        584.518625,
+        -703.2798124999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H87",
+    "boundaryBin": [
+      -9,
+      17
+    ],
+    "localXYZ": [
+      -423.3241249999999,
+      21.93582330596758,
+      865.5317500000002
+    ],
+    "sourceENH": [
+      853953.849875,
+      1611868.0212499998,
+      21.93582330596758
+    ],
+    "sampledRegionalNetVolumeM3": 4.605017722199556,
+    "sampledPeakM3s": 0.0012907379861383794,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -400.6231875,
+        872.4361250000001
+      ],
+      [
+        -409.7035625,
+        869.674375
+      ],
+      [
+        -418.7839375,
+        866.9126250000002
+      ],
+      [
+        -446.0250625,
+        858.627375
+      ],
+      [
+        -436.9446875,
+        861.3891250000001
+      ],
+      [
+        -427.8643125,
+        864.150875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H88",
+    "boundaryBin": [
+      1,
+      -13
+    ],
+    "localXYZ": [
+      77.39475000000003,
+      50.258596795271316,
+      -621.1835000000001
+    ],
+    "sourceENH": [
+      854454.56875,
+      1613354.7364999999,
+      50.258596795271316
+    ],
+    "sampledRegionalNetVolumeM3": 4.346460572827222,
+    "sampledPeakM3s": 0.0012189066094780451,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        80.97803125000004,
+        -625.3171875
+      ],
+      [
+        88.14459375000004,
+        -633.5845625000002
+      ],
+      [
+        95.31115625000001,
+        -641.8519375000001
+      ],
+      [
+        73.81146875000002,
+        -617.0498125000001
+      ],
+      [
+        66.64490625000002,
+        -608.7824375
+      ],
+      [
+        59.478343750000015,
+        -600.5150625000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H89",
+    "boundaryBin": [
+      -7,
+      17
+    ],
+    "localXYZ": [
+      -321.8726484375,
+      24.416622894484288,
+      887.6471171875
+    ],
+    "sourceENH": [
+      854055.3013515625,
+      1611845.9058828123,
+      24.416622894484288
+    ],
+    "sampledRegionalNetVolumeM3": 4.072551516252956,
+    "sampledPeakM3s": 0.0018375037349460822,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -316.18014062500004,
+        892.272265625
+      ],
+      [
+        -304.06470312500005,
+        872.769328125
+      ],
+      [
+        -310.122421875,
+        882.520796875
+      ],
+      [
+        -343.232125,
+        889.8570625000001
+      ],
+      [
+        -333.622875,
+        892.7734375
+      ],
+      [
+        -324.01362500000005,
+        895.6898125
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H90",
+    "boundaryBin": [
+      0,
+      -12
+    ],
+    "localXYZ": [
+      30.812093749999985,
+      49.26115561642838,
+      -567.4455625
+    ],
+    "sourceENH": [
+      854407.98609375,
+      1613300.9985624999,
+      49.26115561642838
+    ],
+    "sampledRegionalNetVolumeM3": 3.710942742668766,
+    "sampledPeakM3s": 0.001046235427735491,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        30.812093749999985,
+        -567.4455625
+      ],
+      [
+        45.14521875,
+        -583.9803125000001
+      ],
+      [
+        16.47896874999997,
+        -550.9108125
+      ],
+      [
+        37.97865624999999,
+        -575.7129375
+      ],
+      [
+        23.645531249999976,
+        -559.1781874999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H91",
+    "boundaryBin": [
+      -10,
+      17
+    ],
+    "localXYZ": [
+      -464.18581250000005,
+      20.40966412761952,
+      853.1038750000001
+    ],
+    "sourceENH": [
+      853912.9881875,
+      1611880.4491249998,
+      20.40966412761952
+    ],
+    "sampledRegionalNetVolumeM3": 3.690929028116047,
+    "sampledPeakM3s": 0.0010374633291948322,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -473.2661875,
+        850.3421250000001
+      ],
+      [
+        -455.1054375,
+        855.8656250000001
+      ],
+      [
+        -464.1858125,
+        853.103875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H92",
+    "boundaryBin": [
+      -13,
+      11
+    ],
+    "localXYZ": [
+      -606.3553750000001,
+      18.173421582448796,
+      560.4371250000002
+    ],
+    "sourceENH": [
+      853770.818625,
+      1612173.115875,
+      18.173421582448796
+    ],
+    "sampledRegionalNetVolumeM3": 3.5240080216435845,
+    "sampledPeakM3s": 0.000989012923998656,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -606.3553750000001,
+        560.4371250000002
+      ],
+      [
+        -622.022375,
+        595.5261250000001
+      ],
+      [
+        -610.2721250000002,
+        569.2093750000001
+      ],
+      [
+        -603.05575,
+        551.440625
+      ],
+      [
+        -618.1056250000001,
+        586.7538750000001
+      ],
+      [
+        -614.188875,
+        577.9816250000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H93",
+    "boundaryBin": [
+      -1,
+      -11
+    ],
+    "localXYZ": [
+      -9.838822916666663,
+      46.53022410893145,
+      -518.1788125
+    ],
+    "sourceENH": [
+      854367.3351770834,
+      1613251.7318125,
+      46.53022410893145
+    ],
+    "sampledRegionalNetVolumeM3": 3.5060301573183783,
+    "sampledPeakM3s": 0.0009869254193871973,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -10.425937499999998,
+        -518.0944375
+      ],
+      [
+        -14.069812499999996,
+        -510.33331250000003
+      ],
+      [
+        -5.020718749999995,
+        -526.1086875000001
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H94",
+    "boundaryBin": [
+      -5,
+      15
+    ],
+    "localXYZ": [
+      -240.45865625,
+      18.325847515267718,
+      770.37890625
+    ],
+    "sourceENH": [
+      854136.71534375,
+      1611963.1740937498,
+      18.325847515267718
+    ],
+    "sampledRegionalNetVolumeM3": 2.9448960078198074,
+    "sampledPeakM3s": 0.000833866408855918,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -231.37207812500003,
+        755.7517031250001
+      ],
+      [
+        -237.42979687500002,
+        765.503171875
+      ],
+      [
+        -243.487515625,
+        775.254640625
+      ],
+      [
+        -249.54523437499998,
+        785.0061093749999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H95",
+    "boundaryBin": [
+      10,
+      -13
+    ],
+    "localXYZ": [
+      546.03825,
+      45.49549070798338,
+      -615.319
+    ],
+    "sourceENH": [
+      854923.21225,
+      1613348.8719999997,
+      45.49549070798338
+    ],
+    "sampledRegionalNetVolumeM3": 2.913719154893328,
+    "sampledPeakM3s": 0.0008199820413501851,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        547.49875,
+        -628.049
+      ],
+      [
+        544.5777499999999,
+        -602.5889999999999
+      ],
+      [
+        546.0382500000001,
+        -615.319
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H96",
+    "boundaryBin": [
+      12,
+      -15
+    ],
+    "localXYZ": [
+      600.677375,
+      49.66043773627971,
+      -746.9491874999999
+    ],
+    "sourceENH": [
+      854977.851375,
+      1613480.5021874998,
+      49.66043773627971
+    ],
+    "sampledRegionalNetVolumeM3": 2.7823459966465376,
+    "sampledPeakM3s": 0.0007850614160514937,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        600.677375,
+        -746.9491874999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H97",
+    "boundaryBin": [
+      11,
+      -13
+    ],
+    "localXYZ": [
+      552.15925,
+      47.16843381238225,
+      -641.3846249999999
+    ],
+    "sourceENH": [
+      854929.33325,
+      1613374.9376249998,
+      47.16843381238225
+    ],
+    "sampledRegionalNetVolumeM3": 2.702112637356673,
+    "sampledPeakM3s": 0.0008112858256898285,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        550.194125,
+        -637.8993125
+      ],
+      [
+        554.1243750000001,
+        -644.8699374999999
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H98",
+    "boundaryBin": [
+      -5,
+      14
+    ],
+    "localXYZ": [
+      -213.19892187500005,
+      18.70566229172668,
+      726.497296875
+    ],
+    "sourceENH": [
+      854163.975078125,
+      1612007.0557031247,
+      18.70566229172668
+    ],
+    "sampledRegionalNetVolumeM3": 2.6847714948871015,
+    "sampledPeakM3s": 0.0007512286361317851,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -213.198921875,
+        726.497296875
+      ],
+      [
+        -207.141203125,
+        716.745828125
+      ],
+      [
+        -219.256640625,
+        736.248765625
+      ],
+      [
+        -225.31435937500004,
+        746.000234375
+      ],
+      [
+        -201.08348437500004,
+        706.994359375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H99",
+    "boundaryBin": [
+      12,
+      -16
+    ],
+    "localXYZ": [
+      603.9091249999999,
+      49.586593984350465,
+      -755.6830625
+    ],
+    "sourceENH": [
+      854981.083125,
+      1613489.2360625,
+      49.586593984350465
+    ],
+    "sampledRegionalNetVolumeM3": 2.500637216614711,
+    "sampledPeakM3s": 0.0007011094732160923,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        603.9091249999999,
+        -755.6830625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H100",
+    "boundaryBin": [
+      -2,
+      10
+    ],
+    "localXYZ": [
+      -74.80331249999999,
+      19.941098410950524,
+      525.6048125
+    ],
+    "sourceENH": [
+      854302.3706875,
+      1612207.9481874998,
+      19.941098410950524
+    ],
+    "sampledRegionalNetVolumeM3": 2.4129527083997178,
+    "sampledPeakM3s": 0.0006748010971396587,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -91.26243749999998,
+        547.9949375
+      ],
+      [
+        -85.77606249999997,
+        540.5315625
+      ],
+      [
+        -63.8305625,
+        510.6780625
+      ],
+      [
+        -58.34418749999999,
+        503.21468749999997
+      ],
+      [
+        -80.28968749999999,
+        533.0681875
+      ],
+      [
+        -74.8033125,
+        525.6048125
+      ],
+      [
+        -69.31693750000002,
+        518.1414375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H101",
+    "boundaryBin": [
+      11,
+      -14
+    ],
+    "localXYZ": [
+      571.2319062500001,
+      49.27343015135984,
+      -675.586828125
+    ],
+    "sourceENH": [
+      854948.40590625,
+      1613409.1398281248,
+      49.27343015135984
+    ],
+    "sampledRegionalNetVolumeM3": 2.406882377203142,
+    "sampledPeakM3s": 0.0006733102403566931,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        575.74075,
+        -683.2083749999999
+      ],
+      [
+        567.88025,
+        -669.267125
+      ],
+      [
+        560.01975,
+        -655.325875
+      ],
+      [
+        581.286875,
+        -694.5459375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H102",
+    "boundaryBin": [
+      13,
+      4
+    ],
+    "localXYZ": [
+      666.8243124999999,
+      28.224519967611194,
+      221.46035
+    ],
+    "sourceENH": [
+      855043.9983125,
+      1612512.0926499998,
+      28.224519967611194
+    ],
+    "sampledRegionalNetVolumeM3": 2.3870618930607757,
+    "sampledPeakM3s": 0.0006685761376002037,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        665.7158124999999,
+        232.2949375
+      ],
+      [
+        671.3346562499999,
+        204.49100000000004
+      ],
+      [
+        654.3254374999999,
+        235.16481250000004
+      ],
+      [
+        671.35646875,
+        212.02500000000003
+      ],
+      [
+        671.3891874999999,
+        223.32600000000002
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H103",
+    "boundaryBin": [
+      -8,
+      17
+    ],
+    "localXYZ": [
+      -372.05987500000003,
+      24.440117397622245,
+      881.1079375000002
+    ],
+    "sourceENH": [
+      854005.114125,
+      1611852.4450624997,
+      24.440117397622245
+    ],
+    "sampledRegionalNetVolumeM3": 2.296384832649241,
+    "sampledPeakM3s": 0.0006431950378687587,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -352.84137499999997,
+        886.9406875000001
+      ],
+      [
+        -372.05987500000003,
+        881.1079375
+      ],
+      [
+        -362.45062500000006,
+        884.0243125000001
+      ],
+      [
+        -381.669125,
+        878.1915625
+      ],
+      [
+        -391.278375,
+        875.2751875
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H104",
+    "boundaryBin": [
+      -11,
+      6
+    ],
+    "localXYZ": [
+      -504.3059895833333,
+      19.984747448428624,
+      335.02253125
+    ],
+    "sourceENH": [
+      853872.8680104166,
+      1612398.5304687498,
+      19.984747448428624
+    ],
+    "sampledRegionalNetVolumeM3": 2.2123427785489356,
+    "sampledPeakM3s": 0.0006384216990727692,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -501.29221874999996,
+        325.29434375
+      ],
+      [
+        -504.88643749999994,
+        334.2393125
+      ],
+      [
+        -506.7393125,
+        345.5339375
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H105",
+    "boundaryBin": [
+      13,
+      2
+    ],
+    "localXYZ": [
+      671.0806953125,
+      28.98949558993568,
+      125.998578125
+    ],
+    "sourceENH": [
+      855048.2546953125,
+      1612607.554421875,
+      28.98949558993568
+    ],
+    "sampledRegionalNetVolumeM3": 2.195154027565365,
+    "sampledPeakM3s": 0.0006136248791936475,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        671.1710625,
+        147.986
+      ],
+      [
+        670.94046875,
+        105.2403125
+      ],
+      [
+        671.0838125,
+        117.85
+      ],
+      [
+        671.1274375,
+        132.918
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H106",
+    "boundaryBin": [
+      11,
+      -12
+    ],
+    "localXYZ": [
+      557.9472499999999,
+      45.288435008021466,
+      -557.2895
+    ],
+    "sourceENH": [
+      854935.12125,
+      1613290.8424999998,
+      45.288435008021466
+    ],
+    "sampledRegionalNetVolumeM3": 2.182570269100748,
+    "sampledPeakM3s": 0.0006127603986130113,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        560.7898749999999,
+        -553.63325
+      ],
+      [
+        555.1046249999999,
+        -560.94575
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H107",
+    "boundaryBin": [
+      -1,
+      9
+    ],
+    "localXYZ": [
+      -25.34949999999999,
+      20.54042986101058,
+      481.32899999999995
+    ],
+    "sourceENH": [
+      854351.8245,
+      1612252.224,
+      20.54042986101058
+    ],
+    "sampledRegionalNetVolumeM3": 1.8387440701302906,
+    "sampledPeakM3s": 0.001118605989094555,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -8.663124999999996,
+        472.04699999999997
+      ],
+      [
+        -19.78737499999999,
+        478.23499999999996
+      ],
+      [
+        -30.911624999999983,
+        484.42299999999994
+      ],
+      [
+        -42.03587499999999,
+        490.611
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H108",
+    "boundaryBin": [
+      13,
+      0
+    ],
+    "localXYZ": [
+      668.9959687500001,
+      29.914262312906512,
+      24.029312500000003
+    ],
+    "sourceENH": [
+      855046.16996875,
+      1612709.5236874998,
+      29.914262312906512
+    ],
+    "sampledRegionalNetVolumeM3": 1.7676166416330867,
+    "sampledPeakM3s": 0.0004937644477188791,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        668.75290625,
+        13.877937500000002
+      ],
+      [
+        668.5098437500001,
+        3.726562499999999
+      ],
+      [
+        668.9959687500001,
+        24.029312500000003
+      ],
+      [
+        669.48209375,
+        44.332062500000006
+      ],
+      [
+        669.23903125,
+        34.180687500000005
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H109",
+    "boundaryBin": [
+      -10,
+      5
+    ],
+    "localXYZ": [
+      -466.61106249999995,
+      21.496243042548038,
+      282.42481250000003
+    ],
+    "sourceENH": [
+      853910.5629375,
+      1612451.1281875,
+      21.496243042548038
+    ],
+    "sampledRegionalNetVolumeM3": 1.5537051832136866,
+    "sampledPeakM3s": 0.0004336038492839292,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -474.61440625,
+        292.31778125
+      ],
+      [
+        -453.27215624999997,
+        265.93653125
+      ],
+      [
+        -458.60771875,
+        272.53184375
+      ],
+      [
+        -479.9499687499999,
+        298.91309375
+      ],
+      [
+        -466.6110625,
+        282.42481250000003
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H110",
+    "boundaryBin": [
+      10,
+      -12
+    ],
+    "localXYZ": [
+      549.79325,
+      45.349276021413566,
+      -569.325
+    ],
+    "sourceENH": [
+      854926.96725,
+      1613302.8779999998,
+      45.349276021413566
+    ],
+    "sampledRegionalNetVolumeM3": 1.4285820069987427,
+    "sampledPeakM3s": 0.0003992541724990267,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        549.79325,
+        -569.325
+      ],
+      [
+        543.11725,
+        -589.8589999999999
+      ],
+      [
+        544.85575,
+        -578.771
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H111",
+    "boundaryBin": [
+      13,
+      1
+    ],
+    "localXYZ": [
+      670.21128125,
+      30.077001652354483,
+      74.7861875
+    ],
+    "sourceENH": [
+      855047.38528125,
+      1612658.7668124998,
+      30.077001652354483
+    ],
+    "sampledRegionalNetVolumeM3": 1.3585883703014991,
+    "sampledPeakM3s": 0.00038314783783042024,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        669.7251562499999,
+        54.483437499999994
+      ],
+      [
+        669.96821875,
+        64.6348125
+      ],
+      [
+        670.21128125,
+        74.7861875
+      ],
+      [
+        670.69740625,
+        95.0889375
+      ],
+      [
+        670.45434375,
+        84.9375625
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H112",
+    "boundaryBin": [
+      -9,
+      5
+    ],
+    "localXYZ": [
+      -445.26881249999997,
+      20.692523615653847,
+      256.0435625
+    ],
+    "sourceENH": [
+      853931.9051875,
+      1612477.5094374998,
+      20.692523615653847
+    ],
+    "sampledRegionalNetVolumeM3": 1.2876594415322724,
+    "sampledPeakM3s": 0.0003683982255194541,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        -447.93659375,
+        259.34121875
+      ],
+      [
+        -442.60103125,
+        252.74590625000002
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H113",
+    "boundaryBin": [
+      13,
+      3
+    ],
+    "localXYZ": [
+      671.2495874999998,
+      28.921061130957458,
+      175.10840000000002
+    ],
+    "sourceENH": [
+      855048.4235875,
+      1612558.4445999998,
+      28.921061130957458
+    ],
+    "sampledRegionalNetVolumeM3": 1.2840114337051225,
+    "sampledPeakM3s": 0.0003582284492878744,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        671.2255937499999,
+        166.82100000000003
+      ],
+      [
+        671.2692187499999,
+        181.889
+      ],
+      [
+        671.3019374999999,
+        193.19
+      ],
+      [
+        671.2474062499999,
+        174.35500000000002
+      ],
+      [
+        671.20378125,
+        159.28700000000003
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  },
+  {
+    "id": "H114",
+    "boundaryBin": [
+      0,
+      9
+    ],
+    "localXYZ": [
+      14.221999999999996,
+      21.724787731803623,
+      459.711125
+    ],
+    "sourceENH": [
+      854391.396,
+      1612273.841875,
+      21.724787731803623
+    ],
+    "sampledRegionalNetVolumeM3": 1.1487727806501982,
+    "sampledPeakM3s": 0.0003205312696656601,
+    "kind": "Native DE0 Riemann boundary flux sampled every 10 seconds, integrated by trapezoids; not a field-measured discharge",
+    "condition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+    "finalReceiver": null,
+    "boundarySegmentMidpoints": [
+      [
+        1.2297499999999935,
+        466.64253125
+      ],
+      [
+        18.552750000000003,
+        457.40065625
+      ],
+      [
+        27.21425,
+        452.77971875
+      ],
+      [
+        9.891249999999992,
+        462.02159374999997
+      ]
+    ],
+    "spatialAggregation": "50 m boundary grid sector, not a constructed outlet"
+  }
+]

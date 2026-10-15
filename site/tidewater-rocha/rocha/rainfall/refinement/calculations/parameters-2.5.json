@@ -1,0 +1,1660 @@
+{
+  "scenario": {
+    "id": "survey-30-60-5",
+    "model": "survey",
+    "intensityMmH": 30,
+    "durationMinutes": 60,
+    "infiltrationMmH": 5,
+    "frictionScale": 1,
+    "hyetograph": "constant",
+    "boundary": "free"
+  },
+  "resolutionM": 2.5,
+  "engine": "ANUGA 4.0.1 CPU DE0",
+  "status": "valid",
+  "elapsedSeconds": 27541.174439875,
+  "initialStorageM3": 0.0,
+  "precipitationM3": 34731.577846364344,
+  "infiltrationM3": 9168.336084397517,
+  "netBoundaryOutflowM3": 9164.748045702698,
+  "finalStorageM3": 16398.493715172885,
+  "massBalanceErrorM3": 1.0912444849964231e-06,
+  "massBalanceErrorPercent": 3.141937546930806e-09,
+  "minimumComputedDepthM": 0.0,
+  "maxDepthM": 2.8709227416988092,
+  "maxSpeedMS": 1.548305158901566,
+  "peakBoundaryDischargeMS3": 2.3481692909871525,
+  "outletVolumesFromSampledPhysicalFluxM3": [
+    17.566382939815135,
+    474.95960620354805,
+    708.0263780864798,
+    457.21579122908906,
+    0.15998419973255698,
+    1.101243340781525,
+    27.971453428717055,
+    1.7107194663925238,
+    34.53848276263487,
+    95.7187674844864,
+    20.057091071623166,
+    0.6751187449843894,
+    11.399098764495832,
+    0.7361246591164354,
+    311.84679690730763,
+    195.06696729536998,
+    17.865263430370998,
+    9.563345348578986,
+    0.4615161975345885,
+    0.25170593880479275,
+    9.694649485534612,
+    3.843275300063141,
+    511.13455673394674,
+    0.24571205169311094,
+    2.9624042843363205,
+    1.3887785504282175,
+    0.12320250312281072,
+    0.6162731421021083,
+    100.33621059236046,
+    63.114254750721926,
+    0.11450638251707664,
+    5.159098933809983,
+    18.85781635227074,
+    39.70756308967772,
+    124.19306843764228,
+    0.2664477842739833,
+    10.091761181785298,
+    3.582952039907491,
+    24.768795931985263,
+    123.09088278212897,
+    33.88569300039106,
+    36.31527907079766,
+    0.5929891724099904,
+    0.4210962743255878,
+    60.930140076542465,
+    179.55738606061485,
+    146.10828550115244,
+    49.01456716326314,
+    23.1457903708815,
+    5.691416974806369,
+    0.04215457207441015,
+    177.78418871124845,
+    6.218252717051022,
+    16.288551207135775,
+    46.374101137114906,
+    343.4318671968737,
+    22.907487027628076,
+    0.08858594608350549,
+    0.6679886657524587,
+    0.09991389857812097,
+    1.5609397086951151,
+    3.293672072632805,
+    1.0724537514470436,
+    0.6754644114578773,
+    1.0938742553390166,
+    0.42690178533467626,
+    9.148405859867685,
+    0.29209304173866996,
+    1.1357133332783378,
+    0.3018258615391695,
+    49.01857000312898,
+    36.89492620282639,
+    0.12878659608958481,
+    47.84918775954483,
+    31.792348617672953,
+    31.57729669194672,
+    172.26380468365582,
+    8.943081117112282,
+    71.31299264542375,
+    0.252418845384923,
+    1.716785264378526,
+    26.47460526993571,
+    55.20242741442278,
+    2.3489177444919753,
+    50.520779130751606,
+    35.016638401693854,
+    24.42391314939447,
+    35.184823506877144,
+    8.587922936445745,
+    24.766630460840542,
+    19.53500330362555,
+    167.8363938515077,
+    7.269745823648941,
+    0.1848165630864475,
+    47.734232600366454,
+    60.17096842132994,
+    9.49393124518165,
+    1.8564061841219552,
+    0.3570978825365156,
+    30.73586052225188,
+    15.03809885140482,
+    4.692015408405709,
+    0.7601163612402437,
+    1.039206253476804,
+    3.0268635088542895,
+    28.82965753032847,
+    4.780475122695429,
+    20.54907838648545,
+    39.533187029191666,
+    3.673685046742438,
+    1.0048207368071231,
+    33.62229769845027,
+    107.26401603627576,
+    13.243954550840495,
+    1806.8540743111394,
+    22.605275068841802,
+    7.326372732032853,
+    7.024213021696268,
+    32.73134177991503,
+    7.675080688765671,
+    609.91593125452,
+    613.5402329566145,
+    99.81199199359502,
+    0.5921619376823414,
+    0.4864957052747144,
+    0.44552848705423237,
+    0.37393904707235964,
+    0.8743601281487933,
+    19.54499813077368
+  ],
+  "outletFluxNote": "10-second samples of ANUGA native Riemann boundary mass flux, not the solver numerical-flux integral; regional volumes are diagnostics and their mismatch is reported. Global water balance uses the solver-integrated boundary flux.",
+  "sampledRegionalOutflowDifferenceM3": 0.31386353753259755,
+  "hypothetical": true,
+  "returnPeriod": null,
+  "finalReceiver": "unknown outside survey",
+  "postRainSeconds": 21600,
+  "chunks": [],
+  "sourceSha256": "726ddff6f9b026cbfe9cd0abbf63952a733c701b54ec3f0b48d4030ed610a82d",
+  "playbackMaximumOmittedSubmillimetreVolumeM3": 0.0,
+  "playbackMaximumFloat32DepthErrorM": 0.0,
+  "procedureVersion": "rocha-rainfall-1.4",
+  "meshDataSha256": "ebd517b6cf7eb3fec9be22bf852910a3e5a348ab97c8bb91ebeb2e672f62e6dc",
+  "keyframeIntervalSeconds": 300,
+  "boundaryCondition": "Dry exterior at each boundary-edge bed elevation; hypothetical free outfall, no external inflow terrain or downstream stage supplied",
+  "boundaryBins": [
+    [
+      -15,
+      14
+    ],
+    [
+      -14,
+      13
+    ],
+    [
+      -14,
+      14
+    ],
+    [
+      -14,
+      15
+    ],
+    [
+      -13,
+      10
+    ],
+    [
+      -13,
+      11
+    ],
+    [
+      -13,
+      12
+    ],
+    [
+      -13,
+      13
+    ],
+    [
+      -13,
+      15
+    ],
+    [
+      -13,
+      16
+    ],
+    [
+      -12,
+      9
+    ],
+    [
+      -12,
+      10
+    ],
+    [
+      -12,
+      16
+    ],
+    [
+      -11,
+      6
+    ],
+    [
+      -11,
+      7
+    ],
+    [
+      -11,
+      8
+    ],
+    [
+      -11,
+      9
+    ],
+    [
+      -11,
+      16
+    ],
+    [
+      -10,
+      5
+    ],
+    [
+      -10,
+      6
+    ],
+    [
+      -10,
+      16
+    ],
+    [
+      -10,
+      17
+    ],
+    [
+      -9,
+      4
+    ],
+    [
+      -9,
+      5
+    ],
+    [
+      -9,
+      17
+    ],
+    [
+      -8,
+      3
+    ],
+    [
+      -8,
+      4
+    ],
+    [
+      -8,
+      17
+    ],
+    [
+      -7,
+      1
+    ],
+    [
+      -7,
+      2
+    ],
+    [
+      -7,
+      3
+    ],
+    [
+      -7,
+      17
+    ],
+    [
+      -6,
+      -1
+    ],
+    [
+      -6,
+      0
+    ],
+    [
+      -6,
+      1
+    ],
+    [
+      -6,
+      15
+    ],
+    [
+      -6,
+      16
+    ],
+    [
+      -6,
+      17
+    ],
+    [
+      -5,
+      -4
+    ],
+    [
+      -5,
+      -3
+    ],
+    [
+      -5,
+      -2
+    ],
+    [
+      -5,
+      -1
+    ],
+    [
+      -5,
+      14
+    ],
+    [
+      -5,
+      15
+    ],
+    [
+      -4,
+      -7
+    ],
+    [
+      -4,
+      -6
+    ],
+    [
+      -4,
+      -5
+    ],
+    [
+      -4,
+      -4
+    ],
+    [
+      -4,
+      12
+    ],
+    [
+      -4,
+      13
+    ],
+    [
+      -4,
+      14
+    ],
+    [
+      -3,
+      -8
+    ],
+    [
+      -3,
+      -7
+    ],
+    [
+      -3,
+      11
+    ],
+    [
+      -3,
+      12
+    ],
+    [
+      -2,
+      -9
+    ],
+    [
+      -2,
+      -8
+    ],
+    [
+      -2,
+      9
+    ],
+    [
+      -2,
+      10
+    ],
+    [
+      -2,
+      11
+    ],
+    [
+      -1,
+      -11
+    ],
+    [
+      -1,
+      -10
+    ],
+    [
+      -1,
+      -9
+    ],
+    [
+      -1,
+      9
+    ],
+    [
+      0,
+      -12
+    ],
+    [
+      0,
+      -11
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      1,
+      -13
+    ],
+    [
+      1,
+      -12
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      2,
+      -14
+    ],
+    [
+      2,
+      -13
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      3,
+      -14
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      4,
+      -16
+    ],
+    [
+      4,
+      -15
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      5,
+      -17
+    ],
+    [
+      5,
+      -16
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      -18
+    ],
+    [
+      6,
+      -17
+    ],
+    [
+      6,
+      6
+    ],
+    [
+      7,
+      -18
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      8,
+      -18
+    ],
+    [
+      8,
+      5
+    ],
+    [
+      9,
+      -18
+    ],
+    [
+      9,
+      -17
+    ],
+    [
+      9,
+      5
+    ],
+    [
+      10,
+      -17
+    ],
+    [
+      10,
+      -16
+    ],
+    [
+      10,
+      -13
+    ],
+    [
+      10,
+      -12
+    ],
+    [
+      10,
+      5
+    ],
+    [
+      11,
+      -16
+    ],
+    [
+      11,
+      -15
+    ],
+    [
+      11,
+      -14
+    ],
+    [
+      11,
+      -13
+    ],
+    [
+      11,
+      -12
+    ],
+    [
+      11,
+      -11
+    ],
+    [
+      11,
+      -10
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      12,
+      -16
+    ],
+    [
+      12,
+      -15
+    ],
+    [
+      12,
+      -10
+    ],
+    [
+      12,
+      -9
+    ],
+    [
+      12,
+      -8
+    ],
+    [
+      12,
+      4
+    ],
+    [
+      13,
+      -8
+    ],
+    [
+      13,
+      -7
+    ],
+    [
+      13,
+      -6
+    ],
+    [
+      13,
+      -5
+    ],
+    [
+      13,
+      -4
+    ],
+    [
+      13,
+      -3
+    ],
+    [
+      13,
+      -2
+    ],
+    [
+      13,
+      -1
+    ],
+    [
+      13,
+      0
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      13,
+      2
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      13,
+      4
+    ],
+    [
+      14,
+      -6
+    ]
+  ],
+  "numericalFlux": {
+    "regional": "Native DE0 Riemann mass flux sampled at boundary every 10 seconds; checked against integrated global flux",
+    "global": "ANUGA integrated numerical boundary flux"
+  },
+  "meshId": "2.5",
+  "solverCells": 575383,
+  "refinementRegions": [],
+  "regionalDischargeSamplingErrorPercent": 0.0034246826641324475,
+  "artifactBinding": {
+    "meshId": "2.5",
+    "resolutionM": 2.5,
+    "solverCells": 575383,
+    "meshDataSha256": "ebd517b6cf7eb3fec9be22bf852910a3e5a348ab97c8bb91ebeb2e672f62e6dc",
+    "sourceSha256": "726ddff6f9b026cbfe9cd0abbf63952a733c701b54ec3f0b48d4030ed610a82d",
+    "sourceCoordinateOrigin": {
+      "east": 854377.174,
+      "north": 1612733.5529999998,
+      "elevation": 0
+    },
+    "coordinateConversion": "East = origin.east + local X; North = origin.north - local Z; elevation = survey Y; unidentified datum",
+    "meshPreparation": {
+      "nominalResolutionM": 2.5,
+      "refinementRegions": [],
+      "maxTriangleAreaM2": 3.125,
+      "triangles": 575383,
+      "areaM2": 1157719.2615455,
+      "areaErrorM2": -8.42846930027008e-08,
+      "centroidBedUsesExactBarycentricSurvey": true,
+      "vertexInterpolantErrorM": {
+        "mean": 0.0011478320006157356,
+        "p95": 0.007345955805944392,
+        "maximum": 0.093811408448353
+      },
+      "curbInterfaceDistanceM": {
+        "maximum": 1.669831137575698,
+        "mean": 0.5795403946087916
+      },
+      "assumptions": {
+        "backgroundManning": 0.06,
+        "zahorraManning": 0.035,
+        "waterManning": 0.03,
+        "roofManning": 0.015,
+        "buildingRoofHeightM": 3.3,
+        "verticalDimensions": "Existing visual estimates, not measured construction",
+        "curbs": "Mapped medians/island classified on computational cells; bordering faces are idealized 0.12 m riverwall crests. Face displacement and local convergence are reported. Width is not a resolved hydraulic cross-section.",
+        "roads": "Rendering lift 0.038 m and shading relief excluded",
+        "infiltration": "Zahorra remains hypothetically permeable; no laboratory permeability inferred"
+      }
+    },
+    "hydrographs": {
+      "file": "hydrographs-2.5.csv.gz",
+      "sha256": "768242a06b26a6677b6d8aeca93cb3c5eebd9598ca0e656036fa8c4da0cd3a87",
+      "sampleIntervalSeconds": 10
+    },
+    "maxima": {
+      "file": "maxima-2.5.npz",
+      "sha256": "2a0a308b49276ad478e1d296af856d645736a250628c3cb18ba2d6a0cbf39017",
+      "sampleIntervalSeconds": 10,
+      "meaning": "Physical maxima sampled every 10 s and cell-centre survey elevations; maxima need not occur at the same time"
+    },
+    "geographicAggregation": {
+      "method": "Native numerical boundary edges assigned by midpoint to fixed geographic 50 m bins",
+      "limitation": "Assigned edge extents change with mesh resolution; regional differences include this discretization as well as hydraulic changes",
+      "sectorExtents": [
+        {
+          "boundaryBin": [
+            -15,
+            14
+          ],
+          "assignedNumericalEdgeLengthM": 7.539735865249039
+        },
+        {
+          "boundaryBin": [
+            -14,
+            13
+          ],
+          "assignedNumericalEdgeLengthM": 53.366477772658214
+        },
+        {
+          "boundaryBin": [
+            -14,
+            14
+          ],
+          "assignedNumericalEdgeLengthM": 52.36757719428182
+        },
+        {
+          "boundaryBin": [
+            -14,
+            15
+          ],
+          "assignedNumericalEdgeLengthM": 82.90505724950832
+        },
+        {
+          "boundaryBin": [
+            -13,
+            10
+          ],
+          "assignedNumericalEdgeLengthM": 9.603022274914213
+        },
+        {
+          "boundaryBin": [
+            -13,
+            11
+          ],
+          "assignedNumericalEdgeLengthM": 55.23696786716945
+        },
+        {
+          "boundaryBin": [
+            -13,
+            12
+          ],
+          "assignedNumericalEdgeLengthM": 56.57138913837238
+        },
+        {
+          "boundaryBin": [
+            -13,
+            13
+          ],
+          "assignedNumericalEdgeLengthM": 2.134659110906284
+        },
+        {
+          "boundaryBin": [
+            -13,
+            15
+          ],
+          "assignedNumericalEdgeLengthM": 11.863841678810584
+        },
+        {
+          "boundaryBin": [
+            -13,
+            16
+          ],
+          "assignedNumericalEdgeLengthM": 40.33706170795594
+        },
+        {
+          "boundaryBin": [
+            -12,
+            9
+          ],
+          "assignedNumericalEdgeLengthM": 43.64158112987684
+        },
+        {
+          "boundaryBin": [
+            -12,
+            10
+          ],
+          "assignedNumericalEdgeLengthM": 46.54484647848684
+        },
+        {
+          "boundaryBin": [
+            -12,
+            16
+          ],
+          "assignedNumericalEdgeLengthM": 52.20090338676656
+        },
+        {
+          "boundaryBin": [
+            -11,
+            6
+          ],
+          "assignedNumericalEdgeLengthM": 29.253669574785846
+        },
+        {
+          "boundaryBin": [
+            -11,
+            7
+          ],
+          "assignedNumericalEdgeLengthM": 48.643788915348836
+        },
+        {
+          "boundaryBin": [
+            -11,
+            8
+          ],
+          "assignedNumericalEdgeLengthM": 55.27638749669047
+        },
+        {
+          "boundaryBin": [
+            -11,
+            9
+          ],
+          "assignedNumericalEdgeLengthM": 21.820790564938534
+        },
+        {
+          "boundaryBin": [
+            -11,
+            16
+          ],
+          "assignedNumericalEdgeLengthM": 52.20090338676638
+        },
+        {
+          "boundaryBin": [
+            -10,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 48.77897339837429
+        },
+        {
+          "boundaryBin": [
+            -10,
+            6
+          ],
+          "assignedNumericalEdgeLengthM": 29.691549025097565
+        },
+        {
+          "boundaryBin": [
+            -10,
+            16
+          ],
+          "assignedNumericalEdgeLengthM": 28.473220029145416
+        },
+        {
+          "boundaryBin": [
+            -10,
+            17
+          ],
+          "assignedNumericalEdgeLengthM": 23.72768335762114
+        },
+        {
+          "boundaryBin": [
+            -9,
+            4
+          ],
+          "assignedNumericalEdgeLengthM": 59.82111434249005
+        },
+        {
+          "boundaryBin": [
+            -9,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 16.96659944291283
+        },
+        {
+          "boundaryBin": [
+            -9,
+            17
+          ],
+          "assignedNumericalEdgeLengthM": 52.20090338676653
+        },
+        {
+          "boundaryBin": [
+            -8,
+            3
+          ],
+          "assignedNumericalEdgeLengthM": 66.87711492971643
+        },
+        {
+          "boundaryBin": [
+            -8,
+            4
+          ],
+          "assignedNumericalEdgeLengthM": 6.47197886416617
+        },
+        {
+          "boundaryBin": [
+            -8,
+            17
+          ],
+          "assignedNumericalEdgeLengthM": 52.44531213078881
+        },
+        {
+          "boundaryBin": [
+            -7,
+            1
+          ],
+          "assignedNumericalEdgeLengthM": 18.93630505800957
+        },
+        {
+          "boundaryBin": [
+            -7,
+            2
+          ],
+          "assignedNumericalEdgeLengthM": 62.711966351704575
+        },
+        {
+          "boundaryBin": [
+            -7,
+            3
+          ],
+          "assignedNumericalEdgeLengthM": 2.15732628805539
+        },
+        {
+          "boundaryBin": [
+            -7,
+            17
+          ],
+          "assignedNumericalEdgeLengthM": 69.94622124437984
+        },
+        {
+          "boundaryBin": [
+            -6,
+            -1
+          ],
+          "assignedNumericalEdgeLengthM": 21.85787945025244
+        },
+        {
+          "boundaryBin": [
+            -6,
+            0
+          ],
+          "assignedNumericalEdgeLengthM": 98.35741195087944
+        },
+        {
+          "boundaryBin": [
+            -6,
+            1
+          ],
+          "assignedNumericalEdgeLengthM": 39.77198479833582
+        },
+        {
+          "boundaryBin": [
+            -6,
+            15
+          ],
+          "assignedNumericalEdgeLengthM": 17.21978435642388
+        },
+        {
+          "boundaryBin": [
+            -6,
+            16
+          ],
+          "assignedNumericalEdgeLengthM": 60.269245247483404
+        },
+        {
+          "boundaryBin": [
+            -6,
+            17
+          ],
+          "assignedNumericalEdgeLengthM": 17.219784356423837
+        },
+        {
+          "boundaryBin": [
+            -5,
+            -4
+          ],
+          "assignedNumericalEdgeLengthM": 24.336055206376642
+        },
+        {
+          "boundaryBin": [
+            -5,
+            -3
+          ],
+          "assignedNumericalEdgeLengthM": 55.45484533701792
+        },
+        {
+          "boundaryBin": [
+            -5,
+            -2
+          ],
+          "assignedNumericalEdgeLengthM": 51.39154496599889
+        },
+        {
+          "boundaryBin": [
+            -5,
+            -1
+          ],
+          "assignedNumericalEdgeLengthM": 29.806199250344218
+        },
+        {
+          "boundaryBin": [
+            -5,
+            14
+          ],
+          "assignedNumericalEdgeLengthM": 54.52931712867549
+        },
+        {
+          "boundaryBin": [
+            -5,
+            15
+          ],
+          "assignedNumericalEdgeLengthM": 40.179496831655406
+        },
+        {
+          "boundaryBin": [
+            -4,
+            -7
+          ],
+          "assignedNumericalEdgeLengthM": 35.483944494884014
+        },
+        {
+          "boundaryBin": [
+            -4,
+            -6
+          ],
+          "assignedNumericalEdgeLengthM": 52.13200705500745
+        },
+        {
+          "boundaryBin": [
+            -4,
+            -5
+          ],
+          "assignedNumericalEdgeLengthM": 53.35422300999242
+        },
+        {
+          "boundaryBin": [
+            -4,
+            -4
+          ],
+          "assignedNumericalEdgeLengthM": 29.74225571129782
+        },
+        {
+          "boundaryBin": [
+            -4,
+            12
+          ],
+          "assignedNumericalEdgeLengthM": 31.56960465344373
+        },
+        {
+          "boundaryBin": [
+            -4,
+            13
+          ],
+          "assignedNumericalEdgeLengthM": 57.39928118807953
+        },
+        {
+          "boundaryBin": [
+            -4,
+            14
+          ],
+          "assignedNumericalEdgeLengthM": 5.739928118807791
+        },
+        {
+          "boundaryBin": [
+            -3,
+            -8
+          ],
+          "assignedNumericalEdgeLengthM": 67.24698107197297
+        },
+        {
+          "boundaryBin": [
+            -3,
+            -7
+          ],
+          "assignedNumericalEdgeLengthM": 17.327515308356965
+        },
+        {
+          "boundaryBin": [
+            -3,
+            11
+          ],
+          "assignedNumericalEdgeLengthM": 55.70235283421972
+        },
+        {
+          "boundaryBin": [
+            -3,
+            12
+          ],
+          "assignedNumericalEdgeLengthM": 28.699640594039558
+        },
+        {
+          "boundaryBin": [
+            -2,
+            -9
+          ],
+          "assignedNumericalEdgeLengthM": 63.38234750865581
+        },
+        {
+          "boundaryBin": [
+            -2,
+            -8
+          ],
+          "assignedNumericalEdgeLengthM": 7.758597628699613
+        },
+        {
+          "boundaryBin": [
+            -2,
+            9
+          ],
+          "assignedNumericalEdgeLengthM": 7.403122808146584
+        },
+        {
+          "boundaryBin": [
+            -2,
+            10
+          ],
+          "assignedNumericalEdgeLengthM": 62.524925007842434
+        },
+        {
+          "boundaryBin": [
+            -2,
+            11
+          ],
+          "assignedNumericalEdgeLengthM": 11.578689816267248
+        },
+        {
+          "boundaryBin": [
+            -1,
+            -11
+          ],
+          "assignedNumericalEdgeLengthM": 37.25486258572186
+        },
+        {
+          "boundaryBin": [
+            -1,
+            -10
+          ],
+          "assignedNumericalEdgeLengthM": 57.68978895416612
+        },
+        {
+          "boundaryBin": [
+            -1,
+            -9
+          ],
+          "assignedNumericalEdgeLengthM": 5.070587800692453
+        },
+        {
+          "boundaryBin": [
+            -1,
+            9
+          ],
+          "assignedNumericalEdgeLengthM": 55.83998989750192
+        },
+        {
+          "boundaryBin": [
+            0,
+            -12
+          ],
+          "assignedNumericalEdgeLengthM": 51.97053720137272
+        },
+        {
+          "boundaryBin": [
+            0,
+            -11
+          ],
+          "assignedNumericalEdgeLengthM": 24.61762288486078
+        },
+        {
+          "boundaryBin": [
+            0,
+            8
+          ],
+          "assignedNumericalEdgeLengthM": 22.08838254595249
+        },
+        {
+          "boundaryBin": [
+            0,
+            9
+          ],
+          "assignedNumericalEdgeLengthM": 36.81397090992081
+        },
+        {
+          "boundaryBin": [
+            1,
+            -13
+          ],
+          "assignedNumericalEdgeLengthM": 62.911702927977416
+        },
+        {
+          "boundaryBin": [
+            1,
+            -12
+          ],
+          "assignedNumericalEdgeLengthM": 13.676457158256092
+        },
+        {
+          "boundaryBin": [
+            1,
+            8
+          ],
+          "assignedNumericalEdgeLengthM": 56.44808872854518
+        },
+        {
+          "boundaryBin": [
+            2,
+            -14
+          ],
+          "assignedNumericalEdgeLengthM": 54.13691755131658
+        },
+        {
+          "boundaryBin": [
+            2,
+            -13
+          ],
+          "assignedNumericalEdgeLengthM": 2.7352914316511683
+        },
+        {
+          "boundaryBin": [
+            2,
+            7
+          ],
+          "assignedNumericalEdgeLengthM": 27.774028865836918
+        },
+        {
+          "boundaryBin": [
+            2,
+            8
+          ],
+          "assignedNumericalEdgeLengthM": 29.451176727936666
+        },
+        {
+          "boundaryBin": [
+            3,
+            -14
+          ],
+          "assignedNumericalEdgeLengthM": 55.87616204920158
+        },
+        {
+          "boundaryBin": [
+            3,
+            7
+          ],
+          "assignedNumericalEdgeLengthM": 53.17844365907695
+        },
+        {
+          "boundaryBin": [
+            4,
+            -16
+          ],
+          "assignedNumericalEdgeLengthM": 9.797034990121045
+        },
+        {
+          "boundaryBin": [
+            4,
+            -15
+          ],
+          "assignedNumericalEdgeLengthM": 67.1476922349771
+        },
+        {
+          "boundaryBin": [
+            4,
+            6
+          ],
+          "assignedNumericalEdgeLengthM": 9.670762969391618
+        },
+        {
+          "boundaryBin": [
+            4,
+            7
+          ],
+          "assignedNumericalEdgeLengthM": 45.05263712454622
+        },
+        {
+          "boundaryBin": [
+            5,
+            -17
+          ],
+          "assignedNumericalEdgeLengthM": 26.941846222832943
+        },
+        {
+          "boundaryBin": [
+            5,
+            -16
+          ],
+          "assignedNumericalEdgeLengthM": 53.883692445665744
+        },
+        {
+          "boundaryBin": [
+            5,
+            6
+          ],
+          "assignedNumericalEdgeLengthM": 53.18919633165396
+        },
+        {
+          "boundaryBin": [
+            6,
+            -18
+          ],
+          "assignedNumericalEdgeLengthM": 46.75620151623273
+        },
+        {
+          "boundaryBin": [
+            6,
+            -17
+          ],
+          "assignedNumericalEdgeLengthM": 35.77270249913926
+        },
+        {
+          "boundaryBin": [
+            6,
+            6
+          ],
+          "assignedNumericalEdgeLengthM": 52.10779550191268
+        },
+        {
+          "boundaryBin": [
+            7,
+            -18
+          ],
+          "assignedNumericalEdgeLengthM": 57.83311598574142
+        },
+        {
+          "boundaryBin": [
+            7,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 2.9365884240502464
+        },
+        {
+          "boundaryBin": [
+            7,
+            6
+          ],
+          "assignedNumericalEdgeLengthM": 49.92200320885331
+        },
+        {
+          "boundaryBin": [
+            8,
+            -18
+          ],
+          "assignedNumericalEdgeLengthM": 52.855971925261834
+        },
+        {
+          "boundaryBin": [
+            8,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 49.92200320885326
+        },
+        {
+          "boundaryBin": [
+            9,
+            -18
+          ],
+          "assignedNumericalEdgeLengthM": 50.21317332899871
+        },
+        {
+          "boundaryBin": [
+            9,
+            -17
+          ],
+          "assignedNumericalEdgeLengthM": 2.642798596263133
+        },
+        {
+          "boundaryBin": [
+            9,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 52.85859163290363
+        },
+        {
+          "boundaryBin": [
+            10,
+            -17
+          ],
+          "assignedNumericalEdgeLengthM": 65.42326168840036
+        },
+        {
+          "boundaryBin": [
+            10,
+            -16
+          ],
+          "assignedNumericalEdgeLengthM": 46.62486910597285
+        },
+        {
+          "boundaryBin": [
+            10,
+            -13
+          ],
+          "assignedNumericalEdgeLengthM": 39.23828387459271
+        },
+        {
+          "boundaryBin": [
+            10,
+            -12
+          ],
+          "assignedNumericalEdgeLengthM": 32.004788487520614
+        },
+        {
+          "boundaryBin": [
+            10,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 49.92200320885333
+        },
+        {
+          "boundaryBin": [
+            11,
+            -16
+          ],
+          "assignedNumericalEdgeLengthM": 52.69873169230498
+        },
+        {
+          "boundaryBin": [
+            11,
+            -15
+          ],
+          "assignedNumericalEdgeLengthM": 48.89122380023393
+        },
+        {
+          "boundaryBin": [
+            11,
+            -14
+          ],
+          "assignedNumericalEdgeLengthM": 55.32572145415843
+        },
+        {
+          "boundaryBin": [
+            11,
+            -13
+          ],
+          "assignedNumericalEdgeLengthM": 14.003989207773966
+        },
+        {
+          "boundaryBin": [
+            11,
+            -12
+          ],
+          "assignedNumericalEdgeLengthM": 23.854389867404695
+        },
+        {
+          "boundaryBin": [
+            11,
+            -11
+          ],
+          "assignedNumericalEdgeLengthM": 59.44295309651126
+        },
+        {
+          "boundaryBin": [
+            11,
+            -10
+          ],
+          "assignedNumericalEdgeLengthM": 12.034666126724714
+        },
+        {
+          "boundaryBin": [
+            11,
+            4
+          ],
+          "assignedNumericalEdgeLengthM": 5.8731768481003686
+        },
+        {
+          "boundaryBin": [
+            11,
+            5
+          ],
+          "assignedNumericalEdgeLengthM": 46.985414784803204
+        },
+        {
+          "boundaryBin": [
+            12,
+            -16
+          ],
+          "assignedNumericalEdgeLengthM": 17.840618358814293
+        },
+        {
+          "boundaryBin": [
+            12,
+            -15
+          ],
+          "assignedNumericalEdgeLengthM": 4.656307028593655
+        },
+        {
+          "boundaryBin": [
+            12,
+            -10
+          ],
+          "assignedNumericalEdgeLengthM": 43.324798056209474
+        },
+        {
+          "boundaryBin": [
+            12,
+            -9
+          ],
+          "assignedNumericalEdgeLengthM": 57.766397408279225
+        },
+        {
+          "boundaryBin": [
+            12,
+            -8
+          ],
+          "assignedNumericalEdgeLengthM": 7.30398843446385
+        },
+        {
+          "boundaryBin": [
+            12,
+            4
+          ],
+          "assignedNumericalEdgeLengthM": 49.92200320885339
+        },
+        {
+          "boundaryBin": [
+            13,
+            -8
+          ],
+          "assignedNumericalEdgeLengthM": 47.47592482401483
+        },
+        {
+          "boundaryBin": [
+            13,
+            -7
+          ],
+          "assignedNumericalEdgeLengthM": 54.77991325847864
+        },
+        {
+          "boundaryBin": [
+            13,
+            -6
+          ],
+          "assignedNumericalEdgeLengthM": 22.44825186209953
+        },
+        {
+          "boundaryBin": [
+            13,
+            -5
+          ],
+          "assignedNumericalEdgeLengthM": 49.95015227883639
+        },
+        {
+          "boundaryBin": [
+            13,
+            -4
+          ],
+          "assignedNumericalEdgeLengthM": 51.80486819813419
+        },
+        {
+          "boundaryBin": [
+            13,
+            -3
+          ],
+          "assignedNumericalEdgeLengthM": 51.19486331379217
+        },
+        {
+          "boundaryBin": [
+            13,
+            -2
+          ],
+          "assignedNumericalEdgeLengthM": 51.03800801336814
+        },
+        {
+          "boundaryBin": [
+            13,
+            -1
+          ],
+          "assignedNumericalEdgeLengthM": 50.77142251541
+        },
+        {
+          "boundaryBin": [
+            13,
+            0
+          ],
+          "assignedNumericalEdgeLengthM": 48.23285138963949
+        },
+        {
+          "boundaryBin": [
+            13,
+            1
+          ],
+          "assignedNumericalEdgeLengthM": 50.771422515409995
+        },
+        {
+          "boundaryBin": [
+            13,
+            2
+          ],
+          "assignedNumericalEdgeLengthM": 49.70795027603366
+        },
+        {
+          "boundaryBin": [
+            13,
+            3
+          ],
+          "assignedNumericalEdgeLengthM": 50.854713136652165
+        },
+        {
+          "boundaryBin": [
+            13,
+            4
+          ],
+          "assignedNumericalEdgeLengthM": 53.628833695602864
+        },
+        {
+          "boundaryBin": [
+            14,
+            -6
+          ],
+          "assignedNumericalEdgeLengthM": 28.06601208712364
+        }
+      ]
+    }
+  }
+}

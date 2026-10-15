@@ -1,0 +1,20 @@
+{
+  "version": "rocha-zahorra-3",
+  "width": 512,
+  "height": 512,
+  "format": "rgba8unorm",
+  "channels": "linear RGB albedo; A height / 0.002 m",
+  "seed": 902163,
+  "tileMetres": 0.63,
+  "maxReliefMetres": 0.002,
+  "generatedMaxReliefMetres": 0.0012992037534713746,
+  "gpuBytesIncludingMips": 1398100,
+  "mipLevels": 10,
+  "sha256": "705cd54f26fb029ade5656b2c34e9da95be9de8c7e4583cb9a071fb1f207ba6b",
+  "appearance": "Maintained, lightly used, dry compacted gray-beige zahorra",
+  "references": [
+    "https://ferreterialacasitaroja.com/product/zahorra-m3/",
+    "https://www.insermaingenieros.com/proyectos/inst-residuos-y-recuperaciones-ambientales/recuperaci%C3%B3n-y-mejora-de-camino-ecol%C3%B3gico-entre-adrados-y-hontalbilla/"
+  ],
+  "estimates": "Visual particle distribution and shallow normal relief; not a construction specification"
+}

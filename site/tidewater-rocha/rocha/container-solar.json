@@ -1,0 +1,431 @@
+{
+  "version": "rocha-container-solar-1",
+  "status": "Proposed visual installation; not approved for construction or export",
+  "preparedDate": "2026-10-09",
+  "sourceNetworkVersion": "rocha-underground-network-3",
+  "sourceNetworkSHA256": "d49f163c077437389416ffd91685ce641ba6ed1b4eea9c519cf5c3a7eef16174",
+  "sourceMapSHA256": "9d1704e8497ab6b452ebbf1b1c78775ac1a9487164f8c2fb7e1d7ddaf5ea0fec",
+  "references": [
+    {
+      "name": "Trina",
+      "url": "https://static.trinasolar.com/sites/default/files/DT-M-0093%20AUS%20EN%20B%20210RVertex_NE19R_600-630_2024_B_web_0.pdf",
+      "packaged": "./rocha/solar-references/trina-tsm-ne19r.pdf",
+      "sha256": "e5cb5f30d64eb660b70b4cf7f17fe9ae354258e6912650149ed559b1cb1e88cc",
+      "inspectedDate": "2026-10-09"
+    },
+    {
+      "name": "Hoymiles",
+      "url": "https://www.hoymiles.com/uploadfile/4/202507/e84c726be6.pdf",
+      "packaged": "./rocha/solar-references/hoymiles-north-america.pdf",
+      "sha256": "18443dd45731f021e7969b09b1c615756796b698dde50707d6fddbb4570ab7af",
+      "inspectedDate": "2026-10-09"
+    }
+  ],
+  "panel": {
+    "manufacturer": "Trina Solar",
+    "model": "TSM-620NE19R",
+    "watts": 620,
+    "dimensionsM": [
+      2.382,
+      1.134,
+      0.03
+    ],
+    "massKg": 27.9,
+    "halfCells": 132,
+    "Vmp": 41.4,
+    "Imp": 14.99,
+    "Voc": 49.6,
+    "Isc": 15.91,
+    "VocTemperatureCoefficientPerC": -0.0024
+  },
+  "inverter": {
+    "manufacturer": "Hoymiles",
+    "model": "HMS-2000-4T-NA",
+    "dimensionsM": [
+      0.331,
+      0.218,
+      0.0406
+    ],
+    "inputs": 4,
+    "independentMPPT": 4,
+    "maxDCV": 65,
+    "MPPTV": [
+      16,
+      60
+    ],
+    "maxInputA": 16,
+    "maxShortCircuitA": 25,
+    "continuousKVA": 1.918,
+    "peakKVA": 2,
+    "ACV": 208,
+    "Hz": 60,
+    "gridFailure": "anti-islanding: generation stops; no battery backup",
+    "certification": "Foreign published certifications are not Colombian approval"
+  },
+  "pending": [
+    "Afinia feasibility, service voltage and product acceptance",
+    "Conductor sizing, voltage rise and protection coordination",
+    "Bonding, existing earthing measurements and grounding design",
+    "Roof framing, attachment, wind uplift, corrosion and roof waterproofing",
+    "CREG/RETIE procedures and permission to export"
+  ],
+  "systems": [
+    {
+      "id": "PV-775",
+      "homeId": "container-775",
+      "plotId": 775,
+      "panelCount": 4,
+      "panelWatts": 620,
+      "dcKWp": 2.48,
+      "stationId": "T13",
+      "serviceId": "P775",
+      "phasePair": "AB",
+      "upstreamRouteId": "UG-R5336",
+      "lateral": {
+        "points": [
+          [
+            592.80419,
+            -501.541305
+          ],
+          [
+            515.4844409501546,
+            -516.8024556695751
+          ]
+        ],
+        "lengthM": 78.81146054280765,
+        "obstacles": [
+          {
+            "outer": [
+              [
+                503.31618115133585,
+                -513.0932167357167
+              ],
+              [
+                513.8786245694472,
+                -519.3959771658136
+              ],
+              [
+                515.8258188486642,
+                -516.1327832642834
+              ],
+              [
+                505.26337543055286,
+                -509.83002283418637
+              ]
+            ],
+            "holes": []
+          }
+        ],
+        "sampleIntervalM": 0.05,
+        "method": "Shortest visibility-graph route around expanded home footprint and access, within own parcel; civil dimensions pending"
+      },
+      "connections": {
+        "DC": "Four separate panels to four independent microinverter inputs",
+        "AC": "Microinverter → AC junction → lockable disconnect / breaker / SPD → house bus downstream of bidirectional meter",
+        "utility": "P775 → bidirectional meter → house board; same assigned T13 secondary",
+        "earth": "Panel frames + rails + inverter PE + metal home → common bonded house earthing; no isolated PV earth"
+      },
+      "equipmentCounts": {
+        "panels": 4,
+        "microinverters": 1,
+        "ACJunctions": 1,
+        "lockableDisconnects": 1,
+        "solarBreakers": 1,
+        "surgeProtectionAssemblies": 1,
+        "bidirectionalMeters": 1,
+        "houseBoards": 1,
+        "monitoringGateways": 1,
+        "groundInspectionCovers": 1,
+        "rails": 2,
+        "mountingFeet": 8,
+        "frameClamps": 16,
+        "cableTies": 4,
+        "panelJunctionBoxes": 4,
+        "DCConnectorPairs": 8,
+        "weatherproofWallCabinets": 2,
+        "DCInputPairs": 4
+      },
+      "supplyAssumed": {
+        "lineLineV": 208,
+        "lineNeutralV": 120,
+        "frequencyHz": 60,
+        "verified": false
+      },
+      "equipmentEnvelope": {
+        "outer": [
+          [
+            515.1336292207172,
+            -517.1171477897326
+          ],
+          [
+            516.2413976767631,
+            -517.7781690055721
+          ],
+          [
+            516.7025752692092,
+            -517.0053072920517
+          ],
+          [
+            515.5948068131634,
+            -516.3442860762123
+          ]
+        ],
+        "holes": []
+      },
+      "floorY": 45.581712152607835,
+      "panelDimensions": [
+        2.382,
+        1.134,
+        0.03
+      ],
+      "arrayDimensions": [
+        9.708,
+        1.134
+      ],
+      "mounting": {
+        "centerZ": 0.8,
+        "tiltDegrees": 5,
+        "minimumRoofClearanceM": 0.15,
+        "estimated": true
+      },
+      "acContinuousKVA": 1.918,
+      "acPeakKVA": 2,
+      "views": {
+        "solar775Roof": {
+          "p": [
+            524.3073869383965,
+            54.581712152607835,
+            -509.43237262468574
+          ],
+          "time": 16.2,
+          "yaw": 1.2668547264526335,
+          "pitch": -0.38589950930053896
+        },
+        "solar775Equipment": {
+          "p": [
+            519.7724739460097,
+            47.68171215260784,
+            -517.0321794743024
+          ],
+          "time": 16.2,
+          "yaw": 1.6243183977578761,
+          "pitch": -0.2065955466794475
+        },
+        "solar775Connection": {
+          "p": [
+            541.2736638984451,
+            69.58171215260784,
+            -504.41784910645123
+          ],
+          "time": 16.2,
+          "yaw": 1.1230942259020646,
+          "pitch": -0.698016416562132
+        }
+      },
+      "moduleHeightIncludesSolar": false,
+      "rendering": {
+        "triangles": 3456,
+        "opaqueBatches": 3,
+        "texturesAdded": 0,
+        "lightsAdded": 0,
+        "passesAdded": 0
+      }
+    },
+    {
+      "id": "PV-776",
+      "homeId": "container-776",
+      "plotId": 776,
+      "panelCount": 4,
+      "panelWatts": 620,
+      "dcKWp": 2.48,
+      "stationId": "T13",
+      "serviceId": "P776",
+      "phasePair": "BC",
+      "upstreamRouteId": "UG-R5337",
+      "lateral": {
+        "points": [
+          [
+            468.555073,
+            -497.124872
+          ],
+          [
+            495.4621323166293,
+            -490.19989030726765
+          ],
+          [
+            498.7589332029725,
+            -484.7725425281211
+          ]
+        ],
+        "lengthM": 34.13409888635232,
+        "obstacles": [
+          {
+            "outer": [
+              [
+                484.899688898518,
+                -483.89712987717064
+              ],
+              [
+                495.4621323166293,
+                -490.19989030726765
+              ],
+              [
+                499.100311101482,
+                -484.10287012282936
+              ],
+              [
+                488.5378676833707,
+                -477.80010969273235
+              ]
+            ],
+            "holes": []
+          },
+          {
+            "outer": [
+              [
+                483.1267440765353,
+                -481.208883858257
+              ],
+              [
+                485.7029497882698,
+                -482.7461424997441
+              ],
+              [
+                486.57406301844577,
+                -481.2862925964279
+              ],
+              [
+                483.9978573067113,
+                -479.74903395494084
+              ]
+            ],
+            "holes": []
+          }
+        ],
+        "sampleIntervalM": 0.05,
+        "method": "Shortest visibility-graph route around expanded home footprint and access, within own parcel; civil dimensions pending"
+      },
+      "connections": {
+        "DC": "Four separate panels to four independent microinverter inputs",
+        "AC": "Microinverter → AC junction → lockable disconnect / breaker / SPD → house bus downstream of bidirectional meter",
+        "utility": "P776 → bidirectional meter → house board; same assigned T13 secondary",
+        "earth": "Panel frames + rails + inverter PE + metal home → common bonded house earthing; no isolated PV earth"
+      },
+      "equipmentCounts": {
+        "panels": 4,
+        "microinverters": 1,
+        "ACJunctions": 1,
+        "lockableDisconnects": 1,
+        "solarBreakers": 1,
+        "surgeProtectionAssemblies": 1,
+        "bidirectionalMeters": 1,
+        "houseBoards": 1,
+        "monitoringGateways": 1,
+        "groundInspectionCovers": 1,
+        "rails": 2,
+        "mountingFeet": 8,
+        "frameClamps": 16,
+        "cableTies": 4,
+        "panelJunctionBoxes": 4,
+        "DCConnectorPairs": 8,
+        "weatherproofWallCabinets": 2,
+        "DCInputPairs": 4
+      },
+      "supplyAssumed": {
+        "lineLineV": 208,
+        "lineNeutralV": 120,
+        "frequencyHz": 60,
+        "verified": false
+      },
+      "equipmentEnvelope": {
+        "outer": [
+          [
+            498.4081214735352,
+            -485.0872346482785
+          ],
+          [
+            499.515889929581,
+            -485.74825586411794
+          ],
+          [
+            499.97706752202714,
+            -484.9753941505976
+          ],
+          [
+            498.8692990659813,
+            -484.3143729347582
+          ]
+        ],
+        "holes": []
+      },
+      "floorY": 45.49747209559394,
+      "panelDimensions": [
+        2.382,
+        1.134,
+        0.03
+      ],
+      "arrayDimensions": [
+        9.708,
+        1.134
+      ],
+      "mounting": {
+        "centerZ": 0.8,
+        "tiltDegrees": 5,
+        "minimumRoofClearanceM": 0.15,
+        "estimated": true
+      },
+      "acContinuousKVA": 1.918,
+      "acPeakKVA": 2,
+      "views": {
+        "solar776Roof": {
+          "p": [
+            506.73638693839655,
+            54.49747209559394,
+            -478.8193726246857
+          ],
+          "time": 16.2,
+          "yaw": 1.266854726452632,
+          "pitch": -0.385899509300536
+        },
+        "solar776Equipment": {
+          "p": [
+            503.0469661988276,
+            47.59747209559394,
+            -485.0022663328484
+          ],
+          "time": 16.2,
+          "yaw": 1.6243183977578755,
+          "pitch": -0.20659554667944485
+        },
+        "solar776Connection": {
+          "p": [
+            523.702663898445,
+            69.49747209559393,
+            -473.80484910645123
+          ],
+          "time": 16.2,
+          "yaw": 1.1565430029976593,
+          "pitch": -0.72209588483932
+        }
+      },
+      "moduleHeightIncludesSolar": false,
+      "rendering": {
+        "triangles": 3456,
+        "opaqueBatches": 3,
+        "texturesAdded": 0,
+        "lightsAdded": 0,
+        "passesAdded": 0
+      }
+    }
+  ],
+  "compatibility": {
+    "panelVmpInMPPTRange": true,
+    "panelVocUnderMax": true,
+    "panelImpUnderMax": true,
+    "panelIscUnderMax": true,
+    "atMinus40CVoc": 57.337599999999995,
+    "onePanelPerInput": true,
+    "seriesPanels": 1,
+    "notes": "STC limits checked against saved datasheets. Final extreme-temperature, irradiance/current allowances, connectors, regional model acceptance and AC protection remain engineering checks."
+  }
+}

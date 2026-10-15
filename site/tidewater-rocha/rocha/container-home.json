@@ -1,0 +1,89 @@
+{
+  "version": "rocha-container-home-2",
+  "source": {
+    "filename": "contenedor_container_rocha.jpg",
+    "sha256": "64b0faf8cac3b08e481284330b8203895035f7b0794919616dd9d3f60e4eb100",
+    "reference": "./rocha/container-plan.jpg"
+  },
+  "homes": [
+    {
+      "id": "container-775",
+      "plotId": 775,
+      "position": [
+        509.571,
+        -514.613
+      ],
+      "yaw": 0.538,
+      "seed": 902775,
+      "dimensions": {
+        "length": 12.1,
+        "width": 3.6,
+        "moduleLength": 6.05,
+        "endWalls": 0.22,
+        "partitions": [
+          0.14,
+          0.15
+        ],
+        "externalHeight": 2.8,
+        "clearHeight": 2.54,
+        "glazingHeight": 2.2,
+        "doorHeight": 2.1,
+        "bed": [
+          1.5,
+          2
+        ],
+        "roofSlope": 0.01
+      },
+      "floorPlacement": {
+        "clearanceM": 0.45,
+        "estimated": true,
+        "sourceNPT": "+0.45; unidentified project datum; terrain clearance is an independent placement estimate"
+      },
+      "sourceDimensions": {
+        "generalLengthM": 12.1,
+        "partialSumM": 12.09,
+        "closureAllowanceM": 0.01,
+        "closureLocation": "bedroom end lining; general extent and central joint take priority"
+      },
+      "heightReference": {
+        "manufacturer": "CONTAINEX",
+        "url": "https://catalog.containex.com/catalog/CONTAINEX/es/catalogs/CLASSIC_Line/pdf/CLASSIC_Line.pdf",
+        "externalHeightM": 2.8,
+        "internalHeightM": 2.54,
+        "status": "Comparable habitable module; custom 3.60 m width and exact original model unverified"
+      },
+      "palette": {
+        "wall": "#5DBCB0",
+        "trim": "#F3EFE6",
+        "accent": "#2E4F73",
+        "floor": "#A98968",
+        "fabric": "#E8D6B0"
+      },
+      "rooms": [
+        "living",
+        "dining",
+        "kitchen",
+        "bathroom",
+        "bedroom"
+      ],
+      "estimates": [
+        "height",
+        "roof",
+        "facades",
+        "furniture dimensions",
+        "shower interpretation",
+        "foundations",
+        "terrain-relative floor clearance"
+      ],
+      "surveyModified": false,
+      "hydraulicModelModified": false
+    }
+  ],
+  "facadeJunction": {
+    "version": "continuous-fascia-1",
+    "glazingHeadM": 2.2725,
+    "frontRoofEdgeM": 2.604,
+    "roofSlope": 0.01,
+    "fixedDuringRoofCutaway": true
+  }
+}

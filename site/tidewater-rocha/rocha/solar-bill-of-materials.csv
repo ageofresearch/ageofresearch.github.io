@@ -1,0 +1,37 @@
+system,plot,component,quantity,model_or_status
+PV-775,775,panels,4,Trina TSM-620NE19R
+PV-775,775,microinverters,1,Hoymiles HMS-2000-4T-NA
+PV-775,775,ACJunctions,1,Proposed visual equipment; engineering pending
+PV-775,775,lockableDisconnects,1,Proposed visual equipment; engineering pending
+PV-775,775,solarBreakers,1,Proposed visual equipment; engineering pending
+PV-775,775,surgeProtectionAssemblies,1,Proposed visual equipment; engineering pending
+PV-775,775,bidirectionalMeters,1,Proposed visual equipment; engineering pending
+PV-775,775,houseBoards,1,Proposed visual equipment; engineering pending
+PV-775,775,monitoringGateways,1,Proposed visual equipment; engineering pending
+PV-775,775,groundInspectionCovers,1,Proposed visual equipment; engineering pending
+PV-775,775,rails,2,Proposed visual equipment; engineering pending
+PV-775,775,mountingFeet,8,Proposed visual equipment; engineering pending
+PV-775,775,frameClamps,16,Proposed visual equipment; engineering pending
+PV-775,775,cableTies,4,Proposed visual equipment; engineering pending
+PV-775,775,panelJunctionBoxes,4,Proposed visual equipment; engineering pending
+PV-775,775,DCConnectorPairs,8,Proposed visual equipment; engineering pending
+PV-775,775,weatherproofWallCabinets,2,Proposed visual equipment; engineering pending
+PV-775,775,DCInputPairs,4,Proposed visual equipment; engineering pending
+PV-776,776,panels,4,Trina TSM-620NE19R
+PV-776,776,microinverters,1,Hoymiles HMS-2000-4T-NA
+PV-776,776,ACJunctions,1,Proposed visual equipment; engineering pending
+PV-776,776,lockableDisconnects,1,Proposed visual equipment; engineering pending
+PV-776,776,solarBreakers,1,Proposed visual equipment; engineering pending
+PV-776,776,surgeProtectionAssemblies,1,Proposed visual equipment; engineering pending
+PV-776,776,bidirectionalMeters,1,Proposed visual equipment; engineering pending
+PV-776,776,houseBoards,1,Proposed visual equipment; engineering pending
+PV-776,776,monitoringGateways,1,Proposed visual equipment; engineering pending
+PV-776,776,groundInspectionCovers,1,Proposed visual equipment; engineering pending
+PV-776,776,rails,2,Proposed visual equipment; engineering pending
+PV-776,776,mountingFeet,8,Proposed visual equipment; engineering pending
+PV-776,776,frameClamps,16,Proposed visual equipment; engineering pending
+PV-776,776,cableTies,4,Proposed visual equipment; engineering pending
+PV-776,776,panelJunctionBoxes,4,Proposed visual equipment; engineering pending
+PV-776,776,DCConnectorPairs,8,Proposed visual equipment; engineering pending
+PV-776,776,weatherproofWallCabinets,2,Proposed visual equipment; engineering pending
+PV-776,776,DCInputPairs,4,Proposed visual equipment; engineering pending

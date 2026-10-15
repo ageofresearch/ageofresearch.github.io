@@ -1,0 +1,15 @@
+{
+  "build": "tidewater-rocha-public-r1",
+  "worlds": [
+    "tidewater",
+    "rocha"
+  ],
+  "upstream": "dgreenheck/tidewater",
+  "upstreamCommit": "4811ba48d795197de5621985f404e765c0b7c0ef",
+  "source": "Current Tidewater + Rocha project; original island and Rocha map, with existing project modifications.",
+  "requires": "WebGPU with 32 sampled textures per shader stage; desktop keyboard and mouse controls",
+  "minimumSampledTexturesPerShaderStage": 32,
+  "entry": "play.html",
+  "renderingSettingsChanged": false,
+  "mipCompatibility": "Four-storage-texture path preserves original values; 580 native GPU readbacks matched the eight-slot reference."
+}

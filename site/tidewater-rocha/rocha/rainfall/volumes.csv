@@ -1,0 +1,7 @@
+metric,value_m3
+initialStorageM3,0.0
+precipitationM3,34731.577846365275
+infiltrationM3,9121.991812834118
+netBoundaryOutflowM3,9477.958465972015
+finalStorageM3,16131.627568010721
+massBalanceErrorM3,-4.515768523560837e-07

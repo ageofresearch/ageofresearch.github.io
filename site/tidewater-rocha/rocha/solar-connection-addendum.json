@@ -1,0 +1,218 @@
+{
+  "version": "rocha-container-solar-1",
+  "sourceNetworkVersion": "rocha-underground-network-3",
+  "sourceNetworkSHA256": "d49f163c077437389416ffd91685ce641ba6ed1b4eea9c519cf5c3a7eef16174",
+  "sourceMapSHA256": "9d1704e8497ab6b452ebbf1b1c78775ac1a9487164f8c2fb7e1d7ddaf5ea0fec",
+  "status": "Proposed visual installation; not approved for construction or export",
+  "scope": "Two private solar house laterals and downstream solar sources only; upstream assets and earlier documents unchanged",
+  "systems": [
+    {
+      "id": "PV-775",
+      "plotId": 775,
+      "serviceId": "P775",
+      "stationId": "T13",
+      "phasePair": "AB",
+      "lateral": {
+        "points": [
+          [
+            592.80419,
+            -501.541305
+          ],
+          [
+            515.4844409501546,
+            -516.8024556695751
+          ]
+        ],
+        "lengthM": 78.81146054280765,
+        "obstacles": [
+          {
+            "outer": [
+              [
+                503.31618115133585,
+                -513.0932167357167
+              ],
+              [
+                513.8786245694472,
+                -519.3959771658136
+              ],
+              [
+                515.8258188486642,
+                -516.1327832642834
+              ],
+              [
+                505.26337543055286,
+                -509.83002283418637
+              ]
+            ],
+            "holes": []
+          }
+        ],
+        "sampleIntervalM": 0.05,
+        "method": "Shortest visibility-graph route around expanded home footprint and access, within own parcel; civil dimensions pending"
+      },
+      "connections": {
+        "DC": "Four separate panels to four independent microinverter inputs",
+        "AC": "Microinverter → AC junction → lockable disconnect / breaker / SPD → house bus downstream of bidirectional meter",
+        "utility": "P775 → bidirectional meter → house board; same assigned T13 secondary",
+        "earth": "Panel frames + rails + inverter PE + metal home → common bonded house earthing; no isolated PV earth"
+      },
+      "dcKWp": 2.48,
+      "continuousKVA": 1.918,
+      "peakKVA": 2,
+      "supplyAssumed": {
+        "lineLineV": 208,
+        "lineNeutralV": 120,
+        "frequencyHz": 60,
+        "verified": false
+      },
+      "equipmentCounts": {
+        "panels": 4,
+        "microinverters": 1,
+        "ACJunctions": 1,
+        "lockableDisconnects": 1,
+        "solarBreakers": 1,
+        "surgeProtectionAssemblies": 1,
+        "bidirectionalMeters": 1,
+        "houseBoards": 1,
+        "monitoringGateways": 1,
+        "groundInspectionCovers": 1,
+        "rails": 2,
+        "mountingFeet": 8,
+        "frameClamps": 16,
+        "cableTies": 4,
+        "panelJunctionBoxes": 4,
+        "DCConnectorPairs": 8,
+        "weatherproofWallCabinets": 2,
+        "DCInputPairs": 4
+      }
+    },
+    {
+      "id": "PV-776",
+      "plotId": 776,
+      "serviceId": "P776",
+      "stationId": "T13",
+      "phasePair": "BC",
+      "lateral": {
+        "points": [
+          [
+            468.555073,
+            -497.124872
+          ],
+          [
+            495.4621323166293,
+            -490.19989030726765
+          ],
+          [
+            498.7589332029725,
+            -484.7725425281211
+          ]
+        ],
+        "lengthM": 34.13409888635232,
+        "obstacles": [
+          {
+            "outer": [
+              [
+                484.899688898518,
+                -483.89712987717064
+              ],
+              [
+                495.4621323166293,
+                -490.19989030726765
+              ],
+              [
+                499.100311101482,
+                -484.10287012282936
+              ],
+              [
+                488.5378676833707,
+                -477.80010969273235
+              ]
+            ],
+            "holes": []
+          },
+          {
+            "outer": [
+              [
+                483.1267440765353,
+                -481.208883858257
+              ],
+              [
+                485.7029497882698,
+                -482.7461424997441
+              ],
+              [
+                486.57406301844577,
+                -481.2862925964279
+              ],
+              [
+                483.9978573067113,
+                -479.74903395494084
+              ]
+            ],
+            "holes": []
+          }
+        ],
+        "sampleIntervalM": 0.05,
+        "method": "Shortest visibility-graph route around expanded home footprint and access, within own parcel; civil dimensions pending"
+      },
+      "connections": {
+        "DC": "Four separate panels to four independent microinverter inputs",
+        "AC": "Microinverter → AC junction → lockable disconnect / breaker / SPD → house bus downstream of bidirectional meter",
+        "utility": "P776 → bidirectional meter → house board; same assigned T13 secondary",
+        "earth": "Panel frames + rails + inverter PE + metal home → common bonded house earthing; no isolated PV earth"
+      },
+      "dcKWp": 2.48,
+      "continuousKVA": 1.918,
+      "peakKVA": 2,
+      "supplyAssumed": {
+        "lineLineV": 208,
+        "lineNeutralV": 120,
+        "frequencyHz": 60,
+        "verified": false
+      },
+      "equipmentCounts": {
+        "panels": 4,
+        "microinverters": 1,
+        "ACJunctions": 1,
+        "lockableDisconnects": 1,
+        "solarBreakers": 1,
+        "surgeProtectionAssemblies": 1,
+        "bidirectionalMeters": 1,
+        "houseBoards": 1,
+        "monitoringGateways": 1,
+        "groundInspectionCovers": 1,
+        "rails": 2,
+        "mountingFeet": 8,
+        "frameClamps": 16,
+        "cableTies": 4,
+        "panelJunctionBoxes": 4,
+        "DCConnectorPairs": 8,
+        "weatherproofWallCabinets": 2,
+        "DCInputPairs": 4
+      }
+    }
+  ],
+  "references": [
+    {
+      "name": "Trina",
+      "url": "https://static.trinasolar.com/sites/default/files/DT-M-0093%20AUS%20EN%20B%20210RVertex_NE19R_600-630_2024_B_web_0.pdf",
+      "packaged": "./rocha/solar-references/trina-tsm-ne19r.pdf",
+      "sha256": "e5cb5f30d64eb660b70b4cf7f17fe9ae354258e6912650149ed559b1cb1e88cc",
+      "inspectedDate": "2026-10-09"
+    },
+    {
+      "name": "Hoymiles",
+      "url": "https://www.hoymiles.com/uploadfile/4/202507/e84c726be6.pdf",
+      "packaged": "./rocha/solar-references/hoymiles-north-america.pdf",
+      "sha256": "18443dd45731f021e7969b09b1c615756796b698dde50707d6fddbb4570ab7af",
+      "inspectedDate": "2026-10-09"
+    }
+  ],
+  "pending": [
+    "Afinia feasibility, service voltage and product acceptance",
+    "Conductor sizing, voltage rise and protection coordination",
+    "Bonding, existing earthing measurements and grounding design",
+    "Roof framing, attachment, wind uplift, corrosion and roof waterproofing",
+    "CREG/RETIE procedures and permission to export"
+  ]
+}

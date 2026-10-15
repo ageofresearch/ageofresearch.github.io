@@ -1,0 +1,79 @@
+{
+  "version": "rocha-container-large-1",
+  "source": {
+    "filename": "IMG-20260923-WA0007.jpg",
+    "sha256": "dfd1ebea0f52c64dfb43385c1fdbbd560122ae6dc5f386fdb5d3b81d0c52df85",
+    "reference": "./rocha/container-large-plan.jpg"
+  },
+  "homes": [
+    {
+      "id": "container-776",
+      "variant": "large",
+      "plotId": 776,
+      "position": [
+        492,
+        -484
+      ],
+      "yaw": 0.538,
+      "seed": 902776,
+      "dimensions": {
+        "length": 12.1,
+        "width": 6.9,
+        "areaM2": 83.49,
+        "moduleLength": 6.05,
+        "moduleWidth": 3.45,
+        "endWalls": 0.22,
+        "partitions": [
+          0.14,
+          0.15
+        ],
+        "externalHeight": 2.8,
+        "clearHeight": 2.54,
+        "glazingHeight": 2.2,
+        "doorHeight": 2.1,
+        "bed": [
+          1.5,
+          2
+        ],
+        "roofSlope": 0.01
+      },
+      "floorPlacement": {
+        "clearanceM": 0.45,
+        "estimated": true,
+        "sourceNPT": "+0.45; project datum unidentified; independent terrain clearance estimate"
+      },
+      "sourceDimensions": {
+        "generalLengthM": 12.1,
+        "partialSumM": 12.09,
+        "closureAllowanceM": 0.01,
+        "closureLocation": "bedroom end lining"
+      },
+      "palette": {
+        "wall": "#5DBCB0",
+        "trim": "#F3EFE6",
+        "accent": "#2E4F73",
+        "floor": "#A98968",
+        "fabric": "#E8D6B0"
+      },
+      "rooms": [
+        "living",
+        "dining",
+        "kitchen",
+        "bathroom-1",
+        "bathroom-2",
+        "bedroom-1",
+        "bedroom-2"
+      ],
+      "estimates": [
+        "height",
+        "two shallow roof planes",
+        "furniture sizes",
+        "shower interpretation",
+        "supports",
+        "terrain-relative floor clearance"
+      ],
+      "surveyModified": false,
+      "hydraulicModelModified": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "version": "rocha-rainfall-1",
+  "sourceVersion": "rocha-v3-a839c17c93b6-51870ef244f1-commercial-entrance-1-roundabout-1-main-entrance-1-lake-road-connection-1",
+  "sourceSha256": "726ddff6f9b026cbfe9cd0abbf63952a733c701b54ec3f0b48d4030ed610a82d",
+  "meshSha256": "619792a453e1f7f1b856165c92fe79a70ed0d6b8f2c7f7a4c25b84921f0ec821",
+  "scope": "One simplified exploratory survey scenario, as requested after disk-space limit",
+  "resolutionM": 10,
+  "convergence": "pending",
+  "scenarios": [
+    {
+      "id": "survey-30-60-5",
+      "status": "valid",
+      "model": "survey",
+      "intensityMmH": 30,
+      "durationMinutes": 60,
+      "infiltrationMmH": 5,
+      "frictionScale": 1,
+      "hyetograph": "constant",
+      "boundary": "free"
+    }
+  ],
+  "assumptions": [
+    "Datum horizontal y vertical, ubicación y precisión vertical sin confirmar",
+    "Lluvia uniforme hipotética: no se asigna periodo de retorno",
+    "Infiltración constante hipotética de 5 mm/h, limitada por agua disponible; no es un ensayo del suelo",
+    "La apariencia de la zahorra no acredita su permeabilidad; el microrelieve y el desplazamiento de pavimento de 0,038 m son gráficos, no cotas hidráulicas",
+    "Manning n = 0,06 uniforme en el modelo topográfico; no es rugosidad calibrada",
+    "Modelo topográfico: lagos, excavaciones, tuberías y construcciones NO se introducen como obras hidráulicas",
+    "Exterior seco en el límite: descarga libre hipotética, sin aportes externos ni remanso",
+    "Reproducción de referencia de 10 m; análisis afinado documentado por separado",
+    "El registro horizontal del PDF no acredita la precisión vertical del levantamiento",
+    "Reproducción float32 cada 5 min, interpolación visual lineal; se omiten celdas con menos de 1 mm de agua",
+    "El receptor final fuera del predio permanece desconocido"
+  ],
+  "finalReceiver": null,
+  "refinementSummary": "Análisis afinado; reproducción de referencia 10 m",
+  "refinementReport": "refinement/report.html"
+}

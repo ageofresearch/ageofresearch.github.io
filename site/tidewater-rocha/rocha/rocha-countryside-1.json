@@ -1,0 +1,215 @@
+{
+  "version": "rocha-countryside-backdrop-1",
+  "defaultEnabled": false,
+  "assets": {
+    "ground": {
+      "file": "rocha-countryside-ground-1.rgba.gz",
+      "width": 1024,
+      "height": 1024,
+      "format": "rgba8unorm",
+      "encoding": "planar-paeth-gzip-1",
+      "color": "linear RGB, premultiplied alpha",
+      "mipLevels": 11,
+      "mips": [
+        {
+          "mip": 0,
+          "width": 1024,
+          "height": 1024,
+          "offset": 0,
+          "bytes": 4194304
+        },
+        {
+          "mip": 1,
+          "width": 512,
+          "height": 512,
+          "offset": 4194304,
+          "bytes": 1048576
+        },
+        {
+          "mip": 2,
+          "width": 256,
+          "height": 256,
+          "offset": 5242880,
+          "bytes": 262144
+        },
+        {
+          "mip": 3,
+          "width": 128,
+          "height": 128,
+          "offset": 5505024,
+          "bytes": 65536
+        },
+        {
+          "mip": 4,
+          "width": 64,
+          "height": 64,
+          "offset": 5570560,
+          "bytes": 16384
+        },
+        {
+          "mip": 5,
+          "width": 32,
+          "height": 32,
+          "offset": 5586944,
+          "bytes": 4096
+        },
+        {
+          "mip": 6,
+          "width": 16,
+          "height": 16,
+          "offset": 5591040,
+          "bytes": 1024
+        },
+        {
+          "mip": 7,
+          "width": 8,
+          "height": 8,
+          "offset": 5592064,
+          "bytes": 256
+        },
+        {
+          "mip": 8,
+          "width": 4,
+          "height": 4,
+          "offset": 5592320,
+          "bytes": 64
+        },
+        {
+          "mip": 9,
+          "width": 2,
+          "height": 2,
+          "offset": 5592384,
+          "bytes": 16
+        },
+        {
+          "mip": 10,
+          "width": 1,
+          "height": 1,
+          "offset": 5592400,
+          "bytes": 4
+        }
+      ],
+      "gpuBytes": 5592404,
+      "downloadBytes": 2100386,
+      "sha256": "315a2c45917acc5f6dc644e927446f19681d0aa21d43988d00f19e1c9d19f9e4",
+      "fileSha256": "fbe8dc92a841fc62df8e89f9998a3510295aef9df01821acc115516c3abc796f",
+      "authoringSha256": "5cc27647f6875e0374818f38c9ae2e9658d365506e1bb4c794cbdac88f05087e"
+    },
+    "horizon": {
+      "file": "rocha-countryside-horizon-1.rgba.gz",
+      "width": 2048,
+      "height": 512,
+      "format": "rgba8unorm",
+      "encoding": "planar-paeth-gzip-1",
+      "color": "linear RGB, premultiplied alpha",
+      "mipLevels": 12,
+      "mips": [
+        {
+          "mip": 0,
+          "width": 2048,
+          "height": 512,
+          "offset": 0,
+          "bytes": 4194304
+        },
+        {
+          "mip": 1,
+          "width": 1024,
+          "height": 256,
+          "offset": 4194304,
+          "bytes": 1048576
+        },
+        {
+          "mip": 2,
+          "width": 512,
+          "height": 128,
+          "offset": 5242880,
+          "bytes": 262144
+        },
+        {
+          "mip": 3,
+          "width": 256,
+          "height": 64,
+          "offset": 5505024,
+          "bytes": 65536
+        },
+        {
+          "mip": 4,
+          "width": 128,
+          "height": 32,
+          "offset": 5570560,
+          "bytes": 16384
+        },
+        {
+          "mip": 5,
+          "width": 64,
+          "height": 16,
+          "offset": 5586944,
+          "bytes": 4096
+        },
+        {
+          "mip": 6,
+          "width": 32,
+          "height": 8,
+          "offset": 5591040,
+          "bytes": 1024
+        },
+        {
+          "mip": 7,
+          "width": 16,
+          "height": 4,
+          "offset": 5592064,
+          "bytes": 256
+        },
+        {
+          "mip": 8,
+          "width": 8,
+          "height": 2,
+          "offset": 5592320,
+          "bytes": 64
+        },
+        {
+          "mip": 9,
+          "width": 4,
+          "height": 1,
+          "offset": 5592384,
+          "bytes": 16
+        },
+        {
+          "mip": 10,
+          "width": 2,
+          "height": 1,
+          "offset": 5592400,
+          "bytes": 8
+        },
+        {
+          "mip": 11,
+          "width": 1,
+          "height": 1,
+          "offset": 5592408,
+          "bytes": 4
+        }
+      ],
+      "gpuBytes": 5592412,
+      "downloadBytes": 623688,
+      "sha256": "5535f37c61e52e3ab658452d33a2ea1a0562c8fd13589290b0acbd90be8d8371",
+      "fileSha256": "ea33dbb21a9a4cbbbfd246e8f27c98f15dff9862add493cee142eef05a4148c9",
+      "authoringSha256": "0b1ac8c7f994f5b41b70a03be574dcc42deb9e705eb8699e5d1644ba0d6f2eef"
+    }
+  },
+  "gpuBytes": 11184816,
+  "downloadBytes": 2724074,
+  "groundTileMetres": 900,
+  "groundPlaneBelowSurveyM": 0.05,
+  "horizonElevationRadians": [
+    -0.1,
+    0.3
+  ],
+  "offlineColorQuantizationStep": 0.011764705882352941,
+  "authoring": "Built-in image generation; locally packaged. Neutral diffuse colors, no baked sky. Deterministic offline periodic seams and linear premultiplied mipmaps.",
+  "geographicAccuracy": "Artistic scenery, not surveyed exterior geography",
+  "lighting": "Existing sky irradiance and directional sun/moon only; existing exposure",
+  "prompts": {
+    "ground": "Top-down seamless subdued Colombian scrubland; neutral diffuse albedo; no sky, roads, buildings, water or directional shadows.",
+    "horizon": "Seamless low tropical hills and woodland, transparent sky; neutral diffuse albedo, no roads, buildings or directional shadows."
+  }
+}

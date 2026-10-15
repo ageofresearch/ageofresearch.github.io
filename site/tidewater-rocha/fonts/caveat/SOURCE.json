@@ -1,0 +1,15 @@
+{
+  "family": "Caveat",
+  "weightRange": [
+    400,
+    700
+  ],
+  "file": "Caveat.ttf",
+  "license": "SIL OFL 1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/caveat",
+  "download": "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf",
+  "retrieved": "2026-10-09",
+  "upstreamGitBlobSHA1": "f84acf2ce2d1b3329b194749530dbaec047e6df6",
+  "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
+  "bytes": 403648
+}

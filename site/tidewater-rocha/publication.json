@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r9",
+  "build": "tidewater-rocha-public-r10",
   "worlds": [
     "tidewater",
     "rocha"
@@ -59,7 +59,17 @@
         "time": 16.2
       }
     },
-    "walk": "walk=MD_R02",
+    "walk": "walk=boarding",
+    "exterior": {
+      "version": "luz-video-exterior-1",
+      "basis": "Owner-supplied exterior stills and survey video; local dimensions estimated",
+      "privateMediaPublished": false,
+      "boarding": "photo-guided-boarding-1",
+      "additionalTextures": 0,
+      "additionalLightingOrReflectionPasses": 0,
+      "sharedYachtBatches": 12,
+      "boardingBatches": 2
+    },
     "interior": {
       "version": "salvagni-crafted-2",
       "references": {
@@ -81,17 +91,17 @@
       "interDeckFurnitureFit": "service-ceiling-fit-1"
     },
     "stairs": {
-      "version": "photo-guided-stairs-1",
+      "version": "photo-guided-stairs-2",
       "routes": 4,
       "references": {
         "lobby": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Lobby_Low-res.jpg",
         "inside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Stairs_Low-res.jpg",
         "outside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Upper-Deck-2_Low-res.jpg"
       },
-      "basis": "Model-series photographs and R03 plans; local rises and fits estimated",
+      "basis": "Owner video distinguishes closed black lower port flight and open-spine upper port flight; R03 fit estimated",
       "sunDeckInitiallyVisible": true
     },
-    "navigation": "Source masks plus derived stair, landing, headroom and lobby doorway support; walk between all four decks; room jump remains optional",
+    "navigation": "Source masks plus derived boarding support, video-layout furniture obstacles, stair openings and headroom; dock to yacht and all four decks; room jumps optional",
     "assetBasis": "rocha/luz-de-mar/MODEL-BASIS.md"
   },
   "lakeYacht": {

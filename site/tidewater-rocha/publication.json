@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r10",
+  "build": "tidewater-rocha-public-r11",
   "worlds": [
     "tidewater",
     "rocha"
@@ -57,9 +57,27 @@
         "yaw": 0.4287780274460164,
         "pitch": -0.7657439795450527,
         "time": 16.2
+      },
+      "luzDeMarBarbecue": {
+        "p": [
+          573.5804614444445,
+          41.75675814938114,
+          -261.39570157894735
+        ],
+        "yaw": 2.339421868282903,
+        "pitch": -0.2508507680571419,
+        "time": 16.2
       }
     },
     "walk": "walk=boarding",
+    "barbecue": {
+      "version": "owner-photo-barbecue-1",
+      "basis": "Owner front photographs, raised and closed hood; estimated local dimensions",
+      "defaultPose": "open",
+      "reviewView": "luzDeMarBarbecue",
+      "additionalTextures": 0,
+      "additionalBatches": 0
+    },
     "exterior": {
       "version": "luz-video-exterior-1",
       "basis": "Owner-supplied exterior stills and survey video; local dimensions estimated",

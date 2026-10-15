@@ -6,6 +6,14 @@ Listing dimensions: 35.23 m length, 7.47 m beam, 2.01 m draft. The source's two-
 
 Rooms, furniture and the base navigation masks come from R03. The current photo-guided stair pass adds continuous guest, bridge, terrace and sun-deck circulation through derived display openings and navigation overlays. Room jumps remain optional. The reconstructed optional sun deck is now visible initially and can be hidden with its existing control. Piping remains in the source binary but is not drawn in the ordinary walkthrough. Original PDFs are retained in the private reference workspace, not published with this map.
 
+## Current barbecue correction · owner-photo-barbecue-1 / public r11
+
+The upper starboard barbecue is rebuilt from the supplied frontal photographs with raised and closed hood, supplemented by the survey video. Looking at its front: the flush oval cover is on the left, three physically separate grates sit in a recessed well centrally, and the dark flush control strip with three circular markings is on the right. The earlier version mirrored this arrangement, used an almost flat lid and exaggerated cabinet bevels.
+
+The cabinet now has straight vertical walls with elliptical rounded ends, three flush doors, narrow recessed joints, circular push catches with the photographed asymmetric placement, and a red fire pictogram on the rightmost door. A thinner pale perimeter surrounds the grey, finely white-veined countertop. The folded hollow hood has two aligned halves, deep side cheeks and returns, an inner louvered liner, nearly continuous horizontal grips, hinge leaves/barrels and slender visible stays. The oval cover is represented closed; concealed equipment and exact material products remain unverified. The ordinary model uses the open hood. Closed-pose renders check the other supplied photograph; they do not imply a new interactive lid control.
+
+This is an appearance and shape reconstruction, with component dimensions estimated from perspective. Source binary, principal yacht dimensions, other authored furniture/IDs, circulation, water, AA and lighting settings remain unchanged. The new assembly shares the same 12 yacht batches and adds no texture, lighting or reflection pass. [Barbecue comparison views](barbecue/) and the `luzDeMarBarbecue` map view make the correction accessible directly.
+
 ## Current exterior · luz-video-exterior-1 / public r10
 
 The supplied exterior photographs and yacht survey video now guide the visible owner-specific cockpit and terrace. The main-to-upper port stair has glossy dark closed risers and broad rounded lower treads. The separate upper-to-sun port flight has open timber treads, a central metal spine, a swept dark outboard support and a slender polished inboard rail. The BBQ is starboard. These placements correct the earlier generic exterior reconstruction.

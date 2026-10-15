@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r7",
+  "build": "tidewater-rocha-public-r8",
   "worlds": [
     "tidewater",
     "rocha"
@@ -76,7 +76,8 @@
       "additionalRenderPasses": 0,
       "losslessIndexedInputs": true,
       "stableIndividualObjectIDs": true,
-      "opaqueBackFaceCulling": true
+      "opaqueBackFaceCulling": true,
+      "interDeckFurnitureFit": "service-ceiling-fit-1"
     },
     "navigation": "Source deck collision masks; virtual room and deck jumps; optional sun deck hidden initially",
     "assetBasis": "rocha/luz-de-mar/MODEL-BASIS.md"

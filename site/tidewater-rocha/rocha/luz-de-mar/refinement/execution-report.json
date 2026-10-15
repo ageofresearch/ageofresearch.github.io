@@ -48,6 +48,38 @@
   "additionalRenderTargets": 0,
   "additionalLightPasses": 0,
   "waterResolutionAndAA": "unchanged",
+  "displayFits": [
+    {
+      "version": "service-ceiling-fit-1",
+      "id": "MD_FUR_038",
+      "base": 3.95,
+      "sourceTop": 6,
+      "top": 5.87,
+      "ceiling": 5.88,
+      "scale": 0.9365853658536586,
+      "basis": "Display height fitted under the existing upper slab; immutable source dimensions remain in model metadata"
+    },
+    {
+      "version": "service-ceiling-fit-1",
+      "id": "MD_FUR_039",
+      "base": 3.95,
+      "sourceTop": 6,
+      "top": 5.87,
+      "ceiling": 5.88,
+      "scale": 0.9365853658536586,
+      "basis": "Display height fitted under the existing upper slab; immutable source dimensions remain in model metadata"
+    },
+    {
+      "version": "service-ceiling-fit-1",
+      "id": "MD_EQU_002",
+      "base": 3.95,
+      "sourceTop": 6.1,
+      "top": 5.87,
+      "ceiling": 5.88,
+      "scale": 0.8930232558139537,
+      "basis": "Display height fitted under the existing upper slab; immutable source dimensions remain in model metadata"
+    }
+  ],
   "holds": [
     "Unverified machinery/crew finishes",
     "Unresolved stair rises and routes",

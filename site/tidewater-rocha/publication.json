@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r1",
+  "build": "tidewater-rocha-public-r2",
   "worlds": [
     "tidewater",
     "rocha"
@@ -11,5 +11,55 @@
   "minimumSampledTexturesPerShaderStage": 32,
   "entry": "play.html",
   "renderingSettingsChanged": false,
+  "lakeYacht": {
+    "version": "rocha-lake-yacht-1",
+    "lakeId": "water-4",
+    "position": [
+      -230.589614,
+      15.208593382194092,
+      690.591792
+    ],
+    "yaw": 1.5707963267948966,
+    "shorelineClearanceM": 14.180477471658829,
+    "estimatedUnderKeelClearanceM": 0.98,
+    "depthStatus": "visual estimate: median surveyed perimeter elevation of connected water system; depth not surveyed",
+    "dimensions": {
+      "length": 38.22,
+      "beam": 7.98,
+      "draft": 2.02
+    },
+    "views": {
+      "lakeYacht": {
+        "p": [
+          -202.589614,
+          27.208593382194092,
+          748.591792
+        ],
+        "yaw": 0.4497596130698391,
+        "pitch": -0.12663802553796374,
+        "time": 16.2
+      },
+      "lakeYachtTop": {
+        "p": [
+          -206.589614,
+          53.208593382194096,
+          733.591792
+        ],
+        "yaw": 0.5090708884223831,
+        "pitch": -0.6070229692343998,
+        "time": 16.2
+      },
+      "lakeYachtStern": {
+        "p": [
+          -269.589614,
+          24.208593382194092,
+          716.591792
+        ],
+        "yaw": -0.982793723247329,
+        "pitch": -0.11048823237874393,
+        "time": 16.2
+      }
+    }
+  },
   "mipCompatibility": "Four-storage-texture path preserves original values; 580 native GPU readbacks matched the eight-slot reference."
 }

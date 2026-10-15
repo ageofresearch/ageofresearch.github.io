@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r3",
+  "build": "tidewater-rocha-public-r4",
   "worlds": [
     "tidewater",
     "rocha"
@@ -18,6 +18,50 @@
     "button": "Performance → Enable fast water",
     "method": "Surface-only shading, baked scrolling ripple normals, same-frame yacht reflection; detailed underwater fallback",
     "resolutionAndAAUnchanged": true
+  },
+  "entranceYacht": {
+    "id": "luz-de-mar",
+    "version": "luz-de-mar-rocha-1",
+    "lakeId": "water-5",
+    "position": [
+      581.115767,
+      36.16675814938114,
+      -261.69057
+    ],
+    "yaw": 1.5707963267948966,
+    "shorelineClearanceM": 10.059843041565514,
+    "estimatedUnderKeelClearanceM": 0.9900000000000002,
+    "dimensions": {
+      "length": 35.23,
+      "beam": 7.47,
+      "draft": 2.01
+    },
+    "basis": "R03 listing normalization; vertical datum and local dimensions remain provisional",
+    "views": {
+      "luzDeMar": {
+        "p": [
+          609.115767,
+          47.16675814938114,
+          -206.69056999999998
+        ],
+        "yaw": 0.47089385898070324,
+        "pitch": -0.14163142105693902,
+        "time": 16.2
+      },
+      "luzDeMarTop": {
+        "p": [
+          597.115767,
+          76.16675814938114,
+          -226.69056999999998
+        ],
+        "yaw": 0.4287780274460164,
+        "pitch": -0.7657439795450527,
+        "time": 16.2
+      }
+    },
+    "walk": "walk=MD_R02",
+    "navigation": "Source deck collision masks; virtual room and deck jumps; optional sun deck hidden initially",
+    "assetBasis": "rocha/luz-de-mar/MODEL-BASIS.md"
   },
   "lakeYacht": {
     "version": "rocha-lake-yacht-1",

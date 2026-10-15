@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r11",
+  "build": "tidewater-rocha-public-r12",
   "worlds": [
     "tidewater",
     "rocha"
@@ -67,9 +67,26 @@
         "yaw": 2.339421868282903,
         "pitch": -0.2508507680571419,
         "time": 16.2
+      },
+      "luzDeMarAccess": {
+        "p": [
+          567.8066558888889,
+          39.70675814938114,
+          -263.86276736842103
+        ],
+        "yaw": -1.5707963267948966,
+        "pitch": 0.32829307299184113,
+        "time": 16.2
       }
     },
     "walk": "walk=boarding",
+    "access": {
+      "version": "connected-access-1",
+      "reviewView": "luzDeMarAccess",
+      "fix": "One upper-deck solid and exact opening reveals; connected pier, gangway, gate, stair and landing handrails",
+      "additionalTextures": 0,
+      "additionalRenderPasses": 0
+    },
     "barbecue": {
       "version": "owner-photo-barbecue-1",
       "basis": "Owner front photographs, raised and closed hood; estimated local dimensions",
@@ -82,7 +99,7 @@
       "version": "luz-video-exterior-1",
       "basis": "Owner-supplied exterior stills and survey video; local dimensions estimated",
       "privateMediaPublished": false,
-      "boarding": "photo-guided-boarding-1",
+      "boarding": "photo-guided-boarding-2",
       "additionalTextures": 0,
       "additionalLightingOrReflectionPasses": 0,
       "sharedYachtBatches": 12,
@@ -109,7 +126,7 @@
       "interDeckFurnitureFit": "service-ceiling-fit-1"
     },
     "stairs": {
-      "version": "photo-guided-stairs-2",
+      "version": "photo-guided-stairs-3",
       "routes": 4,
       "references": {
         "lobby": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Lobby_Low-res.jpg",

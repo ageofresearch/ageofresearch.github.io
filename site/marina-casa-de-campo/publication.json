@@ -1,6 +1,6 @@
 {
-  "build": "casa-de-campo-foundation-1",
-  "publishedPreparationUTC": "2026-10-16T07:58:10.708863+00:00",
+  "build": "casa-de-campo-soccer-ball-1",
+  "publishedPreparationUTC": "2026-10-16T17:04:30.321528+00:00",
   "entry": "index.html",
   "url": "https://ageofresearch.github.io/marina-casa-de-campo/",
   "backend": "WebGL2",
@@ -23,8 +23,8 @@
       "bytes": 0
     },
     "CREDITS.txt": {
-      "sha256": "3545518142419e7477341014e5e128b8bcf128620b49c4e9de18a20aa4e08292",
-      "bytes": 621
+      "sha256": "c6927de7fa08dd7ee054f9846bc09a2dcdb9979e6ca6c81bbe3d2232eed6d439",
+      "bytes": 882
     },
     "LICENSE.txt": {
       "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec",
@@ -34,25 +34,68 @@
       "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
       "bytes": 1081
     },
-    "assets/MarinaApp-DFTsqgOy.js": {
-      "sha256": "627e2cdfdb68086486b221c359f858b0e8fd30bc86859c14d0a40576b142e8b7",
-      "bytes": 998090
+    "assets/MarinaApp-CoHwdVsx.js": {
+      "sha256": "4912ec5b61e2e616c6b096a11e2940ca6bc910fc45ce676a6edb8775e1c788ad",
+      "bytes": 1080241
     },
-    "assets/marina-i5t-daBT.js": {
-      "sha256": "33096e7d85a28dc2151ec05dbf009563ea5b308a772b20cca86568461f7977f0",
+    "assets/marina-DQwEH02Q.js": {
+      "sha256": "d3c118890bec555eac438e8b28857fa8ab4c2d7989725ce833caf1402d015b2b",
       "bytes": 2537
     },
     "index.html": {
-      "sha256": "3da3ed85796bc8b6f61ee4454f403c318b5653ad2475faf0c5eb69147cddc672",
-      "bytes": 4801
+      "sha256": "95a3f6d28742ef1a45cfb02be701a2f5a682cd4ac2b21fda893cef56dcf9a60a",
+      "bytes": 4955
     },
     "marina/foundation.json": {
       "sha256": "9998f6a0313c9a932872a13b693eef055c026ada6aa000827db3830b1909e90a",
       "bytes": 4681397
     },
+    "marina/soccer-ball/CREDITS.txt": {
+      "sha256": "62d8dad6576476a4e6be262af8c02de488ec222145cfd50d4832b26b1c244108",
+      "bytes": 343
+    },
+    "marina/soccer-ball/asset.json": {
+      "sha256": "8a517ada12d21d868604ef3e3f6731f181876b48e2f0a8da5e01c8e62317db2d",
+      "bytes": 520
+    },
+    "marina/soccer-ball/soccer-ball-v1.glb": {
+      "sha256": "08a2b3167b5785b4a65da541ada4015514978c06ab2da3a05ebbb4e946a548b7",
+      "bytes": 3049408
+    },
     "marina.html": {
-      "sha256": "3da3ed85796bc8b6f61ee4454f403c318b5653ad2475faf0c5eb69147cddc672",
-      "bytes": 4801
+      "sha256": "95a3f6d28742ef1a45cfb02be701a2f5a682cd4ac2b21fda893cef56dcf9a60a",
+      "bytes": 4955
+    }
+  },
+  "soccerBall": {
+    "diameter_m": 0.22,
+    "support": "Q-MAIN",
+    "inspection": "?view=ball",
+    "interaction": "Static decorative prop",
+    "sourceBlenderSHA256": "77cb515caa40a6806ac4bf4517cfc9626dd4af534132148c359c76fff06052a7",
+    "asset": {
+      "name": "SoccerBall_22cm",
+      "source": "SoccerBall.blend",
+      "diameter_m": 0.22,
+      "dimensions_m": [
+        0.22001340985298157,
+        0.22045326232910156,
+        0.2200540155172348
+      ],
+      "pivot": "Centre; glTF Y up",
+      "triangles": 27896,
+      "materials": 1,
+      "texture_size": [
+        1024,
+        1024
+      ],
+      "bakes": [
+        "base color (sRGB)",
+        "roughness (linear)",
+        "tangent normal (+Y)"
+      ],
+      "glb_bytes": 3049408,
+      "scope": "Static prop; geometry and material only. Native Blender scene is preserved separately."
     }
   }
 }

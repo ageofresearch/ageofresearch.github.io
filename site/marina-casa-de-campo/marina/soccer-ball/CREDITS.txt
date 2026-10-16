@@ -1,0 +1,5 @@
+Original soccer ball modeled in Blender for this project.
+Baked leather, mud, moisture and crushed-grass materials from SoccerBall.blend.
+Real-world nominal diameter: 0.22 m. Static decorative prop.
+Only the ball geometry and baked PBR textures are included.
+The Blender photographic pitch, lights and forest HDR environment are not included.

@@ -9,3 +9,7 @@ from registered reference observations. Google imagery is research material;
 no Google map images, tiles or live imagery services are included at runtime.
 Heights and seabed values are provisional local construction values, not
 surveyed levels or navigation depths.
+
+Soccer ball: original 22 cm Blender model and procedural wear created for this project.
+Browser asset includes baked PBR textures, grass clippings and soil grains.
+See marina/soccer-ball/CREDITS.txt. No external model, pitch or studio environment is included.

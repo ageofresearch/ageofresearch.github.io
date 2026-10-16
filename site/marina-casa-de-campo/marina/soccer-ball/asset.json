@@ -1,0 +1,24 @@
+{
+  "name": "SoccerBall_22cm",
+  "source": "SoccerBall.blend",
+  "diameter_m": 0.22,
+  "dimensions_m": [
+    0.22001340985298157,
+    0.22045326232910156,
+    0.2200540155172348
+  ],
+  "pivot": "Centre; glTF Y up",
+  "triangles": 27896,
+  "materials": 1,
+  "texture_size": [
+    1024,
+    1024
+  ],
+  "bakes": [
+    "base color (sRGB)",
+    "roughness (linear)",
+    "tangent normal (+Y)"
+  ],
+  "glb_bytes": 3049408,
+  "scope": "Static prop; geometry and material only. Native Blender scene is preserved separately."
+}

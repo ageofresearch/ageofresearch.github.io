@@ -1,0 +1,58 @@
+{
+  "build": "casa-de-campo-foundation-1",
+  "publishedPreparationUTC": "2026-10-16T07:58:10.708863+00:00",
+  "entry": "index.html",
+  "url": "https://ageofresearch.github.io/marina-casa-de-campo/",
+  "backend": "WebGL2",
+  "unitsPerMetre": 1,
+  "origin": {
+    "lat": 18.400767,
+    "lon": -68.902414
+  },
+  "axes": [
+    "east",
+    "up",
+    "south"
+  ],
+  "heightEvidence": "Provisional local mean-water datum; no surveyed elevations or navigation depths.",
+  "performance": "Actual Android/Bifrost and Safari performance, including 45 FPS target, remain unverified.",
+  "runtimeReferences": "No live Google tiles or reference screenshots.",
+  "runtimeFiles": {
+    ".nojekyll": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "CREDITS.txt": {
+      "sha256": "3545518142419e7477341014e5e128b8bcf128620b49c4e9de18a20aa4e08292",
+      "bytes": 621
+    },
+    "LICENSE.txt": {
+      "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec",
+      "bytes": 1083
+    },
+    "THREE-LICENSE.txt": {
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+      "bytes": 1081
+    },
+    "assets/MarinaApp-DFTsqgOy.js": {
+      "sha256": "627e2cdfdb68086486b221c359f858b0e8fd30bc86859c14d0a40576b142e8b7",
+      "bytes": 998090
+    },
+    "assets/marina-i5t-daBT.js": {
+      "sha256": "33096e7d85a28dc2151ec05dbf009563ea5b308a772b20cca86568461f7977f0",
+      "bytes": 2537
+    },
+    "index.html": {
+      "sha256": "3da3ed85796bc8b6f61ee4454f403c318b5653ad2475faf0c5eb69147cddc672",
+      "bytes": 4801
+    },
+    "marina/foundation.json": {
+      "sha256": "9998f6a0313c9a932872a13b693eef055c026ada6aa000827db3830b1909e90a",
+      "bytes": 4681397
+    },
+    "marina.html": {
+      "sha256": "3da3ed85796bc8b6f61ee4454f403c318b5653ad2475faf0c5eb69147cddc672",
+      "bytes": 4801
+    }
+  }
+}

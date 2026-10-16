@@ -1,0 +1,11 @@
+Marina Casa de Campo playable foundation
+
+Built from the prepared ageofresearch/tidewater-rocha working tree, reusing
+Tidewater systems by dgreenheck / DRG Software Solutions LLC and Three.js.
+See LICENSE.txt and THREE-LICENSE.txt for the accompanying MIT license notices.
+
+Coast, road, quay, pier and building footprints are authored foundation geometry
+from registered reference observations. Google imagery is research material;
+no Google map images, tiles or live imagery services are included at runtime.
+Heights and seabed values are provisional local construction values, not
+surveyed levels or navigation depths.

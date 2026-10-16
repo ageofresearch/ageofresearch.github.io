@@ -1,0 +1,13 @@
+GRANDE 36M MARINA INTEGRATION
+
+Open index.html or marina.html through an HTTP server. No remote CDN dependencies are required.
+Enter yacht opens the salon. Deck/Room chooses 27 modeled spaces; WASD and drag/mouse look explore each space. E near the boarding ramp boards the cockpit; E aboard returns to the saved marina view. F switches between room walking and free inspection. Return to quay restores camera position, orientation and projection. Existing Quay, Overhead, Entrance, Pier, River and Ball views remain available. The yacht-controls panel can be collapsed.
+
+The marina/yacht GLB is a browser derivative of the packed Azimut_Grande_36M.blend. All 1,883,684 evaluated source triangles remain, with lossless texture storage and Meshopt vertex compression/quantization. Standard browser materials approximate native procedural/bump/glass and Cycles lighting. Accuracy is photographic and estimated, not 100 percent verified. Source notes and checksums are in MODEL-NOTES.txt and asset.json.
+
+Navigation is not a naval engineering collision model: conservative room bounds/furniture boxes prevent ordinary wall/furniture clipping; room destinations bridge closed decorative doors. Continuous walking up every stair and through every doorway is not claimed. Free inspection allows looking through compartments. Some crew camera views use a crouched eye position to show the compact bunk arrangement. The gangway and berth placement use the marina's provisional local datum.
+
+The original marina foundation and all soccer-ball files are preserved byte for byte from published commit 0e2bcd0a9f13d04df43db87c52ce4dfe813d9499. Existing engine and soccer-ball code remains intact in MarinaApp-Yacht36m.js; this module copies the published engine bundle and appends named exports for its already included Three.js types and GLTFLoader. The original bundle files remain available. The additive, editable experience code is assets/yacht-experience.js, assets/yacht-navigation.js and assets/marina-yacht-entry.js.
+
+Serve the site root with: python -m http.server --directory site
+The default marina and its ball are usable while the yacht downloads. A yacht-only loading error exposes a retry button without replacing the marina. Physical phone and Safari performance have not been measured; software browser QA does not establish a phone FPS claim.

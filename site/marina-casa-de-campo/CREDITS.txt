@@ -13,3 +13,11 @@ surveyed levels or navigation depths.
 Soccer ball v2: original 22 cm Blender model and authored wear, with CC0 Dry Ground Rocks and Brown Leather photographic material references by Rob Tuytel / Poly Haven.
 Packed PBR atlas, independent leather detail, modeled soil grains and grass clippings.
 See marina/soccer-ball/CREDITS.txt and provenance-v2.json.
+
+Azimut Grande 36M: original Blender photographic reconstruction authored for this project.
+Reference: https://vrcloud.com/?pv=1667308298 (55 viewpoints), with published dimensions
+and supplementary exterior references from https://azimutyachts.com/en/grande-series/grande-36m/.
+Six authored color textures; no tour photographs or Google imagery are served as textures.
+The packed native asset uses a CC0 Poly Haven daylight HDRI; the marina derivative reuses
+the marina's existing sky instead. See marina/yacht/MODEL-NOTES.txt for estimates and scope.
+Meshopt encoder/decoder by Arseny Kapoulkine, MIT; see assets/MESHOPT-LICENSE.txt.

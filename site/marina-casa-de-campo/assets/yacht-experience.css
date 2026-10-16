@@ -1,0 +1,21 @@
+nav{flex-wrap:wrap;max-width:calc(100vw - 400px)}
+#yacht-panel{position:fixed;top:82px;right:25px;width:310px;padding:13px 15px;background:#f6f2e9ed;border:1px solid #c6cebd;border-radius:17px;box-shadow:0 5px 22px #294b3d12}
+#yacht-info{margin:0 0 10px;font-size:12px;font-weight:600}
+.yacht-buttons{display:flex;gap:3px;flex-wrap:wrap}
+#enter-yacht{background:#3f5c50;color:#fffdf4}
+#enter-yacht:disabled{cursor:progress;opacity:.65}
+#yacht-outside{background:#e4e8df}
+#yacht-destinations{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+#yacht-destinations label{display:grid;grid-template-columns:37px 1fr;align-items:center;gap:7px;font-size:12px}
+#yacht-destinations select{width:100%;min-width:0;color:#384942;background:#fffdf4;border:1px solid #b9c7b7;border-radius:8px;padding:6px 7px}
+#yacht-room-reset{margin:7px 0 0;padding:5px 0;text-decoration:underline;font-size:11px}
+#yacht-control-hint{font-size:11px;color:#617166;margin:10px 0 0}
+#boarding-hint{position:fixed;bottom:82px;left:50%;transform:translateX(-50%);background:#f6f2e9f5;border:1px solid #c6cebd;border-radius:22px;box-shadow:0 2px 15px #1a2f2533}
+[data-yacht-inside=true] #help{display:none}
+[data-yacht-inside=true] #jump{display:none}
+@media(max-width:1100px) and (min-width:761px){nav{max-width:calc(100vw - 310px)}#yacht-panel{top:125px}}
+@media(max-width:760px){nav{max-width:none;top:79px}#yacht-panel{top:128px;right:12px;width:250px;padding:10px 12px}#yacht-info{font-size:11px;margin-bottom:7px}.yacht-buttons button{padding:7px 10px;font-size:12px}#yacht-control-hint{font-size:10px;margin-top:7px}#yacht-destinations{margin-top:8px;gap:6px}#yacht-destinations select{padding:5px}#help{top:128px;max-width:calc(100vw - 284px)}#help:not([open]){display:none}#yacht-panel[data-inside=false] #yacht-control-hint{display:none}#boarding-hint{bottom:150px;white-space:nowrap}#performance{bottom:88px}#yacht-panel[data-inside=true]{width:255px}header p{max-width:210px}.touch-hint{opacity:.65;bottom:170px}}
+@media(max-width:420px){nav{gap:0}nav button{font-size:11px;padding:7px 6px}#yacht-panel{top:123px}#yacht-panel[data-inside=true]{top:123px}#yacht-panel[data-inside=true] #yacht-control-hint{max-width:225px}}
+
+#yacht-panel summary{font-size:11px;color:#617166}#yacht-panel[open] summary{margin-bottom:9px}#yacht-panel[data-inside=false]{left:26px;right:auto;top:125px}#yacht-panel:not([open]){width:auto;min-width:145px}canvas:focus{outline:none}
+@media(max-width:760px){#yacht-panel[data-inside=false]{left:12px;right:auto;top:128px;width:235px}#yacht-panel:not([open]){width:auto;min-width:135px}}

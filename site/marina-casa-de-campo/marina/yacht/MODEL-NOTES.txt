@@ -1,0 +1,19 @@
+AZIMUT GRANDE 36M — TOUR RECONSTRUCTION
+
+Reference: https://vrcloud.com/?pv=1667308298
+55 accessible scene viewpoints inspected on 16 October 2026; all six cube faces retrieved. Four tour deck plans guided the layout. Manufacturer exterior views and published dimensions supplement the tour.
+
+Published dimensions: LOA incl. pulpit 35.29 m; maximum beam 7.50 m; full-load draft 1.96 m. Source: https://azimutyachts.com/en/grande-series/grande-36m/
+
+ESTIMATES: no measured room dimensions or calibrated camera positions were supplied. Deck heights, hull sections, wall thicknesses, furniture sizes, fittings, joinery profiles and fixture offsets are visually estimated. Underwater appendages are expressly estimated. Internal machinery is simplified visual geometry, not a functional engineering replica. The tour does not expose bilges, tanks, concealed wiring, structural laminates, hidden cabinetry interiors or a measurable hull survey. No claim of 100 percent verified accuracy.
+
+All asset parts are in AZIMUT GRANDE 36M | yacht asset. Optional ocean, lights and cameras are separate under PRESENTATION. Meters, X forward, Y port, Z up. Cameras 01–08 cover exterior, salon, owner suite, sun deck, sky lounge, engine room and guest cabin. Six original material image maps, four plan images, and a CC0 daylight HDRI are packed. HDRI: Poly Haven, kloppenheim_06_puresky, https://polyhaven.com/a/kloppenheim_06_puresky, CC0. Procedural shader nodes also remain editable. Reference panoramas are inspection material, not projected geometry.
+
+The native source remains a separate yacht-only deliverable. The marina browser derivative adds yacht geometry and controls while preserving existing foundation data and soccer-ball assets byte for byte.
+
+Additional inspected detail pop-ups: stowed ceiling TV, folding upper lounge table leaves, closed grill and enclosed toilet details. Dimensions and mechanisms are visually interpreted; alternate deployed positions are not rigged.
+
+BROWSER VERSION
+Evaluated native meshes, curves and text; batched by original collection and material. No decimation. Generated BOX color projection converted to explicit UVs. Meshopt compression with 16-bit position quantization. Browser uses transparent glass and simplified bump/lighting; shader output is not pixel-identical to Cycles.
+Walking uses conservative room bounds and furniture boxes. Room/deck destinations move through closed decorative doors; continuous stair traversal is not claimed. F enables free inspection.
+Estimated installation at main quay; local datum and gangway are provisional. No surveyed berth or navigation-depth claim.

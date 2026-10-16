@@ -1,0 +1,99 @@
+{
+  "verifiedUTC": "2026-10-16T21:38:15.421697+00:00",
+  "browser": "Chromium, WebGL2 SwiftShader; actual rendered pixels, native emulated touch input",
+  "app_errors": [],
+  "failed_requests": [],
+  "checks": {
+    "keyboard_movement_metres": 0.1746684592404404,
+    "room_bounds": true,
+    "exact_camera_return": true,
+    "soccer_ball_v2": true,
+    "keyboard_boarding": true,
+    "touch_movement": true,
+    "touch_destinations": true,
+    "portrait_layout": {
+      "nav": {
+        "x": 12,
+        "y": 79,
+        "right": 378,
+        "bottom": 118.9375
+      },
+      "panel": {
+        "x": 123,
+        "y": 123,
+        "right": 378,
+        "bottom": 369.203125
+      },
+      "footer": {
+        "x": 12,
+        "y": 790.609375,
+        "right": 378,
+        "bottom": 832
+      }
+    },
+    "overhead_return": true,
+    "preserved_ball_projection": true
+  },
+  "room_views_inspected": 27,
+  "revised_camera_views_inspected": [
+    "salon",
+    "starboard-guest-bath",
+    "captain",
+    "port-crew",
+    "starboard-crew",
+    "middle-crew"
+  ],
+  "navigation_unit_tests": {
+    "passed": 3,
+    "failed": 0
+  },
+  "map_and_ball_preservation": {
+    "site/marina-casa-de-campo/marina/foundation.json": {
+      "bytes": 4681397,
+      "sha256": "9998f6a0313c9a932872a13b693eef055c026ada6aa000827db3830b1909e90a",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/CREDITS.txt": {
+      "bytes": 948,
+      "sha256": "cf46a78e710a262c5110f6c300abc7ec6ad42f3cfc318c004dc144a618be9a46",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/asset-v2.json": {
+      "bytes": 1382,
+      "sha256": "5c25efead432a5f19771835bf00fa38df80155b6174699a8f4e6c08553d3b62b",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/asset.json": {
+      "bytes": 520,
+      "sha256": "8a517ada12d21d868604ef3e3f6731f181876b48e2f0a8da5e01c8e62317db2d",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/leather-detail-12mm.png": {
+      "bytes": 669843,
+      "sha256": "395ade074929cf11ebb70943f610a41d1957add1f875f10547830181198696f5",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/provenance-v2.json": {
+      "bytes": 2471,
+      "sha256": "e7980c6839ba0f34180c58d41a8a176c458574ca8852f68f54aeda1566a9cb6a",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/soccer-ball-v1.glb": {
+      "bytes": 3049408,
+      "sha256": "08a2b3167b5785b4a65da541ada4015514978c06ab2da3a05ebbb4e946a548b7",
+      "unchanged": true
+    },
+    "site/marina-casa-de-campo/marina/soccer-ball/soccer-ball-v2.glb": {
+      "bytes": 7144628,
+      "sha256": "d7294e8cfaebaeb359d3ad3332552bd174b50f82e698e0b51e811e0619acfa93",
+      "unchanged": true
+    }
+  },
+  "engine_and_ball_code_prefix_unchanged": true,
+  "limitations": [
+    "No physical phone/Safari FPS measurement",
+    "Photo-based estimated dimensions and details",
+    "Room destination transitions; not continuous door/stair collision traversal",
+    "Standard browser shader approximation of native materials"
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "build": "casa-de-campo-soccer-ball-2",
-  "publishedPreparationUTC": "2026-10-16T17:57:04.144775+00:00",
+  "build": "casa-de-campo-grande36m-interiors-1",
+  "publishedPreparationUTC": "2026-10-16T21:37:18.878263+00:00",
   "entry": "index.html",
   "url": "https://ageofresearch.github.io/marina-casa-de-campo/",
   "backend": "WebGL2",
@@ -23,8 +23,8 @@
       "bytes": 0
     },
     "CREDITS.txt": {
-      "sha256": "76b8987d4ff2cb955c713e9dd2396776467e04c90c07bafcc3d3f7bf21d5972d",
-      "bytes": 937
+      "sha256": "5dc47f98a4f251ffffab35fce9b0f3c78e2cd7a1545a0c4672445b2e026fbd89",
+      "bytes": 1573
     },
     "LICENSE.txt": {
       "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec",
@@ -34,17 +34,61 @@
       "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
       "bytes": 1081
     },
+    "assets/MESHOPT-LICENSE.txt": {
+      "sha256": "f03037ca7bad1e3eb7f4a63fa6084a8baabd5ba30d3c239a9a7f35705d873e26",
+      "bytes": 1079
+    },
     "assets/MarinaApp-BNIyhh8x.js": {
       "sha256": "c7282b29525cd32b5d6137023a4511a41e646e5e18c356ff738222e29a5dc570",
       "bytes": 1083276
+    },
+    "assets/MarinaApp-CoHwdVsx.js": {
+      "sha256": "4912ec5b61e2e616c6b096a11e2940ca6bc910fc45ce676a6edb8775e1c788ad",
+      "bytes": 1080241
+    },
+    "assets/MarinaApp-DFTsqgOy.js": {
+      "sha256": "627e2cdfdb68086486b221c359f858b0e8fd30bc86859c14d0a40576b142e8b7",
+      "bytes": 998090
+    },
+    "assets/MarinaApp-Yacht36m.js": {
+      "sha256": "cbbd77c67ad021f5f285480f27334edeb3cbc0781b2f7730eadb782c837059cc",
+      "bytes": 1083445
     },
     "assets/marina-B83pUa-5.js": {
       "sha256": "470bff53b1d4339a35c9419ff3a75ab11ade26a5092206c8b85e7e3b4da9942d",
       "bytes": 2537
     },
+    "assets/marina-DQwEH02Q.js": {
+      "sha256": "d3c118890bec555eac438e8b28857fa8ab4c2d7989725ce833caf1402d015b2b",
+      "bytes": 2537
+    },
+    "assets/marina-i5t-daBT.js": {
+      "sha256": "33096e7d85a28dc2151ec05dbf009563ea5b308a772b20cca86568461f7977f0",
+      "bytes": 2537
+    },
+    "assets/marina-yacht-entry.js": {
+      "sha256": "2bfa17c9af80011066185f97a854e0359b0125cfdbac65e1362b4b36e1de487f",
+      "bytes": 476
+    },
+    "assets/yacht-experience.css": {
+      "sha256": "b5afff9534cf99226e7f0067d74e2526a3a79431c725288146567af74b75912f",
+      "bytes": 2606
+    },
+    "assets/yacht-experience.js": {
+      "sha256": "f31e3e3fcf9ac0673653029a6f89d0a15c6a95a06403dc14263731b2ce66eb90",
+      "bytes": 12427
+    },
+    "assets/yacht-meshopt-decoder.mjs": {
+      "sha256": "10b313edaa0e322b0c1b46443f6c8b186b42139fe1eca189d50c09511d0ebedc",
+      "bytes": 29019
+    },
+    "assets/yacht-navigation.js": {
+      "sha256": "e137bd792cf2482950f6f62591e79711f068deaae181fbb072483eaf5dd1b605",
+      "bytes": 4063
+    },
     "index.html": {
-      "sha256": "339b881b459b100502836ca05b5c00e0349f313958efbe30acc183cfd425bbf7",
-      "bytes": 4955
+      "sha256": "f96ff9cc74ee98609ca631f8158734c0569386ff1a6416161e586b14979bcd5f",
+      "bytes": 6151
     },
     "marina/foundation.json": {
       "sha256": "9998f6a0313c9a932872a13b693eef055c026ada6aa000827db3830b1909e90a",
@@ -78,9 +122,29 @@
       "sha256": "d7294e8cfaebaeb359d3ad3332552bd174b50f82e698e0b51e811e0619acfa93",
       "bytes": 7144628
     },
+    "marina/yacht/INTEGRATION.txt": {
+      "sha256": "8ac6cfa4e3eec444bd2d5fbcb34ee03fc9e26f227f901b10fddd63f02911695b",
+      "bytes": 2350
+    },
+    "marina/yacht/MODEL-NOTES.txt": {
+      "sha256": "93773958d28827e0be43646a9d6e4b3ce4ff4c5961af50977711ca5745d3cc6f",
+      "bytes": 2634
+    },
+    "marina/yacht/VALIDATION.json": {
+      "sha256": "c9211635450202e6796ab8f185fa95e5329e1d987b5e2cc91aa6ad12e4c6ca39",
+      "bytes": 3139
+    },
+    "marina/yacht/asset.json": {
+      "sha256": "da63889f11350bffb46aee3324a56e0d2ee80a8a6b7d4e90549a47655b94aa7c",
+      "bytes": 132590
+    },
+    "marina/yacht/grande-36m.glb": {
+      "sha256": "a23ede2733eac2730fb8bb515f85de644e3075412b9d06b5b06768b45e29df49",
+      "bytes": 17577824
+    },
     "marina.html": {
-      "sha256": "339b881b459b100502836ca05b5c00e0349f313958efbe30acc183cfd425bbf7",
-      "bytes": 4955
+      "sha256": "f96ff9cc74ee98609ca631f8158734c0569386ff1a6416161e586b14979bcd5f",
+      "bytes": 6151
     }
   },
   "soccerBall": {
@@ -135,5 +199,27 @@
     "nativeDerivativeSHA256": "3a642bee2744d93bb2de41547a38f499ea7a97d06c3223574a3bfc45cf905431",
     "verification": "UV audit, 7 foundation tests, 3 asset/support tests, actual browser pixels, microdetail on/off, three lighting directions, v1/v2 same-camera comparison, context restoration and portrait controls. Physical phone/Safari performance unverified.",
     "framing": "Adaptive inspection distance: close desktop framing, whole ball retained in portrait."
+  },
+  "previousBuild": "casa-de-campo-soccer-ball-2",
+  "yacht": {
+    "name": "Azimut Grande 36M",
+    "dimensions_m": {
+      "length": 35.29,
+      "beam": 7.5,
+      "draft": 1.96
+    },
+    "source_triangles": 1883684,
+    "browser_triangles": 1883684,
+    "browser_materials": 35,
+    "browser_images": 6,
+    "glb_bytes": 17577824,
+    "glb_sha256": "a23ede2733eac2730fb8bb515f85de644e3075412b9d06b5b06768b45e29df49",
+    "native_sha256": "100634492de0d633ace901d2e850a8f96b06036570b9966463ef874f7e195769",
+    "accuracy": "Photo-based reconstruction. Room sizes, deck heights, concealed areas and machinery details are estimated; not a surveyed replica.",
+    "navigation_destinations": 27,
+    "navigation_limitations": "Conservative room bounds/furniture boxes; destination transitions bridge closed decorative doors. Continuous traversal of every stair and doorway is not implemented. Some compact crew camera presets use a crouched eye height.",
+    "entry": "?view=salon",
+    "exterior": "?view=yacht",
+    "preservation": "Foundation and 7 soccer-ball files match published commit 0e2bcd0 byte for byte."
   }
 }

@@ -1,0 +1,43 @@
+{
+  "name": "SoccerBall_22cm_v2",
+  "source": "SoccerBall.blend; non-destructive v2 derivative",
+  "diameter_m": 0.22,
+  "dimensions_m": [
+    0.22001340985298157,
+    0.22041654586791992,
+    0.2200540155172348
+  ],
+  "pivot": "Centre; glTF Y up",
+  "triangles": 30796,
+  "materials": 1,
+  "texture_size": [
+    2048,
+    2048
+  ],
+  "detail": {
+    "file": "leather-detail-12mm.png",
+    "size": [
+      512,
+      512
+    ],
+    "tileMetres": 0.012,
+    "repeat": 46.17961907287851,
+    "packedChannels": "RGB tangent normal (+Y), A roughness",
+    "bytes": 669843
+  },
+  "atlas": {
+    "method": "32 planar tangent projections, one per curved panel; uniform physical texel density",
+    "panelCells": 32,
+    "auxiliaryCells": 4,
+    "paddingPixels": 10,
+    "hiddenPanelBacksExported": false,
+    "measuredApproxExteriorAreaFraction": 0.4597940444946289,
+    "areaWeightedMedianStretchRatio": 1.046458694195867,
+    "comparisonToV1ExteriorTexels": 32.50662336313842
+  },
+  "packedSurfaceChannels": "R ambient occlusion; G roughness; B remaining leather mask; metallicFactor=0",
+  "references": "CC0 Poly Haven soil and leather scans; see CREDITS.txt and provenance.json",
+  "glb_bytes": 7144628,
+  "scope": "Static prop; no pitch, camera, studio environment or light baked into base color.",
+  "glb_sha256": "d7294e8cfaebaeb359d3ad3332552bd174b50f82e698e0b51e811e0619acfa93"
+}

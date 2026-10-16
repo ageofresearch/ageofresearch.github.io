@@ -10,6 +10,6 @@ no Google map images, tiles or live imagery services are included at runtime.
 Heights and seabed values are provisional local construction values, not
 surveyed levels or navigation depths.
 
-Soccer ball: original 22 cm Blender model and procedural wear created for this project.
-Browser asset includes baked PBR textures, grass clippings and soil grains.
-See marina/soccer-ball/CREDITS.txt. No external model, pitch or studio environment is included.
+Soccer ball v2: original 22 cm Blender model and authored wear, with CC0 Dry Ground Rocks and Brown Leather photographic material references by Rob Tuytel / Poly Haven.
+Packed PBR atlas, independent leather detail, modeled soil grains and grass clippings.
+See marina/soccer-ball/CREDITS.txt and provenance-v2.json.

@@ -1,5 +1,12 @@
-Original soccer ball modeled in Blender for this project.
-Baked leather, mud, moisture and crushed-grass materials from SoccerBall.blend.
-Real-world nominal diameter: 0.22 m. Static decorative prop.
-Only the ball geometry and baked PBR textures are included.
-The Blender photographic pitch, lights and forest HDR environment are not included.
+Soccer ball versions 1 and 2: original 22 cm ball geometry, authored wear masks and grass strokes created for this project in Blender.
+
+Version 2 adds photographic surface references:
+Dry Ground Rocks, Rob Tuytel / Poly Haven, CC0-1.0
+https://polyhaven.com/a/dry_ground_rocks
+Brown Leather, Rob Tuytel / Poly Haven, CC0-1.0
+https://polyhaven.com/a/brown_leather
+License: https://polyhaven.com/license
+
+Soil diffuse/normal references retrieved from adithya-s-k/RCForge on GitHub. Leather reference retrieved from SethRobinson/Patchy on GitHub. See provenance-v2.json for exact file hashes and retrieval URLs. Original CC0 assets were photographed/scanned; derivative contact masks, chlorophyll transfer and pebble grain are authored for this ball.
+
+The runtime includes only the ball, packed PBR maps and a tiled detail map. No photographic pitch, studio environment, camera or light is exported. The original Blender scene is preserved separately.

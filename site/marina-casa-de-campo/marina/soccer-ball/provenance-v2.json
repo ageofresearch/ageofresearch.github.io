@@ -1,0 +1,53 @@
+{
+  "assets": [
+    {
+      "file": "soil-color.jpg",
+      "retrievedFrom": "https://raw.githubusercontent.com/adithya-s-k/RCForge/main/public/scenery/dry-ground-color.jpg",
+      "gitBlob": "c7723a85d0f5ca86242332c546b6d27048cc73ad",
+      "sha256": "491ac5be54859171730c620ad768a615f600b81ce00d83bbeab8a7aed7b199d8",
+      "bytes": 826834,
+      "license": "CC0-1.0",
+      "author": "Rob Tuytel / Poly Haven",
+      "originalAsset": "https://polyhaven.com/a/dry_ground_rocks",
+      "use": "Diffuse mineral variation and mask breakup; derivative baked into the ball"
+    },
+    {
+      "file": "soil-normal.jpg",
+      "retrievedFrom": "https://raw.githubusercontent.com/adithya-s-k/RCForge/main/public/scenery/dry-ground-normal.jpg",
+      "gitBlob": "3e456562aeb9e3e2cf5f42be15f285f61abe7fa7",
+      "sha256": "0bba49a710d0d1f7497ac7c72db2f0ed622ed07397539ce2d5ba756bf5fb3051",
+      "bytes": 1263934,
+      "license": "CC0-1.0",
+      "author": "Rob Tuytel / Poly Haven",
+      "originalAsset": "https://polyhaven.com/a/dry_ground_rocks",
+      "use": "Mesoscopic clay normal detail; derivative baked into the ball"
+    },
+    {
+      "file": "leather-color.png",
+      "retrievedFrom": "https://raw.githubusercontent.com/SethRobinson/Patchy/main/src/ui/textures/brown_leather.png",
+      "gitBlob": "8c1eadfbd9c0d9d2ee2d2a19dcf5ad8dd53e4145",
+      "sha256": "513288e3374d6c858f3405aceb070dcc0c130aea7255bdc5fe512f97a9743f60",
+      "bytes": 442471,
+      "license": "CC0-1.0",
+      "author": "Rob Tuytel / Poly Haven",
+      "originalAsset": "https://polyhaven.com/a/brown_leather",
+      "use": "High-pass organic variation in the independent grain tile"
+    },
+    {
+      "file": "cracked-soil.png",
+      "retrievedFrom": "https://raw.githubusercontent.com/SethRobinson/Patchy/main/src/ui/textures/mud_cracked_dry_03.png",
+      "gitBlob": "349a2aed4fc0070fe0fd2043ec9898e4f99e0dd9",
+      "sha256": "eae23c9d63d32ae317ee42968752dc0663f4fa6897af3e07a5937c252372857a",
+      "bytes": 520963,
+      "license": "CC0-1.0",
+      "author": "Poly Haven",
+      "originalAsset": "https://polyhaven.com/a/mud_cracked_dry_03",
+      "use": "Research reference only; not embedded in the browser or Blender asset"
+    }
+  ],
+  "licenseSource": "https://polyhaven.com/license",
+  "mirrorCreditSources": [
+    "https://github.com/adithya-s-k/RCForge/blob/main/public/scenery/README.md",
+    "https://github.com/SethRobinson/Patchy/blob/main/NOTICE-THIRD-PARTY.md"
+  ]
+}

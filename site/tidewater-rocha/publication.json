@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r12",
+  "build": "tidewater-rocha-public-r13",
   "worlds": [
     "tidewater",
     "rocha"
@@ -77,9 +77,26 @@
         "yaw": -1.5707963267948966,
         "pitch": 0.32829307299184113,
         "time": 16.2
+      },
+      "luzDeMarDetails": {
+        "p": [
+          567.4152114444445,
+          39.70675814938114,
+          -263.8037936842105
+        ],
+        "yaw": -2.387492334547224,
+        "pitch": -0.25983677686890494,
+        "time": 16.2
       }
     },
     "walk": "walk=boarding",
+    "ownerDetails": {
+      "version": "owner-deck-fittings-1",
+      "reviewView": "luzDeMarDetails",
+      "basis": "Owner video/stills; stern identification, Panama flag, mooring equipment, cockpit sink and loose fittings; estimated local dimensions",
+      "additionalTextures": 0,
+      "additionalRenderPasses": 0
+    },
     "access": {
       "version": "connected-access-1",
       "reviewView": "luzDeMarAccess",

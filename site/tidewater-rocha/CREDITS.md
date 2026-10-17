@@ -65,6 +65,11 @@ Virtual Reality, 2020.
 [Inter](https://rsms.me/inter/) and [JetBrains Mono](https://www.jetbrains.com/lp/mono/) are both under the
 SIL Open Font License 1.1. They are loaded from Google Fonts at runtime and are not part of this repository.
 
+The Luz de Mar stern inscription uses baked outlines from [Noto Serif](https://github.com/notofonts/noto-fonts),
+copyright Google Inc., under the SIL Open Font License 1.1. Only the used glyph outlines are embedded;
+there is no runtime font request. The complete license is included at
+`rocha/luz-de-mar/licenses/stern-lettering-OFL.txt`. The typeface match is an artistic estimate.
+
 ## Libraries
 
 The SMAA area and search lookup textures (`textures/smaa/`) are from three.js (MIT), which ships

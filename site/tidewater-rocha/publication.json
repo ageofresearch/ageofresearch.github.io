@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r16",
+  "build": "tidewater-rocha-public-r17",
   "worlds": [
     "tidewater",
     "rocha"
@@ -10,12 +10,13 @@
   "requires": "WebGPU with 32 sampled textures per shader stage; desktop keyboard and mouse controls",
   "minimumSampledTexturesPerShaderStage": 32,
   "entry": "play.html",
-  "renderingSettingsChanged": false,
+  "renderingSettingsChanged": true,
   "fastWater": {
     "version": "rocha-fast-water-1",
-    "default": false,
+    "default": true,
     "urlParameter": "fastWater=1",
-    "button": "Performance → Enable fast water",
+    "detailedUrlParameter": "fastWater=0",
+    "button": "Performance → Use detailed water",
     "method": "Surface-only shading, baked scrolling ripple normals, same-frame yacht reflection; detailed underwater fallback",
     "resolutionAndAAUnchanged": true
   },

@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r13",
+  "build": "tidewater-rocha-public-r14",
   "worlds": [
     "tidewater",
     "rocha"
@@ -87,9 +87,31 @@
         "yaw": -2.387492334547224,
         "pitch": -0.25983677686890494,
         "time": 16.2
+      },
+      "luzDeMarMachinery": {
+        "p": [
+          571.9363947777778,
+          37.33675814938114,
+          -261.69057
+        ],
+        "yaw": -1.5707963267948966,
+        "pitch": -0.14170558032160327,
+        "time": 16.2
       }
     },
     "walk": "walk=boarding",
+    "machinery": {
+      "version": "owner-machinery-1",
+      "reviewView": "luzDeMarMachinery",
+      "walk": "walk=LD_R02",
+      "basis": "Owner CuartoDeMaquina videos and 17 photographs; fitted dimensions and rack-side assignment remain estimates",
+      "additionalTextures": 0,
+      "additionalRenderPasses": 0,
+      "conditionalRoomBatch": 1,
+      "hiddenInExteriorViews": true,
+      "privateMediaPublished": false,
+      "review": "rocha/luz-de-mar/machinery/"
+    },
     "ownerDetails": {
       "version": "owner-deck-fittings-1",
       "reviewView": "luzDeMarDetails",

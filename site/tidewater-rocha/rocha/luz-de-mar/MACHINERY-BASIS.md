@@ -1,0 +1,17 @@
+# Luz de Mar machinery reconstruction
+
+The new lower-deck machinery space uses the owner-supplied CuartoDeMaquina archive: two videos (52.913 and 65.660 seconds) and 17 photographs. Private source media and equipment serial plates are not distributed with this website.
+
+Identifiable equipment includes two MTU 16V2000M96 engines (photographed rating 1790 kW at 2450 rpm), two Kohler generator sound shields (one readable plate: 80EOZDJ, 80 kW, 60 Hz), three CLIMMA cooling modules, an Idromar watermaker, ASEA AC45NVHE-3 master/slave converters and Victron Skylla-TG 24/50 chargers. Individual photographed ratings do not establish aggregate system capacity or exact local dimensions.
+
+The model includes white V16 engine banks, air cleaners, safety rails, black exhaust trunks with silver jackets and blue couplings, generator access panels, electrical cabinets, the six-lever fuel manifold and transfer/manual pumps, watermaker vessels/controls, cooling modules and insulated lines, pumping racks, portable pumps, filters, intercom, gas panel, tool cases, extinguisher, checkerplate panels, open bilge services, cable trays, ventilation and ceiling strips.
+
+Overall yacht normalization remains 35.23 m long, 7.47 m beam and 2.01 m draft. The immutable R03 import and original navigation masks are retained. Display replacements consume the 24 machinery envelopes; the new room has supported walking aisles and obstacles. Its floor is fitted to the existing lower-deck datum. The open inspection bay follows the supplied still; the videos show panels fitted in normal use. The shown access ladder is visual: its unseen upper connection is not reconstructed as a verified guest route. Use the room selector or `walk=LD_R02` to visit.
+
+Equipment dimensions, clearances and absolute port/starboard assignment of camera-only racks are estimates from image proportions and the existing provisional layout. The photographed service door carries a 1700 x 570 mm plate. No engineering dimensional drawings were obtained. The visuals are a detailed interpretation, not an exact equipment CAD model or installation specification. Pipe and cable geometry follows visible runs only; hidden continuity and operating controls are not simulated.
+
+Machinery is compiled into one indexed conditional room batch, hidden from exterior and other-room cameras. It introduces no textures, dynamic lights, water/reflection passes or change to AA/resolution. Neutral room-light bounce and polished-metal reflections use an inexpensive analytic approximation of the enclosure and ceiling strips. They are not live local reflection probes. Fine checkerplate and perforations fade with pixel derivatives.
+
+Cloud validation renders the isolated yacht with the production post chain. Browser controls are tested separately on desktop and portrait touch. Whole Rocha still requires WebGPU with 32 sampled textures per stage; the cloud Chromium software adapter cannot verify full-map gameplay or physical-phone FPS.
+
+Online manufacturer and search endpoints were attempted but this session proxy returned CONNECT 403. Equipment identities are therefore checked against the supplied nameplates and previously downloaded official yacht references. Audio was not independently transcribed.

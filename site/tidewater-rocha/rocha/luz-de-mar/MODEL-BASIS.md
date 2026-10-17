@@ -106,3 +106,8 @@ The additional owner-detail pass adds port stern lettering and a sun/wave emblem
 These objects share existing yacht batches, lighting, water, reflections and anti-aliasing. Source JSON/binary, principal dimensions, all 31 room entries and the four walkable stair routes remain intact. No new textures, font requests or dynamic light/reflection passes are added. The video shows exterior terraces rather than enclosed cabins; it does not authenticate the existing cabin finishes aboard this individual yacht.
 
 The stern inscription uses baked Noto Serif glyph outlines under the SIL Open Font License 1.1; see [the complete license](licenses/stern-lettering-OFL.txt). The exact typeface match is an estimate. The [generated before/after review](details/) contains model renders; private owner photographs, video and PDFs are not published.
+
+
+## Owner machinery survey
+
+The lower-deck equipment now uses the owner CuartoDeMaquina videos and photographs. See [machinery modelling basis](MACHINERY-BASIS.md) and [before-and-after views](machinery/). Source assets and principal dimensions remain unchanged; local equipment sizes and rack-side assignment remain inferred. New detail uses one conditional room batch and no added textures or lighting passes.

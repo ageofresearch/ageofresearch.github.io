@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r17",
+  "build": "tidewater-rocha-public-r18",
   "worlds": [
     "tidewater",
     "rocha"
@@ -19,6 +19,14 @@
     "button": "Performance → Use detailed water",
     "method": "Surface-only shading, baked scrolling ripple normals, same-frame yacht reflection; detailed underwater fallback",
     "resolutionAndAAUnchanged": true
+  },
+  "photoLayout": {
+    "version": "owner-photo-layout-1",
+    "basis": "Owner machinery and exterior videos/stills; shared room and deck landmarks",
+    "comparison": "Fixed cameras, production materials and AA; component overlays retain estimated camera alignment",
+    "engineeringExactness": false,
+    "waterResolutionAndAAUnchanged": true,
+    "review": "rocha/luz-de-mar/survey-layout/"
   },
   "entranceYacht": {
     "id": "luz-de-mar",
@@ -105,13 +113,15 @@
       "version": "owner-machinery-3",
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
-      "guestPassageFix": {
-        "version": "operable-service-door-1",
+      "serviceAccess": {
+        "version": "owner-photo-layout-1",
+        "location": "aft watertight service door",
         "keyboard": "E",
         "touch": "Open machinery door button",
         "walkThrough": true,
         "closeObstructionGuard": true,
-        "walk": "walk=LD_R11",
+        "walk": "walk=machinery-entry",
+        "guestWall": "Opaque closure; fuel manifold restored to its photographed end-wall position",
         "persistentEnclosure": true,
         "collisionMatchesVisiblePanel": true,
         "additionalBatches": 0,

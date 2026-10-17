@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r19",
+  "build": "tidewater-rocha-public-r20",
   "worlds": [
     "tidewater",
     "rocha"
@@ -112,7 +112,8 @@
     "machinery": {
       "version": "owner-machinery-3",
       "craft": {
-        "version": "owner-machinery-craft-1",
+        "version": "owner-machinery-craft-2",
+        "cabinetFix": "Separated ASEA cabinet body, perimeter gasket and door surfaces; removes coplanar upper-border flicker without changing AA",
         "preEditVisualRegions": 96,
         "preEditAppearanceChecks": 1152,
         "comparisonGate": "All 314 production files unchanged at review completion",

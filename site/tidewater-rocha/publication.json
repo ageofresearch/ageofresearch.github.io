@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r14",
+  "build": "tidewater-rocha-public-r15",
   "worlds": [
     "tidewater",
     "rocha"
@@ -101,9 +101,17 @@
     },
     "walk": "walk=boarding",
     "machinery": {
-      "version": "owner-machinery-1",
+      "version": "owner-machinery-2",
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
+      "guestPassageFix": {
+        "version": "persistent-service-boundary-1",
+        "walk": "walk=LD_R11",
+        "persistentEnclosure": true,
+        "collisionMatchesVisiblePanel": true,
+        "additionalBatches": 0,
+        "additionalTextures": 0
+      },
       "basis": "Owner CuartoDeMaquina videos and 17 photographs; fitted dimensions and rack-side assignment remain estimates",
       "additionalTextures": 0,
       "additionalRenderPasses": 0,

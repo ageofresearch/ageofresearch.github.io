@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r15",
+  "build": "tidewater-rocha-public-r16",
   "worlds": [
     "tidewater",
     "rocha"
@@ -101,11 +101,15 @@
     },
     "walk": "walk=boarding",
     "machinery": {
-      "version": "owner-machinery-2",
+      "version": "owner-machinery-3",
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
       "guestPassageFix": {
-        "version": "persistent-service-boundary-1",
+        "version": "operable-service-door-1",
+        "keyboard": "E",
+        "touch": "Open machinery door button",
+        "walkThrough": true,
+        "closeObstructionGuard": true,
         "walk": "walk=LD_R11",
         "persistentEnclosure": true,
         "collisionMatchesVisiblePanel": true,

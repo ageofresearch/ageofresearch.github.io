@@ -95,3 +95,7 @@ These are published techniques. No code from the papers is included.
 
 The cloud noise, lighting and sampling scheme (`src/sky/Clouds.js`) is adapted from DRG Software Solutions'
 own *Sky Pro WebGPU*. It is published here under this repository's MIT license by its copyright holder.
+
+### Machinery-room craft review (r19)
+
+The owner-supplied CuartoDeMaquina photographs and two videos informed 96 paired close-up reviews and 1,152 pre-edit appearance diagnostics. The derived model includes formed edges, machinery fittings, instruments, insulation and filtered surface detail. Local dimensions/radii remain estimates. Owner-reference images and videos are excluded from the public build; the model-only review is at `rocha/luz-de-mar/machinery-craft/`. No owner photograph is used as a baked material texture.

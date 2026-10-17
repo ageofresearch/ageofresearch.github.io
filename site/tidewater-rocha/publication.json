@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r18",
+  "build": "tidewater-rocha-public-r19",
   "worlds": [
     "tidewater",
     "rocha"
@@ -111,6 +111,19 @@
     "walk": "walk=boarding",
     "machinery": {
       "version": "owner-machinery-3",
+      "craft": {
+        "version": "owner-machinery-craft-1",
+        "preEditVisualRegions": 96,
+        "preEditAppearanceChecks": 1152,
+        "comparisonGate": "All 314 production files unchanged at review completion",
+        "review": "rocha/luz-de-mar/machinery-craft/",
+        "newTextures": 0,
+        "newRenderPasses": 0,
+        "sharedYachtBatches": 13,
+        "privateMediaPublished": false,
+        "localDimensions": "Fitted photo estimates; source vessel scale unchanged",
+        "waterResolutionAndAAUnchanged": true
+      },
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
       "serviceAccess": {

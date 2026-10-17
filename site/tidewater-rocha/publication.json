@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r20",
+  "build": "tidewater-rocha-public-r21",
   "worlds": [
     "tidewater",
     "rocha"
@@ -109,6 +109,18 @@
       }
     },
     "walk": "walk=boarding",
+    "navigationUI": {
+      "version": "luz-walk-navigation-2",
+      "language": "es",
+      "compactLocationBar": true,
+      "deckPicker": true,
+      "searchAcrossDecks": true,
+      "automaticLocation": true,
+      "keyboardShortcut": "N",
+      "touchMovement": true,
+      "additionalTextures": 0,
+      "additionalRenderPasses": 0
+    },
     "machinery": {
       "version": "owner-machinery-3",
       "craft": {

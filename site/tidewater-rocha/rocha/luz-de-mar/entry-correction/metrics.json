@@ -1,0 +1,25 @@
+{
+  "version": "r27",
+  "triangles": {
+    "r26": 193839,
+    "r27": 194997,
+    "changePercent": 0.5974029993964125
+  },
+  "geometryBytes": {
+    "r26": 9104422,
+    "r27": 9175902,
+    "changePercent": 0.7851129923459155
+  },
+  "yachtBatches": 13,
+  "boardingBatches": 2,
+  "newTextures": 0,
+  "newRenderPasses": 0,
+  "sameCameraComparisons": [
+    "T01-threshold",
+    "T02-desktop"
+  ],
+  "stageComparisons": 13,
+  "privateOwnerMediaPublished": false,
+  "scope": "Production yacht/material/AA integration rendered with native Vulkan. Browser keyboard/touch checks use the production navigation fixture; not a full-map browser rendering or phone FPS measurement.",
+  "dimensions": "Visual fits; not surveyed component dimensions."
+}

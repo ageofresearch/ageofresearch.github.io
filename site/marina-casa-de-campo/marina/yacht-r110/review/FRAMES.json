@@ -1,0 +1,285 @@
+{
+  "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+  "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
+  "runtime_sha256": "8a72b593f4c0d3f14655af4e4bebd827b4ac069c2b81048769aafdd4d1638177",
+  "lightmaps_sha256": "0bb1455b5f98128c56d58329b4b921c7e0f4233d6c629bb0af5511ecf734f9f6",
+  "pixel_identical": false,
+  "vr_reference_reconstruction_finished": false,
+  "frames": [
+    {
+      "id": "scene_bow_l",
+      "title": "Bow \u00b7 L",
+      "image": "pairs/scene_bow_l.jpg"
+    },
+    {
+      "id": "scene_salon_l",
+      "title": "Salon \u00b7 L",
+      "image": "pairs/scene_salon_l.jpg"
+    },
+    {
+      "id": "scene_captain_cabin_f",
+      "title": "Captain Cabin \u00b7 F",
+      "image": "pairs/scene_captain_cabin_f.jpg"
+    },
+    {
+      "id": "scene_middle_crew_head_f",
+      "title": "Middle Crew Head \u00b7 F",
+      "image": "pairs/scene_middle_crew_head_f.jpg"
+    },
+    {
+      "id": "scene_master_head_f",
+      "title": "Master Head \u00b7 F",
+      "image": "pairs/scene_master_head_f.jpg"
+    },
+    {
+      "id": "scene_stbd_crew_cabin_b",
+      "title": "Starboard Crew Cabin \u00b7 B",
+      "image": "pairs/scene_stbd_crew_cabin_b.jpg"
+    },
+    {
+      "id": "scene_middle_crew_cabin_l",
+      "title": "Middle Crew Cabin \u00b7 L",
+      "image": "pairs/scene_middle_crew_cabin_l.jpg"
+    },
+    {
+      "id": "scene_port_crew_cabin_r",
+      "title": "Port Crew Cabin \u00b7 R",
+      "image": "pairs/scene_port_crew_cabin_r.jpg"
+    },
+    {
+      "id": "scene_garage_l",
+      "title": "Garage \u00b7 L",
+      "image": "pairs/scene_garage_l.jpg"
+    },
+    {
+      "id": "scene_engine_room_f",
+      "title": "Engine Room \u00b7 F",
+      "image": "pairs/scene_engine_room_f.jpg"
+    },
+    {
+      "id": "scene_stbd_twin_guest_head_f",
+      "title": "Stbd. Twin Guest Head \u00b7 F",
+      "image": "pairs/scene_stbd_twin_guest_head_f.jpg"
+    },
+    {
+      "id": "scene_skylounge_-_port_r",
+      "title": "Skylounge (Port) \u00b7 R",
+      "image": "pairs/scene_skylounge_-_port_r.jpg"
+    },
+    {
+      "id": "scene_stbd_crew_head_b",
+      "title": "Starboard Crew Head \u00b7 B",
+      "image": "pairs/scene_stbd_crew_head_b.jpg"
+    },
+    {
+      "id": "scene_forward_starboard_side_f",
+      "title": "Fwd. Starboard Side \u00b7 F",
+      "image": "pairs/scene_forward_starboard_side_f.jpg"
+    },
+    {
+      "id": "scene_upperdeck_lounge_l",
+      "title": "Upperdeck Lounge \u00b7 L",
+      "image": "pairs/scene_upperdeck_lounge_l.jpg"
+    },
+    {
+      "id": "scene_pilothouse_entrance_l",
+      "title": "Pilothouse Entrance \u00b7 L",
+      "image": "pairs/scene_pilothouse_entrance_l.jpg"
+    },
+    {
+      "id": "scene_master_cabin_f",
+      "title": "Master Cabin \u00b7 F",
+      "image": "pairs/scene_master_cabin_f.jpg"
+    },
+    {
+      "id": "scene_sundeck_aft_f",
+      "title": "Sundeck Aft \u00b7 F",
+      "image": "pairs/scene_sundeck_aft_f.jpg"
+    },
+    {
+      "id": "scene_skylounge_-_stbd_l",
+      "title": "Skylounge (Stbd) \u00b7 L",
+      "image": "pairs/scene_skylounge_-_stbd_l.jpg"
+    },
+    {
+      "id": "scene_bow_sunbed_f",
+      "title": "Bow Sunbed \u00b7 F",
+      "image": "pairs/scene_bow_sunbed_f.jpg"
+    },
+    {
+      "id": "scene_upperdeck_sunbed_l",
+      "title": "Upperdeck Sunbed \u00b7 L",
+      "image": "pairs/scene_upperdeck_sunbed_l.jpg"
+    },
+    {
+      "id": "scene_port_double_guest_cabin_r",
+      "title": "Port Double Guest Cabin \u00b7 R",
+      "image": "pairs/scene_port_double_guest_cabin_r.jpg"
+    },
+    {
+      "id": "scene_pilothouse_l",
+      "title": "Pilothouse \u00b7 L",
+      "image": "pairs/scene_pilothouse_l.jpg"
+    },
+    {
+      "id": "scene_stbd_double_guest_cabin_b",
+      "title": "Stbd. Double Guest Cabin \u00b7 B",
+      "image": "pairs/scene_stbd_double_guest_cabin_b.jpg"
+    },
+    {
+      "id": "scene_skylounge_f",
+      "title": "Skylounge \u00b7 F",
+      "image": "pairs/scene_skylounge_f.jpg"
+    },
+    {
+      "id": "scene_port_twin_guest_cabin_r",
+      "title": "Port Twin Guest Cabin \u00b7 R",
+      "image": "pairs/scene_port_twin_guest_cabin_r.jpg"
+    },
+    {
+      "id": "scene_day_head_r",
+      "title": "Day Head \u00b7 R",
+      "image": "pairs/scene_day_head_r.jpg"
+    },
+    {
+      "id": "scene_pilothouse_lounge_l",
+      "title": "Pilothouse Lounge \u00b7 L",
+      "image": "pairs/scene_pilothouse_lounge_l.jpg"
+    },
+    {
+      "id": "scene_lazarette_b",
+      "title": "Lazarette \u00b7 B",
+      "image": "pairs/scene_lazarette_b.jpg"
+    },
+    {
+      "id": "scene_master_shower_r",
+      "title": "Master Shower \u00b7 R",
+      "image": "pairs/scene_master_shower_r.jpg"
+    },
+    {
+      "id": "scene_beach_club_l",
+      "title": "Beach Club \u00b7 L",
+      "image": "pairs/scene_beach_club_l.jpg"
+    },
+    {
+      "id": "scene_stbd_double_guest_head_r",
+      "title": "Stbd. Double Guest Head \u00b7 R",
+      "image": "pairs/scene_stbd_double_guest_head_r.jpg"
+    },
+    {
+      "id": "scene_port_double_guest_head_f",
+      "title": "Port Double Guest Head \u00b7 F",
+      "image": "pairs/scene_port_double_guest_head_f.jpg"
+    },
+    {
+      "id": "scene_stbd_twin_guest_cabin_b",
+      "title": "Stbd. Twin Guest Cabin \u00b7 B",
+      "image": "pairs/scene_stbd_twin_guest_cabin_b.jpg"
+    },
+    {
+      "id": "scene_starboard_side_f",
+      "title": "Starboard Side \u00b7 F",
+      "image": "pairs/scene_starboard_side_f.jpg"
+    },
+    {
+      "id": "scene_port_crew_head_b",
+      "title": "Port Crew Head \u00b7 B",
+      "image": "pairs/scene_port_crew_head_b.jpg"
+    },
+    {
+      "id": "scene_cockpit_r",
+      "title": "Cockpit \u00b7 R",
+      "image": "pairs/scene_cockpit_r.jpg"
+    },
+    {
+      "id": "scene_galley_entrance_b",
+      "title": "Galley Entrance \u00b7 B",
+      "image": "pairs/scene_galley_entrance_b.jpg"
+    },
+    {
+      "id": "scene_dining_area_l",
+      "title": "Dining Area \u00b7 L",
+      "image": "pairs/scene_dining_area_l.jpg"
+    },
+    {
+      "id": "scene_master_cabin_-_port_b",
+      "title": "Master Cabin (Port) \u00b7 B",
+      "image": "pairs/scene_master_cabin_-_port_b.jpg"
+    },
+    {
+      "id": "scene_crew_entrance_l",
+      "title": "Crew Entrance \u00b7 L",
+      "image": "pairs/scene_crew_entrance_l.jpg"
+    },
+    {
+      "id": "scene_lower_lobby_f",
+      "title": "Lower Lobby \u00b7 F",
+      "image": "pairs/scene_lower_lobby_f.jpg"
+    },
+    {
+      "id": "scene_sundeck_b",
+      "title": "Sundeck \u00b7 B",
+      "image": "pairs/scene_sundeck_b.jpg"
+    },
+    {
+      "id": "scene_upperdeck_port_r",
+      "title": "Upperdeck Port \u00b7 R",
+      "image": "pairs/scene_upperdeck_port_r.jpg"
+    },
+    {
+      "id": "scene_sundeck_forward_r",
+      "title": "Sundeck Forward \u00b7 R",
+      "image": "pairs/scene_sundeck_forward_r.jpg"
+    },
+    {
+      "id": "scene_galley_r",
+      "title": "Galley \u00b7 R",
+      "image": "pairs/scene_galley_r.jpg"
+    },
+    {
+      "id": "scene_cockpit_-_port_f",
+      "title": "Cockpit (Port) \u00b7 F",
+      "image": "pairs/scene_cockpit_-_port_f.jpg"
+    },
+    {
+      "id": "scene_cockpit_-_stbd_l",
+      "title": "Cockpit (Stbd) \u00b7 L",
+      "image": "pairs/scene_cockpit_-_stbd_l.jpg"
+    },
+    {
+      "id": "scene_crew_area_b",
+      "title": "Crew Area \u00b7 B",
+      "image": "pairs/scene_crew_area_b.jpg"
+    },
+    {
+      "id": "scene_crew_corridor_b",
+      "title": "Crew Corridor \u00b7 B",
+      "image": "pairs/scene_crew_corridor_b.jpg"
+    },
+    {
+      "id": "scene_bow_lounge_b",
+      "title": "Bow Lounge \u00b7 B",
+      "image": "pairs/scene_bow_lounge_b.jpg"
+    },
+    {
+      "id": "scene_main_corridor_l",
+      "title": "Main Corridor \u00b7 L",
+      "image": "pairs/scene_main_corridor_l.jpg"
+    },
+    {
+      "id": "scene_port_side_b",
+      "title": "Port Side \u00b7 B",
+      "image": "pairs/scene_port_side_b.jpg"
+    },
+    {
+      "id": "scene_captain_head_l",
+      "title": "Captain Head \u00b7 L",
+      "image": "pairs/scene_captain_head_l.jpg"
+    },
+    {
+      "id": "scene_port_twin_guest_head_r",
+      "title": "Port Twin Guest Head \u00b7 R",
+      "image": "pairs/scene_port_twin_guest_head_r.jpg"
+    }
+  ]
+}

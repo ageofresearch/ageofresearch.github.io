@@ -1,0 +1,482 @@
+[
+  {
+    "source": "Owner dressing mirror",
+    "position": [
+      9.005200386047363,
+      4.039999961853027,
+      -1.6200000047683716
+    ],
+    "normal": [
+      -1.0,
+      -0.0,
+      0.0
+    ],
+    "width": 1.3199999332427979,
+    "height": 0.8900001049041748
+  },
+  {
+    "source": "Owner broad single-basin marble vanity main mirror",
+    "position": [
+      11.263199806213379,
+      4.039999961853027,
+      -0.0
+    ],
+    "normal": [
+      -1.0,
+      -0.0,
+      0.0
+    ],
+    "width": 2.4200000762939453,
+    "height": 1.1099998950958252
+  },
+  {
+    "source": "Owner broad single-basin marble vanity side cupboard clear mirr",
+    "position": [
+      11.100000381469727,
+      4.039999961853027,
+      1.192199945449829
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.9350001811981201
+  },
+  {
+    "source": "Owner broad single-basin marble vanity side cupboard clear ",
+    "position": [
+      11.100000381469727,
+      4.039999961853027,
+      -1.192199945449829
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.9350001811981201
+  },
+  {
+    "source": "Galley mirrored refrigerator door",
+    "position": [
+      1.9500000476837158,
+      3.5999999046325684,
+      -1.4437999725341797
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.5700000524520874,
+    "height": 2.0199997425079346
+  },
+  {
+    "source": "Galley mirrored refrigerator door.001",
+    "position": [
+      2.5799999237060547,
+      3.5999999046325684,
+      -1.4437999725341797
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.570000171661377,
+    "height": 2.0199997425079346
+  },
+  {
+    "source": "Day head marble and cognac vanity main mirror",
+    "position": [
+      4.57319974899292,
+      4.039999961853027,
+      2.640000104904175
+    ],
+    "normal": [
+      -1.0,
+      -0.0,
+      0.0
+    ],
+    "width": 0.5500001907348633,
+    "height": 1.1099998950958252
+  },
+  {
+    "source": "Day head marble and cognac vanity side cupboard clear mirror",
+    "position": [
+      4.409999847412109,
+      4.039999961853027,
+      2.897200107574463
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.9350001811981201
+  },
+  {
+    "source": "Day head marble and cognac vanity side cupboard clear mirro",
+    "position": [
+      4.409999847412109,
+      4.039999961853027,
+      2.3827998638153076
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.9350001811981201
+  },
+  {
+    "source": "Port circular dressing mirror",
+    "position": [
+      -0.9361000061035156,
+      1.3987499475479126,
+      -0.32280001044273376
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.9000000357627869,
+    "height": 0.8451800346374512
+  },
+  {
+    "source": "Port double head marble vanity main mirror",
+    "position": [
+      -4.193199634552002,
+      1.690000057220459,
+      -1.909999966621399
+    ],
+    "normal": [
+      1.0,
+      0.0,
+      -0.0
+    ],
+    "width": 1.1000001430511475,
+    "height": 1.1100001335144043
+  },
+  {
+    "source": "Port double head marble vanity side cupboard clear mirror",
+    "position": [
+      -4.03000020980835,
+      1.690000057220459,
+      -1.3778001070022583
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.934999942779541
+  },
+  {
+    "source": "Port double head marble vanity side cupboard clear mirror.001",
+    "position": [
+      -4.03000020980835,
+      1.690000057220459,
+      -2.442200183868408
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.934999942779541
+  },
+  {
+    "source": "Port twin entry room-facing full-height mirror",
+    "position": [
+      3.0318000316619873,
+      1.2349998950958252,
+      -1.190000057220459
+    ],
+    "normal": [
+      1.0,
+      0.0,
+      -0.0
+    ],
+    "width": 0.6749999523162842,
+    "height": 1.9399999380111694
+  },
+  {
+    "source": "Port twin head main mirror",
+    "position": [
+      2.0850000381469727,
+      1.5499999523162842,
+      -1.7518000602722168
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.440000057220459,
+    "height": 0.9000000953674316
+  },
+  {
+    "source": "Port twin side cupboard clear mirror",
+    "position": [
+      1.612800121307373,
+      1.559999942779541,
+      -1.9199998378753662
+    ],
+    "normal": [
+      1.0,
+      0.0,
+      -0.0
+    ],
+    "width": 0.29499995708465576,
+    "height": 0.875
+  },
+  {
+    "source": "Port twin side cupboard clear mirror.001",
+    "position": [
+      2.2872002124786377,
+      1.559999942779541,
+      -1.9199998378753662
+    ],
+    "normal": [
+      -1.0,
+      -0.0,
+      0.0
+    ],
+    "width": 0.29499995708465576,
+    "height": 0.875
+  },
+  {
+    "source": "Starboard circular dressing mirror",
+    "position": [
+      -0.9361000061035156,
+      1.3987499475479126,
+      0.31080004572868347
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.9000000357627869,
+    "height": 0.8451800346374512
+  },
+  {
+    "source": "Starboard double head marble vanity main mirror",
+    "position": [
+      -4.193199634552002,
+      1.690000057220459,
+      1.909999966621399
+    ],
+    "normal": [
+      1.0,
+      0.0,
+      -0.0
+    ],
+    "width": 1.1000001430511475,
+    "height": 1.1100001335144043
+  },
+  {
+    "source": "Starboard double head marble vanity side cupboard clear mirror",
+    "position": [
+      -4.03000020980835,
+      1.690000057220459,
+      2.442200183868408
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.934999942779541
+  },
+  {
+    "source": "Starboard double head marble vanity side cupboard clear mir",
+    "position": [
+      -4.03000020980835,
+      1.690000057220459,
+      1.3778001070022583
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.2950000762939453,
+    "height": 0.934999942779541
+  },
+  {
+    "source": "Starboard twin entry room-facing full-height mirror",
+    "position": [
+      3.0318000316619873,
+      1.2349998950958252,
+      1.2000000476837158
+    ],
+    "normal": [
+      1.0,
+      0.0,
+      -0.0
+    ],
+    "width": 0.6749999523162842,
+    "height": 1.9399999380111694
+  },
+  {
+    "source": "Starboard twin head main mirror",
+    "position": [
+      2.0850000381469727,
+      1.5499999523162842,
+      1.7518000602722168
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.440000057220459,
+    "height": 0.9000000953674316
+  },
+  {
+    "source": "Starboard twin side cupboard clear mirror",
+    "position": [
+      1.612800121307373,
+      1.559999942779541,
+      1.9199998378753662
+    ],
+    "normal": [
+      1.0,
+      0.0,
+      -0.0
+    ],
+    "width": 0.29499995708465576,
+    "height": 0.875
+  },
+  {
+    "source": "Starboard twin side cupboard clear mirror.001",
+    "position": [
+      2.2872002124786377,
+      1.559999942779541,
+      1.9199998378753662
+    ],
+    "normal": [
+      -1.0,
+      -0.0,
+      0.0
+    ],
+    "width": 0.29499995708465576,
+    "height": 0.875
+  },
+  {
+    "source": "Crew mess central mirrored recess",
+    "position": [
+      6.489999771118164,
+      1.7699999809265137,
+      -2.4667000770568848
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.6099996566772461,
+    "height": 0.8000000715255737
+  },
+  {
+    "source": "Captain upper mirrored cupboard",
+    "position": [
+      8.109999656677246,
+      1.8600000143051147,
+      0.5771999359130859
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.6800003051757812,
+    "height": 0.7999999523162842
+  },
+  {
+    "source": "Captain lower mirrored band",
+    "position": [
+      7.940000057220459,
+      1.2400000095367432,
+      0.5791999697685242
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.28999996185302734,
+    "height": 0.24000000953674316
+  },
+  {
+    "source": "Middle revised outboard mirror",
+    "position": [
+      7.96250057220459,
+      1.5485260486602783,
+      -1.41920006275177
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.7750000953674316,
+    "height": 0.6139481067657471
+  },
+  {
+    "source": "Starboard angled vanity mirror",
+    "position": [
+      11.350000381469727,
+      1.375,
+      1.9891999959945679
+    ],
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "width": 0.5799999237060547,
+    "height": 0.21000003814697266
+  },
+  {
+    "source": "Port head fitted upper mirror door",
+    "position": [
+      12.374458312988281,
+      1.8199999332427979,
+      -1.757200002670288
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.4106941223144531,
+    "height": 0.3999999761581421
+  },
+  {
+    "source": "Port head fitted upper mirror door.001",
+    "position": [
+      12.788152694702148,
+      1.8199999332427979,
+      -1.757200002670288
+    ],
+    "normal": [
+      -0.0,
+      -0.0,
+      1.0
+    ],
+    "width": 0.4106941223144531,
+    "height": 0.3999999761581421
+  }
+]

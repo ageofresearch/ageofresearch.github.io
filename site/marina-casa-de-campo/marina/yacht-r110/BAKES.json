@@ -1,0 +1,1229 @@
+{
+  "batches": {
+    "atlas-21": {
+      "collection": "36 | Captain crew berth | whitewashed oak",
+      "object": "PARITY 36 | Captain crew berth | whitewashed oak",
+      "size": 2048,
+      "samples": 64,
+      "unsupported_colours": [
+        "Captain reference pale oak.001"
+      ],
+      "bump_normals": [
+        "Captain source cool gray berth linen.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-21-light-contact-field.hdr",
+      "colour": "textures/atlas-21-colour.png",
+      "normal": "textures/atlas-21-normal.png",
+      "seconds": 567.6209763600018,
+      "raw_light": "textures/atlas-21-light.hdr",
+      "denoised": true,
+      "guide_normal": "textures/atlas-21-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-21-light-denoised.hdr",
+        "textures/atlas-21-light.hdr",
+        "textures/atlas-21-light-guided.hdr"
+      ],
+      "denoise_guides": true,
+      "contact_correction": {
+        "method": "Shared cubic world-space irradiance field across mattress and linen tops",
+        "training_texels": 22191,
+        "adjusted_texels": 110023,
+        "geometry_changed": false,
+        "training_rmse": 0.07294327023777783,
+        "source": "Native Cycles guided linear lightmap; exclude hidden contacts; robust fit",
+        "light_sha256": "ea2cb12953ff5688b66d7e5ecb02c42aa037ec0f450fbadcbef8e7dcab2d90a1",
+        "scope": "Captain mattress and linen top illumination only; native geometry and material graph retained."
+      }
+    },
+    "atlas-26": {
+      "collection": "37 | Middle crew inboard wet room | plan and VR arrangement",
+      "object": "PARITY 37 | Middle crew inboard wet room | plan and VR arrangem",
+      "size": 2048,
+      "samples": 64,
+      "unsupported_colours": [
+        "Middle head dark clouded slate.001"
+      ],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-26-light-guided.hdr",
+      "colour": "textures/atlas-26-colour.png",
+      "seconds": 728.248078908,
+      "raw_light": "textures/atlas-26-light.hdr",
+      "denoised": true,
+      "guide_normal": "textures/atlas-26-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-26-light-denoised.hdr",
+        "textures/atlas-26-light.hdr"
+      ],
+      "denoise_guides": true
+    },
+    "atlas-00": {
+      "collection": "01 | Rebuilt hull and true portlight apertures",
+      "object": "PARITY 01 | Rebuilt hull and true portlight apertures",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-00-light-guided.hdr",
+      "seconds": 25.706671002000803,
+      "guide_normal": "textures/atlas-00-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-00-light.hdr"
+      ],
+      "raw_light": "textures/atlas-00-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-01": {
+      "collection": "02 | Rebuilt decks, circulation and roof structures",
+      "object": "PARITY 02 | Rebuilt decks, circulation and roof structures",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-01-light-guided.hdr",
+      "seconds": 99.45960142499825,
+      "guide_normal": "textures/atlas-01-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-01-light.hdr"
+      ],
+      "raw_light": "textures/atlas-01-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-02": {
+      "collection": "03 | Underwater appendages | ESTIMATED",
+      "object": "PARITY 03 | Underwater appendages | ESTIMATED",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-02-light-guided.hdr",
+      "seconds": 25.52647927900034,
+      "guide_normal": "textures/atlas-02-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-02-light.hdr"
+      ],
+      "raw_light": "textures/atlas-02-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-03": {
+      "collection": "10 | Rebuilt salon and transverse dining",
+      "object": "PARITY 10 | Rebuilt salon and transverse dining",
+      "size": 2048,
+      "detail_size": 1024,
+      "samples": 64,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Boucle.001",
+        "Pale blue.001",
+        "Gray.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-03-cove-v2-light-guided.hdr",
+      "normal": "textures/atlas-03-normal.png",
+      "seconds": 44.91499250299967,
+      "guide_normal": "textures/atlas-03-cove-v2-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-03-light.hdr",
+        "textures/atlas-03-light-guided.hdr",
+        "textures/atlas-03-cove-v2-light.hdr"
+      ],
+      "raw_light": "textures/atlas-03-cove-v2-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "visible_side_correction": {
+        "light": "textures/atlas-03-cove-v2-light.hdr",
+        "guide-normal": "textures/atlas-03-cove-v2-guide-normal.png",
+        "size": 2048,
+        "samples": 64,
+        "temporary_visible_side_faces": 480,
+        "native_geometry_changed": false
+      },
+      "back_light": "textures/atlas-03-cove-v2-light-guided.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-03-cove-v2-light-guided.hdr",
+        "reused_visible_side_correction": true,
+        "views": [
+          "scene_dining_area_l",
+          "scene_galley_entrance_b",
+          "scene_salon_l"
+        ]
+      }
+    },
+    "atlas-04": {
+      "collection": "15 | Salon ceiling TV and folding mechanism",
+      "object": "PARITY 15 | Salon ceiling TV and folding mechanism",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-04-light-guided.hdr",
+      "seconds": 93.65625065900167,
+      "guide_normal": "textures/atlas-04-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-04-light.hdr"
+      ],
+      "raw_light": "textures/atlas-04-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-05": {
+      "collection": "12 | Rebuilt owner suite and wardrobes",
+      "object": "PARITY 12 | Rebuilt owner suite and wardrobes",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Boucle.001",
+        "Bedding.001",
+        "Owner speaker woven gray.001",
+        "Runner gray.001",
+        "Gray.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-05-light-guided.hdr",
+      "normal": "textures/atlas-05-normal.png",
+      "seconds": 76.24439815900041,
+      "guide_normal": "textures/atlas-05-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-05-light.hdr"
+      ],
+      "raw_light": "textures/atlas-05-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-06": {
+      "collection": "13 | Rebuilt owner stone bathroom and separate WC",
+      "object": "PARITY 13 | Rebuilt owner stone bathroom and separate WC",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Bedding.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-06-light-guided.hdr",
+      "normal": "textures/atlas-06-normal.png",
+      "seconds": 115.01365623000311,
+      "guide_normal": "textures/atlas-06-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-06-light.hdr"
+      ],
+      "raw_light": "textures/atlas-06-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-07": {
+      "collection": "11 | Rebuilt galley, laundry and main passage",
+      "object": "PARITY 11 | Rebuilt galley, laundry and main passage",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-07-light-guided.hdr",
+      "normal": "textures/atlas-07-normal.png",
+      "seconds": 80.20352972900218,
+      "guide_normal": "textures/atlas-07-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-07-light.hdr"
+      ],
+      "raw_light": "textures/atlas-07-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-08": {
+      "collection": "14 | Rebuilt starboard day head",
+      "object": "PARITY 14 | Rebuilt starboard day head",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-08-light-guided.hdr",
+      "normal": "textures/atlas-08-normal.png",
+      "seconds": 109.8393049130027,
+      "guide_normal": "textures/atlas-08-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-08-light.hdr"
+      ],
+      "raw_light": "textures/atlas-08-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "back_light": "textures/atlas-08-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-08-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 209,
+        "views": [
+          "scene_day_head_r"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-08-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-09": {
+      "collection": "20 | Rebuilt short skylounge with open side glazing",
+      "object": "PARITY 20 | Rebuilt short skylounge with open side glazing",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Bedding.001",
+        "Pale blue.001",
+        "Skylounge pale gray textile.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-09-light-guided.hdr",
+      "normal": "textures/atlas-09-normal.png",
+      "seconds": 98.96360281899979,
+      "guide_normal": "textures/atlas-09-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-09-light.hdr"
+      ],
+      "raw_light": "textures/atlas-09-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-10": {
+      "collection": "21 | Rebuilt pilothouse, single helm and starboard bench",
+      "object": "PARITY 21 | Rebuilt pilothouse, single helm and starboard bench",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Pale blue.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-10-light-guided.hdr",
+      "normal": "textures/atlas-10-normal.png",
+      "seconds": 64.35642901000028,
+      "guide_normal": "textures/atlas-10-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-10-light.hdr"
+      ],
+      "raw_light": "textures/atlas-10-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "back_light": "textures/atlas-10-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-10-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 724,
+        "views": [
+          "scene_pilothouse_lounge_l"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-10-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-11": {
+      "collection": "30 | Port double cabin | athwartships bed",
+      "object": "PARITY 30 | Port double cabin | athwartships bed",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Guest window dark cognac.001"
+      ],
+      "bump_normals": [
+        "Boucle.001",
+        "Bedding.001",
+        "Runner lilac.001",
+        "Gray.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-11-light-guided.hdr",
+      "colour": "textures/atlas-11-colour.png",
+      "normal": "textures/atlas-11-normal.png",
+      "seconds": 102.92424020500039,
+      "guide_normal": "textures/atlas-11-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-11-light.hdr"
+      ],
+      "raw_light": "textures/atlas-11-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-12": {
+      "collection": "31 | Port double head | separate WC",
+      "object": "PARITY 31 | Port double head | separate WC",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-12-light-guided.hdr",
+      "normal": "textures/atlas-12-normal.png",
+      "seconds": 119.14466278399777,
+      "guide_normal": "textures/atlas-12-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-12-light.hdr"
+      ],
+      "raw_light": "textures/atlas-12-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-13": {
+      "collection": "32 | Port twin cabin | forward headboards",
+      "object": "PARITY 32 | Port twin cabin | forward headboards",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Guest window dark cognac.001"
+      ],
+      "bump_normals": [
+        "Bedding.001",
+        "Gray.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-13-light-guided.hdr",
+      "colour": "textures/atlas-13-colour.png",
+      "normal": "textures/atlas-13-normal.png",
+      "seconds": 89.14881779799907,
+      "guide_normal": "textures/atlas-13-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-13-light.hdr"
+      ],
+      "raw_light": "textures/atlas-13-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-14": {
+      "collection": "33 | Port compact twin head",
+      "object": "PARITY 33 | Port compact twin head",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Guest bath fine dark cognac.001"
+      ],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-14-light-guided.hdr",
+      "colour": "textures/atlas-14-colour.png",
+      "normal": "textures/atlas-14-normal.png",
+      "seconds": 376.5938833029977,
+      "guide_normal": "textures/atlas-14-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-14-light.hdr"
+      ],
+      "raw_light": "textures/atlas-14-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-15": {
+      "collection": "30 | Starboard double cabin | athwartships bed",
+      "object": "PARITY 30 | Starboard double cabin | athwartships bed",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Guest window dark cognac.001"
+      ],
+      "bump_normals": [
+        "Boucle.001",
+        "Bedding.001",
+        "Runner lilac.001",
+        "Gray.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-15-light-guided.hdr",
+      "colour": "textures/atlas-15-colour.png",
+      "normal": "textures/atlas-15-normal.png",
+      "seconds": 100.0325506909976,
+      "guide_normal": "textures/atlas-15-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-15-light.hdr"
+      ],
+      "raw_light": "textures/atlas-15-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-16": {
+      "collection": "31 | Starboard double head | separate WC",
+      "object": "PARITY 31 | Starboard double head | separate WC",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-16-light-guided.hdr",
+      "normal": "textures/atlas-16-normal.png",
+      "seconds": 129.10915661900071,
+      "guide_normal": "textures/atlas-16-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-16-light.hdr"
+      ],
+      "raw_light": "textures/atlas-16-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-17": {
+      "collection": "32 | Starboard twin cabin | forward headboards",
+      "object": "PARITY 32 | Starboard twin cabin | forward headboards",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Guest window dark cognac.001"
+      ],
+      "bump_normals": [
+        "Bedding.001",
+        "Gray.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-17-light-guided.hdr",
+      "colour": "textures/atlas-17-colour.png",
+      "normal": "textures/atlas-17-normal.png",
+      "seconds": 94.73129839300236,
+      "guide_normal": "textures/atlas-17-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-17-light.hdr"
+      ],
+      "raw_light": "textures/atlas-17-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-18": {
+      "collection": "33 | Starboard compact twin head",
+      "object": "PARITY 33 | Starboard compact twin head",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Guest bath fine dark cognac.001"
+      ],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-18-light-guided.hdr",
+      "colour": "textures/atlas-18-colour.png",
+      "normal": "textures/atlas-18-normal.png",
+      "seconds": 138.81800467799985,
+      "guide_normal": "textures/atlas-18-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-18-light.hdr"
+      ],
+      "raw_light": "textures/atlas-18-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-19": {
+      "collection": "34 | Rebuilt guest lobby and continuous curved stairs",
+      "object": "PARITY 34 | Rebuilt guest lobby and continuous curved stairs",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-19-light-guided.hdr",
+      "seconds": 98.95860638099839,
+      "guide_normal": "textures/atlas-19-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-19-light.hdr"
+      ],
+      "raw_light": "textures/atlas-19-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-20": {
+      "collection": "35 | Rebuilt crew mess and clear service corridor",
+      "object": "PARITY 35 | Rebuilt crew mess and clear service corridor",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Captain reference pale oak.001"
+      ],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-20-light-guided.hdr",
+      "colour": "textures/atlas-20-colour.png",
+      "normal": "textures/atlas-20-normal.png",
+      "seconds": 141.58345583999835,
+      "guide_normal": "textures/atlas-20-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-20-light.hdr"
+      ],
+      "raw_light": "textures/atlas-20-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-22": {
+      "collection": "36 | Middle crew berth | whitewashed oak",
+      "object": "PARITY 36 | Middle crew berth | whitewashed oak",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Pale blue.001",
+        "Crew gray linen.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-22-light-cloth-field-v2.hdr",
+      "normal": "textures/atlas-22-normal.png",
+      "seconds": 163.49937119300012,
+      "guide_normal": "textures/atlas-22-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-22-light.hdr",
+        "textures/atlas-22-light-guided.hdr"
+      ],
+      "raw_light": "textures/atlas-22-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "contact_correction": {
+        "label": "Middle",
+        "atlas": "atlas-22",
+        "samples": "atlas-22-cloth-field-samples.npz",
+        "levels": [
+          1.1101919742381061
+        ],
+        "original_light": "textures/atlas-22-light-guided.hdr",
+        "geometry_changed": false,
+        "field": "atlas-22-cloth-field-v2.npy",
+        "beds": [
+          {
+            "level_m": 1.1101919742381061,
+            "training_texels": 9196,
+            "adjusted_texels": 48589,
+            "training_rmse": 0.13765609248233449
+          }
+        ],
+        "method": "Shared robust world-space irradiance field per touching textile pair",
+        "light": "textures/atlas-22-light-cloth-field-v2.hdr",
+        "sha256": "1bff3d4e0ac0d08e86c917566fa6ef123d5bdb7c6db85ed00178cb9644ef019a"
+      },
+      "back_light": "textures/atlas-22-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-22-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 16,
+        "views": [
+          "scene_middle_crew_cabin_l"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-22-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-23": {
+      "collection": "36 | Starboard crew berth | whitewashed oak",
+      "object": "PARITY 36 | Starboard crew berth | whitewashed oak",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Pale blue.001",
+        "Crew gray linen.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-23-light-cloth-field-v2.hdr",
+      "normal": "textures/atlas-23-normal.png",
+      "seconds": 156.57978112099954,
+      "guide_normal": "textures/atlas-23-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-23-light.hdr",
+        "textures/atlas-23-light-guided.hdr"
+      ],
+      "raw_light": "textures/atlas-23-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "contact_correction": {
+        "label": "Starboard",
+        "atlas": "atlas-23",
+        "samples": "atlas-23-cloth-field-samples.npz",
+        "levels": [
+          0.7201766564091742,
+          1.5801766786742097
+        ],
+        "original_light": "textures/atlas-23-light-guided.hdr",
+        "geometry_changed": false,
+        "field": "atlas-23-cloth-field-v2.npy",
+        "beds": [
+          {
+            "level_m": 0.7201766564091742,
+            "training_texels": 6881,
+            "adjusted_texels": 38898,
+            "training_rmse": 0.08166840401629795
+          },
+          {
+            "level_m": 1.5801766786742097,
+            "training_texels": 6857,
+            "adjusted_texels": 38782,
+            "training_rmse": 0.15951435475791095
+          }
+        ],
+        "method": "Shared robust world-space irradiance field per touching textile pair",
+        "light": "textures/atlas-23-light-cloth-field-v2.hdr",
+        "sha256": "206511064830296adc426052e0317ff6b04c7fdfb2eec51e4beac09b22c713e0"
+      }
+    },
+    "atlas-24": {
+      "collection": "36 | Port crew berth | whitewashed oak",
+      "object": "PARITY 36 | Port crew berth | whitewashed oak",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Pale blue.001",
+        "Crew gray linen.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-24-light-cloth-field-v2.hdr",
+      "normal": "textures/atlas-24-normal.png",
+      "seconds": 148.7713858169991,
+      "guide_normal": "textures/atlas-24-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-24-light.hdr",
+        "textures/atlas-24-light-guided.hdr"
+      ],
+      "raw_light": "textures/atlas-24-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "contact_correction": {
+        "label": "Port",
+        "atlas": "atlas-24",
+        "samples": "atlas-24-cloth-field-samples.npz",
+        "levels": [
+          0.7201766564091742,
+          1.5801766786742097
+        ],
+        "original_light": "textures/atlas-24-light-guided.hdr",
+        "geometry_changed": false,
+        "field": "atlas-24-cloth-field-v2.npy",
+        "beds": [
+          {
+            "level_m": 0.7201766564091742,
+            "training_texels": 7205,
+            "adjusted_texels": 41557,
+            "training_rmse": 0.0978921953453465
+          },
+          {
+            "level_m": 1.5801766786742097,
+            "training_texels": 7252,
+            "adjusted_texels": 41382,
+            "training_rmse": 0.21988265571567273
+          }
+        ],
+        "method": "Shared robust world-space irradiance field per touching textile pair",
+        "light": "textures/atlas-24-light-cloth-field-v2.hdr",
+        "sha256": "c7eef0b7ab9470c57cfdeba7b41146548c885bb518882afc998d70a01faa3803"
+      }
+    },
+    "atlas-25": {
+      "collection": "37 | Captain crew head | distinct wet-area arrangement",
+      "object": "PARITY 37 | Captain crew head | distinct wet-area arrangement",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Captain reference pale oak.001"
+      ],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-25-light-guided.hdr",
+      "colour": "textures/atlas-25-colour.png",
+      "seconds": 138.11328509699888,
+      "guide_normal": "textures/atlas-25-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-25-light.hdr"
+      ],
+      "raw_light": "textures/atlas-25-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-27": {
+      "collection": "37 | Starboard crew head | hull vanity and forward shower",
+      "object": "PARITY 37 | Starboard crew head | hull vanity and forward showe",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-27-light-guided.hdr",
+      "normal": "textures/atlas-27-normal.png",
+      "seconds": 115.55860776499685,
+      "guide_normal": "textures/atlas-27-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-27-light.hdr"
+      ],
+      "raw_light": "textures/atlas-27-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "back_light": "textures/atlas-27-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-27-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 5,
+        "views": [
+          "scene_stbd_crew_head_b"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-27-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-28": {
+      "collection": "37 | Port crew head | distinct wet-area arrangement",
+      "object": "PARITY 37 | Port crew head | distinct wet-area arrangement",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Port head clouded blue-gray slate.001"
+      ],
+      "bump_normals": [
+        "Bedding.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-28-light-guided.hdr",
+      "colour": "textures/atlas-28-colour.png",
+      "normal": "textures/atlas-28-normal.png",
+      "seconds": 111.15772688700235,
+      "guide_normal": "textures/atlas-28-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-28-light.hdr"
+      ],
+      "raw_light": "textures/atlas-28-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "back_light": "textures/atlas-28-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-28-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 1024,
+        "views": [
+          "scene_port_crew_head_b"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-28-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-29": {
+      "collection": "40 | Rebuilt cockpit, beach club and exterior stair links",
+      "object": "PARITY 40 | Rebuilt cockpit, beach club and exterior stair link",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Bedding.001",
+        "Pale blue.001",
+        "Outdoor silver textile.001",
+        "Gray.001",
+        "Director graphite textile.001",
+        "Pale gold.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-29-light-guided.hdr",
+      "normal": "textures/atlas-29-normal.png",
+      "seconds": 45.078949874998216,
+      "guide_normal": "textures/atlas-29-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-29-light.hdr"
+      ],
+      "raw_light": "textures/atlas-29-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-30": {
+      "collection": "42 | Starboard main side-deck stair to raised foredeck",
+      "object": "PARITY 42 | Starboard main side-deck stair to raised foredeck",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-30-light-guided.hdr",
+      "seconds": 68.66406930599987,
+      "guide_normal": "textures/atlas-30-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-30-light.hdr"
+      ],
+      "raw_light": "textures/atlas-30-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-31": {
+      "collection": "41 | Rebuilt upper aft terrace, folding table and grill",
+      "object": "PARITY 41 | Rebuilt upper aft terrace, folding table and grill",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Boucle.001",
+        "Director graphite textile.001",
+        "Bedding.001",
+        "Pale blue.001",
+        "Outdoor silver textile.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-31-light-guided.hdr",
+      "normal": "textures/atlas-31-normal.png",
+      "seconds": 51.81641169499926,
+      "guide_normal": "textures/atlas-31-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-31-light.hdr"
+      ],
+      "raw_light": "textures/atlas-31-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-32": {
+      "collection": "42 | Upper terrace grill lid, grates and controls",
+      "object": "PARITY 42 | Upper terrace grill lid, grates and controls",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-32-light-guided.hdr",
+      "normal": "textures/atlas-32-normal.png",
+      "seconds": 47.58033262400204,
+      "guide_normal": "textures/atlas-32-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-32-light.hdr"
+      ],
+      "raw_light": "textures/atlas-32-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-33": {
+      "collection": "42 | Rebuilt stepped bow lounge, inset pool and working deck",
+      "object": "PARITY 42 | Rebuilt stepped bow lounge, inset pool and working ",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Bedding.001",
+        "Pale blue.001",
+        "Outdoor silver textile.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-33-light-guided.hdr",
+      "normal": "textures/atlas-33-normal.png",
+      "seconds": 72.85281238099924,
+      "guide_normal": "textures/atlas-33-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-33-light.hdr"
+      ],
+      "raw_light": "textures/atlas-33-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-34": {
+      "collection": "43 | Rebuilt sundeck curves, daybeds, bar and chaises",
+      "object": "PARITY 43 | Rebuilt sundeck curves, daybeds, bar and chaises",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [
+        "Bedding.001",
+        "Pale blue.001",
+        "Outdoor silver textile.001",
+        "Gray.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-34-light-guided.hdr",
+      "normal": "textures/atlas-34-normal.png",
+      "seconds": 49.890226126000925,
+      "guide_normal": "textures/atlas-34-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-34-light.hdr"
+      ],
+      "raw_light": "textures/atlas-34-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-35": {
+      "collection": "44 | Rebuilt rails, mast and visible deck hardware",
+      "object": "PARITY 44 | Rebuilt rails, mast and visible deck hardware",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-35-light-guided.hdr",
+      "seconds": 4.321929574998649,
+      "guide_normal": "textures/atlas-35-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-35-light.hdr"
+      ],
+      "raw_light": "textures/atlas-35-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-36": {
+      "collection": "41 | Garage, lazarette & systems",
+      "object": "PARITY 41 | Garage, lazarette & systems",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-36-light-guided.hdr",
+      "seconds": 50.81799113099987,
+      "guide_normal": "textures/atlas-36-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-36-light.hdr"
+      ],
+      "raw_light": "textures/atlas-36-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "back_light": "textures/atlas-36-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-36-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 2048,
+        "views": [
+          "scene_garage_l"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-36-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-37": {
+      "collection": "40 | Engine room | observed arrangement, estimated components :",
+      "object": "PARITY 40 | Engine room | observed arrangement, estimated compo",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Raised aluminium checker plate.001"
+      ],
+      "bump_normals": [
+        "Raised aluminium checker plate.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-37-light-guided.hdr",
+      "colour": "textures/atlas-37-colour.png",
+      "normal": "textures/atlas-37-normal.png",
+      "seconds": 69.03068301000167,
+      "guide_normal": "textures/atlas-37-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-37-light.hdr"
+      ],
+      "raw_light": "textures/atlas-37-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-38": {
+      "collection": "40 | Engine room | observed arrangement, estimated componen",
+      "object": "PARITY 40 | Engine room | observed arrangement, estimated c",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-38-light-guided.hdr",
+      "seconds": 124.72265677799805,
+      "guide_normal": "textures/atlas-38-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-38-light.hdr"
+      ],
+      "raw_light": "textures/atlas-38-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-39": {
+      "collection": "72 | Engine room photographed rails, covers and pipework",
+      "object": "PARITY 72 | Engine room photographed rails, covers and pipework",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Raised aluminium checker plate.001"
+      ],
+      "bump_normals": [
+        "Engine black woven insulation.001",
+        "Pale blue.001",
+        "Engine silver insulation jacket.001",
+        "Pale gold.001",
+        "Gray.001",
+        "Raised aluminium checker plate.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-39-light-guided.hdr",
+      "colour": "textures/atlas-39-colour.png",
+      "normal": "textures/atlas-39-normal.png",
+      "seconds": 24.465054422998946,
+      "guide_normal": "textures/atlas-39-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-39-light.hdr"
+      ],
+      "raw_light": "textures/atlas-39-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-40": {
+      "collection": "73 | Garage rails, cable trays and service enclosures",
+      "object": "PARITY 73 | Garage rails, cable trays and service enclosures",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-40-light-guided.hdr",
+      "seconds": 47.65086070400139,
+      "guide_normal": "textures/atlas-40-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-40-light.hdr"
+      ],
+      "raw_light": "textures/atlas-40-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-41": {
+      "collection": "74 | Lazarette separate service passage and visible machinery",
+      "object": "PARITY 74 | Lazarette separate service passage and visible mach",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [
+        "Raised aluminium checker plate.001"
+      ],
+      "bump_normals": [
+        "Raised aluminium checker plate.001"
+      ],
+      "passed": true,
+      "light": "textures/atlas-41-light-guided.hdr",
+      "colour": "textures/atlas-41-colour.png",
+      "normal": "textures/atlas-41-normal.png",
+      "seconds": 83.88487693299976,
+      "guide_normal": "textures/atlas-41-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-41-light.hdr"
+      ],
+      "raw_light": "textures/atlas-41-light.hdr",
+      "denoised": true,
+      "denoise_guides": true,
+      "back_light": "textures/atlas-41-light-back-v1-denoised.hdr",
+      "back_side_bake": {
+        "light": "textures/atlas-41-light-back-v1-denoised.hdr",
+        "size": 1024,
+        "samples": 32,
+        "expanded_faces": 20,
+        "views": [
+          "scene_lazarette_b"
+        ],
+        "source_geometry_changed": false,
+        "raw_light": "textures/atlas-41-light-back-v1.hdr",
+        "denoised": true
+      }
+    },
+    "atlas-42": {
+      "collection": "38 | Service stair between galley and crew mess",
+      "object": "PARITY 38 | Service stair between galley and crew mess",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-42-light-guided.hdr",
+      "seconds": 104.378064206001,
+      "guide_normal": "textures/atlas-42-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-42-light.hdr"
+      ],
+      "raw_light": "textures/atlas-42-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    },
+    "atlas-43": {
+      "collection": "04 | Exterior smoked glazing and continuous window casings",
+      "object": "PARITY 04 | Exterior smoked glazing and continuous window casin",
+      "size": 1024,
+      "detail_size": 1024,
+      "samples": 32,
+      "unsupported_colours": [],
+      "bump_normals": [],
+      "passed": true,
+      "light": "textures/atlas-43-light-guided.hdr",
+      "seconds": 58.66843766599777,
+      "guide_normal": "textures/atlas-43-guide-normal.png",
+      "light_aliases": [
+        "textures/atlas-43-light.hdr"
+      ],
+      "raw_light": "textures/atlas-43-light.hdr",
+      "denoised": true,
+      "denoise_guides": true
+    }
+  },
+  "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+  "square_uv": true
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Azimut Grande 36M",
+  "native_source": "Grande_36M_r110.blend",
+  "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+  "glb_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
+  "source_triangles": 2341488,
+  "colliders": [],
+  "accuracy": "Photo-based reconstruction in progress; not a surveyed replica.",
+  "dimensions_m": {
+    "length": 35.29,
+    "beam": 7.5,
+    "draft": 1.96
+  },
+  "status": "Validated same-source real-time presentation update; VR-reference reconstruction remains in progress.",
+  "pixel_identical": false,
+  "validation": "VALIDATION.json",
+  "comparisons": "review/"
+}

@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r21",
+  "build": "tidewater-rocha-public-r22",
   "worlds": [
     "tidewater",
     "rocha"
@@ -109,6 +109,18 @@
       }
     },
     "walk": "walk=boarding",
+    "boardingRoute": {
+      "version": "owner-boarding-route-1",
+      "checkpoint": "Boarding junction and port outside passage",
+      "review": "rocha/luz-de-mar/boarding-route/",
+      "sharedLayoutAndCollision": true,
+      "inboardGate": true,
+      "reference": "Owner video, 12–24 seconds; fitted component dimensions",
+      "serviceDescentReconstruction": false,
+      "additionalTextures": 0,
+      "additionalRenderPasses": 0,
+      "sourceAssetUnchanged": true
+    },
     "navigationUI": {
       "version": "luz-walk-navigation-2",
       "language": "es",
@@ -187,10 +199,10 @@
       "version": "luz-video-exterior-1",
       "basis": "Owner-supplied exterior stills and survey video; local dimensions estimated",
       "privateMediaPublished": false,
-      "boarding": "photo-guided-boarding-2",
+      "boarding": "owner-boarding-route-1",
       "additionalTextures": 0,
       "additionalLightingOrReflectionPasses": 0,
-      "sharedYachtBatches": 12,
+      "sharedYachtBatches": 13,
       "boardingBatches": 2
     },
     "interior": {

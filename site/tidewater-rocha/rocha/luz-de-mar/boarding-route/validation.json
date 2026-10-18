@@ -1,0 +1,146 @@
+{
+  "build": "tidewater-rocha-public-r22",
+  "checkpoint": "Boarding junction and port outside passage",
+  "geometry": {
+    "before": {
+      "yacht": {
+        "version": "luz-de-mar-rocha-1",
+        "sourceComponents": 694,
+        "sourceTriangles": 159885,
+        "sourceDisplayRecords": 613,
+        "consumedProxies": 183,
+        "renderedComponents": 430,
+        "triangles": 168278,
+        "batches": 13,
+        "sourceBinaryBytes": 3837030,
+        "newTextures": 0,
+        "baseTriangles": 41645,
+        "photoLayoutVersion": "owner-photo-layout-1",
+        "machineryCraftVersion": "owner-machinery-craft-2",
+        "machineryVersion": "owner-machinery-3",
+        "machineryParts": 1066,
+        "machineryTriangles": 87056,
+        "machineryStructureTriangles": 1380,
+        "ownerDetailsVersion": "owner-deck-fittings-1",
+        "barbecueVersion": "owner-photo-barbecue-1",
+        "exteriorVersion": "luz-video-exterior-1",
+        "exteriorParts": 250,
+        "stairVersion": "photo-guided-stairs-3",
+        "stairRoutes": 4,
+        "interiorVersion": "salvagni-crafted-2",
+        "refinedComponents": 345,
+        "detailParts": 571,
+        "indexedInputs": true,
+        "vertices": 133867,
+        "geometryBytes": 7970752
+      },
+      "boarding": {
+        "batches": 2,
+        "triangles": 5048,
+        "geometryBytes": 188888,
+        "newTextures": 0
+      },
+      "totalTriangles": 173326,
+      "totalGeometryBytes": 8159640,
+      "totalBatches": 15
+    },
+    "after": {
+      "yacht": {
+        "version": "luz-de-mar-rocha-1",
+        "sourceComponents": 694,
+        "sourceTriangles": 159885,
+        "sourceDisplayRecords": 613,
+        "consumedProxies": 192,
+        "renderedComponents": 421,
+        "triangles": 170345,
+        "batches": 13,
+        "sourceBinaryBytes": 3837030,
+        "newTextures": 0,
+        "baseTriangles": 41645,
+        "photoLayoutVersion": "owner-photo-layout-1",
+        "machineryCraftVersion": "owner-machinery-craft-2",
+        "machineryVersion": "owner-machinery-3",
+        "machineryParts": 1066,
+        "machineryTriangles": 87056,
+        "machineryStructureTriangles": 1380,
+        "ownerDetailsVersion": "owner-deck-fittings-1",
+        "barbecueVersion": "owner-photo-barbecue-1",
+        "exteriorVersion": "luz-video-exterior-1",
+        "exteriorParts": 265,
+        "stairVersion": "photo-guided-stairs-3",
+        "stairRoutes": 4,
+        "interiorVersion": "salvagni-crafted-2",
+        "refinedComponents": 354,
+        "detailParts": 582,
+        "indexedInputs": true,
+        "vertices": 134860,
+        "geometryBytes": 8034790
+      },
+      "boarding": {
+        "batches": 2,
+        "triangles": 6944,
+        "geometryBytes": 265888,
+        "newTextures": 0
+      },
+      "totalTriangles": 177289,
+      "totalGeometryBytes": 8300678,
+      "totalBatches": 15
+    },
+    "trianglesChangePercent": 2.286442887968332,
+    "geometryBytesChangePercent": 1.7284831193532968
+  },
+  "timing": {
+    "scope": "Isolated native Vulkan software renderer, CPU encoding plus queue completion. Not physical Android or Safari FPS.",
+    "method": "Sequential r21/new/new/r21 at the identical landing camera, 478\u00d7850, 48 frames each; first 16 frames excluded from paired summary. Original 12-frame four-view audits retained separately.",
+    "runs": {
+      "cost-before-1": {
+        "warmSamples": 32,
+        "medianMs": 175.20136449999973,
+        "draws": 29,
+        "submittedTriangles": 185776
+      },
+      "cost-after-1": {
+        "warmSamples": 32,
+        "medianMs": 178.77642650000053,
+        "draws": 29,
+        "submittedTriangles": 193702
+      },
+      "cost-after-2": {
+        "warmSamples": 32,
+        "medianMs": 176.89957950000007,
+        "draws": 29,
+        "submittedTriangles": 193702
+      },
+      "cost-before-2": {
+        "warmSamples": 32,
+        "medianMs": 178.61401449999994,
+        "draws": 29,
+        "submittedTriangles": 185776
+      }
+    },
+    "pooledBeforeMedianMs": 176.88855250000051,
+    "pooledAfterMedianMs": 177.55342900000005,
+    "medianChangePercent": 0.3758731080121924,
+    "interpretation": "Run medians overlap; this limited cloud measurement does not establish a mobile FPS change."
+  },
+  "checks": {
+    "yachtTestFiles": 12,
+    "newRouteBehaviorTests": 5,
+    "actualKeyboardAndTouchRoundTrip": true,
+    "existingFourStairsBothDirectionsDesktopAndTouch": true,
+    "navigationUiViewports": 4,
+    "nativeGpuErrors": [],
+    "originalModelUnchanged": true,
+    "lowerDeckGpuGeometryUnchanged": true,
+    "newTextures": 0,
+    "newLightingOrReflectionPasses": 0,
+    "waterAaResolutionUnchanged": true
+  },
+  "limitations": [
+    "Door D1, horizontal louvres, service descent and lower vestibule are pending; their reservation is not a verified structural fit.",
+    "Exterior stair silhouette, coaming curves, covered stern furniture and photographed materials remain later refinements.",
+    "Reference camera poses and component dimensions are fitted estimates, not measured engineering drawings.",
+    "Native captures omit full Rocha scenery. Cloud Chromium offers 16 sampled textures per stage; full map requires 32. Browser navigation is tested using the production non-rendering fixture.",
+    "Original owner video and stills are not published publicly."
+  ]
+}

@@ -83,9 +83,11 @@ function axisSphere( geometry ) {
 
 }
 
-const PALM_NEAR = 120; // m, full detail palms
-const TREE_NEAR = 65; // m, trees: geometry -> impostor
-const SHRUB_NEAR = 45;
+// This world is only 50 m across. Keep its plants in one geometric LOD
+// throughout the permitted camera range, avoiding dithered impostor switches.
+const PALM_NEAR = 180;
+const TREE_NEAR = 160;
+const SHRUB_NEAR = 160;
 const UNDER_FADE = [ 120, 140 ]; // young palms / bananas
 const BROAD_FADE = [ 85, 105 ]; // monstera / elephant ear / heliconia
 const BANANA_FADE = [ 100, 120 ];

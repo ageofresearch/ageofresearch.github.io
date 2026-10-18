@@ -2,10 +2,12 @@ import * as T from './tidewater/engine/index.js';
 import {standard} from './tidewater/materials/Materials.js';
 import {Vegetation} from './tidewater/world/Vegetation.js';
 import {mulberry32} from './tidewater/util/Noise.js';
+import {SolidUnion} from './solids.js';
+import {createMaterials} from './materials.js';
+import {createFurniture} from './furniture.js';
 
 export const S=12.42;
 export const pt=(x,z)=>[(x-521.16)/S,(z-292.5)/S];
-const C={wall:0xeee0bf,floor:0xe8dac0,stone:0xb6ac91,wood:0x755136,terracotta:0xc27e60,cream:0xf5e9cd,green:0x627b5d,linen:0xd7c6a6,metal:0x3e4941,teal:0x4d8e83};
 
 export function polygonGeo(points,y){
  const g=new T.BufferGeometry(),p=[],n=[],uv=[],idx=[];
@@ -23,19 +25,20 @@ export function polygonGeo(points,y){
 
 export function buildHouse(scene,data,sky,lights){
  const root=new T.Group(),roofs=new T.Group(),wallsGroup=new T.Group();root.name='Casa Turbaco · plano vectorial';roofs.name='Cubiertas · altura exterior 2.70m';wallsGroup.name='Muros';scene.add(root);root.add(roofs,wallsGroup);
- const batches=new Map(),materials={};let parts=0;
+ const batches=new Map(),materials=createMaterials(),solids=new SolidUnion(),roofSolids=new SolidUnion();let parts=0,architecture=true;
  const mat=(key,color,rough=.82)=>materials[key]??=(standard({name:'Turbaco · '+key,color,roughness:rough}));
- for(const [k,c] of Object.entries(C))mat(k,c);
- materials.wall.surface=`let q=floor(in.P*180.0);let noise=fract(sin(dot(q,vec3f(12.1,31.7,17.3)))*43758.5);s.albedo*=.97+noise*.06;s.roughness=.91;`;
- materials.stone.surface=`let uv=in.P.xz;let row=floor(uv.y*2.0);let cell=fract(uv*vec2f(1.0,2.0)+vec2f(row*.5,0.0));let joint=step(.025,cell.x)*step(.035,cell.y);let v=fract(sin(dot(floor(uv*vec2f(1.0,2.0)),vec2f(12.9,78.2)))*43758.5);s.albedo*=mix(.66,.92+v*.13,joint);`;
- materials.wood.surface=`s.albedo*=.88+.12*sin(in.P.x*71.0+sin(in.P.z*2.1)*2.0);s.roughness=.76;`;
- mat('roof',0xe4d1ac).surface=`let q=in.P.xz;let f=fract(q*vec2f(2.3,1.3));s.albedo*=.97+.03*sin(q.x*32.0);s.albedo*=.95+.05*step(.012,f.x)*step(.012,f.y);`;
- mat('lawn',0x667b3e).surface=`let p=in.P.xz;let n=sin(p.x*.81+sin(p.y*.73))*sin(p.y*.6);let q=floor(p*50.0);let v=fract(sin(dot(q,vec2f(12.8,78.2)))*43758.5);s.albedo*=.88+n*.12+v*.13;s.roughness=1.0;`;
- mat('earth',0x596c3c).surface=`let p=in.P.xz;s.albedo*=.93+.07*sin(p.x*.13)*sin(p.y*.1);`;
  const glass=materials.glass=standard({name:'Vidrio del jardín',color:0x7da6a0,roughness:.12,metalness:.25,transparent:true,opacity:.25,depthWrite:false});
  function add(geo,key,group=root){const material=typeof key==='string'?materials[key]:key;const tag=(group===roofs?'roof':group===wallsGroup?'wall':'root')+':'+material.id;
   if(!batches.has(tag))batches.set(tag,{material,group,geos:[]});batches.get(tag).geos.push(geo);parts++;}
- function box(x,y,z,w,h,d,key='wall',group=root,angle=0){if(w<=0||h<=0||d<=0)return;const geo=new T.BoxGeometry(w,h,d);if(angle)geo.rotateY(angle);geo.translate(x,y,z);add(geo,key,group)}
+ function box(x,y,z,w,h,d,key='wall',group=root,angle=0){
+  if(w<=0||h<=0||d<=0)return;
+  const material=typeof key==='string'?materials[key]:key;
+  if(architecture&&!material.transparent&&Math.abs(Math.sin(angle*2))<1e-6){
+   const dimensions=Math.abs(Math.sin(angle))>.5?[d,h,w]:[w,h,d];
+   (group===roofs?roofSolids:solids).add([x,y,z],dimensions,material,group);parts++;return;
+  }
+  const geo=new T.BoxGeometry(w,h,d);if(angle)geo.rotateY(angle);geo.translate(x,y,z);add(geo,key,group);
+ }
  function cyl(x,y,z,r,h,key='wood',r2=r,group=root){const g=new T.CylinderGeometry(r2,r,h,16);g.translate(x,y,z);add(g,key,group)}
  function ball(x,y,z,rx,ry,rz,key='linen'){const g=new T.SphereGeometry(1,12,8);g.scale(rx,ry,rz);g.translate(x,y,z);add(g,key)}
  function rect(a,b,c,d,y=.07,key='floor',h=.12,group=root){const p=pt(a,b),q=pt(c,d);box((p[0]+q[0])/2,y,(p[1]+q[1])/2,q[0]-p[0],h,q[1]-p[1],key,group)}
@@ -94,24 +97,26 @@ export function buildHouse(scene,data,sky,lights){
  for(const [dx,dz] of [[-.83,0],[.83,0],[0,-.83],[0,.83]])box(jp[0]+dx,.5,jp[1]+dz,dx===0?1.8:.18,.12,dz===0?1.8:.18,'cream');
  const bubbleMat=mat('bubble',0xc6e2d3,.2);for(let i=0;i<16;i++){const a=i*2.4;cyl(jp[0]+Math.cos(a)*.6,.516,jp[1]+Math.sin(a)*.6,.035,.006,bubbleMat);}
 
- function bed(px,pz,double=false,turn=0){const [x,z]=pt(px,pz),w=double?1.8:.92,h=2.06;
-  const local=(dx,dy,dz,bw,bh,bd,k)=>box(x+Math.cos(turn)*dx+Math.sin(turn)*dz,dy,z-Math.sin(turn)*dx+Math.cos(turn)*dz,bw,bh,bd,k,root,turn);
-  local(0,.3,0,w+.06,.3,h+.08,'wood');local(0,.52,0,w,.22,h,'cream');local(0,.67,.32,w,.09,1.25,'linen');local(0,.74,.61,w+.015,.045,.43,'terracotta');local(0,.7,-.64,w*.82,.14,.42,'cream');local(0,.75,-1.07,w+.13,1.25,.08,'wood');
-  for(const dx of [-w/2-.32,w/2+.32]){local(dx,.4,-.7,.45,.62,.42,'wood');}
- }
- bed(423,191,true,-Math.PI/2);for(const z of [237,254])bed(402,z,false,-Math.PI/2);for(const x of [402,421])bed(x,320,false);for(const z of [187,206])bed(635,z,false,Math.PI/2);for(const x of [621,639])bed(x,268,false);bed(598,365,false,Math.PI/2);
- function chair(x,z,angle=0,k='wood'){box(x,.48,z,.49,.1,.52,k,root,angle);box(x+Math.sin(angle)*.23,.84,z+Math.cos(angle)*.23,.5,.66,.08,k,root,angle);for(const dx of [-.18,.18])for(const dz of [-.18,.18])box(x+dx,.26,z+dz,.045,.45,.045,'wood');box(x,.55,z,.43,.08,.44,'linen',root,angle);}
- function sofa(px,pz,w=2.5,angle=0,k='linen'){const [x,z]=pt(px,pz);box(x,.38,z,w,.5,.86,'wood',root,angle);box(x,.66,z,w-.1,.22,.79,k,root,angle);box(x+Math.sin(angle)*.35,.87,z+Math.cos(angle)*.35,w,.65,.18,k,root,angle);for(const s of [-1,1]){box(x+Math.cos(angle)*s*(w/2-.09),.76,z-Math.sin(angle)*s*(w/2-.09),.18,.48,.9,k,root,angle);}}
+ architecture=false;
+ const furniture=createFurniture({add,materials,root});
+ const bed=(px,pz,double=false,a=0)=>furniture.bed(...pt(px,pz),double,a);
+ const chair=(x,z,a=0)=>furniture.chair(x,z,a);
+ const sofa=(px,pz,w=2.5,a=0)=>furniture.sofa(...pt(px,pz),w,a);
+ bed(423,191,true,Math.PI/2);
+ for(const z of [238,256])bed(406,z,false,Math.PI/2);
+ for(const x of [402,421])bed(x,320,false);
+ for(const z of [187,206])bed(635,z,false,-Math.PI/2);
+ for(const x of [621,639])bed(x,271,false);
+ bed(598,365,false,Math.PI/2);
  sofa(461,365,2.8,Math.PI);sofa(461,408,2.8);sofa(441,386,2.35,Math.PI/2);sofa(485,386,2.35,-Math.PI/2);
  const center=pt(461,386);box(center[0],.35,center[1],1.35,.4,1.35,'wood');box(center[0],.58,center[1],1.4,.06,1.4,'stone');cyl(center[0],.65,center[1],.2,.1,'terracotta');
  rect(436,364,487,415,.137,'green',.012);
  sofa(410,385,2.4);const desk=pt(388,369);box(desk[0],.85,desk[1],.7,.09,1.9,'wood');chair(desk[0]+.65,desk[1],Math.PI/2);
  sofa(408,429,2.4,.5);const tv=pt(381,418);box(tv[0],1.2,tv[1],.1,.85,1.5,'metal');
- const dining=pt(522,414);ball(dining[0],.91,dining[1],1.02,.06,1.8,'wood');box(dining[0],.5,dining[1],.5,.78,1.15,'wood');for(let i=0;i<8;i++){const a=i*Math.PI/4;chair(dining[0]+Math.cos(a)*1.3,dining[1]+Math.sin(a)*2.05,-a+Math.PI/2);}
- cyl(dining[0],1.02,dining[1],.22,.15,'stone');
+ const dining=pt(522,414);furniture.dining(...dining);cyl(dining[0],.991,dining[1],.16,.16,'stone');
  // Outdoor lounge furniture.
  for(const z of [342,366]){const p=pt(547,z);box(p[0],.32,p[1],1.6,.2,.65,'wood');box(p[0]-.5,.55,p[1],.45,.12,.65,'linen',root,.15);box(p[0],.46,p[1],1.4,.06,.6,'cream');}
- const table=pt(523,344);cyl(table[0],.73,table[1],.52,.08,'cream');cyl(table[0],.42,table[1],.08,.55,'wood');for(let i=0;i<4;i++){const a=i*Math.PI/2;chair(table[0]+Math.cos(a)*.83,table[1]+Math.sin(a)*.83,-a+Math.PI/2);}
+ const table=pt(523,344);furniture.outdoorTable(...table);
  // Kitchen, island and service storage.
  rect(558,419,614,428,.53,'wood',.86);rect(558,418,614,429,.985,'cream',.05);rect(617,386,627,428,.53,'wood',.86);rect(616,386,628,429,.985,'cream',.05);rect(566,391,592,403,.53,'wood',.86);rect(565,390,593,404,.985,'cream',.05);
  const hob=pt(584,424);box(hob[0],1.02,hob[1],.75,.025,.53,'metal');for(const x of [-.19,.19])for(const z of [-.14,.14])cyl(hob[0]+x,1.04,hob[1]+z,.095,.01,'metal');
@@ -130,9 +135,10 @@ export function buildHouse(scene,data,sky,lights){
  // Garden lights glow after sunset, with local illumination from Tidewater.
  const lamps=[];for(const [px,pz] of [[469,496],[469,538],[590,106],[590,150],[468,240],[468,290],[558,311],[551,359],[414,444],[628,446]]){const [x,z]=pt(px,pz);box(x,.4,z,.09,.7,.09,'metal');const lm=standard({name:'Luz del jardín',color:0xe4cf99,emissive:0xffd9a0,emissiveIntensity:.02});box(x,.78,z,.13,.12,.13,lm);lamps.push(lm);lights.add({position:new T.Vector3(x,.85,z),color:new T.Color(1,.72,.42),intensity:1.1,range:5,kind:'pathLight'});}
  for(const r of data.rooms.filter(r=>r.kind!=='exterior')){const [a,b,c,d]=r.rect;lights.add({position:new T.Vector3((a+c)/2,2.25,(b+d)/2),color:new T.Color(1,.78,.5),intensity:.55,range:6,kind:'window'});}
+ for(const solid of [solids,roofSolids])for(const surface of solid.build())add(surface.geometry,surface.material,surface.group);
  for(const {material,group,geos} of batches.values()){const geo=T.mergeGeometries(geos);if(!geo)throw Error('No se pudo unir geometría: '+material.name);geo.computeBoundingSphere();geo.computeBoundingBox();const mesh=new T.Mesh(geo,material);mesh.name=material.name;mesh.castShadow=material!==glass&&material!==poolMat;mesh.receiveShadow=true;mesh.staticVelocity=true;mesh.shadowStatic=true;if(material===glass)mesh.layers.set(2);group.add(mesh);}
  root.updateMatrixWorld(true);
- return {root,roofs,wallsGroup,collision,lamps,parts,pool:data.pool,materials};
+ return {root,roofs,wallsGroup,collision,lamps,parts,pool:data.pool,materials,furniture:furniture.records,surfaceAudit:{architecture:solids.stats,roofs:roofSolids.stats}};
 }
 
 export function makeVegetation(scene,data){

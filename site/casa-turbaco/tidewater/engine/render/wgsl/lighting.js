@@ -133,12 +133,11 @@ fn _shadowDepth( uv: vec2f, layer: i32 ) -> f32 {
 //  1. blocker search: average depth of the occluders around the pixel (raw depth loads, no sampler)
 //  2. penumbra width = occluder-receiver distance * sun diameter, converted to this cascade's texels
 //  3. percentage-closer filtering over that width
-// Both sample sets are Vogel disks rotated per pixel and per frame (interleaved gradient noise): the
-// TAA resolves the noise into a smooth gradient. Farther cascades: three's PCFShadowFilter (5 Vogel taps
-// of hardware comparisons over one texel, rotated per pixel).
+// Stable Vogel disks with bilinear hardware comparisons. Binary raw-depth
+// comparisons here produced speckled penumbrae that shimmered with the camera.
 const SHADOW_MAX_OCCLUDER_HEIGHT: f32 = 30.0; // m: search radius covers penumbrae of occluders up to this far above
 const SHADOW_SEARCH_TAPS: i32 = 8;
-const SHADOW_FILTER_TAPS: i32 = 12;
+const SHADOW_FILTER_TAPS: i32 = 24;
 
 fn sunShadowCascade( P: vec3f, N: vec3f, c: i32, noise: f32, pcfNoise: f32 ) -> f32 {
 	return _sunShadowCascade( P, N, c, noise, pcfNoise, true );
@@ -154,7 +153,7 @@ fn _sunShadowCascade( P: vec3f, N: vec3f, c: i32, noise: f32, pcfNoise: f32, pcs
 	let z = uvz.z - shadowParams.bias;
 	let texel = 1.0 / shadowParams.mapSize;
 	if ( pcss && u32( c ) < shadowParams.pcssCascades ) {
-		// moved every frame (Jimenez 2014): a noise pattern fixed on screen would never average out
+		// Fixed orientation; each filter tap performs bilinear PCF itself.
 		let phi = noise * TWO_PI;
 		let width = info.y * shadowParams.mapSize; // cascade width (m)
 		let range = info.w; // depth range (m)
@@ -178,8 +177,7 @@ fn _sunShadowCascade( P: vec3f, N: vec3f, c: i32, noise: f32, pcfNoise: f32, pcs
 		// 3. PCF over the penumbra
 		var sum = 0.0;
 		for ( var i = 0; i < SHADOW_FILTER_TAPS; i++ ) {
-			let d = _shadowDepth( uvz.xy + vogelDiskSample( i, SHADOW_FILTER_TAPS, phi + 1.7 ) * penumbraUV, c );
-			sum += select( 0.0, 1.0, z <= d );
+			sum += _shadowTap( uvz.xy + vogelDiskSample( i, SHADOW_FILTER_TAPS, phi + 1.7 ) * penumbraUV, c, z );
 		}
 		return sum / f32( SHADOW_FILTER_TAPS );
 	}
@@ -208,8 +206,10 @@ fn sunShadowPCF( P: vec3f, N: vec3f, pixel: vec2f ) -> f32 {
 fn _sunShadow( P: vec3f, N: vec3f, pixel: vec2f, pcss: bool ) -> f32 {
 	if ( shadowParams.enabled < 0.5 ) { return 1.0; }
 	let dist = dot( P - frame.cameraPos, - vec3f( frame.view[ 0 ][ 2 ], frame.view[ 1 ][ 2 ], frame.view[ 2 ][ 2 ] ) );
-	let noise = interleavedGradientNoise( pixel + f32( frame.frameIndex % 64u ) * 5.588238 );
-	let pcfNoise = interleavedGradientNoise( pixel );
+	// Architectural surfaces use a fixed filter kernel: changing its rotation
+	// every frame caused the penumbra to sparkle on floors and walls.
+	let noise = 0.381966;
+	let pcfNoise = 0.618034;
 	if ( shadowParams.fade < 0.5 ) {
 		let c = shadowCascadeOf( dist );
 		if ( c < 0 ) { return 1.0; }

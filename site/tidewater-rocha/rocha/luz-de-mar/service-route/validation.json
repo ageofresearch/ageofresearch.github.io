@@ -1,0 +1,39 @@
+{
+  "build": "tidewater-rocha-public-r23",
+  "route": "Port D1 \u2192 right-turn service descent \u2192 vestibule \u2192 separate port-side D2 \u2192 machinery aisle",
+  "basis": "Owner VID-20261017-WA0004, 23\u201344 seconds; local dimensions estimated",
+  "newEntranceDestination": "walk=service-entry",
+  "checks": {
+    "yachtTestFiles": 13,
+    "newBehaviorTests": 6,
+    "headroomSamples": 1515,
+    "sampleDescription": "303 center/lateral vertical rays on each of 5 stairs; threshold 1.62 source metres",
+    "actualKeyboardAndTouchCompleteRoundTrip": true,
+    "existingFourStairsBothDirectionsDesktopTouch": true,
+    "doorCloseObstructionGuards": true,
+    "byteExactDoorCloseRestore": true,
+    "navigationUiViewports": 4,
+    "newTextures": 0,
+    "newLightingOrReflectionPasses": 0,
+    "nativeGpuErrors": []
+  },
+  "cost": {
+    "beforeYachtTriangles": 170345,
+    "afterYachtTriangles": 177846,
+    "trianglesChangePercent": 4.403416595732201,
+    "beforeGeometryBytes": 8034790,
+    "afterGeometryBytes": 8372400,
+    "geometryChangePercent": 4.201852195265832,
+    "yachtBatches": 13,
+    "boardingBatches": 2,
+    "waterAaResolution": "unchanged",
+    "benchmarkLimit": "Cloud native render timings are not mobile FPS; extra geometry is explicitly counted."
+  },
+  "limits": [
+    "Video does not establish surveyed component dimensions, exact stair risers or hidden engineering layout.",
+    "Small tools, footwear, hardware and panel legends remain approximations.",
+    "D3 destination is not established and no room is invented behind it.",
+    "Browser navigation is tested with production controls in a non-rendering fixture; cloud Chromium supplies 16 sampled textures per stage versus 32 required for the complete map. Native images are isolated yacht/lake views.",
+    "Private original video and owner frames are excluded from public publication."
+  ]
+}

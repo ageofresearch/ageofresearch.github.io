@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r22",
+  "build": "tidewater-rocha-public-r23",
   "worlds": [
     "tidewater",
     "rocha"
@@ -111,12 +111,13 @@
     "walk": "walk=boarding",
     "boardingRoute": {
       "version": "owner-boarding-route-1",
-      "checkpoint": "Boarding junction and port outside passage",
-      "review": "rocha/luz-de-mar/boarding-route/",
+      "checkpoint": "Connected port service entrance, descending stair and machinery vestibule",
+      "review": "rocha/luz-de-mar/service-route/",
+      "serviceAccessVersion": "owner-port-service-route-1",
       "sharedLayoutAndCollision": true,
       "inboardGate": true,
       "reference": "Owner video, 12–24 seconds; fitted component dimensions",
-      "serviceDescentReconstruction": false,
+      "serviceDescentReconstruction": true,
       "additionalTextures": 0,
       "additionalRenderPasses": 0,
       "sourceAssetUnchanged": true
@@ -152,8 +153,11 @@
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
       "serviceAccess": {
-        "version": "owner-photo-layout-1",
-        "location": "aft watertight service door",
+        "version": "owner-port-service-route-1",
+        "location": "Port side door aft of tall louvres, right-turn descent, lower vestibule and separate watertight machinery door",
+        "exteriorWalk": "walk=service-entry",
+        "twoIndependentDoors": true,
+        "closedRaisedDoorDestination": "unverified",
         "keyboard": "E",
         "touch": "Open machinery door button",
         "walkThrough": true,
@@ -227,7 +231,9 @@
     },
     "stairs": {
       "version": "photo-guided-stairs-3",
-      "routes": 4,
+      "routes": 5,
+      "existingRoutes": 4,
+      "serviceRoute": "owner-port-service-route-1",
       "references": {
         "lobby": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Lobby_Low-res.jpg",
         "inside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Stairs_Low-res.jpg",

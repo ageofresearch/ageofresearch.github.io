@@ -38,7 +38,6 @@ export class Input {
 		} );
 		dom.addEventListener( 'contextmenu', ( e ) => e.preventDefault() );
 		window.addEventListener( 'mousemove', ( e ) => {
-			if ( this.externalLook ) return;
 
 			if ( this.locked || this.mouseDown || this.rightDown ) {
 

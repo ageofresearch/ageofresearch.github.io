@@ -14,11 +14,11 @@ import {Environment} from './tidewater/sky/Environment.js';
 import {PostFX} from './tidewater/post/PostFX.js';
 import {Underwater} from './tidewater/post/Underwater.js';
 import {AirHaze} from './tidewater/post/AirHaze.js';
-import {Input} from './tidewater/core/Input.js';
+import {Input} from './tidewater/core/Input.js?v=20261018-pointer-lock';
 import {FlyCamera} from './tidewater/player/FlyCamera.js';
 import {updateCameraVelocity} from './tidewater/post/CameraVelocity.js';
 import {buildHouse,makeVegetation,pt} from './model.js';
-import {ScenePointerControls} from './camera-controls.js';
+import {ScenePointerControls} from './camera-controls.js?v=20261018-pointer-lock';
 
 const $=s=>document.getElementById(s),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const state={mode:'orbit',time:16.2,interior:false,tour:false,ready:false,sound:false,orbit:{az:.72,el:.64,distance:46,target:new T.Vector3(0,0,-1)},transition:null};
@@ -30,20 +30,27 @@ function formatTime(t){const m=Math.round(t*60);return `${Math.floor(m/60).toStr
 function updateTime(t){state.time=t;$('sun-time').value=t;const s=formatTime(t);$('time-label').textContent=s;$('sun-output').textContent=s}
 function stopTour(){state.tour=false;$('tour-btn').classList.remove('active');$('tour-btn').setAttribute('aria-pressed','false');$('tour-text').textContent='Paseo'}
 function invalidateView(){if(!app?.post)return;app.post._hasPrev=false;app.post.motionBlur._hasPrev=false;app.post.taau._needsRestart=true;app.haze._histValid=false;app.clouds.resetHistory();}
+function cameraHint(){
+ if(state.mode==='top'){$('hint').textContent='RUEDA PARA ACERCAR · SELECCIONA UN ESPACIO EN EL PLANO';return;}
+ if(matchMedia('(pointer:coarse)').matches){$('hint').textContent=state.mode==='walk'?'DESLIZA PARA MIRAR · FLECHAS PARA CAMINAR':'DESLIZA PARA GIRAR · DOS DEDOS PARA ACERCAR';return;}
+ const locked=app?.controls?.locked;
+ $('hint').textContent=locked?(state.mode==='walk'?'W A S D PARA CAMINAR · MUEVE EL RATÓN PARA MIRAR · ESC PARA LIBERAR':'MUEVE EL RATÓN PARA GIRAR · RUEDA PARA ACERCAR · ESC PARA LIBERAR'):'CLIC EN LA ESCENA PARA CAPTURAR EL RATÓN · ESC PARA LIBERAR';
+}
 function setRoof(v){state.interior=v;if(app?.house)app.house.roofs.visible=!v;invalidateView();$('roof-text').textContent=v?'Ver cubiertas':'Ver interior';$('roof-btn').classList.toggle('active',v);$('roof-btn').setAttribute('aria-pressed',String(v))}
 function setMode(mode){if(!state.ready){toast('La escena se está preparando');return}stopTour();state.mode=mode;state.transition=null;document.body.classList.add('exploring');for(const m of ['orbit','walk','top'])$(m+'-btn').classList.toggle('active',mode===m);$('touch-controls').hidden=mode!=='walk'||!matchMedia('(pointer:coarse)').matches;
- if(mode==='walk'){const p=pt(469,490);const pos=new T.Vector3(p[0],1.68,p[1]);app.fly.setPose(pos,0,0);app.fly.velocity.set(0,0,0);state.walkSpawn=pos.clone();$('hint').textContent='W A S D PARA CAMINAR · MUEVE EL RATÓN PARA MIRAR · ESC PARA PAUSAR';$('view-name').textContent='A la altura de los ojos';toast('WASD para caminar · Mueve el ratón para mirar');}
+ if(mode==='walk'){const p=pt(469,490);const pos=new T.Vector3(p[0],1.68,p[1]);app.fly.setPose(pos,0,0);app.fly.velocity.set(0,0,0);state.walkSpawn=pos.clone();$('view-name').textContent='A la altura de los ojos';toast('Clic para capturar el ratón · WASD para caminar · Esc para liberar');}
  else if(mode==='top'){setRoof(true);state.orbit.target.set(0,0,0);state.orbit.distance=52;state.orbit.el=1.565;state.orbit.az=0;$('hint').textContent='RUEDA PARA ACERCAR · SELECCIONA UN ESPACIO EN EL PLANO';$('view-name').textContent='Planta arquitectónica';}
- else {state.orbit.target.set(0,0,-1);state.orbit.distance=46;state.orbit.el=.64;state.orbit.az=.72;$('hint').textContent='MUEVE EL RATÓN PARA GIRAR · RUEDA PARA ACERCAR · ESC PARA PAUSAR';$('view-name').textContent='Perspectiva del jardín';}invalidateView();
+ else {state.orbit.target.set(0,0,-1);state.orbit.distance=46;state.orbit.el=.64;state.orbit.az=.72;$('view-name').textContent='Perspectiva del jardín';}
+ app.controls.clearInput();if(mode==='top')app.controls.release();cameraHint();invalidateView();
 }
 function visitRoom(room){if(!state.ready){toast('La escena necesita WebGPU para recorrerla');return}setMode('walk');setRoof(true);const [a,b,c,d]=room.rect;let x=(a+c)/2,z=(b+d)/2;if(blocked(x,z)){const spots=[];for(let px=a+.3;px<c-.3;px+=.18)for(let pz=b+.3;pz<d-.3;pz+=.18)if(!blocked(px,pz))spots.push([px,pz,Math.hypot(px-x,pz-z)]);spots.sort((a,b)=>a[2]-b[2]);if(spots.length)[x,z]=spots[0];}app.fly.setPose(new T.Vector3(x,1.68,z),room.id==='principal'?-Math.PI/2:0,-.04);invalidateView();$('plan-panel').hidden=true;$('view-name').textContent=room.name;toast(room.name+' · '+room.area.toLocaleString('es-CO')+' m² aprox.');}
 for(const r of data.rooms){const b=document.createElement('button');b.innerHTML=`<span>${r.name}</span><small>${r.area.toLocaleString('es-CO')} m² aprox. ↗</small>`;b.onclick=()=>visitRoom(r);$('room-list').appendChild(b)}
-for(const m of ['orbit','walk','top'])$(m+'-btn').onclick=()=>setMode(m);
+for(const m of ['orbit','walk','top'])$(m+'-btn').onclick=()=>{setMode(m);if(m!=='top'&&!matchMedia('(pointer:coarse)').matches)app?.controls?.requestLock()};
 $('roof-btn').onclick=()=>{setRoof(!state.interior);document.body.classList.add('exploring')};
-$('map-btn').onclick=()=>$('plan-panel').hidden=!$('plan-panel').hidden;
-$('settings-btn').onclick=()=>{const v=!$('settings').hidden;$('settings').hidden=v;$('settings-btn').setAttribute('aria-expanded',String(!v))};
+$('map-btn').onclick=()=>{$('plan-panel').hidden=!$('plan-panel').hidden;if(!$('plan-panel').hidden)app?.controls?.release()};
+$('settings-btn').onclick=()=>{const v=!$('settings').hidden;$('settings').hidden=v;$('settings-btn').setAttribute('aria-expanded',String(!v));if(!v)app?.controls?.release()};
 for(const b of document.querySelectorAll('[data-close]'))b.onclick=()=>{$(b.dataset.close).hidden=true;if(b.dataset.close==='settings')$('settings-btn').setAttribute('aria-expanded','false')};
-$('info-btn').onclick=()=>$('info').showModal();$('info-close').onclick=()=>$('info').close();$('info').onclick=e=>{if(e.target===$('info')){const r=$('info').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('info').close()}};
+$('info-btn').onclick=()=>{app?.controls?.release();$('info').showModal()};$('info-close').onclick=()=>$('info').close();$('info').onclick=e=>{if(e.target===$('info')){const r=$('info').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('info').close()}};
 $('fullscreen-btn').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{toast('Usa la opción de pantalla completa de tu navegador')}};
 $('sun-time').oninput=e=>updateTime(Number(e.target.value));
 $('wind').oninput=e=>{if(app)G.windSpeed.value=Number(e.target.value);$('wind-output').textContent=e.target.value<3?'Calma':e.target.value<7?'Suave':'Intensa'};
@@ -51,7 +58,7 @@ $('cloud-cover').oninput=e=>{if(app)app.clouds.coverage.value=Number(e.target.va
 $('quality').onchange=e=>{if(app){const q=Number(e.target.value);app.post.setScale(q);app.clouds.resolutionScale=q;app.planting.veg.setQualityLevel(q<.7?.5:1);invalidateView();toast('Calidad gráfica actualizada')}};
 $('tour-btn').onclick=()=>{if(!state.ready)return;const start=!state.tour;if(start){setMode('orbit');state.tour=true;tourElapsed=0;$('tour-btn').classList.add('active');$('tour-btn').setAttribute('aria-pressed','true');$('tour-text').textContent='Pausar';$('view-name').textContent='Paseo por el jardín';document.body.classList.add('exploring');}else stopTour()};
 for(const b of document.querySelectorAll('[data-key]')){b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);app?.input.keys.add(b.dataset.key)};b.onpointerup=b.onpointercancel=()=>app?.input.keys.delete(b.dataset.key)}
-window.addEventListener('keydown',e=>{if(e.code==='Escape'){const open=!$('settings').hidden||!$('plan-panel').hidden||$('info').open;$('settings').hidden=true;$('plan-panel').hidden=true;stopTour();if(!open)app?.controls?.setEnabled(!app.controls.enabled);}if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;if(e.code==='KeyH'&&state.ready)setRoof(!state.interior);if(e.code==='KeyP')$('plan-panel').hidden=!$('plan-panel').hidden;if(e.code==='KeyR'&&state.ready)setMode('orbit')});
+window.addEventListener('keydown',e=>{if(e.code==='Escape'){$('settings').hidden=true;$('settings-btn').setAttribute('aria-expanded','false');$('plan-panel').hidden=true;stopTour();app?.controls?.release();}if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;if(e.code==='KeyH'&&state.ready)setRoof(!state.interior);if(e.code==='KeyP'){$('plan-panel').hidden=!$('plan-panel').hidden;if(!$('plan-panel').hidden)app?.controls?.release()}if(e.code==='KeyR'&&state.ready)setMode('orbit')});
 
 // Procedural garden soundscape. Starts only after an explicit click.
 $('sound-btn').onclick=async()=>{if(!audioCtx){audioCtx=new AudioContext();const buffer=audioCtx.createBuffer(1,audioCtx.sampleRate*3,audioCtx.sampleRate),v=buffer.getChannelData(0);for(let i=0;i<v.length;i++)v[i]=(Math.random()*2-1)*.15;const src=audioCtx.createBufferSource();src.buffer=buffer;src.loop=true;const filter=audioCtx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=650;const gain=audioCtx.createGain();gain.gain.value=.12;src.connect(filter).connect(gain).connect(audioCtx.destination);src.start();audioTimer=setInterval(()=>{if(audioCtx.state!=='running')return;const t=audioCtx.currentTime;for(let i=0;i<3;i++){const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(1800+Math.random()*1200,t+i*.15);o.frequency.exponentialRampToValueAtTime(3500+Math.random()*1100,t+i*.15+.07);g.gain.setValueAtTime(0,t+i*.15);g.gain.linearRampToValueAtTime(.012,t+i*.15+.015);g.gain.exponentialRampToValueAtTime(.0001,t+i*.15+.12);o.connect(g).connect(audioCtx.destination);o.start(t+i*.15);o.stop(t+i*.15+.13)}},3900)}state.sound=!state.sound;if(state.sound)await audioCtx.resume();else await audioCtx.suspend();$('sound-btn').textContent=state.sound?'Desactivar ♫':'Activar ♫';$('sound-btn').setAttribute('aria-pressed',String(state.sound))};
@@ -105,14 +112,15 @@ async function init(){
  post.aaMode='smaa';post.aoPass.useTemporalFiltering=false;post.setScale(1);
  app.input=new Input(engine.domElement);app.fly=new FlyCamera(camera,engine.domElement,app.input);app.fly.speed=2.5;
  app.controls=new ScenePointerControls({canvas:engine.canvas,input:app.input,state,
-  isBlocked:()=>!$('settings').hidden||!$('plan-panel').hidden||$('info').open,
+  isBlocked:()=>!state.ready||!$('settings').hidden||!$('plan-panel').hidden||$('info').open,
   onInteract:()=>{document.body.classList.add('exploring');stopTour()},
-  onPauseChange:on=>{$('look-btn').textContent=on?'Activado':'Pausado';$('look-btn').setAttribute('aria-pressed',String(on));if(state.mode!=='top')$('hint').textContent=on?'MUEVE EL RATÓN PARA MIRAR · ESC PARA PAUSAR':'CÁMARA PAUSADA · CLIC EN EL MAPA PARA VOLVER A MIRAR';}
+  onLockChange:locked=>{$('look-btn').textContent=locked?'Liberar':'Entrar';$('look-btn').setAttribute('aria-pressed',String(locked));cameraHint()},
+  onLockError:()=>toast('No se pudo capturar el ratón. Haz clic de nuevo en la escena para entrar.')
  });
- $('look-btn').onclick=()=>app.controls.setEnabled(!app.controls.enabled);
+ $('look-btn').onclick=()=>{if(app.controls.locked)app.controls.release();else{$('settings').hidden=true;$('settings-btn').setAttribute('aria-expanded','false');app.controls.requestLock()}};
  engine.canvas.addEventListener('wheel',e=>{if(state.mode!=='walk'){state.orbit.distance=Math.max(5,Math.min(80,state.orbit.distance*Math.exp(e.deltaY*.001)));document.body.classList.add('exploring');stopTour();}},{passive:true});
  progress(.65,'Afinando luz, sombras y reflejos…');post._build();post._outW=0;await GPU.pipelinesReady();
- function frame(dt){GPU.beginFrame();FrameUniforms.fields.frameIndex.value=GPU.frame;G.time.value+=dt;G.dt.value=dt;
+ function frame(dt){GPU.beginFrame();FrameUniforms.fields.frameIndex.value=GPU.frame;G.time.value+=dt;G.dt.value=dt;app.controls.update();
   if(state.tour){tourElapsed+=dt;state.orbit.az=.72+tourElapsed*.045;state.orbit.el=.52+Math.sin(tourElapsed*.055)*.14;state.orbit.distance=39+Math.sin(tourElapsed*.04)*4;}
   if(state.mode==='walk'){
    const before=camera.position.clone();app.fly.update(dt);const after=camera.position.clone();camera.position.y=1.68;
@@ -127,7 +135,7 @@ async function init(){
  }
  app.frame=frame;
  engine.meshRenderer.precompiling=true;frame(1/60);engine.meshRenderer.precompiling=false;progress(.84,'Preparando el recorrido…');await GPU.pipelinesReady();await GPU.queue.onSubmittedWorkDone();frame(1/60);await GPU.pipelinesReady();
- progress(1,'Bienvenido a Casa Turbaco.');state.ready=true;setRoof(false);engine.start(dt=>{try{frame(dt)}catch(e){engine.stop();console.error(e);toast('La escena se interrumpió. Recarga para volver a entrar.')}});
+ progress(1,'Bienvenido a Casa Turbaco.');state.ready=true;setRoof(false);cameraHint();engine.start(dt=>{try{frame(dt)}catch(e){engine.stop();console.error(e);toast('La escena se interrumpió. Recarga para volver a entrar.')}});
  $('loading').classList.add('done');setTimeout(()=>$('loading').hidden=true,1100);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){engine.stop();audioCtx?.suspend();}else{engine.start(dt=>frame(dt));if(state.sound)audioCtx?.resume()}});
 }

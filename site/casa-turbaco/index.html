@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#183b31">
+  <title>Casa Turbaco · Un refugio tropical</title>
+  <meta name="description" content="Una casa entre jardines. Explora el plano de Casa Turbaco en un mundo tropical de 50 × 50 metros, con el motor de Tidewater.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%231b4337'/%3E%3Cpath d='M9 23 20 12l11 11M14 20v11h12V20' fill='none' stroke='%23efe9d8' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app" aria-label="Escena 3D de Casa Turbaco"></main>
+<div id="loading"><div class="load-brand">T / C</div><p class="eyebrow">TIDEWATER · CASA TURBACO</p><h1>Un refugio<br><i>entre jardines.</i></h1><p id="load-text">Preparando el paisaje…</p><div class="load-track"><div id="load-bar"></div></div><span>50 × 50 metros de calma</span></div>
+<header>
+ <a class="brand" href="./" aria-label="Casa Turbaco, inicio"><span class="brand-mark">T/C</span><span>CASA TURBACO<small>UN REFUGIO TROPICAL</small></span></a>
+ <div class="top-right"><span class="live"><i></i> MUNDO VIVO</span><button id="info-btn" class="icon-btn" aria-label="Acerca de la recreación">i</button><button id="fullscreen-btn" class="icon-btn" aria-label="Pantalla completa">⤢</button></div>
+</header>
+<section class="scene-caption"><p class="eyebrow">TURBACO, COLOMBIA</p><h1>La casa.<br><i>El jardín. La calma.</i></h1><p>Arquitectura que se abre al trópico.</p><div class="caption-rule"></div><span>ESTUDIO DEL PLANO / 01</span></section>
+<div class="scene-meta"><span id="view-name">Perspectiva del jardín</span><span>50 × 50 m <b>·</b> Altura 2,70 m</span></div>
+<aside class="minimap" aria-label="Mapa y posición"><button id="map-btn" aria-label="Abrir plano original"><canvas id="mini" width="230" height="230"></canvas><span>EXPLORAR PLANO <b>↗</b></span></button></aside>
+<div id="space-label" hidden></div>
+<nav class="toolbar" aria-label="Controles de la escena">
+ <div class="mode-group"><button id="orbit-btn" class="active" title="Arrastra para girar; rueda para acercar"><span>◉</span> Orbitar</button><button id="walk-btn" title="WASD para caminar; arrastra para mirar"><span>♧</span> Recorrer</button><button id="top-btn"><span>⊞</span> Planta</button></div>
+ <span class="divider"></span><button id="roof-btn" aria-pressed="false"><span>⌂</span><span id="roof-text">Ver interior</span></button><button id="tour-btn" aria-pressed="false"><span>▷</span><span id="tour-text">Paseo</span></button>
+ <span class="divider"></span><button id="settings-btn" aria-expanded="false"><span>☀</span><span id="time-label">16:12</span></button>
+</nav>
+<div class="bottom-hint" id="hint">ARRASTRA PARA GIRAR <b>·</b> RUEDA PARA ACERCAR</div>
+<div class="corner-note">HECHO CON TIDEWATER <span>↗</span></div>
+<section class="settings panel" id="settings" hidden aria-label="Atmósfera">
+ <div class="panel-top"><h2>La atmósfera</h2><button data-close="settings" aria-label="Cerrar atmósfera">×</button></div>
+ <label for="sun-time">Hora del día <output id="sun-output">16:12</output></label><input type="range" id="sun-time" min="7" max="20" step=".05" value="16.2">
+ <div class="range-labels"><span>Amanecer</span><span>Atardecer</span><span>Noche</span></div>
+ <label for="wind">Brisa tropical <output id="wind-output">Suave</output></label><input type="range" id="wind" min="0" max="12" step=".5" value="4">
+ <label for="cloud-cover">Nubes <output id="cloud-output">Parcial</output></label><input type="range" id="cloud-cover" min="0.05" max="0.85" step="0.01" value="0.38">
+ <div class="setting-row"><span>Sonidos del jardín</span><button id="sound-btn" aria-pressed="false">Activar ♫</button></div>
+ <label for="quality">Calidad gráfica</label><select id="quality"><option value=".65">Ligera</option><option value=".85" selected>Equilibrada</option><option value="1">Alta</option></select>
+</section>
+<section id="plan-panel" class="drawer" hidden aria-label="Análisis del plano">
+ <div class="panel-top"><div><p class="eyebrow">DEL PAPEL AL PAISAJE</p><h2>La planta del modelo.</h2></div><button data-close="plan-panel" aria-label="Cerrar plano">×</button></div>
+ <div class="plan-image-link"><canvas id="public-plan" width="720" height="720" aria-label="Planta esquemática del modelo 3D"></canvas></div>
+ <p class="plan-tip">Selecciona un espacio para visitarlo.</p><div id="room-list"></div>
+ <details><summary>Cómo se interpretó el plano</summary><p>Se conservan las coordenadas del trazado vectorial, la piscina en L, las alas de habitaciones, los espacios sociales y el bloque de servicio. El lote inclinado de aproximadamente 25 × 45 m se sitúa dentro de un mapa de 50 × 50 m, sin estirarlo.</p><p>Altura exterior de las construcciones: 2,70 m. El plano no incluye cortes, fachadas ni topografía: cubiertas, ventanas, acabados, mobiliario volumétrico y terreno plano son interpretaciones visuales. Las áreas indicadas son aproximaciones de los recintos, sin descontar todos los muros.</p><p>La nomenclatura conserva Hab. 1, 2, 4 y 5; el documento no identifica una Hab. 3.</p></details>
+</section>
+<dialog id="info"><button class="dialog-close" id="info-close" aria-label="Cerrar">×</button><p class="eyebrow">CASA TURBACO / TIDEWATER</p><h2>Un plano.<br><i>Un pequeño mundo.</i></h2><p>Una recreación navegable de tu casa, en un terreno de 2.500 m². Muros, circulaciones y espacios se trazaron sobre el PDF original.</p><p>El motor WebGPU, la atmósfera física, las nubes volumétricas, las palmeras y plantas con viento, la cámara libre y el procesamiento de imagen provienen del código de Tidewater.</p><p class="fine">La arquitectura sin información de alzado es una interpretación. Esta visualización no sustituye documentación constructiva.</p><a href="https://github.com/dgreenheck/tidewater" target="_blank" rel="noopener">Código de referencia ↗</a><a href="TIDEWATER-LICENSE.txt" target="_blank" rel="noopener">Licencia MIT ↗</a></dialog>
+<div class="touch-controls" id="touch-controls" hidden><div><button data-key="KeyW" aria-label="Avanzar">↑</button><div><button data-key="KeyA" aria-label="Izquierda">←</button><button data-key="KeyS" aria-label="Retroceder">↓</button><button data-key="KeyD" aria-label="Derecha">→</button></div></div></div>
+<div id="toast" role="status"></div>
+<script type="module" src="main.js"></script>
+</body></html>

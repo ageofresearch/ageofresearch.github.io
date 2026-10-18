@@ -1,0 +1,77 @@
+{
+  "scope": "Blender r110 to real-time website presentation; full VR-reference reconstruction remains in progress.",
+  "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+  "glb_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
+  "runtime_sha256": "8a72b593f4c0d3f14655af4e4bebd827b4ac069c2b81048769aafdd4d1638177",
+  "lightmaps_manifest_sha256": "0bb1455b5f98128c56d58329b4b921c7e0f4233d6c629bb0af5511ecf734f9f6",
+  "packed_companion_sha256": "2fdefca548aa7dfb1ec74fb29b5569e587be877e3ba436f2bcc22e13f58943fb",
+  "matched_views_rendered": 55,
+  "matched_views_visually_inspected": 55,
+  "browser_errors": 0,
+  "failed_requests": 0,
+  "navigation": {
+    "destinations": 43,
+    "routes_passed": 44,
+    "stairs_passed": 11,
+    "scope": "Graphics disabled during these fixed-timestep input/navigation checks; normal startup and appearance verified by the fitted-camera rendering pass."
+  },
+  "controls": {
+    "W_metres": 0.23001066338028756,
+    "Shift_W_metres": 0.4400062607638422,
+    "F_fly": true,
+    "F_walk": true,
+    "R_opens_door": true,
+    "E_returns": true,
+    "touch_metres": 0.38334331213523554,
+    "touch_keys_released": true
+  },
+  "display_pass_isolation": {
+    "ball": {
+      "selected_yacht_pixels": 0,
+      "changed_pixels": 0,
+      "outside_mask_max_error": 0,
+      "outside_mask_changed_pixels": 0
+    },
+    "quay": {
+      "selected_yacht_pixels": 12344,
+      "changed_pixels": 12342,
+      "outside_mask_max_error": 0,
+      "outside_mask_changed_pixels": 0
+    },
+    "yacht": {
+      "selected_yacht_pixels": 18312,
+      "changed_pixels": 18312,
+      "outside_mask_max_error": 0,
+      "outside_mask_changed_pixels": 0
+    }
+  },
+  "preservation": {
+    "original_marina_files_byte_unchanged": 31,
+    "changed_original_files": [
+      "index.html",
+      "marina.html"
+    ],
+    "original_assets_retained": true,
+    "soccer_ball_pixels_changed_in_isolation_check": 0
+  },
+  "packed_companion": {
+    "passed": true,
+    "source_native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+    "companion_sha256": "2fdefca548aa7dfb1ec74fb29b5569e587be877e3ba436f2bcc22e13f58943fb",
+    "geometry_objects": 271,
+    "native_material_graphs": 103,
+    "native_lights": 155,
+    "packed_images": 113,
+    "viewport_originals_hidden": 5211,
+    "geometry_material_lighting_equal_to_prepared": true
+  },
+  "pixel_identical": false,
+  "vr_reference_reconstruction_finished": false,
+  "known_differences": [
+    "Baked indirect lighting and edge shading",
+    "Cloth colors and residual bake grain",
+    "Glossy reflections and refraction",
+    "Live marina remains visible through windows"
+  ],
+  "device_frame_rate_certified": false
+}

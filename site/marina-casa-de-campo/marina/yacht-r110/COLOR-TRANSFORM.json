@@ -1,0 +1,15 @@
+{
+  "size": 65,
+  "min_ev": -12.47393,
+  "max_ev": 12.5260688117,
+  "format": "little endian float16 RGB; red fastest, then green, then blue",
+  "output": "display encoded sRGB",
+  "config": "/workspace/yacht-1667308298/tools/blender-4.3.2-linux-x64/4.3/datafiles/colormanagement/config.ocio",
+  "view": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "interpolation_error_8bit": {
+    "mean": 0.16333291966545363,
+    "p99": 1.5271767063051516,
+    "max": 8.250754636369061
+  }
+}

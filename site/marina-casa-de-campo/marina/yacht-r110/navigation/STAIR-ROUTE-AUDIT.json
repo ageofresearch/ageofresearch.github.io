@@ -1,0 +1,5809 @@
+{
+  "native": "/workspace/yacht-1667308298/rebuild-02/versions/Grande_36M_r110.blend",
+  "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+  "method": "Every tread and both landings queried; each adjacent route must reach its endpoint and remain within the individual flight bounds. Height tolerance is the configured 0.20 m climb plus one 0.025 m voxel; browser walking separately resolves the real floor triangles.",
+  "nav_height_tolerance_m": 0.225,
+  "flights": [
+    {
+      "id": "guest-lower",
+      "expected_treads": 14,
+      "actual_treads": 14,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            2.1,
+            0.2,
+            0.225
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.024999999999999994,
+          "nearest": {
+            "x": 2.0999999046325684,
+            "y": 0.25,
+            "z": -0.20000000298023224
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 1",
+          "number": 1,
+          "p": [
+            2.438068151473999,
+            -0.5626673996448517,
+            0.3678571283817291
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08525800704956055,
+          "nearest": {
+            "x": 2.438068151473999,
+            "y": 0.4531151354312897,
+            "z": 0.5626673698425293
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 2",
+          "number": 2,
+          "p": [
+            2.364905834197998,
+            -0.43062079697847366,
+            0.5357142686843872
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0794573426246643,
+          "nearest": {
+            "x": 2.364905834197998,
+            "y": 0.6151716113090515,
+            "z": 0.43062078952789307
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 3",
+          "number": 3,
+          "p": [
+            2.205508768558502,
+            -0.33951734006404877,
+            0.7035714387893677
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.009344220161437988,
+          "nearest": {
+            "x": 2.2055087089538574,
+            "y": 0.7129156589508057,
+            "z": 0.33951735496520996
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 4",
+          "number": 4,
+          "p": [
+            1.9843279123306274,
+            -0.30272528156638145,
+            0.8714285492897034
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.015298664569854736,
+          "nearest": {
+            "x": 1.9843279123306274,
+            "y": 0.8867272138595581,
+            "z": 0.30272528529167175
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 5",
+          "number": 5,
+          "p": [
+            1.6156720519065857,
+            -0.30272528156638145,
+            1.039285659790039
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.053420186042785645,
+          "nearest": {
+            "x": 1.6156721115112305,
+            "y": 1.0927058458328247,
+            "z": 0.30272528529167175
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 6",
+          "number": 6,
+          "p": [
+            1.3944913148880005,
+            -0.3395173456519842,
+            1.2071428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01785719394683838,
+          "nearest": {
+            "x": 1.3944913148880005,
+            "y": 1.225000023841858,
+            "z": 0.33951735496520996
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 7",
+          "number": 7,
+          "p": [
+            1.2350941896438599,
+            -0.43062078952789307,
+            1.375
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08663427829742432,
+          "nearest": {
+            "x": 1.2350941896438599,
+            "y": 1.4616342782974243,
+            "z": 0.43062078952789307
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 8",
+          "number": 8,
+          "p": [
+            1.1619319021701813,
+            -0.5626673698425293,
+            1.5428571701049805
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.007142782211303711,
+          "nearest": {
+            "x": 1.1619318723678589,
+            "y": 1.5499999523162842,
+            "z": 0.5626673698425293
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 9",
+          "number": 9,
+          "p": [
+            1.1500000059604645,
+            -0.7839999794960022,
+            1.710714340209961
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01461482048034668,
+          "nearest": {
+            "x": 1.149999976158142,
+            "y": 1.6960995197296143,
+            "z": 0.7839999794960022
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 10",
+          "number": 10,
+          "p": [
+            1.1500000059604645,
+            -0.9519999921321869,
+            1.8785713911056519
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.019306302070617676,
+          "nearest": {
+            "x": 1.149999976158142,
+            "y": 1.8592650890350342,
+            "z": 0.9520000219345093
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 11",
+          "number": 11,
+          "p": [
+            1.1500000059604645,
+            -1.1200000047683716,
+            2.046428680419922
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.004647016525268555,
+          "nearest": {
+            "x": 1.149999976158142,
+            "y": 2.0510756969451904,
+            "z": 1.1200000047683716
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 12",
+          "number": 12,
+          "p": [
+            1.1500000059604645,
+            -1.2879999876022339,
+            2.2142856121063232
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.06817221641540527,
+          "nearest": {
+            "x": 1.149999976158142,
+            "y": 2.2824578285217285,
+            "z": 1.2879999876022339
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 13",
+          "number": 13,
+          "p": [
+            1.1500000059604645,
+            -1.4559999704360962,
+            2.3821427822113037
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01841282844543457,
+          "nearest": {
+            "x": 1.149999976158142,
+            "y": 2.4005556106567383,
+            "z": 1.4559999704360962
+          }
+        },
+        {
+          "object": "Guest lower to main oak tread 14",
+          "number": 14,
+          "p": [
+            1.1500000059604645,
+            -1.6239999532699585,
+            2.549999952316284
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.012222051620483398,
+          "nearest": {
+            "x": 1.149999976158142,
+            "y": 2.537777900695801,
+            "z": 1.6239999532699585
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            1.85,
+            -2.1,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.025000047683715998,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 2.575000047683716,
+            "z": 2.0999999046325684
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Guest lower to main oak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.0999999046325684,
+              "y": 0.25,
+              "z": -0.20000000298023224
+            },
+            {
+              "x": 1.8400001525878906,
+              "y": 0.25,
+              "z": -0.22499990463256836
+            },
+            {
+              "x": 1.6299991607666016,
+              "y": 0.25,
+              "z": -0.22499990463256836
+            },
+            {
+              "x": 1.4200000762939453,
+              "y": 0.25,
+              "z": -0.19000005722045898
+            },
+            {
+              "x": 1.210000991821289,
+              "y": 0.25,
+              "z": -0.11999988555908203
+            },
+            {
+              "x": 1,
+              "y": 0.25,
+              "z": 0.05500030517578125
+            },
+            {
+              "x": 0.7900009155273438,
+              "y": 0.25,
+              "z": 0.2650003433227539
+            },
+            {
+              "x": 0.7199993133544922,
+              "y": 0.25,
+              "z": 0.4050002098083496
+            },
+            {
+              "x": 0.6849994659423828,
+              "y": 0.25,
+              "z": 0.47499990463256836
+            },
+            {
+              "x": 0.6849994659423828,
+              "y": 0.25,
+              "z": 1.1050000190734863
+            },
+            {
+              "x": 0.7900009155273438,
+              "y": 0.25,
+              "z": 1.2100000381469727
+            },
+            {
+              "x": 1.385000228881836,
+              "y": 0.25,
+              "z": 1.315000057220459
+            },
+            {
+              "x": 1.5249996185302734,
+              "y": 0.25,
+              "z": 1.315000057220459
+            },
+            {
+              "x": 2.2250003814697266,
+              "y": 0.25,
+              "z": 0.8600001335144043
+            },
+            {
+              "x": 2.3299999237060547,
+              "y": 0.25,
+              "z": 0.755000114440918
+            },
+            {
+              "x": 2.438068151473999,
+              "y": 0.4531151354312897,
+              "z": 0.5626673698425293
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 1",
+          "to": "Guest lower to main oak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.438068151473999,
+              "y": 0.4531151354312897,
+              "z": 0.5626673698425293
+            },
+            {
+              "x": 2.364905834197998,
+              "y": 0.6151716113090515,
+              "z": 0.43062078952789307
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 2",
+          "to": "Guest lower to main oak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.364905834197998,
+              "y": 0.6151716113090515,
+              "z": 0.43062078952789307
+            },
+            {
+              "x": 2.2055087089538574,
+              "y": 0.7129156589508057,
+              "z": 0.33951735496520996
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 3",
+          "to": "Guest lower to main oak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.2055087089538574,
+              "y": 0.7129156589508057,
+              "z": 0.33951735496520996
+            },
+            {
+              "x": 1.9843279123306274,
+              "y": 0.8867272138595581,
+              "z": 0.30272528529167175
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 4",
+          "to": "Guest lower to main oak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.9843279123306274,
+              "y": 0.8867272138595581,
+              "z": 0.30272528529167175
+            },
+            {
+              "x": 1.6156721115112305,
+              "y": 1.0927058458328247,
+              "z": 0.30272528529167175
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 5",
+          "to": "Guest lower to main oak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.6156721115112305,
+              "y": 1.0927058458328247,
+              "z": 0.30272528529167175
+            },
+            {
+              "x": 1.3944913148880005,
+              "y": 1.225000023841858,
+              "z": 0.33951735496520996
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 6",
+          "to": "Guest lower to main oak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.3944913148880005,
+              "y": 1.225000023841858,
+              "z": 0.33951735496520996
+            },
+            {
+              "x": 1.2350941896438599,
+              "y": 1.4616342782974243,
+              "z": 0.43062078952789307
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 7",
+          "to": "Guest lower to main oak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.2350941896438599,
+              "y": 1.4616342782974243,
+              "z": 0.43062078952789307
+            },
+            {
+              "x": 1.1619318723678589,
+              "y": 1.5499999523162842,
+              "z": 0.5626673698425293
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 8",
+          "to": "Guest lower to main oak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.1619318723678589,
+              "y": 1.5499999523162842,
+              "z": 0.5626673698425293
+            },
+            {
+              "x": 1.149999976158142,
+              "y": 1.6960995197296143,
+              "z": 0.7839999794960022
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 9",
+          "to": "Guest lower to main oak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.149999976158142,
+              "y": 1.6960995197296143,
+              "z": 0.7839999794960022
+            },
+            {
+              "x": 1.149999976158142,
+              "y": 1.8592650890350342,
+              "z": 0.9520000219345093
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 10",
+          "to": "Guest lower to main oak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.149999976158142,
+              "y": 1.8592650890350342,
+              "z": 0.9520000219345093
+            },
+            {
+              "x": 1.149999976158142,
+              "y": 2.0510756969451904,
+              "z": 1.1200000047683716
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 11",
+          "to": "Guest lower to main oak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.149999976158142,
+              "y": 2.0510756969451904,
+              "z": 1.1200000047683716
+            },
+            {
+              "x": 1.149999976158142,
+              "y": 2.2824578285217285,
+              "z": 1.2879999876022339
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 12",
+          "to": "Guest lower to main oak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.149999976158142,
+              "y": 2.2824578285217285,
+              "z": 1.2879999876022339
+            },
+            {
+              "x": 1.149999976158142,
+              "y": 2.4005556106567383,
+              "z": 1.4559999704360962
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 13",
+          "to": "Guest lower to main oak tread 14",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.149999976158142,
+              "y": 2.4005556106567383,
+              "z": 1.4559999704360962
+            },
+            {
+              "x": 1.149999976158142,
+              "y": 2.537777900695801,
+              "z": 1.6239999532699585
+            }
+          ]
+        },
+        {
+          "from": "Guest lower to main oak tread 14",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.149999976158142,
+              "y": 2.537777900695801,
+              "z": 1.6239999532699585
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 2.575000047683716,
+              "z": 2.0999999046325684
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "guest-upper",
+      "expected_treads": 15,
+      "actual_treads": 15,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            2.85,
+            -1.8,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.025000047683715998,
+          "nearest": {
+            "x": 2.8499999046325684,
+            "y": 2.575000047683716,
+            "z": 1.7999999523162842
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 1",
+          "number": 1,
+          "p": [
+            2.3175758123397827,
+            -1.7882043719291687,
+            2.7133333683013916
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13785839080810547,
+          "nearest": {
+            "x": 2.3175759315490723,
+            "y": 2.851191759109497,
+            "z": 1.7882044315338135
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 2",
+          "number": 2,
+          "p": [
+            2.096077859401703,
+            -1.7141398191452026,
+            2.876666784286499
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07194995880126953,
+          "nearest": {
+            "x": 2.0960779190063477,
+            "y": 2.9486167430877686,
+            "z": 1.7141398191452026
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 3",
+          "number": 3,
+          "p": [
+            1.9358601570129395,
+            -1.5539221167564392,
+            3.0399999618530273
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.06520628929138184,
+          "nearest": {
+            "x": 1.9358601570129395,
+            "y": 3.105206251144409,
+            "z": 1.553922176361084
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 4",
+          "number": 4,
+          "p": [
+            1.8617957830429077,
+            -1.3324242234230042,
+            3.2033333778381348
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.021666765213012695,
+          "nearest": {
+            "x": 1.8617957830429077,
+            "y": 3.2250001430511475,
+            "z": 1.3324241638183594
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 5",
+          "number": 5,
+          "p": [
+            1.850000023841858,
+            -1.0600000023841858,
+            3.366666555404663
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.05913853645324707,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 3.42580509185791,
+            "z": 1.059999942779541
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 6",
+          "number": 6,
+          "p": [
+            1.850000023841858,
+            -0.8800000250339508,
+            3.5299999713897705
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01909494400024414,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 3.5490949153900146,
+            "z": 0.8799999952316284
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 7",
+          "number": 7,
+          "p": [
+            1.850000023841858,
+            -0.7000000178813934,
+            3.693333387374878
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.05195903778076172,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 3.7452924251556396,
+            "z": 0.7000000476837158
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 8",
+          "number": 8,
+          "p": [
+            1.850000023841858,
+            -0.5200000107288361,
+            3.8566665649414062
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08732724189758301,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 3.9439938068389893,
+            "z": 0.5199999809265137
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 9",
+          "number": 9,
+          "p": [
+            1.850000023841858,
+            -0.3400000035762787,
+            4.019999980926514
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.1046147346496582,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 4.124614715576172,
+            "z": 0.3400000035762787
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 10",
+          "number": 10,
+          "p": [
+            1.850000023841858,
+            -0.1600000001490116,
+            4.183333396911621
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11147689819335938,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 4.2948102951049805,
+            "z": 0.1599999964237213
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 11",
+          "number": 11,
+          "p": [
+            1.850000023841858,
+            0.019999999552965164,
+            4.3466668128967285
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10624885559082031,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 4.452915668487549,
+            "z": -0.019999999552965164
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 12",
+          "number": 12,
+          "p": [
+            1.850000023841858,
+            0.19999999552965164,
+            4.510000228881836
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10183238983154297,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 4.611832618713379,
+            "z": -0.19999998807907104
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 13",
+          "number": 13,
+          "p": [
+            1.850000023841858,
+            0.3799999952316284,
+            4.673333168029785
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11631011962890625,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 4.789643287658691,
+            "z": -0.3799999952316284
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 14",
+          "number": 14,
+          "p": [
+            1.850000023841858,
+            0.5599999874830246,
+            4.836666584014893
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11894607543945312,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 4.955612659454346,
+            "z": -0.5600000023841858
+          }
+        },
+        {
+          "object": "Guest main to upper oak tread 15",
+          "number": 15,
+          "p": [
+            1.850000023841858,
+            0.7399999797344208,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0443878173828125,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 5.0443878173828125,
+            "z": -0.7400000095367432
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            1.85,
+            1.3,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": 1.850000023841858,
+            "y": 5.025000095367432,
+            "z": -1.2999999523162842
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Guest main to upper oak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.8499999046325684,
+              "y": 2.575000047683716,
+              "z": 1.7999999523162842
+            },
+            {
+              "x": 2.3175759315490723,
+              "y": 2.851191759109497,
+              "z": 1.7882044315338135
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 1",
+          "to": "Guest main to upper oak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.3175759315490723,
+              "y": 2.851191759109497,
+              "z": 1.7882044315338135
+            },
+            {
+              "x": 2.0960779190063477,
+              "y": 2.9486167430877686,
+              "z": 1.7141398191452026
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 2",
+          "to": "Guest main to upper oak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.0960779190063477,
+              "y": 2.9486167430877686,
+              "z": 1.7141398191452026
+            },
+            {
+              "x": 1.9358601570129395,
+              "y": 3.105206251144409,
+              "z": 1.553922176361084
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 3",
+          "to": "Guest main to upper oak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.9358601570129395,
+              "y": 3.105206251144409,
+              "z": 1.553922176361084
+            },
+            {
+              "x": 1.8617957830429077,
+              "y": 3.2250001430511475,
+              "z": 1.3324241638183594
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 4",
+          "to": "Guest main to upper oak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.8617957830429077,
+              "y": 3.2250001430511475,
+              "z": 1.3324241638183594
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 3.42580509185791,
+              "z": 1.059999942779541
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 5",
+          "to": "Guest main to upper oak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 3.42580509185791,
+              "z": 1.059999942779541
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 3.5490949153900146,
+              "z": 0.8799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 6",
+          "to": "Guest main to upper oak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 3.5490949153900146,
+              "z": 0.8799999952316284
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 3.7452924251556396,
+              "z": 0.7000000476837158
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 7",
+          "to": "Guest main to upper oak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 3.7452924251556396,
+              "z": 0.7000000476837158
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 3.9439938068389893,
+              "z": 0.5199999809265137
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 8",
+          "to": "Guest main to upper oak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 3.9439938068389893,
+              "z": 0.5199999809265137
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 4.124614715576172,
+              "z": 0.3400000035762787
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 9",
+          "to": "Guest main to upper oak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 4.124614715576172,
+              "z": 0.3400000035762787
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 4.2948102951049805,
+              "z": 0.1599999964237213
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 10",
+          "to": "Guest main to upper oak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 4.2948102951049805,
+              "z": 0.1599999964237213
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 4.452915668487549,
+              "z": -0.019999999552965164
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 11",
+          "to": "Guest main to upper oak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 4.452915668487549,
+              "z": -0.019999999552965164
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 4.611832618713379,
+              "z": -0.19999998807907104
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 12",
+          "to": "Guest main to upper oak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 4.611832618713379,
+              "z": -0.19999998807907104
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 4.789643287658691,
+              "z": -0.3799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 13",
+          "to": "Guest main to upper oak tread 14",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 4.789643287658691,
+              "z": -0.3799999952316284
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 4.955612659454346,
+              "z": -0.5600000023841858
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 14",
+          "to": "Guest main to upper oak tread 15",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 4.955612659454346,
+              "z": -0.5600000023841858
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 5.0443878173828125,
+              "z": -0.7400000095367432
+            }
+          ]
+        },
+        {
+          "from": "Guest main to upper oak tread 15",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.850000023841858,
+              "y": 5.0443878173828125,
+              "z": -0.7400000095367432
+            },
+            {
+              "x": 1.850000023841858,
+              "y": 5.025000095367432,
+              "z": -1.2999999523162842
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "cockpit-upper",
+      "expected_treads": 14,
+      "actual_treads": 14,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            -10.25,
+            2.65,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0016765117645265448,
+          "nearest": {
+            "x": -10.25,
+            "y": 2.5516765117645264,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 1",
+          "number": 1,
+          "p": [
+            -9.9375,
+            2.6500000953674316,
+            2.7250001430511475
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0715935230255127,
+          "nearest": {
+            "x": -9.9375,
+            "y": 2.79659366607666,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 2",
+          "number": 2,
+          "p": [
+            -9.8125,
+            2.6500000953674316,
+            2.9000000953674316
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08267998695373535,
+          "nearest": {
+            "x": -9.8125,
+            "y": 2.982680082321167,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 3",
+          "number": 3,
+          "p": [
+            -9.6875,
+            2.6500000953674316,
+            3.075000047683716
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10239386558532715,
+          "nearest": {
+            "x": -9.6875,
+            "y": 3.177393913269043,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 4",
+          "number": 4,
+          "p": [
+            -9.5625,
+            2.6500000953674316,
+            3.25
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13614201545715332,
+          "nearest": {
+            "x": -9.5625,
+            "y": 3.3861420154571533,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 5",
+          "number": 5,
+          "p": [
+            -9.4375,
+            2.6500000953674316,
+            3.4250001907348633
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08353161811828613,
+          "nearest": {
+            "x": -9.4375,
+            "y": 3.5085318088531494,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 6",
+          "number": 6,
+          "p": [
+            -9.3125,
+            2.6500000953674316,
+            3.6000001430511475
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03739333152770996,
+          "nearest": {
+            "x": -9.3125,
+            "y": 3.6373934745788574,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 7",
+          "number": 7,
+          "p": [
+            -9.1875,
+            2.6500000953674316,
+            3.7750000953674316
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07053542137145996,
+          "nearest": {
+            "x": -9.1875,
+            "y": 3.8455355167388916,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 8",
+          "number": 8,
+          "p": [
+            -9.0625,
+            2.6500000953674316,
+            3.950000047683716
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08055520057678223,
+          "nearest": {
+            "x": -9.0625,
+            "y": 4.030555248260498,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 9",
+          "number": 9,
+          "p": [
+            -8.9375,
+            2.6500000953674316,
+            4.125
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.041391849517822266,
+          "nearest": {
+            "x": -8.9375,
+            "y": 4.166391849517822,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 10",
+          "number": 10,
+          "p": [
+            -8.8125,
+            2.6500000953674316,
+            4.299999713897705
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09876489639282227,
+          "nearest": {
+            "x": -8.8125,
+            "y": 4.398764610290527,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 11",
+          "number": 11,
+          "p": [
+            -8.6875,
+            2.6500000953674316,
+            4.474999904632568
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09684085845947266,
+          "nearest": {
+            "x": -8.6875,
+            "y": 4.571840763092041,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 12",
+          "number": 12,
+          "p": [
+            -8.5625,
+            2.6500000953674316,
+            4.649999618530273
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02222299575805664,
+          "nearest": {
+            "x": -8.5625,
+            "y": 4.67222261428833,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 13",
+          "number": 13,
+          "p": [
+            -8.4375,
+            2.6500000953674316,
+            4.824999809265137
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08525228500366211,
+          "nearest": {
+            "x": -8.4375,
+            "y": 4.910252094268799,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "Port cockpit to upper teak tread 14",
+          "number": 14,
+          "p": [
+            -8.3125,
+            2.6500000953674316,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03690481185913086,
+          "nearest": {
+            "x": -8.3125,
+            "y": 5.036904811859131,
+            "z": -2.6500000953674316
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            -8.05,
+            2.65,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": -8.050000190734863,
+            "y": 5.025000095367432,
+            "z": -2.6500000953674316
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Port cockpit to upper teak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -10.25,
+              "y": 2.5516765117645264,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.9375,
+              "y": 2.79659366607666,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 1",
+          "to": "Port cockpit to upper teak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.9375,
+              "y": 2.79659366607666,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.8125,
+              "y": 2.982680082321167,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 2",
+          "to": "Port cockpit to upper teak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.8125,
+              "y": 2.982680082321167,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.6875,
+              "y": 3.177393913269043,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 3",
+          "to": "Port cockpit to upper teak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.6875,
+              "y": 3.177393913269043,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.5625,
+              "y": 3.3861420154571533,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 4",
+          "to": "Port cockpit to upper teak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.5625,
+              "y": 3.3861420154571533,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.4375,
+              "y": 3.5085318088531494,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 5",
+          "to": "Port cockpit to upper teak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.4375,
+              "y": 3.5085318088531494,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.3125,
+              "y": 3.6373934745788574,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 6",
+          "to": "Port cockpit to upper teak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.3125,
+              "y": 3.6373934745788574,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.1875,
+              "y": 3.8455355167388916,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 7",
+          "to": "Port cockpit to upper teak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.1875,
+              "y": 3.8455355167388916,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -9.0625,
+              "y": 4.030555248260498,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 8",
+          "to": "Port cockpit to upper teak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.0625,
+              "y": 4.030555248260498,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.9375,
+              "y": 4.166391849517822,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 9",
+          "to": "Port cockpit to upper teak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.9375,
+              "y": 4.166391849517822,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.8125,
+              "y": 4.398764610290527,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 10",
+          "to": "Port cockpit to upper teak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.8125,
+              "y": 4.398764610290527,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.6875,
+              "y": 4.571840763092041,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 11",
+          "to": "Port cockpit to upper teak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.6875,
+              "y": 4.571840763092041,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.5625,
+              "y": 4.67222261428833,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 12",
+          "to": "Port cockpit to upper teak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.5625,
+              "y": 4.67222261428833,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.4375,
+              "y": 4.910252094268799,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 13",
+          "to": "Port cockpit to upper teak tread 14",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.4375,
+              "y": 4.910252094268799,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.3125,
+              "y": 5.036904811859131,
+              "z": -2.6500000953674316
+            }
+          ]
+        },
+        {
+          "from": "Port cockpit to upper teak tread 14",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.3125,
+              "y": 5.036904811859131,
+              "z": -2.6500000953674316
+            },
+            {
+              "x": -8.050000190734863,
+              "y": 5.025000095367432,
+              "z": -2.6500000953674316
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "forward-starboard",
+      "expected_treads": 14,
+      "actual_treads": 14,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            1.55,
+            -3.5,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.025000047683715998,
+          "nearest": {
+            "x": 1.5499999523162842,
+            "y": 2.575000047683716,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 1",
+          "number": 1,
+          "p": [
+            1.8275178670883179,
+            -3.5,
+            2.7250001430511475
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.04037618637084961,
+          "nearest": {
+            "x": 1.8275178670883179,
+            "y": 2.765376329421997,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 2",
+          "number": 2,
+          "p": [
+            1.953553557395935,
+            -3.5,
+            2.9000000953674316
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0777287483215332,
+          "nearest": {
+            "x": 1.953553557395935,
+            "y": 2.977728843688965,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 3",
+          "number": 3,
+          "p": [
+            2.079589307308197,
+            -3.5,
+            3.075000047683716
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.05938553810119629,
+          "nearest": {
+            "x": 2.079589366912842,
+            "y": 3.134385585784912,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 4",
+          "number": 4,
+          "p": [
+            2.205625057220459,
+            -3.5,
+            3.25
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08276891708374023,
+          "nearest": {
+            "x": 2.205625057220459,
+            "y": 3.3327689170837402,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 5",
+          "number": 5,
+          "p": [
+            2.331660747528076,
+            -3.5,
+            3.4250001907348633
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0830850601196289,
+          "nearest": {
+            "x": 2.331660747528076,
+            "y": 3.508085250854492,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 6",
+          "number": 6,
+          "p": [
+            2.4576964378356934,
+            -3.5,
+            3.6000001430511475
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11064267158508301,
+          "nearest": {
+            "x": 2.4576964378356934,
+            "y": 3.7106428146362305,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 7",
+          "number": 7,
+          "p": [
+            2.5837321281433105,
+            -3.5,
+            3.7750000953674316
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09955167770385742,
+          "nearest": {
+            "x": 2.5837321281433105,
+            "y": 3.874551773071289,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 8",
+          "number": 8,
+          "p": [
+            2.7097678184509277,
+            -3.5,
+            3.950000047683716
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10753989219665527,
+          "nearest": {
+            "x": 2.7097678184509277,
+            "y": 4.057539939880371,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 9",
+          "number": 9,
+          "p": [
+            2.835803508758545,
+            -3.5,
+            4.125
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13236093521118164,
+          "nearest": {
+            "x": 2.835803508758545,
+            "y": 4.257360935211182,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 10",
+          "number": 10,
+          "p": [
+            2.961839199066162,
+            -3.5,
+            4.299999713897705
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.17403841018676758,
+          "nearest": {
+            "x": 2.961839199066162,
+            "y": 4.474038124084473,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 11",
+          "number": 11,
+          "p": [
+            3.0878748893737793,
+            -3.5,
+            4.474999904632568
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.1188516616821289,
+          "nearest": {
+            "x": 3.0878748893737793,
+            "y": 4.593851566314697,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 12",
+          "number": 12,
+          "p": [
+            3.2139108180999756,
+            -3.5,
+            4.649999618530273
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.06987953186035156,
+          "nearest": {
+            "x": 3.2139108180999756,
+            "y": 4.719879150390625,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 13",
+          "number": 13,
+          "p": [
+            3.3399465084075928,
+            -3.5,
+            4.824999809265137
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11103296279907227,
+          "nearest": {
+            "x": 3.3399465084075928,
+            "y": 4.936032772064209,
+            "z": 3.5
+          }
+        },
+        {
+          "object": "Starboard forward side-deck access teak tread 14",
+          "number": 14,
+          "p": [
+            3.46598219871521,
+            -3.5,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": 3.439918279647827,
+            "y": 5.025000095367432,
+            "z": 3.482624053955078
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            3.75,
+            -3.5,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": 3.75,
+            "y": 5.025000095367432,
+            "z": 3.380000114440918
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Starboard forward side-deck access teak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.5499999523162842,
+              "y": 2.575000047683716,
+              "z": 3.5
+            },
+            {
+              "x": 1.8275178670883179,
+              "y": 2.765376329421997,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 1",
+          "to": "Starboard forward side-deck access teak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.8275178670883179,
+              "y": 2.765376329421997,
+              "z": 3.5
+            },
+            {
+              "x": 1.953553557395935,
+              "y": 2.977728843688965,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 2",
+          "to": "Starboard forward side-deck access teak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 1.953553557395935,
+              "y": 2.977728843688965,
+              "z": 3.5
+            },
+            {
+              "x": 2.079589366912842,
+              "y": 3.134385585784912,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 3",
+          "to": "Starboard forward side-deck access teak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.079589366912842,
+              "y": 3.134385585784912,
+              "z": 3.5
+            },
+            {
+              "x": 2.205625057220459,
+              "y": 3.3327689170837402,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 4",
+          "to": "Starboard forward side-deck access teak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.205625057220459,
+              "y": 3.3327689170837402,
+              "z": 3.5
+            },
+            {
+              "x": 2.331660747528076,
+              "y": 3.508085250854492,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 5",
+          "to": "Starboard forward side-deck access teak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.331660747528076,
+              "y": 3.508085250854492,
+              "z": 3.5
+            },
+            {
+              "x": 2.4576964378356934,
+              "y": 3.7106428146362305,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 6",
+          "to": "Starboard forward side-deck access teak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.4576964378356934,
+              "y": 3.7106428146362305,
+              "z": 3.5
+            },
+            {
+              "x": 2.5837321281433105,
+              "y": 3.874551773071289,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 7",
+          "to": "Starboard forward side-deck access teak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.5837321281433105,
+              "y": 3.874551773071289,
+              "z": 3.5
+            },
+            {
+              "x": 2.7097678184509277,
+              "y": 4.057539939880371,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 8",
+          "to": "Starboard forward side-deck access teak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.7097678184509277,
+              "y": 4.057539939880371,
+              "z": 3.5
+            },
+            {
+              "x": 2.835803508758545,
+              "y": 4.257360935211182,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 9",
+          "to": "Starboard forward side-deck access teak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.835803508758545,
+              "y": 4.257360935211182,
+              "z": 3.5
+            },
+            {
+              "x": 2.961839199066162,
+              "y": 4.474038124084473,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 10",
+          "to": "Starboard forward side-deck access teak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 2.961839199066162,
+              "y": 4.474038124084473,
+              "z": 3.5
+            },
+            {
+              "x": 3.0878748893737793,
+              "y": 4.593851566314697,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 11",
+          "to": "Starboard forward side-deck access teak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.0878748893737793,
+              "y": 4.593851566314697,
+              "z": 3.5
+            },
+            {
+              "x": 3.2139108180999756,
+              "y": 4.719879150390625,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 12",
+          "to": "Starboard forward side-deck access teak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.2139108180999756,
+              "y": 4.719879150390625,
+              "z": 3.5
+            },
+            {
+              "x": 3.3399465084075928,
+              "y": 4.936032772064209,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 13",
+          "to": "Starboard forward side-deck access teak tread 14",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.3399465084075928,
+              "y": 4.936032772064209,
+              "z": 3.5
+            },
+            {
+              "x": 3.439918279647827,
+              "y": 5.025000095367432,
+              "z": 3.482624053955078
+            }
+          ]
+        },
+        {
+          "from": "Starboard forward side-deck access teak tread 14",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.439918279647827,
+              "y": 5.025000095367432,
+              "z": 3.482624053955078
+            },
+            {
+              "x": 3.4850006103515625,
+              "y": 5.025000095367432,
+              "z": 3.4150004386901855
+            },
+            {
+              "x": 3.5550003051757812,
+              "y": 5.025000095367432,
+              "z": 3.380000114440918
+            },
+            {
+              "x": 3.75,
+              "y": 5.025000095367432,
+              "z": 3.380000114440918
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "beach-starboard",
+      "expected_treads": 13,
+      "actual_treads": 13,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            -17,
+            -2.78,
+            0.65
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.012053585052490212,
+          "nearest": {
+            "x": -17,
+            "y": 0.6620535850524902,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 1",
+          "number": 1,
+          "p": [
+            -16.759614944458008,
+            -2.7799999713897705,
+            0.7961538434028625
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.036366939544677734,
+          "nearest": {
+            "x": -16.759614944458008,
+            "y": 0.8325207829475403,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 2",
+          "number": 2,
+          "p": [
+            -16.578845977783203,
+            -2.7799999713897705,
+            0.942307710647583
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.054608941078186035,
+          "nearest": {
+            "x": -16.578845977783203,
+            "y": 0.996916651725769,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 3",
+          "number": 3,
+          "p": [
+            -16.3980770111084,
+            -2.7799999713897705,
+            1.0884615182876587
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.04714035987854004,
+          "nearest": {
+            "x": -16.3980770111084,
+            "y": 1.1356018781661987,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 4",
+          "number": 4,
+          "p": [
+            -16.217308044433594,
+            -2.7799999713897705,
+            1.2346153259277344
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03967177867889404,
+          "nearest": {
+            "x": -16.217308044433594,
+            "y": 1.2742871046066284,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 5",
+          "number": 5,
+          "p": [
+            -16.036539554595947,
+            -2.7799999713897705,
+            1.3807692527770996
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.032203078269958496,
+          "nearest": {
+            "x": -16.03653907775879,
+            "y": 1.412972331047058,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 6",
+          "number": 6,
+          "p": [
+            -15.855769157409668,
+            -2.7799999713897705,
+            1.5269230604171753
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.024735212326049805,
+          "nearest": {
+            "x": -15.855769157409668,
+            "y": 1.551658272743225,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 7",
+          "number": 7,
+          "p": [
+            -15.675000190734863,
+            -2.7799999713897705,
+            1.673076868057251
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01786649227142334,
+          "nearest": {
+            "x": -15.675000190734863,
+            "y": 1.6909433603286743,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 8",
+          "number": 8,
+          "p": [
+            -15.494231224060059,
+            -2.7799999713897705,
+            1.8192307949066162
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.015820622444152832,
+          "nearest": {
+            "x": -15.494231224060059,
+            "y": 1.835051417350769,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 9",
+          "number": 9,
+          "p": [
+            -15.313461303710938,
+            -2.7799999713897705,
+            1.965384602546692
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01377558708190918,
+          "nearest": {
+            "x": -15.313461303710938,
+            "y": 1.979160189628601,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 10",
+          "number": 10,
+          "p": [
+            -15.132692337036133,
+            -2.7799999713897705,
+            2.1115386486053467
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01172947883605957,
+          "nearest": {
+            "x": -15.132692337036133,
+            "y": 2.1232681274414062,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 11",
+          "number": 11,
+          "p": [
+            -14.951923370361328,
+            -2.7799999713897705,
+            2.257692337036133
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.009683847427368164,
+          "nearest": {
+            "x": -14.951923370361328,
+            "y": 2.267376184463501,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 12",
+          "number": 12,
+          "p": [
+            -14.771153450012207,
+            -2.7799999713897705,
+            2.403846263885498
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09236717224121094,
+          "nearest": {
+            "x": -14.771153450012207,
+            "y": 2.496213436126709,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club -1 split stair teak tread 13",
+          "number": 13,
+          "p": [
+            -14.590384483337402,
+            -2.7799999713897705,
+            2.5500001907348633
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.013873577117919922,
+          "nearest": {
+            "x": -14.590384483337402,
+            "y": 2.563873767852783,
+            "z": 2.7799999713897705
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            -14.3,
+            -2.78,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 1.9073486345888568e-7,
+          "nearest": {
+            "x": -14.300000190734863,
+            "y": 2.5500001907348633,
+            "z": 2.7799999713897705
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Beach club -1 split stair teak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -17,
+              "y": 0.6620535850524902,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -16.759614944458008,
+              "y": 0.8325207829475403,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 1",
+          "to": "Beach club -1 split stair teak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.759614944458008,
+              "y": 0.8325207829475403,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -16.578845977783203,
+              "y": 0.996916651725769,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 2",
+          "to": "Beach club -1 split stair teak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.578845977783203,
+              "y": 0.996916651725769,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -16.3980770111084,
+              "y": 1.1356018781661987,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 3",
+          "to": "Beach club -1 split stair teak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.3980770111084,
+              "y": 1.1356018781661987,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -16.217308044433594,
+              "y": 1.2742871046066284,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 4",
+          "to": "Beach club -1 split stair teak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.217308044433594,
+              "y": 1.2742871046066284,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -16.03653907775879,
+              "y": 1.412972331047058,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 5",
+          "to": "Beach club -1 split stair teak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.03653907775879,
+              "y": 1.412972331047058,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -15.855769157409668,
+              "y": 1.551658272743225,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 6",
+          "to": "Beach club -1 split stair teak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.855769157409668,
+              "y": 1.551658272743225,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -15.675000190734863,
+              "y": 1.6909433603286743,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 7",
+          "to": "Beach club -1 split stair teak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.675000190734863,
+              "y": 1.6909433603286743,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -15.494231224060059,
+              "y": 1.835051417350769,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 8",
+          "to": "Beach club -1 split stair teak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.494231224060059,
+              "y": 1.835051417350769,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -15.313461303710938,
+              "y": 1.979160189628601,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 9",
+          "to": "Beach club -1 split stair teak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.313461303710938,
+              "y": 1.979160189628601,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -15.132692337036133,
+              "y": 2.1232681274414062,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 10",
+          "to": "Beach club -1 split stair teak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.132692337036133,
+              "y": 2.1232681274414062,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -14.951923370361328,
+              "y": 2.267376184463501,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 11",
+          "to": "Beach club -1 split stair teak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -14.951923370361328,
+              "y": 2.267376184463501,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -14.771153450012207,
+              "y": 2.496213436126709,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 12",
+          "to": "Beach club -1 split stair teak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -14.771153450012207,
+              "y": 2.496213436126709,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -14.590384483337402,
+              "y": 2.563873767852783,
+              "z": 2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club -1 split stair teak tread 13",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -14.590384483337402,
+              "y": 2.563873767852783,
+              "z": 2.7799999713897705
+            },
+            {
+              "x": -14.300000190734863,
+              "y": 2.5500001907348633,
+              "z": 2.7799999713897705
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "beach-port",
+      "expected_treads": 13,
+      "actual_treads": 13,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            -17,
+            2.78,
+            0.65
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03082296848297117,
+          "nearest": {
+            "x": -17,
+            "y": 0.6808229684829712,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 1",
+          "number": 1,
+          "p": [
+            -16.759614944458008,
+            2.7799999713897705,
+            0.7961538434028625
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.025686919689178467,
+          "nearest": {
+            "x": -16.759614944458008,
+            "y": 0.821840763092041,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 2",
+          "number": 2,
+          "p": [
+            -16.578845977783203,
+            2.7799999713897705,
+            0.942307710647583
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.05460900068283081,
+          "nearest": {
+            "x": -16.578845977783203,
+            "y": 0.9969167113304138,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 3",
+          "number": 3,
+          "p": [
+            -16.3980770111084,
+            2.7799999713897705,
+            1.0884615182876587
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.04714035987854004,
+          "nearest": {
+            "x": -16.3980770111084,
+            "y": 1.1356018781661987,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 4",
+          "number": 4,
+          "p": [
+            -16.217308044433594,
+            2.7799999713897705,
+            1.2346153259277344
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03967177867889404,
+          "nearest": {
+            "x": -16.217308044433594,
+            "y": 1.2742871046066284,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 5",
+          "number": 5,
+          "p": [
+            -16.036539554595947,
+            2.7799999713897705,
+            1.3807692527770996
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.032203078269958496,
+          "nearest": {
+            "x": -16.03653907775879,
+            "y": 1.412972331047058,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 6",
+          "number": 6,
+          "p": [
+            -15.855769157409668,
+            2.7799999713897705,
+            1.5269230604171753
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.024735212326049805,
+          "nearest": {
+            "x": -15.855769157409668,
+            "y": 1.551658272743225,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 7",
+          "number": 7,
+          "p": [
+            -15.675000190734863,
+            2.7799999713897705,
+            1.673076868057251
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01786661148071289,
+          "nearest": {
+            "x": -15.675000190734863,
+            "y": 1.6909434795379639,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 8",
+          "number": 8,
+          "p": [
+            -15.494231224060059,
+            2.7799999713897705,
+            1.8192307949066162
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.015820622444152832,
+          "nearest": {
+            "x": -15.494231224060059,
+            "y": 1.835051417350769,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 9",
+          "number": 9,
+          "p": [
+            -15.313461303710938,
+            2.7799999713897705,
+            1.965384602546692
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01377558708190918,
+          "nearest": {
+            "x": -15.313461303710938,
+            "y": 1.979160189628601,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 10",
+          "number": 10,
+          "p": [
+            -15.132692337036133,
+            2.7799999713897705,
+            2.1115386486053467
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01172947883605957,
+          "nearest": {
+            "x": -15.132692337036133,
+            "y": 2.1232681274414062,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 11",
+          "number": 11,
+          "p": [
+            -14.951923370361328,
+            2.7799999713897705,
+            2.257692337036133
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.009683847427368164,
+          "nearest": {
+            "x": -14.951923370361328,
+            "y": 2.267376184463501,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 12",
+          "number": 12,
+          "p": [
+            -14.771153450012207,
+            2.7799999713897705,
+            2.403846263885498
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09236717224121094,
+          "nearest": {
+            "x": -14.771153450012207,
+            "y": 2.496213436126709,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "Beach club 1 split stair teak tread 13",
+          "number": 13,
+          "p": [
+            -14.590384483337402,
+            2.7799999713897705,
+            2.5500001907348633
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.013873577117919922,
+          "nearest": {
+            "x": -14.590384483337402,
+            "y": 2.563873767852783,
+            "z": -2.7799999713897705
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            -14.3,
+            2.78,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 1.9073486345888568e-7,
+          "nearest": {
+            "x": -14.300000190734863,
+            "y": 2.5500001907348633,
+            "z": -2.7799999713897705
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Beach club 1 split stair teak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -17,
+              "y": 0.6808229684829712,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -16.759614944458008,
+              "y": 0.821840763092041,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 1",
+          "to": "Beach club 1 split stair teak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.759614944458008,
+              "y": 0.821840763092041,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -16.578845977783203,
+              "y": 0.9969167113304138,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 2",
+          "to": "Beach club 1 split stair teak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.578845977783203,
+              "y": 0.9969167113304138,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -16.3980770111084,
+              "y": 1.1356018781661987,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 3",
+          "to": "Beach club 1 split stair teak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.3980770111084,
+              "y": 1.1356018781661987,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -16.217308044433594,
+              "y": 1.2742871046066284,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 4",
+          "to": "Beach club 1 split stair teak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.217308044433594,
+              "y": 1.2742871046066284,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -16.03653907775879,
+              "y": 1.412972331047058,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 5",
+          "to": "Beach club 1 split stair teak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -16.03653907775879,
+              "y": 1.412972331047058,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -15.855769157409668,
+              "y": 1.551658272743225,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 6",
+          "to": "Beach club 1 split stair teak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.855769157409668,
+              "y": 1.551658272743225,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -15.675000190734863,
+              "y": 1.6909434795379639,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 7",
+          "to": "Beach club 1 split stair teak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.675000190734863,
+              "y": 1.6909434795379639,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -15.494231224060059,
+              "y": 1.835051417350769,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 8",
+          "to": "Beach club 1 split stair teak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.494231224060059,
+              "y": 1.835051417350769,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -15.313461303710938,
+              "y": 1.979160189628601,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 9",
+          "to": "Beach club 1 split stair teak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.313461303710938,
+              "y": 1.979160189628601,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -15.132692337036133,
+              "y": 2.1232681274414062,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 10",
+          "to": "Beach club 1 split stair teak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -15.132692337036133,
+              "y": 2.1232681274414062,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -14.951923370361328,
+              "y": 2.267376184463501,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 11",
+          "to": "Beach club 1 split stair teak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -14.951923370361328,
+              "y": 2.267376184463501,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -14.771153450012207,
+              "y": 2.496213436126709,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 12",
+          "to": "Beach club 1 split stair teak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -14.771153450012207,
+              "y": 2.496213436126709,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -14.590384483337402,
+              "y": 2.563873767852783,
+              "z": -2.7799999713897705
+            }
+          ]
+        },
+        {
+          "from": "Beach club 1 split stair teak tread 13",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -14.590384483337402,
+              "y": 2.563873767852783,
+              "z": -2.7799999713897705
+            },
+            {
+              "x": -14.300000190734863,
+              "y": 2.5500001907348633,
+              "z": -2.7799999713897705
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "lazarette",
+      "expected_treads": 14,
+      "actual_treads": 14,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            -10.8,
+            3.32,
+            0.225
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03097399473190307,
+          "nearest": {
+            "x": -10.800000190734863,
+            "y": 0.2559739947319031,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 1",
+          "number": 1,
+          "p": [
+            -10.439285278320312,
+            3.319999933242798,
+            0.3678571283817291
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09727984666824341,
+          "nearest": {
+            "x": -10.439285278320312,
+            "y": 0.46513697504997253,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 2",
+          "number": 2,
+          "p": [
+            -10.317856788635254,
+            3.319999933242798,
+            0.535714328289032
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07806211709976196,
+          "nearest": {
+            "x": -10.317856788635254,
+            "y": 0.613776445388794,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 3",
+          "number": 3,
+          "p": [
+            -10.196428298950195,
+            3.319999933242798,
+            0.7035714387893677
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08367365598678589,
+          "nearest": {
+            "x": -10.196428298950195,
+            "y": 0.7872450947761536,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 4",
+          "number": 4,
+          "p": [
+            -10.074999809265137,
+            3.319999933242798,
+            0.8714286088943481
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.12525546550750732,
+          "nearest": {
+            "x": -10.074999809265137,
+            "y": 0.9966840744018555,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 5",
+          "number": 5,
+          "p": [
+            -9.953571319580078,
+            3.319999933242798,
+            1.039285659790039
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13149893283843994,
+          "nearest": {
+            "x": -9.953571319580078,
+            "y": 1.170784592628479,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 6",
+          "number": 6,
+          "p": [
+            -9.83214282989502,
+            3.319999933242798,
+            1.2071428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10059094429016113,
+          "nearest": {
+            "x": -9.83214282989502,
+            "y": 1.3077337741851807,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 7",
+          "number": 7,
+          "p": [
+            -9.710714340209961,
+            3.319999933242798,
+            1.375
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.06326520442962646,
+          "nearest": {
+            "x": -9.710714340209961,
+            "y": 1.4382652044296265,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 8",
+          "number": 8,
+          "p": [
+            -9.589285850524902,
+            3.319999933242798,
+            1.542857050895691
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.1290348768234253,
+          "nearest": {
+            "x": -9.589285850524902,
+            "y": 1.6718919277191162,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 9",
+          "number": 9,
+          "p": [
+            -9.467857360839844,
+            3.319999933242798,
+            1.7107142210006714
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10061728954315186,
+          "nearest": {
+            "x": -9.467857360839844,
+            "y": 1.8113315105438232,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 10",
+          "number": 10,
+          "p": [
+            -9.346428871154785,
+            3.319999933242798,
+            1.8785713911056519
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09499931335449219,
+          "nearest": {
+            "x": -9.346428871154785,
+            "y": 1.973570704460144,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 11",
+          "number": 11,
+          "p": [
+            -9.225000381469727,
+            3.319999933242798,
+            2.046428680419922
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0467524528503418,
+          "nearest": {
+            "x": -9.225000381469727,
+            "y": 2.0931811332702637,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 12",
+          "number": 12,
+          "p": [
+            -9.103571891784668,
+            3.319999933242798,
+            2.2142858505249023
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08357000350952148,
+          "nearest": {
+            "x": -9.103571891784668,
+            "y": 2.297855854034424,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 13",
+          "number": 13,
+          "p": [
+            -8.982142448425293,
+            3.319999933242798,
+            2.382143020629883
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.12071442604064941,
+          "nearest": {
+            "x": -8.982142448425293,
+            "y": 2.5028574466705322,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "Lazarette access to cockpit teak tread 14",
+          "number": 14,
+          "p": [
+            -8.860713958740234,
+            3.319999933242798,
+            2.5500001907348633
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.04684567451477051,
+          "nearest": {
+            "x": -8.860713958740234,
+            "y": 2.596845865249634,
+            "z": -3.319999933242798
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            -8.6,
+            3.32,
+            2.55
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.025000047683715998,
+          "nearest": {
+            "x": -8.600000381469727,
+            "y": 2.575000047683716,
+            "z": -3.319999933242798
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Lazarette access to cockpit teak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -10.800000190734863,
+              "y": 0.2559739947319031,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -10.439285278320312,
+              "y": 0.46513697504997253,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 1",
+          "to": "Lazarette access to cockpit teak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -10.439285278320312,
+              "y": 0.46513697504997253,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -10.317856788635254,
+              "y": 0.613776445388794,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 2",
+          "to": "Lazarette access to cockpit teak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -10.317856788635254,
+              "y": 0.613776445388794,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -10.196428298950195,
+              "y": 0.7872450947761536,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 3",
+          "to": "Lazarette access to cockpit teak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -10.196428298950195,
+              "y": 0.7872450947761536,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -10.074999809265137,
+              "y": 0.9966840744018555,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 4",
+          "to": "Lazarette access to cockpit teak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -10.074999809265137,
+              "y": 0.9966840744018555,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.953571319580078,
+              "y": 1.170784592628479,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 5",
+          "to": "Lazarette access to cockpit teak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.953571319580078,
+              "y": 1.170784592628479,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.83214282989502,
+              "y": 1.3077337741851807,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 6",
+          "to": "Lazarette access to cockpit teak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.83214282989502,
+              "y": 1.3077337741851807,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.710714340209961,
+              "y": 1.4382652044296265,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 7",
+          "to": "Lazarette access to cockpit teak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.710714340209961,
+              "y": 1.4382652044296265,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.589285850524902,
+              "y": 1.6718919277191162,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 8",
+          "to": "Lazarette access to cockpit teak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.589285850524902,
+              "y": 1.6718919277191162,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.467857360839844,
+              "y": 1.8113315105438232,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 9",
+          "to": "Lazarette access to cockpit teak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.467857360839844,
+              "y": 1.8113315105438232,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.346428871154785,
+              "y": 1.973570704460144,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 10",
+          "to": "Lazarette access to cockpit teak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.346428871154785,
+              "y": 1.973570704460144,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.225000381469727,
+              "y": 2.0931811332702637,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 11",
+          "to": "Lazarette access to cockpit teak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.225000381469727,
+              "y": 2.0931811332702637,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -9.103571891784668,
+              "y": 2.297855854034424,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 12",
+          "to": "Lazarette access to cockpit teak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -9.103571891784668,
+              "y": 2.297855854034424,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -8.982142448425293,
+              "y": 2.5028574466705322,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 13",
+          "to": "Lazarette access to cockpit teak tread 14",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.982142448425293,
+              "y": 2.5028574466705322,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -8.860713958740234,
+              "y": 2.596845865249634,
+              "z": -3.319999933242798
+            }
+          ]
+        },
+        {
+          "from": "Lazarette access to cockpit teak tread 14",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -8.860713958740234,
+              "y": 2.596845865249634,
+              "z": -3.319999933242798
+            },
+            {
+              "x": -8.600000381469727,
+              "y": 2.575000047683716,
+              "z": -3.319999933242798
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "sundeck",
+      "expected_treads": 14,
+      "actual_treads": 14,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            -2.8,
+            2.8,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": -2.799999952316284,
+            "y": 5.025000095367432,
+            "z": -2.919999837875366
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 1",
+          "number": 1,
+          "p": [
+            -3.0999999046325684,
+            2.799999952316284,
+            5.1785712242126465
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07044267654418945,
+          "nearest": {
+            "x": -3.0999999046325684,
+            "y": 5.249013900756836,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 2",
+          "number": 2,
+          "p": [
+            -3.299999952316284,
+            2.799999952316284,
+            5.357142925262451
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10239696502685547,
+          "nearest": {
+            "x": -3.299999952316284,
+            "y": 5.459539890289307,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 3",
+          "number": 3,
+          "p": [
+            -3.5,
+            2.799999952316284,
+            5.535714149475098
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08302497863769531,
+          "nearest": {
+            "x": -3.5,
+            "y": 5.618739128112793,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 4",
+          "number": 4,
+          "p": [
+            -3.700000047683716,
+            2.799999952316284,
+            5.714285373687744
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03143787384033203,
+          "nearest": {
+            "x": -3.700000047683716,
+            "y": 5.745723247528076,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 5",
+          "number": 5,
+          "p": [
+            -3.899999976158142,
+            2.799999952316284,
+            5.892857074737549
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0461573600769043,
+          "nearest": {
+            "x": -3.9000000953674316,
+            "y": 5.939014434814453,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 6",
+          "number": 6,
+          "p": [
+            -4.099999785423279,
+            2.799999952316284,
+            6.071428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0591273307800293,
+          "nearest": {
+            "x": -4.099999904632568,
+            "y": 6.130555629730225,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 7",
+          "number": 7,
+          "p": [
+            -4.300000190734863,
+            2.799999952316284,
+            6.25
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02341318130493164,
+          "nearest": {
+            "x": -4.300000190734863,
+            "y": 6.273413181304932,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 8",
+          "number": 8,
+          "p": [
+            -4.5,
+            2.799999952316284,
+            6.4285712242126465
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09010076522827148,
+          "nearest": {
+            "x": -4.5,
+            "y": 6.518671989440918,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 9",
+          "number": 9,
+          "p": [
+            -4.699999809265137,
+            2.799999952316284,
+            6.607142925262451
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.1250004768371582,
+          "nearest": {
+            "x": -4.699999809265137,
+            "y": 6.732143402099609,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 10",
+          "number": 10,
+          "p": [
+            -4.900000095367432,
+            2.799999952316284,
+            6.785714149475098
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11309623718261719,
+          "nearest": {
+            "x": -4.900000095367432,
+            "y": 6.898810386657715,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 11",
+          "number": 11,
+          "p": [
+            -5.099999904632568,
+            2.799999952316284,
+            6.964285373687744
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13242387771606445,
+          "nearest": {
+            "x": -5.099999904632568,
+            "y": 7.096709251403809,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 12",
+          "number": 12,
+          "p": [
+            -5.300000190734863,
+            2.799999952316284,
+            7.142857074737549
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.12161731719970703,
+          "nearest": {
+            "x": -5.300000190734863,
+            "y": 7.264474391937256,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 13",
+          "number": 13,
+          "p": [
+            -5.5,
+            2.799999952316284,
+            7.321428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10845947265625,
+          "nearest": {
+            "x": -5.5,
+            "y": 7.429887771606445,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "Port upper terrace to sun teak tread 14",
+          "number": 14,
+          "p": [
+            -5.699999809265137,
+            2.799999952316284,
+            7.5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": -5.699999809265137,
+            "y": 7.525000095367432,
+            "z": -2.799999952316284
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            -6,
+            2.3,
+            7.5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": -6,
+            "y": 7.525000095367432,
+            "z": -2.299999952316284
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Port upper terrace to sun teak tread 1",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -2.799999952316284,
+              "y": 5.025000095367432,
+              "z": -2.919999837875366
+            },
+            {
+              "x": -2.9200000762939453,
+              "y": 5.025000095367432,
+              "z": -2.919999837875366
+            },
+            {
+              "x": -3.0999999046325684,
+              "y": 5.249013900756836,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 1",
+          "to": "Port upper terrace to sun teak tread 2",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -3.0999999046325684,
+              "y": 5.249013900756836,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -3.299999952316284,
+              "y": 5.459539890289307,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 2",
+          "to": "Port upper terrace to sun teak tread 3",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -3.299999952316284,
+              "y": 5.459539890289307,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -3.5,
+              "y": 5.618739128112793,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 3",
+          "to": "Port upper terrace to sun teak tread 4",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -3.5,
+              "y": 5.618739128112793,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -3.700000047683716,
+              "y": 5.745723247528076,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 4",
+          "to": "Port upper terrace to sun teak tread 5",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -3.700000047683716,
+              "y": 5.745723247528076,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -3.9000000953674316,
+              "y": 5.939014434814453,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 5",
+          "to": "Port upper terrace to sun teak tread 6",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -3.9000000953674316,
+              "y": 5.939014434814453,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -4.099999904632568,
+              "y": 6.130555629730225,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 6",
+          "to": "Port upper terrace to sun teak tread 7",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -4.099999904632568,
+              "y": 6.130555629730225,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -4.300000190734863,
+              "y": 6.273413181304932,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 7",
+          "to": "Port upper terrace to sun teak tread 8",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -4.300000190734863,
+              "y": 6.273413181304932,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -4.5,
+              "y": 6.518671989440918,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 8",
+          "to": "Port upper terrace to sun teak tread 9",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -4.5,
+              "y": 6.518671989440918,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -4.699999809265137,
+              "y": 6.732143402099609,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 9",
+          "to": "Port upper terrace to sun teak tread 10",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -4.699999809265137,
+              "y": 6.732143402099609,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -4.900000095367432,
+              "y": 6.898810386657715,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 10",
+          "to": "Port upper terrace to sun teak tread 11",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -4.900000095367432,
+              "y": 6.898810386657715,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -5.099999904632568,
+              "y": 7.096709251403809,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 11",
+          "to": "Port upper terrace to sun teak tread 12",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -5.099999904632568,
+              "y": 7.096709251403809,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -5.300000190734863,
+              "y": 7.264474391937256,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 12",
+          "to": "Port upper terrace to sun teak tread 13",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -5.300000190734863,
+              "y": 7.264474391937256,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -5.5,
+              "y": 7.429887771606445,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 13",
+          "to": "Port upper terrace to sun teak tread 14",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -5.5,
+              "y": 7.429887771606445,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -5.699999809265137,
+              "y": 7.525000095367432,
+              "z": -2.799999952316284
+            }
+          ]
+        },
+        {
+          "from": "Port upper terrace to sun teak tread 14",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": -5.699999809265137,
+              "y": 7.525000095367432,
+              "z": -2.799999952316284
+            },
+            {
+              "x": -5.965000152587891,
+              "y": 7.525000095367432,
+              "z": -2.5349998474121094
+            },
+            {
+              "x": -6,
+              "y": 7.525000095367432,
+              "z": -2.299999952316284
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "service",
+      "expected_treads": 17,
+      "actual_treads": 17,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            3.2,
+            0,
+            2.57
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0014730167388914417,
+          "nearest": {
+            "x": 3.200000047683716,
+            "y": 2.5685269832611084,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread",
+          "number": 0,
+          "p": [
+            3.4588234424591064,
+            0,
+            2.411764621734619
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08193302154541016,
+          "nearest": {
+            "x": 3.4588234424591064,
+            "y": 2.4936976432800293,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.001",
+          "number": 1,
+          "p": [
+            3.5764706134796143,
+            0,
+            2.273529291152954
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08773159980773926,
+          "nearest": {
+            "x": 3.5764706134796143,
+            "y": 2.3612608909606934,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.002",
+          "number": 2,
+          "p": [
+            3.694117546081543,
+            0,
+            2.135294198989868
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0410919189453125,
+          "nearest": {
+            "x": 3.694117546081543,
+            "y": 2.1763861179351807,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.003",
+          "number": 3,
+          "p": [
+            3.811764717102051,
+            0,
+            1.9970587491989136
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07785665988922119,
+          "nearest": {
+            "x": 3.811764717102051,
+            "y": 2.0749154090881348,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.004",
+          "number": 4,
+          "p": [
+            3.9294116497039795,
+            0,
+            1.858823537826538
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0728142261505127,
+          "nearest": {
+            "x": 3.9294116497039795,
+            "y": 1.9316377639770508,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.005",
+          "number": 5,
+          "p": [
+            4.047058939933777,
+            0,
+            1.720588207244873
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.027941107749938965,
+          "nearest": {
+            "x": 4.047059059143066,
+            "y": 1.748529314994812,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.006",
+          "number": 6,
+          "p": [
+            4.164705753326416,
+            0,
+            1.582352876663208
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08214366436004639,
+          "nearest": {
+            "x": 4.164705753326416,
+            "y": 1.6644965410232544,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.007",
+          "number": 7,
+          "p": [
+            4.282352924346924,
+            0,
+            1.4441176652908325
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07399320602416992,
+          "nearest": {
+            "x": 4.282352924346924,
+            "y": 1.5181108713150024,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.008",
+          "number": 8,
+          "p": [
+            4.400000095367432,
+            0,
+            1.3058823347091675
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01566171646118164,
+          "nearest": {
+            "x": 4.400000095367432,
+            "y": 1.3215440511703491,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.009",
+          "number": 9,
+          "p": [
+            4.5176472663879395,
+            0,
+            1.1676470041275024
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.05589771270751953,
+          "nearest": {
+            "x": 4.5176472663879395,
+            "y": 1.223544716835022,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.010",
+          "number": 10,
+          "p": [
+            4.635293960571289,
+            0,
+            1.029411792755127
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03931784629821777,
+          "nearest": {
+            "x": 4.635293960571289,
+            "y": 1.0687296390533447,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.011",
+          "number": 11,
+          "p": [
+            4.752941131591797,
+            0,
+            0.8911764621734619
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.05758845806121826,
+          "nearest": {
+            "x": 4.752941131591797,
+            "y": 0.9487649202346802,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.012",
+          "number": 12,
+          "p": [
+            4.870588302612305,
+            0,
+            0.7529411315917969
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11373454332351685,
+          "nearest": {
+            "x": 4.870588302612305,
+            "y": 0.8666756749153137,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.013",
+          "number": 13,
+          "p": [
+            4.9882354736328125,
+            0,
+            0.6147058606147766
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08206796646118164,
+          "nearest": {
+            "x": 4.9882354736328125,
+            "y": 0.6967738270759583,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.014",
+          "number": 14,
+          "p": [
+            5.105882167816162,
+            0,
+            0.47647058963775635
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.06624209880828857,
+          "nearest": {
+            "x": 5.105882167816162,
+            "y": 0.5427126884460449,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.015",
+          "number": 15,
+          "p": [
+            5.22352933883667,
+            0,
+            0.3382352888584137
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.07237005233764648,
+          "nearest": {
+            "x": 5.22352933883667,
+            "y": 0.4106053411960602,
+            "z": 0
+          }
+        },
+        {
+          "object": "Service stair oak tread.016",
+          "number": 16,
+          "p": [
+            5.341176509857178,
+            0,
+            0.20000000298023224
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.10881911218166351,
+          "nearest": {
+            "x": 5.341176509857178,
+            "y": 0.30881911516189575,
+            "z": 0
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            5.6,
+            0,
+            0.225
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.024999997019767767,
+          "nearest": {
+            "x": 5.599999904632568,
+            "y": 0.20000000298023224,
+            "z": 0
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Service stair oak tread",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.200000047683716,
+              "y": 2.5685269832611084,
+              "z": 0
+            },
+            {
+              "x": 3.4588234424591064,
+              "y": 2.4936976432800293,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread",
+          "to": "Service stair oak tread.001",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.4588234424591064,
+              "y": 2.4936976432800293,
+              "z": 0
+            },
+            {
+              "x": 3.5764706134796143,
+              "y": 2.3612608909606934,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.001",
+          "to": "Service stair oak tread.002",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.5764706134796143,
+              "y": 2.3612608909606934,
+              "z": 0
+            },
+            {
+              "x": 3.694117546081543,
+              "y": 2.1763861179351807,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.002",
+          "to": "Service stair oak tread.003",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.694117546081543,
+              "y": 2.1763861179351807,
+              "z": 0
+            },
+            {
+              "x": 3.811764717102051,
+              "y": 2.0749154090881348,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.003",
+          "to": "Service stair oak tread.004",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.811764717102051,
+              "y": 2.0749154090881348,
+              "z": 0
+            },
+            {
+              "x": 3.9294116497039795,
+              "y": 1.9316377639770508,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.004",
+          "to": "Service stair oak tread.005",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 3.9294116497039795,
+              "y": 1.9316377639770508,
+              "z": 0
+            },
+            {
+              "x": 4.047059059143066,
+              "y": 1.748529314994812,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.005",
+          "to": "Service stair oak tread.006",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.047059059143066,
+              "y": 1.748529314994812,
+              "z": 0
+            },
+            {
+              "x": 4.164705753326416,
+              "y": 1.6644965410232544,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.006",
+          "to": "Service stair oak tread.007",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.164705753326416,
+              "y": 1.6644965410232544,
+              "z": 0
+            },
+            {
+              "x": 4.282352924346924,
+              "y": 1.5181108713150024,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.007",
+          "to": "Service stair oak tread.008",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.282352924346924,
+              "y": 1.5181108713150024,
+              "z": 0
+            },
+            {
+              "x": 4.400000095367432,
+              "y": 1.3215440511703491,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.008",
+          "to": "Service stair oak tread.009",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.400000095367432,
+              "y": 1.3215440511703491,
+              "z": 0
+            },
+            {
+              "x": 4.5176472663879395,
+              "y": 1.223544716835022,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.009",
+          "to": "Service stair oak tread.010",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.5176472663879395,
+              "y": 1.223544716835022,
+              "z": 0
+            },
+            {
+              "x": 4.635293960571289,
+              "y": 1.0687296390533447,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.010",
+          "to": "Service stair oak tread.011",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.635293960571289,
+              "y": 1.0687296390533447,
+              "z": 0
+            },
+            {
+              "x": 4.752941131591797,
+              "y": 0.9487649202346802,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.011",
+          "to": "Service stair oak tread.012",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.752941131591797,
+              "y": 0.9487649202346802,
+              "z": 0
+            },
+            {
+              "x": 4.870588302612305,
+              "y": 0.8666756749153137,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.012",
+          "to": "Service stair oak tread.013",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.870588302612305,
+              "y": 0.8666756749153137,
+              "z": 0
+            },
+            {
+              "x": 4.9882354736328125,
+              "y": 0.6967738270759583,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.013",
+          "to": "Service stair oak tread.014",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 4.9882354736328125,
+              "y": 0.6967738270759583,
+              "z": 0
+            },
+            {
+              "x": 5.105882167816162,
+              "y": 0.5427126884460449,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.014",
+          "to": "Service stair oak tread.015",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 5.105882167816162,
+              "y": 0.5427126884460449,
+              "z": 0
+            },
+            {
+              "x": 5.22352933883667,
+              "y": 0.4106053411960602,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.015",
+          "to": "Service stair oak tread.016",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 5.22352933883667,
+              "y": 0.4106053411960602,
+              "z": 0
+            },
+            {
+              "x": 5.341176509857178,
+              "y": 0.30881911516189575,
+              "z": 0
+            }
+          ]
+        },
+        {
+          "from": "Service stair oak tread.016",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 5.341176509857178,
+              "y": 0.30881911516189575,
+              "z": 0
+            },
+            {
+              "x": 5.599999904632568,
+              "y": 0.20000000298023224,
+              "z": 0
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "bow-starboard",
+      "expected_treads": 7,
+      "actual_treads": 7,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            14.18,
+            -1.21,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.040349483489990234,
+          "nearest": {
+            "x": 14.180000305175781,
+            "y": 5.04034948348999,
+            "z": 1.2100000381469727
+          }
+        },
+        {
+          "object": "Bow stepped teak tread",
+          "number": 0,
+          "p": [
+            14.385714530944824,
+            -1.210714340209961,
+            4.864285469055176
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.011937618255615234,
+          "nearest": {
+            "x": 14.385714530944824,
+            "y": 4.876223087310791,
+            "z": 1.210714340209961
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.001",
+          "number": 1,
+          "p": [
+            14.557143211364746,
+            -1.1321429014205933,
+            4.72857141494751
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.021428585052490234,
+          "nearest": {
+            "x": 14.545001983642578,
+            "y": 4.75,
+            "z": 1.1321429014205933
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.002",
+          "number": 2,
+          "p": [
+            14.728571891784668,
+            -1.0535714626312256,
+            4.5928568840026855
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.007143497467041016,
+          "nearest": {
+            "x": 14.720001220703125,
+            "y": 4.600000381469727,
+            "z": 1.0535714626312256
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.003",
+          "number": 3,
+          "p": [
+            14.899999618530273,
+            -0.9750000238418579,
+            4.4571428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01785755157470703,
+          "nearest": {
+            "x": 14.895000457763672,
+            "y": 4.475000381469727,
+            "z": 0.9750000238418579
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.004",
+          "number": 4,
+          "p": [
+            15.071428298950195,
+            -0.8964285850524902,
+            4.321428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0035719871520996094,
+          "nearest": {
+            "x": 15.139999389648438,
+            "y": 4.325000286102295,
+            "z": 0.8600001335144043
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.005",
+          "number": 5,
+          "p": [
+            15.242856979370117,
+            -0.8178571462631226,
+            4.185714244842529
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.11581611633300781,
+          "nearest": {
+            "x": 15.242856979370117,
+            "y": 4.301530361175537,
+            "z": 0.8178571462631226
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.006",
+          "number": 6,
+          "p": [
+            15.414285659790039,
+            -0.7392857074737549,
+            4.049999713897705
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13044214248657227,
+          "nearest": {
+            "x": 15.414285659790039,
+            "y": 4.180441856384277,
+            "z": 0.7392857074737549
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            15.65,
+            -0.45,
+            4.05
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.024999809265136896,
+          "nearest": {
+            "x": 15.649999618530273,
+            "y": 4.074999809265137,
+            "z": 0.44999998807907104
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Bow stepped teak tread",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.180000305175781,
+              "y": 5.04034948348999,
+              "z": 1.2100000381469727
+            },
+            {
+              "x": 14.385714530944824,
+              "y": 4.876223087310791,
+              "z": 1.210714340209961
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread",
+          "to": "Bow stepped teak tread.001",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.385714530944824,
+              "y": 4.876223087310791,
+              "z": 1.210714340209961
+            },
+            {
+              "x": 14.474998474121094,
+              "y": 4.875,
+              "z": 1.140000343322754
+            },
+            {
+              "x": 14.545001983642578,
+              "y": 4.75,
+              "z": 1.1321429014205933
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.001",
+          "to": "Bow stepped teak tread.002",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.545001983642578,
+              "y": 4.75,
+              "z": 1.1321429014205933
+            },
+            {
+              "x": 14.545001983642578,
+              "y": 4.75,
+              "z": 1.1050000190734863
+            },
+            {
+              "x": 14.615001678466797,
+              "y": 4.75,
+              "z": 1.070000171661377
+            },
+            {
+              "x": 14.720001220703125,
+              "y": 4.600000381469727,
+              "z": 1.0535714626312256
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.002",
+          "to": "Bow stepped teak tread.003",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.720001220703125,
+              "y": 4.600000381469727,
+              "z": 1.0535714626312256
+            },
+            {
+              "x": 14.720001220703125,
+              "y": 4.600000381469727,
+              "z": 1.0350003242492676
+            },
+            {
+              "x": 14.790000915527344,
+              "y": 4.600000381469727,
+              "z": 1
+            },
+            {
+              "x": 14.895000457763672,
+              "y": 4.475000381469727,
+              "z": 0.9750000238418579
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.003",
+          "to": "Bow stepped teak tread.004",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.895000457763672,
+              "y": 4.475000381469727,
+              "z": 0.9750000238418579
+            },
+            {
+              "x": 14.895000457763672,
+              "y": 4.475000381469727,
+              "z": 0.9650001525878906
+            },
+            {
+              "x": 15.03499984741211,
+              "y": 4.475000381469727,
+              "z": 0.8949999809265137
+            },
+            {
+              "x": 15.139999389648438,
+              "y": 4.325000286102295,
+              "z": 0.8600001335144043
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.004",
+          "to": "Bow stepped teak tread.005",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 15.139999389648438,
+              "y": 4.325000286102295,
+              "z": 0.8600001335144043
+            },
+            {
+              "x": 15.209999084472656,
+              "y": 4.325000286102295,
+              "z": 0.8250002861022949
+            },
+            {
+              "x": 15.242856979370117,
+              "y": 4.301530361175537,
+              "z": 0.8178571462631226
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.005",
+          "to": "Bow stepped teak tread.006",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 15.242856979370117,
+              "y": 4.301530361175537,
+              "z": 0.8178571462631226
+            },
+            {
+              "x": 15.414285659790039,
+              "y": 4.180441856384277,
+              "z": 0.7392857074737549
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.006",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 15.414285659790039,
+              "y": 4.180441856384277,
+              "z": 0.7392857074737549
+            },
+            {
+              "x": 15.649999618530273,
+              "y": 4.074999809265137,
+              "z": 0.44999998807907104
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "bow-port",
+      "expected_treads": 7,
+      "actual_treads": 7,
+      "waypoints": [
+        {
+          "object": "start landing",
+          "p": [
+            14.18,
+            1.21,
+            5
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.02500009536743164,
+          "nearest": {
+            "x": 14.180000305175781,
+            "y": 5.025000095367432,
+            "z": -1.2100000381469727
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.007",
+          "number": 7,
+          "p": [
+            14.385714530944824,
+            1.210714340209961,
+            4.864285469055176
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.014794349670410156,
+          "nearest": {
+            "x": 14.385714530944824,
+            "y": 4.879079818725586,
+            "z": -1.210714340209961
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.008",
+          "number": 8,
+          "p": [
+            14.557143211364746,
+            1.1321429014205933,
+            4.72857141494751
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.08961915969848633,
+          "nearest": {
+            "x": 14.554533004760742,
+            "y": 4.818190574645996,
+            "z": -1.1190932989120483
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.009",
+          "number": 9,
+          "p": [
+            14.728571891784668,
+            1.0535714626312256,
+            4.5928568840026855
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.007143497467041016,
+          "nearest": {
+            "x": 14.720001220703125,
+            "y": 4.600000381469727,
+            "z": -1.0535714626312256
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.010",
+          "number": 10,
+          "p": [
+            14.899999618530273,
+            0.9750000238418579,
+            4.4571428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.01785755157470703,
+          "nearest": {
+            "x": 14.895000457763672,
+            "y": 4.475000381469727,
+            "z": -0.9750000238418579
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.011",
+          "number": 11,
+          "p": [
+            15.071428298950195,
+            0.8964285850524902,
+            4.321428298950195
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.0035719871520996094,
+          "nearest": {
+            "x": 15.069999694824219,
+            "y": 4.325000286102295,
+            "z": -0.8964285850524902
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.012",
+          "number": 12,
+          "p": [
+            15.242856979370117,
+            0.8178571462631226,
+            4.185714244842529
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.09889364242553711,
+          "nearest": {
+            "x": 15.242856979370117,
+            "y": 4.284607887268066,
+            "z": -0.8178571462631226
+          }
+        },
+        {
+          "object": "Bow stepped teak tread.013",
+          "number": 13,
+          "p": [
+            15.414285659790039,
+            0.7392857074737549,
+            4.049999713897705
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.13219404220581055,
+          "nearest": {
+            "x": 15.414285659790039,
+            "y": 4.182193756103516,
+            "z": -0.7392857074737549
+          }
+        },
+        {
+          "object": "end landing",
+          "p": [
+            15.65,
+            0.45,
+            4.05
+          ],
+          "found": true,
+          "nav_height_difference_m": 0.03804941177368182,
+          "nearest": {
+            "x": 15.649999618530273,
+            "y": 4.088049411773682,
+            "z": -0.44999998807907104
+          }
+        }
+      ],
+      "segments": [
+        {
+          "from": "start landing",
+          "to": "Bow stepped teak tread.007",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.180000305175781,
+              "y": 5.025000095367432,
+              "z": -1.2100000381469727
+            },
+            {
+              "x": 14.385714530944824,
+              "y": 4.879079818725586,
+              "z": -1.210714340209961
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.007",
+          "to": "Bow stepped teak tread.008",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.385714530944824,
+              "y": 4.879079818725586,
+              "z": -1.210714340209961
+            },
+            {
+              "x": 14.474998474121094,
+              "y": 4.875,
+              "z": -1.1349999904632568
+            },
+            {
+              "x": 14.554533004760742,
+              "y": 4.818190574645996,
+              "z": -1.1190932989120483
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.008",
+          "to": "Bow stepped teak tread.009",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.554533004760742,
+              "y": 4.818190574645996,
+              "z": -1.1190932989120483
+            },
+            {
+              "x": 14.650001525878906,
+              "y": 4.75,
+              "z": -1.0649998188018799
+            },
+            {
+              "x": 14.720001220703125,
+              "y": 4.600000381469727,
+              "z": -1.0535714626312256
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.009",
+          "to": "Bow stepped teak tread.010",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.720001220703125,
+              "y": 4.600000381469727,
+              "z": -1.0535714626312256
+            },
+            {
+              "x": 14.720001220703125,
+              "y": 4.600000381469727,
+              "z": -1.0299999713897705
+            },
+            {
+              "x": 14.825000762939453,
+              "y": 4.600000381469727,
+              "z": -0.994999885559082
+            },
+            {
+              "x": 14.895000457763672,
+              "y": 4.475000381469727,
+              "z": -0.9750000238418579
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.010",
+          "to": "Bow stepped teak tread.011",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 14.895000457763672,
+              "y": 4.475000381469727,
+              "z": -0.9750000238418579
+            },
+            {
+              "x": 14.895000457763672,
+              "y": 4.475000381469727,
+              "z": -0.9599997997283936
+            },
+            {
+              "x": 14.96500015258789,
+              "y": 4.475000381469727,
+              "z": -0.9249999523162842
+            },
+            {
+              "x": 15.069999694824219,
+              "y": 4.325000286102295,
+              "z": -0.8964285850524902
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.011",
+          "to": "Bow stepped teak tread.012",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 15.069999694824219,
+              "y": 4.325000286102295,
+              "z": -0.8964285850524902
+            },
+            {
+              "x": 15.069999694824219,
+              "y": 4.325000286102295,
+              "z": -0.8899998664855957
+            },
+            {
+              "x": 15.139999389648438,
+              "y": 4.325000286102295,
+              "z": -0.8549997806549072
+            },
+            {
+              "x": 15.209999084472656,
+              "y": 4.325000286102295,
+              "z": -0.8199999332427979
+            },
+            {
+              "x": 15.242856979370117,
+              "y": 4.284607887268066,
+              "z": -0.8178571462631226
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.012",
+          "to": "Bow stepped teak tread.013",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 15.242856979370117,
+              "y": 4.284607887268066,
+              "z": -0.8178571462631226
+            },
+            {
+              "x": 15.384998321533203,
+              "y": 4.200000286102295,
+              "z": -0.75
+            },
+            {
+              "x": 15.414285659790039,
+              "y": 4.182193756103516,
+              "z": -0.7392857074737549
+            }
+          ]
+        },
+        {
+          "from": "Bow stepped teak tread.013",
+          "to": "end landing",
+          "connected": true,
+          "error": 0,
+          "outside_flight_bounds": false,
+          "path": [
+            {
+              "x": 15.414285659790039,
+              "y": 4.182193756103516,
+              "z": -0.7392857074737549
+            },
+            {
+              "x": 15.649999618530273,
+              "y": 4.088049411773682,
+              "z": -0.44999998807907104
+            }
+          ]
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": 11,
+  "failed": 0
+}

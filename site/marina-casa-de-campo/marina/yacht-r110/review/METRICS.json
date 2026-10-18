@@ -1,0 +1,556 @@
+{
+  "scope": "Same-model image diagnostics. Whole-frame errors include the intentionally retained live marina outside windows. No percentage or automatic visual approval is claimed.",
+  "capture_complete": true,
+  "records": [
+    {
+      "id": "scene_bow_l",
+      "mean_absolute_rgb_error_8bit": 31.550489814814814,
+      "rmse_rgb_8bit": 42.73085615328334,
+      "grayscale_ssim": 0.858076233065736,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_salon_l",
+      "mean_absolute_rgb_error_8bit": 16.891802777777777,
+      "rmse_rgb_8bit": 25.091337537972034,
+      "grayscale_ssim": 0.8358784388353694,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_captain_cabin_f",
+      "mean_absolute_rgb_error_8bit": 15.433762962962964,
+      "rmse_rgb_8bit": 18.40799685321975,
+      "grayscale_ssim": 0.8980903822616099,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_middle_crew_head_f",
+      "mean_absolute_rgb_error_8bit": 7.826219444444447,
+      "rmse_rgb_8bit": 12.370137016816543,
+      "grayscale_ssim": 0.943672418347447,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_master_head_f",
+      "mean_absolute_rgb_error_8bit": 12.623652263374487,
+      "rmse_rgb_8bit": 18.12129868550769,
+      "grayscale_ssim": 0.8505408680214331,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_stbd_crew_cabin_b",
+      "mean_absolute_rgb_error_8bit": 16.457721193415637,
+      "rmse_rgb_8bit": 20.856026529341406,
+      "grayscale_ssim": 0.8664411639810191,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_middle_crew_cabin_l",
+      "mean_absolute_rgb_error_8bit": 31.725833333333334,
+      "rmse_rgb_8bit": 36.86828386212561,
+      "grayscale_ssim": 0.8672416127892965,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_crew_cabin_r",
+      "mean_absolute_rgb_error_8bit": 17.357872942386827,
+      "rmse_rgb_8bit": 22.639777817130923,
+      "grayscale_ssim": 0.8822890772966561,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_garage_l",
+      "mean_absolute_rgb_error_8bit": 17.803027263374485,
+      "rmse_rgb_8bit": 31.707181806121145,
+      "grayscale_ssim": 0.8477635173254305,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_engine_room_f",
+      "mean_absolute_rgb_error_8bit": 26.73734310699588,
+      "rmse_rgb_8bit": 36.37497143381283,
+      "grayscale_ssim": 0.6326046717322996,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_stbd_twin_guest_head_f",
+      "mean_absolute_rgb_error_8bit": 21.088626543209877,
+      "rmse_rgb_8bit": 28.335898939759783,
+      "grayscale_ssim": 0.6953642084436332,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_skylounge_-_port_r",
+      "mean_absolute_rgb_error_8bit": 16.433935185185188,
+      "rmse_rgb_8bit": 26.40634977883114,
+      "grayscale_ssim": 0.8628325633009081,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_stbd_crew_head_b",
+      "mean_absolute_rgb_error_8bit": 22.81485082304527,
+      "rmse_rgb_8bit": 29.542872870602135,
+      "grayscale_ssim": 0.7740847718590788,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_forward_starboard_side_f",
+      "mean_absolute_rgb_error_8bit": 54.21513888888889,
+      "rmse_rgb_8bit": 64.68550639559314,
+      "grayscale_ssim": 0.7487052707826316,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_upperdeck_lounge_l",
+      "mean_absolute_rgb_error_8bit": 24.543858024691357,
+      "rmse_rgb_8bit": 33.86769274898894,
+      "grayscale_ssim": 0.7870436128269865,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_pilothouse_entrance_l",
+      "mean_absolute_rgb_error_8bit": 13.71229681069959,
+      "rmse_rgb_8bit": 24.608829371278336,
+      "grayscale_ssim": 0.8388539140285237,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_master_cabin_f",
+      "mean_absolute_rgb_error_8bit": 14.304390432098764,
+      "rmse_rgb_8bit": 22.404427621736136,
+      "grayscale_ssim": 0.8357416838273383,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_sundeck_aft_f",
+      "mean_absolute_rgb_error_8bit": 50.705388374485594,
+      "rmse_rgb_8bit": 68.49186914812073,
+      "grayscale_ssim": 0.7390621494907553,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_skylounge_-_stbd_l",
+      "mean_absolute_rgb_error_8bit": 16.164987139917695,
+      "rmse_rgb_8bit": 26.00864553354734,
+      "grayscale_ssim": 0.858126452609892,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_bow_sunbed_f",
+      "mean_absolute_rgb_error_8bit": 61.225959362139925,
+      "rmse_rgb_8bit": 69.95143158184679,
+      "grayscale_ssim": 0.7653695638733826,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_upperdeck_sunbed_l",
+      "mean_absolute_rgb_error_8bit": 42.27957561728395,
+      "rmse_rgb_8bit": 49.01700146493223,
+      "grayscale_ssim": 0.8462058232597369,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_double_guest_cabin_r",
+      "mean_absolute_rgb_error_8bit": 14.054861111111112,
+      "rmse_rgb_8bit": 22.9632096387587,
+      "grayscale_ssim": 0.8729510478863508,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_pilothouse_l",
+      "mean_absolute_rgb_error_8bit": 18.156188271604936,
+      "rmse_rgb_8bit": 25.335664386743353,
+      "grayscale_ssim": 0.8203107246667205,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_stbd_double_guest_cabin_b",
+      "mean_absolute_rgb_error_8bit": 16.491975308641976,
+      "rmse_rgb_8bit": 25.33325881243101,
+      "grayscale_ssim": 0.8283807854677001,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_skylounge_f",
+      "mean_absolute_rgb_error_8bit": 13.618112139917697,
+      "rmse_rgb_8bit": 20.714342410066543,
+      "grayscale_ssim": 0.8650136416328964,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_twin_guest_cabin_r",
+      "mean_absolute_rgb_error_8bit": 11.380933641975309,
+      "rmse_rgb_8bit": 18.025595727671487,
+      "grayscale_ssim": 0.9109534514171835,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_day_head_r",
+      "mean_absolute_rgb_error_8bit": 41.386743827160494,
+      "rmse_rgb_8bit": 61.329339644533654,
+      "grayscale_ssim": 0.5802043233212368,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_pilothouse_lounge_l",
+      "mean_absolute_rgb_error_8bit": 32.03710390946502,
+      "rmse_rgb_8bit": 46.98287179142573,
+      "grayscale_ssim": 0.7454970230619945,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_lazarette_b",
+      "mean_absolute_rgb_error_8bit": 11.6398353909465,
+      "rmse_rgb_8bit": 21.405391301001046,
+      "grayscale_ssim": 0.8851496995462398,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_master_shower_r",
+      "mean_absolute_rgb_error_8bit": 18.447404835390948,
+      "rmse_rgb_8bit": 24.324705419064788,
+      "grayscale_ssim": 0.8454485134238459,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_beach_club_l",
+      "mean_absolute_rgb_error_8bit": 25.080321502057615,
+      "rmse_rgb_8bit": 38.89441313276737,
+      "grayscale_ssim": 0.7640852599230006,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_stbd_double_guest_head_r",
+      "mean_absolute_rgb_error_8bit": 29.781010802469137,
+      "rmse_rgb_8bit": 41.339666946791006,
+      "grayscale_ssim": 0.6625492474487314,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_double_guest_head_f",
+      "mean_absolute_rgb_error_8bit": 22.260159465020575,
+      "rmse_rgb_8bit": 35.6496047080977,
+      "grayscale_ssim": 0.6793651164572349,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_stbd_twin_guest_cabin_b",
+      "mean_absolute_rgb_error_8bit": 12.695830761316872,
+      "rmse_rgb_8bit": 23.256101184075344,
+      "grayscale_ssim": 0.8905432472282798,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_starboard_side_f",
+      "mean_absolute_rgb_error_8bit": 53.15359053497942,
+      "rmse_rgb_8bit": 69.74817220343601,
+      "grayscale_ssim": 0.6500032532927058,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_crew_head_b",
+      "mean_absolute_rgb_error_8bit": 19.88223508230453,
+      "rmse_rgb_8bit": 25.486941554741616,
+      "grayscale_ssim": 0.8573310365596554,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_cockpit_r",
+      "mean_absolute_rgb_error_8bit": 23.91031378600823,
+      "rmse_rgb_8bit": 37.17254257931114,
+      "grayscale_ssim": 0.8084613305081342,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_galley_entrance_b",
+      "mean_absolute_rgb_error_8bit": 14.8259670781893,
+      "rmse_rgb_8bit": 21.999322964703932,
+      "grayscale_ssim": 0.8432920994336275,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_dining_area_l",
+      "mean_absolute_rgb_error_8bit": 17.60045781893004,
+      "rmse_rgb_8bit": 27.16659045282046,
+      "grayscale_ssim": 0.7954403428415513,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_master_cabin_-_port_b",
+      "mean_absolute_rgb_error_8bit": 13.200462962962964,
+      "rmse_rgb_8bit": 18.94510995898479,
+      "grayscale_ssim": 0.8721308872217166,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_crew_entrance_l",
+      "mean_absolute_rgb_error_8bit": 16.78599022633745,
+      "rmse_rgb_8bit": 22.12372796324728,
+      "grayscale_ssim": 0.883623699984983,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_lower_lobby_f",
+      "mean_absolute_rgb_error_8bit": 11.311584362139918,
+      "rmse_rgb_8bit": 18.217312459609094,
+      "grayscale_ssim": 0.8405394143157189,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_sundeck_b",
+      "mean_absolute_rgb_error_8bit": 23.79972479423868,
+      "rmse_rgb_8bit": 33.30728237422529,
+      "grayscale_ssim": 0.8160036170711594,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_upperdeck_port_r",
+      "mean_absolute_rgb_error_8bit": 48.50053755144033,
+      "rmse_rgb_8bit": 61.94973721367687,
+      "grayscale_ssim": 0.7537558800330655,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_sundeck_forward_r",
+      "mean_absolute_rgb_error_8bit": 23.52985853909465,
+      "rmse_rgb_8bit": 30.030763333608036,
+      "grayscale_ssim": 0.8375483247755777,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_galley_r",
+      "mean_absolute_rgb_error_8bit": 14.75948302469136,
+      "rmse_rgb_8bit": 23.20031179946926,
+      "grayscale_ssim": 0.84044439008865,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_cockpit_-_port_f",
+      "mean_absolute_rgb_error_8bit": 17.377494855967075,
+      "rmse_rgb_8bit": 28.078150875446948,
+      "grayscale_ssim": 0.8279976440920751,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_cockpit_-_stbd_l",
+      "mean_absolute_rgb_error_8bit": 20.071278292181066,
+      "rmse_rgb_8bit": 32.67879447805709,
+      "grayscale_ssim": 0.8071840465444717,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_crew_area_b",
+      "mean_absolute_rgb_error_8bit": 10.403531378600823,
+      "rmse_rgb_8bit": 14.540740534376708,
+      "grayscale_ssim": 0.9368928197591833,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_crew_corridor_b",
+      "mean_absolute_rgb_error_8bit": 15.467165637860083,
+      "rmse_rgb_8bit": 24.848599996995798,
+      "grayscale_ssim": 0.8329127500689205,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_bow_lounge_b",
+      "mean_absolute_rgb_error_8bit": 51.502854938271604,
+      "rmse_rgb_8bit": 62.81778522796313,
+      "grayscale_ssim": 0.7298579057961024,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_main_corridor_l",
+      "mean_absolute_rgb_error_8bit": 15.35545524691358,
+      "rmse_rgb_8bit": 19.19998600125947,
+      "grayscale_ssim": 0.8856307953921235,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_side_b",
+      "mean_absolute_rgb_error_8bit": 36.56292952674897,
+      "rmse_rgb_8bit": 41.69099601427809,
+      "grayscale_ssim": 0.7522153803191864,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_captain_head_l",
+      "mean_absolute_rgb_error_8bit": 19.928912037037037,
+      "rmse_rgb_8bit": 27.91340551248677,
+      "grayscale_ssim": 0.8227172643394539,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    },
+    {
+      "id": "scene_port_twin_guest_head_r",
+      "mean_absolute_rgb_error_8bit": 19.4059079218107,
+      "rmse_rgb_8bit": 27.488289921690836,
+      "grayscale_ssim": 0.7220607129599552,
+      "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+      "personally_inspected": false,
+      "fidelity_approved": false,
+      "asset_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40"
+    }
+  ]
+}

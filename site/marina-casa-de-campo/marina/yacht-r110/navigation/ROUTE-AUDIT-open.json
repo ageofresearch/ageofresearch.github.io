@@ -1,0 +1,3583 @@
+{
+  "source_native": "/workspace/yacht-1667308298/rebuild-02/versions/Grande_36M_r110.blend",
+  "source_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
+  "character": {
+    "height_m": 1.7,
+    "radius_m": 0.14,
+    "max_step_m": 0.2
+  },
+  "cell_size_m": 0.035,
+  "cell_height_m": 0.025,
+  "elapsed_seconds": 1.327,
+  "destinations": {
+    "cockpit": {
+      "id": "cockpit",
+      "blender": [
+        -9.3,
+        0,
+        2.55
+      ],
+      "position": {
+        "x": -9.3,
+        "y": 2.55,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4996,
+        "nearestPoint": {
+          "x": -9.300000190734863,
+          "y": 2.551612377166748,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 1.9073486257070726e-7,
+        "vertical": 0.0016123771667482245
+      },
+      "found": true
+    },
+    "starboard-main-walk": {
+      "id": "starboard-main-walk",
+      "blender": [
+        -2.76,
+        -3.16,
+        2.55
+      ],
+      "position": {
+        "x": -2.76,
+        "y": 2.55,
+        "z": 3.16
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 6344,
+        "nearestPoint": {
+          "x": -2.759999990463257,
+          "y": 2.5500001907348633,
+          "z": 3.1600000858306885
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 8.63588821493059e-8,
+        "vertical": 1.9073486345888568e-7
+      },
+      "found": true
+    },
+    "salon": {
+      "id": "salon",
+      "blender": [
+        -7.5,
+        0,
+        2.6
+      ],
+      "position": {
+        "x": -7.5,
+        "y": 2.6,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4811,
+        "nearestPoint": {
+          "x": -7.5,
+          "y": 2.595716714859009,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 0,
+        "vertical": 0.0042832851409913
+      },
+      "found": true
+    },
+    "dining": {
+      "id": "dining",
+      "blender": [
+        -2.25,
+        -2.1,
+        2.6
+      ],
+      "position": {
+        "x": -2.25,
+        "y": 2.6,
+        "z": 2.1
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5526,
+        "nearestPoint": {
+          "x": -2.25,
+          "y": 2.585165023803711,
+          "z": 2.0999999046325684
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 9.536743172944284e-8,
+        "vertical": 0.014834976196289151
+      },
+      "found": true
+    },
+    "galley": {
+      "id": "galley",
+      "blender": [
+        3.75,
+        1.65,
+        2.57
+      ],
+      "position": {
+        "x": 3.75,
+        "y": 2.57,
+        "z": -1.65
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4826,
+        "nearestPoint": {
+          "x": 3.75,
+          "y": 2.575000047683716,
+          "z": -1.649999976158142
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 2.3841857821338408e-8,
+        "vertical": 0.00500004768371598
+      },
+      "found": true
+    },
+    "day-head": {
+      "id": "day-head",
+      "blender": [
+        3.8,
+        -2.2,
+        2.57
+      ],
+      "position": {
+        "x": 3.8,
+        "y": 2.57,
+        "z": 2.2
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 6132,
+        "nearestPoint": {
+          "x": 3.799999952316284,
+          "y": 2.575000047683716,
+          "z": 2.200000047683716
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 6.743495736621566e-8,
+        "vertical": 0.00500004768371598
+      },
+      "found": true
+    },
+    "owner": {
+      "id": "owner",
+      "blender": [
+        5.65,
+        -2.1,
+        2.57
+      ],
+      "position": {
+        "x": 5.65,
+        "y": 2.57,
+        "z": 2.1
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5442,
+        "nearestPoint": {
+          "x": 5.650000095367432,
+          "y": 2.575000047683716,
+          "z": 2.0999999046325684
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 1.348699150464498e-7,
+        "vertical": 0.00500004768371598
+      },
+      "found": true
+    },
+    "owner-head": {
+      "id": "owner-head",
+      "blender": [
+        10,
+        0,
+        2.57
+      ],
+      "position": {
+        "x": 10,
+        "y": 2.57,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5226,
+        "nearestPoint": {
+          "x": 10,
+          "y": 2.575000047683716,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 0,
+        "vertical": 0.00500004768371598
+      },
+      "found": true
+    },
+    "owner-WC": {
+      "id": "owner-WC",
+      "blender": [
+        9.7,
+        -1.9,
+        2.57
+      ],
+      "position": {
+        "x": 9.7,
+        "y": 2.57,
+        "z": 1.9
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5959,
+        "nearestPoint": {
+          "x": 9.699999809265137,
+          "y": 2.575000047683716,
+          "z": 1.899999976158142
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 1.9221920295391794e-7,
+        "vertical": 0.00500004768371598
+      },
+      "found": true
+    },
+    "owner-shower": {
+      "id": "owner-shower",
+      "blender": [
+        9.72,
+        1.9,
+        2.6
+      ],
+      "position": {
+        "x": 9.72,
+        "y": 2.6,
+        "z": -1.9
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4641,
+        "nearestPoint": {
+          "x": 9.720000267028809,
+          "y": 2.6000001430511475,
+          "z": -1.899999976158142
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 2.6809106374858305e-7,
+        "vertical": 1.4305114737211966e-7
+      },
+      "found": true
+    },
+    "lower-lobby": {
+      "id": "lower-lobby",
+      "blender": [
+        2.1,
+        0.2,
+        0.23
+      ],
+      "position": {
+        "x": 2.1,
+        "y": 0.23,
+        "z": -0.2
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4951,
+        "nearestPoint": {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 9.541398649464745e-8,
+        "vertical": 0.01999999999999999
+      },
+      "found": true
+    },
+    "port-double": {
+      "id": "port-double",
+      "blender": [
+        -0.4,
+        0.75,
+        0.24
+      ],
+      "position": {
+        "x": -0.4,
+        "y": 0.24,
+        "z": -0.75
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5054,
+        "nearestPoint": {
+          "x": -0.4000000059604645,
+          "y": 0.25,
+          "z": -0.75
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 5.960464455334602e-9,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "stbd-double": {
+      "id": "stbd-double",
+      "blender": [
+        -0.4,
+        -0.75,
+        0.24
+      ],
+      "position": {
+        "x": -0.4,
+        "y": 0.24,
+        "z": 0.75
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5589,
+        "nearestPoint": {
+          "x": -0.4000000059604645,
+          "y": 0.25,
+          "z": 0.75
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 5.960464455334602e-9,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "port-double-head": {
+      "id": "port-double-head",
+      "blender": [
+        -3.05,
+        1.6,
+        0.24
+      ],
+      "position": {
+        "x": -3.05,
+        "y": 0.24,
+        "z": -1.6
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4520,
+        "nearestPoint": {
+          "x": -3.049999952316284,
+          "y": 0.25,
+          "z": -1.600000023841858
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 5.331201479839772e-8,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "stbd-double-head": {
+      "id": "stbd-double-head",
+      "blender": [
+        -3.05,
+        -1.6,
+        0.24
+      ],
+      "position": {
+        "x": -3.05,
+        "y": 0.24,
+        "z": 1.6
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5923,
+        "nearestPoint": {
+          "x": -3.049999952316284,
+          "y": 0.25,
+          "z": 1.600000023841858
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 5.331201479839772e-8,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "port-twin": {
+      "id": "port-twin",
+      "blender": [
+        3.45,
+        1.58,
+        0.24
+      ],
+      "position": {
+        "x": 3.45,
+        "y": 0.24,
+        "z": -1.58
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4661,
+        "nearestPoint": {
+          "x": 3.445385217666626,
+          "y": 0.25,
+          "z": -1.5830767154693604
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.005546385675719232,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "stbd-twin": {
+      "id": "stbd-twin",
+      "blender": [
+        3.8,
+        -1.63,
+        0.24
+      ],
+      "position": {
+        "x": 3.8,
+        "y": 0.24,
+        "z": 1.63
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5937,
+        "nearestPoint": {
+          "x": 3.799999952316284,
+          "y": 0.25,
+          "z": 1.6299999952316284
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 4.7921541127342146e-8,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "port-twin-aisle": {
+      "id": "port-twin-aisle",
+      "blender": [
+        4,
+        1.63,
+        0.24
+      ],
+      "position": {
+        "x": 4,
+        "y": 0.24,
+        "z": -1.63
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4667,
+        "nearestPoint": {
+          "x": 4,
+          "y": 0.25,
+          "z": -1.6299999952316284
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 4.76837147544984e-9,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "stbd-twin-aisle": {
+      "id": "stbd-twin-aisle",
+      "blender": [
+        4,
+        -1.63,
+        0.24
+      ],
+      "position": {
+        "x": 4,
+        "y": 0.24,
+        "z": 1.63
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5937,
+        "nearestPoint": {
+          "x": 4,
+          "y": 0.25,
+          "z": 1.6299999952316284
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 4.76837147544984e-9,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "port-twin-head": {
+      "id": "port-twin-head",
+      "blender": [
+        2.52,
+        2.51,
+        0.24
+      ],
+      "position": {
+        "x": 2.52,
+        "y": 0.24,
+        "z": -2.51
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4313,
+        "nearestPoint": {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": -2.509999990463257
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.015000839233401486,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "stbd-twin-head": {
+      "id": "stbd-twin-head",
+      "blender": [
+        2.52,
+        -2.51,
+        0.24
+      ],
+      "position": {
+        "x": 2.52,
+        "y": 0.24,
+        "z": 2.51
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 6168,
+        "nearestPoint": {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": 2.509999990463257
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.015000839233401486,
+        "vertical": 0.010000000000000009
+      },
+      "found": true
+    },
+    "crew-mess": {
+      "id": "crew-mess",
+      "blender": [
+        6.8,
+        0.5,
+        0.23
+      ],
+      "position": {
+        "x": 6.8,
+        "y": 0.23,
+        "z": -0.5
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5211,
+        "nearestPoint": {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.5
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.00999946594238299,
+        "vertical": 0.004999991059303294
+      },
+      "found": true
+    },
+    "captain": {
+      "id": "captain",
+      "blender": [
+        6.74,
+        -1.25,
+        0.23
+      ],
+      "position": {
+        "x": 6.74,
+        "y": 0.23,
+        "z": 1.25
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5732,
+        "nearestPoint": {
+          "x": 6.739999771118164,
+          "y": 0.2773808538913727,
+          "z": 1.25
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 2.2888183615066282e-7,
+        "vertical": 0.04738085389137267
+      },
+      "found": true
+    },
+    "captain-head": {
+      "id": "captain-head",
+      "blender": [
+        8.3,
+        -1.14,
+        0.23
+      ],
+      "position": {
+        "x": 8.3,
+        "y": 0.23,
+        "z": 1.14
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5802,
+        "nearestPoint": {
+          "x": 8.280000686645508,
+          "y": 0.22500000894069672,
+          "z": 1.1399999856948853
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.019999313354498015,
+        "vertical": 0.004999991059303294
+      },
+      "found": true
+    },
+    "captain-shower": {
+      "id": "captain-shower",
+      "blender": [
+        8.11,
+        -2.25,
+        0.25
+      ],
+      "position": {
+        "x": 8.11,
+        "y": 0.25,
+        "z": 2.25
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5804,
+        "nearestPoint": {
+          "x": 8.109999656677246,
+          "y": 0.2750000059604645,
+          "z": 2.25
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 3.433227533378158e-7,
+        "vertical": 0.025000005960464478
+      },
+      "found": true
+    },
+    "middle-crew": {
+      "id": "middle-crew",
+      "blender": [
+        8.85,
+        1.2,
+        0.23
+      ],
+      "position": {
+        "x": 8.85,
+        "y": 0.23,
+        "z": -1.2
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4956,
+        "nearestPoint": {
+          "x": 8.850000381469727,
+          "y": 0.22500000894069672,
+          "z": -1.2000000476837158
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 3.8443840769801673e-7,
+        "vertical": 0.004999991059303294
+      },
+      "found": true
+    },
+    "middle-head": {
+      "id": "middle-head",
+      "blender": [
+        7.76,
+        0.87,
+        0.25
+      ],
+      "position": {
+        "x": 7.76,
+        "y": 0.25,
+        "z": -0.87
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5129,
+        "nearestPoint": {
+          "x": 7.760000228881836,
+          "y": 0.2750000059604645,
+          "z": -0.8700000047683716
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 2.2893150129959298e-7,
+        "vertical": 0.025000005960464478
+      },
+      "found": true
+    },
+    "port-crew": {
+      "id": "port-crew",
+      "blender": [
+        11.1,
+        1.1,
+        0.23
+      ],
+      "position": {
+        "x": 11.1,
+        "y": 0.23,
+        "z": -1.1
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5041,
+        "nearestPoint": {
+          "x": 11.100000381469727,
+          "y": 0.22500000894069672,
+          "z": -1.100000023841858
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 3.822140587930956e-7,
+        "vertical": 0.004999991059303294
+      },
+      "found": true
+    },
+    "port-crew-head": {
+      "id": "port-crew-head",
+      "blender": [
+        12.72,
+        0.98,
+        0.23
+      ],
+      "position": {
+        "x": 12.72,
+        "y": 0.23,
+        "z": -0.98
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5122,
+        "nearestPoint": {
+          "x": 12.720000267028809,
+          "y": 0.22500000894069672,
+          "z": -0.9800000190734863
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 2.6770913723453797e-7,
+        "vertical": 0.004999991059303294
+      },
+      "found": true
+    },
+    "port-crew-shower": {
+      "id": "port-crew-shower",
+      "blender": [
+        12.5,
+        -0.075,
+        0.25
+      ],
+      "position": {
+        "x": 12.5,
+        "y": 0.25,
+        "z": 0.075
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5378,
+        "nearestPoint": {
+          "x": 12.5,
+          "y": 0.26785701513290405,
+          "z": 0.07500000298023224
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 2.980232241545089e-9,
+        "vertical": 0.017857015132904053
+      },
+      "found": true
+    },
+    "stbd-crew": {
+      "id": "stbd-crew",
+      "blender": [
+        9.4,
+        -1.15,
+        0.23
+      ],
+      "position": {
+        "x": 9.4,
+        "y": 0.23,
+        "z": 1.15
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5533,
+        "nearestPoint": {
+          "x": 9.33192253112793,
+          "y": 0.22500000894069672,
+          "z": 1.1953845024108887
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.08181867040664813,
+        "vertical": 0.004999991059303294
+      },
+      "found": true
+    },
+    "stbd-crew-head": {
+      "id": "stbd-crew-head",
+      "blender": [
+        11.9,
+        -1.5,
+        0.25
+      ],
+      "position": {
+        "x": 11.9,
+        "y": 0.25,
+        "z": 1.5
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5885,
+        "nearestPoint": {
+          "x": 11.899999618530273,
+          "y": 0.22500000894069672,
+          "z": 1.5
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 3.8146972691777137e-7,
+        "vertical": 0.024999991059303284
+      },
+      "found": true
+    },
+    "stbd-crew-shower": {
+      "id": "stbd-crew-shower",
+      "blender": [
+        12.45,
+        -1.75,
+        0.25
+      ],
+      "position": {
+        "x": 12.45,
+        "y": 0.25,
+        "z": 1.75
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 6042,
+        "nearestPoint": {
+          "x": 12.444999694824219,
+          "y": 0.2750000059604645,
+          "z": 1.75
+        },
+        "isOverPoly": false
+      },
+      "snap_distance_m": {
+        "horizontal": 0.0050003051757805395,
+        "vertical": 0.025000005960464478
+      },
+      "found": true
+    },
+    "upper-aft": {
+      "id": "upper-aft",
+      "blender": [
+        -7.5,
+        2,
+        5.03
+      ],
+      "position": {
+        "x": -7.5,
+        "y": 5.03,
+        "z": -2
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4738,
+        "nearestPoint": {
+          "x": -7.5,
+          "y": 5.025000095367432,
+          "z": -2
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 0,
+        "vertical": 0.004999904632568608
+      },
+      "found": true
+    },
+    "skylounge": {
+      "id": "skylounge",
+      "blender": [
+        -2.4,
+        0,
+        5.05
+      ],
+      "position": {
+        "x": -2.4,
+        "y": 5.05,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4885,
+        "nearestPoint": {
+          "x": -2.4000000953674316,
+          "y": 5.0428571701049805,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 9.536743172944284e-8,
+        "vertical": 0.007142829895019354
+      },
+      "found": true
+    },
+    "bridge": {
+      "id": "bridge",
+      "blender": [
+        3.15,
+        1.4,
+        5.04
+      ],
+      "position": {
+        "x": 3.15,
+        "y": 5.04,
+        "z": -1.4
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4720,
+        "nearestPoint": {
+          "x": 3.1500000953674316,
+          "y": 5.025000095367432,
+          "z": -1.399999976158142
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 9.830249853916663e-8,
+        "vertical": 0.014999904632568395
+      },
+      "found": true
+    },
+    "foredeck": {
+      "id": "foredeck",
+      "blender": [
+        8.5,
+        0,
+        5.02
+      ],
+      "position": {
+        "x": 8.5,
+        "y": 5.02,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5310,
+        "nearestPoint": {
+          "x": 8.5,
+          "y": 5.025000095367432,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 0,
+        "vertical": 0.005000095367432067
+      },
+      "found": true
+    },
+    "bow": {
+      "id": "bow",
+      "blender": [
+        15.8,
+        0,
+        4.07
+      ],
+      "position": {
+        "x": 15.8,
+        "y": 4.07,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5178,
+        "nearestPoint": {
+          "x": 15.800000190734863,
+          "y": 4.08065938949585,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 1.9073486257070726e-7,
+        "vertical": 0.010659389495849325
+      },
+      "found": true
+    },
+    "sundeck": {
+      "id": "sundeck",
+      "blender": [
+        -6.5,
+        0,
+        7.52
+      ],
+      "position": {
+        "x": -6.5,
+        "y": 7.52,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5234,
+        "nearestPoint": {
+          "x": -6.5,
+          "y": 7.525000095367432,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 0,
+        "vertical": 0.005000095367432067
+      },
+      "found": true
+    },
+    "beach-club": {
+      "id": "beach-club",
+      "blender": [
+        -17.05,
+        0,
+        0.67
+      ],
+      "position": {
+        "x": -17.05,
+        "y": 0.67,
+        "z": 0
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 5404,
+        "nearestPoint": {
+          "x": -17.049999237060547,
+          "y": 0.6499999761581421,
+          "z": 0
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 7.629394538355427e-7,
+        "vertical": 0.02000002384185795
+      },
+      "found": true
+    },
+    "engine": {
+      "id": "engine",
+      "blender": [
+        -9.25,
+        0.8,
+        0.28
+      ],
+      "position": {
+        "x": -9.25,
+        "y": 0.28,
+        "z": -0.8
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4760,
+        "nearestPoint": {
+          "x": -9.25,
+          "y": 0.2750000059604645,
+          "z": -0.800000011920929
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 1.1920928910669204e-8,
+        "vertical": 0.004999994039535549
+      },
+      "found": true
+    },
+    "garage": {
+      "id": "garage",
+      "blender": [
+        -10.4,
+        -2,
+        0.23
+      ],
+      "position": {
+        "x": -10.4,
+        "y": 0.23,
+        "z": 2
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 6088,
+        "nearestPoint": {
+          "x": -10.399999618530273,
+          "y": 0.25,
+          "z": 2
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 3.8146972691777137e-7,
+        "vertical": 0.01999999999999999
+      },
+      "found": true
+    },
+    "lazarette": {
+      "id": "lazarette",
+      "blender": [
+        -11.1,
+        2.1,
+        0.27
+      ],
+      "position": {
+        "x": -11.1,
+        "y": 0.27,
+        "z": -2.1
+      },
+      "nearest": {
+        "success": true,
+        "status": 1073741824,
+        "nearestRef": 4530,
+        "nearestPoint": {
+          "x": -11.100000381469727,
+          "y": 0.2750000059604645,
+          "z": -2.0999999046325684
+        },
+        "isOverPoly": true
+      },
+      "snap_distance_m": {
+        "horizontal": 3.9320999426437395e-7,
+        "vertical": 0.00500000596046446
+      },
+      "found": true
+    }
+  },
+  "routes": [
+    {
+      "from": "cockpit",
+      "to": "salon",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -9.300000190734863,
+          "y": 2.551612377166748,
+          "z": 0
+        },
+        {
+          "x": -7.5,
+          "y": 2.595716714859009,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "salon",
+      "to": "dining",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -7.5,
+          "y": 2.595716714859009,
+          "z": 0
+        },
+        {
+          "x": -4.005000114440918,
+          "y": 2.6000001430511475,
+          "z": 1.4900002479553223
+        },
+        {
+          "x": -3.5849990844726562,
+          "y": 2.6000001430511475,
+          "z": 1.875
+        },
+        {
+          "x": -2.25,
+          "y": 2.585165023803711,
+          "z": 2.0999999046325684
+        }
+      ]
+    },
+    {
+      "from": "dining",
+      "to": "galley",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -2.25,
+          "y": 2.585165023803711,
+          "z": 2.0999999046325684
+        },
+        {
+          "x": -1.4850006103515625,
+          "y": 2.6000001430511475,
+          "z": 2.190000057220459
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 2.6000001430511475,
+          "z": 2.2249999046325684
+        },
+        {
+          "x": -0.8199996948242188,
+          "y": 2.6000001430511475,
+          "z": 2.190000057220459
+        },
+        {
+          "x": 0.125,
+          "y": 2.6000001430511475,
+          "z": 1.5250000953674316
+        },
+        {
+          "x": 0.2649993896484375,
+          "y": 2.6000001430511475,
+          "z": 1.385000228881836
+        },
+        {
+          "x": 0.2999992370605469,
+          "y": 2.6000001430511475,
+          "z": 1.3499999046325684
+        },
+        {
+          "x": 0.47500038146972656,
+          "y": 2.575000047683716,
+          "z": -1.3799998760223389
+        },
+        {
+          "x": 0.5450000762939453,
+          "y": 2.575000047683716,
+          "z": -1.554999828338623
+        },
+        {
+          "x": 0.6499996185302734,
+          "y": 2.575000047683716,
+          "z": -1.6599998474121094
+        },
+        {
+          "x": 2.854999542236328,
+          "y": 2.575000047683716,
+          "z": -1.6599998474121094
+        },
+        {
+          "x": 3.75,
+          "y": 2.575000047683716,
+          "z": -1.649999976158142
+        }
+      ]
+    },
+    {
+      "from": "dining",
+      "to": "day-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -2.25,
+          "y": 2.585165023803711,
+          "z": 2.0999999046325684
+        },
+        {
+          "x": -1.4850006103515625,
+          "y": 2.6000001430511475,
+          "z": 2.190000057220459
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 2.6000001430511475,
+          "z": 2.2249999046325684
+        },
+        {
+          "x": 2.575000762939453,
+          "y": 2.575000047683716,
+          "z": 2.2950000762939453
+        },
+        {
+          "x": 2.924999237060547,
+          "y": 2.575000047683716,
+          "z": 1.945000171661377
+        },
+        {
+          "x": 3.030000686645508,
+          "y": 2.575000047683716,
+          "z": 1.8400001525878906
+        },
+        {
+          "x": 3.239999771118164,
+          "y": 2.575000047683716,
+          "z": 1.700000286102295
+        },
+        {
+          "x": 3.3799991607666016,
+          "y": 2.575000047683716,
+          "z": 1.700000286102295
+        },
+        {
+          "x": 3.4850006103515625,
+          "y": 2.575000047683716,
+          "z": 1.8050003051757812
+        },
+        {
+          "x": 3.799999952316284,
+          "y": 2.575000047683716,
+          "z": 2.200000047683716
+        }
+      ]
+    },
+    {
+      "from": "dining",
+      "to": "owner",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -2.25,
+          "y": 2.585165023803711,
+          "z": 2.0999999046325684
+        },
+        {
+          "x": -1.4850006103515625,
+          "y": 2.6000001430511475,
+          "z": 2.190000057220459
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 2.6000001430511475,
+          "z": 2.2249999046325684
+        },
+        {
+          "x": 2.575000762939453,
+          "y": 2.575000047683716,
+          "z": 2.2950000762939453
+        },
+        {
+          "x": 2.924999237060547,
+          "y": 2.575000047683716,
+          "z": 1.945000171661377
+        },
+        {
+          "x": 3.030000686645508,
+          "y": 2.575000047683716,
+          "z": 1.8400001525878906
+        },
+        {
+          "x": 3.239999771118164,
+          "y": 2.575000047683716,
+          "z": 1.700000286102295
+        },
+        {
+          "x": 4.6399993896484375,
+          "y": 2.575000047683716,
+          "z": 1.700000286102295
+        },
+        {
+          "x": 4.745000839233398,
+          "y": 2.575000047683716,
+          "z": 1.7350001335144043
+        },
+        {
+          "x": 4.920000076293945,
+          "y": 2.575000047683716,
+          "z": 1.875
+        },
+        {
+          "x": 5.650000095367432,
+          "y": 2.575000047683716,
+          "z": 2.0999999046325684
+        }
+      ]
+    },
+    {
+      "from": "owner",
+      "to": "owner-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 5.650000095367432,
+          "y": 2.575000047683716,
+          "z": 2.0999999046325684
+        },
+        {
+          "x": 6.635000228881836,
+          "y": 2.575000047683716,
+          "z": 1.8050003051757812
+        },
+        {
+          "x": 8.315000534057617,
+          "y": 2.6000001430511475,
+          "z": 1.1750001907348633
+        },
+        {
+          "x": 8.454999923706055,
+          "y": 2.6000001430511475,
+          "z": 1.0350003242492676
+        },
+        {
+          "x": 8.90999984741211,
+          "y": 2.575000047683716,
+          "z": 0.440000057220459
+        },
+        {
+          "x": 9.014999389648438,
+          "y": 2.575000047683716,
+          "z": 0.33500003814697266
+        },
+        {
+          "x": 10,
+          "y": 2.575000047683716,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "owner-head",
+      "to": "owner-WC",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 10,
+          "y": 2.575000047683716,
+          "z": 0
+        },
+        {
+          "x": 9.699999809265137,
+          "y": 2.575000047683716,
+          "z": 1.899999976158142
+        }
+      ]
+    },
+    {
+      "from": "owner-head",
+      "to": "owner-shower",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 10,
+          "y": 2.575000047683716,
+          "z": 0
+        },
+        {
+          "x": 9.720000267028809,
+          "y": 2.6000001430511475,
+          "z": -1.899999976158142
+        }
+      ]
+    },
+    {
+      "from": "salon",
+      "to": "lower-lobby",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -7.5,
+          "y": 2.595716714859009,
+          "z": 0
+        },
+        {
+          "x": -4.005000114440918,
+          "y": 2.6000001430511475,
+          "z": 1.4900002479553223
+        },
+        {
+          "x": -3.5849990844726562,
+          "y": 2.6000001430511475,
+          "z": 1.875
+        },
+        {
+          "x": -1.4850006103515625,
+          "y": 2.6000001430511475,
+          "z": 2.190000057220459
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 2.6000001430511475,
+          "z": 2.2249999046325684
+        },
+        {
+          "x": -0.8199996948242188,
+          "y": 2.6000001430511475,
+          "z": 2.190000057220459
+        },
+        {
+          "x": 0.8950004577636719,
+          "y": 2.575000047683716,
+          "z": 1.875
+        },
+        {
+          "x": 1,
+          "y": 2.575000047683716,
+          "z": 1.7699999809265137
+        },
+        {
+          "x": 1.2800006866455078,
+          "y": 1.5499999523162842,
+          "z": 0.6150002479553223
+        },
+        {
+          "x": 1.4200000762939453,
+          "y": 1.399999976158142,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 1.489999771118164,
+          "y": 1.225000023841858,
+          "z": 0.440000057220459
+        },
+        {
+          "x": 2.1200008392333984,
+          "y": 0.7250000238418579,
+          "z": 0.440000057220459
+        },
+        {
+          "x": 2.190000534057617,
+          "y": 0.7250000238418579,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 2.3299999237060547,
+          "y": 0.550000011920929,
+          "z": 0.6150002479553223
+        },
+        {
+          "x": 2.3299999237060547,
+          "y": 0.25,
+          "z": 0.755000114440918
+        },
+        {
+          "x": 2.2250003814697266,
+          "y": 0.25,
+          "z": 0.8600001335144043
+        },
+        {
+          "x": 1.5249996185302734,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 1.385000228881836,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 0.7900009155273438,
+          "y": 0.25,
+          "z": 1.2100000381469727
+        },
+        {
+          "x": 0.6849994659423828,
+          "y": 0.25,
+          "z": 1.1050000190734863
+        },
+        {
+          "x": 0.6849994659423828,
+          "y": 0.25,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 0.7549991607666016,
+          "y": 0.25,
+          "z": 0.33500003814697266
+        },
+        {
+          "x": 0.7900009155273438,
+          "y": 0.25,
+          "z": 0.2650003433227539
+        },
+        {
+          "x": 1,
+          "y": 0.25,
+          "z": 0.05500030517578125
+        },
+        {
+          "x": 1.210000991821289,
+          "y": 0.25,
+          "z": -0.11999988555908203
+        },
+        {
+          "x": 1.4200000762939453,
+          "y": 0.25,
+          "z": -0.19000005722045898
+        },
+        {
+          "x": 1.6299991607666016,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.8400001525878906,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        }
+      ]
+    },
+    {
+      "from": "lower-lobby",
+      "to": "port-double",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        },
+        {
+          "x": -0.4000000059604645,
+          "y": 0.25,
+          "z": -0.75
+        }
+      ]
+    },
+    {
+      "from": "lower-lobby",
+      "to": "stbd-double",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        },
+        {
+          "x": 1.8400001525878906,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.6299991607666016,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.4200000762939453,
+          "y": 0.25,
+          "z": -0.19000005722045898
+        },
+        {
+          "x": 1.210000991821289,
+          "y": 0.25,
+          "z": -0.11999988555908203
+        },
+        {
+          "x": 0.125,
+          "y": 0.25,
+          "z": 0.5799999237060547
+        },
+        {
+          "x": -0.4000000059604645,
+          "y": 0.25,
+          "z": 0.75
+        }
+      ]
+    },
+    {
+      "from": "port-double",
+      "to": "port-double-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -0.4000000059604645,
+          "y": 0.25,
+          "z": -0.75
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 0.25,
+          "z": -0.8899998664855957
+        },
+        {
+          "x": -2.184999465942383,
+          "y": 0.25,
+          "z": -0.994999885559082
+        },
+        {
+          "x": -2.325000762939453,
+          "y": 0.25,
+          "z": -1.1349999904632568
+        },
+        {
+          "x": -2.4650001525878906,
+          "y": 0.25,
+          "z": -1.3799998760223389
+        },
+        {
+          "x": -2.5699996948242188,
+          "y": 0.25,
+          "z": -1.4849998950958252
+        },
+        {
+          "x": -3.049999952316284,
+          "y": 0.25,
+          "z": -1.600000023841858
+        }
+      ]
+    },
+    {
+      "from": "stbd-double",
+      "to": "stbd-double-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -0.4000000059604645,
+          "y": 0.25,
+          "z": 0.75
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 0.25,
+          "z": 0.8949999809265137
+        },
+        {
+          "x": -2.1499996185302734,
+          "y": 0.25,
+          "z": 0.9650001525878906
+        },
+        {
+          "x": -2.325000762939453,
+          "y": 0.25,
+          "z": 1.140000343322754
+        },
+        {
+          "x": -2.4650001525878906,
+          "y": 0.25,
+          "z": 1.385000228881836
+        },
+        {
+          "x": -2.5699996948242188,
+          "y": 0.25,
+          "z": 1.4900002479553223
+        },
+        {
+          "x": -3.049999952316284,
+          "y": 0.25,
+          "z": 1.600000023841858
+        }
+      ]
+    },
+    {
+      "from": "lower-lobby",
+      "to": "port-twin",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        },
+        {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": -0.8199999332427979
+        },
+        {
+          "x": 2.645000457763672,
+          "y": 0.25,
+          "z": -0.9599997997283936
+        },
+        {
+          "x": 3.1000003814697266,
+          "y": 0.25,
+          "z": -1.309999942779541
+        },
+        {
+          "x": 3.445385217666626,
+          "y": 0.25,
+          "z": -1.5830767154693604
+        }
+      ]
+    },
+    {
+      "from": "lower-lobby",
+      "to": "stbd-twin",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        },
+        {
+          "x": 1.8400001525878906,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.6299991607666016,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.4200000762939453,
+          "y": 0.25,
+          "z": -0.19000005722045898
+        },
+        {
+          "x": 1.210000991821289,
+          "y": 0.25,
+          "z": -0.11999988555908203
+        },
+        {
+          "x": 1,
+          "y": 0.25,
+          "z": 0.05500030517578125
+        },
+        {
+          "x": 0.7900009155273438,
+          "y": 0.25,
+          "z": 0.2650003433227539
+        },
+        {
+          "x": 0.7549991607666016,
+          "y": 0.25,
+          "z": 0.33500003814697266
+        },
+        {
+          "x": 0.6849994659423828,
+          "y": 0.25,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 0.6849994659423828,
+          "y": 0.25,
+          "z": 1.1050000190734863
+        },
+        {
+          "x": 0.7900009155273438,
+          "y": 0.25,
+          "z": 1.2100000381469727
+        },
+        {
+          "x": 1.385000228881836,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 1.5249996185302734,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 2.3299999237060547,
+          "y": 0.25,
+          "z": 1.2800002098083496
+        },
+        {
+          "x": 2.469999313354492,
+          "y": 0.25,
+          "z": 1.2800002098083496
+        },
+        {
+          "x": 3.1000003814697266,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 3.4850006103515625,
+          "y": 0.25,
+          "z": 1.5950002670288086
+        },
+        {
+          "x": 3.799999952316284,
+          "y": 0.25,
+          "z": 1.6299999952316284
+        }
+      ]
+    },
+    {
+      "from": "port-twin",
+      "to": "port-twin-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 3.445385217666626,
+          "y": 0.25,
+          "z": -1.5830767154693604
+        },
+        {
+          "x": 2.645000457763672,
+          "y": 0.25,
+          "z": -2.254999876022339
+        },
+        {
+          "x": 2.5400009155273438,
+          "y": 0.25,
+          "z": -2.359999895095825
+        },
+        {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": -2.429999828338623
+        },
+        {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": -2.509999990463257
+        }
+      ]
+    },
+    {
+      "from": "stbd-twin",
+      "to": "stbd-twin-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 3.799999952316284,
+          "y": 0.25,
+          "z": 1.6299999952316284
+        },
+        {
+          "x": 3.4850006103515625,
+          "y": 0.25,
+          "z": 1.6649999618530273
+        },
+        {
+          "x": 2.645000457763672,
+          "y": 0.25,
+          "z": 2.260000228881836
+        },
+        {
+          "x": 2.6100006103515625,
+          "y": 0.25,
+          "z": 2.2950000762939453
+        },
+        {
+          "x": 2.5400009155273438,
+          "y": 0.25,
+          "z": 2.3650002479553223
+        },
+        {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": 2.434999942779541
+        },
+        {
+          "x": 2.5049991607666016,
+          "y": 0.25,
+          "z": 2.509999990463257
+        }
+      ]
+    },
+    {
+      "from": "galley",
+      "to": "crew-mess",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 3.75,
+          "y": 2.575000047683716,
+          "z": -1.649999976158142
+        },
+        {
+          "x": 3.239999771118164,
+          "y": 2.575000047683716,
+          "z": -0.434999942779541
+        },
+        {
+          "x": 3.239999771118164,
+          "y": 2.575000047683716,
+          "z": -0.2950000762939453
+        },
+        {
+          "x": 3.344999313354492,
+          "y": 2.575000047683716,
+          "z": -0.19000005722045898
+        },
+        {
+          "x": 5.760000228881836,
+          "y": 0.20000000298023224,
+          "z": -0.04999971389770508
+        },
+        {
+          "x": 6.704999923706055,
+          "y": 0.22500000894069672,
+          "z": -0.04999971389770508
+        },
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.1549997329711914
+        },
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.5
+        }
+      ]
+    },
+    {
+      "from": "crew-mess",
+      "to": "captain",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.5
+        },
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.1549997329711914
+        },
+        {
+          "x": 6.704999923706055,
+          "y": 0.22500000894069672,
+          "z": 0.4050002098083496
+        },
+        {
+          "x": 6.670000076293945,
+          "y": 0.22500000894069672,
+          "z": 0.8250002861022949
+        },
+        {
+          "x": 6.670000076293945,
+          "y": 0.22500000894069672,
+          "z": 1.070000171661377
+        },
+        {
+          "x": 6.739999771118164,
+          "y": 0.2773808538913727,
+          "z": 1.25
+        }
+      ]
+    },
+    {
+      "from": "captain",
+      "to": "captain-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 6.739999771118164,
+          "y": 0.2773808538913727,
+          "z": 1.25
+        },
+        {
+          "x": 6.9850006103515625,
+          "y": 0.22500000894069672,
+          "z": 1.244999885559082
+        },
+        {
+          "x": 8.280000686645508,
+          "y": 0.22500000894069672,
+          "z": 1.1399999856948853
+        }
+      ]
+    },
+    {
+      "from": "captain-head",
+      "to": "captain-shower",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 8.280000686645508,
+          "y": 0.22500000894069672,
+          "z": 1.1399999856948853
+        },
+        {
+          "x": 8.245000839233398,
+          "y": 0.22500000894069672,
+          "z": 1.7699999809265137
+        },
+        {
+          "x": 8.109999656677246,
+          "y": 0.2750000059604645,
+          "z": 2.25
+        }
+      ]
+    },
+    {
+      "from": "crew-mess",
+      "to": "middle-crew",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.5
+        },
+        {
+          "x": 7.405000686645508,
+          "y": 0.22500000894069672,
+          "z": 0.09000015258789062
+        },
+        {
+          "x": 7.475000381469727,
+          "y": 0.22500000894069672,
+          "z": 0.125
+        },
+        {
+          "x": 8.454999923706055,
+          "y": 0.22500000894069672,
+          "z": 0.125
+        },
+        {
+          "x": 8.524999618530273,
+          "y": 0.22500000894069672,
+          "z": 0.09000015258789062
+        },
+        {
+          "x": 8.630001068115234,
+          "y": 0.22500000894069672,
+          "z": -0.014999866485595703
+        },
+        {
+          "x": 8.735000610351562,
+          "y": 0.22500000894069672,
+          "z": -0.3299999237060547
+        },
+        {
+          "x": 8.850000381469727,
+          "y": 0.22500000894069672,
+          "z": -1.2000000476837158
+        }
+      ]
+    },
+    {
+      "from": "middle-crew",
+      "to": "middle-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 8.850000381469727,
+          "y": 0.22500000894069672,
+          "z": -1.2000000476837158
+        },
+        {
+          "x": 8.770000457763672,
+          "y": 0.22500000894069672,
+          "z": -1.0999999046325684
+        },
+        {
+          "x": 8.735000610351562,
+          "y": 0.22500000894069672,
+          "z": -1.0649998188018799
+        },
+        {
+          "x": 8.665000915527344,
+          "y": 0.22500000894069672,
+          "z": -0.994999885559082
+        },
+        {
+          "x": 8.280000686645508,
+          "y": 0.2750000059604645,
+          "z": -0.9249999523162842
+        },
+        {
+          "x": 7.760000228881836,
+          "y": 0.2750000059604645,
+          "z": -0.8700000047683716
+        }
+      ]
+    },
+    {
+      "from": "crew-mess",
+      "to": "port-crew",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.5
+        },
+        {
+          "x": 7.405000686645508,
+          "y": 0.22500000894069672,
+          "z": 0.09000015258789062
+        },
+        {
+          "x": 7.475000381469727,
+          "y": 0.22500000894069672,
+          "z": 0.125
+        },
+        {
+          "x": 8.454999923706055,
+          "y": 0.22500000894069672,
+          "z": 0.125
+        },
+        {
+          "x": 10.065000534057617,
+          "y": 0.22500000894069672,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 10.135000228881836,
+          "y": 0.22500000894069672,
+          "z": -0.25999975204467773
+        },
+        {
+          "x": 11.100000381469727,
+          "y": 0.22500000894069672,
+          "z": -1.100000023841858
+        }
+      ]
+    },
+    {
+      "from": "port-crew",
+      "to": "port-crew-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 11.100000381469727,
+          "y": 0.22500000894069672,
+          "z": -1.100000023841858
+        },
+        {
+          "x": 11.780000686645508,
+          "y": 0.22500000894069672,
+          "z": -0.8549997806549072
+        },
+        {
+          "x": 12.444999694824219,
+          "y": 0.22500000894069672,
+          "z": -0.8199999332427979
+        },
+        {
+          "x": 12.549999237060547,
+          "y": 0.22500000894069672,
+          "z": -0.8549997806549072
+        },
+        {
+          "x": 12.720000267028809,
+          "y": 0.22500000894069672,
+          "z": -0.9800000190734863
+        }
+      ]
+    },
+    {
+      "from": "port-crew-head",
+      "to": "port-crew-shower",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 12.720000267028809,
+          "y": 0.22500000894069672,
+          "z": -0.9800000190734863
+        },
+        {
+          "x": 12.479999542236328,
+          "y": 0.22500000894069672,
+          "z": -0.36499977111816406
+        },
+        {
+          "x": 12.479999542236328,
+          "y": 0.2750000059604645,
+          "z": -0.11999988555908203
+        },
+        {
+          "x": 12.5,
+          "y": 0.26785701513290405,
+          "z": 0.07500000298023224
+        }
+      ]
+    },
+    {
+      "from": "crew-mess",
+      "to": "stbd-crew",
+      "connected": true,
+      "end_error_m": 1.1920928955078125e-7,
+      "path": [
+        {
+          "x": 6.809999465942383,
+          "y": 0.22500000894069672,
+          "z": -0.5
+        },
+        {
+          "x": 7.405000686645508,
+          "y": 0.22500000894069672,
+          "z": 0.09000015258789062
+        },
+        {
+          "x": 7.475000381469727,
+          "y": 0.22500000894069672,
+          "z": 0.125
+        },
+        {
+          "x": 8.875,
+          "y": 0.22500000894069672,
+          "z": 0.23000001907348633
+        },
+        {
+          "x": 8.979999542236328,
+          "y": 0.22500000894069672,
+          "z": 0.33500003814697266
+        },
+        {
+          "x": 9.225000381469727,
+          "y": 0.22500000894069672,
+          "z": 1.070000171661377
+        },
+        {
+          "x": 9.260000228881836,
+          "y": 0.22500000894069672,
+          "z": 1.140000343322754
+        },
+        {
+          "x": 9.33192253112793,
+          "y": 0.22500000894069672,
+          "z": 1.1953843832015991
+        }
+      ]
+    },
+    {
+      "from": "stbd-crew",
+      "to": "stbd-crew-head",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 9.33192253112793,
+          "y": 0.22500000894069672,
+          "z": 1.1953843832015991
+        },
+        {
+          "x": 9.364999771118164,
+          "y": 0.22500000894069672,
+          "z": 1.244999885559082
+        },
+        {
+          "x": 11.899999618530273,
+          "y": 0.22500000894069672,
+          "z": 1.5
+        }
+      ]
+    },
+    {
+      "from": "stbd-crew-head",
+      "to": "stbd-crew-shower",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 11.899999618530273,
+          "y": 0.22500000894069672,
+          "z": 1.5
+        },
+        {
+          "x": 12.025001525878906,
+          "y": 0.22500000894069672,
+          "z": 1.559999942779541
+        },
+        {
+          "x": 12.444999694824219,
+          "y": 0.2750000059604645,
+          "z": 1.75
+        }
+      ]
+    },
+    {
+      "from": "cockpit",
+      "to": "upper-aft",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -9.300000190734863,
+          "y": 2.551612377166748,
+          "z": 0
+        },
+        {
+          "x": -8.729999542236328,
+          "y": 2.5500001907348633,
+          "z": 1.385000228881836
+        },
+        {
+          "x": -8.729999542236328,
+          "y": 2.5500001907348633,
+          "z": 1.7699999809265137
+        },
+        {
+          "x": -8.765000343322754,
+          "y": 2.5500001907348633,
+          "z": 1.9800000190734863
+        },
+        {
+          "x": -9.010000228881836,
+          "y": 2.5500001907348633,
+          "z": 2.2249999046325684
+        },
+        {
+          "x": -9.079999923706055,
+          "y": 2.5500001907348633,
+          "z": 2.260000228881836
+        },
+        {
+          "x": -12.895000457763672,
+          "y": 2.5500001907348633,
+          "z": 2.6100001335144043
+        },
+        {
+          "x": -13.175000190734863,
+          "y": 2.5500001907348633,
+          "z": 2.6100001335144043
+        },
+        {
+          "x": -13.350000381469727,
+          "y": 2.5500001907348633,
+          "z": 2.505000114440918
+        },
+        {
+          "x": -13.559999465942383,
+          "y": 2.5500001907348633,
+          "z": 2.2950000762939453
+        },
+        {
+          "x": -13.630000114440918,
+          "y": 2.5500001907348633,
+          "z": 2.190000057220459
+        },
+        {
+          "x": -13.699999809265137,
+          "y": 2.5500001907348633,
+          "z": 2.0850000381469727
+        },
+        {
+          "x": -13.770000457763672,
+          "y": 2.5500001907348633,
+          "z": 1.945000171661377
+        },
+        {
+          "x": -13.84000015258789,
+          "y": 2.5500001907348633,
+          "z": 1.7699999809265137
+        },
+        {
+          "x": -13.875,
+          "y": 2.5500001907348633,
+          "z": 1.6649999618530273
+        },
+        {
+          "x": -13.944999694824219,
+          "y": 2.5500001907348633,
+          "z": 1.4200000762939453
+        },
+        {
+          "x": -14.014999389648438,
+          "y": 2.5500001907348633,
+          "z": 1.070000171661377
+        },
+        {
+          "x": -14.050000190734863,
+          "y": 2.5500001907348633,
+          "z": 0.8250002861022949
+        },
+        {
+          "x": -14.085000038146973,
+          "y": 2.5500001907348633,
+          "z": 0.125
+        },
+        {
+          "x": -14.085000038146973,
+          "y": 2.5500001907348633,
+          "z": -0.11999988555908203
+        },
+        {
+          "x": -14.050000190734863,
+          "y": 2.5500001907348633,
+          "z": -0.8199999332427979
+        },
+        {
+          "x": -14.014999389648438,
+          "y": 2.5500001907348633,
+          "z": -1.0649998188018799
+        },
+        {
+          "x": -13.944999694824219,
+          "y": 2.5500001907348633,
+          "z": -1.4149999618530273
+        },
+        {
+          "x": -13.875,
+          "y": 2.5500001907348633,
+          "z": -1.6599998474121094
+        },
+        {
+          "x": -13.84000015258789,
+          "y": 2.5500001907348633,
+          "z": -1.7649998664855957
+        },
+        {
+          "x": -13.770000457763672,
+          "y": 2.5500001907348633,
+          "z": -1.9399998188018799
+        },
+        {
+          "x": -13.699999809265137,
+          "y": 2.5500001907348633,
+          "z": -2.0799999237060547
+        },
+        {
+          "x": -13.630000114440918,
+          "y": 2.5500001907348633,
+          "z": -2.184999942779541
+        },
+        {
+          "x": -13.559999465942383,
+          "y": 2.5500001907348633,
+          "z": -2.2899999618530273
+        },
+        {
+          "x": -13.315000534057617,
+          "y": 2.5500001907348633,
+          "z": -2.5349998474121094
+        },
+        {
+          "x": -13.244999885559082,
+          "y": 2.5500001907348633,
+          "z": -2.569999933242798
+        },
+        {
+          "x": -13.03499984741211,
+          "y": 2.5500001907348633,
+          "z": -2.6399998664855957
+        },
+        {
+          "x": -12.895000457763672,
+          "y": 2.5500001907348633,
+          "z": -2.6399998664855957
+        },
+        {
+          "x": -6.069999694824219,
+          "y": 5.025000095367432,
+          "z": -2.6050000190734863
+        },
+        {
+          "x": -6,
+          "y": 5.025000095367432,
+          "z": -2.569999933242798
+        },
+        {
+          "x": -5.8949995040893555,
+          "y": 5.025000095367432,
+          "z": -2.4649999141693115
+        },
+        {
+          "x": -5.8949995040893555,
+          "y": 5.025000095367432,
+          "z": -2.2199997901916504
+        },
+        {
+          "x": -6.034999847412109,
+          "y": 5.025000095367432,
+          "z": -2.115000009536743
+        },
+        {
+          "x": -7.5,
+          "y": 5.025000095367432,
+          "z": -2
+        }
+      ]
+    },
+    {
+      "from": "upper-aft",
+      "to": "skylounge",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -7.5,
+          "y": 5.025000095367432,
+          "z": -2
+        },
+        {
+          "x": -4.1449995040893555,
+          "y": 5.025000095367432,
+          "z": -1.6599998474121094
+        },
+        {
+          "x": -3.864999771118164,
+          "y": 5.025000095367432,
+          "z": -1.554999828338623
+        },
+        {
+          "x": -2.4000000953674316,
+          "y": 5.0428571701049805,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "skylounge",
+      "to": "bridge",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -2.4000000953674316,
+          "y": 5.0428571701049805,
+          "z": 0
+        },
+        {
+          "x": -1.4500007629394531,
+          "y": 5.050000190734863,
+          "z": -1.7649998664855957
+        },
+        {
+          "x": -1.3449993133544922,
+          "y": 5.050000190734863,
+          "z": -1.869999885559082
+        },
+        {
+          "x": -1.2749996185302734,
+          "y": 5.050000190734863,
+          "z": -1.9049999713897705
+        },
+        {
+          "x": -1.135000228881836,
+          "y": 5.050000190734863,
+          "z": -1.9749999046325684
+        },
+        {
+          "x": -0.8199996948242188,
+          "y": 5.050000190734863,
+          "z": -2.009999990463257
+        },
+        {
+          "x": -0.049999237060546875,
+          "y": 5.050000190734863,
+          "z": -2.009999990463257
+        },
+        {
+          "x": 0.125,
+          "y": 5.025000095367432,
+          "z": -1.9749999046325684
+        },
+        {
+          "x": 0.8250007629394531,
+          "y": 5.025000095367432,
+          "z": -1.6949999332427979
+        },
+        {
+          "x": 3.1500000953674316,
+          "y": 5.025000095367432,
+          "z": -1.399999976158142
+        }
+      ]
+    },
+    {
+      "from": "upper-aft",
+      "to": "foredeck",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -7.5,
+          "y": 5.025000095367432,
+          "z": -2
+        },
+        {
+          "x": -6.034999847412109,
+          "y": 5.025000095367432,
+          "z": -2.115000009536743
+        },
+        {
+          "x": -5.8949995040893555,
+          "y": 5.025000095367432,
+          "z": -2.2199997901916504
+        },
+        {
+          "x": -5.229999542236328,
+          "y": 5.025000095367432,
+          "z": -3.234999895095825
+        },
+        {
+          "x": -5.125,
+          "y": 5.025000095367432,
+          "z": -3.3399999141693115
+        },
+        {
+          "x": -2.9549999237060547,
+          "y": 5.025000095367432,
+          "z": -3.3399999141693115
+        },
+        {
+          "x": 8.805000305175781,
+          "y": 5.025000095367432,
+          "z": -2.744999885559082
+        },
+        {
+          "x": 8.90999984741211,
+          "y": 5.025000095367432,
+          "z": -2.6399998664855957
+        },
+        {
+          "x": 8.90999984741211,
+          "y": 5.025000095367432,
+          "z": -1.6949999332427979
+        },
+        {
+          "x": 8.735000610351562,
+          "y": 5.025000095367432,
+          "z": -0.40000009536743164
+        },
+        {
+          "x": 8.5,
+          "y": 5.025000095367432,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "foredeck",
+      "to": "bow",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 8.5,
+          "y": 5.025000095367432,
+          "z": 0
+        },
+        {
+          "x": 8.735000610351562,
+          "y": 5.025000095367432,
+          "z": 0.4050002098083496
+        },
+        {
+          "x": 9.190000534057617,
+          "y": 5.025000095367432,
+          "z": 1.385000228881836
+        },
+        {
+          "x": 9.260000228881836,
+          "y": 5.025000095367432,
+          "z": 1.5250000953674316
+        },
+        {
+          "x": 9.364999771118164,
+          "y": 5.025000095367432,
+          "z": 1.630000114440918
+        },
+        {
+          "x": 11.045000076293945,
+          "y": 5.025000095367432,
+          "z": 1.9100003242492676
+        },
+        {
+          "x": 11.850000381469727,
+          "y": 5.025000095367432,
+          "z": 1.9100003242492676
+        },
+        {
+          "x": 14.439998626708984,
+          "y": 4.875,
+          "z": 1.1050000190734863
+        },
+        {
+          "x": 14.615001678466797,
+          "y": 4.75,
+          "z": 1.0350003242492676
+        },
+        {
+          "x": 14.96500015258789,
+          "y": 4.475000381469727,
+          "z": 0.8949999809265137
+        },
+        {
+          "x": 15.139999389648438,
+          "y": 4.325000286102295,
+          "z": 0.7899999618530273
+        },
+        {
+          "x": 15.279998779296875,
+          "y": 4.200000286102295,
+          "z": 0.6500000953674316
+        },
+        {
+          "x": 15.800000190734863,
+          "y": 4.08065938949585,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "upper-aft",
+      "to": "sundeck",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -7.5,
+          "y": 5.025000095367432,
+          "z": -2
+        },
+        {
+          "x": -6.034999847412109,
+          "y": 5.025000095367432,
+          "z": -2.115000009536743
+        },
+        {
+          "x": -5.8949995040893555,
+          "y": 5.025000095367432,
+          "z": -2.2199997901916504
+        },
+        {
+          "x": -5.229999542236328,
+          "y": 5.025000095367432,
+          "z": -3.234999895095825
+        },
+        {
+          "x": -5.125,
+          "y": 5.025000095367432,
+          "z": -3.3399999141693115
+        },
+        {
+          "x": -2.9549999237060547,
+          "y": 5.025000095367432,
+          "z": -3.3399999141693115
+        },
+        {
+          "x": -2.815000534057617,
+          "y": 5.025000095367432,
+          "z": -3.1999998092651367
+        },
+        {
+          "x": -2.815000534057617,
+          "y": 5.025000095367432,
+          "z": -3.059999942779541
+        },
+        {
+          "x": -2.9200000762939453,
+          "y": 5.025000095367432,
+          "z": -2.9549999237060547
+        },
+        {
+          "x": -5.859999656677246,
+          "y": 7.525000095367432,
+          "z": -2.6399998664855957
+        },
+        {
+          "x": -5.965000152587891,
+          "y": 7.525000095367432,
+          "z": -2.5349998474121094
+        },
+        {
+          "x": -6.489999771118164,
+          "y": 7.525000095367432,
+          "z": -1.4149999618530273
+        },
+        {
+          "x": -6.5,
+          "y": 7.525000095367432,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "cockpit",
+      "to": "beach-club",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -9.300000190734863,
+          "y": 2.551612377166748,
+          "z": 0
+        },
+        {
+          "x": -8.729999542236328,
+          "y": 2.5500001907348633,
+          "z": 1.385000228881836
+        },
+        {
+          "x": -8.729999542236328,
+          "y": 2.5500001907348633,
+          "z": 1.7699999809265137
+        },
+        {
+          "x": -8.765000343322754,
+          "y": 2.5500001907348633,
+          "z": 1.9800000190734863
+        },
+        {
+          "x": -9.010000228881836,
+          "y": 2.5500001907348633,
+          "z": 2.2249999046325684
+        },
+        {
+          "x": -9.079999923706055,
+          "y": 2.5500001907348633,
+          "z": 2.260000228881836
+        },
+        {
+          "x": -12.895000457763672,
+          "y": 2.5500001907348633,
+          "z": 2.6100001335144043
+        },
+        {
+          "x": -14.434999465942383,
+          "y": 2.5500001907348633,
+          "z": 2.6449999809265137
+        },
+        {
+          "x": -16.920000076293945,
+          "y": 0.6499999761581421,
+          "z": 2.6449999809265137
+        },
+        {
+          "x": -17.024999618530273,
+          "y": 0.6499999761581421,
+          "z": 2.5399999618530273
+        },
+        {
+          "x": -17.235000610351562,
+          "y": 0.6499999761581421,
+          "z": 2.1200003623962402
+        },
+        {
+          "x": -17.235000610351562,
+          "y": 0.6499999761581421,
+          "z": 1.2100000381469727
+        },
+        {
+          "x": -17.049999237060547,
+          "y": 0.6499999761581421,
+          "z": 0
+        }
+      ]
+    },
+    {
+      "from": "cockpit",
+      "to": "lazarette",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -9.300000190734863,
+          "y": 2.551612377166748,
+          "z": 0
+        },
+        {
+          "x": -8.449999809265137,
+          "y": 2.5500001907348633,
+          "z": -1.3799998760223389
+        },
+        {
+          "x": -8.449999809265137,
+          "y": 2.5500001907348633,
+          "z": -2.2199997901916504
+        },
+        {
+          "x": -8.519999504089355,
+          "y": 2.575000047683716,
+          "z": -3.129999876022339
+        },
+        {
+          "x": -8.694999694824219,
+          "y": 2.575000047683716,
+          "z": -3.2699999809265137
+        },
+        {
+          "x": -10.0600004196167,
+          "y": 1.0500000715255737,
+          "z": -3.2699999809265137
+        },
+        {
+          "x": -10.515000343322754,
+          "y": 0.375,
+          "z": -3.1999998092651367
+        },
+        {
+          "x": -10.6899995803833,
+          "y": 0.25,
+          "z": -3.059999942779541
+        },
+        {
+          "x": -11.100000381469727,
+          "y": 0.2750000059604645,
+          "z": -2.0999999046325684
+        }
+      ]
+    },
+    {
+      "from": "lazarette",
+      "to": "engine",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -11.100000381469727,
+          "y": 0.2750000059604645,
+          "z": -2.0999999046325684
+        },
+        {
+          "x": -10.795000076293945,
+          "y": 0.2750000059604645,
+          "z": -2.569999933242798
+        },
+        {
+          "x": -10.6899995803833,
+          "y": 0.2750000059604645,
+          "z": -2.674999952316284
+        },
+        {
+          "x": -10.550000190734863,
+          "y": 0.2750000059604645,
+          "z": -2.674999952316284
+        },
+        {
+          "x": -10.444999694824219,
+          "y": 0.2750000059604645,
+          "z": -2.569999933242798
+        },
+        {
+          "x": -10.375,
+          "y": 0.2750000059604645,
+          "z": -2.429999828338623
+        },
+        {
+          "x": -10.269999504089355,
+          "y": 0.2750000059604645,
+          "z": -2.3249998092651367
+        },
+        {
+          "x": -10.0600004196167,
+          "y": 0.2750000059604645,
+          "z": -2.2199997901916504
+        },
+        {
+          "x": -9.289999961853027,
+          "y": 0.2750000059604645,
+          "z": -2.0799999237060547
+        },
+        {
+          "x": -8.975000381469727,
+          "y": 0.2750000059604645,
+          "z": -1.9749999046325684
+        },
+        {
+          "x": -8.835000038146973,
+          "y": 0.2750000059604645,
+          "z": -1.8349997997283936
+        },
+        {
+          "x": -8.835000038146973,
+          "y": 0.2750000059604645,
+          "z": -1.6949999332427979
+        },
+        {
+          "x": -9.25,
+          "y": 0.2750000059604645,
+          "z": -0.800000011920929
+        }
+      ]
+    },
+    {
+      "from": "lazarette",
+      "to": "garage",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -11.100000381469727,
+          "y": 0.2750000059604645,
+          "z": -2.0999999046325684
+        },
+        {
+          "x": -10.795000076293945,
+          "y": 0.2750000059604645,
+          "z": -2.569999933242798
+        },
+        {
+          "x": -10.6899995803833,
+          "y": 0.2750000059604645,
+          "z": -2.674999952316284
+        },
+        {
+          "x": -10.550000190734863,
+          "y": 0.2750000059604645,
+          "z": -2.674999952316284
+        },
+        {
+          "x": -10.444999694824219,
+          "y": 0.2750000059604645,
+          "z": -2.569999933242798
+        },
+        {
+          "x": -10.199999809265137,
+          "y": 0.375,
+          "z": -1.4499998092651367
+        },
+        {
+          "x": -10.199999809265137,
+          "y": 0.25,
+          "z": 1.700000286102295
+        },
+        {
+          "x": -10.399999618530273,
+          "y": 0.25,
+          "z": 2
+        }
+      ]
+    },
+    {
+      "from": "lower-lobby",
+      "to": "bridge",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 2.0999999046325684,
+          "y": 0.25,
+          "z": -0.20000000298023224
+        },
+        {
+          "x": 1.8400001525878906,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.6299991607666016,
+          "y": 0.25,
+          "z": -0.22499990463256836
+        },
+        {
+          "x": 1.4200000762939453,
+          "y": 0.25,
+          "z": -0.19000005722045898
+        },
+        {
+          "x": 1.210000991821289,
+          "y": 0.25,
+          "z": -0.11999988555908203
+        },
+        {
+          "x": 1,
+          "y": 0.25,
+          "z": 0.05500030517578125
+        },
+        {
+          "x": 0.7900009155273438,
+          "y": 0.25,
+          "z": 0.2650003433227539
+        },
+        {
+          "x": 0.7549991607666016,
+          "y": 0.25,
+          "z": 0.33500003814697266
+        },
+        {
+          "x": 0.6849994659423828,
+          "y": 0.25,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 0.6849994659423828,
+          "y": 0.25,
+          "z": 1.1050000190734863
+        },
+        {
+          "x": 0.7900009155273438,
+          "y": 0.25,
+          "z": 1.2100000381469727
+        },
+        {
+          "x": 1.385000228881836,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 1.5249996185302734,
+          "y": 0.25,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 2.2250003814697266,
+          "y": 0.25,
+          "z": 0.8600001335144043
+        },
+        {
+          "x": 2.3299999237060547,
+          "y": 0.25,
+          "z": 0.755000114440918
+        },
+        {
+          "x": 2.3299999237060547,
+          "y": 0.550000011920929,
+          "z": 0.6150002479553223
+        },
+        {
+          "x": 2.190000534057617,
+          "y": 0.7250000238418579,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 2.1200008392333984,
+          "y": 0.7250000238418579,
+          "z": 0.440000057220459
+        },
+        {
+          "x": 1.489999771118164,
+          "y": 1.225000023841858,
+          "z": 0.440000057220459
+        },
+        {
+          "x": 1.4200000762939453,
+          "y": 1.399999976158142,
+          "z": 0.47499990463256836
+        },
+        {
+          "x": 1.2800006866455078,
+          "y": 1.5499999523162842,
+          "z": 0.6150002479553223
+        },
+        {
+          "x": 1.2450008392333984,
+          "y": 2.2250001430511475,
+          "z": 1.315000057220459
+        },
+        {
+          "x": 1.2450008392333984,
+          "y": 2.4000000953674316,
+          "z": 1.4200000762939453
+        },
+        {
+          "x": 1.5249996185302734,
+          "y": 2.575000047683716,
+          "z": 1.7699999809265137
+        },
+        {
+          "x": 1.875,
+          "y": 2.575000047683716,
+          "z": 2.1200003623962402
+        },
+        {
+          "x": 1.9799995422363281,
+          "y": 2.575000047683716,
+          "z": 2.190000057220459
+        },
+        {
+          "x": 2.190000534057617,
+          "y": 2.575000047683716,
+          "z": 2.260000228881836
+        },
+        {
+          "x": 2.575000762939453,
+          "y": 2.575000047683716,
+          "z": 2.2950000762939453
+        },
+        {
+          "x": 2.6800003051757812,
+          "y": 2.575000047683716,
+          "z": 2.190000057220459
+        },
+        {
+          "x": 2.6800003051757812,
+          "y": 2.575000047683716,
+          "z": 2.0500001907348633
+        },
+        {
+          "x": 2.575000762939453,
+          "y": 2.575000047683716,
+          "z": 1.945000171661377
+        },
+        {
+          "x": 2.5400009155273438,
+          "y": 2.575000047683716,
+          "z": 1.9100003242492676
+        },
+        {
+          "x": 2.0149993896484375,
+          "y": 3.2250001430511475,
+          "z": 1.385000228881836
+        },
+        {
+          "x": 1.9799995422363281,
+          "y": 3.2250001430511475,
+          "z": 1.2800002098083496
+        },
+        {
+          "x": 1.9449996948242188,
+          "y": 3.5500001907348633,
+          "z": 0.8949999809265137
+        },
+        {
+          "x": 1.9449996948242188,
+          "y": 3.700000047683716,
+          "z": 0.755000114440918
+        },
+        {
+          "x": 1.9799995422363281,
+          "y": 5.025000095367432,
+          "z": -0.8899998664855957
+        },
+        {
+          "x": 2.2250003814697266,
+          "y": 5.025000095367432,
+          "z": -1.1349999904632568
+        },
+        {
+          "x": 3.1500000953674316,
+          "y": 5.025000095367432,
+          "z": -1.399999976158142
+        }
+      ]
+    },
+    {
+      "from": "port-twin",
+      "to": "port-twin-aisle",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 3.445385217666626,
+          "y": 0.25,
+          "z": -1.5830767154693604
+        },
+        {
+          "x": 3.450000762939453,
+          "y": 0.25,
+          "z": -1.5899999141693115
+        },
+        {
+          "x": 3.520000457763672,
+          "y": 0.25,
+          "z": -1.625
+        },
+        {
+          "x": 4,
+          "y": 0.25,
+          "z": -1.6299999952316284
+        }
+      ]
+    },
+    {
+      "from": "stbd-twin",
+      "to": "stbd-twin-aisle",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": 3.799999952316284,
+          "y": 0.25,
+          "z": 1.6299999952316284
+        },
+        {
+          "x": 4,
+          "y": 0.25,
+          "z": 1.6299999952316284
+        }
+      ]
+    },
+    {
+      "from": "cockpit",
+      "to": "starboard-main-walk",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -9.300000190734863,
+          "y": 2.551612377166748,
+          "z": 0
+        },
+        {
+          "x": -8.729999542236328,
+          "y": 2.5500001907348633,
+          "z": 1.385000228881836
+        },
+        {
+          "x": -8.345000267028809,
+          "y": 2.5500001907348633,
+          "z": 2.820000171661377
+        },
+        {
+          "x": -8.239999771118164,
+          "y": 2.5500001907348633,
+          "z": 2.9950003623962402
+        },
+        {
+          "x": -8.135000228881836,
+          "y": 2.5500001907348633,
+          "z": 3.0999999046325684
+        },
+        {
+          "x": -2.759999990463257,
+          "y": 2.5500001907348633,
+          "z": 3.1600000858306885
+        }
+      ]
+    },
+    {
+      "from": "starboard-main-walk",
+      "to": "foredeck",
+      "connected": true,
+      "end_error_m": 0,
+      "path": [
+        {
+          "x": -2.759999990463257,
+          "y": 2.5500001907348633,
+          "z": 3.1600000858306885
+        },
+        {
+          "x": 1.7000007629394531,
+          "y": 2.575000047683716,
+          "z": 3.3450002670288086
+        },
+        {
+          "x": 3.5550003051757812,
+          "y": 5.025000095367432,
+          "z": 3.3450002670288086
+        },
+        {
+          "x": 8.805000305175781,
+          "y": 5.025000095367432,
+          "z": 2.75
+        },
+        {
+          "x": 8.90999984741211,
+          "y": 5.025000095367432,
+          "z": 2.6449999809265137
+        },
+        {
+          "x": 8.90999984741211,
+          "y": 5.025000095367432,
+          "z": 1.6649999618530273
+        },
+        {
+          "x": 8.735000610351562,
+          "y": 5.025000095367432,
+          "z": 0.4050002098083496
+        },
+        {
+          "x": 8.5,
+          "y": 5.025000095367432,
+          "z": 0
+        }
+      ]
+    }
+  ],
+  "passed": 44,
+  "failed": 0,
+  "status": "Diagnostic; dynamic door sweeps and browser controls still require validation"
+}

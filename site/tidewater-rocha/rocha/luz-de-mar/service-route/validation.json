@@ -5,7 +5,7 @@
   "newEntranceDestination": "walk=service-entry",
   "checks": {
     "yachtTestFiles": 13,
-    "newBehaviorTests": 6,
+    "newBehaviorTests": 7,
     "headroomSamples": 1515,
     "sampleDescription": "303 center/lateral vertical rays on each of 5 stairs; threshold 1.62 source metres",
     "actualKeyboardAndTouchCompleteRoundTrip": true,

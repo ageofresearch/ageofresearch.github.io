@@ -1,5 +1,13 @@
 {
-  "build": "tidewater-rocha-public-r27",
+  "build": "tidewater-rocha-public-r28",
+  "rochaStartup": {
+    "default": "yacht-only",
+    "fullMapParameter": "map=full",
+    "button": "Cargar mapa completo",
+    "minimumSampledTextures": 16,
+    "waterAndTerrainDeferred": true,
+    "automaticBoarding": true
+  },
   "worlds": [
     "tidewater",
     "rocha"
@@ -7,8 +15,9 @@
   "upstream": "dgreenheck/tidewater",
   "upstreamCommit": "4811ba48d795197de5621985f404e765c0b7c0ef",
   "source": "Current Tidewater + Rocha project; original island and Rocha map, with existing project modifications.",
-  "requires": "WebGPU with 32 sampled textures per shader stage; desktop keyboard and mouse controls",
-  "minimumSampledTexturesPerShaderStage": 32,
+  "requires": "Rocha yacht: WebGPU with 16 sampled textures per shader stage; full maps: 32. Yacht walking supports keyboard, mouse and touch.",
+  "minimumSampledTexturesPerShaderStage": 16,
+  "fullMapMinimumSampledTexturesPerShaderStage": 32,
   "entry": "play.html",
   "renderingSettingsChanged": true,
   "fastWater": {

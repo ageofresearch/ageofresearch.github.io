@@ -1,0 +1,1 @@
+function e(e=``){let t=new URLSearchParams(e);return t.get(`world`)===`rocha`&&t.get(`map`)!==`full`}function t(e){let t=new URL(e);return t.searchParams.set(`world`,`rocha`),t.searchParams.set(`map`,`full`),t.searchParams.set(`resumeYacht`,`1`),t}export{e as n,t};

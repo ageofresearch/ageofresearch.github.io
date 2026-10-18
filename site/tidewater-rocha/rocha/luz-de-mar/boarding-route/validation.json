@@ -134,7 +134,18 @@
     "lowerDeckGpuGeometryUnchanged": true,
     "newTextures": 0,
     "newLightingOrReflectionPasses": 0,
-    "waterAaResolutionUnchanged": true
+    "waterAaResolutionUnchanged": true,
+    "nativeContinuousBoardingFrames": 48,
+    "productionBuild": "pass",
+    "productionCompatibilityGuard": "pass: cloud adapter 16/32; full scene not rendered",
+    "productionReviewDesktopPortrait": "pass: 9 images, no missing assets or overflow",
+    "siteWideStaticValidation": {
+      "htmlPages": 27,
+      "files": 605,
+      "result": "pass"
+    },
+    "serviceWallCollision": "pass: wall blocked at x 7.9, 8.5, 9, 10, 11; passage remains walkable",
+    "finalRenderPayloadMatchesCaptures": "15 mesh attribute/index streams byte-identical after collision-only fix"
   },
   "limitations": [
     "Door D1, horizontal louvres, service descent and lower vestibule are pending; their reservation is not a verified structural fit.",

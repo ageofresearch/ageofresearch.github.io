@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r23",
+  "build": "tidewater-rocha-public-r24",
   "worlds": [
     "tidewater",
     "rocha"
@@ -65,6 +65,16 @@
         ],
         "yaw": 0.4287780274460164,
         "pitch": -0.7657439795450527,
+        "time": 16.2
+      },
+      "luzDeMarStern": {
+        "p": [
+          555.6718781111111,
+          39.15675814938114,
+          -261.69057
+        ],
+        "yaw": -1.5707963267948966,
+        "pitch": -0.06030919661623661,
         "time": 16.2
       },
       "luzDeMarBarbecue": {
@@ -176,6 +186,20 @@
       "hiddenInExteriorViews": true,
       "privateMediaPublished": false,
       "review": "rocha/luz-de-mar/machinery/"
+    },
+    "transom": {
+      "version": "owner-central-transom-1",
+      "review": "rocha/luz-de-mar/stern-design/",
+      "reviewView": "luzDeMarStern",
+      "basis": "Owner rear approach video, 0–8 seconds; estimated panel dimensions and typeface fit",
+      "centralRakedPanel": true,
+      "name": "LUZ DE MAR",
+      "registry": "PANAMA",
+      "registrySide": "lower starboard",
+      "additionalTextures": 0,
+      "additionalBatches": 0,
+      "additionalRenderPasses": 0,
+      "privateMediaPublished": false
     },
     "ownerDetails": {
       "version": "owner-deck-fittings-1",

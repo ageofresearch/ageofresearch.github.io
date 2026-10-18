@@ -99,3 +99,7 @@ own *Sky Pro WebGPU*. It is published here under this repository's MIT license b
 ### Machinery-room craft review (r19)
 
 The owner-supplied CuartoDeMaquina photographs and two videos informed 96 paired close-up reviews and 1,152 pre-edit appearance diagnostics. The derived model includes formed edges, machinery fittings, instruments, insulation and filtered surface detail. Local dimensions/radii remain estimates. Owner-reference images and videos are excluded from the public build; the model-only review is at `rocha/luz-de-mar/machinery-craft/`. No owner photograph is used as a baked material texture.
+
+## Luz de Mar stern lettering
+
+The central transom uses baked Cinzel and Cinzel Decorative outlines by Natanael Gama (NDiscover), SIL Open Font License 1.1. Sources: https://github.com/google/fonts/tree/main/ofl/cinzel and https://github.com/google/fonts/tree/main/ofl/cinzeldecorative. Licenses: `rocha/luz-de-mar/licenses/Cinzel-OFL.txt` and `rocha/luz-de-mar/licenses/CinzelDecorative-OFL.txt`. The typeface fit and local component dimensions are photographic estimates. No runtime fonts or lettering textures are loaded.

@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r24",
+  "build": "tidewater-rocha-public-r25",
   "worlds": [
     "tidewater",
     "rocha"
@@ -119,11 +119,30 @@
       }
     },
     "walk": "walk=boarding",
+    "approach": {
+      "version": "owner-approach-r25",
+      "review": "rocha/luz-de-mar/approach/",
+      "upperEquipmentVersion": "owner-white-mast-domes-1",
+      "fixedCameraCheckpoints": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        18,
+        20
+      ],
+      "profiledServiceEnclosure": true,
+      "sourceScaleUnchanged": true,
+      "newTextures": 0,
+      "newRenderPasses": 0,
+      "dimensions": "Photographic estimates; not surveyed"
+    },
     "boardingRoute": {
-      "version": "owner-boarding-route-1",
+      "version": "owner-boarding-route-2",
       "checkpoint": "Connected port service entrance, descending stair and machinery vestibule",
       "review": "rocha/luz-de-mar/service-route/",
-      "serviceAccessVersion": "owner-port-service-route-1",
+      "serviceAccessVersion": "owner-port-service-route-2",
       "sharedLayoutAndCollision": true,
       "inboardGate": true,
       "reference": "Owner video, 12–24 seconds; fitted component dimensions",
@@ -163,7 +182,7 @@
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
       "serviceAccess": {
-        "version": "owner-port-service-route-1",
+        "version": "owner-port-service-route-2",
         "location": "Port side door aft of tall louvres, right-turn descent, lower vestibule and separate watertight machinery door",
         "exteriorWalk": "walk=service-entry",
         "twoIndependentDoors": true,
@@ -188,7 +207,7 @@
       "review": "rocha/luz-de-mar/machinery/"
     },
     "transom": {
-      "version": "owner-central-transom-1",
+      "version": "owner-central-transom-2",
       "review": "rocha/luz-de-mar/stern-design/",
       "reviewView": "luzDeMarStern",
       "basis": "Owner rear approach video, 0–8 seconds; estimated panel dimensions and typeface fit",
@@ -227,7 +246,7 @@
       "version": "luz-video-exterior-1",
       "basis": "Owner-supplied exterior stills and survey video; local dimensions estimated",
       "privateMediaPublished": false,
-      "boarding": "owner-boarding-route-1",
+      "boarding": "owner-boarding-route-2",
       "additionalTextures": 0,
       "additionalLightingOrReflectionPasses": 0,
       "sharedYachtBatches": 13,
@@ -257,7 +276,7 @@
       "version": "photo-guided-stairs-3",
       "routes": 5,
       "existingRoutes": 4,
-      "serviceRoute": "owner-port-service-route-1",
+      "serviceRoute": "owner-port-service-route-2",
       "references": {
         "lobby": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Lobby_Low-res.jpg",
         "inside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Stairs_Low-res.jpg",

@@ -2,7 +2,7 @@
   "scope": "Blender r110 to real-time website presentation; full VR-reference reconstruction remains in progress.",
   "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
   "glb_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
-  "runtime_sha256": "8a72b593f4c0d3f14655af4e4bebd827b4ac069c2b81048769aafdd4d1638177",
+  "runtime_sha256": "e4e86b2ceb618b8102a574c9dabb2e072a3039223be15adc3ef124b08cc02cdf",
   "lightmaps_manifest_sha256": "0bb1455b5f98128c56d58329b4b921c7e0f4233d6c629bb0af5511ecf734f9f6",
   "packed_companion_sha256": "2fdefca548aa7dfb1ec74fb29b5569e587be877e3ba436f2bcc22e13f58943fb",
   "matched_views_rendered": 55,
@@ -73,5 +73,61 @@
     "Glossy reflections and refraction",
     "Live marina remains visible through windows"
   ],
-  "device_frame_rate_certified": false
+  "device_frame_rate_certified": false,
+  "matched_comparison_runtime_sha256": "8a72b593f4c0d3f14655af4e4bebd827b4ac069c2b81048769aafdd4d1638177",
+  "flight_fix": {
+    "original_error": "Cold F entry before environment conversion: Maximum call stack size exceeded.",
+    "base_commit": "3620b795dd2a9f22b512818ebde048fd9784fdea",
+    "baseline_runtime_sha256": "8a72b593f4c0d3f14655af4e4bebd827b4ac069c2b81048769aafdd4d1638177",
+    "cold_texture_objects": {
+      "baseline_before": 88,
+      "baseline_after_error": 842,
+      "fixed_after_render": 96
+    },
+    "resource_tests_draws_suppressed": true,
+    "fixed_120_cycles_min_max": [
+      96,
+      96
+    ],
+    "all_32_mirrors_tested_twice": true,
+    "second_mirror_sweep_texture_min_max": [
+      154,
+      154
+    ],
+    "six_probe_refresh_texture_counts": [
+      162,
+      162,
+      162,
+      162,
+      162,
+      162
+    ],
+    "real_cold_and_warm_render_completed": true,
+    "f_preserved": true,
+    "geometry_and_materials_preserved": true,
+    "device_frame_rate_certified": false,
+    "display_pass_isolation_runtime_sha256": "e4e86b2ceb618b8102a574c9dabb2e072a3039223be15adc3ef124b08cc02cdf",
+    "versioned_entrypoint_tested": true,
+    "versioned_runtime": "assets/yacht-parity-runtime-r110-flight-fix1.js",
+    "visual_regression": {
+      "runtime_sha256": "e4e86b2ceb618b8102a574c9dabb2e072a3039223be15adc3ef124b08cc02cdf",
+      "frames": [
+        {
+          "id": "scene_master_head_f",
+          "mean_absolute_rgb_error": 0.0,
+          "changed_pixels": 0,
+          "max_rgb_error": 0
+        },
+        {
+          "id": "scene_salon_l",
+          "mean_absolute_rgb_error": 0.0016407407407407408,
+          "changed_pixels": 1440,
+          "max_rgb_error": 6
+        }
+      ]
+    },
+    "rendered_regression_errors": [],
+    "rendered_regression_failed_requests": []
+  },
+  "matched_views_scope": "Archived 55-view comparison from matched_comparison_runtime_sha256; same geometry, lighting and materials. Current runtime cold-flight and resource regressions recorded in flight_fix."
 }

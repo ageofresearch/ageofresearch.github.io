@@ -1,5 +1,5 @@
 {
-  "build": "tidewater-rocha-public-r25",
+  "build": "tidewater-rocha-public-r26",
   "worlds": [
     "tidewater",
     "rocha"
@@ -29,6 +29,28 @@
     "review": "rocha/luz-de-mar/survey-layout/"
   },
   "entranceYacht": {
+    "serviceRefinement": {
+      "version": "owner-service-refinement-r26",
+      "review": "rocha/luz-de-mar/service-refinement/",
+      "walk": "walk=service-entry",
+      "comparisonStages": 13,
+      "privateObservations": 55,
+      "baselineTriangles": 188129,
+      "currentTriangles": 193839,
+      "baselineGeometryBytes": 8797786,
+      "currentGeometryBytes": 9104422,
+      "batches": 13,
+      "boardingBatches": 2,
+      "newTextures": 0,
+      "newRenderPasses": 0,
+      "rightHandMachineryDoor": true,
+      "continuousHandrail": true,
+      "exposedMetalNosings": true,
+      "technicalFloor": 1.58,
+      "sourceDimensionsUnchanged": true,
+      "privateMediaPublished": false,
+      "dimensions": "Visual estimates; closed raised door destination unverified"
+    },
     "id": "luz-de-mar",
     "version": "luz-de-mar-rocha-1",
     "lakeId": "water-5",
@@ -142,7 +164,7 @@
       "version": "owner-boarding-route-2",
       "checkpoint": "Connected port service entrance, descending stair and machinery vestibule",
       "review": "rocha/luz-de-mar/service-route/",
-      "serviceAccessVersion": "owner-port-service-route-2",
+      "serviceAccessVersion": "owner-port-service-route-3",
       "sharedLayoutAndCollision": true,
       "inboardGate": true,
       "reference": "Owner video, 12–24 seconds; fitted component dimensions",
@@ -182,7 +204,7 @@
       "reviewView": "luzDeMarMachinery",
       "walk": "walk=LD_R02",
       "serviceAccess": {
-        "version": "owner-port-service-route-2",
+        "version": "owner-port-service-route-3",
         "location": "Port side door aft of tall louvres, right-turn descent, lower vestibule and separate watertight machinery door",
         "exteriorWalk": "walk=service-entry",
         "twoIndependentDoors": true,
@@ -276,7 +298,7 @@
       "version": "photo-guided-stairs-3",
       "routes": 5,
       "existingRoutes": 4,
-      "serviceRoute": "owner-port-service-route-2",
+      "serviceRoute": "owner-port-service-route-3",
       "references": {
         "lobby": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Lobby_Low-res.jpg",
         "inside": "https://azimutyachts.com/wp-content/uploads/2023/10/G36M-Stairs_Low-res.jpg",

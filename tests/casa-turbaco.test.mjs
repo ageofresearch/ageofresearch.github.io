@@ -22,7 +22,7 @@ test('door openings remain open when adjacent walls are unioned',()=>{
 });
 test('all 24 rooms retain their footprints and every model vertex is finite',()=>{
  assert.equal(data.rooms.length,24);const h=model();assert.equal(data.constructionHeight,2.7);
- h.root.traverse(o=>{if(o.isMesh){assert(o.geometry.index);for(const v of o.geometry.attributes.position.array)assert(Number.isFinite(v))}});
+ let triangles=0;h.root.traverse(o=>{if(o.isMesh){assert(o.geometry.index);triangles+=o.geometry.index.count/3;for(const key of ['position','normal','uv'])for(const v of o.geometry.attributes[key].array)assert(Number.isFinite(v),key)}});assert(triangles<450000,'interior detail must stay within the small-map geometry budget');
  assert(h.surfaceAudit.architecture.overlappingCells>0);assert(h.surfaceAudit.roofs.overlappingCells>0);
  const unique=new Set();h.roofs.traverse(o=>{if(!o.isMesh)return;const p=o.geometry.attributes.position,idx=o.geometry.index.array;for(let i=0;i<idx.length;i+=3){const key=[0,1,2].map(k=>new T.Vector3().fromBufferAttribute(p,idx[i+k]).toArray().map(n=>n.toFixed(4)).join(',')).sort().join('|');assert(!unique.has(key),'duplicate roof triangle');unique.add(key)}});
 });
@@ -30,6 +30,11 @@ test('beds fit within their bedrooms and dining chairs face the table without in
  const h=model();assert.equal(h.furniture.beds.length,10);
  for(const b of h.furniture.beds){const room=data.rooms.find(r=>b.x>r.rect[0]&&b.x<r.rect[2]&&b.z>r.rect[1]&&b.z<r.rect[3]);assert(room);for(const dx of [-b.width/2,b.width/2])for(const dz of [-b.length/2,b.length/2]){const x=b.x+Math.cos(b.angle)*dx+Math.sin(b.angle)*dz,z=b.z-Math.sin(b.angle)*dx+Math.cos(b.angle)*dz;assert(x>room.rect[0]-.015&&x<room.rect[2]+.015&&z>room.rect[1]-.015&&z<room.rect[3]+.015,room.name)}}
  for(const table of h.furniture.tables){const chairs=h.furniture.chairs.filter(c=>c.table===table.id);assert.equal(chairs.length,table.id==='dining'?8:4);for(const c of chairs){const dx=c.x-table.x,dz=c.z-table.z;assert(Math.sin(c.angle)*dx+Math.cos(c.angle)*dz>0);assert(table.top-c.seatHeight>.24&&table.top-c.seatHeight<.35);for(let u=-.25;u<=.25;u+=.05)for(let v=-.245;v<=.245;v+=.05){const x=dx+Math.cos(c.angle)*u+Math.sin(c.angle)*v,z=dz-Math.sin(c.angle)*u+Math.cos(c.angle)*v;assert(x*x/table.rx**2+z*z/table.rz**2>1,'chair intersects tabletop')}}}
+ function bounds(x,z,w,d,a){const dx=Math.abs(Math.cos(a))*w/2+Math.abs(Math.sin(a))*d/2,dz=Math.abs(Math.sin(a))*w/2+Math.abs(Math.cos(a))*d/2;return [x-dx,z-dz,x+dx,z+dz]}
+ for(const l of h.furniture.loungers)for(const c of h.furniture.chairs.filter(c=>c.table==='outdoor')){
+  const a=bounds(l.x,l.z,l.width,l.length,l.angle),b=bounds(c.x,c.z,.56,.65,c.angle),gap=.10;
+  assert(a[2]+gap<=b[0]||b[2]+gap<=a[0]||a[3]+gap<=b[1]||b[3]+gap<=a[1],'terrace chair must clear the loungers');
+ }
 });
 class Canvas extends EventTarget{
  style={};focus(){}setPointerCapture(){}

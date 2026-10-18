@@ -3,8 +3,8 @@ import {standard} from './tidewater/materials/Materials.js';
 import {Vegetation} from './tidewater/world/Vegetation.js';
 import {mulberry32} from './tidewater/util/Noise.js';
 import {SolidUnion} from './solids.js';
-import {createMaterials} from './materials.js';
-import {createFurniture} from './furniture.js';
+import {createMaterials} from './materials.js?v=20261018-furniture';
+import {createFurniture} from './furniture.js?v=20261018-furniture';
 
 export const S=12.42;
 export const pt=(x,z)=>[(x-521.16)/S,(z-292.5)/S];
@@ -109,20 +109,20 @@ export function buildHouse(scene,data,sky,lights){
  for(const x of [621,639])bed(x,271,false);
  bed(598,365,false,Math.PI/2);
  sofa(461,365,2.8,Math.PI);sofa(461,408,2.8);sofa(441,386,2.35,Math.PI/2);sofa(485,386,2.35,-Math.PI/2);
- const center=pt(461,386);box(center[0],.35,center[1],1.35,.4,1.35,'wood');box(center[0],.58,center[1],1.4,.06,1.4,'stone');cyl(center[0],.65,center[1],.2,.1,'terracotta');
+ const center=pt(461,386);furniture.coffeeTables(...center);
  rect(436,364,487,415,.137,'green',.012);
- sofa(410,385,2.4);const desk=pt(388,369);box(desk[0],.85,desk[1],.7,.09,1.9,'wood');chair(desk[0]+.65,desk[1],Math.PI/2);
+ sofa(410,385,2.4);const desk=pt(388,369);furniture.desk(...desk);chair(desk[0]+.65,desk[1],Math.PI/2);
  sofa(408,429,2.4,.5);const tv=pt(381,418);box(tv[0],1.2,tv[1],.1,.85,1.5,'metal');
- const dining=pt(522,414);furniture.dining(...dining);cyl(dining[0],.991,dining[1],.16,.16,'stone');
+ const dining=pt(522,414);furniture.dining(...dining);
  // Outdoor lounge furniture.
- for(const z of [342,366]){const p=pt(547,z);box(p[0],.32,p[1],1.6,.2,.65,'wood');box(p[0]-.5,.55,p[1],.45,.12,.65,'linen',root,.15);box(p[0],.46,p[1],1.4,.06,.6,'cream');}
- const table=pt(523,344);furniture.outdoorTable(...table);
+ for(const z of [342,366])furniture.lounger(...pt(547,z));
+ const table=pt(523,344);table[0]-=.55;furniture.outdoorTable(...table);
  // Kitchen, island and service storage.
- rect(558,419,614,428,.53,'wood',.86);rect(558,418,614,429,.985,'cream',.05);rect(617,386,627,428,.53,'wood',.86);rect(616,386,628,429,.985,'cream',.05);rect(566,391,592,403,.53,'wood',.86);rect(565,390,593,404,.985,'cream',.05);
+ furniture.cabinetRun(...pt(586,423.5),56/S,9/S);furniture.cabinetRun(...pt(622,407),42/S,10/S,Math.PI/2);furniture.cabinetRun(...pt(579,397),26/S,12/S);
  const hob=pt(584,424);box(hob[0],1.02,hob[1],.75,.025,.53,'metal');for(const x of [-.19,.19])for(const z of [-.14,.14])cyl(hob[0]+x,1.04,hob[1]+z,.095,.01,'metal');
- const fridge=pt(624,383);box(fridge[0],1.1,fridge[1],.75,1.95,.78,'metal');
+ const fridge=pt(624,383);furniture.refrigerator(...fridge);
  for(const r of data.rooms.filter(r=>r.id.startsWith('bano'))){const [a,b,c,d]=r.rect;cyl(a+.45,.41,b+.43,.22,.58,'cream');ball(a+.45,.74,b+.58,.25,.08,.34,'cream');box(c-.46,.72,d-.36,.65,.12,.48,'wood');ball(c-.46,.82,d-.36,.22,.09,.16,'cream');box(c-.07,1.4,d-.6,.03,.8,.6,'teal');}
- const estar=pt(611,319);for(let i=0;i<3;i++){const a=i*2.1;ball(estar[0]+Math.cos(a)*.8,.55,estar[1]+Math.sin(a)*.8,.38,.35,.38,'terracotta');}cyl(estar[0],.42,estar[1],.35,.08,'wood');
+ const er=data.rooms.find(r=>r.id==='estar').rect,estar=[(er[0]+er[2])/2,(er[1]+er[3])/2];for(let i=0;i<3;i++){const a=i*2.1,dx=Math.cos(a)*.88,dz=Math.sin(a)*.88;furniture.armchair(estar[0]+dx,estar[1]+dz,Math.atan2(dx,dz),['fabricClay','fabricSand','fabricOlive'][i]);}furniture.occasionalTable(...estar);
  // Gym equipment: treadmill, bike, weight bench and free weights.
  const gym=pt(625,154);box(gym[0],.25,gym[1],.85,.24,1.65,'metal');box(gym[0],.4,gym[1],.64,.04,1.4,'green');box(gym[0],1.18,gym[1]-.65,.7,.08,.13,'metal');for(const s of [-1,1])box(gym[0]+s*.34,.8,gym[1]-.65,.045,.8,.045,'metal');
  const bench=pt(615,142);box(bench[0],.55,bench[1],.48,.18,1.25,'linen');for(const dz of [-.45,.45])box(bench[0],.3,bench[1]+dz,.5,.5,.06,'metal');

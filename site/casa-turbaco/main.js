@@ -17,8 +17,9 @@ import {AirHaze} from './tidewater/post/AirHaze.js';
 import {Input} from './tidewater/core/Input.js?v=20261018-pointer-lock';
 import {FlyCamera} from './tidewater/player/FlyCamera.js';
 import {updateCameraVelocity} from './tidewater/post/CameraVelocity.js';
-import {buildHouse,makeVegetation,pt} from './model.js';
+import {buildHouse,makeVegetation,pt} from './model.js?v=20261018-furniture';
 import {ScenePointerControls} from './camera-controls.js?v=20261018-pointer-lock';
+import {loadFurnitureTextures} from './furniture-textures.js';
 
 const $=s=>document.getElementById(s),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const state={mode:'orbit',time:16.2,interior:false,tour:false,ready:false,sound:false,orbit:{az:.72,el:.64,distance:46,target:new T.Vector3(0,0,-1)},transition:null};
@@ -90,6 +91,7 @@ async function init(){
  SceneLighting.set('directModulation',new ShaderModule({name:'TurbacoCloudShadows',deps:[clouds.shadowModule],code:'fn hookDirectModulation(P:vec3f,N:vec3f)->vec3f{return vec3f(cloudsShadow(P.xz));}'}));
  SceneLighting.set('bounce',new ShaderModule({name:'TurbacoGroundBounce',code:'fn hookBounce(P:vec3f,N:vec3f)->vec3f{return frame.sunColor*vec3f(.032,.033,.018)*max(0.0,.4-N.y*.4)*max(frame.sunDir.y,0.0);}'}));
  const lights=app.lights=new LocalLights();
+ progress(.29,'Preparando madera, lino y acabados…');await loadFurnitureTextures();
  progress(.32,'Levantando los muros a 2,70 metros…');await new Promise(r=>requestAnimationFrame(r));app.house=buildHouse(scene,data,sky,lights);
  progress(.47,'Plantando palmeras y jardines…');await new Promise(r=>requestAnimationFrame(r));app.planting=makeVegetation(scene,data);
  const sr=app.sr=new SceneRenderer(engine.meshRenderer,scene,camera);sr.background=sky.background;sr.waterEnabled=false;sr.refractionEnabled=false;

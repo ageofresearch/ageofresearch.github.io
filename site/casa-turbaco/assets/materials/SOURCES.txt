@@ -1,0 +1,30 @@
+CASA TURBACO - FURNITURE MATERIALS
+
+Local texture scans, 1K resolution, Creative Commons CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+wood-color.jpg, wood-normal.jpg, wood-roughness.jpg
+Wood Table 001 - Poly Haven
+Photography: Dimitrios Savva. Processing: Rico Cilliers.
+https://polyhaven.com/a/wood_table_001
+
+linen-color.jpg, linen-normal.jpg, linen-roughness.jpg
+Rough Linen - Poly Haven
+Photography: colormass. Processing: Rico Cilliers.
+https://polyhaven.com/a/rough_linen
+
+The scanned luminance, normals and roughness are used with the scene's warm
+oak, ivory, sand, terracotta and olive palette. Color photos remain unmodified.
+Mipmaps and anisotropic filtering preserve stable detail at a distance.
+
+Visual research (linked references only; product photos are not redistributed):
+Ethnicraft - Behind the design of the Bok collection
+https://inspiration.ethnicraft.com/en/bok-collection
+Ethnicraft N701 - Ecru beige upholstery and soft modular cushions
+https://www.nordicnest.com/brands/ethnicraft-nv/n701-modular-corner-sofa-with-rounded-corner-fabric-ecru-beige-330x260-cm/
+Cozy Furniture - Ardea travertine coffee table set
+https://cozyfurnitures.ca/products/ardea-travertine-coffee-table-set
+
+Furniture meshes are authored for this architectural scene, inspired by
+rounded oak joinery, woven upholstery and honed natural stone references.
+They are interpretations, not branded product models.

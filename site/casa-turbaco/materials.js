@@ -1,4 +1,5 @@
-import {standard} from './tidewater/materials/Materials.js';
+import {standard,physical} from './tidewater/materials/Materials.js';
+import {furnitureTextures} from './furniture-textures.js';
 import {Texture} from './tidewater/engine/gpu/Texture.js';
 import {GPU} from './tidewater/engine/gpu/GPU.js';
 import {generateMipmaps} from './tidewater/engine/gpu/Mipmaps.js';
@@ -46,9 +47,39 @@ export function createMaterials(){
  materials.lawn.bindings.detailMap={texture:maps.plaster};materials.lawn.surface='let p=in.P.xz;let n=sin(p.x*.81+sin(p.y*.73))*sin(p.y*.6);let d=textureSample(detailMap,smpAnisoRepeat,p*2.0);s.albedo*=.92+n*.08+(d.r-.5)*.09;s.roughness=1.0;';
  materials.earth.surface='let p=in.P.xz;s.albedo*=.93+.07*sin(p.x*.13)*sin(p.y*.1);s.roughness=1.0;';
  for(const [key,color] of Object.entries({fabricIvory:0xeee8da,fabricSand:0xc8b69c,fabricClay:0xb8836a,fabricOlive:0x82907a})){
-  materials[key]=standard({name:'Turbaco · '+key,color,roughness:.95});mapped(materials[key],maps.fabric,'3.0','.15','.95');
+  materials[key]=physical({name:'Turbaco · '+key,color,roughness:.93,sheen:.18,sheenColor:0xe9dec9,sheenRoughness:.9,specularIntensity:.45});mapped(materials[key],maps.fabric,'3.0','.05','.93');
  }
- materials.oak=standard({name:'Turbaco · oak furniture',color:0x9b7955,roughness:.43});mapped(materials.oak,maps.wood,'1.6','.10','.43');
+ materials.oak=physical({name:'Turbaco · oiled oak furniture',color:0xa08460,roughness:.49,clearcoat:.09,clearcoatRoughness:.52});mapped(materials.oak,maps.wood,'.65','.025','.49');
+ materials.oakTop=physical({name:'Turbaco · joined oak tabletop',color:0xa08460,roughness:.46,clearcoat:.13,clearcoatRoughness:.46});mapped(materials.oakTop,maps.wood,'.65','.025','.46');
+ for(const [key,kind,scale,mean] of [
+  ['oak','wood',.667,.01769],['oakTop','wood',.667,.01769],
+  ...['fabricIvory','fabricSand','fabricClay','fabricOlive'].map(key=>[key,'linen',3.33,.3962])
+ ]){
+  const scan=furnitureTextures[kind];if(!scan)continue;
+  Object.assign(materials[key].bindings,{scanColor:{texture:scan.color},scanNormal:{texture:scan.normal},scanRoughness:{texture:scan.roughness}});
+  // Metric UVs are authored in each furniture component before rotation. Grain
+  // follows legs, rails and boards instead of projecting through the whole room.
+  delete materials[key].bindings.detailMap;
+  materials[key].surface=`let uv=in.uv*${scale};let c=textureSample(scanColor,smpAnisoRepeat,uv).rgb;let luma=dot(c,vec3f(.2126,.7152,.0722));s.albedo*=clamp(pow(max(luma,.0001)/${mean},${kind==='wood'?'.30':'.43'}),${kind==='wood'?'.78,1.22':'.68,1.32'});let r=textureSample(scanRoughness,smpAnisoRepeat,uv).r;s.roughness=${kind==='wood'?'.37+r*.22':'.80+r*.16'};let n=textureSample(scanNormal,smpAnisoRepeat,uv).xyz*2.0-1.0;s.normal=perturbNormalByMap(in.P,s.normal,uv,normalize(vec3f(n.xy*${kind==='wood'?'.17':'.12'},max(n.z,.25))));`;
+  if(key==='oakTop')materials[key].surface+=`let q=in.uv.x/.34;let edge=min(fract(q),1.0-fract(q));let aa=max(fwidth(q),.0001);let joint=1.0-smoothstep(.001-aa,.001+aa,edge);s.albedo*=1.0-joint*.18;s.albedo*=.985+.025*fract(sin(floor(q)*127.1)*43758.5453);`;
+ }
+ materials.travertine=physical({name:'Turbaco · honed travertine furniture',color:0xd6c5a6,roughness:.57,clearcoat:.045,clearcoatRoughness:.65});
+ materials.travertine.bindings.detailMap={texture:maps.stone};
+ materials.travertine.surface='let uv=in.P.xz*.75+in.P.yy*vec2f(.07,.12);let d=textureSample(detailMap,smpAnisoRepeat,uv);let bands=sin(in.P.y*38.0+in.P.x*2.1+d.r*2.0)*.025;s.albedo*=.94+d.r*.10+bands;s.roughness=.53+d.r*.12;s.normal=perturbNormalByMap(in.P,s.normal,uv,normalize(vec3f((d.gb*2.0-1.0)*.04,1.0)));';
+ for(const [key,color] of Object.entries({ceramicCream:0xe6decb,ceramicClay:0xae765d,ceramicOlive:0x718171})){
+  materials[key]=physical({name:'Turbaco · '+key,color,roughness:.39,clearcoat:.22,clearcoatRoughness:.24});
+  mapped(materials[key],maps.plaster,'8.0','.018','.38');
+ }
+ materials.brass=physical({name:'Turbaco · brushed brass',color:0x9e8961,metalness:.82,roughness:.35});
+ materials.cane=standard({name:'Turbaco · natural woven cane',color:0xae9469,roughness:.79});
+ materials.cane.surface='let q=in.uv*86.0;let f=abs(fract(q)-.5);let aa=max(fwidth(q),vec2f(.001));let warp=1.0-smoothstep(.28-aa.x,.28+aa.x,f.x);let weft=1.0-smoothstep(.28-aa.y,.28+aa.y,f.y);let woven=max(warp,weft);s.albedo*=mix(.48,1.04,woven);s.roughness=.78;';
+ materials.paper=standard({name:'Turbaco · warm book pages',color:0xe6dec9,roughness:.95});
+ materials.paper.surface='let aa=max(fwidth(in.P.y*700.0),.01);let lines=.5+.5*sin(in.P.y*700.0);s.albedo*=1.0-.08*lines/(1.0+aa);';
+ materials.bookOlive=standard({name:'Turbaco · olive linen binding',color:0x647261,roughness:.91});
+ materials.bookClay=standard({name:'Turbaco · clay linen binding',color:0xa66e55,roughness:.91});
+ materials.felt=standard({name:'Turbaco · charcoal felt feet',color:0x36352e,roughness:1});
+ materials.screen=physical({name:'Turbaco · dark display glass',color:0x192724,roughness:.21,metalness:.18,clearcoat:.3,clearcoatRoughness:.16});
+ materials.appliance=physical({name:'Turbaco · satin steel appliances',color:0x92988f,metalness:.65,roughness:.37,clearcoat:.08,clearcoatRoughness:.4});
  materials.seam=standard({name:'Turbaco · textile piping',color:0xc3b7a0,roughness:1});
  return materials;
 }

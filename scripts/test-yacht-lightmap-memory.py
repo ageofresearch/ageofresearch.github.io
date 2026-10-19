@@ -28,7 +28,7 @@ with sync_playwright()as p:
    f=(S/unquote(u.path).lstrip('/')).resolve()
    if not f.is_relative_to(S.resolve())or not f.is_file():r.fulfill(status=404,body='Missing local file');return
    body=runtime.read_bytes()if f.name=='yacht-parity-runtime-r110-memory-fix1.js'else f.read_bytes()
-   if f.name=='marina-yacht-entry-r110-memory-fix1.js':body=body.replace(b'await app.init();',b'await app.init();app.engine.stop();')
+   if f.name.startswith('marina-yacht-entry-r110-'):body=body.replace(b'await app.init();',b'await app.init();app.engine.stop();')
    kind='text/javascript'if f.suffix in ['.js','.mjs']else'application/wasm'if f.suffix=='.wasm'else mimetypes.guess_type(f.name)[0]or'application/octet-stream'
    r.fulfill(status=200,content_type=kind,body=body)
   page.route('**/*',route)

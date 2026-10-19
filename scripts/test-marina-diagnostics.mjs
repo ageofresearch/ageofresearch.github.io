@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {trackAllocations,lightingMemory,installDiagnostics} from '../site/marina-casa-de-campo/assets/marina-diagnostics-v1.mjs';
+import {trackAllocations,lightingMemory,installDiagnostics} from '../site/marina-casa-de-campo/assets/marina-diagnostics-v2.mjs';
 
 function fakeGL(){
  const gl={};let enumValue=100;

@@ -2,7 +2,7 @@
   "scope": "Blender r110 to real-time website presentation; full VR-reference reconstruction remains in progress.",
   "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
   "glb_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
-  "runtime_sha256": "e4e86b2ceb618b8102a574c9dabb2e072a3039223be15adc3ef124b08cc02cdf",
+  "runtime_sha256": "13ed574feeed82d17891bfc3e58fb7c67242f7ecaef04a8add06b29e666dce71",
   "lightmaps_manifest_sha256": "0bb1455b5f98128c56d58329b4b921c7e0f4233d6c629bb0af5511ecf734f9f6",
   "packed_companion_sha256": "2fdefca548aa7dfb1ec74fb29b5569e587be877e3ba436f2bcc22e13f58943fb",
   "matched_views_rendered": 55,
@@ -129,5 +129,48 @@
     "rendered_regression_errors": [],
     "rendered_regression_failed_requests": []
   },
-  "matched_views_scope": "Archived 55-view comparison from matched_comparison_runtime_sha256; same geometry, lighting and materials. Current runtime cold-flight and resource regressions recorded in flight_fix."
+  "matched_views_scope": "Archived 55-view comparison from matched_comparison_runtime_sha256; same geometry, lighting and materials. Current runtime memory and rendered regressions recorded in lightmap_memory_fix; historical mirror regression remains in flight_fix.",
+  "lightmap_memory_fix": {
+    "baseline_runtime_sha256": "e4e86b2ceb618b8102a574c9dabb2e072a3039223be15adc3ef124b08cc02cdf",
+    "runtime_sha256": "13ed574feeed82d17891bfc3e58fb7c67242f7ecaef04a8add06b29e666dce71",
+    "versioned_runtime": "assets/yacht-parity-runtime-r110-memory-fix1.js",
+    "change": "Release decoded CPU pixel arrays after evicting and disposing a lightmap; active maps keep their CPU data and evicted maps reload on demand.",
+    "baseline_views_tested": 12,
+    "baseline_peak_stale_array_bytes": 192937984,
+    "fixed_destinations": 43,
+    "fixed_sweeps": 2,
+    "fixed_view_changes": 86,
+    "fixed_peak_stale_array_bytes": 0,
+    "active_maps_without_cpu_data": 0,
+    "requested_webgl_bytes_at_each_sweep_end": [
+      825632698,
+      825632698
+    ],
+    "allocation_test_scope": "Draw commands suppressed; real decoding, shader compilation and GL allocations. No physical VRAM or user Mac process RAM measurement.",
+    "visual_regression": [
+      {
+        "view": "owner-head",
+        "different_pixels": 0,
+        "max_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "view": "salon",
+        "different_pixels": 0,
+        "max_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "view": "ball",
+        "different_pixels": 0,
+        "max_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      }
+    ],
+    "visual_regression_scope": "Unsuppressed Chromium/SwiftShader at 240x180 after cache transitions, all HUD hidden; owner bathroom, salon and ball. Not all archived matched views were recaptured.",
+    "diagnostic_build": "marina-diagnostics-v2",
+    "diagnostic_pause_status_and_restart_guard_tested": true,
+    "original_mac_freeze_fully_attributed": false,
+    "device_frame_rate_certified": false
+  }
 }

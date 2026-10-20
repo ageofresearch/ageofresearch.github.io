@@ -2,7 +2,7 @@
   "scope": "Blender r110 to real-time website presentation; full VR-reference reconstruction remains in progress.",
   "native_sha256": "5e2a69cc3d6f86db687af5cb8ba0b559877e067ef58a3810b1a19d75c3306186",
   "glb_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
-  "runtime_sha256": "13ed574feeed82d17891bfc3e58fb7c67242f7ecaef04a8add06b29e666dce71",
+  "runtime_sha256": "8f8458d332bd7f6eb00b1a8e4996d04d1fda870a8a46d8c44feadd1a14bb1d02",
   "lightmaps_manifest_sha256": "0bb1455b5f98128c56d58329b4b921c7e0f4233d6c629bb0af5511ecf734f9f6",
   "packed_companion_sha256": "2fdefca548aa7dfb1ec74fb29b5569e587be877e3ba436f2bcc22e13f58943fb",
   "matched_views_rendered": 55,
@@ -129,7 +129,7 @@
     "rendered_regression_errors": [],
     "rendered_regression_failed_requests": []
   },
-  "matched_views_scope": "Archived 55-view comparison from matched_comparison_runtime_sha256; same geometry, lighting and materials. Current runtime memory and rendered regressions recorded in lightmap_memory_fix; historical mirror regression remains in flight_fix.",
+  "matched_views_scope": "Archived Blender-to-browser comparison remains unchanged. The current runtime was compared against the preceding browser runtime across all 55 fitted cameras, fixtures, marina and ball; see lossless_performance_fix and performance-v1/EVIDENCE.json.",
   "lightmap_memory_fix": {
     "baseline_runtime_sha256": "e4e86b2ceb618b8102a574c9dabb2e072a3039223be15adc3ef124b08cc02cdf",
     "runtime_sha256": "13ed574feeed82d17891bfc3e58fb7c67242f7ecaef04a8add06b29e666dce71",
@@ -172,5 +172,154 @@
     "diagnostic_pause_status_and_restart_guard_tested": true,
     "original_mac_freeze_fully_attributed": false,
     "device_frame_rate_certified": false
+  },
+  "lossless_performance_fix": {
+    "scope": "Quality-preserving browser delivery and graphics storage changes. VR-reference reconstruction remains unfinished; no Blender pixel-identity or device frame-rate certification.",
+    "baseline_commit": "6f80c19319b30a39c718c2f057426fced2a70013",
+    "baseline_runtime_sha256": "13ed574feeed82d17891bfc3e58fb7c67242f7ecaef04a8add06b29e666dce71",
+    "runtime_sha256": "8f8458d332bd7f6eb00b1a8e4996d04d1fda870a8a46d8c44feadd1a14bb1d02",
+    "versioned_runtime": "assets/yacht-parity-runtime-r110-performance1.js",
+    "changes": [
+      "Share one scratch canonical camera for sequential mirror transmission renders; keep every mirror image target and the async view/probe camera separate.",
+      "Use an R8 binary selection target while preserving its depth buffer and the original compositor.",
+      "Prefer a lossless-WebP GLB after a decoder probe, with the original PNG model for unsupported/blocked decoders."
+    ],
+    "unchanged_rendering": [
+      "Geometry and meshopt bytes",
+      "Decoded texture pixels and resolutions",
+      "Materials and lighting",
+      "Mirror target sizes and update frequency",
+      "MSAA and FXAA",
+      "Full scene and HDR passes",
+      "Marina renderer, map, ball and controls"
+    ],
+    "allocation": {
+      "scope": "Requested GL storage estimates with draw commands suppressed; real decoders, shaders and allocations. Not physical VRAM, Mac process RAM or FPS.",
+      "viewport": [
+        256,
+        256
+      ],
+      "destinations": 43,
+      "sweeps_each": 2,
+      "baseline_requested_bytes_each_sweep_end": [
+        823484696,
+        823484696
+      ],
+      "candidate_requested_bytes_each_sweep_end": [
+        708294272,
+        708294272
+      ],
+      "saved_requested_bytes": 115190424,
+      "desktop_viewport": [
+        1440,
+        788
+      ],
+      "desktop_saved_requested_bytes": 118397976,
+      "lighting_records_identical_in_all_86_pairs": true,
+      "stale_lightmap_array_bytes": 0
+    },
+    "controls": {
+      "scope": "Fixed timestep actual key/touch handlers; draws suppressed. Actual rendered fixtures covered separately.",
+      "routes_passed": 44,
+      "stairs_passed": 11,
+      "W_metres": 0.2300292874729874,
+      "Shift_W_metres": 0.44000244140625,
+      "marina_F_free_entry": true,
+      "F_fly_and_walk": true,
+      "E_return": true,
+      "R_door": true,
+      "touch_metres": 0.38334331213523554,
+      "touch_keys_released": true,
+      "fallback_original_png_model_loaded": true,
+      "preferred_model_loaded": true,
+      "context_loss_and_restore": true,
+      "restored_mask": {
+        "complete": true,
+        "format": 1028,
+        "internalFormat": "R8",
+        "width": 390,
+        "height": 844,
+        "error": 0
+      }
+    },
+    "diagnostics": {
+      "version": "marina-diagnostics-v3",
+      "default_warning_without_pause": true,
+      "ordinary_visit_uninstrumented": true,
+      "browser_regression_passed": true
+    },
+    "evidence": "performance-v1/EVIDENCE.json",
+    "visual": {
+      "actual_draws_from_startup": true,
+      "inspection": {
+        "inspected_by": "Codex visual inspection",
+        "candidate_fitted_views": 55,
+        "contact_sheets": [
+          "CONTACT-1.png",
+          "CONTACT-2.png",
+          "CONTACT-3.png"
+        ],
+        "additional_full_resolution_views": [
+          "scene_salon_l",
+          "scene_master_head_f"
+        ],
+        "scope": "Inspected for missing geometry/textures and obvious regressions. Pixel comparisons are recorded separately. This is not independent expert review or approval of fidelity to the VR reference or native Blender render."
+      },
+      "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "viewport": [
+        360,
+        360
+      ],
+      "fitted_views": 55,
+      "extra_fixture_and_marina_views": 7,
+      "fixture_tested": "Galley_dining_door_hinge",
+      "fixture_states_captured": 4,
+      "changed_pixels_total": 0,
+      "animation_time_fixed": true,
+      "capture_sessions": {
+        "baseline": [
+          {
+            "group": "implementation-performance-20261020",
+            "captured_views": 27,
+            "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+            "models_requested": [
+              "soccer-ball-v2.glb",
+              "grande-36m.glb"
+            ],
+            "terminal_interruption": "[Errno 32] Broken pipe"
+          },
+          {
+            "group": "baseline-rest",
+            "captured_views": 35,
+            "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+            "models_requested": [
+              "grande-36m.glb"
+            ],
+            "terminal_interruption": null
+          }
+        ],
+        "candidate": [
+          {
+            "group": "candidate-first",
+            "captured_views": 27,
+            "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+            "models_requested": [
+              "grande-36m-lossless-webp-v1.glb"
+            ],
+            "terminal_interruption": null
+          },
+          {
+            "group": "candidate-rest",
+            "captured_views": 35,
+            "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+            "models_requested": [
+              "grande-36m-lossless-webp-v1.glb"
+            ],
+            "terminal_interruption": null
+          }
+        ]
+      },
+      "scope": "Real draws from startup in Chromium/SwiftShader. Each variant uses two matched camera sequences (first 27 fitted views, then remaining 28 plus fixtures/marina/ball). Intact first baseline captures survived a terminal restart; the failed output pipe did not report a site error. The repeated 86-transition allocation tests are separate, uninterrupted sessions. Not Mac FPS, physical VRAM, process RAM or native Blender parity."
+    }
   }
 }

@@ -1,0 +1,555 @@
+{
+  "scope": "Quality-preserving browser delivery and graphics storage changes. VR-reference reconstruction remains unfinished; no Blender pixel-identity or device frame-rate certification.",
+  "baseline_commit": "6f80c19319b30a39c718c2f057426fced2a70013",
+  "baseline_runtime_sha256": "13ed574feeed82d17891bfc3e58fb7c67242f7ecaef04a8add06b29e666dce71",
+  "runtime_sha256": "8f8458d332bd7f6eb00b1a8e4996d04d1fda870a8a46d8c44feadd1a14bb1d02",
+  "versioned_runtime": "assets/yacht-parity-runtime-r110-performance1.js",
+  "changes": [
+    "Share one scratch canonical camera for sequential mirror transmission renders; keep every mirror image target and the async view/probe camera separate.",
+    "Use an R8 binary selection target while preserving its depth buffer and the original compositor.",
+    "Prefer a lossless-WebP GLB after a decoder probe, with the original PNG model for unsupported/blocked decoders."
+  ],
+  "unchanged_rendering": [
+    "Geometry and meshopt bytes",
+    "Decoded texture pixels and resolutions",
+    "Materials and lighting",
+    "Mirror target sizes and update frequency",
+    "MSAA and FXAA",
+    "Full scene and HDR passes",
+    "Marina renderer, map, ball and controls"
+  ],
+  "delivery": {
+    "original_bytes": 76037084,
+    "delivery_bytes": 62651476,
+    "original_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
+    "delivery_sha256": "3a1bb6d1d7751aa1bef55fc834fafed83629ea24a8fc218b2fde8757bf90862d",
+    "geometry_ranges": 2552,
+    "gzip_original_bytes": 55510513,
+    "gzip_delivery_bytes": 42322155,
+    "passed": true,
+    "texture_images_verified": 61,
+    "all_decoded_rgba_pixels_identical": true,
+    "compressed_geometry_ranges_identical": true,
+    "scene_graph_accessors_materials_samplers_unchanged": true
+  },
+  "visual": {
+    "actual_draws_from_startup": true,
+    "inspection": {
+      "inspected_by": "Codex visual inspection",
+      "candidate_fitted_views": 55,
+      "contact_sheets": [
+        "CONTACT-1.png",
+        "CONTACT-2.png",
+        "CONTACT-3.png"
+      ],
+      "additional_full_resolution_views": [
+        "scene_salon_l",
+        "scene_master_head_f"
+      ],
+      "scope": "Inspected for missing geometry/textures and obvious regressions. Pixel comparisons are recorded separately. This is not independent expert review or approval of fidelity to the VR reference or native Blender render."
+    },
+    "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "viewport": [
+      360,
+      360
+    ],
+    "fitted_views": 55,
+    "extra_fixture_and_marina_views": 7,
+    "fixture_tested": "Galley_dining_door_hinge",
+    "fixture_states_captured": 4,
+    "comparisons": [
+      {
+        "id": "scene_bow_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_salon_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_captain_cabin_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_middle_crew_head_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_master_head_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_stbd_crew_cabin_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_middle_crew_cabin_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_crew_cabin_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_garage_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_engine_room_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_stbd_twin_guest_head_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_skylounge_-_port_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_stbd_crew_head_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_forward_starboard_side_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_upperdeck_lounge_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_pilothouse_entrance_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_master_cabin_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_sundeck_aft_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_skylounge_-_stbd_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_bow_sunbed_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_upperdeck_sunbed_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_double_guest_cabin_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_pilothouse_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_stbd_double_guest_cabin_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_skylounge_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_twin_guest_cabin_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_day_head_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_pilothouse_lounge_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_lazarette_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_master_shower_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_beach_club_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_stbd_double_guest_head_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_double_guest_head_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_stbd_twin_guest_cabin_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_starboard_side_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_crew_head_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_cockpit_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_galley_entrance_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_dining_area_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_master_cabin_-_port_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_crew_entrance_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_lower_lobby_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_sundeck_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_upperdeck_port_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_sundeck_forward_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_galley_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_cockpit_-_port_f",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_cockpit_-_stbd_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_crew_area_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_crew_corridor_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_bow_lounge_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_main_corridor_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_side_b",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_captain_head_l",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "scene_port_twin_guest_head_r",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "fixture-0",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "fixture-1",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "fixture-2",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "fixture-3",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "quay",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "exterior",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      },
+      {
+        "id": "ball",
+        "different_pixels": 0,
+        "maximum_channel_difference": 0,
+        "mean_channel_difference": 0.0
+      }
+    ],
+    "changed_pixels_total": 0,
+    "animation_time_fixed": true,
+    "capture_sessions": {
+      "baseline": [
+        {
+          "group": "implementation-performance-20261020",
+          "captured_views": 27,
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+          "models_requested": [
+            "soccer-ball-v2.glb",
+            "grande-36m.glb"
+          ],
+          "terminal_interruption": "[Errno 32] Broken pipe"
+        },
+        {
+          "group": "baseline-rest",
+          "captured_views": 35,
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+          "models_requested": [
+            "grande-36m.glb"
+          ],
+          "terminal_interruption": null
+        }
+      ],
+      "candidate": [
+        {
+          "group": "candidate-first",
+          "captured_views": 27,
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+          "models_requested": [
+            "grande-36m-lossless-webp-v1.glb"
+          ],
+          "terminal_interruption": null
+        },
+        {
+          "group": "candidate-rest",
+          "captured_views": 35,
+          "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+          "models_requested": [
+            "grande-36m-lossless-webp-v1.glb"
+          ],
+          "terminal_interruption": null
+        }
+      ]
+    },
+    "scope": "Real draws from startup in Chromium/SwiftShader. Each variant uses two matched camera sequences (first 27 fitted views, then remaining 28 plus fixtures/marina/ball). Intact first baseline captures survived a terminal restart; the failed output pipe did not report a site error. The repeated 86-transition allocation tests are separate, uninterrupted sessions. Not Mac FPS, physical VRAM, process RAM or native Blender parity."
+  },
+  "allocation": {
+    "scope": "Requested GL storage estimates with draw commands suppressed; real decoders, shaders and allocations. Not physical VRAM, Mac process RAM or FPS.",
+    "viewport": [
+      256,
+      256
+    ],
+    "destinations": 43,
+    "sweeps_each": 2,
+    "baseline_requested_bytes_each_sweep_end": [
+      823484696,
+      823484696
+    ],
+    "candidate_requested_bytes_each_sweep_end": [
+      708294272,
+      708294272
+    ],
+    "saved_requested_bytes": 115190424,
+    "desktop_viewport": [
+      1440,
+      788
+    ],
+    "desktop_saved_requested_bytes": 118397976,
+    "lighting_records_identical_in_all_86_pairs": true,
+    "stale_lightmap_array_bytes": 0
+  },
+  "controls": {
+    "scope": "Fixed timestep actual key/touch handlers; draws suppressed. Actual rendered fixtures covered separately.",
+    "routes_passed": 44,
+    "stairs_passed": 11,
+    "W_metres": 0.2300292874729874,
+    "Shift_W_metres": 0.44000244140625,
+    "marina_F_free_entry": true,
+    "F_fly_and_walk": true,
+    "E_return": true,
+    "R_door": true,
+    "touch_metres": 0.38334331213523554,
+    "touch_keys_released": true,
+    "fallback_original_png_model_loaded": true,
+    "preferred_model_loaded": true,
+    "context_loss_and_restore": true,
+    "restored_mask": {
+      "complete": true,
+      "format": 1028,
+      "internalFormat": "R8",
+      "width": 390,
+      "height": 844,
+      "error": 0
+    }
+  },
+  "diagnostics": {
+    "version": "marina-diagnostics-v3",
+    "default_warning_without_pause": true,
+    "ordinary_visit_uninstrumented": true,
+    "browser_regression_passed": true
+  },
+  "preservation": {
+    "core_renderer_sha256": "cbbd77c67ad021f5f285480f27334edeb3cbc0781b2f7730eadb782c837059cc",
+    "original_glb_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
+    "changed_existing_marina_files": [
+      "site/marina-casa-de-campo/index.html",
+      "site/marina-casa-de-campo/marina.html",
+      "site/marina-casa-de-campo/marina/yacht-r110/asset.json",
+      "site/marina-casa-de-campo/marina/yacht-r110/VALIDATION.json"
+    ],
+    "all_other_existing_marina_assets_byte_identical": true,
+    "recovery_zip_and_blender_artifacts_unchanged": true,
+    "release_upload_attempted": false
+  },
+  "limitations": [
+    "No measurement on the user Mac.",
+    "No claim that all original Mac memory freezes are resolved.",
+    "WebP reduces download bytes, not resident texture RAM.",
+    "The full VR-reference reconstruction remains in progress."
+  ]
+}

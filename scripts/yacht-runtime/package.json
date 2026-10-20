@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@recast-navigation/core": "^0.43.1",
+    "@recast-navigation/generators": "^0.43.1",
+    "esbuild": "^0.28.2",
+    "three": "^0.180.0",
+    "three-mesh-bvh": "^0.9.2"
+  }
+}

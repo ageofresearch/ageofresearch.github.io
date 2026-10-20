@@ -217,6 +217,31 @@
     },
     "machinery": {
       "version": "owner-machinery-3",
+      "mtu": {
+        "version": "mtu-m96-r03-1",
+        "sourceSHA256": "2b94d601027673a0506136c165c4c3a3a95f59f3646ed3d2eb8b6540f20c4580",
+        "placement": {
+          "x": 10.832801589554357,
+          "y": 1.2,
+          "z": 1.42,
+          "coupling": [
+            -1.089,
+            0,
+            0.52
+          ],
+          "nominalSize": [
+            2.258,
+            1.293,
+            1.453
+          ],
+          "basis": "Fitted to the existing gearbox input at source x9.72,z1.94; not surveyed installation coordinates."
+        },
+        "assets": "rocha/luz-de-mar/mtu-r03/",
+        "inspection": true,
+        "illustrativeCycleSeconds": 8,
+        "crankDegreesPerCycle": 720,
+        "privateMediaPublished": false
+      },
       "craft": {
         "version": "owner-machinery-craft-2",
         "cabinetFix": "Separated ASEA cabinet body, perimeter gasket and door surfaces; removes coplanar upper-border flicker without changing AA",

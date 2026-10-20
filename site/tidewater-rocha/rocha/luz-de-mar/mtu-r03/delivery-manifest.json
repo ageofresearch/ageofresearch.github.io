@@ -1,0 +1,52 @@
+{
+  "version": "mtu-m96-r03-1",
+  "sourceSHA256": "2b94d601027673a0506136c165c4c3a3a95f59f3646ed3d2eb8b6540f20c4580",
+  "files": [
+    {
+      "path": "MODEL-BASIS.md",
+      "bytes": 4791,
+      "sha256": "8fa231107db0826bd85f6a5234af7661207b51648d188a374899f8524f153483"
+    },
+    {
+      "path": "export-report.json",
+      "bytes": 1752,
+      "sha256": "c835a99f19c219b1a796fef379256470ecbbeb8416848fa07ba92598185ec7e7"
+    },
+    {
+      "path": "exterior.bin.gz",
+      "bytes": 4303485,
+      "sha256": "0a44e4580670b1f4c1ab8423a81014b2419bdf1141433003357c12e3e4741b45"
+    },
+    {
+      "path": "exterior.json",
+      "bytes": 225560,
+      "sha256": "a86d493c94b5122e5de92c6e5244ee372f107d7756895f2ec7cf36bc345c3f3b"
+    },
+    {
+      "path": "finish-report.json",
+      "bytes": 113,
+      "sha256": "5cb5ac77654f67fc8f568a7c503e882ef9380635b9cadb8417f042c9b14450af"
+    },
+    {
+      "path": "inspection.bin.gz",
+      "bytes": 15000136,
+      "sha256": "d990f63bb5cce0e565a567261a44eb2f3c7a67023ed2a798a12c84810c4bc2ba"
+    },
+    {
+      "path": "inspection.json",
+      "bytes": 364697,
+      "sha256": "9fcd8c61254d91966db2454db20f92866715df5da98990dd626e0d9477f106fc"
+    },
+    {
+      "path": "native-verification.json",
+      "bytes": 445,
+      "sha256": "adf39df8543fcee4c457c077a9387aec32df5824d7bfc36c442d91f59a26eb75"
+    },
+    {
+      "path": "normal-report.json",
+      "bytes": 180,
+      "sha256": "3faee3e47ee6e1d340f9ce292d4812572ba466ae360975f174e5463ddad33767"
+    }
+  ],
+  "manifestExcludesItself": true
+}

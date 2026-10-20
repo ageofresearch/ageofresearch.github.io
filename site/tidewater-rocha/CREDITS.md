@@ -103,3 +103,10 @@ The owner-supplied CuartoDeMaquina photographs and two videos informed 96 paired
 ## Luz de Mar stern lettering
 
 The central transom uses baked Cinzel and Cinzel Decorative outlines by Natanael Gama (NDiscover), SIL Open Font License 1.1. Sources: https://github.com/google/fonts/tree/main/ofl/cinzel and https://github.com/google/fonts/tree/main/ofl/cinzeldecorative. Licenses: `rocha/luz-de-mar/licenses/Cinzel-OFL.txt` and `rocha/luz-de-mar/licenses/CinzelDecorative-OFL.txt`. The typeface fit and local component dimensions are photographic estimates. No runtime fonts or lettering textures are loaded.
+
+MTU 16V2000M96 R03: user-supplied nominal Blender reconstruction, converted from
+MTU_16V_2000_M96_R03_package.zip with original source hash retained. Geometry,
+cutaway and illustrative native actions are used for Luz de Mar's machinery
+inspection. Manufacturer drawings remain credited to MTU / Rolls-Royce and
+Azimut Yachts; their use as references does not imply OEM authentication.
+See rocha/luz-de-mar/mtu-r03/MODEL-BASIS.md for source links and limits.

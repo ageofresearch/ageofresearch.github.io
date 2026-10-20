@@ -1,0 +1,56 @@
+{
+  "sourceFilename": "MTU_16V_2000_M96_R03.blend",
+  "sourceSHA256": "2b94d601027673a0506136c165c4c3a3a95f59f3646ed3d2eb8b6540f20c4580",
+  "sourceUnchanged": true,
+  "nativeVerification": "native-verification.json",
+  "assets": [
+    {
+      "kind": "exterior",
+      "bounds": [
+        -1.1115000247955322,
+        -0.6464999914169312,
+        0.06399999558925629,
+        1.1464999914169312,
+        0.6464999914169312,
+        1.5169471502304077
+      ],
+      "triangles": 382211,
+      "vertices": 220228,
+      "sourceEvaluatedTriangles": 2837260,
+      "byteLength": 14276564,
+      "sha256": "00336f5184a97a24f0b6d42193b7d7022bd904a1d059c3e6743ce81185b2154a",
+      "animation": null,
+      "compressedBytes": 4303485
+    },
+    {
+      "kind": "inspection",
+      "bounds": [
+        -1.1115000247955322,
+        -0.6218301653862,
+        0.06399999558925629,
+        1.1464999914169312,
+        0.6464999914169312,
+        1.5169471502304077
+      ],
+      "triangles": 982922,
+      "vertices": 578134,
+      "sourceEvaluatedTriangles": 3214012,
+      "byteLength": 56346792,
+      "sha256": "f330019a5f010d8f444578b9e2e69cb368b14765351ca3d8cb5b8817b0eb746b",
+      "animation": {
+        "frames": 240,
+        "fps": 30,
+        "duration": 8,
+        "crankDegrees": 720,
+        "channels": 254,
+        "loopMatrixError": 3.4969110629390343e-07,
+        "scope": "Native slow illustrative cycle; not 2450 rpm or OEM timing.",
+        "evaluationScene": "01 INTACT | exterior (native complete dependency graph)"
+      },
+      "compressedBytes": 15000136
+    }
+  ],
+  "newTextures": 0,
+  "newLightingPasses": 0,
+  "scope": "Metric display exports and sampled native animation; nominal mechanics, not OEM installation certification."
+}

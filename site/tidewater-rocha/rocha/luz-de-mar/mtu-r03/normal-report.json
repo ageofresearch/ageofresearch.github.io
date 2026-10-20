@@ -1,0 +1,10 @@
+{
+  "exterior": {
+    "zeroNativeCorners": 1011,
+    "degenerateCornerFallbacks": 0
+  },
+  "inspection": {
+    "zeroNativeCorners": 680,
+    "degenerateCornerFallbacks": 553
+  }
+}

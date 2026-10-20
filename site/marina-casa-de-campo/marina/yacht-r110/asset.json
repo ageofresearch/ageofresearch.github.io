@@ -14,5 +14,14 @@
   "status": "Validated same-source real-time presentation update; VR-reference reconstruction remains in progress.",
   "pixel_identical": false,
   "validation": "VALIDATION.json",
-  "comparisons": "review/"
+  "comparisons": "review/",
+  "browser_delivery": {
+    "preferred": "grande-36m-lossless-webp-v1.glb",
+    "preferred_sha256": "3a1bb6d1d7751aa1bef55fc834fafed83629ea24a8fc218b2fde8757bf90862d",
+    "preferred_bytes": 62651476,
+    "texture_encoding": "Lossless WebP; all 61 decoded texture pixel arrays and all 2552 meshopt geometry byte ranges match the original GLB.",
+    "fallback": "grande-36m.glb",
+    "fallback_sha256": "2f23f95f6746a22071beba7a1a9ddec4ccdd319e8cb70ce031075008f4376f40",
+    "selection": "Decode a 1x1 lossless WebP before requesting the model; unsupported or blocked decoders select the original PNG model."
+  }
 }

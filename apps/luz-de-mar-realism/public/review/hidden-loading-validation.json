@@ -1,0 +1,54 @@
+{
+  "pass": true,
+  "selectedLoadPreservedWhenHidden": true,
+  "resumedOnSelectedRoom": "bow",
+  "stats": {
+    "room": "bow",
+    "residentZones": [
+      "saloon",
+      "bow"
+    ],
+    "pendingZones": [],
+    "sharedTextures": {
+      "textures": 35,
+      "references": 44
+    },
+    "elevation": 6,
+    "position": [
+      27.1,
+      -2.35
+    ],
+    "frames": 4,
+    "ratio": 1,
+    "quality": 1,
+    "canvas": [
+      320,
+      213
+    ],
+    "calls": 16,
+    "triangles": 75681,
+    "memory": {
+      "geometries": 62,
+      "textures": 47
+    },
+    "estimatedMemory": {
+      "geometryBytes": 21286180,
+      "textureBytes": 361410129,
+      "shadowDepthBytes": 16777216,
+      "totalBytes": 399473525,
+      "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+    },
+    "frameMs": {
+      "p50": 0,
+      "p95": 0
+    },
+    "submissionMs": {
+      "p50": 1359.5,
+      "p95": 1359.5
+    },
+    "shadowUpdates": 10,
+    "errors": [],
+    "renderer": "WebKit WebGL"
+  },
+  "displayFramesPausedWhileWaitingForVisibility": true
+}

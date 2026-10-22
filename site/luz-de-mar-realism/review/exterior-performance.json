@@ -36,7 +36,8 @@
         9.20254227040962,
         -0.11871750821691351
       ]
-    }
+    },
+    "hiddenDuringSelectedLoad": true
   },
   "captures": [
     {
@@ -1793,6 +1794,7 @@
     "pass": true,
     "reason": "Face-interior irradiance retained in coarse planar surfaces; same application and navigation, fresh matched captures and actual rendered walking sequences."
   },
+  "hiddenLoadingValidation": "hidden-loading-validation.json",
   "baselineCameras": {
     "renderer": "Original unmodified yacht WebGPU / SwiftShader",
     "comparability": "Identical source camera coordinates, field of view and viewport. Lighting and model layout differ; this is a geometry/presentation comparison, not an isolated renderer benchmark.",

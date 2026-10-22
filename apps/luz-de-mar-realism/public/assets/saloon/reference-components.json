@@ -1,0 +1,2277 @@
+[
+  {
+    "id": "MD_R02/OBS/A10/0001",
+    "feature": "A10 Plank floor substrate",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0002",
+    "feature": "A09 Lower white side lining",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0003",
+    "feature": "A09 Upper curved window soffit",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0004",
+    "feature": "A09 Rounded ivory glazing reveal",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0005",
+    "feature": "A09 Thin dark window gasket",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0006",
+    "feature": "A09 Smoked glass",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0007",
+    "feature": "A09 Fine lower sill track",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0008",
+    "feature": "A09 Rounded ivory glazing reveal.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0009",
+    "feature": "A09 Thin dark window gasket.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0010",
+    "feature": "A09 Smoked glass.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0011",
+    "feature": "A09 Fine lower sill track.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0012",
+    "feature": "A01 White sculpted niche base",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0013",
+    "feature": "A01 Rounded veneer niche backing",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0014",
+    "feature": "A01 Ivory niche return",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0015",
+    "feature": "A01 Ivory niche return.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0016",
+    "feature": "A01 Niche shelf",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0017",
+    "feature": "A01 Curved veneer ceiling transition",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A02/0018",
+    "feature": "A02 Ceramic bowl",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A02/0019",
+    "feature": "A02 Bowl foot",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A02/0020",
+    "feature": "A02 Bowl foot.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A02/0021",
+    "feature": "A02 Bowl foot.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0022",
+    "feature": "A09 Lower white side lining.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0023",
+    "feature": "A09 Upper curved window soffit.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0024",
+    "feature": "A09 Rounded ivory glazing reveal.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0025",
+    "feature": "A09 Thin dark window gasket.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0026",
+    "feature": "A09 Smoked glass.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0027",
+    "feature": "A09 Fine lower sill track.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0028",
+    "feature": "A09 Rounded ivory glazing reveal.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0029",
+    "feature": "A09 Thin dark window gasket.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0030",
+    "feature": "A09 Smoked glass.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A09/0031",
+    "feature": "A09 Fine lower sill track.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0032",
+    "feature": "A01 White sculpted niche base.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0033",
+    "feature": "A01 Rounded veneer niche backing.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0034",
+    "feature": "A01 Ivory niche return.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0035",
+    "feature": "A01 Ivory niche return.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0036",
+    "feature": "A01 Niche shelf.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A01/0037",
+    "feature": "A01 Curved veneer ceiling transition.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A03/0038",
+    "feature": "A03 Small pale cylinders",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A03/0039",
+    "feature": "A03 Small pale cylinders.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A03/0040",
+    "feature": "A03 Small pale cylinders.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A11/0041",
+    "feature": "A11 Starboard full-height veneer panel",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A11/0042",
+    "feature": "A11 Fine vertical door division",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A11/0043",
+    "feature": "A11 Recessed dark vertical pull",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0044",
+    "feature": "A08 Aft glass sliding panel",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0045",
+    "feature": "A08 Sliding door metal edge",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0046",
+    "feature": "A08 Aft glass sliding panel.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0047",
+    "feature": "A08 Sliding door metal edge.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0048",
+    "feature": "A08 Aft glass sliding panel.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0049",
+    "feature": "A08 Sliding door metal edge.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0050",
+    "feature": "A08 Triple sliding track",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A08/0051",
+    "feature": "A08 Triple sliding track.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A07/0052",
+    "feature": "A07 Pleated full-height curtain",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A07/0053",
+    "feature": "A07 Pleated full-height curtain.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0054",
+    "feature": "A04 Aft veneer ceiling frieze",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0055",
+    "feature": "A04 Aft frieze return",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0056",
+    "feature": "A04 Aft frieze return.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0057",
+    "feature": "A04 Veneer wall behind the cabinet",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D04/0058",
+    "feature": "D04 Ivory forward wall panel",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D04/0059",
+    "feature": "D04 Ivory forward wall panel.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D04/0060",
+    "feature": "D04 Ivory forward wall panel.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D04/0061",
+    "feature": "D04 Passage shadow closure",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D04/0062",
+    "feature": "D04 Passage reveal",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D04/0063",
+    "feature": "D04 Passage reveal.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C05/0064",
+    "feature": "C05 Vertical warm panel joint",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C05/0065",
+    "feature": "C05 Vertical warm panel joint.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0066",
+    "feature": "S01 Dark recessed sofa plinth",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0067",
+    "feature": "S01 Curved seat module 00",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0068",
+    "feature": "S01 Upholstery seam",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0069",
+    "feature": "S01 Upholstery seam.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0070",
+    "feature": "S01 Curved seat module 01",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0071",
+    "feature": "S01 Curved back module 01",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0072",
+    "feature": "S01 Upholstery seam.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0073",
+    "feature": "S01 Upholstery seam.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0074",
+    "feature": "S01 Curved seat module 02",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0075",
+    "feature": "S01 Curved back module 02",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0076",
+    "feature": "S01 Upholstery seam.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0077",
+    "feature": "S01 Upholstery seam.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0078",
+    "feature": "S01 Curved seat module 03",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0079",
+    "feature": "S01 Curved back module 03",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0080",
+    "feature": "S01 Upholstery seam.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0081",
+    "feature": "S01 Upholstery seam.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0082",
+    "feature": "S01 Curved seat module 04",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0083",
+    "feature": "S01 Curved back module 04",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0084",
+    "feature": "S01 Upholstery seam.008",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0085",
+    "feature": "S01 Upholstery seam.009",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0086",
+    "feature": "S01 Curved seat module 05",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0087",
+    "feature": "S01 Curved back module 05",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0088",
+    "feature": "S01 Upholstery seam.010",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0089",
+    "feature": "S01 Upholstery seam.011",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0090",
+    "feature": "S01 Curved seat module 06",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0091",
+    "feature": "S01 Upholstery seam.012",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S01/0092",
+    "feature": "S01 Upholstery seam.013",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0093",
+    "feature": "S05 Butter back cushion",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0094",
+    "feature": "S05 Butter back cushion sewn perimeter",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0095",
+    "feature": "S05 Blue front cushion",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0096",
+    "feature": "S05 Blue front cushion sewn perimeter",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0097",
+    "feature": "S05 Butter back cushion.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0098",
+    "feature": "S05 Butter back cushion sewn perimeter.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0099",
+    "feature": "S05 Blue front cushion.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0100",
+    "feature": "S05 Blue front cushion sewn perimeter.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0101",
+    "feature": "S05 Butter back cushion.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0102",
+    "feature": "S05 Butter back cushion sewn perimeter.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0103",
+    "feature": "S05 Blue front cushion.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0104",
+    "feature": "S05 Blue front cushion sewn perimeter.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0105",
+    "feature": "S05 Butter back cushion.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0106",
+    "feature": "S05 Butter back cushion sewn perimeter.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0107",
+    "feature": "S05 Blue front cushion.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S05/0108",
+    "feature": "S05 Blue front cushion sewn perimeter.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S02/0109",
+    "feature": "S02 Chair recessed base",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S02/0110",
+    "feature": "S02 Boucle seat",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S02/0111",
+    "feature": "S02 Boucle barrel back",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S02/0112",
+    "feature": "S02 Chair recessed base.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S02/0113",
+    "feature": "S02 Boucle seat.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S02/0114",
+    "feature": "S02 Boucle barrel back.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S07/0115",
+    "feature": "S07 Oval blue pile rug",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S03/0116",
+    "feature": "S03 Dark oval coffee border",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S03/0117",
+    "feature": "S03 Pale oval coffee top",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S03/0118",
+    "feature": "S03 Thin warm oval rim",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S03/0119",
+    "feature": "S03 Inferred coffee support",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S03/0120",
+    "feature": "S03 Inferred coffee support.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0121",
+    "feature": "S04 Nested tray base",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0122",
+    "feature": "S04 Tray raised edge",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0123",
+    "feature": "S04 Tray raised edge.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0124",
+    "feature": "S04 Tray raised edge.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0125",
+    "feature": "S04 Loop tray handle",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0126",
+    "feature": "S04 Tray raised edge.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0127",
+    "feature": "S04 Loop tray handle.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0128",
+    "feature": "S04 Nested tray base.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0129",
+    "feature": "S04 Tray raised edge.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0130",
+    "feature": "S04 Tray raised edge.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0131",
+    "feature": "S04 Tray raised edge.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0132",
+    "feature": "S04 Loop tray handle.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0133",
+    "feature": "S04 Tray raised edge.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S04/0134",
+    "feature": "S04 Loop tray handle.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0135",
+    "feature": "S06 Draped pale throw",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0136",
+    "feature": "S06 Throw fringe",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0137",
+    "feature": "S06 Throw fringe.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0138",
+    "feature": "S06 Throw fringe.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0139",
+    "feature": "S06 Throw fringe.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0140",
+    "feature": "S06 Throw fringe.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0141",
+    "feature": "S06 Throw fringe.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0142",
+    "feature": "S06 Throw fringe.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0143",
+    "feature": "S06 Throw fringe.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0144",
+    "feature": "S06 Throw fringe.008",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0145",
+    "feature": "S06 Throw fringe.009",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0146",
+    "feature": "S06 Throw fringe.010",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0147",
+    "feature": "S06 Throw fringe.011",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0148",
+    "feature": "S06 Throw fringe.012",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0149",
+    "feature": "S06 Throw fringe.013",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0150",
+    "feature": "S06 Throw fringe.014",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0151",
+    "feature": "S06 Throw fringe.015",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0152",
+    "feature": "S06 Throw fringe.016",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0153",
+    "feature": "S06 Throw fringe.017",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0154",
+    "feature": "S06 Throw fringe.018",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0155",
+    "feature": "S06 Throw fringe.019",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0156",
+    "feature": "S06 Throw fringe.020",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0157",
+    "feature": "S06 Throw fringe.021",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0158",
+    "feature": "S06 Throw fringe.022",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0159",
+    "feature": "S06 Throw fringe.023",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0160",
+    "feature": "S06 Throw fringe.024",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0161",
+    "feature": "S06 Throw fringe.025",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0162",
+    "feature": "S06 Throw fringe.026",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0163",
+    "feature": "S06 Throw fringe.027",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0164",
+    "feature": "S06 Throw fringe.028",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0165",
+    "feature": "S06 Throw fringe.029",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0166",
+    "feature": "S06 Throw fringe.030",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0167",
+    "feature": "S06 Throw fringe.031",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0168",
+    "feature": "S06 Throw fringe.032",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0169",
+    "feature": "S06 Throw fringe.033",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0170",
+    "feature": "S06 Throw fringe.034",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S06/0171",
+    "feature": "S06 Throw fringe.035",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S08/0172",
+    "feature": "S08 Side table top",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S08/0173",
+    "feature": "S08 Side table stem",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S08/0174",
+    "feature": "S08 Side table foot",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S08/0175",
+    "feature": "S08 Lamp slender stem",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S08/0176",
+    "feature": "S08 Lamp small base",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/S08/0177",
+    "feature": "S08 Lobed glossy red shade",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0178",
+    "feature": "A04 Rounded aft glossy cabinet",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0179",
+    "feature": "A04 Pale counter top",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0180",
+    "feature": "A04 Cabinet door hairline",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0181",
+    "feature": "A04 Cabinet door hairline.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A04/0182",
+    "feature": "A04 Cabinet door hairline.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A05/0183",
+    "feature": "A05 Sculptural white lamp foot",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A05/0184",
+    "feature": "A05 Dark slender lamp stem",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A05/0185",
+    "feature": "A05 Ivory tapered lampshade",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A05/0186",
+    "feature": "A05 Sculptural white lamp foot.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A05/0187",
+    "feature": "A05 Dark slender lamp stem.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A05/0188",
+    "feature": "A05 Ivory tapered lampshade.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A06/0189",
+    "feature": "A06 Small framed ornament",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A06/0190",
+    "feature": "A06 Reflective sculptural plates",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A06/0191",
+    "feature": "A06 Reflective sculptural plates.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/A06/0192",
+    "feature": "A06 Reflective sculptural plates.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D01/0193",
+    "feature": "D01 Rounded dark stone tabletop",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D01/0194",
+    "feature": "D01 Rounded dark tabletop border",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D01/0195",
+    "feature": "D01 Pale sculptural table support",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D01/0196",
+    "feature": "D01 Pale sculptural table support.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0197",
+    "feature": "D02 Upholstered dining seat",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0198",
+    "feature": "D02 Curved dining back",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0199",
+    "feature": "D02 Slim dining leg",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0200",
+    "feature": "D02 Slim dining leg.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0201",
+    "feature": "D02 Slim dining leg.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0202",
+    "feature": "D02 Slim dining leg.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0203",
+    "feature": "D02 Upholstered dining seat.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0204",
+    "feature": "D02 Curved dining back.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0205",
+    "feature": "D02 Slim dining leg.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0206",
+    "feature": "D02 Slim dining leg.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0207",
+    "feature": "D02 Slim dining leg.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0208",
+    "feature": "D02 Slim dining leg.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0209",
+    "feature": "D02 Upholstered dining seat.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0210",
+    "feature": "D02 Curved dining back.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0211",
+    "feature": "D02 Slim dining leg.008",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0212",
+    "feature": "D02 Slim dining leg.009",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0213",
+    "feature": "D02 Slim dining leg.010",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0214",
+    "feature": "D02 Slim dining leg.011",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0215",
+    "feature": "D02 Upholstered dining seat.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0216",
+    "feature": "D02 Curved dining back.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0217",
+    "feature": "D02 Slim dining leg.012",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0218",
+    "feature": "D02 Slim dining leg.013",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0219",
+    "feature": "D02 Slim dining leg.014",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0220",
+    "feature": "D02 Slim dining leg.015",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0221",
+    "feature": "D02 Upholstered dining seat.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0222",
+    "feature": "D02 Curved dining back.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0223",
+    "feature": "D02 Slim dining leg.016",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0224",
+    "feature": "D02 Slim dining leg.017",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0225",
+    "feature": "D02 Slim dining leg.018",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0226",
+    "feature": "D02 Slim dining leg.019",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0227",
+    "feature": "D02 Upholstered dining seat.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0228",
+    "feature": "D02 Curved dining back.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0229",
+    "feature": "D02 Slim dining leg.020",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0230",
+    "feature": "D02 Slim dining leg.021",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0231",
+    "feature": "D02 Slim dining leg.022",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0232",
+    "feature": "D02 Slim dining leg.023",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0233",
+    "feature": "D02 Upholstered dining seat.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0234",
+    "feature": "D02 Curved dining back.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0235",
+    "feature": "D02 Slim dining leg.024",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0236",
+    "feature": "D02 Slim dining leg.025",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0237",
+    "feature": "D02 Slim dining leg.026",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0238",
+    "feature": "D02 Slim dining leg.027",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0239",
+    "feature": "D02 Upholstered dining seat.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0240",
+    "feature": "D02 Curved dining back.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0241",
+    "feature": "D02 Slim dining leg.028",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0242",
+    "feature": "D02 Slim dining leg.029",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0243",
+    "feature": "D02 Slim dining leg.030",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0244",
+    "feature": "D02 Slim dining leg.031",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0245",
+    "feature": "D02 Upholstered dining seat.008",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0246",
+    "feature": "D02 Curved dining back.008",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0247",
+    "feature": "D02 Slim dining leg.032",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0248",
+    "feature": "D02 Slim dining leg.033",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0249",
+    "feature": "D02 Slim dining leg.034",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0250",
+    "feature": "D02 Slim dining leg.035",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0251",
+    "feature": "D02 Upholstered dining seat.009",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0252",
+    "feature": "D02 Curved dining back.009",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0253",
+    "feature": "D02 Slim dining leg.036",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0254",
+    "feature": "D02 Slim dining leg.037",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0255",
+    "feature": "D02 Slim dining leg.038",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D02/0256",
+    "feature": "D02 Slim dining leg.039",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0257",
+    "feature": "D03 Pedestal centerpiece bowl",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0258",
+    "feature": "D03 Rounded ceramic rim bead",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0259",
+    "feature": "D03 Rounded ceramic rim bead.001",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0260",
+    "feature": "D03 Rounded ceramic rim bead.002",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0261",
+    "feature": "D03 Rounded ceramic rim bead.003",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0262",
+    "feature": "D03 Rounded ceramic rim bead.004",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0263",
+    "feature": "D03 Rounded ceramic rim bead.005",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0264",
+    "feature": "D03 Rounded ceramic rim bead.006",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0265",
+    "feature": "D03 Rounded ceramic rim bead.007",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0266",
+    "feature": "D03 Rounded ceramic rim bead.008",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0267",
+    "feature": "D03 Rounded ceramic rim bead.009",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0268",
+    "feature": "D03 Rounded ceramic rim bead.010",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0269",
+    "feature": "D03 Rounded ceramic rim bead.011",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/D03/0270",
+    "feature": "D03 Rounded ceramic rim bead.012",
+    "lightmap": "furniture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C01/0271",
+    "feature": "C01 Main white ceiling",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C01/0272",
+    "feature": "C01 Rounded annular coffer lip",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C01/0273",
+    "feature": "C01 Recessed oval center",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0274",
+    "feature": "C03 Downlight white rim",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0275",
+    "feature": "C03 Small recessed warm diffuser",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0276",
+    "feature": "C03 Downlight white rim.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0277",
+    "feature": "C03 Small recessed warm diffuser.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0278",
+    "feature": "C03 Downlight white rim.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0279",
+    "feature": "C03 Small recessed warm diffuser.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0280",
+    "feature": "C03 Downlight white rim.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0281",
+    "feature": "C03 Small recessed warm diffuser.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0282",
+    "feature": "C03 Downlight white rim.004",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0283",
+    "feature": "C03 Small recessed warm diffuser.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0284",
+    "feature": "C03 Downlight white rim.005",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0285",
+    "feature": "C03 Small recessed warm diffuser.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0286",
+    "feature": "C03 Downlight white rim.006",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0287",
+    "feature": "C03 Small recessed warm diffuser.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0288",
+    "feature": "C03 Downlight white rim.007",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0289",
+    "feature": "C03 Small recessed warm diffuser.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0290",
+    "feature": "C03 Coffered ceiling downlight rim",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0291",
+    "feature": "C03 Coffered ceiling warm diffuser",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0292",
+    "feature": "C03 Coffered ceiling downlight rim.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0293",
+    "feature": "C03 Coffered ceiling warm diffuser.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0294",
+    "feature": "C03 Coffered ceiling downlight rim.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0295",
+    "feature": "C03 Coffered ceiling warm diffuser.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0296",
+    "feature": "C03 Coffered ceiling downlight rim.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0297",
+    "feature": "C03 Coffered ceiling warm diffuser.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0298",
+    "feature": "C03 Circular speaker grille",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0299",
+    "feature": "C03 Circular speaker grille.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0300",
+    "feature": "C03 Circular speaker grille.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0301",
+    "feature": "C03 Circular speaker grille.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0302",
+    "feature": "C03 Alarm puck",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0303",
+    "feature": "C03 Long ventilation slot",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0304",
+    "feature": "C03 Long ventilation slot.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0305",
+    "feature": "C03 Long ventilation slot.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0306",
+    "feature": "C03 Long ventilation slot.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0307",
+    "feature": "C03 Long ventilation slot.004",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C03/0308",
+    "feature": "C03 Long ventilation slot.005",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0309",
+    "feature": "C04 Dining ceiling inset",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0310",
+    "feature": "C04 Recessed luminous dining oval",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0311",
+    "feature": "C04 Recessed luminous dining oval.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0312",
+    "feature": "C04 Central dining diffuser rim",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0313",
+    "feature": "C04 Central dining diffuser",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0314",
+    "feature": "C04 Central dining diffuser rim.001",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0315",
+    "feature": "C04 Central dining diffuser.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0316",
+    "feature": "C04 Central dining diffuser rim.002",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0317",
+    "feature": "C04 Central dining diffuser.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0318",
+    "feature": "C04 Central dining diffuser rim.003",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0319",
+    "feature": "C04 Central dining diffuser.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0320",
+    "feature": "C04 Central dining diffuser rim.004",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0321",
+    "feature": "C04 Central dining diffuser.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0322",
+    "feature": "C04 Central dining diffuser rim.005",
+    "lightmap": "architecture",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C04/0323",
+    "feature": "C04 Central dining diffuser.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C05/0324",
+    "feature": "C05 Aft warm accent joint",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  },
+  {
+    "id": "MD_R02/OBS/C05/0325",
+    "feature": "C05 Aft warm accent joint.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated",
+    "source": "VRCLOUD viewpoint inventory"
+  }
+]

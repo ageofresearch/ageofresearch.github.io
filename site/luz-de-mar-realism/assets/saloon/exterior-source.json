@@ -1,0 +1,31 @@
+{
+  "source": {
+    "provider": "Poly Haven",
+    "asset": "Fish Hoek Beach",
+    "author": "Greg Zaal",
+    "license": "CC0-1.0",
+    "licenseURL": "https://polyhaven.com/license",
+    "assetURL": "https://polyhaven.com/a/fish_hoek_beach",
+    "use": "Sky and distant coast supply an illustrative Blender environment with a physical water plane. Not the yacht reference location.",
+    "files": [
+      {
+        "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/4k/fish_hoek_beach_4k.hdr",
+        "file": "fish_hoek_beach_4k.hdr",
+        "sha256": "d82fea84dfb57f0e21bf229721bd26d0af34865f02d2145a26fe1b6c86546568",
+        "bytes": 22759214
+      }
+    ]
+  },
+  "adaptation": "Sky and distant coast from CC0 HDRI, near beach occluded by a physical Blender water plane; illustrative scenery, not the yacht anchorage.",
+  "linearHDR": {
+    "file": "marine-ambient.exr",
+    "sha256": "2ad29e6bb9153c371d667c7c43cb97ec6630f323a44e469f4dd3c3ba64984fd0"
+  },
+  "displayJPEG": {
+    "file": "exterior.jpg",
+    "width": 4096,
+    "height": 2048,
+    "sha256": "d29eb2a2190d64eb2ab9e1471bde2d5cbd3c62238667108d898f6ea6b95e9860"
+  },
+  "toneCurve": "Three.js 0.180.0 Neutral (MIT)"
+}

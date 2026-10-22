@@ -1,0 +1,212 @@
+{
+  "source": "https://vrcloud.com/?pv=1667308298",
+  "scope": "Salon and adjoining Dining Area viewpoints only. Machinery excluded from this release.",
+  "identity": "The tour identifies Azimut Grande 36M; specific vessel identity and as-built dimensions are unverified.",
+  "referenceDate": "2026-10-22",
+  "observed": [
+    {
+      "id": "S01",
+      "item": "Continuous curved modular sofa, open toward two armchairs",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Two mirrored separate sofas",
+      "required": "Replace the mirrored layout; model seat modules, rounded back, seams and recessed base"
+    },
+    {
+      "id": "S02",
+      "item": "Two separate ivory rounded lounge chairs",
+      "evidence": "scene_dining_area-port.png",
+      "oldMismatch": "Missing",
+      "required": "Add rounded seats, barrel backs and separate bases"
+    },
+    {
+      "id": "S03",
+      "item": "Single oval pale coffee table with dark edge and gold-toned inner rim",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Two small circular tables",
+      "required": "Replace tops and supports; support geometry remains inferred where hidden"
+    },
+    {
+      "id": "S04",
+      "item": "Two nested trays with loop handles on the coffee table",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Missing",
+      "required": "Add separate tray rims, bases and handles"
+    },
+    {
+      "id": "S05",
+      "item": "Pale blue and yellow cushions with rounded corners",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Box-like pillows with flat surfaces",
+      "required": "Add cloth volume, piping, shallow wrinkles and observed color placement"
+    },
+    {
+      "id": "S06",
+      "item": "Pale throw with fringe draped over forward sofa cushion",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Missing",
+      "required": "Add cloth drape and fringe; folds illustrative"
+    },
+    {
+      "id": "S07",
+      "item": "Oval blue rug with variegated cloudy pile",
+      "evidence": "scene_salon-floor.png",
+      "oldMismatch": "Flat blue separate carpet shapes",
+      "required": "Create continuous outline and physical-scale color/roughness variation"
+    },
+    {
+      "id": "S08",
+      "item": "Orange-red mushroom-like side lamp and small pale round side table",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Simplified floating red disk",
+      "required": "Model lobed shade, slender warm-metal stem, base and side table"
+    },
+    {
+      "id": "A01",
+      "item": "One opposing pair of glossy vertical-grain niches between the living and dining windows",
+      "evidence": "scene_dining_area-ceiling.png",
+      "oldMismatch": "Long generic side cabinets",
+      "required": "One pair, curved white bases and returns, veneer back and shelf; do not mirror an additional pair"
+    },
+    {
+      "id": "A02",
+      "item": "Small pale green ceramic bowl on three feet inside a wood niche",
+      "evidence": "scene_dining_area-forward.png",
+      "oldMismatch": "Missing",
+      "required": "Add bowl wall, concavity and three supports"
+    },
+    {
+      "id": "A03",
+      "item": "Small grouped pale cylindrical objects in opposite niche",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Missing",
+      "required": "Represent visible grouping without inventing product identity"
+    },
+    {
+      "id": "A04",
+      "item": "Rounded glossy cabinet along the aft port wall, with veneer wall backing",
+      "evidence": "scene_salon-aft.png",
+      "oldMismatch": "Generic linear cabinets",
+      "required": "Port-side placement, cabinet doors, pale top and rounded ends; no mirrored starboard cabinet"
+    },
+    {
+      "id": "A05",
+      "item": "Two white-shaded lamps above aft cabinet",
+      "evidence": "scene_salon-aft.png",
+      "oldMismatch": "Missing",
+      "required": "Model two shades at different heights and reflective sculptural stands"
+    },
+    {
+      "id": "A06",
+      "item": "Small reflective ornaments and framed item on aft cabinet",
+      "evidence": "scene_salon-aft.png",
+      "oldMismatch": "Missing",
+      "required": "Reproduce visible silhouettes; small hidden surfaces inferred"
+    },
+    {
+      "id": "A07",
+      "item": "Full-height ivory curtains at sliding entry",
+      "evidence": "scene_dining_area-port.png",
+      "oldMismatch": "Thin flat curtain bars",
+      "required": "Model folds, thickness, upper tracks and lower hem"
+    },
+    {
+      "id": "A08",
+      "item": "Dark smoked aft sliding doors with multiple tracks and metal pull details",
+      "evidence": "scene_salon-port.png",
+      "oldMismatch": "Single undifferentiated glass plane",
+      "required": "Retain transparent view, separate panels and tracks"
+    },
+    {
+      "id": "A09",
+      "item": "Large side glazing with rounded frame corners",
+      "evidence": "scene_salon-forward.png",
+      "oldMismatch": "Square frames, generic mullions",
+      "required": "Create inset pale reveals, thin dark gaskets and rounded corners"
+    },
+    {
+      "id": "A10",
+      "item": "Pale plank flooring with long grain and offset joints",
+      "evidence": "scene_dining_area-floor.png",
+      "oldMismatch": "Generic brown striping",
+      "required": "Add board-scale seams and pale wood maps"
+    },
+    {
+      "id": "C01",
+      "item": "Shallow oval lounge ceiling coffer with rounded relief",
+      "evidence": "scene_salon-ceiling.png",
+      "oldMismatch": "Large flat hanging disk",
+      "required": "Recessed center, subtle lip, consistent white finish and perimeter shadow gap"
+    },
+    {
+      "id": "C02",
+      "item": "Thin ceiling panel joints",
+      "evidence": "scene_dining_area-ceiling.png",
+      "oldMismatch": "Missing",
+      "required": "Add restrained millimetre-scale seam lines"
+    },
+    {
+      "id": "C03",
+      "item": "Small recessed/cylindrical spotlights, circular speaker grilles and alarm puck",
+      "evidence": "scene_salon-ceiling.png",
+      "oldMismatch": "Sparse approximate disks",
+      "required": "Model separate fixture types, rims and observed placement"
+    },
+    {
+      "id": "C04",
+      "item": "Shallow transverse dining ceiling oval with a luminous perimeter and a central row of diffusers",
+      "evidence": "scene_salon-starboard.png",
+      "oldMismatch": "Missing",
+      "required": "Ceiling-mounted recess, warm perimeter and central small fixtures; remove the previously inferred suspension wires"
+    },
+    {
+      "id": "C05",
+      "item": "Warm vertical accent light at panel and entry joints",
+      "evidence": "scene_dining_area-port.png",
+      "oldMismatch": "Missing",
+      "required": "Add narrow diffusers and modest local lighting"
+    },
+    {
+      "id": "D01",
+      "item": "Oblong stone dining table oriented across the beam, with a dark rounded border",
+      "evidence": "scene_dining_area-starboard.png",
+      "oldMismatch": "Round small table",
+      "required": "Transverse top, inset stone, rolled dark border and pale supports; orientation confirmed by tour and its deck plan"
+    },
+    {
+      "id": "D02",
+      "item": "Ten rounded dining chairs: four on each long side and one at each short end",
+      "evidence": "scene_dining_area-aft.png",
+      "oldMismatch": "Tall angular chairs",
+      "required": "Transverse ten-seat layout shown by the deck plan and tour, curved backs facing away from the table, dark slim legs"
+    },
+    {
+      "id": "D03",
+      "item": "White pedestal centerpiece with scalloped/rounded rim",
+      "evidence": "scene_dining_area-starboard.png",
+      "oldMismatch": "Tiny generic vase",
+      "required": "Add pedestal, shallow bowl and rounded rim lobes"
+    },
+    {
+      "id": "D04",
+      "item": "Ivory forward wall panels, narrow lit vertical joints and side passage",
+      "evidence": "scene_dining_area-starboard.png",
+      "oldMismatch": "Open background and generic curtains",
+      "required": "Add wall returns, panel boundaries, trim and passage reveal"
+    },
+    {
+      "id": "A11",
+      "item": "Full-height glossy wood panel and dark recessed pull at the aft starboard side",
+      "evidence": "scene_salon-forward.png",
+      "oldMismatch": "Replaced by generic glazing; the side view had not been incorporated",
+      "required": "Veneer panel, fine vertical joint and recessed pull; hidden construction remains inferred"
+    }
+  ],
+  "inferred": [
+    "All replacement object dimensions and positions are estimated within the existing room envelope.",
+    "Hidden furniture support shapes, cushion backs and bowl undersides are not fully visible.",
+    "Wood species, fabric manufacturer, lamp brand and stone identity are not established by these images.",
+    "Exterior marine horizon is an authored environment, not the photographed anchorage."
+  ],
+  "planSource": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/content/main.png?v=p29279716",
+  "planSHA256": "b74fb594d0ab4f34c42c54659637098072798142ee4f07b79824f4a8b3b26c52"
+}

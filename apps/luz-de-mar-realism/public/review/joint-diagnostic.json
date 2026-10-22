@@ -1,0 +1,156 @@
+{
+  "sourceGeometrySHA256": "debf97607db8a55d5585964dd654b204b7866534c8f3dada9ab2253f94b1045f",
+  "capture": "Diagnostic material-ID browser pass from revision 2; pure red channel identifies each drawn mesh.",
+  "floorJointMeshID": 4,
+  "meshMap": [
+    {
+      "id": 1,
+      "name": "Cube060",
+      "material": "Pale plank floor | architecture",
+      "family": "flooroak"
+    },
+    {
+      "id": 2,
+      "name": "Cube060_1",
+      "material": "Ivory architectural enamel | architecture",
+      "family": "paint"
+    },
+    {
+      "id": 3,
+      "name": "Cube060_2",
+      "material": "Soft black gasket | architecture",
+      "family": "rubber"
+    },
+    {
+      "id": 4,
+      "name": "Cube060_3",
+      "material": "Pale plank seam | architecture",
+      "family": "paint"
+    },
+    {
+      "id": 5,
+      "name": "Cube060_4",
+      "material": "Ivory satin panel | architecture",
+      "family": "paint"
+    },
+    {
+      "id": 6,
+      "name": "Cube060_5",
+      "material": "Ceiling joint | architecture",
+      "family": "paint"
+    },
+    {
+      "id": 7,
+      "name": "Cube060_6",
+      "material": "Perforated white speaker grille | architecture",
+      "family": "acoustic"
+    },
+    {
+      "id": 8,
+      "name": "A09_Smoked_glass006",
+      "material": "Retained smoked glazing | none",
+      "family": "glass"
+    },
+    {
+      "id": 9,
+      "name": "A09_Smoked_glass006_1",
+      "material": "Warm light diffuser | none",
+      "family": "paint"
+    },
+    {
+      "id": 10,
+      "name": "A09_Fine_lower_sill_track",
+      "material": "Polished lamp metal | furniture",
+      "family": "metal"
+    },
+    {
+      "id": 11,
+      "name": "A09_Fine_lower_sill_track_1",
+      "material": "Glossy warm vertical veneer | furniture",
+      "family": "wood"
+    },
+    {
+      "id": 12,
+      "name": "A09_Fine_lower_sill_track_2",
+      "material": "Pale celadon ceramic | furniture",
+      "family": "paint"
+    },
+    {
+      "id": 13,
+      "name": "A09_Fine_lower_sill_track_3",
+      "material": "Pale coffee tabletop | furniture",
+      "family": "paint"
+    },
+    {
+      "id": 14,
+      "name": "A09_Fine_lower_sill_track_4",
+      "material": "Ivory woven sofa | furniture",
+      "family": "fabric"
+    },
+    {
+      "id": 15,
+      "name": "A09_Fine_lower_sill_track_5",
+      "material": "Dark bronze edge | furniture",
+      "family": "metal"
+    },
+    {
+      "id": 16,
+      "name": "A09_Fine_lower_sill_track_6",
+      "material": "Muted butter linen | furniture",
+      "family": "fabric"
+    },
+    {
+      "id": 17,
+      "name": "A09_Fine_lower_sill_track_7",
+      "material": "Pale blue linen | furniture",
+      "family": "fabric"
+    },
+    {
+      "id": 18,
+      "name": "A09_Fine_lower_sill_track_8",
+      "material": "Ivory boucle chairs | furniture",
+      "family": "boucle"
+    },
+    {
+      "id": 19,
+      "name": "A09_Fine_lower_sill_track_9",
+      "material": "Clouded blue pile | furniture",
+      "family": "cloudrug"
+    },
+    {
+      "id": 20,
+      "name": "A09_Fine_lower_sill_track_10",
+      "material": "Warm metal | furniture",
+      "family": "metal"
+    },
+    {
+      "id": 21,
+      "name": "A09_Fine_lower_sill_track_11",
+      "material": "Gloss red-orange shade | furniture",
+      "family": "paint"
+    },
+    {
+      "id": 22,
+      "name": "A09_Fine_lower_sill_track_12",
+      "material": "Warm taupe veined stone | furniture",
+      "family": "stone"
+    },
+    {
+      "id": 23,
+      "name": "",
+      "material": ""
+    },
+    {
+      "id": 24,
+      "name": "",
+      "material": ""
+    },
+    {
+      "id": 25,
+      "name": "",
+      "material": ""
+    }
+  ],
+  "diagnosticRawSHA256": "e892ee78c63636aec7c0dfa21d7bf7808853d173ec31e7a0e510cd1b70b4c919",
+  "conclusion": "Floor-joint geometry is visible over foreground furniture. Removing long tube joint meshes removed the observed artifacts. No claim about the underlying driver implementation."
+}

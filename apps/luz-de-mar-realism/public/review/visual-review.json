@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "revision": 7,
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "referencePlan": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/content/main.png?v=p29279716",
+  "visualFidelity": "Approximation with unresolved differences; no numeric likeness score.",
+  "comparisons": {
+    "originalAndCandidate": {
+      "sourcePosition": [
+        9.2,
+        0,
+        5.55
+      ],
+      "target": [
+        13.157,
+        0.084,
+        5.55
+      ],
+      "verticalFov": 72,
+      "viewport": [
+        1200,
+        800
+      ],
+      "dpr": 1,
+      "baselineSHA256": "4dff9396dffd78870e654673d3cbca218674ade4c4c1249afc71a28e9692874b",
+      "candidateSHA256": "9f4acc3264640033e6618f3b5dd711735fa62a1470e0e5b094cbb5f8cd9c4af8"
+    },
+    "tour": {
+      "cameraCalibration": "Not established from an as-built survey. Tour crops were reviewed visually; source-image camera and inferred model coordinates are not asserted equivalent."
+    }
+  },
+  "corrections": [
+    "Removed long subpixel floor/ceiling joint tube meshes responsible for visible foreground artifacts; joints use material maps/filtered surface lines.",
+    "Corrected display niches to one pair.",
+    "Corrected aft cabinet to port and added starboard full-height veneer panel.",
+    "Corrected dining table across the beam, ten chairs and ceiling-mounted luminous oval.",
+    "Rebuilt annular saloon coffer with a visible recessed centre.",
+    "Added sewn cushion panels and folds; refined chair volumes, grain and mottled rug.",
+    "Replaced a single low-resolution reflection capture with three blended local probes, retaining static visible luminaires.",
+    "Added a licensed coastal sky and distant scenery with water rendered in Blender, replacing the flat procedural horizon."
+  ],
+  "remaining": [
+    "Furniture profiles and hidden supports remain inferred.",
+    "Fabric, veneer, stone and rug are authored approximations rather than manufacturer-matched scans.",
+    "Reflections use static local probes; they do not reproduce all view-dependent reflected geometry.",
+    "Marine exterior is illustrative, not the photographed anchorage.",
+    "No hardware desktop/mobile FPS measurement has been made."
+  ]
+}

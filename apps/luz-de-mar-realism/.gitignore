@@ -1,0 +1,5 @@
+node_modules/
+work/
+*.blend1
+__pycache__/
+*.pyc

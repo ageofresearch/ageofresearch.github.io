@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "build": "main-saloon-r7",
+  "scope": "Main saloon and adjoining dining area only",
+  "sourceBaseCommit": "36624f2403cfd27b7c7406514727c773dd7d3dfc",
+  "authoringRevision": 7,
+  "assetManifestSHA256": "0564dd1ec9a1333b8cdb8e64333b00436b866ca33a3bfaf0fd8b594cf0f6d2d2",
+  "originalYacht": {
+    "filesVerified": 629,
+    "allOriginalSHA256Match": true
+  },
+  "functionalBrowserChecks": true,
+  "renderer": "Three.js 0.180.0 / WebGL2",
+  "visualStatus": "Reference-led work in progress; no photographic-parity or hardware-FPS claim."
+}

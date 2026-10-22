@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0-preview.7",
+  "source": "Current Luz de Mar / tidewater-rocha",
+  "sourcePublishedCommit": "36624f2403cfd27b7c7406514727c773dd7d3dfc",
+  "sourceModelSHA256": "24a64a65f8b1f87a217edbc75aa5187152cc94518c702526b7613bffe25d8422",
+  "units": "physical metres",
+  "sourceAxes": "X forward, Y port, Z up",
+  "normalization": {
+    "sx": 0.978611111111111,
+    "sy": 0.9828947368421053,
+    "seaReference": 2.01,
+    "length": 35.23
+  },
+  "rooms": [
+    {
+      "id": "saloon",
+      "sourceID": "MD_R02",
+      "geometry": "saloon/room.glb",
+      "metadata": "saloon/room.json",
+      "triangles": 236100,
+      "sha256": "ac388739458fb0e27fde6cabecb000cde28c6ff2eb8aeea937cdfaa1b2ebf298",
+      "ambientAtlases": [
+        "saloon/ambient-architecture.exr",
+        "saloon/ambient-furniture.exr"
+      ],
+      "probes": [
+        "saloon/probe-aft.exr",
+        "saloon/probe.exr",
+        "saloon/probe-dining.exr"
+      ]
+    }
+  ],
+  "scope": "Salón principal MD_R02 only",
+  "sourceSnapshotRooms": [
+    {
+      "id": "saloon",
+      "sourceID": "MD_R02",
+      "triangles": 19096,
+      "vertices": 17798,
+      "sha256": "9772596bde1d885e95404a4c1ad6c84d4c623723ae5f2c07fa17f9bdd1b5d8ef"
+    }
+  ]
+}

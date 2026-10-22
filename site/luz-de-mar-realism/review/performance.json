@@ -1,0 +1,534 @@
+{
+  "url": "http://127.0.0.1:5235/?room=saloon",
+  "scope": "Main saloon only. Chromium / ANGLE SwiftShader software-rendered actual walking sequences, not hardware FPS.",
+  "hardware": {
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "affinityCPUs": 4,
+    "cgroupCPUQuota": 4,
+    "cgroupCpuMax": "400000 100000",
+    "gpu": "Software rasterizer"
+  },
+  "captures": [
+    {
+      "name": "saloon-rest",
+      "rendererDPR": 2,
+      "canvas": [
+        2400,
+        1600
+      ]
+    },
+    {
+      "name": "saloon-overview",
+      "sourcePosition": [
+        9.2,
+        0,
+        5.5
+      ],
+      "verticalFov": 72,
+      "renderCanvas": [
+        1200,
+        800
+      ]
+    },
+    {
+      "name": "saloon-matched",
+      "sourcePosition": [
+        9.2,
+        0,
+        5.55
+      ],
+      "target": [
+        13.157,
+        0.084,
+        5.55
+      ],
+      "verticalFov": 72
+    },
+    {
+      "name": "saloon-ceiling",
+      "sourcePosition": [
+        10.6,
+        -0.5,
+        5.5
+      ],
+      "target": [
+        11.75,
+        0,
+        6
+      ],
+      "verticalFov": 72
+    },
+    {
+      "name": "saloon-dining",
+      "sourcePosition": [
+        14.65,
+        -1.8,
+        5.5
+      ],
+      "target": [
+        16,
+        0.1,
+        4.85
+      ],
+      "verticalFov": 72,
+      "renderCanvas": [
+        1200,
+        800
+      ]
+    },
+    {
+      "name": "saloon-wood",
+      "sourcePosition": [
+        13.65,
+        -1.6,
+        5.5
+      ],
+      "target": [
+        14.1,
+        -2.55,
+        5.15
+      ],
+      "verticalFov": 72,
+      "renderCanvas": [
+        1200,
+        800
+      ]
+    },
+    {
+      "name": "saloon-upholstery",
+      "sourcePosition": [
+        10.98,
+        -0.20999999999999996,
+        5.5
+      ],
+      "target": [
+        12.4,
+        1.65,
+        4.6
+      ],
+      "verticalFov": 72,
+      "renderCanvas": [
+        1200,
+        800
+      ]
+    },
+    {
+      "name": "saloon-aft",
+      "sourcePosition": [
+        13.9,
+        -1.65,
+        5.5
+      ],
+      "target": [
+        9.45,
+        2.32,
+        5.1
+      ],
+      "verticalFov": 72,
+      "renderCanvas": [
+        1200,
+        800
+      ]
+    },
+    {
+      "name": "saloon-mobile",
+      "sourcePosition": [
+        9.20254227040962,
+        -0.11871750821695495,
+        5.5
+      ],
+      "verticalFov": 72,
+      "renderCanvas": [
+        390,
+        844
+      ]
+    }
+  ],
+  "sequences": [
+    {
+      "fixedRatio": 1,
+      "viewport": [
+        1200,
+        800
+      ],
+      "deviceDPR": 2,
+      "actualFrameMs": [
+        11,
+        3472.699999988079,
+        3579.2000000178814,
+        3529.199999988079,
+        3709.5999999940395,
+        5.700000017881393,
+        4082.0999999940395,
+        3526.199999988079,
+        7673.4000000059605,
+        1266.199999988079,
+        2251.7000000178814,
+        3480.2999999821186
+      ],
+      "ratios": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "before": [
+        9.2,
+        0
+      ],
+      "after": [
+        9.216265041513136,
+        -0.7595357253015681
+      ],
+      "stats": {
+        "room": "saloon",
+        "frames": 30,
+        "ratio": 1,
+        "quality": 0.55,
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 26,
+        "triangles": 236635,
+        "memory": {
+          "geometries": 36,
+          "textures": 37
+        },
+        "frameMs": {
+          "p50": 3516.5,
+          "p95": 7683
+        },
+        "submissionMs": {
+          "p50": 1.100000023841858,
+          "p95": 6.4000000059604645
+        },
+        "shadowUpdates": 1,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "actualPercentiles": {
+        "p50": 3529.199999988079,
+        "p95": 7673.4000000059605
+      }
+    },
+    {
+      "fixedRatio": null,
+      "viewport": [
+        1200,
+        800
+      ],
+      "deviceDPR": 2,
+      "actualFrameMs": [
+        10543.59999999404,
+        2.9000000059604645,
+        3.5999999940395355,
+        2142.4000000059605,
+        4276.5,
+        2277.2999999821186,
+        4412.5,
+        8,
+        2183.4000000059605,
+        2105.300000011921,
+        2154.9000000059605,
+        2133.899999976158
+      ],
+      "ratios": [
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875,
+        0.6875
+      ],
+      "before": [
+        9.2,
+        0
+      ],
+      "after": [
+        9.216263008510012,
+        -0.7594407892694364
+      ],
+      "stats": {
+        "room": "saloon",
+        "frames": 42,
+        "ratio": 0.6875,
+        "quality": 0.55,
+        "canvas": [
+          825,
+          550
+        ],
+        "calls": 26,
+        "triangles": 236635,
+        "memory": {
+          "geometries": 36,
+          "textures": 37
+        },
+        "frameMs": {
+          "p50": 2183.1999999999825,
+          "p95": 7099.699999999997
+        },
+        "submissionMs": {
+          "p50": 0.9000000059604645,
+          "p95": 1
+        },
+        "shadowUpdates": 1,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "actualPercentiles": {
+        "p50": 2154.9000000059605,
+        "p95": 4412.5
+      }
+    }
+  ],
+  "checks": {
+    "saloonOnly": true,
+    "idleDemandRendering": {
+      "framesUnchanged": true,
+      "restDPR": 2
+    },
+    "fixedShadowsCached": true,
+    "repeatedReloadResourcesStable": true,
+    "visibilityHandler": true,
+    "touchWalking": {
+      "before": [
+        9.2,
+        0
+      ],
+      "after": [
+        9.20254227040962,
+        -0.11871750821695495
+      ]
+    }
+  },
+  "initial": {
+    "room": "saloon",
+    "frames": 3,
+    "ratio": 2,
+    "quality": 1,
+    "canvas": [
+      2400,
+      1600
+    ],
+    "calls": 26,
+    "triangles": 236635,
+    "memory": {
+      "geometries": 36,
+      "textures": 37
+    },
+    "frameMs": {
+      "p50": 0,
+      "p95": 0
+    },
+    "submissionMs": {
+      "p50": 1646,
+      "p95": 1646
+    },
+    "shadowUpdates": 1,
+    "errors": [],
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "downloads": [
+      {
+        "url": "http://127.0.0.1:5235/assets/index-D8ihNcGD.js",
+        "encodedBytes": 704014,
+        "transferBytes": 704314,
+        "durationMs": 21.400000005960464
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/index-hKtT5TdB.css",
+        "encodedBytes": 6498,
+        "transferBytes": 6798,
+        "durationMs": 15.400000005960464
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/exterior.jpg",
+        "encodedBytes": 588155,
+        "transferBytes": 588455,
+        "durationMs": 9
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+        "encodedBytes": 61069,
+        "transferBytes": 61369,
+        "durationMs": 7.4000000059604645
+      },
+      {
+        "url": "http://127.0.0.1:5235/favicon.svg",
+        "encodedBytes": 198,
+        "transferBytes": 498,
+        "durationMs": 6.300000011920929
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+        "encodedBytes": 19656712,
+        "transferBytes": 19657012,
+        "durationMs": 652.7999999821186
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+        "encodedBytes": 12177625,
+        "transferBytes": 12177925,
+        "durationMs": 661.3000000119209
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+        "encodedBytes": 14464194,
+        "transferBytes": 14464494,
+        "durationMs": 507
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+        "encodedBytes": 2055491,
+        "transferBytes": 2055791,
+        "durationMs": 54.5
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+        "encodedBytes": 2084521,
+        "transferBytes": 2084821,
+        "durationMs": 55.099999994039536
+      },
+      {
+        "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+        "encodedBytes": 2099173,
+        "transferBytes": 2099473,
+        "durationMs": 54.60000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5235/decoders/basis_transcoder.js",
+        "encodedBytes": 57529,
+        "transferBytes": 57829,
+        "durationMs": 44.10000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5235/decoders/basis_transcoder.wasm",
+        "encodedBytes": 527333,
+        "transferBytes": 527633,
+        "durationMs": 45.80000001192093
+      }
+    ]
+  },
+  "resources": [
+    {
+      "geometries": 36,
+      "textures": 37
+    },
+    {
+      "geometries": 36,
+      "textures": 37
+    },
+    {
+      "geometries": 36,
+      "textures": 37
+    }
+  ],
+  "final": {
+    "room": "saloon",
+    "frames": 59,
+    "ratio": 1,
+    "quality": 0.55,
+    "canvas": [
+      390,
+      844
+    ],
+    "calls": 25,
+    "triangles": 236241,
+    "memory": {
+      "geometries": 36,
+      "textures": 37
+    },
+    "frameMs": {
+      "p50": 2149.8000000000175,
+      "p95": 7099.699999999997
+    },
+    "submissionMs": {
+      "p50": 0.9000000059604645,
+      "p95": 2.5
+    },
+    "shadowUpdates": 4,
+    "errors": [],
+    "renderer": "WebKit WebGL"
+  },
+  "errors": [],
+  "failures": [],
+  "pass": true,
+  "baselineExecution": {
+    "percentiles": {
+      "p50": 6170.5,
+      "p95": 7562.9000000059605
+    },
+    "meshRenderer": {
+      "draws": 30,
+      "triangles": 334383,
+      "pipelines": 7
+    },
+    "hardware": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "affinityCPUs": 4,
+      "cgroupCpuMax": "400000 100000",
+      "gpu": "SwiftShader Vulkan software renderer"
+    },
+    "method": "Preserved full-yacht WebGPU application in saloon; sequential submitted-frame GPU-completion latency. Candidate is a room-only WebGL2 viewer. Different scope and rendering pipelines; no hardware FPS or renderer-only speedup inference."
+  },
+  "atlasStorage": {
+    "format": "Linear RGB half-float EXR, uploaded as RGBA16F",
+    "gpuBytes": 67108864,
+    "reason": "Preserve irradiance fidelity at thin UV chart edges. Material textures remain GPU-compressed KTX2."
+  },
+  "baselineCamera": {
+    "verticalFov": 72,
+    "sourcePosition": [
+      9.200000000000003,
+      0,
+      5.549999999999999
+    ],
+    "quaternion": [
+      0,
+      -0.6995297421107389,
+      0,
+      0.7146034843901078
+    ],
+    "viewport": [
+      1200,
+      800
+    ],
+    "renderer": "Original yacht WebGPU / SwiftShader",
+    "drawCalls": null
+  },
+  "authoringRevision": 7,
+  "assetBytes": {
+    "ambient-architecture.exr": 12177625,
+    "ambient-furniture.exr": 14464194,
+    "authoring.json": 4001,
+    "exterior-source.json": 1190,
+    "exterior.jpg": 588155,
+    "probe-aft.exr": 2055491,
+    "probe-dining.exr": 2099173,
+    "probe.exr": 2084521,
+    "reference-components.json": 65873,
+    "room.glb": 19656712,
+    "room.json": 61069
+  },
+  "visualReview": {
+    "reference": "https://vrcloud.com/?pv=1667308298",
+    "plan": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/content/main.png?v=p29279716",
+    "assessment": "Reference-led reconstruction; no claim of photographic parity with the bedroom. See visual-review.json.",
+    "notAVisualAcceptanceTest": true
+  }
+}

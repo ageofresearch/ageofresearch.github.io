@@ -1,0 +1,31 @@
+{
+  "version": "luz-seawater-strainers-1",
+  "blend": "Luz-de-Mar-seawater-strainers.blend",
+  "blendSHA256": "6d79fe45330a5cf3b7f13140ac016423d3296f2890baa76587e1f04ddd65af48",
+  "blender": "4.3.2",
+  "templateObjects": 52,
+  "realPerforations": 19200,
+  "dimensions": {
+    "bodyDiameter": 0.316,
+    "lidDiameter": 0.41,
+    "basketDiameter": 0.24,
+    "basketHeight": 0.6,
+    "housingHeight": 0.724,
+    "basketLift": 0.7
+  },
+  "exports": {
+    "exterior": {
+      "triangles": 9506,
+      "bytes": 447768,
+      "compressedBytes": 86829
+    },
+    "inspection": {
+      "triangles": 359992,
+      "bytes": 19016256,
+      "compressedBytes": 4382690
+    }
+  },
+  "privateMediaPublished": false,
+  "manufacturerIdentified": false,
+  "installedContextMeshes": 16
+}

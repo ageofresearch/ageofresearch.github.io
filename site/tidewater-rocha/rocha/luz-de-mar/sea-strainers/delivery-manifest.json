@@ -1,0 +1,73 @@
+{
+  "version": "luz-seawater-strainers-1",
+  "authoring": "Blender 4.3.2; physical metres",
+  "basis": "Image-estimated dimensions and hidden connections; manufacturer unconfirmed",
+  "privateMediaPublished": false,
+  "files": [
+    {
+      "path": "Luz-de-Mar-filtros-Blender.zip",
+      "bytes": 5239902,
+      "sha256": "85bd4e6ceb0fc0a4d5c796ea9014e7b700873abecf6d5b401b55f84b58ca21c0"
+    },
+    {
+      "path": "MODEL-BASIS.md",
+      "bytes": 8863,
+      "sha256": "29bb062c21ad59dad38fc8f7d0196321b9158d9273789f2e143ad30eb199c4c1"
+    },
+    {
+      "path": "clean.webp",
+      "bytes": 80060,
+      "sha256": "993edf9981d6cc4fa786cea4da7847bfcad3cb04298b813bd6958d11b4cd4127"
+    },
+    {
+      "path": "dirty.webp",
+      "bytes": 73274,
+      "sha256": "dc089abf88003761ca585427de733c1b66932404be139d7802cff64b979b6b6f"
+    },
+    {
+      "path": "export-report.json",
+      "bytes": 769,
+      "sha256": "e2bdd1a72d3f4014a7995a46100788f66bd92b01cd1fdc1a1779095fd0187c13"
+    },
+    {
+      "path": "exterior.bin.gz",
+      "bytes": 86829,
+      "sha256": "040ba2bd0bab78f7b13932d17c4f701aa79952f4add97a8d5a3808f1569e7423"
+    },
+    {
+      "path": "exterior.json",
+      "bytes": 4438,
+      "sha256": "06a85d4328133a35c4d66f17b0fc67b4a984e61a2df6737751f61621965e8c6b"
+    },
+    {
+      "path": "index.html",
+      "bytes": 4714,
+      "sha256": "f9b3921e3660d2298cd6805f51c65d31b40a24cc0530e2db6b67318511ef1cc8"
+    },
+    {
+      "path": "inspection.bin.gz",
+      "bytes": 4382690,
+      "sha256": "303b052959d1d6bb1b0860a2d2875a12d87d10a248cd7b17f2db6972807e4fdf"
+    },
+    {
+      "path": "inspection.json",
+      "bytes": 1530,
+      "sha256": "12eb9c5048ed3af1f51aacbcde40ed95a046c90cb8738ca0594386bd30309cba"
+    },
+    {
+      "path": "installed.webp",
+      "bytes": 59536,
+      "sha256": "4148ac4c05d51f51947d058458dcdf1dd5abf68572d3994479c7fce575f42592"
+    },
+    {
+      "path": "motion.json",
+      "bytes": 10509,
+      "sha256": "942e7440b76bf768fd1ab336d5fb807f20f3cbcf644367bc28ba894c4548246b"
+    },
+    {
+      "path": "native-verification.json",
+      "bytes": 210,
+      "sha256": "d6d3034b1700046855bd76e153c7d3790826db94fc761bdd69870ba30e6293b1"
+    }
+  ]
+}

@@ -217,6 +217,36 @@
     },
     "machinery": {
       "version": "owner-machinery-3",
+      "seaStrainers": {
+        "version": "luz-seawater-strainers-1",
+        "installation": {
+          "x": 12.14,
+          "y": 0.27,
+          "z": 0.77,
+          "register": [
+            11.45,
+            -0.49,
+            12.59,
+            0.49
+          ],
+          "basketDiameter": 0.24,
+          "basketHeight": 0.6,
+          "housingDiameter": 0.316,
+          "coverDiameter": 0.41,
+          "housingHeight": 0.724,
+          "extractionLift": 0.7,
+          "dimensionStatus": "image-estimated",
+          "manufacturer": null,
+          "duplexOperationVerified": false
+        },
+        "assets": "rocha/luz-de-mar/sea-strainers/",
+        "review": "rocha/luz-de-mar/sea-strainers/",
+        "inspectionOnDemand": true,
+        "referenceVideoFrames": 3321,
+        "manufacturerIdentified": false,
+        "dimensionsSurveyed": false,
+        "privateMediaPublished": false
+      },
       "mtu": {
         "version": "mtu-m96-r03-1",
         "sourceSHA256": "2b94d601027673a0506136c165c4c3a3a95f59f3646ed3d2eb8b6540f20c4580",

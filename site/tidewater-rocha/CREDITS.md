@@ -110,3 +110,12 @@ cutaway and illustrative native actions are used for Luz de Mar's machinery
 inspection. Manufacturer drawings remain credited to MTU / Rolls-Royce and
 Azimut Yachts; their use as references does not imply OEM authentication.
 See rocha/luz-de-mar/mtu-r03/MODEL-BASIS.md for source links and limits.
+
+Luz de Mar seawater strainers: original Blender geometry reconstructed from the
+owner's maintenance video and five photographs. The reusable perforated basket,
+housing and illustrative disassembly are image-fitted estimates; manufacturer,
+model, alloy and surveyed dimensions remain unverified. No owner media is
+included in the public assets or used as a material texture. Primary Guidi,
+GROCO, VETUS and Azimut references are listed in
+rocha/luz-de-mar/sea-strainers/MODEL-BASIS.md; these references do not
+identify the installed product or its maintenance schedule.

@@ -12,6 +12,7 @@ import {applyProxyShading} from './proxy-shading.js';
 import {assetURL} from './asset-version.js';
 import {estimateGpuMemory} from './resource-estimates.js';
 import {blendCoastalWater} from './water-shading.js';
+import {initDeckMap} from './deck-map.js';
 const $=id=>document.getElementById(id),loading=$('loading'),title=$('loading-title'),detail=$('loading-detail');
 const percentile=(a,p)=>a.length?a.toSorted((a,b)=>a-b)[Math.min(a.length-1,Math.floor(a.length*p))]:0;
 const app={room:null,loading:false,frames:0,request:0,raf:0,lastTime:null,motionUntil:0,quality:1,lastAdjust:0,ema:16,exposureTarget:1.15,fixedRatio:null,samples:[],cpuSamples:[],shadowUpdates:0,errors:[]};
@@ -35,7 +36,7 @@ try{
   app.raf=0;if(document.hidden||!app.room)return;const rawDt=app.lastTime===null?1/60:(time-app.lastTime)/1000,dt=Math.min(.1,rawDt),hadPrevious=app.lastTime!==null;app.lastTime=time;
   const walking=app.controls.update(dt),exposureChanging=Math.abs(renderer.toneMappingExposure-app.exposureTarget)>.003;if(exposureChanging)renderer.toneMappingExposure+=(app.exposureTarget-renderer.toneMappingExposure)*(1-Math.exp(-Math.min(rawDt,.25)*10));else renderer.toneMappingExposure=app.exposureTarget;const moving=walking||exposureChanging||time<app.motionUntil;
   if(moving){if(hadPrevious){app.ema=app.ema*.8+rawDt*200;if(time-app.lastAdjust>400){if(app.ema>24)app.quality=Math.max(.55,app.quality*.85);else if(app.ema<15)app.quality=Math.min(1,app.quality*1.08);app.lastAdjust=time;}}app.setRatio(app.fixedRatio??Math.min(devicePixelRatio||1,2,Math.sqrt(1.5e6/(innerWidth*innerHeight)))*app.quality);}else app.setRatio(app.fixedRatio??Math.min(devicePixelRatio||1,2));
-  const start=performance.now();renderer.render(app.scene,app.camera);app.cpuSamples.push(performance.now()-start);if(hadPrevious&&moving)app.samples.push(rawDt*1000);if(app.samples.length>600)app.samples.shift();if(app.cpuSamples.length>600)app.cpuSamples.shift();app.frames++;
+  app.deckMap?.update();const start=performance.now();renderer.render(app.scene,app.camera);app.cpuSamples.push(performance.now()-start);if(hadPrevious&&moving)app.samples.push(rawDt*1000);if(app.samples.length>600)app.samples.shift();if(app.cpuSamples.length>600)app.cpuSamples.shift();app.frames++;
   if(walking||exposureChanging||time<app.motionUntil)app.invalidate();else{app.lastTime=null;clearTimeout(app.restTimer);if(renderer.getPixelRatio()<(app.fixedRatio??Math.min(devicePixelRatio||1,2)))app.restTimer=setTimeout(()=>app.invalidate(),155);}
  }
  const manifest=await(await fetch(assetURL('./assets/manifest.json'))).json(),layout=await(await fetch(assetURL('./assets/'+manifest.navigation))).json(),saloonMeta=await(await fetch(assetURL('./assets/saloon/room.json'))).json();
@@ -52,6 +53,7 @@ try{
  const stream=app.stream=new ZoneStreamer({load:resources.load,attach:room=>{app.scene.add(room.root);const proxy=proxies.get(room.id);if(proxy)proxy.visible=false;},detach:room=>{app.scene.remove(room.root);const proxy=proxies.get(room.id);if(proxy)proxy.visible=true;},dispose:resources.dispose,onChange:()=>app.invalidate(false,true)});
  function updateActive(id){if(!stream.residents.has(id))return;stream.activate(id);app.room=stream.residents.get(id).value;app.exposureTarget=app.room.meta.camera.exposure??1.15;if(app.loading||selecting)renderer.toneMappingExposure=app.exposureTarget;$('room-name').textContent=app.room.meta.label;$('room-selector').value=id;document.querySelector('.brand small').textContent=app.room.meta.label;const url=new URL(location.href);url.searchParams.set('room',id);history.replaceState(null,'',url);}
  const nav=app.nav=new DeckNavigation(layout,saloonMeta,{available:id=>stream.residents.has(id),onBoundary:id=>{boundaryID=id;void ensureNear(id);},onZone:updateActive});
+ if(manifest.structure){const structure=await(await fetch(assetURL('./assets/'+manifest.structure))).json();app.deckMap=initDeckMap({structure,app,onSelect:id=>void app.load(id),button:$('open-deck-map'),dialog:$('deck-map')});$('open-deck-map').hidden=false;}
  async function ensureNear(id,retry=false){if(selecting||!roomIDs.has(id)||stream.residents.has(id)||lastFailed===id&&!retry)return;try{if(!document.hidden&&boundaryID===id)say('Preparando el siguiente tramo…');await stream.ensure(id);if(boundaryID===id){say('');boundaryID=null;}app.invalidate();}catch(e){if(e.name==='AbortError')return;lastFailed=id;say('El siguiente tramo no se ha cargado. Puedes seguir en esta zona.',id);}}
  app.preloadNear=()=>{if(document.hidden||selecting)return;const p=nav.position,near=layout.connections.filter(c=>c.zones.includes(nav.zone)).map(c=>({id:c.zones.find(id=>id!==nav.zone),distance:Math.hypot(c.at[0]-p[0],c.at[1]-p[1])})).filter(c=>c.distance<2.4).sort((a,b)=>a.distance-b.distance)[0];if(near)void ensureNear(near.id);};
  app.resetView=()=>{if(app.room){nav.setZone(app.room.id,app.room.meta.room.spawn);app.controls.bind(app.room.meta,nav);app.invalidate();}};

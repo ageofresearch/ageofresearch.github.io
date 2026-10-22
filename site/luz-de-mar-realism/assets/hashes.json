@@ -1,6 +1,5 @@
 {
-  "version": 2,
-  "stage": 2,
+  "version": 3,
   "algorithm": "SHA-256",
   "scope": "New page subtree, excluding hashes.json and publication.json to avoid circular hashes",
   "files": {
@@ -104,9 +103,13 @@
       "bytes": 28916,
       "sha256": "cd0f101251ff7013a22ac557a202e16fd471b29836970983b0bf5f17a93c367c"
     },
+    "assets/context/authoring.json": {
+      "bytes": 1026,
+      "sha256": "c3895289c77c05f03fa9df9d26ce8494bd03cfeb4d2d82e7608743388fa2958e"
+    },
     "assets/context/context.glb": {
-      "bytes": 193208,
-      "sha256": "dd4370471794cfdd97659d9379ff0295aba6540b4ced686e856084cecb01675a"
+      "bytes": 167684,
+      "sha256": "30853161d3283f90736c6b33a51d7f6909e9d1e6421c4d3c6052e7f4c99e5f34"
     },
     "assets/context/reference-components.json": {
       "bytes": 4435,
@@ -116,17 +119,17 @@
       "bytes": 73028,
       "sha256": "1b1f5a05fd29b12889951b6ad5ee1b424503ded9b3da969dec468f2963586093"
     },
-    "assets/index-CIUBmlqs.js": {
-      "bytes": 713300,
-      "sha256": "1dec36c3212860a17303582db983676913a7c907d81d5267a3ca187cb1a990f1"
+    "assets/index-CBSgxiyS.css": {
+      "bytes": 10164,
+      "sha256": "d56069a1b90aba8819c27c4b28e15390c4a10d382c7e4635a50ee65c3f8a9f5f"
     },
-    "assets/index-nA3kuNkn.css": {
-      "bytes": 7118,
-      "sha256": "6e8066e45e702bbf9542b3f26d2fc2e946eda439e8267c72ac9ee7950e1d1f5f"
+    "assets/index-DX3YMKHb.js": {
+      "bytes": 717700,
+      "sha256": "234365b7941cad4285a7492ce0c22cc3f13fa61ce599a13c2cfb20fe24c18a31"
     },
     "assets/manifest.json": {
-      "bytes": 7601,
-      "sha256": "af9323dea90274b3d7e9919b890696709f022d5f281fbe5caf8d7d76f173cc10"
+      "bytes": 7762,
+      "sha256": "d581385af025913c20cea0763c0362db1a9fa1540f8551e1a81739ba1b30f9d0"
     },
     "assets/navigation.json": {
       "bytes": 12865,
@@ -236,6 +239,10 @@
       "bytes": 14142,
       "sha256": "74ff66fbe9190236593d9df4548aa76b8291c950b47c51dc4bb886977714eb69"
     },
+    "assets/yacht-structure.json": {
+      "bytes": 42331,
+      "sha256": "7aeced30d34a149338dcf9583993dc2bc7df5510a923ec04e7955aae584ee8d4"
+    },
     "authoring/exteriors-downloads.json": {
       "bytes": 2917,
       "sha256": "4178b8fe15a87a561ada67fd0a4ab18ce6d92970f9005d9c57b03eca33f5ba9f"
@@ -247,6 +254,10 @@
     "authoring/saloon-raw-bakes.zip": {
       "bytes": 14661906,
       "sha256": "da205bb7503be7cf907999420b489faf14d08a9429b22f3a2a851f995dac9153"
+    },
+    "authoring/structure-download.json": {
+      "bytes": 1026,
+      "sha256": "c3895289c77c05f03fa9df9d26ce8494bd03cfeb4d2d82e7608743388fa2958e"
     },
     "decoders/basis_transcoder.js": {
       "bytes": 57529,
@@ -261,8 +272,8 @@
       "sha256": "d9a3769d62ff8947f43fc0dcb9f8422e1ebd213aa32f5d035ef4a51a708c0671"
     },
     "index.html": {
-      "bytes": 2460,
-      "sha256": "ada3cae3be62596d01d3ef5c718c4c996296e24cc0a20a6cc8eae269c35beaba"
+      "bytes": 3362,
+      "sha256": "814d7c2254f6ca71276cbf0ae49e8e0fa0892883f169ac88eb14df29dc0c668e"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -341,8 +352,8 @@
       "sha256": "86ef67ebb054491ae4e92dde36f30dc79b67441be05c1691ce1f5e6dfb086f90"
     },
     "review/index.html": {
-      "bytes": 14290,
-      "sha256": "cddf36c8849287bcb0a6f85bb8489e474c7aeab3817eb69d623d6c98c3529623"
+      "bytes": 14352,
+      "sha256": "459a4906a7b1401f80876d586567417aa5f54441c01c68dd7aa7880b024eca32"
     },
     "review/joint-diagnostic.json": {
       "bytes": 3944,
@@ -431,6 +442,50 @@
     "review/stage1-public-verification.json": {
       "bytes": 153976,
       "sha256": "619cf1c77491c9527a7a3b243571bd29784943ad6352c36cdd311fcfb94c1f5d"
+    },
+    "review/structural-geometry.json": {
+      "bytes": 37754,
+      "sha256": "1241e486e04c3e2960a9df6748ebdec2494bfaa3b67c4a9d5c76a30de3643492"
+    },
+    "review/structure-foredeck-after.webp": {
+      "bytes": 36022,
+      "sha256": "a560869be96a7bf898f5863fa0f07347bf173ac3ea08ceab6ba0f2879064b337"
+    },
+    "review/structure-foredeck-before.webp": {
+      "bytes": 41804,
+      "sha256": "fe000fd686284b7d9ee8f2e985eea2d0108de20b8d8e59ce3c692ab61bd3b9e9"
+    },
+    "review/structure-foredeck-working.webp": {
+      "bytes": 34186,
+      "sha256": "06df01b972a32af5fdf94d7acb048f545065df4eb61eecb30edca72a511faee7"
+    },
+    "review/structure-lower-deck-map.webp": {
+      "bytes": 27764,
+      "sha256": "7995887b47f9cf154bd0ea5139fdb1f6abbcb3bfa0e7e0f9ac2062b9f823f131"
+    },
+    "review/structure-main-deck-map.webp": {
+      "bytes": 24934,
+      "sha256": "7dacbe0bba3b1533adf203c6f997694c7be3942a66354bcb1022c7af3ce0bd61"
+    },
+    "review/structure-mobile-map.webp": {
+      "bytes": 17690,
+      "sha256": "3a2744acf524bfe44cc6e1c2e4bfe841817ee7d08b0ca1b7e9ac0074028391b2"
+    },
+    "review/structure-public-source.json": {
+      "bytes": 621,
+      "sha256": "8469e92cf07cee38467b0798a763cfdfabd3f78f65a39a535bbdb5c7170aeb52"
+    },
+    "review/structure-upper-deck-map.webp": {
+      "bytes": 24754,
+      "sha256": "0043b1edb4cc03546a3bfa53f6c366dc606a5e1d3c6f66e5624a8c1f1b0ce25a"
+    },
+    "review/structure-validation.json": {
+      "bytes": 4936,
+      "sha256": "8e0288f6639b6e9e5a586080ad073aa5070637e53666be89ac894765e8a1df87"
+    },
+    "review/structure.html": {
+      "bytes": 7133,
+      "sha256": "41fdad380c836a888c30e5eda71042bfc1e5d96ba41af6f488b355ab8a198917"
     },
     "review/visual-review.json": {
       "bytes": 2220,

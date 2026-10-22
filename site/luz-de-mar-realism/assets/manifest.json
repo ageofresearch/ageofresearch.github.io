@@ -299,5 +299,10 @@
         }
       ]
     }
-  ]
+  ],
+  "structure": "yacht-structure.json",
+  "structuralBasis": {
+    "source": "Published original yacht, guarded by SHA-256",
+    "revision": "structure-r10"
+  }
 }

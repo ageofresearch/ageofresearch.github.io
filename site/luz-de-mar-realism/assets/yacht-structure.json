@@ -1,0 +1,2133 @@
+{
+  "version": 1,
+  "revision": "structure-r10",
+  "original": "https://ageofresearch.github.io/tidewater-rocha/play.html?world=rocha",
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "sourceFiles": {
+    "rocha/luz-de-mar/model.json": "5d416760e6e041cc0cdf85604b3d048a111c9aeb4f7b0c74460823e714f8637c",
+    "rocha/luz-de-mar/model.bin": "24a64a65f8b1f87a217edbc75aa5187152cc94518c702526b7613bffe25d8422"
+  },
+  "units": "source metres; multiply X by 35.23/36 and Y by 7.47/7.6; Three Y = source Z - 2.01",
+  "physical": {
+    "length": 35.23,
+    "beam": 7.47,
+    "seaReference": 2.01
+  },
+  "decks": [
+    {
+      "id": "LD",
+      "label": "Cubierta inferior",
+      "floor": 1.55,
+      "outlines": [
+        {
+          "exterior": [
+            [
+              0.9283,
+              0
+            ],
+            [
+              1.0138,
+              2.126
+            ],
+            [
+              1.125,
+              3.076
+            ],
+            [
+              1.202,
+              3.333
+            ],
+            [
+              1.9744,
+              3.5885
+            ],
+            [
+              2.2267,
+              3.637
+            ],
+            [
+              6.6802,
+              3.6926
+            ],
+            [
+              13.1748,
+              3.6926
+            ],
+            [
+              17.8138,
+              3.5442
+            ],
+            [
+              22.2672,
+              3.3401
+            ],
+            [
+              26.164,
+              2.969
+            ],
+            [
+              29.3185,
+              2.3566
+            ],
+            [
+              32.1019,
+              1.5773
+            ],
+            [
+              32.2236,
+              1.5297
+            ],
+            [
+              32.3077,
+              1.2772
+            ],
+            [
+              32.4615,
+              0
+            ],
+            [
+              32.3077,
+              -1.2772
+            ],
+            [
+              32.2306,
+              -1.5084
+            ],
+            [
+              32.1019,
+              -1.5587
+            ],
+            [
+              29.133,
+              -2.3009
+            ],
+            [
+              25.6073,
+              -3.0432
+            ],
+            [
+              21.8961,
+              -3.4514
+            ],
+            [
+              17.8138,
+              -3.6741
+            ],
+            [
+              13.1748,
+              -3.7298
+            ],
+            [
+              6.6802,
+              -3.7854
+            ],
+            [
+              2.5051,
+              -3.637
+            ],
+            [
+              1.2006,
+              -3.3284
+            ],
+            [
+              1.125,
+              -3.076
+            ],
+            [
+              1.0138,
+              -2.126
+            ],
+            [
+              0.9283,
+              0
+            ]
+          ],
+          "holes": []
+        }
+      ],
+      "rooms": [
+        {
+          "id": "LD_R01",
+          "deck": "LD",
+          "label": "Garaje / zona de popa",
+          "bounds": [
+            0.09278,
+            -3.41431,
+            6.71728,
+            3.35864
+          ],
+          "sourceLabel": "Aft beach / tender zone",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R02",
+          "deck": "LD",
+          "label": "Cuarto de máquinas",
+          "bounds": [
+            6.73584,
+            -3.59987,
+            13.21189,
+            3.56276
+          ],
+          "sourceLabel": "Machinery space",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R03",
+          "deck": "LD",
+          "label": "Camarote de popa · babor",
+          "bounds": [
+            14.3067,
+            0.42679,
+            17.81379,
+            3.56276
+          ],
+          "sourceLabel": "Aft guest cabin P",
+          "status": "T/I",
+          "interpretation": "Guest cabin; name inferred"
+        },
+        {
+          "id": "LD_R04",
+          "deck": "LD",
+          "label": "Baño de popa · babor",
+          "bounds": [
+            13.26756,
+            0.57524,
+            14.3067,
+            2.43084
+          ],
+          "sourceLabel": "Aft port ensuite",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R05",
+          "deck": "LD",
+          "label": "Camarote de popa · estribor",
+          "bounds": [
+            14.3067,
+            -3.41431,
+            17.81379,
+            -0.64946
+          ],
+          "sourceLabel": "Aft guest cabin S",
+          "status": "T/I",
+          "interpretation": "Guest cabin; name inferred"
+        },
+        {
+          "id": "LD_R06",
+          "deck": "LD",
+          "label": "Baño de popa · estribor",
+          "bounds": [
+            13.26756,
+            -2.43084,
+            14.3067,
+            -0.68657
+          ],
+          "sourceLabel": "Aft starboard ensuite",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R07",
+          "deck": "LD",
+          "label": "Camarote de proa · babor",
+          "bounds": [
+            20.0034,
+            0.50101,
+            22.63835,
+            3.43286
+          ],
+          "sourceLabel": "Forward port guest cabin",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R08",
+          "deck": "LD",
+          "label": "Baño de proa · babor",
+          "bounds": [
+            17.88801,
+            0.85358,
+            19.66939,
+            3.41431
+          ],
+          "sourceLabel": "Forward port ensuite",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R09",
+          "deck": "LD",
+          "label": "Camarote de proa · estribor",
+          "bounds": [
+            20.0034,
+            -3.21019,
+            22.63835,
+            -0.59379
+          ],
+          "sourceLabel": "Forward starboard guest cabin",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R10",
+          "deck": "LD",
+          "label": "Baño de proa · estribor",
+          "bounds": [
+            17.88801,
+            -3.28442,
+            19.66939,
+            -1.13192
+          ],
+          "sourceLabel": "Forward starboard ensuite",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R11",
+          "deck": "LD",
+          "label": "Pasillo de invitados",
+          "bounds": [
+            13.34178,
+            -0.55668,
+            22.63835,
+            0.35256
+          ],
+          "sourceLabel": "Guest passage",
+          "status": "T/I",
+          "interpretation": "Passage"
+        },
+        {
+          "id": "LD_R12",
+          "deck": "LD",
+          "label": "Zona de servicio",
+          "bounds": [
+            22.76824,
+            0.4639,
+            25.05064,
+            3.26586
+          ],
+          "sourceLabel": "Forward mess / service area",
+          "status": "T/I",
+          "interpretation": "Use inferred from dinette"
+        },
+        {
+          "id": "LD_R13",
+          "deck": "LD",
+          "label": "Camarote de servicio P1",
+          "bounds": [
+            25.16197,
+            0.64946,
+            26.96191,
+            3.17308
+          ],
+          "sourceLabel": "Forward cabin P1",
+          "status": "T/I",
+          "interpretation": "Use unresolved; source footprint only"
+        },
+        {
+          "id": "LD_R14",
+          "deck": "LD",
+          "label": "Camarote de servicio P2",
+          "bounds": [
+            27.01757,
+            0.68657,
+            29.04018,
+            2.9133
+          ],
+          "sourceLabel": "Forward cabin P2",
+          "status": "T/I",
+          "interpretation": "Use unresolved; source footprint only"
+        },
+        {
+          "id": "LD_R15",
+          "deck": "LD",
+          "label": "Camarote de servicio S1",
+          "bounds": [
+            22.82391,
+            -3.19164,
+            24.86508,
+            -0.72369
+          ],
+          "sourceLabel": "Forward cabin S1",
+          "status": "T/I",
+          "interpretation": "Use unresolved; source footprint only"
+        },
+        {
+          "id": "LD_R16",
+          "deck": "LD",
+          "label": "Camarote de servicio S2",
+          "bounds": [
+            25.97844,
+            -2.95041,
+            28.9474,
+            -0.94636
+          ],
+          "sourceLabel": "Forward cabin S2",
+          "status": "T/I",
+          "interpretation": "Use unresolved; source footprint only"
+        },
+        {
+          "id": "LD_R17",
+          "deck": "LD",
+          "label": "Baño de servicio",
+          "bounds": [
+            24.82796,
+            -2.09683,
+            26.01555,
+            -0.72369
+          ],
+          "sourceLabel": "Forward service head S",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R18",
+          "deck": "LD",
+          "label": "Baño de proa · babor",
+          "bounds": [
+            29.13296,
+            0.167,
+            30.85867,
+            1.41026
+          ],
+          "sourceLabel": "Forepeak head P",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R19",
+          "deck": "LD",
+          "label": "Baño de proa · estribor",
+          "bounds": [
+            29.13296,
+            -1.55871,
+            30.85867,
+            -0.31545
+          ],
+          "sourceLabel": "Forepeak head S",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "LD_R20",
+          "deck": "LD",
+          "label": "Volumen de proa",
+          "bounds": [
+            30.95145,
+            -1.46593,
+            33.40085,
+            1.48448
+          ],
+          "sourceLabel": "Forepeak / unresolved volume",
+          "status": "T/I",
+          "interpretation": "Unresolved fitout"
+        }
+      ]
+    },
+    {
+      "id": "MD",
+      "label": "Cubierta principal",
+      "floor": 3.95,
+      "outlines": [
+        {
+          "exterior": [
+            [
+              12.6428,
+              -3.7877
+            ],
+            [
+              11,
+              -3.7925
+            ],
+            [
+              8.4536,
+              -3.8
+            ],
+            [
+              7,
+              -3.8
+            ],
+            [
+              6.7645,
+              -3.7966
+            ],
+            [
+              3.78,
+              -3.7188
+            ],
+            [
+              3.78,
+              0
+            ],
+            [
+              3.78,
+              3.734
+            ],
+            [
+              4.2,
+              3.76
+            ],
+            [
+              7,
+              3.8
+            ],
+            [
+              11,
+              3.8
+            ],
+            [
+              15,
+              3.77
+            ],
+            [
+              15.134,
+              3.7687
+            ],
+            [
+              18,
+              3.7113
+            ],
+            [
+              22.4536,
+              3.4701
+            ],
+            [
+              26.5361,
+              3.1546
+            ],
+            [
+              29.5968,
+              2.6875
+            ],
+            [
+              30.5899,
+              2.4769
+            ],
+            [
+              31.3532,
+              2.2752
+            ],
+            [
+              33,
+              1.74
+            ],
+            [
+              34.5,
+              1.05
+            ],
+            [
+              35.4,
+              0.44
+            ],
+            [
+              35.5418,
+              0.3407
+            ],
+            [
+              35.64,
+              0.253
+            ],
+            [
+              35.6856,
+              0.2017
+            ],
+            [
+              35.7328,
+              0.1546
+            ],
+            [
+              35.7818,
+              0.1123
+            ],
+            [
+              35.8102,
+              0.0735
+            ],
+            [
+              35.8338,
+              0.0464
+            ],
+            [
+              35.8539,
+              0.027
+            ],
+            [
+              35.8704,
+              0.0135
+            ],
+            [
+              35.8806,
+              0.0063
+            ],
+            [
+              35.8909,
+              0
+            ],
+            [
+              35.8771,
+              -0.0087
+            ],
+            [
+              35.8635,
+              -0.0189
+            ],
+            [
+              35.85,
+              -0.0305
+            ],
+            [
+              35.8366,
+              -0.0435
+            ],
+            [
+              35.8234,
+              -0.0578
+            ],
+            [
+              35.806,
+              -0.0788
+            ],
+            [
+              35.7938,
+              -0.095
+            ],
+            [
+              35.7818,
+              -0.1123
+            ],
+            [
+              35.7402,
+              -0.1478
+            ],
+            [
+              35.6997,
+              -0.1869
+            ],
+            [
+              35.6606,
+              -0.2291
+            ],
+            [
+              34.5155,
+              -1.0021
+            ],
+            [
+              32.6211,
+              -1.8632
+            ],
+            [
+              32.0646,
+              -2.044
+            ],
+            [
+              30.2576,
+              -2.5474
+            ],
+            [
+              29.2139,
+              -2.7687
+            ],
+            [
+              27.4351,
+              -3.0776
+            ],
+            [
+              26,
+              -3.29
+            ],
+            [
+              25.3933,
+              -3.3486
+            ],
+            [
+              22.4954,
+              -3.5989
+            ],
+            [
+              20.9351,
+              -3.6574
+            ],
+            [
+              18.1587,
+              -3.7384
+            ],
+            [
+              15,
+              -3.77
+            ],
+            [
+              12.6428,
+              -3.7877
+            ]
+          ],
+          "holes": [
+            [
+              [
+                17.9443,
+                -1.5959
+              ],
+              [
+                19.6701,
+                -1.5959
+              ],
+              [
+                19.6701,
+                0.0186
+              ],
+              [
+                17.9443,
+                0.0186
+              ],
+              [
+                17.9443,
+                -1.5959
+              ]
+            ]
+          ]
+        }
+      ],
+      "rooms": [
+        {
+          "id": "MD_R01",
+          "deck": "MD",
+          "label": "Terraza de popa",
+          "bounds": [
+            2.78351,
+            -2.70928,
+            8.4433,
+            2.70928
+          ],
+          "sourceLabel": "Aft terrace",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "MD_R02",
+          "deck": "MD",
+          "label": "Salón principal",
+          "bounds": [
+            8.53608,
+            -2.56082,
+            17.77732,
+            2.72784
+          ],
+          "sourceLabel": "Saloon",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "MD_R03",
+          "deck": "MD",
+          "label": "Núcleo de servicio",
+          "bounds": [
+            17.81443,
+            -2.87629,
+            22.45361,
+            2.95052
+          ],
+          "sourceLabel": "Service core",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "MD_R04",
+          "deck": "MD",
+          "label": "Suite principal",
+          "bounds": [
+            22.60206,
+            -2.54227,
+            27.1299,
+            2.65361
+          ],
+          "sourceLabel": "Forward main-deck suite",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "MD_R05",
+          "deck": "MD",
+          "label": "Baños de la suite",
+          "bounds": [
+            27.22268,
+            -2.4866,
+            29.43093,
+            2.46804
+          ],
+          "sourceLabel": "Forward suite heads",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "MD_R06",
+          "deck": "MD",
+          "label": "Aseo de día",
+          "bounds": [
+            20.44948,
+            -3.19175,
+            22.1567,
+            -2.18969
+          ],
+          "sourceLabel": "Day head",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        }
+      ]
+    },
+    {
+      "id": "UD",
+      "label": "Cubierta superior",
+      "floor": 6,
+      "outlines": [
+        {
+          "exterior": [
+            [
+              10.8855,
+              -3.6316
+            ],
+            [
+              5.7506,
+              -3.3614
+            ],
+            [
+              4.1797,
+              -2.8208
+            ],
+            [
+              3.3351,
+              -2.1621
+            ],
+            [
+              3.2,
+              1.4864
+            ],
+            [
+              3.3858,
+              2.3479
+            ],
+            [
+              4.3317,
+              3.26
+            ],
+            [
+              5.7337,
+              3.5134
+            ],
+            [
+              10.8855,
+              3.5978
+            ],
+            [
+              16.2907,
+              3.5471
+            ],
+            [
+              21.358,
+              3.3107
+            ],
+            [
+              25.4119,
+              2.9897
+            ],
+            [
+              28.9591,
+              2.4661
+            ],
+            [
+              32.1684,
+              1.7905
+            ],
+            [
+              34.3643,
+              0.929
+            ],
+            [
+              35.8845,
+              0
+            ],
+            [
+              34.3643,
+              -0.8783
+            ],
+            [
+              32.1684,
+              -1.7905
+            ],
+            [
+              28.7902,
+              -2.5168
+            ],
+            [
+              25.243,
+              -3.0911
+            ],
+            [
+              21.358,
+              -3.5303
+            ],
+            [
+              16.2907,
+              -3.6823
+            ],
+            [
+              10.8855,
+              -3.6316
+            ]
+          ],
+          "holes": [
+            [
+              [
+                31.3407,
+                0.8446
+              ],
+              [
+                29.5672,
+                0.8446
+              ],
+              [
+                29.5672,
+                -0.7432
+              ],
+              [
+                31.3407,
+                -0.7432
+              ],
+              [
+                31.3407,
+                0.8446
+              ]
+            ],
+            [
+              [
+                18.7906,
+                1.1486
+              ],
+              [
+                18.7906,
+                -1.5371
+              ],
+              [
+                19.5338,
+                -1.5371
+              ],
+              [
+                19.5338,
+                1.1486
+              ],
+              [
+                18.7906,
+                1.1486
+              ]
+            ]
+          ]
+        }
+      ],
+      "rooms": [
+        {
+          "id": "UD_R01",
+          "deck": "UD",
+          "label": "Terraza superior de popa",
+          "bounds": [
+            4.48373,
+            -2.51679,
+            14.02726,
+            1.99316
+          ],
+          "sourceLabel": "Aft upper-deck lounge",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "UD_R02",
+          "deck": "UD",
+          "label": "Comedor superior",
+          "bounds": [
+            14.17928,
+            -2.46611,
+            18.5541,
+            2.07762
+          ],
+          "sourceLabel": "Dining area",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "UD_R03",
+          "deck": "UD",
+          "label": "Puente de mando",
+          "bounds": [
+            19.53379,
+            -2.09451,
+            23.70591,
+            2.07762
+          ],
+          "sourceLabel": "Bridge / helm",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        },
+        {
+          "id": "UD_R04",
+          "deck": "UD",
+          "label": "Lounge de proa",
+          "bounds": [
+            24.14508,
+            -2.07762,
+            33.18187,
+            2.01005
+          ],
+          "sourceLabel": "Forward exterior lounge",
+          "status": "T/I",
+          "interpretation": "Interpreted space"
+        }
+      ]
+    },
+    {
+      "id": "SD",
+      "label": "Solárium",
+      "floor": 8.2,
+      "outlines": [
+        {
+          "exterior": [
+            [
+              10.9269,
+              -1.4273
+            ],
+            [
+              10.9,
+              1.2523
+            ],
+            [
+              11.0481,
+              1.9256
+            ],
+            [
+              11.8695,
+              2.4776
+            ],
+            [
+              13.647,
+              2.5315
+            ],
+            [
+              16.3266,
+              2.4507
+            ],
+            [
+              18.4137,
+              2.1141
+            ],
+            [
+              19.2217,
+              1.6428
+            ],
+            [
+              19.5852,
+              0.9426
+            ],
+            [
+              19.7872,
+              0
+            ],
+            [
+              19.5852,
+              -1.0099
+            ],
+            [
+              19.1813,
+              -1.6832
+            ],
+            [
+              18.3868,
+              -2.0467
+            ],
+            [
+              16.2997,
+              -2.3834
+            ],
+            [
+              13.5392,
+              -2.5584
+            ],
+            [
+              11.883,
+              -2.5315
+            ],
+            [
+              11.102,
+              -2.1545
+            ],
+            [
+              10.9269,
+              -1.4273
+            ]
+          ],
+          "holes": [
+            [
+              [
+                11.9368,
+                1.4139
+              ],
+              [
+                14.1856,
+                1.4139
+              ],
+              [
+                14.1856,
+                2.3834
+              ],
+              [
+                11.9368,
+                2.3834
+              ],
+              [
+                11.9368,
+                1.4139
+              ]
+            ]
+          ]
+        }
+      ],
+      "rooms": [
+        {
+          "id": "SD_R01",
+          "deck": "SD",
+          "label": "Solárium superior",
+          "bounds": [
+            11.02119,
+            -2.38339,
+            19.57177,
+            2.32953
+          ],
+          "sourceLabel": "Optional sun-deck lounge",
+          "status": "T/I",
+          "interpretation": "OPTIONAL; installed status unknown"
+        }
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "id": "saloon",
+      "label": "Salón",
+      "sourceID": "MD_R02",
+      "deck": "MD",
+      "floor": 3.95,
+      "spawn": [
+        9.2,
+        0
+      ],
+      "polygons": [
+        [
+          8.53608,
+          -2.56082,
+          17.77732,
+          2.72784
+        ]
+      ],
+      "sourceRoomBounds": [
+        8.53608,
+        -2.56082,
+        17.77732,
+        2.72784
+      ]
+    },
+    {
+      "id": "cockpit",
+      "label": "Terraza de popa",
+      "sourceID": "MD_R01",
+      "deck": "MD",
+      "floor": 3.95,
+      "spawn": [
+        7.1,
+        0
+      ],
+      "polygons": [
+        {
+          "polygon": [
+            [
+              3.4,
+              -3.47
+            ],
+            [
+              8.65,
+              -3.47
+            ],
+            [
+              8.65,
+              3.47
+            ],
+            [
+              3.4,
+              3.47
+            ]
+          ],
+          "height": {
+            "x0": 3.4,
+            "z0": 3.95,
+            "slope": 0
+          }
+        }
+      ],
+      "sourceRoomBounds": [
+        2.78351,
+        -2.70928,
+        8.4433,
+        2.70928
+      ]
+    },
+    {
+      "id": "beach-club",
+      "label": "Beach club",
+      "sourceID": null,
+      "relatedSourceID": "LD_R01",
+      "sourcePlatform": "MD_DCK_002",
+      "deck": "LD",
+      "floor": 2.12,
+      "splitLevel": true,
+      "spawn": [
+        2.1,
+        0
+      ],
+      "polygons": [
+        {
+          "polygon": [
+            [
+              -0.15,
+              -3.28
+            ],
+            [
+              2.6,
+              -3.28
+            ],
+            [
+              2.6,
+              3.28
+            ],
+            [
+              -0.15,
+              3.28
+            ]
+          ],
+          "height": {
+            "x0": -0.15,
+            "z0": 2.12,
+            "slope": 0
+          }
+        },
+        {
+          "polygon": [
+            [
+              2.5,
+              -1.93
+            ],
+            [
+              4.17,
+              -1.93
+            ],
+            [
+              4.17,
+              1.93
+            ],
+            [
+              2.5,
+              1.93
+            ]
+          ],
+          "height": {
+            "x0": 2.5,
+            "z0": 2.12,
+            "slope": 0
+          }
+        },
+        {
+          "polygon": [
+            [
+              1.2,
+              -3.275
+            ],
+            [
+              3.4,
+              -3.275
+            ],
+            [
+              3.4,
+              -2.4250000000000003
+            ],
+            [
+              1.2,
+              -2.4250000000000003
+            ]
+          ],
+          "height": {
+            "x0": 1.2,
+            "z0": 2.12,
+            "slope": 0.8318181818181818
+          }
+        },
+        {
+          "polygon": [
+            [
+              1.2,
+              2.4250000000000003
+            ],
+            [
+              3.4,
+              2.4250000000000003
+            ],
+            [
+              3.4,
+              3.275
+            ],
+            [
+              1.2,
+              3.275
+            ]
+          ],
+          "height": {
+            "x0": 1.2,
+            "z0": 2.12,
+            "slope": 0.8318181818181818
+          }
+        }
+      ],
+      "sourceRoomBounds": null
+    },
+    {
+      "id": "port-side",
+      "label": "Pasillo de babor",
+      "sourceID": null,
+      "deck": "MD",
+      "floor": 3.95,
+      "spawn": [
+        12,
+        3.14
+      ],
+      "polygons": [
+        {
+          "polygon": [
+            [
+              8.55,
+              2.74
+            ],
+            [
+              20.7,
+              2.74
+            ],
+            [
+              20.7,
+              3.52
+            ],
+            [
+              8.55,
+              3.52
+            ]
+          ],
+          "height": {
+            "x0": 8.55,
+            "z0": 3.95,
+            "slope": 0
+          }
+        }
+      ],
+      "sourceRoomBounds": null
+    },
+    {
+      "id": "starboard-side",
+      "label": "Pasillo de estribor",
+      "sourceID": null,
+      "deck": "MD",
+      "floor": 3.95,
+      "upperDeck": "UD",
+      "spawn": [
+        12,
+        -3.14
+      ],
+      "polygons": [
+        {
+          "polygon": [
+            [
+              8.55,
+              -3.52
+            ],
+            [
+              21.8,
+              -3.52
+            ],
+            [
+              21.8,
+              -2.74
+            ],
+            [
+              8.55,
+              -2.74
+            ]
+          ],
+          "height": {
+            "x0": 8.55,
+            "z0": 3.95,
+            "slope": 0
+          }
+        },
+        {
+          "polygon": [
+            [
+              21.8,
+              -3.5
+            ],
+            [
+              24.1,
+              -3.5
+            ],
+            [
+              24.1,
+              -2.5999999999999996
+            ],
+            [
+              21.8,
+              -2.5999999999999996
+            ]
+          ],
+          "height": {
+            "x0": 21.8,
+            "z0": 3.95,
+            "slope": 0.8913043478260866
+          }
+        },
+        {
+          "polygon": [
+            [
+              24.1,
+              -3.5
+            ],
+            [
+              24.75,
+              -3.5
+            ],
+            [
+              24.75,
+              -2.6
+            ],
+            [
+              24.1,
+              -2.6
+            ]
+          ],
+          "height": {
+            "x0": 24.1,
+            "z0": 6,
+            "slope": 0
+          }
+        }
+      ],
+      "sourceRoomBounds": null
+    },
+    {
+      "id": "bow",
+      "label": "Proa",
+      "sourceID": "UD_R04",
+      "deck": "UD",
+      "floor": 6,
+      "workingFloor": 5.1,
+      "spawn": [
+        27.1,
+        -2.35
+      ],
+      "polygons": [
+        {
+          "polygon": [
+            [
+              24.55,
+              -2.93
+            ],
+            [
+              31.9,
+              -2.93
+            ],
+            [
+              31.9,
+              2.93
+            ],
+            [
+              24.55,
+              2.93
+            ]
+          ],
+          "height": {
+            "x0": 24.55,
+            "z0": 6,
+            "slope": 0
+          }
+        },
+        {
+          "polygon": [
+            [
+              31.9,
+              -2.55
+            ],
+            [
+              32.65,
+              -2.55
+            ],
+            [
+              32.65,
+              -1.43
+            ],
+            [
+              31.9,
+              -1.43
+            ]
+          ],
+          "height": {
+            "x0": 31.9,
+            "z0": 6,
+            "slope": 0
+          }
+        },
+        {
+          "polygon": [
+            [
+              32.65,
+              -2.335
+            ],
+            [
+              33.75,
+              -2.335
+            ],
+            [
+              33.75,
+              -1.585
+            ],
+            [
+              32.65,
+              -1.585
+            ]
+          ],
+          "height": {
+            "x0": 32.65,
+            "z0": 6,
+            "slope": -0.8181818181818175
+          }
+        },
+        {
+          "polygon": [
+            [
+              31.9,
+              1.43
+            ],
+            [
+              32.65,
+              1.43
+            ],
+            [
+              32.65,
+              2.55
+            ],
+            [
+              31.9,
+              2.55
+            ]
+          ],
+          "height": {
+            "x0": 31.9,
+            "z0": 6,
+            "slope": 0
+          }
+        },
+        {
+          "polygon": [
+            [
+              32.65,
+              1.585
+            ],
+            [
+              33.75,
+              1.585
+            ],
+            [
+              33.75,
+              2.335
+            ],
+            [
+              32.65,
+              2.335
+            ]
+          ],
+          "height": {
+            "x0": 32.65,
+            "z0": 6,
+            "slope": -0.8181818181818175
+          }
+        },
+        {
+          "polygon": [
+            [
+              33.65,
+              -2.35
+            ],
+            [
+              35.65,
+              -0.65
+            ],
+            [
+              35.65,
+              0.65
+            ],
+            [
+              33.65,
+              2.35
+            ]
+          ],
+          "height": {
+            "x0": 33.65,
+            "z0": 5.1,
+            "slope": 0
+          }
+        }
+      ],
+      "sourceRoomBounds": [
+        24.14508,
+        -2.07762,
+        33.18187,
+        2.01005
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "zones": [
+        "saloon",
+        "cockpit"
+      ],
+      "at": [
+        8.57,
+        0
+      ]
+    },
+    {
+      "zones": [
+        "cockpit",
+        "beach-club"
+      ],
+      "at": [
+        3.4,
+        2.85
+      ]
+    },
+    {
+      "zones": [
+        "cockpit",
+        "beach-club"
+      ],
+      "at": [
+        3.4,
+        -2.85
+      ]
+    },
+    {
+      "zones": [
+        "cockpit",
+        "port-side"
+      ],
+      "at": [
+        8.57,
+        3.15
+      ]
+    },
+    {
+      "zones": [
+        "cockpit",
+        "starboard-side"
+      ],
+      "at": [
+        8.57,
+        -3.15
+      ]
+    },
+    {
+      "zones": [
+        "starboard-side",
+        "bow"
+      ],
+      "at": [
+        24.6,
+        -3
+      ]
+    }
+  ],
+  "limitations": [
+    "Las huellas de habitaciones del original son límites aproximados, no tabiques levantados ni planos as-built.",
+    "Los nombres de camarotes y usos de servicio conservan el carácter inferido del original.",
+    "La disposición de muebles sigue la VR; no se fuerza a coincidir con los muebles esquemáticos del original."
+  ],
+  "reconciliation": [
+    {
+      "id": "levels",
+      "status": "matched",
+      "original": {
+        "LD": 1.55,
+        "MD": 3.95,
+        "UD": 6,
+        "SD": 8.2
+      },
+      "realism": {
+        "saloon": 3.95,
+        "cockpit": 3.95,
+        "sides": 3.95,
+        "bowLounge": 6
+      },
+      "note": "El lounge de proa pertenece a la cubierta superior. La maquinaria queda debajo del salón, en LD_R02; el puente queda a popa del lounge de proa en UD_R03."
+    },
+    {
+      "id": "beach-platform",
+      "status": "documented-override",
+      "sourceID": "MD_DCK_002",
+      "originalTop": 2.84,
+      "realismTop": 2.12,
+      "difference": -0.72,
+      "note": "Se conserva la plataforma baja y el nicho abierto de la VR. El original tiene una plataforma esquemática más alta; no se presenta esta diferencia como una medida real."
+    },
+    {
+      "id": "working-bow",
+      "status": "documented-override",
+      "sourceID": "UD_DCK_001",
+      "originalTop": 6,
+      "realismTop": 5.1,
+      "difference": -0.9,
+      "note": "La VR muestra dos escaleras descendentes al área de maniobra. Su desnivel es estimado; el original emplea una losa plana en esa zona."
+    },
+    {
+      "id": "foredeck-envelope",
+      "status": "corrected",
+      "sourceIDs": [
+        "HULL_HUL_001",
+        "HULL_HUL_002"
+      ],
+      "note": "Se recuperan las secciones originales del casco bajo proa y se cierra su encuentro con la cubierta reconstruida. La banda de unión es inferida; no modifica las superficies transitables."
+    },
+    {
+      "id": "aft-upper-stair",
+      "status": "reserved",
+      "sourcePath": [
+        [
+          5.4,
+          2.21
+        ],
+        [
+          8.05,
+          2.21
+        ]
+      ],
+      "realismPath": [
+        [
+          6.25,
+          2.83
+        ],
+        [
+          8.4,
+          2.83
+        ]
+      ],
+      "note": "La escalera visible en popa aún no permite subir. La posición de la VR y la ruta fotográfica del original difieren; no se abre un recorrido superior sin reconciliar el desembarco y el techo del salón."
+    }
+  ],
+  "counts": {
+    "sourceRooms": 31,
+    "sourceMeshes": 694,
+    "walkableAreas": 6
+  },
+  "sourceEquipment": [
+    {
+      "id": "LD_MAC_001",
+      "label": "Main engine P envelope",
+      "deck": "LD",
+      "bounds": [
+        9.46357,
+        0.42679,
+        1.67,
+        12.50676,
+        1.59582,
+        2.75
+      ]
+    },
+    {
+      "id": "LD_MAC_002",
+      "label": "Main engine P cover 1",
+      "deck": "LD",
+      "bounds": [
+        9.90892,
+        0.53812,
+        2.75,
+        10.20581,
+        1.48448,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_003",
+      "label": "Main engine P cover 2",
+      "deck": "LD",
+      "bounds": [
+        10.28004,
+        0.53812,
+        2.75,
+        10.57693,
+        1.48448,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_004",
+      "label": "Main engine P cover 3",
+      "deck": "LD",
+      "bounds": [
+        10.65116,
+        0.53812,
+        2.75,
+        10.94806,
+        1.48448,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_005",
+      "label": "Main engine P cover 4",
+      "deck": "LD",
+      "bounds": [
+        11.02228,
+        0.53812,
+        2.75,
+        11.31918,
+        1.48448,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_006",
+      "label": "Main engine P cover 5",
+      "deck": "LD",
+      "bounds": [
+        11.3934,
+        0.53812,
+        2.75,
+        11.6903,
+        1.48448,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_007",
+      "label": "Main engine P cover 6",
+      "deck": "LD",
+      "bounds": [
+        11.76452,
+        0.53812,
+        2.75,
+        12.06142,
+        1.48448,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_008",
+      "label": "Reduction-gear proxy P",
+      "deck": "LD",
+      "bounds": [
+        9.12956,
+        0.57524,
+        1.69,
+        9.77903,
+        1.44737,
+        2.29
+      ]
+    },
+    {
+      "id": "LD_MAC_009",
+      "label": "Engine bed proxy P 1",
+      "deck": "LD",
+      "bounds": [
+        9.31513,
+        1.45015,
+        1.55,
+        12.63665,
+        1.63015,
+        1.68
+      ]
+    },
+    {
+      "id": "LD_MAC_010",
+      "label": "Engine bed proxy P 1",
+      "deck": "LD",
+      "bounds": [
+        9.31513,
+        0.39246,
+        1.55,
+        12.63665,
+        0.57246,
+        1.68
+      ]
+    },
+    {
+      "id": "LD_MAC_011",
+      "label": "Main engine S envelope",
+      "deck": "LD",
+      "bounds": [
+        9.46357,
+        -1.74427,
+        1.67,
+        12.50676,
+        -0.57524,
+        2.75
+      ]
+    },
+    {
+      "id": "LD_MAC_012",
+      "label": "Main engine S cover 1",
+      "deck": "LD",
+      "bounds": [
+        9.90892,
+        -1.63293,
+        2.75,
+        10.20581,
+        -0.68657,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_013",
+      "label": "Main engine S cover 2",
+      "deck": "LD",
+      "bounds": [
+        10.28004,
+        -1.63293,
+        2.75,
+        10.57693,
+        -0.68657,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_014",
+      "label": "Main engine S cover 3",
+      "deck": "LD",
+      "bounds": [
+        10.65116,
+        -1.63293,
+        2.75,
+        10.94806,
+        -0.68657,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_015",
+      "label": "Main engine S cover 4",
+      "deck": "LD",
+      "bounds": [
+        11.02228,
+        -1.63293,
+        2.75,
+        11.31918,
+        -0.68657,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_016",
+      "label": "Main engine S cover 5",
+      "deck": "LD",
+      "bounds": [
+        11.3934,
+        -1.63293,
+        2.75,
+        11.6903,
+        -0.68657,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_017",
+      "label": "Main engine S cover 6",
+      "deck": "LD",
+      "bounds": [
+        11.76452,
+        -1.63293,
+        2.75,
+        12.06142,
+        -0.68657,
+        2.88
+      ]
+    },
+    {
+      "id": "LD_MAC_018",
+      "label": "Reduction-gear proxy S",
+      "deck": "LD",
+      "bounds": [
+        9.12956,
+        -1.59582,
+        1.69,
+        9.77903,
+        -0.72369,
+        2.29
+      ]
+    },
+    {
+      "id": "LD_MAC_019",
+      "label": "Engine bed proxy S 1",
+      "deck": "LD",
+      "bounds": [
+        9.31513,
+        -0.7209,
+        1.55,
+        12.63665,
+        -0.5409,
+        1.68
+      ]
+    },
+    {
+      "id": "LD_MAC_020",
+      "label": "Engine bed proxy S 1",
+      "deck": "LD",
+      "bounds": [
+        9.31513,
+        -1.7786,
+        1.55,
+        12.63665,
+        -1.5986,
+        1.68
+      ]
+    },
+    {
+      "id": "LD_MAC_021",
+      "label": "Auxiliary machinery block P",
+      "deck": "LD",
+      "bounds": [
+        7.05129,
+        2.17106,
+        1.55,
+        8.22032,
+        3.26586,
+        2.33
+      ]
+    },
+    {
+      "id": "LD_MAC_022",
+      "label": "Auxiliary machinery block S",
+      "deck": "LD",
+      "bounds": [
+        7.8492,
+        -2.98752,
+        1.55,
+        9.64913,
+        -2.04116,
+        2.31
+      ]
+    },
+    {
+      "id": "LD_MAC_023",
+      "label": "Circular machinery / vent P",
+      "deck": "LD",
+      "bounds": [
+        8.777,
+        2.26384,
+        1.55,
+        9.48213,
+        2.96896,
+        2.11
+      ]
+    },
+    {
+      "id": "LD_MAC_024",
+      "label": "Circular machinery / vent S",
+      "deck": "LD",
+      "bounds": [
+        7.64508,
+        -2.93185,
+        1.55,
+        8.38732,
+        -2.18961,
+        2.11
+      ]
+    },
+    {
+      "id": "UD_FUR_038",
+      "label": "Curved helm console",
+      "deck": "UD",
+      "bounds": [
+        21.69586,
+        -1.67223,
+        6,
+        23.18228,
+        1.97627,
+        7.01
+      ]
+    },
+    {
+      "id": "UD_EQU_001",
+      "label": "Helm display proxy 1",
+      "deck": "UD",
+      "bounds": [
+        21.91544,
+        1.08104,
+        7.01,
+        22.15192,
+        1.3513,
+        7.09
+      ]
+    },
+    {
+      "id": "UD_EQU_002",
+      "label": "Helm display proxy 2",
+      "deck": "UD",
+      "bounds": [
+        22.15192,
+        0.45606,
+        7.01,
+        22.3884,
+        0.72632,
+        7.09
+      ]
+    },
+    {
+      "id": "UD_EQU_003",
+      "label": "Helm display proxy 3",
+      "deck": "UD",
+      "bounds": [
+        22.23638,
+        -0.1858,
+        7.01,
+        22.47285,
+        0.08446,
+        7.09
+      ]
+    },
+    {
+      "id": "UD_EQU_004",
+      "label": "Helm display proxy 4",
+      "deck": "UD",
+      "bounds": [
+        22.06746,
+        -0.82767,
+        7.01,
+        22.30394,
+        -0.55741,
+        7.09
+      ]
+    },
+    {
+      "id": "UD_EQU_005",
+      "label": "Helm display proxy 5",
+      "deck": "UD",
+      "bounds": [
+        21.83099,
+        -1.45264,
+        7.01,
+        22.06746,
+        -1.18238,
+        7.09
+      ]
+    }
+  ]
+}

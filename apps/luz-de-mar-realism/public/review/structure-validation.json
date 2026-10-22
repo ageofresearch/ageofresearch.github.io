@@ -1,0 +1,205 @@
+{
+  "revision": "structure-r10",
+  "url": "http://127.0.0.1:5235/",
+  "checks": {
+    "modalPausesWalking": true,
+    "all31SourceRooms": true,
+    "mapSelectionLoadsCorrectDeck": true,
+    "sixRoomsAndResidency": true,
+    "mobileMapSelection": true
+  },
+  "captures": [
+    {
+      "name": "foredeck-before",
+      "sourcePosition": [
+        30,
+        -10,
+        6
+      ],
+      "target": [
+        29,
+        0,
+        5
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 15
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 3,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 28,
+        "triangles": 124941,
+        "memory": {
+          "geometries": 40,
+          "textures": 22
+        },
+        "estimatedMemory": {
+          "geometryBytes": 12143500,
+          "textureBytes": 232784273,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 261704989,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 3559.699999988079,
+          "p95": 3559.699999988079
+        },
+        "shadowUpdates": 5,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "foredeck-after",
+      "sourcePosition": [
+        30,
+        -10,
+        6
+      ],
+      "target": [
+        29,
+        0,
+        5
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 15
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 3,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 28,
+        "triangles": 124008,
+        "memory": {
+          "geometries": 40,
+          "textures": 22
+        },
+        "estimatedMemory": {
+          "geometryBytes": 12119182,
+          "textureBytes": 232784273,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 261680671,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 3652.4000000059605,
+          "p95": 3652.4000000059605
+        },
+        "shadowUpdates": 5,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "foredeck-working",
+      "sourcePosition": [
+        35,
+        -8,
+        5
+      ],
+      "target": [
+        33,
+        0,
+        4.7
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 15
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 4,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 28,
+        "triangles": 124008,
+        "memory": {
+          "geometries": 40,
+          "textures": 22
+        },
+        "estimatedMemory": {
+          "geometryBytes": 12119182,
+          "textureBytes": 232784273,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 261680671,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 1404,
+          "p95": 3652.4000000059605
+        },
+        "shadowUpdates": 5,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "softwareRenderer": true,
+  "errors": [],
+  "pass": true,
+  "scope": "Source anchoring, context envelope and deck map. Six room meshes, material textures and baked light remain unchanged.",
+  "performanceLimit": "Rendered correctness and geometry budgets checked on SwiftShader. This focused update has no new hardware frame-time measurement; the r9 report remains historical.",
+  "lightingLimit": "Existing room irradiance and probes retained; added outer joining skins use the existing context ambient and live sun."
+}

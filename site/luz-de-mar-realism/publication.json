@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "build": "exteriors-r9-stage-2",
+  "version": 3,
+  "build": "structure-r10",
   "scope": [
     "saloon",
     "cockpit",
@@ -9,13 +9,20 @@
     "starboard-side",
     "bow"
   ],
-  "authoringRevision": 9,
-  "assetManifestSHA256": "5388992d4bb6e6838049e6ececf99ecde035cdf3bfe39f00fc13ad256a5a883a",
+  "roomAuthoringRevision": 9,
+  "contextAuthoringRevision": 10,
+  "assetManifestSHA256": "8d5029223ce470b4a00b54222ec9176f03b376a84704cce91f09f0adf02194da",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
   },
+  "existingRoomAssets": {
+    "filesVerified": 47,
+    "allSHA256Unchanged": true,
+    "baselineCommit": "1cb3c1f"
+  },
+  "structuralSourceRooms": 31,
   "functionalBrowserChecks": true,
   "renderer": "Three.js 0.180.0 / WebGL2",
-  "visualStatus": "Panorama-guided reconstruction; inferred dimensions and finishes. No photographic parity or hardware FPS claim."
+  "visualStatus": "Source hull and deck-map reconciliation. VR-based level overrides and inferred joining skins documented; original room irradiance/probes retained."
 }

@@ -1,0 +1,440 @@
+{
+  "version": 2,
+  "stage": 2,
+  "algorithm": "SHA-256",
+  "scope": "New page subtree, excluding hashes.json and publication.json to avoid circular hashes",
+  "files": {
+    "BASISU-LICENSE.txt": {
+      "bytes": 11347,
+      "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
+    },
+    "CREDITS.md": {
+      "bytes": 3361,
+      "sha256": "2357aa4ba6a4c8666732a2861a9b72aad39e3052663150369bd7c658b0ec1827"
+    },
+    "MESHOPT-LICENSE.txt": {
+      "bytes": 1079,
+      "sha256": "f03037ca7bad1e3eb7f4a63fa6084a8baabd5ba30d3c239a9a7f35705d873e26"
+    },
+    "THREE-LICENSE.txt": {
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    "assets/beach-club/ambient-beach-club.exr": {
+      "bytes": 12815691,
+      "sha256": "f7f74cbb12d2654afadca747e43f1fadc8c6e76e18d7abff3b6864cd4e865fe0"
+    },
+    "assets/beach-club/authoring.json": {
+      "bytes": 2250,
+      "sha256": "f82e23e95ce95bd9b683a15c64077a3e11fc8d60dc9d17ac1415d93f0dd2ba70"
+    },
+    "assets/beach-club/context.glb": {
+      "bytes": 362812,
+      "sha256": "6ca0786e0a00f0ab695b3c867b00a16f70906014a808d492a13cdd4139411961"
+    },
+    "assets/beach-club/probe.exr": {
+      "bytes": 1798463,
+      "sha256": "fc7223b06e0897900a5315b795f7674efb971140616acc1a34a24e52cf651040"
+    },
+    "assets/beach-club/reference-components.json": {
+      "bytes": 20985,
+      "sha256": "982931b9c416eb24a984feb0430eca6c4613afe4acab96eddd2af27a56d515af"
+    },
+    "assets/beach-club/room.glb": {
+      "bytes": 9598688,
+      "sha256": "dd2c29791f3bfceafa779d7e0cb36d5e9b98a50246de62af303fdff6555e7279"
+    },
+    "assets/beach-club/room.json": {
+      "bytes": 18562,
+      "sha256": "6ea4aa017583978ba0c2555d27477dcd7347672a83977387dca6da46496c0b83"
+    },
+    "assets/bow/ambient-bow.exr": {
+      "bytes": 13106177,
+      "sha256": "9b71bb98a16533c9cec98ef9c61ba54a04b058085aee6cbc53e8659b479d09fb"
+    },
+    "assets/bow/authoring.json": {
+      "bytes": 2342,
+      "sha256": "c405a1b0180466be212922dbc5f05a733fea0257006b19f81fe919a8609bfad1"
+    },
+    "assets/bow/context.glb": {
+      "bytes": 633188,
+      "sha256": "419453858a0d49ab7e8dda3592135c577de528b46d05ff171c71d0ee9006f6b0"
+    },
+    "assets/bow/probe.exr": {
+      "bytes": 1524565,
+      "sha256": "e10b5f69165177d1a0d7a6398a1414ee12d467b48d6a793ff633657f1d50f5ec"
+    },
+    "assets/bow/reference-components.json": {
+      "bytes": 42181,
+      "sha256": "b3c9e6c289ee7cb0e93e197de928b97349e788d50e9464cfcf8267ec7a1a015f"
+    },
+    "assets/bow/room.glb": {
+      "bytes": 10260464,
+      "sha256": "3e9dc80d7276d97e4795fe0355d3e9301523cfe7e74fd934c04a6842e1d2702a"
+    },
+    "assets/bow/room.json": {
+      "bytes": 35199,
+      "sha256": "3d83747a3b1b6c216258058c1f7ee2c2c0ba9accf643ae8f72d90f26cbdb23ff"
+    },
+    "assets/cockpit/ambient-cockpit.exr": {
+      "bytes": 12378556,
+      "sha256": "5655aa0d117ed2aad920eda3f081d6214d2b3c191feb22a31a7e75054baea9f2"
+    },
+    "assets/cockpit/authoring.json": {
+      "bytes": 2209,
+      "sha256": "57728d2281bfe7ecd9854002cd02fc47b1d21b8c4ee779ced5674b837b44168c"
+    },
+    "assets/cockpit/context.glb": {
+      "bytes": 690856,
+      "sha256": "70a8ad48fce6f88e76471caa431085404f5eb6b261da0f970fd1b175bba61f64"
+    },
+    "assets/cockpit/probe.exr": {
+      "bytes": 2370720,
+      "sha256": "d393cee41b33dbebb36ed38194dd91b6e1fd4a5186084ae93602060ffac09c71"
+    },
+    "assets/cockpit/reference-components.json": {
+      "bytes": 34004,
+      "sha256": "0f62cdebb91ad65946913c6f037e9aef8ac6b26c97629b125ba1a9710be9bd77"
+    },
+    "assets/cockpit/room.glb": {
+      "bytes": 12774460,
+      "sha256": "d29cb12137adde0deae493ab88923ff7de1f67a61f260142ad5cdcdd3e3d35f2"
+    },
+    "assets/cockpit/room.json": {
+      "bytes": 28916,
+      "sha256": "cd0f101251ff7013a22ac557a202e16fd471b29836970983b0bf5f17a93c367c"
+    },
+    "assets/context/context.glb": {
+      "bytes": 193208,
+      "sha256": "dd4370471794cfdd97659d9379ff0295aba6540b4ced686e856084cecb01675a"
+    },
+    "assets/context/reference-components.json": {
+      "bytes": 4435,
+      "sha256": "911f9fa8e7b415094258ac64d0cbc0c6d24330e5ba6ee952db3a7d349c811a55"
+    },
+    "assets/exterior-inventory.json": {
+      "bytes": 73028,
+      "sha256": "1b1f5a05fd29b12889951b6ad5ee1b424503ded9b3da969dec468f2963586093"
+    },
+    "assets/index-CIUBmlqs.js": {
+      "bytes": 713300,
+      "sha256": "1dec36c3212860a17303582db983676913a7c907d81d5267a3ca187cb1a990f1"
+    },
+    "assets/index-nA3kuNkn.css": {
+      "bytes": 7118,
+      "sha256": "6e8066e45e702bbf9542b3f26d2fc2e946eda439e8267c72ac9ee7950e1d1f5f"
+    },
+    "assets/manifest.json": {
+      "bytes": 7601,
+      "sha256": "af9323dea90274b3d7e9919b890696709f022d5f281fbe5caf8d7d76f173cc10"
+    },
+    "assets/navigation.json": {
+      "bytes": 12865,
+      "sha256": "55d15e1059b31f2ba6ed9b6c0a771f2e1460351c77550d2fe65f5104e509c3b4"
+    },
+    "assets/port-side/ambient-port-side.exr": {
+      "bytes": 11516229,
+      "sha256": "b93a0134224b9decab1cca23466a382001c1840822d719678759fae6ced1330a"
+    },
+    "assets/port-side/authoring.json": {
+      "bytes": 2259,
+      "sha256": "d0ed9d190f227a8a3c2e22d5f796fa040120087c9790dc2c3fd77ca4b93d48d2"
+    },
+    "assets/port-side/context.glb": {
+      "bytes": 96376,
+      "sha256": "70a48bdf5b00057d26c5255ce103afadc9827d91b30b174c37eb3f7726b57f0f"
+    },
+    "assets/port-side/probe.exr": {
+      "bytes": 2180555,
+      "sha256": "a9ff80d753c1d7ac3e5e0b42472b7618f81d286b8ec6a8e47836665d29336e06"
+    },
+    "assets/port-side/reference-components.json": {
+      "bytes": 7622,
+      "sha256": "16a180d3f90cd2ec8950f0211779505fdc367102ff3e0bd3333369c2da12765e"
+    },
+    "assets/port-side/room.glb": {
+      "bytes": 6660204,
+      "sha256": "175376231647ed580218670c878809025398d62833bcd3ec510a964e0c173694"
+    },
+    "assets/port-side/room.json": {
+      "bytes": 7447,
+      "sha256": "e663a455d73881650cac62c54f8a2895e97ea56f5124232eab797db89ffd1816"
+    },
+    "assets/saloon/ambient-architecture.exr": {
+      "bytes": 12907868,
+      "sha256": "fb3bd2e1cf25362dfe0345a7dce0184170396851cd0ef165b31e4f2b786aea1c"
+    },
+    "assets/saloon/ambient-furniture.exr": {
+      "bytes": 14729807,
+      "sha256": "9518dad9888f5c4b9f0e43440928be9d69e724270485d28723d76698758ea300"
+    },
+    "assets/saloon/authoring.json": {
+      "bytes": 4393,
+      "sha256": "ef356eb70f542205d80bda50b32e01d0c78410933f4dc4c59528e7f632dc24ec"
+    },
+    "assets/saloon/context.glb": {
+      "bytes": 1404100,
+      "sha256": "ddabe0fca94ef4690ed92dc1c2916754b6a389e1367f11ee8a630030a84089fb"
+    },
+    "assets/saloon/exterior-source.json": {
+      "bytes": 1190,
+      "sha256": "739c8d8218833f2a45bc6eb510ca461f227f21a8f70899f8f53a5fe67f1ddcec"
+    },
+    "assets/saloon/exterior.jpg": {
+      "bytes": 588155,
+      "sha256": "d29eb2a2190d64eb2ab9e1471bde2d5cbd3c62238667108d898f6ea6b95e9860"
+    },
+    "assets/saloon/probe-aft.exr": {
+      "bytes": 2231638,
+      "sha256": "0f9e0113805a054fad03919138e8a05b4fe440e2c9ca663e834b7ed0a571dd8a"
+    },
+    "assets/saloon/probe-dining.exr": {
+      "bytes": 2256627,
+      "sha256": "032e5333e54bea9127c1ad9b3fea64251698d6eb271e24e9917d8e6b64801d36"
+    },
+    "assets/saloon/probe.exr": {
+      "bytes": 2242975,
+      "sha256": "b922baa9123927054d32a272cd139ee27c28628cc8cdf249651b987315a17894"
+    },
+    "assets/saloon/reference-components.json": {
+      "bytes": 64573,
+      "sha256": "ab2b824008dd75c9e8eb53c925e0eccff908d781dd18b696ff213d740ddb6b45"
+    },
+    "assets/saloon/room.glb": {
+      "bytes": 21492856,
+      "sha256": "b4f71d44e575b522f5016deb86b78398fea1f8b29c8e6fdf1633ac89577c392e"
+    },
+    "assets/saloon/room.json": {
+      "bytes": 59833,
+      "sha256": "b58e8d212beca9d626423a62f4313e857ba3056d408dce71b77a6e9d33f0c6ee"
+    },
+    "assets/starboard-side/ambient-starboard-side.exr": {
+      "bytes": 12903807,
+      "sha256": "f249a5461c7b690359c34bc9b73dd80bee89d1e89257ff4eac78a08c774a5788"
+    },
+    "assets/starboard-side/authoring.json": {
+      "bytes": 2289,
+      "sha256": "226b698a97761b4c2030e7642b34710c9309822bf67823c637507f0813b5260d"
+    },
+    "assets/starboard-side/context.glb": {
+      "bytes": 211072,
+      "sha256": "cc66e1fff6670496a265aa7bdfcceb3c05c02097bd4f04b9a1bbafe4791bc5f1"
+    },
+    "assets/starboard-side/probe.exr": {
+      "bytes": 2194372,
+      "sha256": "390627bcd5e46bf6c72d0a1f42349643e833f1e8ac00a3bd5090e3fd523430e9"
+    },
+    "assets/starboard-side/reference-components.json": {
+      "bytes": 15438,
+      "sha256": "b494c9205b42c64fff87d0fd780ef72c79be8a44971f7003e6e161cfa0c9fe66"
+    },
+    "assets/starboard-side/room.glb": {
+      "bytes": 6781208,
+      "sha256": "3153ca3afdaad2dd0aaa322c248b29046a421c36f9c4e2825c7d72890f48bd8d"
+    },
+    "assets/starboard-side/room.json": {
+      "bytes": 14142,
+      "sha256": "74ff66fbe9190236593d9df4548aa76b8291c950b47c51dc4bb886977714eb69"
+    },
+    "authoring/exteriors-downloads.json": {
+      "bytes": 2917,
+      "sha256": "4178b8fe15a87a561ada67fd0a4ab18ce6d92970f9005d9c57b03eca33f5ba9f"
+    },
+    "authoring/saloon-authoring.zip": {
+      "bytes": 91865256,
+      "sha256": "b4779dbb20e41db3cfb229c1bf4ff40aab78184388559fb493cd9179705892ae"
+    },
+    "authoring/saloon-raw-bakes.zip": {
+      "bytes": 14661906,
+      "sha256": "da205bb7503be7cf907999420b489faf14d08a9429b22f3a2a851f995dac9153"
+    },
+    "decoders/basis_transcoder.js": {
+      "bytes": 57529,
+      "sha256": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1"
+    },
+    "decoders/basis_transcoder.wasm": {
+      "bytes": 527333,
+      "sha256": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a"
+    },
+    "favicon.svg": {
+      "bytes": 198,
+      "sha256": "d9a3769d62ff8947f43fc0dcb9f8422e1ebd213aa32f5d035ef4a51a708c0671"
+    },
+    "index.html": {
+      "bytes": 2460,
+      "sha256": "ada3cae3be62596d01d3ef5c718c4c996296e24cc0a20a6cc8eae269c35beaba"
+    },
+    "review/baseline-performance.json": {
+      "bytes": 8559,
+      "sha256": "e216aa302d96fa5557acf45a3af7c27d7dd88704392db9e7ce8aa64494c101a6"
+    },
+    "review/baseline-saloon.webp": {
+      "bytes": 38394,
+      "sha256": "62055145fce489af6ee90b5c78fdcd5871f38b90824c8a9834ceb178e2067a99"
+    },
+    "review/exterior-beach-club-shower.webp": {
+      "bytes": 72162,
+      "sha256": "23c5980abb55f4d49ccecf2091e1b13acaef49f09ccac806a6c5ef2f4fa0ebe7"
+    },
+    "review/exterior-beach-club-upholstery.webp": {
+      "bytes": 73942,
+      "sha256": "d70d595a1d83e22dc3267579c017a607c7159a384dc51eeaeda8aedf4ae89ffa"
+    },
+    "review/exterior-beach-club.webp": {
+      "bytes": 38038,
+      "sha256": "3ee097a98f32c328733d74b9c22d603f24c4aee2971c0753314690b6a00ae3a2"
+    },
+    "review/exterior-bow-jacuzzi.webp": {
+      "bytes": 51048,
+      "sha256": "d24a208e47ab26ca92d06afcf25d8cd7a52304a4a7478d10ba1fa2c691845c45"
+    },
+    "review/exterior-bow-mooring.webp": {
+      "bytes": 59996,
+      "sha256": "5cb57867e7b3f8cd537862021d106f6da1d229c5d1e1349d100e2903cd6a0f2e"
+    },
+    "review/exterior-bow-two-tables.webp": {
+      "bytes": 47600,
+      "sha256": "3ac941477a9aaf8603ecd6937e95c1ab4bcd363e288fa97b04822678e02889e7"
+    },
+    "review/exterior-bow.webp": {
+      "bytes": 44660,
+      "sha256": "5e7141296b7a0e6854f4df5c0757e5aeeb4ca922c5059df33e00348e2e4cbdfe"
+    },
+    "review/exterior-cockpit-director-chairs.webp": {
+      "bytes": 50398,
+      "sha256": "d01bbed013855f416ebfe8cd88f0e260765ce2cc58e582b8273f0b21f5f648f5"
+    },
+    "review/exterior-cockpit-wetbar.webp": {
+      "bytes": 67414,
+      "sha256": "f9f68d9d54d1ef5be6ed237821ca31b320ec300f327a1a3a8e0d5d83e4fa4e66"
+    },
+    "review/exterior-cockpit.webp": {
+      "bytes": 39904,
+      "sha256": "ca13fb2e4337f5f0d03697c29e8049956aa2d30c54843773a1c49fdd64a43c5e"
+    },
+    "review/exterior-mobile.webp": {
+      "bytes": 22206,
+      "sha256": "e49e224e8275a6cb7b631db8f8714a184594eba4f8c6dcac439c214af362e27f"
+    },
+    "review/exterior-performance.json": {
+      "bytes": 47682,
+      "sha256": "290d6ab6e9242dd0274e9891367a6a761c2dfcb370406ac366c216ecbcb733f6"
+    },
+    "review/exterior-port-side.webp": {
+      "bytes": 39754,
+      "sha256": "191c78544693c6a93b14bb1af9966648989bbf8be3a0a3aaa998bda98af853ca"
+    },
+    "review/exterior-saloon.webp": {
+      "bytes": 44910,
+      "sha256": "d8a94d61789e6242302914e97f180181a724b3e74a474db710cd8339088b9605"
+    },
+    "review/exterior-starboard-side.webp": {
+      "bytes": 45652,
+      "sha256": "64d811d8ae4412df3588f337311df77e31f55b6aad9b53bce5ec91929e47d544"
+    },
+    "review/exterior-visual-review.json": {
+      "bytes": 28630,
+      "sha256": "41a610cce18d402647a000e43d7f37e7d64ce4aeb37bcb0e15d5e8db3b6beffb"
+    },
+    "review/hidden-loading-validation.json": {
+      "bytes": 1098,
+      "sha256": "86ef67ebb054491ae4e92dde36f30dc79b67441be05c1691ce1f5e6dfb086f90"
+    },
+    "review/index.html": {
+      "bytes": 14290,
+      "sha256": "cddf36c8849287bcb0a6f85bb8489e474c7aeab3817eb69d623d6c98c3529623"
+    },
+    "review/joint-diagnostic.json": {
+      "bytes": 3944,
+      "sha256": "ebc26d84cd46d3feef4f0b8adc3ecd3efaa93009fa18270448cc9584beb06c6d"
+    },
+    "review/joint-diagnostic.webp": {
+      "bytes": 29024,
+      "sha256": "d3de3654e79605be3f95e8bddd381b716c4265058d6932a83fd42a64c5bd5287"
+    },
+    "review/original-beach-club.webp": {
+      "bytes": 11714,
+      "sha256": "1e770af1d8cc22fe22995f8956cb1eda156a0f4edab7d77ad2a47ff3bca34fd6"
+    },
+    "review/original-bow.webp": {
+      "bytes": 18564,
+      "sha256": "f9fefd9883fdfc73375df76e5510598cafe8efcb48345b52ea65a99c10f666b1"
+    },
+    "review/original-cockpit.webp": {
+      "bytes": 32496,
+      "sha256": "4e862be268190528e76ed6d0a39b56f58a39e4f6220beb4694396d560531d2af"
+    },
+    "review/original-port-side.webp": {
+      "bytes": 17954,
+      "sha256": "161d1538230e0a932c9913d63495289f609c31677e8d869ea78c5bf4b672af1d"
+    },
+    "review/original-saloon.webp": {
+      "bytes": 17516,
+      "sha256": "12f363e02b816e6cc9129fe01cba9dbba4295eaf9dd848b7e37eb8314724b19e"
+    },
+    "review/original-starboard-side.webp": {
+      "bytes": 14068,
+      "sha256": "0227a47e32448043849f8dade3dc528c90ba907f2e4126733399d6d99bcf88f9"
+    },
+    "review/original-yacht-hashes.json": {
+      "bytes": 71801,
+      "sha256": "9062d08713919d6820d5bc15478d52eff2b91d65590d66d23576d8668b4c3358"
+    },
+    "review/performance.json": {
+      "bytes": 11501,
+      "sha256": "20b74598f72538d7e92a68a5ec2e0eef6d848b9fb7337badf3c34f9378d0a724"
+    },
+    "review/reference-inventory.json": {
+      "bytes": 9086,
+      "sha256": "dff5d51151b022594c2460118dbb6f3c03fa7fac2777a99a6442a40a3f778b43"
+    },
+    "review/saloon-aft.webp": {
+      "bytes": 64124,
+      "sha256": "4b4acd86240f6cbe61460b18b11881d9d4dbf3844e92e385419f2b2dafca8d39"
+    },
+    "review/saloon-ceiling.webp": {
+      "bytes": 39126,
+      "sha256": "8e95e153afde4f72818fae9d69e2cc614fc7ec7c0ff39c7ebcdc7d6e7da61b37"
+    },
+    "review/saloon-dining.webp": {
+      "bytes": 53050,
+      "sha256": "fac88e1aa22aa4845f1df4ecf4cc2038eb591d14332d5dc26ace57a3db5d861d"
+    },
+    "review/saloon-matched.webp": {
+      "bytes": 57508,
+      "sha256": "f533274e90453f0c98883408e5a1d12c6c53b0caf2ef5b49215479d01807d726"
+    },
+    "review/saloon-mobile.webp": {
+      "bytes": 20740,
+      "sha256": "2cac4ae653825418192dbfc12588b22cc3c6ec347bf5aa14ac9cbf096b5d4d81"
+    },
+    "review/saloon-overview.webp": {
+      "bytes": 57410,
+      "sha256": "f491f548a0c7cedd03754519636c79ed68a7ed6863ccc4606c39fea55c345663"
+    },
+    "review/saloon-r7.html": {
+      "bytes": 7557,
+      "sha256": "6eb6f8046433a2baa06cbf7068e2ccb2cd2bf7bbd70a4705cc25cccfb85d62f5"
+    },
+    "review/saloon-rest.webp": {
+      "bytes": 80760,
+      "sha256": "8fcaba652352952257b60298b510b85696ac9724bf2202ecd43ae78edaefaea0"
+    },
+    "review/saloon-upholstery.webp": {
+      "bytes": 67790,
+      "sha256": "413131e1103dca9fe0eb3b0e8435658489b39cb7488c79f86cd1699e284eefcb"
+    },
+    "review/saloon-wood.webp": {
+      "bytes": 60020,
+      "sha256": "e5a4a312f1049230772abd76877bcd9d357c0ed06c006422be984ac0f05daca4"
+    },
+    "review/stage1-public-verification.json": {
+      "bytes": 153976,
+      "sha256": "619cf1c77491c9527a7a3b243571bd29784943ad6352c36cdd311fcfb94c1f5d"
+    },
+    "review/visual-review.json": {
+      "bytes": 2220,
+      "sha256": "b7963a688e667156ab5b347eddadc79ab41b2c992412e382a5de2e6776d3adca"
+    }
+  }
+}

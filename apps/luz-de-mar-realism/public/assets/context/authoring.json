@@ -1,0 +1,16 @@
+{
+  "revision": "structure-r10",
+  "sourceModelSHA256": "24a64a65f8b1f87a217edbc75aa5187152cc94518c702526b7613bffe25d8422",
+  "nativeSHA256": "64a563047902d61c3dc0fc9c51f1a4d2e3e4fd8f79caf1966e4ba6426c78607e",
+  "sourceGLBSHA256": "74b5e56f114158bb1447290d284090282b04773f00b7783e62ba82a70841ae98",
+  "components": 26,
+  "roomsReexported": false,
+  "bakesRecomputed": false,
+  "lightingLimit": "Existing room irradiance and probes retained; added outer joining skins use the existing context ambient and live sun.",
+  "viewerContextSHA256": "30853161d3283f90736c6b33a51d7f6909e9d1e6421c4d3c6052e7f4c99e5f34",
+  "file": "yacht-structure-r10.zip",
+  "bytes": 13248361,
+  "sha256": "053c0b9dfda03b58f08b2a566b774a47f74bde442caee19d5ab423f4aca0b2f6",
+  "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-structure-r10/yacht-structure-r10.zip",
+  "rebuildBasis": "Existing realism authoring checkout and the r9 exteriors-final.blend; original published source files bundled for audit."
+}

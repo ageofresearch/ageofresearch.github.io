@@ -2,8 +2,9 @@
 // rooms keep their lighting through windows without loading full HDR atlases.
 import fs from 'node:fs/promises';import path from 'node:path';import{NodeIO}from'@gltf-transform/core';import{ALL_EXTENSIONS,EXTMeshoptCompression}from'@gltf-transform/extensions';import{dedup,prune,join,simplify,reorder}from'@gltf-transform/functions';import{MeshoptEncoder,MeshoptDecoder,MeshoptSimplifier}from'meshoptimizer';import{EXRLoader}from'three/addons/loaders/EXRLoader.js';import{FloatType}from'three';
 const R=path.resolve(import.meta.dirname,'..'),A=path.join(R,'public/assets');await Promise.all([MeshoptEncoder.ready,MeshoptDecoder.ready,MeshoptSimplifier.ready]);const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder,'meshopt.decoder':MeshoptDecoder}),exr=new EXRLoader().setDataType(FloatType);
-for(const id of['saloon','cockpit','beach-club','port-side','starboard-side','bow','context']){
- const doc=await io.read(path.join(R,'work',id+'-source.glb')),buffer=doc.getRoot().listBuffers()[0],atlases=new Map(),palette=new Map();
+const selected=process.argv.slice(2),sourceDir=process.env.PROXY_SOURCE_DIR||path.join(R,'work');
+for(const id of(selected.length?selected:['saloon','cockpit','beach-club','port-side','starboard-side','bow','context'])){
+ const doc=await io.read(path.join(sourceDir,id+'-source.glb')),buffer=doc.getRoot().listBuffers()[0],atlases=new Map(),palette=new Map();
  if(id!=='context'){const a=JSON.parse(await fs.readFile(path.join(A,id,'authoring.json')));for(const key of a.atlases){const b=await fs.readFile(path.join(A,id,'ambient-'+key+'.exr'));atlases.set(key,exr.parse(b.buffer.slice(b.byteOffset,b.byteOffset+b.length)));}}
  function sample(im,u,v,c){const x=Math.max(0,Math.min(im.width-1,u*(im.width-1))),y=Math.max(0,Math.min(im.height-1,(1-v)*(im.height-1))),x0=Math.floor(x),y0=Math.floor(y),x1=Math.min(im.width-1,x0+1),y1=Math.min(im.height-1,y0+1),a=x-x0,b=y-y0,get=(xx,yy)=>im.data[(yy*im.width+xx)*4+c];return Math.max(0,Math.min(16,(get(x0,y0)*(1-a)+get(x1,y0)*a)*(1-b)+(get(x0,y1)*(1-a)+get(x1,y1)*a)*b));}
  for(const mesh of doc.getRoot().listMeshes())for(const p of mesh.listPrimitives()){

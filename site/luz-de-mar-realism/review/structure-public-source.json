@@ -1,0 +1,23 @@
+[
+  {
+    "resource": "play.html?world=rocha",
+    "status": 200,
+    "bytes": 3370,
+    "sha256": "18b557dc6e33e897de448fb9fc701ca25bebdf3fea2baa368d11e0b096eccea4",
+    "matchesLocalSource": null
+  },
+  {
+    "resource": "rocha/luz-de-mar/model.json",
+    "status": 200,
+    "bytes": 283684,
+    "sha256": "5d416760e6e041cc0cdf85604b3d048a111c9aeb4f7b0c74460823e714f8637c",
+    "matchesLocalSource": true
+  },
+  {
+    "resource": "rocha/luz-de-mar/model.bin",
+    "status": 200,
+    "bytes": 3837030,
+    "sha256": "24a64a65f8b1f87a217edbc75aa5187152cc94518c702526b7613bffe25d8422",
+    "matchesLocalSource": true
+  }
+]

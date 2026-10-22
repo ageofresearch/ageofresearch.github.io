@@ -1,14 +1,14 @@
 {
   "room": "saloon",
-  "revision": 7,
+  "revision": 9,
   "atlasPadding": {
     "architecture": {
       "marginMethod": "FRACTION",
       "islandMargin": 0.003,
-      "coverage": 0.503681480884552,
+      "coverage": 0.4845219850540161,
       "degenerateTriangleFraction": 0.0019011406844106464,
       "bakeMarginPixels": 2,
-      "uvTrianglesSHA256": "14c2f90968b07b067229b371a9a7965227d41e4502e73f048f9facb13a69905a"
+      "uvTrianglesSHA256": "f6cc76d385f275ca8837899bdd945e44eaec55adc5a92854dc4180335df40328"
     },
     "furniture": {
       "marginMethod": "FRACTION",
@@ -16,23 +16,19 @@
       "coverage": 0.3011300265789032,
       "degenerateTriangleFraction": 0.0033190064519918933,
       "bakeMarginPixels": 2,
-      "uvTrianglesSHA256": "86377e2bb228939b89fe1e001a89882cae73b1ce055f7992d89a21df91fd2eb5"
+      "uvTrianglesSHA256": "60b3489cfb3bae9f7d189739323d12019a46ff49e62c54bcf51983a819a22c6c"
     }
   },
   "sourceGeometrySHA256": "9772596bde1d885e95404a4c1ad6c84d4c623723ae5f2c07fa17f9bdd1b5d8ef",
-  "replacementBasis": "28 viewpoint detail groups; inherited room envelope, furniture and visible interior replaced as image-estimated geometry",
+  "replacementBasis": "VR-led exterior reconstruction; inherited yacht transformation; all unmeasured dimensions inferred",
   "atlasSize": 2048,
   "atlases": [
     "architecture",
     "furniture"
   ],
-  "rawBakesSHA256": {
-    "architecture": "5eedad7e38e956a3747cece4df3105e088ce921b4e953a56e3cca0e2f797336c",
-    "furniture": "d5783db1e4ea43f5cf5b36a790e729d938624b2b1365a55b9d8de5650d739c1e"
-  },
-  "bakeGeometrySHA256": "c760fe9a6f538919c7777445f8731c9e563abd8e17e0a0b9a38421905cd4a22b",
+  "bakeGeometrySHA256": "6c0ed9a5a4c698b0dc776af97a1a92107b1df2a4a8a84ff8810d4feedaf51373",
   "rawNativeBakesPacked": true,
-  "samples": 96,
+  "samples": 24,
   "ambientEnvironmentSHA256": "2ad29e6bb9153c371d667c7c43cb97ec6630f323a44e469f4dd3c3ba64984fd0",
   "uvRoles": {
     "material": 0,
@@ -45,7 +41,6 @@
   "blender": "4.3.2",
   "dynamicObjects": [],
   "bakedOccludersExcludeDynamic": true,
-  "masterSHA256": "11d2623fc4679ba6dd4c36cb70648099c82c9133949f484291aeea9b5c886a6d",
   "probePosition": [
     -0.19657894736842108,
     3.1900000000000004,
@@ -53,7 +48,7 @@
   ],
   "probes": [
     {
-      "id": "aft",
+      "id": "saloon-0",
       "position": [
         0.6388815789473684,
         3.24,
@@ -67,48 +62,48 @@
       "asset": "probe-aft.exr",
       "width": 1024,
       "height": 512,
-      "samples": 64,
-      "purpose": "Fixed static specular environment, spatially blended; runtime sun excluded"
+      "samples": 24,
+      "purpose": "Local static specular capture; live sun excluded"
     },
     {
-      "id": "saloon",
+      "id": "saloon-1",
       "position": [
         -0.19657894736842108,
         3.1900000000000004,
         -5.871666666666666
       ],
       "sourcePosition": [
-        12.0,
+        12,
         -0.2,
         5.2
       ],
       "asset": "probe.exr",
       "width": 1024,
       "height": 512,
-      "samples": 64,
-      "purpose": "Fixed static specular environment, spatially blended; runtime sun excluded"
+      "samples": 24,
+      "purpose": "Local static specular capture; live sun excluded"
     },
     {
-      "id": "dining",
+      "id": "saloon-2",
       "position": [
         0.0,
         3.29,
         -1.9572222222222226
       ],
       "sourcePosition": [
-        16.0,
+        16,
         0,
         5.3
       ],
       "asset": "probe-dining.exr",
       "width": 1024,
       "height": 512,
-      "samples": 64,
-      "purpose": "Fixed static specular environment, spatially blended; runtime sun excluded"
+      "samples": 24,
+      "purpose": "Local static specular capture; live sun excluded"
     }
   ],
   "halfFloatLinearAtlases": true,
-  "denoise": "Intel Open Image Denoise 2.5.1 CPU RTLightmap, linear HDR full-atlas filtering; original 96-sample bakes retained in authoring archive",
+  "denoise": "OIDN 2.5.1 CPU RTLightmap, full linear HDR atlas",
   "finishControls": {
     "wood": {
       "roughness": 0.14,
@@ -129,5 +124,31 @@
     "attributes": "53535993ac806716d074ab32440f1763504e9f63f361f723bdc533298d085cf5",
     "triangles": "13bc731559ad1f72199825c8028ea2cc7c8f0f1458c5e259ff52ecf70edf465e",
     "triangleCount": 236100
+  },
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "ambientStrength": 0.5,
+  "nativeOutdoorWoodCoat": 0.18,
+  "ambientCalibration": "Fixed illustrative daylight, not photometrically measured. Linear ambient HDR strength 0.5; live sun 1.15 excluded from bakes.",
+  "bakeSeconds": 343.76,
+  "rawBakesSHA256": {
+    "architecture": "5c04b36c095f6397dceb845fa0fa3033ffd4aa29a77195042399cfe94e4adb90",
+    "furniture": "7711caded5e98ef9109dfad5afc403074a087169506e4aadc09d75f21616c788"
+  },
+  "masterSHA256": "ecfc9d91c16fe5cac48f01837095b56c15d3ad04a7aa88d8f8f023f772ca1cc1",
+  "cameraExposure": 1.15,
+  "presentationCamera": {
+    "sourcePosition": [
+      9.2,
+      0,
+      5.5
+    ],
+    "target": [
+      13.157,
+      0.084,
+      5.5
+    ],
+    "verticalFov": 72,
+    "viewerToneCurve": "Three.js Neutral",
+    "nativeToneCurve": "Blender AgX"
   }
 }

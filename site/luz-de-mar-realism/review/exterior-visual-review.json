@@ -1,0 +1,690 @@
+{
+  "revision": 9,
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "referencePanoramas": 10,
+  "cubeFaces": 60,
+  "featureGroups": 43,
+  "cameraCalibration": "Original and candidate renders use identical source coordinates, HFOV90/VFOV67.380 degrees and 900×600 pixels. Tour comparison matches visible features approximately; its 3D camera position and dimensions are not surveyed.",
+  "captures": [
+    {
+      "name": "saloon",
+      "zone": "saloon",
+      "sourcePosition": [
+        9.2,
+        0,
+        5.55
+      ],
+      "target": [
+        13.157,
+        0.084,
+        5.55
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "saloon",
+        "residentZones": [
+          "saloon",
+          "cockpit"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          9.2,
+          0
+        ],
+        "frames": 7,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 46,
+        "triangles": 325529,
+        "memory": {
+          "geometries": 65,
+          "textures": 47
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 9.800000011920929,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 10,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "saloon",
+        "sourcePosition": [
+          9.2,
+          0,
+          5.55
+        ],
+        "actualSourcePosition": [
+          9.200000000000003,
+          0,
+          5.549999999999999
+        ],
+        "target": [
+          13.157,
+          0.084,
+          5.55
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": []
+    },
+    {
+      "name": "cockpit",
+      "zone": "cockpit",
+      "sourcePosition": [
+        7.1,
+        0,
+        5.5
+      ],
+      "target": [
+        4,
+        0,
+        5.35
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "cockpit",
+        "residentZones": [
+          "saloon",
+          "cockpit"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          7.1,
+          0
+        ],
+        "frames": 12,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 21,
+        "triangles": 94113,
+        "memory": {
+          "geometries": 68,
+          "textures": 49
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 4.199999988079071,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 15,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "cockpit",
+        "sourcePosition": [
+          7.1,
+          0,
+          5.5
+        ],
+        "actualSourcePosition": [
+          7.100000000000036,
+          0,
+          5.500000000000002
+        ],
+        "target": [
+          4,
+          0,
+          5.35
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C08",
+        "C09",
+        "C10"
+      ]
+    },
+    {
+      "name": "beach-club",
+      "zone": "beach-club",
+      "sourcePosition": [
+        0.2,
+        0,
+        3.67
+      ],
+      "target": [
+        3.7,
+        0,
+        3
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "beach-club",
+        "residentZones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 32
+        },
+        "elevation": 2.12,
+        "position": [
+          2.1,
+          0
+        ],
+        "frames": 17,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 45,
+        "triangles": 178467,
+        "memory": {
+          "geometries": 61,
+          "textures": 26
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 2.7000000178813934,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 21,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "beach-club",
+        "sourcePosition": [
+          0.2,
+          0,
+          3.67
+        ],
+        "actualSourcePosition": [
+          0.19999999999999699,
+          0,
+          3.6699999999999964
+        ],
+        "target": [
+          3.7,
+          0,
+          3
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09"
+      ]
+    },
+    {
+      "name": "cockpit-director-chairs",
+      "zone": "cockpit",
+      "sourcePosition": [
+        6.9,
+        -0.3,
+        5.45
+      ],
+      "target": [
+        6.4,
+        0.35,
+        4.7
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "cockpit",
+        "residentZones": [
+          "cockpit",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          7.1,
+          0
+        ],
+        "frames": 22,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 29,
+        "triangles": 189385,
+        "memory": {
+          "geometries": 72,
+          "textures": 35
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 2.300000011920929,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 27,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "cockpit",
+        "sourcePosition": [
+          7.1,
+          0,
+          5.5
+        ],
+        "actualSourcePosition": [
+          7.100000000000036,
+          0,
+          5.500000000000002
+        ],
+        "target": [
+          4,
+          0,
+          5.35
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C08",
+        "C09",
+        "C10"
+      ]
+    },
+    {
+      "name": "cockpit-wetbar",
+      "zone": "cockpit",
+      "sourcePosition": [
+        6.9,
+        -1.2,
+        5.4
+      ],
+      "target": [
+        7.6,
+        -2.4,
+        4.85
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "cockpit",
+        "residentZones": [
+          "cockpit",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          7.1,
+          0
+        ],
+        "frames": 24,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 37,
+        "triangles": 249705,
+        "memory": {
+          "geometries": 72,
+          "textures": 43
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 2.300000011920929,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 27,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "cockpit",
+        "sourcePosition": [
+          7.1,
+          0,
+          5.5
+        ],
+        "actualSourcePosition": [
+          7.100000000000036,
+          0,
+          5.500000000000002
+        ],
+        "target": [
+          4,
+          0,
+          5.35
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C08",
+        "C09",
+        "C10"
+      ]
+    },
+    {
+      "name": "beach-club-upholstery",
+      "zone": "beach-club",
+      "sourcePosition": [
+        1.9,
+        0,
+        3.67
+      ],
+      "target": [
+        0.75,
+        1.15,
+        2.65
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "beach-club",
+        "residentZones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 32
+        },
+        "elevation": 2.12,
+        "position": [
+          2.1,
+          0
+        ],
+        "frames": 29,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 19,
+        "triangles": 79411,
+        "memory": {
+          "geometries": 61,
+          "textures": 26
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 1.9000000059604645,
+          "p95": 7621.199999988079
+        },
+        "shadowUpdates": 32,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "beach-club",
+        "sourcePosition": [
+          0.2,
+          0,
+          3.67
+        ],
+        "actualSourcePosition": [
+          0.19999999999999699,
+          0,
+          3.6699999999999964
+        ],
+        "target": [
+          3.7,
+          0,
+          3
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09"
+      ]
+    },
+    {
+      "name": "beach-club-shower",
+      "zone": "beach-club",
+      "sourcePosition": [
+        1.1,
+        -2,
+        3.67
+      ],
+      "target": [
+        2.15,
+        -3.23,
+        3.6
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "beach-club",
+        "residentZones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 32
+        },
+        "elevation": 2.12,
+        "position": [
+          2.1,
+          0
+        ],
+        "frames": 31,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 32,
+        "triangles": 149925,
+        "memory": {
+          "geometries": 61,
+          "textures": 26
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 1.7999999821186066,
+          "p95": 7621.199999988079
+        },
+        "shadowUpdates": 32,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "beach-club",
+        "sourcePosition": [
+          0.2,
+          0,
+          3.67
+        ],
+        "actualSourcePosition": [
+          0.19999999999999699,
+          0,
+          3.6699999999999964
+        ],
+        "target": [
+          3.7,
+          0,
+          3
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09"
+      ]
+    }
+  ],
+  "remaining": [
+    "All exterior dimensions are estimates",
+    "Hidden construction and exact finishes inferred",
+    "Static probes approximate view-dependent reflections",
+    "Coastal scene and weather illustrative",
+    "No measured hardware 60/30 FPS result",
+    "Visual reconstruction remains distinguishable from the photographs"
+  ]
+}

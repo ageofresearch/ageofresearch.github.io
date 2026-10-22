@@ -1,0 +1,86 @@
+{
+  "room": "bow",
+  "revision": 9,
+  "replacementBasis": "VR-led exterior reconstruction; inherited yacht transformation; all unmeasured dimensions inferred",
+  "atlasSize": 2048,
+  "atlases": [
+    "bow"
+  ],
+  "atlasPadding": {
+    "bow": {
+      "marginMethod": "FRACTION",
+      "islandMargin": 0.006,
+      "coverage": 0.3960127830505371,
+      "degenerateTriangleFraction": 0.0,
+      "bakeMarginPixels": 4,
+      "uvTrianglesSHA256": "e9c9faf2558e77566f6d81f375dbd49ab83c89ab7e00653da22be6de54656676"
+    }
+  },
+  "samples": 24,
+  "blender": "4.3.2",
+  "uvRoles": {
+    "material": 0,
+    "ambient": 1
+  },
+  "bakeGeometrySHA256": "f869d3f237057e11d84b832d6044d3a42674c432fa2f2a39f63655531bfdc161",
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "dynamicObjects": [],
+  "bakedOccludersExcludeDynamic": true,
+  "ambientEnvironmentSHA256": "2ad29e6bb9153c371d667c7c43cb97ec6630f323a44e469f4dd3c3ba64984fd0",
+  "refinements": [
+    "Hollow jacuzzi walls leave the fixed blue water visible",
+    "Raised white foredeck bulwarks follow the side taper"
+  ],
+  "ambientStrength": 0.5,
+  "nativeOutdoorWoodCoat": 0.18,
+  "ambientCalibration": "Fixed illustrative daylight, not photometrically measured. Linear ambient HDR strength 0.5; live sun 1.15 excluded from bakes.",
+  "rawBakesSHA256": {
+    "bow": "a5fbfb6f076d522e1e022a493e3b0b789a6c9a056cb1c708a5ace78ca4e02466"
+  },
+  "rawNativeBakesPacked": true,
+  "denoise": "OIDN 2.5.1 CPU RTLightmap, full linear HDR atlas",
+  "probes": [
+    {
+      "id": "bow-0",
+      "position": [
+        0.0,
+        5.19,
+        9.786111111111108
+      ],
+      "sourcePosition": [
+        28.0,
+        0,
+        7.2
+      ],
+      "asset": "probe.exr",
+      "width": 1024,
+      "height": 512,
+      "samples": 24,
+      "purpose": "Local static specular capture; live sun excluded"
+    }
+  ],
+  "probePosition": [
+    0.0,
+    5.19,
+    9.786111111111108
+  ],
+  "halfFloatLinearAtlases": true,
+  "masterSHA256": "42c33b86e7c008932f60509e6471a028bd6a94c82b13bb1823b6676b896ec1a3",
+  "bakeSeconds": 136.65,
+  "cameraExposure": 1.25,
+  "presentationCamera": {
+    "sourcePosition": [
+      27.1,
+      -2.35,
+      7.55
+    ],
+    "target": [
+      30.5,
+      0,
+      6.7
+    ],
+    "verticalFov": 72,
+    "viewerToneCurve": "Three.js Neutral",
+    "nativeToneCurve": "Blender AgX"
+  }
+}

@@ -1,43 +1,195 @@
 {
-  "version": "1.0.0-preview.7",
-  "source": "Current Luz de Mar / tidewater-rocha",
-  "sourcePublishedCommit": "36624f2403cfd27b7c7406514727c773dd7d3dfc",
-  "sourceModelSHA256": "24a64a65f8b1f87a217edbc75aa5187152cc94518c702526b7613bffe25d8422",
-  "units": "physical metres",
-  "sourceAxes": "X forward, Y port, Z up",
-  "normalization": {
-    "sx": 0.978611111111111,
-    "sy": 0.9828947368421053,
-    "seaReference": 2.01,
-    "length": 35.23
+  "version": "2.0.0-exteriors.1",
+  "stage": 1,
+  "defaultRoom": "saloon",
+  "scope": "Connected VR-led exterior reconstruction",
+  "maxDetailedZones": 2,
+  "physicalTransform": {
+    "source": "X forward, Y port, Z up",
+    "three": "[Y*SY, Z-2.01, X*SX-17.615]",
+    "SX": 0.978611111111111,
+    "SY": 0.9828947368421053
   },
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "accuracy": "Dimensions estimated; tour is an Azimut Grande 36M, not verified as Luz de Mar.",
+  "navigation": "navigation.json",
+  "context": "context/context.glb",
+  "proxies": [
+    {
+      "id": "saloon",
+      "asset": "saloon/context.glb"
+    },
+    {
+      "id": "cockpit",
+      "asset": "cockpit/context.glb"
+    },
+    {
+      "id": "beach-club",
+      "asset": "beach-club/context.glb"
+    },
+    {
+      "id": "port-side",
+      "asset": "port-side/context.glb"
+    },
+    {
+      "id": "starboard-side",
+      "asset": "starboard-side/context.glb"
+    },
+    {
+      "id": "bow",
+      "asset": "bow/context.glb"
+    }
+  ],
   "rooms": [
     {
       "id": "saloon",
-      "sourceID": "MD_R02",
-      "geometry": "saloon/room.glb",
+      "label": "Salón",
       "metadata": "saloon/room.json",
+      "geometry": "saloon/room.glb",
+      "sha256": "b4f71d44e575b522f5016deb86b78398fea1f8b29c8e6fdf1633ac89577c392e",
       "triangles": 236100,
-      "sha256": "ac388739458fb0e27fde6cabecb000cde28c6ff2eb8aeea937cdfaa1b2ebf298",
       "ambientAtlases": [
-        "saloon/ambient-architecture.exr",
-        "saloon/ambient-furniture.exr"
+        {
+          "key": "architecture",
+          "asset": "ambient-architecture.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        },
+        {
+          "key": "furniture",
+          "asset": "ambient-furniture.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        }
       ],
       "probes": [
-        "saloon/probe-aft.exr",
-        "saloon/probe.exr",
-        "saloon/probe-dining.exr"
+        {
+          "id": "saloon-0",
+          "position": [
+            0.6388815789473684,
+            3.24,
+            -8.171402777777777
+          ],
+          "sourcePosition": [
+            9.65,
+            0.65,
+            5.25
+          ],
+          "asset": "probe-aft.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        },
+        {
+          "id": "saloon-1",
+          "position": [
+            -0.19657894736842108,
+            3.1900000000000004,
+            -5.871666666666666
+          ],
+          "sourcePosition": [
+            12,
+            -0.2,
+            5.2
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        },
+        {
+          "id": "saloon-2",
+          "position": [
+            0,
+            3.29,
+            -1.9572222222222226
+          ],
+          "sourcePosition": [
+            16,
+            0,
+            5.3
+          ],
+          "asset": "probe-dining.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        }
       ]
-    }
-  ],
-  "scope": "Salón principal MD_R02 only",
-  "sourceSnapshotRooms": [
+    },
     {
-      "id": "saloon",
-      "sourceID": "MD_R02",
-      "triangles": 19096,
-      "vertices": 17798,
-      "sha256": "9772596bde1d885e95404a4c1ad6c84d4c623723ae5f2c07fa17f9bdd1b5d8ef"
+      "id": "cockpit",
+      "label": "Terraza de popa",
+      "metadata": "cockpit/room.json",
+      "geometry": "cockpit/room.glb",
+      "sha256": "d29cb12137adde0deae493ab88923ff7de1f67a61f260142ad5cdcdd3e3d35f2",
+      "triangles": 59950,
+      "ambientAtlases": [
+        {
+          "key": "cockpit",
+          "asset": "ambient-cockpit.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        }
+      ],
+      "probes": [
+        {
+          "id": "cockpit-0",
+          "position": [
+            0,
+            2.99,
+            -10.862583333333333
+          ],
+          "sourcePosition": [
+            6.9,
+            0,
+            5
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        }
+      ]
+    },
+    {
+      "id": "beach-club",
+      "label": "Beach club",
+      "metadata": "beach-club/room.json",
+      "geometry": "beach-club/room.glb",
+      "sha256": "dd2c29791f3bfceafa779d7e0cb36d5e9b98a50246de62af303fdff6555e7279",
+      "triangles": 27076,
+      "ambientAtlases": [
+        {
+          "key": "beach-club",
+          "asset": "ambient-beach-club.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        }
+      ],
+      "probes": [
+        {
+          "id": "beach-club-0",
+          "position": [
+            0,
+            1.1900000000000004,
+            -16.04922222222222
+          ],
+          "sourcePosition": [
+            1.6,
+            0,
+            3.2
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        }
+      ]
     }
   ]
 }

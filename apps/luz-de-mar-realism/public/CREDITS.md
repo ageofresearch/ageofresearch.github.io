@@ -4,7 +4,7 @@
   published commit `36624f2403cfd27b7c7406514727c773dd7d3dfc`.
   See assets/manifest.json and the authoring archive for hashes and transforms.
 - Primary visual reference: **Azimut Grande 36M — VRCLOUD**,
-  https://vrcloud.com/?pv=1667308298, accessed 2026-10-22. Salon and Dining Area.
+  https://vrcloud.com/?pv=1667308298, accessed 2026-10-22. Salon and Dining Area, Cockpit, Cockpit Port/Stbd, Port Side, Starboard Side, Forward Starboard Side, Bow Lounge, Bow Sunbed, Bow and Beach Club. All six cube faces of the ten exterior panoramas were reviewed.
   Its public main-deck plan also informed table orientation, chair count and
   asymmetric cabinetry: https://cdn-static.vrcloud.com/azimut-yachts/ma2805/content/main.png?v=p29279716.
   Reference images retain their owners' rights. They are not used as application
@@ -38,3 +38,5 @@ This is a visual reconstruction, not an as-built survey. Room dimensions are
 inherited estimates. Furniture dimensions, some hidden shapes, exact placement,
 material identity and light calibration are inferred. Improved rendering does
 not provide additional evidence of dimensional accuracy.
+
+Exterior reconstruction: own teak, outdoor woven textiles, stitching, furniture, jacuzzi, deck machinery and fixed water. These visually inferred forms are not manufacturer CAD. New Blender authoring archives are distributed through GitHub Releases; old saloon downloads are retained.

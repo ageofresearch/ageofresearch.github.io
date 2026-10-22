@@ -3,3 +3,5 @@
 .saloon-tag{font-size:11px;letter-spacing:.18em;color:#293c32;background:#f0ede4e8;padding:15px 20px;border-radius:30px} @media(max-width:600px){.saloon-tag{display:none}}
 
 .external-icon{width:12px;height:12px;vertical-align:-2px;margin-left:3px}@media(pointer:coarse){.keyboard-hint{display:none}}
+
+.zone-select select{font:inherit;font-size:12px;color:#ece8df;background:#1e2425dd;border:1px solid #bfb5a855;border-radius:8px;padding:10px 28px 10px 12px;max-width:230px;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.notice.visible{opacity:1;pointer-events:auto}.notice button{margin-left:12px;border:1px solid #a8aaa7;background:#f8f5ee;color:#303936;border-radius:5px;padding:6px 10px;cursor:pointer}@media(max-width:680px){.brand small{display:none}.zone-select select{max-width:160px;font-size:11px;padding:8px}.brand-mark{display:none}.original{font-size:10px}}

@@ -1,15 +1,16 @@
 {
-  "version": 1,
+  "version": 2,
+  "stage": 1,
   "algorithm": "SHA-256",
-  "scope": "Published new-page subtree, excluding this manifest and publication.json to avoid circular hashes.",
+  "scope": "New page subtree, excluding hashes.json and publication.json to avoid circular hashes",
   "files": {
     "BASISU-LICENSE.txt": {
       "bytes": 11347,
       "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
     },
     "CREDITS.md": {
-      "bytes": 2888,
-      "sha256": "80b8d7bc6158f5f4760cf07a255435f1eeb9740ee751e89b28252a076c0ea020"
+      "bytes": 3361,
+      "sha256": "2357aa4ba6a4c8666732a2861a9b72aad39e3052663150369bd7c658b0ec1827"
     },
     "MESHOPT-LICENSE.txt": {
       "bytes": 1079,
@@ -19,29 +20,113 @@
       "bytes": 1081,
       "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
     },
-    "assets/index-D8ihNcGD.js": {
-      "bytes": 704014,
-      "sha256": "b8c44ce8559fca48c8fe91b61e893e0cfdd0d70c40355bb9427e4b896610c83d"
+    "assets/beach-club/ambient-beach-club.exr": {
+      "bytes": 12815691,
+      "sha256": "f7f74cbb12d2654afadca747e43f1fadc8c6e76e18d7abff3b6864cd4e865fe0"
     },
-    "assets/index-hKtT5TdB.css": {
-      "bytes": 6498,
-      "sha256": "0e43e56d4923bda4a3a74c11e4b32b3acd4a4e12514b9c2bece3df446fec2bbc"
+    "assets/beach-club/authoring.json": {
+      "bytes": 2250,
+      "sha256": "f82e23e95ce95bd9b683a15c64077a3e11fc8d60dc9d17ac1415d93f0dd2ba70"
+    },
+    "assets/beach-club/context.glb": {
+      "bytes": 239368,
+      "sha256": "dbe97f126ac54df3399f57fc957d49a3ed53c091e908e90fbb480fd03bbf6329"
+    },
+    "assets/beach-club/probe.exr": {
+      "bytes": 1798463,
+      "sha256": "fc7223b06e0897900a5315b795f7674efb971140616acc1a34a24e52cf651040"
+    },
+    "assets/beach-club/reference-components.json": {
+      "bytes": 20985,
+      "sha256": "982931b9c416eb24a984feb0430eca6c4613afe4acab96eddd2af27a56d515af"
+    },
+    "assets/beach-club/room.glb": {
+      "bytes": 9598688,
+      "sha256": "dd2c29791f3bfceafa779d7e0cb36d5e9b98a50246de62af303fdff6555e7279"
+    },
+    "assets/beach-club/room.json": {
+      "bytes": 18562,
+      "sha256": "6ea4aa017583978ba0c2555d27477dcd7347672a83977387dca6da46496c0b83"
+    },
+    "assets/bow/context.glb": {
+      "bytes": 485092,
+      "sha256": "bd4466c14e2050ee229125442c2feac12bd87c7641399e042a370728ff7020e2"
+    },
+    "assets/cockpit/ambient-cockpit.exr": {
+      "bytes": 12378556,
+      "sha256": "5655aa0d117ed2aad920eda3f081d6214d2b3c191feb22a31a7e75054baea9f2"
+    },
+    "assets/cockpit/authoring.json": {
+      "bytes": 2209,
+      "sha256": "57728d2281bfe7ecd9854002cd02fc47b1d21b8c4ee779ced5674b837b44168c"
+    },
+    "assets/cockpit/context.glb": {
+      "bytes": 542012,
+      "sha256": "a336687c795e2c25f3aec1ace4cc950f2c39f169b5800db03038424f1d56cafc"
+    },
+    "assets/cockpit/probe.exr": {
+      "bytes": 2370720,
+      "sha256": "d393cee41b33dbebb36ed38194dd91b6e1fd4a5186084ae93602060ffac09c71"
+    },
+    "assets/cockpit/reference-components.json": {
+      "bytes": 34004,
+      "sha256": "0f62cdebb91ad65946913c6f037e9aef8ac6b26c97629b125ba1a9710be9bd77"
+    },
+    "assets/cockpit/room.glb": {
+      "bytes": 12774460,
+      "sha256": "d29cb12137adde0deae493ab88923ff7de1f67a61f260142ad5cdcdd3e3d35f2"
+    },
+    "assets/cockpit/room.json": {
+      "bytes": 28916,
+      "sha256": "cd0f101251ff7013a22ac557a202e16fd471b29836970983b0bf5f17a93c367c"
+    },
+    "assets/context/context.glb": {
+      "bytes": 186932,
+      "sha256": "526624e07429270b1df7356bbbd085b599391cb46b4ea9cb080dfed787853739"
+    },
+    "assets/context/reference-components.json": {
+      "bytes": 4435,
+      "sha256": "911f9fa8e7b415094258ac64d0cbc0c6d24330e5ba6ee952db3a7d349c811a55"
+    },
+    "assets/exterior-inventory.json": {
+      "bytes": 73028,
+      "sha256": "1b1f5a05fd29b12889951b6ad5ee1b424503ded9b3da969dec468f2963586093"
+    },
+    "assets/index-CJbYSKkb.js": {
+      "bytes": 709896,
+      "sha256": "f4c6ba783db1da39e86159f8448d4133f83e217e32787381f7d9a68f8b709164"
+    },
+    "assets/index-nA3kuNkn.css": {
+      "bytes": 7118,
+      "sha256": "6e8066e45e702bbf9542b3f26d2fc2e946eda439e8267c72ac9ee7950e1d1f5f"
     },
     "assets/manifest.json": {
-      "bytes": 1226,
-      "sha256": "efd3d99f6813f5b510796067eb55e75e9cce59894f9478fcf95ec1e3cde24371"
+      "bytes": 4839,
+      "sha256": "7a72db6d965d2e4522f205ea2185dbdd18cd5641715147244f6b94c1de3d717d"
+    },
+    "assets/navigation.json": {
+      "bytes": 12865,
+      "sha256": "55d15e1059b31f2ba6ed9b6c0a771f2e1460351c77550d2fe65f5104e509c3b4"
+    },
+    "assets/port-side/context.glb": {
+      "bytes": 70468,
+      "sha256": "2988d6ba940fa8cdc747c5dd3d4441433fdd87b9e0ca25872fb25176a6b2b10d"
     },
     "assets/saloon/ambient-architecture.exr": {
-      "bytes": 12177625,
-      "sha256": "cba1c092eea686f626a49afee93f1226c16e5b7a7846d86da19b1ff469bdc6d8"
+      "bytes": 12907868,
+      "sha256": "fb3bd2e1cf25362dfe0345a7dce0184170396851cd0ef165b31e4f2b786aea1c"
     },
     "assets/saloon/ambient-furniture.exr": {
-      "bytes": 14464194,
-      "sha256": "b8d605712d44ea9ed495793b23b77f931695b64f752c9cf2d90ef734422caaf1"
+      "bytes": 14729807,
+      "sha256": "9518dad9888f5c4b9f0e43440928be9d69e724270485d28723d76698758ea300"
     },
     "assets/saloon/authoring.json": {
-      "bytes": 4001,
-      "sha256": "d350b63d0338a67f9763a4580c0acabce846dac55c7c3ab0de8718ad599cc4e4"
+      "bytes": 4393,
+      "sha256": "ef356eb70f542205d80bda50b32e01d0c78410933f4dc4c59528e7f632dc24ec"
+    },
+    "assets/saloon/context.glb": {
+      "bytes": 905640,
+      "sha256": "0d1dfbade0243e97c92e65fe079e935904210f5fd0f10c135d484368959fdb2e"
     },
     "assets/saloon/exterior-source.json": {
       "bytes": 1190,
@@ -52,28 +137,36 @@
       "sha256": "d29eb2a2190d64eb2ab9e1471bde2d5cbd3c62238667108d898f6ea6b95e9860"
     },
     "assets/saloon/probe-aft.exr": {
-      "bytes": 2055491,
-      "sha256": "64acdddaaf7bf0f06f0b309126db4ff1f27cfc07deead19dd7c8e332b42efd13"
+      "bytes": 2231638,
+      "sha256": "0f9e0113805a054fad03919138e8a05b4fe440e2c9ca663e834b7ed0a571dd8a"
     },
     "assets/saloon/probe-dining.exr": {
-      "bytes": 2099173,
-      "sha256": "8c0fbfbc758e6924f48236dab63fe355c6da224d191d55d42f1e18a156b31f56"
+      "bytes": 2256627,
+      "sha256": "032e5333e54bea9127c1ad9b3fea64251698d6eb271e24e9917d8e6b64801d36"
     },
     "assets/saloon/probe.exr": {
-      "bytes": 2084521,
-      "sha256": "2f3b07f97652165097028087dd91aa9b14f17a066c5ffe54878fbdaa68e968a3"
+      "bytes": 2242975,
+      "sha256": "b922baa9123927054d32a272cd139ee27c28628cc8cdf249651b987315a17894"
     },
     "assets/saloon/reference-components.json": {
-      "bytes": 65873,
-      "sha256": "57db63b1c82174de3fb351190a9a5575b6c146e192499bd0d0366e7574965fda"
+      "bytes": 64573,
+      "sha256": "ab2b824008dd75c9e8eb53c925e0eccff908d781dd18b696ff213d740ddb6b45"
     },
     "assets/saloon/room.glb": {
-      "bytes": 19656712,
-      "sha256": "ac388739458fb0e27fde6cabecb000cde28c6ff2eb8aeea937cdfaa1b2ebf298"
+      "bytes": 21492856,
+      "sha256": "b4f71d44e575b522f5016deb86b78398fea1f8b29c8e6fdf1633ac89577c392e"
     },
     "assets/saloon/room.json": {
-      "bytes": 61069,
-      "sha256": "b5181156be65e8f71d31a70b956310ccc2b278d56ce0b2bf45b48ba6a02b3152"
+      "bytes": 59833,
+      "sha256": "b58e8d212beca9d626423a62f4313e857ba3056d408dce71b77a6e9d33f0c6ee"
+    },
+    "assets/starboard-side/context.glb": {
+      "bytes": 132684,
+      "sha256": "b4b4349ab0b78cb9750917bba464fa135c8285374ff5756cefadbb0e1c18af44"
+    },
+    "authoring/exteriors-downloads.json": {
+      "bytes": 1462,
+      "sha256": "620ef1be69ce6e1109d1136dbd63fd0cb1117c826c056d91dde271e91bac2b19"
     },
     "authoring/saloon-authoring.zip": {
       "bytes": 91865256,
@@ -96,8 +189,8 @@
       "sha256": "d9a3769d62ff8947f43fc0dcb9f8422e1ebd213aa32f5d035ef4a51a708c0671"
     },
     "index.html": {
-      "bytes": 2353,
-      "sha256": "7394fac5689addf41b99444eda8c87fe99aaf0f7b721950a6a75f5e64a33340a"
+      "bytes": 2460,
+      "sha256": "1f33aea34b882766cf3a540468a3ed210eef40f4a9e30b7b4f6dbe42c03157c6"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -107,9 +200,49 @@
       "bytes": 38394,
       "sha256": "62055145fce489af6ee90b5c78fdcd5871f38b90824c8a9834ceb178e2067a99"
     },
+    "review/exterior-beach-club-shower.webp": {
+      "bytes": 72182,
+      "sha256": "d69aa1bc47d3969c25941f1983db3af3178d74471d26cc530b5a23e5dab5f846"
+    },
+    "review/exterior-beach-club-upholstery.webp": {
+      "bytes": 73746,
+      "sha256": "2441fbaf1272b01e6e8572ab886de45b4c883294f72c92e915bcbe94bb3e67a8"
+    },
+    "review/exterior-beach-club.webp": {
+      "bytes": 37868,
+      "sha256": "42370bfc1957e317310bf18e601ac348dd22a12fe9d106e8d857a1cce83f7ba3"
+    },
+    "review/exterior-cockpit-director-chairs.webp": {
+      "bytes": 50386,
+      "sha256": "02d4e4a5c1dea8f0ee608a2e304929a0dc0a4cd2e05f4ca098fb934a64151d15"
+    },
+    "review/exterior-cockpit-wetbar.webp": {
+      "bytes": 67586,
+      "sha256": "01ddd1e78504a26a5fe477dd059a295ac73ca3ffa9fa16ca777cd1099d625c7c"
+    },
+    "review/exterior-cockpit.webp": {
+      "bytes": 39162,
+      "sha256": "5e8b670222a0a21186ae646aef924f3a2676bf3fc59793d2b4dc81145b311652"
+    },
+    "review/exterior-mobile.webp": {
+      "bytes": 21824,
+      "sha256": "42ea1a45efe093992a42b780493902c3796a589d5600c4de5b056d9f2e37266a"
+    },
+    "review/exterior-performance.json": {
+      "bytes": 42197,
+      "sha256": "5d2601abbccacce955a1fcdb10bf556c849ca0fd0f57cea353366a453b3c0daf"
+    },
+    "review/exterior-saloon.webp": {
+      "bytes": 45088,
+      "sha256": "e5fbc5c7d75181fd19b0878394fde9ddda85450502e1125a5a37d8313f2b5dc9"
+    },
+    "review/exterior-visual-review.json": {
+      "bytes": 13567,
+      "sha256": "dbd73a52056852aa96ec77d8203aede18d2e401711b1f79231913591bb8630f0"
+    },
     "review/index.html": {
-      "bytes": 7557,
-      "sha256": "6eb6f8046433a2baa06cbf7068e2ccb2cd2bf7bbd70a4705cc25cccfb85d62f5"
+      "bytes": 9264,
+      "sha256": "996faf9796029a5c2ff6abe4a27725740cde69f84de3ddbc65f33c2448d63db6"
     },
     "review/joint-diagnostic.json": {
       "bytes": 3944,
@@ -118,6 +251,18 @@
     "review/joint-diagnostic.webp": {
       "bytes": 29024,
       "sha256": "d3de3654e79605be3f95e8bddd381b716c4265058d6932a83fd42a64c5bd5287"
+    },
+    "review/original-beach-club.webp": {
+      "bytes": 11714,
+      "sha256": "1e770af1d8cc22fe22995f8956cb1eda156a0f4edab7d77ad2a47ff3bca34fd6"
+    },
+    "review/original-cockpit.webp": {
+      "bytes": 32496,
+      "sha256": "4e862be268190528e76ed6d0a39b56f58a39e4f6220beb4694396d560531d2af"
+    },
+    "review/original-saloon.webp": {
+      "bytes": 17516,
+      "sha256": "12f363e02b816e6cc9129fe01cba9dbba4295eaf9dd848b7e37eb8314724b19e"
     },
     "review/original-yacht-hashes.json": {
       "bytes": 71801,
@@ -154,6 +299,10 @@
     "review/saloon-overview.webp": {
       "bytes": 57410,
       "sha256": "f491f548a0c7cedd03754519636c79ed68a7ed6863ccc4606c39fea55c345663"
+    },
+    "review/saloon-r7.html": {
+      "bytes": 7557,
+      "sha256": "6eb6f8046433a2baa06cbf7068e2ccb2cd2bf7bbd70a4705cc25cccfb85d62f5"
     },
     "review/saloon-rest.webp": {
       "bytes": 80760,

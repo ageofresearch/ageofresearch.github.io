@@ -1,0 +1,492 @@
+[
+  {
+    "id": "starboard-side/S01/0311",
+    "zone": "starboard-side",
+    "feature": "S01 Continuous teak side deck.001",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S02/0312",
+    "zone": "starboard-side",
+    "feature": "S02 Forward glossy cabin wall.001",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S03/0313",
+    "zone": "starboard-side",
+    "feature": "S03 White side-deck soffit.001",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0314",
+    "zone": "starboard-side",
+    "feature": "S04 White outer bulwark.001",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0315",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard polished top rail.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0316",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard lower rail.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0317",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard stanchion.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0318",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard deck flange.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0319",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard stanchion.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0320",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard deck flange.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0321",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard stanchion.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0322",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard deck flange.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0323",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard stanchion.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0324",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard deck flange.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0325",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard stanchion.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0326",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard deck flange.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0327",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard stanchion.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S04/0328",
+    "zone": "starboard-side",
+    "feature": "S04 Side-deck guard deck flange.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S05/0329",
+    "zone": "starboard-side",
+    "feature": "S05 Recessed side-deck light.004",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S05/0330",
+    "zone": "starboard-side",
+    "feature": "S05 Recessed side-deck light.005",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S05/0331",
+    "zone": "starboard-side",
+    "feature": "S05 Recessed side-deck light.006",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S05/0332",
+    "zone": "starboard-side",
+    "feature": "S05 Recessed side-deck light.007",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Flush/0333",
+    "zone": "starboard-side",
+    "feature": "Flush teak service hatch.004",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Hatch/0334",
+    "zone": "starboard-side",
+    "feature": "Hatch short hinge.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Hatch/0335",
+    "zone": "starboard-side",
+    "feature": "Hatch short hinge.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Circular/0336",
+    "zone": "starboard-side",
+    "feature": "Circular flush hatch catch.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S06/0337",
+    "zone": "starboard-side",
+    "feature": "S06 Outer scupper.003",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Flush/0338",
+    "zone": "starboard-side",
+    "feature": "Flush teak service hatch.005",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Hatch/0339",
+    "zone": "starboard-side",
+    "feature": "Hatch short hinge.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Hatch/0340",
+    "zone": "starboard-side",
+    "feature": "Hatch short hinge.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Circular/0341",
+    "zone": "starboard-side",
+    "feature": "Circular flush hatch catch.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S06/0342",
+    "zone": "starboard-side",
+    "feature": "S06 Outer scupper.004",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Flush/0343",
+    "zone": "starboard-side",
+    "feature": "Flush teak service hatch.006",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Hatch/0344",
+    "zone": "starboard-side",
+    "feature": "Hatch short hinge.012",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Hatch/0345",
+    "zone": "starboard-side",
+    "feature": "Hatch short hinge.013",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/Circular/0346",
+    "zone": "starboard-side",
+    "feature": "Circular flush hatch catch.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S06/0347",
+    "zone": "starboard-side",
+    "feature": "S06 Outer scupper.005",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0348",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0349",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0350",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.001",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0351",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.001",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0352",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.002",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0353",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.002",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0354",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.003",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0355",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.003",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0356",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.004",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0357",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.004",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0358",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.005",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0359",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.005",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0360",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.006",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0361",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.006",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0362",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.007",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0363",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.007",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0364",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.008",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0365",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.008",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0366",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.009",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0367",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.009",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0368",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.010",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0369",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.010",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0370",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair white riser.011",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0371",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair teak tread.011",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0372",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair sloped handrail",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0373",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair handrail post",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0374",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair handrail post.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0375",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair handrail post.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0376",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair sloped handrail.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0377",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair handrail post.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0378",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair handrail post.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0379",
+    "zone": "starboard-side",
+    "feature": "S08 Forward starboard stair handrail post.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "starboard-side/S08/0380",
+    "zone": "starboard-side",
+    "feature": "S08 Upper landing",
+    "lightmap": "starboard-side",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  }
+]

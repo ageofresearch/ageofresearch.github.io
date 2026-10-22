@@ -1,0 +1,1570 @@
+[
+  {
+    "id": "bow/F01/0381",
+    "zone": "bow",
+    "feature": "F01 Upper foredeck",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F01/0382",
+    "zone": "bow",
+    "feature": "F01 Narrow jacuzzi bypass",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0383",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0384",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0385",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0386",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0387",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0388",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0389",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.003",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0390",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.003",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0391",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.004",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0392",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.004",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0393",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair sloped handrail",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0394",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0395",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0396",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0397",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair sloped handrail.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0398",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0399",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0400",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F01/0401",
+    "zone": "bow",
+    "feature": "F01 Narrow jacuzzi bypass.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0402",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.005",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0403",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.005",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0404",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.006",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0405",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.006",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0406",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.007",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0407",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.007",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0408",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.008",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0409",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.008",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0410",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair white riser.009",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0411",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair teak tread.009",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0412",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair sloped handrail.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0413",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0414",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0415",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0416",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair sloped handrail.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0417",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0418",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F02/0419",
+    "zone": "bow",
+    "feature": "F02 Lower working bow stair handrail post.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F03/0420",
+    "zone": "bow",
+    "feature": "F03 Tapered lower working deck",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0421",
+    "zone": "bow",
+    "feature": "F04 Lounge aft sofa plinth",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0422",
+    "zone": "bow",
+    "feature": "F04 Lounge aft sofa seat",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0423",
+    "zone": "bow",
+    "feature": "F04 Lounge aft sofa back",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0424",
+    "zone": "bow",
+    "feature": "F04 Lounge return plinth",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0425",
+    "zone": "bow",
+    "feature": "F04 Lounge return seat",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0426",
+    "zone": "bow",
+    "feature": "F04 Lounge return back",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0427",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion.008",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0428",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion sewn perimeter.008",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0429",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion.009",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0430",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion sewn perimeter.009",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0431",
+    "zone": "bow",
+    "feature": "F04 Lounge return plinth.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0432",
+    "zone": "bow",
+    "feature": "F04 Lounge return seat.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F04/0433",
+    "zone": "bow",
+    "feature": "F04 Lounge return back.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0434",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion.010",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0435",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion sewn perimeter.010",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0436",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion.011",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Loose/0437",
+    "zone": "bow",
+    "feature": "Loose sewn accent cushion sewn perimeter.011",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0438",
+    "zone": "bow",
+    "feature": "F05 Separate lounge table pale edge",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0439",
+    "zone": "bow",
+    "feature": "F05 Separate lounge table timber top",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0440",
+    "zone": "bow",
+    "feature": "F05 Table pedestal",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0441",
+    "zone": "bow",
+    "feature": "F05 Separate lounge table pale edge.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0442",
+    "zone": "bow",
+    "feature": "F05 Separate lounge table timber top.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0443",
+    "zone": "bow",
+    "feature": "F05 Table pedestal.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Shallow/0444",
+    "zone": "bow",
+    "feature": "Shallow reflective decorative bowl.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F05/0445",
+    "zone": "bow",
+    "feature": "F05 Plain monochrome book",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0446",
+    "zone": "bow",
+    "feature": "F06 Sunpad plinth",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0447",
+    "zone": "bow",
+    "feature": "F06 Separate sewn sunpad",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0448",
+    "zone": "bow",
+    "feature": "F06 Rolled head bolster",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0449",
+    "zone": "bow",
+    "feature": "F06 Sunpad accent",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0450",
+    "zone": "bow",
+    "feature": "F06 Sunpad accent sewn perimeter",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0451",
+    "zone": "bow",
+    "feature": "F06 Separate sewn sunpad.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0452",
+    "zone": "bow",
+    "feature": "F06 Rolled head bolster.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0453",
+    "zone": "bow",
+    "feature": "F06 Sunpad accent.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0454",
+    "zone": "bow",
+    "feature": "F06 Sunpad accent sewn perimeter.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0455",
+    "zone": "bow",
+    "feature": "F06 Separate sewn sunpad.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0456",
+    "zone": "bow",
+    "feature": "F06 Rolled head bolster.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0457",
+    "zone": "bow",
+    "feature": "F06 Sunpad accent.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F06/0458",
+    "zone": "bow",
+    "feature": "F06 Sunpad accent sewn perimeter.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0459",
+    "zone": "bow",
+    "feature": "F07 Timber sunpad endcap",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0460",
+    "zone": "bow",
+    "feature": "F07 Flush circular cup holder",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0461",
+    "zone": "bow",
+    "feature": "F07 Cup holder hollow",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0462",
+    "zone": "bow",
+    "feature": "F07 Flush circular cup holder.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0463",
+    "zone": "bow",
+    "feature": "F07 Cup holder hollow.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0464",
+    "zone": "bow",
+    "feature": "F07 Timber sunpad endcap.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0465",
+    "zone": "bow",
+    "feature": "F07 Flush circular cup holder.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0466",
+    "zone": "bow",
+    "feature": "F07 Cup holder hollow.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0467",
+    "zone": "bow",
+    "feature": "F07 Flush circular cup holder.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F07/0468",
+    "zone": "bow",
+    "feature": "F07 Cup holder hollow.003",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0470",
+    "zone": "bow",
+    "feature": "F08 Jacuzzi blue interior",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0471",
+    "zone": "bow",
+    "feature": "F08 Fixed water surface",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0472",
+    "zone": "bow",
+    "feature": "F08 Jacuzzi glass windscreen",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0473",
+    "zone": "bow",
+    "feature": "F08 Jacuzzi bright glass edge",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0474",
+    "zone": "bow",
+    "feature": "F08 Jacuzzi glass windscreen.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0475",
+    "zone": "bow",
+    "feature": "F08 Jacuzzi bright glass edge.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0476",
+    "zone": "bow",
+    "feature": "F08 Teak jacuzzi rim",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/0477",
+    "zone": "bow",
+    "feature": "F08 Teak jacuzzi rim.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0478",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0479",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0480",
+    "zone": "bow",
+    "feature": "F09 Bow rail post",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0481",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0482",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0483",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0484",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0485",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0486",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0487",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0488",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0489",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0490",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0491",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0492",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Mooring/0493",
+    "zone": "bow",
+    "feature": "Mooring recessed fairlead.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0494",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0495",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0496",
+    "zone": "bow",
+    "feature": "Stainless cleat horns.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Mooring/0497",
+    "zone": "bow",
+    "feature": "Mooring recessed fairlead.003",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0498",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0499",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0500",
+    "zone": "bow",
+    "feature": "Stainless cleat horns.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Mooring/0501",
+    "zone": "bow",
+    "feature": "Mooring recessed fairlead.004",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0502",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0503",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0504",
+    "zone": "bow",
+    "feature": "Stainless cleat horns.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Flush/0505",
+    "zone": "bow",
+    "feature": "Flush teak service hatch.007",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0506",
+    "zone": "bow",
+    "feature": "Hatch short hinge.014",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0507",
+    "zone": "bow",
+    "feature": "Hatch short hinge.015",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Circular/0508",
+    "zone": "bow",
+    "feature": "Circular flush hatch catch.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Flush/0509",
+    "zone": "bow",
+    "feature": "Flush teak service hatch.008",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0510",
+    "zone": "bow",
+    "feature": "Hatch short hinge.016",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0511",
+    "zone": "bow",
+    "feature": "Hatch short hinge.017",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Circular/0512",
+    "zone": "bow",
+    "feature": "Circular flush hatch catch.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Flush/0513",
+    "zone": "bow",
+    "feature": "Flush teak service hatch.009",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0514",
+    "zone": "bow",
+    "feature": "Hatch short hinge.018",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0515",
+    "zone": "bow",
+    "feature": "Hatch short hinge.019",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Circular/0516",
+    "zone": "bow",
+    "feature": "Circular flush hatch catch.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0517",
+    "zone": "bow",
+    "feature": "F10 Windlass base",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0518",
+    "zone": "bow",
+    "feature": "F10 Windlass drum",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0519",
+    "zone": "bow",
+    "feature": "F10 Windlass cap",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0520",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0521",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0522",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0523",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0524",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0525",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0526",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0527",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0528",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0529",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0530",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0531",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0532",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.012",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0533",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.013",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0534",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.014",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0535",
+    "zone": "bow",
+    "feature": "F10 Chain roller throat",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0536",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0537",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0538",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0539",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0540",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0541",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0542",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0543",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0544",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0545",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0546",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0547",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.008",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0548",
+    "zone": "bow",
+    "feature": "F09 Bow polished top rail.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0549",
+    "zone": "bow",
+    "feature": "F09 Bow lower rail.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/0550",
+    "zone": "bow",
+    "feature": "F09 Bow rail post.009",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Mooring/0551",
+    "zone": "bow",
+    "feature": "Mooring recessed fairlead.005",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0552",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0553",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0554",
+    "zone": "bow",
+    "feature": "Stainless cleat horns.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Mooring/0555",
+    "zone": "bow",
+    "feature": "Mooring recessed fairlead.006",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0556",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.012",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0557",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.013",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0558",
+    "zone": "bow",
+    "feature": "Stainless cleat horns.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Mooring/0559",
+    "zone": "bow",
+    "feature": "Mooring recessed fairlead.007",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0560",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.014",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0561",
+    "zone": "bow",
+    "feature": "Stainless cleat foot.015",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Stainless/0562",
+    "zone": "bow",
+    "feature": "Stainless cleat horns.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Flush/0563",
+    "zone": "bow",
+    "feature": "Flush teak service hatch.010",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0564",
+    "zone": "bow",
+    "feature": "Hatch short hinge.020",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0565",
+    "zone": "bow",
+    "feature": "Hatch short hinge.021",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Circular/0566",
+    "zone": "bow",
+    "feature": "Circular flush hatch catch.010",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Flush/0567",
+    "zone": "bow",
+    "feature": "Flush teak service hatch.011",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0568",
+    "zone": "bow",
+    "feature": "Hatch short hinge.022",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0569",
+    "zone": "bow",
+    "feature": "Hatch short hinge.023",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Circular/0570",
+    "zone": "bow",
+    "feature": "Circular flush hatch catch.011",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Flush/0571",
+    "zone": "bow",
+    "feature": "Flush teak service hatch.012",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0572",
+    "zone": "bow",
+    "feature": "Hatch short hinge.024",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Hatch/0573",
+    "zone": "bow",
+    "feature": "Hatch short hinge.025",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/Circular/0574",
+    "zone": "bow",
+    "feature": "Circular flush hatch catch.012",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0575",
+    "zone": "bow",
+    "feature": "F10 Windlass base.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0576",
+    "zone": "bow",
+    "feature": "F10 Windlass drum.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0577",
+    "zone": "bow",
+    "feature": "F10 Windlass cap.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0578",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.015",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0579",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.016",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0580",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.017",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0581",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.018",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0582",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.019",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0583",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.020",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0584",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.021",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0585",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.022",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0586",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.023",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0587",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.024",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0588",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.025",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0589",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.026",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0590",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.027",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0591",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.028",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0592",
+    "zone": "bow",
+    "feature": "F10 Individual anchor chain link.029",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F10/0593",
+    "zone": "bow",
+    "feature": "F10 Chain roller throat.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/refined-0",
+    "zone": "bow",
+    "feature": "F08 Hollow jacuzzi end wall",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/refined-1",
+    "zone": "bow",
+    "feature": "F08 Hollow jacuzzi end wall.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/refined-2",
+    "zone": "bow",
+    "feature": "F08 Hollow jacuzzi side wall",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F08/refined-3",
+    "zone": "bow",
+    "feature": "F08 Hollow jacuzzi side wall.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-4",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-5",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.001",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-6",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.002",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-7",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.003",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-8",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.004",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-9",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.005",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-10",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.006",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "bow/F09/refined-11",
+    "zone": "bow",
+    "feature": "F09 Raised white foredeck bulwark.007",
+    "lightmap": "bow",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  }
+]

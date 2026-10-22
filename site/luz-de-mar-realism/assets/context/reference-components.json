@@ -1,0 +1,163 @@
+[
+  {
+    "id": "context/X02/0595",
+    "zone": "context",
+    "feature": "X02 Upper cabin roof",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0596",
+    "zone": "context",
+    "feature": "X03 Upper port cabin",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0597",
+    "zone": "context",
+    "feature": "X03 Upper starboard cabin",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0598",
+    "zone": "context",
+    "feature": "X03 Upper context glazing",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0599",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0600",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0601",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.003",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0602",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.004",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0603",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.005",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0604",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.006",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X03/0605",
+    "zone": "context",
+    "feature": "X03 Upper context glazing.007",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X04/0606",
+    "zone": "context",
+    "feature": "X04 Slanted pilothouse windshield",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X04/0607",
+    "zone": "context",
+    "feature": "X04 Visible windshield wiper",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X04/0608",
+    "zone": "context",
+    "feature": "X04 Visible windshield wiper.001",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X04/0609",
+    "zone": "context",
+    "feature": "X04 Visible windshield wiper.002",
+    "lightmap": "none",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X05/0610",
+    "zone": "context",
+    "feature": "X05 Sun-deck canopy",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X05/0611",
+    "zone": "context",
+    "feature": "X05 Canopy upright",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X05/0612",
+    "zone": "context",
+    "feature": "X05 Canopy upright.001",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X06/0613",
+    "zone": "context",
+    "feature": "X06 Mast",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X06/0614",
+    "zone": "context",
+    "feature": "X06 Satellite dome",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X06/0615",
+    "zone": "context",
+    "feature": "X06 Satellite dome.001",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X07/0616",
+    "zone": "context",
+    "feature": "X07 Preserved source hull HULL_HUL_001",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  },
+  {
+    "id": "context/X07/0617",
+    "zone": "context",
+    "feature": "X07 Preserved source hull HULL_HUL_002",
+    "lightmap": "context",
+    "dimensionStatus": "image-estimated; no as-built claim"
+  }
+]

@@ -2,6 +2,7 @@ import {Vector3} from 'three';
 // Original implementation of room-local box projection and baked diffuse.
 export function applyRoomShading(material,room,{baked=false}={}){
  const ceiling=material.name.startsWith('Ivory architectural enamel');
+ const cockpitCeiling=room.id==='cockpit'&&material.name.startsWith('Gloss ivory marine enamel');
  const before=material.onBeforeCompile;
  material.onBeforeCompile=(shader,renderer)=>{
   before?.(shader,renderer);shader.uniforms.uRoomMin={value:new Vector3(...room.probeBounds.min)};shader.uniforms.uRoomMax={value:new Vector3(...room.probeBounds.max)};shader.uniforms.uRoomCenter={value:new Vector3(...room.probePosition)};
@@ -47,8 +48,16 @@ export function applyRoomShading(material,room,{baked=false}={}){
     float panelJoint=max(coverage.x,coverage.y)*smoothstep(3.98,3.999,vRoomWorld.y);
     diffuseColor.rgb*=1.-.26*panelJoint;`);
   }
+  if(cockpitCeiling){
+   shader.fragmentShader=shader.fragmentShader.replace('#include <map_fragment>',`#include <map_fragment>
+    vec2 deckMetres=vec2((vRoomWorld.z+17.615)/${35.23/36},vRoomWorld.x/${7.47/7.6});
+    vec2 jointDistance=vec2(min(abs(deckMetres.x-5.10),abs(deckMetres.x-7.25)),abs(abs(deckMetres.y)-1.90));
+    vec2 footprint=max(fwidth(deckMetres),vec2(.00001));
+    vec2 seam=max(vec2(0.),min(jointDistance+footprint*.5,vec2(.0007))-max(jointDistance-footprint*.5,vec2(-.0007)))/footprint;
+    diffuseColor.rgb*=1.-.20*max(seam.x,seam.y)*smoothstep(3.91,3.94,vRoomWorld.y);`);
+  }
  };
- material.customProgramCacheKey=()=>`luz-room-v3-${baked}-${ceiling}`;
+ material.customProgramCacheKey=()=>`luz-room-v4-${baked}-${ceiling}-${cockpitCeiling}`;
 }
 export function applyNativeFinish(material){
  const before=material.onBeforeCompile,key=material.customProgramCacheKey.bind(material);

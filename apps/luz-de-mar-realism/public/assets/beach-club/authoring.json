@@ -1,0 +1,82 @@
+{
+  "room": "beach-club",
+  "revision": 9,
+  "replacementBasis": "VR-led exterior reconstruction; inherited yacht transformation; all unmeasured dimensions inferred",
+  "atlasSize": 2048,
+  "atlases": [
+    "beach-club"
+  ],
+  "atlasPadding": {
+    "beach-club": {
+      "marginMethod": "FRACTION",
+      "islandMargin": 0.006,
+      "coverage": 0.42654117941856384,
+      "degenerateTriangleFraction": 0.0,
+      "bakeMarginPixels": 4,
+      "uvTrianglesSHA256": "011d3af9a59d4625cef7bf671b58df7b76633a83b104db261f93ac316f0fc1a8"
+    }
+  },
+  "samples": 24,
+  "blender": "4.3.2",
+  "uvRoles": {
+    "material": 0,
+    "ambient": 1
+  },
+  "bakeGeometrySHA256": "88f465562dd6dc5c84f6246697821062e876145f6fb70a2b0a42f64340b05684",
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "dynamicObjects": [],
+  "bakedOccludersExcludeDynamic": true,
+  "ambientEnvironmentSHA256": "2ad29e6bb9153c371d667c7c43cb97ec6630f323a44e469f4dd3c3ba64984fd0",
+  "rawNativeBakesPacked": true,
+  "denoise": "OIDN 2.5.1 CPU RTLightmap, full linear HDR atlas",
+  "probes": [
+    {
+      "id": "beach-club-0",
+      "position": [
+        0.0,
+        1.1900000000000004,
+        -16.04922222222222
+      ],
+      "sourcePosition": [
+        1.6,
+        0,
+        3.2
+      ],
+      "asset": "probe.exr",
+      "width": 1024,
+      "height": 512,
+      "samples": 24,
+      "purpose": "Local static specular capture; live sun excluded"
+    }
+  ],
+  "probePosition": [
+    0.0,
+    1.1900000000000004,
+    -16.04922222222222
+  ],
+  "halfFloatLinearAtlases": true,
+  "bakeSeconds": 102.86,
+  "ambientStrength": 0.5,
+  "nativeOutdoorWoodCoat": 0.18,
+  "ambientCalibration": "Fixed illustrative daylight, not photometrically measured. Linear ambient HDR strength 0.5; live sun 1.15 excluded from bakes.",
+  "rawBakesSHA256": {
+    "beach-club": "69e161c5f42004129097ab4fdf397cb5cc962abc5254be6f5f86c1b6d47f391f"
+  },
+  "masterSHA256": "bf34c49ce06141c8dffeee285fdcd4d67f09347cdd6a86da492e5a3e66c8d02d",
+  "cameraExposure": 2,
+  "presentationCamera": {
+    "sourcePosition": [
+      2.1,
+      0,
+      3.67
+    ],
+    "target": [
+      0,
+      0,
+      2.9
+    ],
+    "verticalFov": 72,
+    "viewerToneCurve": "Three.js Neutral",
+    "nativeToneCurve": "Blender AgX"
+  }
+}

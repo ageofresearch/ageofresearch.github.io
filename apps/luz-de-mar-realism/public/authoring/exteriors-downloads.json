@@ -1,0 +1,35 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "id": "cockpit",
+      "file": "cockpit-authoring-r9.zip",
+      "bytes": 143408643,
+      "sha256": "5f1e9eabb700a65fd1dd4656f91b03e5fa0d4c6aadcfe023d1ccc5525d061a06",
+      "nativeSHA256": "afad75bb74b0849622d1ab8d9d0515807f1e021d6b03e5ff01e968992c22d710",
+      "revision": 9,
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/cockpit-authoring-r9.zip",
+      "release": "luz-de-mar-aft-r9"
+    },
+    {
+      "id": "beach-club",
+      "file": "beach-club-authoring-r9.zip",
+      "bytes": 151461882,
+      "sha256": "4c2396d640e1a5a8a029647a0dbae4351e9ce72e8d9bac8ec6341cd906bc9ae9",
+      "nativeSHA256": "bf34c49ce06141c8dffeee285fdcd4d67f09347cdd6a86da492e5a3e66c8d02d",
+      "revision": 9,
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/beach-club-authoring-r9.zip",
+      "release": "luz-de-mar-aft-r9"
+    },
+    {
+      "id": "saloon",
+      "file": "saloon-authoring-r9.zip",
+      "bytes": 209367303,
+      "sha256": "eee376a49d3a350a10c89b498afa4d481693a7bdf73499f552fbc71a1a25c355",
+      "nativeSHA256": "ecfc9d91c16fe5cac48f01837095b56c15d3ad04a7aa88d8f8f023f772ca1cc1",
+      "revision": 9,
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/saloon-authoring-r9.zip",
+      "release": "luz-de-mar-aft-r9"
+    }
+  ]
+}

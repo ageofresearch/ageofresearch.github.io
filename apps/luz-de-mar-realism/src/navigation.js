@@ -22,9 +22,9 @@ export class WalkingControls{
   for(const b of document.querySelectorAll('[data-move]')){const key=b.dataset.move;on(b,'pointerdown',e=>{e.preventDefault();this.keys.add(key);b.setPointerCapture(e.pointerId);app.invalidate(true);});for(const k of['pointerup','pointercancel','lostpointercapture'])on(b,k,()=>this.keys.delete(key));}
  }
  clear(){this.keys.clear();}
- bind(meta){this.nav=new RoomNavigation(meta);this.focus(meta.room.spawn,meta.room.look,false);}
+ bind(meta,nav=null){this.nav=nav||new RoomNavigation(meta);this.focus(meta.room.spawn,meta.room.look,false);}
  focus(position,target,move=true){if(move)this.nav.position=this.nav.nearest(...position);this.apply();const c=this.app.camera;c.lookAt(sourcePoint(target));const e=new Euler().setFromQuaternion(c.quaternion,'YXZ');this.yaw=e.y;this.pitch=e.x;this.clear();this.apply();this.app.invalidate();}
- apply(){if(!this.nav)return;const p=this.nav.position;this.app.camera.position.copy(sourcePoint([p[0],p[1],this.nav.meta.floor+(this.nav.meta.camera?.eyeHeight??1.62)]));this.app.camera.rotation.set(this.pitch,this.yaw,0,'YXZ');}
- update(dt){if(!this.nav||this.app.loading||document.hidden)return false;const k=this.keys,f=Number(k.has('KeyW')||k.has('ArrowUp'))-Number(k.has('KeyS')||k.has('ArrowDown')),r=Number(k.has('KeyD')||k.has('ArrowRight'))-Number(k.has('KeyA')||k.has('ArrowLeft')),len=Math.hypot(f,r);if(!len)return false;const speed=(k.has('ShiftLeft')||k.has('ShiftRight')?2.6:1.4)*Math.min(.05,dt)/len;const dx=(-Math.sin(this.yaw)*f+Math.cos(this.yaw)*r)*speed,dz=(-Math.cos(this.yaw)*f-Math.sin(this.yaw)*r)*speed;this.nav.move(dz/SX,dx/SY);this.apply();return true;}
+ apply(){if(!this.nav)return;const p=this.nav.position;this.app.camera.position.copy(sourcePoint([p[0],p[1],(this.nav.elevation??this.nav.meta.floor)+(this.nav.meta.camera?.eyeHeight??1.62)]));this.app.camera.rotation.set(this.pitch,this.yaw,0,'YXZ');}
+ update(dt){if(!this.nav||this.app.loading||document.hidden)return false;const k=this.keys,f=Number(k.has('KeyW')||k.has('ArrowUp'))-Number(k.has('KeyS')||k.has('ArrowDown')),r=Number(k.has('KeyD')||k.has('ArrowRight'))-Number(k.has('KeyA')||k.has('ArrowLeft')),len=Math.hypot(f,r);if(!len)return false;const speed=(k.has('ShiftLeft')||k.has('ShiftRight')?2.6:1.4)*Math.min(.05,dt)/len;const dx=(-Math.sin(this.yaw)*f+Math.cos(this.yaw)*r)*speed,dz=(-Math.cos(this.yaw)*f-Math.sin(this.yaw)*r)*speed;this.nav.move(dz/SX,dx/SY);this.apply();this.app.preloadNear?.();return true;}
  dispose(){for(const d of this.disposers)d();}
 }

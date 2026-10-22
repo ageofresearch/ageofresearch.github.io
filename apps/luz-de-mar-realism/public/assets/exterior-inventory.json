@@ -1,0 +1,1978 @@
+{
+  "version": 1,
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "referenceAccessed": "2026-10-22",
+  "rights": "Tour photographs belong to their owners. Not redistributed as site images, textures or authoring content. Hashes identify privately reviewed reference inputs.",
+  "vesselIdentity": "Tour identifies an Azimut Grande 36M; not confirmed as Luz de Mar.",
+  "physicalBasis": "Inherited source yacht normalization; source X forward/Y port/Z up. All exterior dimensions estimated.",
+  "records": [
+    {
+      "zone": "cockpit",
+      "featureID": "C01",
+      "observed": "Longitudinal teak and margin boards",
+      "components": [
+        "cockpit/C01/0001"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C02",
+      "observed": "Transverse aft banquette and rounded returns, pale sewn pads",
+      "components": [
+        "cockpit/C02/0002",
+        "cockpit/C02/0003",
+        "cockpit/C02/0004",
+        "cockpit/C02/0005",
+        "cockpit/C02/0006",
+        "cockpit/C02/0007",
+        "cockpit/C02/0012",
+        "cockpit/C02/0013",
+        "cockpit/C02/0014"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C03",
+      "observed": "Single transverse pale timber dining table",
+      "components": [
+        "cockpit/C03/0019",
+        "cockpit/C03/0020"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C04",
+      "observed": "Four charcoal sling director chairs, crossed timber legs, armrests and exposed hinges",
+      "components": [
+        "cockpit/C04/0021",
+        "cockpit/C04/0022",
+        "cockpit/C04/0023",
+        "cockpit/C04/0024",
+        "cockpit/C04/0025",
+        "cockpit/C04/0026",
+        "cockpit/C04/0027",
+        "cockpit/C04/0028",
+        "cockpit/C04/0029",
+        "cockpit/C04/0030",
+        "cockpit/C04/0031",
+        "cockpit/C04/0032",
+        "cockpit/C04/0033",
+        "cockpit/C04/0034",
+        "cockpit/C04/0035",
+        "cockpit/C04/0036",
+        "cockpit/C04/0037",
+        "cockpit/C04/0038",
+        "cockpit/C04/0039",
+        "cockpit/C04/0040",
+        "cockpit/C04/0041",
+        "cockpit/C04/0042",
+        "cockpit/C04/0043",
+        "cockpit/C04/0044",
+        "cockpit/C04/0045",
+        "cockpit/C04/0046",
+        "cockpit/C04/0047",
+        "cockpit/C04/0048",
+        "cockpit/C04/0049",
+        "cockpit/C04/0050",
+        "cockpit/C04/0051",
+        "cockpit/C04/0052",
+        "cockpit/C04/0053",
+        "cockpit/C04/0054",
+        "cockpit/C04/0055",
+        "cockpit/C04/0056",
+        "cockpit/C04/0057",
+        "cockpit/C04/0058",
+        "cockpit/C04/0059",
+        "cockpit/C04/0060",
+        "cockpit/C04/0061",
+        "cockpit/C04/0062",
+        "cockpit/C04/0063",
+        "cockpit/C04/0064",
+        "cockpit/C04/0065",
+        "cockpit/C04/0066",
+        "cockpit/C04/0067",
+        "cockpit/C04/0068"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C05",
+      "observed": "Two reflective green bowls and potted orchid",
+      "components": [
+        "cockpit/C05/0071",
+        "cockpit/C05/0072",
+        "cockpit/C05/0073",
+        "cockpit/C05/0074",
+        "cockpit/C05/0075",
+        "cockpit/C05/0076",
+        "cockpit/C05/0077",
+        "cockpit/C05/0078",
+        "cockpit/C05/0079",
+        "cockpit/C05/0080",
+        "cockpit/C05/0081",
+        "cockpit/C05/0082",
+        "cockpit/C05/0083",
+        "cockpit/C05/0084",
+        "cockpit/C05/0085",
+        "cockpit/C05/0086"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C06",
+      "observed": "Rounded wetbar, recessed sink, faucet and chrome ceiling pole",
+      "components": [
+        "cockpit/C06/0087",
+        "cockpit/C06/0088",
+        "cockpit/C06/0089",
+        "cockpit/C06/0090"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C07",
+      "observed": "Curved pale chaise below port staircase",
+      "components": [
+        "cockpit/C07/0091",
+        "cockpit/C07/0092"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C08",
+      "observed": "Port upper staircase visible in context; upper deck not navigable",
+      "components": [
+        "cockpit/C08/0097",
+        "cockpit/C08/0098",
+        "cockpit/C08/0099",
+        "cockpit/C08/0100",
+        "cockpit/C08/0101",
+        "cockpit/C08/0102",
+        "cockpit/C08/0103",
+        "cockpit/C08/0104",
+        "cockpit/C08/0105",
+        "cockpit/C08/0106",
+        "cockpit/C08/0107",
+        "cockpit/C08/0108",
+        "cockpit/C08/0109",
+        "cockpit/C08/0110",
+        "cockpit/C08/0111",
+        "cockpit/C08/0112",
+        "cockpit/C08/0113",
+        "cockpit/C08/0114",
+        "cockpit/C08/0115",
+        "cockpit/C08/0116",
+        "cockpit/C08/0117",
+        "cockpit/C08/0118",
+        "cockpit/C08/0119",
+        "cockpit/C08/0120"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C09",
+      "observed": "Polished rails, tinted guards, cleats and fairlead niches",
+      "components": [
+        "cockpit/C09/0121",
+        "cockpit/C09/0126",
+        "cockpit/C09/0127",
+        "cockpit/C09/0128",
+        "cockpit/C09/0129",
+        "cockpit/C09/0130",
+        "cockpit/C09/0131",
+        "cockpit/C09/0132",
+        "cockpit/C09/0133",
+        "cockpit/C09/0134",
+        "cockpit/C09/0135",
+        "cockpit/C09/0140",
+        "cockpit/C09/0141",
+        "cockpit/C09/0142",
+        "cockpit/C09/0143",
+        "cockpit/C09/0144",
+        "cockpit/C09/0145",
+        "cockpit/C09/0146",
+        "cockpit/C09/0147",
+        "cockpit/C09/0148"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "cockpit",
+      "featureID": "C10",
+      "observed": "White overhead, recessed lights, speakers; flush service hatch",
+      "components": [
+        "cockpit/C10/0149",
+        "cockpit/C10/0150",
+        "cockpit/C10/0151",
+        "cockpit/C10/0152",
+        "cockpit/C10/0153",
+        "cockpit/C10/0154",
+        "cockpit/C10/0155",
+        "cockpit/C10/0156",
+        "cockpit/C10/0157",
+        "cockpit/C10/0158",
+        "cockpit/C10/0159",
+        "cockpit/C10/0160",
+        "cockpit/C10/0161",
+        "cockpit/C10/0162",
+        "cockpit/C10/0163",
+        "cockpit/C10/0164",
+        "cockpit/C10/0165",
+        "cockpit/C10/0166",
+        "cockpit/C10/0167",
+        "cockpit/C10/0168",
+        "cockpit/C10/covered-ceiling"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Cockpit",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B01",
+      "observed": "Fixed low teak bathing platform and recessed club floor",
+      "components": [
+        "beach-club/B01/0173",
+        "beach-club/B01/0174"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B02",
+      "observed": "Two transom staircases with stainless handrails and teak treads",
+      "components": [
+        "beach-club/B02/0175",
+        "beach-club/B02/0176",
+        "beach-club/B02/0177",
+        "beach-club/B02/0178",
+        "beach-club/B02/0179",
+        "beach-club/B02/0180",
+        "beach-club/B02/0181",
+        "beach-club/B02/0182",
+        "beach-club/B02/0183",
+        "beach-club/B02/0184",
+        "beach-club/B02/0185",
+        "beach-club/B02/0186",
+        "beach-club/B02/0187",
+        "beach-club/B02/0188",
+        "beach-club/B02/0189",
+        "beach-club/B02/0190",
+        "beach-club/B02/0191",
+        "beach-club/B02/0192",
+        "beach-club/B02/0193",
+        "beach-club/B02/0194",
+        "beach-club/B02/0195",
+        "beach-club/B02/0196",
+        "beach-club/B02/0197",
+        "beach-club/B02/0198",
+        "beach-club/B02/0199",
+        "beach-club/B02/0200",
+        "beach-club/B02/0202",
+        "beach-club/B02/0203",
+        "beach-club/B02/0204",
+        "beach-club/B02/0205",
+        "beach-club/B02/0206",
+        "beach-club/B02/0207",
+        "beach-club/B02/0208",
+        "beach-club/B02/0209",
+        "beach-club/B02/0210",
+        "beach-club/B02/0211",
+        "beach-club/B02/0212",
+        "beach-club/B02/0213",
+        "beach-club/B02/0214",
+        "beach-club/B02/0215",
+        "beach-club/B02/0216",
+        "beach-club/B02/0217",
+        "beach-club/B02/0218",
+        "beach-club/B02/0219",
+        "beach-club/B02/0220",
+        "beach-club/B02/0221",
+        "beach-club/B02/0222",
+        "beach-club/B02/0223",
+        "beach-club/B02/0224",
+        "beach-club/B02/0225",
+        "beach-club/B02/0226",
+        "beach-club/B02/0227"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B03",
+      "observed": "Grey sculpted transom shoulders",
+      "components": [
+        "beach-club/B03/0201",
+        "beach-club/B03/0228"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B04",
+      "observed": "Open recessed alcove, wood frieze and grey locker doors with handles",
+      "components": [
+        "beach-club/B04/0229",
+        "beach-club/B04/0230",
+        "beach-club/B04/0231",
+        "beach-club/B04/0232",
+        "beach-club/B04/0233",
+        "beach-club/B04/0234",
+        "beach-club/B04/0235",
+        "beach-club/B04/0236"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B05",
+      "observed": "Pale daybed in the recess, blue and ochre loose cushions",
+      "components": [
+        "beach-club/B05/0237",
+        "beach-club/B05/0238",
+        "beach-club/B05/0239"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B06",
+      "observed": "Two pale reclining chairs with timber frames and accent pillows",
+      "components": [
+        "beach-club/B06/0244",
+        "beach-club/B06/0245",
+        "beach-club/B06/0246",
+        "beach-club/B06/0247",
+        "beach-club/B06/0248",
+        "beach-club/B06/0249",
+        "beach-club/B06/0250",
+        "beach-club/B06/0251",
+        "beach-club/B06/0252",
+        "beach-club/B06/0253",
+        "beach-club/B06/0254",
+        "beach-club/B06/0255",
+        "beach-club/B06/0256",
+        "beach-club/B06/0257",
+        "beach-club/B06/0258",
+        "beach-club/B06/0259"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B07",
+      "observed": "Low copper tray and plain coral book; original cover artwork not copied",
+      "components": [
+        "beach-club/B07/0261"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B08",
+      "observed": "Curved stainless deck shower with round head",
+      "components": [
+        "beach-club/B08/0262",
+        "beach-club/B08/0263"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "beach-club",
+      "featureID": "B09",
+      "observed": "Visible hinges, flush round sockets and edge hardware",
+      "components": [
+        "beach-club/B09/0264",
+        "beach-club/B09/0265",
+        "beach-club/B09/0266",
+        "beach-club/B09/0267",
+        "beach-club/B09/0268",
+        "beach-club/B09/0269",
+        "beach-club/B09/0270",
+        "beach-club/B09/0271",
+        "beach-club/B09/0272"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Beach_Club",
+          "Cockpit_-_Port",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S01",
+      "observed": "Narrow continuous teak side deck",
+      "components": [
+        "port-side/S01/0273"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S02",
+      "observed": "Gloss black/glazed cabin wall; existing saloon windows retained",
+      "components": [
+        "port-side/S02/0274"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S03",
+      "observed": "White soffit and overhead seams",
+      "components": [
+        "port-side/S03/0275"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S04",
+      "observed": "White outer bulwark, polished top rail, posts and lower rail",
+      "components": [
+        "port-side/S04/0276",
+        "port-side/S04/0277",
+        "port-side/S04/0278",
+        "port-side/S04/0279",
+        "port-side/S04/0280",
+        "port-side/S04/0281",
+        "port-side/S04/0282",
+        "port-side/S04/0283",
+        "port-side/S04/0284",
+        "port-side/S04/0285",
+        "port-side/S04/0286",
+        "port-side/S04/0287",
+        "port-side/S04/0288",
+        "port-side/S04/0289",
+        "port-side/S04/0290"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S05",
+      "observed": "Small recessed downlights",
+      "components": [
+        "port-side/S05/0291",
+        "port-side/S05/0292",
+        "port-side/S05/0293",
+        "port-side/S05/0294"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S06",
+      "observed": "Service hatches, catches and scupper slots",
+      "components": [
+        "port-side/S06/0299",
+        "port-side/S06/0304",
+        "port-side/S06/0309"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "port-side",
+      "featureID": "S07",
+      "observed": "Forward service bulkhead terminates walking; no inferred passage to bow",
+      "components": [
+        "port-side/S07/0310"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Port_Side",
+          "Cockpit_-_Port"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S01",
+      "observed": "Continuous narrow longitudinal teak walkway",
+      "components": [
+        "starboard-side/S01/0311"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S02",
+      "observed": "Dark glossy cabin wall and trims",
+      "components": [
+        "starboard-side/S02/0312"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S03",
+      "observed": "White overhead soffit",
+      "components": [
+        "starboard-side/S03/0313"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S04",
+      "observed": "White bulwark and stainless guardrails",
+      "components": [
+        "starboard-side/S04/0314",
+        "starboard-side/S04/0315",
+        "starboard-side/S04/0316",
+        "starboard-side/S04/0317",
+        "starboard-side/S04/0318",
+        "starboard-side/S04/0319",
+        "starboard-side/S04/0320",
+        "starboard-side/S04/0321",
+        "starboard-side/S04/0322",
+        "starboard-side/S04/0323",
+        "starboard-side/S04/0324",
+        "starboard-side/S04/0325",
+        "starboard-side/S04/0326",
+        "starboard-side/S04/0327",
+        "starboard-side/S04/0328"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S05",
+      "observed": "Small recessed overhead fixtures",
+      "components": [
+        "starboard-side/S05/0329",
+        "starboard-side/S05/0330",
+        "starboard-side/S05/0331",
+        "starboard-side/S05/0332"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S06",
+      "observed": "Deck hatches, catches and outer scuppers",
+      "components": [
+        "starboard-side/S06/0337",
+        "starboard-side/S06/0342",
+        "starboard-side/S06/0347"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "starboard-side",
+      "featureID": "S08",
+      "observed": "Forward ascending staircase and upper landing to bow",
+      "components": [
+        "starboard-side/S08/0348",
+        "starboard-side/S08/0349",
+        "starboard-side/S08/0350",
+        "starboard-side/S08/0351",
+        "starboard-side/S08/0352",
+        "starboard-side/S08/0353",
+        "starboard-side/S08/0354",
+        "starboard-side/S08/0355",
+        "starboard-side/S08/0356",
+        "starboard-side/S08/0357",
+        "starboard-side/S08/0358",
+        "starboard-side/S08/0359",
+        "starboard-side/S08/0360",
+        "starboard-side/S08/0361",
+        "starboard-side/S08/0362",
+        "starboard-side/S08/0363",
+        "starboard-side/S08/0364",
+        "starboard-side/S08/0365",
+        "starboard-side/S08/0366",
+        "starboard-side/S08/0367",
+        "starboard-side/S08/0368",
+        "starboard-side/S08/0369",
+        "starboard-side/S08/0370",
+        "starboard-side/S08/0371",
+        "starboard-side/S08/0372",
+        "starboard-side/S08/0373",
+        "starboard-side/S08/0374",
+        "starboard-side/S08/0375",
+        "starboard-side/S08/0376",
+        "starboard-side/S08/0377",
+        "starboard-side/S08/0378",
+        "starboard-side/S08/0379",
+        "starboard-side/S08/0380"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Starboard_Side",
+          "Forward_Starboard_Side",
+          "Cockpit_-_Stbd"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F01",
+      "observed": "Upper teak foredeck and side bypasses",
+      "components": [
+        "bow/F01/0381",
+        "bow/F01/0382",
+        "bow/F01/0401"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F02",
+      "observed": "Two descending staircases to lower working bow",
+      "components": [
+        "bow/F02/0383",
+        "bow/F02/0384",
+        "bow/F02/0385",
+        "bow/F02/0386",
+        "bow/F02/0387",
+        "bow/F02/0388",
+        "bow/F02/0389",
+        "bow/F02/0390",
+        "bow/F02/0391",
+        "bow/F02/0392",
+        "bow/F02/0393",
+        "bow/F02/0394",
+        "bow/F02/0395",
+        "bow/F02/0396",
+        "bow/F02/0397",
+        "bow/F02/0398",
+        "bow/F02/0399",
+        "bow/F02/0400",
+        "bow/F02/0402",
+        "bow/F02/0403",
+        "bow/F02/0404",
+        "bow/F02/0405",
+        "bow/F02/0406",
+        "bow/F02/0407",
+        "bow/F02/0408",
+        "bow/F02/0409",
+        "bow/F02/0410",
+        "bow/F02/0411",
+        "bow/F02/0412",
+        "bow/F02/0413",
+        "bow/F02/0414",
+        "bow/F02/0415",
+        "bow/F02/0416",
+        "bow/F02/0417",
+        "bow/F02/0418",
+        "bow/F02/0419"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F03",
+      "observed": "Tapered lower foredeck for anchoring",
+      "components": [
+        "bow/F03/0420"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F04",
+      "observed": "Pale U lounge, blue and ochre cushions",
+      "components": [
+        "bow/F04/0421",
+        "bow/F04/0422",
+        "bow/F04/0423",
+        "bow/F04/0424",
+        "bow/F04/0425",
+        "bow/F04/0426",
+        "bow/F04/0431",
+        "bow/F04/0432",
+        "bow/F04/0433"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F05",
+      "observed": "Two separate timber lounge tables on pale pedestals, tray and plain book",
+      "components": [
+        "bow/F05/0438",
+        "bow/F05/0439",
+        "bow/F05/0440",
+        "bow/F05/0441",
+        "bow/F05/0442",
+        "bow/F05/0443",
+        "bow/F05/0445"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F06",
+      "observed": "Three broad sewn sunpad sections, rolled headrests and loose accent pillows",
+      "components": [
+        "bow/F06/0446",
+        "bow/F06/0447",
+        "bow/F06/0448",
+        "bow/F06/0449",
+        "bow/F06/0450",
+        "bow/F06/0451",
+        "bow/F06/0452",
+        "bow/F06/0453",
+        "bow/F06/0454",
+        "bow/F06/0455",
+        "bow/F06/0456",
+        "bow/F06/0457",
+        "bow/F06/0458"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F07",
+      "observed": "Timber side cabinets/endcaps with four metal cupholders",
+      "components": [
+        "bow/F07/0459",
+        "bow/F07/0460",
+        "bow/F07/0461",
+        "bow/F07/0462",
+        "bow/F07/0463",
+        "bow/F07/0464",
+        "bow/F07/0465",
+        "bow/F07/0466",
+        "bow/F07/0467",
+        "bow/F07/0468"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F08",
+      "observed": "Fixed clear blue jacuzzi, glass windscreen and teak rim",
+      "components": [
+        "bow/F08/0470",
+        "bow/F08/0471",
+        "bow/F08/0472",
+        "bow/F08/0473",
+        "bow/F08/0474",
+        "bow/F08/0475",
+        "bow/F08/0476",
+        "bow/F08/0477",
+        "bow/F08/refined-0",
+        "bow/F08/refined-1",
+        "bow/F08/refined-2",
+        "bow/F08/refined-3"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F09",
+      "observed": "Polished guardrails, white bulwark context, cleats, fairleads and flush hatches",
+      "components": [
+        "bow/F09/0478",
+        "bow/F09/0479",
+        "bow/F09/0480",
+        "bow/F09/0481",
+        "bow/F09/0482",
+        "bow/F09/0483",
+        "bow/F09/0484",
+        "bow/F09/0485",
+        "bow/F09/0486",
+        "bow/F09/0487",
+        "bow/F09/0488",
+        "bow/F09/0489",
+        "bow/F09/0490",
+        "bow/F09/0491",
+        "bow/F09/0492",
+        "bow/F09/0536",
+        "bow/F09/0537",
+        "bow/F09/0538",
+        "bow/F09/0539",
+        "bow/F09/0540",
+        "bow/F09/0541",
+        "bow/F09/0542",
+        "bow/F09/0543",
+        "bow/F09/0544",
+        "bow/F09/0545",
+        "bow/F09/0546",
+        "bow/F09/0547",
+        "bow/F09/0548",
+        "bow/F09/0549",
+        "bow/F09/0550",
+        "bow/F09/refined-4",
+        "bow/F09/refined-5",
+        "bow/F09/refined-6",
+        "bow/F09/refined-7",
+        "bow/F09/refined-8",
+        "bow/F09/refined-9",
+        "bow/F09/refined-10",
+        "bow/F09/refined-11"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    },
+    {
+      "zone": "bow",
+      "featureID": "F10",
+      "observed": "Twin windlass drums, capstans, individual chain links and roller throats",
+      "components": [
+        "bow/F10/0517",
+        "bow/F10/0518",
+        "bow/F10/0519",
+        "bow/F10/0520",
+        "bow/F10/0521",
+        "bow/F10/0522",
+        "bow/F10/0523",
+        "bow/F10/0524",
+        "bow/F10/0525",
+        "bow/F10/0526",
+        "bow/F10/0527",
+        "bow/F10/0528",
+        "bow/F10/0529",
+        "bow/F10/0530",
+        "bow/F10/0531",
+        "bow/F10/0532",
+        "bow/F10/0533",
+        "bow/F10/0534",
+        "bow/F10/0535",
+        "bow/F10/0575",
+        "bow/F10/0576",
+        "bow/F10/0577",
+        "bow/F10/0578",
+        "bow/F10/0579",
+        "bow/F10/0580",
+        "bow/F10/0581",
+        "bow/F10/0582",
+        "bow/F10/0583",
+        "bow/F10/0584",
+        "bow/F10/0585",
+        "bow/F10/0586",
+        "bow/F10/0587",
+        "bow/F10/0588",
+        "bow/F10/0589",
+        "bow/F10/0590",
+        "bow/F10/0591",
+        "bow/F10/0592",
+        "bow/F10/0593"
+      ],
+      "evidence": {
+        "tour": "https://vrcloud.com/?pv=1667308298",
+        "panoramas": [
+          "Bow_Lounge",
+          "Bow_Sunbed",
+          "Bow",
+          "Forward_Starboard_Side"
+        ],
+        "coverage": "All six original cube faces reviewed: front, left, back, right, zenith and nadir; browser cardinal sweeps also captured."
+      },
+      "geometry": "Independently authored editable Blender components",
+      "materials": "Own procedural outdoor weave and teak maps; CC0 veneer relief guides grain only",
+      "inferred": [
+        "Physical dimensions and precise absolute coordinates",
+        "Unseen backs, undersides and internal construction",
+        "Exact timber species, upholstery product and metal alloy",
+        "Sun calibration and coastal location"
+      ]
+    }
+  ],
+  "cubeSources": [
+    {
+      "scene": "Cockpit",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "3a42533041891aa99ada24fba81f94fcff2250ce47dbdb402dee929f3279a268",
+      "bytes": 906807
+    },
+    {
+      "scene": "Cockpit",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "f4207be9a34d0b078bcc37586c59a90512d720dc4e830fd58c0208b9032a40af",
+      "bytes": 1001594
+    },
+    {
+      "scene": "Cockpit",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "7f82391dd89a1d9565de34f32fa04b26182cc656448c53cf9735827eb246a040",
+      "bytes": 1106436
+    },
+    {
+      "scene": "Cockpit",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "523da2d13065e441017eb1ff5e31093eca9b71cb5bed86a1f412971392afc58e",
+      "bytes": 1091928
+    },
+    {
+      "scene": "Cockpit",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "1b402a0eb6f9e774fa5304e28e365f89cf1c96e708d28271ba5084958a149aa3",
+      "bytes": 595158
+    },
+    {
+      "scene": "Cockpit",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "ded99c83dd266faa671de53db4b8f3d602a249a7e54cf743bb7aef70b942ddf0",
+      "bytes": 1302230
+    },
+    {
+      "scene": "Cockpit_-_Port",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Port.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "043eab51bdd2b5071badd8afe69fc973c71eb0a4b93697c8e66456c839902593",
+      "bytes": 1104454
+    },
+    {
+      "scene": "Cockpit_-_Port",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Port.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "f245d7dd50636f424f175aed96a1cf2bedd2d5410a5f09e0eb0ce8a78cf93509",
+      "bytes": 1159286
+    },
+    {
+      "scene": "Cockpit_-_Port",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Port.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "729a099edd340b68d69ecdfeb075d0cc6d1fe53d51dedefbd8be63b19c32bb8b",
+      "bytes": 971988
+    },
+    {
+      "scene": "Cockpit_-_Port",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Port.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "083dae6f7b23653d603904af360507d9abf4ea441501e4c141737caae8b2e631",
+      "bytes": 1058510
+    },
+    {
+      "scene": "Cockpit_-_Port",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Port.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "02d1960041670b49ef8eb487bd6c5432f40d3e7af6fcec791b9c3e2f8fbd680e",
+      "bytes": 719308
+    },
+    {
+      "scene": "Cockpit_-_Port",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Port.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "e88d2bbc12194be7d03b0b8e872d3e472fbaeaef9777c1083c400ffbae8c6165",
+      "bytes": 1126394
+    },
+    {
+      "scene": "Cockpit_-_Stbd",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Stbd.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "6cf8dcd56515c43fcc11bc6c45322680376a67d8501b22f263d0b5bf9c1c3af2",
+      "bytes": 990352
+    },
+    {
+      "scene": "Cockpit_-_Stbd",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Stbd.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "8d23e01836aad13c316c9e3dd190611ff3da566c95c2a3571eaf146d2d94afac",
+      "bytes": 1199207
+    },
+    {
+      "scene": "Cockpit_-_Stbd",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Stbd.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "562ff029c8b480e52eb79d24b3a909f0d984b976aa9ec5306fc00c899454a9ee",
+      "bytes": 986015
+    },
+    {
+      "scene": "Cockpit_-_Stbd",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Stbd.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "9a1a4e98b6e21ba3583382a0cb0b7549efe88e9652abc569e2a7e88ceb702b9f",
+      "bytes": 913700
+    },
+    {
+      "scene": "Cockpit_-_Stbd",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Stbd.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "9ccce52361087264ed61e12b9db8b6b60c581a9f4775b9b8be982736a0b0caf1",
+      "bytes": 720806
+    },
+    {
+      "scene": "Cockpit_-_Stbd",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Cockpit_-_Stbd.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "16c57cd32bd20ac21129aac4038940a06e98db7f4dc2e742b9cda0b7a2c3edf9",
+      "bytes": 1125351
+    },
+    {
+      "scene": "Port_Side",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Port_Side.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "5350fc17716455458ee9973268512566791da676520d53c1236b484f2cf51039",
+      "bytes": 1016478
+    },
+    {
+      "scene": "Port_Side",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Port_Side.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "eb563086d22bee6e2caece71f57cc042f34cb4f43bd0bdc852c30150d56c4399",
+      "bytes": 962547
+    },
+    {
+      "scene": "Port_Side",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Port_Side.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "a769fd6ec9ad8f14307c6261a038d7fccc48981839a5e683e0c0842920d20411",
+      "bytes": 891826
+    },
+    {
+      "scene": "Port_Side",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Port_Side.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "7e09feffb5797b9eb3a7868300d15799b77d4da5140b1e597c2284322de5355f",
+      "bytes": 1025151
+    },
+    {
+      "scene": "Port_Side",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Port_Side.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "6f9271155e36a52f5114972d533d2313adcb02737f0ffaf3790936e322abbbac",
+      "bytes": 668033
+    },
+    {
+      "scene": "Port_Side",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Port_Side.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "dfa226ee0117d6b680e2770565320573807fc59074bc2ab2ef23204d4bb35451",
+      "bytes": 1058691
+    },
+    {
+      "scene": "Starboard_Side",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Starboard_Side.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "420292938d6035b0f8e52edca4263a5d8fccba2759f0dac4f2dece14ada79534",
+      "bytes": 1136748
+    },
+    {
+      "scene": "Starboard_Side",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Starboard_Side.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "0c0466075dd79119f9a774a0eaee354a4c26a485bea81b23788c21d1c9811a03",
+      "bytes": 711855
+    },
+    {
+      "scene": "Starboard_Side",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Starboard_Side.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "609a7768e2a4658bd2d2271c0ac1f394f0229092fe01a3e75281d346c85ba204",
+      "bytes": 1037157
+    },
+    {
+      "scene": "Starboard_Side",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Starboard_Side.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "d1adcb158fbae5a54cc2d8484a23ffbff542ffec4980605377c0167b25f6c904",
+      "bytes": 1023303
+    },
+    {
+      "scene": "Starboard_Side",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Starboard_Side.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "d21739b1dbbf524980ea61856e3e9d5c28cbb2d3b3506773740ddfee02dd9425",
+      "bytes": 648625
+    },
+    {
+      "scene": "Starboard_Side",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Starboard_Side.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "bc408c92f4f60eb1b6cff2a2433432e826e901af996bd6979d410b5d13ee42bb",
+      "bytes": 952535
+    },
+    {
+      "scene": "Forward_Starboard_Side",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Forward_Starboard_Side.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "ee84098c868840c767c431773747361fc4971412db6061ffb96380ecbbd86820",
+      "bytes": 1120814
+    },
+    {
+      "scene": "Forward_Starboard_Side",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Forward_Starboard_Side.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "b73281a9cd808e250c79745f5c373fc4f0dff955dea473bdd5258c611c2195a7",
+      "bytes": 1073759
+    },
+    {
+      "scene": "Forward_Starboard_Side",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Forward_Starboard_Side.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "886bc9071dadfc364c35c91c655d9e09f103e2218b5e769fe2a1b6130f969c97",
+      "bytes": 1006800
+    },
+    {
+      "scene": "Forward_Starboard_Side",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Forward_Starboard_Side.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "1cb7393a300fcee4b01cc4274c90a2948f8a60c125802dae1bee0ef19c929bc2",
+      "bytes": 1068537
+    },
+    {
+      "scene": "Forward_Starboard_Side",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Forward_Starboard_Side.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "47e51dfc9d9b2913dea55eb38953f9a78a99d43e4727f73ff80441a9efb3493c",
+      "bytes": 646566
+    },
+    {
+      "scene": "Forward_Starboard_Side",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Forward_Starboard_Side.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "5719dc0d20b4bd806966fb7cdbb2a7096faed16528f1d956488f34bfcb04bc51",
+      "bytes": 1199897
+    },
+    {
+      "scene": "Bow_Lounge",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Lounge.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "c575881fc73cabc6a3c04461bd55dab5ab1293b8ae517dad9ddc989793e9f680",
+      "bytes": 1081912
+    },
+    {
+      "scene": "Bow_Lounge",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Lounge.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "22990a2f92aff73cffa69ebe0b28bb10779150de845331b61cfc260b00c3e81d",
+      "bytes": 1071985
+    },
+    {
+      "scene": "Bow_Lounge",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Lounge.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "a34eb35747e0282d0625d8bbbea7e5655a0667990448a4d8df4766b64b15f414",
+      "bytes": 1028353
+    },
+    {
+      "scene": "Bow_Lounge",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Lounge.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "a2280a208b5c51f22e6453cfdb3667e08891571002c5fbe3678589091b6bfc86",
+      "bytes": 1047299
+    },
+    {
+      "scene": "Bow_Lounge",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Lounge.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "d8ec77927b523a257909e45331b401f8291856d841a9a1568803e462299f3752",
+      "bytes": 634419
+    },
+    {
+      "scene": "Bow_Lounge",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Lounge.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "0402ace4965a5a609b25f0aea1816cb1af0558f273f390c6f58cf29c245c4002",
+      "bytes": 1186886
+    },
+    {
+      "scene": "Bow_Sunbed",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Sunbed.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "c229173a1276da92a9124418f86ecc87594b57970e31c08722fbdd44e21b0c7f",
+      "bytes": 974796
+    },
+    {
+      "scene": "Bow_Sunbed",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Sunbed.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "9876495254c711ec0e5d806200a808f91283739552fab7791c9a1e0ffd2b01fe",
+      "bytes": 1065932
+    },
+    {
+      "scene": "Bow_Sunbed",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Sunbed.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "6e3919b423c510d3f696f66139d9e3a9714b259e55811376503c3d0050a759a6",
+      "bytes": 1016562
+    },
+    {
+      "scene": "Bow_Sunbed",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Sunbed.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "affb64204e4bf7a806f03f9337032526f75b282485a540c9a63958d2f7d17476",
+      "bytes": 1024340
+    },
+    {
+      "scene": "Bow_Sunbed",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Sunbed.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "c2703a36ba52a6799d4715413aa1be6846d7682c9ae3f4102a74980ddc7fc5e9",
+      "bytes": 631736
+    },
+    {
+      "scene": "Bow_Sunbed",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow_Sunbed.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "8c4d341fcfb1142ba322f0a990b947377d3c6adbf7a1d3082052a6a95900a71e",
+      "bytes": 1161218
+    },
+    {
+      "scene": "Bow",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "73ca647a5d1047caadf3e53f70871ed6d91dbefc1f44d08826eae08432996795",
+      "bytes": 866683
+    },
+    {
+      "scene": "Bow",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "116ab7868fd4e64bafcee3d80702b1cc531d9538591855b5a31a58ced3e67533",
+      "bytes": 896557
+    },
+    {
+      "scene": "Bow",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "22e970f9671789277b72994fd1962a7d007578ad7120099e684966883cbdd0ae",
+      "bytes": 900773
+    },
+    {
+      "scene": "Bow",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "1b7721ab4613c03fc5aa5c02eb4fe909d2886786fd23234ac6ecb0b9b55b9d88",
+      "bytes": 900926
+    },
+    {
+      "scene": "Bow",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "37053f3ec97e5e3d7d1604617571799646b0a2d9085569435cf22dcaf66389dd",
+      "bytes": 631827
+    },
+    {
+      "scene": "Bow",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Bow.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "9f78e59ca60ce06ab71b4dd596e1f475a2b221771d6ebb392a761be2163e4c90",
+      "bytes": 1282387
+    },
+    {
+      "scene": "Beach_Club",
+      "face": "f",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Beach_Club.tiles/pano_f.jpg?v=p29279716",
+      "sha256": "7e585f3ed1cd80bacdd1e3b1a59bc1f241cc9b6d971518c8d487bf5ae77aadcb",
+      "bytes": 1039090
+    },
+    {
+      "scene": "Beach_Club",
+      "face": "l",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Beach_Club.tiles/pano_l.jpg?v=p29279716",
+      "sha256": "f71962848db79eb16a95c1dc47642059f323ac16371ed435f99114b3dc5941f5",
+      "bytes": 1065857
+    },
+    {
+      "scene": "Beach_Club",
+      "face": "b",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Beach_Club.tiles/pano_b.jpg?v=p29279716",
+      "sha256": "ce4e251fa96baeb321730df5dc6582312c4e4ecc0c43d844f9a1a7969e49e9b2",
+      "bytes": 1124037
+    },
+    {
+      "scene": "Beach_Club",
+      "face": "r",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Beach_Club.tiles/pano_r.jpg?v=p29279716",
+      "sha256": "655b50992636f072939268b7406149f933978d09889e7159c662ebacd7db4b97",
+      "bytes": 1022015
+    },
+    {
+      "scene": "Beach_Club",
+      "face": "u",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Beach_Club.tiles/pano_u.jpg?v=p29279716",
+      "sha256": "944df9df3bc102361943235b89e24bda9f6578cd351447b5a572c1f102fa8603",
+      "bytes": 666037
+    },
+    {
+      "scene": "Beach_Club",
+      "face": "d",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Beach_Club.tiles/pano_d.jpg?v=p29279716",
+      "sha256": "be294a23b2ef9ea45f2684e950a0e048482abc64f30ae46fa10b39ebf4fc92d0",
+      "bytes": 1068014
+    }
+  ],
+  "captureReview": {
+    "panoramas": 10,
+    "browserCaptures": 100,
+    "rejectedAngles": [
+      45,
+      135,
+      225,
+      315
+    ],
+    "reason": "Gray cube seams in the software browser at diagonal views; not used as evidence. The complete cube photographs were reviewed directly."
+  },
+  "occludedAreas": [
+    "Lazarette behind beach club doors",
+    "Cabinet interiors and plumbing",
+    "Anchoring machinery internal mechanism",
+    "Bridge and upper deck interiors",
+    "Port forward connection not visible; deliberately not provided"
+  ]
+}

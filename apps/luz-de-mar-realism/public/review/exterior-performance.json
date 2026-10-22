@@ -1,0 +1,1764 @@
+{
+  "url": "http://127.0.0.1:5235/",
+  "stage": 1,
+  "authoringRevision": 9,
+  "method": "Actual WebGL2 renders, SwiftShader software GPU. Correctness and software frame times; no hardware 60/30 FPS claim.",
+  "measurementConditions": {
+    "concurrentOfflineBake": true,
+    "hardwareFpsClaim": false
+  },
+  "hardware": {
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "affinity": 4,
+    "cgroupCpuMax": "400000 100000",
+    "gpu": "ANGLE SwiftShader"
+  },
+  "checks": {
+    "slowBoundary": {
+      "preservedRoot": true,
+      "heldAt": [
+        8.414285714285704,
+        0
+      ],
+      "continuousCrossing": true
+    },
+    "failedBoundaryRetry": true,
+    "rapidSelection": true,
+    "resourceStability": true,
+    "demandRendering": true,
+    "hiddenPause": true,
+    "touchWalking": {
+      "before": [
+        9.2,
+        0
+      ],
+      "after": [
+        9.20254227040962,
+        -0.11871750821695495
+      ]
+    }
+  },
+  "captures": [
+    {
+      "name": "saloon",
+      "zone": "saloon",
+      "sourcePosition": [
+        9.2,
+        0,
+        5.55
+      ],
+      "target": [
+        13.157,
+        0.084,
+        5.55
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "saloon",
+        "residentZones": [
+          "saloon",
+          "cockpit"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          9.2,
+          0
+        ],
+        "frames": 7,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 46,
+        "triangles": 325529,
+        "memory": {
+          "geometries": 65,
+          "textures": 47
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 9.800000011920929,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 10,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "cockpit",
+      "zone": "cockpit",
+      "sourcePosition": [
+        7.1,
+        0,
+        5.5
+      ],
+      "target": [
+        4,
+        0,
+        5.35
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "cockpit",
+        "residentZones": [
+          "saloon",
+          "cockpit"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          7.1,
+          0
+        ],
+        "frames": 12,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 21,
+        "triangles": 94113,
+        "memory": {
+          "geometries": 68,
+          "textures": 49
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 4.199999988079071,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 15,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "beach-club",
+      "zone": "beach-club",
+      "sourcePosition": [
+        0.2,
+        0,
+        3.67
+      ],
+      "target": [
+        3.7,
+        0,
+        3
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "beach-club",
+        "residentZones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 32
+        },
+        "elevation": 2.12,
+        "position": [
+          2.1,
+          0
+        ],
+        "frames": 17,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 45,
+        "triangles": 178467,
+        "memory": {
+          "geometries": 61,
+          "textures": 26
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 2.7000000178813934,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 21,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "cockpit-director-chairs",
+      "zone": "cockpit",
+      "sourcePosition": [
+        6.9,
+        -0.3,
+        5.45
+      ],
+      "target": [
+        6.4,
+        0.35,
+        4.7
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "cockpit",
+        "residentZones": [
+          "cockpit",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          7.1,
+          0
+        ],
+        "frames": 22,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 29,
+        "triangles": 189385,
+        "memory": {
+          "geometries": 72,
+          "textures": 35
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 2.300000011920929,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 27,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "cockpit-wetbar",
+      "zone": "cockpit",
+      "sourcePosition": [
+        6.9,
+        -1.2,
+        5.4
+      ],
+      "target": [
+        7.6,
+        -2.4,
+        4.85
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "cockpit",
+        "residentZones": [
+          "cockpit",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          7.1,
+          0
+        ],
+        "frames": 24,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 37,
+        "triangles": 249705,
+        "memory": {
+          "geometries": 72,
+          "textures": 43
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 2.300000011920929,
+          "p95": 15136.800000011921
+        },
+        "shadowUpdates": 27,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "beach-club-upholstery",
+      "zone": "beach-club",
+      "sourcePosition": [
+        1.9,
+        0,
+        3.67
+      ],
+      "target": [
+        0.75,
+        1.15,
+        2.65
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "beach-club",
+        "residentZones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 32
+        },
+        "elevation": 2.12,
+        "position": [
+          2.1,
+          0
+        ],
+        "frames": 29,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 19,
+        "triangles": 79411,
+        "memory": {
+          "geometries": 61,
+          "textures": 26
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 1.9000000059604645,
+          "p95": 7621.199999988079
+        },
+        "shadowUpdates": 32,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "name": "beach-club-shower",
+      "zone": "beach-club",
+      "sourcePosition": [
+        1.1,
+        -2,
+        3.67
+      ],
+      "target": [
+        2.15,
+        -3.23,
+        3.6
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "beach-club",
+        "residentZones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 32
+        },
+        "elevation": 2.12,
+        "position": [
+          2.1,
+          0
+        ],
+        "frames": 31,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 32,
+        "triangles": 149925,
+        "memory": {
+          "geometries": 61,
+          "textures": 26
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 1.7999999821186066,
+          "p95": 7621.199999988079
+        },
+        "shadowUpdates": 32,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "memory": {
+        "geometries": 61,
+        "textures": 26
+      },
+      "pool": {
+        "textures": 17,
+        "references": 32
+      },
+      "residents": [
+        "cockpit",
+        "beach-club"
+      ]
+    },
+    {
+      "memory": {
+        "geometries": 61,
+        "textures": 26
+      },
+      "pool": {
+        "textures": 17,
+        "references": 32
+      },
+      "residents": [
+        "cockpit",
+        "beach-club"
+      ]
+    },
+    {
+      "memory": {
+        "geometries": 61,
+        "textures": 26
+      },
+      "pool": {
+        "textures": 17,
+        "references": 32
+      },
+      "residents": [
+        "cockpit",
+        "beach-club"
+      ]
+    }
+  ],
+  "sequences": [
+    {
+      "fixedRatio": 1,
+      "actualFrameMs": [
+        7.0999999940395355,
+        4.4000000059604645,
+        1842.699999988079,
+        1956.0999999940395,
+        1860.5,
+        1847.2000000178814,
+        1866.199999988079,
+        1888.4000000059605,
+        1872.0999999940395,
+        1850
+      ],
+      "ratios": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "before": [
+        9.2,
+        0
+      ],
+      "after": [
+        9.213213280189994,
+        -0.6170262980648289
+      ],
+      "viewport": [
+        640,
+        426
+      ],
+      "stats": {
+        "room": "saloon",
+        "residentZones": [
+          "saloon",
+          "cockpit"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          9.213213280189994,
+          -0.6170262980648289
+        ],
+        "frames": 89,
+        "ratio": 1,
+        "quality": 0.55,
+        "canvas": [
+          640,
+          426
+        ],
+        "calls": 46,
+        "triangles": 325529,
+        "memory": {
+          "geometries": 72,
+          "textures": 47
+        },
+        "frameMs": {
+          "p50": 1849.9000000000233,
+          "p95": 1966.6999999999825
+        },
+        "submissionMs": {
+          "p50": 1.5,
+          "p95": 6
+        },
+        "shadowUpdates": 110,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "percentiles": {
+        "p50": 1866.199999988079,
+        "p95": 1956.0999999940395
+      }
+    },
+    {
+      "fixedRatio": null,
+      "actualFrameMs": [
+        5454.600000023842,
+        2.0999999940395355,
+        10.299999982118607,
+        1101.300000011921,
+        1066.5999999940395,
+        1057.4000000059605,
+        1076,
+        1075.5999999940395,
+        2039.800000011921,
+        1009.2999999821186
+      ],
+      "ratios": [
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55
+      ],
+      "before": [
+        9.2,
+        0
+      ],
+      "after": [
+        9.18576491210862,
+        0.6647420971891103
+      ],
+      "viewport": [
+        640,
+        426
+      ],
+      "stats": {
+        "room": "saloon",
+        "residentZones": [
+          "saloon",
+          "cockpit"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 37,
+          "references": 46
+        },
+        "elevation": 3.95,
+        "position": [
+          9.18576491210862,
+          0.6647420971891103
+        ],
+        "frames": 99,
+        "ratio": 0.55,
+        "quality": 0.55,
+        "canvas": [
+          352,
+          234
+        ],
+        "calls": 46,
+        "triangles": 325529,
+        "memory": {
+          "geometries": 72,
+          "textures": 47
+        },
+        "frameMs": {
+          "p50": 1083.3000000000175,
+          "p95": 3616.399999999994
+        },
+        "submissionMs": {
+          "p50": 1.300000011920929,
+          "p95": 1.5999999940395355
+        },
+        "shadowUpdates": 111,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "percentiles": {
+        "p50": 1075.5999999940395,
+        "p95": 2039.800000011921
+      }
+    }
+  ],
+  "initial": {
+    "room": "saloon",
+    "residentZones": [
+      "saloon",
+      "cockpit"
+    ],
+    "pendingZones": [],
+    "sharedTextures": {
+      "textures": 37,
+      "references": 46
+    },
+    "elevation": 3.95,
+    "position": [
+      9.2,
+      0
+    ],
+    "frames": 3,
+    "ratio": 1,
+    "quality": 1,
+    "canvas": [
+      900,
+      600
+    ],
+    "calls": 46,
+    "triangles": 325529,
+    "memory": {
+      "geometries": 65,
+      "textures": 47
+    },
+    "frameMs": {
+      "p50": 0,
+      "p95": 0
+    },
+    "submissionMs": {
+      "p50": 15136.800000011921,
+      "p95": 15136.800000011921
+    },
+    "shadowUpdates": 6,
+    "errors": [],
+    "renderer": "WebKit WebGL",
+    "unmaskedRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "final": {
+    "room": "saloon",
+    "residentZones": [
+      "saloon",
+      "cockpit"
+    ],
+    "pendingZones": [],
+    "sharedTextures": {
+      "textures": 37,
+      "references": 46
+    },
+    "elevation": 3.95,
+    "position": [
+      9.20254227040962,
+      -0.11871750821695495
+    ],
+    "frames": 106,
+    "ratio": 1,
+    "quality": 0.55,
+    "canvas": [
+      390,
+      844
+    ],
+    "calls": 45,
+    "triangles": 325135,
+    "memory": {
+      "geometries": 72,
+      "textures": 47
+    },
+    "frameMs": {
+      "p50": 1066.6000000000058,
+      "p95": 3616.399999999994
+    },
+    "submissionMs": {
+      "p50": 1.300000011920929,
+      "p95": 2
+    },
+    "shadowUpdates": 112,
+    "errors": [],
+    "renderer": "WebKit WebGL"
+  },
+  "downloads": [
+    {
+      "url": "http://127.0.0.1:5235/assets/index-CJbYSKkb.js",
+      "encodedBytes": 709896,
+      "transferBytes": 710196,
+      "durationMs": 90.39999997615814
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/index-nA3kuNkn.css",
+      "encodedBytes": 7118,
+      "transferBytes": 7418,
+      "durationMs": 73.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/exterior.jpg",
+      "encodedBytes": 588155,
+      "transferBytes": 588455,
+      "durationMs": 49.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/manifest.json",
+      "encodedBytes": 4839,
+      "transferBytes": 5139,
+      "durationMs": 10.599999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 498,
+      "durationMs": 13.100000023841858
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/navigation.json",
+      "encodedBytes": 12865,
+      "transferBytes": 13165,
+      "durationMs": 7.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 60133,
+      "durationMs": 33.599999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/context/context.glb",
+      "encodedBytes": 186932,
+      "transferBytes": 187232,
+      "durationMs": 8.200000017881393
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/context.glb",
+      "encodedBytes": 905640,
+      "transferBytes": 905940,
+      "durationMs": 8.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/context.glb",
+      "encodedBytes": 542012,
+      "transferBytes": 542312,
+      "durationMs": 12.599999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/context.glb",
+      "encodedBytes": 239368,
+      "transferBytes": 239668,
+      "durationMs": 10.700000017881393
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/port-side/context.glb",
+      "encodedBytes": 70468,
+      "transferBytes": 70768,
+      "durationMs": 2.2999999821186066
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/starboard-side/context.glb",
+      "encodedBytes": 132684,
+      "transferBytes": 132984,
+      "durationMs": 3.300000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/bow/context.glb",
+      "encodedBytes": 485092,
+      "transferBytes": 485392,
+      "durationMs": 9.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 300,
+      "durationMs": 9.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 593.0999999940395
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 841.0999999940395
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 687.0999999940395
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 2243275,
+      "durationMs": 106.7000000178814
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 2231938,
+      "durationMs": 132.90000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 2256927,
+      "durationMs": 174
+    },
+    {
+      "url": "http://127.0.0.1:5235/decoders/basis_transcoder.js",
+      "encodedBytes": 57529,
+      "transferBytes": 57829,
+      "durationMs": 12.900000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/decoders/basis_transcoder.wasm",
+      "encodedBytes": 527333,
+      "transferBytes": 527633,
+      "durationMs": 13.799999982118607
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 300,
+      "durationMs": 36.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.json",
+      "encodedBytes": 28916,
+      "transferBytes": 29216,
+      "durationMs": 8.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.glb",
+      "encodedBytes": 12774460,
+      "transferBytes": 12774760,
+      "durationMs": 174.7000000178814
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/ambient-cockpit.exr",
+      "encodedBytes": 12378556,
+      "transferBytes": 12378856,
+      "durationMs": 224.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/probe.exr",
+      "encodedBytes": 2370720,
+      "transferBytes": 2371020,
+      "durationMs": 90.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 300,
+      "durationMs": 8
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 18862,
+      "durationMs": 6.699999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 9598688,
+      "transferBytes": 9598988,
+      "durationMs": 94.59999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 207
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 1798763,
+      "durationMs": 51.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 300,
+      "durationMs": 3.5999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 300,
+      "durationMs": 11.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 6.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 235.2999999821186
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 482.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 266
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 300,
+      "durationMs": 54.099999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 300,
+      "durationMs": 54.29999998211861
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 300,
+      "durationMs": 54.69999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 300,
+      "durationMs": 3.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 9598688,
+      "transferBytes": 9598988,
+      "durationMs": 48.400000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 77.59999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 300,
+      "durationMs": 11.699999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 300,
+      "durationMs": 7.4000000059604645
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 60133,
+      "durationMs": 9.300000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 394
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 247.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 331.7999999821186
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 2231938,
+      "durationMs": 154.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 2256927,
+      "durationMs": 141.90000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 2243275,
+      "durationMs": 155
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 498,
+      "durationMs": 17.700000017881393
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.json",
+      "encodedBytes": 28916,
+      "transferBytes": 29216,
+      "durationMs": 13.700000017881393
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.glb",
+      "encodedBytes": 12774460,
+      "transferBytes": 12774760,
+      "durationMs": 3083.300000011921
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/ambient-cockpit.exr",
+      "encodedBytes": 12378556,
+      "transferBytes": 12378856,
+      "durationMs": 52.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/probe.exr",
+      "encodedBytes": 2370720,
+      "transferBytes": 2371020,
+      "durationMs": 27.099999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 1.2000000178813934
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 0.699999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 1.0999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 18862,
+      "durationMs": 15.799999982118607
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 0,
+      "transferBytes": 0,
+      "durationMs": 7.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 137.09999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 1798763,
+      "durationMs": 58.29999998211861
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 0,
+      "durationMs": 1.699999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 74.80000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 9598688,
+      "transferBytes": 9598988,
+      "durationMs": 78.7000000178814
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 0,
+      "durationMs": 9.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 2.4000000059604645
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 0,
+      "transferBytes": 0,
+      "durationMs": 8.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 60133,
+      "durationMs": 4.4000000059604645
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 157.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 177.69999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 222.69999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 300,
+      "durationMs": 69.59999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 300,
+      "durationMs": 67.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 300,
+      "durationMs": 68.2000000178814
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 8
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 300,
+      "durationMs": 7.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 1.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 0,
+      "durationMs": 1.2999999821186066
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 9598688,
+      "transferBytes": 9598988,
+      "durationMs": 55.900000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 108.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 0,
+      "durationMs": 14.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 0.7999999821186066
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 0,
+      "durationMs": 0.8999999761581421
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 391.09999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 165.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 0,
+      "durationMs": 20.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 283.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 0,
+      "durationMs": 20.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 0,
+      "durationMs": 20.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 3.399999976158142
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.json",
+      "encodedBytes": 28916,
+      "transferBytes": 300,
+      "durationMs": 12.200000017881393
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.glb",
+      "encodedBytes": 12774460,
+      "transferBytes": 12774760,
+      "durationMs": 77.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/ambient-cockpit.exr",
+      "encodedBytes": 12378556,
+      "transferBytes": 12378856,
+      "durationMs": 56.69999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/probe.exr",
+      "encodedBytes": 2370720,
+      "transferBytes": 300,
+      "durationMs": 17.400000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 1
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 300,
+      "durationMs": 2.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 9598688,
+      "transferBytes": 9598988,
+      "durationMs": 53.29999998211861
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 92.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 300,
+      "durationMs": 16.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 300,
+      "durationMs": 6.0999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 300,
+      "durationMs": 16.600000023841858
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 250.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 171.69999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 300,
+      "durationMs": 29.099999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 121.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 300,
+      "durationMs": 25.400000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 300,
+      "durationMs": 29.399999976158142
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 1.9000000059604645
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.json",
+      "encodedBytes": 28916,
+      "transferBytes": 0,
+      "durationMs": 1.699999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.glb",
+      "encodedBytes": 12774460,
+      "transferBytes": 12774760,
+      "durationMs": 74.09999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/ambient-cockpit.exr",
+      "encodedBytes": 12378556,
+      "transferBytes": 12378856,
+      "durationMs": 58.099999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/probe.exr",
+      "encodedBytes": 2370720,
+      "transferBytes": 0,
+      "durationMs": 6.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 0.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.json",
+      "encodedBytes": 18562,
+      "transferBytes": 0,
+      "durationMs": 1.0999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/room.glb",
+      "encodedBytes": 9598688,
+      "transferBytes": 9598988,
+      "durationMs": 37
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/probe.exr",
+      "encodedBytes": 1798463,
+      "transferBytes": 0,
+      "durationMs": 4.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/ambient-beach-club.exr",
+      "encodedBytes": 12815691,
+      "transferBytes": 12815991,
+      "durationMs": 75.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 1.0999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json",
+      "encodedBytes": 59833,
+      "transferBytes": 0,
+      "durationMs": 0.7999999821186066
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.glb",
+      "encodedBytes": 21492856,
+      "transferBytes": 21493156,
+      "durationMs": 339
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-furniture.exr",
+      "encodedBytes": 14729807,
+      "transferBytes": 14730107,
+      "durationMs": 192.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/ambient-architecture.exr",
+      "encodedBytes": 12907868,
+      "transferBytes": 12908168,
+      "durationMs": 285.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-aft.exr",
+      "encodedBytes": 2231638,
+      "transferBytes": 0,
+      "durationMs": 33.20000001788139
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe.exr",
+      "encodedBytes": 2242975,
+      "transferBytes": 0,
+      "durationMs": 33.400000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/probe-dining.exr",
+      "encodedBytes": 2256627,
+      "transferBytes": 0,
+      "durationMs": 33.60000002384186
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encodedBytes": 198,
+      "transferBytes": 0,
+      "durationMs": 2.2999999821186066
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.json",
+      "encodedBytes": 28916,
+      "transferBytes": 300,
+      "durationMs": 2.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/room.glb",
+      "encodedBytes": 12774460,
+      "transferBytes": 12774760,
+      "durationMs": 65.19999998807907
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/ambient-cockpit.exr",
+      "encodedBytes": 12378556,
+      "transferBytes": 12378856,
+      "durationMs": 101.09999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/probe.exr",
+      "encodedBytes": 2370720,
+      "transferBytes": 300,
+      "durationMs": 26.900000005960464
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "pass": true,
+  "baselineCameras": {
+    "renderer": "Original unmodified yacht WebGPU / SwiftShader",
+    "comparability": "Identical source camera coordinates, field of view and viewport. Lighting and model layout differ; this is a geometry/presentation comparison, not an isolated renderer benchmark.",
+    "views": [
+      {
+        "id": "saloon",
+        "sourcePosition": [
+          9.2,
+          0,
+          5.55
+        ],
+        "actualSourcePosition": [
+          9.200000000000003,
+          0,
+          5.549999999999999
+        ],
+        "target": [
+          13.157,
+          0.084,
+          5.55
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      {
+        "id": "cockpit",
+        "sourcePosition": [
+          7.1,
+          0,
+          5.5
+        ],
+        "actualSourcePosition": [
+          7.100000000000036,
+          0,
+          5.500000000000002
+        ],
+        "target": [
+          4,
+          0,
+          5.35
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      {
+        "id": "beach-club",
+        "sourcePosition": [
+          0.2,
+          0,
+          3.67
+        ],
+        "actualSourcePosition": [
+          0.19999999999999699,
+          0,
+          3.6699999999999964
+        ],
+        "target": [
+          3.7,
+          0,
+          3
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      {
+        "id": "port-side",
+        "sourcePosition": [
+          9.1,
+          3.14,
+          5.5
+        ],
+        "actualSourcePosition": [
+          9.1,
+          3.139999999999979,
+          5.500000000000002
+        ],
+        "target": [
+          18,
+          3.14,
+          5.5
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      {
+        "id": "starboard-side",
+        "sourcePosition": [
+          9.1,
+          -3.14,
+          5.5
+        ],
+        "actualSourcePosition": [
+          9.1,
+          -3.139999999999979,
+          5.500000000000002
+        ],
+        "target": [
+          20,
+          -3.14,
+          5.5
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      {
+        "id": "bow",
+        "sourcePosition": [
+          27.1,
+          -2.35,
+          7.55
+        ],
+        "actualSourcePosition": [
+          27.100000000000012,
+          -2.3500000000000285,
+          7.549999999999999
+        ],
+        "target": [
+          30.5,
+          0,
+          6.7
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      }
+    ]
+  },
+  "scope": [
+    "saloon",
+    "cockpit",
+    "beach-club"
+  ],
+  "atlasStorage": {
+    "format": "Linear half-float EXR / RGBA16F runtime",
+    "size": [
+      2048,
+      2048
+    ],
+    "bytesPerAtlas": 33554432,
+    "selectedRoomOnly": true
+  },
+  "targetHardwareFps": {
+    "desktop": 60,
+    "mobile": 30,
+    "measured": false
+  },
+  "geometryBudget": {
+    "visibleTriangles": 1000000,
+    "drawCalls": 120,
+    "withinRecordedViews": true
+  },
+  "sourceNotes": "Tour reviewed privately; its images are not distributed. Same-coordinate original/candidate renders do not share identical lighting or inferred layout."
+}

@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0-exteriors.1",
-  "stage": 1,
+  "version": "2.0.0-exteriors.2",
+  "stage": 2,
   "defaultRoom": "saloon",
   "scope": "Connected VR-led exterior reconstruction",
   "maxDetailedZones": 2,
@@ -182,6 +182,114 @@
             1.6,
             0,
             3.2
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        }
+      ]
+    },
+    {
+      "id": "port-side",
+      "label": "Pasillo de babor",
+      "metadata": "port-side/room.json",
+      "geometry": "port-side/room.glb",
+      "sha256": "175376231647ed580218670c878809025398d62833bcd3ec510a964e0c173694",
+      "triangles": 3840,
+      "ambientAtlases": [
+        {
+          "key": "port-side",
+          "asset": "ambient-port-side.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        }
+      ],
+      "probes": [
+        {
+          "id": "port-side-0",
+          "position": [
+            3.0666315789473684,
+            2.99,
+            -3.4251388888888883
+          ],
+          "sourcePosition": [
+            14.5,
+            3.12,
+            5
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        }
+      ]
+    },
+    {
+      "id": "starboard-side",
+      "label": "Pasillo de estribor",
+      "metadata": "starboard-side/room.json",
+      "geometry": "starboard-side/room.glb",
+      "sha256": "3153ca3afdaad2dd0aaa322c248b29046a421c36f9c4e2825c7d72890f48bd8d",
+      "triangles": 6560,
+      "ambientAtlases": [
+        {
+          "key": "starboard-side",
+          "asset": "ambient-starboard-side.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        }
+      ],
+      "probes": [
+        {
+          "id": "starboard-side-0",
+          "position": [
+            -3.0666315789473684,
+            2.99,
+            -3.4251388888888883
+          ],
+          "sourcePosition": [
+            14.5,
+            -3.12,
+            5
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 24,
+          "purpose": "Local static specular capture; live sun excluded"
+        }
+      ]
+    },
+    {
+      "id": "bow",
+      "label": "Proa",
+      "metadata": "bow/room.json",
+      "geometry": "bow/room.glb",
+      "sha256": "3e9dc80d7276d97e4795fe0355d3e9301523cfe7e74fd934c04a6842e1d2702a",
+      "triangles": 51286,
+      "ambientAtlases": [
+        {
+          "key": "bow",
+          "asset": "ambient-bow.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR"
+        }
+      ],
+      "probes": [
+        {
+          "id": "bow-0",
+          "position": [
+            0,
+            5.19,
+            9.786111111111108
+          ],
+          "sourcePosition": [
+            28,
+            0,
+            7.2
           ],
           "asset": "probe.exr",
           "width": 1024,

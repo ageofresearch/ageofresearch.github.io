@@ -63,3 +63,9 @@ de la página original. La publicación verifica los 629 hashes de esa página.
 La meta de 60 fps de escritorio/30 fps móvil exige medir hardware real. Las
 mediciones de SwiftShader son comprobaciones de corrección y estabilidad; no
 demuestran esa meta ni equivalencia fotográfica con la visita.
+
+Las versiones ligeras reciben irradiancia por vértice derivada de los mismos atlas HDR, junto con las sombras solares reutilizadas. Así se conserva el color interior al mirar por los cristales sin cargar atlas de zonas no residentes. La exposición de cámara se calibra por zona y cambia suavemente al cruzar una conexión; las luces permanecen fijas. `ASSET_REVISION` versiona las peticiones de geometría y luz para evitar mezclar UV antiguas con atlas nuevos en caché.
+
+El agua cercana usa normales estáticas y sombras del yate. A distancia se mezcla con el panorama costero para evitar una línea de corte visible. Las versiones ligeras conservan una media de irradiancia del interior de las caras grandes; usar únicamente las esquinas oscuras de un atlas daba falsos techos negros.
+
+Para regenerar las versiones ligeras después de preparar las mallas y hornear: `node tools/light-proxies.mjs`. Ejecutar `node tools/refresh-exterior-manifest.mjs` con `PUBLICATION_STAGE=1` o `2` para vincular los bakes terminados antes de publicar. Las 629 comprobaciones del original incluyen 628 recursos servidos y el marcador `.nojekyll`, verificado en el commit del despliegue porque GitHub Pages no lo expone por HTTP.

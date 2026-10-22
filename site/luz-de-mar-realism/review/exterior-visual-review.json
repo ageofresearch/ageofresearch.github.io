@@ -42,26 +42,33 @@
           9.2,
           0
         ],
-        "frames": 7,
+        "frames": 4,
         "ratio": 1,
         "quality": 1,
         "canvas": [
           900,
           600
         ],
-        "calls": 46,
-        "triangles": 325529,
+        "calls": 43,
+        "triangles": 325583,
         "memory": {
-          "geometries": 65,
+          "geometries": 63,
           "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 21653924,
+          "textureBytes": 368400689,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 406831829,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 9.800000011920929,
-          "p95": 15136.800000011921
+          "p50": 8676.199999988079,
+          "p95": 8676.199999988079
         },
         "shadowUpdates": 10,
         "errors": [],
@@ -129,28 +136,35 @@
           7.1,
           0
         ],
-        "frames": 12,
+        "frames": 7,
         "ratio": 1,
         "quality": 1,
         "canvas": [
           900,
           600
         ],
-        "calls": 21,
-        "triangles": 94113,
+        "calls": 20,
+        "triangles": 94101,
         "memory": {
-          "geometries": 68,
+          "geometries": 63,
           "textures": 49
+        },
+        "estimatedMemory": {
+          "geometryBytes": 21653924,
+          "textureBytes": 368400689,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 406831829,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 4.199999988079071,
-          "p95": 15136.800000011921
+          "p50": 5850.100000023842,
+          "p95": 8676.199999988079
         },
-        "shadowUpdates": 15,
+        "shadowUpdates": 14,
         "errors": [],
         "renderer": "WebKit WebGL"
       },
@@ -227,28 +241,35 @@
           2.1,
           0
         ],
-        "frames": 17,
+        "frames": 10,
         "ratio": 1,
         "quality": 1,
         "canvas": [
           900,
           600
         ],
-        "calls": 45,
-        "triangles": 178467,
+        "calls": 41,
+        "triangles": 178483,
         "memory": {
-          "geometries": 61,
+          "geometries": 55,
           "textures": 26
+        },
+        "estimatedMemory": {
+          "geometryBytes": 13810300,
+          "textureBytes": 279620721,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 310208237,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 2.7000000178813934,
-          "p95": 15136.800000011921
+          "p50": 212.90000000596046,
+          "p95": 8676.199999988079
         },
-        "shadowUpdates": 21,
+        "shadowUpdates": 19,
         "errors": [],
         "renderer": "WebKit WebGL"
       },
@@ -286,6 +307,315 @@
         "B07",
         "B08",
         "B09"
+      ]
+    },
+    {
+      "name": "port-side",
+      "zone": "port-side",
+      "sourcePosition": [
+        9.1,
+        3.14,
+        5.5
+      ],
+      "target": [
+        18,
+        3.14,
+        5.5
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "port-side",
+        "residentZones": [
+          "beach-club",
+          "port-side"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 27
+        },
+        "elevation": 3.95,
+        "position": [
+          12,
+          3.14
+        ],
+        "frames": 13,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 24,
+        "triangles": 112141,
+        "memory": {
+          "geometries": 47,
+          "textures": 24
+        },
+        "estimatedMemory": {
+          "geometryBytes": 11225440,
+          "textureBytes": 272630161,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 300632817,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 212.90000000596046,
+          "p95": 8676.199999988079
+        },
+        "shadowUpdates": 24,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "port-side",
+        "sourcePosition": [
+          9.1,
+          3.14,
+          5.5
+        ],
+        "actualSourcePosition": [
+          9.1,
+          3.139999999999979,
+          5.500000000000002
+        ],
+        "target": [
+          18,
+          3.14,
+          5.5
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07"
+      ]
+    },
+    {
+      "name": "starboard-side",
+      "zone": "starboard-side",
+      "sourcePosition": [
+        9.1,
+        -3.14,
+        5.5
+      ],
+      "target": [
+        20,
+        -3.14,
+        5.5
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "starboard-side",
+        "residentZones": [
+          "port-side",
+          "starboard-side"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 12,
+          "references": 24
+        },
+        "elevation": 3.95,
+        "position": [
+          12,
+          -3.14
+        ],
+        "frames": 16,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 28,
+        "triangles": 112845,
+        "memory": {
+          "geometries": 43,
+          "textures": 21
+        },
+        "estimatedMemory": {
+          "geometryBytes": 10430704,
+          "textureBytes": 264241473,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 291449393,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 212.90000000596046,
+          "p95": 8676.199999988079
+        },
+        "shadowUpdates": 29,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "starboard-side",
+        "sourcePosition": [
+          9.1,
+          -3.14,
+          5.5
+        ],
+        "actualSourcePosition": [
+          9.1,
+          -3.139999999999979,
+          5.500000000000002
+        ],
+        "target": [
+          20,
+          -3.14,
+          5.5
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S08"
+      ]
+    },
+    {
+      "name": "bow",
+      "zone": "bow",
+      "sourcePosition": [
+        27.1,
+        -2.35,
+        7.55
+      ],
+      "target": [
+        30.5,
+        0,
+        6.7
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "starboard-side",
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 27
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 19,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 16,
+        "triangles": 75681,
+        "memory": {
+          "geometries": 50,
+          "textures": 24
+        },
+        "estimatedMemory": {
+          "geometryBytes": 12647820,
+          "textureBytes": 272630161,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 302055197,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 212.90000000596046,
+          "p95": 8676.199999988079
+        },
+        "shadowUpdates": 34,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "bow",
+        "sourcePosition": [
+          27.1,
+          -2.35,
+          7.55
+        ],
+        "actualSourcePosition": [
+          27.100000000000012,
+          -2.3500000000000285,
+          7.549999999999999
+        ],
+        "target": [
+          30.5,
+          0,
+          6.7
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
       ]
     },
     {
@@ -331,21 +661,28 @@
           900,
           600
         ],
-        "calls": 29,
-        "triangles": 189385,
+        "calls": 27,
+        "triangles": 189013,
         "memory": {
-          "geometries": 72,
+          "geometries": 66,
           "textures": 35
+        },
+        "estimatedMemory": {
+          "geometryBytes": 21653924,
+          "textureBytes": 368400689,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 406831829,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 2.300000011920929,
-          "p95": 15136.800000011921
+          "p50": 222.59999999403954,
+          "p95": 8676.199999988079
         },
-        "shadowUpdates": 27,
+        "shadowUpdates": 40,
         "errors": [],
         "renderer": "WebKit WebGL"
       },
@@ -429,21 +766,28 @@
           900,
           600
         ],
-        "calls": 37,
-        "triangles": 249705,
+        "calls": 35,
+        "triangles": 252261,
         "memory": {
-          "geometries": 72,
+          "geometries": 66,
           "textures": 43
+        },
+        "estimatedMemory": {
+          "geometryBytes": 21653924,
+          "textureBytes": 368400689,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 406831829,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 2.300000011920929,
-          "p95": 15136.800000011921
+          "p50": 212.90000000596046,
+          "p95": 8676.199999988079
         },
-        "shadowUpdates": 27,
+        "shadowUpdates": 40,
         "errors": [],
         "renderer": "WebKit WebGL"
       },
@@ -520,7 +864,7 @@
           2.1,
           0
         ],
-        "frames": 29,
+        "frames": 27,
         "ratio": 1,
         "quality": 1,
         "canvas": [
@@ -530,18 +874,25 @@
         "calls": 19,
         "triangles": 79411,
         "memory": {
-          "geometries": 61,
+          "geometries": 55,
           "textures": 26
+        },
+        "estimatedMemory": {
+          "geometryBytes": 13810300,
+          "textureBytes": 279620721,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 310208237,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 1.9000000059604645,
-          "p95": 7621.199999988079
+          "p50": 143.5,
+          "p95": 8676.199999988079
         },
-        "shadowUpdates": 32,
+        "shadowUpdates": 45,
         "errors": [],
         "renderer": "WebKit WebGL"
       },
@@ -617,28 +968,35 @@
           2.1,
           0
         ],
-        "frames": 31,
+        "frames": 29,
         "ratio": 1,
         "quality": 1,
         "canvas": [
           900,
           600
         ],
-        "calls": 32,
-        "triangles": 149925,
+        "calls": 29,
+        "triangles": 149941,
         "memory": {
-          "geometries": 61,
+          "geometries": 55,
           "textures": 26
+        },
+        "estimatedMemory": {
+          "geometryBytes": 13810300,
+          "textureBytes": 279620721,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 310208237,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
         },
         "frameMs": {
           "p50": 0,
           "p95": 0
         },
         "submissionMs": {
-          "p50": 1.7999999821186066,
-          "p95": 7621.199999988079
+          "p50": 21.5,
+          "p95": 8676.199999988079
         },
-        "shadowUpdates": 32,
+        "shadowUpdates": 45,
         "errors": [],
         "renderer": "WebKit WebGL"
       },
@@ -676,6 +1034,321 @@
         "B07",
         "B08",
         "B09"
+      ]
+    },
+    {
+      "name": "bow-jacuzzi",
+      "zone": "bow",
+      "sourcePosition": [
+        30,
+        -2.1,
+        7.55
+      ],
+      "target": [
+        31.1,
+        0,
+        6.25
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "beach-club",
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 30
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 32,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 14,
+        "triangles": 53001,
+        "memory": {
+          "geometries": 54,
+          "textures": 24
+        },
+        "estimatedMemory": {
+          "geometryBytes": 13442556,
+          "textureBytes": 272630161,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 302849933,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 21.5,
+          "p95": 5850.100000023842
+        },
+        "shadowUpdates": 50,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "bow",
+        "sourcePosition": [
+          27.1,
+          -2.35,
+          7.55
+        ],
+        "actualSourcePosition": [
+          27.100000000000012,
+          -2.3500000000000285,
+          7.549999999999999
+        ],
+        "target": [
+          30.5,
+          0,
+          6.7
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "name": "bow-two-tables",
+      "zone": "bow",
+      "sourcePosition": [
+        27.1,
+        -2.35,
+        7.55
+      ],
+      "target": [
+        25.6,
+        0,
+        6.6
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "beach-club",
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 30
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 34,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 33,
+        "triangles": 152533,
+        "memory": {
+          "geometries": 54,
+          "textures": 24
+        },
+        "estimatedMemory": {
+          "geometryBytes": 13442556,
+          "textureBytes": 272630161,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 302849933,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 3.699999988079071,
+          "p95": 5850.100000023842
+        },
+        "shadowUpdates": 50,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "bow",
+        "sourcePosition": [
+          27.1,
+          -2.35,
+          7.55
+        ],
+        "actualSourcePosition": [
+          27.100000000000012,
+          -2.3500000000000285,
+          7.549999999999999
+        ],
+        "target": [
+          30.5,
+          0,
+          6.7
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
+      ]
+    },
+    {
+      "name": "bow-mooring",
+      "zone": "bow",
+      "sourcePosition": [
+        33.9,
+        0,
+        6.65
+      ],
+      "target": [
+        34.5,
+        0.8,
+        5.4
+      ],
+      "verticalFov": 67.38013505195957,
+      "horizontalFov": 90,
+      "viewport": [
+        900,
+        600
+      ],
+      "dpr": 1,
+      "stats": {
+        "room": "bow",
+        "residentZones": [
+          "beach-club",
+          "bow"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 15,
+          "references": 30
+        },
+        "elevation": 6,
+        "position": [
+          27.1,
+          -2.35
+        ],
+        "frames": 36,
+        "ratio": 1,
+        "quality": 1,
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 9,
+        "triangles": 40881,
+        "memory": {
+          "geometries": 54,
+          "textures": 24
+        },
+        "estimatedMemory": {
+          "geometryBytes": 13442556,
+          "textureBytes": 272630161,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 302849933,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, programs and driver caches."
+        },
+        "frameMs": {
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "p50": 3,
+          "p95": 5850.100000023842
+        },
+        "shadowUpdates": 50,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "sourceComparison": {
+        "id": "bow",
+        "sourcePosition": [
+          27.1,
+          -2.35,
+          7.55
+        ],
+        "actualSourcePosition": [
+          27.100000000000012,
+          -2.3500000000000285,
+          7.549999999999999
+        ],
+        "target": [
+          30.5,
+          0,
+          6.7
+        ],
+        "verticalFov": 67.38013505195957,
+        "horizontalFov": 90,
+        "viewport": [
+          900,
+          600
+        ]
+      },
+      "tourFeatures": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10"
       ]
     }
   ],

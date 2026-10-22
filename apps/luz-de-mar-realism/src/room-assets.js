@@ -1,7 +1,8 @@
 import * as THREE from 'three';import {applyRoomShading} from './shading.js';import {TexturePool} from './streaming.js';
+import {assetURL} from './asset-version.js';
 export function roomAssets({gltf,exr,pmrem}){
  const pool=new TexturePool();
- const bytes=async(url,signal)=>{const r=await fetch(url,{signal});if(!r.ok)throw new Error('No se pudo descargar '+url+' ('+r.status+')');return r.arrayBuffer();};
+ const bytes=async(url,signal)=>{const r=await fetch(assetURL(url),{signal});if(!r.ok)throw new Error('No se pudo descargar '+url+' ('+r.status+')');return r.arrayBuffer();};
  const texture=(buffer,atlas=false)=>{const t=exr.parse(buffer),v=new THREE.DataTexture(t.data,t.width,t.height,t.format,t.type);v.colorSpace=THREE.LinearSRGBColorSpace;v.minFilter=v.magFilter=THREE.LinearFilter;v.generateMipmaps=false;v.flipY=atlas;v.channel=atlas?1:0;v.needsUpdate=true;return v;};
  function dispose(room){
   const geometries=new Set(),materials=new Set(),textures=new Set(Object.values(room.atlases||{})),pooled=new Set([...pool.entries.values()].map(e=>e.texture));
@@ -9,7 +10,7 @@ export function roomAssets({gltf,exr,pmrem}){
   for(const m of materials){for(const v of Object.values(m))if(v?.isTexture&&!pooled.has(v))textures.add(v);m.dispose();}for(const g of geometries)g.dispose();for(const t of textures)t.dispose();for(const e of room.environments||[])e.dispose();pool.release(room.lease||new Set());
  }
  async function load(id,signal){
-  const base='./assets/'+id+'/',response=await fetch(base+'room.json',{signal});if(!response.ok)throw Error('No se pudo abrir la zona');const meta=await response.json(),atlases=meta.atlases,probeSpecs=meta.probes;
+  const base='./assets/'+id+'/',response=await fetch(assetURL(base+'room.json'),{signal});if(!response.ok)throw Error('No se pudo abrir la zona');const meta=await response.json(),atlases=meta.atlases,probeSpecs=meta.probes;
   const buffers=await Promise.all([bytes(base+'room.glb',signal),...atlases.map(a=>bytes(base+a.asset,signal)),...probeSpecs.map(p=>bytes(base+p.asset,signal))]);
   signal.throwIfAborted();const room={id,meta,atlases:{},environments:[],probeSpecs,probePosition:meta.probePosition,probeBounds:meta.probeBounds,lease:new Set()};
   try{

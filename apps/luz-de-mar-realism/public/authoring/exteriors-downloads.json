@@ -8,8 +8,8 @@
       "sha256": "5f1e9eabb700a65fd1dd4656f91b03e5fa0d4c6aadcfe023d1ccc5525d061a06",
       "nativeSHA256": "afad75bb74b0849622d1ab8d9d0515807f1e021d6b03e5ff01e968992c22d710",
       "revision": 9,
-      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/cockpit-authoring-r9.zip",
-      "release": "luz-de-mar-aft-r9"
+      "release": "luz-de-mar-aft-r9",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/cockpit-authoring-r9.zip"
     },
     {
       "id": "beach-club",
@@ -18,8 +18,8 @@
       "sha256": "4c2396d640e1a5a8a029647a0dbae4351e9ce72e8d9bac8ec6341cd906bc9ae9",
       "nativeSHA256": "bf34c49ce06141c8dffeee285fdcd4d67f09347cdd6a86da492e5a3e66c8d02d",
       "revision": 9,
-      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/beach-club-authoring-r9.zip",
-      "release": "luz-de-mar-aft-r9"
+      "release": "luz-de-mar-aft-r9",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/beach-club-authoring-r9.zip"
     },
     {
       "id": "saloon",
@@ -28,8 +28,38 @@
       "sha256": "eee376a49d3a350a10c89b498afa4d481693a7bdf73499f552fbc71a1a25c355",
       "nativeSHA256": "ecfc9d91c16fe5cac48f01837095b56c15d3ad04a7aa88d8f8f023f772ca1cc1",
       "revision": 9,
-      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/saloon-authoring-r9.zip",
-      "release": "luz-de-mar-aft-r9"
+      "release": "luz-de-mar-aft-r9",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-aft-r9/saloon-authoring-r9.zip"
+    },
+    {
+      "id": "port-side",
+      "file": "port-side-authoring-r9.zip",
+      "bytes": 208128973,
+      "sha256": "103f03f3027cbd713a1ccc1f374ca82a28ec88f82665620e6f3423facd6b803d",
+      "nativeSHA256": "47d916adb3a931f122b12528fd28cae33a78484b37c1de70ae6c19b5756afafb",
+      "revision": 9,
+      "release": "luz-de-mar-foredeck-r9",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-foredeck-r9/port-side-authoring-r9.zip"
+    },
+    {
+      "id": "starboard-side",
+      "file": "starboard-side-authoring-r9.zip",
+      "bytes": 235701250,
+      "sha256": "a1d628897067e9064c8ad98491926b79ac189565900273dfa74f10b0c37a7c95",
+      "nativeSHA256": "9945726f8a75b6e89b2ff3c24f04ca9f5447be8a79208377332daf52f2344686",
+      "revision": 9,
+      "release": "luz-de-mar-foredeck-r9",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-foredeck-r9/starboard-side-authoring-r9.zip"
+    },
+    {
+      "id": "bow",
+      "file": "bow-authoring-r9.zip",
+      "bytes": 259085827,
+      "sha256": "d04b921be302cc28c90596136c701859dceee801798971757421c4a748ae61a0",
+      "nativeSHA256": "42c33b86e7c008932f60509e6471a028bd6a94c82b13bb1823b6676b896ec1a3",
+      "revision": 9,
+      "release": "luz-de-mar-foredeck-r9",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-foredeck-r9/bow-authoring-r9.zip"
     }
   ]
 }

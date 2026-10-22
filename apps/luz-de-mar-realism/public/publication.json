@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "build": "exteriors-r9-stage-1",
+  "build": "exteriors-r9-stage-2",
   "scope": [
     "saloon",
     "cockpit",
-    "beach-club"
+    "beach-club",
+    "port-side",
+    "starboard-side",
+    "bow"
   ],
   "authoringRevision": 9,
-  "assetManifestSHA256": "a440e29ce88e80551486a829da2f8e005c1398e5634ef46e3bbbe0e66fc119ea",
+  "assetManifestSHA256": "2e618e90e73fc20c3880efa1c5c892714a835353addd4dcaf2673794739f0407",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true

@@ -1,0 +1,490 @@
+{
+  "cameraSource": [
+    9.15,
+    0,
+    3.18
+  ],
+  "regions": {
+    "f": [
+      {
+        "name": "Conjunto derecho visible y sus conexiones",
+        "polygon": [
+          [
+            2047,
+            1024
+          ],
+          [
+            1248,
+            1030
+          ],
+          [
+            1193,
+            1100
+          ],
+          [
+            1218,
+            1400
+          ],
+          [
+            1388,
+            1810
+          ],
+          [
+            1518,
+            2047
+          ],
+          [
+            2047,
+            2047
+          ]
+        ],
+        "material": "mixto",
+        "confidence": "medium"
+      },
+      {
+        "name": "Admisión, tapas y servicios del motor derecho",
+        "polygon": [
+          [
+            1360,
+            1390
+          ],
+          [
+            1460,
+            1240
+          ],
+          [
+            1700,
+            1230
+          ],
+          [
+            2047,
+            1390
+          ],
+          [
+            2047,
+            2047
+          ],
+          [
+            1600,
+            2047
+          ]
+        ],
+        "material": "esmalte / malla / goma",
+        "detail": true,
+        "confidence": "medium"
+      },
+      {
+        "name": "Escape derecho visible",
+        "polygon": [
+          [
+            1550,
+            940
+          ],
+          [
+            1660,
+            790
+          ],
+          [
+            2047,
+            650
+          ],
+          [
+            2047,
+            1390
+          ],
+          [
+            1700,
+            1280
+          ]
+        ],
+        "material": "aislamiento / herrajes",
+        "detail": false,
+        "confidence": "medium"
+      }
+    ],
+    "l": [],
+    "r": [
+      {
+        "name": "Instalación derecha y barandilla inmediata",
+        "polygon": [
+          [
+            0,
+            585
+          ],
+          [
+            48,
+            536
+          ],
+          [
+            248,
+            484
+          ],
+          [
+            540,
+            494
+          ],
+          [
+            767,
+            531
+          ],
+          [
+            999,
+            690
+          ],
+          [
+            1088,
+            1085
+          ],
+          [
+            1060,
+            1350
+          ],
+          [
+            1018,
+            1452
+          ],
+          [
+            805,
+            1635
+          ],
+          [
+            476,
+            1723
+          ],
+          [
+            450,
+            2047
+          ],
+          [
+            0,
+            2047
+          ]
+        ],
+        "material": "mixto",
+        "confidence": "medium"
+      },
+      {
+        "name": "Escape principal y banda",
+        "polygon": [
+          [
+            1068,
+            937
+          ],
+          [
+            1065,
+            905
+          ],
+          [
+            1062,
+            860
+          ],
+          [
+            1053,
+            821
+          ],
+          [
+            1038,
+            780
+          ],
+          [
+            998,
+            688
+          ],
+          [
+            939,
+            619
+          ],
+          [
+            854,
+            570
+          ],
+          [
+            766,
+            531
+          ],
+          [
+            681,
+            505
+          ],
+          [
+            610,
+            493
+          ],
+          [
+            539,
+            494
+          ],
+          [
+            398,
+            476
+          ],
+          [
+            248,
+            484
+          ],
+          [
+            148,
+            492
+          ],
+          [
+            48,
+            536
+          ],
+          [
+            1,
+            587
+          ],
+          [
+            1,
+            817
+          ],
+          [
+            28,
+            850
+          ],
+          [
+            108,
+            891
+          ],
+          [
+            248,
+            930
+          ],
+          [
+            358,
+            956
+          ],
+          [
+            458,
+            954
+          ],
+          [
+            568,
+            907
+          ],
+          [
+            668,
+            896
+          ],
+          [
+            878,
+            923
+          ]
+        ],
+        "material": "tejido negro / banda satinada",
+        "detail": false,
+        "confidence": "high"
+      },
+      {
+        "name": "Funda aislante",
+        "polygon": [
+          [
+            1088,
+            1085
+          ],
+          [
+            1084,
+            1215
+          ],
+          [
+            1060,
+            1350
+          ],
+          [
+            1018,
+            1452
+          ],
+          [
+            962,
+            1490
+          ],
+          [
+            918,
+            1530
+          ],
+          [
+            867,
+            1590
+          ],
+          [
+            805,
+            1635
+          ],
+          [
+            704,
+            1660
+          ],
+          [
+            588,
+            1674
+          ],
+          [
+            476,
+            1723
+          ],
+          [
+            419,
+            1687
+          ],
+          [
+            412,
+            1600
+          ],
+          [
+            407,
+            1506
+          ],
+          [
+            410,
+            1414
+          ],
+          [
+            442,
+            1350
+          ],
+          [
+            495,
+            1311
+          ],
+          [
+            550,
+            1301
+          ],
+          [
+            602,
+            1307
+          ],
+          [
+            626,
+            1324
+          ],
+          [
+            642,
+            1340
+          ],
+          [
+            650,
+            1316
+          ],
+          [
+            666,
+            1245
+          ],
+          [
+            680,
+            1162
+          ],
+          [
+            685,
+            1095
+          ],
+          [
+            680,
+            1052
+          ],
+          [
+            891,
+            1000
+          ]
+        ],
+        "material": "aluminizado",
+        "detail": true,
+        "confidence": "high"
+      },
+      {
+        "name": "Cierres del puño",
+        "polygon": [
+          [
+            675,
+            910
+          ],
+          [
+            1095,
+            940
+          ],
+          [
+            1095,
+            1100
+          ],
+          [
+            675,
+            1095
+          ]
+        ],
+        "material": "tejido satinado / inoxidable",
+        "detail": true,
+        "confidence": "high"
+      },
+      {
+        "name": "Carcasa próxima y conexiones",
+        "polygon": [
+          [
+            0,
+            1260
+          ],
+          [
+            320,
+            1250
+          ],
+          [
+            450,
+            1390
+          ],
+          [
+            420,
+            1800
+          ],
+          [
+            0,
+            1950
+          ]
+        ],
+        "material": "esmalte / goma / metal",
+        "detail": true,
+        "confidence": "high"
+      }
+    ],
+    "b": [],
+    "u": [],
+    "d": [
+      {
+        "name": "Reductora, extintor y apoyos derechos",
+        "polygon": [
+          [
+            1270,
+            0
+          ],
+          [
+            2047,
+            0
+          ],
+          [
+            2047,
+            1050
+          ],
+          [
+            1570,
+            900
+          ],
+          [
+            1310,
+            550
+          ]
+        ],
+        "material": "esmalte / acero / rojo",
+        "detail": true,
+        "confidence": "medium"
+      }
+    ]
+  },
+  "heldOutEdges": [],
+  "acceptance": {
+    "status": "not certified",
+    "note": "Coverage and comparison aids only; no independent all-edge pixel-error pass has been established."
+  },
+  "limits": [
+    "One physical VR camera, estimated depths.",
+    "Broad regions include background gaps and are not pixel-level reference segmentation.",
+    "Inventory coverage does not equal manual acceptance."
+  ]
+}

@@ -10,7 +10,7 @@ test('candidate assets bind their hashes and reject an unverified geometry or wa
  assert.equal(binding.solidNormalsValidation.inwardSolids,0);assert.ok(binding.solidNormalsValidation.closedAuthoredSolids>0);assert.ok(binding.nativeShadingNormalsValidation.minimumFaceNormalDot>0);assert.ok(binding.nativeTopologyValidation.lightmapDegenerateTriangleFraction<.0001);
  for(const[name,expected]of Object.entries(spec.hashes))assert.equal(sha(fs.readFileSync(path.join(A,name))),expected);assert.equal(spec.previewQuery,'left-vr-grid-r13');assert.equal(sha(fs.readFileSync(path.join(W,'left-engine-master.blend'))),binding.masterSHA256);assert.equal(binding.gridFit.controls.length,24);assert.equal(binding.gridFit.anchorFitPassed,true);assert.ok(binding.gridDeformationValidation.minimumVertexJacobian>.015);assert.equal(binding.clearance.conflictsCount,0);assert.equal(binding.clearance.radiusMetres,.14);for(const c of binding.contours.contours){assert.ok(c.maxErrorPixels<40.96);assert.ok(c.heldOut.maxErrorPixels<40.96);}for(const p of binding.mountingInterfaces.engineBeds){assert.ok(Math.abs(p.footBaseSourceZ-1.484)<1e-5);assert.equal(p.gapMetres,0);}for(const name of['irradiance.exr','probe-0.exr','probe-1.exr'])assert.equal(fs.readFileSync(path.join(A,name)).readUInt32LE(0),20000630);
 });
-test('right-engine geometry and nominal MTU/filter samples retain their published bytes',()=>{
+test('nominal MTU/filter samples retain their published bytes',()=>{
  for(const folder of['mtu-r03','sea-strainers'])for(const name of fs.readdirSync(path.join(R,'public/assets/mechanics',folder),{recursive:true})){const current=path.join(R,'public/assets/mechanics',folder,name);if(fs.statSync(current).isFile())assert.equal(sha(fs.readFileSync(current)),sha(fs.readFileSync(path.join(W,'baseline-site/assets/mechanics',folder,name))),folder+'/'+name);}
 });
 test('R13 records strict tile acceptance separately from legacy construction guards',()=>{
@@ -40,11 +40,11 @@ test('coplanar original port beds belong exclusively to the nominal fallback',as
   for(let k=0;k<indices.length;k+=3){const vertices=Array.from(indices.subarray(k,k+3),i=>positions.getElement(i,[]));
    for(const side of['port','starboard'])if(legacy.webBounds.some(([lo,hi])=>vertices.every(v=>v.every((x,axis)=>{
     if(side==='starboard'&&axis===0)x=-x;return x>=lo[axis]-legacy.tolerance&&x<=hi[axis]+legacy.tolerance;
-   }))))counts[side+(node.getExtras().variant==='left-r11'?'Fallback':'Context')]++;
+   }))))counts[side+(node.getExtras().variant===(side==='port'?'left-r11':'right-r11')?'Fallback':'Context')]++;
   }
  }
- assert.deepEqual(counts,{portFallback:24,portContext:0,starboardContext:24,starboardFallback:0});
+ assert.deepEqual(counts,{portFallback:24,portContext:0,starboardContext:0,starboardFallback:24});
  const room=read(path.join(R,'public/assets/machinery/room.json'));
  assert.ok(room.partition.replacedIDs.includes(legacy.id));assert.ok(spec.replacedIDs.includes(legacy.id));
- assert.equal(room.partition.geometry.sha256,sha(fs.readFileSync(path.join(R,'public/assets/machinery/room.glb'))));
+ assert.equal((room.rightPartition||room.partition).geometry.sha256,sha(fs.readFileSync(path.join(R,'public/assets/machinery/room.glb'))));
 });

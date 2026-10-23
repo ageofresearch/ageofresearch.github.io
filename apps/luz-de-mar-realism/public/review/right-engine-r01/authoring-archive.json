@@ -1,0 +1,254 @@
+{
+  "file": "luz-right-engine-r01-authoring.zip",
+  "bytes": 89610431,
+  "sha256": "9a704a9e393206af07e4719f73059eaca4ec034215e807065a205fe82381c54f",
+  "entries": {
+    "project/package.json": {
+      "bytes": 484,
+      "sha256": "77db3beb2934e47c84d69e65e8692bc9a330a8c8722103263c1eed2343ec882f"
+    },
+    "project/package-lock.json": {
+      "bytes": 80960,
+      "sha256": "ce67da282ab92aa324d28b0ffd0eaa0cc6e0a64f7b09a966556c67725d37bd30"
+    },
+    "validation/unit-tests.txt": {
+      "bytes": 5444,
+      "sha256": "fedb2ab1ccdd279116859aae4b0d73b1464b513150bf0f3b757547d6f0dfa25e"
+    },
+    "right-engine-master.blend": {
+      "bytes": 84524111,
+      "sha256": "eaa858c961b4e6c05cae255b0b6cb07e313e9a28ec8bc309f7cc720b4d629bb4"
+    },
+    "authoring.json": {
+      "bytes": 5715,
+      "sha256": "cc611bf4b851505a0462a07995a0357c7a1c7e3eb94ff1f37aee50f2813b6219"
+    },
+    "runtime-assets.json": {
+      "bytes": 14858,
+      "sha256": "d649c0ef4674f1b5ab60cf3159d08ac7fd54c331b4839c0710e89cab27b529cb"
+    },
+    "provenance/evidence.json": {
+      "bytes": 8283,
+      "sha256": "41e67bc53f3072cfa3caf7be2ea1da7a1dc2997a1de78d2f89b712692d996c22"
+    },
+    "provenance/components.json": {
+      "bytes": 471534,
+      "sha256": "2f4a29494da4651d1e8b90af972a03ba8522b72011edfcdf1642bbf670c9ca6b"
+    },
+    "provenance/right-observations.json": {
+      "bytes": 5653,
+      "sha256": "26dcd66d3ee1fe56932da21d57fec47e7dc69d373048af3bfe9fd24ba859afb0"
+    },
+    "validation/clearance.json": {
+      "bytes": 301,
+      "sha256": "d81137dfb633586a6b622bd875f1f18f701fb75821e5740c1ea07ae782fd2314"
+    },
+    "validation/baked-uv-binding.f32": {
+      "bytes": 10240140,
+      "sha256": "da23ed46182e67b5d8dc0e2a1c32097c3a953af6b4ad04c9c854657bcfa83dea"
+    },
+    "provenance/image-source-validation.json": {
+      "bytes": 6514,
+      "sha256": "55fc6b406cfd406164d68006445187077878a77defda04e087c4e030f065a24c"
+    },
+    "validation/browser.json": {
+      "bytes": 18057,
+      "sha256": "ed7a41dcbd45926beb6f49781a48468a0abe16b955ff540a57eadeb2565821cf"
+    },
+    "validation/performance.json": {
+      "bytes": 29572,
+      "sha256": "db194d120c24809b2273809ecdcbc3bea03a8b09843b606830aa1f5d807f4e53"
+    },
+    "validation/performance-baseline.json": {
+      "bytes": 14838,
+      "sha256": "ace5ecc8a13cd446de7a78fb28f04260eb51e33138ec36acec29d6dd396e27a9"
+    },
+    "validation/default-browser.json": {
+      "bytes": 1858,
+      "sha256": "383963a24ae3d0c0fd2e061ce557a9483456f1f02d0d6158eecd21212e051852"
+    },
+    "validation/captures.json": {
+      "bytes": 31357,
+      "sha256": "0482f80c8be8e51ea082ed8600a944d6f0ed969ee94f8bf0a67cdb25599b530d"
+    },
+    "validation/baseline-captures.json": {
+      "bytes": 22872,
+      "sha256": "849844cf46410d09dcfb2051a03035c1483c52df64cdbbcb87e8580845ff535b"
+    },
+    "validation/tile-inventory.json": {
+      "bytes": 3799600,
+      "sha256": "adb47cd7cae0e008fa3e2819771be2cde1f56d9ca77f21b6f3b783159d6b51f1"
+    },
+    "validation/cube-camera-and-visible-ids.json": {
+      "bytes": 184143,
+      "sha256": "b5bfed126bb335ade5dc911059557ddbe352abcd0249bf5c33115e82ccdf87b3"
+    },
+    "validation/visual-assessment.json": {
+      "bytes": 2518,
+      "sha256": "2bb8807bfec9d6f7fda5d6c34d76cda0e96d8a0b953f86fde5fb75224067ced5"
+    },
+    "provenance/original-yacht-629-sha256.json": {
+      "bytes": 80533,
+      "sha256": "191268986c524eb428a22ed0f801eb5c71303413b658bc2e986c1180388eba6f"
+    },
+    "tools/build-right-engine.py": {
+      "bytes": 20069,
+      "sha256": "e03ce331ae9be01cbb6f27d97320dc1b4afa32b4e97a706553096a6d9c7b509e"
+    },
+    "tools/right-engine-detail.py": {
+      "bytes": 9241,
+      "sha256": "7979cbcd25c789ea907068cd71dc6402a045e2a5c94f66278dfabfb4e16f9689"
+    },
+    "tools/right-intake-detail.py": {
+      "bytes": 3805,
+      "sha256": "718e7fb71d5bf1b80e848f731ad2c1c5bd51d0fcb04f5dd888118156dc948863"
+    },
+    "tools/right-engine-textures.py": {
+      "bytes": 905,
+      "sha256": "effda92c911423b3b4ef95ab5f201741851688ce87ca409347e51ebdebbb5fa0"
+    },
+    "tools/bake-right-engine.py": {
+      "bytes": 14696,
+      "sha256": "95f7dab0d6f603d64253a05aec29aa36c9c93d9992ff659a7d2adf2e7a0c9fd8"
+    },
+    "tools/encode-right-lighting.py": {
+      "bytes": 1493,
+      "sha256": "6e2877ec47ef3b803faba56d5f919669a8411fdeac869b7f83ca3b6ff1ca4041"
+    },
+    "tools/prepare-right-engine.mjs": {
+      "bytes": 7394,
+      "sha256": "9b35e934f505adea8bea961a93176cfcd7e0cc966abf029b9c4dd6ece54fb8fd"
+    },
+    "tools/external-engine-textures.mjs": {
+      "bytes": 2907,
+      "sha256": "9c5703147ccf2c6d552222de2ef69c1ac549fad6f1d51a535dd2c8a4bfb93d09"
+    },
+    "tools/partition-right-machinery.mjs": {
+      "bytes": 4293,
+      "sha256": "9f992d8f2ba4be551c657ed4250e045db7f43f4d963dafc362b3dd40923d4238"
+    },
+    "tools/render-right-engine.py": {
+      "bytes": 1930,
+      "sha256": "9720218e9c494aea32620d8e5078973868cfab49571e33a6891c546d1f1e5f1e"
+    },
+    "tools/render-right-tiles.py": {
+      "bytes": 5581,
+      "sha256": "42cfab4727cbd34154a25ed7f1e0152ea574e0b46372f0777f2a50b7a1126b8f"
+    },
+    "tools/review-right-tiles.py": {
+      "bytes": 10222,
+      "sha256": "e27abd297e2547ae553f3cc1afde3d58011ef1b69dfade0f80b749fb4a329af2"
+    },
+    "tools/right-tile-evidence.json": {
+      "bytes": 8038,
+      "sha256": "bf20700009d4e60d3d92abe0dff9b3c38645c81a05be0f9f29f4d905de69699c"
+    },
+    "tools/inventory-right-engine.py": {
+      "bytes": 1892,
+      "sha256": "8903140a6632d3efec9812d16ee93917fafb6bc56b3951d6a0f655a7c3778779"
+    },
+    "tools/check-right-clearance.py": {
+      "bytes": 1855,
+      "sha256": "410fe88da7d932906b339f68319827fc70f729886ff69675a116d0015cf83278"
+    },
+    "tools/check-right-image-sources.py": {
+      "bytes": 985,
+      "sha256": "1a76c4ff3dd2d5dca4bba06762c6d3ab9e453d42b3cc26c14c922e28eb521cf9"
+    },
+    "tools/stamp-right-authoring.py": {
+      "bytes": 726,
+      "sha256": "051d6390a0aad9912df655cb95e6a4d604b9c061e23941d9dc6e5d826efc9c79"
+    },
+    "tools/preserve-viewer-entry.py": {
+      "bytes": 1662,
+      "sha256": "e735c7285877732e105ecf95e27c9182d8d0137d4b7a664f0c2728589512483f"
+    },
+    "tools/right-engine-evidence.py": {
+      "bytes": 6508,
+      "sha256": "08510da29709e2934ceb815ca2c7d7aabe36ac6ffdcabfc6f98043d9a46fe3d5"
+    },
+    "tools/capture-right-engine.cjs": {
+      "bytes": 3566,
+      "sha256": "af6e1e3e4270161bb48cc4ab520f1635e208377a59e64f4629d08e436b9cdd6c"
+    },
+    "tools/package-right-engine.py": {
+      "bytes": 7039,
+      "sha256": "82ac198ccad55187038e2f98582c27c543e525dcc4356c3fa2acb413dcaf0dce"
+    },
+    "tools/build-left-engine.py": {
+      "bytes": 42639,
+      "sha256": "62c033d0a8a8f28007d6230c49f0e30dde0b978e9dcd7bd870e7e38a8f39ac39"
+    },
+    "tools/bake-left-engine.py": {
+      "bytes": 13624,
+      "sha256": "b6e4e3c18c6b0cb62c801a3f4657863c1ed91b8bbc103242290a009a72ea6441"
+    },
+    "tools/lightmap-uv.py": {
+      "bytes": 1863,
+      "sha256": "c9174c0e50cc7508e0ca5456cd7a20602f8db97f34b58badac2d6d7245c4d8c4"
+    },
+    "tools/left-engine-grid-controls.json": {
+      "bytes": 15001,
+      "sha256": "a76a65c2d7390ac63112bcf9b08bb745a9bf364faaefc412698a7d70975910bd"
+    },
+    "tools/left-engine-legacy-parts.json": {
+      "bytes": 688,
+      "sha256": "531ba33e66e08882f43c390d982fa6e115b04ed46d2ab4cbcdd0ca08bf91699e"
+    },
+    "test/right-engine-assets.test.mjs": {
+      "bytes": 5195,
+      "sha256": "3a6696cfefb10e185b3b2a4cafcb2ebe3a8bd1c7aa341dfae4f485b6b9a93a81"
+    },
+    "test/right-engine-browser.cjs": {
+      "bytes": 7232,
+      "sha256": "da8064fce08ba4a6adfc721092836125661c2518e9ee3862e2d1dbf02d4b8154"
+    },
+    "test/right-engine-performance.cjs": {
+      "bytes": 5581,
+      "sha256": "8f5d1216b962a6f2962b19d32a1f0c4bfb81517a004a8d0a307cf0ce3370347d"
+    },
+    "test/installed-engine.test.mjs": {
+      "bytes": 9224,
+      "sha256": "c61d4583d006591ed171b86f4d81cb38d689ac1a186e556bd864929e81856305"
+    },
+    "test/resource-estimates.test.mjs": {
+      "bytes": 914,
+      "sha256": "b7375524a0ca9389d2ea9d617205fbd602c1a8eda7e4af07be8b818051d2f6a8"
+    },
+    "test/default-machinery-smoke.cjs": {
+      "bytes": 2289,
+      "sha256": "51bb6bfd11d3039c8c951ab0b74045d78a59480035a74dcbec9926a7cc4ab5d4"
+    },
+    "textures/cast-orm.png": {
+      "bytes": 510083,
+      "sha256": "9f8f954e16e38d674985eef7ad7535a97236615bef39bb57bf56d44145907338"
+    },
+    "textures/steel-orm.png": {
+      "bytes": 398362,
+      "sha256": "daeb9e02b9832cd84a9f0e4760dab26d9bd6d08a3ea85416b723234e2177b82a"
+    },
+    "textures/cast-color.png": {
+      "bytes": 500037,
+      "sha256": "1cc34ef74c7007fcc3bd5bf3b6dcd9b5a74b5e0855716ecd8186cd306b3f3783"
+    },
+    "textures/enamel-color.png": {
+      "bytes": 504438,
+      "sha256": "858ac8f2577fd4906328647ddd3a2d44504413dba933bac646f01ad1949cbc0b"
+    },
+    "textures/enamel-orm.png": {
+      "bytes": 438730,
+      "sha256": "d960aa82b0f47935c418eb37f7eb0585728c3bd30d3c8733bf6aee9c9ebd9bff"
+    },
+    "README.md": {
+      "bytes": 2764,
+      "sha256": "51823e801434b4ea8cda6289e196635bd506a529b799eb2ccaa6bfdcb4c65d1b"
+    }
+  },
+  "privateVrPhotosIncluded": false,
+  "comparisonArchive": {
+    "file": "luz-right-engine-r01-captures.zip",
+    "bytes": 12216592,
+    "sha256": "e7fa752fb75b768b293c766bf32ac25c3b9c0f2752a1b051360445cf98650caf",
+    "privateVrPhotosIncluded": false
+  }
+}

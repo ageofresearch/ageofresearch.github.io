@@ -1,5 +1,5 @@
 {
-  "version": "3.1.0-left-engine-r13",
+  "version": "3.2.0-right-engine-r01",
   "stage": 2,
   "defaultRoom": "saloon",
   "scope": "Connected exterior walk plus original machinery-room inspection",
@@ -305,7 +305,7 @@
       "sourceID": "LD_R02",
       "metadata": "machinery/room.json",
       "geometry": "machinery/room.glb",
-      "sha256": "42a90af341a1df66c9bfe5996d692ad756a683e9b79e8d650a8e5343eb6931f7",
+      "sha256": "b3f95546a0ddcf17a0105fd6cbe328797ef78e6bf254a50433f4ca2f2fa511c2",
       "triangles": 79664,
       "ambientAtlases": [
         {
@@ -754,7 +754,180 @@
             "privateInventorySHA256": "6cfd838e69c3825ed3039ef45396bd639eb193a858930a91684015745874d8fb"
           },
           "reference": "VR Engine Room left assembly; estimated depths",
-          "inspection": "mtu-r03, nominal representation"
+          "inspection": "mtu-r03, nominal representation",
+          "previewAliases": [
+            "right-vr-r01"
+          ]
+        },
+        "starboard": {
+          "version": 1,
+          "side": "starboard",
+          "fallbackVariant": "right-r11",
+          "contextReflections": false,
+          "hashes": {
+            "component-inventory.json": "2f4a29494da4651d1e8b90af972a03ba8522b72011edfcdf1642bbf670c9ca6b",
+            "detail.glb": "d36042c736c8615f0b660543b755399779877c56e53740b351e17a1eba6dc84e",
+            "evidence.json": "41e67bc53f3072cfa3caf7be2ea1da7a1dc2997a1de78d2f89b712692d996c22",
+            "irradiance.exr": "4e0873f376cf937f783778653bc1e839754dd9fd8d7ee9f7cf794e52d4bba979",
+            "probe-0.exr": "6655d98927f61154a1a691496dd2c2145b621fab185584c8ae900c12eaa1905d",
+            "probe-1.exr": "f2c3b9a4ec690c451288233a05a51fa539dec94de1ed98dc6e0c80d3f7c54fc3",
+            "receiver.ktx2": "2204fa5d9bcc4e053f22cecafa544d20438d07a4f5f931f8153959e17fbf0199",
+            "texture-0939b59ad6ec214b34909fed999fb7fb5c15d1c92e147fbcd6ddc1e57f40ee6d.ktx2": "0939b59ad6ec214b34909fed999fb7fb5c15d1c92e147fbcd6ddc1e57f40ee6d",
+            "texture-0abe144b08f874d0a1fa605426dd21f879279753246b30736c28a9258653d7f1.ktx2": "0abe144b08f874d0a1fa605426dd21f879279753246b30736c28a9258653d7f1",
+            "texture-0fa640e1181403cffed316f106fed15c087e48e1c55be13bdd48741368f307f7.ktx2": "0fa640e1181403cffed316f106fed15c087e48e1c55be13bdd48741368f307f7",
+            "texture-1b99317a96cb71b7e341443edfde20eba4d401833984939b3cd6a27c13ecaf10.ktx2": "1b99317a96cb71b7e341443edfde20eba4d401833984939b3cd6a27c13ecaf10",
+            "texture-1d10f5ae2af9e6ea20eeef1c86d7c3ec38acd4a26253fd43a05dd3ef371952c0.ktx2": "1d10f5ae2af9e6ea20eeef1c86d7c3ec38acd4a26253fd43a05dd3ef371952c0",
+            "texture-1f080b39db6446548791fa27b79d096ecee8ec263e2d0c3d586b4a8c7012ec4a.ktx2": "1f080b39db6446548791fa27b79d096ecee8ec263e2d0c3d586b4a8c7012ec4a",
+            "texture-26b3b0744ccc33d21cf7ea2f19379c5dc96ce51cbef97b59358220d684fe5061.ktx2": "26b3b0744ccc33d21cf7ea2f19379c5dc96ce51cbef97b59358220d684fe5061",
+            "texture-407c52b0273669a8920bd7a81e7aecc7a7c60d0fd0eb9a5535f541daca570be5.ktx2": "407c52b0273669a8920bd7a81e7aecc7a7c60d0fd0eb9a5535f541daca570be5",
+            "texture-574583e5407513f79cbbb7af23cf15c8403747b68dbe9ef19170e1d1a1a2191e.ktx2": "574583e5407513f79cbbb7af23cf15c8403747b68dbe9ef19170e1d1a1a2191e",
+            "texture-6050716619259d9bded7be5282cb804ff495b85be2473418976882101e9cbac3.ktx2": "6050716619259d9bded7be5282cb804ff495b85be2473418976882101e9cbac3",
+            "texture-64d4390e2bdffb0e7dd8581e665d57c00444f0a9adc834f9d04896ac6f15a36d.ktx2": "64d4390e2bdffb0e7dd8581e665d57c00444f0a9adc834f9d04896ac6f15a36d",
+            "texture-6b022a4f50ea10d152377ec94c04a1962ea257c461299f2f80950410985aa868.ktx2": "6b022a4f50ea10d152377ec94c04a1962ea257c461299f2f80950410985aa868",
+            "texture-748deb8ef5926d670cdf4cac3bbfbaf95696b1217c0f33eac3023f491659fb92.ktx2": "748deb8ef5926d670cdf4cac3bbfbaf95696b1217c0f33eac3023f491659fb92",
+            "texture-931c9776135d7f22e63e34f8c782ba4d0b4d17cd6954ed4f47a621191d7c605d.ktx2": "931c9776135d7f22e63e34f8c782ba4d0b4d17cd6954ed4f47a621191d7c605d",
+            "texture-9562488e62936b8a0ebd397ce188499d3db71334e79091b6f3d0f69a747216e6.ktx2": "9562488e62936b8a0ebd397ce188499d3db71334e79091b6f3d0f69a747216e6",
+            "texture-9ef714955ad2dda93883e1dd5eb0f524f40d830e005ab2fba497db0fe191b0a6.ktx2": "9ef714955ad2dda93883e1dd5eb0f524f40d830e005ab2fba497db0fe191b0a6",
+            "texture-a56fd6c4314d4c1b078d5f62ea72631be82a60f7dc7bfadb066bb2be06bb3405.ktx2": "a56fd6c4314d4c1b078d5f62ea72631be82a60f7dc7bfadb066bb2be06bb3405",
+            "texture-b3109d81eb93e627fe76bfcfc4cec30aea71dcbd53cd61392e2ce05cf0145535.ktx2": "b3109d81eb93e627fe76bfcfc4cec30aea71dcbd53cd61392e2ce05cf0145535",
+            "texture-b6f04bdfdded64c344553dac840b1659949ac691d894ea1b2632c8c2530c5387.ktx2": "b6f04bdfdded64c344553dac840b1659949ac691d894ea1b2632c8c2530c5387",
+            "texture-c7b9d118614edfa828cf5e25df6760a87e8f5bb8baa2e0f03d595843f4ea3e57.ktx2": "c7b9d118614edfa828cf5e25df6760a87e8f5bb8baa2e0f03d595843f4ea3e57",
+            "texture-cc2792407cb75db9517f86d03290abda5117e96dddc2f529089edffd797a1cee.ktx2": "cc2792407cb75db9517f86d03290abda5117e96dddc2f529089edffd797a1cee",
+            "texture-cfb5424dcc7c0cefbdc32c2557705018caa11f26ad8356c55e37e420c45dd3ae.ktx2": "cfb5424dcc7c0cefbdc32c2557705018caa11f26ad8356c55e37e420c45dd3ae",
+            "texture-d45c1b1c4bd2edee5bd1cb0917334f12728fa5d46c57bce6e305c74201cf8415.ktx2": "d45c1b1c4bd2edee5bd1cb0917334f12728fa5d46c57bce6e305c74201cf8415",
+            "texture-d515387f734d503e6a29ccc1e2121fe6ee5a8c98fbe86c9bfc269e2fc412ab59.ktx2": "d515387f734d503e6a29ccc1e2121fe6ee5a8c98fbe86c9bfc269e2fc412ab59",
+            "texture-dc2045cbf6b2d7319170fa6a0fe19ae43363627ce42c2a739d3bc89a60234cbb.ktx2": "dc2045cbf6b2d7319170fa6a0fe19ae43363627ce42c2a739d3bc89a60234cbb",
+            "texture-ec1e4b6c691745f3b19096a18e8f286f426a5098dd3969e14d5ed0d536a51dc6.ktx2": "ec1e4b6c691745f3b19096a18e8f286f426a5098dd3969e14d5ed0d536a51dc6",
+            "texture-f46333dd8e2757a86149a04308b6c0f7564b9b31e686bd18238422616bea217c.ktx2": "f46333dd8e2757a86149a04308b6c0f7564b9b31e686bd18238422616bea217c",
+            "texture-f6beafbb3f9b4478ab0922f2800739d1b9fb51830d95cba382b8be963d45c476.ktx2": "f6beafbb3f9b4478ab0922f2800739d1b9fb51830d95cba382b8be963d45c476",
+            "texture-f9a86d516ccc929a753545c9fd26002033ba2e802ae7dde9ba8c4298ade5e2c3.ktx2": "f9a86d516ccc929a753545c9fd26002033ba2e802ae7dde9ba8c4298ade5e2c3",
+            "walk.glb": "b0192b0466f3a77d01413378fd293c8ca743cc99a63f61fdcc71a338a1540b4f"
+          },
+          "previewQuery": "right-vr-r01",
+          "base": "./assets/mechanics/right-vr-r01/",
+          "matrix": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "lods": {
+            "walk": {
+              "asset": "walk.glb",
+              "sha256": "b0192b0466f3a77d01413378fd293c8ca743cc99a63f61fdcc71a338a1540b4f",
+              "bytes": 3735620,
+              "triangles": 122837
+            },
+            "detail": {
+              "asset": "detail.glb",
+              "sha256": "d36042c736c8615f0b660543b755399779877c56e53740b351e17a1eba6dc84e",
+              "bytes": 4650140,
+              "triangles": 170607
+            }
+          },
+          "irradiance": {
+            "asset": "irradiance.exr",
+            "size": 2048,
+            "mode": "full diffuse without albedo; direct + indirect; runtime direct lighting excluded"
+          },
+          "probes": [
+            {
+              "asset": "probe-0.exr",
+              "position": [
+                -0.3931578993797302,
+                0.7900000214576721,
+                -7.731027603149414
+              ],
+              "sourcePosition": [
+                10.1,
+                -0.4,
+                2.8
+              ],
+              "width": 1024,
+              "height": 512,
+              "state": "installed static exterior"
+            },
+            {
+              "asset": "probe-1.exr",
+              "position": [
+                -0.41281577944755554,
+                0.7900000214576721,
+                -6.067389011383057
+              ],
+              "sourcePosition": [
+                11.8,
+                -0.42,
+                2.8
+              ],
+              "width": 1024,
+              "height": 512,
+              "state": "installed static exterior"
+            }
+          ],
+          "receiver": {
+            "asset": "receiver.ktx2",
+            "boundsSource": [
+              8.7,
+              -2.05,
+              12.7,
+              -0.12
+            ],
+            "zSource": 1.58,
+            "mode": "linear attenuation of diffuse on existing near-floor receiver surfaces only",
+            "boundsWeb": [
+              -2.0149342105263157,
+              -9.101083333333333,
+              -0.11794736842105263,
+              -5.18663888888889
+            ],
+            "floorWeb": -0.4299999999999997
+          },
+          "detailCenter": [
+            -1.1794736842105262,
+            0.59,
+            -7.045999999999999
+          ],
+          "replacedIDs": [
+            "LD_R02/machinery/engine-starboard/55",
+            "LD_R02/machinery/engine-starboard/56",
+            "LD_R02/machinery/engine-starboard/57",
+            "LD_R02/machinery/engine-starboard/58",
+            "LD_R02/machinery/engine-starboard/59",
+            "LD_R02/machinery/engine-starboard/60",
+            "LD_R02/machinery/engine-starboard/61",
+            "LD_R02/machinery/engine-starboard/62",
+            "LD_R02/machinery/engine-starboard/63",
+            "LD_R02/machinery/engine-starboard/69",
+            "LD_R02/machinery-craft/engine-starboard/24",
+            "LD_R02/machinery-craft/engine-starboard/25",
+            "LD_R02/machinery-craft/engine-starboard/26",
+            "LD_R02/machinery-craft/engine-starboard/27",
+            "LD_R02/machinery-craft/engine-starboard/28",
+            "LD_R02/machinery-craft/engine-starboard/29",
+            "LD_R02/machinery-craft/engine-starboard/30",
+            "LD_R02/machinery-craft/engine-starboard/31",
+            "LD_R02/machinery-craft/engine-starboard/32",
+            "LD_R02/machinery-craft/engine-starboard/33",
+            "LD_R02/machinery-craft/engine-starboard/34",
+            "LD_R02/machinery-craft/engine-starboard/35",
+            "LD_R02/machinery-craft/engine-starboard/36",
+            "MTU/installation/starboard-beds"
+          ],
+          "reference": "VR right assembly; independent observed details with estimated depths",
+          "inspection": "mtu-r03 nominal representation",
+          "releasePhase": "reference-led right exterior candidate"
         }
       }
     },

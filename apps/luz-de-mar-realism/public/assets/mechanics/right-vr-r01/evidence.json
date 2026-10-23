@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "scene": "scene_engine_room",
+  "rightDefinition": "Right when looking toward the central fluid group; starboard instance in the digital source, not a verified VR hull-side identification.",
+  "referenceCubeSize": [
+    2048,
+    2048
+  ],
+  "panoramaStations": 1,
+  "camera": {
+    "sourcePosition": [
+      9.15,
+      0,
+      3.18
+    ],
+    "status": "Estimated single registration, fixed for all orientations",
+    "fitBasis": "Compatible engine envelope and near/far rail, intake and exhaust landmarks"
+  },
+  "units": "physical metres; original yacht normalization compensated",
+  "items": [
+    {
+      "id": "RVR/casting",
+      "title": "Bloque, cárter y nervaduras",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Estructura compatible del ZIP; superficies ocultas nominales. Carcasas próximas trazadas en el cubo R, con profundidad inferida."
+    },
+    {
+      "id": "RVR/covers",
+      "title": "Tapas inclinadas y juntas",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Reutilizar tapas compatibles y ajustar carenados observables."
+    },
+    {
+      "id": "RVR/intake",
+      "title": "Cilindro de admisión con malla y aro negro",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Carcasa, nervaduras y uniones derechas trazadas en el encuadre fijo de admisión. Patrón superficial y dimensiones estimados; paso de malla de 5,6 mm para la lectura visual, no medido. No es el filtro de agua de mar."
+    },
+    {
+      "id": "RVR/service",
+      "title": "Tapones negros/amarillos, tubos y accesorios superiores",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "No atribuir funciones o referencias ilegibles."
+    },
+    {
+      "id": "RVR/exhaust",
+      "title": "Escape negro longitudinal y dos conexiones inferiores",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Recorrido reconstruido desde rayos de la única panorámica; profundidad inferida."
+    },
+    {
+      "id": "RVR/jacket",
+      "title": "Funda plateada, pliegues y bandas textiles",
+      "evidence": [
+        "pano_r.jpg",
+        "pano_f.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Forma observada; sección posterior inferida."
+    },
+    {
+      "id": "RVR/closures",
+      "title": "Cierres, costuras y soportes de aislamiento",
+      "evidence": [
+        "pano_r.jpg",
+        "pano_f.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Se reproducen los cierres que se distinguen; no certifica desmontaje real."
+    },
+    {
+      "id": "RVR/couplings",
+      "title": "Manguitos azules y abrazaderas",
+      "evidence": [
+        "pano_r.jpg",
+        "pano_f.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Cantidad y encuentros visibles; fabricante sin identificar."
+    },
+    {
+      "id": "RVR/gearbox",
+      "title": "Reductora, carcasas y acoplamiento",
+      "evidence": [
+        "pano_d.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "El anclaje digital se conserva. La VR no confirma el modelo exacto."
+    },
+    {
+      "id": "RVR/mounts",
+      "title": "Pies, soportes y bancadas",
+      "evidence": [
+        "pano_d.jpg",
+        "pano_f.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Partes visibles observadas; cotas y caras ocultas estimadas."
+    },
+    {
+      "id": "RVR/rails",
+      "title": "Barandilla inoxidable y fijaciones",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Recorridos observados y ajuste al corredor digital."
+    },
+    {
+      "id": "RVR/hoses",
+      "title": "Mangueras, cables y abrazaderas del motor",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_r.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Solo servicios del conjunto derecho; circuitos no identificados."
+    },
+    {
+      "id": "RVR/extinguisher",
+      "title": "Extintor derecho con manetas, manguera y soporte",
+      "evidence": [
+        "pano_f.jpg",
+        "pano_d.jpg"
+      ],
+      "classification": "observed form / estimated 3D depth",
+      "note": "Tipo y capacidad no afirmados a partir de la fotografía."
+    }
+  ],
+  "poses": [
+    {
+      "id": "front",
+      "h": 0,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "oblique",
+      "h": 30,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "exhaust",
+      "h": 60,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "side",
+      "h": 90,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "lower",
+      "h": 90,
+      "v": 65,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "intake",
+      "h": 30,
+      "v": 18,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    },
+    {
+      "id": "jacket",
+      "h": 70,
+      "v": 3,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    },
+    {
+      "id": "mounting",
+      "h": 50,
+      "v": 40,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    }
+  ],
+  "sources": [
+    {
+      "face": "f",
+      "sha256": "be5c7583661b1ee242e8ec1214994f90885192328b9bf97dd1adf9ca145d9e6c",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_f.jpg?v=p29279716"
+    },
+    {
+      "face": "l",
+      "sha256": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_l.jpg?v=p29279716"
+    },
+    {
+      "face": "r",
+      "sha256": "cce4144b4698f514a5457f91724f99871460fe799cae877bd675d0d1af043a4a",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_r.jpg?v=p29279716"
+    },
+    {
+      "face": "b",
+      "sha256": "574b87df722335ae39d16886e27d7756968f65767fb807560e37093aad1dde70",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_b.jpg?v=p29279716"
+    },
+    {
+      "face": "u",
+      "sha256": "9e2826689e0c7507e449ee8610a807990239bc2301f5194565ce2bf51edc53f7",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_u.jpg?v=p29279716"
+    },
+    {
+      "face": "d",
+      "sha256": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_d.jpg?v=p29279716"
+    }
+  ],
+  "limits": [
+    "Six cube photographs from one position; zoom adds no new depth or image resolution.",
+    "The VR identifies a Grande 36M, not a verified identity as Luz de Mar.",
+    "Dimensions and installation interfaces are estimates constrained by the existing digital mounting.",
+    "R03 internals remain a separate nominal demonstration.",
+    "No original VR photograph is a published model texture."
+  ],
+  "compatibleDocuments": [
+    {
+      "url": "https://www.mtu-solutions.com/content/dam/mtu/products/yacht/main-propulsion/mtu-series-2000/3238241_MTU_Marine_spec_10V12V16V2000M96_1DS.pdf/_jcr_content/renditions/original./3238241_MTU_Marine_spec_10V12V16V2000M96_1DS.pdf",
+      "purpose": "Nominal engine-envelope reference; does not identify the photographed accessory installation."
+    },
+    {
+      "url": "https://azimutyachts.com/wp-content/uploads/2022/04/Lowerdeck_Grande36M.jpg",
+      "purpose": "General lower-deck machinery arrangement; not proof of the digital mounting coordinates."
+    }
+  ]
+}

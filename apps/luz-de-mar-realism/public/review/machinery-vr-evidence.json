@@ -1,0 +1,1698 @@
+{
+  "version": 1,
+  "source": "https://vrcloud.com/?pv=1667308298",
+  "tourTitle": "Azimut Grande 36M – 360/VR Virtual Tour – VRCLOUD",
+  "captured": "2026-10-22T23:45:03.193Z",
+  "accessRoute": [
+    "Bottom boat/floor-plan icon",
+    "LOWER",
+    "Fourth black dot from right: Engine Room"
+  ],
+  "uiSteps": [
+    {
+      "click": "skin_btn_map",
+      "x": 653.5,
+      "y": 940,
+      "width": 71,
+      "height": 32
+    },
+    {
+      "click": "btn_lower",
+      "x": 1330,
+      "y": 706,
+      "width": 120,
+      "height": 28
+    },
+    {
+      "click": "spot_engine_room",
+      "x": 1248,
+      "y": 814,
+      "width": 20,
+      "height": 20
+    },
+    {
+      "click": "skin_btn_map",
+      "x": 653.5,
+      "y": 940,
+      "width": 71,
+      "height": 32
+    }
+  ],
+  "scene": {
+    "scene": "scene_engine_room",
+    "title": "Engine Room",
+    "links": [
+      {
+        "name": "spot2",
+        "linkedscene": "scene_lazarette",
+        "ath": "-128.080",
+        "atv": "2.431",
+        "onclick": "if(!noSkin, toggleHelp(1)); hs_lookto(get(name)); showHint();"
+      },
+      {
+        "name": "scenecap",
+        "ath": 0,
+        "atv": 90,
+        "onclick": null
+      },
+      {
+        "name": "hs_hint_spot2",
+        "ath": -128.08,
+        "atv": 2.431,
+        "onclick": null
+      }
+    ]
+  },
+  "coverage": {
+    "panoramaPositions": 1,
+    "cubeFaces": 6,
+    "cubeSize": [
+      2048,
+      2048
+    ],
+    "captureAttempts": 28,
+    "usableCaptures": 24,
+    "horizontalAngles": [
+      0,
+      30,
+      60,
+      90,
+      120,
+      150,
+      180,
+      210,
+      240,
+      270,
+      300,
+      330
+    ],
+    "upDownAngles": [
+      -65,
+      65
+    ],
+    "detailFov": 45,
+    "excludedDiagonalCaptures": [
+      "detail-135.png",
+      "detail-225.png",
+      "detail-315.png",
+      "detail-45.png"
+    ],
+    "method": "Normal site controls and exposed krpano viewing API. Six normally requested JPEG cube faces inspected; no encrypted XML decoded."
+  },
+  "images": [
+    {
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_f.jpg?v=p29279716",
+      "file": "pano_f.jpg",
+      "bytes": 1247013,
+      "sha256": "be5c7583661b1ee242e8ec1214994f90885192328b9bf97dd1adf9ca145d9e6c"
+    },
+    {
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_l.jpg?v=p29279716",
+      "file": "pano_l.jpg",
+      "bytes": 1181523,
+      "sha256": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9"
+    },
+    {
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_u.jpg?v=p29279716",
+      "file": "pano_u.jpg",
+      "bytes": 648058,
+      "sha256": "9e2826689e0c7507e449ee8610a807990239bc2301f5194565ce2bf51edc53f7"
+    },
+    {
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_d.jpg?v=p29279716",
+      "file": "pano_d.jpg",
+      "bytes": 1437797,
+      "sha256": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3"
+    },
+    {
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_r.jpg?v=p29279716",
+      "file": "pano_r.jpg",
+      "bytes": 1211618,
+      "sha256": "cce4144b4698f514a5457f91724f99871460fe799cae877bd675d0d1af043a4a"
+    },
+    {
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_b.jpg?v=p29279716",
+      "file": "pano_b.jpg",
+      "bytes": 961585,
+      "sha256": "574b87df722335ae39d16886e27d7756968f65767fb807560e37093aad1dde70"
+    }
+  ],
+  "captures": [
+    {
+      "file": "around-000.png",
+      "h": 0,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "a452cc7f88eae2bf7469dc76ff9d77ec93c924b05fa860e2848149887d41f2ff",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-030.png",
+      "h": 30,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "73ba7d9e37c9dfbbca705f2bcb668069920fce15e5abc3c2b8a66d611842dcf0",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-060.png",
+      "h": 60,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "227bc244e8546da71b988527c6dea8ff333165d98d54c8306ccf78d69436cad0",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-090.png",
+      "h": 90,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "78708df4f504e8e53d678bd0b03be8b3795cadb31be1785e58e1a48926c90658",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-120.png",
+      "h": 120,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "c0a1c35d98f1b6783d0cffce8aad52c78cd428861c3f876fcf27b0b846ab5bac",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-150.png",
+      "h": 150,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "482731ed72b313ca0e63b5e66602b75914810b75b2fcc69c2102c61eb26b7ae0",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-180.png",
+      "h": 180,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "2d7c67a00b6f0d35fcf5d3aac86299baefd6159b7e22efdafdd99a47bbad2dfc",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-210.png",
+      "h": 210,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "af99d3384e70a4a423ae36c77166268492153d74c3c96526f76ba93cb788f718",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-240.png",
+      "h": 240,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "3c455af945d0851988b3ac8d10128d1d862eda5d0e6619fa547431e208f312c2",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-270.png",
+      "h": 270,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "7f6267615d82803111b7ce6d12f39e54db58de9aca82fc26e1e78594a6e3a52a",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-300.png",
+      "h": 300,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "1ec663bfe66408a467c90b6900fdb7d11b306bc9324089c7942cc9ddccfcaba1",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "around-330.png",
+      "h": 330,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "9e6b08fdfcccae13dca37413ab0d9d12be546cc3b38e495fce92220bfa24766e",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "ceiling-0.png",
+      "h": 0,
+      "v": -65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "90da5972a77d87c181bc541a69d2cdcef05c6d81c5fb266a943bb9972a488a56",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "ceiling-90.png",
+      "h": 90,
+      "v": -65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "9784e115af759aaf4511255a09171b48f455a4384bceb4b840b8710f7ba52d94",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "ceiling-180.png",
+      "h": 180,
+      "v": -65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "0b742d1ddbbc0d8a5f5fe64c51c63d3a960f2d84f13ac45fa3c86f7f544174f6",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "ceiling-270.png",
+      "h": 270,
+      "v": -65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "792919122083fb039e26cec96451e09d0f6a64fc4c6cc8fe24a7f6a6b3ad204d",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "floor-0.png",
+      "h": 0,
+      "v": 65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "4f0fc3a9272471657c68be4a4f6eb3cc390bfc126a153dad888e7c9ca277265f",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "floor-90.png",
+      "h": 90,
+      "v": 65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "24454604c8c4729181303c24b822ef1508583b06d130867ae35408548ec9ae5b",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "floor-180.png",
+      "h": 180,
+      "v": 65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "b89bcde30638bf9328874d1eae49daf4b2190c4f3a8b40fedcbf2f259a428e8d",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "floor-270.png",
+      "h": 270,
+      "v": 65,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "sha256": "84e3ae3c4f97b06c1069ca3b586a7cefa6f82179da64f0d5c2e112d4032cb5cb",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "detail-0.png",
+      "h": 0,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "836edf101b28d1a92e01a160314a47abef5a5a3ebc8b4121bf1f1ea887c2ed1a",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "detail-45.png",
+      "h": 45,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "4bceed6919dc30bd837f7b0755a39014673f3b28772ff0d49a43c69993fd7fb2",
+      "usable": false,
+      "note": "Gray diagonal rendering failure; excluded from evidence"
+    },
+    {
+      "file": "detail-90.png",
+      "h": 90,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "b6725186454024bcdb1a9fe06bc7ed7cbd06a06839785de5c8eb8ed8ecc26124",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "detail-135.png",
+      "h": 135,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "106a5296716c20c52b63bc16620e3cd06cbf2e37adc4bb9c1ce05ec89be5a42c",
+      "usable": false,
+      "note": "Gray diagonal rendering failure; excluded from evidence"
+    },
+    {
+      "file": "detail-180.png",
+      "h": 180,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "f7628a4be88c2591738bc5f46363555ad42feb8e967a5e20a80e6979e7c390da",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "detail-225.png",
+      "h": 225,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "00c1887ac3437fd12326c4de8378def635d637be5bdbead3cb11376e65a2e16d",
+      "usable": false,
+      "note": "Gray diagonal rendering failure; excluded from evidence"
+    },
+    {
+      "file": "detail-270.png",
+      "h": 270,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "82b7b271acadf51fb3c5b2302d523aa437bad827a1db933ef1b66b9105e8a510",
+      "usable": true,
+      "note": "Inspected reference capture"
+    },
+    {
+      "file": "detail-315.png",
+      "h": 315,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064,
+      "sha256": "52172b867e43447aec9b9be3049a07f0268891234d6801a66af10036a2bdf848",
+      "usable": false,
+      "note": "Gray diagonal rendering failure; excluded from evidence"
+    }
+  ],
+  "coordinateNote": "Angles h/v are relative to the panorama. No surveyed compass bearing, camera position or metric dimensions are inferred from them. A 90-degree krpano fov is not asserted to be horizontal; actual hfov/vfov are recorded per capture.",
+  "sourceGeometrySHA256": "ff5c668f8e04bd9a7f74345f6972fe7f2711fadd9386b19a5f15bca2beec2b2c",
+  "items": [
+    {
+      "id": "VR-ER-01",
+      "key": "engines",
+      "observation": "Dos motores blancos longitudinales, paralelos, con tapas, tuberías, mangueras y fijaciones visibles.",
+      "views": [
+        "around-000.png",
+        "around-030.png",
+        "around-330.png"
+      ],
+      "sourceComponentCount": 1,
+      "sourceComponentExamples": [
+        {
+          "id": "MTU/installation",
+          "feature": "MTU/installation"
+        }
+      ],
+      "comparison": "La disposición general se conserva; el exterior del ZIP es nominal y sus accesorios no coinciden uno por uno con la fotografía.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-02",
+      "key": "guards",
+      "observation": "Barandillas de tubo inoxidable pulido rodean los dos motores; curvas amplias, dobles travesaños y soportes.",
+      "views": [
+        "around-000.png",
+        "around-060.png",
+        "around-300.png"
+      ],
+      "sourceComponentCount": 17,
+      "sourceComponentExamples": [
+        {
+          "id": "LD/service-route/127",
+          "feature": "polished handrail along service descent"
+        },
+        {
+          "id": "LD/service-route/129",
+          "feature": "seated service handrail wall bracket"
+        },
+        {
+          "id": "LD/service-route/130",
+          "feature": "seated service handrail wall bracket"
+        },
+        {
+          "id": "LD/service-route/131",
+          "feature": "seated service handrail wall bracket"
+        },
+        {
+          "id": "LD_R02/machinery/engine-starboard/57",
+          "feature": "continuous polished engine safety guard"
+        },
+        {
+          "id": "LD_R02/machinery/engine-starboard/58",
+          "feature": "guard upright and foot"
+        },
+        {
+          "id": "LD_R02/machinery/engine-starboard/59",
+          "feature": "guard upright and foot"
+        },
+        {
+          "id": "LD_R02/machinery/engine-starboard/60",
+          "feature": "guard upright and foot"
+        }
+      ],
+      "comparison": "Conservar el recorrido de tubos y apoyos del original; ajustar las reflexiones y revisar las siluetas frente a la VR.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-03",
+      "key": "central-walk",
+      "observation": "Pasarela central estrecha que desemboca en una circulación transversal más ancha. Placas desmontables y agujeros circulares negros.",
+      "views": [
+        "around-000.png",
+        "floor-0.png",
+        "floor-180.png"
+      ],
+      "sourceComponentCount": 12,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/photo-layout/floor/100",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/101",
+          "feature": "flush fitted-panel fasteners"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/102",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/103",
+          "feature": "flush fitted-panel fasteners"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/104",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/105",
+          "feature": "flush fitted-panel fasteners"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/106",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/107",
+          "feature": "flush fitted-panel fasteners"
+        }
+      ],
+      "comparison": "El original conserva paneles y registro, pero requiere comparar su contorno en T y los detalles de la chapa.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-04",
+      "key": "checkerplate",
+      "observation": "Chapa de aluminio con grupos de resaltes diagonales, juntas entre placas y cantos sobre fosos.",
+      "views": [
+        "floor-0.png",
+        "floor-90.png",
+        "floor-270.png"
+      ],
+      "sourceComponentCount": 12,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/photo-layout/floor/100",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/101",
+          "feature": "flush fitted-panel fasteners"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/102",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/103",
+          "feature": "flush fitted-panel fasteners"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/104",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/105",
+          "feature": "flush fitted-panel fasteners"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/106",
+          "feature": "fitted normal-state checkerplate walkway"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/107",
+          "feature": "flush fitted-panel fasteners"
+        }
+      ],
+      "comparison": "Detectado durante la revisión: el patrón 35 del suelo original no estaba asignado a la textura de chapa en la importación preliminar.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-05",
+      "key": "ochre-grids",
+      "observation": "Rejillas antideslizantes ocres sobre la circulación transversal y delante de los equipos laterales, en piezas irregulares.",
+      "views": [
+        "floor-90.png",
+        "floor-180.png",
+        "floor-270.png"
+      ],
+      "sourceComponentCount": 0,
+      "sourceComponentExamples": [],
+      "comparison": "Faltan en la importación preliminar. Su material exacto y dimensiones no se identifican en la imagen.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-06",
+      "key": "ceiling",
+      "observation": "Techo blanco brillante formado por paneles estrechos, juntas finas y bandas transversales atornilladas. Refleja equipos y luminarias.",
+      "views": [
+        "ceiling-0.png",
+        "ceiling-90.png",
+        "ceiling-180.png",
+        "ceiling-270.png"
+      ],
+      "sourceComponentCount": 17,
+      "sourceComponentExamples": [
+        {
+          "id": "LD/service-route/285",
+          "feature": "white machine-room ceiling around exact service stair opening"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/0",
+          "feature": "linear LED ceiling housing"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/1",
+          "feature": "linear white LED diffuser"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/2",
+          "feature": "linear LED ceiling housing"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/3",
+          "feature": "linear white LED diffuser"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/4",
+          "feature": "linear LED ceiling housing"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/5",
+          "feature": "linear white LED diffuser"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/6",
+          "feature": "ceiling panel fine joint"
+        }
+      ],
+      "comparison": "El original incluye techo y juntas; el material preliminar se ve más mate y oscuro que la referencia.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-07",
+      "key": "leds",
+      "observation": "Tiras LED delgadas longitudinales y varios segmentos transversales. Se distinguen diodos, extremos y pequeñas fijaciones.",
+      "views": [
+        "around-000.png",
+        "ceiling-90.png",
+        "ceiling-180.png"
+      ],
+      "sourceComponentCount": 16,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/ceiling/0",
+          "feature": "linear LED ceiling housing"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/1",
+          "feature": "linear white LED diffuser"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/2",
+          "feature": "linear LED ceiling housing"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/3",
+          "feature": "linear white LED diffuser"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/4",
+          "feature": "linear LED ceiling housing"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/5",
+          "feature": "linear white LED diffuser"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/6",
+          "feature": "ceiling panel fine joint"
+        },
+        {
+          "id": "LD_R02/machinery/ceiling/7",
+          "feature": "ceiling panel fine joint"
+        }
+      ],
+      "comparison": "El original contiene tres tiras longitudinales. Faltan segmentos transversales observados; la potencia real no está medida.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-08",
+      "key": "black-exhaust",
+      "observation": "Dos grandes conductos de escape curvados con recubrimiento negro granular. Bandas textiles negras cruzan las uniones y tienen costuras.",
+      "views": [
+        "around-060.png",
+        "around-300.png",
+        "detail-90.png",
+        "detail-270.png"
+      ],
+      "sourceComponentCount": 4,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/engine-starboard/63",
+          "feature": "black insulated swept exhaust trunk"
+        },
+        {
+          "id": "LD_R02/machinery/engine-port/63",
+          "feature": "black insulated swept exhaust trunk"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-starboard/35",
+          "feature": "exhaust black fabric stitched perimeter"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-port/72",
+          "feature": "exhaust black fabric stitched perimeter"
+        }
+      ],
+      "comparison": "El original conserva la ruta general y algunas costuras. La textura, las bandas y los soportes requieren más detalle.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-09",
+      "key": "silver-jackets",
+      "observation": "Fundas plateadas acolchadas alrededor de los codos y turbos: pliegues irregulares, costuras claras y varios cierres de gancho.",
+      "views": [
+        "around-060.png",
+        "around-300.png",
+        "detail-90.png",
+        "detail-270.png"
+      ],
+      "sourceComponentCount": 2,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/engine-starboard/62",
+          "feature": "silver insulated exhaust elbow jacket"
+        },
+        {
+          "id": "LD_R02/machinery/engine-port/62",
+          "feature": "silver insulated exhaust elbow jacket"
+        }
+      ],
+      "comparison": "No deben representarse como tubos rígidos metálicos lisos. Las fundas originales son aproximadas.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-10",
+      "key": "blue-sleeves",
+      "observation": "Manguitos azules en conexiones verticales bajo los escapes, sujetos por varias abrazaderas de acero.",
+      "views": [
+        "around-060.png",
+        "around-300.png"
+      ],
+      "sourceComponentCount": 10,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery-craft/engine-starboard/24",
+          "feature": "continuous blue silicone exhaust sleeve"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-starboard/25",
+          "feature": "stainless exhaust sleeve tightening band"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-starboard/27",
+          "feature": "stainless exhaust sleeve tightening band"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-starboard/29",
+          "feature": "stainless exhaust sleeve tightening band"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-starboard/31",
+          "feature": "stainless exhaust sleeve tightening band"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-port/61",
+          "feature": "continuous blue silicone exhaust sleeve"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-port/62",
+          "feature": "stainless exhaust sleeve tightening band"
+        },
+        {
+          "id": "LD_R02/machinery-craft/engine-port/64",
+          "feature": "stainless exhaust sleeve tightening band"
+        }
+      ],
+      "comparison": "El original ya incluye manguitos y abrazaderas; contrastar color, separación y posición.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-11",
+      "key": "front-fluid-group",
+      "observation": "En el mamparo del frente h=0: conjunto compacto de tubos blancos, codos de metal amarillo, palanca roja, motor eléctrico blanco y cuerpo circular con palanca amarilla.",
+      "views": [
+        "around-000.png",
+        "detail-0.png"
+      ],
+      "sourceComponentCount": 70,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/fuel-manifold/0",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/1",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/2",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/3",
+          "feature": "bolted pipe flange"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/4",
+          "feature": "flange bolt heads"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/5",
+          "feature": "black manifold selection lever"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/6",
+          "feature": "bolted pipe flange"
+        },
+        {
+          "id": "LD_R02/machinery/fuel-manifold/7",
+          "feature": "flange bolt heads"
+        }
+      ],
+      "comparison": "El original lo llama FUEL MANIFOLD y simplifica el conjunto. La panorámica no permite verificar por sí sola esa función ni todos sus circuitos.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-12",
+      "key": "epu",
+      "observation": "Armarios claros en el frente: se lee EPU en el mayor del sector izquierdo y ECO R en otro menor. Cajas pequeñas tienen entradas de cables y módulos verticales.",
+      "views": [
+        "around-000.png",
+        "around-330.png"
+      ],
+      "sourceComponentCount": 72,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/photo-layout/controls/46",
+          "feature": "individually fitted white control cabinet"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/47",
+          "feature": "seated cabinet latch"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/48",
+          "feature": "cabinet bottom cable glands"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/49",
+          "feature": "connected gland to gland cable return"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/50",
+          "feature": "return cable wall clamp"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/51",
+          "feature": "cabinet bottom cable glands"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/52",
+          "feature": "connected gland to gland cable return"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/53",
+          "feature": "return cable wall clamp"
+        }
+      ],
+      "comparison": "La distribución y la rotulación del original son aproximadas. No copiar funciones o estados eléctricos sin esquema.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-13",
+      "key": "mtu-controls",
+      "observation": "En el sector derecho del frente se leen SCU y MTU, junto a un armario con pantalla pequeña, pilotos y mandos.",
+      "views": [
+        "around-030.png",
+        "around-060.png"
+      ],
+      "sourceComponentCount": 72,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/photo-layout/controls/46",
+          "feature": "individually fitted white control cabinet"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/47",
+          "feature": "seated cabinet latch"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/48",
+          "feature": "cabinet bottom cable glands"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/49",
+          "feature": "connected gland to gland cable return"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/50",
+          "feature": "return cable wall clamp"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/51",
+          "feature": "cabinet bottom cable glands"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/52",
+          "feature": "connected gland to gland cable return"
+        },
+        {
+          "id": "LD_R02/photo-layout/controls/53",
+          "feature": "return cable wall clamp"
+        }
+      ],
+      "comparison": "La etiqueta MTU es visible; no se lee una placa que pruebe aquí el modelo 16V2000M96 ni números de serie.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-14",
+      "key": "distribution",
+      "observation": "Dos secciones superiores de cuadros EURO EL con pantallas Woodward, diagramas finos, pilotos y pulsadores de varios colores; filas inferiores de protecciones detrás de tapas transparentes.",
+      "views": [
+        "around-120.png",
+        "around-150.png"
+      ],
+      "sourceComponentCount": 62,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/switchboard/0",
+          "feature": "white electrical cabinet"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/1",
+          "feature": "inset cabinet door shadow joint"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/2",
+          "feature": "flush white door face"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/3",
+          "feature": "dark monitoring display"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/4",
+          "feature": "screen static system diagram"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/5",
+          "feature": "screen static system diagram"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/6",
+          "feature": "screen static system diagram"
+        },
+        {
+          "id": "LD_R02/machinery/switchboard/7",
+          "feature": "raised indicator or pushbutton"
+        }
+      ],
+      "comparison": "Existe una aproximación en el original; faltan correspondencia fina de filas, tapas, textos y bisagras. Los estados de pilotos son los de la fotografía.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-15",
+      "key": "shore-power",
+      "observation": "Cuadro rotulado SHORE POWER SYSTEM en h=180: dos palancas superiores, selector general inferior, voltímetro y otros indicadores.",
+      "views": [
+        "around-180.png",
+        "around-210.png",
+        "detail-180.png"
+      ],
+      "sourceComponentCount": 69,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/asea-0/0",
+          "feature": "white electrical cabinet"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/1",
+          "feature": "inset cabinet door shadow joint"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/2",
+          "feature": "flush white door face"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/4",
+          "feature": "ASEA yellow isolator backing"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/5",
+          "feature": "raised indicator or pushbutton"
+        },
+        {
+          "id": "LD_R02/machinery/asea-1/0",
+          "feature": "white electrical cabinet"
+        },
+        {
+          "id": "LD_R02/machinery/asea-1/1",
+          "feature": "inset cabinet door shadow joint"
+        },
+        {
+          "id": "LD_R02/machinery/asea-1/2",
+          "feature": "flush white door face"
+        }
+      ],
+      "comparison": "No es intercambiable visualmente con los dos convertidores genéricos del original. Requiere reconstrucción de su frente.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-16",
+      "key": "vented-cabinet",
+      "observation": "Debajo del cuadro de puerto hay una envolvente blanca con cuatro columnas de ranuras estampadas, tapa, tornillos y dos argollas.",
+      "views": [
+        "around-180.png",
+        "around-210.png"
+      ],
+      "sourceComponentCount": 69,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/asea-0/0",
+          "feature": "white electrical cabinet"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/1",
+          "feature": "inset cabinet door shadow joint"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/2",
+          "feature": "flush white door face"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/4",
+          "feature": "ASEA yellow isolator backing"
+        },
+        {
+          "id": "LD_R02/machinery/asea-0/5",
+          "feature": "raised indicator or pushbutton"
+        },
+        {
+          "id": "LD_R02/machinery/asea-1/0",
+          "feature": "white electrical cabinet"
+        },
+        {
+          "id": "LD_R02/machinery/asea-1/1",
+          "feature": "inset cabinet door shadow joint"
+        },
+        {
+          "id": "LD_R02/machinery/asea-1/2",
+          "feature": "flush white door face"
+        }
+      ],
+      "comparison": "La función concreta y los componentes internos quedan sin verificar; no asignar un fabricante por su aspecto.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-17",
+      "key": "battery-selectors",
+      "observation": "Columna lateral con cuatro seccionadores circulares rojos grandes y varios interruptores menores con maneta o llave, cada uno con etiqueta.",
+      "views": [
+        "around-210.png",
+        "around-240.png"
+      ],
+      "sourceComponentCount": 0,
+      "sourceComponentExamples": [],
+      "comparison": "Falta su disposición reconocible en la importación preliminar. La lectura parcial de etiquetas no demuestra el cableado.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-18",
+      "key": "victron",
+      "observation": "Dos cajas azules grandes Victron Energy y una unidad azul menor en el mamparo lateral, con pilotos y cables inferiores; junto a conductos verticales de cobre.",
+      "views": [
+        "around-090.png",
+        "around-120.png",
+        "detail-90.png"
+      ],
+      "sourceComponentCount": 109,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/charging/0",
+          "feature": "blue Skylla-TG charger housing"
+        },
+        {
+          "id": "LD_R02/machinery/charging/6",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/charging/7",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/charging/8",
+          "feature": "blue Skylla-TG charger housing"
+        },
+        {
+          "id": "LD_R02/machinery/charging/14",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/charging/15",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/charging/16",
+          "feature": "stacked ArgoFET battery isolator"
+        },
+        {
+          "id": "LD_R02/machinery/charging/17",
+          "feature": "stacked ArgoFET battery isolator"
+        }
+      ],
+      "comparison": "La familia está representada en el original; verificar cantidades, tamaños relativos, soportes y cableado. No asignar referencias de modelo ilegibles.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-19",
+      "key": "kohler",
+      "observation": "Dos generadores en envolventes blancas laterales. KOHLER es legible, además de puertas con tiradores oscuros y controlador en uno de ellos.",
+      "views": [
+        "around-090.png",
+        "around-270.png",
+        "around-240.png"
+      ],
+      "sourceComponentCount": 46,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/generator-starboard/0",
+          "feature": "Kohler rounded sound enclosure"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/1",
+          "feature": "sound-shield dark base rail"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/2",
+          "feature": "separate generator access panel"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/3",
+          "feature": "separate generator access panel"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/4",
+          "feature": "generator controller bezel"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/5",
+          "feature": "KOHLER identification"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/6",
+          "feature": "80EOZDJ identification"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/7",
+          "feature": "raised indicator or pushbutton"
+        }
+      ],
+      "comparison": "Ambos generadores existen en el original. La VR no confirma su potencia ni la referencia 80EOZDJ del rótulo digital.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-20",
+      "key": "hatch-ladder",
+      "observation": "Escotilla de techo sobre un generador y escalera blanca vertical visible en h=90. Se distinguen el marco, herrajes y peldaños.",
+      "views": [
+        "around-090.png",
+        "around-120.png"
+      ],
+      "sourceComponentCount": 138,
+      "sourceComponentExamples": [
+        {
+          "id": "LD/service-route/67",
+          "feature": "brown service tread 3"
+        },
+        {
+          "id": "LD/service-route/68",
+          "feature": "white stair underside closure 3"
+        },
+        {
+          "id": "LD/service-route/72",
+          "feature": "brown service tread 4"
+        },
+        {
+          "id": "LD/service-route/73",
+          "feature": "white stair underside closure 4"
+        },
+        {
+          "id": "LD/service-route/74",
+          "feature": "metal tread nosing 4"
+        },
+        {
+          "id": "LD/service-route/75",
+          "feature": "metal tread front return 4"
+        },
+        {
+          "id": "LD/service-route/76",
+          "feature": "white service riser 4"
+        },
+        {
+          "id": "LD/service-route/77",
+          "feature": "brown service tread 5"
+        }
+      ],
+      "comparison": "Conservar el acceso documentado. Su destino superior y altura exacta no quedan acreditados por una sola panorámica.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-21",
+      "key": "service-exit",
+      "observation": "Paso de servicio en h≈232°: el hotspot de la visita enlaza con Lazarette (ath=-128.080°, atv=2.431°).",
+      "views": [
+        "around-240.png",
+        "around-270.png"
+      ],
+      "sourceComponentCount": 135,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_PAR_001/port-service-opening",
+          "feature": "LD_PAR_001/port-service-opening"
+        },
+        {
+          "id": "LD/service-route/67",
+          "feature": "brown service tread 3"
+        },
+        {
+          "id": "LD/service-route/68",
+          "feature": "white stair underside closure 3"
+        },
+        {
+          "id": "LD/service-route/72",
+          "feature": "brown service tread 4"
+        },
+        {
+          "id": "LD/service-route/73",
+          "feature": "white stair underside closure 4"
+        },
+        {
+          "id": "LD/service-route/74",
+          "feature": "metal tread nosing 4"
+        },
+        {
+          "id": "LD/service-route/75",
+          "feature": "metal tread front return 4"
+        },
+        {
+          "id": "LD/service-route/76",
+          "feature": "white service riser 4"
+        }
+      ],
+      "comparison": "No inventar una conexión directa desde los pasillos exteriores. La dirección del hotspot no mide el ancho ni la altura del paso.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-22",
+      "key": "ventilation",
+      "observation": "Cajas y campanas blancas altas con ventiladores de rejilla circular orientados hacia abajo, paneles de control y tuberías de cobre.",
+      "views": [
+        "around-090.png",
+        "around-270.png",
+        "around-120.png"
+      ],
+      "sourceComponentCount": 104,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/climma-0/0",
+          "feature": "cooling module white rack foot"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/1",
+          "feature": "polished CLIMMA compressor cover"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/4",
+          "feature": "ochre compressor insulation jacket"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/5",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/6",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/7",
+          "feature": "upper control strip"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/8",
+          "feature": "raised indicator or pushbutton"
+        },
+        {
+          "id": "LD_R02/machinery/climma-0/9",
+          "feature": "raised indicator or pushbutton"
+        }
+      ],
+      "comparison": "La geometría original de climatización/ventilación es simplificada. La VR no demuestra qué unidad sirve a cada sistema.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-23",
+      "key": "intercom",
+      "observation": "Caja de intercomunicación, auricular o conjunto acústico y protección auditiva colgada, con cables que bajan por el mamparo.",
+      "views": [
+        "around-240.png",
+        "around-270.png"
+      ],
+      "sourceComponentCount": 14,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/safety/7",
+          "feature": "engine room intercom box"
+        },
+        {
+          "id": "LD_R02/photo-layout/safety/110",
+          "feature": "hearing protection connected headband"
+        },
+        {
+          "id": "LD_R02/photo-layout/safety/112",
+          "feature": "intercom lower selector"
+        },
+        {
+          "id": "LD_R02/machinery-craft/safety/400",
+          "feature": "intercom thin printed perimeter"
+        },
+        {
+          "id": "LD_R02/machinery-craft/safety/403",
+          "feature": "INTERCOM SYSTEM technical marking"
+        },
+        {
+          "id": "LD_R02/machinery-craft/safety/405",
+          "feature": "intercom selector white index"
+        },
+        {
+          "id": "LD_R02/machinery-craft/safety/406",
+          "feature": "sounder rounded outer flange and inner dome"
+        },
+        {
+          "id": "LD_R02/machinery-craft/safety/407",
+          "feature": "sounder closed centre cap"
+        }
+      ],
+      "comparison": "El original conserva formas de intercomunicación y protección auditiva; contrastar su ubicación y tamaño.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-24",
+      "key": "ceiling-sensors",
+      "observation": "Unidades blancas circulares ranuradas junto al techo y un elemento circular metálico en la cara superior.",
+      "views": [
+        "around-000.png",
+        "ceiling-0.png",
+        "ceiling-270.png"
+      ],
+      "sourceComponentCount": 48,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/engine-starboard/57",
+          "feature": "continuous polished engine safety guard"
+        },
+        {
+          "id": "LD_R02/machinery/engine-port/57",
+          "feature": "continuous polished engine safety guard"
+        },
+        {
+          "id": "LD_R02/machinery/safety/0",
+          "feature": "gas detection enclosure"
+        },
+        {
+          "id": "LD_R02/machinery/safety/1",
+          "feature": "gas panel black face and amber LCD"
+        },
+        {
+          "id": "LD_R02/machinery/safety/2",
+          "feature": "amber gas detection display"
+        },
+        {
+          "id": "LD_R02/machinery/safety/7",
+          "feature": "engine room intercom box"
+        },
+        {
+          "id": "LD_R02/machinery/safety/8",
+          "feature": "raised indicator or pushbutton"
+        },
+        {
+          "id": "LD_R02/machinery/safety/11",
+          "feature": "red portable extinguisher"
+        }
+      ],
+      "comparison": "Las formas son observables. No identificar tecnología de detección, boquilla o agente extintor sin documentación adicional.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-25",
+      "key": "alarm-cluster",
+      "observation": "Sobre h=180 hay cuatro unidades de alarma: dos rojas, una ámbar y una azul; en el frente h=0 se ven otras dos rojas.",
+      "views": [
+        "around-000.png",
+        "ceiling-180.png"
+      ],
+      "sourceComponentCount": 48,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/engine-starboard/57",
+          "feature": "continuous polished engine safety guard"
+        },
+        {
+          "id": "LD_R02/machinery/engine-port/57",
+          "feature": "continuous polished engine safety guard"
+        },
+        {
+          "id": "LD_R02/machinery/safety/0",
+          "feature": "gas detection enclosure"
+        },
+        {
+          "id": "LD_R02/machinery/safety/1",
+          "feature": "gas panel black face and amber LCD"
+        },
+        {
+          "id": "LD_R02/machinery/safety/2",
+          "feature": "amber gas detection display"
+        },
+        {
+          "id": "LD_R02/machinery/safety/7",
+          "feature": "engine room intercom box"
+        },
+        {
+          "id": "LD_R02/machinery/safety/8",
+          "feature": "raised indicator or pushbutton"
+        },
+        {
+          "id": "LD_R02/machinery/safety/11",
+          "feature": "red portable extinguisher"
+        }
+      ],
+      "comparison": "Su posición y aspecto deben incorporarse. No deducir de la foto el significado de los colores o si están activadas.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-26",
+      "key": "extinguishers",
+      "observation": "Dos extintores rojos sujetos a los montantes interiores, con manetas rojas, soportes negros, mangueras y rótulos blancos.",
+      "views": [
+        "floor-0.png",
+        "around-030.png",
+        "around-330.png"
+      ],
+      "sourceComponentCount": 2,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/safety/11",
+          "feature": "red portable extinguisher"
+        },
+        {
+          "id": "LD_R02/machinery/safety/12",
+          "feature": "extinguisher handle"
+        }
+      ],
+      "comparison": "El original incluye formas de extintor; revisar cantidad y ubicación respecto al ensanchamiento de la pasarela.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-27",
+      "key": "cable-bundles",
+      "observation": "Haces densos de cables negros por los mamparos altos y sus bajadas curvas. Se observan líneas violeta, naranja y tierra verde/amarillo.",
+      "views": [
+        "around-000.png",
+        "around-120.png",
+        "around-240.png"
+      ],
+      "sourceComponentCount": 223,
+      "sourceComponentExamples": [
+        {
+          "id": "LD/service-route/274",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD/service-route/275",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD/service-route/276",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD/service-route/277",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD_R02/machinery/charging/0",
+          "feature": "blue Skylla-TG charger housing"
+        },
+        {
+          "id": "LD_R02/machinery/charging/6",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/charging/7",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/charging/8",
+          "feature": "blue Skylla-TG charger housing"
+        }
+      ],
+      "comparison": "El original contiene parte del cableado. Añadir volumen, bridas, radios de curvatura y entradas de armarios según lo visible.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-28",
+      "key": "cable-trays",
+      "observation": "Bandejas claras perforadas sostienen el cableado alto; soportes y fijaciones separan los haces del mamparo.",
+      "views": [
+        "around-000.png",
+        "around-210.png"
+      ],
+      "sourceComponentCount": 79,
+      "sourceComponentExamples": [
+        {
+          "id": "LD/service-route/270",
+          "feature": "technical alcove metal tray"
+        },
+        {
+          "id": "LD/service-route/274",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD/service-route/275",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD/service-route/276",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD/service-route/277",
+          "feature": "technical alcove yellow cable coil"
+        },
+        {
+          "id": "LD_R02/machinery/cables/0",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/cables/1",
+          "feature": "continuous pipe or hose"
+        },
+        {
+          "id": "LD_R02/machinery/cables/2",
+          "feature": "continuous pipe or hose"
+        }
+      ],
+      "comparison": "No pintar el cableado como rayas planas; conservar la oclusión y la separación de bandejas y cables.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-29",
+      "key": "bilges",
+      "observation": "A los lados de la pasarela se ven fosos, soportes, bancadas, tubos y cables por debajo de la cota del piso.",
+      "views": [
+        "floor-0.png",
+        "floor-90.png",
+        "floor-270.png"
+      ],
+      "sourceComponentCount": 24,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/machinery/display-floor-cut",
+          "feature": "LD_R02/machinery/display-floor-cut"
+        },
+        {
+          "id": "LD/service-route/127",
+          "feature": "polished handrail along service descent"
+        },
+        {
+          "id": "LD/service-route/129",
+          "feature": "seated service handrail wall bracket"
+        },
+        {
+          "id": "LD/service-route/130",
+          "feature": "seated service handrail wall bracket"
+        },
+        {
+          "id": "LD/service-route/131",
+          "feature": "seated service handrail wall bracket"
+        },
+        {
+          "id": "LD_R02/machinery/generator-starboard/1",
+          "feature": "sound-shield dark base rail"
+        },
+        {
+          "id": "LD_R02/machinery/generator-port/1",
+          "feature": "sound-shield dark base rail"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/100",
+          "feature": "fitted normal-state checkerplate walkway"
+        }
+      ],
+      "comparison": "Esas franjas no son superficies transitables. Las profundidades reales permanecen sin medir.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-30",
+      "key": "surface-condition",
+      "observation": "Pintura blanca de brillo variable, fundición con textura fina, pequeñas marcas de uso, metal pulido y juntas oscuras; el conjunto está cuidado.",
+      "views": [
+        "around-030.png",
+        "around-150.png",
+        "detail-0.png"
+      ],
+      "sourceComponentCount": 0,
+      "sourceComponentExamples": [],
+      "comparison": "Evitar suciedad uniforme y reflejos idénticos en todos los materiales. El balance blanco de la fotografía no es una medición de color.",
+      "status": "observed"
+    },
+    {
+      "id": "VR-ER-31",
+      "key": "seawater-filter",
+      "observation": "No se ve la cesta desmontada ni una carcasa abierta que permita identificar inequívocamente el filtro de agua de mar de las fotos del usuario.",
+      "views": [
+        "floor-0.png",
+        "floor-90.png",
+        "floor-180.png",
+        "floor-270.png"
+      ],
+      "sourceComponentCount": 2,
+      "sourceComponentExamples": [
+        {
+          "id": "LD_R02/photo-layout/floor/106/sea-register",
+          "feature": "fitted normal-state checkerplate walkway · register"
+        },
+        {
+          "id": "LD_R02/photo-layout/floor/107/sea-register-fasteners",
+          "feature": "flush fitted-panel fasteners · register-fasteners"
+        }
+      ],
+      "comparison": "La instalación digital de los filtros y sus dimensiones siguen basadas en las fotos/vídeo y en el original; esta VR no confirma esas coordenadas, fabricante ni intervalo de servicio.",
+      "status": "visibility-limit"
+    },
+    {
+      "id": "VR-ER-32",
+      "key": "hidden-regions",
+      "observation": "La vista es una sola posición panorámica: motores, equipos y tapas ocultan superficies. El nadir contiene una máscara de la cámara.",
+      "views": [
+        "floor-0.png",
+        "floor-180.png"
+      ],
+      "sourceComponentCount": 0,
+      "sourceComponentExamples": [],
+      "comparison": "Las seis caras completan la esfera visible, pero no permiten mirar detrás de objetos ni dentro de equipos cerrados.",
+      "status": "visibility-limit"
+    }
+  ],
+  "limits": [
+    "The tour identifies an Azimut Grande 36M, not a verified hull identity for Luz de Mar.",
+    "One panorama covers visible surfaces only; occluded, internal and masked areas remain unknown.",
+    "Readable brand labels establish appearance in the tour, not model numbers, capacity or equipment identity on another hull.",
+    "Filter placement, manufacturer, cleaning intervals and duplex operation cannot be verified from this panorama.",
+    "Private reference photographs are not republished or used as textures. Public records contain observations, links and hashes only."
+  ],
+  "implementation": {
+    "retained": "Original equipment and its digital placement; base positions unchanged",
+    "refined": [
+      "Checkerplate pattern 35 and physical UVs",
+      "Gloss ceiling enamel",
+      "Four estimated transverse LED fixtures",
+      "Estimated ochre grid clipped to safe source floor",
+      "Rebaked indirect light and local reflection probes"
+    ],
+    "remainingDifferences": [
+      "Shore power panel front",
+      "Battery selector column",
+      "Ceiling alarm groups",
+      "Some engine accessories and covers"
+    ],
+    "referenceDetailStatus": "Observations identify reconstruction work; they do not assert it all exists in the viewer."
+  },
+  "publicationStatus": "VR-led finish/light pass over the imported room; remaining geometric differences explicitly retained in the inventory."
+}

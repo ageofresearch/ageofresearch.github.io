@@ -3,7 +3,7 @@ const svgElement=(tag,attrs={})=>{const e=document.createElementNS(NS,tag);for(c
 const xy=([x,y])=>[24+(4-y)*31,42+(36-x)*13];
 const ring=p=>p.map(v=>xy(v).join(',')).join(' ');
 export function polygonsOnDeck(area,deck){
- if(area.id==='saloon')return[{polygon:[[area.sourceRoomBounds[0],area.sourceRoomBounds[1]],[area.sourceRoomBounds[2],area.sourceRoomBounds[1]],[area.sourceRoomBounds[2],area.sourceRoomBounds[3]],[area.sourceRoomBounds[0],area.sourceRoomBounds[3]]]}];
+ if(area.id==='saloon'||!area.polygons.length)return[{polygon:[[area.sourceRoomBounds[0],area.sourceRoomBounds[1]],[area.sourceRoomBounds[2],area.sourceRoomBounds[1]],[area.sourceRoomBounds[2],area.sourceRoomBounds[3]],[area.sourceRoomBounds[0],area.sourceRoomBounds[3]]]}];
  // An upper landing must not project the entire main-deck passage onto UD.
  return area.polygons.filter(p=>area.deck===deck.id||Math.max(...p.polygon.map(([x])=>p.height.z0+(x-p.height.x0)*p.height.slope))>=deck.floor-.05);
 }

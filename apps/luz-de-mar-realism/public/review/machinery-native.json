@@ -1,0 +1,50 @@
+{
+  "pass": true,
+  "masterSHA256": "04813630d29b60b7177449efcf00af156c424e7857ad2ae9f1188f10ed6f137e",
+  "editableRecords": 1043,
+  "sharedNativeEngineMesh": true,
+  "sharedNativeFilterMesh": true,
+  "areaLights": 7,
+  "workBeams": 2,
+  "vrSupplementObjects": 9,
+  "imagesPacked": true,
+  "placements": [
+    {
+      "side": "port",
+      "couplingErrorMetres": 1.1944189326376765e-7,
+      "nativeBounds": [
+        [
+          -1.1115000247955322,
+          -0.6464999914169312,
+          0.06399999558925629
+        ],
+        [
+          1.1464999914169312,
+          0.6464999914169312,
+          1.5169471502304077
+        ]
+      ],
+      "footSourceZ": 1.4839999955892562,
+      "topSourceZ": 2.9369471502304076
+    },
+    {
+      "side": "starboard",
+      "couplingErrorMetres": 1.1944189326376765e-7,
+      "nativeBounds": [
+        [
+          -1.1115000247955322,
+          -0.6464999914169312,
+          0.06399999558925629
+        ],
+        [
+          1.1464999914169312,
+          0.6464999914169312,
+          1.5169471502304077
+        ]
+      ],
+      "footSourceZ": 1.4839999955892562,
+      "topSourceZ": 2.9369471502304076
+    }
+  ],
+  "scope": "Digital source placement and nominal exterior dimensions; not an as-built survey"
+}

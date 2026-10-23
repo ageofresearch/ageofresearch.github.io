@@ -1,8 +1,8 @@
 {
-  "version": "2.0.0-exteriors.2",
+  "version": "3.0.0-machinery-r11",
   "stage": 2,
   "defaultRoom": "saloon",
-  "scope": "Connected VR-led exterior reconstruction",
+  "scope": "Connected exterior walk plus original machinery-room inspection",
   "maxDetailedZones": 2,
   "physicalTransform": {
     "source": "X forward, Y port, Z up",
@@ -298,11 +298,129 @@
           "purpose": "Local static specular capture; live sun excluded"
         }
       ]
+    },
+    {
+      "id": "machinery",
+      "label": "Cuarto de máquinas",
+      "sourceID": "LD_R02",
+      "metadata": "machinery/room.json",
+      "geometry": "machinery/room.glb",
+      "sha256": "045517e66adac8430a85475da4a8b12d1f19c060f68ccabe6f7593b86dcfbc3c",
+      "triangles": 79664,
+      "ambientAtlases": [
+        {
+          "key": "architecture",
+          "asset": "ambient-architecture.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR / indirect diffuse only"
+        },
+        {
+          "key": "furniture",
+          "asset": "ambient-furniture.exr",
+          "size": 2048,
+          "format": "linear half-float HDR EXR / indirect diffuse only"
+        }
+      ],
+      "probes": [
+        {
+          "id": "machinery-0",
+          "sourcePosition": [
+            8.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -9.394666666666666
+          ],
+          "asset": "probe-aft.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 48,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture"
+        },
+        {
+          "id": "machinery-1",
+          "sourcePosition": [
+            10.5,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -7.339583333333334
+          ],
+          "asset": "probe.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 48,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture"
+        },
+        {
+          "id": "machinery-2",
+          "sourcePosition": [
+            12.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -5.4802222222222206
+          ],
+          "asset": "probe-forward.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 48,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture"
+        }
+      ]
     }
   ],
   "structure": "yacht-structure.json",
   "structuralBasis": {
     "source": "Published original yacht, guarded by SHA-256",
     "revision": "structure-r10"
+  },
+  "mechanics": {
+    "mtu": {
+      "x": 10.832801589554357,
+      "y": 1.2,
+      "z": 1.42,
+      "coupling": [
+        -1.089,
+        0,
+        0.52
+      ],
+      "nominalSize": [
+        2.258,
+        1.293,
+        1.453
+      ],
+      "basis": "Fitted to the existing gearbox input at source x9.72,z1.94; not surveyed installation coordinates."
+    },
+    "filters": {
+      "x": 12.14,
+      "y": 0.27,
+      "z": 0.77,
+      "register": [
+        11.45,
+        -0.49,
+        12.59,
+        0.49
+      ],
+      "basketDiameter": 0.24,
+      "basketHeight": 0.6,
+      "housingDiameter": 0.316,
+      "coverDiameter": 0.41,
+      "housingHeight": 0.724,
+      "extractionLift": 0.7,
+      "dimensionStatus": "image-estimated",
+      "manufacturer": null,
+      "duplexOperationVerified": false
+    },
+    "source": "Original published native assets, byte-identical; inspection loaded on request"
   }
 }

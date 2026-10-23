@@ -1593,6 +1593,25 @@
         33.18187,
         2.01005
       ]
+    },
+    {
+      "id": "machinery",
+      "label": "Cuarto de máquinas",
+      "sourceID": "LD_R02",
+      "deck": "LD",
+      "floor": 1.58,
+      "isolated": true,
+      "spawn": [
+        8.62,
+        0
+      ],
+      "polygons": [],
+      "sourceRoomBounds": [
+        6.73584,
+        -3.59987,
+        13.21189,
+        3.56276
+      ]
     }
   ],
   "connections": [
@@ -1736,7 +1755,7 @@
   "counts": {
     "sourceRooms": 31,
     "sourceMeshes": 694,
-    "walkableAreas": 6
+    "walkableAreas": 7
   },
   "sourceEquipment": [
     {

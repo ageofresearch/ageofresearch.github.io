@@ -40,3 +40,19 @@ material identity and light calibration are inferred. Improved rendering does
 not provide additional evidence of dimensional accuracy.
 
 Exterior reconstruction: own teak, outdoor woven textiles, stitching, furniture, jacuzzi, deck machinery and fixed water. These visually inferred forms are not manufacturer CAD. New Blender authoring archives are distributed through GitHub Releases; old saloon downloads are retained.
+
+Machinery r11: evaluated geometry, equipment identities, native MTU exterior/
+cutaway samples and seawater-filter assets imported byte-identically from the
+published tidewater-rocha yacht. The MTU model originates in the user-provided
+R03 Blender package; native source hash and nominal-geometry limits are recorded
+in assets/mechanics/mtu-r03/MODEL-BASIS.md. The filter is a visual reconstruction
+of owner-provided maintenance photos/video; its provenance and unknown equipment
+identity remain recorded in assets/mechanics/sea-strainers/MODEL-BASIS.md.
+
+The Engine Room panorama in the Grande 36M tour was inspected via the boat icon →
+LOWER → Engine Room on 2026-10-22 UTC. Six complete 2048² cube faces and 24 valid
+views inform the finish/light pass. The observation inventory records differences
+from the imported equipment. Four transverse light fixtures and the ochre floor
+grid are independently authored, with estimated placement. The tour photographs
+are not redistributed or sampled as textures. Its visible brands identify the
+tour's equipment appearance, without confirming models or equipment on Luz de Mar.

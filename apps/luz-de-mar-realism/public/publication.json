@@ -1,28 +1,42 @@
 {
-  "version": 3,
-  "build": "structure-r10",
+  "version": 4,
+  "build": "machinery-r11",
   "scope": [
     "saloon",
     "cockpit",
     "beach-club",
     "port-side",
     "starboard-side",
-    "bow"
+    "bow",
+    "machinery"
   ],
-  "roomAuthoringRevision": 9,
+  "roomAuthoringRevision": {
+    "existing": 9,
+    "machinery": 11
+  },
   "contextAuthoringRevision": 10,
-  "assetManifestSHA256": "eec6a55353fa0acea460fbcfffa120ab9b48b156ae7171a93802a79077f998c5",
+  "assetManifestSHA256": "bb5936a05fcf88137fb957e19fd783e79e565cea942fe244d61b711752d1dc6e",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
   },
-  "existingRoomAssets": {
-    "filesVerified": 47,
+  "existingRoomAndContextAssets": {
+    "filesVerified": 50,
     "allSHA256Unchanged": true,
-    "baselineCommit": "1cb3c1f"
+    "baselineCommit": "0bd696df5c642b60b4c90db8eddc24960d3ab88c"
   },
-  "structuralSourceRooms": 31,
+  "existingDownloads": {
+    "filesVerified": 4,
+    "allSHA256Unchanged": true
+  },
   "functionalBrowserChecks": true,
+  "gpuDeformationChecks": true,
+  "vrReference": {
+    "scene": "scene_engine_room",
+    "cubeFaces": 6,
+    "usableCaptures": 24,
+    "observations": 32
+  },
   "renderer": "Three.js 0.180.0 / WebGL2",
-  "visualStatus": "Source hull and deck-map reconciliation. VR-based level overrides and inferred joining skins documented; original room irradiance/probes retained."
+  "visualStatus": "Original machinery equipment imported with baked ambient and local probes. VR-led finish/light supplements have estimated placement; remaining geometry differences documented. Native mechanics remain nominal."
 }

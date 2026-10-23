@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "file": "luz-de-mar-machinery-r11.zip",
+  "bytes": 140737053,
+  "sha256": "3140321fe7b5f01700ac2421cc80467df7ff1373c7974ee2a4dc0b09c133f41f",
+  "masterSHA256": "04813630d29b60b7177449efcf00af156c424e7857ad2ae9f1188f10ed6f137e",
+  "sourceSHA256": "ff5c668f8e04bd9a7f74345f6972fe7f2711fadd9386b19a5f15bca2beec2b2c",
+  "sourcePartRecords": 1043,
+  "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-de-mar-machinery-r11/luz-de-mar-machinery-r11.zip",
+  "includes": [
+    "Editable Blender scene",
+    "Lossless original room snapshot",
+    "Original mechanical samples and spring deltas",
+    "Raw HDR atlases and probes",
+    "Viewer assets",
+    "Tools, source/geometry bindings and credits"
+  ],
+  "excludes": [
+    "VR photographs",
+    "Owner photographs/video",
+    "Unchanged original R03 Blender source"
+  ]
+}

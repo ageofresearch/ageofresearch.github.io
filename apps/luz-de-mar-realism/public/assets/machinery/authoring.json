@@ -1,0 +1,270 @@
+{
+  "revision": 11,
+  "sourceGeometrySHA256": "ff5c668f8e04bd9a7f74345f6972fe7f2711fadd9386b19a5f15bca2beec2b2c",
+  "sourceTriangles": 79664,
+  "editableParts": 1043,
+  "bakeGeometrySHA256": "7edbe8923a780c2d00ac8180ff6e3ccd7443977877a2a20b8076bfa32cf1b4da",
+  "atlases": [
+    "architecture",
+    "furniture"
+  ],
+  "atlasPadding": {
+    "architecture": {
+      "marginMethod": "FRACTION",
+      "islandMargin": 0.006,
+      "coverage": 0.35320448875427246,
+      "degenerateTriangleFraction": 0,
+      "bakeMarginPixels": 4,
+      "uvTrianglesSHA256": "606cd8de8c98054f7b48d9af5aac064f2b792fa46d8fef628918534b7d2c7659"
+    },
+    "furniture": {
+      "marginMethod": "FRACTION",
+      "islandMargin": 0.0015,
+      "coverage": 0.25279757380485535,
+      "degenerateTriangleFraction": 0.0009197913223437433,
+      "bakeMarginPixels": 1,
+      "uvTrianglesSHA256": "fc12dfffc4e01f5a5a4f4d7b02e0ecf1a7a29bdcd1e520e85fa020e3cf825239"
+    }
+  },
+  "lights": {
+    "rectangles": [
+      {
+        "position": [
+          -1.868,
+          1.746,
+          -7.878
+        ],
+        "width": 0.028,
+        "height": 5.5,
+        "intensity": 1600
+      },
+      {
+        "position": [
+          0,
+          1.746,
+          -7.878
+        ],
+        "width": 0.028,
+        "height": 5.5,
+        "intensity": 1600
+      },
+      {
+        "position": [
+          1.868,
+          1.746,
+          -6.782
+        ],
+        "width": 0.028,
+        "height": 3.308,
+        "intensity": 1600
+      },
+      {
+        "position": [
+          -1.8183553218841553,
+          1.718000054359436,
+          -5.724874973297119
+        ],
+        "width": 1.3150000000000002,
+        "height": 0.022,
+        "intensity": 1600,
+        "evidence": "VR transverse light; fitted position estimated"
+      },
+      {
+        "position": [
+          0,
+          1.718000054359436,
+          -5.724874973297119
+        ],
+        "width": 1.3150000000000002,
+        "height": 0.022,
+        "intensity": 1600,
+        "evidence": "VR transverse light; fitted position estimated"
+      },
+      {
+        "position": [
+          1.8183553218841553,
+          1.718000054359436,
+          -5.724874973297119
+        ],
+        "width": 1.3150000000000002,
+        "height": 0.022,
+        "intensity": 1600,
+        "evidence": "VR transverse light; fitted position estimated"
+      },
+      {
+        "position": [
+          0,
+          1.718000054359436,
+          -9.443596839904785
+        ],
+        "width": 1.215,
+        "height": 0.022,
+        "intensity": 1600,
+        "evidence": "VR transverse light; fitted position estimated"
+      }
+    ],
+    "spots": [
+      {
+        "sourcePosition": [
+          8.1,
+          0,
+          3.72
+        ],
+        "sourceTarget": [
+          8.1,
+          0,
+          1.35
+        ],
+        "intensity": 12
+      },
+      {
+        "sourcePosition": [
+          11.75,
+          0,
+          3.72
+        ],
+        "sourceTarget": [
+          11.75,
+          0,
+          1.2
+        ],
+        "intensity": 12
+      }
+    ],
+    "color": [
+      1,
+      0.98,
+      0.94
+    ],
+    "exposure": 0.05,
+    "bake": "Indirect diffuse only; live work lights supply direct illumination"
+  },
+  "masterSHA256": "04813630d29b60b7177449efcf00af156c424e7857ad2ae9f1188f10ed6f137e",
+  "dynamicOccludersExcluded": true,
+  "sourceInstallation": {
+    "mtu": {
+      "x": 10.832801589554357,
+      "y": 1.2,
+      "z": 1.42,
+      "coupling": [
+        -1.089,
+        0,
+        0.52
+      ],
+      "nominalSize": [
+        2.258,
+        1.293,
+        1.453
+      ],
+      "basis": "Fitted to the existing gearbox input at source x9.72,z1.94; not surveyed installation coordinates."
+    },
+    "filters": {
+      "x": 12.14,
+      "y": 0.27,
+      "z": 0.77,
+      "register": [
+        11.45,
+        -0.49,
+        12.59,
+        0.49
+      ],
+      "basketDiameter": 0.24,
+      "basketHeight": 0.6,
+      "housingDiameter": 0.316,
+      "coverDiameter": 0.41,
+      "housingHeight": 0.724,
+      "extractionLift": 0.7,
+      "dimensionStatus": "image-estimated",
+      "manufacturer": null,
+      "duplexOperationVerified": false
+    }
+  },
+  "accuracy": "Original digital installation preserved; original inferred dimensions remain estimates",
+  "rawNativeBakesPacked": true,
+  "samples": 48,
+  "denoise": "OIDN 2.5.1 CPU RTLightmap / RT HDR",
+  "probePosition": [
+    0,
+    0.6900000000000004,
+    -7.339583333333334
+  ],
+  "directLightExcludedFromBakes": true,
+  "reflectionLimitation": "Static local probes retain the closed exterior in reflections during inspection; geometry and live shadows use the selected pose.",
+  "explicitVertexColors": true,
+  "vrReference": "https://vrcloud.com/?pv=1667308298",
+  "vrSupplements": {
+    "asset": "vr-details.glb",
+    "sha256": "ae8eb357c94d17b9698e5ea2e83d40a6247d6117de8a34adcb4ac583875e0bc6",
+    "estimatedPlacement": true,
+    "objects": 9,
+    "triangles": 8626,
+    "note": "Four transverse LED fixtures and an ochre floor grid, clipped to existing safe floor; original equipment positions preserved.",
+    "runtimeSHA256": "bf1647c18f44a2bdac0a21c7cb979e29c8ac6251387923ea1a199525bb1286b1"
+  },
+  "finishChanges": [
+    "Original pattern 35 mapped to physical checkerplate textures",
+    "Original pattern 34 mapped to acoustic finish",
+    "Ceiling enamel roughness .12 with .7 coat; photographic calibration, not measured",
+    "Seven area strips and two work beams; indirect diffuse rebaked consistently"
+  ],
+  "rawBakesSHA256": {
+    "architecture": "bb63d33889051e5b14a2e522afa0e4568c110e26c040debe82a9c38399af36b6",
+    "furniture": "d87e1b249d063e1400dddc4ee55d07a46cba7ef0b78ab3516bd70d9f312d1ed3"
+  },
+  "probes": [
+    {
+      "id": "machinery-0",
+      "sourcePosition": [
+        8.4,
+        0,
+        2.7
+      ],
+      "position": [
+        0,
+        0.6900000000000004,
+        -9.394666666666666
+      ],
+      "asset": "probe-aft.exr",
+      "width": 1024,
+      "height": 512,
+      "samples": 48,
+      "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture"
+    },
+    {
+      "id": "machinery-1",
+      "sourcePosition": [
+        10.5,
+        0,
+        2.7
+      ],
+      "position": [
+        0,
+        0.6900000000000004,
+        -7.339583333333334
+      ],
+      "asset": "probe.exr",
+      "width": 1024,
+      "height": 512,
+      "samples": 48,
+      "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture"
+    },
+    {
+      "id": "machinery-2",
+      "sourcePosition": [
+        12.4,
+        0,
+        2.7
+      ],
+      "position": [
+        0,
+        0.6900000000000004,
+        -5.4802222222222206
+      ],
+      "asset": "probe-forward.exr",
+      "width": 1024,
+      "height": 512,
+      "samples": 48,
+      "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture"
+    }
+  ]
+}

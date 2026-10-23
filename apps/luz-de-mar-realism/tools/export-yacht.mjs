@@ -21,6 +21,7 @@ const omitted=new Set([...m.indexOmissions.owners.values()].flatMap(x=>[...x]));
 const panels=new Set(m.machinery.seaStrainerAccess.panelIds),doors=new Set(m.machinery.parts.filter(p=>p.serviceDoorLeaf).map(p=>p.id));
 const specs=[{id:'saloon',sourceID:'MD_R02',label:'Salón',bounds:[8.30,-3.35,3.72,18.08,3.35,6.02],walkBounds:[8.60,-2.48,17.72,2.64],floor:3.95},
  {id:'machinery',sourceID:'LD_R02',label:'Cuarto de máquinas',bounds:[6.25,-3.36,.55,13.48,3.36,3.94],walkBounds:[6.82,-3.14,13.12,3.14],floor:1.58}];
+if(process.argv[4]==='machinery'){specs.splice(0,1);specs[0].bounds[0]=5.70;specs[0].walkBounds[0]=5.72;}
 function surface(c,s,p,glass){
  let pattern=Math.round(s[2]||0),color=c.slice(),rough=s[0],metal=s[1];
  if(pattern===17){pattern=p[2]>3.9&&p[2]<4?'wood-floor':0;if(pattern==='wood-floor'){color=[.474,.392,.275];rough=.48;}}
@@ -63,7 +64,13 @@ for(const spec of specs){
  writeFileSync(resolve(out,spec.id+'.bin'),blob);
  const step=.04,[x0,y0,x1,y1]=spec.walkBounds,nx=Math.ceil((x1-x0)/step)+1,ny=Math.ceil((y1-y0)/step)+1,bits=Buffer.alloc(Math.ceil(nx*ny/8)),nav=new LuzDeMarNavigation(asset,{exterior:m.navigation,boarding:m.boarding,machinery:m.machinery.navigation,service:m.serviceAccess});nav.enterRoom(spec.sourceID);
  let safeCells=0;for(let iy=0;iy<ny;iy++)for(let ix=0;ix<nx;ix++){const x=x0+ix*step,y=y0+iy*step;if([[0,0],[.02,0],[-.02,0],[0,.02],[0,-.02]].every(([dx,dy])=>nav.floorSafe(x+dx,y+dy,room.deck))){const k=iy*nx+ix;bits[k>>3]|=1<<(k&7);safeCells++;}}
- const meta={...spec,room,units:'physical metres',binary:spec.id+'.bin',vertices:v.length/11,triangles:indices.length/3,vertexBytes:float.byteLength,indexBytes:ix.byteLength,sha256:createHash('sha256').update(blob).digest('hex'),parts,recipes,navigation:{x0,y0,step,nx,ny,mask:bits.toString('base64'),radius:.14,safeCells},door:spec.id==='machinery'?m.machinery.door:null};
+ let openDoorNavigation=null;
+ if(spec.id==='machinery'&&process.argv[4]==='machinery'){
+  m.machinery.door.open=true;const openBits=Buffer.alloc(bits.length);let openSafe=0;
+  for(let iy=0;iy<ny;iy++)for(let ix=0;ix<nx;ix++){const x=x0+ix*step,y=y0+iy*step;if([[0,0],[.02,0],[-.02,0],[0,.02],[0,-.02]].every(([dx,dy])=>nav.floorSafe(x+dx,y+dy,room.deck))){const k=iy*nx+ix;openBits[k>>3]|=1<<(k&7);openSafe++;}}
+  m.machinery.door.open=false;openDoorNavigation={x0,y0,step,nx,ny,mask:openBits.toString('base64'),radius:.14,safeCells:openSafe};
+ }
+ const meta={...spec,room,units:'physical metres',binary:spec.id+'.bin',vertices:v.length/11,triangles:indices.length/3,vertexBytes:float.byteLength,indexBytes:ix.byteLength,sha256:createHash('sha256').update(blob).digest('hex'),parts,recipes,navigation:{x0,y0,step,nx,ny,mask:bits.toString('base64'),radius:.14,safeCells},...(openDoorNavigation?{openDoorNavigation}:{}),door:spec.id==='machinery'?m.machinery.door:null};
  writeFileSync(resolve(out,spec.id+'.json'),JSON.stringify(meta));info.rooms.push({id:spec.id,sourceID:spec.sourceID,triangles:meta.triangles,vertices:meta.vertices,sha256:meta.sha256});console.log(spec.id,meta.triangles,'triangles',safeCells,'safe navigation cells');
 }
 for(const name of['mtu-r03','sea-strainers']){const dst=resolve(out,'mechanics',name);mkdirSync(dst,{recursive:true});for(const f of['exterior.json','exterior.bin.gz','inspection.json','inspection.bin.gz',...(name==='sea-strainers'?['motion.json']:[]),'MODEL-BASIS.md','native-verification.json'])cpSync(resolve(dir,'rocha/luz-de-mar',name,f),resolve(dst,f));}

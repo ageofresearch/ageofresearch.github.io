@@ -1,0 +1,12 @@
+{
+  "sourceSHA256": "2b94d601027673a0506136c165c4c3a3a95f59f3646ed3d2eb8b6540f20c4580",
+  "frames": 240,
+  "rigidChannelsCompared": 237,
+  "springsCompared": 64,
+  "rigidPointComparisons": 56880,
+  "springPointComparisons": 15360,
+  "maxRigidErrorM": 4.768598950285941e-07,
+  "maxSpringErrorM": 8.940696716308594e-08,
+  "pass": true,
+  "scope": "Native Blender display poses and spring deformation; not OEM mechanics or physical performance."
+}

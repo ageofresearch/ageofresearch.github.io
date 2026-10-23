@@ -1,0 +1,27 @@
+{
+  "pass": true,
+  "renderer": "WebKit WebGL",
+  "softwareRenderer": true,
+  "poses": [
+    0,
+    0.125,
+    0.5,
+    0.9,
+    1.25,
+    1.999,
+    2.417,
+    3.75,
+    4,
+    5.125,
+    6.667,
+    7.999,
+    8
+  ],
+  "verticesCompared": 318,
+  "springParts": 64,
+  "rigidChannels": 254,
+  "pointComparisons": 4134,
+  "maxPositionErrorMetres": 1.5568291567014114e-7,
+  "loopClosesExactly": true,
+  "scope": "Actual WebGL2 palette texture and shared runtime deformation GLSL, compared to original pose matrices and spring data"
+}

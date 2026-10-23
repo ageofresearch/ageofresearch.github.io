@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "algorithm": "SHA-256",
   "scope": "New page subtree, excluding hashes.json and publication.json to avoid circular hashes",
   "files": {
@@ -8,8 +8,8 @@
       "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
     },
     "CREDITS.md": {
-      "bytes": 3361,
-      "sha256": "2357aa4ba6a4c8666732a2861a9b72aad39e3052663150369bd7c658b0ec1827"
+      "bytes": 4489,
+      "sha256": "514e1d91afdea699f5c24e15211301d896bb5d0e7c9c42d210fe454636a680c1"
     },
     "MESHOPT-LICENSE.txt": {
       "bytes": 1079,
@@ -18,6 +18,10 @@
     "THREE-LICENSE.txt": {
       "bytes": 1081,
       "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    "assets/asset-version-DmRPsZYl.js": {
+      "bytes": 539039,
+      "sha256": "3e4af7e14f3273ac3d2231c63506f2c746bdb4e543f359b1e2eafde156836685"
     },
     "assets/beach-club/ambient-beach-club.exr": {
       "bytes": 12815691,
@@ -119,17 +123,113 @@
       "bytes": 73028,
       "sha256": "1b1f5a05fd29b12889951b6ad5ee1b424503ded9b3da969dec468f2963586093"
     },
-    "assets/index-DLw-9y4g.css": {
-      "bytes": 10260,
-      "sha256": "756a67df37ca016b0b0f31183e2e0c533ac79a758192b4637abb279796e080b2"
+    "assets/index-BMIL2Evc.js": {
+      "bytes": 187415,
+      "sha256": "9aff0672c515e02e0c1a5e6c24b01a5006839534f16d46a7460bcb5e60646252"
     },
-    "assets/index-Dk0mw8fD.js": {
-      "bytes": 717959,
-      "sha256": "55dee5f5dc7e678aeb92182ab4f7d49a6607ff57fb9fffa46d94a1a8d225a89c"
+    "assets/index-DxPoVZRA.css": {
+      "bytes": 10429,
+      "sha256": "b409e423ff20ca61c980e1e96dd589251507d08bbbadf2bf30c64be6b1362751"
+    },
+    "assets/machinery/ambient-architecture.exr": {
+      "bytes": 12462030,
+      "sha256": "3b60a040574d779117b8008e2367462343ecbafad727b888f9c8e645fabcf328"
+    },
+    "assets/machinery/ambient-furniture.exr": {
+      "bytes": 17327436,
+      "sha256": "ceb270cda505a45facc1e48dc8987839b2e652853b1714e2a5e5dd60b3fa51e4"
+    },
+    "assets/machinery/authoring.json": {
+      "bytes": 7004,
+      "sha256": "645cc67eb301cf4400b04159d21a48ced7b0358ba3ab409e3ae49f2a52ab835f"
+    },
+    "assets/machinery/probe-aft.exr": {
+      "bytes": 1570452,
+      "sha256": "4495117d00ab59d996fddd65bdc63a2331c0c9685a4bef9b4761cfec6abba58f"
+    },
+    "assets/machinery/probe-forward.exr": {
+      "bytes": 1665679,
+      "sha256": "4edb80960846bba814de1f1ae823c0472f1c8e7799035b6ec13f2b13b15d3414"
+    },
+    "assets/machinery/probe.exr": {
+      "bytes": 1562003,
+      "sha256": "8d605ff60be6f11ba5e0b35a0d469c5fc48a7482e992d50d1675a1dc72c9768b"
+    },
+    "assets/machinery/reference-components.json": {
+      "bytes": 455930,
+      "sha256": "465bade7be3cf637823803ef2df77fc45fecc85dbaef76ff81dcaf1e6469e07c"
+    },
+    "assets/machinery/room.glb": {
+      "bytes": 11948888,
+      "sha256": "045517e66adac8430a85475da4a8b12d1f19c060f68ccabe6f7593b86dcfbc3c"
+    },
+    "assets/machinery/room.json": {
+      "bytes": 323117,
+      "sha256": "b91caaa8298dfd9f765767dd7a1f117128dc92b1f725c1772b94070312314fa4"
+    },
+    "assets/machinery/vr-details.glb": {
+      "bytes": 88476,
+      "sha256": "bf1647c18f44a2bdac0a21c7cb979e29c8ac6251387923ea1a199525bb1286b1"
     },
     "assets/manifest.json": {
-      "bytes": 7762,
-      "sha256": "d581385af025913c20cea0763c0362db1a9fa1540f8551e1a81739ba1b30f9d0"
+      "bytes": 10933,
+      "sha256": "ed25bbda88c6473a621bd9114550a00dcf1528d4cd0bc76e1333120e1c5ccfbb"
+    },
+    "assets/mechanics-Bl6190ef.js": {
+      "bytes": 262460,
+      "sha256": "fa662fb1f2c6b1d4f341ccb4bce4924585bacac5242a3a7237648d70ecbcbb76"
+    },
+    "assets/mechanics/mtu-r03/MODEL-BASIS.md": {
+      "bytes": 4791,
+      "sha256": "8fa231107db0826bd85f6a5234af7661207b51648d188a374899f8524f153483"
+    },
+    "assets/mechanics/mtu-r03/exterior.bin.gz": {
+      "bytes": 4303485,
+      "sha256": "0a44e4580670b1f4c1ab8423a81014b2419bdf1141433003357c12e3e4741b45"
+    },
+    "assets/mechanics/mtu-r03/exterior.json": {
+      "bytes": 225560,
+      "sha256": "a86d493c94b5122e5de92c6e5244ee372f107d7756895f2ec7cf36bc345c3f3b"
+    },
+    "assets/mechanics/mtu-r03/inspection.bin.gz": {
+      "bytes": 15000136,
+      "sha256": "d990f63bb5cce0e565a567261a44eb2f3c7a67023ed2a798a12c84810c4bc2ba"
+    },
+    "assets/mechanics/mtu-r03/inspection.json": {
+      "bytes": 364697,
+      "sha256": "9fcd8c61254d91966db2454db20f92866715df5da98990dd626e0d9477f106fc"
+    },
+    "assets/mechanics/mtu-r03/native-verification.json": {
+      "bytes": 445,
+      "sha256": "adf39df8543fcee4c457c077a9387aec32df5824d7bfc36c442d91f59a26eb75"
+    },
+    "assets/mechanics/sea-strainers/MODEL-BASIS.md": {
+      "bytes": 8863,
+      "sha256": "29bb062c21ad59dad38fc8f7d0196321b9158d9273789f2e143ad30eb199c4c1"
+    },
+    "assets/mechanics/sea-strainers/exterior.bin.gz": {
+      "bytes": 86829,
+      "sha256": "040ba2bd0bab78f7b13932d17c4f701aa79952f4add97a8d5a3808f1569e7423"
+    },
+    "assets/mechanics/sea-strainers/exterior.json": {
+      "bytes": 4438,
+      "sha256": "06a85d4328133a35c4d66f17b0fc67b4a984e61a2df6737751f61621965e8c6b"
+    },
+    "assets/mechanics/sea-strainers/inspection.bin.gz": {
+      "bytes": 4382690,
+      "sha256": "303b052959d1d6bb1b0860a2d2875a12d87d10a248cd7b17f2db6972807e4fdf"
+    },
+    "assets/mechanics/sea-strainers/inspection.json": {
+      "bytes": 1530,
+      "sha256": "12eb9c5048ed3af1f51aacbcde40ed95a046c90cb8738ca0594386bd30309cba"
+    },
+    "assets/mechanics/sea-strainers/motion.json": {
+      "bytes": 10509,
+      "sha256": "942e7440b76bf768fd1ab336d5fb807f20f3cbcf644367bc28ba894c4548246b"
+    },
+    "assets/mechanics/sea-strainers/native-verification.json": {
+      "bytes": 210,
+      "sha256": "d6d3034b1700046855bd76e153c7d3790826db94fc761bdd69870ba30e6293b1"
     },
     "assets/navigation.json": {
       "bytes": 12865,
@@ -240,12 +340,16 @@
       "sha256": "74ff66fbe9190236593d9df4548aa76b8291c950b47c51dc4bb886977714eb69"
     },
     "assets/yacht-structure.json": {
-      "bytes": 42331,
-      "sha256": "7aeced30d34a149338dcf9583993dc2bc7df5510a923ec04e7955aae584ee8d4"
+      "bytes": 42677,
+      "sha256": "016a70e0f86c4be107d38251484ce0e996e4dcd929faece1c3cb666b9d00e1fa"
     },
     "authoring/exteriors-downloads.json": {
       "bytes": 2917,
       "sha256": "4178b8fe15a87a561ada67fd0a4ab18ce6d92970f9005d9c57b03eca33f5ba9f"
+    },
+    "authoring/machinery-download.json": {
+      "bytes": 871,
+      "sha256": "6cbe62e97cb642c82576b5a79b7dfd20aafcb0cd0f28752524990cd2ef9b1d3f"
     },
     "authoring/saloon-authoring.zip": {
       "bytes": 91865256,
@@ -272,8 +376,8 @@
       "sha256": "d9a3769d62ff8947f43fc0dcb9f8422e1ebd213aa32f5d035ef4a51a708c0671"
     },
     "index.html": {
-      "bytes": 3362,
-      "sha256": "1755311a774eb0ee8ad611b26f2ffc25e509f244b26652a74af68784e969ddb2"
+      "bytes": 5497,
+      "sha256": "29d0ad7282170e039889f13b209490eaa98c27963399bc5002f3bad2ab72cb1d"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -352,8 +456,8 @@
       "sha256": "86ef67ebb054491ae4e92dde36f30dc79b67441be05c1691ce1f5e6dfb086f90"
     },
     "review/index.html": {
-      "bytes": 14352,
-      "sha256": "459a4906a7b1401f80876d586567417aa5f54441c01c68dd7aa7880b024eca32"
+      "bytes": 14404,
+      "sha256": "3934384ec62b5dcb30577ebb35710c0af0301e487f57229ffd199e7825fd92d8"
     },
     "review/joint-diagnostic.json": {
       "bytes": 3944,
@@ -362,6 +466,82 @@
     "review/joint-diagnostic.webp": {
       "bytes": 29024,
       "sha256": "d3de3654e79605be3f95e8bddd381b716c4265058d6932a83fd42a64c5bd5287"
+    },
+    "review/machinery-candidate-floor.webp": {
+      "bytes": 95884,
+      "sha256": "9aec24aea285972b0605212bfe54ad3d1d657f74e014d0639e6bea90a1930628"
+    },
+    "review/machinery-candidate-overview.webp": {
+      "bytes": 89408,
+      "sha256": "d7608b6f7c7e01573afdabafc1a7da1f14201857e0d131bff7247e23548c9161"
+    },
+    "review/machinery-candidate-port-equipment.webp": {
+      "bytes": 88976,
+      "sha256": "3d71f7d210fd48a5118d635be00ab5ec85ebb47d72d4e79b9a76801136a1b462"
+    },
+    "review/machinery-candidate-starboard-controls.webp": {
+      "bytes": 80622,
+      "sha256": "05e0cb00ac883c1f266988047cf49398d2c1b60766ca80460b1c58f20aae5c72"
+    },
+    "review/machinery-filter-clean.webp": {
+      "bytes": 100088,
+      "sha256": "e98fb3a1c637f8b76d15d7cc96cfa5f686e8b7193b835e027ccfd1465ff8f930"
+    },
+    "review/machinery-filter-dirty.webp": {
+      "bytes": 98130,
+      "sha256": "94664d8ae5631df1ab2cacd7d59d404711c4b27c4ccdad4407bd61a4f1265e9c"
+    },
+    "review/machinery-gpu.json": {
+      "bytes": 531,
+      "sha256": "db1a31df5bd4e99c8b3a5df79e9ef048efd6c0bae51e4050046f778c321ae767"
+    },
+    "review/machinery-mobile.webp": {
+      "bytes": 48144,
+      "sha256": "b3214da1bdbd3fc1b38a22c01b9f25d3a3ce4d3754f29adf7ab55d5f36ca5ad9"
+    },
+    "review/machinery-mtu-cutaway-port.webp": {
+      "bytes": 98440,
+      "sha256": "13c7f916759ab9bf2889dbef4667aba55d4bc510ba2e24ec9004212537852ecc"
+    },
+    "review/machinery-mtu-cycle-2-4s.webp": {
+      "bytes": 98840,
+      "sha256": "5031164bbd2e284bcf4d8f6769b9365a63f9d7a3a86c88b5338cf7f3b6716cac"
+    },
+    "review/machinery-native.json": {
+      "bytes": 1255,
+      "sha256": "2549b45109a7d90071fdc6e72336cec84ba16ec89455118cfa5d908b224481b2"
+    },
+    "review/machinery-original-floor.webp": {
+      "bytes": 71032,
+      "sha256": "3bb01f4c59a85729fb7910383a76b87589238c1417754c5d27c829ec6adb0b44"
+    },
+    "review/machinery-original-overview.webp": {
+      "bytes": 61590,
+      "sha256": "4d48851857c57a7c5c10adbf0155b28a99851f0166946fa381dd64da1d6f7e84"
+    },
+    "review/machinery-original-port-equipment.webp": {
+      "bytes": 65896,
+      "sha256": "6327687bdfa34cf9fb2503de753534c82b4c523ba1e1235180d2fd49458bb776"
+    },
+    "review/machinery-original-starboard-controls.webp": {
+      "bytes": 56994,
+      "sha256": "f6ff5a2ce7dd3bea3e66820d1ab7427fa7991b305227a70e4c601d3e52f314bf"
+    },
+    "review/machinery-resource-summary.json": {
+      "bytes": 9494,
+      "sha256": "80173685c6ac588fde0477c84b0e2eb9cf35be0e7ca1336393614b179168a043"
+    },
+    "review/machinery-validation.json": {
+      "bytes": 55933,
+      "sha256": "97436a58ec7c31b53a0266d9eebc96b3a849764c3779cf85b4df064c3179c965"
+    },
+    "review/machinery-vr-evidence.json": {
+      "bytes": 55135,
+      "sha256": "307cf47aa9b36a6157970955700b7aa03686fe5d008a8905ce9d33c326d8e18c"
+    },
+    "review/machinery.html": {
+      "bytes": 22732,
+      "sha256": "4ee39d9953eda35596c9285490321392f8174b4a46876998f4e21d835b7e7542"
     },
     "review/original-beach-club.webp": {
       "bytes": 11714,

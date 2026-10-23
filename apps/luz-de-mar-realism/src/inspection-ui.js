@@ -1,0 +1,13 @@
+export function setupInspectionUI(app){
+ const $=id=>document.getElementById(id),panel=$('machinery-inspector'),active=()=>app.room?.machinery;let tab='motor';
+ app.syncUI=()=>{const m=active();panel.hidden=!m;if(!m){panel.open=false;return;}const a=m.mtu,f=m.filters;
+  for(const name of['motor','filter']){$('inspect-'+name+'-tab').setAttribute('aria-pressed',String(tab===name));$('inspect-'+name+'-content').hidden=tab!==name;}
+  $('motor-side').value=a.selected;$('motor-cutaway').checked=a.cutaway||a.requestedCut;$('motor-play').textContent=a.playing?'Pausar':'Reproducir';$('motor-play').disabled=a.loading;$('motor-time').value=a.time;$('motor-clock').textContent=a.time.toFixed(2)+' / 8 s';$('motor-status').textContent=a.loading?'Cargando el mecanismo…':a.error;
+  $('filter-side').value=f.selected;$('filter-access').checked=f.accessOpen;$('filter-dirty').checked=f.dirty;$('filter-extract').disabled=!f.accessOpen||f.loading;$('filter-insert').disabled=!f.accessOpen||f.loading;$('filter-progress').disabled=!f.accessOpen||!m.filterMotion;$('filter-progress').value=f.progress;$('filter-status').textContent=f.loading?'Cargando el cesto…':f.error;
+  $('machine-door').textContent=m.doorOpen?'Cerrar puerta · E':'Abrir puerta · E';const d=m.room.meta.door,p=app.nav?.position;$('machine-door').disabled=!p||Math.hypot((p[0]-d.center[0])*35.23/36,(p[1]-d.center[1])*7.47/7.6)>d.reach;
+ };
+ for(const name of['motor','filter'])$('inspect-'+name+'-tab').onclick=()=>{tab=name;app.controls.clear();app.syncUI();};
+ $('motor-side').onchange=e=>active()?.selectMotor(e.target.value);$('motor-cutaway').onchange=e=>void active()?.cut(e.target.checked);$('motor-play').onclick=()=>void active()?.play();$('motor-restart').onclick=()=>active()?.setTime(0);$('motor-time').oninput=e=>active()?.setTime(e.target.value);
+ $('filter-side').onchange=e=>active()?.selectFilter(e.target.value);$('filter-access').onchange=e=>{active()?.access(e.target.checked);app.syncUI();};$('filter-dirty').onchange=e=>{const m=active();if(m){m.filters.dirty=e.target.checked;m.sync();}};$('filter-extract').onclick=()=>void active()?.extract(1);$('filter-insert').onclick=()=>void active()?.extract(0);$('filter-progress').oninput=e=>active()?.progress(e.target.value);$('inspection-reset').onclick=()=>app.resetView();$('machine-door').onclick=()=>active()?.toggleDoor();
+ window.addEventListener('keydown',e=>{if(e.code==='KeyK'&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&!/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)&&active()){e.preventDefault();app.controls.clear();panel.open=!panel.open;}});panel.addEventListener('toggle',()=>{app.controls.clear();document.body.classList.toggle('inspection-open',panel.open&&!panel.hidden);});app.syncUI();
+}

@@ -1,0 +1,340 @@
+{
+  "initialEncodedPayloadBytes": 57433347,
+  "initialRequests": [
+    {
+      "url": "http://127.0.0.1:5235/assets/index-BMIL2Evc.js",
+      "encoded": 187415,
+      "decoded": 187415,
+      "transfer": 187715,
+      "durationMs": 15.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/index-DxPoVZRA.css",
+      "encoded": 10429,
+      "decoded": 10429,
+      "transfer": 10729,
+      "durationMs": 13.700000017881393
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/asset-version-DmRPsZYl.js",
+      "encoded": 539039,
+      "decoded": 539039,
+      "transfer": 539339,
+      "durationMs": 16.400000005960464
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/exterior.jpg",
+      "encoded": 588155,
+      "decoded": 588155,
+      "transfer": 588455,
+      "durationMs": 5.300000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/manifest.json?v=machinery-r11",
+      "encoded": 10933,
+      "decoded": 10933,
+      "transfer": 11233,
+      "durationMs": 11.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/favicon.svg",
+      "encoded": 198,
+      "decoded": 198,
+      "transfer": 498,
+      "durationMs": 2.5999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/navigation.json?v=machinery-r11",
+      "encoded": 12865,
+      "decoded": 12865,
+      "transfer": 13165,
+      "durationMs": 1.7000000178813934
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/room.json?v=machinery-r11",
+      "encoded": 59833,
+      "decoded": 59833,
+      "transfer": 60133,
+      "durationMs": 1.800000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/context/context.glb?v=machinery-r11",
+      "encoded": 167684,
+      "decoded": 167684,
+      "transfer": 167984,
+      "durationMs": 8.699999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/saloon/context.glb?v=machinery-r11",
+      "encoded": 1404100,
+      "decoded": 1404100,
+      "transfer": 1404400,
+      "durationMs": 10.099999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/cockpit/context.glb?v=machinery-r11",
+      "encoded": 690856,
+      "decoded": 690856,
+      "transfer": 691156,
+      "durationMs": 4.299999982118607
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/beach-club/context.glb?v=machinery-r11",
+      "encoded": 362812,
+      "decoded": 362812,
+      "transfer": 363112,
+      "durationMs": 3.100000023841858
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/port-side/context.glb?v=machinery-r11",
+      "encoded": 96376,
+      "decoded": 96376,
+      "transfer": 96676,
+      "durationMs": 2.4000000059604645
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/starboard-side/context.glb?v=machinery-r11",
+      "encoded": 211072,
+      "decoded": 211072,
+      "transfer": 211372,
+      "durationMs": 2.300000011920929
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/bow/context.glb?v=machinery-r11",
+      "encoded": 633188,
+      "decoded": 633188,
+      "transfer": 633488,
+      "durationMs": 6.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/yacht-structure.json?v=machinery-r11",
+      "encoded": 42677,
+      "decoded": 42677,
+      "transfer": 42977,
+      "durationMs": 2
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/room.json?v=machinery-r11",
+      "encoded": 323117,
+      "decoded": 323117,
+      "transfer": 323417,
+      "durationMs": 5.0999999940395355
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/room.glb?v=machinery-r11",
+      "encoded": 11948888,
+      "decoded": 11948888,
+      "transfer": 11949188,
+      "durationMs": 188.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/ambient-architecture.exr?v=machinery-r11",
+      "encoded": 12462030,
+      "decoded": 12462030,
+      "transfer": 12462330,
+      "durationMs": 260.7999999821186
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/ambient-furniture.exr?v=machinery-r11",
+      "encoded": 17327436,
+      "decoded": 17327436,
+      "transfer": 17327736,
+      "durationMs": 338.09999999403954
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/probe-aft.exr?v=machinery-r11",
+      "encoded": 1570452,
+      "decoded": 1570452,
+      "transfer": 1570752,
+      "durationMs": 62.70000001788139
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/probe.exr?v=machinery-r11",
+      "encoded": 1562003,
+      "decoded": 1562003,
+      "transfer": 1562303,
+      "durationMs": 53.70000001788139
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/probe-forward.exr?v=machinery-r11",
+      "encoded": 1665679,
+      "decoded": 1665679,
+      "transfer": 1665979,
+      "durationMs": 73.40000000596046
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/machinery/vr-details.glb?v=machinery-r11",
+      "encoded": 88476,
+      "decoded": 88476,
+      "transfer": 88776,
+      "durationMs": 60.39999997615814
+    },
+    {
+      "url": "http://127.0.0.1:5235/decoders/basis_transcoder.js",
+      "encoded": 57529,
+      "decoded": 57529,
+      "transfer": 57829,
+      "durationMs": 5.299999982118607
+    },
+    {
+      "url": "http://127.0.0.1:5235/decoders/basis_transcoder.wasm",
+      "encoded": 527333,
+      "decoded": 527333,
+      "transfer": 527633,
+      "durationMs": 17.30000001192093
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/mechanics-Bl6190ef.js",
+      "encoded": 262460,
+      "decoded": 262460,
+      "transfer": 262760,
+      "durationMs": 5.5
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/mechanics/mtu-r03/exterior.json?v=machinery-r11",
+      "encoded": 225560,
+      "decoded": 225560,
+      "transfer": 225860,
+      "durationMs": 4.199999988079071
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/mechanics/sea-strainers/exterior.json?v=machinery-r11",
+      "encoded": 4438,
+      "decoded": 4438,
+      "transfer": 4738,
+      "durationMs": 8.099999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/mechanics/mtu-r03/exterior.bin.gz?v=machinery-r11",
+      "encoded": 4303485,
+      "decoded": 4303485,
+      "transfer": 4303785,
+      "durationMs": 32.599999994039536
+    },
+    {
+      "url": "http://127.0.0.1:5235/assets/mechanics/sea-strainers/exterior.bin.gz?v=machinery-r11",
+      "encoded": 86829,
+      "decoded": 86829,
+      "transfer": 87129,
+      "durationMs": 4.199999988079071
+    }
+  ],
+  "normalBeforeInspectionEstimatedGpuBytes": 310258331,
+  "cycleResourceCounts": [
+    {
+      "memory": {
+        "geometries": 111,
+        "textures": 45
+      },
+      "shared": {
+        "textures": 29,
+        "references": 38
+      },
+      "mechanics": {
+        "active": true,
+        "exteriorTrianglesPerEngine": 382211,
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      }
+    },
+    {
+      "memory": {
+        "geometries": 111,
+        "textures": 45
+      },
+      "shared": {
+        "textures": 29,
+        "references": 38
+      },
+      "mechanics": {
+        "active": true,
+        "exteriorTrianglesPerEngine": 382211,
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      }
+    },
+    {
+      "memory": {
+        "geometries": 111,
+        "textures": 45
+      },
+      "shared": {
+        "textures": 29,
+        "references": 38
+      },
+      "mechanics": {
+        "active": true,
+        "exteriorTrianglesPerEngine": 382211,
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      }
+    }
+  ],
+  "estimationLimits": "Payloads from the local static server, before first inspection request. GPU payload estimate excludes canvas/MSAA, programs, global light tables and driver caches. Geometry for previously inspected interiors can remain cached until room eviction."
+}

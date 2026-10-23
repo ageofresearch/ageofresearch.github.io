@@ -5,7 +5,7 @@ import subprocess,json,hashlib,sys,time,urllib.request
 R=Path(__file__).resolve().parents[1];repo=R.parents[1];W=R/'work/right-engine-r01';base='5bb26ba6083bd82feefc763a5c3bb1d4a8e5aba6';commit=sys.argv[1]
 def git(*args):return subprocess.check_output(['git',*args],cwd=repo,text=True).strip()
 assert git('rev-parse',commit)==commit
-files=git('diff','--name-only','--diff-filter=ACM',base,commit,'--','site/luz-de-mar-realism').splitlines()
+files=git('diff','--no-renames','--name-only','--diff-filter=ACM',base,commit,'--','site/luz-de-mar-realism').splitlines()
 def verify(name):
  local=repo/name;rel=name.removeprefix('site/');expected=hashlib.sha256(local.read_bytes()).hexdigest();url='https://ageofresearch.github.io/'+rel+'?verify='+commit[:12];error=''
  for attempt in range(5):

@@ -8,7 +8,7 @@ from pathlib import Path
 from mathutils import Vector, Matrix
 from mathutils.bvhtree import BVHTree
 
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';A=R/'public/assets/mechanics/left-vr-r01'
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';A=R/'public/assets/mechanics/left-vr-r01'
 BASE=R/'work/machinery-r11';S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6
 E=json.loads((A/'evidence.json').read_text());meta=json.loads((BASE/'snapshot/machinery.json').read_text())
 S.render.engine='CYCLES';S.cycles.device='CPU';S.cycles.samples=64;S.cycles.max_bounces=6;S.cycles.diffuse_bounces=3;S.cycles.glossy_bounces=3;S.render.threads_mode='FIXED';S.render.threads=4
@@ -67,7 +67,7 @@ def mat(name,color=None,rough=None,metal=None):
  if name in mats:return mats[name]
  m=bpy.data.materials.new('LVR | '+name);m.use_nodes=True;p=m.node_tree.nodes['Principled BSDF'];m['leftMaterial']=True;m['family']=name;m['lightmap']='left-installed';n=m.node_tree.nodes;l=m.node_tree.links
  if name in families:
-  rr,mm,tile=families[name];p.inputs['Roughness'].default_value=rr;p.inputs['Metallic'].default_value=mm;p.inputs['Coat Weight'].default_value=.2 if name in ['enamel','cast','red']else .02
+  rr,mm,tile=families[name];p.inputs['Roughness'].default_value=rr;p.inputs['Metallic'].default_value=mm;p.inputs['Coat Weight'].default_value=.08 if name in ['enamel','cast','red']else .02
   uv=n.new('ShaderNodeUVMap');uv.uv_map='UV0'
   for kind,slot in [('color','Base Color'),('normal','Normal'),('orm','Roughness')]:
    tex=n.new('ShaderNodeTexImage');im=bpy.data.images.load(str(W/'textures'/(name+'-'+kind+'.png')),check_existing=True);im.colorspace_settings.name='sRGB'if kind=='color'else'Non-Color';tex.image=im;l.new(uv.outputs[0],tex.inputs['Vector'])
@@ -76,7 +76,7 @@ def mat(name,color=None,rough=None,metal=None):
    else:l.new(tex.outputs['Color'],p.inputs[slot])
   m['tileMetres']=tile
  elif name=='intake-mesh':
-  uv=n.new('ShaderNodeUVMap');uv.uv_map='UV0';t=n.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(W/'textures/intake-mesh-color.png'));l.new(uv.outputs[0],t.inputs['Vector']);l.new(t.outputs['Color'],p.inputs['Base Color']);l.new(t.outputs['Alpha'],p.inputs['Alpha']);p.inputs['Metallic'].default_value=.87;p.inputs['Roughness'].default_value=.45;m['tileMetres']=.180;m['alphaMask']=True;m.surface_render_method='DITHERED'
+  uv=n.new('ShaderNodeUVMap');uv.uv_map='UV0';t=n.new('ShaderNodeTexImage');t.image=bpy.data.images.load(str(W/'textures/intake-mesh-color.png'));l.new(uv.outputs[0],t.inputs['Vector']);l.new(t.outputs['Color'],p.inputs['Base Color']);l.new(t.outputs['Alpha'],p.inputs['Alpha']);p.inputs['Metallic'].default_value=.87;p.inputs['Roughness'].default_value=.45;m['tileMetres']=.180;m['alphaMask']=True;m.surface_render_method='DITHERED';nt=n.new('ShaderNodeTexImage');nt.image=bpy.data.images.load(str(W/'textures/intake-mesh-normal.png'));nt.image.colorspace_settings.name='Non-Color';l.new(uv.outputs[0],nt.inputs['Vector']);nm=n.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=.55;l.new(nt.outputs['Color'],nm.inputs['Color']);l.new(nm.outputs[0],p.inputs['Normal'])
  else:p.inputs['Base Color'].default_value=(*color,1);p.inputs['Roughness'].default_value=rough or .4;p.inputs['Metallic'].default_value=metal or 0;m['tileMetres']=.12
  target=n.new('ShaderNodeTexImage');target.name='BAKE | installed diffuse';n.active=target;mats[name]=m;return m
 for name in families:mat(name)
@@ -128,11 +128,12 @@ def tube(name,points,r,material,group,radial=16,sub=5,wrinkle=0):
    t=j/sub;sample.append(.5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t*t+(-p0+3*p1-3*p2+p3)*t*t*t))
  sample.append(pp[-1]);verts=[];length=0;lengths=[];last_u=None
  for i,p in enumerate(sample):
-  tangent=(sample[min(i+1,len(sample)-1)]-sample[max(i-1,0)]).normalized();u=tangent.cross(Vector((0,0,1)))
-  if u.length<.1:u=tangent.cross(Vector((1,0,0)))
-  u.normalize()
-  if last_u is not None and u.dot(last_u)<0:u=-u
-  last_u=u;v=tangent.cross(u).normalized();s=i/(len(sample)-1)
+  tangent=(sample[min(i+1,len(sample)-1)]-sample[max(i-1,0)]).normalized()
+  # Parallel transport avoids the old abrupt frame flip at near-vertical elbows.
+  # That flip twisted rings through one another, making black horizontal slits.
+  u=last_u-tangent*last_u.dot(tangent) if last_u is not None else tangent.cross(Vector((0,0,1)))
+  if u.length<.001:u=tangent.cross(Vector((1,0,0)))
+  u.normalize();last_u=u.copy();v=tangent.cross(u).normalized();s=i/(len(sample)-1)
   if i:length+=(p-sample[i-1]).length
   lengths.append(length)
   for j in range(radial):
@@ -268,8 +269,8 @@ for k,y in enumerate([1.35,1.85]):
 
 # Padded covers have irregular volume, sewn perimeter, binding and three hooks.
 clothpts=[[9.30,1.05,3.26],[9.30,1.05,3.09],[9.32,1.05,2.91],[9.42,1.05,2.72],[9.63,1.07,2.64],[9.80,1.10,2.64]]
-cloth=tube('aluminized padded elbow',clothpts,.208,'aluminized','jacket',64,12,.065)
-cuff=tube('upper black fastening cuff',[[9.30,1.05,3.285],[9.30,1.05,3.21],[9.30,1.05,3.135]],.216,'strap','closures',64,10,.045)
+cloth=tube('aluminized padded elbow',clothpts,.208,'aluminized','jacket',64,24,0)
+cuff=tube('upper black fastening cuff',[[9.30,1.05,3.285],[9.30,1.05,3.21],[9.30,1.05,3.135]],.216,'strap','closures',64,18,0)
 for i,ids in enumerate([range(64),range(len(cuff.data.vertices)-64,len(cuff.data.vertices))]):
  path=[source(cuff.data.vertices[j].co)for j in ids];path.append(path[0]);tube('cuff perimeter sewn binding '+str(i),path,.0014,'aluminized','closures',6,1)
 skin=BVHTree.FromPolygons([v.co for v in cuff.data.vertices],[f.vertices[:]for f in cuff.data.polygons],all_triangles=False)
@@ -380,16 +381,24 @@ def sculpt(o,group,taper=False):
  field=grid['groups'][group];control=np.asarray(field['points']);weights=np.asarray(field['weights']);affine=np.asarray(field['affine']);coords=np.asarray([source(v.co)for v in o.data.vertices]);dx=(coords[:,0]-9.15)*SX;dy=coords[:,1]*SY;dz=coords[:,2]-3.18;uv=np.c_[(1+dx/dy)/2,(1-dz/dy)/2];r=np.linalg.norm(uv[:,None,:]-control[None,:,:],axis=2);k=r*r*np.log(np.maximum(r,1e-10));shift=k@weights+np.c_[np.ones(len(uv)),uv]@affine
  if taper:shift*=np.clip((coords[:,2]-3.04)/.35,0,1)[:,None]
  if not taper:
-  diff=uv[:,None,:]-control;gradient=(2*np.log(np.maximum(r,1e-10))+1)[:,:,None]*diff;jac=np.einsum('nki,kj->nji',gradient,weights)+affine[1:].T[None,:,:]+np.eye(2);minimum=float(np.linalg.det(jac).min());o['gridJacobianMinimum']=minimum
+  diff=uv[:,None,:]-control;gradient=(2*np.log(np.maximum(r,1e-10))+1)[:,:,None]*diff;jac=np.einsum('nki,kj->nji',gradient,weights)+affine[1:].T[None,:,:]+np.eye(2);minimum=float(np.linalg.det(jac).min());o['gridJacobianMinimum']=min(o.get('gridJacobianMinimum',1),minimum)
   if minimum<=.015:raise RuntimeError('Grid sculpt reverses or collapses a surface: '+o.name+' '+str(minimum))
  uv+=shift;coords[:,0]=9.15+(uv[:,0]*2-1)*dy/SX;coords[:,2]=3.18+(1-uv[:,1]*2)*dy
  for v,p in zip(o.data.vertices,coords):v.co=pt(p)
  o['gridSculpt']=group;o['gridDepth']='inferred, unchanged per vertex';o.data.update()
-for o in ([]if os.environ.get('LVR_NO_GRID')else parts):
- name=o.name.removeprefix('LVR | ')
- if name in ['black main swept exhaust','exhaust sewn end panel','main exhaust textile band']or name.startswith(('main band stitched edge','main band hook')):sculpt(o,'exhaust')
- elif name.startswith(('black downward branch','exhaust bracket','exhaust standoff','exhaust flange fastener')):sculpt(o,'exhaust',True)
- elif name in ['aluminized padded elbow','upper black fastening cuff']or name.startswith(('cuff perimeter','diagonal cuff','cuff strap','stainless cuff','longitudinal sewn seam')):sculpt(o,'jacket')
+def apply_grid_fields():
+ for o in ([]if os.environ.get('LVR_NO_GRID')else parts):
+  name=o.name.removeprefix('LVR | ')
+  if name in ['black main swept exhaust','exhaust sewn end panel','main exhaust textile band']or name.startswith(('main band stitched edge','main band hook')):sculpt(o,'exhaust')
+  elif name.startswith(('black downward branch','exhaust bracket','exhaust standoff','exhaust flange fastener')):sculpt(o,'exhaust',True)
+  elif name in ['aluminized padded elbow','upper black fastening cuff']or name.startswith(('cuff perimeter','diagonal cuff','cuff strap','stainless cuff','longitudinal sewn seam')):sculpt(o,'jacket')
+apply_grid_fields()
+base_grid=grid
+refinement_path=R/'tools/left-engine-r13-contours.json'
+refinements=json.loads(refinement_path.read_text())if refinement_path.exists()else{'stages':[]}
+for stage in refinements['stages']:
+ grid=stage;apply_grid_fields()
+grid=base_grid
 
 solid_volumes=[]
 for o in parts:
@@ -397,6 +406,9 @@ for o in parts:
  bm=bmesh.new();bm.from_mesh(o.data);volume=bm.calc_volume(signed=True);closed=all(e.is_manifold for e in bm.edges);bm.free()
  if not closed or volume<=1e-12:raise RuntimeError('Invalid final authored solid: '+o.name+' '+str(volume))
  solid_volumes.append(volume)
+
+# R13 visible surface reconstruction follows the original pixel grid.
+runpy.run_path(str(R/'tools/left-engine-r13-detail.py'),init_globals=globals())
 
 # Physical box UVs for castings; tubes carry continuous physical tangent UVs.
 for o in parts:
@@ -428,7 +440,7 @@ C.hide_render=True;C.hide_viewport=True
 hero.data.calc_loop_triangles();triangles=len(hero.data.loop_triangles)
 assert triangles<=450000,triangles
 runpy.run_path(str(R/'tools/verify-left-grid.py'))
-binding={'version':2,'asset':'left-vr-r01','units':'physical metres','space':'viewer-world-metres','matrix':[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],'reference':E['reference'],'sourceCamera':E['camera'],'replacedIDs':replaced,'compatibleNativeSHA256':json.loads((R/'public/assets/mechanics/mtu-r03/exterior.json').read_text())['sourceSHA256'],'rightNativeUnchanged':True,'editableObjects':len(parts),'detailTriangles':triangles,'uv':uv,'materials':list(mats),'gridFit':json.loads((W/'grid-fit.json').read_text()),'gridSculpt':grid,'lightingModel':'baked full diffuse + local probe specular; no duplicate live direct contribution','couplingSource':[9.72,1.2,1.94],'accuracy':'Visible VR forms; estimated depth and dimensions. Nominal R03 mechanics is a separate representation.'}
+binding={'version':2,'asset':'left-vr-r01','units':'physical metres','space':'viewer-world-metres','matrix':[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],'reference':E['reference'],'sourceCamera':E['camera'],'replacedIDs':replaced,'compatibleNativeSHA256':json.loads((R/'public/assets/mechanics/mtu-r03/exterior.json').read_text())['sourceSHA256'],'rightNativeUnchanged':True,'editableObjects':len(parts),'detailTriangles':triangles,'uv':uv,'materials':list(mats),'gridFit':json.loads((W/'grid-fit.json').read_text()),'gridSculpt':grid,'contourRefinements':refinements,'lightingModel':'baked full diffuse + local probe specular; no duplicate live direct contribution','couplingSource':[9.72,1.2,1.94],'accuracy':'Visible VR forms; estimated depth and dimensions. Nominal R03 mechanics is a separate representation.'}
 binding['gridDeformationValidation']={'minimumVertexJacobian':min(o.get('gridJacobianMinimum',1)for o in parts),'nonpositiveVertexJacobians':0,'test':'Analytic grid-map Jacobian sampled at every sculpted surface vertex; tapered branch connections keep their seated ends.'}
 binding['mountingInterfaces']={'engineBeds':mount_interfaces,'guardFeetSourceZ':1.58,'nominalCoreAssemblies':['01 Crankcase and oil sump','SAE0 flange and flywheel bell'],'status':'Compatible nominal load path retained; bedding inferred and seated on the existing digital bilge'}
 binding['solidNormalsValidation']={'closedAuthoredSolids':len(solid_volumes),'inwardSolids':0,'minimumPositiveSignedVolume':min(solid_volumes),'method':'Manifold edges and positive signed volume after deformation; evaluated source primitives are oriented outward before modifiers and diffuse baking.'}

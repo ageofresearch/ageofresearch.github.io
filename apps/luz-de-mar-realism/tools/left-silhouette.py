@@ -2,7 +2,7 @@
 import bpy, math
 from pathlib import Path
 from mathutils import Vector
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6
 collection=bpy.data.collections['EDITABLE | VR left installed'];collection.hide_render=False;collection.hide_viewport=False
 m=bpy.data.materials.new('Silhouette');m.use_nodes=True;n=m.node_tree.nodes;n.clear();e=n.new('ShaderNodeEmission');e.inputs[0].default_value=(1,1,1,1);o=n.new('ShaderNodeOutputMaterial');m.node_tree.links.new(e.outputs[0],o.inputs[0])
 for obj in S.objects:

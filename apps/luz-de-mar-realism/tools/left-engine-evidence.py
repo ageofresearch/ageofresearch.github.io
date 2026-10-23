@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 R=Path(__file__).resolve().parents[1]
-W=R/'work/left-engine-r12'; W.mkdir(parents=True,exist_ok=True)
+W=R/'work/left-engine-r13'; W.mkdir(parents=True,exist_ok=True)
 A=R/'public/assets/mechanics/left-vr-r01'; A.mkdir(parents=True,exist_ok=True)
 SOURCE=R/'work/reference/machinery/cubes'
 CAMERA=[9.15,0,3.18]

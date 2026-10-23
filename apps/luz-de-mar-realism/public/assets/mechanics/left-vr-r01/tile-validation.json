@@ -1,0 +1,214 @@
+{
+  "version": "left-vr-grid-r13",
+  "camera": [
+    9.15,
+    0,
+    3.18
+  ],
+  "cubeSize": 2048,
+  "tileCount": 2406,
+  "automaticallyAssessedCount": 2406,
+  "parent64Count": 849,
+  "referenceAssets": {
+    "f": {
+      "referenceSHA256": "be5c7583661b1ee242e8ec1214994f90885192328b9bf97dd1adf9ca145d9e6c"
+    },
+    "l": {
+      "referenceSHA256": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9"
+    },
+    "d": {
+      "referenceSHA256": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3"
+    }
+  },
+  "heldOutEdges": [
+    {
+      "name": "intake lower visible edge",
+      "face": "f",
+      "object": "LVR | R13 stepped intake casting",
+      "points": [
+        [
+          335,
+          1525
+        ],
+        [
+          379,
+          1520
+        ],
+        [
+          429,
+          1497
+        ],
+        [
+          482,
+          1460
+        ],
+        [
+          526,
+          1437
+        ],
+        [
+          570,
+          1410
+        ],
+        [
+          607,
+          1370
+        ]
+      ],
+      "confidence": "medium",
+      "usedForFit": false,
+      "errorsPixels": [
+        1,
+        17.08800749063506,
+        14.317821063276353,
+        4.47213595499958,
+        5.830951894845301,
+        7.810249675906654,
+        7.0710678118654755
+      ],
+      "p95Pixels": 16.256951562427446,
+      "maxPixels": 17.08800749063506,
+      "passed": false,
+      "measurement": "Visible rendered object boundary; occluded annotations remain reported, not silently discarded."
+    },
+    {
+      "name": "silver left visible edge",
+      "face": "l",
+      "object": "LVR | aluminized padded elbow",
+      "points": [
+        [
+          965,
+          1150
+        ],
+        [
+          975,
+          1290
+        ],
+        [
+          1010,
+          1410
+        ],
+        [
+          1060,
+          1480
+        ],
+        [
+          1190,
+          1570
+        ],
+        [
+          1260,
+          1630
+        ],
+        [
+          1350,
+          1670
+        ],
+        [
+          1450,
+          1687
+        ],
+        [
+          1550,
+          1695
+        ]
+      ],
+      "confidence": "high",
+      "usedForFit": false,
+      "errorsPixels": [
+        1.4142135623730951,
+        1,
+        1,
+        1,
+        2.23606797749979,
+        1,
+        1.4142135623730951,
+        1,
+        3
+      ],
+      "p95Pixels": 2.6944271909999156,
+      "maxPixels": 3,
+      "passed": true,
+      "measurement": "Visible rendered object boundary; occluded annotations remain reported, not silently discarded."
+    },
+    {
+      "name": "exhaust top visible edge",
+      "face": "l",
+      "object": "LVR | black main swept exhaust",
+      "points": [
+        [
+          990,
+          770
+        ],
+        [
+          1035,
+          660
+        ],
+        [
+          1105,
+          590
+        ],
+        [
+          1200,
+          538
+        ],
+        [
+          1300,
+          505
+        ],
+        [
+          1400,
+          490
+        ],
+        [
+          1550,
+          466
+        ],
+        [
+          1720,
+          470
+        ],
+        [
+          1850,
+          488
+        ],
+        [
+          1950,
+          515
+        ],
+        [
+          2030,
+          560
+        ]
+      ],
+      "confidence": "high",
+      "usedForFit": false,
+      "errorsPixels": [
+        1.4142135623730951,
+        2.8284271247461903,
+        0,
+        1.4142135623730951,
+        0,
+        5,
+        5,
+        1,
+        1,
+        3.1622776601683795,
+        2.8284271247461903
+      ],
+      "p95Pixels": 5,
+      "maxPixels": 5,
+      "passed": true,
+      "measurement": "Visible rendered object boundary; occluded annotations remain reported, not silently discarded."
+    }
+  ],
+  "acceptance": {
+    "unambiguousLandmarkMaxPixels": 4,
+    "clearEdgeP95Pixels": 6,
+    "allVisibleCellsReviewed": true,
+    "materialAndInternalFeaturesRequired": true
+  },
+  "accepted": false,
+  "status": "Candidate under comparison; no automatic promotion",
+  "privateInventorySHA256": "6cfd838e69c3825ed3039ef45396bd639eb193a858930a91684015745874d8fb"
+}

@@ -1,0 +1,228 @@
+{
+  "file": "luz-left-engine-grid-r13-authoring.zip",
+  "bytes": 74399519,
+  "sha256": "529f33f4f3eb75a6b399b47bde4fe49172d8a3e5ac7cc10cadf4aac2710c24a4",
+  "entries": {
+    "left-engine-master.blend": {
+      "bytes": 69082444,
+      "sha256": "c87a15a8d4463ffe24066cdbf24926e440591a3f98f2e7509fc682fda413c741"
+    },
+    "authoring.json": {
+      "bytes": 77367,
+      "sha256": "11e8d899389b97073600c78b22e80f88b76f3fb50ee679155945a48474252b89"
+    },
+    "runtime-assets.json": {
+      "bytes": 86217,
+      "sha256": "9a3cf71f545ddda41c6afb94bdcff2e11b52609fdf06a087b4f6fd589366bfa0"
+    },
+    "validation/grid-fit.json": {
+      "bytes": 12055,
+      "sha256": "2d60d5cf016a8c9a711b4a02760b8c33296be3b1b842547b070b48850e7e2669"
+    },
+    "validation/clearance.json": {
+      "bytes": 301,
+      "sha256": "a0061e38d045565990bde190605f5cdfbfcfa207220d81c0ca605bc6916e2b7c"
+    },
+    "provenance/source-integrity.json": {
+      "bytes": 476,
+      "sha256": "892a16b7ae6a23fcac8babda5784d6115a2eeb2c0597001b05d19daee7447053"
+    },
+    "validation/contours.json": {
+      "bytes": 6980,
+      "sha256": "5a3b0823bfef2359de0e44545ec2a4a5057b2761a340a9af8cc4f43e6b911593"
+    },
+    "README.md": {
+      "bytes": 5249,
+      "sha256": "87d27b5aaf2554641ef0a969a3e5017b3761420be191fa0250fd7967739ba23a"
+    },
+    "provenance/evidence.json": {
+      "bytes": 8205,
+      "sha256": "a6c76897a13a70dea39ce78bf2b4d6591c8b377309d9d4e73768412718a4bee2"
+    },
+    "tools/build-left-engine.py": {
+      "bytes": 41836,
+      "sha256": "230accba3b1404d6153aaa1adea249996161b150edc6e23cc0db1a45218036c6"
+    },
+    "tools/left-engine-r13-detail.py": {
+      "bytes": 14660,
+      "sha256": "24ddd9932aa7c6166dea36f74f91be86ef41cde2df131cd9e108ac7a3b957060"
+    },
+    "tools/left-engine-textures.py": {
+      "bytes": 3023,
+      "sha256": "d8a7b22c853291d0d99b373796cc82093da7e495356a20dd8539e944400ca5e9"
+    },
+    "tools/report-left-engine.py": {
+      "bytes": 11766,
+      "sha256": "4830defc1df335bd674930cca864ebde6313992ebf480002b7c1d497d0be90b9"
+    },
+    "tools/left-engine-evidence.py": {
+      "bytes": 6426,
+      "sha256": "d99dfa911ed3c03f949f53fdc132b9eb18d38728a1aeff6021522c761e8bd3bb"
+    },
+    "tools/package-left-engine.py": {
+      "bytes": 3897,
+      "sha256": "647219edb5232d62e1ea69f50d7047051dbebd42ab6b5a8bd48c42a728941276"
+    },
+    "tools/bake-left-engine.py": {
+      "bytes": 13624,
+      "sha256": "b6e4e3c18c6b0cb62c801a3f4657863c1ed91b8bbc103242290a009a72ea6441"
+    },
+    "tools/audit-left-grid.py": {
+      "bytes": 3226,
+      "sha256": "f5f746cec4526bc4b70529af944caf348a50e22daaf3faef93f7b742948b9fab"
+    },
+    "tools/compare-left-grid.py": {
+      "bytes": 3842,
+      "sha256": "8069d410a819b5fe0d1652c684060df246f8c0e5c6349885c5f4bfebc946345a"
+    },
+    "tools/verify-left-grid.py": {
+      "bytes": 3670,
+      "sha256": "14bfcda456bfcd92396f40a7f652ed6ee32f952dab39180ba083d955947f1df9"
+    },
+    "tools/fit-left-contours.py": {
+      "bytes": 2532,
+      "sha256": "31399d8f3cc6c9303bc4bed7032b216498b6988db18a2793d476b70e45f0cc2f"
+    },
+    "tools/left-silhouette.py": {
+      "bytes": 1719,
+      "sha256": "06b3639ff6c880fbae0a2186d4038faa6db69a71dd12cb6b632b8b85055ade2e"
+    },
+    "tools/check-left-clearance.py": {
+      "bytes": 1847,
+      "sha256": "6693b428474e4c1ede63e2fa8197e5f358334d5a48c9a1e88ac262f874f9c91d"
+    },
+    "tools/check-left-image-sources.py": {
+      "bytes": 983,
+      "sha256": "fc4518730778954b848a929ecd1a12c3e2c390ae7c4267eaa1c61d61126f6d50"
+    },
+    "tools/compare-left-default.py": {
+      "bytes": 2518,
+      "sha256": "6a96ed69a1c0fd341a55978bb20865bdd22e5a3cd66e117b530db21f55f19d82"
+    },
+    "tools/left-component-inventory.py": {
+      "bytes": 2838,
+      "sha256": "25dbc6eb0448fe9f5c5598f98f7b72a120cee33d07c8f41a6b49e520e2d0ebcb"
+    },
+    "tools/left-engine-grid-controls.json": {
+      "bytes": 15001,
+      "sha256": "a76a65c2d7390ac63112bcf9b08bb745a9bf364faaefc412698a7d70975910bd"
+    },
+    "tools/lightmap-uv.py": {
+      "bytes": 1710,
+      "sha256": "aa5116fc0a7324b03d8b8e34a1edd8d229933005ef3bb3ec5b94bae673f8659d"
+    },
+    "provenance/CREDITS.md": {
+      "bytes": 5168,
+      "sha256": "301565df46e646a006c7213f73c59be9817a0170549dd1ba14918ea56420edde"
+    },
+    "provenance/THREE-LICENSE.txt": {
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    "provenance/MESHOPT-LICENSE.txt": {
+      "bytes": 1079,
+      "sha256": "f03037ca7bad1e3eb7f4a63fa6084a8baabd5ba30d3c239a9a7f35705d873e26"
+    },
+    "provenance/BASISU-LICENSE.txt": {
+      "bytes": 11347,
+      "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
+    },
+    "tools/prepare-left-engine.mjs": {
+      "bytes": 8087,
+      "sha256": "442e6d956ea06f37095eefe94370f6d81f3de68dcc47d9a35f1a96b8cf83b919"
+    },
+    "tools/partition-machinery.mjs": {
+      "bytes": 3451,
+      "sha256": "d8cfd3c9f5cab01508aafd494ac13e013eda02fe078e7717cb413126b9867421"
+    },
+    "tools/capture-left-engine.cjs": {
+      "bytes": 3128,
+      "sha256": "7fe14d891e7d01e10c9628be7d3c4d8c8b5978590de522a3b8ddaea8e16c5982"
+    },
+    "tools/diagnose-left-surface.cjs": {
+      "bytes": 4758,
+      "sha256": "aca48f1e61b45715c4c109c1e6e19e553cfd7858923579c20e02e63cd2a8242f"
+    },
+    "tools/left-engine-r13-contours.json": {
+      "bytes": 35501,
+      "sha256": "704be8852f628a58a84e7369db02b12c484cdc66b54994464e640e2774c39310"
+    },
+    "tools/left-tile-evidence.json": {
+      "bytes": 3920,
+      "sha256": "b8c507ab5c1df74c6458673a98afa81a730e3684e0a236fb90b62a807fbf7703"
+    },
+    "provenance/original-yacht-629-sha256.json": {
+      "bytes": 80533,
+      "sha256": "191268986c524eb428a22ed0f801eb5c71303413b658bc2e986c1180388eba6f"
+    },
+    "provenance/image-source-validation.json": {
+      "bytes": 6006,
+      "sha256": "3aa487cd8786f820f37fbfb7a742c33a88caaac22d15d90d15ceacbee845e99e"
+    },
+    "provenance/components.json": {
+      "bytes": 598855,
+      "sha256": "662d93eb1b5ffce3c80a29a09a3acf9dbe65211b570e90dd5e1f7829de80e623"
+    },
+    "validation/browser.json": {
+      "bytes": 14842,
+      "sha256": "f58bfa30031ff3e8a73d0ca2aed554bc9a7bc9d08ee5f9105a4e61dbc95583c2"
+    },
+    "validation/performance.json": {
+      "bytes": 14491,
+      "sha256": "c38568dfeab1a10a18f2216d59aee8d232621c1bbc0246430727cad205e679a6"
+    },
+    "validation/performance-r11.json": {
+      "bytes": 12417,
+      "sha256": "853d5db57cc51dd86ece8eeb40d9a62fa3ad2b2606949ae509b80af564e0e311"
+    },
+    "validation/visual-assessment.json": {
+      "bytes": 4444,
+      "sha256": "8bcf741d1ebca77f7d9004e155d3a5e00827f623c2971e60853f3e1b541d79a3"
+    },
+    "validation/default-appearance.json": {
+      "bytes": 1001,
+      "sha256": "8a2c6a021681c5b29a30d6e216a2cd480f1bfab72fb2ee8cc6cce680728f9f6b"
+    },
+    "validation/tile-inventory.json": {
+      "bytes": 3964709,
+      "sha256": "6cfd838e69c3825ed3039ef45396bd639eb193a858930a91684015745874d8fb"
+    },
+    "provenance/tile-evidence.json": {
+      "bytes": 3920,
+      "sha256": "b8c507ab5c1df74c6458673a98afa81a730e3684e0a236fb90b62a807fbf7703"
+    },
+    "provenance/contour-refinements.json": {
+      "bytes": 35501,
+      "sha256": "704be8852f628a58a84e7369db02b12c484cdc66b54994464e640e2774c39310"
+    },
+    "tools/render-left-tiles.py": {
+      "bytes": 5578,
+      "sha256": "498cd275d8519067f2d6ec0cff58bb425244d146ad70750ebcad1c5a60fff973"
+    },
+    "tools/review-left-tiles.py": {
+      "bytes": 10228,
+      "sha256": "99ea62151f08cf326aa9d9a2a3f8e4b725473f606d8963d871d801d359e80d65"
+    },
+    "tools/refine-left-contours.py": {
+      "bytes": 1677,
+      "sha256": "b4e3ce79a95a7ac8a32dca1dcab7826c842f9443147da2d5da71080a69ee720a"
+    },
+    "validation/cube-camera-and-visible-ids.json": {
+      "bytes": 144832,
+      "sha256": "5ffdf315313390f242f083dd3b89f6fe474a3f82d97afdb594b5099d3c05de4c"
+    },
+    "validation/f-render-region.json": {
+      "bytes": 227,
+      "sha256": "35b0e76cfd29fc00af1be8002c8271837760e0f434d94a737e267bd0c8e37c4e"
+    },
+    "validation/l-render-region.json": {
+      "bytes": 230,
+      "sha256": "8db88d96c10ad096f39bbe73ba3b322ddaf5286d515237b9bfe10fd596a91978"
+    },
+    "validation/d-render-region.json": {
+      "bytes": 225,
+      "sha256": "9b36da83e0be5addf9d9e58856b545b971bf008d21a99110205e9c8e639726e4"
+    }
+  },
+  "privateVrPhotosIncluded": false
+}

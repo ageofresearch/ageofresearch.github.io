@@ -6,7 +6,7 @@ same source station. This checks real surfaces, rather than free-floating marks.
 import bpy, json, math, sys
 from pathlib import Path
 from mathutils import Vector
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';S=bpy.context.scene
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';S=bpy.context.scene
 SX=35.23/36;SY=7.47/7.6
 def pt(p):return Vector((p[1]*SY,-(p[0]*SX-17.615),p[2]-2.01))
 def src(p):return [(-p.y+17.615)/SX,p.x/SY,p.z+2.01]

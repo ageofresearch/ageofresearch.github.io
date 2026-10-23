@@ -1,7 +1,7 @@
 """Read-only provenance check before packaging the editable Blender scene."""
 from pathlib import Path
 import bpy,json,hashlib
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';sources=[];private=[]
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';sources=[];private=[]
 for im in bpy.data.images:
  if im.source!='FILE'or not im.filepath:continue
  file=Path(bpy.path.abspath(im.filepath));sources.append({'name':im.name,'file':file.name,'packed':bool(im.packed_file)})

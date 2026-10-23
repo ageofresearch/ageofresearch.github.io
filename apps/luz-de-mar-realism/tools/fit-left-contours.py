@@ -7,7 +7,7 @@ from pathlib import Path
 import json, numpy as np
 from PIL import Image
 from scipy.ndimage import binary_erosion,distance_transform_edt
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';review=W/'review/grid'
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';review=W/'review/grid'
 annotations=json.loads((review/'contours.json').read_text())['contours'];fit=json.loads((W/'grid-fit.json').read_text());groups={}
 def kernel(a,b):
  r=np.linalg.norm(a[:,None,:]-b[None,:,:],axis=2);return r*r*np.log(np.maximum(r,1e-10))

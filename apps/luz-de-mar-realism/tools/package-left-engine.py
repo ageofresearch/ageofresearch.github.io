@@ -1,21 +1,25 @@
 """Package editable authoring and its provenance without private VR pixels."""
 from pathlib import Path
 import zipfile,json,hashlib
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12'
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13'
 image_audit=json.loads((W/'image-source-validation.json').read_text());assert image_audit['masterSHA256']==hashlib.sha256((W/'left-engine-master.blend').read_bytes()).hexdigest()and not image_audit['privateVrImages']
-items=[(W/'left-engine-master.blend','left-engine-master.blend'),(W/'authoring.json','authoring.json'),(R/'public/assets/mechanics/left-vr-r01/authoring.json','runtime-assets.json'),(W/'grid-fit.json','validation/grid-fit.json'),(W/'clearance.json','validation/clearance.json'),(W/'source-integrity.json','provenance/source-integrity.json'),(W/'review/grid/contours.json','validation/contours.json'),(R/'LEFT_ENGINE_GRID_R12.md','README.md'),(R/'public/assets/mechanics/left-vr-r01/evidence.json','provenance/evidence.json')]
+items=[(W/'left-engine-master.blend','left-engine-master.blend'),(W/'authoring.json','authoring.json'),(R/'public/assets/mechanics/left-vr-r01/authoring.json','runtime-assets.json'),(W/'grid-fit.json','validation/grid-fit.json'),(W/'clearance.json','validation/clearance.json'),(W/'source-integrity.json','provenance/source-integrity.json'),(W/'review/grid/contours.json','validation/contours.json'),(R/'LEFT_ENGINE_GRID_R13.md','README.md'),(R/'public/assets/mechanics/left-vr-r01/evidence.json','provenance/evidence.json')]
 for pattern in ['*left*engine*.py','*left*grid*.py','fit-left-contours.py','left-silhouette.py','check-left-clearance.py','check-left-image-sources.py','compare-left-default.py','left-component-inventory.py','left-engine-grid-controls.json','lightmap-uv.py']:
  for p in (R/'tools').glob(pattern):
   record=(p,'tools/'+p.name)
   if record not in items:items.append(record)
 for name in['CREDITS.md','THREE-LICENSE.txt','MESHOPT-LICENSE.txt','BASISU-LICENSE.txt']:items.append((R/'public'/name,'provenance/'+name))
-for name in['prepare-left-engine.mjs','partition-machinery.mjs','capture-left-engine.cjs']:items.append((R/'tools'/name,'tools/'+name))
+for name in['prepare-left-engine.mjs','partition-machinery.mjs','capture-left-engine.cjs','diagnose-left-surface.cjs','left-engine-r13-contours.json','left-tile-evidence.json']:items.append((R/'tools'/name,'tools/'+name))
+items.append((W/'original-629.json','provenance/original-yacht-629-sha256.json'))
 items.append((W/'image-source-validation.json','provenance/image-source-validation.json'))
 items.append((R/'public/assets/mechanics/left-vr-r01/component-inventory.json','provenance/components.json'))
-for name in['browser.json','performance.json','performance-r11.json']:
+for name in['browser.json','performance.json','performance-r11.json','visual-assessment.json']:
  items.append((W/name,'validation/'+name))
 items.append((W/'review/default/comparison.json','validation/default-appearance.json'))
-out=W/'luz-left-engine-grid-r12-authoring.zip';inventory={}
+items.extend([(W/'review/tiles/inventory.json','validation/tile-inventory.json'),(R/'tools/left-tile-evidence.json','provenance/tile-evidence.json'),(R/'tools/left-engine-r13-contours.json','provenance/contour-refinements.json'),(R/'tools/render-left-tiles.py','tools/render-left-tiles.py'),(R/'tools/review-left-tiles.py','tools/review-left-tiles.py'),(R/'tools/refine-left-contours.py','tools/refine-left-contours.py')])
+items.append((W/'review/cubes/camera.json','validation/cube-camera-and-visible-ids.json'))
+for face in ['f','l','d']:items.append((W/f'review/cubes/{face}-beauty-region.json',f'validation/{face}-render-region.json'))
+out=W/'luz-left-engine-grid-r13-authoring.zip';inventory={}
 with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_STORED)as z:
  for source,name in items:
   data=source.read_bytes();z.writestr(name,data);inventory[name]={'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}

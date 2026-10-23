@@ -7,7 +7,7 @@ import bpy,json,base64,math
 from pathlib import Path
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';meta=json.loads((W/'baseline/assets/machinery/room.json').read_text());g=meta['navigation'];bits=bytearray(base64.b64decode(g['mask']));SX=35.23/36;SY=7.47/7.6
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';meta=json.loads((W/'baseline/assets/machinery/room.json').read_text());g=meta['navigation'];bits=bytearray(base64.b64decode(g['mask']));SX=35.23/36;SY=7.47/7.6
 S=bpy.context.scene;obj=S.objects['LVR installed | detail'];bvh=BVHTree.FromObject(obj,bpy.context.evaluated_depsgraph_get());radius=.14;dz=.10;effective=math.sqrt(radius*radius+(dz/2)**2);hits=[];checked=0
 def pt(x,y,z):return Vector((y*SY,-(x*SX-17.615),z-2.01))
 def walk(ix,iy):

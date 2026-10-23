@@ -1,5 +1,5 @@
 {
-  "version": "3.1.0-left-engine-r12",
+  "version": "3.1.0-left-engine-r13",
   "stage": 2,
   "defaultRoom": "saloon",
   "scope": "Connected exterior walk plus original machinery-room inspection",
@@ -404,17 +404,18 @@
         "port": {
           "version": 1,
           "hashes": {
-            "component-inventory.json": "e646ebf6d4bbbaa99fd37cb50ffbb18f3c52b559b2c323a3aeb5bc5fbc3c4e62",
-            "detail.glb": "ce181613239c261f6b63d4b7239ea5b28234013e32c309d4c04bc3edc412d7e1",
+            "component-inventory.json": "662d93eb1b5ffce3c80a29a09a3acf9dbe65211b570e90dd5e1f7829de80e623",
+            "detail.glb": "091327b7ae9db8695ed1c22b6e425919a8c71234812ae1b03a09fa15a718db5f",
             "evidence.json": "a6c76897a13a70dea39ce78bf2b4d6591c8b377309d9d4e73768412718a4bee2",
-            "irradiance.exr": "f54f5fdf51baa7ebd6b2e6c1d807265ca666d802c57a303430174c57137794db",
-            "probe-0.exr": "d8e628b2b98e0dab9978d7ccdaf8e046c3996cdb04e7145940ba384b0516df81",
-            "probe-1.exr": "c35b0afd53edaae78514192d9294a94d12d7bfec89bc260461e1cbd4696f7b3b",
-            "receiver.ktx2": "53a31db13c5ca806c7fcc8eb55b856d853bb229520424d9ddfc09cc3e38154ec",
-            "walk.glb": "816c56db51bf221f378f79576f71667d70106850ddc0ddfe0c4d09c7ddf8e8f7"
+            "irradiance.exr": "ee5bba866f1c3d1ea1832a3fdb28b602bb5c896b185df74db9861565be0f8638",
+            "probe-0.exr": "da56ab6fcecd8af9976079df0eda47c75deaa4a92a1cb80cd74d7eead60b472c",
+            "probe-1.exr": "7c68497ebcc200f52df93cfdcd2023c233a81211fa68fdefa7513a41a56b56b0",
+            "receiver.ktx2": "47f2c5fd80f4e98ab8b38322f23ecedf542ee3d37bb4b5e11c4f597818c7f3d7",
+            "tile-validation.json": "743c53db36a328e5c0be5d2cb2beb6b82efb8117487db53bdea10086cb208c48",
+            "walk.glb": "0372ed6bd9948977d06d03447b04d8d4acca79db5643d07e19b6870117f65c45"
           },
-          "previewQuery": "left-vr-grid-r12",
-          "releasePhase": "grid-fit candidate; castings and surface finishing remain under review",
+          "previewQuery": "left-vr-grid-r13",
+          "releasePhase": "surface-detail candidate; tile-by-tile validation recorded separately",
           "base": "./assets/mechanics/left-vr-r01/",
           "matrix": [
             1,
@@ -437,15 +438,15 @@
           "lods": {
             "walk": {
               "asset": "walk.glb",
-              "sha256": "816c56db51bf221f378f79576f71667d70106850ddc0ddfe0c4d09c7ddf8e8f7",
-              "bytes": 18206656,
-              "triangles": 94021
+              "sha256": "0372ed6bd9948977d06d03447b04d8d4acca79db5643d07e19b6870117f65c45",
+              "bytes": 17542488,
+              "triangles": 102574
             },
             "detail": {
               "asset": "detail.glb",
-              "sha256": "ce181613239c261f6b63d4b7239ea5b28234013e32c309d4c04bc3edc412d7e1",
-              "bytes": 18788104,
-              "triangles": 130587
+              "sha256": "091327b7ae9db8695ed1c22b6e425919a8c71234812ae1b03a09fa15a718db5f",
+              "bytes": 17855292,
+              "triangles": 142465
             }
           },
           "irradiance": {
@@ -537,6 +538,220 @@
             "LD_R02/machinery-craft/engine-port/72",
             "LD_R02/machinery-craft/engine-port/73"
           ],
+          "visualValidation": {
+            "version": "left-vr-grid-r13",
+            "camera": [
+              9.15,
+              0,
+              3.18
+            ],
+            "cubeSize": 2048,
+            "tileCount": 2406,
+            "automaticallyAssessedCount": 2406,
+            "parent64Count": 849,
+            "referenceAssets": {
+              "f": {
+                "referenceSHA256": "be5c7583661b1ee242e8ec1214994f90885192328b9bf97dd1adf9ca145d9e6c"
+              },
+              "l": {
+                "referenceSHA256": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9"
+              },
+              "d": {
+                "referenceSHA256": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3"
+              }
+            },
+            "heldOutEdges": [
+              {
+                "name": "intake lower visible edge",
+                "face": "f",
+                "object": "LVR | R13 stepped intake casting",
+                "points": [
+                  [
+                    335,
+                    1525
+                  ],
+                  [
+                    379,
+                    1520
+                  ],
+                  [
+                    429,
+                    1497
+                  ],
+                  [
+                    482,
+                    1460
+                  ],
+                  [
+                    526,
+                    1437
+                  ],
+                  [
+                    570,
+                    1410
+                  ],
+                  [
+                    607,
+                    1370
+                  ]
+                ],
+                "confidence": "medium",
+                "usedForFit": false,
+                "errorsPixels": [
+                  1,
+                  17.08800749063506,
+                  14.317821063276353,
+                  4.47213595499958,
+                  5.830951894845301,
+                  7.810249675906654,
+                  7.0710678118654755
+                ],
+                "p95Pixels": 16.256951562427446,
+                "maxPixels": 17.08800749063506,
+                "passed": false,
+                "measurement": "Visible rendered object boundary; occluded annotations remain reported, not silently discarded."
+              },
+              {
+                "name": "silver left visible edge",
+                "face": "l",
+                "object": "LVR | aluminized padded elbow",
+                "points": [
+                  [
+                    965,
+                    1150
+                  ],
+                  [
+                    975,
+                    1290
+                  ],
+                  [
+                    1010,
+                    1410
+                  ],
+                  [
+                    1060,
+                    1480
+                  ],
+                  [
+                    1190,
+                    1570
+                  ],
+                  [
+                    1260,
+                    1630
+                  ],
+                  [
+                    1350,
+                    1670
+                  ],
+                  [
+                    1450,
+                    1687
+                  ],
+                  [
+                    1550,
+                    1695
+                  ]
+                ],
+                "confidence": "high",
+                "usedForFit": false,
+                "errorsPixels": [
+                  1.4142135623730951,
+                  1,
+                  1,
+                  1,
+                  2.23606797749979,
+                  1,
+                  1.4142135623730951,
+                  1,
+                  3
+                ],
+                "p95Pixels": 2.6944271909999156,
+                "maxPixels": 3,
+                "passed": true,
+                "measurement": "Visible rendered object boundary; occluded annotations remain reported, not silently discarded."
+              },
+              {
+                "name": "exhaust top visible edge",
+                "face": "l",
+                "object": "LVR | black main swept exhaust",
+                "points": [
+                  [
+                    990,
+                    770
+                  ],
+                  [
+                    1035,
+                    660
+                  ],
+                  [
+                    1105,
+                    590
+                  ],
+                  [
+                    1200,
+                    538
+                  ],
+                  [
+                    1300,
+                    505
+                  ],
+                  [
+                    1400,
+                    490
+                  ],
+                  [
+                    1550,
+                    466
+                  ],
+                  [
+                    1720,
+                    470
+                  ],
+                  [
+                    1850,
+                    488
+                  ],
+                  [
+                    1950,
+                    515
+                  ],
+                  [
+                    2030,
+                    560
+                  ]
+                ],
+                "confidence": "high",
+                "usedForFit": false,
+                "errorsPixels": [
+                  1.4142135623730951,
+                  2.8284271247461903,
+                  0,
+                  1.4142135623730951,
+                  0,
+                  5,
+                  5,
+                  1,
+                  1,
+                  3.1622776601683795,
+                  2.8284271247461903
+                ],
+                "p95Pixels": 5,
+                "maxPixels": 5,
+                "passed": true,
+                "measurement": "Visible rendered object boundary; occluded annotations remain reported, not silently discarded."
+              }
+            ],
+            "acceptance": {
+              "unambiguousLandmarkMaxPixels": 4,
+              "clearEdgeP95Pixels": 6,
+              "allVisibleCellsReviewed": true,
+              "materialAndInternalFeaturesRequired": true
+            },
+            "accepted": false,
+            "status": "Candidate under comparison; no automatic promotion",
+            "privateInventorySHA256": "6cfd838e69c3825ed3039ef45396bd639eb193a858930a91684015745874d8fb"
+          },
           "reference": "VR Engine Room left assembly; estimated depths",
           "inspection": "mtu-r03, nominal representation"
         }

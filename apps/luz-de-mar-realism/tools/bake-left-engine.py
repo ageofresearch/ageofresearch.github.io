@@ -2,7 +2,7 @@
 import bpy, numpy as np, json, math, hashlib, subprocess, sys, time
 from pathlib import Path
 from mathutils import Vector
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';A=R/'public/assets/mechanics/left-vr-r01';S=bpy.context.scene
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';A=R/'public/assets/mechanics/left-vr-r01';S=bpy.context.scene
 binding=json.loads((W/'authoring.json').read_text());evidence=json.loads((A/'evidence.json').read_text());SX=35.23/36;SY=7.47/7.6
 phase=sys.argv[sys.argv.index('--')+1]if'--'in sys.argv else'bake'
 S.render.engine='CYCLES';S.cycles.device='CPU';S.cycles.max_bounces=6;S.cycles.diffuse_bounces=3;S.cycles.glossy_bounces=3;S.render.threads_mode='FIXED';S.render.threads=4;S.render.resolution_percentage=100;S.render.image_settings.file_format='OPEN_EXR';S.render.image_settings.color_mode='RGBA';S.render.image_settings.color_depth='16';S.render.image_settings.exr_codec='PIZ'
@@ -31,22 +31,38 @@ else:
  # A positive enclosed volume alone does not validate custom shading normals.
  # Reject copied rocker/head surfaces whose normals point below the geometric
  # tangent plane: their diffuse bake produces black triangle-edge streaks.
- normal_objects=[o for o in S.objects if o.name.startswith('LVR | compatible')and('rocker cover'in o.name or'cylinder head'in o.name)]
+ normal_objects=[o for o in S.objects if o.name.startswith('LVR | compatible')]
  minimum=min(f.normal.dot(o.data.corner_normals[li].vector)for o in normal_objects for f in o.data.polygons if f.area>1e-10 for li in f.loop_indices)
  assert minimum>0,('Invalid native-derived shading normal',minimum)
  binding['nativeShadingNormalsValidation']={'objects':len(normal_objects),'minimumFaceNormalDot':minimum,'method':'Split normals derived from evaluated geometry, sharp edges at 38 degrees; all nondegenerate head/cover corner normals remain above their geometric tangent plane.'}
  assert binding['uv']['degenerateTriangleFraction']<.0001,'Repair disconnected/collapsed UV charts before baking'
  binding['nativeTopologyValidation']={'duplicateVerticesReconnected':sum(o.get('weldedDuplicateVertices',0)for o in S.objects),'weldToleranceMetres':1e-6,'lightmapDegenerateTriangleFraction':binding['uv']['degenerateTriangleFraction'],'scope':'New left derivative only; coincident native vertices reconnected before UV unwrapping. Original R03 and right instance unchanged.'}
- S.cycles.samples=64;S.cycles.use_denoising=False;S.render.bake.use_pass_direct=True;S.render.bake.use_pass_indirect=True;S.render.bake.use_pass_color=False;S.render.bake.margin=2
- im=bpy.data.images.new('Left engine | full diffuse raw',2048,2048,float_buffer=True)
+ fine_normals=[(n,n.inputs['Strength'].default_value)for m in hero.data.materials for n in m.node_tree.nodes if n.type=='NORMAL_MAP']
+ for n,strength in fine_normals:n.inputs['Strength'].default_value=0
+ S.cycles.samples=16;S.cycles.use_denoising=False;S.render.bake.use_pass_direct=True;S.render.bake.use_pass_indirect=True;S.render.bake.use_pass_color=False;S.render.bake.margin=binding['uv']['bakeMarginPixels']*2
+ im=bpy.data.images.new('Left engine | full diffuse raw',4096,4096,float_buffer=True)
  for m in hero.data.materials:n=m.node_tree.nodes['BAKE | installed diffuse'];n.image=im;m.node_tree.nodes.active=n
  bpy.ops.object.select_all(action='DESELECT');hero.select_set(True);bpy.context.view_layer.objects.active=hero;hero.data.uv_layers.active_index=1
- started=time.time();bpy.ops.object.bake(type='DIFFUSE',uv_layer='UV1');hero.data.uv_layers.active_index=0;im.save_render(str(W/'irradiance-raw.exr'),scene=S);out=filtered(im,'left-irradiance');out.save_render(str(A/'irradiance.exr'),scene=S);print('FULL DIFFUSE BAKED',time.time()-started,flush=True)
+ started=time.time();bpy.ops.object.bake(type='DIFFUSE',uv_layer='UV1');hero.data.uv_layers.active_index=0;im.save_render(str(W/'irradiance-raw.exr'),scene=S);pixels=np.array(im.pixels[:],dtype=np.float32).reshape(2048,2,2048,2,4).mean(axis=(1,3));reduced=bpy.data.images.new('Left engine | supersampled diffuse',2048,2048,float_buffer=True);reduced.pixels.foreach_set(pixels.ravel());out=filtered(reduced,'left-irradiance');out.save_render(str(A/'irradiance.exr'),scene=S);print('FULL DIFFUSE BAKED',time.time()-started,flush=True)
+ for n,strength in fine_normals:n.inputs['Strength'].default_value=strength
+ binding['diffuseSampling']={'bakeResolution':4096,'runtimeResolution':2048,'samples':16,'supersampling':2,'fineNormalMaps':'excluded from low-frequency diffuse bake; retained for material and reflection rendering','gutterPixels':binding['uv']['minimumGutterPixels'],'paddingPixels':binding['uv']['bakeMarginPixels']}
+ # Cycles area lights are not camera-visible. A probe made only of camera rays
+ # therefore omitted the actual LED emitter lines. Add camera-only emitter
+ # proxies for the probe capture, with physical strip area/radiance. These do
+ # not contribute to diffuse baking, cast shadows or get exported to the GLB.
+ emitters=[]
+ for light in [o for o in S.objects if o.type=='LIGHT'and o.data.type=='AREA']:
+  data=light.data;x=data.size/2;y=(data.size_y if data.shape in ['RECTANGLE','ELLIPSE']else data.size)/2
+  mesh=bpy.data.meshes.new('Probe LED emitter');mesh.from_pydata([(-x,-y,-.003),(x,-y,-.003),(x,y,-.003),(-x,y,-.003)],[],[(0,3,2,1)]);mesh.update();o=bpy.data.objects.new('PROBE ONLY | '+light.name,mesh);S.collection.objects.link(o);o.matrix_world=light.matrix_world.copy()
+  m=bpy.data.materials.new('Probe LED radiance');m.use_nodes=True;n=m.node_tree.nodes;n.clear();em=n.new('ShaderNodeEmission');em.inputs['Color'].default_value=(*data.color,1);em.inputs['Strength'].default_value=data.energy/(4*x*y*math.pi);end=n.new('ShaderNodeOutputMaterial');m.node_tree.links.new(em.outputs[0],end.inputs[0]);mesh.materials.append(m)
+  o.visible_camera=True;o.visible_diffuse=False;o.visible_glossy=False;o.visible_shadow=False;o.visible_transmission=False;emitters.append(o)
+ binding['probeEmitters']={'count':len(emitters),'radiance':'area-light power / (area * pi)','visibility':'camera rays only during probe capture; excluded from diffuse bake and runtime geometry'}
  # Preserve the original environment for the right engine and other equipment.
  # These sharper probes belong only to the new left exterior material.
  cam.data.type='PANO';cam.data.panorama_type='EQUIRECTANGULAR';cam.rotation_euler=(math.pi/2,0,0);S.render.resolution_x=2048;S.render.resolution_y=1024;S.cycles.samples=32;S.cycles.use_denoising=False;probes=[]
  for i,p in enumerate([[10.1,.40,2.80],[11.8,.42,2.80]]):
   cam.location=pt(p);file=W/f'probe-{i}-raw.exr';S.render.filepath=str(file);bpy.ops.render.render(write_still=True);raw=bpy.data.images.load(str(file),check_existing=False);out=filtered(raw,f'left-probe-{i}','RT');asset=f'probe-{i}.exr';out.save_render(str(A/asset),scene=S);wp=pt(p);probes.append({'asset':asset,'position':[wp.x,wp.z,-wp.y],'sourcePosition':p,'width':2048,'height':1024,'state':'installed static exterior'});print('LOCAL PROBE',i,flush=True)
+ for o in emitters:o.hide_render=True
  # Receiver-only bake at the real floor level. Ratio on/off supplies reversible
  # diffuse occlusion without adding a permanent engine silhouette to room atlases.
  bounds=[8.7,.12,12.7,2.05];x0,y0,x1,y1=bounds;verts=[pt([x,y,1.584])for x,y in[(x0,y0),(x1,y0),(x1,y1),(x0,y1)]];d=bpy.data.meshes.new('Temporary receiver');d.from_pydata(verts,[],[(0,1,2,3)]);d.update();o=bpy.data.objects.new('Temporary receiver',d);S.collection.objects.link(o)
@@ -63,7 +79,7 @@ else:
  bpy.ops.object.select_all(action='DESELECT');hero.select_set(True);bpy.context.view_layer.objects.active=hero;opts=dict(export_format='GLB',use_selection=True,export_extras=True,export_normals=True,export_texcoords=True)
  bpy.ops.export_scene.gltf(filepath=str(W/'detail-source.glb'),**opts)
  walk=hero.copy();walk.data=hero.data.copy();S.collection.objects.link(walk);walk.name='LVR installed | walking';bpy.ops.object.select_all(action='DESELECT');walk.select_set(True);bpy.context.view_layer.objects.active=walk;dec=walk.modifiers.new('Walking derivative, preserve silhouette','DECIMATE');dec.ratio=.72;dec.use_collapse_triangulate=True;bpy.ops.object.modifier_apply(modifier=dec.name);walk.data.calc_loop_triangles();walktris=len(walk.data.loop_triangles);assert walktris<=220000;walk['lod']='walk';bpy.ops.export_scene.gltf(filepath=str(W/'walk-source.glb'),**opts);walk.hide_render=True;walk.hide_viewport=True
- binding.update({'walkTriangles':walktris,'probes':probes,'irradiance':{'asset':'irradiance.exr','size':2048,'mode':'full diffuse without albedo; direct + indirect; runtime direct lighting excluded'},'receiver':{'asset':'receiver.ktx2','boundsSource':bounds,'zSource':1.58,'mode':'linear attenuation of diffuse on existing near-floor receiver surfaces only'},'samples':{'diffuse':64,'reflections':32,'receiver':32},'rawIrradianceSHA256':hashlib.sha256((W/'irradiance-raw.exr').read_bytes()).hexdigest(),'geometrySHA256':{k:hashlib.sha256((W/(k+'-source.glb')).read_bytes()).hexdigest()for k in ['detail','walk']}})
+ binding.update({'walkTriangles':walktris,'probes':probes,'irradiance':{'asset':'irradiance.exr','size':2048,'mode':'full diffuse without albedo; direct + indirect; runtime direct lighting excluded'},'receiver':{'asset':'receiver.ktx2','boundsSource':bounds,'zSource':1.58,'mode':'linear attenuation of diffuse on existing near-floor receiver surfaces only'},'samples':{'diffuse':16,'reflections':32,'receiver':32},'rawIrradianceSHA256':hashlib.sha256((W/'irradiance-raw.exr').read_bytes()).hexdigest(),'geometrySHA256':{k:hashlib.sha256((W/(k+'-source.glb')).read_bytes()).hexdigest()for k in ['detail','walk']}})
  for im in bpy.data.images:
   if im.source=='FILE'and im.has_data:im.pack()
  S.view_settings.exposure=math.log2(.05);camera(evidence['poses'][1]);S.render.resolution_x=1200;S.render.resolution_y=800;bpy.ops.wm.save_as_mainfile(filepath=str(W/'left-engine-master.blend'),compress=True);binding['masterSHA256']=hashlib.sha256((W/'left-engine-master.blend').read_bytes()).hexdigest();(W/'authoring.json').write_text(json.dumps(binding,ensure_ascii=False,indent=2)+'\n');print('LEFT ENGINE LIGHTING COMPLETE',flush=True)

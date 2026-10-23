@@ -2,7 +2,7 @@
 // locally against these same hashed assets in left-engine-browser.cjs.
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const base=process.argv[2]||'https://ageofresearch.github.io/luz-de-mar-realism/';
-const out=path.resolve('work/left-engine-r12/public-browser.json');
+const out=path.resolve('work/left-engine-r13/public-browser.json');
 const report={url:base,scope:'Public controls and deployment smoke; full resource-cycle/failure checks are in browser.json',checks:{},errors:[]};
 (async()=>{
  const b=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,proxy:{server:process.env.HTTPS_PROXY||'http://proxy:8080'},args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-gpu-watchdog']});
@@ -10,7 +10,7 @@ const report={url:base,scope:'Public controls and deployment smoke; full resourc
   const p=await b.newPage({viewport:{width:600,height:400}});p.setDefaultTimeout(240000);p.on('pageerror',e=>report.errors.push(e.message));
   const ready=()=>p.waitForFunction(()=>window.__yachtRealism?.status==='ready'&&document.querySelector('#loading').hidden);
   const draw=()=>p.evaluate(()=>__yachtRealism.draw());
-  await p.goto(base+'?room=machinery&engine=left-vr-grid-r12');await ready();await p.waitForFunction(()=>__yachtRealism.stats.machinery.installed.ready);await draw();
+  await p.goto(base+'?room=machinery&engine=left-vr-grid-r13');await ready();await p.waitForFunction(()=>__yachtRealism.stats.machinery.installed.ready);await draw();
   report.assets=await p.evaluate(()=>__yachtRealism.app.room.machinery.installed.spec.hashes);
   const expected=JSON.parse(fs.readFileSync('public/assets/mechanics/left-vr-r01/authoring.json')).runtime.files;
   assert.deepEqual(report.assets,Object.fromEntries(Object.entries(expected).map(([k,v])=>[k,v.sha256])));

@@ -6,7 +6,7 @@ No floating landmarks, per-view camera fitting, or photographs in public assets.
 import bpy, json, math
 from pathlib import Path
 from mathutils import Vector
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6
 def source(p):return [(-p.y+17.615)/SX,p.x/SY,p.z+2.01]
 def average(vertices):return sum((v.co for v in vertices),Vector())/len(vertices)
 def point(name,mode='center',n=20):

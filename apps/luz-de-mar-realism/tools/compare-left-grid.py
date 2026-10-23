@@ -3,7 +3,7 @@ from pathlib import Path
 import json, numpy as np
 from PIL import Image,ImageDraw
 from scipy.ndimage import binary_erosion,distance_transform_edt
-R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r12';P=R/'work/reference/machinery/cubes';F=W/'review/grid';F.mkdir(exist_ok=True)
+R=Path(__file__).resolve().parents[1];W=R/'work/left-engine-r13';P=R/'work/reference/machinery/cubes';F=W/'review/grid';F.mkdir(exist_ok=True)
 fit=json.loads((W/'grid-fit.json').read_text())
 outlines={
  'exhaust':[[980,900],[980,880],[980,860],[982,830],[985,800],[1015,700],[1070,620],[1150,560],[1250,520],[1350,495],[1450,490],[1510,465],[1650,465],[1800,478],[1900,500],[2000,535],[2047,580],[2047,805],[2020,855],[1940,895],[1800,920],[1690,925],[1590,920],[1480,920],[1380,910]],
@@ -16,7 +16,7 @@ held_out={
  'jacket':[[965,1150],[975,1290],[1010,1410],[1060,1480],[1190,1570],[1260,1630],[1350,1670],[1450,1687],[1550,1695],[1625,1600],[1615,1460],[1595,1390],[1565,1340],[1470,1300],[1400,1330],[1360,1230],[1360,1160]],
 }
 for key,points in outlines.items():
- a=np.asarray(Image.open(W/'review'/('mask-'+key+'.png')).convert('RGBA'))[:,:,3]>128;edge=a&~binary_erosion(a);distance=distance_transform_edt(~edge);errors=[float(distance[y,x])for x,y in points];held=[float(distance[y,x])for x,y in held_out[key]];contours.append({'group':key,'annotation':'Manually traced visible contour controls, approximate pixel labels; not hidden surfaces','points':points,'errorsPixels':errors,'maxErrorPixels':max(errors),'meanErrorPixels':sum(errors)/len(errors),'heldOut':{'points':held_out[key],'errorsPixels':held,'maxErrorPixels':max(held),'meanErrorPixels':sum(held)/len(held),'usedForFitting':False}})
+ a=np.asarray(Image.open(W/'review'/('mask-'+key+'.png')).convert('RGBA'))[:,:,3]>128;edge=a&~binary_erosion(a,border_value=1);distance=distance_transform_edt(~edge);errors=[float(distance[y,x])for x,y in points];held=[float(distance[y,x])for x,y in held_out[key]];contours.append({'group':key,'annotation':'Manually traced visible contour controls, approximate pixel labels; not hidden surfaces','points':points,'errorsPixels':errors,'maxErrorPixels':max(errors),'meanErrorPixels':sum(errors)/len(errors),'heldOut':{'points':held_out[key],'errorsPixels':held,'maxErrorPixels':max(held),'meanErrorPixels':sum(held)/len(held),'usedForFitting':False}})
  d=ImageDraw.Draw(im);ys,xs=np.where(edge);color=(50,220,255)if key=='exhaust'else(250,70,230)
  for x,y in zip(xs[::2],ys[::2]):d.point((int(x),int(y)),fill=color)
  for (x,y),error in zip(points,errors):d.ellipse((x-5,y-5,x+5,y+5),fill='#fff000');d.text((x+7,y),str(round(error)),fill='#fff000')

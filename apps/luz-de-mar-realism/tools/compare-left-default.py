@@ -4,7 +4,7 @@ from PIL import Image
 import hashlib, json
 import numpy as np
 
-W = Path(__file__).resolve().parents[1] / 'work/left-engine-r12/review'
+W = Path(__file__).resolve().parents[1] / 'work/left-engine-r13/review'
 def pixels(path):
     return np.asarray(Image.open(path).convert('RGB'))
 a = pixels(W / 'r11/front.png')

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "cubeSize": 2048,
+  "tileSize": 64,
+  "detailSize": 32,
+  "cameraSource": [9.15, 0, 3.18],
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "limits": "Manual visible-region annotations from one panorama station. Region masks conservatively include small background gaps. No additional depth observations; physical dimensions and hidden faces are inferred.",
+  "regions": {
+    "f": [
+      {"name":"left installed assembly","polygon":[[0,1024],[800,1030],[855,1100],[830,1400],[660,1810],[530,2047],[0,2047]],"material":"mixed","confidence":"medium"},
+      {"name":"stepped intake casing","polygon":[[280,1290],[470,1230],[592,1270],[622,1330],[595,1394],[463,1485],[351,1530],[292,1500]],"material":"painted casting","confidence":"high","detail":true},
+      {"name":"eight bank covers and long lower casting","polygon":[[350,1650],[744,1215],[793,1307],[410,1870],[318,1950]],"material":"enamel, joints","confidence":"medium","detail":true},
+      {"name":"near pipes, conduits and accessories","polygon":[[0,1220],[250,1200],[287,1530],[420,1700],[310,1900],[0,1840]],"material":"enamel, rubber, metal","confidence":"medium","detail":true},
+      {"name":"intake woven cylinder","polygon":[[529,1190],[620,1145],[705,1160],[746,1215],[724,1295],[661,1360],[596,1400]],"material":"open metal weave, black rim","confidence":"high","detail":true}
+    ],
+    "l": [
+      {"name":"left installed assembly","polygon":[[958,1090],[976,800],[1020,650],[1180,530],[1450,490],[1510,465],[1800,478],[2047,580],[2047,2047],[1070,2047],[1060,1680],[1200,1660],[1030,1450]],"material":"mixed","confidence":"medium"},
+      {"name":"aluminized elbow cover","polygon":[[960,1090],[970,1220],[990,1360],[1080,1495],[1220,1600],[1400,1680],[1600,1695],[1630,1640],[1620,1500],[1580,1360],[1495,1305],[1415,1320],[1370,1340],[1350,1130],[1370,1080]],"material":"aluminized cloth","confidence":"high","detail":true},
+      {"name":"black gathered cuff and closures","polygon":[[950,955],[1080,929],[1230,932],[1340,910],[1370,1080],[1230,1120],[1120,1080],[951,1090]],"material":"satin textile, steel buckles","confidence":"high","detail":true},
+      {"name":"near accessory castings","polygon":[[1620,1360],[1770,1300],[2047,1400],[2047,1925],[1650,1860],[1585,1670]],"material":"cast enamel, rubber conduit","confidence":"medium","detail":true},
+      {"name":"horizontal exhaust band","polygon":[[1430,480],[1510,465],[1710,470],[1730,850],[1590,920],[1420,900]],"material":"satin textile, steel closures","confidence":"high","detail":true},
+      {"name":"immediate rail and exhaust mounting","polygon":[[1415,1000],[2047,990],[2047,1190],[1415,1180],[1420,1310],[1390,1300]],"material":"polished steel","confidence":"medium","detail":true}
+    ],
+    "d": [
+      {"name":"lower assembly and extinguisher","polygon":[[0,0],[660,0],[675,410],[265,970],[0,970]],"material":"cast enamel, red enamel, hoses, steel","confidence":"medium","detail":true}
+    ],
+    "r": [], "b": [], "u": []
+  },
+  "heldOutEdges": [
+    {"name":"intake lower visible edge","face":"f","object":"LVR | R13 stepped intake casting","points":[[335,1525],[379,1520],[429,1497],[482,1460],[526,1437],[570,1410],[607,1370]],"confidence":"medium","usedForFit":false},
+    {"name":"silver left visible edge","face":"l","object":"LVR | aluminized padded elbow","points":[[965,1150],[975,1290],[1010,1410],[1060,1480],[1190,1570],[1260,1630],[1350,1670],[1450,1687],[1550,1695]],"confidence":"high","usedForFit":false},
+    {"name":"exhaust top visible edge","face":"l","object":"LVR | black main swept exhaust","points":[[990,770],[1035,660],[1105,590],[1200,538],[1300,505],[1400,490],[1550,466],[1720,470],[1850,488],[1950,515],[2030,560]],"confidence":"high","usedForFit":false}
+  ],
+  "acceptance": {"unambiguousLandmarkMaxPixels":4,"clearEdgeP95Pixels":6,"allVisibleCellsReviewed":true,"materialAndInternalFeaturesRequired":true}
+}

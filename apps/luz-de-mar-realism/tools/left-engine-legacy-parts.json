@@ -1,0 +1,11 @@
+{
+  "id": "MTU/installation/port-beds",
+  "sourceID": "MTU/installation",
+  "triangles": 24,
+  "tolerance": 0.00001,
+  "webBounds": [
+    [[0.5957565903663635, -0.7099999785423279, -8.416055679321289], [0.7431907653808594, -0.5260000228881836, -5.431291580200195]],
+    [[1.615756630897522, -0.7099999785423279, -8.416055679321289], [1.763190746307373, -0.5260000228881836, -5.431291580200195]]
+  ],
+  "reason": "The R11 port engine beds share their top plane with the R13 beds at source Z=1.484 m. Swap the complete old solids with the installed exterior; retain them for loading fallback and nominal cutaway. Bounds identify existing digital geometry, not measured yacht dimensions."
+}

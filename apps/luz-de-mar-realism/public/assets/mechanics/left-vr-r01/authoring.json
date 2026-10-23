@@ -4009,10 +4009,40 @@
     },
     "partition": {
       "asset": "room.glb",
-      "sha256": "9004e5cf5647eefaf79b79442dfa63155bb258a5a9e5e10a8add04373b123b44",
-      "bytes": 11977716,
+      "sha256": "42a90af341a1df66c9bfe5996d692ad756a683e9b79e8d650a8e5343eb6931f7",
+      "bytes": 11979856,
       "triangles": 79664,
-      "replacedTriangles": 5616
+      "replacedTriangles": 5640,
+      "legacyBeds": {
+        "id": "MTU/installation/port-beds",
+        "triangles": 24,
+        "webBounds": [
+          [
+            [
+              0.5957565903663635,
+              -0.7099999785423279,
+              -8.416055679321289
+            ],
+            [
+              0.7431907653808594,
+              -0.5260000228881836,
+              -5.431291580200195
+            ]
+          ],
+          [
+            [
+              1.615756630897522,
+              -0.7099999785423279,
+              -8.416055679321289
+            ],
+            [
+              1.763190746307373,
+              -0.5260000228881836,
+              -5.431291580200195
+            ]
+          ]
+        ]
+      }
     },
     "files": {
       "component-inventory.json": {
@@ -4050,6 +4080,44 @@
       "walk.glb": {
         "bytes": 17542488,
         "sha256": "0372ed6bd9948977d06d03447b04d8d4acca79db5643d07e19b6870117f65c45"
+      }
+    },
+    "partitionCorrection": {
+      "revision": "left-vr-grid-r13-floor-fix",
+      "reason": "The R11 port engine beds share their top plane with the R13 beds at source Z=1.484 m. Swap the complete old solids with the installed exterior; retain them for loading fallback and nominal cutaway. Bounds identify existing digital geometry, not measured yacht dimensions.",
+      "scope": "Room context partition only. Installed engine geometry, HDR lighting and R13 authoring snapshot unchanged.",
+      "legacyBeds": {
+        "id": "MTU/installation/port-beds",
+        "sourceID": "MTU/installation",
+        "triangles": 24,
+        "tolerance": 0.00001,
+        "webBounds": [
+          [
+            [
+              0.5957565903663635,
+              -0.7099999785423279,
+              -8.416055679321289
+            ],
+            [
+              0.7431907653808594,
+              -0.5260000228881836,
+              -5.431291580200195
+            ]
+          ],
+          [
+            [
+              1.615756630897522,
+              -0.7099999785423279,
+              -8.416055679321289
+            ],
+            [
+              1.763190746307373,
+              -0.5260000228881836,
+              -5.431291580200195
+            ]
+          ]
+        ],
+        "reason": "The R11 port engine beds share their top plane with the R13 beds at source Z=1.484 m. Swap the complete old solids with the installed exterior; retain them for loading fallback and nominal cutaway. Bounds identify existing digital geometry, not measured yacht dimensions."
       }
     }
   }

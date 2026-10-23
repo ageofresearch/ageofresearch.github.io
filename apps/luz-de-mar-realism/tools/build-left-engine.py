@@ -27,6 +27,12 @@ def activate(o):bpy.ops.object.select_all(action='DESELECT');o.select_set(True);
 # Partition the old surrounding parts while retaining their original UVs and
 # custom corner normals. The other engine and every retained face are untouched.
 replaced=[p['id']for p in meta['parts']if 'engine-port/'in p['id']or p['id']in ['LD_R02/machinery/safety/11','LD_R02/machinery/safety/12']]
+legacy_beds=json.loads((R/'tools/left-engine-legacy-parts.json').read_text());replaced.append(legacy_beds['id']);legacy_bed_triangles=0
+def is_legacy_bed(original,polygon,source_id):
+ if source_id!=legacy_beds['sourceID']:return False
+ vertices=[original.matrix_world@original.data.vertices[i].co for i in polygon.vertices]
+ web=[(v.x,v.z,-v.y)for v in vertices];eps=legacy_beds['tolerance']
+ return any(all(all(lo[k]-eps<=v[k]<=hi[k]+eps for k in range(3))for v in web)for lo,hi in legacy_beds['webBounds'])
 part_ids=np.frombuffer((BASE/'snapshot/machinery.bin').read_bytes(),dtype='<u4',offset=meta['vertexBytes']+meta['indexBytes'])
 def filtered(original,face_numbers,name):
  d=original.data;polys=[d.polygons[int(i)]for i in face_numbers];oldloops=[li for f in polys for li in f.loop_indices];oldverts=sorted({i for f in polys for i in f.vertices});remap={v:i for i,v in enumerate(oldverts)}
@@ -47,11 +53,13 @@ for atlas in ['architecture','furniture','none','register','door']:
  if not o:continue
  faces=np.array([i for i,p in enumerate(part_ids)if(meta['parts'][int(p)]['dynamic']==atlas if atlas in ['register','door']else meta['parts'][int(p)]['atlas']==atlas and not meta['parts'][int(p)]['dynamic'])],dtype=int)
  assert len(faces)==len(o.data.polygons),(atlas,len(faces),len(o.data.polygons))
- remove=np.array([meta['parts'][int(part_ids[i])]['id']in replaced for i in faces])
+ legacy_remove=np.array([is_legacy_bed(o,o.data.polygons[j],meta['parts'][int(part_ids[i])]['id'])for j,i in enumerate(faces)]);legacy_bed_triangles+=int(legacy_remove.sum())
+ remove=np.array([meta['parts'][int(part_ids[i])]['id']in replaced for i in faces])|legacy_remove
  if remove.any():
   f=filtered(o,np.flatnonzero(remove),'R11 fallback | left installation');f['variant']='left-r11';f['replacedIDs']=json.dumps(replaced);fallback.append(f)
   keep=filtered(o,np.flatnonzero(~remove),'KEEP | '+atlas);keep['variant']='context';base_objects.append(keep);o.hide_render=True;o.hide_viewport=True
  else:base_objects.append(o)
+assert legacy_bed_triangles==legacy_beds['triangles'],'Review changed original port engine bed geometry'
 for o in S.objects:
  if o.name.startswith('mtu-r03 | Babor'):o.hide_render=True;o.hide_viewport=True
 opts=dict(export_format='GLB',use_selection=True,export_extras=True,export_normals=True,export_texcoords=True)

@@ -30,3 +30,21 @@ test('partitioned room preserves every R11 face attribute and material without r
  const [original,current]=await Promise.all([io.read(path.join(W,'baseline/assets/machinery/room.glb')),io.read(path.join(R,'public/assets/machinery/room.glb'))]);assert.equal(faceHash(current),faceHash(original));
  const textures=d=>d.getRoot().listTextures().map(t=>sha(t.getImage())).sort();assert.deepEqual(textures(current),textures(original));
 });
+test('coplanar original port beds belong exclusively to the nominal fallback',async()=>{
+ const legacy=read(path.join(R,'tools/left-engine-legacy-parts.json'));
+ const doc=await io.read(path.join(R,'public/assets/machinery/room.glb'));
+ const counts={portFallback:0,portContext:0,starboardContext:0,starboardFallback:0};
+ for(const node of doc.getRoot().listNodes())for(const p of node.getMesh()?.listPrimitives()||[]){
+  if(p.getMaterial()?.getName()!=='Machinery paint 44 | furniture')continue;
+  const positions=p.getAttribute('POSITION'),indices=p.getIndices().getArray();
+  for(let k=0;k<indices.length;k+=3){const vertices=Array.from(indices.subarray(k,k+3),i=>positions.getElement(i,[]));
+   for(const side of['port','starboard'])if(legacy.webBounds.some(([lo,hi])=>vertices.every(v=>v.every((x,axis)=>{
+    if(side==='starboard'&&axis===0)x=-x;return x>=lo[axis]-legacy.tolerance&&x<=hi[axis]+legacy.tolerance;
+   }))))counts[side+(node.getExtras().variant==='left-r11'?'Fallback':'Context')]++;
+  }
+ }
+ assert.deepEqual(counts,{portFallback:24,portContext:0,starboardContext:24,starboardFallback:0});
+ const room=read(path.join(R,'public/assets/machinery/room.json'));
+ assert.ok(room.partition.replacedIDs.includes(legacy.id));assert.ok(spec.replacedIDs.includes(legacy.id));
+ assert.equal(room.partition.geometry.sha256,sha(fs.readFileSync(path.join(R,'public/assets/machinery/room.glb'))));
+});

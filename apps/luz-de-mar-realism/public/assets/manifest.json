@@ -305,7 +305,7 @@
       "sourceID": "LD_R02",
       "metadata": "machinery/room.json",
       "geometry": "machinery/room.glb",
-      "sha256": "9004e5cf5647eefaf79b79442dfa63155bb258a5a9e5e10a8add04373b123b44",
+      "sha256": "42a90af341a1df66c9bfe5996d692ad756a683e9b79e8d650a8e5343eb6931f7",
       "triangles": 79664,
       "ambientAtlases": [
         {
@@ -536,7 +536,8 @@
             "LD_R02/machinery-craft/engine-port/70",
             "LD_R02/machinery-craft/engine-port/71",
             "LD_R02/machinery-craft/engine-port/72",
-            "LD_R02/machinery-craft/engine-port/73"
+            "LD_R02/machinery-craft/engine-port/73",
+            "MTU/installation/port-beds"
           ],
           "visualValidation": {
             "version": "left-vr-grid-r13",

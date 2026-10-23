@@ -1,0 +1,164 @@
+{
+  "file": "luz-left-engine-grid-r12-authoring.zip",
+  "bytes": 70836730,
+  "sha256": "5aa4d428bae6acfa3d66a20e1e4ded801ec92dd556e3528a312776160bd580bb",
+  "entries": {
+    "left-engine-master.blend": {
+      "bytes": 69969765,
+      "sha256": "45322f91fab7ebb595d7ca50ef77970b0059ca873903ba729a7ad3cb65dde2c3"
+    },
+    "authoring.json": {
+      "bytes": 37828,
+      "sha256": "c72bdab59d6531f2f9042d76a5f3773180f7f46558f7b5522a17842364642e01"
+    },
+    "runtime-assets.json": {
+      "bytes": 47558,
+      "sha256": "fc9e7ce253b5fd18ae70559ad7e4b7172245e530de93d4cd5f82f0319fd4d418"
+    },
+    "validation/grid-fit.json": {
+      "bytes": 12059,
+      "sha256": "f701e45363b15c504b1887e0992056fd8c1d947c8c0a06b70cc07343d3be25cd"
+    },
+    "validation/clearance.json": {
+      "bytes": 301,
+      "sha256": "a0061e38d045565990bde190605f5cdfbfcfa207220d81c0ca605bc6916e2b7c"
+    },
+    "provenance/source-integrity.json": {
+      "bytes": 476,
+      "sha256": "892a16b7ae6a23fcac8babda5784d6115a2eeb2c0597001b05d19daee7447053"
+    },
+    "validation/contours.json": {
+      "bytes": 7179,
+      "sha256": "704dc436afe2306923549c1432c612f66d30e6f7beeff7636c244c285531af30"
+    },
+    "README.md": {
+      "bytes": 9253,
+      "sha256": "c535519ba8eadda32c5450db5a6edbf8db5637fe74033f2cc01b53ec66aae0ac"
+    },
+    "provenance/evidence.json": {
+      "bytes": 8205,
+      "sha256": "a6c76897a13a70dea39ce78bf2b4d6591c8b377309d9d4e73768412718a4bee2"
+    },
+    "tools/build-left-engine.py": {
+      "bytes": 40790,
+      "sha256": "c30eff080cabff4663f69cde90b5664e51f7ffaf97bd2306483ef435094320f6"
+    },
+    "tools/left-engine-textures.py": {
+      "bytes": 2640,
+      "sha256": "9685f7033f37beed780b94d699e045565a99b68ac6745e5c14d50859dc9ed2cb"
+    },
+    "tools/report-left-engine.py": {
+      "bytes": 9135,
+      "sha256": "5f9fdea7d619738a59438397240464cd4d9b2057ef2776f7b355026cc77f3e78"
+    },
+    "tools/left-engine-evidence.py": {
+      "bytes": 6426,
+      "sha256": "1c7a89e628c178ce668c15c3a7dde371daaa3614f685006c7c31b21f06b11def"
+    },
+    "tools/package-left-engine.py": {
+      "bytes": 3064,
+      "sha256": "454a1cbec178342aede88926ace20c117bd800d24e45f4cdfdbc70a835aa8aa4"
+    },
+    "tools/bake-left-engine.py": {
+      "bytes": 11304,
+      "sha256": "0afc6c0bf21fedd90843cc1327b5d49b300616728a719cee48a9fd9937bff3ca"
+    },
+    "tools/audit-left-grid.py": {
+      "bytes": 3226,
+      "sha256": "d3f0c5fc589498142d48026b0f9bfdec21085c343fdf4094c55284ecce28f08b"
+    },
+    "tools/compare-left-grid.py": {
+      "bytes": 3827,
+      "sha256": "1b376180fd051d5808d6e60cd226b5dcdc1e07dae41a1f2ce1e0ada0c995c0ba"
+    },
+    "tools/verify-left-grid.py": {
+      "bytes": 3670,
+      "sha256": "86aaae0eb121e7d4bae5ffed4cdf0593a0643c0280c813abdd79046ee0b6e4a9"
+    },
+    "tools/fit-left-contours.py": {
+      "bytes": 2532,
+      "sha256": "62fa2de9d73181a6bb1a8dfb990bee456c770367ee1f5fc7823686d307ed7cac"
+    },
+    "tools/left-silhouette.py": {
+      "bytes": 1719,
+      "sha256": "8f68b6377bb38bfef361131155aec26690ab8ef091e3a20b19bf7bc022002259"
+    },
+    "tools/check-left-clearance.py": {
+      "bytes": 1847,
+      "sha256": "d14b5ce0854f939c7e678d85a6d50f8208dc1b90b9721d4b37fc9af94b20900f"
+    },
+    "tools/check-left-image-sources.py": {
+      "bytes": 983,
+      "sha256": "eebcfa35380982b83d316560b85ed093f217befc6a7628dc027a86ad12fa2e7a"
+    },
+    "tools/compare-left-default.py": {
+      "bytes": 2518,
+      "sha256": "30c0a9d30352c1a0f57223cddf7a5cac053f8cfbb9f9c2fbace39a79d39ee2b7"
+    },
+    "tools/left-component-inventory.py": {
+      "bytes": 2675,
+      "sha256": "0aba9938ec0744bc50e5761519512f5ccc105f2bd852b833b5205b9bb4c1f7bd"
+    },
+    "tools/left-engine-grid-controls.json": {
+      "bytes": 15001,
+      "sha256": "a76a65c2d7390ac63112bcf9b08bb745a9bf364faaefc412698a7d70975910bd"
+    },
+    "tools/lightmap-uv.py": {
+      "bytes": 1610,
+      "sha256": "a40818afb152ab345edb1f714f62f848ef45ac047b2426075be589666ee00b42"
+    },
+    "provenance/CREDITS.md": {
+      "bytes": 5168,
+      "sha256": "301565df46e646a006c7213f73c59be9817a0170549dd1ba14918ea56420edde"
+    },
+    "provenance/THREE-LICENSE.txt": {
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+    },
+    "provenance/MESHOPT-LICENSE.txt": {
+      "bytes": 1079,
+      "sha256": "f03037ca7bad1e3eb7f4a63fa6084a8baabd5ba30d3c239a9a7f35705d873e26"
+    },
+    "provenance/BASISU-LICENSE.txt": {
+      "bytes": 11347,
+      "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
+    },
+    "tools/prepare-left-engine.mjs": {
+      "bytes": 7395,
+      "sha256": "879961a44f47d499ee36046ea1a984e8ec63e5da11da9751068ccd565f9dbc4f"
+    },
+    "tools/partition-machinery.mjs": {
+      "bytes": 3451,
+      "sha256": "d8cfd3c9f5cab01508aafd494ac13e013eda02fe078e7717cb413126b9867421"
+    },
+    "tools/capture-left-engine.cjs": {
+      "bytes": 3128,
+      "sha256": "3385ab7c6350beecf90edfa526142e6dfe813b17e41af78b4ce07f3e49a61891"
+    },
+    "provenance/image-source-validation.json": {
+      "bytes": 5892,
+      "sha256": "9415b8ca8c3e1790096c3a62a54a3e385bd4c6f630bb75f8b51179c491fd8b1c"
+    },
+    "provenance/components.json": {
+      "bytes": 544489,
+      "sha256": "e646ebf6d4bbbaa99fd37cb50ffbb18f3c52b559b2c323a3aeb5bc5fbc3c4e62"
+    },
+    "validation/browser.json": {
+      "bytes": 14668,
+      "sha256": "2da98c20a2d96ae09b7228487a675952e9752c597827ba3c390eea345df8e7c5"
+    },
+    "validation/performance.json": {
+      "bytes": 14521,
+      "sha256": "55522099965209ed9e10fd6a20db38a5cf17e40a5e88f462250e5b99662b34af"
+    },
+    "validation/performance-r11.json": {
+      "bytes": 12286,
+      "sha256": "bc70f24fe053e50fd7af3f8f844996e089f682a1198d6761468d8af13b584d8c"
+    },
+    "validation/default-appearance.json": {
+      "bytes": 1001,
+      "sha256": "8a2c6a021681c5b29a30d6e216a2cd480f1bfab72fb2ee8cc6cce680728f9f6b"
+    }
+  },
+  "privateVrPhotosIncluded": false
+}

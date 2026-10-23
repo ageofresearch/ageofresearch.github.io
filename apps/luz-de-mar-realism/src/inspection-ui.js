@@ -1,8 +1,12 @@
 export function setupInspectionUI(app){
  const $=id=>document.getElementById(id),panel=$('machinery-inspector'),active=()=>app.room?.machinery;let tab='motor';
+ const appearance=$('inspect-motor-content').appendChild(document.createElement('p')),retry=$('inspect-motor-content').appendChild(document.createElement('button'));appearance.id='motor-appearance';appearance.setAttribute('role','status');retry.id='motor-appearance-retry';retry.textContent='Reintentar exterior izquierdo';retry.hidden=true;retry.onclick=()=>{const e=active()?.installed;if(e){e.error='';void(e.ready?e.detail():e.load());}};
  app.syncUI=()=>{const m=active();panel.hidden=!m;if(!m){panel.open=false;return;}const a=m.mtu,f=m.filters;
   for(const name of['motor','filter']){$('inspect-'+name+'-tab').setAttribute('aria-pressed',String(tab===name));$('inspect-'+name+'-content').hidden=tab!==name;}
   $('motor-side').value=a.selected;$('motor-cutaway').checked=a.cutaway||a.requestedCut;$('motor-play').textContent=a.playing?'Pausar':'Reproducir';$('motor-play').disabled=a.loading;$('motor-time').value=a.time;$('motor-clock').textContent=a.time.toFixed(2)+' / 8 s';$('motor-status').textContent=a.loading?'Cargando el mecanismo…':a.error;
+  const exterior=m.installed;appearance.hidden=!exterior;retry.hidden=!exterior?.error;retry.textContent=exterior?.ready?'Reintentar detalle izquierdo':'Reintentar exterior izquierdo';
+  $('motor-cutaway').parentElement.lastChild.textContent=exterior&&a.selected==='port'?' Ver corte de la mecánica nominal':' Mostrar corte';
+  appearance.textContent=exterior?.loading?'Preparando el exterior izquierdo…':exterior?.error||(exterior?.ready?(a.cutaway&&a.selected==='port'?'Mecánica nominal R03. Al cerrar el corte vuelve el exterior VR.':'Exterior izquierdo VR · candidata de encaje; acabados en revisión.'):'');
   $('filter-side').value=f.selected;$('filter-access').checked=f.accessOpen;$('filter-dirty').checked=f.dirty;$('filter-extract').disabled=!f.accessOpen||f.loading;$('filter-insert').disabled=!f.accessOpen||f.loading;$('filter-progress').disabled=!f.accessOpen||!m.filterMotion;$('filter-progress').value=f.progress;$('filter-status').textContent=f.loading?'Cargando el cesto…':f.error;
   $('machine-door').textContent=m.doorOpen?'Cerrar puerta · E':'Abrir puerta · E';const d=m.room.meta.door,p=app.nav?.position;$('machine-door').disabled=!p||Math.hypot((p[0]-d.center[0])*35.23/36,(p[1]-d.center[1])*7.47/7.6)>d.reach;
  };

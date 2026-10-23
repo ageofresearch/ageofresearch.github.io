@@ -56,3 +56,13 @@ from the imported equipment. Four transverse light fixtures and the ochre floor
 grid are independently authored, with estimated placement. The tour photographs
 are not redistributed or sampled as textures. Its visible brands identify the
 tour's equipment appearance, without confirming models or equipment on Luz de Mar.
+
+Left-engine grid candidate r12: independently authored installed exterior fitted
+to the same private panorama reference, with a fixed estimated station and
+documented contour controls. Compatible crankcase, mount, rocker-cover and
+flywheel parts retain the nominal R03 source provenance. The original package,
+original Blender file and right-engine asset remain unchanged. Paint, metal,
+insulation, rubber and intake-weave maps are procedural authoring; the editable
+scene and its source/validation inventory are distributed through GitHub Releases.
+The geometric fit is an intermediate review milestone. Casing shapes,
+accessories, cloth detail and finish remain under review.

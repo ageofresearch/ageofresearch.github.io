@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-machinery-r11",
+  "version": "3.1.0-left-engine-r12",
   "stage": 2,
   "defaultRoom": "saloon",
   "scope": "Connected exterior walk plus original machinery-room inspection",
@@ -305,7 +305,7 @@
       "sourceID": "LD_R02",
       "metadata": "machinery/room.json",
       "geometry": "machinery/room.glb",
-      "sha256": "045517e66adac8430a85475da4a8b12d1f19c060f68ccabe6f7593b86dcfbc3c",
+      "sha256": "9004e5cf5647eefaf79b79442dfa63155bb258a5a9e5e10a8add04373b123b44",
       "triangles": 79664,
       "ambientAtlases": [
         {
@@ -399,7 +399,148 @@
         1.293,
         1.453
       ],
-      "basis": "Fitted to the existing gearbox input at source x9.72,z1.94; not surveyed installation coordinates."
+      "basis": "Fitted to the existing gearbox input at source x9.72,z1.94; not surveyed installation coordinates.",
+      "appearance": {
+        "port": {
+          "version": 1,
+          "hashes": {
+            "component-inventory.json": "e646ebf6d4bbbaa99fd37cb50ffbb18f3c52b559b2c323a3aeb5bc5fbc3c4e62",
+            "detail.glb": "ce181613239c261f6b63d4b7239ea5b28234013e32c309d4c04bc3edc412d7e1",
+            "evidence.json": "a6c76897a13a70dea39ce78bf2b4d6591c8b377309d9d4e73768412718a4bee2",
+            "irradiance.exr": "f54f5fdf51baa7ebd6b2e6c1d807265ca666d802c57a303430174c57137794db",
+            "probe-0.exr": "d8e628b2b98e0dab9978d7ccdaf8e046c3996cdb04e7145940ba384b0516df81",
+            "probe-1.exr": "c35b0afd53edaae78514192d9294a94d12d7bfec89bc260461e1cbd4696f7b3b",
+            "receiver.ktx2": "53a31db13c5ca806c7fcc8eb55b856d853bb229520424d9ddfc09cc3e38154ec",
+            "walk.glb": "816c56db51bf221f378f79576f71667d70106850ddc0ddfe0c4d09c7ddf8e8f7"
+          },
+          "previewQuery": "left-vr-grid-r12",
+          "releasePhase": "grid-fit candidate; castings and surface finishing remain under review",
+          "base": "./assets/mechanics/left-vr-r01/",
+          "matrix": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "lods": {
+            "walk": {
+              "asset": "walk.glb",
+              "sha256": "816c56db51bf221f378f79576f71667d70106850ddc0ddfe0c4d09c7ddf8e8f7",
+              "bytes": 18206656,
+              "triangles": 94021
+            },
+            "detail": {
+              "asset": "detail.glb",
+              "sha256": "ce181613239c261f6b63d4b7239ea5b28234013e32c309d4c04bc3edc412d7e1",
+              "bytes": 18788104,
+              "triangles": 130587
+            }
+          },
+          "irradiance": {
+            "asset": "irradiance.exr",
+            "size": 2048,
+            "mode": "full diffuse without albedo; direct + indirect; runtime direct lighting excluded"
+          },
+          "probes": [
+            {
+              "asset": "probe-0.exr",
+              "position": [
+                0.3931578993797302,
+                0.7900000214576721,
+                -7.731027603149414
+              ],
+              "sourcePosition": [
+                10.1,
+                0.4,
+                2.8
+              ],
+              "width": 2048,
+              "height": 1024,
+              "state": "installed static exterior"
+            },
+            {
+              "asset": "probe-1.exr",
+              "position": [
+                0.41281577944755554,
+                0.7900000214576721,
+                -6.067389011383057
+              ],
+              "sourcePosition": [
+                11.8,
+                0.42,
+                2.8
+              ],
+              "width": 2048,
+              "height": 1024,
+              "state": "installed static exterior"
+            }
+          ],
+          "receiver": {
+            "asset": "receiver.ktx2",
+            "boundsSource": [
+              8.7,
+              0.12,
+              12.7,
+              2.05
+            ],
+            "zSource": 1.58,
+            "mode": "linear attenuation of diffuse on existing near-floor receiver surfaces only",
+            "boundsWeb": [
+              0.11794736842105263,
+              -9.101083333333333,
+              2.0149342105263157,
+              -5.18663888888889
+            ],
+            "floorWeb": -0.4299999999999997
+          },
+          "detailCenter": [
+            1.1794736842105262,
+            0.5900000000000003,
+            -7.045999999999999
+          ],
+          "replacedIDs": [
+            "LD_R02/machinery/engine-port/55",
+            "LD_R02/machinery/engine-port/56",
+            "LD_R02/machinery/engine-port/57",
+            "LD_R02/machinery/engine-port/58",
+            "LD_R02/machinery/engine-port/59",
+            "LD_R02/machinery/engine-port/60",
+            "LD_R02/machinery/engine-port/61",
+            "LD_R02/machinery/engine-port/62",
+            "LD_R02/machinery/engine-port/63",
+            "LD_R02/machinery/engine-port/69",
+            "LD_R02/machinery/safety/11",
+            "LD_R02/machinery/safety/12",
+            "LD_R02/machinery-craft/engine-port/61",
+            "LD_R02/machinery-craft/engine-port/62",
+            "LD_R02/machinery-craft/engine-port/63",
+            "LD_R02/machinery-craft/engine-port/64",
+            "LD_R02/machinery-craft/engine-port/65",
+            "LD_R02/machinery-craft/engine-port/66",
+            "LD_R02/machinery-craft/engine-port/67",
+            "LD_R02/machinery-craft/engine-port/68",
+            "LD_R02/machinery-craft/engine-port/69",
+            "LD_R02/machinery-craft/engine-port/70",
+            "LD_R02/machinery-craft/engine-port/71",
+            "LD_R02/machinery-craft/engine-port/72",
+            "LD_R02/machinery-craft/engine-port/73"
+          ],
+          "reference": "VR Engine Room left assembly; estimated depths",
+          "inspection": "mtu-r03, nominal representation"
+        }
+      }
     },
     "filters": {
       "x": 12.14,

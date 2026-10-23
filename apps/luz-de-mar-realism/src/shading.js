@@ -6,10 +6,11 @@ export function applyRoomShading(material,room,{baked=false}={}){
  const before=material.onBeforeCompile;
  material.onBeforeCompile=(shader,renderer)=>{
   before?.(shader,renderer);shader.uniforms.uRoomMin={value:new Vector3(...room.probeBounds.min)};shader.uniforms.uRoomMax={value:new Vector3(...room.probeBounds.max)};shader.uniforms.uRoomCenter={value:new Vector3(...room.probePosition)};
-  const probes=room.environments||[room.environment],specs=room.probeSpecs||[{position:room.probePosition}];
+  const override=room.reflectionOverride,probes=override?.targets||room.environments||[room.environment],specs=override?.specs||room.probeSpecs||[{position:room.probePosition}];
   for(const[i,name]of ['A','B','C'].entries()){
    const index=Math.min(i,probes.length-1);shader.uniforms['uRoomProbe'+name]={value:probes[index].texture};shader.uniforms['uRoomPosition'+name]={value:new Vector3(...specs[index].position)};
   }
+  (room.probeBindings??=new Map()).set(material,shader.uniforms);
   shader.vertexShader='varying vec3 vRoomWorld;\n'+shader.vertexShader;shader.vertexShader=shader.vertexShader.replace('#include <worldpos_vertex>','#include <worldpos_vertex>\nvRoomWorld=(modelMatrix*vec4(transformed,1.0)).xyz;');
   shader.fragmentShader='varying vec3 vRoomWorld;uniform vec3 uRoomMin,uRoomMax,uRoomCenter,uRoomPositionA,uRoomPositionB,uRoomPositionC;uniform sampler2D uRoomProbeA,uRoomProbeB,uRoomProbeC;\n'+shader.fragmentShader;
   // ShaderChunk expansion must happen before changing the probe lookup.

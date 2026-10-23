@@ -1,0 +1,15 @@
+// Reproducible eight-view comparison. Capture actual WebGL output, no repaint.
+const{chromium}=require('playwright'),fs=require('fs'),path=require('path');
+const base=process.argv[2]||'http://127.0.0.1:5235/',out=path.resolve(process.argv[3]||'work/left-engine-r12/review/candidate');fs.mkdirSync(out,{recursive:true});
+const ref=JSON.parse(fs.readFileSync('public/assets/mechanics/left-vr-r01/evidence.json')),report={url:base,camera:ref.camera,views:[],errors:[],renderer:'SwiftShader; correctness only, not hardware FPS'};
+(async()=>{const remote=base.startsWith('https:'),b=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,...remote?{proxy:{server:process.env.HTTPS_PROXY||'http://proxy:8080'}}:{},args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-gpu-watchdog']});try{const p=await b.newPage({viewport:{width:900,height:600},deviceScaleFactor:1});p.setDefaultTimeout(240000);p.on('pageerror',e=>report.errors.push(e.message));if(remote)await p.route('https://ageofresearch.github.io/**',async r=>r.fulfill({response:await r.fetch({timeout:180000})}));await p.goto(base+'?room=machinery&engine=left-vr-grid-r12&release=left-r12',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__yachtRealism?.status==='ready'&&document.querySelector('#loading').hidden);await p.waitForFunction(()=>!__yachtRealism.app.room.machinery.installed||__yachtRealism.app.room.machinery.installed.ready);await p.addStyleTag({content:'.topbar,.room-caption,.room-actions,.touch-pad,.inspector,#notice{visibility:hidden!important}'});await p.evaluate(()=>__yachtRealism.setFixedRatio(1));
+await p.evaluate(()=>{const a=__yachtRealism.app;a.renderer.toneMappingExposure=a.exposureTarget;});
+report.assets=await p.evaluate(()=>__yachtRealism.app.room.machinery.installed?.spec.hashes||null);
+for(const v of ref.poses.filter(p=>!process.env.CAPTURE_POSES||process.env.CAPTURE_POSES.split(',').includes(p.id))){
+ const position=ref.camera.sourcePosition,r=Math.PI/180,h=v.h*r,a=v.v*r,dir=[Math.cos(a)*Math.cos(h),-Math.cos(a)*Math.sin(h),-Math.sin(a)],target=[position[0]+dir[0]/(35.23/36),position[1]+dir[1]/(7.47/7.6),position[2]+dir[2]];
+ await p.evaluate(([pos,t,fov])=>__yachtRealism.captureView(pos,t,fov),[position,target,v.vfov]);await p.evaluate(()=>__yachtRealism.draw());
+ await p.evaluate(async()=>{const i=__yachtRealism.app.room.machinery.installed;if(i)await Promise.all([...i.loadingLods.values()]);});await p.evaluate(()=>__yachtRealism.draw());
+ await p.screenshot({path:path.join(out,v.id+'.png'),timeout:180000});const stats=await p.evaluate(()=>__yachtRealism.stats),exposure=await p.evaluate(()=>__yachtRealism.app.renderer.toneMappingExposure);
+ report.views.push({...v,position,target,exposure,toneMapping:'Three.js NeutralToneMapping, linear EXR to sRGB output',stats});fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log('CAPTURED',v.id,stats.calls,stats.triangles);
+}
+}finally{await b.close();fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));}})().catch(e=>{console.error(e);process.exitCode=1});

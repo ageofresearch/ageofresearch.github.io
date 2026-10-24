@@ -1,0 +1,140 @@
+{
+  "base": "https://ageofresearch.github.io/luz-de-mar-realism/",
+  "checks": {
+    "electricalEntryStation": true,
+    "candidatePubliclyLoaded": true,
+    "cutPlaybackScrubAndSideControls": true,
+    "cachedExitReleasesBulkhead": true,
+    "cachedReturnReloadsAtomically": true
+  },
+  "errors": [],
+  "renderer": "SwiftShader correctness only",
+  "runtimeGeometrySHA256": "72cd44625c8018e2e0751869dd05dd326b301c2dd554cd68eaf7d3d51c779e62",
+  "stats": {
+    "room": "machinery",
+    "machinery": {
+      "active": true,
+      "bulkhead": {
+        "ready": true,
+        "loading": false,
+        "error": "",
+        "active": true,
+        "committed": true,
+        "waitingForSafePosition": false,
+        "triangles": 114622,
+        "version": "electrical-lower-r02",
+        "label": "frente eléctrico"
+      },
+      "exteriorTrianglesPerEngine": 382211,
+      "installed": {
+        "configured": true,
+        "ready": true,
+        "loading": false,
+        "error": "",
+        "active": true,
+        "lod": "walk",
+        "detailLoaded": false,
+        "visible": true,
+        "triangles": 102574,
+        "lighting": "Full baked diffuse and local probe specular",
+        "receiverEnabled": true
+      },
+      "installedRight": {
+        "configured": true,
+        "ready": true,
+        "loading": false,
+        "error": "",
+        "active": true,
+        "lod": "walk",
+        "detailLoaded": false,
+        "visible": true,
+        "triangles": 122837,
+        "lighting": "Full baked diffuse and local probe specular",
+        "receiverEnabled": true
+      },
+      "inspectionLoaded": true,
+      "filterInspectionLoaded": false,
+      "processingMechanics": false,
+      "poseTextureBytes": 20320,
+      "motor": {
+        "selected": "port",
+        "cutaway": false,
+        "requestedCut": false,
+        "playing": false,
+        "time": 3.75,
+        "loading": false,
+        "error": ""
+      },
+      "filters": {
+        "selected": "port",
+        "accessOpen": false,
+        "progress": 0,
+        "target": 0,
+        "moving": false,
+        "dirty": false,
+        "loading": false,
+        "error": ""
+      },
+      "doorOpen": false
+    },
+    "residentZones": [
+      "machinery",
+      "saloon"
+    ],
+    "pendingZones": [],
+    "sharedTextures": {
+      "textures": 93,
+      "references": 110
+    },
+    "elevation": 1.58,
+    "position": [
+      9.15,
+      0
+    ],
+    "frames": 20,
+    "ratio": 1,
+    "quality": 1,
+    "resolution": {
+      "mode": "sharp",
+      "source": "machinery",
+      "requestedDPR": 1,
+      "effectiveDPR": 1,
+      "hardwareLimited": false,
+      "canvas": [
+        480,
+        320
+      ]
+    },
+    "canvas": [
+      480,
+      320
+    ],
+    "calls": 67,
+    "triangles": 375659,
+    "memory": {
+      "geometries": 206,
+      "textures": 156
+    },
+    "estimatedMemory": {
+      "geometryBytes": 125009302,
+      "textureBytes": 720571217,
+      "shadowDepthBytes": 25165824,
+      "totalBytes": 870746343,
+      "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+    },
+    "frameMs": {
+      "samples": 0,
+      "p50": 0,
+      "p95": 0
+    },
+    "submissionMs": {
+      "samples": 1,
+      "p50": 2.399999998509884,
+      "p95": 2.399999998509884
+    },
+    "shadowUpdates": 46,
+    "errors": [],
+    "renderer": "WebKit WebGL"
+  },
+  "pass": true
+}

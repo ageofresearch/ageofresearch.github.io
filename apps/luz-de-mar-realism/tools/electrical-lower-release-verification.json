@@ -1,0 +1,67 @@
+{
+  "pass": true,
+  "releaseURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-electrical-lower-r02",
+  "runtimeGeometrySHA256": "72cd44625c8018e2e0751869dd05dd326b301c2dd554cd68eaf7d3d51c779e62",
+  "archives": [
+    {
+      "name": "luz-electrical-lower-r02-authoring.zip",
+      "bytes": 105913618,
+      "sha256": "cb5f4d90b814e1419ac48a64aeca7e6899c904a614422a16d2f64614f3d3b7d4",
+      "CRCVerified": true,
+      "downloadVerified": true,
+      "photographicFilesIncluded": false
+    },
+    {
+      "name": "luz-electrical-lower-r02-bakes.zip",
+      "bytes": 32853555,
+      "sha256": "d2dd4b4eaffcc77e62eaf22f5d5a1dbcfad4c2886b4427d5bc24a8d634782662",
+      "CRCVerified": true,
+      "downloadVerified": true,
+      "photographicFilesIncluded": false
+    },
+    {
+      "name": "luz-electrical-lower-r02-evidence.zip",
+      "bytes": 4786086,
+      "sha256": "5694e79c0150009897e81465321c014afcec3313597b9860fdc70ef19d20543d",
+      "CRCVerified": true,
+      "downloadVerified": true,
+      "photographicFilesIncluded": false
+    }
+  ],
+  "authoringEquivalence": {
+    "method": "All decoded production triangles matched once by physical world positions, winding and material; UV0 disambiguates near-coincident faces. Per-corner physical UV0 and lightmap UV1 copied from the public GLB, preserving geometry. Dynamic door matched separately without a static bake.",
+    "runtimeGLBSHA256": "72cd44625c8018e2e0751869dd05dd326b301c2dd554cd68eaf7d3d51c779e62",
+    "matchedTriangles": 114622,
+    "matchedStaticTriangles": 114578,
+    "matchedDynamicTriangles": 44,
+    "maximumGeometryDifferenceMetres": 8.278274146186197e-05,
+    "maximumCopiedUVComponentError": 0,
+    "cornersCopied": 343734,
+    "UV0FallbackDisambiguations": 0,
+    "originalEnginesChanged": false,
+    "hybridCornerIrradianceCopied": true,
+    "passed": true,
+    "masterSHA256": "16601a9a087e54be0aae725ad48cbc666122ae24294d6e12960e34bffd5e820e",
+    "sourceCommit": "94b54d5cf599167da1f8da722106ac8170b56d27",
+    "originalVRPhotosIncluded": false,
+    "productionAuthoringSHA256": "4eff10515d7f8e41a636de5e663240055ee4231262725353ef8838f400d304a9"
+  },
+  "workflows": {
+    "pages": {
+      "conclusion": "success",
+      "databaseId": 40128849003,
+      "headSha": "94b54d5cf599167da1f8da722106ac8170b56d27",
+      "status": "completed",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40128849003"
+    },
+    "authoring": {
+      "conclusion": "success",
+      "databaseId": 40128861288,
+      "headSha": "94b54d5cf599167da1f8da722106ac8170b56d27",
+      "status": "completed",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40128861288"
+    }
+  },
+  "SHA256SUMSDownloadSHA256": "d945f2eb567437efa308abaa835a28d119ffd5cc72b365baeded98e070a1fc04",
+  "privateVRPhotographsIncluded": false
+}

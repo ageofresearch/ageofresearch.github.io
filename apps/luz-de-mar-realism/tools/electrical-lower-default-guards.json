@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "runtimeSourcesVerified": 18,
+  "roomGLBSHA256": "c81f744302bb895ba3385c9effee2df260ec3133287b3efa44c961b988c3db5b",
+  "defaultMetadataSHA256": "653792c077f9fbd276f066be2cffd609c74daf2ef9960ca3b47ed2512a0bbb46",
+  "metadataCanonicalization": "Python json.dumps(sort_keys=True), UTF-8; optional electricalAppearance excluded",
+  "guardInputSHA256": "6c9aca186c594dc48269bba4435795b2ffb9b87e37f4472f4ba6aa7ef593285b",
+  "reason": "Final UV-only electrical repair does not affect default geometry, default metadata or any viewer runtime source."
+}

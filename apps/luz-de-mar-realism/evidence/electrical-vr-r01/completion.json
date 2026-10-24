@@ -1,0 +1,63 @@
+{
+  "runtimeCommit": "c63b1674d48fb1b6d54442973872efb660f109f2",
+  "status": "Published opt-in review candidate; not promoted",
+  "strictVisualAcceptance": false,
+  "pagesDeployment": {
+    "run": 40098293086,
+    "conclusion": "success"
+  },
+  "authoringRelease": {
+    "run": 40098307893,
+    "conclusion": "success",
+    "tag": "luz-electrical-vr-r01"
+  },
+  "localSuitesPassed": 15,
+  "staticSiteValidation": {
+    "HTMLPages": 45,
+    "files": 1415,
+    "passed": true
+  },
+  "nativeGrid": {
+    "pixels": [
+      16,
+      8
+    ],
+    "cells": 50252,
+    "numericallyCompared": 50252,
+    "completeNonoverlappingLeaves": true,
+    "manualFullCellAcceptance": false
+  },
+  "independentPoints": {
+    "passedWithin4Pixels": 13,
+    "total": 24,
+    "allFailuresRetained": true
+  },
+  "budgets": {
+    "triangles": 88083,
+    "additionalResidentBytes": 46626334,
+    "maximumAdditionalBytes": 67108864,
+    "maximumWalkingCalls": 70,
+    "maximumWalkingTriangles": 362064
+  },
+  "pagesArtifact": {
+    "bytes": 1035581440,
+    "limit": 1073741824,
+    "minimumHeadroomBytes": 33554432,
+    "headroomBytes": 38160384
+  },
+  "originals": {
+    "filesVerified": 629,
+    "allOriginalSHA256Match": true
+  },
+  "strategy": {
+    "id": "LDM-VR-EST-001 v1.0",
+    "sha256": "023852c67153ab6ff0f76cad934e8c38bb28f5f3105f1451a282bc3f4ed09b0c",
+    "unchanged": true
+  },
+  "limits": [
+    "Candidate still needs visual corrections to screens, protection patterns, metal reflections and context occlusions.",
+    "The zero-pixel static moving/rest test passed; a separate default cross-version comparison records4 changed rear-view raster pixels isolated to mesh partitioning.",
+    "SwiftShader timings establish software correctness only; hardware FPS remains unmeasured.",
+    "Original VR photographs and comparator stay private."
+  ]
+}

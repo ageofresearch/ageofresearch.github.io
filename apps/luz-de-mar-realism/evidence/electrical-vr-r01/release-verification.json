@@ -1,0 +1,43 @@
+{
+  "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-electrical-vr-r01/",
+  "archives": [
+    {
+      "name": "luz-electrical-vr-r01-authoring.zip",
+      "sha256": "83b9c3db8a6d88b0e53b2aab131d396eb9864438281035bf4b9147d33099ceff",
+      "bytes": 102109913,
+      "members": 82,
+      "crcVerified": true
+    },
+    {
+      "name": "luz-electrical-vr-r01-bakes.zip",
+      "sha256": "4552a7178ac7af897def4c9845b434332389b39793ffabec8856a0de72a26736",
+      "bytes": 30598683,
+      "members": 10,
+      "crcVerified": true
+    },
+    {
+      "name": "luz-electrical-vr-r01-evidence.zip",
+      "sha256": "7a63b25d0a9de7ca21134dd33f49008f94f2ec84b30532af75f29694969bba8c",
+      "bytes": 2555693,
+      "members": 31,
+      "crcVerified": true
+    }
+  ],
+  "binding": {
+    "method": "All decoded production triangles matched once by physical world positions, winding and material; UV0 disambiguates near-coincident faces. Per-corner physical UV0 and lightmap UV1 copied from the public GLB, preserving geometry.",
+    "runtimeGLBSHA256": "d009df34dbf3497e56a7519a5037e27558ae2eee2311fcbde8158e10ff6bbdb5",
+    "matchedTriangles": 88083,
+    "maximumGeometryDifferenceMetres": 5.00551023321494e-05,
+    "maximumCopiedUVComponentError": 2.9800958145642653e-08,
+    "cornersCopied": 264249,
+    "UV0FallbackDisambiguations": 0,
+    "originalEnginesChanged": false,
+    "hybridCornerIrradianceCopied": true,
+    "passed": true,
+    "masterSHA256": "1836f385363a1b386d3e10f705cd2c4e0ea4de19b34220b7bf4d2d54dc9bf8b5",
+    "sourceCommit": "c63b1674d48fb1b6d54442973872efb660f109f2",
+    "originalVRPhotosIncluded": false,
+    "productionAuthoringSHA256": "003d9ae3eac1f032344eaad79e2f48e02db96bfe04a28998723ce2326bf1bb34"
+  },
+  "pass": true
+}

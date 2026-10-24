@@ -1,0 +1,3884 @@
+{
+  "commit": "c63b1674d48fb1b6d54442973872efb660f109f2",
+  "publicBase": "https://ageofresearch.github.io/",
+  "assets": [
+    {
+      "path": "tidewater-rocha/CREDITS.md",
+      "bytes": 7527,
+      "sha256": "a57c84beebc13bc16da817bdba1aa94c54ae7792458462b321e4d5bd6f34fd55",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/LICENSE.txt",
+      "bytes": 1083,
+      "sha256": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/OPTIMIZATIONS-LICENSE.txt",
+      "bytes": 1249,
+      "sha256": "7565933731dbfe94b4b118b3ba19c55c27b9e29c0de2a825ac5f6e16905b685b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/POSITIONING-1MM.md",
+      "bytes": 6008,
+      "sha256": "714d3ef0e9fc67776a9334f85358b2faa52e592808642b5a31767d1a80f9b06d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/ROCHA-CONTAINER.md",
+      "bytes": 17160,
+      "sha256": "b0fcafa08e27ecc11f47f7c21c3076021d9e79914e159ce2246d658acf0a0b34",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/ROCHA-MAP.md",
+      "bytes": 63810,
+      "sha256": "0922add5dd6455bc78d79738b53307fda1bde607978438075d53e9d44d89a7f9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/ROCHA-RENDERING.md",
+      "bytes": 22851,
+      "sha256": "ed6879ec2660533cda107c0ef9539dee7c61e39ebfcaf0cef4048f2fc5581dfb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Bench-CI-ryIGp.js",
+      "bytes": 7319,
+      "sha256": "f50cb53b401fd378aef4908efb12364e457c08224ddf27c0600c5d19f6615bd6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Bench-D9yc8qCT.js",
+      "bytes": 7213,
+      "sha256": "5fc19f6a4af664a8e142aab9ae9499a1cadb726ed3242ca988de112e2f3b5d7d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/CameraVelocity-DbPmsWHs.js",
+      "bytes": 16274,
+      "sha256": "1c881df60afc95e382f0772e3d37db0b7801be004405c6b12373a0e807e3ad6e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/DebugViews-CMYk8aZr.js",
+      "bytes": 4514,
+      "sha256": "15cde1d5c1625c44e109fbde84f78716c667090dfdf638db570c6bc237f5e31e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/DebugViews-DVAeWhIh.js",
+      "bytes": 2509,
+      "sha256": "37976f4f24ab16c0a02756bb3c39c6fdd1e46b2af7a9135fdd7416be244ee372",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Frame-CNet77I0.js",
+      "bytes": 70378,
+      "sha256": "d992933c8b153610aa06e759cc63f53da3cec59368a604acc85c80bb7aae23d8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/GPU-CRJNW8x0.js",
+      "bytes": 62,
+      "sha256": "037f188513775357c23105c4d99ab21a75e9d603a83b963dbc58a5d3d216ae99",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/GPU-CxPpnRCf.js",
+      "bytes": 5475,
+      "sha256": "2c478651abd9e45701a4ab1531e329f13ef26ea180852a9d7917dac89fe9096b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Globals-CLsqp45h.js",
+      "bytes": 28,
+      "sha256": "4c444bc39e1ee540fce93cd9442156bd7b5695b40e91f51a215fac82616e89b2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/LocalLights-BPcaAqUW.js",
+      "bytes": 65,
+      "sha256": "2a8d811a528c2c124a7da0bd19e1765f381fd23d22acc17cb102f3269b72a183",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/LocalLights-DGrzAZBs.js",
+      "bytes": 41337,
+      "sha256": "d970d3c5d86e8cf2a48e90b9fdfda47a79d488e3f23bea651bd5bddc093ab170",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Material-tyLfv2Wn.js",
+      "bytes": 5232,
+      "sha256": "4597bd6eeffa9e81919a24b63eee2401a603f545d58962b1db91888422416e7b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Materials-CAztm2ge.js",
+      "bytes": 8492,
+      "sha256": "826dc11f55d97b4783149546dd0a2c058995545e20bcce5bc1ef9b382694388e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Positioning-BfVGiJPZ.js",
+      "bytes": 5577,
+      "sha256": "2e45106f82c122a52a8909f79032189f50bd659981abad8a60ae54a5d90d9149",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/PositioningMode-BlXOboEe.js",
+      "bytes": 23328,
+      "sha256": "47670769cbfe3b1cd7ee0bfb23291ba6086f2a6c4f0d5dcb85dc08c29634c08b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/PostFX-0mW-sLoH.js",
+      "bytes": 194783,
+      "sha256": "47d6ed41564a09c7d3d9a041737964ad0b4456397d630091cae304b1fd13af0c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Readback-5lEJRVdK.js",
+      "bytes": 2008,
+      "sha256": "4cdb582466e117b027cdbfad2de45009bb402ae9f44833a05bb5d83a524aa2ac",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BNpWf47W.js",
+      "bytes": 480106,
+      "sha256": "579991d4188123784bd632d6cdef33ceb7e91487375d574508886beada69c2ec",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-B_HN071-.js",
+      "bytes": 548226,
+      "sha256": "c181bb2627b95c7e35435d934f0097610fa1114ce587b48c1c7cec52e2fb44e5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BbTeLCVd.js",
+      "bytes": 574420,
+      "sha256": "7d9411bc3d4f0ef4f7476a099583fddd8797713a90ae9efe8364373f590baa52",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BhzUZg9C.js",
+      "bytes": 559989,
+      "sha256": "5ac584c5eccb7ca9c593f8a2bfba21c283fc97c2ea068404d3bf77151e2a5ad4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BitJKF_H.js",
+      "bytes": 437014,
+      "sha256": "69171848659ac8540dde7b77f1450384c60acfdbdb9a1e7333433f3825cfd121",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-Bs9DRMN9.js",
+      "bytes": 595161,
+      "sha256": "5f683ab94214cf2aa53d181368a01a9cb7c13d021a754f638d9d1645655bda9b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BvtyIiSe.js",
+      "bytes": 534040,
+      "sha256": "5ac26aa9850aa4635a490954cc62529e612443b4dce4c80e52683448eb2d883a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BxXjZQHn.js",
+      "bytes": 589552,
+      "sha256": "e39c250b5a327a12f4ebbbe84efc57796bb57f7d5034c64cf8b06521b35841eb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-BySUSW_P.js",
+      "bytes": 259368,
+      "sha256": "c96a91fe67e3d0605541c8f7b0a6d245b12a8f1c5df5747afe8ae896f75c43bd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-C1lqW8Es.js",
+      "bytes": 609852,
+      "sha256": "92b856962bccbf92fbaae74fee09b0815a92ad0acbf3907a9631665de8a8585b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-C2QEVWIj.js",
+      "bytes": 607735,
+      "sha256": "69e3f986b3dfde8a7113477bc364e962328181e36ed556c2b781c7ade465938b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-C718Yehd.js",
+      "bytes": 560034,
+      "sha256": "6ae1a2954a113aa875fc0154721fd93d7b880b033b773cbe011462ee1e173f99",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-CTXATkNN.js",
+      "bytes": 483967,
+      "sha256": "719f0b9e03542556d49c0de4dc2443b9e92d5a788521161f87d7749f082d8f5e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-CTZhpUsQ.js",
+      "bytes": 479900,
+      "sha256": "0eb02cd389edda55943adbe6ef107720a9a5d6ce5cdc5eaeb2387f7bfdf65472",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-Cn9x-ISW.js",
+      "bytes": 259368,
+      "sha256": "28e7fdaa80aae2d54c42b7073801e6a6ad431e8c6e28fac1de669c9cc1e27351",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-DGEI0l_o.js",
+      "bytes": 503394,
+      "sha256": "cecae6750a4cc8fc04a6a24248118df979c8b9c66b771cd6615282bf1772f0db",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-DKItp_Q-.js",
+      "bytes": 478995,
+      "sha256": "4af8c85353317b119423f3ed83afcd046b635d195f07dffd88eb597bce38d142",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-DbHivW1B.js",
+      "bytes": 259368,
+      "sha256": "2b113fac5eb8ec2fcc1eb1c1a8a69bb3cb9cb0b7137cff7a4dabde71e12058d6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-DsOy9rT3.js",
+      "bytes": 452297,
+      "sha256": "63383084f608370cfe237f77659ab556711b30bc873c06bc45f18d728d51b8f6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-UcO9XGGP.js",
+      "bytes": 483967,
+      "sha256": "e1e52820c57999bb88d5f53a9c3f3a90c80be58a5ce1e7e05e91d8076ff79c70",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-Yuin-xRm.js",
+      "bytes": 533840,
+      "sha256": "4f10b0ad97579a1781f360916e910b318083f335b32e5e072be3f0f49fcbcd86",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaApp-ydG6WS3i.js",
+      "bytes": 574659,
+      "sha256": "27a1a3ede21b2187a04ee9d705c2b7df6110733fc0846dbd2aa0a9ca9d1c2eb1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaElectrical-DCVQeAqy.js",
+      "bytes": 41580,
+      "sha256": "ec405ba77a440d059ee061883921d0d6cfb2be83665297bc65752c6e3ac240f2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaElectrical-DK0YupCi.js",
+      "bytes": 35204,
+      "sha256": "bb0dbbc936069b86d1cc569a8935a160759d121c3a4dbcf706a182f8e1b76c12",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaOverheadNetwork-BIccoZEe.js",
+      "bytes": 13605,
+      "sha256": "2b92293ffde9167871f09901cf155598f86720b4ac9668866a92f9ad42ecfe9e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaOverheadNetwork-BZez0gDi.js",
+      "bytes": 364,
+      "sha256": "ae8dbb6ef14c09f4a26f98cc85f10f2986de3b3582e9b2fa93b771858003184c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaOverheadNetwork-CCLyK03E.js",
+      "bytes": 13605,
+      "sha256": "3779cd81e17e7ea7046bf48c0520dcc522690cc88daae3c8f6dd9bdddaa0ca82",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaOverheadNetwork-dXAtSBNc.js",
+      "bytes": 364,
+      "sha256": "8bd2920d1d7617eb4129290c8c5300a02c91c649bcf71866218f7a32c31be757",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaOverheadNetworkLegacy-BwbA6iac.js",
+      "bytes": 10928,
+      "sha256": "596ec553b2a18883b7cca201c6980194f0340cef78aa6936a6779026f5f595dc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaOverheadNetworkLegacy-D4NBsgZf.js",
+      "bytes": 10928,
+      "sha256": "616593d1e62f0c6ca7feeef3515f28021441e98488e7805fbf2b9b8344739bff",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaRenderPolicy-MpP0sevE.js",
+      "bytes": 2834,
+      "sha256": "f410966a16b42dad0148a8f61a31076f26d7586c9aa8ad1642188f3c55ba845f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaStartup-DD9aAm5G.js",
+      "bytes": 265,
+      "sha256": "41cc353cd1c02a7deeb2305972433d6c6ac8493e710a3655a440351090f61156",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaTerrainData-D4ZpzSkV.js",
+      "bytes": 6458,
+      "sha256": "cda6f657f478be7567a1336f72dbe3546d1010ba7edd0f9d1d4e56ce96c3fd96",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaYachtApp-BxIkkIcJ.js",
+      "bytes": 5737,
+      "sha256": "8ce285c11e1832eeab3e9cd87edd9c3ddd436de97e299a9b44d3bb2391478096",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaYachtApp-DML7NRPp.js",
+      "bytes": 5737,
+      "sha256": "1a76505964643653a54edabf48a2240834beb57941b431c096cfdcabcb75b688",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaYachtApp-LBN073i9.js",
+      "bytes": 5737,
+      "sha256": "9c4c854b3e11c8290ba7c6e522a7b225c0bf862f07da62dbb36aecf78dcc8553",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaYachtState-3sLxl97e.js",
+      "bytes": 373236,
+      "sha256": "281766790691b4a4901456d50fd4f232c93cb53c3ff3190dfcacc4bb6132dfd4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaYachtState-DA0jjysC.js",
+      "bytes": 355800,
+      "sha256": "dd78db8489c82c2de212a0183a7304e4750a36a977f820f96db3d860d4181af9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js",
+      "bytes": 393923,
+      "sha256": "6ac5776f756a7c006e8afe569a096e06435c4c54ae82b925f42919b8e697ca33",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Texture-8f_StRFj.js",
+      "bytes": 5249,
+      "sha256": "006301e353e2d24defe9d55e1119ba1571df4ea4e10c8eab0eac70caf2a801fb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Vegetation-DMUN83MS.js",
+      "bytes": 673513,
+      "sha256": "3ca934a50bb08ad675a475a0d065f4ebda515002f9ae91ac61cb16a75b34167f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Vegetation-DnVtKdbc.js",
+      "bytes": 479134,
+      "sha256": "3ec13ac97fe3cb0d01b9bde79f7a278ebf9623f676b666d208dc0d91977501dd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Village-C3UMI-Qm.js",
+      "bytes": 259917,
+      "sha256": "7d960295a74de70ee1ffd141a64475a9c88500cd3a5bf188180fd090b5e8b52b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/Village-C_egDSub.js",
+      "bytes": 251528,
+      "sha256": "85474a8272aac712e09fb22a49e0736a0acd5af03a23de78649e83a011694953",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/common-HBn3Movl.js",
+      "bytes": 50617,
+      "sha256": "dedfd2ea2fba1c9896b04f9b514c128652a5410f637829616a698291d972b7f4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-6oawQTFV.js",
+      "bytes": 870174,
+      "sha256": "12186ee4f41b190619600777e5ac770069c8f0ec81a76051253e683bfc6f4c75",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-B2dlivAs.js",
+      "bytes": 870174,
+      "sha256": "ff8b0e897d1cf6d369dc557b183c49534701bfbf35f16c55ae7ebe026bb8c0c7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-B4CAF8M0.js",
+      "bytes": 870121,
+      "sha256": "5e1e5037dc6a07a5d11e9c046c32b70eca2d36c1d005f26f433ac70ed2df2707",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-BnP_SuAo.js",
+      "bytes": 870174,
+      "sha256": "a198b65fbe53666eb0c38dc3779012e712e3ea339ef8dc0c72a3e420e567b4c0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-BptDtxTM.js",
+      "bytes": 870477,
+      "sha256": "f2b8ec5ac0e62fe2443feeb15b4a4d71d59df59c9f472242c2893e897ffcf641",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-C4WhS2Xq.js",
+      "bytes": 870174,
+      "sha256": "68be539ea9f11f5f661cbc98e1b045e6291dc992aa80b731339d186f734360b3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-C4qkRHSq.js",
+      "bytes": 870477,
+      "sha256": "f41f3fa983660fbf360f80767a321a4099f5248e77f06dd4d45b59135194c33c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-C533spLq.js",
+      "bytes": 870121,
+      "sha256": "4f6c46580af5ce9d447668f2ef1f5ab615d3db6d64f6852a8a76cb2689708f20",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-CDAKihp_.js",
+      "bytes": 870121,
+      "sha256": "eb74b96367fc7637011389a02310be9740fb5c951459e6b5d3b6a607c16cd7e6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-CZj5hVHc.js",
+      "bytes": 870174,
+      "sha256": "786843007119f1565aad177095a60116a6cd3810b2c1c290e4c3abe64e943b27",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-CbxDRUOV.js",
+      "bytes": 870174,
+      "sha256": "ed7a014f279b213e85c0d73812d87766d592dee3337da882b8dc7ca690e0fbef",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-CstsmqKr.js",
+      "bytes": 870174,
+      "sha256": "1003bdcdcd46d1f0742c790e243cfd535c2b8e63476569ab2d51ab78e0da6fc5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-Cv7cCD0O.js",
+      "bytes": 870121,
+      "sha256": "945379ac07623f4b72bec3453e4675c8f3dacf1d45d883a93c78bdf856a29be1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-DJMrSeQY.js",
+      "bytes": 870121,
+      "sha256": "13d8f8564a1b415cfbb961b86ddb36dad8df0250b1362a61676099fa358f0bdb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-DRUKvFMq.js",
+      "bytes": 870477,
+      "sha256": "79c320f892079ccd1825c817833f38e2fd67b38b04cc3299ba590133c1473f17",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-D_bMY9pm.js",
+      "bytes": 870121,
+      "sha256": "10bf980d864f96667653d283ee497848dca70e226837612d6fa74bfb81ba6d11",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-Dyei57NE.js",
+      "bytes": 870121,
+      "sha256": "b44dcad485bfbb36f1b3ac577d6f6270879536ec6cc9ad8225e9b21d3004be43",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-F-LZtfJH.js",
+      "bytes": 870174,
+      "sha256": "b2d0e924709e2bd4d7142e718af04130ab4f082e8c14058db6f45a58f1056381",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-F0oO5f-p.js",
+      "bytes": 870174,
+      "sha256": "c36575d70d266d6ea62f343e2e2ed67055e9fed6eae3d309d0a9e880df79ba80",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-FUrnFwFH.js",
+      "bytes": 870121,
+      "sha256": "69674d3f6905368cdbd9ee6df0fee5963ac07d0547b3edabdfc16811d0981539",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-XXUgCu9J.js",
+      "bytes": 870121,
+      "sha256": "ad7b3d220843d6418f2ffd67cc84b15fefd6af139594353636b7bedd45fa4cca",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/main-n5w3h2VG.js",
+      "bytes": 870174,
+      "sha256": "4fdbb9a3190302cb3dc8f8c4ed5f9ae2705d8442d49274a45ac22511672965d9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/maps-9CVJLD9T.js",
+      "bytes": 731,
+      "sha256": "ba6b6184d9ba37fd6b34141da6276c38976dd9da8180ae995d6a6ff8833468cd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/maps-C4HnVQZt.js",
+      "bytes": 709,
+      "sha256": "67906e91532396c72ade8249abf4446edb92b12f1bc8fdeed5f8bae729d6cec6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/modulepreload-polyfill-P2Xu9kJm.js",
+      "bytes": 670,
+      "sha256": "418c206484b89b68ef5f067277831e583fc9193a62aadf4de269acaaeb12a85f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-6KFntOew.js",
+      "bytes": 2060,
+      "sha256": "fa147ced5b9df09fd38d52eec6a44f8b746149596a7372a6a5b92b5a7024ece9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-BLPDbtK3.css",
+      "bytes": 45866,
+      "sha256": "4c2eaac7de99f019beb4c2b40416bccf3e2c66aa6886c81e1b2124fe5d8fadeb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-BQnbkQLv.js",
+      "bytes": 2060,
+      "sha256": "de43f3bfdf4812f9e130aecdeab6bdc85f5d30f06b8990286629943e54356674",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-BYbEtXMD.js",
+      "bytes": 2060,
+      "sha256": "a7bc3d1c61638e397a5743a9a92cb907a331405c72b1c0fce9897b60a93ded90",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-BmOqR51C.js",
+      "bytes": 2060,
+      "sha256": "6f5aa1a85084c33854ef0042bc20596ad9a74e43939f73ed883b114ad0cf80be",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-BtN8Sewe.js",
+      "bytes": 2060,
+      "sha256": "2317caa16bc4b44a3da965b73e67449b0584e77e064d236e09d3d229c49da658",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-C5BPhl6D.js",
+      "bytes": 2950,
+      "sha256": "e9283f4efee50d4c2666ecc198995d474ce0c6cd2461ff480f6d23f8162f9f1f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-CAx3kQQD.js",
+      "bytes": 2060,
+      "sha256": "ce265ca832d13e62bddd029d95d260833618608f86dcf67ea6e6cc75fe8b3040",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-CB2wqEpf.js",
+      "bytes": 2060,
+      "sha256": "191c1f7823d0e024e11cf50baad5474bdb2fd94c1c5a2844c83d0862b2ee3cd0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-CEIWtsfa.js",
+      "bytes": 2060,
+      "sha256": "20ec739ebc7c9618d923244c3201d243cff84fe6c73d22ca90fde883c947f478",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-CIE0SRWD.js",
+      "bytes": 2060,
+      "sha256": "ba935011b59b74a33f624cde982025da36f3bef5ee38fa89ad3cfefa31c1a1fc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-CWjbuoyM.js",
+      "bytes": 2060,
+      "sha256": "40dd6b3ae9730db8c88224a8bb16b5d3480d8406035c0c49b771d1c1fe73d08b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-Ce5M9W_i.js",
+      "bytes": 2950,
+      "sha256": "0d4f0efe08f4105bdee3a2259d6839188d3f7c9470386e3afad304ff0962f551",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-Cjc5oFTu.js",
+      "bytes": 2060,
+      "sha256": "e53219cff46758b27f4e5012b99b8ad43ce239fc0e414ac7b7fec0dc002c791b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-Cs6cgvuy.js",
+      "bytes": 2060,
+      "sha256": "d38adb9fded7c85bc4c32b4fe7918aa228e7d2bb9d6ec30d54513c9fed1f532a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-DQP-yws7.js",
+      "bytes": 2060,
+      "sha256": "3a5d38ea454037ffcb70809f91b708a787947bb26bfbe2f380834e688cef4bbf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-DhB1VRvC.js",
+      "bytes": 2060,
+      "sha256": "a600bf5647694c82884e9fa345132003af6664f349c74843affcf10ad1205e5e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-DoPbRGtI.js",
+      "bytes": 2060,
+      "sha256": "068c14e2e5a8bc481a7f146ef50ee7bb0a6d3105c200be8c7a3062159183df8a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-LYvzDoQv.js",
+      "bytes": 2060,
+      "sha256": "d39585b1ceb526fa0aa80887c468dcc090ecb5562d0dcd5e88ec35886fdebf06",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-PQ9dzHtX.js",
+      "bytes": 2060,
+      "sha256": "b0c7067c4cb32833e278a7a7d70b7368244c2898dfa5809d3419d09b02ab883f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-SlT7-bNF.js",
+      "bytes": 2060,
+      "sha256": "5d9444463d932a1f23239356d5b4333533e6eb8dee4802142461304235189295",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-qQV6xoLu.js",
+      "bytes": 2060,
+      "sha256": "2633eb6529b343de3c283f601f6de21bc564a843a614a03c2590acba3e59a030",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/play-ylZJZyTP.js",
+      "bytes": 2950,
+      "sha256": "006c32d2b5eb022cdb50fec9e21c59f79283ab815f9890a441dcca5eff98678f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/assets/preload-helper-uBIymjUX.js",
+      "bytes": 1233,
+      "sha256": "e1a22f3f73566f21ff932e058d32243e4a118f3491b91e96893aa5ab7eb49a00",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/CREDITS.md",
+      "bytes": 10394,
+      "sha256": "1ce3b28a2a36237bb3ab101bd0e7e2accff37475e95d16f8e27d420b11605207",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/bail_click.ogg",
+      "bytes": 13369,
+      "sha256": "42236eb210ce7a0cc54b28c13e5d5dd00e0782ecde3b3a61561a177bb0f5cabc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/big_splash.ogg",
+      "bytes": 31718,
+      "sha256": "b3401965c8536d93dffa62a793ca45a34b185d0d0bb28f58f16b35a19990c38e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/bird_dove.ogg",
+      "bytes": 128894,
+      "sha256": "156f11da57c25ab4ee05af27a2d38f01195bad8283f1ee2424c0e6e185f7b6c9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/bird_forest.ogg",
+      "bytes": 159596,
+      "sha256": "a5368bcbbaae5b7521322f225cab99f644abab975c6c5db1a17b9232ada6f032",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/birds_dawn.ogg",
+      "bytes": 378131,
+      "sha256": "4647b53f1409faab746a18f946e76b4f4002ec6821c2be62e6f9a4f40da694a4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/boat_engine.ogg",
+      "bytes": 411828,
+      "sha256": "9ae124875c9290c1f3b57f5fe4504b640e0f131949ddc7f278b3725d616137d9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/boat_lap.ogg",
+      "bytes": 293262,
+      "sha256": "90c0b619f22842e8625520e36d6da6cad6d3cf21ade49c36a77d03ddcbde9bb8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/boat_rush.ogg",
+      "bytes": 318170,
+      "sha256": "c5ea66614be5bce2787ba4ee8478433c18fd3e80e7b2bafa5365664ecf72ca5e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/coins.ogg",
+      "bytes": 15872,
+      "sha256": "caf26599903959eb27f5b3660e8c6f3c9d317917848a86174e16f4b465ab5e92",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/crickets.ogg",
+      "bytes": 341489,
+      "sha256": "01b41d7e8fc719373f77f41f3936e8ccfdfee4aadea1a1dd1120206b2115d76c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/emerge.ogg",
+      "bytes": 9254,
+      "sha256": "6b06f80b49a1dc03daa0ec0bc02e6a0b68c8d36c2af16cbaf0a9874bb4320759",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/fish_flop.ogg",
+      "bytes": 25121,
+      "sha256": "c1425bfbd966e387409f83c8c1aa16c8a553703957b24af46b4c863776eb0c87",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/fish_splash.ogg",
+      "bytes": 38203,
+      "sha256": "7c3b51bdf54b08bd53364aceb603c19e6e6c7f961f9d8f7385fac65d269e5897",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/gull.ogg",
+      "bytes": 55921,
+      "sha256": "467dd8e48f66c5b497f051c622ca7f753b9bf30eaf1ca7b9162b8e234bb674bb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/hull_slap.ogg",
+      "bytes": 27436,
+      "sha256": "a0d74ee5d1dc174de4a2806090bfa4005999dfa9a038cb2067bd85f1ec1ef0f9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/line_out.ogg",
+      "bytes": 5795,
+      "sha256": "5fdf20746905ed2a1ca8a9dc2ca58cfa1e74762922413f6f0fa12bc1f5875409",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/line_snap.ogg",
+      "bytes": 20929,
+      "sha256": "2a312b716065f7c676d56ed3b31b6ffef8194cbb00159337b2a65b9a998c860d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/line_strain.ogg",
+      "bytes": 9264,
+      "sha256": "4f7e9604609b4d2daed797d85894f0c1f68b0242f34c980e4687664686a965d1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/palms.ogg",
+      "bytes": 357078,
+      "sha256": "33c89a41d0e0592cb2b6fd5592fab4e7333b090dace7fd755334cc145ef51820",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/pier_lap.ogg",
+      "bytes": 287231,
+      "sha256": "e020be075543b148dfb2b47540a605c1a30d25e5d18206b945b949b96a32079a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/plop.ogg",
+      "bytes": 11220,
+      "sha256": "b648df37071652a2335aa34f3a73e03aeb3bd8201c26d65951ebac0779b6c6f7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/reel_drag.ogg",
+      "bytes": 38165,
+      "sha256": "e22d713852e49557b535b9e08cb35911a696935eb87e67ee7b1e9490d0ed3085",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/reel_wind.ogg",
+      "bytes": 70632,
+      "sha256": "6783e26b193865bf0c143e61c0b1c63a18f554fd21e9ef6f4b9f5997fde0d61f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/rod_swish.ogg",
+      "bytes": 24086,
+      "sha256": "5637f21cc6d11e6e16f1806997267117bb34e0a190277f2569c5ba8f1f234184",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/splash.ogg",
+      "bytes": 63034,
+      "sha256": "9de4dab53ab34891dcfe14be3160c5cb6770364e007c83cec8d0d79065a49ee0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/step_grass.ogg",
+      "bytes": 19268,
+      "sha256": "31be902e1ddf2530867d447cc3ae602a03c9aa60293d515f27359dbafd5ceb87",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/step_rock.ogg",
+      "bytes": 21541,
+      "sha256": "82b0a1bb6344b982c789988d99d9d324493ea0a1e7fd1668c0ca2081e8895157",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/step_sand.ogg",
+      "bytes": 22902,
+      "sha256": "3128efca52668d0aad8ec243963a691b969e2327c5c740f41c71fe624c96242e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/step_water.ogg",
+      "bytes": 37998,
+      "sha256": "e8b03fa5acd8d09286e1b3907b5c86dbcfaa6064afe59cb375a37b4abac7636e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/step_wetsand.ogg",
+      "bytes": 17584,
+      "sha256": "c48ebf1ee3124be44d5348689b0e2c32513370c6975d27bde509d6a42a05c9b4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/step_wood.ogg",
+      "bytes": 22476,
+      "sha256": "90cb5daf01a8f122bf0a08504f2216869008b0943e588c4bc637f1bd187210d8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/submerge.ogg",
+      "bytes": 15989,
+      "sha256": "56b2f265bb453da7daf1775ca9d2a9c3e6366758d0c0d906b791c4996bdd36c2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/surf_backwash.ogg",
+      "bytes": 108825,
+      "sha256": "9e771de117448c7d672c888a472777a9074b63ab904a5c121f5624f4f4fa4b81",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/surf_crash.ogg",
+      "bytes": 132426,
+      "sha256": "9e09d4ec25c4b31114f7c44c1a2a57e8d84589caa64592817df5b79d8174e6ea",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/surf_far.ogg",
+      "bytes": 365150,
+      "sha256": "a4c0068c83ae7752c0b666cf06548ac917aefd61bb49f970d9f19d52b4f7eaa4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/surf_wash.ogg",
+      "bytes": 75291,
+      "sha256": "cad02b8c23a584290da4a7e73742e9477d4088d927aae19c1b852f1cf53619c7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/swim.ogg",
+      "bytes": 29543,
+      "sha256": "cf45000f1b0ad2b0f330b2dde654a53ea64ce3484301d024c32bd57dd32bffdc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/tern.ogg",
+      "bytes": 108719,
+      "sha256": "981c538c1db50380f3a7afe04656f7b08d60ebd1c1be84fcc6052f70d7175559",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/under_reef.ogg",
+      "bytes": 412371,
+      "sha256": "121952cc2e09a3a30712e2d1038a00366e2cbad3dccf1fa2388261487028249f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/uw_swim.ogg",
+      "bytes": 37646,
+      "sha256": "b52eae0e40747edb6f84e12f0bf62674e667004204cc35929182c73abd98b00f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/whale_blow.ogg",
+      "bytes": 37617,
+      "sha256": "549b6b6c1fcba1617d30b632332d21a168e48cde7f1cfad5906b64096d057e0f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/whale_song.ogg",
+      "bytes": 373991,
+      "sha256": "5452f85dda448630503eacee842737b72a6731bfa4989edd7e4df7e6eb8de45f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/audio/wind.ogg",
+      "bytes": 415921,
+      "sha256": "3e5d45f75364bf797f375061ed0232724e0570c1ff8f64c4c97498093e1789ec",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/clouds/LICENSING.md",
+      "bytes": 1123,
+      "sha256": "49a92b94c0037891fd16910ee4110b2ca8f3d2cdee7216ef1e48e646f5e7b384",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/clouds/baseShape64.bin",
+      "bytes": 908287,
+      "sha256": "1e11118d70768aaeb0050ff3dd19d0c9f4321e5dc02eda8c6805e838f89c35c4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/clouds/blueNoise.bin",
+      "bytes": 4096,
+      "sha256": "982b0312f19ed4a737f55be30d965d85ec05d63bee679ea28c488cc8db323cc0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/caveat/Caveat.ttf",
+      "bytes": 403648,
+      "sha256": "0bdb6b660482d31531b3945849fba5916b3ef8695da7024a9e6b9ee3c4157988",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/caveat/OFL.txt",
+      "bytes": 4385,
+      "sha256": "1f9d81d094273d82f3898a1ee8b598a717d050ecbf5ff7bede105b704880157b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/caveat/SOURCE.json",
+      "bytes": 484,
+      "sha256": "9dab0304fb9dfe42475dce6e9cd521136ded9dfd2684046b33329feef58e61de",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/credits/CabinSketch-Bold.ttf",
+      "bytes": 271012,
+      "sha256": "0961688037b97947495c2e35e6e5a93f2b234490514e33346605ffedf9c7e6be",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/credits/LICENSE-PermanentMarker.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/credits/OFL-CabinSketch.txt",
+      "bytes": 4416,
+      "sha256": "f6fc9fbae062e4efc1b0306e27715d43cd64a48b8ffba81c22034b8efee4fce2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/credits/OFL-Oswald.txt",
+      "bytes": 4483,
+      "sha256": "0fd731a904b729a4e02eaf5e8ebd06783edd9abe400e8882760160230675b652",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/credits/Oswald.ttf",
+      "bytes": 172088,
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/fonts/credits/PermanentMarker-Regular.ttf",
+      "bytes": 74632,
+      "sha256": "28f82c8a7943cb8e9d599f8554da1d4fc75dbcf69b9885ad6c0611d20c6946c5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/index.html",
+      "bytes": 5367,
+      "sha256": "cc1a67526b847c08dcbfbe0b95b530354e13a5706d03a3bcdbe6a163b617bf6e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/characters/LICENSE-Rocketbox.md",
+      "bytes": 1066,
+      "sha256": "17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/characters/joe.glb",
+      "bytes": 4743204,
+      "sha256": "da3efce5a452d3c17f40b8d33bf449f565c0a6bef93602dc3e74364fb64081ca",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/characters/marta.glb",
+      "bytes": 5507076,
+      "sha256": "2b5eb048c75d37a6815cfc2770ca87dcaba1729b72779f1557c4f4d13b3ba75a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/CREDITS.md",
+      "bytes": 1390,
+      "sha256": "97798436efce4cb6302d6fd4c508b064c39a2095e4642b87fb0380b3360f168e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_01.glb",
+      "bytes": 107568,
+      "sha256": "223c1325855bb5428bef0ed94729b38b19f48933512c67a10c62197dd1a6a328",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_01_albedo.jpg",
+      "bytes": 720703,
+      "sha256": "2da1b4bdd5ea430d7ad1ba2fb547bf4f18d9def6f711781be89972e004757d2a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_01_arm.jpg",
+      "bytes": 595028,
+      "sha256": "9fc47d37b740a409fea889edc7f2d7bedac3d970a3a506092e18cfca10d2ed82",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_01_normal.jpg",
+      "bytes": 1023490,
+      "sha256": "1d6603df36d0dd711d73e0ae2f067cd96f63d5e3ab0681d4a85bcb8df2049388",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_02.glb",
+      "bytes": 106644,
+      "sha256": "5dfac308be9c9c8f8e362e5e2596b000ae706d37afebf4ab9f68ff3b69fa0134",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_02_albedo.jpg",
+      "bytes": 617273,
+      "sha256": "6519bf7082bb3849c94a43a1f615a4a94547edd59217e05ab1351205eafd88da",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_02_arm.jpg",
+      "bytes": 501350,
+      "sha256": "4cc11b6d5ffd457280ffc2652f40f27c25352447f03afaa0f3e8920b5f597280",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_branch_02_normal.jpg",
+      "bytes": 737343,
+      "sha256": "27007d93991058dcead6a52b877d86bc7f5b27a13e397d5a99e8f00562166533",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_trunk.glb",
+      "bytes": 128644,
+      "sha256": "19a89e0b97270d816555cfe39f3c45a8cfd1452e77c41822219f0947b7d96f3c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_trunk_albedo.jpg",
+      "bytes": 768713,
+      "sha256": "53015f7dc3cc9a5ad360439b63c72d90402314201255495684bf6a6499aef7e0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_trunk_arm.jpg",
+      "bytes": 514214,
+      "sha256": "7aa714956b606c2d4a929d4ab76490db4a45f23a1ec24c66f088867ef363f37a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/dead_quiver_trunk_normal.jpg",
+      "bytes": 573241,
+      "sha256": "b3d987eba87112005529664455a82809da2325420021d494832dd8ba860eb62c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/lambis_shell.glb",
+      "bytes": 64276,
+      "sha256": "46228f0775fc1e6bea37595d72c8b3080f8adf68fbb522264c6fbab21df15579",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/lambis_shell_albedo.jpg",
+      "bytes": 785669,
+      "sha256": "0b9296a51b8a157fff2245fced2a7723db9db4c7ea3e976802e1f9d3f93b7cc8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/lambis_shell_arm.jpg",
+      "bytes": 567463,
+      "sha256": "360e5e637404cd8999914ba679d4bcc726b73016b69697631ba7ab33b31b4d2c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/debris/lambis_shell_normal.jpg",
+      "bytes": 582208,
+      "sha256": "285344a5bd1ea5710fdd0447be0fb7b86bd2b5a8d67f1c93d01d4201d8f3e369",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/CREDITS.md",
+      "bytes": 3608,
+      "sha256": "7477484e351f5592808f86f0569d6d3db08d5c82b9bcfe5e1fe9fecbdc352f40",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_WoodenTable_03_0_a.jpg",
+      "bytes": 48049,
+      "sha256": "941155536ebc3c00fd62035cab642b7061f72477ef824a573612de5175985363",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_WoodenTable_03_0_n.jpg",
+      "bytes": 50552,
+      "sha256": "80c38ffd9f72b54d840ff8d278dc382ba84e2eb8511a7c896e19ea9109fb94cc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_WoodenTable_03_0_r.jpg",
+      "bytes": 76840,
+      "sha256": "f0b7052ace0b9827afbe7d26beefa5009a4da0a0060e897dfcd0b7a6ea13a6f7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_fish_knife_0_a.jpg",
+      "bytes": 62747,
+      "sha256": "71c6f06f04fd039367e3825e728fe5b27f9cc4a4702a9429361ccab06f70f8fa",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_fish_knife_0_n.jpg",
+      "bytes": 71662,
+      "sha256": "fdf758fd9c115f6b22711f1636a1b2c0fb45dcc99285d646d14dfc3ad16dc0cd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_fish_knife_0_r.jpg",
+      "bytes": 98754,
+      "sha256": "5497058bfb56aedeee74b86504bca9e52e5b2415cbed29117c2933df432e79d1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_fishermans_hat_0_a.jpg",
+      "bytes": 36296,
+      "sha256": "40da7f194859ef0a52bd154cf0e8cffb2b097170c55e689a4606bd548e33f0c9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_fishermans_hat_0_n.jpg",
+      "bytes": 71097,
+      "sha256": "d42ff8830693639131ea90dcc234bcd4b7d63afed1799ea16ae08fd942a75567",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_fishermans_hat_0_r.jpg",
+      "bytes": 66174,
+      "sha256": "4ba768ea5737f0999a49e6799bc882289c9b54a7a1a27bf1d55e04a320f5419e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_life_jacket_0_a.jpg",
+      "bytes": 51197,
+      "sha256": "43cb5560344cedb38d1db497e28432c6f646833571290cda9c8cf00db1965362",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_life_jacket_0_n.jpg",
+      "bytes": 62218,
+      "sha256": "5f36803c8a2fce1999951d29693a509319d70c01b68075cf81fa9946c502b28a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_life_jacket_0_r.jpg",
+      "bytes": 69860,
+      "sha256": "fb496c385a6b31e509f84f00d75c3b4fb5d5acad16f76c95463a71dbd98d665e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_lifebuoy_0_a.jpg",
+      "bytes": 77135,
+      "sha256": "b9dba33c840e6cca357eedc15b5f1daac756d6aac713255623ff1b04f3e38f26",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_lifebuoy_0_n.jpg",
+      "bytes": 90349,
+      "sha256": "b5d46416427b8ed92b1a2369e9838b4eb77db77735ad558c46e227810c05f7a9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_lifebuoy_0_r.jpg",
+      "bytes": 59734,
+      "sha256": "7a292cf89446d3b137dccf70daa570bd7ce98b6a092be94ef21defb664213f97",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_metal_jerrycan_green_0_a.jpg",
+      "bytes": 44244,
+      "sha256": "04a2b977dc8221ea5a980f902ea752cb846e1cca6f1340741bae9f553a7541e2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_metal_jerrycan_green_0_n.jpg",
+      "bytes": 73176,
+      "sha256": "8ae04a5561e63c5c87cd1fabb2082f9be86b9adcdf65abc1730d533cb86d1de7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_metal_jerrycan_green_0_r.jpg",
+      "bytes": 116307,
+      "sha256": "0659a22d506ad1355b9931600b10b56f5cb6c3762c27240b8f7dbdf31c51001b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_metal_toolbox_0_a.jpg",
+      "bytes": 44712,
+      "sha256": "5da452bc8438355894d6ecc108e46c31a4ed3c28b1731e66146c02f257a78fe0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_metal_toolbox_0_n.jpg",
+      "bytes": 50139,
+      "sha256": "4c1b20de645e04ed2068f3dda9fbf418a444cd661ef3803e023d2606203e3be8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_metal_toolbox_0_r.jpg",
+      "bytes": 96223,
+      "sha256": "d143b83b93261e086a24c550c91492ccb34ddf740e9cd607b958b2069b044785",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_plastic_jerrycan_0_a.jpg",
+      "bytes": 55495,
+      "sha256": "4ed9d3df47d9e94ef295e185c59ae4b4628c2de7333526bec03ffdb0c40aac20",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_plastic_jerrycan_0_n.jpg",
+      "bytes": 51105,
+      "sha256": "592905dc7584bf9ba014cce495a034f0f3135d712128184429980eb1bee9c020",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_plastic_jerrycan_0_r.jpg",
+      "bytes": 108159,
+      "sha256": "79402265b9bba83b52172b6eab82b95f3b4109962994c7db8ef53a57246c45c5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_bucket_01_0_a.jpg",
+      "bytes": 59261,
+      "sha256": "fc1fd6aed5f36bf8f48cd9d39e2029a4151cb2a5194b31cc1b2c2c7d4ecb979b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_bucket_01_0_n.jpg",
+      "bytes": 58439,
+      "sha256": "e8a4d8b703d244186cad2102734a4e925630f706405d00563b423e4ce5dc5bf9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_bucket_01_0_r.jpg",
+      "bytes": 81071,
+      "sha256": "0527e1d74bef548a815bb85851ccfd3a64b0fe52e164e9c87caecd983ae0b0b2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_crate_01_0_a.jpg",
+      "bytes": 59591,
+      "sha256": "253dc7afd546525f6ca2f7547c001b4e5e3e5c97286ebd8b554a6d8d754b33ce",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_crate_01_0_n.jpg",
+      "bytes": 50512,
+      "sha256": "fd66fac342b21272db2c0ceff8935ab661099653d974f7037643b60830ca30f4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_crate_01_0_r.jpg",
+      "bytes": 75542,
+      "sha256": "352460ee351df1ad2ad649157718b2687aabb880ee17fcb1de949943fc659b27",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_crate_02_0_a.jpg",
+      "bytes": 63008,
+      "sha256": "b0492b57d1bf940c9c36c54b562b473ea48c28e634dcb336cb03e95ed4ba18a3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_crate_02_0_n.jpg",
+      "bytes": 49803,
+      "sha256": "e547d3e9753ad185b8877296066c8ae59b236d3b6d9b6ed5a29621340c5108a3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_crate_02_0_r.jpg",
+      "bytes": 82037,
+      "sha256": "70c59a9849d791506db4454d31f609f73ea033b50ea0f48b152bc496988d47a4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_cutting_board_0_a.jpg",
+      "bytes": 67101,
+      "sha256": "c06d3d0fbc5c9e00f754d82f676fe1be1053530310cdf5ce624b7c84ff8ecf75",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_cutting_board_0_n.jpg",
+      "bytes": 48647,
+      "sha256": "82a0190810e8e13dbd5156cf058dbb3b0d0120df1aa07ed3dc994fddfe6f97e2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_cutting_board_0_r.jpg",
+      "bytes": 27151,
+      "sha256": "767c3f44efefbee5ce0835bd5fb04e41b903576aa81d9e3fdefb960957af7a67",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_display_shelves_01_0_a.jpg",
+      "bytes": 47132,
+      "sha256": "1bb3878ca01ccde52e8d051368dee7a67d905431547e218bb10d49d88d7cbb33",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_display_shelves_01_0_n.jpg",
+      "bytes": 19738,
+      "sha256": "809b37bade4475cbc3c93c30b82fbe71194aa8b15e50f0b1dcc79e2c4c0f78cf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_display_shelves_01_0_r.jpg",
+      "bytes": 58584,
+      "sha256": "43d487b561ecd31da8fea819e48f895a711c5045665fc3e1d78bdaa10b143b14",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_lantern_01_0_a.jpg",
+      "bytes": 60530,
+      "sha256": "f4d25f09192b2ad096609ec7917a74e88fc536d37b2f764872f18aa30c9e7cd7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_lantern_01_0_n.jpg",
+      "bytes": 70640,
+      "sha256": "f0a2d553099e285a47271002808aaf5a672cb57c6d1f5d5601f80da924118a88",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_lantern_01_0_r.jpg",
+      "bytes": 84421,
+      "sha256": "803bd9da03c87b73b66ff3ef00e8a7c6e9a76b335ffb3aac4df0919d3ea847bd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_lantern_01_1_a.jpg",
+      "bytes": 27242,
+      "sha256": "ffab51509e7d89a0f07e763cb663fac7d72e007d8727f394958ca6a5a64ef701",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_lantern_01_1_n.jpg",
+      "bytes": 10665,
+      "sha256": "4fdf1b374deb5e9f32ca32d581ad7b83b38519e0a27fb9c2b97d895932bf0754",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/p_wooden_lantern_01_1_r.jpg",
+      "bytes": 40594,
+      "sha256": "51952435ccc51447b137d116fb717c6539548ab3b1a34056041604af568b530e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/props.bin",
+      "bytes": 1988532,
+      "sha256": "f6dbe1c53a94a330f1aae852964aec1d8e4bcd57b04b145df9b1552aa899d486",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/props.json",
+      "bytes": 3386,
+      "sha256": "858b5910c9df36e70d9667e005df080eb0e508484e45ba081fd8aba6fb37ccb5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_brown_planks_a.jpg",
+      "bytes": 235038,
+      "sha256": "09c4942b3b03b022be607f04ac05d1b832cbb0b32a1faaffe7624be6b1d44df8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_brown_planks_n.jpg",
+      "bytes": 246956,
+      "sha256": "1bcae3fa86c68a4d9ce82bf90e1cf6cbf9af7fe6a1c15aef09fa79c18f9308ff",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_brown_planks_r.jpg",
+      "bytes": 224089,
+      "sha256": "f562c608e9ea0a9efda3a08c2e3109f496ecd9d2c15f3d9286ba3c0e12e27afa",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_peeling_timber_a.jpg",
+      "bytes": 322180,
+      "sha256": "8021a167f79461bf3edff76d277b0770bb55bc56e75a33321a40eaff0014253f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_peeling_timber_n.jpg",
+      "bytes": 220254,
+      "sha256": "885759fd46ad21bdb72fd21460f07ba448865207b3fd2cc39ab4fbc91b24232d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_peeling_timber_r.jpg",
+      "bytes": 217262,
+      "sha256": "69b9b3d1ffda28e6824f2e5cac0c4f361c54d343d206b861d37e19234b30f9fc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_planks_a.jpg",
+      "bytes": 166512,
+      "sha256": "0517c5c7e79c378bb03bd35e44f3e2216cdd184a085599e7effb1371b7c8845a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_planks_n.jpg",
+      "bytes": 206585,
+      "sha256": "2205263952e3f58d4d1736afa0b884dc506f223641bbe10ee613d49f830e6cf6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_weathered_planks_r.jpg",
+      "bytes": 125165,
+      "sha256": "404a5ad3a39b45036f405d48859248e5c60cce12ee6c62396cd26a20f4cd6f52",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_worn_corrugated_iron_a.jpg",
+      "bytes": 277831,
+      "sha256": "19c86b80696d51760acc3d4e542401c1c5c66ee7e7f128e4c9454cb0d47578c6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_worn_corrugated_iron_n.jpg",
+      "bytes": 413288,
+      "sha256": "c4296e5fc64d702243e66367ccbab9b22a408ad46d19fddf39542eaffc4681d2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/s_worn_corrugated_iron_r.jpg",
+      "bytes": 195035,
+      "sha256": "baa6ab87bfc3bfb4fea34d415e69ba742d89956a627e8f203afb64f187fa1524",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/props/signs.png",
+      "bytes": 222251,
+      "sha256": "94036b301f674db2df33b001dc00f76ef540d3156f7b16492fe7ff2dfbf66431",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/whale/humpback.bin",
+      "bytes": 3469416,
+      "sha256": "b3a31801a393489331bc3dd4fd5be64cbad32ac4e159f5180e0eb028d489a92d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/whale/humpback.json",
+      "bytes": 4106,
+      "sha256": "c47390c365da1c8c6fa73bea4996bf51073a973770c1942e8993f545e283a354",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/whale/humpback_albedo.png",
+      "bytes": 4289686,
+      "sha256": "5daaa6727f5304aaa3b6f6ef86cedcebc7cf922376a5c0e7caad66c4f4a5efe1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/models/whale/humpback_height.png",
+      "bytes": 12896017,
+      "sha256": "5e18fbff0aa0034519d149c245d515f75011e7dd4f626dbd1a5e97eea79b66b5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/play.html",
+      "bytes": 3370,
+      "sha256": "18b557dc6e33e897de448fb9fc701ca25bebdf3fea2baa368d11e0b096eccea4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/publication.json",
+      "bytes": 15607,
+      "sha256": "d8797d8e4265302a95a6390815d9ad26766c1fd756f144260c4c2dceb3deab25",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/container-home.json",
+      "bytes": 2358,
+      "sha256": "c7d6bbdbd89bc5dd7ff76532dfd4a86933bc197bf9de244b2543ba6605a0afe7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/container-large-home.json",
+      "bytes": 1870,
+      "sha256": "36b915cdb1599c95d9a4c19414ab285325fd51f45a859e9cac77d49244e447ce",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/container-large-plan.jpg",
+      "bytes": 252240,
+      "sha256": "dfd1ebea0f52c64dfb43385c1fdbbd560122ae6dc5f386fdb5d3b81d0c52df85",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/container-plan.jpg",
+      "bytes": 174074,
+      "sha256": "64b0faf8cac3b08e481284330b8203895035f7b0794919616dd9d3f60e4eb100",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/container-solar.json",
+      "bytes": 11836,
+      "sha256": "a5088a4cbe7cde49ec3a399ab29d273b48b7bb424dff98b0b67f3e62c56fb310",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/MACHINERY-BASIS.md",
+      "bytes": 4213,
+      "sha256": "beb49316e84381c332ce1aecc0a688887d1584a02029affa0d6f0c8d6cd7bb06",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/MODEL-BASIS.md",
+      "bytes": 21983,
+      "sha256": "281198f083362ae446e4de8b3c48eae0a6b073b13edac79fc87fdddbdb1c33df",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/SURVEY-LAYOUT.md",
+      "bytes": 2844,
+      "sha256": "53ad19507a62a5deca9f05d9ade72d100295a91972fdd30f98d6a646bbd71bfb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/after-access-landing.png",
+      "bytes": 831036,
+      "sha256": "3ee3cb678e989162d811a3322c559ce7f8d37bb792c6d6bb7b5cfea774d08dd7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/after-access-mobile.png",
+      "bytes": 380211,
+      "sha256": "20bd4d79b356c31dc792c41e6bb70b11b125c7cb8344983ab979755fc3e653ae",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/after-access-overview.png",
+      "bytes": 1043722,
+      "sha256": "125668d46d3d3088a510d9d09eaebb87b2275d7d461f7c62f43a84c57478f034",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/after-access-stair.png",
+      "bytes": 646279,
+      "sha256": "1e92b37808993ef8cf44135946029f319b3ee03e0a7250e936b53831153897ab",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/before-access-landing.png",
+      "bytes": 814275,
+      "sha256": "43d58e547717e1c2922a56fb0b441c549ce2cefbeadd88e4bb9f4cff9f86bafb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/before-access-overview.png",
+      "bytes": 1039001,
+      "sha256": "29f7ebc637bdc5c9b8008e52540fa401bc8d263a885ef630102dc2c60ecb232a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/before-access-stair.png",
+      "bytes": 650655,
+      "sha256": "0c3b46508ea51aac2336004d5618f7472b5cf2b98920532cc4c670831ebeb016",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/access/index.html",
+      "bytes": 2824,
+      "sha256": "ae01bbc235780df3de8a51a865acf23eef009f439bb43eef3944d8f9d0a3a34f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/before-after.mp4",
+      "bytes": 10634367,
+      "sha256": "03c3b2f315ccaa4530934b9f12635552fb0a04804a8edb3505eee80ce2ce760a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/index.html",
+      "bytes": 4830,
+      "sha256": "549889966cad5d8d47859b17550a63d4746118fc79e76077df4c6721a177453d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/poster.png",
+      "bytes": 506209,
+      "sha256": "e70b0f2e3f1271abdb4ae093d073197247655695c436a0824c2832c999408ac2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/validation.json",
+      "bytes": 3978,
+      "sha256": "9ccc7340f970f91dc062ff10bafe7af42597b3d62edb5a0367c25bd1766b49fe",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-00.jpg",
+      "bytes": 186629,
+      "sha256": "ed57761fdc3dd87f1adec72e4eeff24849918c467af5e6b74300862a65b4e396",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-04.jpg",
+      "bytes": 204386,
+      "sha256": "4f43ca572ea62046d5115e6c7cacc53b435fb484e275d672950af33faf379d2f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-08.jpg",
+      "bytes": 221764,
+      "sha256": "d8909029f7e68fd626f2983f832f230abeb43e833e69ad5f4db9df4ed0f6bf04",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-12.jpg",
+      "bytes": 235554,
+      "sha256": "8079f6d3db0808874c5c46c46558450b4110547b3d9fb0b08abc7330733edde5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-16.jpg",
+      "bytes": 206915,
+      "sha256": "d895a1c089d09be922b3bb1f2159fe0d8eb32a7d7d797228f8df859cee8a0981",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-18.jpg",
+      "bytes": 170096,
+      "sha256": "1c69b098d7362e1d2b13d0f0f6541b72729d29de28ef04fd5899c6cf995801c3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/view-20.jpg",
+      "bytes": 185588,
+      "sha256": "e91f3d8f82b86c3a8b0808d0a4e04d3ed836b5839b805336c0f1e6ad4152fe17",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/approach/walkthrough.mp4",
+      "bytes": 5645408,
+      "sha256": "544c4a518378ef8f93ec24b8cc2ded6471a031c62ac98346390d45b9bc970083",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/after-barbecue.png",
+      "bytes": 717865,
+      "sha256": "a0a1c50960215ce9a1d97f36828a821fb4ea7ec9f9a8dcdb017ca43cf9219383",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/after-bbq-front.png",
+      "bytes": 696699,
+      "sha256": "9e181a7bc945eff7c8b5f7f87cebbce925da0d38d92e5cdbbf1cdfc608cde407",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/after-bbq-high.png",
+      "bytes": 938782,
+      "sha256": "7d5b1d00a5051a81ecae6fc561cccf6219b19585fa2e1ec63e8e89fc9f0bad8e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/after-bbq-mobile.png",
+      "bytes": 305810,
+      "sha256": "25af5c3ba278f46a1d4c5c7f0b8edcc01591bfa865fd63728348ecc65ca973a5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/before-barbecue.png",
+      "bytes": 728210,
+      "sha256": "c7da302378ed5ce428b42d7f9ad15ae2ab236808e6f09cfba369a8b9173370bc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/before-bbq-front.png",
+      "bytes": 714822,
+      "sha256": "c08d8b200212f966b27762dce593c6d46a69154c97d44567851d747bb1110414",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/before-bbq-high.png",
+      "bytes": 914488,
+      "sha256": "095b01081bbf1cae81799172af04b51951e81c53422f6d35a073ca854e5ed032",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/closed-bbq-front.png",
+      "bytes": 678541,
+      "sha256": "706b7df5a95591d87605858df11c255ee8923db4bd6a4467b4230ae0d01f410d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/barbecue/index.html",
+      "bytes": 3070,
+      "sha256": "437225f9f4e4f6188ef1973beecf644fb596c4928fd06ef45703a74ec567c556",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/berth.json",
+      "bytes": 10124,
+      "sha256": "c685c4dc131d9c315174dae0d04db0becc984420122c68fdf0d36945d23329ff",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/boarding-plan-section.png",
+      "bytes": 154383,
+      "sha256": "cf82b649d750e530d78901278670b948c23094eb1be57135208abff7b1f1b0b9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/bypass-21-after.png",
+      "bytes": 485172,
+      "sha256": "69b16036ee6a02e8b1fff677d5d26e877deff8be1d5952e4c21c79ec31389827",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/bypass-21-before.png",
+      "bytes": 488837,
+      "sha256": "e7aefde4689bf800989ab12fc40e630db63b8e8af3e849aabd70edefc4fce906",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/gangway-12-after.png",
+      "bytes": 624103,
+      "sha256": "ad6a324bff51f93d209bd099fe457ae0181b6f98935bb19213eff3664b5b8e93",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/gangway-12-before.png",
+      "bytes": 567287,
+      "sha256": "be4bdeb0dae8bf1f9dbcea2d27527ba8cfa12eec9e2d7921dd6e6e9f902ce23e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/index.html",
+      "bytes": 4578,
+      "sha256": "2a23b9155b7208da060227d97b17bc139225be51aa304d32d1a11ad731c8ce86",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/landing-16-after.png",
+      "bytes": 534751,
+      "sha256": "a82bf8a7a3e3ca94dc30fb08348330ed0f30df01e6e07c65dfad55809d1476c5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/landing-16-before.png",
+      "bytes": 509820,
+      "sha256": "ef0654b74808aa83feb9e2f547dbd8f768053d382361f99b292091e5f6187b76",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/side-passage-24-after.png",
+      "bytes": 312202,
+      "sha256": "f16ddc6032135eeb3a3c428dff29ef6dad1e5ee3a5d6d04423e6a7c0952e831d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/side-passage-24-before.png",
+      "bytes": 389106,
+      "sha256": "c7d67eb574624938306f9597ea1c8dccd98f27d0bfdbbbf4c6ec93686d0290f3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/boarding-route/validation.json",
+      "bytes": 5927,
+      "sha256": "d0457f7b4e92aaa9ecd89f65cb1b2abb34a442bb1867654349660d72b0b347f6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-cockpit.png",
+      "bytes": 801975,
+      "sha256": "35a1157fb7d9649700e7915a2a843490bb2319ed99f2a14fed3f31a12e114d5a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-bucket.png",
+      "bytes": 585428,
+      "sha256": "0946c3c8636406333041830c816179597d7c7081c298e10929939709a458428f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-capstan.png",
+      "bytes": 741705,
+      "sha256": "97f1b8cf962bed065bf9f83cdfc787f20a98a995a4df9980f06fda8bac2b992d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-flag.png",
+      "bytes": 755431,
+      "sha256": "49d98e279f0acf8e4e8e0a23e382be3180f79aa791aae93a3237bb56a0c3923b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-mobile.png",
+      "bytes": 388868,
+      "sha256": "3ca68b34475a8921b342479d137ca6eb8c0de2abb3bbcd6f19a19d00b4ecf3f4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-stern.png",
+      "bytes": 803236,
+      "sha256": "a92f7835ecced5f7b96c03f44c1caa51a4cd2d4428213e72a75ee2738c5b5139",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-storage.png",
+      "bytes": 710436,
+      "sha256": "f4ee50d79c5b177f82bf4c9e29565ee744044108655a82d6307eaa5042469ae0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-owner-wetbar.png",
+      "bytes": 671928,
+      "sha256": "e6bc5c090870e014e898e4c2beaca5803361b680363c141075e0a7870005e34a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/after-terrace.png",
+      "bytes": 750742,
+      "sha256": "4442b479e6a62b641e26d9aaf614e24c88be8d5397cb9910757ef462d72e3160",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-cockpit.png",
+      "bytes": 794258,
+      "sha256": "0860d8eecc922be98b85aa43d5212b9e5d69cd56a2b0a3b18fa094203c65e654",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-bucket.png",
+      "bytes": 565872,
+      "sha256": "ddfb82b5a0cf265607a7c234d3d386578867aaca903de6f6853f400d565b6a32",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-capstan.png",
+      "bytes": 720691,
+      "sha256": "1ad0d78d54c0a7f49e253f8b21e6c2ae880b68f6af7b5749a7b38bb812ff20a0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-flag.png",
+      "bytes": 723864,
+      "sha256": "8f79053ea7bb4413f2ea8c7cedf806f3d49a430c0f4634ce95d5584a59ab2849",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-mobile.png",
+      "bytes": 385728,
+      "sha256": "8caf13fb08aa042f3c123e5a99ca220dd8a72db29e601bae8bd63c5e800f43c5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-stern.png",
+      "bytes": 795235,
+      "sha256": "0e2a1728d808e17bb522f4bd8b76ea6a777fa14c64bcc8165430fca9bda7424c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-storage.png",
+      "bytes": 717270,
+      "sha256": "b2dcbb59fc098520f7b497369835241e00f999683d5d4c3d7c1a3f070607fab2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-owner-wetbar.png",
+      "bytes": 647598,
+      "sha256": "4e57036733d96e5a5b1b0b26f10107f6f68317affc55daeb901c0c08540a9c26",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/before-terrace.png",
+      "bytes": 743299,
+      "sha256": "5c011672d6f3b0e9258a8295c52f7ea74d88c3a6f9eb4a2b7300e1d7a8a043ea",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/details/index.html",
+      "bytes": 7146,
+      "sha256": "948561d0dc8899acf87a16222b06b3ff8be02581edb5b0cd3a2a79ac9579278f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S01.jpg",
+      "bytes": 62135,
+      "sha256": "6df1f1fbeed2d7d0924cd524223fac62ff65517745741e136297f5aa38d12958",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S02.jpg",
+      "bytes": 68700,
+      "sha256": "45356a7de3ff4b9b27a83c262636edd6bc298121d6cccd4146e0472017c45a85",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S03.jpg",
+      "bytes": 58773,
+      "sha256": "9322ddb5b84844f41a4cbc38b54a623bfa7c93acd4344f74ab3b24483fec8abd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S04.jpg",
+      "bytes": 70045,
+      "sha256": "50b698b34f9d60a0fa433143cb96d769fa9cb75e69f519188426c159ab154a94",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S05.jpg",
+      "bytes": 63594,
+      "sha256": "ec0e5491b1e8af93df4879f07cb3d38a3bc9f69ebacec08b46064195b13bffb8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S06.jpg",
+      "bytes": 60603,
+      "sha256": "58534412663435a390712841b2e101bad4aec74bd995f2160f616785b63f69eb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S07.jpg",
+      "bytes": 61439,
+      "sha256": "6c0ca14cd074dc6b0537797e05bf88c04ff77c0064991c16c7295d883dea2b12",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S08.jpg",
+      "bytes": 55003,
+      "sha256": "4a03707508e77e6ebbd7cf908b8f3299f8716b13bfcbc79dd1351028e227b689",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S09.jpg",
+      "bytes": 54638,
+      "sha256": "298346802119423edb772b2f9351c94d0fd9f87117274ec0b75d56d537e10269",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S10.jpg",
+      "bytes": 54278,
+      "sha256": "d35664ccf4d1e454af0cc9d85f355a346b8b0c6c2e6cf2e2fc7145931a4f3c99",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S11.jpg",
+      "bytes": 70101,
+      "sha256": "f30adc362bf7a1795ae0b790b8dd2300895083f0a9fd8d054e08413b7dbcb4d9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S12.jpg",
+      "bytes": 83613,
+      "sha256": "93598015db7cccfda3e0abe800eee878f174bdad1545940f00baa0bfc1133ce8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/S13.jpg",
+      "bytes": 81076,
+      "sha256": "67f23244473a304bb238cbeb4770590d75ddff8261e796fba5025c90b60cbf3b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/T01-threshold.jpg",
+      "bytes": 81437,
+      "sha256": "3d6ee487813c5d341ee6635b9e9e36d42786c38ed20448e523a208ffecd0aa7e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after/T02-desktop.jpg",
+      "bytes": 103520,
+      "sha256": "2ed44173ef1fd96ad4b2f696e0b074f3f094c992938274f3483ef8c05c7284a8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/after.mp4",
+      "bytes": 2642226,
+      "sha256": "45d58f7dc35d60f8d20b5773a5ddcda743439a7e382166d8b36f783c36751236",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S01.jpg",
+      "bytes": 62107,
+      "sha256": "e9a7852179eb284954bbf69647094d9e581fea5c045bfe34eb42d47d108fc2dd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S02.jpg",
+      "bytes": 56993,
+      "sha256": "9dd6da178cdae9e2ce6c4042c50e2c7b65a961d946e4e92c358453bb35f464cf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S03.jpg",
+      "bytes": 47165,
+      "sha256": "746972da843ac95d502a280902669a04b0842f238d4978fe86acdfb7e8c95b4f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S04.jpg",
+      "bytes": 77038,
+      "sha256": "0528ecf76ff75bf891a24456600f4cd1abb1e4e4b69a53e0bde3a3a9923e74d2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S05.jpg",
+      "bytes": 68072,
+      "sha256": "fd8624c9057aabd786923051269ec7dc989138014d1eb0c3f326f336fbe87253",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S06.jpg",
+      "bytes": 65336,
+      "sha256": "e44e64289f3708d37bf4f4d6a0c04b2059e8f65ecec797893057e473113cdc97",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S07.jpg",
+      "bytes": 64566,
+      "sha256": "a1abfdaafbd19089edf7721a45fb50076b785e997449af4ba1b06718d699f2bd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S08.jpg",
+      "bytes": 58036,
+      "sha256": "5665ca65783fbe70c50bf91deed6b9f888d8acf33f033f6e8912eda7a01ed947",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S09.jpg",
+      "bytes": 56662,
+      "sha256": "35fc52c0d26ec7154249618d460b6c1b19a351257c4e3dbfc9e7347f36307781",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S10.jpg",
+      "bytes": 54324,
+      "sha256": "28cf1c404c7da6736f8055e760e943ffc623f7f3f8ca52b045de865f9c516275",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S11.jpg",
+      "bytes": 71886,
+      "sha256": "bd069bfc4a89036f39eb8a4880342841cb2d47678d630fbc084fc2087e9e9b57",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S12.jpg",
+      "bytes": 82808,
+      "sha256": "90e01136c6e6f2b882f1811725683c224cefb90a5cbd43304248185a11f6c6d0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/S13.jpg",
+      "bytes": 87595,
+      "sha256": "a796f0b491159e847c352ddb5c4ec940f8279273dec4cd778fc1019da17d704b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/T01-threshold.jpg",
+      "bytes": 70583,
+      "sha256": "cfb02f51083ec60d0de9f4ffa463d9ea90b95fefa406aec87bd02aa40abad2da",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/before/T02-desktop.jpg",
+      "bytes": 114118,
+      "sha256": "2cf6b8ebcce23299389e86aa74da85578e8e0793d3022a18db9313f540b92a52",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/index.html",
+      "bytes": 8127,
+      "sha256": "fc000339c47e7b6a55db902762fbc6fd60a24f23e3781ef1e757d13c34956e69",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/entry-correction/metrics.json",
+      "bytes": 735,
+      "sha256": "ebbd1d8075f849dbf0b25e7a1b016297503854b8e0a54cfaebf6bce56fd7a369",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-barbecue.png",
+      "bytes": 717865,
+      "sha256": "a0a1c50960215ce9a1d97f36828a821fb4ea7ec9f9a8dcdb017ca43cf9219383",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-boarding.png",
+      "bytes": 808790,
+      "sha256": "f0cc788cbc304f5fd6e420e751ad28005cc0a870eb8dcbd6f9a1cc02ec7d8dcd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-cockpit.png",
+      "bytes": 774668,
+      "sha256": "1600471c450d951c1c1b2dbd33bdcfa7bcf32581104bab8441adea11abe31078",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-dining.png",
+      "bytes": 697421,
+      "sha256": "cecdfe4c5bf0b83f29e8b84249693c326d59210ca4de33e719e3052e38b48d77",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-lower-stair.png",
+      "bytes": 806766,
+      "sha256": "e675f950c983d423094141e0718bfc27b4a302cc282790424d4008ca462169fd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-terrace-mobile.png",
+      "bytes": 337324,
+      "sha256": "afe17b6d9d454dec7c4791b602c4054c32e172419728b7bac3979a4d64550049",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-terrace.png",
+      "bytes": 739137,
+      "sha256": "0bb7eae5aa51be58c493623c03366d0a52fedf15d6d882e332d0d1cdfc768498",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/after-upper-stair.png",
+      "bytes": 770763,
+      "sha256": "404ec5dd17b7c901b669e2a490afd31b9c413ea45da05cb2287bb6d5c89f2913",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-barbecue.png",
+      "bytes": 621368,
+      "sha256": "941c6f90b002486cc64d71bf44cba6a96352a6edcc9d05441d44a17e42473f04",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-boarding.png",
+      "bytes": 703744,
+      "sha256": "39a0c30debea1f1670805852a3944b5e1216c56570653ad544885e8a80a4b44c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-cockpit.png",
+      "bytes": 761534,
+      "sha256": "f9bf4a2beb2be76c0900d97f4a441ba1039678f1cad6912b86abce935c8083ed",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-dining.png",
+      "bytes": 680887,
+      "sha256": "13599af948697da7894eff0c0126fea18fd2e33a688f2edf76e093038c518cbd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-lower-stair.png",
+      "bytes": 883289,
+      "sha256": "1d8119705346b4c7238d7503b06ea41db9dce65562a0360b837b8de4ffebfd49",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-terrace.png",
+      "bytes": 604497,
+      "sha256": "04cc7749a528a0c7f8ccd4f6955ca1a9b2beb8488e7bf00982d0a5b97698438f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/before-upper-stair.png",
+      "bytes": 817819,
+      "sha256": "ac1e5901e98b4ed7802a6df8d3de0efea6814441edf0fe077b3b48cfd06fd8b6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/exterior/index.html",
+      "bytes": 4273,
+      "sha256": "aa6d68ed3fd597a7ae6ea5f3cf193ed6ecaaf56853a20eb7930f1263b128a37e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/licenses/Cinzel-OFL.txt",
+      "bytes": 4383,
+      "sha256": "f2b3029aba64c378bf0963b62945eee15e564fe4330b934c8f2eb058282b5e83",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/licenses/CinzelDecorative-OFL.txt",
+      "bytes": 4393,
+      "sha256": "1e5d6660366ddcfca4f2fc10e2acfba9fa4d97d40aec80d7dbfd41d730a420ae",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/licenses/stern-lettering-OFL.txt",
+      "bytes": 4110,
+      "sha256": "ceb1c47b6d1d4e55ea9168af8898fcc66104914975c2ecd36fce281a24b59ddf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/index.html",
+      "bytes": 7336,
+      "sha256": "a77dd07ba29240dcf9fbda40db4d533309b05f9f413ba49910cf61c97d737731",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-aft-after.webp",
+      "bytes": 47834,
+      "sha256": "855298cbc363eb3a8ea48a9de680c641b1dc916c3b0fe7bc4575bf3ccf127077",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-aft-before.webp",
+      "bytes": 20710,
+      "sha256": "ac163df37bb4d5d75e7a752a800cb6079302433f4176e14c72da8f3e88fe33a2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-charging-after.webp",
+      "bytes": 75840,
+      "sha256": "53edbff7843af771eda4fef1a93f4a82d6609085366cc0df55b1249d64c4b7a5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-charging-before.webp",
+      "bytes": 9694,
+      "sha256": "504130ad50ec51a5e004e6c30681f5914dc956b7722d43f4ee50adad4f05c8a1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-cooling-after.webp",
+      "bytes": 52910,
+      "sha256": "cfab7d6ca113290b63b5167ddc82c40df4a74dea37f14cd7f9add696249643ff",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-cooling-before.webp",
+      "bytes": 9878,
+      "sha256": "586225d54638f88efb49b24c1234bfdb5e1cf685986be18661cd1dd169a246fb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-electrical-after.webp",
+      "bytes": 35260,
+      "sha256": "01d746cc96b8399813fbaa388c3e1159ec1622867a0a60ed650182ba9000b796",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-electrical-before.webp",
+      "bytes": 20868,
+      "sha256": "57fb1218c7e38a782d7dc589ec74f3db1bce08cc6cb95ffd96c8ebf4adc7b6d6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-engines-after.webp",
+      "bytes": 53104,
+      "sha256": "f7e6d7c164053c14e6c2a2adc54730acd152754d7433a6533e8347aae41c57c3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-engines-before.webp",
+      "bytes": 19368,
+      "sha256": "756ec27db0f4725550acee3803d4c4646f20d1b5534d67d17a99eeb85e9542b1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-entry-after.webp",
+      "bytes": 47758,
+      "sha256": "3fb9aeb4e2ba2b235379958d5be10162894d9c9745397506055d6ef07194e110",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-entry-before.webp",
+      "bytes": 18376,
+      "sha256": "cc5737fa3ddcc89bf5056a0ab884e7ef56584bb2dcd8f236182289b055f13a8d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-fuel-after.webp",
+      "bytes": 78508,
+      "sha256": "6464ec729457fc658c9edbf40705bd0cae5b519c500e4f2bd8d9708df79020b4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-fuel-before.webp",
+      "bytes": 21206,
+      "sha256": "1be64aaab2f740f6e2532850c89b018d3ec1c4c880f0ff6b90bd63ff8b475378",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-generator-after.webp",
+      "bytes": 23358,
+      "sha256": "a4afe5ca6a070f1efdd79cd7c1c014bf6e1835b0a38d6291bc131eecd663e106",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-generator-before.webp",
+      "bytes": 13204,
+      "sha256": "0c954ffb5a82c4910bb77584171373cc6fb6fc820de72ecf4b82c7a151392dc3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-mobile-after.webp",
+      "bytes": 26892,
+      "sha256": "f9091d0c0680bc40f55a8dab2d0cfb8da7758cff7a7df14ca8348a6ecba3f0b6",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-mobile-before.webp",
+      "bytes": 12912,
+      "sha256": "e07d140c8e9c56b5bd542aa9b8af5184f982f8661547c41b4d374f1549fa2b50",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-watermaker-after.webp",
+      "bytes": 66844,
+      "sha256": "8d9efa1d8c7ded21e7fd16860277e165fccc6f3c4e6114a5e7de4722d31d65bd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery/machinery-watermaker-before.webp",
+      "bytes": 11206,
+      "sha256": "3d50c4ce941bf7ec5d7ea49601237d592536a1da46329f4f54592d29090ba7f0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/AUDIT.md",
+      "bytes": 5237,
+      "sha256": "507c05c045ca20e10856e13342e6861d43f51296866a469cf4f2906f596de361",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-charging-after.webp",
+      "bytes": 31828,
+      "sha256": "41b53ec97f9959984b5528b499d802aed1f54260fb4db3f0afc136b3cad61519",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-charging-before.webp",
+      "bytes": 47800,
+      "sha256": "07db8b1bd8b53308fe0478ba9baa4ce123b210e67ebae939facebd87ef94f910",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-cooling-after.webp",
+      "bytes": 70320,
+      "sha256": "98b72af1bea37de300bd45d5cb13c17edde763a4d1052b657faed9816102787b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-cooling-before.webp",
+      "bytes": 55960,
+      "sha256": "d097edea643d5c646bb4a89a5b2e0f20be47e8943702d6155186d006157ccfb3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-engine-port-after.webp",
+      "bytes": 100492,
+      "sha256": "a893157635461b4ef4add5cfcbec892c3ff07e650dacd637c9e51a7237ab3342",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-engine-port-before.webp",
+      "bytes": 65342,
+      "sha256": "6ba585b380417a1eed1c3947646c875d7ac8e9fa84606d0c36e79ffd8e091b2c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-exhaust-after.webp",
+      "bytes": 72772,
+      "sha256": "420aa99bd941a11603b4af3045a8521aa53aab15afb828acd61eaf9ea24821ec",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-exhaust-before.webp",
+      "bytes": 68764,
+      "sha256": "74941073f157721214277f18b982e559b28e3c3a04bb0921c8b416642b651550",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-floor-after.webp",
+      "bytes": 59572,
+      "sha256": "c89ce7f8af1d206db6ee3ea846b6a76d31bf46af48ea4293a3ad801a1f2599f8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-floor-before.webp",
+      "bytes": 46632,
+      "sha256": "735a3860f8e4d571945c96089f81c98fbb6887aa28b113e8a219128f43473c5e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-fuel-after.webp",
+      "bytes": 60254,
+      "sha256": "996f146cde63ffafd4e96bb2eb6e7262503f3049ac332222bfcb1203e63bf958",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-fuel-before.webp",
+      "bytes": 69194,
+      "sha256": "f538dad8ba3ae4ed38f439404ad81cc6b4cffb1005bb2babf00e03f31bf33037",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-generator-after.webp",
+      "bytes": 42486,
+      "sha256": "3ef4b04422f0825482cd188eb72bd35386fd4c752bcfca7235aeabd204080ff5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-generator-before.webp",
+      "bytes": 36950,
+      "sha256": "d2b32a34e0c7540d633648da4014e9a024808c0a3a14dc4aaf3f832bed30b4ec",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-safety-after.webp",
+      "bytes": 52106,
+      "sha256": "a6e400146c7fe8478a8a70646e28e1a9c1f39e5b63720bfa0e5519cc8220ff29",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/D-safety-before.webp",
+      "bytes": 113854,
+      "sha256": "6a3bd36a95fd193711572b8e986ab01397735429a32b2c9ac901b6c81d680b9b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/index.html",
+      "bytes": 6559,
+      "sha256": "147741df5327e4cd1923050ce8b825ffa374cd48553f03db8b354acbec998dde",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/overview-desktop.webp",
+      "bytes": 92588,
+      "sha256": "fd195707d5abe634c05612e8ba8a3dd84ad464ac5144b8e7fdcaa08ccfe7d5c7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/overview-mobile.webp",
+      "bytes": 35976,
+      "sha256": "0be511ed0391d8bdf5cac82e2ba7fd5046f3f073f52aa6e8630cb4dadb3d0bca",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/safety-mobile.webp",
+      "bytes": 26742,
+      "sha256": "0879184580966b26996d48572459320a7a86f728bba420ab80db203f2898808e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/machinery-craft/summary.json",
+      "bytes": 7877,
+      "sha256": "41c700a56506bf7cfb11f26a340a99f65b7cd19df21a0727e470bdf576329e99",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/model.bin",
+      "bytes": 3837030,
+      "sha256": "24a64a65f8b1f87a217edbc75aa5187152cc94518c702526b7613bffe25d8422",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/model.json",
+      "bytes": 283684,
+      "sha256": "5d416760e6e041cc0cdf85604b3d048a111c9aeb4f7b0c74460823e714f8637c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/MODEL-BASIS.md",
+      "bytes": 4791,
+      "sha256": "8fa231107db0826bd85f6a5234af7661207b51648d188a374899f8524f153483",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/delivery-manifest.json",
+      "bytes": 1545,
+      "sha256": "458a7c07abec7dbfa3a234bfcb406eb2637521c5217f06270fbfe5f8ee7eb084",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/export-report.json",
+      "bytes": 1752,
+      "sha256": "c835a99f19c219b1a796fef379256470ecbbeb8416848fa07ba92598185ec7e7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/exterior.bin.gz",
+      "bytes": 4303485,
+      "sha256": "0a44e4580670b1f4c1ab8423a81014b2419bdf1141433003357c12e3e4741b45",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/exterior.json",
+      "bytes": 225560,
+      "sha256": "a86d493c94b5122e5de92c6e5244ee372f107d7756895f2ec7cf36bc345c3f3b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/finish-report.json",
+      "bytes": 113,
+      "sha256": "5cb5ac77654f67fc8f568a7c503e882ef9380635b9cadb8417f042c9b14450af",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/inspection.bin.gz",
+      "bytes": 15000136,
+      "sha256": "d990f63bb5cce0e565a567261a44eb2f3c7a67023ed2a798a12c84810c4bc2ba",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/inspection.json",
+      "bytes": 364697,
+      "sha256": "9fcd8c61254d91966db2454db20f92866715df5da98990dd626e0d9477f106fc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/native-verification.json",
+      "bytes": 445,
+      "sha256": "adf39df8543fcee4c457c077a9387aec32df5824d7bfc36c442d91f59a26eb75",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/mtu-r03/normal-report.json",
+      "bytes": 180,
+      "sha256": "3faee3e47ee6e1d340f9ce292d4812572ba466ae360975f174e5463ddad33767",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-LD_R03.png",
+      "bytes": 589625,
+      "sha256": "051314ba2ca36e25f882a692aa078c598c93676af58715f2539cd7b8cb83b2ae",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-MD_R02.png",
+      "bytes": 647135,
+      "sha256": "99cf8a470e108191317d662b539e4c514d589168c3aa3988ba46530f2beb0826",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-MD_R04.png",
+      "bytes": 627565,
+      "sha256": "0efc2c6a82f59d84ef793612272785208378dc5b8a11da4b616cb53030aa5eac",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-UD_R02.png",
+      "bytes": 575693,
+      "sha256": "add1e15ac402c7ea9169df9254b487160f6d51cf6d702e0ed36524c0c4d473b2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-UD_R03.png",
+      "bytes": 529865,
+      "sha256": "556aba3e180e091c31b0f4c25e50030275c0875ae58c95155872ec4bdf1d5de4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-galley.png",
+      "bytes": 578069,
+      "sha256": "9c33b30eaaa5db339e47b27f82eac0ab3ee9593909a936b6cc1477fbbbb7b5bd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/after-saloon-portrait.png",
+      "bytes": 303770,
+      "sha256": "eb5152b9e6d7ffe5317cc4f7cb900e3d9969cdbfd57ce5a8cf65a15f1ab54e4e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/bath.png",
+      "bytes": 549536,
+      "sha256": "e85d63ac8c83d09e527250eb8409a9c1ca05d4e249c55bad5c9a88135f2b9d08",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-LD_R03.png",
+      "bytes": 551807,
+      "sha256": "e1753b87f96341982919886a0447e3273bf81e33842e90638d069701c1f9c918",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-MD_R02.png",
+      "bytes": 655062,
+      "sha256": "161c5f85491fc6c4fac4d764bc3d21a20b0fa90718f8337d893f4324b079f2fb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-MD_R04.png",
+      "bytes": 634707,
+      "sha256": "3dc2dd8ef70ad4d17b4d81a518359ab45188f5b65351931709d9633066d5720d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-UD_R02.png",
+      "bytes": 611587,
+      "sha256": "3f7fe0dff0dc41df2f34c3a8ef319aab49769629ff9620e421b4195a48bd4a21",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-UD_R03.png",
+      "bytes": 466367,
+      "sha256": "d535ee7f3d348ca08a69682cb82e065fa1e862402c6fb2d92faa0e9ba94b360f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-galley.png",
+      "bytes": 669549,
+      "sha256": "158da0f6c5e6be402d6f6e4a2bd4d7e04172c8f03b942eeaa73f7428834b8166",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/before-saloon-portrait.png",
+      "bytes": 312025,
+      "sha256": "834a039c73a4d01811a201c4b37a7a40b55395620ad11e5e536380880513e171",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/execution-report.json",
+      "bytes": 43417,
+      "sha256": "304229b1e575b8cf5a33c1fd93985964ca652efdda29147f0ac72fdbaf0bd31b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/index.html",
+      "bytes": 6433,
+      "sha256": "6293b354849a83057a4abe56202566501e13fa9c16a2695216105872ae755ec3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/owner-counter.png",
+      "bytes": 658042,
+      "sha256": "faec13d6438edf62f48210780bf274320a3a1591c7e6a27c197e070321a4a44b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/paired-render-cost.json",
+      "bytes": 4289,
+      "sha256": "1bdd612a7780b8430ea7f8b9e1a61a071dcae29bea8ff8a784202977d0fef072",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/saloon-dawn.png",
+      "bytes": 667540,
+      "sha256": "fc817f0dbc7462c83d996019d44ebbf6e4b937aad1802b647fd320323793e653",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/terrace.png",
+      "bytes": 605532,
+      "sha256": "4d4e59c003657bd9a2ee435f1b94459fb13950724ce51d5a4ac87b2ca93cb2b0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/refinement/twin.png",
+      "bytes": 582000,
+      "sha256": "7971d8b2624fd5847991b42680e684feed7c9501e318c4f12082bc8df11cc76e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/Luz-de-Mar-filtros-Blender.zip",
+      "bytes": 5239902,
+      "sha256": "85bd4e6ceb0fc0a4d5c796ea9014e7b700873abecf6d5b401b55f84b58ca21c0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/MODEL-BASIS.md",
+      "bytes": 8863,
+      "sha256": "29bb062c21ad59dad38fc8f7d0196321b9158d9273789f2e143ad30eb199c4c1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/clean.webp",
+      "bytes": 80060,
+      "sha256": "993edf9981d6cc4fa786cea4da7847bfcad3cb04298b813bd6958d11b4cd4127",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/delivery-manifest.json",
+      "bytes": 2199,
+      "sha256": "5289403e27e0f6c617b96ebbb33aae5aab57f5e7dc7900c2d13cfc9e8a0c2aa5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/dirty.webp",
+      "bytes": 73274,
+      "sha256": "dc089abf88003761ca585427de733c1b66932404be139d7802cff64b979b6b6f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/export-report.json",
+      "bytes": 769,
+      "sha256": "e2bdd1a72d3f4014a7995a46100788f66bd92b01cd1fdc1a1779095fd0187c13",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/exterior.bin.gz",
+      "bytes": 86829,
+      "sha256": "040ba2bd0bab78f7b13932d17c4f701aa79952f4add97a8d5a3808f1569e7423",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/exterior.json",
+      "bytes": 4438,
+      "sha256": "06a85d4328133a35c4d66f17b0fc67b4a984e61a2df6737751f61621965e8c6b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/index.html",
+      "bytes": 4714,
+      "sha256": "f9b3921e3660d2298cd6805f51c65d31b40a24cc0530e2db6b67318511ef1cc8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/inspection.bin.gz",
+      "bytes": 4382690,
+      "sha256": "303b052959d1d6bb1b0860a2d2875a12d87d10a248cd7b17f2db6972807e4fdf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/inspection.json",
+      "bytes": 1530,
+      "sha256": "12eb9c5048ed3af1f51aacbcde40ed95a046c90cb8738ca0594386bd30309cba",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/installed.webp",
+      "bytes": 59536,
+      "sha256": "4148ac4c05d51f51947d058458dcdf1dd5abf68572d3994479c7fce575f42592",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/motion.json",
+      "bytes": 10509,
+      "sha256": "942e7440b76bf768fd1ab336d5fb807f20f3cbcf644367bc28ba894c4548246b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/sea-strainers/native-verification.json",
+      "bytes": 210,
+      "sha256": "d6d3034b1700046855bd76e153c7d3790826db94fc761bdd69870ba30e6293b1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S01.jpg",
+      "bytes": 46972,
+      "sha256": "d1493473fdf23b326a95f26e4aa3e2a3df79ea369a6d068cca3e8be53696c038",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S02.jpg",
+      "bytes": 47316,
+      "sha256": "63c511299406a15c335c1d7a676530fa7c9edcc59bccc26f7dee90584f792d6c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S03.jpg",
+      "bytes": 39383,
+      "sha256": "cbb66f9056cbd6439a1e701dc712391cd2f3e16ad61ef8049b1d36e6a5b6c0fa",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S04.jpg",
+      "bytes": 65186,
+      "sha256": "c334898e27af96d900064cca293cd3d267afcfa6aff21e727fdb7ab577743fee",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S05.jpg",
+      "bytes": 58634,
+      "sha256": "7c19f3f23d33c2b44f2d526a4b9a1cc78b96ec4f8a45b7d09eda2d9715e88f1f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S06.jpg",
+      "bytes": 56180,
+      "sha256": "dcb6ea82f7332941d3f2c73a104d69d3b316c8fc59e09740a3888d623edc4ba0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S07.jpg",
+      "bytes": 54877,
+      "sha256": "089ecf8cd4d65e4fe02b948c53c0aff45fd2361c87c4685ea27e28a08ebc0cb0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S08.jpg",
+      "bytes": 48694,
+      "sha256": "7755efe69442895f1aac1c4db3217ac1d8668d2f28139157a89ffb4389d61397",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S09.jpg",
+      "bytes": 47567,
+      "sha256": "0f89cb4c468b485163beddabb80fbb81954de2f8b76679ac0224803854c4dd0b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S10.jpg",
+      "bytes": 48067,
+      "sha256": "050b575249ece36b29773f5f0aba50257fb5f3fbc0e0c33956917d085e01579c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S11.jpg",
+      "bytes": 63758,
+      "sha256": "72b83be1e2948a9edc0ade2ab2a81d2853f2c4138f66fc77b0d38dafc3c58e04",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S12.jpg",
+      "bytes": 67869,
+      "sha256": "45206a2fa9282c88c6eac901242e8566d635cc1c0bc87132fd014eeeeee55544",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after/S13.jpg",
+      "bytes": 75237,
+      "sha256": "e461143e6f55d7d37bed3a4305b82e1025e493bf8ff4e007d5574b4dde2da466",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/after.mp4",
+      "bytes": 3644696,
+      "sha256": "ebfb44b990bf802c3fd39ff45ac716189eac7a973bae41cd1f9a04911f7b1198",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S01.jpg",
+      "bytes": 46892,
+      "sha256": "14407af81dbfb656bdaddf80fc95c6d0f0b01219c89cd6eda072478da168868b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S02.jpg",
+      "bytes": 45922,
+      "sha256": "ad2d05d1c48cb61ca74314f70dac0fbbb817c3863dfc1c0b7b344b7fa105f841",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S03.jpg",
+      "bytes": 44889,
+      "sha256": "25c5afb854249bbb8913b3ec9345a11c62078f4d80ad4462243b3bae230e25f0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S04.jpg",
+      "bytes": 59268,
+      "sha256": "1ad694e86e4f9266f282ea93935e8cf16d59e7339149bf65313bbbd216abc8fe",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S05.jpg",
+      "bytes": 46997,
+      "sha256": "ec3ed9facef1090b289f5460f86e8bd61ba9b301c6bb088614fa7727b741d36b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S06.jpg",
+      "bytes": 43449,
+      "sha256": "b57c46b707d44555c7e97887a45513da86b6174996c72a921d2408dbc145dbcf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S07.jpg",
+      "bytes": 45912,
+      "sha256": "5e1cac72653fab10857196b20d98a142ad4e3bc2a32b57fbe0ff8f4e8f9028dd",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S08.jpg",
+      "bytes": 36955,
+      "sha256": "186e7fad4d2dd2032bab03907f42367b9f3f7ac1ae97cb8084d53adb9b5988db",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S09.jpg",
+      "bytes": 36003,
+      "sha256": "2799c5b68d802009ae5553181c660bc3204422ea9131018d981a817d3f38d4c3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S10.jpg",
+      "bytes": 50129,
+      "sha256": "2fb72d86690e3f078c45e4457aa24a270b7f98a0d534921195ee3bc900b78bf5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S11.jpg",
+      "bytes": 49244,
+      "sha256": "d4d9aec9e9429a02fd0d2c624d2f6c6dca3575de40c1a0040ec94e86749e8fda",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S12.jpg",
+      "bytes": 70842,
+      "sha256": "220829f78b1bdaf2b1b0de55782d03a0a8e47501100c4747ade69ee6e2b66110",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before/S13.jpg",
+      "bytes": 78376,
+      "sha256": "ba680c7275b8820d0f070a905b1ea5ae7f6d7badf8f53981868e893610bf6ef1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/before.mp4",
+      "bytes": 3117717,
+      "sha256": "3d5d0e09a061c1fd2fabfbc7e2fbdb6156c670b360de3792d4d65b82725e2a56",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/desktop.mp4",
+      "bytes": 1093940,
+      "sha256": "07472c366dfe9cc3f02b6e9da4e9bf77c8a94190ac6f2d61ce30b65f72ab0dad",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/index.html",
+      "bytes": 6574,
+      "sha256": "8122e5af27387bb9921d87a0909be709bd1fc716e139ab702c1deca03d354f90",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-refinement/metrics.json",
+      "bytes": 1721,
+      "sha256": "090b498b2e373899f4eb78b32dcafe7ae3eec9868fbbc062e843b4acb9b9a4bf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/door-24-before.png",
+      "bytes": 252703,
+      "sha256": "9af7fc32ed2eabff70f66548ab223cc1853cc3a9166f8f02dee078792c30052d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/door-24.png",
+      "bytes": 318862,
+      "sha256": "5f05f11e608acaa11bce623270c1957f64b6e522e5d9caf2102ba59325bbc132",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/door-open-27.png",
+      "bytes": 353290,
+      "sha256": "db44c7010ecfd6572ed8fbabff05e100cf0420bb511db0eb2d4323d0187d99eb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/engine-door-42.png",
+      "bytes": 535569,
+      "sha256": "95156747ac3f04de8c9060443bc665b424b858d7e291ba3bffe593efc1abdf52",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/entry-28.png",
+      "bytes": 375625,
+      "sha256": "9c18f5898c28beaf9b161c16964bd3df8afe77bea5a4c8c63112585eb76d9c9f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/entry-desktop-before.png",
+      "bytes": 800341,
+      "sha256": "8a1ec0ed88c0e51106c13247c04740fccd5af606c58582070310a0e301953fb5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/entry-desktop.png",
+      "bytes": 861902,
+      "sha256": "5834b9f5b23aff41adac2b4246ea3625419d995efcfcb0737d022985bb4e7033",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/index.html",
+      "bytes": 4348,
+      "sha256": "93108bf6f7778ef91c0f73cc6029f2bced576b00f67d1e827157cb128f77b576",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/service-route-plan.png",
+      "bytes": 139229,
+      "sha256": "056cec15cc02481f9360a02a6bd46761e1788b1069e95162c099c0307a5907e0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/stairs-31.png",
+      "bytes": 368848,
+      "sha256": "e2183908dc9f72779f7f2584c22dca8812f95568eb5dc4d8d2cebf86e390bfe5",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/validation.json",
+      "bytes": 1883,
+      "sha256": "02b77e321482660c4a359c8b43bc6bcb8df4d36ac2fd9f6be06b24098298aecb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/service-route/vestibule-37.png",
+      "bytes": 376788,
+      "sha256": "b74ea3435e32c122fb158e4b1d1cfc6c29c1af434537a3b6addbb4c17b0b429a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/after-aft-stairs.png",
+      "bytes": 893600,
+      "sha256": "92a9aa088457b0563a565f4a547e1c928a1acd6b0f4063fb0ba5f5fd718da871",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/after-guest-entry.png",
+      "bytes": 630116,
+      "sha256": "5c7ba86b379ee66b1787ba9fefbddfb3f7b72a5919e40eab596ecba002629f4f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/after-guest-portrait.png",
+      "bytes": 333634,
+      "sha256": "99f763fe3e641ff0436b07711eeea7f4aced97e230c01b8552424ef0648d54d7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/after-sun-portrait.png",
+      "bytes": 462166,
+      "sha256": "90695b2c89e3ad16f58050fd4ccc2d3678af24a46ee9ea4771dbcc3ada5636ce",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/after-sun-stairs.png",
+      "bytes": 820944,
+      "sha256": "0055a28d3d9875cfd3bc1b908fcb51864172a8ebb0e9dd116335ee1b27f2d7d8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/before-aft-stairs.png",
+      "bytes": 696666,
+      "sha256": "1589d3405dfedbd60acd41977f6f0c333a845e99703bcbb0859fd5e913b0982e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/before-guest-entry.png",
+      "bytes": 581280,
+      "sha256": "ee137d8db0fa91180368295377104afc5a121f7e82ad056243104b834a62dc3d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/before-guest-portrait.png",
+      "bytes": 321839,
+      "sha256": "5971032237d14fb2ce739394f03301bf40cd6c317e85bc890af4c68ec592504c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/before-sun-portrait.png",
+      "bytes": 362614,
+      "sha256": "a0e71d15d8102e7daa38048f8d140279431014cf41da636f23517123a7144f1b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/before-sun-stairs.png",
+      "bytes": 660403,
+      "sha256": "9ccc58479fe7ba2c807ec8888e405543d1a6b714146148c6c1feb608a3aeabb1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stairs/index.html",
+      "bytes": 2949,
+      "sha256": "65d342a727b1d1f9d243d93ad8451b2a9dfdad1973a99f82613eb5a82964bd7b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/after-final-stern-front.png",
+      "bytes": 1193086,
+      "sha256": "36649e3816105b5b4e0d8626fb6c6395e7ad1f9cd5dcf6762e17eccd1dfecfd7",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/after-final-stern-lettering.png",
+      "bytes": 1282227,
+      "sha256": "49a8f92d791ad550920a80145ab4dff50cc50f6f9ee5f4463726db250ffb2d52",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/after-final-stern-mobile.png",
+      "bytes": 475045,
+      "sha256": "0afc1417c6b082c6878368801647e6c35a0c1834384c4cf08c9cbe68faf47610",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/after-final-stern-port.png",
+      "bytes": 1276780,
+      "sha256": "3f92083e2331391e792a91844ca231260e891cc939ac2c9210a5993320b18f86",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/before-stern-front.png",
+      "bytes": 1243658,
+      "sha256": "68dc78e7f092a2035fb18a56f812d14b7fc1d31caa2e03a15eb9b7f691c18eb0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/before-stern-mobile.png",
+      "bytes": 494300,
+      "sha256": "3d2e1c56abd3412b03393b340f2c4f3cf0a6d6e4929f025e18ddb87b1b436f31",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/stern-design/index.html",
+      "bytes": 4017,
+      "sha256": "5a68072812e39f79b65e251d8b34507644a7a3911fc1a4a1b18285471ff6961c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/E21-salon-front-after.webp",
+      "bytes": 37922,
+      "sha256": "5feeabfbe0fc2fdda89dde715e4ac3a5756d102eb99be24bf16ced7931706b86",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/E21-salon-front-before.webp",
+      "bytes": 42366,
+      "sha256": "baec853953981879aaf5d405c8a04ba3c2eb62963a96597ea0f2f3ecaf9dc5ca",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/M19-electrical-wide-after.webp",
+      "bytes": 20768,
+      "sha256": "25b2872d3387d69d4a5a5938aa19cc52602230977ec475015aab0d96ddd3bda2",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/M19-electrical-wide-before.webp",
+      "bytes": 30380,
+      "sha256": "8a4d34a4c8c9af960eb93e4367a5ec80d97ee083457e9a5698b5bed7d948bfe4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/R01-charging-photo-pose-after.webp",
+      "bytes": 45878,
+      "sha256": "ed970df1eab932dbefa89136144f8083b43e001afb1e2df4a37fccdd9d8eda96",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/R01-charging-photo-pose-before.webp",
+      "bytes": 68752,
+      "sha256": "2d55192e6e061987cd7ad37a2a881e399536ee0f108a618966cd483d1d8c8e34",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/R03-terrace-central-after.webp",
+      "bytes": 32052,
+      "sha256": "cb5463f75d3d8f1771409fc011d8ea05db8b41f6e9340fe019ace80c6b16b900",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/R03-terrace-central-before.webp",
+      "bytes": 33674,
+      "sha256": "8d89359a443845b9e7f2a480948f6deace3d9f2c9c32fa0a0212f9e23caf1fb3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/aft-door-closed.webp",
+      "bytes": 13242,
+      "sha256": "9e7f96519e3623d86d36336e904a03cc6d62e3aa5c4c00edc2fca3972272a0c8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/aft-door-open.webp",
+      "bytes": 19672,
+      "sha256": "795d733342d666c72c13d7b869cc20a521225f2a29d604129406db0b2c4cc939",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/luz-de-mar/survey-layout/index.html",
+      "bytes": 4170,
+      "sha256": "8c1d769e5940bb4da7adae5532b27f925fcca168147f9aa8446abdbe99bcab79",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/minimap.svg",
+      "bytes": 706163,
+      "sha256": "64895126a8957ec81c0f2f58c485443ceef4df1437e0b00dda2f09f532f8c651",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/overhead-frontage-audit.csv",
+      "bytes": 278959,
+      "sha256": "75f86d176604f2d747f07b9880a365e528202d7808f4f1900ed369e376f52f1e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/overhead-minimap.svg",
+      "bytes": 753635,
+      "sha256": "1f453108d76e65255f380c9cd69f50c3af10f2d7a08d00723d56216c82840058",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/overhead-network.json",
+      "bytes": 4835363,
+      "sha256": "7e1362c6cf31cc9a051eb17ae1c6d7106a21cf34a6be456655630e6d99a8747e",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/overhead-span-audit.csv",
+      "bytes": 161510,
+      "sha256": "8566cc4cab9f00d558a0aaa4c6adb0065e83aa6ebd84f67aeee4c327966bc613",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/overhead-span-audit.json",
+      "bytes": 1127178,
+      "sha256": "49c4056b0749e972dc26c4a5ac50ca709bffef73fa7534493e02d395968c52db",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/basins.png",
+      "bytes": 98609,
+      "sha256": "3c895f1ac75cce1f9fbb89f1d6debc14bf219d8917c6645fa72ce5db5526ce17",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/depth.png",
+      "bytes": 501031,
+      "sha256": "ef63759575a54b89bc151b226c9650719cfb8c2d05eb87c52031e599f6a99800",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/exposure.csv",
+      "bytes": 152925,
+      "sha256": "1a009d180c219ef9868c1e06b7f2fa7366641fd6f003c0d02a1a01d20c61feb1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/hydraulic-outlets.json",
+      "bytes": 121573,
+      "sha256": "fe18ce3a7cb2ef5a41ef2de2e0d7d4e7fa8aab0b22f710a1d1763f60ccef8582",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/hydrograph.png",
+      "bytes": 70742,
+      "sha256": "db6a5ef6ab634d4f48099794a47518fd052dae79dedc4b7a7af9c8eb53b7529f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/hydrographs.csv",
+      "bytes": 2430389,
+      "sha256": "884391dcc6851a124c5f0531941e8c2878b7679edf11614804a0093feb5e49f1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/manifest.json",
+      "bytes": 2012,
+      "sha256": "d53cbabeacc89b7c7a0759e21e601daea8ce0e572b75627ca72ade474449b66a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/mesh.bin",
+      "bytes": 6515256,
+      "sha256": "619792a453e1f7f1b856165c92fe79a70ed0d6b8f2c7f7a4c25b84921f0ec821",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/outlets.png",
+      "bytes": 167249,
+      "sha256": "6694989a836fa04c10c42b7a1c103960122ec8fc6f17b699ac671deb36fd3bb8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/profiles.png",
+      "bytes": 69925,
+      "sha256": "21a59166dbb7fe8bdbfa1250cfaea9683d5e010e0501c1a650b246b035c2ef85",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/rainfall.gif",
+      "bytes": 48921,
+      "sha256": "d777799f7eaad0eb757faaa520a0b2a919a47c5a8c63448aa0ea1a4de8610135",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/hydrographs-10.csv.gz",
+      "bytes": 615888,
+      "sha256": "ded63ebe55c31325b64bcbbd4f56b19dab0bcbd5199c3901896cd8c7b4fd27d1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/hydrographs-2.5.csv.gz",
+      "bytes": 689050,
+      "sha256": "768242a06b26a6677b6d8aeca93cb3c5eebd9598ca0e656036fa8c4da0cd3a87",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/hydrographs-5.csv.gz",
+      "bytes": 657327,
+      "sha256": "f5641a18e3ec6b3e6559e908ef1fb27379abc258dac68f0d1c869b85bbd3cc3b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/maxima-10.npz",
+      "bytes": 1280243,
+      "sha256": "d3ab1de52d170a89ee68934445adc11ac5eb51379001cffe066cff2e7db84e6c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/maxima-2.5.npz",
+      "bytes": 20352801,
+      "sha256": "2a0a308b49276ad478e1d296af856d645736a250628c3cb18ba2d6a0cbf39017",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/maxima-5.npz",
+      "bytes": 5117601,
+      "sha256": "1662dde00609b56f0881fd0f4f55b1b7ce3a04aa4b1abc5320f41001685284fb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/parameters-10.json",
+      "bytes": 33503,
+      "sha256": "f3530639e2269ca0ad4d667267efbbb6e0c7ff57d43a746b3e18af1074139cd1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/parameters-2.5.json",
+      "bytes": 31546,
+      "sha256": "d0ef928d7e0648d069ad73fb27606110c60a0670fbb4c7131500a439c5e15c3f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/calculations/parameters-5.json",
+      "bytes": 34282,
+      "sha256": "34b156542eba90aa208517fa5ebe0313e052a0f9bbdd9b960d3c089e3e1817a0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/depth-refined.png",
+      "bytes": 409364,
+      "sha256": "f9fa60a5aa41bdf36e8019e896a0da5267744d325f2d838ad45b69e5cb874b04",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/exposure-refined.csv",
+      "bytes": 78401,
+      "sha256": "b4f0c84dbf27869989b40c373a3343b81f8a7711f1323787b5137165118d1c6d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/exposure-refined.json",
+      "bytes": 254199,
+      "sha256": "ebb2be2ed1c17002ba44d5f56fe7b8bc924a29863292f43a7bda22de84f9b910",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/hydraulic-outlets.json",
+      "bytes": 234412,
+      "sha256": "28a31b88b3fe7baef19d6aa304b06668108a973380f794129cd8de4574b81cc0",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/hydrograph-comparison.png",
+      "bytes": 84809,
+      "sha256": "c10b9cc09d6502e5bac22757a40fab8ae964b62e26c839040c0647d8db8ff8ba",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/metrics.csv",
+      "bytes": 637,
+      "sha256": "7041bee5c1daf0b8fa3b6a437fe9c0562477bfdcb9214a27c5f7f6b6dd6a3e69",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/outlets-refined.png",
+      "bytes": 98572,
+      "sha256": "c79e828350840b61ddc071b6cd60a9facd162d51c298bc9d174fc78b40611b25",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/outlets.csv",
+      "bytes": 14933,
+      "sha256": "a228a177d139f539476305c0873cf2d4fd7e032004ab35174cba48e20a1fcf9b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/report.html",
+      "bytes": 11910,
+      "sha256": "36e68ef061ecb172bbe6424661618d682b095221d81bea328ced4a56c498b4b4",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/report.json",
+      "bytes": 720976,
+      "sha256": "7f5850464feaa5b733c122a70cffdea62af3eba288e183b22ba9a14eb533eedf",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/sector-comparisons.csv",
+      "bytes": 56884,
+      "sha256": "8f402badb1539057f652bb7ea7ea8090d6f5af7901468b52d9faaf4882b28b5d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/sector-hydrographs.png",
+      "bytes": 191758,
+      "sha256": "2c40417b24f2c7523b7852b39e6dedb98bc039551846e121f525739a7afad99d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/refinement/speed-refined.png",
+      "bytes": 617834,
+      "sha256": "f0ca4169869c985d5dca3156fa2f7e913fe47f6506dcc51651072ba09c827b29",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/report.html",
+      "bytes": 6463,
+      "sha256": "5b3ded1adfec02833687579c873a9ef304373eaab23a4860b47dca5085d62ac1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/study.json",
+      "bytes": 292439,
+      "sha256": "9361b5883f10f3d968f3de55eab02a5e1029df4d603677b66d692f0655876bed",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0000.bin",
+      "bytes": 2057461,
+      "sha256": "32ac60d37006a21086fa42f0b2e562f55baa39c489795ec4fd094da236657a2f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0001.bin",
+      "bytes": 2522657,
+      "sha256": "9f400f82adf98c3e03101e01c80dae3b6259dbec59465913e99360f062900736",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0002.bin",
+      "bytes": 995596,
+      "sha256": "1ac421c682c8e95d949907967f1eded16cd0f3e56f333e8fdf946f303b2d155f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0003.bin",
+      "bytes": 245591,
+      "sha256": "9938470abf5e74fca4d27a332ea7f1652d29af2a8a9935d6cd901257c8762c68",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0004.bin",
+      "bytes": 185077,
+      "sha256": "c569cb158b2905bf022a6cbf6e217957dc86bb995198bf7133c92eecfd6e0209",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0005.bin",
+      "bytes": 175402,
+      "sha256": "a4bd9f5cbfbd9a9e93a0afe55045ad7619cd9262e625fc89e323686878dbe096",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0006.bin",
+      "bytes": 170624,
+      "sha256": "af85e81948e33c45f6fe590936ed628e51fe189beb19e5f84ea03368be66fde9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0007.bin",
+      "bytes": 166214,
+      "sha256": "f22e69c5709fcf5bf62f118afaf793d903ed1ca89c03dffa218a28ffca280694",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0008.bin",
+      "bytes": 158916,
+      "sha256": "99d507cc4708ee49334954fc189d5a81e838bcfee7f5b880a885ddc64b984941",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0009.bin",
+      "bytes": 149836,
+      "sha256": "92e3f3967ec163bb1603a713633171af151d8c2d2bcbc1a11fef9512720b6a17",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0010.bin",
+      "bytes": 143329,
+      "sha256": "e04338a23dfdf5e88e84116ff53ea4627fb54498d5acaf24b6682a9b249b5054",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0011.bin",
+      "bytes": 140509,
+      "sha256": "96f26b6f8088072746c80366f85632e336bf7981298837b820b718be4bc17afa",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0012.bin",
+      "bytes": 137609,
+      "sha256": "9886f89536a85f884d36b0565320454d605762223bbb24b38ade706c6df4bc49",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0013.bin",
+      "bytes": 134194,
+      "sha256": "cbce2293ee8cb932aa6240397f4996653fcef19c6b7fa843452d04fb81c86ea3",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/chunk-0014.bin",
+      "bytes": 22459,
+      "sha256": "4ee4bb9d62bc47b32f3ab12145e48de4912b361cc112aeab614c625103808a55",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/survey-30-60-5/scenario.json",
+      "bytes": 12378,
+      "sha256": "ea7a53c7271ebc3ac44f2744e0400f423a1cf3fcd0fe7cdd335680201f827b99",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/topography.json",
+      "bytes": 44217,
+      "sha256": "3be916510bb5e62d87136bf617b0dd6fafecd89df9801e277d6d40913a992f1d",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/velocity.png",
+      "bytes": 700144,
+      "sha256": "99b12c04dd60eb7d45c998bf2c04ed9fd9e3c38b9d35d671034691f948939857",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rainfall/volumes.csv",
+      "bytes": 227,
+      "sha256": "6e66469549697e79dc64a26a0e025035d34317c62b2ac9c269537686741f6017",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rocha-countryside-1.json",
+      "bytes": 5419,
+      "sha256": "5ebf9aa313ce08e2f115f7f62696442028ea070f2b5cc5ce500ad52900b92ebb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rocha-countryside-ground-1.rgba.gz",
+      "bytes": 2100386,
+      "sha256": "fbe8dc92a841fc62df8e89f9998a3510295aef9df01821acc115516c3abc796f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rocha-countryside-horizon-1.rgba.gz",
+      "bytes": 623688,
+      "sha256": "ea33dbb21a9a4cbbbfd246e8f27c98f15dff9862add493cee142eef05a4148c9",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rocha-data.json",
+      "bytes": 1004127,
+      "sha256": "9d1704e8497ab6b452ebbf1b1c78775ac1a9487164f8c2fb7e1d7ddaf5ea0fec",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rocha-zahorra-3.json",
+      "bytes": 849,
+      "sha256": "ea7b4c20ab1c19eef1d44b863366f8e5448e4569e4122f7baa9b0a34b2bc2185",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/rocha-zahorra-3.rgba",
+      "bytes": 1398100,
+      "sha256": "705cd54f26fb029ade5656b2c34e9da95be9de8c7e4583cb9a071fb1f207ba6b",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/solar-bill-of-materials.csv",
+      "bytes": 2673,
+      "sha256": "69db553b327ee40a1d178dfff42830e260032fecf1a2238c9888794a35e2d4fb",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/solar-connection-addendum.json",
+      "bytes": 6826,
+      "sha256": "cfd0b56ca36d4f2136edd7ce15a468ffd43d04b56761923ce89fc6ee936a1b60",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/solar-references/hoymiles-north-america.pdf",
+      "bytes": 4543556,
+      "sha256": "18443dd45731f021e7969b09b1c615756796b698dde50707d6fddbb4570ab7af",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/solar-references/trina-tsm-ne19r.pdf",
+      "bytes": 522174,
+      "sha256": "e5cb5f30d64eb660b70b4cf7f17fe9ae354258e6912650149ed559b1cb1e88cc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/solar-single-line-775.svg",
+      "bytes": 3575,
+      "sha256": "1ca1ed951689a14f51f57f5c49cdc71cb1796bd670c2940a59440e590baecbfc",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/solar-single-line-776.svg",
+      "bytes": 3575,
+      "sha256": "f2cc2569149af4752c0c83ca5e9803ca55e9a0f93793dec6f64513ecc3a4ac3a",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/source-metadata.json",
+      "bytes": 15913,
+      "sha256": "72a7fb231574ec0163e31b76eb39a37142a3f81c957374a32dbe6d82dc4db253",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/underground-minimap-solar.svg",
+      "bytes": 728352,
+      "sha256": "4db7447c205371bac7e2417b17d4922adf753a90a5107345aa3b162142e8dd63",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/underground-minimap.svg",
+      "bytes": 728152,
+      "sha256": "a7e676b70ae1b5cf694456b2766a27202b21b7509a87366d94029868efa14cc8",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/underground-network.json",
+      "bytes": 3123508,
+      "sha256": "d49f163c077437389416ffd91685ce641ba6ed1b4eea9c519cf5c3a7eef16174",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/underground-placement.json",
+      "bytes": 181240,
+      "sha256": "9b4155254d49284b6342c853407c53314925a1562308ccc5a508a88feda2de1f",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/underground-routes-minimap-solar.svg",
+      "bytes": 1152196,
+      "sha256": "dc3736015e5d4bcc66e886c527f80958f76c0db599681cddda086174e651d76c",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/rocha/underground-routes-minimap.svg",
+      "bytes": 1151799,
+      "sha256": "04cd68d1de52506951312610aa8ce0f91b8a1de8a922b86c488eb674b7816b28",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/textures/smaa/area.png",
+      "bytes": 33203,
+      "sha256": "b5a8e3bb3fbf11136d1411c6b7454f4469358559352987a074e22047582c0625",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/textures/smaa/search.png",
+      "bytes": 113,
+      "sha256": "025eb54fb8c4c2858a7d6d9743b88919fe5f9c661329c447a8f1e28971ae7403",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/ui/keyart-720.jpg",
+      "bytes": 161268,
+      "sha256": "51d0c22f6699acfe3e0d0e2d93d397e4912de207230a87506f241063d6a3b1c1",
+      "passed": true
+    },
+    {
+      "path": "tidewater-rocha/ui/keyart.jpg",
+      "bytes": 630621,
+      "sha256": "98b2446bc1faa3cd594fa0d469d388dea9441ed5de2a9f5bbf612c38712dec6a",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/index.html",
+      "bytes": 5794,
+      "sha256": "6d1bab78f61bbcbadbfa3b847863b824470df6c5cae9390b4c4efff0c3b6f704",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/manifest.json",
+      "bytes": 20020,
+      "sha256": "5537ded77ce4d320f84b2bd1afdbdb6973e276e7c766aa9c1ebc986131a3bdac",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/hashes.json",
+      "bytes": 61958,
+      "sha256": "682966bd93a588d28fcae0370856b143f54d17bfc816d657cb1f2ef46d08d7f7",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/publication.json",
+      "bytes": 1952,
+      "sha256": "2e40cb777070790a4edeec6898c9878532eeeaac854ecf9a98fed9bc70156e05",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/room.json",
+      "bytes": 364600,
+      "sha256": "924c36460de20736a9b7801d6eb45640dc8635246679dd4683034f6a8280ea6c",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/room.glb",
+      "bytes": 12043740,
+      "sha256": "d00c0bf1158835f611bfaf89a46b764ef687cd8df3a736e06721793761dd035a",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/review/electrical-vr-r01/index.html",
+      "bytes": 5825,
+      "sha256": "4b98406b6d5a96f9f8fb569e783136e7f42d0bf022b45d4d617f060688941cb8",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/review/electrical-vr-r01/validation.json",
+      "bytes": 221598,
+      "sha256": "08b3c5593fe6021d1e1fa90ef4a0102d6d99c7a2de15915b1f174fedc765ddb9",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/electrical.glb",
+      "bytes": 5958916,
+      "sha256": "d009df34dbf3497e56a7519a5037e27558ae2eee2311fcbde8158e10ff6bbdb5",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/bulkhead-vr-r01/bulkhead.glb",
+      "bytes": 3607508,
+      "sha256": "df23152e0dc761481a238c8d56f934a02a737b265e740e5062713279949070da",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/electrical-irradiance.exr",
+      "bytes": 4458209,
+      "sha256": "da3909ac6bffbb816427b45a53555b25259f39b5ec3d6f20a47eee3becbd862b",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr",
+      "bytes": 7401037,
+      "sha256": "ea517450b57c47427a7042ffeabdce1dd66a37c6c9873300d588ac1afe814e23",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/port-irradiance.exr",
+      "bytes": 6508427,
+      "sha256": "14329e86696f44657e759b9c8312e34057d24529b6e727850213be216fcf1dcd",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/starboard-irradiance.exr",
+      "bytes": 6322509,
+      "sha256": "3fca77a985317d778f9391235604d9364f9ef190ec84063d775ca4bf0015c696",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/room-probe-0.exr",
+      "bytes": 686241,
+      "sha256": "e01e479aa6f5af92ae80983a8301eaee27efb6389328d18d88e75699547eaca9",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/room-probe-1.exr",
+      "bytes": 548497,
+      "sha256": "1b2a24db3bcb3bc87200aae66e538c4499679905d81bc028aa2f670fb35f1e9a",
+      "passed": true
+    },
+    {
+      "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/room-probe-2.exr",
+      "bytes": 627171,
+      "sha256": "70cfbdad373b099c763e3ef2d3adecd267f69e3fd48117914f807f3a1e16fe64",
+      "passed": true
+    }
+  ],
+  "originalYachtTreeUnchanged": true,
+  "originalGitTree": "f5475b87b550c4d5dfb999a49d37d86dcefe4c25",
+  "localOriginalFilesVerified": 629,
+  "publicOriginalFilesVerified": 628,
+  "dotfilesPreservedInGitButNotServed": [
+    "tidewater-rocha/.nojekyll"
+  ],
+  "pass": true
+}

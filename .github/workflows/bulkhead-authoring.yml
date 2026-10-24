@@ -23,6 +23,9 @@ jobs:
           curl --fail --location --retry 3 https://download.blender.org/release/Blender4.3/blender-4.3.2-linux-x64.tar.xz --output /tmp/blender.tar.xz
           echo '4da1c956673c0485e63054e563ee69198cc8f80d8157dd7592dffc8a6a5592e6  /tmp/blender.tar.xz' | sha256sum --check
           tar -xf /tmp/blender.tar.xz -C /tmp
+      - name: Install pinned GLB decoder dependencies
+        working-directory: apps/luz-de-mar-realism
+        run: npm ci --ignore-scripts
       - name: Reconstruct and verify editable scene; package only in the runner
         working-directory: apps/luz-de-mar-realism
         env:

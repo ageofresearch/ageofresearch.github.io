@@ -27,16 +27,16 @@ def run(master,script):subprocess.run([blender,'-b',str(master),'-t','4','--pyth
 run(original,'build-bulkhead.py');run(W/'bulkhead-neutral.blend','finish-bulkhead.py');run(W/'bulkhead-master.blend','bulkhead-collisions.py')
 actual=json.loads((W/'authoring.json').read_text());expected=json.loads((P/'authoring.json').read_text())
 assert actual['neutralGeometrySHA256']==expected['neutralGeometrySHA256'],'Canonical geometry differs'
-assert actual['uv']['uvTrianglesSHA256']==expected['uv']['uvTrianglesSHA256'],'UV corner layout differs; do not publish a mismatched scene'
 assert actual['triangles']==expected['triangles']
 for name,digest in expected['sourceTextures'].items():assert sha(W/'textures'/name)==digest,('Source material map changed',name)
+subprocess.run(['node',str(R/'tools/export-bulkhead-runtime-uv.mjs')],check=True);run(W/'bulkhead-master.blend','align-bulkhead-runtime-uv.py');uv_equivalence=json.loads((W/'runtime-uv-equivalence.json').read_text());assert uv_equivalence['passed']and uv_equivalence['matchedTriangles']==expected['triangles']
 run(W/'bulkhead-master.blend','finalize-bulkhead.py')
-proof={'method':'Pinned Blender 4.3.2 reconstruction from verified public input archives; canonical evaluated source and exact optimized UV corner hashes match the locally reviewed production record. Blend binary metadata may differ.','neutralGeometrySHA256':actual['neutralGeometrySHA256'],'uvTrianglesSHA256':actual['uv']['uvTrianglesSHA256'],'triangles':actual['triangles'],'originalVRPhotosIncluded':False,'masterSHA256':sha(W/'bulkhead-master.blend'),'sourceCommit':os.environ.get('GITHUB_SHA','local')}
+actual=json.loads((W/'authoring.json').read_text());proof={'method':'Pinned Blender 4.3.2 reconstruction from verified public inputs; canonical evaluated geometry matches production and every lightmap/material UV corner is aligned to the actual public GLB. Platform-dependent UV repacking is discarded. Blend binary metadata may differ.','neutralGeometrySHA256':actual['neutralGeometrySHA256'],'uvTrianglesSHA256':actual['uv']['uvTrianglesSHA256'],'runtimeUVBinding':uv_equivalence,'triangles':actual['triangles'],'originalVRPhotosIncluded':False,'masterSHA256':sha(W/'bulkhead-master.blend'),'sourceCommit':os.environ.get('GITHUB_SHA','local')}
 (O/'equivalence.json').write_text(json.dumps(proof,indent=2)+'\n')
 def archive(name,files):
  with zipfile.ZipFile(O/name,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for file,relative in files:z.write(file,relative)
-owned=['build-bulkhead.py','refine-bulkhead.py','finish-bulkhead.py','pack-bulkhead-uv.py','bake-bulkhead.py','bulkhead-collisions.py','finalize-bulkhead.py','build-left-engine.py','bake-left-engine.py','bulkhead-fine-observations.json','release-bulkhead.py']
+owned=['build-bulkhead.py','refine-bulkhead.py','finish-bulkhead.py','pack-bulkhead-uv.py','bake-bulkhead.py','bulkhead-collisions.py','finalize-bulkhead.py','export-bulkhead-runtime-uv.mjs','align-bulkhead-runtime-uv.py','build-left-engine.py','bake-left-engine.py','bulkhead-fine-observations.json','release-bulkhead.py']
 archive('luz-bulkhead-vr-r01-authoring.zip',[(W/'bulkhead-master.blend','bulkhead-master.blend'),(W/'authoring.json','authoring.json'),(O/'equivalence.json','equivalence.json'),*[(R/'tools'/n,'tools/'+n)for n in owned],*[(P/n,'review/'+('production-authoring.json'if n=='authoring.json'else n))for n in ['authoring.json','evidence.json','fine-neutral-review.json','component-inventory.json','validation.json']],*[(f,'textures/'+f.name)for f in (W/'textures').glob('*.png')]])
 archive('luz-bulkhead-vr-r01-bakes.zip',[(f,f.name)for f in P.glob('*.exr')]+[(P/'authoring.json','authoring.json')])
 review=R/'public/review/bulkhead-vr-r01'

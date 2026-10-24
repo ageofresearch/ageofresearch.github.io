@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "id": "bulkhead-vr-r01",
+  "sourceMasterSHA256": "eaa858c961b4e6c05cae255b0b6cb07e313e9a28ec8bc309f7cc720b4d629bb4",
+  "replacedIDs": [
+    "LD_R02/machinery/pump-bank/0",
+    "LD_R02/machinery/pump-bank/1",
+    "LD_R02/machinery/pump-bank/2",
+    "LD_R02/machinery/pump-bank/3",
+    "LD_R02/machinery/pump-bank/4",
+    "LD_R02/machinery/pump-bank/5",
+    "LD_R02/machinery/pump-bank/6",
+    "LD_R02/machinery/pump-bank/7",
+    "LD_R02/machinery/pump-bank/8",
+    "LD_R02/machinery/pump-bank/9",
+    "LD_R02/machinery/pump-bank/10",
+    "LD_R02/machinery/pump-bank/11",
+    "LD_R02/machinery/pump-bank/12",
+    "LD_R02/machinery/pump-bank/13",
+    "LD_R02/machinery/pump-bank/14",
+    "LD_R02/machinery/pump-bank/15",
+    "LD_R02/machinery/pump-bank/16",
+    "LD_R02/machinery/pump-bank/17",
+    "LD_R02/machinery/pump-bank/18",
+    "LD_R02/machinery/pump-bank/19",
+    "LD_R02/machinery/pump-bank/20",
+    "LD_R02/machinery/fuel-manifold/0",
+    "LD_R02/machinery/fuel-manifold/1",
+    "LD_R02/machinery/fuel-manifold/2",
+    "LD_R02/machinery/fuel-manifold/3",
+    "LD_R02/machinery/fuel-manifold/4",
+    "LD_R02/machinery/fuel-manifold/5",
+    "LD_R02/machinery/fuel-manifold/6",
+    "LD_R02/machinery/fuel-manifold/7",
+    "LD_R02/machinery/fuel-manifold/8",
+    "LD_R02/machinery/fuel-manifold/9",
+    "LD_R02/machinery/fuel-manifold/10",
+    "LD_R02/machinery/fuel-manifold/11",
+    "LD_R02/machinery/fuel-manifold/12",
+    "LD_R02/machinery/fuel-manifold/13",
+    "LD_R02/machinery/fuel-manifold/14",
+    "LD_R02/machinery/fuel-manifold/15",
+    "LD_R02/machinery/fuel-manifold/16",
+    "LD_R02/machinery/fuel-manifold/17",
+    "LD_R02/machinery/fuel-manifold/18",
+    "LD_R02/machinery/fuel-manifold/19",
+    "LD_R02/machinery/fuel-manifold/20",
+    "LD_R02/machinery/fuel-manifold/21",
+    "LD_R02/machinery/fuel-manifold/22",
+    "LD_R02/machinery/fuel-manifold/23",
+    "LD_R02/machinery/fuel-manifold/24",
+    "LD_R02/machinery/fuel-manifold/25",
+    "LD_R02/machinery/fuel-manifold/26",
+    "LD_R02/machinery/fuel-manifold/27",
+    "LD_R02/machinery/fuel-manifold/28",
+    "LD_R02/machinery/fuel-manifold/29",
+    "LD_R02/machinery/fuel-manifold/30",
+    "LD_R02/machinery/fuel-manifold/31",
+    "LD_R02/machinery/fuel-manifold/32",
+    "LD_R02/machinery-craft/fuel-manifold/255",
+    "LD_R02/machinery-craft/fuel-manifold/256",
+    "LD_R02/machinery-craft/fuel-manifold/257",
+    "LD_R02/machinery-craft/fuel-manifold/258",
+    "LD_R02/machinery-craft/fuel-manifold/259",
+    "LD_R02/machinery-craft/fuel-manifold/260",
+    "LD_R02/machinery-craft/fuel-manifold/261",
+    "LD_R02/machinery-craft/fuel-manifold/262",
+    "LD_R02/machinery-craft/fuel-manifold/263",
+    "LD_R02/machinery-craft/fuel-manifold/264",
+    "LD_R02/machinery-craft/fuel-manifold/265",
+    "LD_R02/machinery-craft/fuel-manifold/266",
+    "LD_R02/machinery-craft/fuel-manifold/267",
+    "LD_R02/machinery-craft/fuel-manifold/268",
+    "LD_R02/machinery-craft/fuel-manifold/269",
+    "LD_R02/machinery-craft/fuel-manifold/270",
+    "LD_R02/machinery-craft/fuel-manifold/271",
+    "LD_R02/machinery-craft/fuel-manifold/272",
+    "LD_R02/machinery-craft/fuel-manifold/273",
+    "LD_R02/machinery-craft/fuel-manifold/274",
+    "LD_R02/machinery-craft/fuel-manifold/275",
+    "LD_R02/machinery-craft/fuel-manifold/276",
+    "LD_R02/machinery-craft/fuel-manifold/277",
+    "LD_R02/machinery-craft/fuel-manifold/278",
+    "LD_R02/machinery-craft/fuel-manifold/279",
+    "LD_R02/machinery-craft/fuel-manifold/280",
+    "LD_R02/machinery-craft/fuel-manifold/281",
+    "LD_R02/machinery-craft/fuel-manifold/282",
+    "LD_R02/machinery-craft/fuel-manifold/283",
+    "LD_R02/machinery-craft/fuel-manifold/284",
+    "LD_R02/machinery-craft/fuel-manifold/285",
+    "LD_R02/machinery-craft/fuel-manifold/286",
+    "LD_R02/machinery-craft/fuel-manifold/287",
+    "LD_R02/machinery-craft/fuel-manifold/288",
+    "LD_R02/machinery-craft/fuel-manifold/289",
+    "LD_R02/machinery-craft/fuel-manifold/290",
+    "LD_R02/machinery-craft/fuel-manifold/291",
+    "LD_R02/machinery-craft/pump-bank/414",
+    "LD_R02/machinery-craft/pump-bank/415",
+    "LD_R02/machinery-craft/pump-bank/416",
+    "LD_R02/machinery-craft/pump-bank/417",
+    "LD_R02/machinery-craft/pump-bank/418",
+    "LD_R02/machinery-craft/pump-bank/419",
+    "LD_R02/machinery-craft/pump-bank/420",
+    "LD_R02/machinery-craft/pump-bank/421",
+    "LD_R02/machinery-craft/pump-bank/422"
+  ],
+  "removedContextTriangles": 8758,
+  "editableObjects": 820,
+  "camera": {
+    "sourcePosition": [
+      9.15,
+      0,
+      3.18
+    ],
+    "estimated": true,
+    "fixedForAllViews": true
+  },
+  "stage": "material candidate",
+  "materialsApproved": false,
+  "neutralGeometrySHA256": "965c5236fa2c8cccd4ca60407347ff6186485e0ef85f513c2a420a091e552cb4",
+  "removedSubmillimetreSlivers": {
+    "triangles": 7074,
+    "areaSquareMetres": 0.00030597603775836535,
+    "maximumTriangleArea": 1.2e-07,
+    "scope": "Optimized new bulkhead derivative only; editable source and both engine meshes retained."
+  },
+  "uv": {
+    "packing": {
+      "method": "xatlas 0.0.11; independent UV1 charts, source geometry and UV0 unchanged",
+      "atlasCount": 1,
+      "width": 2005,
+      "height": 2001,
+      "utilization": 0.8287081122398376,
+      "coverage": 0.40738093852996826,
+      "paddingPixels": 4,
+      "effectivePaddingAt2048": 4.085785536159601,
+      "charts": 4518
+    },
+    "coverage": 0.40738089412658507,
+    "minimumGutterPixels": 4,
+    "bakeMarginPixels": 4,
+    "degenerateTriangleFraction": 0,
+    "uvTrianglesSHA256": "20af223417b307bdfc074ebac11b4839dda9d79c412708c8ee3ce5982cc8b934"
+  },
+  "triangles": 88293,
+  "neutralMilestone": {
+    "stage": "native neutral geometry",
+    "captureSHA256": "2c86bbdafa676dff20e11b27c072893f9ffd722144bf0d5fdc82098b0296be87",
+    "comparedFeatures": 20,
+    "gridPixels": 16,
+    "detailGridPixels": 8,
+    "primaryEnclosureCount": 8,
+    "primaryValveGroups": 3,
+    "majorAssembliesPresent": true,
+    "advanceToFinish": true,
+    "exactVisualAcceptance": false,
+    "observations": [
+      "Original engine context occludes parts of ECO/SCU and is retained by scope.",
+      "Full 4px/6px criteria not met or certified; old adjusted landmarks no longer independent.",
+      "Gray neutral pass does not establish materials, labels or reflections acceptance.",
+      "Bellows and narrow cable/valve details require material-pass comparison; no automatic per-cell approval.",
+      "Neutral-pass denoising suppresses narrow bellows highlights; retain raw pass and verify actual runtime geometry/material response."
+    ],
+    "reviewBinding": "965c5236fa2c8cccd4ca60407347ff6186485e0ef85f513c2a420a091e552cb4"
+  },
+  "lighting": {
+    "diffuseSamples": 64,
+    "reflectionSamples": 128,
+    "irradianceSize": 2048,
+    "model": "Full diffuse direct+indirect without albedo; local static probe specular; no duplicate direct contribution",
+    "hdr": "Linear RGB half-float EXR DWAA",
+    "files": {
+      "bulkhead-irradiance.exr": {
+        "rawSHA256": "02c1e02cce250e9ff2d64c33153bf049a1c9807578b5d2951715aa809d24d1b2",
+        "sha256": "42f354b44ee394b620f4d7cd33202b8aaeec44cc2be59b0f8f609574e05dca58",
+        "bytes": 7410247
+      },
+      "port-irradiance.exr": {
+        "rawSHA256": "7d62dd1444484a38da2e215019c999b0be5d2f9d891e6cd58d0d9749aa725a6a",
+        "sha256": "38a06e433fc72d9f3557e5087fe49a380c4a92d178d984784ed564000daf80c2",
+        "bytes": 6540715
+      },
+      "starboard-irradiance.exr": {
+        "rawSHA256": "3a13969c7d1c343f693121be20da51a703a381d2159224f9b8b1c429bbb15aef",
+        "sha256": "e73e7b37594f1d284489f6f131d046ba95b28579351d996de3d69eee273cdb7b",
+        "bytes": 6388946
+      },
+      "room-probe-0.exr": {
+        "sha256": "35b5df25dc2862d3b4522ce86a4ceca4d29af0b267de7e8070c7cc41ac4f9ed6",
+        "bytes": 579694
+      },
+      "room-probe-1.exr": {
+        "sha256": "91413d7484b1a21dfb50220103873d6c96fb9d133f50f78703415035a40ca36b",
+        "bytes": 536924
+      },
+      "room-probe-2.exr": {
+        "sha256": "200972bb92803ad8497de98042d942011dcdce1cf059c548bed4f5326a69c91f",
+        "bytes": 624099
+      }
+    },
+    "engineUVBindings": {
+      "bulkhead": {
+        "cornerSHA256": "200e63598a35c7d5b532e3e5044c33ee3782ced543dac4801aadcaa73e15ee0d",
+        "triangles": 88293,
+        "originalGeometryUnchanged": false
+      },
+      "port": {
+        "cornerSHA256": "078d47b61afd468c2f9b97d759460e917eef7df7253d669748040f9394184e09",
+        "triangles": 142465,
+        "originalGeometryUnchanged": true
+      },
+      "starboard": {
+        "cornerSHA256": "93be7c3dd230bef638c0f5a0cfbe0b2ee511643b3838c18d8c5c1c69e43ae989",
+        "triangles": 170607,
+        "originalGeometryUnchanged": true
+      }
+    },
+    "probes": {
+      "room": [
+        {
+          "id": "machinery-0",
+          "sourcePosition": [
+            8.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -9.394666666666666
+          ],
+          "asset": "room-probe-0.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        },
+        {
+          "id": "machinery-1",
+          "sourcePosition": [
+            10.5,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -7.339583333333334
+          ],
+          "asset": "room-probe-1.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        },
+        {
+          "id": "machinery-2",
+          "sourcePosition": [
+            12.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -5.4802222222222206
+          ],
+          "asset": "room-probe-2.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        }
+      ]
+    }
+  },
+  "sourceGeometrySHA256": "65ac441256d7e7ada1851f6b4e82208ccbade4756c45e811784855d507b69956",
+  "masterSHA256": "65bc2d6835bc9de897968a33b7e4da2a0ed07b88e96e9d1a08bf820ab1d7a55b",
+  "display": {
+    "transform": "Khronos PBR Neutral",
+    "exposureMultiplier": 0.05,
+    "output": "sRGB"
+  },
+  "removedUnusedUVLayers": [
+    "UVMap"
+  ],
+  "transportSourceGeometrySHA256": "fc47f90283cac805408cc32ee2423b85c2845e6695b00939621df87368a3df5c",
+  "bakedUV1BindingPreservedDuringExportRepair": true,
+  "runtime": {
+    "triangles": 88293,
+    "replacedTriangles": 8758,
+    "hashes": {
+      "bulkhead.glb": "df23152e0dc761481a238c8d56f934a02a737b265e740e5062713279949070da",
+      "bulkhead-irradiance.exr": "42f354b44ee394b620f4d7cd33202b8aaeec44cc2be59b0f8f609574e05dca58",
+      "port-irradiance.exr": "38a06e433fc72d9f3557e5087fe49a380c4a92d178d984784ed564000daf80c2",
+      "starboard-irradiance.exr": "e73e7b37594f1d284489f6f131d046ba95b28579351d996de3d69eee273cdb7b",
+      "room-probe-0.exr": "35b5df25dc2862d3b4522ce86a4ceca4d29af0b267de7e8070c7cc41ac4f9ed6",
+      "room-probe-1.exr": "91413d7484b1a21dfb50220103873d6c96fb9d133f50f78703415035a40ca36b",
+      "room-probe-2.exr": "200972bb92803ad8497de98042d942011dcdce1cf059c548bed4f5326a69c91f"
+    },
+    "sharedProbeCount": 3,
+    "strictVisualAcceptance": false,
+    "quantization": {
+      "positionBits": 16,
+      "normalBits": 16,
+      "lightmapUVBits": 16,
+      "physicalUV0Unchanged": true
+    },
+    "captionAndScreenMicrovariationSize": 256
+  },
+  "sourceTextures": {
+    "panel-grey-color.png": "e9a54ef61663faa5bafffa4e995131b5b79e083446997b84b3267b2ea8cf34a3",
+    "metal-orm.png": "0cc080efe9031b35b255eeb23c995700438b01ef1d5a7a9c5bbf4e38205cf3a0",
+    "screen-color.png": "128b5fd305f250d671c4b5032c88312da030d5be224f6d9fc9efe62d55d81d3e",
+    "yellow-color.png": "9d920b2cf6b7f517512bdd10af1c25e5d405201b42b9afb2696431c7dfdde14c",
+    "green-normal.png": "7dfcf510fadc06bdd8d5e844cb43876d33642dc5d90ba1c43b122999b4c88928",
+    "metal-normal.png": "077565f5a4f863a7675d50637011408f75a160664e8878ae2a8adf2d9dc52b9a",
+    "red-color.png": "ff51260edc01754cd0b0fd3481fe76e6e837f429dddc69d5cfd6d57431a15d78",
+    "brass-color.png": "c041ab71814e8a57a39d4a49285d595d3ce825175a9411df856985443b82cc11",
+    "panel-grey-orm.png": "1b07a4beff451f097190b477a7f9df013e256cea756d82b28744d44fad11fb8c",
+    "label-color.png": "9e1146d4cc5a2f0a41b1e153e19338c3f85f8621e2b71e66c4dbad97cf40118e",
+    "red-normal.png": "077565f5a4f863a7675d50637011408f75a160664e8878ae2a8adf2d9dc52b9a",
+    "green-orm.png": "af6d2cdfc02cceedf42a35a32bdb4f4cb9797b93cadcaef328519a3d2397cc0c",
+    "brass-orm.png": "4484a43f0944c655248f887127b806249a012a7dba9826c9184343d307fab99b",
+    "rubber-normal.png": "911e1e865dbf18e599f6943af262e4c6cf08f53e92996b7a2d0e122c107fd729",
+    "paint-color.png": "51418247563c2d1c4adebd3b2be5a2e38241acdcfc16c76c494d976526fde32a",
+    "paint-normal.png": "3ffd0569b88d01d551e1df021e03bc1ccd51b8fc79abd059ab71c5e534a6ee69",
+    "paint-orm.png": "a93e42c9c391e1e1d2b69506739ffbbf4c2c6d1bcb5447bdbe13941a9fa4ed71",
+    "red-orm.png": "c5b09381ede419265dc740085f358d2e32639ec19f49d2ea9aae16830128d0b8",
+    "panel-grey-normal.png": "9667c1383d454e54673f4f5a1115cddcfb40cacae7b991ebe162f28646273e7f",
+    "label-normal.png": "077565f5a4f863a7675d50637011408f75a160664e8878ae2a8adf2d9dc52b9a",
+    "screen-normal.png": "077565f5a4f863a7675d50637011408f75a160664e8878ae2a8adf2d9dc52b9a",
+    "rubber-color.png": "836c898e337f1ceda590767b5026dd9d1912361360aeb350286aae526b8b98f6",
+    "green-color.png": "3ca5f929e9a65f1b4409705af5d002a93668f41a85ea8f0355d219bf1b7c36df",
+    "motor-paint-color.png": "9f0fad29c57e6290fa0b79f834a6972b8f0f2650381a0ef23eeb7501d32ddf19",
+    "screen-orm.png": "b7846afe80b072f33143ec4c939bbe6e3deb96739f0ba99c058b0da35cf76c5a",
+    "brass-normal.png": "1c7b77f774eb88440cdf2c80665704d999683ae3773a77a0c5c532b2e3cdaec5",
+    "motor-paint-normal.png": "911e1e865dbf18e599f6943af262e4c6cf08f53e92996b7a2d0e122c107fd729",
+    "motor-paint-orm.png": "9136609a1b7a55f60fc67339429fda4426397340e7c1e766114b989b7d50ec75",
+    "label-orm.png": "a56dbafade2849328e9aa8c4a4af3f75d6bca75a054e0ef00018f0624032d1f4",
+    "rubber-orm.png": "a1afbfac2ff1626702b32ccbb01c115c664b9fe8f39942a7c95c63ef4da56701",
+    "yellow-normal.png": "7dfcf510fadc06bdd8d5e844cb43876d33642dc5d90ba1c43b122999b4c88928",
+    "yellow-orm.png": "aca884290446973e4293d325bb82dd76c5fb555615d044802b92b1a6d67708d8",
+    "metal-color.png": "f562ceb524a94eb74b1e238bc67370e8c4d81d8152c2dcf79845f5884f18d845",
+    "dark-orm.png": "7614de1503c9d7b6c0a5d3a776d5a5e2076502afdc670d3fef2ed99417eb3c43",
+    "dark-color.png": "d5dd38b221972d905a8c6fb42898e30a2dc0f189327b617f72f38d482c9d8a91",
+    "dark-normal.png": "077565f5a4f863a7675d50637011408f75a160664e8878ae2a8adf2d9dc52b9a"
+  }
+}

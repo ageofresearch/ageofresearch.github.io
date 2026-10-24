@@ -66,3 +66,17 @@ insulation, rubber and intake-weave maps are procedural authoring; the editable
 scene and its source/validation inventory are distributed through GitHub Releases.
 The geometric fit is an intermediate review milestone. Casing shapes,
 accessories, cloth detail and finish remain under review.
+
+Bulkhead VR R01 candidate (2026-10-24): independently authored cabinets,
+pipework, motor/pump housings, wiring, supports and procedural material maps.
+Native 2048² reference comparison uses 16-pixel cells and 8-pixel detail cells
+from the same estimated panorama station. The tour photographs remain private,
+are not included in Pages or Releases, and are never used as model textures.
+Unseen dimensions and routing are estimates. The original engine model/material
+assets and LDM-VR-EST-001 strategy remain unchanged. Strict visual acceptance
+has not been established; this variant is opt-in rather than the default.
+
+Authoring uses Blender 4.3.2/Cycles, Intel Open Image Denoise 2.5.1, and xatlas
+0.0.11 Python bindings (MIT; https://github.com/mworchel/xatlas-python) to generate
+independent lightmap UVs. Runtime geometry uses meshoptimizer and textures use
+Basis Universal/KTX2 under the licenses already included in this distribution.

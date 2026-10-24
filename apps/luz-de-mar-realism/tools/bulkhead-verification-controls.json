@@ -1,0 +1,26 @@
+{
+  "purpose": "Post-freeze verification points, excluded from subsequent geometry adjustment. Native VR coordinates estimated manually; 2px annotation uncertainty is retained and not subtracted from reported errors.",
+  "sourceResolution": 2048,
+  "annotationUncertaintyPixels": 2,
+  "points": [
+    {"object":"eco corner washer 0","pixel":[141,906]},
+    {"object":"port-operating corner washer 0","pixel":[294,904]},
+    {"object":"epu corner washer 2","pixel":[458,1042]},
+    {"object":"port-local corner washer 2","pixel":[714,997]},
+    {"object":"port-local corner washer 3","pixel":[834,998]},
+    {"object":"starboard-local corner washer 2","pixel":[1189,997]},
+    {"object":"starboard-local corner washer 3","pixel":[1300,997]},
+    {"object":"junction corner washer 0","pixel":[1427,901]},
+    {"object":"junction corner washer 3","pixel":[1480,937]},
+    {"object":"starboard-operating corner washer 3","pixel":[1678,1047]},
+    {"object":"upper valve flange stud 0 0","pixel":[938,937]},
+    {"object":"middle valve visible stud 2 1","pixel":[1076,1002]},
+    {"object":"motor foot fixing 0","pixel":[1012,1146]},
+    {"object":"lower shoe bolt 1 1","pixel":[1028,1411]},
+    {"object":"pump volute visible fixing 2","pixel":[1114,1133]},
+    {"object":"right vertical flange hex nut 5","pixel":[1138,1031]},
+    {"object":"junction corner washer 1","pixel":[1480,901]},
+    {"object":"port-local gland hex nut 0","pixel":[723,1008]},
+    {"object":"starboard-local gland hex nut 0","pixel":[1198,1009]}
+  ]
+}

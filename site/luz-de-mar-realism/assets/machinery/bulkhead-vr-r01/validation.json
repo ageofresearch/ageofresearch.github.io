@@ -1,0 +1,6798 @@
+{
+  "version": "bulkhead-vr-r01",
+  "status": "candidate; not promoted",
+  "strictVisualAcceptance": false,
+  "grid": {
+    "nativeSize": 2048,
+    "basePixels": 16,
+    "detailPixels": 8,
+    "cells": 9157,
+    "cells16": 1377,
+    "cells8": 7780,
+    "featureRegionsCompared": 20,
+    "automaticallyAccepted": 0,
+    "manuallyAcceptedCells": 0,
+    "features": [
+      {
+        "id": "eco",
+        "rect": [
+          132,
+          898,
+          273,
+          979
+        ],
+        "observation": "Carcasa, cuatro fijaciones de esquina, etiqueta de doble marco y lazo de cables inferior.",
+        "materials": "pintura, etiqueta, metal y PVC",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "port-operating",
+        "rect": [
+          286,
+          896,
+          409,
+          1028
+        ],
+        "observation": "Tres pilotos coloreados con placas independientes, pulsador de emergencia rojo sobre base amarilla y entradas inferiores; no confundir placas con pilotos adicionales.",
+        "materials": "pintura, plástico, lentes y metal",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "epu",
+        "rect": [
+          418,
+          895,
+          671,
+          1051
+        ],
+        "observation": "Frente del EPU entre X-píxel450 y651, etiqueta en513..595; la región amplia incluye retorno lateral y rejillas del equipo vecino.",
+        "materials": "pintura satinada y etiqueta",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "epu-vents",
+        "rect": [
+          648,
+          908,
+          674,
+          1009
+        ],
+        "observation": "Lamas oscuras dentro de un rebaje; mantener profundidad y continuidad vertical.",
+        "materials": "pintura y sombra interior",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "epu-label",
+        "rect": [
+          511,
+          980,
+          601,
+          1033
+        ],
+        "observation": "Borde y palabra EPU legibles; texto pequeño restante no identificado.",
+        "materials": "etiqueta mate",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "port-local",
+        "rect": [
+          705,
+          899,
+          841,
+          1006
+        ],
+        "observation": "Caja, cuatro fijaciones visibles, columna de indicadores y siete curvas de cable inferiores modeladas como grupo estimado.",
+        "materials": "pintura, plástico, PVC",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "starboard-local",
+        "rect": [
+          1180,
+          899,
+          1308,
+          1007
+        ],
+        "observation": "Caja y columna de indicadores, reborde y haces de cable con entrada propia.",
+        "materials": "pintura, plástico, PVC",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "junction",
+        "rect": [
+          1420,
+          894,
+          1487,
+          944
+        ],
+        "observation": "Caja pequeña sobre el cuadro derecho con tapa, fijaciones y conductor de unión.",
+        "materials": "pintura y conductor",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "starboard-operating",
+        "rect": [
+          1550,
+          902,
+          1686,
+          1056
+        ],
+        "observation": "Pantalla con bisel, dos pilotos, placas inferiores y tres mandos diferenciados; no inventar cifras del display.",
+        "materials": "pintura, vidrio oscuro, lentes y plástico",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "scu",
+        "rect": [
+          1697,
+          894,
+          2018,
+          1031
+        ],
+        "observation": "Retorno lateral izquierdo1697..1748, frente1748..1972 con junta de puerta1877, placasSCU/MTU centradas~1818, cierre1766 y lazo que se curva a la izquierda.",
+        "materials": "pintura, placas y metal",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "scu-lock",
+        "rect": [
+          1730,
+          963,
+          1811,
+          1031
+        ],
+        "observation": "Herraje y lazo fino adyacente; no confundir el reflejo con otra pieza.",
+        "materials": "metal, plástico y PVC",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "tray",
+        "rect": [
+          0,
+          813,
+          2048,
+          898
+        ],
+        "observation": "Bandeja perforada y varias líneas de cable; identificar soportes y cruces sin inventar el número de conductores ocultos.",
+        "materials": "metal pintado y PVC",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "upper-valves",
+        "rect": [
+          906,
+          901,
+          1100,
+          1020
+        ],
+        "observation": "Tres grupos superiores con cuerpo blanco, bridas partidas, tornillería y palancas negras; fila intermedia con soportes propios.",
+        "materials": "pintura, metal y plástico",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "right-brass",
+        "rect": [
+          1094,
+          944,
+          1155,
+          1100
+        ],
+        "observation": "Cuerpo vertical amarillo metálico, tres rebordes, uniones atornilladas, codo y palanca roja lateral.",
+        "materials": "metal amarillo, inoxidable y pintura roja",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "bellows",
+        "rect": [
+          953,
+          1025,
+          1105,
+          1092
+        ],
+        "observation": "Uniones cilíndricas, fuelle de varias crestas, abrazaderas y dos lazos de unión inferiores.",
+        "materials": "inoxidable, metal amarillo y conductor",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "motor",
+        "rect": [
+          985,
+          1074,
+          1128,
+          1158
+        ],
+        "observation": "Motor gris con aletas, placa oscura, caja superior, cuerpo blanco próximo y pies sobre repisa.",
+        "materials": "fundición pintada, metal y placa",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "manual-cover",
+        "rect": [
+          973,
+          1171,
+          1081,
+          1271
+        ],
+        "observation": "Tapa circular escalonada, tornillos visibles y palanca diagonal con empuñadura amarilla.",
+        "materials": "pintura, metal y empuñadura",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "lower-lines",
+        "rect": [
+          897,
+          1147,
+          1152,
+          1424
+        ],
+        "observation": "Tres tubos descendentes, uniones, soportes, caja inferior y curvas de cables; parte baja oculta por el contexto.",
+        "materials": "pintura, metal y PVC",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "port-drops",
+        "rect": [
+          706,
+          991,
+          881,
+          1105
+        ],
+        "observation": "Entradas de cables y radios de curvatura bajo el cuadro izquierdo.",
+        "materials": "PVC y prensaestopas",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      },
+      {
+        "id": "starboard-drops",
+        "rect": [
+          1146,
+          990,
+          1327,
+          1105
+        ],
+        "observation": "Entradas de cables y curvas bajo el cuadro derecho.",
+        "materials": "PVC y prensaestopas",
+        "manualFeatureCompared": true,
+        "strictAccepted": false
+      }
+    ]
+  },
+  "geometry": {
+    "editableObjects": 820,
+    "triangles": 88293,
+    "maximumTriangles": 120000,
+    "uv": {
+      "packing": {
+        "method": "xatlas 0.0.11; independent UV1 charts, source geometry and UV0 unchanged",
+        "atlasCount": 1,
+        "width": 2005,
+        "height": 2001,
+        "utilization": 0.8287081122398376,
+        "coverage": 0.40738093852996826,
+        "paddingPixels": 4,
+        "effectivePaddingAt2048": 4.085785536159601,
+        "charts": 4518
+      },
+      "coverage": 0.40738089412658507,
+      "minimumGutterPixels": 4,
+      "bakeMarginPixels": 4,
+      "degenerateTriangleFraction": 0,
+      "uvTrianglesSHA256": "20af223417b307bdfc074ebac11b4839dda9d79c412708c8ee3ce5982cc8b934"
+    },
+    "neutralGeometrySHA256": "965c5236fa2c8cccd4ca60407347ff6186485e0ef85f513c2a420a091e552cb4"
+  },
+  "lighting": {
+    "diffuseSamples": 64,
+    "reflectionSamples": 128,
+    "irradianceSize": 2048,
+    "model": "Full diffuse direct+indirect without albedo; local static probe specular; no duplicate direct contribution",
+    "hdr": "Linear RGB half-float EXR DWAA",
+    "files": {
+      "bulkhead-irradiance.exr": {
+        "rawSHA256": "02c1e02cce250e9ff2d64c33153bf049a1c9807578b5d2951715aa809d24d1b2",
+        "sha256": "42f354b44ee394b620f4d7cd33202b8aaeec44cc2be59b0f8f609574e05dca58",
+        "bytes": 7410247
+      },
+      "port-irradiance.exr": {
+        "rawSHA256": "7d62dd1444484a38da2e215019c999b0be5d2f9d891e6cd58d0d9749aa725a6a",
+        "sha256": "38a06e433fc72d9f3557e5087fe49a380c4a92d178d984784ed564000daf80c2",
+        "bytes": 6540715
+      },
+      "starboard-irradiance.exr": {
+        "rawSHA256": "3a13969c7d1c343f693121be20da51a703a381d2159224f9b8b1c429bbb15aef",
+        "sha256": "e73e7b37594f1d284489f6f131d046ba95b28579351d996de3d69eee273cdb7b",
+        "bytes": 6388946
+      },
+      "room-probe-0.exr": {
+        "sha256": "35b5df25dc2862d3b4522ce86a4ceca4d29af0b267de7e8070c7cc41ac4f9ed6",
+        "bytes": 579694
+      },
+      "room-probe-1.exr": {
+        "sha256": "91413d7484b1a21dfb50220103873d6c96fb9d133f50f78703415035a40ca36b",
+        "bytes": 536924
+      },
+      "room-probe-2.exr": {
+        "sha256": "200972bb92803ad8497de98042d942011dcdce1cf059c548bed4f5326a69c91f",
+        "bytes": 624099
+      }
+    },
+    "engineUVBindings": {
+      "bulkhead": {
+        "cornerSHA256": "200e63598a35c7d5b532e3e5044c33ee3782ced543dac4801aadcaa73e15ee0d",
+        "triangles": 88293,
+        "originalGeometryUnchanged": false
+      },
+      "port": {
+        "cornerSHA256": "078d47b61afd468c2f9b97d759460e917eef7df7253d669748040f9394184e09",
+        "triangles": 142465,
+        "originalGeometryUnchanged": true
+      },
+      "starboard": {
+        "cornerSHA256": "93be7c3dd230bef638c0f5a0cfbe0b2ee511643b3838c18d8c5c1c69e43ae989",
+        "triangles": 170607,
+        "originalGeometryUnchanged": true
+      }
+    },
+    "probes": {
+      "room": [
+        {
+          "id": "machinery-0",
+          "sourcePosition": [
+            8.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -9.394666666666666
+          ],
+          "asset": "room-probe-0.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        },
+        {
+          "id": "machinery-1",
+          "sourcePosition": [
+            10.5,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -7.339583333333334
+          ],
+          "asset": "room-probe-1.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        },
+        {
+          "id": "machinery-2",
+          "sourcePosition": [
+            12.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -5.4802222222222206
+          ],
+          "asset": "room-probe-2.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        }
+      ]
+    },
+    "comparison": {
+      "transform": "Neutral",
+      "exposure": 0.05,
+      "output": "sRGB"
+    },
+    "originalEngineAssetsUnchanged": true
+  },
+  "landmarks": {
+    "camera": {
+      "sourcePosition": [
+        9.15,
+        0,
+        3.18
+      ],
+      "estimated": true,
+      "fixedForAllViews": true
+    },
+    "cubeSize": 2048,
+    "checks": [
+      {
+        "id": "eco-left",
+        "face": "f",
+        "pixel": [
+          132,
+          940
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure eco",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 6488,
+        "errorPixels": 53.45091205957107,
+        "passed": false
+      },
+      {
+        "id": "eco-bottom",
+        "face": "f",
+        "pixel": [
+          212,
+          979
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure eco",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 6488,
+        "errorPixels": 0,
+        "passed": true
+      },
+      {
+        "id": "operating-port-right",
+        "face": "f",
+        "pixel": [
+          409,
+          963
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure port-operating",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 17201,
+        "errorPixels": 6,
+        "passed": false
+      },
+      {
+        "id": "epu-left",
+        "face": "f",
+        "pixel": [
+          418,
+          972
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure epu",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 28836,
+        "errorPixels": 32,
+        "passed": false
+      },
+      {
+        "id": "epu-bottom",
+        "face": "f",
+        "pixel": [
+          555,
+          1051
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure epu",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 28836,
+        "errorPixels": 11,
+        "passed": false
+      },
+      {
+        "id": "port-local-right",
+        "face": "f",
+        "pixel": [
+          841,
+          955
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure port-local",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 13234,
+        "errorPixels": 5,
+        "passed": false
+      },
+      {
+        "id": "starboard-local-left",
+        "face": "f",
+        "pixel": [
+          1180,
+          954
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure starboard-local",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 12387,
+        "errorPixels": 5,
+        "passed": false
+      },
+      {
+        "id": "junction-right",
+        "face": "f",
+        "pixel": [
+          1487,
+          920
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure junction",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 4069,
+        "errorPixels": 1,
+        "passed": true
+      },
+      {
+        "id": "operating-starboard-left",
+        "face": "f",
+        "pixel": [
+          1550,
+          980
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure starboard-operating",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 18200,
+        "errorPixels": 18,
+        "passed": false
+      },
+      {
+        "id": "scu-bottom",
+        "face": "f",
+        "pixel": [
+          1836,
+          1031
+        ],
+        "group": "panels",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | enclosure scu",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 18232,
+        "errorPixels": 1.4142135623730951,
+        "passed": true
+      },
+      {
+        "id": "central-upper-white",
+        "face": "f",
+        "pixel": [
+          1019,
+          910
+        ],
+        "group": "central",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | upper white swept header",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 3504,
+        "errorPixels": 6,
+        "passed": false
+      },
+      {
+        "id": "central-brass-outer",
+        "face": "f",
+        "pixel": [
+          1137,
+          1009
+        ],
+        "group": "central",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | right brass elbow",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 628,
+        "errorPixels": 1,
+        "passed": true
+      },
+      {
+        "id": "motor-fan-center",
+        "face": "f",
+        "pixel": [
+          1031,
+          1115
+        ],
+        "group": "central",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | motor body rectangular ribs",
+        "method": "projected geometric bounding centre; not a floating annotation",
+        "actual": [
+          1039.5943615592573,
+          1109.7690012254336
+        ],
+        "visiblePixels": 1507,
+        "errorPixels": 10.061133076883289,
+        "passed": false
+      },
+      {
+        "id": "manual-cover-center",
+        "face": "f",
+        "pixel": [
+          1028,
+          1215
+        ],
+        "group": "central",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | manual circular cover inner",
+        "method": "projected geometric bounding centre; not a floating annotation",
+        "actual": [
+          1025.995926189796,
+          1214.6110024684635
+        ],
+        "visiblePixels": 1557,
+        "errorPixels": 2.041477630611563,
+        "passed": true
+      },
+      {
+        "id": "tray-line",
+        "face": "f",
+        "pixel": [
+          1380,
+          826
+        ],
+        "group": "cables",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | upper perforated cable tray",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 33512,
+        "errorPixels": 3.605551275463989,
+        "passed": true
+      },
+      {
+        "id": "cable-drop",
+        "face": "f",
+        "pixel": [
+          1162,
+          1240
+        ],
+        "group": "cables",
+        "confidence": "medium",
+        "usedForFineAdjustment": false,
+        "object": "BVR | starboard full height harness 0",
+        "method": "visible component boundary, including its own door when present",
+        "actual": null,
+        "visiblePixels": 847,
+        "errorPixels": 2,
+        "passed": true
+      }
+    ],
+    "unambiguousLandmarkMaxPixels": 4,
+    "passedLandmarks": 7,
+    "landmarkCount": 16,
+    "allLandmarksPassed": false,
+    "allClearEdgesCertified": false,
+    "visualAcceptance": false,
+    "limits": [
+      "Visible boundary/centre samples only; no certification of 95% of every component edge.",
+      "Manual photograph coordinates have uncertainty; all measurements retained, including occlusions and failures."
+    ],
+    "independence": "Original frozen points retained as diagnostic; some have informed refinement and must not be described as independent holdouts."
+  },
+  "browser": {
+    "url": "http://127.0.0.1:5251/",
+    "renderer": "Chromium SwiftShader; correctness/resource checks only",
+    "hardware": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "softwareRenderer": true,
+      "viewport": [
+        600,
+        400
+      ],
+      "DPR": 1
+    },
+    "checks": {
+      "httpFailureRetainsOriginal": true,
+      "hashFailureRetainsOriginal": true,
+      "atomicRetryAndBudgets": true,
+      "sharedLightingBound": true,
+      "identicalCameraFrames": true,
+      "bothNominalCutsKeepBulkhead": true,
+      "filterRegisterAndReset": true,
+      "threeResourceCyclesStable": true,
+      "restoresOriginalAndReactivates": true,
+      "slowLoadFallbackAndExitCancellation": true,
+      "hiddenPausesAndResumes": true,
+      "contextRestoresCandidate": true,
+      "mobileTouchWalkAndOrientation": true
+    },
+    "errors": [],
+    "cycles": [
+      {
+        "memory": {
+          "geometries": 149,
+          "textures": 136
+        },
+        "pool": {
+          "textures": 81,
+          "references": 81
+        },
+        "programs": 37
+      },
+      {
+        "memory": {
+          "geometries": 149,
+          "textures": 136
+        },
+        "pool": {
+          "textures": 81,
+          "references": 81
+        },
+        "programs": 37
+      },
+      {
+        "memory": {
+          "geometries": 149,
+          "textures": 136
+        },
+        "pool": {
+          "textures": 81,
+          "references": 81
+        },
+        "programs": 37
+      }
+    ],
+    "before": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": false,
+          "loading": false,
+          "error": "No se pudo preparar el mamparo (503)",
+          "active": true,
+          "committed": false,
+          "waitingForSafePosition": false,
+          "triangles": 88293,
+          "version": "bulkhead-vr-r01"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        8.62,
+        0
+      ],
+      "frames": 4,
+      "ratio": 0.5,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 0.5,
+        "effectiveDPR": 0.5,
+        "hardwareLimited": false,
+        "canvas": [
+          300,
+          200
+        ]
+      },
+      "canvas": [
+        300,
+        200
+      ],
+      "calls": 100,
+      "triangles": 319213,
+      "memory": {
+        "geometries": 137,
+        "textures": 101
+      },
+      "estimatedMemory": {
+        "geometryBytes": 58177490,
+        "textureBytes": 415587857,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 482153955,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 3,
+        "p50": 11.099999964237213,
+        "p95": 5544.5
+      },
+      "shadowUpdates": 11,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "after": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 88293,
+          "version": "bulkhead-vr-r01"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        8.62,
+        0
+      ],
+      "frames": 9,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          600,
+          400
+        ]
+      },
+      "canvas": [
+        600,
+        400
+      ],
+      "calls": 100,
+      "triangles": 398748,
+      "memory": {
+        "geometries": 149,
+        "textures": 137
+      },
+      "estimatedMemory": {
+        "geometryBytes": 62468600,
+        "textureBytes": 544563505,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 615420713,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 2,
+        "p50": 5.400000035762787,
+        "p95": 5.400000035762787
+      },
+      "shadowUpdates": 12,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "additionalResidentBytes": 133266758,
+    "walkingSequence": {
+      "frames": [
+        {
+          "time": 99442.30000001192,
+          "calls": 94,
+          "triangles": 397129,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 105791.90000003576,
+          "calls": 92,
+          "triangles": 388415,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 105828,
+          "calls": 91,
+          "triangles": 388043,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 110988.60000002384,
+          "calls": 90,
+          "triangles": 387947,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 119730.70000004768,
+          "calls": 90,
+          "triangles": 387947,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 127737.70000004768,
+          "calls": 88,
+          "triangles": 387077,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 136539.20000004768,
+          "calls": 87,
+          "triangles": 385277,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 143858.5,
+          "calls": 87,
+          "triangles": 385277,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 152590.20000004768,
+          "calls": 85,
+          "triangles": 370055,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 158894.30000001192,
+          "calls": 82,
+          "triangles": 376237,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 165990.10000002384,
+          "calls": 80,
+          "triangles": 373857,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 173523.80000001192,
+          "calls": 80,
+          "triangles": 373857,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 182582.80000001192,
+          "calls": 78,
+          "triangles": 354057,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 190193.80000001192,
+          "calls": 78,
+          "triangles": 354057,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 198622,
+          "calls": 78,
+          "triangles": 354057,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 204586.80000001192,
+          "calls": 77,
+          "triangles": 354006,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 212457.80000001192,
+          "calls": 77,
+          "triangles": 354006,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 218874.10000002384,
+          "calls": 77,
+          "triangles": 354006,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 225193.80000001192,
+          "calls": 77,
+          "triangles": 354006,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 231772.90000003576,
+          "calls": 72,
+          "triangles": 334842,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 238225.60000002384,
+          "calls": 72,
+          "triangles": 334842,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 245021.90000003576,
+          "calls": 72,
+          "triangles": 334842,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 250535.90000003576,
+          "calls": 70,
+          "triangles": 332586,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 257181.70000004768,
+          "calls": 70,
+          "triangles": 332586,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 262781.3000000119,
+          "calls": 70,
+          "triangles": 332586,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 268356.60000002384,
+          "calls": 68,
+          "triangles": 332074,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 274035.8000000119,
+          "calls": 67,
+          "triangles": 331946,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 279191,
+          "calls": 67,
+          "triangles": 331946,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 284321.3000000119,
+          "calls": 66,
+          "triangles": 331322,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 288517.60000002384,
+          "calls": 66,
+          "triangles": 331322,
+          "canvas": [
+            600,
+            400
+          ]
+        }
+      ],
+      "frameMs": {
+        "samples": 29,
+        "p50": 6449.700000000012,
+        "p95": 8799.600000000006
+      },
+      "submissionMs": {
+        "samples": 33,
+        "p50": 1.800000011920929,
+        "p95": 8.5
+      }
+    },
+    "previousAttempts": [
+      {
+        "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n    memory: {\n      geometries: 149,\n+     textures: 137\n-     textures: 136\n    },\n    pool: {\n      references: 81,\n      textures: 81\n    },\n+   programs: 34\n-   programs: 36\n  }\n\n    at /workspace/water-safari-site/apps/luz-de-mar-realism/test/bulkhead-browser.cjs:34:10",
+        "cycles": [
+          {
+            "memory": {
+              "geometries": 149,
+              "textures": 136
+            },
+            "pool": {
+              "textures": 81,
+              "references": 81
+            },
+            "programs": 36
+          },
+          {
+            "memory": {
+              "geometries": 149,
+              "textures": 137
+            },
+            "pool": {
+              "textures": 81,
+              "references": 81
+            },
+            "programs": 34
+          },
+          {
+            "memory": {
+              "geometries": 149,
+              "textures": 136
+            },
+            "pool": {
+              "textures": 81,
+              "references": 81
+            },
+            "programs": 36
+          }
+        ]
+      }
+    ],
+    "downloads": [
+      {
+        "url": "http://127.0.0.1:5251/assets/manifest.json?v=bulkhead-vr-r01",
+        "encodedBytes": 32457,
+        "transferBytes": 32757,
+        "durationMs": 8.900000035762787
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/navigation.json?v=bulkhead-vr-r01",
+        "encodedBytes": 12865,
+        "transferBytes": 13165,
+        "durationMs": 3.699999988079071
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/saloon/room.json?v=bulkhead-vr-r01",
+        "encodedBytes": 59833,
+        "transferBytes": 60133,
+        "durationMs": 3.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/context/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 167684,
+        "transferBytes": 167984,
+        "durationMs": 10.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/saloon/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 1404100,
+        "transferBytes": 1404400,
+        "durationMs": 10.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/cockpit/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 690856,
+        "transferBytes": 691156,
+        "durationMs": 6.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/beach-club/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 362812,
+        "transferBytes": 363112,
+        "durationMs": 3.699999988079071
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/port-side/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 96376,
+        "transferBytes": 96676,
+        "durationMs": 3.099999964237213
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/starboard-side/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 211072,
+        "transferBytes": 211372,
+        "durationMs": 2.900000035762787
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/bow/context.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 633188,
+        "transferBytes": 633488,
+        "durationMs": 4.700000047683716
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/yacht-structure.json?v=bulkhead-vr-r01",
+        "encodedBytes": 42677,
+        "transferBytes": 42977,
+        "durationMs": 2.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/room.json?v=bulkhead-vr-r01",
+        "encodedBytes": 344621,
+        "transferBytes": 344921,
+        "durationMs": 7.199999988079071
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/room.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 12019724,
+        "transferBytes": 12020024,
+        "durationMs": 170.79999995231628
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/ambient-architecture.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 12462030,
+        "transferBytes": 12462330,
+        "durationMs": 138.80000001192093
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/ambient-furniture.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 17327436,
+        "transferBytes": 17327736,
+        "durationMs": 95.80000001192093
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe-aft.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1570452,
+        "transferBytes": 1570752,
+        "durationMs": 45.19999998807907
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe-forward.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1665679,
+        "transferBytes": 1665979,
+        "durationMs": 37.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1562003,
+        "transferBytes": 1562303,
+        "durationMs": 44.60000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/vr-details.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 88476,
+        "transferBytes": 88776,
+        "durationMs": 46.40000003576279
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/mtu-r03/exterior.json?v=bulkhead-vr-r01",
+        "encodedBytes": 225560,
+        "transferBytes": 225860,
+        "durationMs": 10.800000011920929
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/sea-strainers/exterior.json?v=bulkhead-vr-r01",
+        "encodedBytes": 4438,
+        "transferBytes": 4738,
+        "durationMs": 10
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/mtu-r03/exterior.bin.gz?v=bulkhead-vr-r01",
+        "encodedBytes": 4303485,
+        "transferBytes": 4303785,
+        "durationMs": 24.899999976158142
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/sea-strainers/exterior.bin.gz?v=bulkhead-vr-r01",
+        "encodedBytes": 86829,
+        "transferBytes": 87129,
+        "durationMs": 5.600000023841858
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/walk.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 17542488,
+        "transferBytes": 17542788,
+        "durationMs": 3777.100000023842
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 19101629,
+        "transferBytes": 19101929,
+        "durationMs": 3858.2999999523163
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6341630,
+        "transferBytes": 6341930,
+        "durationMs": 3686.800000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6144950,
+        "transferBytes": 6145250,
+        "durationMs": 3681.400000035763
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/receiver.ktx2?v=bulkhead-vr-r01",
+        "encodedBytes": 244975,
+        "transferBytes": 245275,
+        "durationMs": 43
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/walk.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 3735620,
+        "transferBytes": 3735920,
+        "durationMs": 3599.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6406894,
+        "transferBytes": 6407194,
+        "durationMs": 3696.300000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 600007,
+        "transferBytes": 600307,
+        "durationMs": 3614.199999988079
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 560574,
+        "transferBytes": 560874,
+        "durationMs": 3627.300000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/receiver.ktx2?v=bulkhead-vr-r01",
+        "encodedBytes": 247072,
+        "transferBytes": 247372,
+        "durationMs": 3636.300000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/bulkhead.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 3607508,
+        "transferBytes": 3607808,
+        "durationMs": 13149.900000035763
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/bulkhead-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 7410247,
+        "transferBytes": 7410547,
+        "durationMs": 13198.199999988079
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 579694,
+        "transferBytes": 579994,
+        "durationMs": 3699.2000000476837
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 536924,
+        "transferBytes": 537224,
+        "durationMs": 3700.899999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-2.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 624099,
+        "transferBytes": 624399,
+        "durationMs": 3717.900000035763
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/port-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6540715,
+        "transferBytes": 6541015,
+        "durationMs": 13481.899999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/starboard-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6388946,
+        "transferBytes": 6389246,
+        "durationMs": 13506.899999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/room.json?v=bulkhead-vr-r01",
+        "encodedBytes": 344621,
+        "transferBytes": 344921,
+        "durationMs": 16.69999998807907
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/room.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 12019724,
+        "transferBytes": 12020024,
+        "durationMs": 267.2000000476837
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/ambient-architecture.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 12462030,
+        "transferBytes": 12462330,
+        "durationMs": 363.89999997615814
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/ambient-furniture.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 17327436,
+        "transferBytes": 17327736,
+        "durationMs": 494.69999998807907
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe-aft.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1570452,
+        "transferBytes": 1570752,
+        "durationMs": 111.39999997615814
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1562003,
+        "transferBytes": 1562303,
+        "durationMs": 96.59999996423721
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe-forward.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1665679,
+        "transferBytes": 1665979,
+        "durationMs": 119.19999998807907
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/vr-details.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 88476,
+        "transferBytes": 88776,
+        "durationMs": 118.10000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/mtu-r03/exterior.json?v=bulkhead-vr-r01",
+        "encodedBytes": 225560,
+        "transferBytes": 225860,
+        "durationMs": 16.30000001192093
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/sea-strainers/exterior.json?v=bulkhead-vr-r01",
+        "encodedBytes": 4438,
+        "transferBytes": 4738,
+        "durationMs": 15.600000023841858
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/sea-strainers/exterior.bin.gz?v=bulkhead-vr-r01",
+        "encodedBytes": 86829,
+        "transferBytes": 87129,
+        "durationMs": 4.899999976158142
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/mtu-r03/exterior.bin.gz?v=bulkhead-vr-r01",
+        "encodedBytes": 4303485,
+        "transferBytes": 4303785,
+        "durationMs": 16.900000035762787
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/walk.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 17542488,
+        "transferBytes": 17542788,
+        "durationMs": 6169.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 19101629,
+        "transferBytes": 19101929,
+        "durationMs": 6215.800000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6341630,
+        "transferBytes": 6341930,
+        "durationMs": 6091.099999964237
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/receiver.ktx2?v=bulkhead-vr-r01",
+        "encodedBytes": 244975,
+        "transferBytes": 245275,
+        "durationMs": 56.60000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6144950,
+        "transferBytes": 6145250,
+        "durationMs": 6081.800000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/walk.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 3735620,
+        "transferBytes": 3735920,
+        "durationMs": 6055.300000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6406894,
+        "transferBytes": 6407194,
+        "durationMs": 6101.399999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 600007,
+        "transferBytes": 600307,
+        "durationMs": 6069.399999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 560574,
+        "transferBytes": 560874,
+        "durationMs": 6081.099999964237
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/receiver.ktx2?v=bulkhead-vr-r01",
+        "encodedBytes": 247072,
+        "transferBytes": 247372,
+        "durationMs": 6089.099999964237
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/bulkhead.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 3607508,
+        "transferBytes": 3607808,
+        "durationMs": 6270.600000023842
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/bulkhead-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 7410247,
+        "transferBytes": 7410547,
+        "durationMs": 17937.399999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 579694,
+        "transferBytes": 579994,
+        "durationMs": 6100.099999964237
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 536924,
+        "transferBytes": 537224,
+        "durationMs": 6104.600000023842
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-2.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 624099,
+        "transferBytes": 624399,
+        "durationMs": 6111.299999952316
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/port-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6540715,
+        "transferBytes": 6541015,
+        "durationMs": 18010.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/starboard-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6388946,
+        "transferBytes": 6389246,
+        "durationMs": 18020.600000023842
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/detail.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 17855292,
+        "transferBytes": 17855592,
+        "durationMs": 51.09999996423721
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/detail.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 4650140,
+        "transferBytes": 4650440,
+        "durationMs": 31.600000023841858
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/room.json?v=bulkhead-vr-r01",
+        "encodedBytes": 344621,
+        "transferBytes": 344921,
+        "durationMs": 16.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/room.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 12019724,
+        "transferBytes": 12020024,
+        "durationMs": 293.60000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/ambient-architecture.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 12462030,
+        "transferBytes": 12462330,
+        "durationMs": 318.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe-aft.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1570452,
+        "transferBytes": 1570752,
+        "durationMs": 139.4000000357628
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/ambient-furniture.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 17327436,
+        "transferBytes": 17327736,
+        "durationMs": 442.19999998807907
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe-forward.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1665679,
+        "transferBytes": 1665979,
+        "durationMs": 134.69999998807907
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/probe.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 1562003,
+        "transferBytes": 1562303,
+        "durationMs": 141.39999997615814
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/vr-details.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 88476,
+        "transferBytes": 88776,
+        "durationMs": 151.39999997615814
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/mtu-r03/exterior.json?v=bulkhead-vr-r01",
+        "encodedBytes": 225560,
+        "transferBytes": 225860,
+        "durationMs": 12.699999988079071
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/sea-strainers/exterior.json?v=bulkhead-vr-r01",
+        "encodedBytes": 4438,
+        "transferBytes": 4738,
+        "durationMs": 11.899999976158142
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/sea-strainers/exterior.bin.gz?v=bulkhead-vr-r01",
+        "encodedBytes": 86829,
+        "transferBytes": 87129,
+        "durationMs": 7.799999952316284
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/mtu-r03/exterior.bin.gz?v=bulkhead-vr-r01",
+        "encodedBytes": 4303485,
+        "transferBytes": 4303785,
+        "durationMs": 48.10000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/walk.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 17542488,
+        "transferBytes": 17542788,
+        "durationMs": 12499.600000023842
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 19101629,
+        "transferBytes": 19101929,
+        "durationMs": 12520.800000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6341630,
+        "transferBytes": 6341930,
+        "durationMs": 12419
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6144950,
+        "transferBytes": 6145250,
+        "durationMs": 12412.300000011921
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/receiver.ktx2?v=bulkhead-vr-r01",
+        "encodedBytes": 244975,
+        "transferBytes": 245275,
+        "durationMs": 61.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/walk.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 3735620,
+        "transferBytes": 3735920,
+        "durationMs": 12372.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6406894,
+        "transferBytes": 6407194,
+        "durationMs": 12468.5
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 600007,
+        "transferBytes": 600307,
+        "durationMs": 12395.400000035763
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 560574,
+        "transferBytes": 560874,
+        "durationMs": 12407.400000035763
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/receiver.ktx2?v=bulkhead-vr-r01",
+        "encodedBytes": 247072,
+        "transferBytes": 247372,
+        "durationMs": 12426.899999976158
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/bulkhead.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 3607508,
+        "transferBytes": 3607808,
+        "durationMs": 38106.39999997616
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/bulkhead-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 7410247,
+        "transferBytes": 7410547,
+        "durationMs": 38241.69999998808
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-0.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 579694,
+        "transferBytes": 579994,
+        "durationMs": 12434.199999988079
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-1.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 536924,
+        "transferBytes": 537224,
+        "durationMs": 12435.700000047684
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/room-probe-2.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 624099,
+        "transferBytes": 624399,
+        "durationMs": 12452
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/port-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6540715,
+        "transferBytes": 6541015,
+        "durationMs": 38331.59999996424
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/machinery/bulkhead-vr-r01/starboard-irradiance.exr?v=bulkhead-vr-r01",
+        "encodedBytes": 6388946,
+        "transferBytes": 6389246,
+        "durationMs": 38320.89999997616
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/left-vr-r01/detail.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 17855292,
+        "transferBytes": 17855592,
+        "durationMs": 121.60000002384186
+      },
+      {
+        "url": "http://127.0.0.1:5251/assets/mechanics/right-vr-r01/detail.glb?v=bulkhead-vr-r01",
+        "encodedBytes": 4650140,
+        "transferBytes": 4650440,
+        "durationMs": 35.30000001192093
+      }
+    ],
+    "pass": true
+  },
+  "views": [
+    {
+      "id": "front",
+      "h": 0,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 0,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 7,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 89,
+        "triangles": 386147,
+        "memory": {
+          "geometries": 149,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 47176066,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 600128179,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 3,
+          "p50": 8,
+          "p95": 8.600000023841858
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "port-oblique",
+      "h": -30,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 0,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 10,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 85,
+        "triangles": 363043,
+        "memory": {
+          "geometries": 149,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 47176066,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 600128179,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 6,
+          "p50": 8,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "starboard-oblique",
+      "h": 30,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 0,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 13,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 84,
+        "triangles": 365625,
+        "memory": {
+          "geometries": 149,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 47176066,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 600128179,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 9,
+          "p50": 5.600000023841858,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "port-panels",
+      "h": -25,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 0,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 142465,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 170607,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 16,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 67,
+        "triangles": 383661,
+        "memory": {
+          "geometries": 163,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 62468600,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 615420713,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 12,
+          "p50": 5.600000023841858,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "starboard-panels",
+      "h": 25,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 0,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 142465,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 170607,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 19,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 72,
+        "triangles": 395981,
+        "memory": {
+          "geometries": 172,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 62468600,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 615420713,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 15,
+          "p50": 3.399999976158142,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "central",
+      "h": 0,
+      "v": 15,
+      "hfov": 45,
+      "vfov": 15,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 142465,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 170607,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 22,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 81,
+        "triangles": 421481,
+        "memory": {
+          "geometries": 173,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 62468600,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 615420713,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 18,
+          "p50": 3.399999976158142,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "cables",
+      "h": 0,
+      "v": -10,
+      "hfov": 70,
+      "vfov": -10,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 142465,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 170607,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 25,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 78,
+        "triangles": 452693,
+        "memory": {
+          "geometries": 173,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 62468600,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 615420713,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 21,
+          "p50": 3.199999988079071,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    {
+      "id": "lower",
+      "h": 0,
+      "v": 30,
+      "hfov": 45,
+      "vfov": 30,
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 142465,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "detail",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 170607,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          8.62,
+          0
+        ],
+        "frames": 28,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            1200,
+            800
+          ]
+        },
+        "canvas": [
+          1200,
+          800
+        ],
+        "calls": 75,
+        "triangles": 389771,
+        "memory": {
+          "geometries": 174,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 62468600,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 615420713,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 24,
+          "p50": 3.199999988079071,
+          "p95": 10.599999964237213
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  ],
+  "preservation": {
+    "originalYachtFiles": 629,
+    "changedOriginalFiles": [],
+    "originalMechanicsFiles": 61,
+    "strategySHA256": "023852c67153ab6ff0f76cad934e8c38bb28f5f3105f1451a282bc3f4ed09b0c"
+  },
+  "limits": [
+    "Strict 4px landmark / 95% of clear edges within 6px acceptance is not established. This release stays explicitly a candidate.",
+    "The 9157-cell ledger is generated and compared automatically; 20 feature regions are manually compared. No assertion of manual acceptance of every cell.",
+    "A single panorama station cannot establish hidden depth or actual physical dimensions.",
+    "Existing engine context occludes parts of ECO/SCU and remains unchanged by scope.",
+    "Unreadable labels, serials and electrical functions are not invented.",
+    "Shared static reflections are an approximation during nominal mechanical inspection.",
+    "SwiftShader measurements establish correctness; no desktop/mobile hardware FPS certification."
+  ],
+  "unfittedVerification": {
+    "purpose": "Post-freeze verification points, excluded from subsequent geometry adjustment. Native VR coordinates estimated manually; 2px annotation uncertainty is retained and not subtracted from reported errors.",
+    "sourceResolution": 2048,
+    "annotationUncertaintyPixels": 2,
+    "points": [
+      {
+        "object": "eco corner washer 0",
+        "pixel": [
+          141,
+          906
+        ]
+      },
+      {
+        "object": "port-operating corner washer 0",
+        "pixel": [
+          294,
+          904
+        ]
+      },
+      {
+        "object": "epu corner washer 2",
+        "pixel": [
+          458,
+          1042
+        ]
+      },
+      {
+        "object": "port-local corner washer 2",
+        "pixel": [
+          714,
+          997
+        ]
+      },
+      {
+        "object": "port-local corner washer 3",
+        "pixel": [
+          834,
+          998
+        ]
+      },
+      {
+        "object": "starboard-local corner washer 2",
+        "pixel": [
+          1189,
+          997
+        ]
+      },
+      {
+        "object": "starboard-local corner washer 3",
+        "pixel": [
+          1300,
+          997
+        ]
+      },
+      {
+        "object": "junction corner washer 0",
+        "pixel": [
+          1427,
+          901
+        ]
+      },
+      {
+        "object": "junction corner washer 3",
+        "pixel": [
+          1480,
+          937
+        ]
+      },
+      {
+        "object": "starboard-operating corner washer 3",
+        "pixel": [
+          1678,
+          1047
+        ]
+      },
+      {
+        "object": "upper valve flange stud 0 0",
+        "pixel": [
+          938,
+          937
+        ]
+      },
+      {
+        "object": "middle valve visible stud 2 1",
+        "pixel": [
+          1076,
+          1002
+        ]
+      },
+      {
+        "object": "motor foot fixing 0",
+        "pixel": [
+          1012,
+          1146
+        ]
+      },
+      {
+        "object": "lower shoe bolt 1 1",
+        "pixel": [
+          1028,
+          1411
+        ]
+      },
+      {
+        "object": "pump volute visible fixing 2",
+        "pixel": [
+          1114,
+          1133
+        ]
+      },
+      {
+        "object": "right vertical flange hex nut 5",
+        "pixel": [
+          1138,
+          1031
+        ]
+      },
+      {
+        "object": "junction corner washer 1",
+        "pixel": [
+          1480,
+          901
+        ]
+      },
+      {
+        "object": "port-local gland hex nut 0",
+        "pixel": [
+          723,
+          1008
+        ]
+      },
+      {
+        "object": "starboard-local gland hex nut 0",
+        "pixel": [
+          1198,
+          1009
+        ]
+      }
+    ],
+    "geometrySHA256": "965c5236fa2c8cccd4ca60407347ff6186485e0ef85f513c2a420a091e552cb4",
+    "method": "Centroid of actual isolated visible component pixels from the fixed-camera ID render; no floating helper markers. Occluded/subpixel items retained, not silently removed.",
+    "checks": [
+      {
+        "object": "eco corner washer 0",
+        "pixel": [
+          141,
+          906
+        ],
+        "actualVisibleCentroid": null,
+        "visiblePixels": 0,
+        "errorPixels": null,
+        "passed": false,
+        "occludedOrSubpixel": true
+      },
+      {
+        "object": "port-operating corner washer 0",
+        "pixel": [
+          294,
+          904
+        ],
+        "actualVisibleCentroid": [
+          294.14285714285717,
+          903.5
+        ],
+        "visiblePixels": 14,
+        "errorPixels": 0.5200078492343294,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "epu corner washer 2",
+        "pixel": [
+          458,
+          1042
+        ],
+        "actualVisibleCentroid": [
+          457.5,
+          1041
+        ],
+        "visiblePixels": 4,
+        "errorPixels": 1.118033988749895,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "port-local corner washer 2",
+        "pixel": [
+          714,
+          997
+        ],
+        "actualVisibleCentroid": [
+          712.8333333333334,
+          997.5
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 1.26929551764395,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "port-local corner washer 3",
+        "pixel": [
+          834,
+          998
+        ],
+        "actualVisibleCentroid": [
+          832.5,
+          997.5
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 1.5811388300841898,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "starboard-local corner washer 2",
+        "pixel": [
+          1189,
+          997
+        ],
+        "actualVisibleCentroid": [
+          1187.5,
+          998.5
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 2.1213203435596424,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "starboard-local corner washer 3",
+        "pixel": [
+          1300,
+          997
+        ],
+        "actualVisibleCentroid": [
+          1299.3333333333333,
+          998.5833333333334
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 1.7179606773407563,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "junction corner washer 0",
+        "pixel": [
+          1427,
+          901
+        ],
+        "actualVisibleCentroid": [
+          1426.857142857143,
+          901.5
+        ],
+        "visiblePixels": 14,
+        "errorPixels": 0.5200078492343138,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "junction corner washer 3",
+        "pixel": [
+          1480,
+          937
+        ],
+        "actualVisibleCentroid": [
+          1477.857142857143,
+          935.5
+        ],
+        "visiblePixels": 14,
+        "errorPixels": 2.615690489085767,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "starboard-operating corner washer 3",
+        "pixel": [
+          1678,
+          1047
+        ],
+        "actualVisibleCentroid": [
+          1676.857142857143,
+          1047.5
+        ],
+        "visiblePixels": 14,
+        "errorPixels": 1.2474463711837547,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "upper valve flange stud 0 0",
+        "pixel": [
+          938,
+          937
+        ],
+        "actualVisibleCentroid": [
+          936.6153846153846,
+          936.6153846153846
+        ],
+        "visiblePixels": 13,
+        "errorPixels": 1.4370416686360756,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "middle valve visible stud 2 1",
+        "pixel": [
+          1076,
+          1002
+        ],
+        "actualVisibleCentroid": [
+          1072.5,
+          1000.5
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 3.8078865529319543,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "motor foot fixing 0",
+        "pixel": [
+          1012,
+          1146
+        ],
+        "actualVisibleCentroid": [
+          1010.5,
+          1143.5
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 2.9154759474226504,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "lower shoe bolt 1 1",
+        "pixel": [
+          1028,
+          1411
+        ],
+        "actualVisibleCentroid": [
+          1026.5,
+          1409
+        ],
+        "visiblePixels": 16,
+        "errorPixels": 2.5,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "pump volute visible fixing 2",
+        "pixel": [
+          1114,
+          1133
+        ],
+        "actualVisibleCentroid": [
+          1113.5,
+          1131.5
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 1.5811388300841898,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "right vertical flange hex nut 5",
+        "pixel": [
+          1138,
+          1031
+        ],
+        "actualVisibleCentroid": [
+          1137.7,
+          1030.3
+        ],
+        "visiblePixels": 10,
+        "errorPixels": 0.7615773105864148,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "junction corner washer 1",
+        "pixel": [
+          1480,
+          901
+        ],
+        "actualVisibleCentroid": [
+          1477.857142857143,
+          901.5
+        ],
+        "visiblePixels": 14,
+        "errorPixels": 2.2004174001070202,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "port-local gland hex nut 0",
+        "pixel": [
+          723,
+          1008
+        ],
+        "actualVisibleCentroid": [
+          723.1875,
+          1007.0625
+        ],
+        "visiblePixels": 16,
+        "errorPixels": 0.9560661587986472,
+        "passed": true,
+        "occludedOrSubpixel": false
+      },
+      {
+        "object": "starboard-local gland hex nut 0",
+        "pixel": [
+          1198,
+          1009
+        ],
+        "actualVisibleCentroid": [
+          1198.5,
+          1008
+        ],
+        "visiblePixels": 12,
+        "errorPixels": 1.118033988749895,
+        "passed": true,
+        "occludedOrSubpixel": false
+      }
+    ],
+    "passed": 18,
+    "allPassed": false,
+    "strictVisualAcceptance": false
+  },
+  "edgeDiagnostics": {
+    "nativeSize": 2048,
+    "method": "Bidirectional distance from photographic luminance edge guides (Gaussian sigma .7 / Sobel threshold .12) to actual model component-ID boundaries. Unclassified guides include material/shadow/text edges and retained context; these are diagnostics, not certified clear-edge acceptance.",
+    "features": [
+      {
+        "id": "eco",
+        "referenceGuidePixels": 3285,
+        "modelGuidePixels": 651,
+        "referenceToModelWithin6Pixels": 0.5226788432267885,
+        "modelToReferenceWithin6Pixels": 0.9339477726574501,
+        "referenceToModelP95Pixels": 48,
+        "modelToReferenceP95Pixels": 7,
+        "accepted": false
+      },
+      {
+        "id": "port-operating",
+        "referenceGuidePixels": 3191,
+        "modelGuidePixels": 1431,
+        "referenceToModelWithin6Pixels": 0.9576935130053275,
+        "modelToReferenceWithin6Pixels": 0.9433962264150944,
+        "referenceToModelP95Pixels": 6,
+        "modelToReferenceP95Pixels": 6.555664084966109,
+        "accepted": false
+      },
+      {
+        "id": "epu",
+        "referenceGuidePixels": 8299,
+        "modelGuidePixels": 3153,
+        "referenceToModelWithin6Pixels": 0.9049283046150138,
+        "modelToReferenceWithin6Pixels": 1,
+        "referenceToModelP95Pixels": 8,
+        "modelToReferenceP95Pixels": 3,
+        "accepted": false
+      },
+      {
+        "id": "epu-vents",
+        "referenceGuidePixels": 1344,
+        "modelGuidePixels": 629,
+        "referenceToModelWithin6Pixels": 0.8742559523809523,
+        "modelToReferenceWithin6Pixels": 1,
+        "referenceToModelP95Pixels": 11,
+        "modelToReferenceP95Pixels": 3.0973665961010313,
+        "accepted": false
+      },
+      {
+        "id": "epu-label",
+        "referenceGuidePixels": 1893,
+        "modelGuidePixels": 403,
+        "referenceToModelWithin6Pixels": 0.8922345483359746,
+        "modelToReferenceWithin6Pixels": 1,
+        "referenceToModelP95Pixels": 7.414375175913828,
+        "modelToReferenceP95Pixels": 2,
+        "accepted": false
+      },
+      {
+        "id": "port-local",
+        "referenceGuidePixels": 3785,
+        "modelGuidePixels": 1600,
+        "referenceToModelWithin6Pixels": 0.9712021136063408,
+        "modelToReferenceWithin6Pixels": 0.963125,
+        "referenceToModelP95Pixels": 5,
+        "modelToReferenceP95Pixels": 5,
+        "accepted": false
+      },
+      {
+        "id": "starboard-local",
+        "referenceGuidePixels": 3424,
+        "modelGuidePixels": 1479,
+        "referenceToModelWithin6Pixels": 0.9707943925233645,
+        "modelToReferenceWithin6Pixels": 0.9432048681541582,
+        "referenceToModelP95Pixels": 6,
+        "modelToReferenceP95Pixels": 6.433632206939473,
+        "accepted": false
+      },
+      {
+        "id": "junction",
+        "referenceGuidePixels": 965,
+        "modelGuidePixels": 362,
+        "referenceToModelWithin6Pixels": 1,
+        "modelToReferenceWithin6Pixels": 1,
+        "referenceToModelP95Pixels": 3,
+        "modelToReferenceP95Pixels": 2.23606797749979,
+        "accepted": false
+      },
+      {
+        "id": "starboard-operating",
+        "referenceGuidePixels": 7614,
+        "modelGuidePixels": 2480,
+        "referenceToModelWithin6Pixels": 0.8756238508011558,
+        "modelToReferenceWithin6Pixels": 0.9733870967741935,
+        "referenceToModelP95Pixels": 10.04987562112089,
+        "modelToReferenceP95Pixels": 4.47213595499958,
+        "accepted": false
+      },
+      {
+        "id": "scu",
+        "referenceGuidePixels": 7853,
+        "modelGuidePixels": 1378,
+        "referenceToModelWithin6Pixels": 0.6663695403030689,
+        "modelToReferenceWithin6Pixels": 0.9782293178519593,
+        "referenceToModelP95Pixels": 113.29871853388988,
+        "modelToReferenceP95Pixels": 4,
+        "accepted": false
+      },
+      {
+        "id": "scu-lock",
+        "referenceGuidePixels": 1913,
+        "modelGuidePixels": 526,
+        "referenceToModelWithin6Pixels": 0.9932043910088866,
+        "modelToReferenceWithin6Pixels": 1,
+        "referenceToModelP95Pixels": 5,
+        "modelToReferenceP95Pixels": 2,
+        "accepted": false
+      },
+      {
+        "id": "tray",
+        "referenceGuidePixels": 119517,
+        "modelGuidePixels": 27783,
+        "referenceToModelWithin6Pixels": 0.7973844725018199,
+        "modelToReferenceWithin6Pixels": 1,
+        "referenceToModelP95Pixels": 118.16344407634966,
+        "modelToReferenceP95Pixels": 1,
+        "accepted": false
+      },
+      {
+        "id": "upper-valves",
+        "referenceGuidePixels": 14541,
+        "modelGuidePixels": 2766,
+        "referenceToModelWithin6Pixels": 0.8123925452169727,
+        "modelToReferenceWithin6Pixels": 0.9793926247288504,
+        "referenceToModelP95Pixels": 13.45362404707371,
+        "modelToReferenceP95Pixels": 4,
+        "accepted": false
+      },
+      {
+        "id": "right-brass",
+        "referenceGuidePixels": 6792,
+        "modelGuidePixels": 1621,
+        "referenceToModelWithin6Pixels": 0.8362779740871613,
+        "modelToReferenceWithin6Pixels": 0.9925971622455274,
+        "referenceToModelP95Pixels": 10.44030650891055,
+        "modelToReferenceP95Pixels": 2.23606797749979,
+        "accepted": false
+      },
+      {
+        "id": "bellows",
+        "referenceGuidePixels": 7068,
+        "modelGuidePixels": 1974,
+        "referenceToModelWithin6Pixels": 0.9112903225806451,
+        "modelToReferenceWithin6Pixels": 0.9954407294832827,
+        "referenceToModelP95Pixels": 7,
+        "modelToReferenceP95Pixels": 2.8284271247461903,
+        "accepted": false
+      },
+      {
+        "id": "motor",
+        "referenceGuidePixels": 7147,
+        "modelGuidePixels": 2331,
+        "referenceToModelWithin6Pixels": 0.8854064642507345,
+        "modelToReferenceWithin6Pixels": 0.9995709995709996,
+        "referenceToModelP95Pixels": 9,
+        "modelToReferenceP95Pixels": 3,
+        "accepted": false
+      },
+      {
+        "id": "manual-cover",
+        "referenceGuidePixels": 5598,
+        "modelGuidePixels": 1447,
+        "referenceToModelWithin6Pixels": 0.8051089674883887,
+        "modelToReferenceWithin6Pixels": 0.995162404975812,
+        "referenceToModelP95Pixels": 14,
+        "modelToReferenceP95Pixels": 3,
+        "accepted": false
+      },
+      {
+        "id": "lower-lines",
+        "referenceGuidePixels": 29068,
+        "modelGuidePixels": 5287,
+        "referenceToModelWithin6Pixels": 0.6359914682812715,
+        "modelToReferenceWithin6Pixels": 0.9173444297333081,
+        "referenceToModelP95Pixels": 22,
+        "modelToReferenceP95Pixels": 8,
+        "accepted": false
+      },
+      {
+        "id": "port-drops",
+        "referenceGuidePixels": 13763,
+        "modelGuidePixels": 2768,
+        "referenceToModelWithin6Pixels": 0.690183826200683,
+        "modelToReferenceWithin6Pixels": 0.993135838150289,
+        "referenceToModelP95Pixels": 23.336652223794324,
+        "modelToReferenceP95Pixels": 1.4142135623730951,
+        "accepted": false
+      },
+      {
+        "id": "starboard-drops",
+        "referenceGuidePixels": 13458,
+        "modelGuidePixels": 3283,
+        "referenceToModelWithin6Pixels": 0.7674988854213107,
+        "modelToReferenceWithin6Pixels": 0.9926896131586963,
+        "referenceToModelP95Pixels": 19,
+        "modelToReferenceP95Pixels": 2,
+        "accepted": false
+      }
+    ],
+    "certified95PercentClearEdges": false
+  },
+  "webglFineReview": {
+    "stage": "Actual WebGL native 2048 F review",
+    "camera": [
+      9.15,
+      0,
+      3.18
+    ],
+    "grid": [
+      16,
+      8
+    ],
+    "regionsManuallyCompared": 20,
+    "captureSHA256": "0e6ad462996c92177e9c99f32f9da8d6b8ce3a1ba20af98d0d129a5f032785ec",
+    "readWithinRenderTurn": true,
+    "strictVisualAcceptance": false,
+    "features": [
+      {
+        "id": "eco",
+        "rect": [
+          132,
+          898,
+          273,
+          979
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Conserved engine support occludes the left half of the label; not accepted as a photographic match."
+      },
+      {
+        "id": "port-operating",
+        "rect": [
+          286,
+          896,
+          409,
+          1028
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Three pilot caps and separate stop matched in count; label type and luminous red lens remain approximate."
+      },
+      {
+        "id": "epu",
+        "rect": [
+          418,
+          895,
+          671,
+          1051
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Front/return separation and plate placement corrected; fine unreadable manufacturer type omitted."
+      },
+      {
+        "id": "epu-vents",
+        "rect": [
+          648,
+          908,
+          674,
+          1009
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Visible louvres present on actual side plane; contrast and shallow frame remain approximate."
+      },
+      {
+        "id": "epu-label",
+        "rect": [
+          511,
+          980,
+          601,
+          1033
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Readable EPU word retained; tiny surrounding text remains unassigned."
+      },
+      {
+        "id": "port-local",
+        "rect": [
+          705,
+          899,
+          841,
+          1006
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Seven status outlines and latch present; rounded indicator shape, gray level and small glyphs remain approximate."
+      },
+      {
+        "id": "starboard-local",
+        "rect": [
+          1180,
+          899,
+          1308,
+          1007
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Same count verified; small glyphs, label plate shape and brightness remain under review."
+      },
+      {
+        "id": "junction",
+        "rect": [
+          1420,
+          894,
+          1487,
+          944
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Cabinet frame, cover and fasteners present; visible fastener scale is slightly emphasized."
+      },
+      {
+        "id": "starboard-operating",
+        "rect": [
+          1550,
+          902,
+          1686,
+          1056
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Olive LCD, pilots, selectors and arcs present; warning plate and unresolved small captions are incomplete."
+      },
+      {
+        "id": "scu",
+        "rect": [
+          1697,
+          894,
+          2018,
+          1031
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Two-door organization and legible names corrected; conserved engine context occludes the right area."
+      },
+      {
+        "id": "scu-lock",
+        "rect": [
+          1730,
+          963,
+          1811,
+          1031
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Cable loop/connector arrangement present; detailed connector form remains approximate."
+      },
+      {
+        "id": "tray",
+        "rect": [
+          0,
+          813,
+          2048,
+          898
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Cable tray/looms visible; inherited luminaire/ceiling context differs from tour."
+      },
+      {
+        "id": "upper-valves",
+        "rect": [
+          906,
+          901,
+          1100,
+          1020
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Three groups and lever directions read correctly; body profiles, joints and small handle labels remain simplified."
+      },
+      {
+        "id": "right-brass",
+        "rect": [
+          1094,
+          944,
+          1155,
+          1100
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Stepped/rounded casting now visible; gloss, color and edge profiles still differ from tour."
+      },
+      {
+        "id": "bellows",
+        "rect": [
+          953,
+          1025,
+          1105,
+          1092
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Individual convolutions now visible in WebGL; flange widths, union shapes and reflection balance remain approximate."
+      },
+      {
+        "id": "motor",
+        "rect": [
+          985,
+          1074,
+          1128,
+          1158
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Transverse orientation and distinct white end housing corrected; left fan-cap profile and rating label remain approximate."
+      },
+      {
+        "id": "manual-cover",
+        "rect": [
+          973,
+          1171,
+          1081,
+          1271
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Layered concentric cover and diagonal handle present; cast embossing omitted where unreadable."
+      },
+      {
+        "id": "lower-lines",
+        "rect": [
+          897,
+          1147,
+          1152,
+          1424
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Three legs and junction box retained; some source-floor/filter pipes are outside this reconstruction."
+      },
+      {
+        "id": "port-drops",
+        "rect": [
+          706,
+          991,
+          881,
+          1105
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Seven leads seated; individual cable bends remain less varied than VR."
+      },
+      {
+        "id": "starboard-drops",
+        "rect": [
+          1146,
+          990,
+          1327,
+          1105
+        ],
+        "reviewed": true,
+        "accepted": false,
+        "remaining": "Seven leads reverse toward central harness; individual path/spacing refinements remain pending."
+      }
+    ]
+  },
+  "performance": {
+    "baseline": {
+      "candidate": false,
+      "base": "http://127.0.0.1:5263/",
+      "hardware": {
+        "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+        "renderer": "Chromium SwiftShader",
+        "softwareOnly": true
+      },
+      "viewport": [
+        600,
+        400
+      ],
+      "DPR": 1,
+      "simulationStepSeconds": 0.016666666666666666,
+      "realRenderCompletions": 60,
+      "p50Ms": 1.9000000357627869,
+      "p95Ms": 9.200000047683716,
+      "frames": [
+        {
+          "renderCompleteMs": 2.899999976158142,
+          "position": [
+            -2.8575091980104904e-18,
+            1.1700000000000004,
+            -8.637374999999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 84,
+          "triangles": 317594
+        },
+        {
+          "renderCompleteMs": 6.199999988079071,
+          "position": [
+            -5.715018396020981e-18,
+            1.1700000000000004,
+            -8.614041666666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 83,
+          "triangles": 309064
+        },
+        {
+          "renderCompleteMs": 2.100000023841858,
+          "position": [
+            -8.572527594031472e-18,
+            1.1700000000000004,
+            -8.59070833333333
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 83,
+          "triangles": 309064
+        },
+        {
+          "renderCompleteMs": 2.100000023841858,
+          "position": [
+            -1.1430036792041965e-17,
+            1.1700000000000004,
+            -8.567374999999997
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 308880
+        },
+        {
+          "renderCompleteMs": 6.400000035762787,
+          "position": [
+            -1.4287545990052457e-17,
+            1.1700000000000004,
+            -8.544041666666663
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 81,
+          "triangles": 308508
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -1.7145055188062947e-17,
+            1.1700000000000004,
+            -8.520708333333328
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 81,
+          "triangles": 308508
+        },
+        {
+          "renderCompleteMs": 1.9000000357627869,
+          "position": [
+            -2.000256438607344e-17,
+            1.1700000000000004,
+            -8.497374999999995
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 2.199999988079071,
+          "position": [
+            -2.2860073584083932e-17,
+            1.1700000000000004,
+            -8.474041666666661
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 2.099999964237213,
+          "position": [
+            -2.5717582782094425e-17,
+            1.1700000000000004,
+            -8.450708333333326
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -2.8575091980104915e-17,
+            1.1700000000000004,
+            -8.427374999999993
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 1.9000000357627869,
+          "position": [
+            -3.143260117811541e-17,
+            1.1700000000000004,
+            -8.404041666666659
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 4.400000035762787,
+          "position": [
+            -3.4290110376125894e-17,
+            1.1700000000000004,
+            -8.380708333333324
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 9.200000047683716,
+          "position": [
+            -3.7147619574136387e-17,
+            1.1700000000000004,
+            -8.35737499999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 1.800000011920929,
+          "position": [
+            -4.000512877214688e-17,
+            1.1700000000000004,
+            -8.334041666666657
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 78,
+          "triangles": 307542
+        },
+        {
+          "renderCompleteMs": 1.899999976158142,
+          "position": [
+            -4.286263797015737e-17,
+            1.1700000000000004,
+            -8.310708333333322
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 78,
+          "triangles": 307542
+        },
+        {
+          "renderCompleteMs": 11.800000011920929,
+          "position": [
+            -4.5720147168167865e-17,
+            1.1700000000000004,
+            -8.287374999999988
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 78,
+          "triangles": 307542
+        },
+        {
+          "renderCompleteMs": 2.699999988079071,
+          "position": [
+            -4.857765636617836e-17,
+            1.1700000000000004,
+            -8.264041666666655
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 305742
+        },
+        {
+          "renderCompleteMs": 2.199999988079071,
+          "position": [
+            -5.143516556418885e-17,
+            1.1700000000000004,
+            -8.24070833333332
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 305742
+        },
+        {
+          "renderCompleteMs": 1.699999988079071,
+          "position": [
+            -5.4292674762199337e-17,
+            1.1700000000000004,
+            -8.217374999999986
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 305742
+        },
+        {
+          "renderCompleteMs": 2.899999976158142,
+          "position": [
+            -5.715018396020983e-17,
+            1.1700000000000004,
+            -8.194041666666653
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 305742
+        },
+        {
+          "renderCompleteMs": 1.600000023841858,
+          "position": [
+            -6.000769315822031e-17,
+            1.1700000000000004,
+            -8.170708333333318
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 305742
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -6.286520235623079e-17,
+            1.1700000000000004,
+            -8.147374999999984
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 290520
+        },
+        {
+          "renderCompleteMs": 1.5999999642372131,
+          "position": [
+            -6.572271155424127e-17,
+            1.1700000000000004,
+            -8.12404166666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 290520
+        },
+        {
+          "renderCompleteMs": 8.5,
+          "position": [
+            -6.858022075225174e-17,
+            1.1700000000000004,
+            -8.100708333333316
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 290520
+        },
+        {
+          "renderCompleteMs": 1.899999976158142,
+          "position": [
+            -7.143772995026222e-17,
+            1.1700000000000004,
+            -8.077374999999982
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 290520
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -7.42952391482727e-17,
+            1.1700000000000004,
+            -8.054041666666649
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 263092
+        },
+        {
+          "renderCompleteMs": 37,
+          "position": [
+            -7.715274834628318e-17,
+            1.1700000000000004,
+            -8.030708333333314
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 15.200000047683716,
+          "position": [
+            -8.001025754429366e-17,
+            1.1700000000000004,
+            -8.00737499999998
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 5,
+          "position": [
+            -8.286776674230414e-17,
+            1.1700000000000004,
+            -7.984041666666647
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 2.200000047683716,
+          "position": [
+            -8.572527594031462e-17,
+            1.1700000000000004,
+            -7.9607083333333115
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 70,
+          "triangles": 294322
+        },
+        {
+          "renderCompleteMs": 1.899999976158142,
+          "position": [
+            -8.286776674230414e-17,
+            1.1700000000000004,
+            -7.984041666666647
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -8.001025754429366e-17,
+            1.1700000000000004,
+            -8.00737499999998
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 1.7999999523162842,
+          "position": [
+            -7.715274834628318e-17,
+            1.1700000000000004,
+            -8.030708333333314
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 1.9000000357627869,
+          "position": [
+            -7.42952391482727e-17,
+            1.1700000000000004,
+            -8.054041666666649
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 72,
+          "triangles": 296702
+        },
+        {
+          "renderCompleteMs": 7.799999952316284,
+          "position": [
+            -7.143772995026222e-17,
+            1.1700000000000004,
+            -8.077374999999982
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 353494
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -6.858022075225174e-17,
+            1.1700000000000004,
+            -8.100708333333316
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 353494
+        },
+        {
+          "renderCompleteMs": 1.600000023841858,
+          "position": [
+            -6.572271155424127e-17,
+            1.1700000000000004,
+            -8.12404166666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 353494
+        },
+        {
+          "renderCompleteMs": 1.600000023841858,
+          "position": [
+            -6.286520235623079e-17,
+            1.1700000000000004,
+            -8.147374999999984
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 75,
+          "triangles": 353494
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -6.000769315822031e-17,
+            1.1700000000000004,
+            -8.170708333333318
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 392798
+        },
+        {
+          "renderCompleteMs": 2.699999988079071,
+          "position": [
+            -5.715018396020983e-17,
+            1.1700000000000004,
+            -8.194041666666653
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 392798
+        },
+        {
+          "renderCompleteMs": 5.300000011920929,
+          "position": [
+            -5.4292674762199337e-17,
+            1.1700000000000004,
+            -8.217374999999986
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 392798
+        },
+        {
+          "renderCompleteMs": 1.600000023841858,
+          "position": [
+            -5.143516556418885e-17,
+            1.1700000000000004,
+            -8.24070833333332
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 392798
+        },
+        {
+          "renderCompleteMs": 1.699999988079071,
+          "position": [
+            -4.857765636617836e-17,
+            1.1700000000000004,
+            -8.264041666666655
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 77,
+          "triangles": 392798
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -4.5720147168167865e-17,
+            1.1700000000000004,
+            -8.287374999999988
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 78,
+          "triangles": 394598
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -4.286263797015737e-17,
+            1.1700000000000004,
+            -8.310708333333322
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 78,
+          "triangles": 394598
+        },
+        {
+          "renderCompleteMs": 3.799999952316284,
+          "position": [
+            -4.000512877214688e-17,
+            1.1700000000000004,
+            -8.334041666666657
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 78,
+          "triangles": 394598
+        },
+        {
+          "renderCompleteMs": 4,
+          "position": [
+            -3.7147619574136387e-17,
+            1.1700000000000004,
+            -8.35737499999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 395682
+        },
+        {
+          "renderCompleteMs": 1.5999999642372131,
+          "position": [
+            -3.4290110376125894e-17,
+            1.1700000000000004,
+            -8.380708333333324
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 395682
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -3.143260117811541e-17,
+            1.1700000000000004,
+            -8.404041666666659
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 395682
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -2.8575091980104915e-17,
+            1.1700000000000004,
+            -8.427374999999993
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -2.5717582782094422e-17,
+            1.1700000000000004,
+            -8.450708333333326
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 1.699999988079071,
+          "position": [
+            -2.286007358408393e-17,
+            1.1700000000000004,
+            -8.474041666666661
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 1.9000000357627869,
+          "position": [
+            -2.0002564386073437e-17,
+            1.1700000000000004,
+            -8.497374999999995
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 308412
+        },
+        {
+          "renderCompleteMs": 1.5999999642372131,
+          "position": [
+            -1.7145055188062944e-17,
+            1.1700000000000004,
+            -8.520708333333328
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 81,
+          "triangles": 308508
+        },
+        {
+          "renderCompleteMs": 3.5,
+          "position": [
+            -1.4287545990052454e-17,
+            1.1700000000000004,
+            -8.544041666666663
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 81,
+          "triangles": 308508
+        },
+        {
+          "renderCompleteMs": 1.600000023841858,
+          "position": [
+            -1.1430036792041962e-17,
+            1.1700000000000004,
+            -8.567374999999997
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 308880
+        },
+        {
+          "renderCompleteMs": 6.300000011920929,
+          "position": [
+            -8.572527594031469e-18,
+            1.1700000000000004,
+            -8.59070833333333
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 83,
+          "triangles": 309064
+        },
+        {
+          "renderCompleteMs": 1.899999976158142,
+          "position": [
+            -5.7150183960209785e-18,
+            1.1700000000000004,
+            -8.614041666666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 83,
+          "triangles": 309064
+        },
+        {
+          "renderCompleteMs": 1.600000023841858,
+          "position": [
+            -2.857509198010488e-18,
+            1.1700000000000004,
+            -8.637374999999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 84,
+          "triangles": 317594
+        },
+        {
+          "renderCompleteMs": 2.599999964237213,
+          "position": [
+            2.271583687037787e-33,
+            1.1700000000000004,
+            -8.660708333333332
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 84,
+          "triangles": 317594
+        }
+      ],
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          2.311115933264683e-33
+        ],
+        "frames": 67,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        "canvas": [
+          600,
+          400
+        ],
+        "calls": 84,
+        "triangles": 317594,
+        "memory": {
+          "geometries": 151,
+          "textures": 101
+        },
+        "estimatedMemory": {
+          "geometryBytes": 58177490,
+          "textureBytes": 415587857,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 482153955,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 59,
+          "p50": 3000,
+          "p95": 5483.200000000012
+        },
+        "submissionMs": {
+          "samples": 62,
+          "p50": 2.099999964237213,
+          "p95": 9.300000011920929
+        },
+        "shadowUpdates": 11,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "errors": [],
+      "pass": true
+    },
+    "candidate": {
+      "candidate": true,
+      "base": "http://127.0.0.1:5251/",
+      "hardware": {
+        "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+        "renderer": "Chromium SwiftShader",
+        "softwareOnly": true
+      },
+      "viewport": [
+        600,
+        400
+      ],
+      "DPR": 1,
+      "simulationStepSeconds": 0.016666666666666666,
+      "realRenderCompletions": 60,
+      "p50Ms": 2.300000011920929,
+      "p95Ms": 14.100000023841858,
+      "frames": [
+        {
+          "renderCompleteMs": 9.5,
+          "position": [
+            -2.8575091980104904e-18,
+            1.1700000000000004,
+            -8.637374999999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 94,
+          "triangles": 397129
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -5.715018396020981e-18,
+            1.1700000000000004,
+            -8.614041666666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 93,
+          "triangles": 388599
+        },
+        {
+          "renderCompleteMs": 3.299999952316284,
+          "position": [
+            -8.572527594031472e-18,
+            1.1700000000000004,
+            -8.59070833333333
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 93,
+          "triangles": 388599
+        },
+        {
+          "renderCompleteMs": 2.200000047683716,
+          "position": [
+            -1.1430036792041965e-17,
+            1.1700000000000004,
+            -8.567374999999997
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 92,
+          "triangles": 388415
+        },
+        {
+          "renderCompleteMs": 2.199999988079071,
+          "position": [
+            -1.4287545990052457e-17,
+            1.1700000000000004,
+            -8.544041666666663
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 91,
+          "triangles": 388043
+        },
+        {
+          "renderCompleteMs": 4.700000047683716,
+          "position": [
+            -1.7145055188062947e-17,
+            1.1700000000000004,
+            -8.520708333333328
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 91,
+          "triangles": 388043
+        },
+        {
+          "renderCompleteMs": 2.400000035762787,
+          "position": [
+            -2.000256438607344e-17,
+            1.1700000000000004,
+            -8.497374999999995
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 9.400000035762787,
+          "position": [
+            -2.2860073584083932e-17,
+            1.1700000000000004,
+            -8.474041666666661
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -2.5717582782094425e-17,
+            1.1700000000000004,
+            -8.450708333333326
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 6.699999988079071,
+          "position": [
+            -2.8575091980104915e-17,
+            1.1700000000000004,
+            -8.427374999999993
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2.600000023841858,
+          "position": [
+            -3.143260117811541e-17,
+            1.1700000000000004,
+            -8.404041666666659
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2.100000023841858,
+          "position": [
+            -3.4290110376125894e-17,
+            1.1700000000000004,
+            -8.380708333333324
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2.399999976158142,
+          "position": [
+            -3.7147619574136387e-17,
+            1.1700000000000004,
+            -8.35737499999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 1.699999988079071,
+          "position": [
+            -4.000512877214688e-17,
+            1.1700000000000004,
+            -8.334041666666657
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 88,
+          "triangles": 387077
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -4.286263797015737e-17,
+            1.1700000000000004,
+            -8.310708333333322
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 88,
+          "triangles": 387077
+        },
+        {
+          "renderCompleteMs": 6.100000023841858,
+          "position": [
+            -4.5720147168167865e-17,
+            1.1700000000000004,
+            -8.287374999999988
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 88,
+          "triangles": 387077
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -4.857765636617836e-17,
+            1.1700000000000004,
+            -8.264041666666655
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 385277
+        },
+        {
+          "renderCompleteMs": 3,
+          "position": [
+            -5.143516556418885e-17,
+            1.1700000000000004,
+            -8.24070833333332
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 385277
+        },
+        {
+          "renderCompleteMs": 1.7999999523162842,
+          "position": [
+            -5.4292674762199337e-17,
+            1.1700000000000004,
+            -8.217374999999986
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 385277
+        },
+        {
+          "renderCompleteMs": 27.099999964237213,
+          "position": [
+            -5.715018396020983e-17,
+            1.1700000000000004,
+            -8.194041666666653
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 385277
+        },
+        {
+          "renderCompleteMs": 1.5999999642372131,
+          "position": [
+            -6.000769315822031e-17,
+            1.1700000000000004,
+            -8.170708333333318
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 385277
+        },
+        {
+          "renderCompleteMs": 2.699999988079071,
+          "position": [
+            -6.286520235623079e-17,
+            1.1700000000000004,
+            -8.147374999999984
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 370055
+        },
+        {
+          "renderCompleteMs": 1.800000011920929,
+          "position": [
+            -6.572271155424127e-17,
+            1.1700000000000004,
+            -8.12404166666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 370055
+        },
+        {
+          "renderCompleteMs": 2.600000023841858,
+          "position": [
+            -6.858022075225174e-17,
+            1.1700000000000004,
+            -8.100708333333316
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 370055
+        },
+        {
+          "renderCompleteMs": 1.9000000357627869,
+          "position": [
+            -7.143772995026222e-17,
+            1.1700000000000004,
+            -8.077374999999982
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 370055
+        },
+        {
+          "renderCompleteMs": 2.299999952316284,
+          "position": [
+            -7.42952391482727e-17,
+            1.1700000000000004,
+            -8.054041666666649
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 342627
+        },
+        {
+          "renderCompleteMs": 14.100000023841858,
+          "position": [
+            -7.715274834628318e-17,
+            1.1700000000000004,
+            -8.030708333333314
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -8.001025754429366e-17,
+            1.1700000000000004,
+            -8.00737499999998
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 1.9000000357627869,
+          "position": [
+            -8.286776674230414e-17,
+            1.1700000000000004,
+            -7.984041666666647
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 2.699999988079071,
+          "position": [
+            -8.572527594031462e-17,
+            1.1700000000000004,
+            -7.9607083333333115
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 80,
+          "triangles": 373857
+        },
+        {
+          "renderCompleteMs": 2.199999988079071,
+          "position": [
+            -8.286776674230414e-17,
+            1.1700000000000004,
+            -7.984041666666647
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 1.5,
+          "position": [
+            -8.001025754429366e-17,
+            1.1700000000000004,
+            -8.00737499999998
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 2.400000035762787,
+          "position": [
+            -7.715274834628318e-17,
+            1.1700000000000004,
+            -8.030708333333314
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 2.099999964237213,
+          "position": [
+            -7.42952391482727e-17,
+            1.1700000000000004,
+            -8.054041666666649
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 82,
+          "triangles": 376237
+        },
+        {
+          "renderCompleteMs": 2.800000011920929,
+          "position": [
+            -7.143772995026222e-17,
+            1.1700000000000004,
+            -8.077374999999982
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 433029
+        },
+        {
+          "renderCompleteMs": 54.60000002384186,
+          "position": [
+            -6.858022075225174e-17,
+            1.1700000000000004,
+            -8.100708333333316
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 433029
+        },
+        {
+          "renderCompleteMs": 1.800000011920929,
+          "position": [
+            -6.572271155424127e-17,
+            1.1700000000000004,
+            -8.12404166666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 433029
+        },
+        {
+          "renderCompleteMs": 2.5,
+          "position": [
+            -6.286520235623079e-17,
+            1.1700000000000004,
+            -8.147374999999984
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 85,
+          "triangles": 433029
+        },
+        {
+          "renderCompleteMs": 3.300000011920929,
+          "position": [
+            -6.000769315822031e-17,
+            1.1700000000000004,
+            -8.170708333333318
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 472333
+        },
+        {
+          "renderCompleteMs": 2.900000035762787,
+          "position": [
+            -5.715018396020983e-17,
+            1.1700000000000004,
+            -8.194041666666653
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 472333
+        },
+        {
+          "renderCompleteMs": 6.399999976158142,
+          "position": [
+            -5.4292674762199337e-17,
+            1.1700000000000004,
+            -8.217374999999986
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 472333
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -5.143516556418885e-17,
+            1.1700000000000004,
+            -8.24070833333332
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 472333
+        },
+        {
+          "renderCompleteMs": 1.800000011920929,
+          "position": [
+            -4.857765636617836e-17,
+            1.1700000000000004,
+            -8.264041666666655
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 87,
+          "triangles": 472333
+        },
+        {
+          "renderCompleteMs": 1.899999976158142,
+          "position": [
+            -4.5720147168167865e-17,
+            1.1700000000000004,
+            -8.287374999999988
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 88,
+          "triangles": 474133
+        },
+        {
+          "renderCompleteMs": 2.5,
+          "position": [
+            -4.286263797015737e-17,
+            1.1700000000000004,
+            -8.310708333333322
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 88,
+          "triangles": 474133
+        },
+        {
+          "renderCompleteMs": 6.700000047683716,
+          "position": [
+            -4.000512877214688e-17,
+            1.1700000000000004,
+            -8.334041666666657
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 88,
+          "triangles": 474133
+        },
+        {
+          "renderCompleteMs": 2.800000011920929,
+          "position": [
+            -3.7147619574136387e-17,
+            1.1700000000000004,
+            -8.35737499999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 475217
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -3.4290110376125894e-17,
+            1.1700000000000004,
+            -8.380708333333324
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 475217
+        },
+        {
+          "renderCompleteMs": 2.399999976158142,
+          "position": [
+            -3.143260117811541e-17,
+            1.1700000000000004,
+            -8.404041666666659
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 475217
+        },
+        {
+          "renderCompleteMs": 6.800000011920929,
+          "position": [
+            -2.8575091980104915e-17,
+            1.1700000000000004,
+            -8.427374999999993
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2.400000035762787,
+          "position": [
+            -2.5717582782094422e-17,
+            1.1700000000000004,
+            -8.450708333333326
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -2.286007358408393e-17,
+            1.1700000000000004,
+            -8.474041666666661
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2.300000011920929,
+          "position": [
+            -2.0002564386073437e-17,
+            1.1700000000000004,
+            -8.497374999999995
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 90,
+          "triangles": 387947
+        },
+        {
+          "renderCompleteMs": 2.199999988079071,
+          "position": [
+            -1.7145055188062944e-17,
+            1.1700000000000004,
+            -8.520708333333328
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 91,
+          "triangles": 388043
+        },
+        {
+          "renderCompleteMs": 1.699999988079071,
+          "position": [
+            -1.4287545990052454e-17,
+            1.1700000000000004,
+            -8.544041666666663
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 91,
+          "triangles": 388043
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -1.1430036792041962e-17,
+            1.1700000000000004,
+            -8.567374999999997
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 92,
+          "triangles": 388415
+        },
+        {
+          "renderCompleteMs": 2,
+          "position": [
+            -8.572527594031469e-18,
+            1.1700000000000004,
+            -8.59070833333333
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 93,
+          "triangles": 388599
+        },
+        {
+          "renderCompleteMs": 1.699999988079071,
+          "position": [
+            -5.7150183960209785e-18,
+            1.1700000000000004,
+            -8.614041666666665
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 93,
+          "triangles": 388599
+        },
+        {
+          "renderCompleteMs": 1.800000011920929,
+          "position": [
+            -2.857509198010488e-18,
+            1.1700000000000004,
+            -8.637374999999999
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 94,
+          "triangles": 397129
+        },
+        {
+          "renderCompleteMs": 20.100000023841858,
+          "position": [
+            2.271583687037787e-33,
+            1.1700000000000004,
+            -8.660708333333332
+          ],
+          "quaternion": [
+            -2.2706009336356195e-18,
+            0.9993122362398842,
+            0.03708172732279218,
+            6.119022657299789e-17
+          ],
+          "canvas": [
+            600,
+            400
+          ],
+          "calls": 94,
+          "triangles": 397129
+        }
+      ],
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 88293,
+            "version": "bulkhead-vr-r01"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          2.311115933264683e-33
+        ],
+        "frames": 67,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        "canvas": [
+          600,
+          400
+        ],
+        "calls": 94,
+        "triangles": 397129,
+        "memory": {
+          "geometries": 173,
+          "textures": 136
+        },
+        "estimatedMemory": {
+          "geometryBytes": 62468600,
+          "textureBytes": 544563505,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 615420713,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 59,
+          "p50": 3299.899999999994,
+          "p95": 3716.5
+        },
+        "submissionMs": {
+          "samples": 62,
+          "p50": 2.300000011920929,
+          "p95": 14.100000023841858
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "errors": [],
+      "pass": true
+    },
+    "matchedCameraFrames": 60,
+    "adaptiveResolution": false,
+    "hardwareFPSCertified": false,
+    "notes": "Actual WebGL submissions and finish at 600×400, one browser at a time, shaders/resources prepared before measurement. Controlled 1/60 navigation step; SwiftShader results do not certify desktop/mobile hardware FPS."
+  },
+  "authoringRebuild": {
+    "geometryEqual": true,
+    "uvCornerHashEqual": true,
+    "trianglesEqual": true,
+    "materialMapsEqual": true,
+    "sceneIncludesVRPhotos": false
+  },
+  "quantization": {
+    "sourceVertices": 134334,
+    "runtimeVertices": 134334,
+    "method": "Bidirectional nearest-vertex distances in physical world coordinates, after decoding meshopt and the quantized node transforms. Source and runtime triangle counts are separately checked.",
+    "maximumPositionErrorMetres": 0.00009825309810028725,
+    "lightmapUVMaximumErrorBoundPixels": 0.022097424092012655,
+    "lightmapUVBits": 16,
+    "normalBits": 16,
+    "positionBits": 16,
+    "physicalMaterialUV0Unchanged": true,
+    "passed": true
+  },
+  "noQueryRegression": {
+    "baselineCommit": "11c4a9c5cad707aecf73a32790ae7fdce338116e",
+    "camera": [
+      9.15,
+      0,
+      3.18
+    ],
+    "viewport": [
+      1200,
+      800
+    ],
+    "candidateQueryPresent": false,
+    "baselineSHA256": "d9efd06a79e8cfd2e84b4f3c27710c99798e275ecd30409eb3434cbd662c671a",
+    "newCodeSHA256": "d9efd06a79e8cfd2e84b4f3c27710c99798e275ecd30409eb3434cbd662c671a",
+    "differentPixels": 0,
+    "maximumChannelDifference": 0,
+    "scope": "Before room partition, new controller/shader plumbing preserves the default front view exactly; fallback partition equivalence checked separately."
+  },
+  "cachedExitAndPlaybackProof": {
+    "base": "http://127.0.0.1:5251/",
+    "checks": {
+      "candidatePubliclyLoaded": true,
+      "cutPlaybackScrubAndSideControls": true,
+      "cachedExitReleasesBulkhead": true,
+      "cachedReturnReloadsAtomically": true
+    },
+    "errors": [],
+    "renderer": "SwiftShader correctness only",
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 88293,
+          "version": "bulkhead-vr-r01"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 3.75,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        8.62,
+        0
+      ],
+      "frames": 19,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          480,
+          320
+        ]
+      },
+      "canvas": [
+        480,
+        320
+      ],
+      "calls": 100,
+      "triangles": 398748,
+      "memory": {
+        "geometries": 188,
+        "textures": 157
+      },
+      "estimatedMemory": {
+        "geometryBytes": 109739458,
+        "textureBytes": 680899025,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 815804307,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 3.299999952316284,
+        "p95": 3.299999952316284
+      },
+      "shadowUpdates": 47,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  }
+}

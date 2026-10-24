@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "build": "machinery-r11",
+  "version": 5,
+  "build": "bulkhead-vr-r01-candidate",
   "scope": [
     "saloon",
     "cockpit",
@@ -10,33 +10,30 @@
     "bow",
     "machinery"
   ],
-  "roomAuthoringRevision": {
-    "existing": 9,
-    "machinery": 11
-  },
-  "contextAuthoringRevision": 10,
-  "assetManifestSHA256": "bb5936a05fcf88137fb957e19fd783e79e565cea942fe244d61b711752d1dc6e",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01",
+  "defaultBulkheadChanged": false,
+  "strictVisualAcceptance": false,
+  "assetManifestSHA256": "7c47977587af7e9f23f67b5fb3e04729c2d6f679770f187c701156d3ab5618e3",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
   },
-  "existingRoomAndContextAssets": {
-    "filesVerified": 50,
-    "allSHA256Unchanged": true,
-    "baselineCommit": "0bd696df5c642b60b4c90db8eddc24960d3ab88c"
+  "originalEngineAssetsUnchanged": true,
+  "existingRoomAssets": {
+    "verified": 50,
+    "allUnchanged": true
   },
   "existingDownloads": {
-    "filesVerified": 4,
-    "allSHA256Unchanged": true
+    "verified": 5,
+    "saloonMovedByteIdenticalToReleases": true
   },
   "functionalBrowserChecks": true,
-  "gpuDeformationChecks": true,
-  "vrReference": {
-    "scene": "scene_engine_room",
-    "cubeFaces": 6,
-    "usableCaptures": 24,
-    "observations": 32
-  },
   "renderer": "Three.js 0.180.0 / WebGL2",
-  "visualStatus": "Original machinery equipment imported with baked ambient and local probes. VR-led finish/light supplements have estimated placement; remaining geometry differences documented. Native mechanics remain nominal."
+  "pagesArtifact": {
+    "bytes": 998062080,
+    "limit": 1073741824,
+    "minimumHeadroomBytes": 33554432,
+    "headroomBytes": 75679744
+  },
+  "visualStatus": "Opt-in bulkhead candidate reviewed on native 16/8 pixel cells; remaining geometric/material/context differences are explicitly retained in validation. No claim of complete cell or 95% edge acceptance."
 }

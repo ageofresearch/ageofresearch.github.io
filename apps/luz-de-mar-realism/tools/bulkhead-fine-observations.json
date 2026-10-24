@@ -1,0 +1,267 @@
+{
+  "version": "bulkhead-fine-16-8-r01",
+  "sourceFace": "f",
+  "sourceResolution": [
+    2048,
+    2048
+  ],
+  "baseTilePixels": 16,
+  "detailTilePixels": 8,
+  "sourceRegions": [
+    [
+      0,
+      798,
+      2048,
+      1065
+    ],
+    [
+      865,
+      1056,
+      1195,
+      1424
+    ]
+  ],
+  "features": [
+    {
+      "id": "eco",
+      "rect": [
+        132,
+        898,
+        273,
+        979
+      ],
+      "detail": true,
+      "observed": "Carcasa, cuatro fijaciones de esquina, etiqueta de doble marco y lazo de cables inferior.",
+      "material": "pintura, etiqueta, metal y PVC"
+    },
+    {
+      "id": "port-operating",
+      "rect": [
+        286,
+        896,
+        409,
+        1028
+      ],
+      "detail": true,
+      "observed": "Tres pilotos coloreados con placas independientes, pulsador de emergencia rojo sobre base amarilla y entradas inferiores; no confundir placas con pilotos adicionales.",
+      "material": "pintura, plástico, lentes y metal"
+    },
+    {
+      "id": "epu",
+      "rect": [
+        418,
+        895,
+        671,
+        1051
+      ],
+      "detail": false,
+      "observed": "Frente del EPU entre X-píxel450 y651, etiqueta en513..595; la región amplia incluye retorno lateral y rejillas del equipo vecino.",
+      "material": "pintura satinada y etiqueta"
+    },
+    {
+      "id": "epu-vents",
+      "rect": [
+        648,
+        908,
+        674,
+        1009
+      ],
+      "detail": true,
+      "observed": "Lamas oscuras dentro de un rebaje; mantener profundidad y continuidad vertical.",
+      "material": "pintura y sombra interior"
+    },
+    {
+      "id": "epu-label",
+      "rect": [
+        511,
+        980,
+        601,
+        1033
+      ],
+      "detail": true,
+      "observed": "Borde y palabra EPU legibles; texto pequeño restante no identificado.",
+      "material": "etiqueta mate"
+    },
+    {
+      "id": "port-local",
+      "rect": [
+        705,
+        899,
+        841,
+        1006
+      ],
+      "detail": true,
+      "observed": "Caja, cuatro fijaciones visibles, columna de indicadores y siete curvas de cable inferiores modeladas como grupo estimado.",
+      "material": "pintura, plástico, PVC"
+    },
+    {
+      "id": "starboard-local",
+      "rect": [
+        1180,
+        899,
+        1308,
+        1007
+      ],
+      "detail": true,
+      "observed": "Caja y columna de indicadores, reborde y haces de cable con entrada propia.",
+      "material": "pintura, plástico, PVC"
+    },
+    {
+      "id": "junction",
+      "rect": [
+        1420,
+        894,
+        1487,
+        944
+      ],
+      "detail": true,
+      "observed": "Caja pequeña sobre el cuadro derecho con tapa, fijaciones y conductor de unión.",
+      "material": "pintura y conductor"
+    },
+    {
+      "id": "starboard-operating",
+      "rect": [
+        1550,
+        902,
+        1686,
+        1056
+      ],
+      "detail": true,
+      "observed": "Pantalla con bisel, dos pilotos, placas inferiores y tres mandos diferenciados; no inventar cifras del display.",
+      "material": "pintura, vidrio oscuro, lentes y plástico"
+    },
+    {
+      "id": "scu",
+      "rect": [
+        1697,
+        894,
+        2018,
+        1031
+      ],
+      "detail": false,
+      "observed": "Retorno lateral izquierdo1697..1748, frente1748..1972 con junta de puerta1877, placasSCU/MTU centradas~1818, cierre1766 y lazo que se curva a la izquierda.",
+      "material": "pintura, placas y metal"
+    },
+    {
+      "id": "scu-lock",
+      "rect": [
+        1730,
+        963,
+        1811,
+        1031
+      ],
+      "detail": true,
+      "observed": "Herraje y lazo fino adyacente; no confundir el reflejo con otra pieza.",
+      "material": "metal, plástico y PVC"
+    },
+    {
+      "id": "tray",
+      "rect": [
+        0,
+        813,
+        2048,
+        898
+      ],
+      "detail": true,
+      "observed": "Bandeja perforada y varias líneas de cable; identificar soportes y cruces sin inventar el número de conductores ocultos.",
+      "material": "metal pintado y PVC"
+    },
+    {
+      "id": "upper-valves",
+      "rect": [
+        906,
+        901,
+        1100,
+        1020
+      ],
+      "detail": true,
+      "observed": "Tres grupos superiores con cuerpo blanco, bridas partidas, tornillería y palancas negras; fila intermedia con soportes propios.",
+      "material": "pintura, metal y plástico"
+    },
+    {
+      "id": "right-brass",
+      "rect": [
+        1094,
+        944,
+        1155,
+        1100
+      ],
+      "detail": true,
+      "observed": "Cuerpo vertical amarillo metálico, tres rebordes, uniones atornilladas, codo y palanca roja lateral.",
+      "material": "metal amarillo, inoxidable y pintura roja"
+    },
+    {
+      "id": "bellows",
+      "rect": [
+        953,
+        1025,
+        1105,
+        1092
+      ],
+      "detail": true,
+      "observed": "Uniones cilíndricas, fuelle de varias crestas, abrazaderas y dos lazos de unión inferiores.",
+      "material": "inoxidable, metal amarillo y conductor"
+    },
+    {
+      "id": "motor",
+      "rect": [
+        985,
+        1074,
+        1128,
+        1158
+      ],
+      "detail": true,
+      "observed": "Motor gris con aletas, placa oscura, caja superior, cuerpo blanco próximo y pies sobre repisa.",
+      "material": "fundición pintada, metal y placa"
+    },
+    {
+      "id": "manual-cover",
+      "rect": [
+        973,
+        1171,
+        1081,
+        1271
+      ],
+      "detail": true,
+      "observed": "Tapa circular escalonada, tornillos visibles y palanca diagonal con empuñadura amarilla.",
+      "material": "pintura, metal y empuñadura"
+    },
+    {
+      "id": "lower-lines",
+      "rect": [
+        897,
+        1147,
+        1152,
+        1424
+      ],
+      "detail": true,
+      "observed": "Tres tubos descendentes, uniones, soportes, caja inferior y curvas de cables; parte baja oculta por el contexto.",
+      "material": "pintura, metal y PVC"
+    },
+    {
+      "id": "port-drops",
+      "rect": [
+        706,
+        991,
+        881,
+        1105
+      ],
+      "detail": true,
+      "observed": "Entradas de cables y radios de curvatura bajo el cuadro izquierdo.",
+      "material": "PVC y prensaestopas"
+    },
+    {
+      "id": "starboard-drops",
+      "rect": [
+        1146,
+        990,
+        1327,
+        1105
+      ],
+      "detail": true,
+      "observed": "Entradas de cables y curvas bajo el cuadro derecho.",
+      "material": "PVC y prensaestopas"
+    }
+  ],
+  "policy": "Compare every native-resolution 16/8 cell. Inventory, diagnostics, manual review and acceptance are distinct. No automatic acceptance; preserve omissions, uncertain details, occlusions and material differences."
+}

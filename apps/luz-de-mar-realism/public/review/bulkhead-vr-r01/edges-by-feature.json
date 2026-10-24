@@ -1,0 +1,207 @@
+{
+  "nativeSize": 2048,
+  "method": "Bidirectional distance from photographic luminance edge guides (Gaussian sigma .7 / Sobel threshold .12) to actual model component-ID boundaries. Unclassified guides include material/shadow/text edges and retained context; these are diagnostics, not certified clear-edge acceptance.",
+  "features": [
+    {
+      "id": "eco",
+      "referenceGuidePixels": 3285,
+      "modelGuidePixels": 651,
+      "referenceToModelWithin6Pixels": 0.5226788432267885,
+      "modelToReferenceWithin6Pixels": 0.9339477726574501,
+      "referenceToModelP95Pixels": 48,
+      "modelToReferenceP95Pixels": 7,
+      "accepted": false
+    },
+    {
+      "id": "port-operating",
+      "referenceGuidePixels": 3191,
+      "modelGuidePixels": 1431,
+      "referenceToModelWithin6Pixels": 0.9576935130053275,
+      "modelToReferenceWithin6Pixels": 0.9433962264150944,
+      "referenceToModelP95Pixels": 6,
+      "modelToReferenceP95Pixels": 6.555664084966109,
+      "accepted": false
+    },
+    {
+      "id": "epu",
+      "referenceGuidePixels": 8299,
+      "modelGuidePixels": 3153,
+      "referenceToModelWithin6Pixels": 0.9049283046150138,
+      "modelToReferenceWithin6Pixels": 1,
+      "referenceToModelP95Pixels": 8,
+      "modelToReferenceP95Pixels": 3,
+      "accepted": false
+    },
+    {
+      "id": "epu-vents",
+      "referenceGuidePixels": 1344,
+      "modelGuidePixels": 629,
+      "referenceToModelWithin6Pixels": 0.8742559523809523,
+      "modelToReferenceWithin6Pixels": 1,
+      "referenceToModelP95Pixels": 11,
+      "modelToReferenceP95Pixels": 3.0973665961010313,
+      "accepted": false
+    },
+    {
+      "id": "epu-label",
+      "referenceGuidePixels": 1893,
+      "modelGuidePixels": 403,
+      "referenceToModelWithin6Pixels": 0.8922345483359746,
+      "modelToReferenceWithin6Pixels": 1,
+      "referenceToModelP95Pixels": 7.414375175913828,
+      "modelToReferenceP95Pixels": 2,
+      "accepted": false
+    },
+    {
+      "id": "port-local",
+      "referenceGuidePixels": 3785,
+      "modelGuidePixels": 1600,
+      "referenceToModelWithin6Pixels": 0.9712021136063408,
+      "modelToReferenceWithin6Pixels": 0.963125,
+      "referenceToModelP95Pixels": 5,
+      "modelToReferenceP95Pixels": 5,
+      "accepted": false
+    },
+    {
+      "id": "starboard-local",
+      "referenceGuidePixels": 3424,
+      "modelGuidePixels": 1479,
+      "referenceToModelWithin6Pixels": 0.9707943925233645,
+      "modelToReferenceWithin6Pixels": 0.9432048681541582,
+      "referenceToModelP95Pixels": 6,
+      "modelToReferenceP95Pixels": 6.433632206939473,
+      "accepted": false
+    },
+    {
+      "id": "junction",
+      "referenceGuidePixels": 965,
+      "modelGuidePixels": 362,
+      "referenceToModelWithin6Pixels": 1,
+      "modelToReferenceWithin6Pixels": 1,
+      "referenceToModelP95Pixels": 3,
+      "modelToReferenceP95Pixels": 2.23606797749979,
+      "accepted": false
+    },
+    {
+      "id": "starboard-operating",
+      "referenceGuidePixels": 7614,
+      "modelGuidePixels": 2480,
+      "referenceToModelWithin6Pixels": 0.8756238508011558,
+      "modelToReferenceWithin6Pixels": 0.9733870967741935,
+      "referenceToModelP95Pixels": 10.04987562112089,
+      "modelToReferenceP95Pixels": 4.47213595499958,
+      "accepted": false
+    },
+    {
+      "id": "scu",
+      "referenceGuidePixels": 7853,
+      "modelGuidePixels": 1378,
+      "referenceToModelWithin6Pixels": 0.6663695403030689,
+      "modelToReferenceWithin6Pixels": 0.9782293178519593,
+      "referenceToModelP95Pixels": 113.29871853388988,
+      "modelToReferenceP95Pixels": 4,
+      "accepted": false
+    },
+    {
+      "id": "scu-lock",
+      "referenceGuidePixels": 1913,
+      "modelGuidePixels": 526,
+      "referenceToModelWithin6Pixels": 0.9932043910088866,
+      "modelToReferenceWithin6Pixels": 1,
+      "referenceToModelP95Pixels": 5,
+      "modelToReferenceP95Pixels": 2,
+      "accepted": false
+    },
+    {
+      "id": "tray",
+      "referenceGuidePixels": 119517,
+      "modelGuidePixels": 27783,
+      "referenceToModelWithin6Pixels": 0.7973844725018199,
+      "modelToReferenceWithin6Pixels": 1,
+      "referenceToModelP95Pixels": 118.16344407634966,
+      "modelToReferenceP95Pixels": 1,
+      "accepted": false
+    },
+    {
+      "id": "upper-valves",
+      "referenceGuidePixels": 14541,
+      "modelGuidePixels": 2766,
+      "referenceToModelWithin6Pixels": 0.8123925452169727,
+      "modelToReferenceWithin6Pixels": 0.9793926247288504,
+      "referenceToModelP95Pixels": 13.45362404707371,
+      "modelToReferenceP95Pixels": 4,
+      "accepted": false
+    },
+    {
+      "id": "right-brass",
+      "referenceGuidePixels": 6792,
+      "modelGuidePixels": 1621,
+      "referenceToModelWithin6Pixels": 0.8362779740871613,
+      "modelToReferenceWithin6Pixels": 0.9925971622455274,
+      "referenceToModelP95Pixels": 10.44030650891055,
+      "modelToReferenceP95Pixels": 2.23606797749979,
+      "accepted": false
+    },
+    {
+      "id": "bellows",
+      "referenceGuidePixels": 7068,
+      "modelGuidePixels": 1974,
+      "referenceToModelWithin6Pixels": 0.9112903225806451,
+      "modelToReferenceWithin6Pixels": 0.9954407294832827,
+      "referenceToModelP95Pixels": 7,
+      "modelToReferenceP95Pixels": 2.8284271247461903,
+      "accepted": false
+    },
+    {
+      "id": "motor",
+      "referenceGuidePixels": 7147,
+      "modelGuidePixels": 2331,
+      "referenceToModelWithin6Pixels": 0.8854064642507345,
+      "modelToReferenceWithin6Pixels": 0.9995709995709996,
+      "referenceToModelP95Pixels": 9,
+      "modelToReferenceP95Pixels": 3,
+      "accepted": false
+    },
+    {
+      "id": "manual-cover",
+      "referenceGuidePixels": 5598,
+      "modelGuidePixels": 1447,
+      "referenceToModelWithin6Pixels": 0.8051089674883887,
+      "modelToReferenceWithin6Pixels": 0.995162404975812,
+      "referenceToModelP95Pixels": 14,
+      "modelToReferenceP95Pixels": 3,
+      "accepted": false
+    },
+    {
+      "id": "lower-lines",
+      "referenceGuidePixels": 29068,
+      "modelGuidePixels": 5287,
+      "referenceToModelWithin6Pixels": 0.6359914682812715,
+      "modelToReferenceWithin6Pixels": 0.9173444297333081,
+      "referenceToModelP95Pixels": 22,
+      "modelToReferenceP95Pixels": 8,
+      "accepted": false
+    },
+    {
+      "id": "port-drops",
+      "referenceGuidePixels": 13763,
+      "modelGuidePixels": 2768,
+      "referenceToModelWithin6Pixels": 0.690183826200683,
+      "modelToReferenceWithin6Pixels": 0.993135838150289,
+      "referenceToModelP95Pixels": 23.336652223794324,
+      "modelToReferenceP95Pixels": 1.4142135623730951,
+      "accepted": false
+    },
+    {
+      "id": "starboard-drops",
+      "referenceGuidePixels": 13458,
+      "modelGuidePixels": 3283,
+      "referenceToModelWithin6Pixels": 0.7674988854213107,
+      "modelToReferenceWithin6Pixels": 0.9926896131586963,
+      "referenceToModelP95Pixels": 19,
+      "modelToReferenceP95Pixels": 2,
+      "accepted": false
+    }
+  ],
+  "certified95PercentClearEdges": false
+}

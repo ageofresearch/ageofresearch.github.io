@@ -1,0 +1,146 @@
+{
+  "stage": "Native neutral revision 4; finish-pass corrections reviewed",
+  "gridPixels": 16,
+  "detailGridPixels": 8,
+  "cubeSize": 2048,
+  "camera": [
+    9.15,
+    0,
+    3.18
+  ],
+  "neutralMasterSHA256": "ddf1167e85d85359b003f6f6a4f11d28d5099ac3bc7427544138371dbf388540",
+  "neutralGeometrySHA256": "965c5236fa2c8cccd4ca60407347ff6186485e0ef85f513c2a420a091e552cb4",
+  "nativeCaptureSHA256": "2c86bbdafa676dff20e11b27c072893f9ffd722144bf0d5fdc82098b0296be87",
+  "comparedFeatures": 20,
+  "inventoriedCells": 9157,
+  "advanceToFinish": true,
+  "strictVisualAcceptance": false,
+  "reviewScope": "Twenty feature regions compared against private native VR after correcting enclosures, controls, lateral motor axis, oval cover and cable routing. Full native view reviewed for continuity. Advancement approves material evaluation, not pixel-exact completion.",
+  "corrections": [
+    "EPU and SCU front/side separation",
+    "Three port pilots and perspective-correct stop",
+    "Seven local indicators and quarter-turn latches",
+    "Cabinet side ventilation",
+    "Transverse electric motor with visible cooling fins",
+    "Formed white volute and oval lower mounting body",
+    "Cable drops fan toward the central vertical harness",
+    "Stepped brass body, flange fasteners and pipe unions",
+    "Broadened white motor end cap and separated its ribbed casing",
+    "Recessed bellows core with distinct metal convolutions",
+    "Rounded lower bronze casting profile",
+    "Olive LCD inset, selector arcs and port pilot caption plates"
+  ],
+  "remaining": [
+    "Original engine context occludes parts of ECO/SCU and is retained by scope.",
+    "Full 4px/6px criteria not met or certified; old adjusted landmarks no longer independent.",
+    "Gray neutral pass does not establish materials, labels or reflections acceptance.",
+    "Bellows and narrow cable/valve details require material-pass comparison; no automatic per-cell approval.",
+    "Neutral-pass denoising suppresses narrow bellows highlights; retain raw pass and verify actual runtime geometry/material response."
+  ],
+  "featureNotes": {
+    "stage": "neutral fine review, revision2",
+    "features": {
+      "eco": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Carcasa conservada. Marco de placa ajustado a151..232/922..956. La parte izquierda queda ocluida por un soporte del motor conservado; no ocultarlo para simular coincidencia."
+      },
+      "port-operating": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Corregida cantidad a tres pilotos; posiciones corroboradas por componentes de color. Base y capuchón de emergencia separados físicamente para reproducir su desplazamiento proyectado."
+      },
+      "epu": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Corregida descomposición frontal/retorno: frente450..651, profundidad.35m; regiones anteriores incluían el lateral ventilado del cuadro vecino."
+      },
+      "epu-vents": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Rejilla sobre plano lateral real, con marco, fondo oscuro y12lamas; normales orientadas hacia la cámara."
+      },
+      "epu-label": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Placa desplazada desde495..579 a513..595; palabra EPU y escala tipográfica se corregirán en acabado."
+      },
+      "port-local": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Añadidos cierre superior, placas de icono y siete contornos de indicadores. Altura de tira ampliada a930..990 con paso8px."
+      },
+      "starboard-local": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Mismas familias visibles y revisión independiente del cableado; dos últimos indicadores con lectura roja cuando se apliquen materiales."
+      },
+      "junction": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Volumen y fijaciones presentes. Revisar respuesta material y encuentros al comparar acabado."
+      },
+      "starboard-operating": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Añadidos biseles, huecos redondos, placas de mandos y formas diferenciadas. Display sigue siendo patrón ilustrativo sin cifras inventadas."
+      },
+      "scu": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Frente subdividido y retorno derivado de profundidad; placas recolocadas al eje1818. Se mantiene oclusión parcial del motor como limitación de contexto."
+      },
+      "scu-lock": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Eliminada lectura de dos cierres; un cierre1766 y dos recorridos de cable curvados a la izquierda con conectores."
+      },
+      "tray": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Profundidad restringida por techo existente3.79m; bandeja y haces bajo techo con brazos de suspensión al mamparo. Profundidad inferida y documentada."
+      },
+      "upper-valves": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Añadidos cuerpos, juntas, prensaestopas y espárragos; las palancas negras requieren comparación posterior con material."
+      },
+      "right-brass": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Añadidos escalones de carcasa y boss frontal; comprobar silueta y color frente a referencia."
+      },
+      "bellows": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Aros geométricos presentes; comparación raw/denoised necesaria para distinguir filtrado y falta de relieve."
+      },
+      "motor": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Corregido eje del cilindro de X aY para que no tape las aletas; tapa blanca lateral y carcasa blanca de bomba trazada como volumen escalonado."
+      },
+      "manual-cover": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Añadidos cuerpo posterior ovalado, orificios, nervadura concéntrica y buje; alineación desplazada tras revisión fina. Esa comprobación inicial deja de ser independiente."
+      },
+      "lower-lines": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Añadidos uniones, manetas amarillas y soportes; tuberías del contexto conservado siguen visibles y difieren de la VR."
+      },
+      "port-drops": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Rehechas salidas distribuidas en toda la caja y curvadas a la derecha hacia el haz vertical; se elimina el retorno superior ficticio."
+      },
+      "starboard-drops": {
+        "reviewed": true,
+        "accepted": false,
+        "note": "Rehechas salidas curvadas a la izquierda hacia el haz vertical y radios distintos por cable."
+      }
+    },
+    "exactVisualAcceptance": false
+  }
+}

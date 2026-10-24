@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-saloon-preserved-r7",
+  "archives": [
+    {
+      "name": "saloon-authoring.zip",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-saloon-preserved-r7/saloon-authoring.zip",
+      "sha256": "b4779dbb20e41db3cfb229c1bf4ff40aab78184388559fb493cd9179705892ae",
+      "bytes": 91865256,
+      "downloadVerified": true
+    },
+    {
+      "name": "saloon-raw-bakes.zip",
+      "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-saloon-preserved-r7/saloon-raw-bakes.zip",
+      "sha256": "da205bb7503be7cf907999420b489faf14d08a9429b22f3a2a851f995dac9153",
+      "bytes": 14661906,
+      "downloadVerified": true
+    }
+  ],
+  "note": "Original ZIP bytes preserved; removed from Pages only after successful release download and SHA-256 verification."
+}

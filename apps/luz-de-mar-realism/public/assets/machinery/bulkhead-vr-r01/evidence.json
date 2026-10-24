@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "id": "bulkhead-vr-r01",
+  "strategy": "LDM-VR-EST-001 v1.0",
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "panoramaStations": 1,
+  "camera": {
+    "sourcePosition": [
+      9.15,
+      0,
+      3.18
+    ],
+    "estimated": true,
+    "fixedForAllViews": true
+  },
+  "poses": [
+    {
+      "id": "front",
+      "h": 0,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "port-oblique",
+      "h": -30,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "starboard-oblique",
+      "h": 30,
+      "v": 0,
+      "hfov": 90,
+      "vfov": 67.38013505195957
+    },
+    {
+      "id": "port-panels",
+      "h": -25,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    },
+    {
+      "id": "starboard-panels",
+      "h": 25,
+      "v": 0,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    },
+    {
+      "id": "central",
+      "h": 0,
+      "v": 15,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    },
+    {
+      "id": "cables",
+      "h": 0,
+      "v": -10,
+      "hfov": 70,
+      "vfov": 50.04680567847782
+    },
+    {
+      "id": "lower",
+      "h": 0,
+      "v": 30,
+      "hfov": 45,
+      "vfov": 30.874169669053064
+    }
+  ],
+  "boxes": [
+    {
+      "id": "eco",
+      "rect": [
+        132,
+        898,
+        273,
+        979
+      ],
+      "legibleLabel": "ECO / R"
+    },
+    {
+      "id": "port-operating",
+      "rect": [
+        286,
+        896,
+        409,
+        1028
+      ],
+      "legibleLabel": null
+    },
+    {
+      "id": "epu",
+      "rect": [
+        418,
+        895,
+        671,
+        1051
+      ],
+      "legibleLabel": "EPU"
+    },
+    {
+      "id": "port-local",
+      "rect": [
+        705,
+        899,
+        841,
+        1006
+      ],
+      "legibleLabel": null
+    },
+    {
+      "id": "starboard-local",
+      "rect": [
+        1180,
+        899,
+        1308,
+        1007
+      ],
+      "legibleLabel": null
+    },
+    {
+      "id": "junction",
+      "rect": [
+        1420,
+        894,
+        1487,
+        944
+      ],
+      "legibleLabel": null
+    },
+    {
+      "id": "starboard-operating",
+      "rect": [
+        1550,
+        902,
+        1686,
+        1056
+      ],
+      "legibleLabel": null
+    },
+    {
+      "id": "scu",
+      "rect": [
+        1697,
+        894,
+        2018,
+        1031
+      ],
+      "legibleLabel": "SCU"
+    }
+  ],
+  "groups": [
+    {
+      "id": "wall",
+      "title": "Paneles, juntas y encuentros",
+      "referenceRects": [
+        [
+          0,
+          875,
+          2048,
+          1060
+        ],
+        [
+          870,
+          1058,
+          1167,
+          1418
+        ]
+      ],
+      "classification": "observed visible form; inferred depth and hidden connections"
+    },
+    {
+      "id": "panels",
+      "title": "Ocho cajas y armarios principales visibles",
+      "referenceRects": [
+        [
+          132,
+          898,
+          273,
+          979
+        ],
+        [
+          286,
+          896,
+          409,
+          1028
+        ],
+        [
+          418,
+          895,
+          671,
+          1051
+        ],
+        [
+          705,
+          899,
+          841,
+          1006
+        ],
+        [
+          1180,
+          899,
+          1308,
+          1007
+        ],
+        [
+          1420,
+          894,
+          1487,
+          944
+        ],
+        [
+          1550,
+          902,
+          1686,
+          1056
+        ],
+        [
+          1697,
+          894,
+          2018,
+          1031
+        ]
+      ],
+      "classification": "observed visible form; inferred depth and hidden connections"
+    },
+    {
+      "id": "central",
+      "title": "Conjunto de tubos, equipo motorizado y soporte central",
+      "referenceRects": [
+        [
+          882,
+          890,
+          1152,
+          1410
+        ]
+      ],
+      "classification": "observed visible form; inferred depth and hidden connections"
+    },
+    {
+      "id": "cables",
+      "title": "Bandeja superior y haces de cable",
+      "referenceRects": [
+        [
+          0,
+          798,
+          2048,
+          901
+        ],
+        [
+          699,
+          990,
+          872,
+          1100
+        ],
+        [
+          1148,
+          990,
+          1325,
+          1100
+        ],
+        [
+          1139,
+          1060,
+          1190,
+          1380
+        ]
+      ],
+      "classification": "observed visible form; inferred depth and hidden connections"
+    },
+    {
+      "id": "fasteners",
+      "title": "Fijaciones y entradas visibles",
+      "referenceRects": [
+        [
+          0,
+          875,
+          2048,
+          1060
+        ],
+        [
+          882,
+          890,
+          1152,
+          1410
+        ]
+      ],
+      "classification": "observed visible form; inferred depth and hidden connections"
+    }
+  ],
+  "heldOut": [
+    {
+      "id": "eco-left",
+      "face": "f",
+      "pixel": [
+        132,
+        940
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "eco-bottom",
+      "face": "f",
+      "pixel": [
+        212,
+        979
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "operating-port-right",
+      "face": "f",
+      "pixel": [
+        409,
+        963
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "epu-left",
+      "face": "f",
+      "pixel": [
+        418,
+        972
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "epu-bottom",
+      "face": "f",
+      "pixel": [
+        555,
+        1051
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "port-local-right",
+      "face": "f",
+      "pixel": [
+        841,
+        955
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "starboard-local-left",
+      "face": "f",
+      "pixel": [
+        1180,
+        954
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "junction-right",
+      "face": "f",
+      "pixel": [
+        1487,
+        920
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "operating-starboard-left",
+      "face": "f",
+      "pixel": [
+        1550,
+        980
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "scu-bottom",
+      "face": "f",
+      "pixel": [
+        1836,
+        1031
+      ],
+      "group": "panels",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "central-upper-white",
+      "face": "f",
+      "pixel": [
+        1019,
+        910
+      ],
+      "group": "central",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "central-brass-outer",
+      "face": "f",
+      "pixel": [
+        1137,
+        1009
+      ],
+      "group": "central",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "motor-fan-center",
+      "face": "f",
+      "pixel": [
+        1031,
+        1115
+      ],
+      "group": "central",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "manual-cover-center",
+      "face": "f",
+      "pixel": [
+        1028,
+        1215
+      ],
+      "group": "central",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "tray-line",
+      "face": "f",
+      "pixel": [
+        1380,
+        826
+      ],
+      "group": "cables",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    },
+    {
+      "id": "cable-drop",
+      "face": "f",
+      "pixel": [
+        1162,
+        1240
+      ],
+      "group": "cables",
+      "confidence": "medium",
+      "usedForFineAdjustment": false
+    }
+  ],
+  "sources": [
+    {
+      "face": "f",
+      "sha256": "be5c7583661b1ee242e8ec1214994f90885192328b9bf97dd1adf9ca145d9e6c",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_f.jpg?v=p29279716"
+    },
+    {
+      "face": "l",
+      "sha256": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_l.jpg?v=p29279716"
+    },
+    {
+      "face": "r",
+      "sha256": "cce4144b4698f514a5457f91724f99871460fe799cae877bd675d0d1af043a4a",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_r.jpg?v=p29279716"
+    },
+    {
+      "face": "b",
+      "sha256": "574b87df722335ae39d16886e27d7756968f65767fb807560e37093aad1dde70",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_b.jpg?v=p29279716"
+    },
+    {
+      "face": "u",
+      "sha256": "9e2826689e0c7507e449ee8610a807990239bc2301f5194565ce2bf51edc53f7",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_u.jpg?v=p29279716"
+    },
+    {
+      "face": "d",
+      "sha256": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_d.jpg?v=p29279716"
+    }
+  ],
+  "limits": [
+    "A single photographic station; metric depth and hidden equipment inferred.",
+    "No real circuit function, serial number, capacity or hidden routing asserted.",
+    "Reference photographs are private and never used as material textures.",
+    "Held-out annotations are manual and include uncertainty; report all results, not only favourable subsets."
+  ]
+}

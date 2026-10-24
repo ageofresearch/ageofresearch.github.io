@@ -2,111 +2,39 @@
   "method": "Bidirectional source luminance guides vs actual component-ID boundaries; diagnostics only",
   "features": [
     {
-      "id": "distribution-upper",
+      "id": "lower-b",
       "face": "b",
-      "referenceToModelWithin6Pixels": 0.6091692613149227,
-      "modelToReferenceWithin6Pixels": 0.8827556696619597,
-      "referenceToModelP95Pixels": 57.0,
-      "modelToReferenceP95Pixels": 9.0,
+      "referenceToModelWithin6Pixels": 0.6775359761201255,
+      "modelToReferenceWithin6Pixels": 0.7917209253083479,
+      "referenceToModelP95Pixels": 28.635642126552707,
+      "modelToReferenceP95Pixels": 25.317977802344327,
       "certifiedClearEdges": false
     },
     {
-      "id": "distribution-lower",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.7557790496229252,
-      "modelToReferenceWithin6Pixels": 0.7842023313554686,
-      "referenceToModelP95Pixels": 76.0,
-      "modelToReferenceP95Pixels": 26.0,
+      "id": "lower-d",
+      "face": "d",
+      "referenceToModelWithin6Pixels": 0.756358519420303,
+      "modelToReferenceWithin6Pixels": 0.9678852859924822,
+      "referenceToModelP95Pixels": 123.76186811776881,
+      "modelToReferenceP95Pixels": 3.0,
       "certifiedClearEdges": false
     },
     {
-      "id": "shore",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.6909511681125319,
-      "modelToReferenceWithin6Pixels": 0.8893608896950026,
-      "referenceToModelP95Pixels": 24.0,
-      "modelToReferenceP95Pixels": 11.0,
+      "id": "lower-l",
+      "face": "l",
+      "referenceToModelWithin6Pixels": 0.6429248490593253,
+      "modelToReferenceWithin6Pixels": 0.9706153551731936,
+      "referenceToModelP95Pixels": 74.95331880577403,
+      "modelToReferenceP95Pixels": 4.0,
       "certifiedClearEdges": false
     },
     {
-      "id": "vented",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.6722179358799678,
-      "modelToReferenceWithin6Pixels": 0.8272456997239329,
-      "referenceToModelP95Pixels": 15.231546211727817,
-      "modelToReferenceP95Pixels": 22.0,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "battery",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.5678437495643446,
-      "modelToReferenceWithin6Pixels": 0.8399234224283926,
-      "referenceToModelP95Pixels": 31.32091952673165,
-      "modelToReferenceP95Pixels": 16.55294535724685,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "battery-enclosure",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.5687395268985227,
-      "modelToReferenceWithin6Pixels": 0.7402381069031405,
-      "referenceToModelP95Pixels": 84.26613404442328,
-      "modelToReferenceP95Pixels": 31.144823004794873,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "cables",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.6101672511940219,
-      "modelToReferenceWithin6Pixels": 0.9056589696721006,
-      "referenceToModelP95Pixels": 48.0,
-      "modelToReferenceP95Pixels": 10.0,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "beacons",
-      "face": "b",
-      "referenceToModelWithin6Pixels": 0.5312618896639189,
-      "modelToReferenceWithin6Pixels": 0.8082882882882882,
-      "referenceToModelP95Pixels": 25.35933769845564,
-      "modelToReferenceP95Pixels": 12.649110640673518,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "distribution-upper-R",
+      "id": "lower-r",
       "face": "r",
-      "referenceToModelWithin6Pixels": 0.7237029631362872,
-      "modelToReferenceWithin6Pixels": 0.9610675039246468,
-      "referenceToModelP95Pixels": 44.721359549995796,
-      "modelToReferenceP95Pixels": 5.830951894845301,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "distribution-lower-R",
-      "face": "r",
-      "referenceToModelWithin6Pixels": 0.73577520533791,
-      "modelToReferenceWithin6Pixels": 0.8826866228128578,
-      "referenceToModelP95Pixels": 37.57658845611187,
-      "modelToReferenceP95Pixels": 11.180339887498949,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "cables-R",
-      "face": "r",
-      "referenceToModelWithin6Pixels": 0.11784905954889566,
-      "modelToReferenceWithin6Pixels": 0.9920127795527156,
-      "referenceToModelP95Pixels": 171.61585000964791,
-      "modelToReferenceP95Pixels": 5.830951894845301,
-      "certifiedClearEdges": false
-    },
-    {
-      "id": "rear-upper-junction",
-      "face": "u",
-      "referenceToModelWithin6Pixels": 0.0,
-      "modelToReferenceWithin6Pixels": null,
-      "referenceToModelP95Pixels": 1539.2181942529778,
-      "modelToReferenceP95Pixels": null,
+      "referenceToModelWithin6Pixels": 0.4918270191990749,
+      "modelToReferenceWithin6Pixels": 0.9340423821898358,
+      "referenceToModelP95Pixels": 153.7172729396407,
+      "modelToReferenceP95Pixels": 7.0710678118654755,
       "certifiedClearEdges": false
     }
   ],

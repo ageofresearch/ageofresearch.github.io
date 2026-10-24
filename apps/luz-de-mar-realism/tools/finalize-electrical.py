@@ -11,6 +11,11 @@ assert uvhash()==before,'Removing an unused layer changed baked UV1'
 d.uv_layers.active_index=d.uv_layers.find('UV0');d.uv_layers['UV0'].active_render=True;a['removedUnusedUVLayers']=list(set(a.get('removedUnusedUVLayers',[])+unused))
 if (W/'electrical-source.glb').exists():a.setdefault('transportSourceGeometrySHA256',hashlib.sha256((W/'electrical-source.glb').read_bytes()).hexdigest())
 bpy.ops.object.select_all(action='DESELECT');hero.select_set(True);bpy.context.view_layer.objects.active=hero
+for o in S.objects:
+ if o.get('appearanceDoor')and not o.data.attributes.get('_BAKE_MODE'):
+  o.hide_render=True;o.hide_viewport=True
+ if o.get('appearanceDoor')and o.data.attributes.get('_BAKE_MODE'):
+  o.data.uv_layers.active_index=o.data.uv_layers.find('UV0');o.data.uv_layers['UV0'].active_render=True;o.select_set(True)
 bpy.ops.export_scene.gltf(filepath=str(W/'electrical-source.glb'),export_format='GLB',use_selection=True,export_extras=True,export_normals=True,export_texcoords=True,export_attributes=True,export_vertex_color='NONE')
 a['sourceGeometrySHA256']=hashlib.sha256((W/'electrical-source.glb').read_bytes()).hexdigest();a['bakedUV1BindingPreservedDuringExportRepair']=True
 S.view_settings.view_transform='Khronos PBR Neutral';S.view_settings.exposure=math.log2(.05);S.view_settings.look='None';S.display_settings.display_device='sRGB'

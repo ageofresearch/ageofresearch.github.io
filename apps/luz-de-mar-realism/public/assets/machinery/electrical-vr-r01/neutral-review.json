@@ -1,45 +1,23 @@
 {
-  "stage": "neutral geometry milestone",
-  "neutralGeometrySHA256": "93c2bbb9bd71ad4bfd671215fe333ffdffcd2251f151fc064f48ee7f5eaed5ec",
-  "reviewedViews": [
-    "general-150",
-    "general-180",
-    "general-210"
-  ],
-  "captureSHA256": {
-    "general-210": "c28c61ecc022ab908fcb5ac26eae4e277bf011c29a16ba54101c0a0cf37b503c",
-    "general-180": "4fb75538dc448f82236d59b376122ef8457f5e50968776e1e580d34949c92f0f",
-    "general-150": "8d4a6c7b50963fb608b60ebdd9aa21cfbb30760dee9416d8cab3863457e6cacf"
-  },
-  "assembliesCompared": [
-    "two upper and two lower main cabinet doors",
-    "two controller screens and distinct pilot rows",
-    "eight clear protection covers with internal modules",
-    "shore selector group and separate instruments",
-    "four columns of stamped louvres",
-    "four large and six small battery controls",
-    "immediate wiring and four upper beacons"
-  ],
+  "version": 2,
+  "neutralGeometrySHA256": "f473d66a15367107341d9971ba30a10a21ab66300e03ee8977a95c1ca547c08a",
   "advanceToFinish": true,
-  "strictVisualAcceptance": false,
-  "manuallyAcceptedCells": 0,
-  "remaining": [
-    "Neutral renders are broad-form checks, not a certification of 24 landmarks or 95% of clear edges.",
-    "Near work-light highlight on the shore panel requires lighting diagnostics.",
-    "Camera registration and unchanged floor/ceiling/context introduce uncertain depths and mounting heights.",
-    "Native cell, material and WebGL comparisons remain required."
+  "reviewedViews": [
+    "lower-wide",
+    "pedestal",
+    "floor-side",
+    "distribution-lower"
   ],
-  "fineRefinement": {
-    "method": "Native color-control centres and adjoining frames adjusted before finish. These measurements are fitting controls, not held-out validation.",
-    "record": "fit-controls.json",
-    "previousReviewStillApplicable": "Major enclosure, cover, louvre and selector quantities unchanged; refined neutral renders replace previous captures."
-  },
-  "serviceAccessCorrection": {
-    "observedFrontsUnchanged": true,
-    "hiddenBatteryPanelDepthMetres": 0.08,
-    "claddingPlaneSourceX": 6.84,
-    "existingDoorOpeningRetained": true,
-    "reason": "A 40cm inferred cabinet/backing blocked the existing service approach. Narrow mounting depth and a backing opening preserve both the photographed fronts and the original walkable access.",
-    "measurementStatus": "Digital constraints, not real-boat measurements."
-  }
+  "findings": [
+    "Closed pedestal and its slot now occupy the reference region; compact pads replace long exposed feet.",
+    "Source-traced lateral grating and auxiliary controls are present; all three green indicator meshes have visible native-L ID pixels.",
+    "Old toolboxes and port-generator front removed atomically; new casing clears the controls.",
+    "Main-board casing shortened to the observed bottom and its mounting frame moved behind the doors.",
+    "Depths and concealed mounting details remain estimated; no global four-pixel acceptance asserted.",
+    "Rechecked final three neutral renders after source-native lower grille relocation to B176..296,1658..1765 and right maker-label alignment; historical grille control D-V06 was on blank panel and is invalid.",
+    "Final three neutral views rechecked after D-native pedestal corner calibration, continuous mitered grating perimeter, removal of overlapping frame/grid faces, and pilot depth projection correction.",
+    "Native source close-up resolves nine broad, steeply folded chevron blades rather than wire strokes. New closed solids reviewed in neutral close view; ray checks confirm the blades are visible in front of the backing.",
+    "Rechecked full neutral lower view after native-D slot measurements:33\u00d711.65px repeat,9/7px webs,24\u00d74.65px slots; removed the incorrect sparse square-grid interpretation."
+  ],
+  "strictVisualAcceptance": false
 }

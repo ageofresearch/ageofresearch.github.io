@@ -1,7 +1,7 @@
 """Verify new runtime bytes and all servable original files; preserve the629-file tree."""
 from pathlib import Path
-import json,urllib.request,hashlib,concurrent.futures,subprocess,posixpath
-R=Path(__file__).resolve().parents[1];W=R/'work/electrical-vr-r01';S=(R/'../../site').resolve();base='https://ageofresearch.github.io/';commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()
+import os,json,urllib.request,hashlib,concurrent.futures,subprocess,posixpath
+R=Path(__file__).resolve().parents[1];W=Path(os.environ.get('ELECTRICAL_AUTHORING_WORK',str(R/'work/electrical-vr-r01')));S=(R/'../../site').resolve();base='https://ageofresearch.github.io/';commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=R,text=True).strip()
 def sha(b):return hashlib.sha256(b).hexdigest()
 room=json.loads((S/'luz-de-mar-realism/assets/machinery/room.json').read_text());paths=['index.html','assets/manifest.json','assets/hashes.json','publication.json','assets/machinery/room.json','assets/machinery/room.glb','review/electrical-vr-r01/index.html','review/electrical-vr-r01/validation.json']+[posixpath.normpath('assets/machinery/electrical-vr-r01/'+n)for n in room['electricalAppearance']['hashes']]
 entry=(S/'luz-de-mar-realism/index.html').read_text()

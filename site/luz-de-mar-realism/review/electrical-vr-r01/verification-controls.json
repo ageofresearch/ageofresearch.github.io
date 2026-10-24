@@ -1,754 +1,264 @@
 {
-  "version": 1,
-  "method": "Native-source annotations reserved after fine fitting, before verification. These are not passed to the modelling scripts. All results, including failures and occlusions, must be retained.",
-  "originalEvidenceControls": "The original 24 entries overlap with fitted selector centres and are diagnostic only; they do not establish independent acceptance.",
-  "points": [
-    {
-      "id": "D-V01",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        452,
-        482
-      ],
-      "object": "main door 1 latch 1",
-      "measure": "centroid"
-    },
-    {
-      "id": "D-V02",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        450,
-        974
-      ],
-      "object": "main door 1 latch 2",
-      "measure": "centroid"
-    },
-    {
-      "id": "D-V03",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        65,
-        531
-      ],
-      "object": "right upper meter black frame",
-      "measure": "centroid"
-    },
-    {
-      "id": "D-V04",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        228,
-        638
-      ],
-      "object": "right display auxiliary key 0",
-      "measure": "centroid"
-    },
-    {
-      "id": "D-V05",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        432,
-        714
-      ],
-      "object": "right Woodward black bezel",
-      "measure": "boundary"
-    },
-    {
-      "id": "D-V06",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        376,
-        1711
-      ],
-      "object": "lower right chevron grille 6",
-      "measure": "boundary"
-    },
-    {
-      "id": "S-V01",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        834,
-        694
-      ],
-      "object": "shore selector polished plate 0",
-      "measure": "boundary"
-    },
-    {
-      "id": "S-V02",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        887,
-        786
-      ],
-      "object": "phase instrument pilot 0",
-      "measure": "centroid"
-    },
-    {
-      "id": "S-V03",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        912,
-        961
-      ],
-      "object": "shore general switch ivory inset",
-      "measure": "boundary"
-    },
-    {
-      "id": "S-V04",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        1120,
-        976
-      ],
-      "object": "shore voltage small plate",
-      "measure": "boundary"
-    },
-    {
-      "id": "S-V05",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        1264,
-        681
-      ],
-      "object": "shore right secondary instrument LCD",
-      "measure": "centroid"
-    },
-    {
-      "id": "S-V06",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        1174,
-        803
-      ],
-      "object": "shore small latch screw",
-      "measure": "centroid"
-    },
-    {
-      "id": "V-V01",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        760,
-        1441
-      ],
-      "object": "stamped louvre 0 5",
-      "measure": "boundary"
-    },
-    {
-      "id": "V-V02",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        760,
-        1597
-      ],
-      "object": "stamped louvre 0 10",
-      "measure": "boundary"
-    },
-    {
-      "id": "V-V03",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        1129,
-        1724
-      ],
-      "object": "stamped louvre 2 14",
-      "measure": "boundary"
-    },
-    {
-      "id": "V-V04",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        1312,
-        1536
-      ],
-      "object": "stamped louvre 3 8",
-      "measure": "boundary"
-    },
-    {
-      "id": "V-V05",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        664,
-        1227
-      ],
-      "object": "vented lid screw 664",
-      "measure": "centroid"
-    },
-    {
-      "id": "V-V06",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        1432,
-        1227
-      ],
-      "object": "vented lid screw 1432",
-      "measure": "centroid"
-    },
-    {
-      "id": "B-V01",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1901,
-        699
-      ],
-      "object": "battery large mounting screw 0 0",
-      "measure": "centroid"
-    },
-    {
-      "id": "B-V02",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1980,
-        813
-      ],
-      "object": "battery large mounting screw 1 1",
-      "measure": "centroid"
-    },
-    {
-      "id": "B-V03",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1893,
-        947
-      ],
-      "object": "battery selector cream ring 2",
-      "measure": "boundary"
-    },
-    {
-      "id": "B-V04",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1934,
-        1150
-      ],
-      "object": "battery small upper fixing 0",
-      "measure": "centroid"
-    },
-    {
-      "id": "B-V05",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1941,
-        1399
-      ],
-      "object": "battery protective cap 1",
-      "measure": "centroid"
-    },
-    {
-      "id": "B-V06",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1934,
-        1737
-      ],
-      "object": "battery small upper fixing 5",
-      "measure": "centroid"
-    }
-  ],
-  "geometrySHA256": "93c2bbb9bd71ad4bfd671215fe333ffdffcd2251f151fc064f48ee7f5eaed5ec",
-  "verificationSourceSHA256": "d15bf73d95cba3b0271873135427dab0b115f390061b5b4eb3b16dcb3c41aa20",
+  "version": "electrical-lower-r02",
+  "method": "Source-native lower diagnostic checks against actual ID render. No independent acceptance claim: these points include fitting controls.",
   "checks": [
     {
-      "id": "D-V01",
-      "assembly": "distribution",
+      "id": "grille-left",
       "face": "b",
       "pixel": [
-        452,
-        482
+        180,
+        1682
       ],
-      "object": "main door 1 latch 1",
-      "measure": "centroid",
-      "actual": null,
-      "visiblePixels": 0,
-      "errorPixels": null,
-      "passed": false,
-      "ambiguousOrOccluded": true,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "D-V02",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        450,
-        974
-      ],
-      "object": "main door 1 latch 2",
-      "measure": "centroid",
-      "actual": [
-        473.24528301886795,
-        971.5
-      ],
-      "visiblePixels": 212,
-      "errorPixels": 23.37933238198368,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "D-V03",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        65,
-        531
-      ],
-      "object": "right upper meter black frame",
-      "measure": "centroid",
-      "actual": [
-        82.3014268727705,
-        570.0680737217598
-      ],
-      "visiblePixels": 3364,
-      "errorPixels": 42.72766967858981,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "D-V04",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        228,
-        638
-      ],
-      "object": "right display auxiliary key 0",
-      "measure": "centroid",
-      "actual": [
-        228.6045197740113,
-        648.9717514124294
-      ],
-      "visiblePixels": 177,
-      "errorPixels": 10.98839265831528,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "D-V05",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        432,
-        714
-      ],
-      "object": "right Woodward black bezel",
+      "componentPrefix": "lower right chevron grille",
       "measure": "boundary",
       "actual": [
-        432,
-        720
+        180,
+        1682
       ],
-      "visiblePixels": 7457,
-      "errorPixels": 6.0,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "D-V06",
-      "assembly": "distribution",
-      "face": "b",
-      "pixel": [
-        376,
-        1711
-      ],
-      "object": "lower right chevron grille 6",
-      "measure": "boundary",
-      "actual": [
-        376,
-        1705
-      ],
-      "visiblePixels": 303,
-      "errorPixels": 6.0,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "S-V01",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        834,
-        694
-      ],
-      "object": "shore selector polished plate 0",
-      "measure": "boundary",
-      "actual": [
-        836,
-        694
-      ],
-      "visiblePixels": 12655,
-      "errorPixels": 2.0,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "S-V02",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        887,
-        786
-      ],
-      "object": "phase instrument pilot 0",
-      "measure": "centroid",
-      "actual": [
-        885.6153846153846,
-        786.6153846153846
-      ],
-      "visiblePixels": 13,
-      "errorPixels": 1.5152088925840028,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "S-V03",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        912,
-        961
-      ],
-      "object": "shore general switch ivory inset",
-      "measure": "boundary",
-      "actual": [
-        912,
-        961
-      ],
-      "visiblePixels": 362,
       "errorPixels": 0.0,
       "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
+      "visiblePixels": 5222,
+      "independent": false
     },
     {
-      "id": "S-V04",
-      "assembly": "shore",
+      "id": "grille-right",
       "face": "b",
       "pixel": [
-        1120,
-        976
+        296,
+        1754
       ],
-      "object": "shore voltage small plate",
+      "componentPrefix": "lower right grille white housing",
       "measure": "boundary",
       "actual": [
-        1119,
-        975
+        299,
+        1754
       ],
-      "visiblePixels": 1134,
-      "errorPixels": 1.4142135623730951,
+      "errorPixels": 3.0,
       "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
+      "visiblePixels": 3370,
+      "independent": false
     },
     {
-      "id": "S-V05",
-      "assembly": "shore",
+      "id": "grille-top",
       "face": "b",
       "pixel": [
-        1264,
-        681
+        234,
+        1658
       ],
-      "object": "shore right secondary instrument LCD",
-      "measure": "centroid",
-      "actual": [
-        1261.5,
-        681.0188335358445
-      ],
-      "visiblePixels": 1646,
-      "errorPixels": 2.500070939408001,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "S-V06",
-      "assembly": "shore",
-      "face": "b",
-      "pixel": [
-        1174,
-        803
-      ],
-      "object": "shore small latch screw",
-      "measure": "centroid",
-      "actual": [
-        1170.367088607595,
-        805.632911392405
-      ],
-      "visiblePixels": 79,
-      "errorPixels": 4.4866766749257385,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "V-V01",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        760,
-        1441
-      ],
-      "object": "stamped louvre 0 5",
+      "componentPrefix": "lower right grille white housing",
       "measure": "boundary",
       "actual": [
-        760,
-        1449
+        234,
+        1656
       ],
-      "visiblePixels": 1311,
-      "errorPixels": 8.0,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "V-V02",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        760,
-        1597
-      ],
-      "object": "stamped louvre 0 10",
-      "measure": "boundary",
-      "actual": [
-        760,
-        1601
-      ],
-      "visiblePixels": 1309,
-      "errorPixels": 4.0,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "V-V03",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        1129,
-        1724
-      ],
-      "object": "stamped louvre 2 14",
-      "measure": "boundary",
-      "actual": [
-        1129,
-        1723
-      ],
-      "visiblePixels": 1302,
-      "errorPixels": 1.0,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "V-V04",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        1312,
-        1536
-      ],
-      "object": "stamped louvre 3 8",
-      "measure": "boundary",
-      "actual": [
-        1312,
-        1540
-      ],
-      "visiblePixels": 1312,
-      "errorPixels": 4.0,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "V-V05",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        664,
-        1227
-      ],
-      "object": "vented lid screw 664",
-      "measure": "centroid",
-      "actual": null,
-      "visiblePixels": 0,
-      "errorPixels": null,
-      "passed": false,
-      "ambiguousOrOccluded": true,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "V-V06",
-      "assembly": "vented",
-      "face": "b",
-      "pixel": [
-        1432,
-        1227
-      ],
-      "object": "vented lid screw 1432",
-      "measure": "centroid",
-      "actual": null,
-      "visiblePixels": 0,
-      "errorPixels": null,
-      "passed": false,
-      "ambiguousOrOccluded": true,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "B-V01",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1901,
-        699
-      ],
-      "object": "battery large mounting screw 0 0",
-      "measure": "centroid",
-      "actual": [
-        1898.3333333333333,
-        706.9444444444445
-      ],
-      "visiblePixels": 36,
-      "errorPixels": 8.380054214739658,
-      "passed": false,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "B-V02",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1980,
-        813
-      ],
-      "object": "battery large mounting screw 1 1",
-      "measure": "centroid",
-      "actual": [
-        1978.4444444444443,
-        811.75
-      ],
-      "visiblePixels": 36,
-      "errorPixels": 1.9955583395180576,
-      "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
-    },
-    {
-      "id": "B-V03",
-      "assembly": "battery",
-      "face": "b",
-      "pixel": [
-        1893,
-        947
-      ],
-      "object": "battery selector cream ring 2",
-      "measure": "boundary",
-      "actual": [
-        1895,
-        947
-      ],
-      "visiblePixels": 2237,
       "errorPixels": 2.0,
       "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
+      "visiblePixels": 3370,
+      "independent": false
     },
     {
-      "id": "B-V04",
-      "assembly": "battery",
+      "id": "grille-bottom",
       "face": "b",
       "pixel": [
-        1934,
-        1150
+        234,
+        1775
       ],
-      "object": "battery small upper fixing 0",
-      "measure": "centroid",
+      "componentPrefix": "lower right grille white housing",
+      "measure": "boundary",
       "actual": [
-        1932.5581395348838,
-        1149.4418604651162
+        234,
+        1775
       ],
-      "visiblePixels": 43,
-      "errorPixels": 1.5461181524273528,
+      "errorPixels": 0.0,
       "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
+      "visiblePixels": 3370,
+      "independent": false
     },
     {
-      "id": "B-V05",
-      "assembly": "battery",
-      "face": "b",
+      "id": "pedestal-front-left",
+      "face": "d",
       "pixel": [
-        1941,
-        1399
+        384,
+        1868
       ],
-      "object": "battery protective cap 1",
-      "measure": "centroid",
+      "componentPrefix": "vented pedestal upper plate",
+      "measure": "boundary",
       "actual": [
-        1938.2014742014742,
-        1397.5896805896805
+        386,
+        1868
       ],
-      "visiblePixels": 407,
-      "errorPixels": 3.1338071868158295,
+      "errorPixels": 2.0,
       "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
+      "visiblePixels": 231902,
+      "independent": false
     },
     {
-      "id": "B-V06",
-      "assembly": "battery",
-      "face": "b",
+      "id": "pedestal-front-right",
+      "face": "d",
       "pixel": [
-        1934,
-        1737
+        1660,
+        1880
       ],
-      "object": "battery small upper fixing 5",
+      "componentPrefix": "vented pedestal upper plate",
+      "measure": "boundary",
+      "actual": [
+        1661,
+        1880
+      ],
+      "errorPixels": 1.0,
+      "passed": true,
+      "visiblePixels": 231902,
+      "independent": false
+    },
+    {
+      "id": "pedestal-slot",
+      "face": "d",
+      "pixel": [
+        1000,
+        1798
+      ],
+      "componentPrefix": "vented pedestal dark interior",
+      "measure": "boundary",
+      "actual": [
+        1000,
+        1801
+      ],
+      "errorPixels": 3.0,
+      "passed": true,
+      "visiblePixels": 4691,
+      "independent": false
+    },
+    {
+      "id": "auxiliary-box",
+      "face": "l",
+      "pixel": [
+        112,
+        1214
+      ],
+      "componentPrefix": "three green pilot enclosure",
+      "measure": "boundary",
+      "actual": [
+        114,
+        1219
+      ],
+      "errorPixels": 5.385164807134504,
+      "passed": false,
+      "visiblePixels": 24327,
+      "independent": false
+    },
+    {
+      "id": "green-0",
+      "face": "l",
+      "pixel": [
+        214.49,
+        1251.75
+      ],
+      "componentPrefix": "auxiliary green lens 0",
       "measure": "centroid",
       "actual": [
-        1932.3076923076924,
-        1735.5384615384614
+        215.1038961038961,
+        1250.922077922078
       ],
-      "visiblePixels": 39,
-      "errorPixels": 2.2360679774998053,
+      "errorPixels": 1.0306907361034814,
       "passed": true,
-      "ambiguousOrOccluded": false,
-      "annotationUncertaintyPixels": 2
+      "visiblePixels": 77,
+      "independent": false
+    },
+    {
+      "id": "green-1",
+      "face": "l",
+      "pixel": [
+        248.91,
+        1241.01
+      ],
+      "componentPrefix": "auxiliary green lens 1",
+      "measure": "centroid",
+      "actual": [
+        249.41558441558442,
+        1240.142857142857
+      ],
+      "errorPixels": 1.0037690650621587,
+      "passed": true,
+      "visiblePixels": 77,
+      "independent": false
+    },
+    {
+      "id": "green-2",
+      "face": "l",
+      "pixel": [
+        280.42,
+        1231.82
+      ],
+      "componentPrefix": "auxiliary green lens 2",
+      "measure": "centroid",
+      "actual": [
+        280.9605263157895,
+        1231.0526315789473
+      ],
+      "errorPixels": 0.938628249995583,
+      "passed": true,
+      "visiblePixels": 76,
+      "independent": false
+    },
+    {
+      "id": "grating-rear",
+      "face": "d",
+      "pixel": [
+        1000,
+        1696
+      ],
+      "componentPrefix": "ochre grating traced from floor",
+      "measure": "boundary",
+      "actual": [
+        1000,
+        1695
+      ],
+      "errorPixels": 1.0,
+      "passed": true,
+      "visiblePixels": 787245,
+      "independent": false
+    },
+    {
+      "id": "grating-step",
+      "face": "d",
+      "pixel": [
+        1312,
+        1160
+      ],
+      "componentPrefix": "ochre grating traced from floor",
+      "measure": "boundary",
+      "actual": [
+        1311,
+        1160
+      ],
+      "errorPixels": 1.0,
+      "passed": true,
+      "visiblePixels": 787245,
+      "independent": false
     }
   ],
-  "passed": 13,
-  "total": 24,
-  "allPassed": false,
+  "passed": 12,
+  "total": 13,
   "strictVisualAcceptance": false,
+  "invalidatedHistoricalControls": [
+    {
+      "id": "D-V06",
+      "reason": "R01 point B376,1711 is on blank cabinet paint. The actual grille occupies approximately B176..296,1658..1765."
+    },
+    {
+      "id": "V-V01..04",
+      "reason": "R01 louvre rows/pitch do not follow the source28-row count; previous row-specific checks are superseded."
+    }
+  ],
+  "ambiguousControls": [
+    {
+      "id": "pipe-bottom",
+      "reason": "Old point170,1648 is inside the white pipe surface, not an unequivocal silhouette edge; excluded from a boundary-error score."
+    }
+  ],
   "limits": [
-    "Only reserved visible point/boundary checks; no 95% clear-edge certification.",
-    "Manual source annotations have uncertainty. Failures are retained, not tuned away."
+    "Native diagnostics do not establish global4px/95% clear-edge acceptance.",
+    "Errors and occlusions are retained.",
+    "Native photographs contain uncertain edges from shadows and reflections."
   ]
 }

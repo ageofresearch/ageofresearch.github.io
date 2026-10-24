@@ -1,12 +1,13 @@
 """Matched review views from one frozen station. Source photographs stay private."""
 import bpy,numpy as np,json,math,ast,subprocess,sys
+import os
 from pathlib import Path
 from mathutils import Vector
-R=Path(__file__).resolve().parents[1];W=R/'work/electrical-vr-r01';S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6;evidence=json.loads((W/'evidence-frozen.json').read_text())
+R=Path(__file__).resolve().parents[1];W=Path(os.environ.get('ELECTRICAL_AUTHORING_WORK',str(R/'work/electrical-vr-r01')));S=bpy.context.scene;SX=35.23/36;SY=7.47/7.6;evidence=json.loads((W/'evidence-frozen.json').read_text())
 for node in ast.parse((R/'tools/bake-left-engine.py').read_text()).body:
  if isinstance(node,ast.FunctionDef)and node.name in ['pt','neutral_png','filtered','camera']:exec(compile(ast.Module(body=[node],type_ignores=[]),str(R/'tools/bake-left-engine.py'),'exec'),globals())
 cam=S.camera;args=sys.argv[sys.argv.index('--')+1:]if'--'in sys.argv else['clay'];mode=args[0];folder=W/'review'/mode;folder.mkdir(parents=True,exist_ok=True);native=mode.endswith('native')
-S.render.engine='CYCLES';S.cycles.device='CPU';S.cycles.samples=8 if mode.startswith('clay')else 64;S.cycles.use_denoising=False;S.render.threads_mode='FIXED';S.render.threads=4;S.render.resolution_percentage=100;S.render.resolution_x=2048 if native else 900;S.render.resolution_y=2048 if native else 600;S.render.use_border=False;S.render.image_settings.file_format='OPEN_EXR';S.render.image_settings.color_mode='RGB';S.render.image_settings.color_depth='16';S.render.image_settings.exr_codec='DWAA'
+S.render.engine='CYCLES';S.cycles.device='CPU';S.cycles.samples=int(os.environ.get('REVIEW_SAMPLES',8 if mode.startswith('clay')else 64));S.cycles.use_denoising=False;S.render.threads_mode='FIXED';S.render.threads=4;S.render.resolution_percentage=100;S.render.resolution_x=2048 if native else 900;S.render.resolution_y=2048 if native else 600;S.render.use_border=False;S.render.image_settings.file_format='OPEN_EXR';S.render.image_settings.color_mode='RGB';S.render.image_settings.color_depth='16';S.render.image_settings.exr_codec='DWAA'
 S.view_settings.view_transform='Standard';S.view_settings.exposure=0
 if mode.startswith('clay'):
  m=bpy.data.materials.new('Electrical neutral geometry audit');m.use_nodes=True;p=m.node_tree.nodes['Principled BSDF'];p.inputs['Base Color'].default_value=(.62,.62,.62,1);p.inputs['Roughness'].default_value=.65
@@ -20,6 +21,7 @@ if guided:
   if isinstance(node,ast.FunctionDef)and node.name=='guided_filter':exec(compile(ast.Module(body=[node],type_ignores=[]),str(R/'tools/render-bulkhead.py'),'exec'),globals())
  S.use_nodes=True;S.view_layers[0].cycles.denoising_store_passes=True;n=S.node_tree.nodes;n.clear();layer=n.new('CompositorNodeRLayers');out=n.new('CompositorNodeComposite');S.node_tree.links.new(layer.outputs['Image'],out.inputs[0]);aux=n.new('CompositorNodeOutputFile');aux.base_path=str(folder);aux.format.file_format='OPEN_EXR';aux.format.color_depth='16';aux.format.exr_codec='PIZ';aux.file_slots.clear()
  for channel in ['Albedo','Normal']:aux.file_slots.new(channel);S.node_tree.links.new(layer.outputs['Denoising '+channel],aux.inputs[channel])
+if(W/'lower-evidence.json').exists():evidence['poses']+=json.loads((W/'lower-evidence.json').read_text())['poses']
 poses=[{'id':f,'h':h,'v':v,'hfov':90,'vfov':90}for f,h,v in [('b',180,0),('r',90,0),('l',270,0),('u',0,-90),('d',0,90)]]if native else evidence['poses']
 for pose in poses:
  if len(args)>1 and pose['id']not in args[1:]:continue

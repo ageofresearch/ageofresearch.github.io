@@ -3,6 +3,7 @@ export function inside(x,y,polygon){let hit=false;for(let i=0,j=polygon.length-1
 export class DeckNavigation {
  constructor(layout,saloon,{available=()=>true,onBoundary=()=>{},onZone=()=>{}}={}){Object.assign(this,{layout,available,onBoundary,onZone});this.saloon=new RoomNavigation(saloon);this.isolated=new Map();this.meta=saloon;this.radius=layout.radius;this.regions=layout.regions;this.position=[...saloon.room.spawn.slice(0,2)];this.zone='saloon';this.elevation=saloon.floor;}
  addIsolated(meta){this.isolated.set(meta.id,new RoomNavigation(meta));}
+ eyeHeightAt(x,y){return this.isolated.get(this.zone)?.eyeHeightAt(x,y)??this.meta.camera?.eyeHeight??1.62;}
  get openRegister(){return this.isolated.get(this.zone)?.openRegister||false;}
  set openRegister(value){const room=this.isolated.get(this.zone);if(room)room.openRegister=!!value;}
  floors(x,y){

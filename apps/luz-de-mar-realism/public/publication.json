@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "build": "electrical-vr-r01-candidate",
+  "build": "electrical-lower-r02-candidate",
   "scope": [
     "saloon",
     "cockpit",
@@ -10,11 +10,11 @@
     "bow",
     "machinery"
   ],
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r01",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r02",
   "defaultBulkheadChanged": false,
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
-  "assetManifestSHA256": "682966bd93a588d28fcae0370856b143f54d17bfc816d657cb1f2ef46d08d7f7",
+  "assetManifestSHA256": "175a23537578f5156a60682506921dabb448a1bd51fe35bd3de64d41fc44988c",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -26,16 +26,14 @@
     "unchanged": true
   },
   "resources": {
-    "additionalResidentBytes": 46626334,
+    "runtimeGeometrySHA256": "72cd44625c8018e2e0751869dd05dd326b301c2dd554cd68eaf7d3d51c779e62",
+    "additionalResidentBytes": 54939876,
     "maximumAdditionalBytes": 67108864,
-    "peakEstimatedBytes": 662047047,
+    "peakEstimatedBytes": 670362749,
     "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches.",
     "implicitBulkheadDependencyVerified": true,
-    "hybridMaterialsCompiled": 16,
-    "pass": true,
-    "baselinePeakEstimatedBytes": 615420713,
-    "samplingIntervalMs": 100,
-    "peakLimit": "Sampled payload estimate, not measured driver allocation; short-lived peaks may fall between samples."
+    "hybridMaterialsCompiled": 20,
+    "pass": true
   },
   "defaultRegression": true,
   "existingRoomAssets": {
@@ -49,10 +47,10 @@
   "functionalBrowserChecks": true,
   "renderer": "Three.js 0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1035581440,
+    "bytes": 1038837760,
     "limit": 1073741824,
     "minimumHeadroomBytes": 33554432,
-    "headroomBytes": 38160384
+    "headroomBytes": 34904064
   },
-  "visualStatus": "Opt-in electrical-front candidate with the compatible bulkhead. Native16/8-cell comparisons and independent failures are retained; no complete cell or95% clear-edge acceptance claimed."
+  "visualStatus": "Opt-in electrical-front candidate with the compatible bulkhead. Native8-pixel lower comparisons and unresolved diagnostic differences are retained; no complete cell or95% clear-edge acceptance claimed."
 }

@@ -32,3 +32,10 @@ test('cancellation discards a stale compilation without replacing a successful r
 test('hidden document defers replacement until the next visible update',async()=>{
  const s=setup();document.hidden=true;s.controller.setActive(true);await s.controller.promise;assert.equal(s.controller.ready,true);assert.equal(s.controller.committed,false);assert.equal(s.fallback.visible,true);document.hidden=false;s.controller.update();assert.equal(s.controller.committed,true);s.controller.dispose();
 });
+test('electrical profile commits both fronts, four atlases and three shared reflections as one unit',async()=>{
+ const s=setup(),electrical=new Group();electrical.userData.variant='electrical-r11';s.room.root.add(electrical);
+ s.controller.dispose();const spec={...s.controller.spec,id:'electrical-vr-r01',label:'frente eléctrico',fallbackVariants:['bulkhead-r11','electrical-r11'],geometries:[{asset:'electrical.glb'},{asset:'../bulkhead-vr-r01/bulkhead.glb'}],irradiances:{bulkhead:'bulkhead.exr',electrical:'electrical.exr'}};
+ const controller=new InstalledBulkhead(s.app,s.room,spec,s.controller.deps,new AbortController().signal);controller.bytes=async()=>new ArrayBuffer(1);controller.setActive(true);await controller.promise;
+ assert.equal(controller.committed,true);assert.equal(s.fallback.visible,false);assert.equal(electrical.visible,false);assert.equal(controller.bundle.root.children.length,2);assert.equal(controller.bundle.textures.length,4);assert.equal(controller.bundle.targets.length,3);assert.equal(s.room.appearanceLighting,controller.bundle.roomLighting);assert.equal(controller.stats.version,'electrical-vr-r01');
+ controller.setActive(false);assert.equal(s.fallback.visible,true);assert.equal(electrical.visible,true);assert.equal(s.room.appearanceLighting,null);assert.equal(controller.bundle,null);controller.dispose();
+});

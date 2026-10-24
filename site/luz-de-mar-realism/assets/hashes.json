@@ -23,6 +23,10 @@
       "bytes": 539129,
       "sha256": "50eb6dd67f72a36cd10c109e17e2d9e6f7ef9502fa9ffc89a9c7ef09c466c9ee"
     },
+    "assets/asset-version-CPW34VcZ.js": {
+      "bytes": 539134,
+      "sha256": "e921171d020e81169a507ee9b59e579150171e3dea80ed2ea7b89df7f203c66b"
+    },
     "assets/asset-version-DB9wJtnD.js": {
       "bytes": 539132,
       "sha256": "3768d2f8dab6c59b3d66304ca66bcdc9548c343b9c86ec415a9cd0bc40c2cc5e"
@@ -139,6 +143,10 @@
       "bytes": 210493,
       "sha256": "3f215c7de680ed00372df7be379d951e968a2a475d59f22a21fc0545104cfec5"
     },
+    "assets/index-CH3YG2B8.js": {
+      "bytes": 212797,
+      "sha256": "e10f057efd6050e919c9e44bfebabbb769e6f0280c36a1289dd88af79511e7f8"
+    },
     "assets/index-CKpNw2n5.js": {
       "bytes": 198687,
       "sha256": "d468f0abf84e365481ecb010abed3513c9c559f7e659a1c592ce3ba039b05451"
@@ -215,6 +223,62 @@
       "bytes": 183859,
       "sha256": "c1a4805d1796d67843d39c894d75f87ace163eb112de19bd19f20e203f646913"
     },
+    "assets/machinery/electrical-vr-r01/authoring.json": {
+      "bytes": 19751,
+      "sha256": "003d9ae3eac1f032344eaad79e2f48e02db96bfe04a28998723ce2326bf1bb34"
+    },
+    "assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr": {
+      "bytes": 7401037,
+      "sha256": "ea517450b57c47427a7042ffeabdce1dd66a37c6c9873300d588ac1afe814e23"
+    },
+    "assets/machinery/electrical-vr-r01/component-inventory.json": {
+      "bytes": 776211,
+      "sha256": "717d0cb7b59f0038bdec1f45f8b5eb3240ad47ca73bead2188e761d9ef19073b"
+    },
+    "assets/machinery/electrical-vr-r01/electrical-irradiance.exr": {
+      "bytes": 4458209,
+      "sha256": "da3909ac6bffbb816427b45a53555b25259f39b5ec3d6f20a47eee3becbd862b"
+    },
+    "assets/machinery/electrical-vr-r01/electrical.glb": {
+      "bytes": 5958916,
+      "sha256": "d009df34dbf3497e56a7519a5037e27558ae2eee2311fcbde8158e10ff6bbdb5"
+    },
+    "assets/machinery/electrical-vr-r01/evidence.json": {
+      "bytes": 13658,
+      "sha256": "0a54635d7e7afff58aab1da6cf3ed58db49c4d9c14ef5b29b8b5e0bf2c2df270"
+    },
+    "assets/machinery/electrical-vr-r01/neutral-review.json": {
+      "bytes": 2215,
+      "sha256": "efa3a62aa035321e401ab8cb6a526b25274a47567fb2fbc3e379ac5dbcb2c2ca"
+    },
+    "assets/machinery/electrical-vr-r01/port-irradiance.exr": {
+      "bytes": 6508427,
+      "sha256": "14329e86696f44657e759b9c8312e34057d24529b6e727850213be216fcf1dcd"
+    },
+    "assets/machinery/electrical-vr-r01/reference-correction.json": {
+      "bytes": 741,
+      "sha256": "ddcfb7e08d6197e78dc60ccdb000032b9f278cb9039273adc61bff5488f211b3"
+    },
+    "assets/machinery/electrical-vr-r01/room-probe-0.exr": {
+      "bytes": 686241,
+      "sha256": "e01e479aa6f5af92ae80983a8301eaee27efb6389328d18d88e75699547eaca9"
+    },
+    "assets/machinery/electrical-vr-r01/room-probe-1.exr": {
+      "bytes": 548497,
+      "sha256": "1b2a24db3bcb3bc87200aae66e538c4499679905d81bc028aa2f670fb35f1e9a"
+    },
+    "assets/machinery/electrical-vr-r01/room-probe-2.exr": {
+      "bytes": 627171,
+      "sha256": "70cfbdad373b099c763e3ef2d3adecd267f69e3fd48117914f807f3a1e16fe64"
+    },
+    "assets/machinery/electrical-vr-r01/starboard-irradiance.exr": {
+      "bytes": 6322509,
+      "sha256": "3fca77a985317d778f9391235604d9364f9ef190ec84063d775ca4bf0015c696"
+    },
+    "assets/machinery/electrical-vr-r01/validation.json": {
+      "bytes": 221598,
+      "sha256": "08b3c5593fe6021d1e1fa90ef4a0102d6d99c7a2de15915b1f174fedc765ddb9"
+    },
     "assets/machinery/probe-aft.exr": {
       "bytes": 1570452,
       "sha256": "4495117d00ab59d996fddd65bdc63a2331c0c9685a4bef9b4761cfec6abba58f"
@@ -232,20 +296,20 @@
       "sha256": "465bade7be3cf637823803ef2df77fc45fecc85dbaef76ff81dcaf1e6469e07c"
     },
     "assets/machinery/room.glb": {
-      "bytes": 12019724,
-      "sha256": "1c939274b68deea71e1ceea4a355adab4d0788ae71018363a91ee042cbeb645d"
+      "bytes": 12043740,
+      "sha256": "d00c0bf1158835f611bfaf89a46b764ef687cd8df3a736e06721793761dd035a"
     },
     "assets/machinery/room.json": {
-      "bytes": 344621,
-      "sha256": "114d424032a7c9e386489d535dd1d3be684bf879b65658ace43d5737562b9b18"
+      "bytes": 364600,
+      "sha256": "924c36460de20736a9b7801d6eb45640dc8635246679dd4683034f6a8280ea6c"
     },
     "assets/machinery/vr-details.glb": {
       "bytes": 88476,
       "sha256": "bf1647c18f44a2bdac0a21c7cb979e29c8ac6251387923ea1a199525bb1286b1"
     },
     "assets/manifest.json": {
-      "bytes": 32457,
-      "sha256": "827e6806f48af91ea12ac84c171a0781ee2a40702fc000e6b41c1396ea03de59"
+      "bytes": 20020,
+      "sha256": "5537ded77ce4d320f84b2bd1afdbdb6973e276e7c766aa9c1ebc986131a3bdac"
     },
     "assets/mechanics-Ckww4WME.js": {
       "bytes": 262914,
@@ -254,6 +318,10 @@
     "assets/mechanics-D0gqCebt.js": {
       "bytes": 262601,
       "sha256": "0b806a0946867988bfdae76cc119b179a9ab4fc72671aeee4519c999dae33e83"
+    },
+    "assets/mechanics-iHJN5jkj.js": {
+      "bytes": 262914,
+      "sha256": "7e934398b8b4b9d2ffcb9200614d0d85d4677182bdf5ba2d94f8fb35e840e356"
     },
     "assets/mechanics-vltWg83h.js": {
       "bytes": 262801,
@@ -645,7 +713,7 @@
     },
     "index.html": {
       "bytes": 5794,
-      "sha256": "8946022942f7b1b0f372cdd32d2c908218d12f93077adfbecd8656d6a9c9ec08"
+      "sha256": "6d1bab78f61bbcbadbfa3b847863b824470df6c5cae9390b4c4efff0c3b6f704"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -743,6 +811,126 @@
       "bytes": 8652,
       "sha256": "5a91b719dbf5f3920768689df7cb683dfecd3f634f5525ecb914ef4731b50d53"
     },
+    "review/electrical-vr-r01/baseline-batteries.webp": {
+      "bytes": 35136,
+      "sha256": "e3894b9caee67aaddc4e52ff458730e7ce5d0c6d98aedc1e0b79b8eed4a2a0e7"
+    },
+    "review/electrical-vr-r01/baseline-distribution-lower.webp": {
+      "bytes": 63674,
+      "sha256": "ad4a9274236b8ca7324df3c82130346420d06cf0a17021ecda127cee5677c7c4"
+    },
+    "review/electrical-vr-r01/baseline-distribution-upper.webp": {
+      "bytes": 45588,
+      "sha256": "e9db9fce1062eaf7e909f61684a562e06c50f71c8d08b27893e31d4e644991a5"
+    },
+    "review/electrical-vr-r01/baseline-general-150.webp": {
+      "bytes": 62778,
+      "sha256": "cc7af5e3088b797df24f4e3c8ea35e90d27ddae4308d172c20931ed44defa479"
+    },
+    "review/electrical-vr-r01/baseline-general-180.webp": {
+      "bytes": 22708,
+      "sha256": "e28281ed01381132f8567eac9f2c812cab5da506c5d0e777f881a7d5389820c0"
+    },
+    "review/electrical-vr-r01/baseline-general-210.webp": {
+      "bytes": 38974,
+      "sha256": "8d4d8b72720ffe11625ad0f5c73574fcd29de937f2e528a185ba65843e318b71"
+    },
+    "review/electrical-vr-r01/baseline-shore.webp": {
+      "bytes": 27152,
+      "sha256": "cdac7a8c50631a17be9b6689e5d67fb83b14eca436efb83596ef13cdbde95d5f"
+    },
+    "review/electrical-vr-r01/baseline-vented.webp": {
+      "bytes": 31156,
+      "sha256": "19c8f1e1f4ab89579cdc4e70183b192d75b99bcfcca596d0d1213c9595e6b4d3"
+    },
+    "review/electrical-vr-r01/blender-general-150.webp": {
+      "bytes": 67630,
+      "sha256": "4e0e442182147893f2214c38629f67d4ef036a6340b379e39124e18c9350e29b"
+    },
+    "review/electrical-vr-r01/blender-general-210.webp": {
+      "bytes": 43600,
+      "sha256": "561a876d69f2151d09535345251ad04b64a3d55684bcaf2278210ceaaa7d2144"
+    },
+    "review/electrical-vr-r01/candidate-batteries.webp": {
+      "bytes": 79014,
+      "sha256": "2c82e6b477f1e4bf6ee5d1707d6331e111e55437bebb91bc402abf1bd3b871f5"
+    },
+    "review/electrical-vr-r01/candidate-distribution-lower.webp": {
+      "bytes": 143440,
+      "sha256": "0c1c23241c5a9ea2e2a9f112d69b92698fbea85f1932c7d843593ebedc2b3fdf"
+    },
+    "review/electrical-vr-r01/candidate-distribution-upper.webp": {
+      "bytes": 114444,
+      "sha256": "df2767b727f5a777a18b0c33b55e0f4dbf4fa6254af2704e5eea2e7625dea027"
+    },
+    "review/electrical-vr-r01/candidate-general-150.webp": {
+      "bytes": 143064,
+      "sha256": "7ee827bc316925655cd7eabfe8a899c0ad4d86d5ee337ca889e4508f0324a26b"
+    },
+    "review/electrical-vr-r01/candidate-general-180.webp": {
+      "bytes": 91622,
+      "sha256": "48fd0c12e22d5ec10462b2d4b438bcad4189a6b5ddedd79298d25537ebd846e6"
+    },
+    "review/electrical-vr-r01/candidate-general-210.webp": {
+      "bytes": 93980,
+      "sha256": "24f4670d0076d4f4b55456c1b30b6a753e813844bcdc1e8b576d7b908c83fd4f"
+    },
+    "review/electrical-vr-r01/candidate-shore.webp": {
+      "bytes": 56274,
+      "sha256": "e727594e05447f9f9623bb7b388c6deefff3efb4d9cfc1ba520a0e7ddd576cc1"
+    },
+    "review/electrical-vr-r01/candidate-vented.webp": {
+      "bytes": 71950,
+      "sha256": "6fd87129c2d7b50873a53ea0fb55a90d46e2b5f1a8531efb35edaa07ada55559"
+    },
+    "review/electrical-vr-r01/edge-diagnostics.json": {
+      "bytes": 3874,
+      "sha256": "3eb0ec7978c49816ef56041cc13a7ab274d5450f335057a5d55eee6a1f9a8107"
+    },
+    "review/electrical-vr-r01/feature-review.json": {
+      "bytes": 4968,
+      "sha256": "a541e05022129878268a4ca60611497c950f900a00003be7bdcda87b725b6418"
+    },
+    "review/electrical-vr-r01/fit-controls.json": {
+      "bytes": 12397,
+      "sha256": "09de89eb1f38efe0af34110b5df38e49dbfbd5ced19728d48326e773d1915d68"
+    },
+    "review/electrical-vr-r01/grid-inventory.json.gz": {
+      "bytes": 1371211,
+      "sha256": "6caf201c958d0f4339475ebbb187893a067026e6350e4a62aafc8f86b460b16d"
+    },
+    "review/electrical-vr-r01/index.html": {
+      "bytes": 5825,
+      "sha256": "4b98406b6d5a96f9f8fb569e783136e7f42d0bf022b45d4d617f060688941cb8"
+    },
+    "review/electrical-vr-r01/micro-uv-repair.json": {
+      "bytes": 478,
+      "sha256": "1e8fcf4cf409f258d78dca5b935e0d58912965f77ff69cb621f0443228d0531d"
+    },
+    "review/electrical-vr-r01/navigation-connectivity.json": {
+      "bytes": 9108,
+      "sha256": "9a16469432081bc38b0b7e275d3cd3db11c4946e4fbde030e7582e99ce75eeed"
+    },
+    "review/electrical-vr-r01/sources.json": {
+      "bytes": 716,
+      "sha256": "70c2910099ff05007412ebac1556f25833ffefcbf35ebfadfecf6491864723d2"
+    },
+    "review/electrical-vr-r01/uv-destination-proof.json": {
+      "bytes": 308,
+      "sha256": "7de609388b28f18f4ba8fbab0e0b795695a4616afc1bdbfdffacdc93fb0b1924"
+    },
+    "review/electrical-vr-r01/validation.json": {
+      "bytes": 221598,
+      "sha256": "08b3c5593fe6021d1e1fa90ef4a0102d6d99c7a2de15915b1f174fedc765ddb9"
+    },
+    "review/electrical-vr-r01/verification-addendum.json": {
+      "bytes": 1134,
+      "sha256": "94e77b3bcb0bfb8277bc32f6bcb73dd3b006897c27bea10c8fb9aff5789c9d22"
+    },
+    "review/electrical-vr-r01/verification-controls.json": {
+      "bytes": 16144,
+      "sha256": "27a495c12944b4811d93c9822df504935ddbd8f698652bc5c0c13440432f41cd"
+    },
     "review/exterior-beach-club-shower.webp": {
       "bytes": 72162,
       "sha256": "23c5980abb55f4d49ccecf2091e1b13acaef49f09ccac806a6c5ef2f4fa0ebe7"
@@ -812,8 +1000,8 @@
       "sha256": "86ef67ebb054491ae4e92dde36f30dc79b67441be05c1691ce1f5e6dfb086f90"
     },
     "review/index.html": {
-      "bytes": 14548,
-      "sha256": "144325fab2caad67f931e9456ad2d7a431ac1284d5688e08b1ada5a54c63d8eb"
+      "bytes": 14618,
+      "sha256": "daff370a666e03a6ad628f01aab966172e804dfebb2a47887f4937c265ea3666"
     },
     "review/joint-diagnostic.json": {
       "bytes": 3944,

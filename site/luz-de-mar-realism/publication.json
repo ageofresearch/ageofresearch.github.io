@@ -1,6 +1,6 @@
 {
   "version": 5,
-  "build": "bulkhead-vr-r01-candidate",
+  "build": "electrical-vr-r01-candidate",
   "scope": [
     "saloon",
     "cockpit",
@@ -10,30 +10,49 @@
     "bow",
     "machinery"
   ],
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r01",
   "defaultBulkheadChanged": false,
+  "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
-  "assetManifestSHA256": "7c47977587af7e9f23f67b5fb3e04729c2d6f679770f187c701156d3ab5618e3",
+  "assetManifestSHA256": "682966bd93a588d28fcae0370856b143f54d17bfc816d657cb1f2ef46d08d7f7",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
   },
   "originalEngineAssetsUnchanged": true,
+  "strategy": {
+    "id": "LDM-VR-EST-001 v1.0",
+    "sha256": "023852c67153ab6ff0f76cad934e8c38bb28f5f3105f1451a282bc3f4ed09b0c",
+    "unchanged": true
+  },
+  "resources": {
+    "additionalResidentBytes": 46626334,
+    "maximumAdditionalBytes": 67108864,
+    "peakEstimatedBytes": 662047047,
+    "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches.",
+    "implicitBulkheadDependencyVerified": true,
+    "hybridMaterialsCompiled": 16,
+    "pass": true,
+    "baselinePeakEstimatedBytes": 615420713,
+    "samplingIntervalMs": 100,
+    "peakLimit": "Sampled payload estimate, not measured driver allocation; short-lived peaks may fall between samples."
+  },
+  "defaultRegression": true,
   "existingRoomAssets": {
     "verified": 50,
     "allUnchanged": true
   },
   "existingDownloads": {
-    "verified": 5,
-    "saloonMovedByteIdenticalToReleases": true
+    "verified": 4,
+    "unchanged": true
   },
   "functionalBrowserChecks": true,
   "renderer": "Three.js 0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 998062080,
+    "bytes": 1035581440,
     "limit": 1073741824,
     "minimumHeadroomBytes": 33554432,
-    "headroomBytes": 75679744
+    "headroomBytes": 38160384
   },
-  "visualStatus": "Opt-in bulkhead candidate reviewed on native 16/8 pixel cells; remaining geometric/material/context differences are explicitly retained in validation. No claim of complete cell or 95% edge acceptance."
+  "visualStatus": "Opt-in electrical-front candidate with the compatible bulkhead. Native16/8-cell comparisons and independent failures are retained; no complete cell or95% clear-edge acceptance claimed."
 }

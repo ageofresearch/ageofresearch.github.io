@@ -1,0 +1,28 @@
+{
+  "originalEvidence": "evidence-frozen.json retained unchanged",
+  "initial24Controls": "Diagnostic only: overlapping fitting anchors discovered during review. Do not count these as independent.",
+  "independentVerification": "tools/electrical-verification-controls.json; separate24 annotations, all outcomes retained",
+  "referenceCorrection": {
+    "version": 1,
+    "supersededFeatureIDs": [
+      "upper-junction"
+    ],
+    "reason": "The rear boundary is at the top of cube U. The preliminary lower-U rectangle refers to the forward ceiling, outside this electrical-front scope. Original frozen evidence is retained; corrected coverage is explicit.",
+    "features": [
+      {
+        "id": "rear-upper-junction",
+        "observation": "Encuentro superior del frente eléctrico con el techo; paneles y juntas, sin atribuir equipos ocultos.",
+        "face": "u",
+        "rect": [
+          512,
+          0,
+          1536,
+          192
+        ],
+        "materials": "paint / panel joints",
+        "detail": false,
+        "classification": "observed visible junction; no new ceiling reconstruction"
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "stage": "neutral geometry milestone",
+  "neutralGeometrySHA256": "93c2bbb9bd71ad4bfd671215fe333ffdffcd2251f151fc064f48ee7f5eaed5ec",
+  "reviewedViews": [
+    "general-150",
+    "general-180",
+    "general-210"
+  ],
+  "captureSHA256": {
+    "general-210": "c28c61ecc022ab908fcb5ac26eae4e277bf011c29a16ba54101c0a0cf37b503c",
+    "general-180": "4fb75538dc448f82236d59b376122ef8457f5e50968776e1e580d34949c92f0f",
+    "general-150": "8d4a6c7b50963fb608b60ebdd9aa21cfbb30760dee9416d8cab3863457e6cacf"
+  },
+  "assembliesCompared": [
+    "two upper and two lower main cabinet doors",
+    "two controller screens and distinct pilot rows",
+    "eight clear protection covers with internal modules",
+    "shore selector group and separate instruments",
+    "four columns of stamped louvres",
+    "four large and six small battery controls",
+    "immediate wiring and four upper beacons"
+  ],
+  "advanceToFinish": true,
+  "strictVisualAcceptance": false,
+  "manuallyAcceptedCells": 0,
+  "remaining": [
+    "Neutral renders are broad-form checks, not a certification of 24 landmarks or 95% of clear edges.",
+    "Near work-light highlight on the shore panel requires lighting diagnostics.",
+    "Camera registration and unchanged floor/ceiling/context introduce uncertain depths and mounting heights.",
+    "Native cell, material and WebGL comparisons remain required."
+  ],
+  "fineRefinement": {
+    "method": "Native color-control centres and adjoining frames adjusted before finish. These measurements are fitting controls, not held-out validation.",
+    "record": "fit-controls.json",
+    "previousReviewStillApplicable": "Major enclosure, cover, louvre and selector quantities unchanged; refined neutral renders replace previous captures."
+  },
+  "serviceAccessCorrection": {
+    "observedFrontsUnchanged": true,
+    "hiddenBatteryPanelDepthMetres": 0.08,
+    "claddingPlaneSourceX": 6.84,
+    "existingDoorOpeningRetained": true,
+    "reason": "A 40cm inferred cabinet/backing blocked the existing service approach. Narrow mounting depth and a backing opening preserve both the photographed fronts and the original walkable access.",
+    "measurementStatus": "Digital constraints, not real-boat measurements."
+  }
+}

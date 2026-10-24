@@ -1,0 +1,434 @@
+{
+  "version": 1,
+  "id": "electrical-vr-r01",
+  "strategy": "LDM-VR-EST-001 v1.0",
+  "sourceMasterSHA256": "65bc2d6835bc9de897968a33b7e4da2a0ed07b88e96e9d1a08bf820ab1d7a55b",
+  "replacedIDs": [
+    "LD_R02/machinery/switchboard/0",
+    "LD_R02/machinery/switchboard/1",
+    "LD_R02/machinery/switchboard/2",
+    "LD_R02/machinery/switchboard/3",
+    "LD_R02/machinery/switchboard/4",
+    "LD_R02/machinery/switchboard/5",
+    "LD_R02/machinery/switchboard/6",
+    "LD_R02/machinery/switchboard/7",
+    "LD_R02/machinery/switchboard/8",
+    "LD_R02/machinery/switchboard/9",
+    "LD_R02/machinery/switchboard/10",
+    "LD_R02/machinery/switchboard/11",
+    "LD_R02/machinery/switchboard/12",
+    "LD_R02/machinery/switchboard/13",
+    "LD_R02/machinery/switchboard/14",
+    "LD_R02/machinery/switchboard/15",
+    "LD_R02/machinery/switchboard/16",
+    "LD_R02/machinery/switchboard/17",
+    "LD_R02/machinery/switchboard/18",
+    "LD_R02/machinery/switchboard/19",
+    "LD_R02/machinery/switchboard/20",
+    "LD_R02/machinery/switchboard/21",
+    "LD_R02/machinery/switchboard/22",
+    "LD_R02/machinery/switchboard/23",
+    "LD_R02/machinery/switchboard/24",
+    "LD_R02/machinery/switchboard/25",
+    "LD_R02/machinery/switchboard/26",
+    "LD_R02/machinery/switchboard/27",
+    "LD_R02/machinery/switchboard/28",
+    "LD_R02/machinery/switchboard/29",
+    "LD_R02/machinery/switchboard/30",
+    "LD_R02/machinery/switchboard/31",
+    "LD_R02/machinery/switchboard/32",
+    "LD_R02/machinery/switchboard/33",
+    "LD_R02/machinery/switchboard/34",
+    "LD_R02/machinery/switchboard/35",
+    "LD_R02/machinery/switchboard/36",
+    "LD_R02/machinery/switchboard/37",
+    "LD_R02/machinery/switchboard/38",
+    "LD_R02/machinery/switchboard/39",
+    "LD_R02/machinery/switchboard/40",
+    "LD_R02/machinery/switchboard/41",
+    "LD_R02/machinery/switchboard/42",
+    "LD_R02/machinery/switchboard/43",
+    "LD_R02/machinery/switchboard/44",
+    "LD_R02/machinery/switchboard/45",
+    "LD_R02/machinery/switchboard/46",
+    "LD_R02/machinery/switchboard/47",
+    "LD_R02/machinery/switchboard/48",
+    "LD_R02/machinery/switchboard/49",
+    "LD_R02/machinery/switchboard/50",
+    "LD_R02/machinery/switchboard/51",
+    "LD_R02/machinery/switchboard/52",
+    "LD_R02/machinery/switchboard/53",
+    "LD_R02/machinery/switchboard/54",
+    "LD_R02/machinery/switchboard/55",
+    "LD_R02/machinery/switchboard/56",
+    "LD_R02/machinery/switchboard/57",
+    "LD_R02/machinery/switchboard/58",
+    "LD_R02/machinery/switchboard/59",
+    "LD_R02/machinery/switchboard/60",
+    "LD_R02/machinery/switchboard/61",
+    "LD_R02/machinery/asea-0/0",
+    "LD_R02/machinery/asea-0/1",
+    "LD_R02/machinery/asea-0/2",
+    "LD_R02/machinery/asea-0/4",
+    "LD_R02/machinery/asea-0/5",
+    "LD_R02/machinery/asea-1/0",
+    "LD_R02/machinery/asea-1/1",
+    "LD_R02/machinery/asea-1/2",
+    "LD_R02/machinery/asea-1/4",
+    "LD_R02/machinery/asea-1/5",
+    "LD_R02/photo-layout/asea-base/1",
+    "LD_R02/photo-layout/asea-base/2",
+    "LD_R02/photo-layout/asea-base/3",
+    "LD_R02/photo-layout/asea-base/4",
+    "LD_R02/photo-layout/asea-base/5",
+    "LD_R02/machinery-craft/asea-0/201",
+    "LD_R02/machinery-craft/asea-0/202",
+    "LD_R02/machinery-craft/asea-0/203",
+    "LD_R02/machinery-craft/asea-0/204",
+    "LD_R02/machinery-craft/asea-0/205",
+    "LD_R02/machinery-craft/asea-0/206",
+    "LD_R02/machinery-craft/asea-0/207",
+    "LD_R02/machinery-craft/asea-0/208",
+    "LD_R02/machinery-craft/asea-0/209",
+    "LD_R02/machinery-craft/asea-0/210",
+    "LD_R02/machinery-craft/asea-0/211",
+    "LD_R02/machinery-craft/asea-0/212",
+    "LD_R02/machinery-craft/asea-0/213",
+    "LD_R02/machinery-craft/asea-0/214",
+    "LD_R02/machinery-craft/asea-0/215",
+    "LD_R02/machinery-craft/asea-0/216",
+    "LD_R02/machinery-craft/asea-0/217",
+    "LD_R02/machinery-craft/asea-0/218",
+    "LD_R02/machinery-craft/asea-0/219",
+    "LD_R02/machinery-craft/asea-0/220",
+    "LD_R02/machinery-craft/asea-0/221",
+    "LD_R02/machinery-craft/asea-0/222",
+    "LD_R02/machinery-craft/asea-0/223",
+    "LD_R02/machinery-craft/asea-0/224",
+    "LD_R02/machinery-craft/asea-0/225",
+    "LD_R02/machinery-craft/asea-0/226",
+    "LD_R02/machinery-craft/asea-0/227",
+    "LD_R02/machinery-craft/asea-1/228",
+    "LD_R02/machinery-craft/asea-1/229",
+    "LD_R02/machinery-craft/asea-1/230",
+    "LD_R02/machinery-craft/asea-1/231",
+    "LD_R02/machinery-craft/asea-1/232",
+    "LD_R02/machinery-craft/asea-1/233",
+    "LD_R02/machinery-craft/asea-1/234",
+    "LD_R02/machinery-craft/asea-1/235",
+    "LD_R02/machinery-craft/asea-1/236",
+    "LD_R02/machinery-craft/asea-1/237",
+    "LD_R02/machinery-craft/asea-1/238",
+    "LD_R02/machinery-craft/asea-1/239",
+    "LD_R02/machinery-craft/asea-1/240",
+    "LD_R02/machinery-craft/asea-1/241",
+    "LD_R02/machinery-craft/asea-1/242",
+    "LD_R02/machinery-craft/asea-1/243",
+    "LD_R02/machinery-craft/asea-1/244",
+    "LD_R02/machinery-craft/asea-1/245",
+    "LD_R02/machinery-craft/asea-1/246",
+    "LD_R02/machinery-craft/asea-1/247",
+    "LD_R02/machinery-craft/asea-1/248",
+    "LD_R02/machinery-craft/asea-1/249",
+    "LD_R02/machinery-craft/asea-1/250",
+    "LD_R02/machinery-craft/asea-1/251",
+    "LD_R02/machinery-craft/asea-1/252",
+    "LD_R02/machinery-craft/asea-1/253",
+    "LD_R02/machinery-craft/asea-1/254"
+  ],
+  "removedContextTriangles": 6952,
+  "editableObjects": 1601,
+  "sourceTriangles": 90467,
+  "camera": {
+    "sourcePosition": [
+      9.15,
+      0,
+      3.18
+    ],
+    "estimated": true,
+    "fixedForAllViews": true
+  },
+  "neutralGeometrySHA256": "93c2bbb9bd71ad4bfd671215fe333ffdffcd2251f151fc064f48ee7f5eaed5ec",
+  "stage": "material candidate; strict visual acceptance pending",
+  "visualAcceptance": false,
+  "metricLimits": "The existing constant-height floor/ceiling and generators differ from the single VR station. The cabinet depths/supports are estimates; no surveyed dimensions are claimed.",
+  "removedSubmillimetreSlivers": {
+    "triangles": 2384,
+    "areaSquareMetres": 0.000004117174025264347,
+    "scope": "Optimized electrical derivative only; editable components retained"
+  },
+  "uv": {
+    "packing": {
+      "method": "xatlas 0.0.11; independent UV1 on broad static surfaces; small manufactured components receive separately baked per-corner HDR irradiance; physical geometry and UV0 unchanged",
+      "atlasCount": 1,
+      "width": 1891,
+      "height": 1891,
+      "utilization": 0.8037082552909851,
+      "coverage": 0.6201776266098022,
+      "paddingPixels": 4,
+      "effectivePaddingAt2048": 4.332099418297197,
+      "charts": 406
+    },
+    "coverage": 0.6201776387013715,
+    "minimumGutterPixels": 4,
+    "degenerateTriangleFraction": 0,
+    "uvTrianglesSHA256": "bb546d0dc15398e3fd0cca937c6b5a9a6530029b9cc94b774aa901204b6a5eea",
+    "atlasTriangles": 8132,
+    "vertexIrradianceTriangles": 79951,
+    "microLighting": "Cycles full diffuse without albedo baked per corner for components with area below .03 m²; _BAKE_MODE selects this HDR irradiance instead of the atlas. UV degeneracy test applies to atlas participants.",
+    "unusedMicroUV1Zeroed": true
+  },
+  "triangles": 88083,
+  "neutralMilestone": {
+    "stage": "neutral geometry milestone",
+    "neutralGeometrySHA256": "93c2bbb9bd71ad4bfd671215fe333ffdffcd2251f151fc064f48ee7f5eaed5ec",
+    "reviewedViews": [
+      "general-150",
+      "general-180",
+      "general-210"
+    ],
+    "captureSHA256": {
+      "general-210": "c28c61ecc022ab908fcb5ac26eae4e277bf011c29a16ba54101c0a0cf37b503c",
+      "general-180": "4fb75538dc448f82236d59b376122ef8457f5e50968776e1e580d34949c92f0f",
+      "general-150": "8d4a6c7b50963fb608b60ebdd9aa21cfbb30760dee9416d8cab3863457e6cacf"
+    },
+    "assembliesCompared": [
+      "two upper and two lower main cabinet doors",
+      "two controller screens and distinct pilot rows",
+      "eight clear protection covers with internal modules",
+      "shore selector group and separate instruments",
+      "four columns of stamped louvres",
+      "four large and six small battery controls",
+      "immediate wiring and four upper beacons"
+    ],
+    "advanceToFinish": true,
+    "strictVisualAcceptance": false,
+    "manuallyAcceptedCells": 0,
+    "remaining": [
+      "Neutral renders are broad-form checks, not a certification of 24 landmarks or 95% of clear edges.",
+      "Near work-light highlight on the shore panel requires lighting diagnostics.",
+      "Camera registration and unchanged floor/ceiling/context introduce uncertain depths and mounting heights.",
+      "Native cell, material and WebGL comparisons remain required."
+    ],
+    "fineRefinement": {
+      "method": "Native color-control centres and adjoining frames adjusted before finish. These measurements are fitting controls, not held-out validation.",
+      "record": "fit-controls.json",
+      "previousReviewStillApplicable": "Major enclosure, cover, louvre and selector quantities unchanged; refined neutral renders replace previous captures."
+    },
+    "serviceAccessCorrection": {
+      "observedFrontsUnchanged": true,
+      "hiddenBatteryPanelDepthMetres": 0.08,
+      "claddingPlaneSourceX": 6.84,
+      "existingDoorOpeningRetained": true,
+      "reason": "A 40cm inferred cabinet/backing blocked the existing service approach. Narrow mounting depth and a backing opening preserve both the photographed fronts and the original walkable access.",
+      "measurementStatus": "Digital constraints, not real-boat measurements."
+    }
+  },
+  "sourceTextures": {
+    "cream-color.png": "14acc3aae2cf2bf6b22f19a24d20bb67694d0c2c82321c0e10da14ffc7d04aad",
+    "blue-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "screen-pale-color.png": "e62e34d42b3f34df73a46a197c928d32620b8bb23e21af3fbd13acb612c76f50",
+    "screen-pale-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "screen-pale-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+    "metal-orm.png": "e1d194f21540a321a8a97d1385ebacf5e6b194b949ba31a669b2b9e585afcca5",
+    "amber-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "screen-color.png": "f64dba80eccfe18790368410fd417a95569f9d17551d53e81685327089694cb4",
+    "green-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "metal-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "edge-orm.png": "4d726d0c149d875579e1b91a73321565b60d67992365ff8cc03bc0804224220e",
+    "red-color.png": "c72afbdf425ab35b75b555d385c778bb20d9146e0a106e18cfb107233cf204bd",
+    "red-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "green-lit-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+    "green-orm.png": "ea9df2126f9927c85488f751aa13ce7dcea24c5edc4ace60bb8ba11c1941e57e",
+    "rubber-normal.png": "3b3c58f5f79041c01085cd5e3baa2d47d8bbce9dbd132504bd2eae436c9894b9",
+    "copper-color.png": "c0a6adbbe6673d2be7764402c652dc1082f230a9fba7c3af4c7ab8bb7bed3861",
+    "paint-color.png": "e3ab6583364b7f020d84f7681e04071a4c021ca51776699b8806ae773cca23ae",
+    "amber-color.png": "3220b8712ac8b58b0efcad40df33c18c98790dcf89793e83d4be6aa304a05a28",
+    "paint-normal.png": "61befd15374e5692fee530f8b6b23eaa933770e6bb5d64833b75a1624b445cda",
+    "paint-orm.png": "278f405872c16d8af3de6eeb86e6d764740d44eab86958f46be96112eb7dc6c1",
+    "red-orm.png": "67c81958d3a2fa2fc8d9dc54958c9e3ca6c42e564e4744969c6af83467c7e8a8",
+    "edge-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "copper-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "blue-lit-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+    "glass-color.png": "6bb91bef85bf1dd0a6362103f6dfbb7ca3f9a66a2b2d855580c3df1993a4fd27",
+    "glass-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "amber-orm.png": "ea9df2126f9927c85488f751aa13ce7dcea24c5edc4ace60bb8ba11c1941e57e",
+    "screen-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "rubber-color.png": "3d93b9873a2e69fe2787f06db50e1ac359497c75fe7411ed13c220f1f8fb6904",
+    "green-color.png": "9d4a57b0231c725219eec035f86b4b30690513e2d089b0a8d018b53d4d1924d2",
+    "blue-lit-color.png": "af87d413f78f73a77a1ce304935d656c05023e82a0033ccf50b4e05a56aecb2f",
+    "blue-orm.png": "278f405872c16d8af3de6eeb86e6d764740d44eab86958f46be96112eb7dc6c1",
+    "screen-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+    "glass-orm.png": "6ec78217dd181d9016c2d738936f1a562867e1d791c3cc3e4bfcce90193be4a1",
+    "copper-orm.png": "79ef73499b4c1ce846ceabb9ff7a35da9de1ae243fb16f2d8b2baad9a4544716",
+    "blue-color.png": "42a588397eedc797cf5b48d825cebb57ad5180d220774ea2adf54107826c65d5",
+    "green-lit-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "blue-lit-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "rubber-orm.png": "6037ccad2b87469b06f012da4675544ffd79d2c6835a8bf8b813acf27e695c41",
+    "cream-orm.png": "a8606c1e6f9474c960e7527609ef9496097b3fc9cb04c597a58251812157e257",
+    "metal-color.png": "29ad966cb185bdb75596c0070950319fa59903da6634f1709b9a40a207574aa5",
+    "green-lit-color.png": "d1e8c5108814d5a9fc9303e47b01ba68a555c5d81abd9411d942e6654c9602c4",
+    "dark-orm.png": "720f0b18b580501c16484febceb2be437e7f0eed217fbc47fd347fa7e5e65a43",
+    "dark-color.png": "1013f7a09c8a8591e50bf8ad505d7de857a0c278376442c939f0f10567b3cd5a",
+    "edge-color.png": "e799cabaa4d80bb1e0aa3942dfcb27e5b8372de532323799ea6015791c6bf672",
+    "cream-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+    "dark-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c"
+  },
+  "masterSHA256": "976cd860c07e81d15c74000d24d5a5c01f8581ba257a45800725150dc52cdb3b",
+  "lighting": {
+    "diffuseSamples": 64,
+    "reflectionSamples": 128,
+    "irradianceSize": 2048,
+    "model": "Full diffuse direct+indirect without albedo; local static probe specular; no duplicate direct contribution",
+    "hdr": "Linear RGB half-float EXR DWAA",
+    "files": {
+      "electrical-irradiance.exr": {
+        "rawSHA256": "53c82e8b875ff4e9d6fa6784a26d5971ca8316945cd58c4b6855ece0c6355e3b",
+        "sha256": "da3909ac6bffbb816427b45a53555b25259f39b5ec3d6f20a47eee3becbd862b",
+        "bytes": 4458209
+      },
+      "bulkhead-irradiance.exr": {
+        "rawSHA256": "1e4d8c0010cb32635c8eb8ccbee877ed50f8f7b675ea5b49e6ea494b59cc7ae8",
+        "sha256": "ea517450b57c47427a7042ffeabdce1dd66a37c6c9873300d588ac1afe814e23",
+        "bytes": 7401037
+      },
+      "port-irradiance.exr": {
+        "rawSHA256": "65c32e9c3df54f1e18c4efcd69a64ee5ed976703d57403ab14e50551f1919f51",
+        "sha256": "14329e86696f44657e759b9c8312e34057d24529b6e727850213be216fcf1dcd",
+        "bytes": 6508427
+      },
+      "starboard-irradiance.exr": {
+        "rawSHA256": "33cc1ef04a656ac0ffd7a61b3ab55919ff2709dbadc7c0103757502231e02d01",
+        "sha256": "3fca77a985317d778f9391235604d9364f9ef190ec84063d775ca4bf0015c696",
+        "bytes": 6322509
+      },
+      "room-probe-0.exr": {
+        "sha256": "e01e479aa6f5af92ae80983a8301eaee27efb6389328d18d88e75699547eaca9",
+        "bytes": 686241
+      },
+      "room-probe-1.exr": {
+        "sha256": "1b2a24db3bcb3bc87200aae66e538c4499679905d81bc028aa2f670fb35f1e9a",
+        "bytes": 548497
+      },
+      "room-probe-2.exr": {
+        "sha256": "70cfbdad373b099c763e3ef2d3adecd267f69e3fd48117914f807f3a1e16fe64",
+        "bytes": 627171
+      }
+    },
+    "engineUVBindings": {
+      "electrical": {
+        "cornerSHA256": "6d005c5394869064e96c32bb3a93f16e5bb108a1e43295ed2b43b204acafbeee",
+        "triangles": 88083,
+        "originalGeometryUnchanged": true
+      },
+      "bulkhead": {
+        "cornerSHA256": "200e63598a35c7d5b532e3e5044c33ee3782ced543dac4801aadcaa73e15ee0d",
+        "triangles": 88293,
+        "originalGeometryUnchanged": false
+      },
+      "port": {
+        "cornerSHA256": "078d47b61afd468c2f9b97d759460e917eef7df7253d669748040f9394184e09",
+        "triangles": 142465,
+        "originalGeometryUnchanged": true
+      },
+      "starboard": {
+        "cornerSHA256": "93be7c3dd230bef638c0f5a0cfbe0b2ee511643b3838c18d8c5c1c69e43ae989",
+        "triangles": 170607,
+        "originalGeometryUnchanged": true
+      }
+    },
+    "cornerIrradiance": {
+      "samples": 64,
+      "corners": 264249,
+      "maximum": 1560.291748046875,
+      "minimum": 0,
+      "sha256": "c32f84611d255c8b821c57db1746e1ca3a3d7cf454046bf5c87e8daa28250b8c",
+      "mode": "Full diffuse direct + indirect without albedo, actual corner positions/normals; only _BAKE_MODE=1 consumes these values."
+    },
+    "probes": {
+      "room": [
+        {
+          "id": "machinery-0",
+          "sourcePosition": [
+            8.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -9.394666666666666
+          ],
+          "asset": "room-probe-0.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        },
+        {
+          "id": "machinery-1",
+          "sourcePosition": [
+            10.5,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -7.339583333333334
+          ],
+          "asset": "room-probe-1.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        },
+        {
+          "id": "machinery-2",
+          "sourcePosition": [
+            12.4,
+            0,
+            2.7
+          ],
+          "position": [
+            0,
+            0.6900000000000004,
+            -5.4802222222222206
+          ],
+          "asset": "room-probe-2.exr",
+          "width": 1024,
+          "height": 512,
+          "samples": 128,
+          "purpose": "Local fixed work-light reflection; engine exterior and closed panels represented in this static capture",
+          "state": "New bulkhead with installed static engine exteriors"
+        }
+      ]
+    }
+  },
+  "sourceGeometrySHA256": "493e68c4aa7015822caa7f16fa33c166af10fb65971f23b57ad60e5dc14fb51f",
+  "microUVRepair": {
+    "cause": "Blender copied UV0 into a newly created UV1. Unused micro coordinates could overlap the macro image bake.",
+    "clearedMicroCorners": 239853,
+    "previousOutOfRangeCorners": 112667,
+    "macroUVsByteIdentical": true,
+    "geometryMaterialUV0CornerIrradianceAndModeUnchanged": true,
+    "nonUVBindingSHA256": "35e05f56d9307270bc413a44fee654c843c2f620f577887e484ee100270012bc",
+    "otherEngineAndBulkheadLightmapUVsUnchanged": true,
+    "electricalAtlasRequiresRebake": true,
+    "electricalAtlasRebaked": true,
+    "samples": 64,
+    "seconds": 641.7351768016815
+  },
+  "removedUnusedUVLayers": [],
+  "transportSourceGeometrySHA256": "7d10b9d2943d5d18b4fe789006f1f45710df867f0f67f10b74fa4f442ccff62a",
+  "bakedUV1BindingPreservedDuringExportRepair": true,
+  "display": {
+    "transform": "Khronos PBR Neutral",
+    "exposureMultiplier": 0.05,
+    "output": "sRGB"
+  },
+  "runtimeGeometrySHA256": "d009df34dbf3497e56a7519a5037e27558ae2eee2311fcbde8158e10ff6bbdb5",
+  "replacedTriangles": 6952
+}

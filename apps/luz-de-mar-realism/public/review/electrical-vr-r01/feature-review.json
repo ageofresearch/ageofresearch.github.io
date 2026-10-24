@@ -1,0 +1,104 @@
+{
+  "version": "electrical-vr-r01",
+  "method": "Manual comparison of eight fixed WebGL / source views and matching feature regions, with full-face diagnostics kept separately. A feature review is not manual acceptance of every 16/8px leaf.",
+  "strictVisualAcceptance": false,
+  "allCellsManuallyReviewed": false,
+  "features": [
+    {
+      "id": "distribution-upper",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Dos frentes, dos controladores y filas de pilotos presentes.",
+      "pending": "Pantallas sin la información fina observable, tipografía y rebordes todavía distintos. El plafón y la luminaria conservados ocultan zonas superiores.",
+      "accepted": false
+    },
+    {
+      "id": "distribution-upper-R",
+      "face": "r",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Continuidad del segundo frente alrededor de la unión B/R.",
+      "pending": "Revisar el relieve del marco y la separación de pequeños pulsadores con luz neutra. No se certifican todos los bordes.",
+      "accepted": false
+    },
+    {
+      "id": "distribution-lower",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Cuatro cubiertas por puerta, juntas, cerraduras y rejilla presentes.",
+      "pending": "Las filas interiores son una aproximación; el patrón real de interruptores y las etiquetas requieren corrección. Cubiertas y marcos demasiado oscuros.",
+      "accepted": false
+    },
+    {
+      "id": "distribution-lower-R",
+      "face": "r",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Cuatro cubiertas y continuidad entre ambas puertas.",
+      "pending": "Misma simplificación de protecciones. Apoyos inferiores y entorno de suelo inferidos se distinguen de la fotografía.",
+      "accepted": false
+    },
+    {
+      "id": "shore",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Dos grandes selectores, dos instrumentos, mando inferior y selector pequeño presentes.",
+      "pending": "Respuesta de metal demasiado contrastada; dial, pantalla y tamaño de textos no coinciden. Hay oclusión de la luminaria original sobre el título.",
+      "accepted": false
+    },
+    {
+      "id": "vented",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Cuatro columnas de lamas, tapa, dos argollas y fijaciones reconstruidas.",
+      "pending": "Contraste de las lamas demasiado duro. Cantidad terminal y partes inferiores ocultas son estimadas; no declarar un número exacto observado. Diferencias de pedestal y suelo visibles.",
+      "accepted": false
+    },
+    {
+      "id": "battery",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Cuatro selectores rojos y seis mandos menores con retenedores presentes.",
+      "pending": "Ajustar espesores de aro y maneta, pequeños terminales y distribución de los cables. Las posiciones de algunos puntos independientes exceden 4px.",
+      "accepted": false
+    },
+    {
+      "id": "battery-enclosure",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Columna y rejilla superior reconstruidas.",
+      "pending": "Profundidad reducida a 8cm como inferencia para conservar la puerta. La puerta de contexto con ojo de buey no está en la VR y permanece visible.",
+      "accepted": false
+    },
+    {
+      "id": "cables",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Haces horizontales y bajadas entran en placa/bandeja; soportes presentes.",
+      "pending": "Los haces son más regulares que la referencia, faltan terminales de certeza insuficiente y la pequeña pantalla lateral es simplificada.",
+      "accepted": false
+    },
+    {
+      "id": "cables-R",
+      "face": "r",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Continuación de tubos/cableado entre caras incluida.",
+      "pending": "Los accesorios azules y el contexto adyacente proceden del cuarto anterior; no forman parte de esta sustitución y no coinciden con la VR.",
+      "accepted": false
+    },
+    {
+      "id": "beacons",
+      "face": "b",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Cuatro balizas, dos rojas, ámbar y azul.",
+      "pending": "Carcasas y soportes presentan diferencias de detalle y reflejo; no aceptación por coincidencia de cantidad.",
+      "accepted": false
+    },
+    {
+      "id": "rear-upper-junction",
+      "face": "u",
+      "state": "reviewed; corrections remain",
+      "observedInCandidate": "Máscara U corregida explícitamente para el encuentro trasero.",
+      "pending": "El techo completo está fuera de alcance y conserva su forma/luminarias anteriores; no certificarlo como reconstruido.",
+      "accepted": false
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "method": "Native-source annotations reserved after fine fitting, before verification. These are not passed to the modelling scripts. All results, including failures and occlusions, must be retained.",
+  "originalEvidenceControls": "The original 24 entries overlap with fitted selector centres and are diagnostic only; they do not establish independent acceptance.",
+  "points": [
+    {"id":"D-V01","assembly":"distribution","face":"b","pixel":[452,482],"object":"main door 1 latch 1","measure":"centroid"},
+    {"id":"D-V02","assembly":"distribution","face":"b","pixel":[450,974],"object":"main door 1 latch 2","measure":"centroid"},
+    {"id":"D-V03","assembly":"distribution","face":"b","pixel":[65,531],"object":"right upper meter black frame","measure":"centroid"},
+    {"id":"D-V04","assembly":"distribution","face":"b","pixel":[228,638],"object":"right display auxiliary key 0","measure":"centroid"},
+    {"id":"D-V05","assembly":"distribution","face":"b","pixel":[432,714],"object":"right Woodward black bezel","measure":"boundary"},
+    {"id":"D-V06","assembly":"distribution","face":"b","pixel":[376,1711],"object":"lower right chevron grille 6","measure":"boundary"},
+    {"id":"S-V01","assembly":"shore","face":"b","pixel":[834,694],"object":"shore selector polished plate 0","measure":"boundary"},
+    {"id":"S-V02","assembly":"shore","face":"b","pixel":[887,786],"object":"phase instrument pilot 0","measure":"centroid"},
+    {"id":"S-V03","assembly":"shore","face":"b","pixel":[912,961],"object":"shore general switch ivory inset","measure":"boundary"},
+    {"id":"S-V04","assembly":"shore","face":"b","pixel":[1120,976],"object":"shore voltage small plate","measure":"boundary"},
+    {"id":"S-V05","assembly":"shore","face":"b","pixel":[1264,681],"object":"shore right secondary instrument LCD","measure":"centroid"},
+    {"id":"S-V06","assembly":"shore","face":"b","pixel":[1174,803],"object":"shore small latch screw","measure":"centroid"},
+    {"id":"V-V01","assembly":"vented","face":"b","pixel":[760,1441],"object":"stamped louvre 0 5","measure":"boundary"},
+    {"id":"V-V02","assembly":"vented","face":"b","pixel":[760,1597],"object":"stamped louvre 0 10","measure":"boundary"},
+    {"id":"V-V03","assembly":"vented","face":"b","pixel":[1129,1724],"object":"stamped louvre 2 14","measure":"boundary"},
+    {"id":"V-V04","assembly":"vented","face":"b","pixel":[1312,1536],"object":"stamped louvre 3 8","measure":"boundary"},
+    {"id":"V-V05","assembly":"vented","face":"b","pixel":[664,1227],"object":"vented lid screw 664","measure":"centroid"},
+    {"id":"V-V06","assembly":"vented","face":"b","pixel":[1432,1227],"object":"vented lid screw 1432","measure":"centroid"},
+    {"id":"B-V01","assembly":"battery","face":"b","pixel":[1901,699],"object":"battery large mounting screw 0 0","measure":"centroid"},
+    {"id":"B-V02","assembly":"battery","face":"b","pixel":[1980,813],"object":"battery large mounting screw 1 1","measure":"centroid"},
+    {"id":"B-V03","assembly":"battery","face":"b","pixel":[1893,947],"object":"battery selector cream ring 2","measure":"boundary"},
+    {"id":"B-V04","assembly":"battery","face":"b","pixel":[1934,1150],"object":"battery small upper fixing 0","measure":"centroid"},
+    {"id":"B-V05","assembly":"battery","face":"b","pixel":[1941,1399],"object":"battery protective cap 1","measure":"centroid"},
+    {"id":"B-V06","assembly":"battery","face":"b","pixel":[1934,1737],"object":"battery small upper fixing 5","measure":"centroid"}
+  ]
+}

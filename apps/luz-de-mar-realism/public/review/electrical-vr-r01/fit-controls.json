@@ -1,0 +1,653 @@
+{
+  "method": "Native colored-control centres and visual panel boundaries. Fitting only, never reported as independent validation.",
+  "adjustments": [
+    {
+      "cluster": "left upper pilot 0 0",
+      "old": [
+        -475,
+        628
+      ],
+      "new": [
+        -493,
+        607.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left upper pilot 0 1",
+      "old": [
+        -417,
+        628
+      ],
+      "new": [
+        -434.4,
+        607.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left upper pilot 0 2",
+      "old": [
+        -359,
+        628
+      ],
+      "new": [
+        -375.8,
+        607.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left upper pilot 1 0",
+      "old": [
+        -475,
+        683
+      ],
+      "new": [
+        -493,
+        662
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left upper pilot 1 1",
+      "old": [
+        -417,
+        683
+      ],
+      "new": [
+        -434.4,
+        662
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left upper pilot 1 2",
+      "old": [
+        -359,
+        683
+      ],
+      "new": [
+        -375.8,
+        662
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right upper pilot 0 0",
+      "old": [
+        40,
+        628
+      ],
+      "new": [
+        35,
+        611.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right upper pilot 0 1",
+      "old": [
+        98,
+        628
+      ],
+      "new": [
+        93.9,
+        611.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right upper pilot 0 2",
+      "old": [
+        156,
+        628
+      ],
+      "new": [
+        151.4,
+        611.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right upper pilot 1 0",
+      "old": [
+        40,
+        683
+      ],
+      "new": [
+        35,
+        665
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right upper pilot 1 1",
+      "old": [
+        98,
+        683
+      ],
+      "new": [
+        93.9,
+        665
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right upper pilot 1 2",
+      "old": [
+        156,
+        683
+      ],
+      "new": [
+        151.4,
+        665
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 0 0",
+      "old": [
+        -398,
+        750
+      ],
+      "new": [
+        -373.2,
+        737.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 0 1",
+      "old": [
+        -332,
+        750
+      ],
+      "new": [
+        -320.6,
+        737.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 0 2",
+      "old": [
+        -266,
+        750
+      ],
+      "new": [
+        -264.9,
+        737.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 0 3",
+      "old": [
+        -200,
+        750
+      ],
+      "new": [
+        -208.6,
+        737.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 0 4",
+      "old": [
+        -134,
+        750
+      ],
+      "new": [
+        -153.2,
+        737.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 0 5",
+      "old": [
+        -68,
+        750
+      ],
+      "new": [
+        -97.3,
+        737.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 1 0",
+      "old": [
+        -398,
+        802
+      ],
+      "new": [
+        -377.4,
+        793
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 1 1",
+      "old": [
+        -332,
+        802
+      ],
+      "new": [
+        -323.1,
+        793
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 1 2",
+      "old": [
+        -266,
+        802
+      ],
+      "new": [
+        -261.8,
+        793
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 1 3",
+      "old": [
+        -200,
+        802
+      ],
+      "new": [
+        -205.4,
+        793
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 1 4",
+      "old": [
+        -134,
+        802
+      ],
+      "new": [
+        -150.2,
+        793
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left management 1 5",
+      "old": [
+        -68,
+        802
+      ],
+      "new": [
+        -95,
+        793
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 0",
+      "old": [
+        -487,
+        869
+      ],
+      "new": [
+        -487,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 1",
+      "old": [
+        -425,
+        869
+      ],
+      "new": [
+        -437,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 2",
+      "old": [
+        -363,
+        869
+      ],
+      "new": [
+        -387,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 3",
+      "old": [
+        -301,
+        869
+      ],
+      "new": [
+        -317,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 4",
+      "old": [
+        -239,
+        869
+      ],
+      "new": [
+        -264,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 5",
+      "old": [
+        -177,
+        869
+      ],
+      "new": [
+        -212,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 6",
+      "old": [
+        -115,
+        869
+      ],
+      "new": [
+        -156,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 0 7",
+      "old": [
+        -53,
+        869
+      ],
+      "new": [
+        -106,
+        865
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 0",
+      "old": [
+        -487,
+        930
+      ],
+      "new": [
+        -487,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 1",
+      "old": [
+        -425,
+        930
+      ],
+      "new": [
+        -437,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 2",
+      "old": [
+        -363,
+        930
+      ],
+      "new": [
+        -387,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 3",
+      "old": [
+        -301,
+        930
+      ],
+      "new": [
+        -317,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 4",
+      "old": [
+        -239,
+        930
+      ],
+      "new": [
+        -264,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 5",
+      "old": [
+        -177,
+        930
+      ],
+      "new": [
+        -212,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 6",
+      "old": [
+        -115,
+        930
+      ],
+      "new": [
+        -156,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "left service 1 7",
+      "old": [
+        -53,
+        930
+      ],
+      "new": [
+        -106,
+        936
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right management 0",
+      "old": [
+        43,
+        790
+      ],
+      "new": [
+        35.8,
+        766.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right management 1",
+      "old": [
+        115,
+        790
+      ],
+      "new": [
+        93.5,
+        766.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right management 2",
+      "old": [
+        187,
+        790
+      ],
+      "new": [
+        154,
+        766.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right management 3",
+      "old": [
+        259,
+        790
+      ],
+      "new": [
+        199.2,
+        766.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right management 4",
+      "old": [
+        331,
+        790
+      ],
+      "new": [
+        256.5,
+        766.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right management 5",
+      "old": [
+        403,
+        790
+      ],
+      "new": [
+        318.8,
+        766.5
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right blue internal selector",
+      "old": [
+        483,
+        799
+      ],
+      "new": [
+        399.2,
+        766.1
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 0",
+      "old": [
+        43,
+        900
+      ],
+      "new": [
+        40.7,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 1",
+      "old": [
+        107,
+        900
+      ],
+      "new": [
+        104,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 2",
+      "old": [
+        171,
+        900
+      ],
+      "new": [
+        165.1,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 3",
+      "old": [
+        235,
+        900
+      ],
+      "new": [
+        231,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 4",
+      "old": [
+        299,
+        900
+      ],
+      "new": [
+        299.1,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 5",
+      "old": [
+        363,
+        900
+      ],
+      "new": [
+        364,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    },
+    {
+      "cluster": "right service 6",
+      "old": [
+        427,
+        900
+      ],
+      "new": [
+        427.8,
+        868
+      ],
+      "source": "native B or R-to-B angular resampling; used for fitting"
+    }
+  ]
+}

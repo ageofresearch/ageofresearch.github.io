@@ -1,0 +1,6 @@
+{
+  "atlasSurfacePixels": 2675203,
+  "microDestinationPixels": 3385570,
+  "overlappingDestinationPixels": 2277882,
+  "cause": "New Blender UV layer copied active physical UV0 into unassigned micro UV1. Micro pieces use corner irradiance, but their unused UV1 could still overwrite the broad-surface bake."
+}

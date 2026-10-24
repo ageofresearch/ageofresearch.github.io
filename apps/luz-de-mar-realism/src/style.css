@@ -11,3 +11,8 @@
 .deck-stair{fill:#dfddd1;stroke:#879683;stroke-width:1;stroke-dasharray:3 2;pointer-events:none}
 
 .inspection-open .room-caption{visibility:hidden}.inspector #motor-clock{margin-left:auto;font-variant-numeric:tabular-nums}.inspector input[type=range]{min-height:22px}
+
+.resolution-control{display:flex;align-items:center;gap:8px;background:#f7f4edeb;padding:5px 8px 5px 12px;border-radius:4px;font-size:11px}.resolution-control select{font:inherit;color:#344237;background:#fff9;border:1px solid #8c978c66;border-radius:4px;padding:8px;min-height:34px}.resolution-control span{max-width:65px;line-height:1.3}@media(max-width:650px){.resolution-control{font-size:10px;padding:4px 6px}.resolution-control span{display:none}.resolution-control select{padding:6px;min-height:32px}}
+@media(min-width:651px) and (max-width:1000px){.machinery-room .resolution-control span{display:none}.machinery-room .room-actions{gap:8px}.machinery-room .room-caption h1{font-size:24px}}
+@media(pointer:coarse){.resolution-control select{min-height:44px}}
+@media(pointer:coarse) and (max-height:500px){.machinery-room .inspector{top:86px}.machinery-room .room-caption{left:14px;bottom:18px;padding:10px 14px}.machinery-room .room-caption h1{font-size:22px;margin:4px 0}.machinery-room .room-caption p{display:none}.machinery-room .room-caption small{font-size:8px}.machinery-room .room-actions{right:14px;bottom:18px;gap:8px}.machinery-room .resolution-control span{display:none}}

@@ -1,0 +1,916 @@
+{
+  "revision": "machinery-sharp-r01",
+  "checks": {
+    "sharp": {
+      "canvas": [
+        1920,
+        1280
+      ],
+      "differentPixels": 0,
+      "movingSHA256": "430b9715fc973b74743b71956dd332cd0332776101d56b16f4fd6f1aae20284c",
+      "restSHA256": "430b9715fc973b74743b71956dd332cd0332776101d56b16f4fd6f1aae20284c"
+    },
+    "performance": {
+      "canvas": [
+        960,
+        640
+      ],
+      "differentPixels": 0,
+      "movingSHA256": "8ed9abab66792e1d3321456699445a8745e99180418953bc24fb41ba67a7e9a7",
+      "restSHA256": "8ed9abab66792e1d3321456699445a8745e99180418953bc24fb41ba67a7e9a7"
+    }
+  },
+  "browserChecks": {
+    "sharpPixelsIdentical": true,
+    "performancePixelsIdentical": true,
+    "pointerRotationSharp": true,
+    "fixedOverrideAndClear": true,
+    "productionCadencesAndStalls": true,
+    "sessionPreference": true,
+    "roomPolicyAndReturn": true,
+    "visibilityAndIdle": true,
+    "inspectionControls": true,
+    "resourcesStable": true,
+    "contextRestore": true
+  },
+  "controlledProductionCadences": [
+    {
+      "mode": "sharp",
+      "hz": 30,
+      "seconds": 30,
+      "longStallMs": 10000,
+      "ratios": [
+        2
+      ],
+      "source": "machinery"
+    },
+    {
+      "mode": "sharp",
+      "hz": 60,
+      "seconds": 30,
+      "longStallMs": 10000,
+      "ratios": [
+        2
+      ],
+      "source": "machinery"
+    },
+    {
+      "mode": "sharp",
+      "hz": 120,
+      "seconds": 30,
+      "longStallMs": 10000,
+      "ratios": [
+        2
+      ],
+      "source": "machinery"
+    },
+    {
+      "mode": "performance",
+      "hz": 30,
+      "seconds": 30,
+      "longStallMs": 10000,
+      "ratios": [
+        1
+      ],
+      "source": "machinery"
+    },
+    {
+      "mode": "performance",
+      "hz": 60,
+      "seconds": 30,
+      "longStallMs": 10000,
+      "ratios": [
+        1
+      ],
+      "source": "machinery"
+    },
+    {
+      "mode": "performance",
+      "hz": 120,
+      "seconds": 30,
+      "longStallMs": 10000,
+      "ratios": [
+        1
+      ],
+      "source": "machinery"
+    }
+  ],
+  "environment": {
+    "renderer": "SwiftShader; correctness only, not hardware FPS",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "hardwareFPSValidated": false,
+  "geometryMaterialsAndAnisotropyChanged": false,
+  "pass": true,
+  "sourceSHA256": {
+    "src/main.js": "ee1880be53e51048fb284fbdd0a9797e0ae61b2c15ffe69d0c1af2074916f8c2",
+    "src/resolution.js": "861d062988bcf13dec54a24ddbd5c2e25b3c0c8a34ef40e56abdf81780182155",
+    "src/style.css": "3585d8ac9109382e14a300265904a6a75b444d5ce2f22fad4cabe21202207637",
+    "index.html": "f82ff87b5638755811c0aa921a031d9f6e5ceb3af66145e414b4d50d344f1866"
+  },
+  "matchedBaseline": {
+    "beforeWalkingCanvas": [
+      825,
+      550
+    ],
+    "afterCanvas": [
+      1920,
+      1280
+    ],
+    "sameCamera": true,
+    "fullReferenceDifferentPixels": 18,
+    "rmse8bit": 0.010552499786122297
+  },
+  "timing_before": {
+    "url": "http://127.0.0.1:5253/",
+    "method": "8 actual walking frames at fixed 600x400; first two warm frames excluded. Full-buffer synchronous readPixels forces completion; latency includes rendering, CPU submission and readback. Short diagnostic, not a sustained FPS benchmark.",
+    "environment": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "cpuQuota": "400000 100000",
+      "software": "SwiftShader; no hardware FPS inference"
+    },
+    "frames": [
+      {
+        "ms": 7018.5,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 308880,
+        "calls": 82
+      },
+      {
+        "ms": 2885,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 306708,
+        "calls": 80
+      },
+      {
+        "ms": 2820.199999988079,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 306612,
+        "calls": 79
+      },
+      {
+        "ms": 2693.300000011921,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 306612,
+        "calls": 79
+      },
+      {
+        "ms": 2656.900000035763,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 305694,
+        "calls": 76
+      },
+      {
+        "ms": 2586.5,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          239,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 305694,
+        "calls": 76
+      },
+      {
+        "ms": 2635.399999976158,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          239,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 305694,
+        "calls": 76
+      },
+      {
+        "ms": 2440.699999988079,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          239,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 290472,
+        "calls": 74
+      }
+    ],
+    "p50": 2656.900000035763,
+    "p95": 2820.199999988079,
+    "pass": true
+  },
+  "timing_after": {
+    "url": "http://127.0.0.1:5251/",
+    "method": "8 actual walking frames at fixed 600x400; first two warm frames excluded. Full-buffer synchronous readPixels forces completion; latency includes rendering, CPU submission and readback. Short diagnostic, not a sustained FPS benchmark.",
+    "environment": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "cpuQuota": "400000 100000",
+      "software": "SwiftShader; no hardware FPS inference"
+    },
+    "frames": [
+      {
+        "ms": 6907.099999964237,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 308880,
+        "calls": 82
+      },
+      {
+        "ms": 2867.199999988079,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 306708,
+        "calls": 80
+      },
+      {
+        "ms": 2821.899999976158,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 306612,
+        "calls": 79
+      },
+      {
+        "ms": 2681.300000011921,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 306612,
+        "calls": 79
+      },
+      {
+        "ms": 2607.199999988079,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          238,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 305694,
+        "calls": 76
+      },
+      {
+        "ms": 2568.300000011921,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          239,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 305694,
+        "calls": 76
+      },
+      {
+        "ms": 2500.5,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          239,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 305694,
+        "calls": 76
+      },
+      {
+        "ms": 2526,
+        "readbackBytes": 960000,
+        "centerPixel": [
+          237,
+          239,
+          226,
+          255
+        ],
+        "canvas": [
+          600,
+          400
+        ],
+        "triangles": 290472,
+        "calls": 74
+      }
+    ],
+    "p50": 2607.199999988079,
+    "p95": 2821.899999976158,
+    "pass": true,
+    "cadence": [
+      {
+        "mode": "sharp",
+        "hz": 30,
+        "seconds": 30,
+        "longStallMs": 10000,
+        "ratios": [
+          1
+        ],
+        "source": "machinery"
+      },
+      {
+        "mode": "sharp",
+        "hz": 60,
+        "seconds": 30,
+        "longStallMs": 10000,
+        "ratios": [
+          1
+        ],
+        "source": "machinery"
+      },
+      {
+        "mode": "sharp",
+        "hz": 120,
+        "seconds": 30,
+        "longStallMs": 10000,
+        "ratios": [
+          1
+        ],
+        "source": "machinery"
+      },
+      {
+        "mode": "performance",
+        "hz": 30,
+        "seconds": 30,
+        "longStallMs": 10000,
+        "ratios": [
+          1
+        ],
+        "source": "machinery"
+      },
+      {
+        "mode": "performance",
+        "hz": 60,
+        "seconds": 30,
+        "longStallMs": 10000,
+        "ratios": [
+          1
+        ],
+        "source": "machinery"
+      },
+      {
+        "mode": "performance",
+        "hz": 120,
+        "seconds": 30,
+        "longStallMs": 10000,
+        "ratios": [
+          1
+        ],
+        "source": "machinery"
+      }
+    ]
+  },
+  "mobile": {
+    "checks": {
+      "mobileDPRAndSelector": true,
+      "actualTouchWalk": true,
+      "orientation": true
+    },
+    "errors": [],
+    "portrait": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        8.62,
+        0
+      ],
+      "frames": 5,
+      "ratio": 2,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 2,
+        "effectiveDPR": 2,
+        "hardwareLimited": false,
+        "canvas": [
+          780,
+          1688
+        ]
+      },
+      "canvas": [
+        780,
+        1688
+      ],
+      "calls": 80,
+      "triangles": 315339,
+      "memory": {
+        "geometries": 118,
+        "textures": 89
+      },
+      "estimatedMemory": {
+        "geometryBytes": 42884956,
+        "textureBytes": 415587857,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 466861421,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 3,
+        "p95": 3
+      },
+      "shadowUpdates": 11,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "afterTouch": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        8.763012205506678,
+        -1.7437615165926695e-17
+      ],
+      "frames": 10,
+      "ratio": 2,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 2,
+        "effectiveDPR": 2,
+        "hardwareLimited": false,
+        "canvas": [
+          780,
+          1688
+        ]
+      },
+      "canvas": [
+        780,
+        1688
+      ],
+      "calls": 76,
+      "triangles": 315027,
+      "memory": {
+        "geometries": 118,
+        "textures": 89
+      },
+      "estimatedMemory": {
+        "geometryBytes": 42884956,
+        "textureBytes": 415587857,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 466861421,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 3,
+        "p50": 16.700000000004366,
+        "p95": 7799.699999999997
+      },
+      "submissionMs": {
+        "samples": 6,
+        "p50": 2.900000035762787,
+        "p95": 3
+      },
+      "shadowUpdates": 11,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "landscape": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        8.763012205506678,
+        -1.7437615165926695e-17
+      ],
+      "frames": 12,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "performance",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          844,
+          390
+        ]
+      },
+      "canvas": [
+        844,
+        390
+      ],
+      "calls": 89,
+      "triangles": 319201,
+      "memory": {
+        "geometries": 127,
+        "textures": 96
+      },
+      "estimatedMemory": {
+        "geometryBytes": 42884956,
+        "textureBytes": 415587857,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 466861421,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 4.399999976158142,
+        "p95": 4.399999976158142
+      },
+      "shadowUpdates": 11,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "mobile_layout": {
+    "checks": [
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "q": {
+          "x": 281,
+          "y": 645,
+          "width": 91,
+          "height": 44,
+          "right": 372,
+          "bottom": 689
+        },
+        "caption": {
+          "x": 14,
+          "y": 733.40625,
+          "width": 221.953125,
+          "height": 92.59375,
+          "right": 235.953125,
+          "bottom": 826
+        },
+        "actions": {
+          "x": 275,
+          "y": 641,
+          "width": 103,
+          "height": 183,
+          "right": 378,
+          "bottom": 824
+        },
+        "up": {
+          "x": 63,
+          "y": 606,
+          "width": 44,
+          "height": 44,
+          "right": 107,
+          "bottom": 650
+        },
+        "upTopHit": "KeyW",
+        "overlap": false
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "q": {
+          "x": 332.09375,
+          "y": 323,
+          "width": 100,
+          "height": 44,
+          "right": 432.09375,
+          "bottom": 367
+        },
+        "caption": {
+          "x": 14,
+          "y": 300.703125,
+          "width": 205.96875,
+          "height": 71.296875,
+          "right": 219.96875,
+          "bottom": 372
+        },
+        "actions": {
+          "x": 320.09375,
+          "y": 318,
+          "width": 509.90625,
+          "height": 54,
+          "right": 830,
+          "bottom": 372
+        },
+        "up": {
+          "x": 72,
+          "y": 137,
+          "width": 44,
+          "height": 44,
+          "right": 116,
+          "bottom": 181
+        },
+        "upTopHit": "KeyW",
+        "overlap": false
+      }
+    ],
+    "errors": [],
+    "method": "CSS hit targets and overlap, fixed DPR .5 for affordable software rendering; native mobile resolution/touch behavior verified separately",
+    "pass": true
+  },
+  "original_verification": {
+    "originalFiles": 629,
+    "allSHA256Match": true
+  },
+  "asset_verification": {
+    "runtimeAssetsVerified": 126,
+    "allOriginalAssetBytesUnchanged": true
+  }
+}

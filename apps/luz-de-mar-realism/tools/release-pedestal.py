@@ -13,6 +13,7 @@ old_url='https://raw.githubusercontent.com/ageofresearch/ageofresearch.github.io
 urllib.request.urlretrieve(old_url,W/'baseline/electrical.glb');assert sha(W/'baseline/electrical.glb')=='98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a'
 env={**os.environ,'PEDESTAL_WORK':str(W)}
 subprocess.run([os.environ['BLENDER'],'-b',str(W/'parent-master.blend'),'-t','4','--python-exit-code','1','--python',str(R/'tools/update-pedestal-authoring.py')],check=True,env=env)
+authoring=json.loads((W/'authoring.json').read_text());authoring['parentMasterSHA256']=sha(W/'parent-master.blend');authoring['masterSHA256']=sha(W/'electrical-master.blend');authoring['pedestalRepair']['authoringProof']=json.loads((W/'authoring-proof.json').read_text());(W/'authoring.json').write_text(json.dumps(authoring,indent=2)+'\n')
 release_proof={'parentArchiveSHA256':sha(parent),'parentMasterSHA256':sha(W/'parent-master.blend'),'parentRuntimeUVBinding':parent_meta.get('runtimeUVBinding'),'patch':json.loads((W/'geometry-proof.json').read_text()),'master':json.loads((W/'authoring-proof.json').read_text()),'publishedRuntimeSHA256':sha(R/'public/assets/machinery/electrical-vr-r01/electrical.glb')}
 assert release_proof['publishedRuntimeSHA256']==release_proof['patch']['runtimeSHA256']
 (W/'release-proof.json').write_text(json.dumps(release_proof,indent=2)+'\n')

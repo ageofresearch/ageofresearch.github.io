@@ -1,0 +1,304 @@
+{
+  "pass": true,
+  "deploymentCommit": "5cf3c6bdfb3d64afb8bc7e3e025d54e1f135d6d9",
+  "pagesRun": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40160869275",
+  "authoringRun": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40160898281",
+  "publicAssets": {
+    "commit": "5cf3c6bdfb3d64afb8bc7e3e025d54e1f135d6d9",
+    "publicBase": "https://ageofresearch.github.io/",
+    "assets": [
+      {
+        "path": "luz-de-mar-realism/index.html",
+        "bytes": 5794,
+        "sha256": "94788f0e3eb929f1841ddb914c334e6c6dc23cc3e684e81ced8a18b52d33bb76",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/manifest.json",
+        "bytes": 20027,
+        "sha256": "67e5c61ad3ea4d9e40a68e5f2b5aa6f3c33fabc0fef2a6317316419743313c15",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/hashes.json",
+        "bytes": 64367,
+        "sha256": "a49d8161a09152ce215ba43678778c8b589ec808d09ab5d1a1613dc70c66ad19",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/publication.json",
+        "bytes": 2054,
+        "sha256": "ba511f53719cea17c2e441343c9d3517fb18d6d3896e129812ff31cbebf1cbe1",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/room.json",
+        "bytes": 407364,
+        "sha256": "d2a9dbd295424c20b109f38678826cc2fa1168e51eb9a0511fb650d2dd58a193",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/room.glb",
+        "bytes": 11991356,
+        "sha256": "8102eb829b93e131ab112a7d3c637dfd756d5255d657e58af5d5e27358cae7ad",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/review/electrical-no-stairs-r04/index.html",
+        "bytes": 2220,
+        "sha256": "8a5e91ccd569e9ce3ded05b5c5c64cdc28192c5c8bcce0a68e6c0aa540daf2c2",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/review/electrical-no-stairs-r04/validation.json",
+        "bytes": 8747,
+        "sha256": "43a4d50092b16d13c617e2f5d73a4e930d49c78506873e3207aaecf75fc42965",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/electrical.glb",
+        "bytes": 7777968,
+        "sha256": "dec7d5a20c37f2cdc5df31bc1d975ff4c347e927947504c0fb8117f7bf002796",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/bulkhead-vr-r01/bulkhead.glb",
+        "bytes": 3607508,
+        "sha256": "df23152e0dc761481a238c8d56f934a02a737b265e740e5062713279949070da",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/electrical-irradiance.exr",
+        "bytes": 5016336,
+        "sha256": "8cc783e8ad6617cbed7ad074dc1d3965ec27452b25d63164406bdf8226e52e29",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr",
+        "bytes": 7410649,
+        "sha256": "65be9aa7ce9cd9eacb11a955996b5d57ab2ffe596d7405c11877fa65c4ec9df3",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/port-irradiance.exr",
+        "bytes": 6549904,
+        "sha256": "6ab87484488db61f83b67a39a320165a53e1cb5ab56b1f5d13e8c913c9729112",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/starboard-irradiance.exr",
+        "bytes": 6381357,
+        "sha256": "c53b15697bcee09ecdf84b0b9d00bf5386d27e009bb6cbeba96f9e625ff51ca6",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/room-probe-0.exr",
+        "bytes": 738428,
+        "sha256": "c73a3cd3597a0d81f9cba30f27c52a29a256668a40b8000f57bbbf5613d21a8c",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/room-probe-1.exr",
+        "bytes": 552048,
+        "sha256": "ed41fcfcd498cf2ebaa28940d83589f2d5dac2ce785fe6f5dd658c3a7f006817",
+        "passed": true
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/electrical-vr-r01/room-probe-2.exr",
+        "bytes": 631029,
+        "sha256": "c0131138422cdde4b4206434cd3fdbf8bc7f678d1bae28c305ab323d7ec11cbb",
+        "passed": true
+      }
+    ],
+    "originalYachtTreeUnchanged": true,
+    "originalGitTree": "f5475b87b550c4d5dfb999a49d37d86dcefe4c25",
+    "localOriginalFilesVerified": 629,
+    "publicOriginalFilesVerified": 0,
+    "dotfilesPreservedInGitButNotServed": [
+      "tidewater-rocha/.nojekyll"
+    ],
+    "pass": true
+  },
+  "publicBrowser": {
+    "base": "https://ageofresearch.github.io/luz-de-mar-realism/",
+    "checks": {
+      "electricalEntryStation": true,
+      "candidatePubliclyLoaded": true,
+      "cutPlaybackScrubAndSideControls": true,
+      "cachedExitReleasesBulkhead": true,
+      "cachedReturnReloadsAtomically": true
+    },
+    "errors": [],
+    "renderer": "SwiftShader correctness only",
+    "runtimeGeometrySHA256": "dec7d5a20c37f2cdc5df31bc1d975ff4c347e927947504c0fb8117f7bf002796",
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 114622,
+          "version": "electrical-no-stairs-r04",
+          "label": "frente el\u00e9ctrico"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 3.75,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 22,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          480,
+          320
+        ]
+      },
+      "canvas": [
+        480,
+        320
+      ],
+      "calls": 65,
+      "triangles": 373275,
+      "memory": {
+        "geometries": 205,
+        "textures": 156
+      },
+      "estimatedMemory": {
+        "geometryBytes": 125702498,
+        "textureBytes": 720571217,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 871439539,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 1.7000000029802322,
+        "p95": 1.7000000029802322
+      },
+      "shadowUpdates": 48,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "authoringRelease": {
+    "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-electrical-no-stairs-r04/",
+    "archives": [
+      {
+        "name": "luz-electrical-no-stairs-r04-authoring.zip",
+        "sha256": "eabf793e502fe564d224313a7357a798ee96c19650540ce977bac941152af95d",
+        "bytes": 132561132,
+        "members": 23,
+        "crcVerified": true
+      }
+    ],
+    "binding": {
+      "method": "All decoded production triangles matched once by physical world positions, winding and material; UV0 disambiguates near-coincident faces. Per-corner physical UV0 and lightmap UV1 copied from the public GLB, preserving geometry. Dynamic door matched separately without a static bake.",
+      "runtimeGLBSHA256": "dec7d5a20c37f2cdc5df31bc1d975ff4c347e927947504c0fb8117f7bf002796",
+      "matchedTriangles": 114622,
+      "matchedStaticTriangles": 114578,
+      "matchedDynamicTriangles": 44,
+      "maximumGeometryDifferenceMetres": 8.278274146186197e-05,
+      "maximumCopiedUVComponentError": 0,
+      "cornersCopied": 343734,
+      "UV0FallbackDisambiguations": 0,
+      "originalEnginesChanged": false,
+      "hybridCornerIrradianceCopied": true,
+      "passed": true,
+      "masterSHA256": "d3647d3415177689db49b05c4bf9a8c0ae9eb7201f75d7fb29d07289dc4e8da7",
+      "sourceCommit": "5cf3c6bdfb3d64afb8bc7e3e025d54e1f135d6d9",
+      "originalVRPhotosIncluded": false,
+      "inputs": [
+        {
+          "tag": "luz-electrical-clearance-r03",
+          "name": "luz-electrical-clearance-r03-authoring.zip",
+          "sha256": "664d988ee90d61d39f88fa791ef3aef1f69b57dc2e438f5cf0e669aa07f5ce0d"
+        },
+        {
+          "tag": "luz-de-mar-machinery-r11",
+          "name": "luz-de-mar-machinery-r11.zip",
+          "sha256": "3140321fe7b5f01700ac2421cc80467df7ff1373c7974ee2a4dc0b09c133f41f"
+        }
+      ]
+    },
+    "pass": true
+  }
+}

@@ -80,3 +80,7 @@ Authoring uses Blender 4.3.2/Cycles, Intel Open Image Denoise 2.5.1, and xatlas
 0.0.11 Python bindings (MIT; https://github.com/mworchel/xatlas-python) to generate
 independent lightmap UVs. Runtime geometry uses meshoptimizer and textures use
 Basis Universal/KTX2 under the licenses already included in this distribution.
+
+## KOHLER y equipos locales · VR R01
+
+Reconstrucción propia a partir de la visita Grande 36M de VRcloud (https://vrcloud.com/?pv=1667308298), con una estación panorámica estimada fija. Las imágenes originales permanecen privadas. Carcasa, controlador, equipos superiores y materiales se modelaron en Blender; las profundidades ocultas y los apoyos son inferidos. Los rótulos legibles usan contornos de DejaVu Sans (https://dejavu-fonts.github.io/License.html). Las texturas de material publicadas son propias; se conservan las licencias Three.js/MIT, meshoptimizer/MIT y Basis Universal/Apache-2.0 anteriores.

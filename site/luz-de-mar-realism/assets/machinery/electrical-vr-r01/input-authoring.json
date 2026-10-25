@@ -1,8 +1,8 @@
 {
-  "version": 3,
-  "id": "electrical-clearance-r03",
+  "version": 4,
+  "id": "electrical-no-stairs-r04",
   "strategy": "LDM-VR-EST-001 v1.0",
-  "sourceMasterSHA256": "eff95b58964187331c972b17e9ec0dd05c4e958e76d3435477e859527ec8b7ee",
+  "sourceMasterSHA256": "6fafd332e7c7da207dd1cf9d81efa9580886573c1fa93c1bf588011d1fcded8d",
   "sourceRuntimeGLBSHA256": "72cd44625c8018e2e0751869dd05dd326b301c2dd554cd68eaf7d3d51c779e62",
   "replacedIDs": [
     "LD/service-route/123",
@@ -193,7 +193,7 @@
     "LD_R02/photo-layout/floor/101"
   ],
   "removedContextTriangles": 3878,
-  "editableObjects": 1520,
+  "editableObjects": 1510,
   "sourceTriangles": 114933,
   "camera": {
     "sourcePosition": [
@@ -205,7 +205,7 @@
     "fixedForAllViews": true
   },
   "neutralGeometrySHA256": "f473d66a15367107341d9971ba30a10a21ab66300e03ee8977a95c1ca547c08a",
-  "stage": "R03 interference correction; visibility accepted, overall room visual fidelity remains a candidate",
+  "stage": "Stairs removed at user request; relocation deferred.",
   "visualAcceptance": false,
   "sourceFaces": [
     "b",
@@ -342,19 +342,20 @@
       "coverage": 0.6166050434112549,
       "paddingPixels": 4,
       "effectivePaddingAt2048": 4.304781923279033,
-      "charts": 672
+      "charts": 672,
+      "retainedLayoutAfterRemoval": true
     },
-    "coverage": 0.6166050434112549,
+    "coverage": 0.5535106658935547,
     "minimumGutterPixels": 4,
     "degenerateTriangleFraction": 0,
-    "uvTrianglesSHA256": "e6e3cbd10b62cbd3384f2b3b8767b8cbdbea20366ab0dbc3863bf8e606ecb91e",
-    "atlasTriangles": 10412,
-    "vertexIrradianceTriangles": 105816,
+    "uvTrianglesSHA256": "ef865058c39570c08dc5cd6f665f710c287b474eea2f3e72443ed95021e27530",
+    "atlasTriangles": 10130,
+    "vertexIrradianceTriangles": 104448,
     "microLighting": "Cycles full diffuse without albedo baked per corner for small manufactured parts and narrow grating bars; _BAKE_MODE selects this HDR irradiance instead of the atlas. UV tests apply to atlas participants."
   },
-  "staticTriangles": 116228,
+  "staticTriangles": 114578,
   "dynamicTriangles": 44,
-  "triangles": 116272,
+  "triangles": 114622,
   "dynamicDoorLighting": "Live room lighting and probes; excluded from static irradiance and shadow imprints.",
   "neutralMilestone": {
     "version": 2,
@@ -444,7 +445,7 @@
     "service-wood-normal.png": "fb3e6a16dd3a0af57f37463deccacb6c77b8a464e279280841b7633767b1f3a9",
     "service-wood-color.png": "ea2c68a4b79125c4df56eb3231debaf3af6a4cf955f454aedde54cea0dfa9a7e"
   },
-  "masterSHA256": "6fafd332e7c7da207dd1cf9d81efa9580886573c1fa93c1bf588011d1fcded8d",
+  "masterSHA256": "38a069552e771924af85c4f9571e8368bda622f5a5fb03cba3b8a41e54aec080",
   "lighting": {
     "diffuseSamples": 64,
     "reflectionSamples": 128,
@@ -453,42 +454,42 @@
     "hdr": "Linear RGB half-float EXR DWAA",
     "files": {
       "electrical-irradiance.exr": {
-        "rawSHA256": "dd3fba30a811a8496c262e7868be4f5f9a5bd7000c4ee21e7033d3d8b30f18e5",
-        "sha256": "4e902c24792304287b78a35c6e1dc507a30e1166fcd84ef81bda2a546cc36e8a",
-        "bytes": 5052940
+        "rawSHA256": "2cae44e9b205ccd5971574aa3fbc6a89d5e17427bcfbdb584a31c180cf9cf4a5",
+        "sha256": "8cc783e8ad6617cbed7ad074dc1d3965ec27452b25d63164406bdf8226e52e29",
+        "bytes": 5016336
       },
       "bulkhead-irradiance.exr": {
-        "rawSHA256": "ed8a5138a791fdbbeb0d4d991c2c5eee5d6556d179fa3cb341d8bd17cbff25e7",
-        "sha256": "6290312768a5a83294b15aafb89e4045d932218d93a3b4da421cec034c155d22",
-        "bytes": 7418080
+        "rawSHA256": "bdd89ff9021e4f37a7427ba255e49e6704a5faac5df65c0a077afb676bcf4ebe",
+        "sha256": "65be9aa7ce9cd9eacb11a955996b5d57ab2ffe596d7405c11877fa65c4ec9df3",
+        "bytes": 7410649
       },
       "port-irradiance.exr": {
-        "rawSHA256": "ab9fe6af3436ae7bf54393a63ffe83f2de8aa979ea103738b058e580d4e0c0ba",
-        "sha256": "d0b42773a7c50052e07bc2ce1444209dbc342111a06b2d7fae8a78a67e10bc56",
-        "bytes": 6558035
+        "rawSHA256": "804385e9436c2fcccb2b421198c9fbc659687eacba8f509e9f3e53f4bc6be963",
+        "sha256": "6ab87484488db61f83b67a39a320165a53e1cb5ab56b1f5d13e8c913c9729112",
+        "bytes": 6549904
       },
       "starboard-irradiance.exr": {
-        "rawSHA256": "103d58c32020fa239cc5317e492672f11451f8f24a561ed7a37250e9ee4a8ad8",
-        "sha256": "c02ccc4268522278a139cf115a42822caf4dd9bfcef0664a0b817db20626229e",
-        "bytes": 6351572
+        "rawSHA256": "37a51393732674eb16b5430409caabe83b252dc8d77265b7559ac5d5cdc62542",
+        "sha256": "c53b15697bcee09ecdf84b0b9d00bf5386d27e009bb6cbeba96f9e625ff51ca6",
+        "bytes": 6381357
       },
       "room-probe-0.exr": {
-        "sha256": "fe38080389894cf1181416638a78b7d6710d347528b12f79bf8aa92ff1854614",
-        "bytes": 745873
+        "sha256": "c73a3cd3597a0d81f9cba30f27c52a29a256668a40b8000f57bbbf5613d21a8c",
+        "bytes": 738428
       },
       "room-probe-1.exr": {
-        "sha256": "de14a79c8d10ceb2d9a7b4cc851ebcea047e40389e3c27c942ea3c40d48f8a37",
-        "bytes": 552989
+        "sha256": "ed41fcfcd498cf2ebaa28940d83589f2d5dac2ce785fe6f5dd658c3a7f006817",
+        "bytes": 552048
       },
       "room-probe-2.exr": {
-        "sha256": "8c1ff25611d46faca55ea7d8bb17aa2e83b98d8edccd00a679150fe9cfe1c892",
-        "bytes": 629697
+        "sha256": "c0131138422cdde4b4206434cd3fdbf8bc7f678d1bae28c305ab323d7ec11cbb",
+        "bytes": 631029
       }
     },
     "engineUVBindings": {
       "electrical": {
-        "cornerSHA256": "05a24cc316ab03feee2e1299ebf5f6fb30c7428ae5865f661fdd3a3759fc8263",
-        "triangles": 116228,
+        "cornerSHA256": "52cd26d8a8ef5c29f288bba4eadb0520a544fc58224afb8c29913d5b9c043f7e",
+        "triangles": 114578,
         "originalGeometryUnchanged": false
       },
       "bulkhead": {
@@ -509,10 +510,10 @@
     },
     "cornerIrradiance": {
       "samples": 64,
-      "corners": 348684,
-      "maximum": 1599.4342041015625,
+      "corners": 343734,
+      "maximum": 1580.0013427734375,
       "minimum": 0,
-      "sha256": "b2e580f2dd81b8c34422c3f4ec7e9274c36dd871414d0867a1b1349e91cdec8b",
+      "sha256": "54274eaa8cf8fa2a86ec1f4f19149731f4310b5d6c070c14f418de03017b0377",
       "mode": "Full diffuse direct + indirect without albedo, actual corner positions/normals; only _BAKE_MODE=1 consumes these values."
     },
     "removableShadowPolicy": "Installed engines excluded from electrical floor/grating/cabinet diffuse transport; reversible runtime contact receivers remain. Engines included in static reflection capture.",
@@ -578,7 +579,7 @@
       ]
     }
   },
-  "sourceGeometrySHA256": "96676e8252ef2ef9eccaa682dce9dcc0e10720fa20cd85a2be371996e4d30f98",
+  "sourceGeometrySHA256": "cf2a760245ef02cf70f255a05088ed3d39efaf978c485d31e6ffc76805e1ef7c",
   "removedUnusedUVLayers": [],
   "transportSourceGeometrySHA256": "ba7f5efd8899eb62d4875d5cb314c6df04d45a321add58463e6bb60f31ba31a9",
   "bakedUV1BindingPreservedDuringExportRepair": true,
@@ -587,15 +588,516 @@
     "exposureMultiplier": 0.05,
     "output": "sRGB"
   },
-  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "runtimeGeometrySHA256": "dec7d5a20c37f2cdc5df31bc1d975ff4c347e927947504c0fb8117f7bf002796",
   "replacedTriangles": 12225,
   "louvreFrontLighting": {
     "components": 112,
     "method": "Front faces use spatial HDR atlas irradiance; split boundaries isolate corner-lit side faces. Geometry and physical UV0 preserved."
   },
   "inputR02MasterSHA256": "eff95b58964187331c972b17e9ec0dd05c4e958e76d3435477e859527ec8b7ee",
-  "parentAuthoringVersion": "electrical-lower-r02",
-  "clearance": {
+  "parentAuthoringVersion": "electrical-clearance-r03",
+  "removedSourceIDs": [
+    "LD/service-route/67",
+    "LD/service-route/68",
+    "LD/service-route/72",
+    "LD/service-route/73",
+    "LD/service-route/74",
+    "LD/service-route/75",
+    "LD/service-route/76",
+    "LD/service-route/77",
+    "LD/service-route/78",
+    "LD/service-route/79",
+    "LD/service-route/80",
+    "LD/service-route/81",
+    "LD/service-route/82",
+    "LD/service-route/83",
+    "LD/service-route/84",
+    "LD/service-route/85",
+    "LD/service-route/86",
+    "LD/service-route/87",
+    "LD/service-route/88",
+    "LD/service-route/89",
+    "LD/service-route/90",
+    "LD/service-route/91",
+    "LD/service-route/92",
+    "LD/service-route/93",
+    "LD/service-route/94",
+    "LD/service-route/95",
+    "LD/service-route/96",
+    "LD/service-route/97",
+    "LD/service-route/98",
+    "LD/service-route/99",
+    "LD/service-route/100",
+    "LD/service-route/101",
+    "LD/service-route/102",
+    "LD/service-route/103",
+    "LD/service-route/104",
+    "LD/service-route/105",
+    "LD/service-route/106",
+    "LD/service-route/107",
+    "LD/service-route/108",
+    "LD/service-route/109",
+    "LD/service-route/110",
+    "LD/service-route/111",
+    "LD/service-route/112",
+    "LD/service-route/113",
+    "LD/service-route/114",
+    "LD/service-route/115",
+    "LD/service-route/116",
+    "LD/service-route/117",
+    "LD/service-route/118",
+    "LD/service-route/120",
+    "LD/service-route/121",
+    "LD/service-route/123",
+    "LD/service-route/124",
+    "LD/service-route/127",
+    "LD/service-route/129",
+    "LD/service-route/130",
+    "LD/service-route/131"
+  ],
+  "stairRemoval": {
+    "sourceIDs": [
+      "LD/service-route/67",
+      "LD/service-route/68",
+      "LD/service-route/72",
+      "LD/service-route/73",
+      "LD/service-route/74",
+      "LD/service-route/75",
+      "LD/service-route/76",
+      "LD/service-route/77",
+      "LD/service-route/78",
+      "LD/service-route/79",
+      "LD/service-route/80",
+      "LD/service-route/81",
+      "LD/service-route/82",
+      "LD/service-route/83",
+      "LD/service-route/84",
+      "LD/service-route/85",
+      "LD/service-route/86",
+      "LD/service-route/87",
+      "LD/service-route/88",
+      "LD/service-route/89",
+      "LD/service-route/90",
+      "LD/service-route/91",
+      "LD/service-route/92",
+      "LD/service-route/93",
+      "LD/service-route/94",
+      "LD/service-route/95",
+      "LD/service-route/96",
+      "LD/service-route/97",
+      "LD/service-route/98",
+      "LD/service-route/99",
+      "LD/service-route/100",
+      "LD/service-route/101",
+      "LD/service-route/102",
+      "LD/service-route/103",
+      "LD/service-route/104",
+      "LD/service-route/105",
+      "LD/service-route/106",
+      "LD/service-route/107",
+      "LD/service-route/108",
+      "LD/service-route/109",
+      "LD/service-route/110",
+      "LD/service-route/111",
+      "LD/service-route/112",
+      "LD/service-route/113",
+      "LD/service-route/114",
+      "LD/service-route/115",
+      "LD/service-route/116",
+      "LD/service-route/117",
+      "LD/service-route/118",
+      "LD/service-route/120",
+      "LD/service-route/121",
+      "LD/service-route/123",
+      "LD/service-route/124",
+      "LD/service-route/127",
+      "LD/service-route/129",
+      "LD/service-route/130",
+      "LD/service-route/131"
+    ],
+    "objects": [
+      {
+        "object": "LD_R02 | furniture",
+        "triangles": 2042,
+        "kind": "original source stair"
+      },
+      {
+        "object": "KEEP | furniture",
+        "triangles": 2042,
+        "kind": "original source stair"
+      },
+      {
+        "object": "BVR context | KEEP | furniture",
+        "triangles": 2042,
+        "kind": "original source stair"
+      },
+      {
+        "object": "EVR context | BVR context | KEEP | furniture",
+        "triangles": 2042,
+        "kind": "original source stair"
+      },
+      {
+        "object": "EVR context | lower R02 EVR context | BVR context | KEEP | furn",
+        "triangles": 2042,
+        "kind": "original source stair"
+      },
+      {
+        "object": "R03 context | EVR context | lower R02 EVR context | BVR context",
+        "triangles": 647,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 3 | 26",
+        "triangles": 30,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 3 | 27",
+        "triangles": 3,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 4 | 28",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 4 | 29",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 4 | 30",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 4 | 31",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 4 | 32",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 5 | 33",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 5 | 34",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 5 | 35",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 5 | 36",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 5 | 37",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 6 | 38",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 6 | 39",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 6 | 40",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 6 | 41",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 6 | 42",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 7 | 43",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 7 | 44",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 7 | 45",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 7 | 46",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 7 | 47",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 8 | 48",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 8 | 49",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 8 | 50",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 8 | 51",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 8 | 52",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 9 | 53",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 9 | 54",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 9 | 55",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 9 | 56",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 9 | 57",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 10 | 58",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 10 | 59",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 10 | 60",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 10 | 61",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 10 | 62",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 11 | 63",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 11 | 64",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 11 | 65",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 11 | 66",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 11 | 67",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 12 | 68",
+        "triangles": 28,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 12 | 69",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread nosing 12 | 70",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 12 | 71",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 12 | 72",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "brown service tread 13 | 73",
+        "triangles": 22,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white stair underside closure 13 | 74",
+        "triangles": 2,
+        "kind": "original source stair"
+      },
+      {
+        "object": "metal tread front return 13 | 75",
+        "triangles": 14,
+        "kind": "original source stair"
+      },
+      {
+        "object": "white service riser 13 | 76",
+        "triangles": 12,
+        "kind": "original source stair"
+      },
+      {
+        "object": "profiled white service stair enclosure | 77",
+        "triangles": 122,
+        "kind": "original source stair"
+      },
+      {
+        "object": "profiled white service stair enclosure | 78",
+        "triangles": 93,
+        "kind": "original source stair"
+      },
+      {
+        "object": "polished handrail along service descent | 81",
+        "triangles": 1054,
+        "kind": "original source stair"
+      },
+      {
+        "object": "seated service handrail wall bracket | 82",
+        "triangles": 32,
+        "kind": "original source stair"
+      },
+      {
+        "object": "seated service handrail wall bracket | 83",
+        "triangles": 32,
+        "kind": "original source stair"
+      },
+      {
+        "object": "seated service handrail wall bracket | 84",
+        "triangles": 32,
+        "kind": "original source stair"
+      },
+      {
+        "object": "CLEARANCE/123/0",
+        "triangles": 104,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/124/0",
+        "triangles": 77,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/step-8",
+        "triangles": 132,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/127",
+        "triangles": 1056,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/129",
+        "triangles": 32,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/130",
+        "triangles": 32,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/131",
+        "triangles": 33,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/129-spacer",
+        "triangles": 6,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/131-standoff",
+        "triangles": 6,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "CLEARANCE/131-sleeve",
+        "triangles": 6,
+        "kind": "R03 editable stair part"
+      },
+      {
+        "object": "EVR installed | static",
+        "triangles": 1650,
+        "kind": "R03 merged stair assembly"
+      }
+    ],
+    "relocated": false,
+    "retained": [
+      "electrical controls",
+      "engine geometry and finishes",
+      "door",
+      "floor",
+      "structural walls and ceilings"
+    ],
+    "R03ArchiveRetained": true
+  },
+  "parentClearance": {
     "sourceParts": [
       "LD/service-route/123",
       "LD/service-route/124",

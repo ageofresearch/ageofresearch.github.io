@@ -1,0 +1,42 @@
+{
+  "references": [
+    {
+      "url": "https://vrcloud.com/?pv=1667308298",
+      "purpose": "Observed layout, shapes and finish; photographs retained privately"
+    },
+    {
+      "url": "https://ageofresearch.github.io/tidewater-rocha/play.html?world=rocha",
+      "purpose": "Existing digital yacht scale, structure and source IDs"
+    }
+  ],
+  "geometry": "Independently authored editable Blender reconstruction, with explicitly inferred hidden depths/supports",
+  "materials": "Owned procedural color/roughness/normal maps; generator authoring256px and runtime128px microvariation, geometry for labels and silhouettes",
+  "typeface": {
+    "name": "DejaVu Sans",
+    "license": "DejaVu Fonts / Bitstream Vera license",
+    "url": "https://dejavu-fonts.github.io/License.html"
+  },
+  "dependencies": [
+    {
+      "name": "Three.js0.180.0",
+      "license": "MIT"
+    },
+    {
+      "name": "meshoptimizer",
+      "license": "MIT"
+    },
+    {
+      "name": "Basis Universal",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "glTF Transform",
+      "license": "MIT"
+    },
+    {
+      "name": "Open Image Denoise",
+      "license": "Apache-2.0"
+    }
+  ],
+  "privacy": "No VR originals in Pages or authoring Releases"
+}

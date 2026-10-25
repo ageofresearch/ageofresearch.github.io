@@ -1,15 +1,15 @@
 {
   "version": 6,
   "algorithm": "SHA-256",
-  "scope": "Independent viewer; hashes.json/publication.json excluded to avoid circular hashes",
+  "scope": "New page subtree excluding hashes.json and publication.json",
   "files": {
     "BASISU-LICENSE.txt": {
       "bytes": 11347,
       "sha256": "065fcf48d6af21c0b75e23be5ed5753aee75c892e1c2cf178fa6736305614a5c"
     },
     "CREDITS.md": {
-      "bytes": 6111,
-      "sha256": "b8c44a795785e0ed699e66d72d280a3cca670fcbdd4d3e163382428673a6c352"
+      "bytes": 6728,
+      "sha256": "a417b341b32ffce1aeebbf175f8d488d63c9d9bdf89ff244f3860ad6ccd21aad"
     },
     "MESHOPT-LICENSE.txt": {
       "bytes": 1079,
@@ -19,33 +19,13 @@
       "bytes": 1081,
       "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
     },
-    "assets/asset-version-C7RqRN8x.js": {
-      "bytes": 539129,
-      "sha256": "50eb6dd67f72a36cd10c109e17e2d9e6f7ef9502fa9ffc89a9c7ef09c466c9ee"
-    },
-    "assets/asset-version-CPW34VcZ.js": {
-      "bytes": 539134,
-      "sha256": "e921171d020e81169a507ee9b59e579150171e3dea80ed2ea7b89df7f203c66b"
-    },
-    "assets/asset-version-Crqp4dg4.js": {
-      "bytes": 539611,
-      "sha256": "ce0831d58bfc5f0ed93e2bf6d81bb0d01f9e594d589ef26cb92a090536508206"
-    },
-    "assets/asset-version-DB9wJtnD.js": {
-      "bytes": 539132,
-      "sha256": "3768d2f8dab6c59b3d66304ca66bcdc9548c343b9c86ec415a9cd0bc40c2cc5e"
+    "assets/asset-version-Bx6VPOYH.js": {
+      "bytes": 539607,
+      "sha256": "2e8dbf019845c35917913790e94dda3a4244fec7953cbf874301c66f20a40beb"
     },
     "assets/asset-version-Dc53sZif.js": {
       "bytes": 539615,
       "sha256": "aca3a0a6c580a780418a43280e96e53804b0be253424cd7f7787e4669294c906"
-    },
-    "assets/asset-version-F-Ujhh1k.js": {
-      "bytes": 539615,
-      "sha256": "90ea90ad00b391875571e917a572fd36baa655408ed0bfb9866be3edec5e176e"
-    },
-    "assets/asset-version-dJtYuNi7.js": {
-      "bytes": 539143,
-      "sha256": "088ec81511d8109777526ac6e97c1d94bf8c1c26e63f8a4e6aaaaf6d173f7cc4"
     },
     "assets/beach-club/ambient-beach-club.exr": {
       "bytes": 12815691,
@@ -151,41 +131,13 @@
       "bytes": 11614,
       "sha256": "ee88006a2d53f399c97e440f7ea9a3538b52c4c281b77d586d1ed1d664c21808"
     },
-    "assets/index-BjWHodBc.js": {
-      "bytes": 214354,
-      "sha256": "4c7c18e0791c538c416a907823e53372cb78831d3c104cb08a60850f4f3c7233"
-    },
-    "assets/index-CFzFrCwV.js": {
-      "bytes": 210493,
-      "sha256": "3f215c7de680ed00372df7be379d951e968a2a475d59f22a21fc0545104cfec5"
-    },
-    "assets/index-CH3YG2B8.js": {
-      "bytes": 212797,
-      "sha256": "e10f057efd6050e919c9e44bfebabbb769e6f0280c36a1289dd88af79511e7f8"
-    },
-    "assets/index-CKpNw2n5.js": {
-      "bytes": 198687,
-      "sha256": "d468f0abf84e365481ecb010abed3513c9c559f7e659a1c592ce3ba039b05451"
-    },
-    "assets/index-C_PV3w5d.js": {
-      "bytes": 199121,
-      "sha256": "ba77e1cec344f18e9696bd597666291a1328df2a8fd93a7539ca6f8b330214ed"
+    "assets/index-BCGp8RZj.js": {
+      "bytes": 214538,
+      "sha256": "4c1112f60565a73951b6c4725aa022c849f5a235f1d535e2fed6594737d4f010"
     },
     "assets/index-D9OlNVfE.js": {
       "bytes": 214379,
       "sha256": "5c8e6e7c90acb48d55e5cfef5de83f89bd5217a579d6e7286ce609f770602200"
-    },
-    "assets/index-Dkic1H-b.js": {
-      "bytes": 201486,
-      "sha256": "50cac6a11e2f8c41f58c0123b0b4e19be975d6f675c93e6bde7a90fb8dd4a4ba"
-    },
-    "assets/index-DxPoVZRA.css": {
-      "bytes": 10429,
-      "sha256": "b409e423ff20ca61c980e1e96dd589251507d08bbbadf2bf30c64be6b1362751"
-    },
-    "assets/index-s6KUA_tz.js": {
-      "bytes": 214329,
-      "sha256": "da253c95244f888c751a37d059307791b402e14c2d0a27e343511ecc9f633fe8"
     },
     "assets/machinery/ambient-architecture.exr": {
       "bytes": 12462030,
@@ -248,12 +200,12 @@
       "sha256": "c1a4805d1796d67843d39c894d75f87ace163eb112de19bd19f20e203f646913"
     },
     "assets/machinery/electrical-vr-r01/authoring.json": {
-      "bytes": 39401,
-      "sha256": "ca36471b9e34edf4c4176ba03f805db79008ffdc0215d5ddb3239c9dc7842780"
+      "bytes": 75733,
+      "sha256": "7463bdaf32a7ebf3ad543dc91a2f4105c15fc4d0bd8fd61391e70c6946e762f2"
     },
     "assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr": {
-      "bytes": 7410649,
-      "sha256": "65be9aa7ce9cd9eacb11a955996b5d57ab2ffe596d7405c11877fa65c4ec9df3"
+      "bytes": 7513105,
+      "sha256": "148451f79270f2e1a791e2705b9f2aed8347aea70b4fa1e0820da0fe694847e1"
     },
     "assets/machinery/electrical-vr-r01/casings.json": {
       "bytes": 175003,
@@ -264,28 +216,28 @@
       "sha256": "baec115d70c0e0f59ef3cc2f5b82ccd4446e77cf41d82110db14d95f46274c47"
     },
     "assets/machinery/electrical-vr-r01/component-inventory.json": {
-      "bytes": 744030,
-      "sha256": "015434590017fc4ca607d90372a084be33299e40bd34d660d47e6356fe2026fd"
+      "bytes": 962011,
+      "sha256": "6bde5a50796a9e79a7f691a673e81be4de21948b319dc60a04a28c57992804cd"
     },
     "assets/machinery/electrical-vr-r01/electrical-irradiance.exr": {
-      "bytes": 5016336,
-      "sha256": "8cc783e8ad6617cbed7ad074dc1d3965ec27452b25d63164406bdf8226e52e29"
+      "bytes": 5233383,
+      "sha256": "5944eb4a646278d191a2bce504dbb33ac2d41b4eb5f6abd7b5172b376c411703"
     },
     "assets/machinery/electrical-vr-r01/electrical.glb": {
-      "bytes": 7777968,
-      "sha256": "dec7d5a20c37f2cdc5df31bc1d975ff4c347e927947504c0fb8117f7bf002796"
+      "bytes": 8985140,
+      "sha256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a"
     },
     "assets/machinery/electrical-vr-r01/evidence.json": {
-      "bytes": 19783,
-      "sha256": "baec115d70c0e0f59ef3cc2f5b82ccd4446e77cf41d82110db14d95f46274c47"
+      "bytes": 16412,
+      "sha256": "8f622847217e5a0e4af55c601a181aeb6e46cae75922bc098e942121bb63e75d"
     },
     "assets/machinery/electrical-vr-r01/input-authoring.json": {
-      "bytes": 25943,
-      "sha256": "79f0e3335c242641fcc41045f056cfde11a15dba4494954665dde919cca14efa"
+      "bytes": 39401,
+      "sha256": "ca36471b9e34edf4c4176ba03f805db79008ffdc0215d5ddb3239c9dc7842780"
     },
     "assets/machinery/electrical-vr-r01/port-irradiance.exr": {
-      "bytes": 6549904,
-      "sha256": "6ab87484488db61f83b67a39a320165a53e1cb5ab56b1f5d13e8c913c9729112"
+      "bytes": 6713581,
+      "sha256": "c73e62f0a44a1ef9bf440aac24632c918b7436d787efa3685907ae577fc1c708"
     },
     "assets/machinery/electrical-vr-r01/reference-correction.json": {
       "bytes": 741,
@@ -296,24 +248,24 @@
       "sha256": "72df1673da5b3176f4f323887b8f6ea00d5bb66f7ed8091ea701c4a293d09d56"
     },
     "assets/machinery/electrical-vr-r01/room-probe-0.exr": {
-      "bytes": 738428,
-      "sha256": "c73a3cd3597a0d81f9cba30f27c52a29a256668a40b8000f57bbbf5613d21a8c"
+      "bytes": 759979,
+      "sha256": "adf79bce5a73729750a3385f33d3e68ac860f810292ee7689758a9f610a1926f"
     },
     "assets/machinery/electrical-vr-r01/room-probe-1.exr": {
-      "bytes": 552048,
-      "sha256": "ed41fcfcd498cf2ebaa28940d83589f2d5dac2ce785fe6f5dd658c3a7f006817"
+      "bytes": 559306,
+      "sha256": "9ac83b0237280bb4922aaa537ea7fe914baf33ef3384bcddeb53032654af9ae8"
     },
     "assets/machinery/electrical-vr-r01/room-probe-2.exr": {
-      "bytes": 631029,
-      "sha256": "c0131138422cdde4b4206434cd3fdbf8bc7f678d1bae28c305ab323d7ec11cbb"
+      "bytes": 634338,
+      "sha256": "5b2b4840d5aeb235a620a4b604829d278924aa928d1128bfbdeefee403269a95"
     },
     "assets/machinery/electrical-vr-r01/starboard-irradiance.exr": {
-      "bytes": 6381357,
-      "sha256": "c53b15697bcee09ecdf84b0b9d00bf5386d27e009bb6cbeba96f9e625ff51ca6"
+      "bytes": 6479129,
+      "sha256": "b39df862d86c42cb351733a384e8367df086b8d984b53632643f77b6173212e6"
     },
     "assets/machinery/electrical-vr-r01/validation.json": {
-      "bytes": 8747,
-      "sha256": "43a4d50092b16d13c617e2f5d73a4e930d49c78506873e3207aaecf75fc42965"
+      "bytes": 132221,
+      "sha256": "4fba119b98e787b1e51eb80032279be2eea2d3796ad78d6ef5dd89e7d5101ff7"
     },
     "assets/machinery/probe-aft.exr": {
       "bytes": 1570452,
@@ -332,48 +284,28 @@
       "sha256": "465bade7be3cf637823803ef2df77fc45fecc85dbaef76ff81dcaf1e6469e07c"
     },
     "assets/machinery/room.glb": {
-      "bytes": 11991356,
-      "sha256": "8102eb829b93e131ab112a7d3c637dfd756d5255d657e58af5d5e27358cae7ad"
+      "bytes": 12020404,
+      "sha256": "c8ed275333416c01e66047eea0c55a3c794ea802d73f4185e724ec820f424c23"
     },
     "assets/machinery/room.json": {
-      "bytes": 407364,
-      "sha256": "d2a9dbd295424c20b109f38678826cc2fa1168e51eb9a0511fb650d2dd58a193"
+      "bytes": 431406,
+      "sha256": "727dd68df6ea2ac266ce207685aee27e19f9f4de411728a28200df2251129c47"
     },
     "assets/machinery/vr-details.glb": {
       "bytes": 88476,
       "sha256": "bf1647c18f44a2bdac0a21c7cb979e29c8ac6251387923ea1a199525bb1286b1"
     },
     "assets/manifest.json": {
-      "bytes": 20027,
-      "sha256": "67e5c61ad3ea4d9e40a68e5f2b5aa6f3c33fabc0fef2a6317316419743313c15"
+      "bytes": 20019,
+      "sha256": "645f475869d89dcb45d01a3331eafdfaab3dec8e95a2739cb21b43b2fda0db62"
     },
-    "assets/mechanics-731nWbjk.js": {
+    "assets/mechanics-BazA2wWr.js": {
       "bytes": 262914,
-      "sha256": "57b4324605bb8f48ed0b2d3692fd654ff65844afbfb5160be04b04115d08bd05"
+      "sha256": "1f0498db974bcbf7447010611d1e5b84d1ee3f9619a758d751e51aab29834c8c"
     },
     "assets/mechanics-C89pyZ_s.js": {
       "bytes": 262914,
       "sha256": "7ecac8eec05202a7fc4be558dec1c2b85360fad1a4f5dcf5b88fab923a348a22"
-    },
-    "assets/mechanics-Ckww4WME.js": {
-      "bytes": 262914,
-      "sha256": "974bafd59b27c298081ed919b32a93a41f7409b8e4f0d06ee216f83da350353b"
-    },
-    "assets/mechanics-D0gqCebt.js": {
-      "bytes": 262601,
-      "sha256": "0b806a0946867988bfdae76cc119b179a9ab4fc72671aeee4519c999dae33e83"
-    },
-    "assets/mechanics-DeXR7h1p.js": {
-      "bytes": 262914,
-      "sha256": "9a0156ce834448d4f7d9f86047805f1cce7c6e63b793d310856f11bf0ee7ac73"
-    },
-    "assets/mechanics-iHJN5jkj.js": {
-      "bytes": 262914,
-      "sha256": "7e934398b8b4b9d2ffcb9200614d0d85d4677182bdf5ba2d94f8fb35e840e356"
-    },
-    "assets/mechanics-vltWg83h.js": {
-      "bytes": 262801,
-      "sha256": "f6a211ca197f8244f01d91f63c7e9a3ce038d1670fe676e4bd9cfb3aae45db0d"
     },
     "assets/mechanics/left-vr-r01/authoring.json": {
       "bytes": 88483,
@@ -761,7 +693,7 @@
     },
     "index.html": {
       "bytes": 5794,
-      "sha256": "94788f0e3eb929f1841ddb914c334e6c6dc23cc3e684e81ced8a18b52d33bb76"
+      "sha256": "31b888b7b5e52f5f590bfc017bf2d5c3f77e4dc2af08677ed6370da0fcfb6179"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -1055,13 +987,65 @@
       "bytes": 28630,
       "sha256": "41a610cce18d402647a000e43d7f37e7d64ce4aeb37bcb0e15d5e8db3b6beffb"
     },
+    "review/generator-vr-r01/after-auxiliary.webp": {
+      "bytes": 16466,
+      "sha256": "619be88aadbd6499ac8d6c4c98404efb3273f75103dcf40046f50943221bfd11"
+    },
+    "review/generator-vr-r01/after-context.webp": {
+      "bytes": 61784,
+      "sha256": "040d3a08de4da109d4fc34a452634a50e062a12f19b1318096091c6126a9788b"
+    },
+    "review/generator-vr-r01/after-controller.webp": {
+      "bytes": 23438,
+      "sha256": "93bd81727ea923e3986698c454493da67667bc87e1e0c7af6700ff5fc718abc1"
+    },
+    "review/generator-vr-r01/after-fan-opening.webp": {
+      "bytes": 35900,
+      "sha256": "6d78886da71e9f50fc51aa8019dd2b10eaf07601439b170017a9c6e49fff1e55"
+    },
+    "review/generator-vr-r01/before-auxiliary.webp": {
+      "bytes": 10044,
+      "sha256": "fb2574183daa19958290dc3a2d31c87a48517ccdbb19a4952dc0a146527ea870"
+    },
+    "review/generator-vr-r01/before-context.webp": {
+      "bytes": 43360,
+      "sha256": "d3f59aed5b3afc3caf19e0c2906d65e0ac3a44693fc12d0e0e17bc5807088b06"
+    },
+    "review/generator-vr-r01/before-controller.webp": {
+      "bytes": 7208,
+      "sha256": "cf4723389c88dd68d767689821f4fd7064e2798ef61fb032d99bef02daf71cf3"
+    },
+    "review/generator-vr-r01/before-fan-opening.webp": {
+      "bytes": 15762,
+      "sha256": "7aa5a9cfdade0d606658870e73a9864e13391c471b397181ba058fad13070fd9"
+    },
+    "review/generator-vr-r01/credits.json": {
+      "bytes": 1234,
+      "sha256": "19af13f7072f61f563e443791750b2913344e14c67aae8fb0daad912d5a1d936"
+    },
+    "review/generator-vr-r01/index.html": {
+      "bytes": 3109,
+      "sha256": "ccb7b1e41dce48dad52176bb9672f0f2fb163ea9531b0be287f7be1c8923b346"
+    },
+    "review/generator-vr-r01/neutral-review.json": {
+      "bytes": 2676,
+      "sha256": "5b1efbb76a35a455c49671a0d6c38884855887d08934c451cc17cbe7d859423e"
+    },
+    "review/generator-vr-r01/region-review.json": {
+      "bytes": 24422,
+      "sha256": "ba8ce7ef8389d092c853b19a121e6a44917fcd6a5e60c4310ff0ef09c4d1eb3a"
+    },
+    "review/generator-vr-r01/validation.json": {
+      "bytes": 132221,
+      "sha256": "4fba119b98e787b1e51eb80032279be2eea2d3796ad78d6ef5dd89e7d5101ff7"
+    },
     "review/hidden-loading-validation.json": {
       "bytes": 1098,
       "sha256": "86ef67ebb054491ae4e92dde36f30dc79b67441be05c1691ce1f5e6dfb086f90"
     },
     "review/index.html": {
-      "bytes": 14616,
-      "sha256": "ced62500925d8c3379f060cfa2b56e5e8f5d3062c7e035fbfd7a044cd88fcf70"
+      "bytes": 14694,
+      "sha256": "e46e41ac1faa2032377a66d6e744243aaa80a83d4ff2ab7f4481f7f7c2970c46"
     },
     "review/joint-diagnostic.json": {
       "bytes": 3944,

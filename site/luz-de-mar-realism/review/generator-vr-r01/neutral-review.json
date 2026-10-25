@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "advanceToFinish": true,
+  "neutralGeometrySHA256": "13a468c34078dbddbe905f6fc5e64bf55de00a8d377632831a43fb63198d92cc",
+  "reviewedViews": [
+    "context",
+    "controller",
+    "ventilation"
+  ],
+  "checks": {
+    "controllerStopKeysAndSelector": true,
+    "doorSeamAndThreeLatches": true,
+    "headsetClearOfLatch": true,
+    "continuousHose": true,
+    "seatedFeet": true,
+    "closedLocalCeiling": true
+  },
+  "limitations": [
+    "The eight/four-pixel grid is a review index, not a claim of per-cell visual acceptance.",
+    "Hidden depth and rear connections are inferred from a single panoramic station.",
+    "Final browser comparisons and quantitative landmark measurements pending."
+  ],
+  "pilotRevision": "Pilots resized to source native-pixel radii after neutral draft; ear shells smooth shading.",
+  "optimizedGuard": "24 observed concentric rings, 56 angular segments each; less than a native-pixel deviation.",
+  "grilleRevision": "Guard lowered26mm to expose underside below housing lip; white painted rings instead of polished steel.",
+  "pilotCenterRevision": "Lens front centers intersect the common offset panel plane at the native reference pixels; solves6\u201313px relief parallax.",
+  "upperDetailRevision": "Side speaker grille, two central actuator-frame screws, ear-cup pivots/inset, white upper junction and observed left arrow; actuator wires terminate in glands.",
+  "contactRevision": "Side grille layers separated by0.2mm and ear-cup inset/pivot stems overlap their supporting body or yoke.",
+  "surfaceRevision": "Readably observed intercom markings projected on the actual common lid plane; softer blue polymer, attached upper mount and lower yoke.",
+  "foundationRevision": "Six inferred pads bridge exported floor heights1.58/1.55m to the1.5955m rail underside; originalVR does not establish hidden support design.",
+  "proxyRemoval": {
+    "method": "Evaluated original proxy BVH,0.3mm surface tolerance. The compressed black bezel additionally uses its evaluated1mm-expanded ownership bounds and matching material; no retained authored component intersects that volume. Reverse centroid check on the retained front.",
+    "evaluatedProxyTriangles": 1565,
+    "removedMergedTriangles": 1595,
+    "roundedKeyOnlyMatches": 427,
+    "additionalSurfaceMatches": 1140,
+    "boundedBezelAdditionalTriangles": 28,
+    "boundedBezelForeignComponentIntersections": 0,
+    "toleranceMetres": 0.0003,
+    "remainingProxyCentroidMatches": 0
+  },
+  "hoseEntryRevision": "Source-observed hose turns behind the casing left edge before the KOHLER lettering; prior endpoint blocked2 of252 source-grid rays in the manufacturer area."
+}

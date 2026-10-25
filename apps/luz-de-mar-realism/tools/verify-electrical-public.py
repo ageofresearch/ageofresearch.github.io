@@ -7,7 +7,8 @@ review=os.environ.get('ELECTRICAL_REVIEW_PATH','review/electrical-vr-r01')
 room=json.loads((S/'luz-de-mar-realism/assets/machinery/room.json').read_text());paths=['index.html','assets/manifest.json','assets/hashes.json','publication.json','assets/machinery/room.json','assets/machinery/room.glb',review+'/index.html',review+'/validation.json']+[posixpath.normpath('assets/machinery/electrical-vr-r01/'+n)for n in room['electricalAppearance']['hashes']]
 entry=(S/'luz-de-mar-realism/index.html').read_text()
 import re
-paths+=re.findall(r'(?:src|href)="(/luz-de-mar-realism/assets/[^" ]+)"',entry);paths=[n.removeprefix('/luz-de-mar-realism/')for n in paths]
+paths+=re.findall(r'(?:src|href)="((?:/luz-de-mar-realism/|\./)?assets/[^" ]+)"',entry);paths=[n.removeprefix('/luz-de-mar-realism/').removeprefix('./')for n in paths]
+manifest=json.loads((S/'luz-de-mar-realism/assets/hashes.json').read_text());compiled=[n for n in manifest['files']if re.fullmatch(r'assets/[^/]+\.(js|css)',n)];paths+=compiled+[n for n in manifest['files']if n.startswith(review+'/')];paths=list(dict.fromkeys(paths))
 original=json.loads((R/'work/left-engine-r13/original-629.json').read_text());assert len(original)==629
 for n,h in original.items():assert sha((S/n).read_bytes())==h,('Local original changed',n)
 hidden=[n for n in original if Path(n).name=='.nojekyll'];assert hidden==['tidewater-rocha/.nojekyll'];servable={n:h for n,h in original.items()if n not in hidden}
@@ -22,4 +23,4 @@ def check(item):
  return{'path':name,'bytes':len(data),'sha256':digest,'passed':True}
 with concurrent.futures.ThreadPoolExecutor(max_workers=6)as pool:results=list(pool.map(check,expected.items()))
 before=subprocess.check_output(['git','rev-parse','f399e512a18ad6c40b9e401524f1a0ba6dca95a9:site/tidewater-rocha'],cwd=R,text=True).strip();after=subprocess.check_output(['git','rev-parse','HEAD:site/tidewater-rocha'],cwd=R,text=True).strip();assert before==after
-report={'commit':commit,'publicBase':base,'assets':results,'originalYachtTreeUnchanged':True,'originalGitTree':after,'localOriginalFilesVerified':629,'publicOriginalFilesVerified':len(public_originals),'dotfilesPreservedInGitButNotServed':hidden,'pass':True};(W/'public-verification.json').write_text(json.dumps(report,indent=2)+'\n');print('PUBLIC BYTES VERIFIED',len(results),'assets;',len(public_originals),'public originals; preserved629-file Git tree',flush=True)
+report={'commit':commit,'publicBase':base,'assets':results,'originalYachtTreeUnchanged':True,'originalGitTree':after,'localOriginalFilesVerified':629,'entryAndCachedCompiledAssetsVerified':len(compiled),'publicOriginalFilesVerified':len(public_originals),'dotfilesPreservedInGitButNotServed':hidden,'pass':True};(W/'public-verification.json').write_text(json.dumps(report,indent=2)+'\n');print('PUBLIC BYTES VERIFIED',len(results),'assets;',len(public_originals),'public originals; preserved629-file Git tree',flush=True)

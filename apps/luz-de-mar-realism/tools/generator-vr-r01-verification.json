@@ -1,0 +1,599 @@
+{
+  "version": "generator-vr-r01",
+  "sourceCommit": "a62c0c26760752c3fbe93da7c16779d9ccce6eb8",
+  "pagesCommit": "738d54d79eb5adf41e0e47030fe0093578ee4b1e",
+  "publicURL": "https://ageofresearch.github.io/luz-de-mar-realism/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=generator-r01",
+  "authoringWorkflow": {
+    "url": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40184644225",
+    "conclusion": "success"
+  },
+  "pagesWorkflow": {
+    "url": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40185393206",
+    "conclusion": "success"
+  },
+  "publicBytes": {
+    "verified": 663,
+    "compiledAssets": 7,
+    "originalPublicFiles": 628,
+    "originalGitFiles": 629,
+    "originalTree": "f5475b87b550c4d5dfb999a49d37d86dcefe4c25",
+    "pass": true
+  },
+  "publicBrowser": {
+    "base": "https://ageofresearch.github.io/luz-de-mar-realism/",
+    "checks": {
+      "electricalEntryStation": true,
+      "candidatePubliclyLoaded": true,
+      "cutPlaybackScrubAndSideControls": true,
+      "cachedExitReleasesBulkhead": true,
+      "cachedReturnReloadsAtomically": true,
+      "cachedRoomCycles": {
+        "cycles": 1,
+        "samples": [
+          {
+            "bytes": 878499351,
+            "memory": {
+              "geometries": 234,
+              "textures": 194
+            }
+          }
+        ],
+        "stable": true
+      }
+    },
+    "errors": [],
+    "renderer": "SwiftShader correctness only",
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178280,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 3.75,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 21,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          480,
+          320
+        ]
+      },
+      "canvas": [
+        480,
+        320
+      ],
+      "calls": 77,
+      "triangles": 447599,
+      "memory": {
+        "geometries": 234,
+        "textures": 194
+      },
+      "estimatedMemory": {
+        "geometryBytes": 132193638,
+        "textureBytes": 721139889,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 878499351,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 1.9000000059604645,
+        "p95": 1.9000000059604645
+      },
+      "shadowUpdates": 46,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "authoringRelease": {
+    "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-generator-vr-r01/",
+    "archives": [
+      {
+        "name": "luz-generator-vr-r01-authoring.zip",
+        "sha256": "c2d968333abeb9d94c6b5a0afb1e9870249a2d745a0adcde8e0f4a36a04a4929",
+        "bytes": 141900175,
+        "members": 93,
+        "crcVerified": true
+      }
+    ],
+    "binding": {
+      "method": "All decoded production triangles matched once by physical world positions, winding and material; UV0 disambiguates near-coincident faces. Per-corner physical UV0 and lightmap UV1 copied from the public GLB, preserving geometry. Dynamic door matched separately without a static bake.",
+      "runtimeGLBSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+      "matchedTriangles": 178280,
+      "matchedStaticTriangles": 178236,
+      "matchedDynamicTriangles": 44,
+      "maximumGeometryDifferenceMetres": 9.121940806320146e-05,
+      "maximumCopiedUVComponentError": 0,
+      "cornersCopied": 534708,
+      "UV0FallbackDisambiguations": 0,
+      "originalEnginesChanged": false,
+      "hybridCornerIrradianceCopied": true,
+      "passed": true,
+      "masterSHA256": "70d7b35f14d54b4ed66beb18284c5ac52db7097dea4fadfd19ff6ec2490cc104",
+      "sourceCommit": "a62c0c26760752c3fbe93da7c16779d9ccce6eb8",
+      "originalVRPhotosIncluded": false,
+      "inputs": [
+        {
+          "tag": "luz-electrical-no-stairs-r04",
+          "name": "luz-electrical-no-stairs-r04-authoring.zip",
+          "sha256": "eabf793e502fe564d224313a7357a798ee96c19650540ce977bac941152af95d"
+        },
+        {
+          "tag": "luz-de-mar-machinery-r11",
+          "name": "luz-de-mar-machinery-r11.zip",
+          "sha256": "3140321fe7b5f01700ac2421cc80467df7ff1373c7974ee2a4dc0b09c133f41f"
+        }
+      ]
+    },
+    "pass": true
+  },
+  "rendering": {
+    "triangles": {
+      "retainedElectrical": 112983,
+      "newGenerator": 65253,
+      "combined": 178280,
+      "combinedBudget": 180000
+    },
+    "resources": {
+      "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+      "additionalResidentBytes": 7059812,
+      "maximumAdditionalBytes": 67108864,
+      "peakEstimatedBytes": 678115757,
+      "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches.",
+      "implicitBulkheadDependencyVerified": true,
+      "hybridMaterialsCompiled": 34,
+      "pass": true
+    },
+    "walking": {
+      "hardware": {
+        "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+        "renderer": "Chromium SwiftShader",
+        "softwareOnly": true
+      },
+      "viewport": [
+        600,
+        400
+      ],
+      "DPR": 1,
+      "framesPerVariant": 20,
+      "simulationStepSeconds": 0.016666666666666666,
+      "maximumWalkingPositionDeviation": 0,
+      "before": {
+        "p50Ms": 1818.2999999970198,
+        "p95Ms": 1886.2000000029802,
+        "maximumCalls": 65,
+        "maximumTriangles": 372563,
+        "measuredResourceTransferBytes": 182600446
+      },
+      "after": {
+        "p50Ms": 1877.2999999970198,
+        "p95Ms": 1919.5,
+        "maximumCalls": 72,
+        "maximumTriangles": 428753,
+        "measuredResourceTransferBytes": 184473921
+      },
+      "interpretation": "Fixed-resolution rendering plus forced full-frame RGBA readback on SwiftShader. Synchronization/readback overhead is included; not GPU hardware FPS.",
+      "pass": true
+    },
+    "motion": {
+      "sameCamera": true,
+      "canvas": [
+        600,
+        400
+      ],
+      "identicalPixels": true,
+      "renderer": "SwiftShader",
+      "fixedRatioOverride": false,
+      "mode": "Nitidez"
+    }
+  },
+  "visualReview": {
+    "grid": {
+      "version": "generator-vr-r01",
+      "camera": {
+        "sourcePosition": [
+          9.15,
+          0,
+          3.18
+        ],
+        "estimated": true,
+        "fixedForAllViews": true
+      },
+      "nativeSize": 2048,
+      "grid": {
+        "basePixels": 8,
+        "detailPixels": 4,
+        "automaticAcceptance": false
+      },
+      "totalCells": 72046,
+      "cells8": 35022,
+      "cells4": 37024,
+      "measuredCells": 72046,
+      "coverage": {
+        "l": {
+          "region": [
+            0,
+            0,
+            1248,
+            2048
+          ],
+          "pixels": 2555904,
+          "complete": true,
+          "overlaps": 0
+        },
+        "b": {
+          "region": [
+            1840,
+            680,
+            2048,
+            2016
+          ],
+          "pixels": 277888,
+          "complete": true,
+          "overlaps": 0
+        }
+      },
+      "regions": 29,
+      "automaticCellAcceptance": false,
+      "individuallyAcceptedCells": 0,
+      "strictVisualAcceptance": false,
+      "views": 15,
+      "nativeFaces": [
+        "b",
+        "l"
+      ],
+      "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+      "privacy": "VR originals remain private; published textures are authored.",
+      "diagnosticLimits": "SRGB differences include exposure, shadows and reflection. They are not a geometry score. Sixteen control centers are fitting landmarks, not independent holdouts."
+    },
+    "controlProjection": {
+      "pass": true,
+      "projection": "Native L cube,2048²; one estimated fixed station",
+      "cameraSource": [
+        9.15,
+        0,
+        3.18
+      ],
+      "landmarkClass": "fit controls; not held out",
+      "points": 16,
+      "maximumErrorPixels": 3.0411963863877514,
+      "results": [
+        {
+          "component": "GVR/red emergency stop",
+          "face": "l",
+          "referenceUV": [
+            432,
+            1136
+          ],
+          "projectedUV": [
+            429.0118197833523,
+            1136.5653799195347
+          ],
+          "errorPixels": 3.0411963863877514,
+          "pass": true
+        },
+        {
+          "component": "GVR/auxiliary green indicator 0 lens",
+          "face": "l",
+          "referenceUV": [
+            214.5,
+            1251.8
+          ],
+          "projectedUV": [
+            214.49989540369177,
+            1251.8000021654643
+          ],
+          "errorPixels": 0.00010461872170870995,
+          "pass": true
+        },
+        {
+          "component": "GVR/auxiliary green indicator 1 lens",
+          "face": "l",
+          "referenceUV": [
+            248.9,
+            1241
+          ],
+          "projectedUV": [
+            248.90011326960382,
+            1241.0000141181492
+          ],
+          "errorPixels": 0.0001141460699561574,
+          "pass": true
+        },
+        {
+          "component": "GVR/auxiliary green indicator 2 lens",
+          "face": "l",
+          "referenceUV": [
+            280.4,
+            1231.8
+          ],
+          "projectedUV": [
+            280.39993969700095,
+            1231.8000383996996
+          ],
+          "errorPixels": 7.149117864560258e-05,
+          "pass": true
+        },
+        {
+          "component": "GVR/intercom blue pilot lens",
+          "face": "l",
+          "referenceUV": [
+            241,
+            638
+          ],
+          "projectedUV": [
+            241.00021621963072,
+            637.9999452686724
+          ],
+          "errorPixels": 0.0002230391152467737,
+          "pass": true
+        },
+        {
+          "component": "GVR/intercom green selector lens",
+          "face": "l",
+          "referenceUV": [
+            237,
+            701
+          ],
+          "projectedUV": [
+            236.99984521828435,
+            701.0000261154878
+          ],
+          "errorPixels": 0.00015696941804929412,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller frame screw (413, 1099)",
+          "face": "l",
+          "referenceUV": [
+            413,
+            1099
+          ],
+          "projectedUV": [
+            412.4541179765124,
+            1099.0669834983228
+          ],
+          "errorPixels": 0.5499763382314421,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller frame screw (413, 1180)",
+          "face": "l",
+          "referenceUV": [
+            413,
+            1180
+          ],
+          "projectedUV": [
+            412.4541179765124,
+            1180.1394116825963
+          ],
+          "errorPixels": 0.5634028761119821,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller frame screw (542, 1099)",
+          "face": "l",
+          "referenceUV": [
+            542,
+            1099
+          ],
+          "projectedUV": [
+            541.5693566799596,
+            1099.0669834983228
+          ],
+          "errorPixels": 0.4358215898082491,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller frame screw (542, 1180)",
+          "face": "l",
+          "referenceUV": [
+            542,
+            1180
+          ],
+          "projectedUV": [
+            541.5693566799596,
+            1180.1394116825963
+          ],
+          "errorPixels": 0.4526469776103422,
+          "pass": true
+        },
+        {
+          "component": "GVR/latch moving tongue 0",
+          "face": "l",
+          "referenceUV": [
+            408,
+            1226
+          ],
+          "projectedUV": [
+            407.99999559485866,
+            1225.9999811015127
+          ],
+          "errorPixels": 1.9405104774043697e-05,
+          "pass": true
+        },
+        {
+          "component": "GVR/latch moving tongue 1",
+          "face": "l",
+          "referenceUV": [
+            550,
+            1226
+          ],
+          "projectedUV": [
+            549.9998218855878,
+            1225.9999811015127
+          ],
+          "errorPixels": 0.00017911420000095828,
+          "pass": true
+        },
+        {
+          "component": "GVR/latch moving tongue 2",
+          "face": "l",
+          "referenceUV": [
+            731,
+            1108
+          ],
+          "projectedUV": [
+            730.9999830904948,
+            1107.999968259193
+          ],
+          "errorPixels": 3.596401241885945e-05,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller colored key 0",
+          "face": "l",
+          "referenceUV": [
+            461,
+            1159.5
+          ],
+          "projectedUV": [
+            461.00002112549805,
+            1159.5000049706787
+          ],
+          "errorPixels": 2.1702403424437285e-05,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller colored key 1",
+          "face": "l",
+          "referenceUV": [
+            476,
+            1159.5
+          ],
+          "projectedUV": [
+            476.000086923921,
+            1159.5000049706787
+          ],
+          "errorPixels": 8.706592725668507e-05,
+          "pass": true
+        },
+        {
+          "component": "GVR/controller colored key 2",
+          "face": "l",
+          "referenceUV": [
+            491,
+            1159.5
+          ],
+          "projectedUV": [
+            491.00015272234396,
+            1159.5000049706787
+          ],
+          "errorPixels": 0.00015280321328317993,
+          "pass": true
+        }
+      ],
+      "limitations": [
+        "A center match does not validate every edge or hidden depth.",
+        "No95% clear-edge or per-cell visual acceptance is claimed."
+      ]
+    },
+    "strictVisualAcceptance": false,
+    "limitations": [
+      "VR is one physical station. Hidden depths, support design and concealed connections are inferred.",
+      "Sixteen measured controls are fitting points, not independent hold-outs.",
+      "The native8/4 grid is measured and reviewed by component; no automatic cell acceptance or95% edge equivalence is claimed.",
+      "Fine photographic texture and the rest of the machinery room remain distinguishable from VR.",
+      "Independent default-viewer sessions retained four changed candidate pixels and one original-mesh isolation pixel within the recorded six-pixel/32-channel tolerance. The same-camera movement/rest test remained pixel-identical."
+    ]
+  },
+  "pagesArtifact": {
+    "bytes": 1037281280,
+    "limit": 1073741824,
+    "minimumHeadroomBytes": 33554432,
+    "headroomBytes": 36460544
+  },
+  "strategy": {
+    "id": "LDM-VR-EST-001 v1.0",
+    "sha256": "023852c67153ab6ff0f76cad934e8c38bb28f5f3105f1451a282bc3f4ed09b0c",
+    "unchanged": true
+  },
+  "pass": true
+}

@@ -1,0 +1,95 @@
+{
+  "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-electrical-clearance-r03/",
+  "archives": [
+    {
+      "name": "luz-electrical-clearance-r03-authoring.zip",
+      "sha256": "664d988ee90d61d39f88fa791ef3aef1f69b57dc2e438f5cf0e669aa07f5ce0d",
+      "bytes": 114071258,
+      "members": 41,
+      "crcVerified": true
+    },
+    {
+      "name": "luz-electrical-clearance-r03-bakes.zip",
+      "sha256": "2540ba3a844c2b5e5f1bb6f0bf885a2197adefd3a1a7d2256093c732aeb6ab21",
+      "bytes": 32948130,
+      "members": 12,
+      "crcVerified": true
+    },
+    {
+      "name": "luz-electrical-clearance-r03-evidence.zip",
+      "sha256": "177fcafefd61f9171fc2961ec5cb9028bab9bb08729a5242120848c0f39b4f85",
+      "bytes": 1214413,
+      "members": 30,
+      "crcVerified": true
+    }
+  ],
+  "binding": {
+    "method": "All decoded production triangles matched once by physical world positions, winding and material; UV0 disambiguates near-coincident faces. Per-corner physical UV0 and lightmap UV1 copied from the public GLB, preserving geometry. Dynamic door matched separately without a static bake.",
+    "runtimeGLBSHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+    "matchedTriangles": 116272,
+    "matchedStaticTriangles": 116228,
+    "matchedDynamicTriangles": 44,
+    "maximumGeometryDifferenceMetres": 8.368668701705072e-05,
+    "maximumCopiedUVComponentError": 0,
+    "cornersCopied": 348684,
+    "UV0FallbackDisambiguations": 0,
+    "originalEnginesChanged": false,
+    "hybridCornerIrradianceCopied": true,
+    "passed": true,
+    "masterSHA256": "7660af34e2284737d3c0d1210a569d525bf3d79ded1c6f6a996f55808585c820",
+    "sourceCommit": "67b474fb424aeb220bc978c02ea35da1e67f9bda",
+    "originalVRPhotosIncluded": false,
+    "productionAuthoringSHA256": "79f0e3335c242641fcc41045f056cfde11a15dba4494954665dde919cca14efa",
+    "inputs": [
+      {
+        "tag": "luz-de-mar-machinery-r11",
+        "name": "luz-de-mar-machinery-r11.zip",
+        "sha256": "3140321fe7b5f01700ac2421cc80467df7ff1373c7974ee2a4dc0b09c133f41f"
+      },
+      {
+        "tag": "luz-electrical-lower-r02",
+        "name": "luz-electrical-lower-r02-authoring.zip",
+        "sha256": "cb5f4d90b814e1419ac48a64aeca7e6899c904a614422a16d2f64614f3d3b7d4"
+      }
+    ]
+  },
+  "pass": true,
+  "releaseURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-electrical-clearance-r03",
+  "R02Preserved": {
+    "pass": true,
+    "unchangedReleaseMetadataAndAssetDigests": {
+      "assets": [
+        {
+          "digest": "sha256:cb5f4d90b814e1419ac48a64aeca7e6899c904a614422a16d2f64614f3d3b7d4",
+          "id": 673221356,
+          "name": "luz-electrical-lower-r02-authoring.zip",
+          "size": 105913618,
+          "updated_at": "2026-10-24T20:22:50Z"
+        },
+        {
+          "digest": "sha256:d2dd4b4eaffcc77e62eaf22f5d5a1dbcfad4c2886b4427d5bc24a8d634782662",
+          "id": 673221351,
+          "name": "luz-electrical-lower-r02-bakes.zip",
+          "size": 32853555,
+          "updated_at": "2026-10-24T20:22:48Z"
+        },
+        {
+          "digest": "sha256:5694e79c0150009897e81465321c014afcec3313597b9860fdc70ef19d20543d",
+          "id": 673221353,
+          "name": "luz-electrical-lower-r02-evidence.zip",
+          "size": 4786086,
+          "updated_at": "2026-10-24T20:22:48Z"
+        },
+        {
+          "digest": "sha256:d945f2eb567437efa308abaa835a28d119ffd5cc72b365baeded98e070a1fc04",
+          "id": 673221343,
+          "name": "SHA256SUMS",
+          "size": 310,
+          "updated_at": "2026-10-24T20:22:47Z"
+        }
+      ],
+      "id": 422958971,
+      "tag_name": "luz-electrical-lower-r02"
+    }
+  }
+}

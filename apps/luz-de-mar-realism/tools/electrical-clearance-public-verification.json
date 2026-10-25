@@ -1,0 +1,163 @@
+{
+  "commit": "67b474fb424aeb220bc978c02ea35da1e67f9bda",
+  "publicBase": "https://ageofresearch.github.io/",
+  "originalYachtTreeUnchanged": true,
+  "originalGitTree": "f5475b87b550c4d5dfb999a49d37d86dcefe4c25",
+  "localOriginalFilesVerified": 629,
+  "publicOriginalFilesVerified": 628,
+  "dotfilesPreservedInGitButNotServed": [
+    "tidewater-rocha/.nojekyll"
+  ],
+  "pass": true,
+  "assetsVerified": 645,
+  "assetVerificationSHA256": "c785626d235f4e31a48a15f0f97eaac5ab4d7dc059260926fd6be7e517ffa58f",
+  "publicViewer": {
+    "base": "https://ageofresearch.github.io/luz-de-mar-realism/",
+    "checks": {
+      "electricalEntryStation": true,
+      "candidatePubliclyLoaded": true,
+      "cutPlaybackScrubAndSideControls": true,
+      "cachedExitReleasesBulkhead": true,
+      "cachedReturnReloadsAtomically": true
+    },
+    "errors": [],
+    "renderer": "SwiftShader correctness only",
+    "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 116272,
+          "version": "electrical-clearance-r03",
+          "label": "frente el\u00e9ctrico"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 3.75,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 21,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          480,
+          320
+        ]
+      },
+      "canvas": [
+        480,
+        320
+      ],
+      "calls": 67,
+      "triangles": 375586,
+      "memory": {
+        "geometries": 211,
+        "textures": 159
+      },
+      "estimatedMemory": {
+        "geometryBytes": 126127102,
+        "textureBytes": 720833441,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 872126367,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 1.8999999985098839,
+        "p95": 1.8999999985098839
+      },
+      "shadowUpdates": 47,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "pagesRun": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40154572496",
+  "releaseRun": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40154638199",
+  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "pagesArtifact": {
+    "bytes": 1039165440,
+    "limit": 1073741824,
+    "minimumHeadroomBytes": 33554432,
+    "headroomBytes": 34576384
+  }
+}

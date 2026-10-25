@@ -1,0 +1,37 @@
+name: Filter well R01 authoring release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  authoring:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Verify the completed editable scene archive
+        working-directory: apps/luz-de-mar-realism/tools
+        run: |
+          sha256sum --check filter-well-authoring-SHA256SUMS
+          python3 - <<'PY'
+          import zipfile,json,hashlib
+          with zipfile.ZipFile('filter-well-authoring-inputs.zip')as z:
+              assert z.testzip() is None
+              manifest=json.loads(z.read('contents.json'))
+              for name,record in manifest.items():
+                  data=z.read(name)
+                  assert hashlib.sha256(data).hexdigest()==record['sha256'],name
+              assert 'filter-well-master.blend' in manifest
+              assert not any(name.lower().endswith('.jpg') for name in manifest)
+          PY
+          cp filter-well-authoring-inputs.zip /tmp/luz-filter-well-r01-authoring.zip
+          sha256sum /tmp/luz-filter-well-r01-authoring.zip | sed 's|/tmp/||' > /tmp/SHA256SUMS
+      - name: Upload the authoring release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh release view luz-filter-well-r01 --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft)" = true
+          gh release upload luz-filter-well-r01 /tmp/luz-filter-well-r01-authoring.zip /tmp/SHA256SUMS --repo "$GITHUB_REPOSITORY" --clobber

@@ -1,0 +1,1412 @@
+[
+  {
+    "id": "FW/continuous recessed floor",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/white well side -0.5",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/white well side 0.5",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/well end 11.03",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/well end 12.79",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/galvanized longitudinal rim -0.465",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/rim vertical return -0.465",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/galvanized longitudinal rim 0.465",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/rim vertical return 0.465",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/galvanized crossmember 11.07",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/crossmember lower web 11.07",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/frame seated bolt (11.07, -0.43)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/frame seated bolt (11.07, 0.43)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/galvanized crossmember 11.895",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/crossmember lower web 11.895",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/frame seated bolt (11.895, -0.43)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/frame seated bolt (11.895, 0.43)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/galvanized crossmember 12.76",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/crossmember lower web 12.76",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/frame seated bolt (12.76, -0.43)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/frame seated bolt (12.76, 0.43)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port hollow housing barrel",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port white annular upper flange",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 0",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 1",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 2",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 3",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 4",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 5",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 6",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port lid bolt 7",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port small hex plug",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port raised lid fitting",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port fitting top",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port red lid lever",
+    "role": "lid",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port seated housing foot -0.1",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port seated housing foot 0.1",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port forward connection",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.875",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.875 bolt 0",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.875 bolt 1",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.875 bolt 2",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.875 bolt 3",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.942",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.942 bolt 0",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.942 bolt 1",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.942 bolt 2",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front flange 11.942 bolt 3",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front teal butterfly",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front actuator hub",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front long lever",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port front long lever raised spine",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear riser",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.49",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.49 bolt 0",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.49 bolt 1",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.49 bolt 2",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.49 bolt 3",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.56",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.56 bolt 0",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.56 bolt 1",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.56 bolt 2",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve flange 1.56 bolt 3",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear valve body",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear black actuator",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear upright lever",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port rear upright lever raised spine",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port yellow bonding [11.9, 0.27, 1.02]",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/port yellow bonding [12.43, 0.27, 1.53]",
+    "role": "fixed",
+    "side": "port",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard hollow housing barrel",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard white annular upper flange",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 0",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 1",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 2",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 3",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 4",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 5",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 6",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard lid bolt 7",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard small hex plug",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard raised lid fitting",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard fitting top",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard red lid lever",
+    "role": "lid",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard seated housing foot -0.1",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard seated housing foot 0.1",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard forward connection",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.875",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.875 bolt 0",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.875 bolt 1",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.875 bolt 2",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.875 bolt 3",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.942",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.942 bolt 0",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.942 bolt 1",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.942 bolt 2",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front flange 11.942 bolt 3",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front teal butterfly",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front actuator hub",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front long lever",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard front long lever raised spine",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear riser",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.49",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.49 bolt 0",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.49 bolt 1",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.49 bolt 2",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.49 bolt 3",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.56",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.56 bolt 0",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.56 bolt 1",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.56 bolt 2",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve flange 1.56 bolt 3",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear valve body",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear black actuator",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear upright lever",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard rear upright lever raised spine",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard yellow bonding [11.9, -0.27, 1.02]",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/starboard yellow bonding [12.43, -0.27, 1.53]",
+    "role": "fixed",
+    "side": "starboard",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper white transverse bridge",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 4",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 5",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 6",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.165 bolt 7",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 4",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 5",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 6",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge flange -0.075 bolt 7",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper dark blue butterfly",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge actuator hub",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge long lever",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge long lever raised spine",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/upper bridge bonding jumper",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/observed green box",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/green box unreadable plate",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/front white collector",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central valve branch -0.083",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central valve branch 0.083",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 white valve bonnet",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 white valve bonnet bolt 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 white valve bonnet bolt 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 white valve bonnet bolt 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 white valve bonnet bolt 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 blue centre",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 red rim",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 spoke 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 spoke 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 spoke 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 spoke 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 spoke 4",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 0 yellow centre bolt",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 white valve bonnet",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 white valve bonnet bolt 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 white valve bonnet bolt 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 white valve bonnet bolt 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 white valve bonnet bolt 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 blue centre",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 red rim",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 spoke 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 spoke 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 spoke 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 spoke 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 spoke 4",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/central handwheel 1 yellow centre bolt",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left return",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel white valve bonnet",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel white valve bonnet bolt 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel white valve bonnet bolt 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel white valve bonnet bolt 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel white valve bonnet bolt 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel blue centre",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel red rim",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel spoke 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel spoke 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel spoke 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel spoke 3",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel spoke 4",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/offset left smaller handwheel yellow centre bolt",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/right collector elbow",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/right exposed brown sleeve",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/sleeve retaining band -0.394",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/sleeve retaining band -0.472",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/blue hose coil 0",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/blue hose coil 1",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/blue hose coil 2",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/blue lower hose tail",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/lower right white service line",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/lower black connector",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/lower connector clamp",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small inner junction box",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/junction cable entering box",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/side stainless run (-1, 0)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (-1, 0, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (-1, 0, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (-1, 0, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (-1, 0, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (-1, 0, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (-1, 0, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/side stainless run (-1, 1)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (-1, 1, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (-1, 1, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (-1, 1, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (-1, 1, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (-1, 1, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (-1, 1, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small side bonding (-1, 11.28)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small side bonding (-1, 12.03)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small side bonding (-1, 12.58)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/side stainless run (1, 0)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (1, 0, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (1, 0, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (1, 0, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (1, 0, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (1, 0, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (1, 0, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/side stainless run (1, 1)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (1, 1, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (1, 1, 11.15)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (1, 1, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (1, 1, 11.92)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/paired saddle (1, 1, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/saddle screw (1, 1, 12.55)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small side bonding (1, 11.28)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small side bonding (1, 12.03)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  },
+  {
+    "id": "FW/small side bonding (1, 12.58)",
+    "role": "fixed",
+    "side": "",
+    "evidence": "observed; depth estimated"
+  }
+]

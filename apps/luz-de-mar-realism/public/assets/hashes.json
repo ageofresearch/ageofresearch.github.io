@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "algorithm": "SHA-256",
   "scope": "New page subtree excluding hashes.json and publication.json",
   "files": {
@@ -19,9 +19,9 @@
       "bytes": 1081,
       "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
     },
-    "assets/asset-version-Bx6VPOYH.js": {
-      "bytes": 539607,
-      "sha256": "2e8dbf019845c35917913790e94dda3a4244fec7953cbf874301c66f20a40beb"
+    "assets/asset-version-BkUu_I7m.js": {
+      "bytes": 539629,
+      "sha256": "20514b57db70fad55eaef014453e9d9ebaad251120476add80bd2bfd881e6aca"
     },
     "assets/asset-version-Curezzlb.js": {
       "bytes": 539603,
@@ -131,13 +131,13 @@
       "bytes": 11614,
       "sha256": "ee88006a2d53f399c97e440f7ea9a3538b52c4c281b77d586d1ed1d664c21808"
     },
-    "assets/index-BCGp8RZj.js": {
-      "bytes": 214538,
-      "sha256": "4c1112f60565a73951b6c4725aa022c849f5a235f1d535e2fed6594737d4f010"
-    },
     "assets/index-BcEB3HbN.js": {
       "bytes": 214538,
       "sha256": "a81064c629a07d0e29e0e46869fc8544d014a9dee61a84a25d851cec48102656"
+    },
+    "assets/index-JiWf8mUx.js": {
+      "bytes": 221105,
+      "sha256": "295dbf8e362ea6d6ae1ff919fef86fe0a3df388c4536551076335835c57fd9a4"
     },
     "assets/machinery/ambient-architecture.exr": {
       "bytes": 12462030,
@@ -271,6 +271,22 @@
       "bytes": 132221,
       "sha256": "4fba119b98e787b1e51eb80032279be2eea2d3796ad78d6ef5dd89e7d5101ff7"
     },
+    "assets/machinery/filter-well-r01/authoring.json": {
+      "bytes": 2053,
+      "sha256": "c4933b877765a0d97af9d20d5378d3603f13f34537d014efebccda69e0abf6e2"
+    },
+    "assets/machinery/filter-well-r01/inventory.json": {
+      "bytes": 32648,
+      "sha256": "a3bc9e9a341fc97a3dbcb01eaa9ad2c7d9b7d46c0df09eea8810e325c5070853"
+    },
+    "assets/machinery/filter-well-r01/irradiance.ktx2": {
+      "bytes": 479278,
+      "sha256": "dcb8ec925753ea147f7448f9e3a2e01ab918cd269ba6136b26f377b8a70ea1df"
+    },
+    "assets/machinery/filter-well-r01/well.glb": {
+      "bytes": 1303236,
+      "sha256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5"
+    },
     "assets/machinery/probe-aft.exr": {
       "bytes": 1570452,
       "sha256": "4495117d00ab59d996fddd65bdc63a2331c0c9685a4bef9b4761cfec6abba58f"
@@ -288,24 +304,24 @@
       "sha256": "465bade7be3cf637823803ef2df77fc45fecc85dbaef76ff81dcaf1e6469e07c"
     },
     "assets/machinery/room.glb": {
-      "bytes": 12020404,
-      "sha256": "c8ed275333416c01e66047eea0c55a3c794ea802d73f4185e724ec820f424c23"
+      "bytes": 12062572,
+      "sha256": "d596ee1cd41ac15eb63027a819acf67f4a21b1f05d6202ab4e9ea567d3714e9a"
     },
     "assets/machinery/room.json": {
-      "bytes": 431549,
-      "sha256": "a2b926937cf82a9124f87004d1205e5e429e9cc4cd23dfb669d85860171583e8"
+      "bytes": 432793,
+      "sha256": "7df5f9621e94de47551386ecd1bc6b5005879699044592cd6f40ec0a4748513d"
     },
     "assets/machinery/vr-details.glb": {
       "bytes": 88476,
       "sha256": "bf1647c18f44a2bdac0a21c7cb979e29c8ac6251387923ea1a199525bb1286b1"
     },
     "assets/manifest.json": {
-      "bytes": 20015,
-      "sha256": "8f32f894abe0c882d8280b74e1e0cda65969b69989f23878ce4e9f3ff67b7d62"
+      "bytes": 20018,
+      "sha256": "0f2d84b0b98d1f4273ca951087aeb1ab48b9c6909695fb2b804bd895e9454224"
     },
-    "assets/mechanics-BazA2wWr.js": {
-      "bytes": 262914,
-      "sha256": "1f0498db974bcbf7447010611d1e5b84d1ee3f9619a758d751e51aab29834c8c"
+    "assets/mechanics-Dsyc_iN3.js": {
+      "bytes": 263354,
+      "sha256": "06f948b7d7a3b4a596eda8fdd170af8d69b64de967481f50084d3a323a28f880"
     },
     "assets/mechanics-FQLybPg1.js": {
       "bytes": 262914,
@@ -697,7 +713,7 @@
     },
     "index.html": {
       "bytes": 5794,
-      "sha256": "051a4c6cb4bf41bdf300f7581ea7f1f9f0f518840f6aeb789690b5a01f38da6d"
+      "sha256": "b0916f3daa6a0cadd24eb0651ce39936c3fd6b5f65733cd138805b3817ae58d8"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -990,6 +1006,18 @@
     "review/exterior-visual-review.json": {
       "bytes": 28630,
       "sha256": "41a610cce18d402647a000e43d7f37e7d64ce4aeb37bcb0e15d5e8db3b6beffb"
+    },
+    "review/filter-well-r01/comparacion.webp": {
+      "bytes": 46210,
+      "sha256": "de009b744fd66fb1d0bc35a3d5795736a4e13b4f62ceab80fdc345c4c5082c45"
+    },
+    "review/filter-well-r01/index.html": {
+      "bytes": 2044,
+      "sha256": "eb61bffacc92755f7554a70d19e4bf28ccb56fe5dcee881fb35ac11d3d48789b"
+    },
+    "review/filter-well-r01/validation.json": {
+      "bytes": 7524,
+      "sha256": "7e8fc021b6e0c3ac5a78f183bae90bf05b28b7b3fe98265a4114b4b47a085be6"
     },
     "review/generator-vr-r01/after-auxiliary.webp": {
       "bytes": 16466,

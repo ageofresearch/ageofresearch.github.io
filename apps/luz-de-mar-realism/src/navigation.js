@@ -3,10 +3,10 @@ export const SX=35.23/36,SY=7.47/7.6;
 export const sourcePoint=p=>new Vector3(p[1]*SY,p[2]-2.01,p[0]*SX-17.615);
 export const toSource=p=>[(p.z+17.615)/SX,p.x/SY,p.y+2.01];
 export const register=[11.45,-.49,12.59,.49];
-export function inRegister(x,y,r=.14){return x>register[0]-r&&x<register[2]+r&&y>register[1]-r&&y<register[3]+r;}
+export function inRegister(x,y,r=.14,rect=register){return x>rect[0]-r&&x<rect[2]+r&&y>rect[1]-r&&y<rect[3]+r;}
 export class RoomNavigation{
  constructor(meta){this.meta=meta;this.grid=meta.navigation;this.bits=Uint8Array.from(atob(this.grid.mask),c=>c.charCodeAt(0));this.openBits=meta.openDoorNavigation?Uint8Array.from(atob(meta.openDoorNavigation.mask),c=>c.charCodeAt(0)):null;this.doorOpen=false;this.openRegister=false;this.position=this.nearest(...meta.room.spawn);}
- safe(x,y){if(this.openRegister&&inRegister(x,y))return false;const g=this.grid,fx=(x-g.x0)/g.step,fy=(y-g.y0)/g.step;
+ safe(x,y){if(this.openRegister&&inRegister(x,y,.14,this.register||register))return false;const g=this.grid,fx=(x-g.x0)/g.step,fy=(y-g.y0)/g.step;
   const bits=this.doorOpen&&this.openBits?this.openBits:this.bits;return [...new Set([Math.floor(fx),Math.ceil(fx)])].every(ix=>[...new Set([Math.floor(fy),Math.ceil(fy)])].every(iy=>{const k=iy*g.nx+ix;return ix>=0&&iy>=0&&ix<g.nx&&iy<g.ny&&!!(bits[k>>3]&(1<<(k&7)));}));}
  nearest(x,y){if(this.safe(x,y))return[x,y];let best=Infinity,p;const g=this.grid;for(let iy=0;iy<g.ny;iy++)for(let ix=0;ix<g.nx;ix++){const a=g.x0+ix*g.step,b=g.y0+iy*g.step,d=(a-x)**2+(b-y)**2;if(d<best&&this.safe(a,b)){best=d;p=[a,b];}}if(!p)throw Error('No hay suelo disponible');return p;}
  move(dx,dy){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy)/.02));for(let i=0;i<steps;i++){const[x,y]=this.position,a=x+dx/steps,b=y+dy/steps;if(this.safe(a,b))this.position=[a,b];else if(this.safe(a,y))this.position=[a,y];else if(this.safe(x,b))this.position=[x,b];}return this.position;}

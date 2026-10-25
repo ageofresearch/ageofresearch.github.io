@@ -1,0 +1,32 @@
+name: Pedestal R01 authoring release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  authoring:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install pinned Blender and NumPy
+        run: |
+          python3 -m venv /tmp/pedestal-python
+          /tmp/pedestal-python/bin/pip install numpy==2.3.5
+          curl --fail --location --retry 3 https://download.blender.org/release/Blender4.3/blender-4.3.2-linux-x64.tar.xz --output /tmp/blender.tar.xz
+          echo '4da1c956673c0485e63054e563ee69198cc8f80d8157dd7592dffc8a6a5592e6  /tmp/blender.tar.xz' | sha256sum --check
+          tar -xf /tmp/blender.tar.xz -C /tmp
+      - name: Bind the editable master to the production pedestal patch
+        working-directory: apps/luz-de-mar-realism
+        env:
+          BLENDER: /tmp/blender-4.3.2-linux-x64/blender
+        run: /tmp/pedestal-python/bin/python tools/release-pedestal.py
+      - name: Attach authoring to the new draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload luz-pedestal-r01 apps/luz-de-mar-realism/work/pedestal-r01-release/release/luz-pedestal-r01-authoring.zip apps/luz-de-mar-realism/work/pedestal-r01-release/release/SHA256SUMS apps/luz-de-mar-realism/work/pedestal-r01-release/release/release-proof.json --repo "$GITHUB_REPOSITORY"

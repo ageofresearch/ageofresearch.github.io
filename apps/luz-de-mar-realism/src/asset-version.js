@@ -1,4 +1,4 @@
 // Bump with asset revisions so previously visited clients cannot mix old UVs
 // with new lightmaps from the same GitHub Pages paths.
-export const ASSET_REVISION='electrical-clearance-r03';
+export const ASSET_REVISION='electrical-no-stairs-r04';
 export const assetURL=path=>path+(path.includes('?')?'&':'?')+'v='+ASSET_REVISION;

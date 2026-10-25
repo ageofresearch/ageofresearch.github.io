@@ -80,5 +80,9 @@
     "count": 79664,
     "sum": "17363a01e7b36bf5efbe0adfaed7c91e538046d14f07749184a17bbcfb60cec3"
   },
-  "method": "SHA256 multiset sum over material name, cyclic-winding canonical original vertex attributes; captured from the unmodified pre-electrical room at baseline commit."
+  "method": "SHA256 multiset sum over material name, cyclic-winding canonical original vertex attributes; captured from the unmodified pre-electrical room at baseline commit.",
+  "removedServiceStairAggregate": {
+    "count": 2042,
+    "sum": "2eb95329cf47e8719484b7fc7dbd4749fc89c6aa2e59edbe79d96080acf40e65"
+  }
 }

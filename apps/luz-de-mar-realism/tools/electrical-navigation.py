@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 R=Path(__file__).resolve().parents[1];W=Path(os.environ.get('ELECTRICAL_AUTHORING_WORK',str(R/'work/electrical-vr-r01')));m=json.loads((R/'work/machinery-r11/snapshot/machinery.json').read_text());b=(R/'work/machinery-r11/snapshot/machinery.bin').read_bytes();a=json.loads((W/'authoring.json').read_text());room=json.loads((W/'baseline/luz-de-mar-realism/assets/machinery/room.json').read_text());g=room['navigation'];SX=35.23/36;SY=7.47/7.6
 v=np.frombuffer(b,dtype='<f4',count=m['vertices']*11).reshape(-1,11)[:,:3];v=np.stack([(v[:,2]+17.615)/SX,v[:,0]/SY,v[:,1]+2.01],1);ix=np.frombuffer(b,dtype='<u4',offset=m['vertexBytes'],count=m['triangles']*3).reshape(-1,3);part=np.frombuffer(b,dtype='<u4',offset=m['vertexBytes']+m['indexBytes'],count=m['triangles']);tri=v[ix];removed=np.array([p['id']in a['replacedIDs']for p in m['parts']])[part]
+removed|=np.array([p['id']in a.get('removedSourceIDs',[])for p in m['parts']])[part]
 old=tri[removed];oldlo=old[:,:,:2].min(1)-.14;oldhi=old[:,:,:2].max(1)+.14
 vertical=(tri[:,:,2].max(1)>1.64)&(tri[:,:,2].min(1)<3.18)&~removed
 def height_clipped(triangles,z0,z1):
@@ -66,5 +67,9 @@ for state,base in [('closed',room['bulkheadAppearance']['navigation']['mask']),(
  results[state]=base64.b64encode(np.packbits(bits,bitorder='little').tobytes()).decode();stats[state]={'recoveredBeforeNewObstacles':recovered,'blockedByNewAssemblies':blockednew,'changedCells':int((bits!=before).sum()),'safeCells':int(bits.sum())}
 accessible=np.unpackbits(np.frombuffer(base64.b64decode(results['closed']),dtype=np.uint8),bitorder='little')[:g['nx']*g['ny']]|np.unpackbits(np.frombuffer(base64.b64decode(results['open']),dtype=np.uint8),bitorder='little')[:g['nx']*g['ny']];low_cells&=accessible.astype(bool)
 distance=distance_transform_edt(~low_cells.reshape(g['ny'],g['nx']))*g['step'];t=np.clip((distance-.16)/.45,0,1);smooth=t*t*(3-2*t);eye=np.rint(smooth*255).astype(np.uint8)
+if not low_cells.any():eye.fill(255) # EDT's implicit outside boundary is not an overhead obstacle.
 report={'mask':results['closed'],'openMask':results['open'],'radius':.14,'step':g['step'],'scopeSource':scope,'method':'Actual floor support and retained triangles clipped to avatar height. A local under-stair service passage uses1.00m body clearance/0.90m eye height; normal standing clearance remains elsewhere. New installation obstacles are never bypassed.','changes':stats,'headroom':{'eyeHeights':base64.b64encode(eye.tobytes()).decode(),'minimumEyeHeight':.90,'maximumEyeHeight':1.60,'bodyClearance':1.00,'standingBodyClearance':1.60,'blendDistance':.45,'anticipationDistance':.16,'lowCells':int(low_cells.sum()),'scopeSource':[6.86,1.06,8.15,2.40],'note':'Digital service passage under original stairs; height inferred from retained scene geometry, not surveyed aboard.'}}
+if a.get('removedSourceIDs'):
+ report['method']='Floor-supported local recovery after service-stair deletion; retained structural surfaces and new equipment remain obstacles, with14cm avatar radius.'
+ report['headroom']['note']='Recomputed after removing the service stairs. Any remaining low clearance belongs to retained structural geometry; no invisible stair height field is retained.'
 (W/'navigation.json').write_text(json.dumps(report,indent=2)+'\n');print('ELECTRICAL NAVIGATION',stats)

@@ -113,6 +113,6 @@ for m in bpy.data.materials:
 for im in list(bpy.data.images):
  if im.users==0:bpy.data.images.remove(im)
 for im in bpy.data.images:
- if im.source=='FILE'and im.has_data:im.pack()
+ if im.source=='FILE'and im.has_data and not im.packed_file:im.pack()
 S.view_settings.exposure=math.log2(.05);S['bake']='New static bulkhead full diffuse plus updated compatible engine transport and reflection probes; no photographic textures'
 bpy.ops.wm.save_as_mainfile(filepath=str(W/'electrical-master.blend'),compress=True);binding['masterSHA256']=hashlib.sha256((W/'electrical-master.blend').read_bytes()).hexdigest();(W/'authoring.json').write_text(json.dumps(binding,indent=2)+'\n');print('ELECTRICAL LIGHTING COMPLETE',flush=True)

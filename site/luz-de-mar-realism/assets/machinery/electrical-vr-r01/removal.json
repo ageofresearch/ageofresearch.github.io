@@ -1,0 +1,442 @@
+{
+  "sourceIDs": [
+    "LD/service-route/67",
+    "LD/service-route/68",
+    "LD/service-route/72",
+    "LD/service-route/73",
+    "LD/service-route/74",
+    "LD/service-route/75",
+    "LD/service-route/76",
+    "LD/service-route/77",
+    "LD/service-route/78",
+    "LD/service-route/79",
+    "LD/service-route/80",
+    "LD/service-route/81",
+    "LD/service-route/82",
+    "LD/service-route/83",
+    "LD/service-route/84",
+    "LD/service-route/85",
+    "LD/service-route/86",
+    "LD/service-route/87",
+    "LD/service-route/88",
+    "LD/service-route/89",
+    "LD/service-route/90",
+    "LD/service-route/91",
+    "LD/service-route/92",
+    "LD/service-route/93",
+    "LD/service-route/94",
+    "LD/service-route/95",
+    "LD/service-route/96",
+    "LD/service-route/97",
+    "LD/service-route/98",
+    "LD/service-route/99",
+    "LD/service-route/100",
+    "LD/service-route/101",
+    "LD/service-route/102",
+    "LD/service-route/103",
+    "LD/service-route/104",
+    "LD/service-route/105",
+    "LD/service-route/106",
+    "LD/service-route/107",
+    "LD/service-route/108",
+    "LD/service-route/109",
+    "LD/service-route/110",
+    "LD/service-route/111",
+    "LD/service-route/112",
+    "LD/service-route/113",
+    "LD/service-route/114",
+    "LD/service-route/115",
+    "LD/service-route/116",
+    "LD/service-route/117",
+    "LD/service-route/118",
+    "LD/service-route/120",
+    "LD/service-route/121",
+    "LD/service-route/123",
+    "LD/service-route/124",
+    "LD/service-route/127",
+    "LD/service-route/129",
+    "LD/service-route/130",
+    "LD/service-route/131"
+  ],
+  "objects": [
+    {
+      "object": "LD_R02 | furniture",
+      "triangles": 2042,
+      "kind": "original source stair"
+    },
+    {
+      "object": "KEEP | furniture",
+      "triangles": 2042,
+      "kind": "original source stair"
+    },
+    {
+      "object": "BVR context | KEEP | furniture",
+      "triangles": 2042,
+      "kind": "original source stair"
+    },
+    {
+      "object": "EVR context | BVR context | KEEP | furniture",
+      "triangles": 2042,
+      "kind": "original source stair"
+    },
+    {
+      "object": "EVR context | lower R02 EVR context | BVR context | KEEP | furn",
+      "triangles": 2042,
+      "kind": "original source stair"
+    },
+    {
+      "object": "R03 context | EVR context | lower R02 EVR context | BVR context",
+      "triangles": 647,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 3 | 26",
+      "triangles": 30,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 3 | 27",
+      "triangles": 3,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 4 | 28",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 4 | 29",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 4 | 30",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 4 | 31",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 4 | 32",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 5 | 33",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 5 | 34",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 5 | 35",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 5 | 36",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 5 | 37",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 6 | 38",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 6 | 39",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 6 | 40",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 6 | 41",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 6 | 42",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 7 | 43",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 7 | 44",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 7 | 45",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 7 | 46",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 7 | 47",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 8 | 48",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 8 | 49",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 8 | 50",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 8 | 51",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 8 | 52",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 9 | 53",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 9 | 54",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 9 | 55",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 9 | 56",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 9 | 57",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 10 | 58",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 10 | 59",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 10 | 60",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 10 | 61",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 10 | 62",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 11 | 63",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 11 | 64",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 11 | 65",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 11 | 66",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 11 | 67",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 12 | 68",
+      "triangles": 28,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 12 | 69",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread nosing 12 | 70",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 12 | 71",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 12 | 72",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "brown service tread 13 | 73",
+      "triangles": 22,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white stair underside closure 13 | 74",
+      "triangles": 2,
+      "kind": "original source stair"
+    },
+    {
+      "object": "metal tread front return 13 | 75",
+      "triangles": 14,
+      "kind": "original source stair"
+    },
+    {
+      "object": "white service riser 13 | 76",
+      "triangles": 12,
+      "kind": "original source stair"
+    },
+    {
+      "object": "profiled white service stair enclosure | 77",
+      "triangles": 122,
+      "kind": "original source stair"
+    },
+    {
+      "object": "profiled white service stair enclosure | 78",
+      "triangles": 93,
+      "kind": "original source stair"
+    },
+    {
+      "object": "polished handrail along service descent | 81",
+      "triangles": 1054,
+      "kind": "original source stair"
+    },
+    {
+      "object": "seated service handrail wall bracket | 82",
+      "triangles": 32,
+      "kind": "original source stair"
+    },
+    {
+      "object": "seated service handrail wall bracket | 83",
+      "triangles": 32,
+      "kind": "original source stair"
+    },
+    {
+      "object": "seated service handrail wall bracket | 84",
+      "triangles": 32,
+      "kind": "original source stair"
+    },
+    {
+      "object": "CLEARANCE/123/0",
+      "triangles": 104,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/124/0",
+      "triangles": 77,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/step-8",
+      "triangles": 132,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/127",
+      "triangles": 1056,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/129",
+      "triangles": 32,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/130",
+      "triangles": 32,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/131",
+      "triangles": 33,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/129-spacer",
+      "triangles": 6,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/131-standoff",
+      "triangles": 6,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "CLEARANCE/131-sleeve",
+      "triangles": 6,
+      "kind": "R03 editable stair part"
+    },
+    {
+      "object": "EVR installed | static",
+      "triangles": 1650,
+      "kind": "R03 merged stair assembly"
+    }
+  ],
+  "relocated": false,
+  "retained": [
+    "electrical controls",
+    "engine geometry and finishes",
+    "door",
+    "floor",
+    "structural walls and ceilings"
+  ],
+  "R03ArchiveRetained": true
+}

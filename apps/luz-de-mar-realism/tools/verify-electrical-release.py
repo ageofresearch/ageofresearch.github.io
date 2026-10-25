@@ -7,7 +7,7 @@ def download(name):
  with urllib.request.urlopen(base+name,timeout=240)as response,target.open('wb')as output:
   while data:=response.read(1024*1024):h.update(data);output.write(data)
  return name,h.hexdigest()
-download('SHA256SUMS');expected={line.split()[1]:line.split()[0]for line in(O/'SHA256SUMS').read_text().splitlines()if line.strip()};assert len(expected)==3
+download('SHA256SUMS');expected={line.split()[1]:line.split()[0]for line in(O/'SHA256SUMS').read_text().splitlines()if line.strip()};assert len(expected)==(1 if tag=='luz-electrical-no-stairs-r04'else 3)
 with concurrent.futures.ThreadPoolExecutor(max_workers=3)as pool:hashes=dict(pool.map(download,expected))
 assert hashes==expected,'Release download SHA256 mismatch';archives=[]
 for name,digest in hashes.items():

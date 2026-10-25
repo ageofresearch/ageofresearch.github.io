@@ -1,6 +1,7 @@
 {
-  "version": 5,
-  "build": "electrical-clearance-r03",
+  "version": 6,
+  "build": "electrical-no-stairs-r04",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r04",
   "scope": [
     "saloon",
     "cockpit",
@@ -10,11 +11,32 @@
     "bow",
     "machinery"
   ],
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03",
-  "defaultBulkheadChanged": false,
-  "defaultElectricalChanged": false,
-  "strictVisualAcceptance": false,
-  "assetManifestSHA256": "3dc524c59d185c4c72e222b696ce6ca1d86b6fd991521ade4f7e73a5b8e97d1e",
+  "stairRemoval": {
+    "pass": true,
+    "version": "electrical-no-stairs-r04",
+    "removedSourceParts": 57,
+    "removedRoomTriangles": 2042,
+    "removedReplacementTriangles": 1650,
+    "retainedRoomTriangles": 77622,
+    "retainedSourceAttributesUnchanged": true,
+    "roomTriangleAggregate": {
+      "count": 77622,
+      "sum": "e87ce6d8186b83845b3952e3311a81d456f6802720ad86d30ac81b3c4e6cc05e"
+    },
+    "removedServiceStairAggregate": {
+      "count": 2042,
+      "sum": "2eb95329cf47e8719484b7fc7dbd4749fc89c6aa2e59edbe79d96080acf40e65"
+    },
+    "originalYachtFilesUnchanged": 629,
+    "protectedMechanicalFilesUnchanged": 73,
+    "electricalTriangles": 114622,
+    "headroom": {
+      "beforeLowCells": 407,
+      "afterLowCells": 0
+    },
+    "relocated": false,
+    "defaultAndCandidate": true
+  },
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -25,33 +47,20 @@
     "sha256": "023852c67153ab6ff0f76cad934e8c38bb28f5f3105f1451a282bc3f4ed09b0c",
     "unchanged": true
   },
-  "resources": {
-    "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
-    "additionalResidentBytes": 1380024,
-    "maximumAdditionalBytes": 4194304,
-    "peakEstimatedBytes": 671742773,
-    "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches.",
-    "implicitBulkheadDependencyVerified": true,
-    "hybridMaterialsCompiled": 21,
-    "pass": true
-  },
-  "defaultRegression": true,
   "existingRoomAssets": {
     "verified": 50,
     "allUnchanged": true
   },
-  "existingDownloads": {
-    "verified": 4,
-    "unchanged": true
-  },
   "functionalBrowserChecks": true,
+  "assetManifestSHA256": "a49d8161a09152ce215ba43678778c8b589ec808d09ab5d1a1613dc70c66ad19",
+  "authoringRelease": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-electrical-no-stairs-r04",
   "renderer": "Three.js 0.180.0 / WebGL2",
+  "strictVisualAcceptance": false,
+  "visualStatus": "Misplaced service stairs removed; relocation deferred. Wider room reconstruction remains a candidate.",
   "pagesArtifact": {
-    "bytes": 1039165440,
+    "bytes": 1039902720,
     "limit": 1073741824,
     "minimumHeadroomBytes": 33554432,
-    "headroomBytes": 34576384
-  },
-  "visibilityCorrectionAccepted": true,
-  "visualStatus": "R03 obstruction correction accepted for ten controls and captions; full-room visual fidelity remains a candidate."
+    "headroomBytes": 33839104
+  }
 }

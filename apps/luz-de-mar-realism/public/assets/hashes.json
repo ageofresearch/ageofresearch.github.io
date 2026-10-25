@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "algorithm": "SHA-256",
   "scope": "New page subtree excluding hashes.json and publication.json",
   "files": {
@@ -23,9 +23,9 @@
       "bytes": 539607,
       "sha256": "2e8dbf019845c35917913790e94dda3a4244fec7953cbf874301c66f20a40beb"
     },
-    "assets/asset-version-Dc53sZif.js": {
-      "bytes": 539615,
-      "sha256": "aca3a0a6c580a780418a43280e96e53804b0be253424cd7f7787e4669294c906"
+    "assets/asset-version-Curezzlb.js": {
+      "bytes": 539603,
+      "sha256": "115e6272996197cc19df376a17531565ac637987361035c07a788e3f3931a2fc"
     },
     "assets/beach-club/ambient-beach-club.exr": {
       "bytes": 12815691,
@@ -135,9 +135,9 @@
       "bytes": 214538,
       "sha256": "4c1112f60565a73951b6c4725aa022c849f5a235f1d535e2fed6594737d4f010"
     },
-    "assets/index-D9OlNVfE.js": {
-      "bytes": 214379,
-      "sha256": "5c8e6e7c90acb48d55e5cfef5de83f89bd5217a579d6e7286ce609f770602200"
+    "assets/index-BcEB3HbN.js": {
+      "bytes": 214538,
+      "sha256": "a81064c629a07d0e29e0e46869fc8544d014a9dee61a84a25d851cec48102656"
     },
     "assets/machinery/ambient-architecture.exr": {
       "bytes": 12462030,
@@ -200,8 +200,8 @@
       "sha256": "c1a4805d1796d67843d39c894d75f87ace163eb112de19bd19f20e203f646913"
     },
     "assets/machinery/electrical-vr-r01/authoring.json": {
-      "bytes": 75733,
-      "sha256": "7463bdaf32a7ebf3ad543dc91a2f4105c15fc4d0bd8fd61391e70c6946e762f2"
+      "bytes": 78518,
+      "sha256": "b58baf1dd47066f50b0acbf46a32e17bfb0267022f886b48da37c12db4561d1e"
     },
     "assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr": {
       "bytes": 7513105,
@@ -224,8 +224,8 @@
       "sha256": "5944eb4a646278d191a2bce504dbb33ac2d41b4eb5f6abd7b5172b376c411703"
     },
     "assets/machinery/electrical-vr-r01/electrical.glb": {
-      "bytes": 8985140,
-      "sha256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a"
+      "bytes": 9097228,
+      "sha256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4"
     },
     "assets/machinery/electrical-vr-r01/evidence.json": {
       "bytes": 16412,
@@ -234,6 +234,10 @@
     "assets/machinery/electrical-vr-r01/input-authoring.json": {
       "bytes": 39401,
       "sha256": "ca36471b9e34edf4c4176ba03f805db79008ffdc0215d5ddb3239c9dc7842780"
+    },
+    "assets/machinery/electrical-vr-r01/pedestal-repair.json": {
+      "bytes": 2074,
+      "sha256": "1f4b944cf5f0bf1a0b4aae85dcd58a28edcd3ef9b8a5b03eb1a6e978b72e6da5"
     },
     "assets/machinery/electrical-vr-r01/port-irradiance.exr": {
       "bytes": 6713581,
@@ -288,24 +292,24 @@
       "sha256": "c8ed275333416c01e66047eea0c55a3c794ea802d73f4185e724ec820f424c23"
     },
     "assets/machinery/room.json": {
-      "bytes": 431406,
-      "sha256": "727dd68df6ea2ac266ce207685aee27e19f9f4de411728a28200df2251129c47"
+      "bytes": 431549,
+      "sha256": "a2b926937cf82a9124f87004d1205e5e429e9cc4cd23dfb669d85860171583e8"
     },
     "assets/machinery/vr-details.glb": {
       "bytes": 88476,
       "sha256": "bf1647c18f44a2bdac0a21c7cb979e29c8ac6251387923ea1a199525bb1286b1"
     },
     "assets/manifest.json": {
-      "bytes": 20019,
-      "sha256": "645f475869d89dcb45d01a3331eafdfaab3dec8e95a2739cb21b43b2fda0db62"
+      "bytes": 20015,
+      "sha256": "8f32f894abe0c882d8280b74e1e0cda65969b69989f23878ce4e9f3ff67b7d62"
     },
     "assets/mechanics-BazA2wWr.js": {
       "bytes": 262914,
       "sha256": "1f0498db974bcbf7447010611d1e5b84d1ee3f9619a758d751e51aab29834c8c"
     },
-    "assets/mechanics-C89pyZ_s.js": {
+    "assets/mechanics-FQLybPg1.js": {
       "bytes": 262914,
-      "sha256": "7ecac8eec05202a7fc4be558dec1c2b85360fad1a4f5dcf5b88fab923a348a22"
+      "sha256": "88c3313805cd3980e857cfedd49c8032e8759bf7905c62c17894e39f96e4c466"
     },
     "assets/mechanics/left-vr-r01/authoring.json": {
       "bytes": 88483,
@@ -693,7 +697,7 @@
     },
     "index.html": {
       "bytes": 5794,
-      "sha256": "31b888b7b5e52f5f590bfc017bf2d5c3f77e4dc2af08677ed6370da0fcfb6179"
+      "sha256": "051a4c6cb4bf41bdf300f7581ea7f1f9f0f518840f6aeb789690b5a01f38da6d"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -1358,6 +1362,18 @@
     "review/original-yacht-hashes.json": {
       "bytes": 71801,
       "sha256": "9062d08713919d6820d5bc15478d52eff2b91d65590d66d23576d8668b4c3358"
+    },
+    "review/pedestal-r01/comparacion.webp": {
+      "bytes": 232446,
+      "sha256": "967df3a30ed0e29f96e23134bda4bab019bd4b5f85b833b2643414d9eb30f1bc"
+    },
+    "review/pedestal-r01/index.html": {
+      "bytes": 1691,
+      "sha256": "bf7cbabf3447581e04fdbae6d2bc8742f6486fd8f8f690555762aee38945a325"
+    },
+    "review/pedestal-r01/validation.json": {
+      "bytes": 44140,
+      "sha256": "19f02c2cca7728d701b548d6a55a4fa2c47073296c145cbeb022c9b499312bd6"
     },
     "review/performance.json": {
       "bytes": 11501,

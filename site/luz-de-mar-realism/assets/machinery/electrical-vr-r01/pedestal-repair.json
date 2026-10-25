@@ -1,0 +1,49 @@
+{
+  "repair": {
+    "version": 1,
+    "id": "pedestal-r01",
+    "sourceSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "removedTriangles": 176,
+    "unionTriangles": 404,
+    "triangles": 178508,
+    "microAtlasTransfers": 1,
+    "method": "Boundary union of four existing convex bevelled parts; plate owns coincident faces; barycentric physical UVs, lightmap UVs, normals and corner irradiance; untouched primitives retain original buffers.",
+    "lighting": "Existing exterior lighting retained; collapsed float32 micro UVs sample the existing atlas at their corners; no new atlas/probe.",
+    "parts": [
+      "EVR | vented pedestal upper plate",
+      "EVR | vented pedestal front upper web",
+      "EVR | vented pedestal side -0.902",
+      "EVR | vented pedestal side 0.902"
+    ]
+  },
+  "geometry": {
+    "pass": true,
+    "sourceSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "unchangedTriangles": 178104,
+    "unchangedAttributeBuffers": true,
+    "unchangedTexturePayloads": true,
+    "unionTriangles": 404,
+    "closedManifold": true,
+    "edges": 606,
+    "coplanarPairsTested": 1496,
+    "maximumOverlapAreaM2": 0,
+    "overlapToleranceM2": 1e-09,
+    "topologyWeldToleranceMetres": 2e-06
+  },
+  "authoring": {
+    "removedAuthoredTriangles": 176,
+    "unionTriangles": 404,
+    "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
+    "previousMasterUnmodified": true,
+    "productionPatchSHA256": "6bf350a95875735c218d249a1829e139895612241b92decc1816da7257c7ce67"
+  },
+  "localAuthoring": {
+    "removedAuthoredTriangles": 176,
+    "unionTriangles": 404,
+    "masterSHA256": "bd2d2932fc1f91bf0142f0042c08842251dbafe7db6febca3de8b6f2494e9cbf",
+    "previousMasterUnmodified": true,
+    "productionPatchSHA256": "6bf350a95875735c218d249a1829e139895612241b92decc1816da7257c7ce67"
+  }
+}

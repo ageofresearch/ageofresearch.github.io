@@ -409,17 +409,19 @@
       "effectivePaddingAt2048": 4.24016563146998,
       "charts": 996
     },
-    "coverage": 0.5961226224899292,
+    "coverage": 0.5951584226765455,
     "minimumGutterPixels": 4,
     "degenerateTriangleFraction": 0,
-    "uvTrianglesSHA256": "d4f11c280bb66a2d8b6fa61db0cbd7399d1d368b05b8fcf05bc3072126825864",
-    "atlasTriangles": 19922,
-    "vertexIrradianceTriangles": 158314,
-    "microLighting": "Cycles diffuse direct+indirect without albedo at actual corners; split atlas/micro boundaries preserve evaluated normals."
+    "atlasTriangles": 20149,
+    "vertexIrradianceTriangles": 158315,
+    "microLighting": "Cycles diffuse direct+indirect without albedo at actual corners; split atlas/micro boundaries preserve evaluated normals.",
+    "pedestalBoundaryTransfer": true,
+    "parentUVTrianglesSHA256": "d4f11c280bb66a2d8b6fa61db0cbd7399d1d368b05b8fcf05bc3072126825864",
+    "binding": "Production UVs retained outside the pedestal; pedestal barycentric transfer is recorded in pedestalRepair"
   },
-  "staticTriangles": 178236,
+  "staticTriangles": 178464,
   "dynamicTriangles": 44,
-  "triangles": 178280,
+  "triangles": 178508,
   "dynamicDoorLighting": "Live room lighting and probes; excluded from static irradiance and shadow imprints.",
   "neutralMilestone": {
     "version": 1,
@@ -508,7 +510,7 @@
     "brushed-orm.png": "9c2f68101d6aa35da61bc024368addc1d0697f6427becbbb747f94ec564db056",
     "brushed-color.png": "fd1f3503743b558f46886ad38818a8c357c4b3b7d6f0233445f845b81461bdc7"
   },
-  "masterSHA256": "7edf3a4898a3032ec387fb17b802ff94ffc8e81dadaee153f44651c18ce948e5",
+  "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
   "lighting": {
     "diffuseSamples": 64,
     "reflectionSamples": 128,
@@ -652,7 +654,7 @@
       ]
     }
   },
-  "sourceGeometrySHA256": "e81be4008801a0168365bf3505930fad5242c99d62f23fd2b23450e4438078ee",
+  "sourceGeometrySHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
   "removedUnusedUVLayers": [],
   "bakedUV1BindingPreservedDuringExportRepair": true,
   "display": {
@@ -660,7 +662,7 @@
     "exposureMultiplier": 0.05,
     "output": "sRGB"
   },
-  "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+  "runtimeGeometrySHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
   "replacedTriangles": 17362,
   "louvreFrontLighting": {
     "components": 112,
@@ -1324,7 +1326,7 @@
     "EVR/side pipe metal clamp (229, 1493)",
     "EVR/side pipe metal clamp (272, 1486)"
   ],
-  "retainedFrontTriangles": 112983,
+  "retainedFrontTriangles": 113211,
   "removedProxyTriangles": 1595,
   "generatorEditableObjects": 390,
   "triangleBudget": 180000,
@@ -2210,9 +2212,60 @@
       0.9259070246863599,
       3.092844257252342
     ],
-    "horizontalDegrees": 90.0,
+    "horizontalDegrees": 90,
     "verticalDegrees": 67.38013505195957,
     "pose": "context",
     "fixedEstimatedStation": true
-  }
+  },
+  "parentMasterSHA256": "70d7b35f14d54b4ed66beb18284c5ac52db7097dea4fadfd19ff6ec2490cc104",
+  "pedestalRepair": {
+    "version": 1,
+    "id": "pedestal-r01",
+    "sourceSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "removedTriangles": 176,
+    "unionTriangles": 404,
+    "triangles": 178508,
+    "microAtlasTransfers": 1,
+    "method": "Boundary union of four existing convex bevelled parts; plate owns coincident faces; barycentric physical UVs, lightmap UVs, normals and corner irradiance; untouched primitives retain original buffers.",
+    "lighting": "Existing exterior lighting retained; collapsed float32 micro UVs sample the existing atlas at their corners; no new atlas/probe.",
+    "parts": [
+      "EVR | vented pedestal upper plate",
+      "EVR | vented pedestal front upper web",
+      "EVR | vented pedestal side -0.902",
+      "EVR | vented pedestal side 0.902"
+    ],
+    "geometryProof": {
+      "pass": true,
+      "sourceSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+      "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+      "unchangedTriangles": 178104,
+      "unchangedAttributeBuffers": true,
+      "unchangedTexturePayloads": true,
+      "unionTriangles": 404,
+      "closedManifold": true,
+      "edges": 606,
+      "coplanarPairsTested": 1496,
+      "maximumOverlapAreaM2": 0,
+      "overlapToleranceM2": 1e-09,
+      "topologyWeldToleranceMetres": 2e-06
+    },
+    "authoringProof": {
+      "removedAuthoredTriangles": 176,
+      "unionTriangles": 404,
+      "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
+      "previousMasterUnmodified": true,
+      "productionPatchSHA256": "6bf350a95875735c218d249a1829e139895612241b92decc1816da7257c7ce67"
+    }
+  },
+  "authoringDownload": {
+    "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-pedestal-r01",
+    "asset": "luz-pedestal-r01-authoring.zip",
+    "sha256": "706810b88f38d7eb1d2baf145b12c41f02d0bb89e67f44f6d66ddd283b130cd9",
+    "bytes": 125246634,
+    "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1"
+  },
+  "parentSourceGeometrySHA256": "e81be4008801a0168365bf3505930fad5242c99d62f23fd2b23450e4438078ee",
+  "sourceGeometryKind": "Boundary patch applied directly to the parent meshopt GLB; unchanged attribute buffers and KTX2 payloads verified",
+  "localMasterSHA256": "bd2d2932fc1f91bf0142f0042c08842251dbafe7db6febca3de8b6f2494e9cbf"
 }

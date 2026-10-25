@@ -394,7 +394,7 @@
   "hiddenFloorUndersideExcludedFromDerivative": true,
   "removedSubmillimetreSlivers": {
     "triangles": 309,
-    "areaSquareMetres": 0.0000024740357651431566,
+    "areaSquareMetres": 2.4740357651431566e-06,
     "scope": "Optimized electrical derivative only; editable components retained"
   },
   "uv": {
@@ -448,7 +448,7 @@
     "pilotRevision": "Pilots resized to source native-pixel radii after neutral draft; ear shells smooth shading.",
     "optimizedGuard": "24 observed concentric rings, 56 angular segments each; less than a native-pixel deviation.",
     "grilleRevision": "Guard lowered26mm to expose underside below housing lip; white painted rings instead of polished steel.",
-    "pilotCenterRevision": "Lens front centers intersect the common offset panel plane at the native reference pixels; solves6–13px relief parallax.",
+    "pilotCenterRevision": "Lens front centers intersect the common offset panel plane at the native reference pixels; solves6\u201313px relief parallax.",
     "upperDetailRevision": "Side speaker grille, two central actuator-frame screws, ear-cup pivots/inset, white upper junction and observed left arrow; actuator wires terminate in glands.",
     "contactRevision": "Side grille layers separated by0.2mm and ear-cup inset/pivot stems overlap their supporting body or yoke.",
     "surfaceRevision": "Readably observed intercom markings projected on the actual common lid plane; softer blue polymer, attached upper mount and lower yoke.",
@@ -510,7 +510,7 @@
     "brushed-orm.png": "9c2f68101d6aa35da61bc024368addc1d0697f6427becbbb747f94ec564db056",
     "brushed-color.png": "fd1f3503743b558f46886ad38818a8c357c4b3b7d6f0233445f845b81461bdc7"
   },
-  "masterSHA256": "bd2d2932fc1f91bf0142f0042c08842251dbafe7db6febca3de8b6f2494e9cbf",
+  "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
   "lighting": {
     "diffuseSamples": 64,
     "reflectionSamples": 128,
@@ -2217,7 +2217,7 @@
     "pose": "context",
     "fixedEstimatedStation": true
   },
-  "parentMasterSHA256": "7edf3a4898a3032ec387fb17b802ff94ffc8e81dadaee153f44651c18ce948e5",
+  "parentMasterSHA256": "70d7b35f14d54b4ed66beb18284c5ac52db7097dea4fadfd19ff6ec2490cc104",
   "pedestalRepair": {
     "version": 1,
     "id": "pedestal-r01",
@@ -2247,21 +2247,25 @@
       "edges": 606,
       "coplanarPairsTested": 1496,
       "maximumOverlapAreaM2": 0,
-      "overlapToleranceM2": 1e-9,
-      "topologyWeldToleranceMetres": 0.000002
+      "overlapToleranceM2": 1e-09,
+      "topologyWeldToleranceMetres": 2e-06
     },
     "authoringProof": {
       "removedAuthoredTriangles": 176,
       "unionTriangles": 404,
-      "masterSHA256": "bd2d2932fc1f91bf0142f0042c08842251dbafe7db6febca3de8b6f2494e9cbf",
+      "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
       "previousMasterUnmodified": true,
       "productionPatchSHA256": "6bf350a95875735c218d249a1829e139895612241b92decc1816da7257c7ce67"
     }
   },
   "authoringDownload": {
     "release": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-pedestal-r01",
-    "asset": "luz-pedestal-r01-authoring.zip"
+    "asset": "luz-pedestal-r01-authoring.zip",
+    "sha256": "706810b88f38d7eb1d2baf145b12c41f02d0bb89e67f44f6d66ddd283b130cd9",
+    "bytes": 125246634,
+    "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1"
   },
   "parentSourceGeometrySHA256": "e81be4008801a0168365bf3505930fad5242c99d62f23fd2b23450e4438078ee",
-  "sourceGeometryKind": "Boundary patch applied directly to the parent meshopt GLB; unchanged attribute buffers and KTX2 payloads verified"
+  "sourceGeometryKind": "Boundary patch applied directly to the parent meshopt GLB; unchanged attribute buffers and KTX2 payloads verified",
+  "localMasterSHA256": "bd2d2932fc1f91bf0142f0042c08842251dbafe7db6febca3de8b6f2494e9cbf"
 }

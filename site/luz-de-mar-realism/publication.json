@@ -1,11 +1,11 @@
 {
-  "version": 6,
-  "build": "generator-vr-r01",
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=generator-r01",
+  "version": 7,
+  "build": "pedestal-r01",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=generator-r01&release=pedestal-r01",
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
   "visualStatus": "KOHLER and local equipment corrected; private native8/4 comparison retained. Hidden depth inferred. No complete photometric or95% edge equivalence claimed.",
-  "assetManifestSHA256": "590c2d434326e6782916fe9f2dea89e592907a5b268a934fc583791f5d5d218a",
+  "assetManifestSHA256": "fa70be0e946428eb69bdb2cc5df124e1da1dbabe4e564b3aa52bfaab4ae5075d",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -26,14 +26,24 @@
     "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches.",
     "implicitBulkheadDependencyVerified": true,
     "hybridMaterialsCompiled": 34,
-    "pass": true
+    "pass": true,
+    "pedestalAdditionalTriangles": 228,
+    "pedestalAdditionalDrawCalls": 1
   },
   "functionalBrowserChecks": true,
   "renderer": "Three.js0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1037281280,
+    "bytes": 1037680640,
     "limit": 1073741824,
     "minimumHeadroomBytes": 33554432,
-    "headroomBytes": 36460544
+    "headroomBytes": 36061184
+  },
+  "previousBuild": "generator-vr-r01",
+  "pedestalRepair": {
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "closedBoundary": true,
+    "duplicateSurfaces": 0,
+    "verifiedVisibleRays": 80,
+    "authoring": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-pedestal-r01"
   }
 }

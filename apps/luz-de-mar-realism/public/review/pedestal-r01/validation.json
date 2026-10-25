@@ -1,0 +1,1773 @@
+{
+  "id": "pedestal-r01",
+  "pass": true,
+  "geometry": {
+    "pass": true,
+    "sourceSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "unchangedTriangles": 178104,
+    "unchangedAttributeBuffers": true,
+    "unchangedTexturePayloads": true,
+    "unionTriangles": 404,
+    "closedManifold": true,
+    "edges": 606,
+    "coplanarPairsTested": 1496,
+    "maximumOverlapAreaM2": 0,
+    "overlapToleranceM2": 1e-9,
+    "topologyWeldToleranceMetres": 0.000002
+  },
+  "viewer": {
+    "renderer": "Chromium / SwiftShader; correctness only",
+    "errors": [],
+    "views": [
+      {
+        "stage": "before",
+        "id": "front",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "before",
+        "id": "left",
+        "position": [
+          9.15,
+          -0.35,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "before",
+        "id": "right",
+        "position": [
+          9.15,
+          0.35,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "before",
+        "id": "near",
+        "position": [
+          8.65,
+          0,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "candidate",
+        "id": "front",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "candidate",
+        "id": "left",
+        "position": [
+          9.15,
+          -0.35,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "candidate",
+        "id": "right",
+        "position": [
+          9.15,
+          0.35,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "candidate",
+        "id": "near",
+        "position": [
+          8.65,
+          0,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      },
+      {
+        "stage": "candidate",
+        "id": "motion-start",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          7.78,
+          0,
+          1.78
+        ],
+        "canvas": [
+          900,
+          600
+        ]
+      }
+    ],
+    "before": {
+      "rays": [
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 0,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 1,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 2,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 3,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 4,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 5,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 6,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 7,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 8,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 9,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 10,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 0,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 1,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 2,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 3,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 4,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 5,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 6,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 7,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 8,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 9,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 10,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 0,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 1,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 2,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 3,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 4,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 5,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 6,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 7,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 8,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 9,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 10,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 0,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 1,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 2,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 3,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 4,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 5,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 6,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 7,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 8,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 9,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 10,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 0,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 1,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 2,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 3,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 4,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 5,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 6,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 7,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 8,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 9,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 10,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 0,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 1,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 2,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 3,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 4,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 5,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 6,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 7,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 8,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 9,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 10,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 2
+        }
+      ],
+      "runtimeSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a"
+    },
+    "candidate": {
+      "rays": [
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 0,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 1,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 2,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 3,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 4,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 5,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 6,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 7,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 8,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 9,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 10,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": -1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 0,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 1,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 2,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 3,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 4,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 5,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 6,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 7,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 8,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 9,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 10,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 11,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 12,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 13,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": -0.35,
+          "side": 1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 0,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 1,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 2,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 3,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 4,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 5,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 6,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 7,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 8,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 9,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 10,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 11,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 12,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": -1,
+          "j": 14,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 0,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 1,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 2,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 3,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 4,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 5,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 6,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 7,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 8,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 9,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 10,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 11,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 12,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 13,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0,
+          "side": 1,
+          "j": 14,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 0,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 1,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 2,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 3,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 4,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 5,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 6,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 7,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 8,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 9,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 10,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 11,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 12,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 13,
+          "first": "Generator_and_retained_electrical_derivative",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": -1,
+          "j": 14,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 0,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 1,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 2,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 3,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 4,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 5,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 6,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 7,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 8,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 9,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 10,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 11,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 12,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 13,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        },
+        {
+          "lateral": 0.35,
+          "side": 1,
+          "j": 14,
+          "first": "EVR/vented-pedestal-union",
+          "coplanarHits": 1
+        }
+      ],
+      "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+      "stats": {
+        "room": "machinery",
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178280,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          0
+        ],
+        "frames": 15,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "machinery",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 66,
+        "triangles": 412567,
+        "memory": {
+          "geometries": 200,
+          "textures": 184
+        },
+        "estimatedMemory": {
+          "geometryBytes": 69711606,
+          "textureBytes": 584804369,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 662904583,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 10,
+          "p50": 2.199999988079071,
+          "p95": 3824.3999999910593
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    },
+    "visibleStripRays": 80,
+    "contextOccludedRays": 10,
+    "motion": {
+      "frames": 16,
+      "canvas": [
+        900,
+        600
+      ],
+      "sameCameraIdenticalPixels": true,
+      "fixedRatioOverride": false
+    },
+    "pass": true
+  },
+  "lifecycle": {
+    "checks": {
+      "httpFailureKeepsFallback": true,
+      "hashFailureKeepsFallback": true,
+      "retryCommits": true,
+      "bothCutsPlaybackAndReset": true,
+      "filterRegisterSideDirtyAndReset": true,
+      "doorToggle": true,
+      "keyboardWalking": true,
+      "exitReleaseAndReturn": true
+    },
+    "errors": [],
+    "renderer": "SwiftShader correctness, not hardware performance",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 44,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          600,
+          400
+        ]
+      },
+      "canvas": [
+        600,
+        400
+      ],
+      "calls": 78,
+      "triangles": 447827,
+      "memory": {
+        "geometries": 258,
+        "textures": 222
+      },
+      "estimatedMemory": {
+        "geometryBytes": 132274998,
+        "textureBytes": 721139889,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 878580711,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 2,
+        "p50": 2.5,
+        "p95": 2.5
+      },
+      "shadowUpdates": 69,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "preservation": {
+    "pass": true,
+    "originalYachtFiles": 629,
+    "protectedEngineAndInspectionFiles": 73,
+    "strategyUnchanged": true,
+    "sevenHDRHashes": {
+      "electrical-irradiance.exr": "5944eb4a646278d191a2bce504dbb33ac2d41b4eb5f6abd7b5172b376c411703",
+      "bulkhead-irradiance.exr": "148451f79270f2e1a791e2705b9f2aed8347aea70b4fa1e0820da0fe694847e1",
+      "port-irradiance.exr": "c73e62f0a44a1ef9bf440aac24632c918b7436d787efa3685907ae577fc1c708",
+      "starboard-irradiance.exr": "b39df862d86c42cb351733a384e8367df086b8d984b53632643f77b6173212e6",
+      "room-probe-0.exr": "adf79bce5a73729750a3385f33d3e68ac860f810292ee7689758a9f610a1926f",
+      "room-probe-1.exr": "9ac83b0237280bb4922aaa537ea7fe914baf33ef3384bcddeb53032654af9ae8",
+      "room-probe-2.exr": "5b2b4840d5aeb235a620a4b604829d278924aa928d1128bfbdeefee403269a95"
+    },
+    "parentBlenderSHA256": "7edf3a4898a3032ec387fb17b802ff94ffc8e81dadaee153f44651c18ce948e5",
+    "parentRuntimeSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "parentCommit": "f03845c7f5cff1f20e21c14b068e223fd3055253"
+  },
+  "tests": {
+    "files": 17,
+    "passed": 17
+  },
+  "scope": "Pedestal topology and inherited lighting only; no additional VR fidelity claim",
+  "renderer": "SwiftShader correctness; no hardware FPS claim",
+  "authoringRelease": {
+    "pass": true,
+    "releaseURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-pedestal-r01",
+    "asset": "luz-pedestal-r01-authoring.zip",
+    "bytes": 125246634,
+    "sha256": "706810b88f38d7eb1d2baf145b12c41f02d0bb89e67f44f6d66ddd283b130cd9",
+    "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "verifiedArchiveMembers": 42,
+    "crcPassed": true,
+    "parentBindingPassed": true,
+    "workflowRun": 40207921282
+  }
+}

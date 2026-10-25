@@ -1,0 +1,274 @@
+{
+  "pass": true,
+  "implementationCommit": "0723173b2e3b4bd2d065435a6e8737d1996b0450",
+  "deploymentCommit": "988c8fefea38e27db19ef346481226eceffd1e22",
+  "pagesWorkflow": {
+    "id": 40208272938,
+    "conclusion": "success"
+  },
+  "publicURL": "https://ageofresearch.github.io/luz-de-mar-realism/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=pedestal-r01",
+  "geometry": {
+    "pass": true,
+    "sourceSHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "unchangedTriangles": 178104,
+    "unchangedAttributeBuffers": true,
+    "unchangedTexturePayloads": true,
+    "unionTriangles": 404,
+    "closedManifold": true,
+    "edges": 606,
+    "coplanarPairsTested": 1496,
+    "maximumOverlapAreaM2": 0,
+    "overlapToleranceM2": 1e-09,
+    "topologyWeldToleranceMetres": 2e-06
+  },
+  "tests": {
+    "files": 17,
+    "passed": 17
+  },
+  "imageDifferences": [
+    {
+      "view": "front",
+      "changedPixels": 5118,
+      "bounds": [
+        191,
+        219,
+        711,
+        371
+      ]
+    },
+    {
+      "view": "left",
+      "changedPixels": 4520,
+      "bounds": [
+        194,
+        197,
+        691,
+        415
+      ]
+    },
+    {
+      "view": "right",
+      "changedPixels": 4462,
+      "bounds": [
+        211,
+        194,
+        706,
+        419
+      ]
+    },
+    {
+      "view": "near",
+      "changedPixels": 4795,
+      "bounds": [
+        145,
+        184,
+        755,
+        381
+      ]
+    }
+  ],
+  "motion": {
+    "frames": 16,
+    "canvas": [
+      900,
+      600
+    ],
+    "sameCameraIdenticalPixels": true,
+    "fixedRatioOverride": false
+  },
+  "localLifecycle": {
+    "httpFailureKeepsFallback": true,
+    "hashFailureKeepsFallback": true,
+    "retryCommits": true,
+    "bothCutsPlaybackAndReset": true,
+    "filterRegisterSideDirtyAndReset": true,
+    "doorToggle": true,
+    "keyboardWalking": true,
+    "exitReleaseAndReturn": true
+  },
+  "publicBrowser": {
+    "base": "https://ageofresearch.github.io/luz-de-mar-realism/",
+    "checks": {
+      "electricalEntryStation": true,
+      "candidatePubliclyLoaded": true,
+      "cutPlaybackScrubAndSideControls": true,
+      "cachedExitReleasesBulkhead": true,
+      "cachedReturnReloadsAtomically": true,
+      "cachedRoomCycles": {
+        "cycles": 1,
+        "samples": [
+          {
+            "bytes": 878580711,
+            "memory": {
+              "geometries": 235,
+              "textures": 194
+            }
+          }
+        ],
+        "stable": true
+      }
+    },
+    "errors": [],
+    "renderer": "SwiftShader correctness only",
+    "runtimeGeometrySHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente el\u00e9ctrico y KOHLER"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 3.75,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 23,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          480,
+          320
+        ]
+      },
+      "canvas": [
+        480,
+        320
+      ],
+      "calls": 78,
+      "triangles": 447827,
+      "memory": {
+        "geometries": 235,
+        "textures": 194
+      },
+      "estimatedMemory": {
+        "geometryBytes": 132274998,
+        "textureBytes": 721139889,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 878580711,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 2.800000011920929,
+        "p95": 2.800000011920929
+      },
+      "shadowUpdates": 48,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "publicHashVerification": {
+    "files": 653,
+    "publicOriginals": 628,
+    "originalFilesPreserved": 629,
+    "originalTree": "f5475b87b550c4d5dfb999a49d37d86dcefe4c25",
+    "extraFiles": [
+      {
+        "path": "assets/machinery/electrical-vr-r01/authoring.json",
+        "sha256": "b58baf1dd47066f50b0acbf46a32e17bfb0267022f886b48da37c12db4561d1e"
+      },
+      {
+        "path": "assets/machinery/electrical-vr-r01/pedestal-repair.json",
+        "sha256": "1f4b944cf5f0bf1a0b4aae85dcd58a28edcd3ef9b8a5b03eb1a6e978b72e6da5"
+      }
+    ]
+  },
+  "authoringRelease": {
+    "pass": true,
+    "releaseURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-pedestal-r01",
+    "asset": "luz-pedestal-r01-authoring.zip",
+    "bytes": 125246634,
+    "sha256": "706810b88f38d7eb1d2baf145b12c41f02d0bb89e67f44f6d66ddd283b130cd9",
+    "masterSHA256": "46c13b6905684e9d5ae354513350b91024dbba6b828fc5f59356d9b685d5dbb1",
+    "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
+    "verifiedArchiveMembers": 42,
+    "crcPassed": true,
+    "parentBindingPassed": true,
+    "workflowRun": 40207921282
+  },
+  "releasePubliclyAccessible": true,
+  "pagesHeadroomBytes": 36061184
+}

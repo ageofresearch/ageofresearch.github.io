@@ -238,7 +238,9 @@
     "archiveSHA256": "95d881e9697875cda7876f77e122ff35b37c51f06681da50dfbedfe66148af41",
     "bytes": 21519042,
     "masterSHA256": "37403393856443a91508c3cb0fe894304e5d01330498d36b5b30e80b6e6bb9e5",
-    "privateReferenceIncluded": false
+    "privateReferenceIncluded": false,
+    "downloadVerified": true,
+    "downloadURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-filter-well-r01/luz-filter-well-r01-authoring.zip"
   },
   "tests": {
     "files": 18,

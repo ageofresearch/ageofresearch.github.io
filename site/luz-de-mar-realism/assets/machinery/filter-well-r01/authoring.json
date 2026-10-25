@@ -1,0 +1,60 @@
+{
+  "id": "filter-well-r01",
+  "runtimeSHA256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5",
+  "bytes": 1303236,
+  "triangles": 27668,
+  "removedInternalJointTriangles": 44,
+  "editableComponents": 235,
+  "masterSHA256": "37403393856443a91508c3cb0fe894304e5d01330498d36b5b30e80b6e6bb9e5",
+  "sourceSHA256": "5762ed1397d3574f4d96f5d889764ac43eed1bbfe5f74e7f0881478945b8f786",
+  "referenceSHA256": "e60bc4366f59c1ee9159dea1c2e2608278a15bdc1280dd6e4dc741d32ad3d0a5",
+  "referencePublic": false,
+  "lighting": {
+    "format": "Linear RGBM128,RGBA8 KTX2; no albedo",
+    "range": 128,
+    "width": 1024,
+    "height": 1024,
+    "authoringSize": 2048,
+    "derivation": "Linear area average; no mipmaps; at least two runtime texels between packed charts",
+    "rawMaximum": 61.27709197998047,
+    "samples": 64,
+    "authoringEXR": "well-irradiance.exr",
+    "orientation": "PNG top row is Cycles top row; glTF UV1 uses1-v"
+  },
+  "uv": {
+    "method": "xatlas 0.0.11; independent UV1 on broad static surfaces; small manufactured components receive separately baked per-corner HDR irradiance; physical geometry and UV0 unchanged",
+    "atlasCount": 1,
+    "width": 1891,
+    "height": 1893,
+    "utilization": 0.8844382762908936,
+    "coverage": 0.6218191981315613,
+    "paddingPixels": 4,
+    "effectivePaddingAt2048": 4.3275224511357635,
+    "charts": 1673
+  },
+  "grid": {
+    "base": 8,
+    "detail": 4,
+    "automaticAcceptance": false
+  },
+  "partition": {
+    "register": [
+      11.05,
+      -0.49,
+      12.75,
+      0.49
+    ],
+    "affectedSourceTriangles": 4402,
+    "bySource": {
+      "LD_R02/machinery/bilge/0": 12,
+      "LD_R02/photo-layout/floor/106": 14,
+      "LD_R02/photo-layout/floor/108": 4,
+      "SeaStrainers/well-and-pipes": 4372
+    },
+    "retainedSourceTriangles": 35880,
+    "clippedTriangles": 186,
+    "registerTriangles": 36,
+    "sourceSHA256": "c8ed275333416c01e66047eea0c55a3c794ea802d73f4185e724ec820f424c23",
+    "sha256": "d596ee1cd41ac15eb63027a819acf67f4a21b1f05d6202ab4e9ea567d3714e9a"
+  }
+}

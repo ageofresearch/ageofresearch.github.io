@@ -1,11 +1,11 @@
 {
-  "version": 7,
-  "build": "pedestal-r01",
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=generator-r01&release=pedestal-r01",
+  "version": 8,
+  "build": "filter-well-r01",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=filter-well-r01",
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
   "visualStatus": "KOHLER and local equipment corrected; private native8/4 comparison retained. Hidden depth inferred. No complete photometric or95% edge equivalence claimed.",
-  "assetManifestSHA256": "fa70be0e946428eb69bdb2cc5df124e1da1dbabe4e564b3aa52bfaab4ae5075d",
+  "assetManifestSHA256": "6164cffa5d6bd6db2c97dd1c1297bccce55f3c91f30204804668b7e208fe10c8",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -33,17 +33,27 @@
   "functionalBrowserChecks": true,
   "renderer": "Three.js0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1037680640,
+    "bytes": 1039616000,
     "limit": 1073741824,
     "minimumHeadroomBytes": 33554432,
-    "headroomBytes": 36061184
+    "headroomBytes": 34125824
   },
-  "previousBuild": "generator-vr-r01",
+  "previousBuild": "pedestal-r01",
   "pedestalRepair": {
     "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
     "closedBoundary": true,
     "duplicateSurfaces": 0,
     "verifiedVisibleRays": 80,
     "authoring": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-pedestal-r01"
+  },
+  "filterWell": {
+    "runtimeSHA256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5",
+    "triangles": 27668,
+    "referencePublic": false,
+    "grid": [
+      8,
+      4
+    ],
+    "authoring": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-filter-well-r01"
   }
 }

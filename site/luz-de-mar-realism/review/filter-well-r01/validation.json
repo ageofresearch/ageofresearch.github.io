@@ -1,0 +1,258 @@
+{
+  "id": "filter-well-r01",
+  "pass": true,
+  "scope": "Only the open central filter well and removable floor portions",
+  "geometry": {
+    "pass": true,
+    "runtimeSHA256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5",
+    "scope": "Only the open central filter well and removable floor portions",
+    "triangles": 27668,
+    "duplicateTriangles": 0,
+    "degenerateTriangles": 0,
+    "lidSupportClearanceMetres": 0.010296476676262616,
+    "supportLocation": "Estimated seat offset for clearance; not a vessel measurement",
+    "originalYachtFiles": 629,
+    "protectedMechanicalFiles": 73,
+    "strategyUnchanged": true
+  },
+  "browser": {
+    "renderer": "Chromium / SwiftShader; correctness, not hardware FPS",
+    "checks": {
+      "installed": true,
+      "extendedOpeningBlocksWalking": true,
+      "bothFiltersExtractScrubCleanDirtyReset": true,
+      "downloadFailureFallbackRetry": true,
+      "cancelledLoadCannotCommit": true,
+      "nominalCutPlaybackBothSides": true,
+      "threeRoomCycles": {
+        "stable": true,
+        "samples": [
+          {
+            "gpu": 917611385,
+            "bindings": 83,
+            "geometry": 288,
+            "textures": 219
+          },
+          {
+            "gpu": 917611385,
+            "bindings": 83,
+            "geometry": 288,
+            "textures": 219
+          },
+          {
+            "gpu": 917611385,
+            "bindings": 83,
+            "geometry": 288,
+            "textures": 219
+          }
+        ]
+      },
+      "movementRest": {
+        "sameBuffer": [
+          600,
+          400
+        ],
+        "differentPixels": 0
+      }
+    },
+    "errors": [],
+    "hashes": {
+      "id": "filter-well-r01",
+      "base": "./assets/machinery/filter-well-r01/",
+      "asset": "well.glb",
+      "sha256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5",
+      "lightmap": {
+        "asset": "irradiance.ktx2",
+        "sha256": "dcb8ec925753ea147f7448f9e3a2e01ab918cd269ba6136b26f377b8a70ea1df",
+        "range": 128
+      },
+      "register": [
+        11.05,
+        -0.49,
+        12.75,
+        0.49
+      ],
+      "triangles": 27668,
+      "reference": "Owner maintenance photograph IMG-20261016-WA0004.jpg,1200x1600; private",
+      "dimensionStatus": "Image-fitted estimated installation; nominal basket dimensions retained",
+      "lighting": "Cycles64-sample full diffuse without albedo;2048 authoring EXR,1024 runtime spatial RGBM128 atlas and shared physical corner transport; existing local room reflections; removable lids excluded from fixed transport"
+    },
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "detail",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 142465,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "detail",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 170607,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": true,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": true,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        10.7,
+        0
+      ],
+      "frames": 50,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          600,
+          400
+        ]
+      },
+      "canvas": [
+        600,
+        400
+      ],
+      "calls": 92,
+      "triangles": 455913,
+      "memory": {
+        "geometries": 293,
+        "textures": 231
+      },
+      "estimatedMemory": {
+        "geometryBytes": 169994632,
+        "textureBytes": 722450929,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 917611385,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 2,
+        "p50": 2135.0999999940395,
+        "p95": 2135.0999999940395
+      },
+      "shadowUpdates": 140,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "comparison": {
+    "referenceSHA256": "e60bc4366f59c1ee9159dea1c2e2608278a15bdc1280dd6e4dc741d32ad3d0a5",
+    "nativeResolution": [
+      1200,
+      1600
+    ],
+    "grid": [
+      8,
+      4
+    ],
+    "cells": 56680,
+    "privateReference": true,
+    "automaticAcceptance": false
+  },
+  "authoringRelease": {
+    "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-filter-well-r01",
+    "archiveSHA256": "95d881e9697875cda7876f77e122ff35b37c51f06681da50dfbedfe66148af41",
+    "bytes": 21519042,
+    "masterSHA256": "37403393856443a91508c3cb0fe894304e5d01330498d36b5b30e80b6e6bb9e5",
+    "privateReferenceIncluded": false,
+    "downloadVerified": true,
+    "downloadURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-filter-well-r01/luz-filter-well-r01-authoring.zip"
+  },
+  "tests": {
+    "files": 18,
+    "passed": 18
+  },
+  "limitations": [
+    "One physical photo station; hidden depth/routing inferred.",
+    "Camera fitted using nominal rim dimensions; fitting points are not independent validation.",
+    "Pixel/edge differences describe discrepancies and do not establish engineering dimensions.",
+    "No blanket fidelity approval for generated grid cells.",
+    "Surrounding engines, room wall and their pipe connections are outside this correction.",
+    "Depth and hidden routing estimated from one photograph.",
+    "Fine wear, some fittings, support projection and lighting retain differences; no blanket 4px correspondence claim."
+  ]
+}

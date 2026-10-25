@@ -7,7 +7,7 @@ fs.mkdirSync(out,{recursive:true});const candidate=process.env.BASELINE!=='1',re
 try{
  const page=await browser.newPage({viewport:{width:1200,height:800},deviceScaleFactor:1});page.setDefaultTimeout(600000);page.on('pageerror',e=>report.errors.push(e.message));
  if(remote)await page.route('https://ageofresearch.github.io/**',async route=>route.fulfill({response:await route.fetch({timeout:180000})}));
- await page.goto(base+'?room=machinery&engine=right-vr-r01&bulkhead=vr-r01'+(candidate?'&electrical=vr-r01':''),{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!!window.__yachtRealism);await page.evaluate(()=>__yachtRealism.setFixedRatio(.5));
+ await page.goto(base+'?room=machinery&engine=right-vr-r01&bulkhead=vr-r01'+(candidate?'&electrical='+(process.env.ELECTRICAL_QUERY||'vr-r01'):''),{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!!window.__yachtRealism);await page.evaluate(()=>__yachtRealism.setFixedRatio(.5));
  await page.waitForFunction(()=>__yachtRealism.status==='ready'&&[__yachtRealism.app.room.machinery.installed,__yachtRealism.app.room.machinery.installedRight].every(e=>e?.ready));
  await page.evaluate(async()=>{for(const e of[__yachtRealism.app.room.machinery.installed,__yachtRealism.app.room.machinery.installedRight]){await e.detail();await Promise.all([...e.loadingLods.values()]);}});
  await page.waitForFunction(()=>__yachtRealism.stats.machinery.bulkhead?.committed);
@@ -17,7 +17,7 @@ try{
  for(const pose of evidence.poses){
   if(process.env.NATIVE_ONLY==='1')continue;
   if(process.env.CAPTURE_POSES&&!process.env.CAPTURE_POSES.split(',').includes(pose.id))continue;
-  const h=pose.h*Math.PI/180,v=pose.v*Math.PI/180,position=evidence.camera.sourcePosition,d=[Math.cos(v)*Math.cos(h),-Math.cos(v)*Math.sin(h),-Math.sin(v)],target=[position[0]+d[0]/(35.23/36),position[1]+d[1]/(7.47/7.6),position[2]+d[2]];
+  const h=pose.h*Math.PI/180,v=pose.v*Math.PI/180,position=pose.position||evidence.camera.sourcePosition,d=[Math.cos(v)*Math.cos(h),-Math.cos(v)*Math.sin(h),-Math.sin(v)],target=pose.target||[position[0]+d[0]/(35.23/36),position[1]+d[1]/(7.47/7.6),position[2]+d[2]];
   await page.evaluate(([p,t,f])=>__yachtRealism.captureView(p,t,f),[position,target,pose.vfov]);await page.evaluate(()=>__yachtRealism.draw());
   await page.evaluate(async()=>{for(const e of[__yachtRealism.app.room.machinery.installed,__yachtRealism.app.room.machinery.installedRight])await Promise.all([...e.loadingLods.values()]);});await page.evaluate(()=>__yachtRealism.draw());
   await page.screenshot({path:path.join(out,pose.id+'.png'),timeout:180000});report.views=report.views.filter(v=>v.id!==pose.id);report.views.push({...pose,position,target,stats:await page.evaluate(()=>__yachtRealism.stats)});fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));console.log('CAPTURED',pose.id);

@@ -1,0 +1,73 @@
+{
+  "pass": true,
+  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "canvas": [
+    2048,
+    2048
+  ],
+  "rows": [
+    {
+      "control": "large-1",
+      "checked": 9489,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-2",
+      "checked": 9489,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-3",
+      "checked": 9489,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-4",
+      "checked": 9489,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-1",
+      "checked": 4399,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-2",
+      "checked": 4399,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-3",
+      "checked": 4399,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-4",
+      "checked": 4399,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-5",
+      "checked": 4399,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-6",
+      "checked": 4399,
+      "blocked": 0,
+      "pass": true
+    }
+  ],
+  "totalBlocked": 0,
+  "method": "Actual complete WebGL scene rendered with a flat depth/ID material; source-mask interiors eroded2native pixels, original electrical=green, replacement access=blue, all other visible geometry=red.",
+  "renderer": "SwiftShader correctness only"
+}

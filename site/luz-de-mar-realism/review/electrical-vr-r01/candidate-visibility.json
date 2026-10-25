@@ -1,0 +1,116 @@
+{
+  "pass": true,
+  "stage": "candidate",
+  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "cameraSource": [
+    9.15,
+    0,
+    3.18
+  ],
+  "nativeSize": 2048,
+  "erosionPixels": 2,
+  "method": "Perspective-correct depth/ID raster of actual decoded normalized GLB positions, including retained source geometry. All photographed control/handle and caption interior pixels must first hit the electrical assembly.",
+  "controls": [
+    {
+      "id": "large-1",
+      "nativePixels": 9489,
+      "electricalFirstHitPixels": 9489,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 9489
+      },
+      "pass": true
+    },
+    {
+      "id": "large-2",
+      "nativePixels": 9489,
+      "electricalFirstHitPixels": 9489,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 9489
+      },
+      "pass": true
+    },
+    {
+      "id": "large-3",
+      "nativePixels": 9489,
+      "electricalFirstHitPixels": 9489,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 9489
+      },
+      "pass": true
+    },
+    {
+      "id": "large-4",
+      "nativePixels": 9489,
+      "electricalFirstHitPixels": 9489,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 9489
+      },
+      "pass": true
+    },
+    {
+      "id": "small-1",
+      "nativePixels": 4399,
+      "electricalFirstHitPixels": 4399,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 4399
+      },
+      "pass": true
+    },
+    {
+      "id": "small-2",
+      "nativePixels": 4399,
+      "electricalFirstHitPixels": 4399,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 4399
+      },
+      "pass": true
+    },
+    {
+      "id": "small-3",
+      "nativePixels": 4399,
+      "electricalFirstHitPixels": 4399,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 4399
+      },
+      "pass": true
+    },
+    {
+      "id": "small-4",
+      "nativePixels": 4399,
+      "electricalFirstHitPixels": 4399,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 4399
+      },
+      "pass": true
+    },
+    {
+      "id": "small-5",
+      "nativePixels": 4399,
+      "electricalFirstHitPixels": 4399,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 4399
+      },
+      "pass": true
+    },
+    {
+      "id": "small-6",
+      "nativePixels": 4399,
+      "electricalFirstHitPixels": 4399,
+      "blockedPixels": 0,
+      "firstHitComponents": {
+        "Existing electrical assembly": 4399
+      },
+      "pass": true
+    }
+  ],
+  "totalBlockedPixels": 0
+}

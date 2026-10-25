@@ -1,0 +1,196 @@
+{
+  "pass": true,
+  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "method": "Bidirectional exact segment/triangle rays on authored mounting surfaces; all pairs must have actual intersections. Nearest-edge samples at 0.5 mm provide diagnostic gap positions. Existing structural target is read from decoded exported room triangles.",
+  "contacts": [
+    {
+      "parts": [
+        "CLEARANCE/127",
+        "CLEARANCE/129"
+      ],
+      "surfaceEdgeIntersections": 17,
+      "minimumSampledGapMetres": 1.0182629921473563e-05,
+      "closestPoints": [
+        [
+          2.012732744216919,
+          0.9486615657806396,
+          -11.725447654724121
+        ],
+        [
+          2.012726068496704,
+          0.9486692547798157,
+          -11.725447654724121
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/127",
+        "CLEARANCE/130"
+      ],
+      "surfaceEdgeIntersections": 17,
+      "minimumSampledGapMetres": 1.0137697245227173e-05,
+      "closestPoints": [
+        [
+          2.012732744216919,
+          1.451147198677063,
+          -10.766408920288086
+        ],
+        [
+          2.012726068496704,
+          1.4511548280715942,
+          -10.766408920288086
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/127",
+        "CLEARANCE/131-sleeve"
+      ],
+      "surfaceEdgeIntersections": 6,
+      "minimumSampledGapMetres": 1.049109505402157e-05,
+      "closestPoints": [
+        [
+          2.006743907928467,
+          1.9283899068832397,
+          -9.85624885559082
+        ],
+        [
+          2.006743907928467,
+          1.9283900260925293,
+          -9.8562593460083
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/131-sleeve",
+        "CLEARANCE/131"
+      ],
+      "surfaceEdgeIntersections": 16,
+      "minimumSampledGapMetres": 4.5565402615466155e-06,
+      "closestPoints": [
+        [
+          2.0249826908111572,
+          1.9279999732971191,
+          -9.838871002197266
+        ],
+        [
+          2.024979591369629,
+          1.9279972314834595,
+          -9.838869094848633
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/129",
+        "CLEARANCE/129-spacer"
+      ],
+      "surfaceEdgeIntersections": 16,
+      "minimumSampledGapMetres": 0.0,
+      "closestPoints": [
+        [
+          2.054230213165283,
+          0.8942692279815674,
+          -11.719931602478027
+        ],
+        [
+          2.054230213165283,
+          0.8942692279815674,
+          -11.719931602478027
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/129-spacer",
+        "CLEARANCE/123/0"
+      ],
+      "surfaceEdgeIntersections": 9,
+      "minimumSampledGapMetres": 9.5367431640625e-06,
+      "closestPoints": [
+        [
+          2.0622572898864746,
+          0.8842691779136658,
+          -11.694393157958984
+        ],
+        [
+          2.0622572898864746,
+          0.8842691779136658,
+          -11.694402694702148
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/130",
+        "CLEARANCE/123/0"
+      ],
+      "surfaceEdgeIntersections": 16,
+      "minimumSampledGapMetres": 4.5299530029296875e-06,
+      "closestPoints": [
+        [
+          2.036553382873535,
+          1.414381980895996,
+          -10.771714210510254
+        ],
+        [
+          2.036557912826538,
+          1.414381980895996,
+          -10.771714210510254
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/131",
+        "CLEARANCE/131-standoff"
+      ],
+      "surfaceEdgeIntersections": 15,
+      "minimumSampledGapMetres": 1.52587890625e-05,
+      "closestPoints": [
+        [
+          2.048302412033081,
+          1.8826078176498413,
+          -9.82939338684082
+        ],
+        [
+          2.048302412033081,
+          1.8826230764389038,
+          -9.82939338684082
+        ]
+      ],
+      "pass": true
+    },
+    {
+      "parts": [
+        "CLEARANCE/131-standoff",
+        "MD_DCK_001/stairs/stair-opening"
+      ],
+      "surfaceEdgeIntersections": 8,
+      "minimumSampledGapMetres": 2.2530555725097656e-05,
+      "closestPoints": [
+        [
+          2.060284376144409,
+          1.8199774026870728,
+          -9.847042083740234
+        ],
+        [
+          2.060284376144409,
+          1.8199999332427979,
+          -9.847042083740234
+        ]
+      ],
+      "pass": true
+    }
+  ]
+}

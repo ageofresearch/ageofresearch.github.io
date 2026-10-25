@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "id": "electrical-vr-r01",
+  "id": "electrical-clearance-r03",
   "strategy": "LDM-VR-EST-001 v1.0",
   "camera": {
     "sourcePosition": [
@@ -16,8 +16,8 @@
   "panoramaStations": 1,
   "nativeSize": 2048,
   "grid": {
-    "basePixels": 16,
-    "detailPixels": 8,
+    "basePixels": 8,
+    "detailPixels": 4,
     "automaticAcceptance": false
   },
   "features": [
@@ -482,60 +482,86 @@
   ],
   "poses": [
     {
-      "id": "general-150",
-      "h": 150,
-      "v": 0,
+      "id": "column-context",
+      "h": 222,
+      "v": 8,
       "hfov": 90,
-      "vfov": 67.38013505195957
+      "vfov": 67.38013505195957,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
     },
     {
-      "id": "general-180",
-      "h": 180,
-      "v": 0,
-      "hfov": 90,
-      "vfov": 67.38013505195957
+      "id": "column-front",
+      "h": 222,
+      "v": 9,
+      "hfov": 70,
+      "vfov": 50.046805678477824,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
     },
     {
-      "id": "general-210",
-      "h": 210,
-      "v": 0,
-      "hfov": 90,
-      "vfov": 67.38013505195957
+      "id": "large-switches",
+      "h": 222,
+      "v": -5,
+      "hfov": 32,
+      "vfov": 21.64459854190175,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
     },
     {
-      "id": "distribution-upper",
-      "h": 147,
-      "v": -12,
-      "hfov": 45,
-      "vfov": 30.874169669053064
-    },
-    {
-      "id": "distribution-lower",
-      "h": 147,
-      "v": 30,
-      "hfov": 55,
-      "vfov": 38.278120095481384
-    },
-    {
-      "id": "shore",
-      "h": 180,
-      "v": -8,
-      "hfov": 45,
-      "vfov": 30.874169669053064
-    },
-    {
-      "id": "vented",
-      "h": 180,
-      "v": 38,
-      "hfov": 55,
-      "vfov": 38.278120095481384
-    },
-    {
-      "id": "batteries",
-      "h": 219,
+      "id": "small-switches",
+      "h": 222,
       "v": 18,
-      "hfov": 65,
-      "vfov": 46.02317413542527
+      "hfov": 40,
+      "vfov": 27.278078567091463,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
+    },
+    {
+      "id": "column-left",
+      "h": 226.64570385683794,
+      "v": 6.788798865104363,
+      "hfov": 70,
+      "vfov": 50.046805678477824,
+      "position": [
+        9.15,
+        -0.3,
+        3.18
+      ],
+      "target": [
+        7.5,
+        1.44,
+        2.9
+      ]
+    },
+    {
+      "id": "column-right",
+      "h": 214.75807141130264,
+      "v": 8.108055755064903,
+      "hfov": 70,
+      "vfov": 50.046805678477824,
+      "position": [
+        9.15,
+        0.3,
+        3.18
+      ],
+      "target": [
+        7.5,
+        1.44,
+        2.9
+      ]
     }
   ],
   "sources": [
@@ -576,5 +602,341 @@
     "Unreadable labels and electrical topology are not invented.",
     "Fixed appearance only; the electrical controls do not operate real circuits.",
     "Existing room floor, ceiling and generator placement constrain the reconstruction and may differ from the photographed room."
-  ]
+  ],
+  "controlMasks": {
+    "face": "b",
+    "nativeSize": 2048,
+    "erosionPixels": 2,
+    "controls": [
+      {
+        "id": "large-1",
+        "kind": "large",
+        "center": [
+          1940,
+          741
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          676,
+          2023,
+          687
+        ],
+        "sourceCaption": [
+          1860,
+          685,
+          2010,
+          698
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "large-2",
+        "kind": "large",
+        "center": [
+          1940,
+          846
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          781,
+          2023,
+          792
+        ],
+        "sourceCaption": [
+          1860,
+          790,
+          2010,
+          803
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "large-3",
+        "kind": "large",
+        "center": [
+          1940,
+          947
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          882,
+          2023,
+          893
+        ],
+        "sourceCaption": [
+          1860,
+          891,
+          2010,
+          904
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "large-4",
+        "kind": "large",
+        "center": [
+          1940,
+          1050
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          985,
+          2023,
+          996
+        ],
+        "sourceCaption": [
+          1860,
+          994,
+          2010,
+          1007
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-1",
+        "kind": "small",
+        "center": [
+          1934,
+          1172
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1134,
+          2027,
+          1146
+        ],
+        "handle": [
+          [
+            1924,
+            1162
+          ],
+          [
+            1983,
+            1155
+          ],
+          [
+            1990,
+            1177
+          ],
+          [
+            1924,
+            1187
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1117,
+          2005,
+          1131
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-2",
+        "kind": "small",
+        "center": [
+          1934,
+          1355
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1317,
+          2027,
+          1329
+        ],
+        "handle": [
+          [
+            1924,
+            1345
+          ],
+          [
+            1983,
+            1338
+          ],
+          [
+            1990,
+            1360
+          ],
+          [
+            1924,
+            1370
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1300,
+          2005,
+          1314
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-3",
+        "kind": "small",
+        "center": [
+          1934,
+          1451
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1413,
+          2027,
+          1425
+        ],
+        "handle": [
+          [
+            1924,
+            1441
+          ],
+          [
+            1983,
+            1434
+          ],
+          [
+            1990,
+            1456
+          ],
+          [
+            1924,
+            1466
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1396,
+          2005,
+          1410
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-4",
+        "kind": "small",
+        "center": [
+          1934,
+          1558
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1520,
+          2027,
+          1532
+        ],
+        "handle": [
+          [
+            1924,
+            1548
+          ],
+          [
+            1983,
+            1541
+          ],
+          [
+            1990,
+            1563
+          ],
+          [
+            1924,
+            1573
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1503,
+          2005,
+          1517
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-5",
+        "kind": "small",
+        "center": [
+          1934,
+          1656
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1618,
+          2027,
+          1630
+        ],
+        "handle": [
+          [
+            1924,
+            1646
+          ],
+          [
+            1983,
+            1639
+          ],
+          [
+            1990,
+            1661
+          ],
+          [
+            1924,
+            1671
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1601,
+          2005,
+          1615
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-6",
+        "kind": "small",
+        "center": [
+          1934,
+          1759
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1721,
+          2027,
+          1733
+        ],
+        "handle": [
+          [
+            1924,
+            1749
+          ],
+          [
+            1983,
+            1742
+          ],
+          [
+            1990,
+            1764
+          ],
+          [
+            1924,
+            1774
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1704,
+          2005,
+          1718
+        ],
+        "annotationUncertaintyPixels": 2
+      }
+    ],
+    "classification": "Manually selected photographic face/handle and caption regions on the original B cube; no acceptance inferred from creating a mask."
+  }
 }

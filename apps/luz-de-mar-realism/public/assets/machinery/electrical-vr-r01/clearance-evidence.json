@@ -1,0 +1,942 @@
+{
+  "version": 1,
+  "id": "electrical-clearance-r03",
+  "strategy": "LDM-VR-EST-001 v1.0",
+  "camera": {
+    "sourcePosition": [
+      9.15,
+      0,
+      3.18
+    ],
+    "estimated": true,
+    "fixedForAllViews": true
+  },
+  "reference": "https://vrcloud.com/?pv=1667308298",
+  "scene": "scene_engine_room",
+  "panoramaStations": 1,
+  "nativeSize": 2048,
+  "grid": {
+    "basePixels": 8,
+    "detailPixels": 4,
+    "automaticAcceptance": false
+  },
+  "features": [
+    {
+      "id": "distribution-upper",
+      "observation": "Dos frentes EURO EL / Woodward",
+      "face": "b",
+      "rect": [
+        0,
+        446,
+        515,
+        1008
+      ],
+      "materials": "paint / plastic / LCD",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "distribution-upper-R",
+      "observation": "Continuación del cuadro superior",
+      "face": "r",
+      "rect": [
+        1680,
+        490,
+        2048,
+        1050
+      ],
+      "materials": "paint / plastic / LCD",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "distribution-lower",
+      "observation": "Protecciones, cuatro tapas transparentes derechas",
+      "face": "b",
+      "rect": [
+        0,
+        1018,
+        536,
+        1925
+      ],
+      "materials": "paint / clear plastic / metal",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "distribution-lower-R",
+      "observation": "Protecciones, cuatro tapas transparentes izquierdas",
+      "face": "r",
+      "rect": [
+        1680,
+        1045,
+        2048,
+        1860
+      ],
+      "materials": "paint / clear plastic / metal",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "shore",
+      "observation": "SHORE POWER SYSTEM y placa de montaje",
+      "face": "b",
+      "rect": [
+        686,
+        514,
+        1237,
+        1114
+      ],
+      "materials": "paint / black plastic / instruments",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "vented",
+      "observation": "Cuatro columnas de lamas, tapa, dos argollas",
+      "face": "b",
+      "rect": [
+        630,
+        1148,
+        1464,
+        2048
+      ],
+      "materials": "paint / metal",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "battery",
+      "observation": "Cuatro seccionadores rojos y seis mandos menores",
+      "face": "b",
+      "rect": [
+        1740,
+        676,
+        2036,
+        1878
+      ],
+      "materials": "paint / red plastic / rubber / metal",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "battery-enclosure",
+      "observation": "Envolvente y rejilla superior",
+      "face": "b",
+      "rect": [
+        1698,
+        292,
+        2048,
+        2020
+      ],
+      "materials": "paint / grille",
+      "detail": false,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "cables",
+      "observation": "Haces superiores, bajadas, bandeja y soportes",
+      "face": "b",
+      "rect": [
+        637,
+        508,
+        1438,
+        1120
+      ],
+      "materials": "rubber / paint / metal",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "cables-R",
+      "observation": "Continuación del cableado en el borde derecho R",
+      "face": "r",
+      "rect": [
+        1500,
+        540,
+        1698,
+        960
+      ],
+      "materials": "rubber / copper / paint",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "beacons",
+      "observation": "Dos balizas rojas, una ámbar y una azul",
+      "face": "b",
+      "rect": [
+        916,
+        215,
+        1390,
+        403
+      ],
+      "materials": "colored plastic / metal",
+      "detail": true,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    },
+    {
+      "id": "upper-junction",
+      "observation": "Remate superior y entrada de balizas",
+      "face": "u",
+      "rect": [
+        640,
+        1390,
+        1190,
+        1810
+      ],
+      "materials": "paint / rubber",
+      "detail": false,
+      "classification": "observed visible form; depth and hidden routing inferred"
+    }
+  ],
+  "heldOut": [
+    {
+      "id": "D01",
+      "face": "b",
+      "pixel": [
+        197,
+        514
+      ],
+      "assembly": "distribution",
+      "description": "Woodward upper-left bezel",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "D02",
+      "face": "b",
+      "pixel": [
+        431,
+        515
+      ],
+      "assembly": "distribution",
+      "description": "Woodward upper-right bezel",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "D03",
+      "face": "b",
+      "pixel": [
+        96,
+        612
+      ],
+      "assembly": "distribution",
+      "description": "Blue illuminated pilot centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "D04",
+      "face": "b",
+      "pixel": [
+        70,
+        768
+      ],
+      "assembly": "distribution",
+      "description": "Green illuminated pilot centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "D05",
+      "face": "b",
+      "pixel": [
+        36,
+        1091
+      ],
+      "assembly": "distribution",
+      "description": "First clear cover upper-left",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "D06",
+      "face": "b",
+      "pixel": [
+        462,
+        1562
+      ],
+      "assembly": "distribution",
+      "description": "Fourth clear cover lower-right",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "S01",
+      "face": "b",
+      "pixel": [
+        903,
+        636
+      ],
+      "assembly": "shore",
+      "description": "Phase selector pivot",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "S02",
+      "face": "b",
+      "pixel": [
+        1106,
+        635
+      ],
+      "assembly": "shore",
+      "description": "Voltage selector pivot",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "S03",
+      "face": "b",
+      "pixel": [
+        811,
+        650
+      ],
+      "assembly": "shore",
+      "description": "Left lever end",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "S04",
+      "face": "b",
+      "pixel": [
+        1036,
+        567
+      ],
+      "assembly": "shore",
+      "description": "Right lever end",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "S05",
+      "face": "b",
+      "pixel": [
+        931,
+        990
+      ],
+      "assembly": "shore",
+      "description": "General selector lower tip",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "S06",
+      "face": "b",
+      "pixel": [
+        1099,
+        818
+      ],
+      "assembly": "shore",
+      "description": "Voltmeter dial centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "V01",
+      "face": "b",
+      "pixel": [
+        630,
+        1237
+      ],
+      "assembly": "vented",
+      "description": "Lid left edge",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "V02",
+      "face": "b",
+      "pixel": [
+        1464,
+        1237
+      ],
+      "assembly": "vented",
+      "description": "Lid right edge",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "V03",
+      "face": "b",
+      "pixel": [
+        817,
+        1174
+      ],
+      "assembly": "vented",
+      "description": "Left lifting eye centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "V04",
+      "face": "b",
+      "pixel": [
+        1298,
+        1179
+      ],
+      "assembly": "vented",
+      "description": "Right lifting eye centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "V05",
+      "face": "b",
+      "pixel": [
+        760,
+        1310
+      ],
+      "assembly": "vented",
+      "description": "First louvre column",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "V06",
+      "face": "b",
+      "pixel": [
+        1310,
+        1505
+      ],
+      "assembly": "vented",
+      "description": "Fourth louvre column",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "B01",
+      "face": "b",
+      "pixel": [
+        1940,
+        741
+      ],
+      "assembly": "battery",
+      "description": "First red selector centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "B02",
+      "face": "b",
+      "pixel": [
+        1940,
+        846
+      ],
+      "assembly": "battery",
+      "description": "Second red selector centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "B03",
+      "face": "b",
+      "pixel": [
+        1940,
+        947
+      ],
+      "assembly": "battery",
+      "description": "Third red selector centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "B04",
+      "face": "b",
+      "pixel": [
+        1940,
+        1050
+      ],
+      "assembly": "battery",
+      "description": "Fourth red selector centre",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "B05",
+      "face": "b",
+      "pixel": [
+        1934,
+        1172
+      ],
+      "assembly": "battery",
+      "description": "Upper small key pivot",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    },
+    {
+      "id": "B06",
+      "face": "b",
+      "pixel": [
+        1938,
+        1700
+      ],
+      "assembly": "battery",
+      "description": "Lowest small switch pivot",
+      "usedForAdjustment": false,
+      "annotationUncertaintyPixels": 2
+    }
+  ],
+  "poses": [
+    {
+      "id": "column-context",
+      "h": 222,
+      "v": 8,
+      "hfov": 90,
+      "vfov": 67.38013505195957,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
+    },
+    {
+      "id": "column-front",
+      "h": 222,
+      "v": 9,
+      "hfov": 70,
+      "vfov": 50.046805678477824,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
+    },
+    {
+      "id": "large-switches",
+      "h": 222,
+      "v": -5,
+      "hfov": 32,
+      "vfov": 21.64459854190175,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
+    },
+    {
+      "id": "small-switches",
+      "h": 222,
+      "v": 18,
+      "hfov": 40,
+      "vfov": 27.278078567091463,
+      "position": [
+        9.15,
+        0,
+        3.18
+      ]
+    },
+    {
+      "id": "column-left",
+      "h": 226.64570385683794,
+      "v": 6.788798865104363,
+      "hfov": 70,
+      "vfov": 50.046805678477824,
+      "position": [
+        9.15,
+        -0.3,
+        3.18
+      ],
+      "target": [
+        7.5,
+        1.44,
+        2.9
+      ]
+    },
+    {
+      "id": "column-right",
+      "h": 214.75807141130264,
+      "v": 8.108055755064903,
+      "hfov": 70,
+      "vfov": 50.046805678477824,
+      "position": [
+        9.15,
+        0.3,
+        3.18
+      ],
+      "target": [
+        7.5,
+        1.44,
+        2.9
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "face": "f",
+      "sha256": "be5c7583661b1ee242e8ec1214994f90885192328b9bf97dd1adf9ca145d9e6c",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_f.jpg?v=p29279716"
+    },
+    {
+      "face": "l",
+      "sha256": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_l.jpg?v=p29279716"
+    },
+    {
+      "face": "r",
+      "sha256": "cce4144b4698f514a5457f91724f99871460fe799cae877bd675d0d1af043a4a",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_r.jpg?v=p29279716"
+    },
+    {
+      "face": "b",
+      "sha256": "574b87df722335ae39d16886e27d7756968f65767fb807560e37093aad1dde70",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_b.jpg?v=p29279716"
+    },
+    {
+      "face": "u",
+      "sha256": "9e2826689e0c7507e449ee8610a807990239bc2301f5194565ce2bf51edc53f7",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_u.jpg?v=p29279716"
+    },
+    {
+      "face": "d",
+      "sha256": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3",
+      "url": "https://cdn-static.vrcloud.com/azimut-yachts/ma2805/panos/Engine_Room.tiles/pano_d.jpg?v=p29279716"
+    }
+  ],
+  "limits": [
+    "One photographic station; small cells do not establish hidden depth.",
+    "Vented cabinet function and manufacturer remain unverified.",
+    "Unreadable labels and electrical topology are not invented.",
+    "Fixed appearance only; the electrical controls do not operate real circuits.",
+    "Existing room floor, ceiling and generator placement constrain the reconstruction and may differ from the photographed room."
+  ],
+  "controlMasks": {
+    "face": "b",
+    "nativeSize": 2048,
+    "erosionPixels": 2,
+    "controls": [
+      {
+        "id": "large-1",
+        "kind": "large",
+        "center": [
+          1940,
+          741
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          676,
+          2023,
+          687
+        ],
+        "sourceCaption": [
+          1860,
+          685,
+          2010,
+          698
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "large-2",
+        "kind": "large",
+        "center": [
+          1940,
+          846
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          781,
+          2023,
+          792
+        ],
+        "sourceCaption": [
+          1860,
+          790,
+          2010,
+          803
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "large-3",
+        "kind": "large",
+        "center": [
+          1940,
+          947
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          882,
+          2023,
+          893
+        ],
+        "sourceCaption": [
+          1860,
+          891,
+          2010,
+          904
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "large-4",
+        "kind": "large",
+        "center": [
+          1940,
+          1050
+        ],
+        "radius": 47,
+        "caption": [
+          1858,
+          985,
+          2023,
+          996
+        ],
+        "sourceCaption": [
+          1860,
+          994,
+          2010,
+          1007
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-1",
+        "kind": "small",
+        "center": [
+          1934,
+          1172
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1134,
+          2027,
+          1146
+        ],
+        "handle": [
+          [
+            1924,
+            1162
+          ],
+          [
+            1983,
+            1155
+          ],
+          [
+            1990,
+            1177
+          ],
+          [
+            1924,
+            1187
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1117,
+          2005,
+          1131
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-2",
+        "kind": "small",
+        "center": [
+          1934,
+          1355
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1317,
+          2027,
+          1329
+        ],
+        "handle": [
+          [
+            1924,
+            1345
+          ],
+          [
+            1983,
+            1338
+          ],
+          [
+            1990,
+            1360
+          ],
+          [
+            1924,
+            1370
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1300,
+          2005,
+          1314
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-3",
+        "kind": "small",
+        "center": [
+          1934,
+          1451
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1413,
+          2027,
+          1425
+        ],
+        "handle": [
+          [
+            1924,
+            1441
+          ],
+          [
+            1983,
+            1434
+          ],
+          [
+            1990,
+            1456
+          ],
+          [
+            1924,
+            1466
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1396,
+          2005,
+          1410
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-4",
+        "kind": "small",
+        "center": [
+          1934,
+          1558
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1520,
+          2027,
+          1532
+        ],
+        "handle": [
+          [
+            1924,
+            1548
+          ],
+          [
+            1983,
+            1541
+          ],
+          [
+            1990,
+            1563
+          ],
+          [
+            1924,
+            1573
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1503,
+          2005,
+          1517
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-5",
+        "kind": "small",
+        "center": [
+          1934,
+          1656
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1618,
+          2027,
+          1630
+        ],
+        "handle": [
+          [
+            1924,
+            1646
+          ],
+          [
+            1983,
+            1639
+          ],
+          [
+            1990,
+            1661
+          ],
+          [
+            1924,
+            1671
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1601,
+          2005,
+          1615
+        ],
+        "annotationUncertaintyPixels": 2
+      },
+      {
+        "id": "small-6",
+        "kind": "small",
+        "center": [
+          1934,
+          1759
+        ],
+        "radius": 14,
+        "caption": [
+          1858,
+          1721,
+          2027,
+          1733
+        ],
+        "handle": [
+          [
+            1924,
+            1749
+          ],
+          [
+            1983,
+            1742
+          ],
+          [
+            1990,
+            1764
+          ],
+          [
+            1924,
+            1774
+          ]
+        ],
+        "sourceCaption": [
+          1856,
+          1704,
+          2005,
+          1718
+        ],
+        "annotationUncertaintyPixels": 2
+      }
+    ],
+    "classification": "Manually selected photographic face/handle and caption regions on the original B cube; no acceptance inferred from creating a mask."
+  }
+}

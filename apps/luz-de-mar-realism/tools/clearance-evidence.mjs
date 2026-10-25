@@ -1,0 +1,13 @@
+// Freeze source-derived control regions and real, navigable comparison stations.
+import fs from'node:fs/promises';import path from'node:path';import{RoomNavigation,SX,SY}from'../src/navigation.js';
+const R=path.resolve(import.meta.dirname,'..'),W=path.resolve(process.env.ELECTRICAL_AUTHORING_WORK||path.join(R,'work/electrical-clearance-r03')),read=async p=>JSON.parse(await fs.readFile(p));
+const m=await read(path.join(W,'baseline/luz-de-mar-realism/assets/machinery/room.json')),s=m.electricalAppearance,nav=new RoomNavigation({...m,navigation:{...m.navigation,mask:s.navigation.mask}}),camera=[9.15,0,3.18],target=[7.5,1.44,2.9];
+const controls=[...[[741,846,947,1050].map((v,i)=>({id:'large-'+(i+1),kind:'large',center:[1940,v],radius:47,caption:[1858,v-65,2023,v-54]})),[1172,1355,1451,1558,1656,1759].map((v,i)=>({id:'small-'+(i+1),kind:'small',center:[1934,v],radius:14,caption:[1858,v-38,2027,v-26],handle:[[1924,v-10],[1983,v-17],[1990,v+5],[1924,v+15]]}))].flat()];
+// Preserve the old digital-caption guard separately from the photographic
+// caption bounds: the R01 captions were themselves vertically displaced.
+for(const c of controls){const v=c.center[1];c.sourceCaption=c.kind==='large'?[1860,v-56,2010,v-43]:[1856,v-55,2005,v-41];c.annotationUncertaintyPixels=2;}
+const pose=(id,h,v,hfov,position=camera,t=null)=>({id,h,v,hfov,vfov:2*Math.atan(Math.tan(hfov*Math.PI/360)/1.5)*180/Math.PI,position,...t?{target:t}:{}});
+const poses=[pose('column-context',222,8,90),pose('column-front',222,9,70),pose('large-switches',222,-5,32),pose('small-switches',222,18,40)];
+for(const[id,y]of[['column-left',-.3],['column-right',.3]]){const p=nav.nearest(9.15,y);if(!nav.safe(...p))throw Error('Unsafe frozen lateral station');const position=[...p,3.18],dx=(target[0]-p[0])*SX,dy=(target[1]-p[1])*SY,h=(Math.atan2(-dy,dx)*180/Math.PI+360)%360,v=Math.atan2(3.18-target[2],Math.hypot(dx,dy))*180/Math.PI;poses.push(pose(id,h,v,70,position,target));}
+const old=await read(path.join(W,'evidence-frozen.json')),e={...old,id:'electrical-clearance-r03',grid:{basePixels:8,detailPixels:4,automaticAcceptance:false},poses,controlMasks:{face:'b',nativeSize:2048,erosionPixels:2,controls,classification:'Manually selected photographic face/handle and caption regions on the original B cube; no acceptance inferred from creating a mask.'}};
+await fs.writeFile(path.join(W,'clearance-evidence.json'),JSON.stringify(e,null,2)+'\n');await fs.writeFile(path.join(W,'evidence-frozen.json'),JSON.stringify(e,null,2)+'\n');console.log('FROZEN',controls.length,'photographic controls and',poses.length,'comparison views',poses.slice(-2).map(p=>p.position));

@@ -33940,5 +33940,225 @@
     ],
     "referenceRect": null,
     "referencePath": null
+  },
+  {
+    "id": "CLEARANCE/123/0",
+    "assembly": "service-enclosure",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      5.699999932433405,
+      2.07200001840451,
+      2.263230810165405,
+      7.342037723919155,
+      2.122000269142978,
+      3.9399999475479124
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/123",
+    "materials": [
+      "EVR | paint"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/124/0",
+    "assembly": "service-enclosure",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      5.699999932433405,
+      1.3780000602385127,
+      2.0809230974316595,
+      7.342037723919155,
+      1.4280003109769808,
+      3.9399999475479124
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/124",
+    "materials": [
+      "EVR | paint"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/step-8",
+    "assembly": "service-access",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      7.388888659816961,
+      1.4358342795008157,
+      2.99246157169342,
+      7.744444540404406,
+      2.0700000471858138,
+      3.0384615755081175
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/92",
+    "materials": [
+      "EVR | paint",
+      "EVR | service-wood"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/127",
+    "assembly": "service-access",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      5.699999932433405,
+      2.031777310403316,
+      2.7953553295135496,
+      7.932405708393115,
+      2.058182630832575,
+      3.9399999475479124
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/127",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/129",
+    "assembly": "service-access",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      6.011999723080914,
+      2.038930512495947,
+      2.8990342116355894,
+      6.028000337036028,
+      2.0960292662961417,
+      2.9615041708946226
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/129",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/130",
+    "assembly": "service-access",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      6.991999565252281,
+      2.038930512495947,
+      3.401519784927368,
+      7.008000179207396,
+      2.0960292662961417,
+      3.4639898633956907
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/130",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/131",
+    "assembly": "service-access",
+    "classification": "digital access adjustment; observed exposed electrical front, hidden depth inferred",
+    "boundsSource": [
+      7.9419998398498475,
+      2.039469740636537,
+      3.8886231279373167,
+      7.958000453804962,
+      2.0960292662961417,
+      3.9399999475479124
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "LD/service-route/131",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/129-spacer",
+    "assembly": "service-access",
+    "classification": "Inferred digital spacer closing the adjusted rail support; not observed VR hardware",
+    "boundsSource": [
+      6.0239132077999145,
+      2.078788519863144,
+      2.8942691779136656,
+      6.054087214127474,
+      2.1011712177690254,
+      2.914269218444824
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "inferred-digital-mount/129-spacer",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [
+      "CLEARANCE/129",
+      "CLEARANCE/123/0"
+    ],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/131-standoff",
+    "assembly": "service-access",
+    "classification": "Inferred digital spacer closing the adjusted rail support; not observed VR hardware",
+    "boundsSource": [
+      7.937737297341798,
+      2.071721550610809,
+      3.825999865531921,
+      7.962262021794834,
+      2.096139392061246,
+      3.8926230764389036
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "inferred-digital-mount/131-standoff",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [
+      "CLEARANCE/131",
+      "MD_DCK_001/stairs/stair-opening"
+    ],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
+  },
+  {
+    "id": "CLEARANCE/131-sleeve",
+    "assembly": "service-access",
+    "classification": "Inferred digital spacer closing the adjusted rail support; not observed VR hardware",
+    "boundsSource": [
+      7.9283185791570014,
+      2.039463433874659,
+      3.9260000085830686,
+      7.946086969085961,
+      2.0602233534357155,
+      3.9459999895095823
+    ],
+    "referenceRect": null,
+    "referencePath": null,
+    "sourceID": "inferred-digital-mount/131-sleeve",
+    "materials": [
+      "EVR | metal"
+    ],
+    "connects": [
+      "CLEARANCE/131",
+      "CLEARANCE/127"
+    ],
+    "evidence": "Frozen VR visibility masks and existing digital yacht structure; hidden construction and mounting spacers inferred."
   }
 ]

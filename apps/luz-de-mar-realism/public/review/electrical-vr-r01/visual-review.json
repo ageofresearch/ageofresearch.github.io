@@ -1,0 +1,102 @@
+{
+  "reviewed": true,
+  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "scope": "R03 obstruction correction only",
+  "viewsReviewed": [
+    "column-context",
+    "column-front",
+    "large-switches",
+    "small-switches",
+    "column-left",
+    "column-right"
+  ],
+  "nativeGrid": {
+    "basePixels": 8,
+    "detailPixels": 4,
+    "comparedCells": 14168,
+    "manualReviewIsNotAutomaticCellAcceptance": true
+  },
+  "controls": [
+    {
+      "control": "large-1",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "large-2",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "large-3",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "large-4",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "small-1",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "small-2",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "small-3",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "small-4",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "small-5",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    },
+    {
+      "control": "small-6",
+      "sourceR02R03SheetReviewed": true,
+      "occlusionAccepted": true,
+      "fullAppearanceAccepted": false,
+      "pending": "Existing handle profile, plate lettering/alignment and material response are retained; small keys/tethers still differ from VR."
+    }
+  ],
+  "findings": [
+    "All four large switches and six small switches, their handles and the existing caption areas are exposed. The former broad white interference across the large switches is removed.",
+    "Existing lower labels are simplified frames; printed content/alignment and the small key/tether shapes do not match VR and remain pending. Their geometry and orientation are deliberately preserved in this scope.",
+    "No old stair wall remains in the tested control/label interiors. Direct, oblique and lateral views show the clear column.",
+    "Three inferred small mount pieces close nine actual mesh contacts to the new casing and the existing main-deck stair-opening boarding lip. They are digital access adjustments, not hardware identified in the panorama.",
+    "Four diffuse atlases and three local probes were regenerated with final mounting geometry. No residual broad casing band was observed on the exposed controls. Static reflections during nominal inspection remain approximate.",
+    "The KOHLER, upper equipment, ceiling, engine insulation and broader room differences remain outside R03."
+  ],
+  "strictWholeRoomVisualAcceptance": false,
+  "photographicReferencesPrivate": true,
+  "reviewImages": "Final native WebGL captures, private VR/R02/R034px sheets, Cycles2views and independent depth/ray/contact passes."
+}

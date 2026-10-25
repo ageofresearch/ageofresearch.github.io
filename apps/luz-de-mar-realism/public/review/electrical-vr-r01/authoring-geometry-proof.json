@@ -1,0 +1,51 @@
+{
+  "pass": true,
+  "skins": [
+    {
+      "componentID": "CLEARANCE/123/0",
+      "closed": true,
+      "volumeCubicMetres": 0.1000183238261803,
+      "columnSeparationMetres": 0.0210723876953125
+    },
+    {
+      "componentID": "CLEARANCE/124/0",
+      "closed": true,
+      "volumeCubicMetres": 0.11728327781574896,
+      "columnSeparationMetres": 0.0210723876953125
+    }
+  ],
+  "accessSeparation": {
+    "minimumSampledMetres": 0.012030601501464844,
+    "conservativeLowerBoundMetres": 0.011030601501464843,
+    "maximumEdgeSampleSpacingMetres": 0.002,
+    "samples": 132384,
+    "method": "Symmetric evaluated surface-edge sampling against exact triangle BVHs; Lipschitz distance bound includes half the maximum sample spacing."
+  },
+  "tread": {
+    "originalTopElevation": 1.0284615755081177,
+    "retainedTopElevation": 1.0284615755081177,
+    "originalArea": 0.21887945413573107,
+    "retainedArea": 0.15225348971228997,
+    "preservedContactPatchXZ": [
+      1.7245922088623047,
+      -10.276200294494629,
+      2.024592161178589,
+      -10.0462007522583
+    ],
+    "contactPatchMetres": [
+      0.3,
+      0.23
+    ]
+  },
+  "accessChangesExplicitlySelected": true,
+  "unchangedWorldAndUV1Bindings": {
+    "port": "078d47b61afd468c2f9b97d759460e917eef7df7253d669748040f9394184e09",
+    "starboard": "93be7c3dd230bef638c0f5a0cfbe0b2ee511643b3838c18d8c5c1c69e43ae989",
+    "bulkhead": "200e63598a35c7d5b532e3e5044c33ee3782ced543dac4801aadcaa73e15ee0d"
+  },
+  "navigationUnchanged": true,
+  "existingElectricalComponentsPhysicallyUnchanged": true,
+  "triangles": 116272,
+  "UVcoverage": 0.6166050434112549,
+  "UVpaddingPixels": 4.304781923279033
+}

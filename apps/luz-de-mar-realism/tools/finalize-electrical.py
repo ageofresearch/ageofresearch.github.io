@@ -23,7 +23,7 @@ from mathutils import Vector
 def point(p):return Vector((p[1]*7.47/7.6,-(p[0]*35.23/36-17.615),p[2]-2.01))
 cam=S.camera;cam.data.type='PERSP';cam.data.sensor_fit='VERTICAL';cam.data.angle=math.radians(72);cam.data.clip_start=.035;cam.location=point([9.15,0,3.18]);cam.rotation_euler=(point([7.8,-.12,2.8])-cam.location).to_track_quat('-Z','Y').to_euler();S.render.resolution_x=1200;S.render.resolution_y=800;S.render.resolution_percentage=100
 for image in bpy.data.images:
- if image.source=='FILE'and image.has_data:image.pack()
+ if image.source=='FILE'and image.has_data and not image.packed_file:image.pack()
 S['displayComparison']='Khronos PBR Neutral, exposure multiplier 0.05, sRGB; native comparison PNGs use the corresponding fixed Neutral transform'
 bpy.ops.wm.save_as_mainfile(filepath=str(W/'electrical-master.blend'),compress=True)
 a['masterSHA256']=hashlib.sha256((W/'electrical-master.blend').read_bytes()).hexdigest();a['display']={'transform':'Khronos PBR Neutral','exposureMultiplier':.05,'output':'sRGB'};(W/'authoring.json').write_text(json.dumps(a,indent=2)+'\n')

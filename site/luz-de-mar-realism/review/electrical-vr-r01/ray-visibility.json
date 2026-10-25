@@ -1,0 +1,236 @@
+{
+  "pass": true,
+  "runtimeGeometrySHA256": "1004c2c25228883698f34b625f3f60b6935c9deba5dea54db5f44ded108c64f9",
+  "stationsWebMetres": [
+    [
+      0.0,
+      1.1699999570846558,
+      -8.6607084274292
+    ],
+    [
+      -0.2948684096336365,
+      1.1699999570846558,
+      -8.6607084274292
+    ],
+    [
+      0.2948684096336365,
+      1.1699999570846558,
+      -8.6607084274292
+    ]
+  ],
+  "nativeMaskSampleStep": 4,
+  "rays": 12297,
+  "results": [
+    {
+      "control": "large-1",
+      "station": 0,
+      "rays": 599,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-1",
+      "station": 1,
+      "rays": 599,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-1",
+      "station": 2,
+      "rays": 599,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-2",
+      "station": 0,
+      "rays": 605,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-2",
+      "station": 1,
+      "rays": 605,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-2",
+      "station": 2,
+      "rays": 605,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-3",
+      "station": 0,
+      "rays": 607,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-3",
+      "station": 1,
+      "rays": 607,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-3",
+      "station": 2,
+      "rays": 607,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-4",
+      "station": 0,
+      "rays": 605,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-4",
+      "station": 1,
+      "rays": 605,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "large-4",
+      "station": 2,
+      "rays": 605,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-1",
+      "station": 0,
+      "rays": 315,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-1",
+      "station": 1,
+      "rays": 315,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-1",
+      "station": 2,
+      "rays": 315,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-2",
+      "station": 0,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-2",
+      "station": 1,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-2",
+      "station": 2,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-3",
+      "station": 0,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-3",
+      "station": 1,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-3",
+      "station": 2,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-4",
+      "station": 0,
+      "rays": 237,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-4",
+      "station": 1,
+      "rays": 237,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-4",
+      "station": 2,
+      "rays": 237,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-5",
+      "station": 0,
+      "rays": 315,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-5",
+      "station": 1,
+      "rays": 315,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-5",
+      "station": 2,
+      "rays": 315,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-6",
+      "station": 0,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-6",
+      "station": 1,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    },
+    {
+      "control": "small-6",
+      "station": 2,
+      "rays": 272,
+      "blocked": 0,
+      "pass": true
+    }
+  ],
+  "method": "Exact triangle BVHs from decoded production GLBs; first electrical hit from each frozen native-mask sample is the target. Cast from three stations against all non-electrical retained and replacement triangles, excluding only a 0.3 mm endpoint tolerance."
+}

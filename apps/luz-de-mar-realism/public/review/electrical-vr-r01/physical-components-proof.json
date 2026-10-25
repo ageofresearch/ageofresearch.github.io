@@ -1,0 +1,34 @@
+{
+  "pass": true,
+  "inputRawGLBSHA256": "a137844c677bf2e7a1231df24a8424b2bb87686c9289ca4e392acc9d57a211bb",
+  "candidateRawGLBSHA256": "96676e8252ef2ef9eccaa682dce9dcc0e10720fa20cd85a2be371996e4d30f98",
+  "unchangedPhysicalTriangles": 114622,
+  "triangleAggregate": {
+    "count": 114622,
+    "sum": "6c9edb002da1025c7a9bead3c941c1c5e925a894d981e0691a2c7023e5261dbd"
+  },
+  "originalMaterialsAndTexturesUnchanged": [
+    "EVR | paint",
+    "EVR | dark",
+    "EVR | edge",
+    "EVR | metal",
+    "EVR | screen",
+    "EVR | green",
+    "EVR | cream",
+    "EVR | blue-lit",
+    "EVR | red",
+    "EVR | blue",
+    "EVR | screen-pale",
+    "EVR | amber",
+    "EVR | green-lit",
+    "EVR | glass",
+    "EVR | rubber",
+    "EVR | copper",
+    "EVR | checker",
+    "EVR | grating",
+    "EVR | brass",
+    "EVR | warning-yellow",
+    "EVR | paint.001"
+  ],
+  "method": "All original world-space positions, normals, UV0 and winding-preserving triangles at1micrometre/component precision; original material-map bytes. UV1 and irradiance may change."
+}

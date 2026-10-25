@@ -2,18 +2,16 @@
   "strategy": "LDM-VR-EST-001 v1.0",
   "reference": "https://vrcloud.com/?pv=1667308298",
   "sourceHashes": {
-    "b": "574b87df722335ae39d16886e27d7756968f65767fb807560e37093aad1dde70",
-    "d": "43f1b9cd4afd5050d2c98ae2fd5485a9ab588070573d2b2091df61b11c66c3f3",
-    "l": "345b47c945b9c90aa852934a4b00c19ec9f3eb14151ea12f304563461379b8d9",
-    "r": "cce4144b4698f514a5457f91724f99871460fe799cae877bd675d0d1af043a4a"
+    "b": "574b87df722335ae39d16886e27d7756968f65767fb807560e37093aad1dde70"
   },
-  "materials": "Own procedural PBR maps; no photographic VR textures",
+  "materials": "Owned procedural PBR maps; no photographic VR textures",
+  "authoringRelease": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-electrical-clearance-r03",
   "dependencies": {
     "three": "0.180.0",
     "blender": "4.3.2",
     "meshopt": "1.3.0",
     "basis": "2.50",
-    "xatlas": "0.0.11"
-  },
-  "authoringRelease": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-electrical-lower-r02"
+    "xatlas": "0.0.11",
+    "shapely": "2.1.2"
+  }
 }

@@ -1,0 +1,167 @@
+{
+  "pass": true,
+  "method": "Blender single-sample native component IDs: at least 95% of each frozen 21 \u00d7 21 center window must hit the intended switch parts, rather than the white enclosure. Physical export equivalence is checked separately.",
+  "controls": [
+    {
+      "id": "large-1",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery red centre 0": 356,
+        "EVR | battery ivory pointer 0": 85
+      },
+      "actualControlPixels": 441,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "large-2",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery red centre 1": 361,
+        "EVR | battery ivory pointer 1": 80
+      },
+      "actualControlPixels": 441,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "large-3",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery red centre 2": 361,
+        "EVR | battery ivory pointer 2": 80
+      },
+      "actualControlPixels": 441,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "large-4",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery red centre 3": 361,
+        "EVR | battery ivory pointer 3": 80
+      },
+      "actualControlPixels": 441,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "small-1",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery column closed enclosure": 4,
+        "EVR | battery small switch boss 0": 187,
+        "EVR | battery small spindle 0": 162,
+        "EVR | battery small switch key 0": 82,
+        "EVR | battery small switch tether 0": 6
+      },
+      "actualControlPixels": 437,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "small-2",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery column closed enclosure": 4,
+        "EVR | battery small switch boss 1": 174,
+        "EVR | battery small spindle 1": 166,
+        "EVR | battery small switch key 1": 91,
+        "EVR | battery small switch tether 1": 6
+      },
+      "actualControlPixels": 437,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "small-3",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery column closed enclosure": 1,
+        "EVR | battery small switch tether 1": 11,
+        "EVR | battery small switch boss 2": 155,
+        "EVR | battery small spindle 2": 164,
+        "EVR | battery small switch key 2": 103,
+        "EVR | battery small switch tether 2": 7
+      },
+      "actualControlPixels": 429,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "small-4",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery column closed enclosure": 4,
+        "EVR | battery small switch boss 3": 174,
+        "EVR | battery small spindle 3": 168,
+        "EVR | battery small switch key 3": 88,
+        "EVR | battery small switch tether 3": 7
+      },
+      "actualControlPixels": 437,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "small-5",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery column closed enclosure": 5,
+        "EVR | battery small switch tether 3": 3,
+        "EVR | battery small switch boss 4": 169,
+        "EVR | battery small spindle 4": 156,
+        "EVR | battery small switch key 4": 101,
+        "EVR | battery small switch tether 4": 7
+      },
+      "actualControlPixels": 433,
+      "totalPixels": 441,
+      "pass": true
+    },
+    {
+      "id": "small-6",
+      "nativeCenterWindow": [
+        21,
+        21
+      ],
+      "actualFirstHitComponents": {
+        "EVR | battery column closed enclosure": 5,
+        "EVR | battery small switch tether 4": 15,
+        "EVR | battery small switch boss 5": 154,
+        "EVR | battery small spindle 5": 159,
+        "EVR | battery small switch key 5": 101,
+        "EVR | battery small switch tether 5": 7
+      },
+      "actualControlPixels": 421,
+      "totalPixels": 441,
+      "pass": true
+    }
+  ]
+}

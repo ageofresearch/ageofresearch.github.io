@@ -1,0 +1,39 @@
+name: KOHLER VR R01 authoring release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  authoring:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install pinned authoring tools
+        run: |
+          python3 -m venv /tmp/generator-python
+          /tmp/generator-python/bin/pip install numpy==2.3.5 Pillow==12.0.0 xatlas==0.0.11
+          curl --fail --location --retry 3 https://download.blender.org/release/Blender4.3/blender-4.3.2-linux-x64.tar.xz --output /tmp/blender.tar.xz
+          echo '4da1c956673c0485e63054e563ee69198cc8f80d8157dd7592dffc8a6a5592e6  /tmp/blender.tar.xz' | sha256sum --check
+          tar -xf /tmp/blender.tar.xz -C /tmp
+      - name: Install pinned GLB dependencies
+        working-directory: apps/luz-de-mar-realism
+        run: npm ci --ignore-scripts
+      - name: Reconstruct and bind production UVs
+        working-directory: apps/luz-de-mar-realism
+        env:
+          BLENDER: /tmp/blender-4.3.2-linux-x64/blender
+        run: |
+          export PATH="/tmp/generator-python/bin:$PATH"
+          python tools/release-generator.py
+      - name: Publish authoring without changing R04
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view luz-generator-vr-r01 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create luz-generator-vr-r01 --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" --title 'KOHLER y equipos locales · VR R01' --notes-file apps/luz-de-mar-realism/work/generator-vr-r01-release/release/NOTES.md
+          gh release upload luz-generator-vr-r01 apps/luz-de-mar-realism/work/generator-vr-r01-release/release/*.zip apps/luz-de-mar-realism/work/generator-vr-r01-release/release/SHA256SUMS --repo "$GITHUB_REPOSITORY" --clobber
+          gh release edit luz-generator-vr-r01 --repo "$GITHUB_REPOSITORY" --draft=false

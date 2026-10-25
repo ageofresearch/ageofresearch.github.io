@@ -45,8 +45,15 @@ d=hero.data;color=d.color_attributes.get('EVR baked irradiance')or d.color_attri
 bpy.ops.object.select_all(action='DESELECT');hero.select_set(True);bpy.context.view_layer.objects.active=hero
 bpy.ops.object.bake(type='DIFFUSE',target='VERTEX_COLORS');values=np.array([c.color[:3]for c in color.data],dtype=np.float32)
 assert np.isfinite(values).all() and values.max()>0,'Invalid corner irradiance'
+continuity=None
+if binding.get('version',1)>=5:
+ import runpy
+ np.savez_compressed(raw_dir/'electrical-corner-irradiance-unsmoothed.npz',irradiance=values)
+ values,continuity=runpy.run_path(str(R/'tools/generator-irradiance.py'))['continuous_generator_irradiance'](d,values)
+ color.data.foreach_set('color',np.column_stack((values,np.ones(len(values),dtype=np.float32))).ravel())
 attr=d.attributes.get('_IRRADIANCE')or d.attributes.new(name='_IRRADIANCE',type='FLOAT_VECTOR',domain='CORNER');attr.data.foreach_set('vector',values.ravel())
 binding['lighting']['cornerIrradiance']={'samples':64,'corners':len(values),'maximum':float(values.max()),'minimum':float(values.min()),'sha256':hashlib.sha256(values.astype('<f4').tobytes()).hexdigest(),'mode':'Full diffuse direct + indirect without albedo, actual corner positions/normals; only _BAKE_MODE=1 consumes these values.'}
+if continuity:binding['lighting']['cornerIrradiance']['continuity']=continuity;binding['generatorCornerContinuity']=continuity
 np.savez_compressed(raw_dir/'electrical-corner-irradiance.npz',irradiance=values)
 S.render.bake.target='IMAGE_TEXTURES'
 bpy.ops.object.select_all(action='DESELECT');hero.select_set(True);bpy.context.view_layer.objects.active=hero;hero.data.uv_layers.active_index=0;hero.data.uv_layers['UV0'].active_render=True

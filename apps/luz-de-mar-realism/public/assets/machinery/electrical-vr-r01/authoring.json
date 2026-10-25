@@ -1,8 +1,8 @@
 {
-  "version": 4,
-  "id": "electrical-no-stairs-r04",
+  "version": 5,
+  "id": "generator-vr-r01",
   "strategy": "LDM-VR-EST-001 v1.0",
-  "sourceMasterSHA256": "6fafd332e7c7da207dd1cf9d81efa9580886573c1fa93c1bf588011d1fcded8d",
+  "sourceMasterSHA256": "38a069552e771924af85c4f9571e8368bda622f5a5fb03cba3b8a41e54aec080",
   "sourceRuntimeGLBSHA256": "72cd44625c8018e2e0751869dd05dd326b301c2dd554cd68eaf7d3d51c779e62",
   "replacedIDs": [
     "LD/service-route/123",
@@ -67,6 +67,9 @@
     "LD_R02/machinery-craft/asea-1/252",
     "LD_R02/machinery-craft/asea-1/253",
     "LD_R02/machinery-craft/asea-1/254",
+    "LD_R02/machinery-craft/ceiling/466",
+    "LD_R02/machinery-craft/ceiling/467",
+    "LD_R02/machinery-craft/ceiling/468",
     "LD_R02/machinery-craft/floor/469",
     "LD_R02/machinery-craft/generator-port/87",
     "LD_R02/machinery-craft/generator-port/88",
@@ -81,6 +84,42 @@
     "LD_R02/machinery-craft/generator-port/97",
     "LD_R02/machinery-craft/generator-port/98",
     "LD_R02/machinery-craft/generator-port/99",
+    "LD_R02/machinery-craft/safety/378",
+    "LD_R02/machinery-craft/safety/379",
+    "LD_R02/machinery-craft/safety/380",
+    "LD_R02/machinery-craft/safety/381",
+    "LD_R02/machinery-craft/safety/382",
+    "LD_R02/machinery-craft/safety/383",
+    "LD_R02/machinery-craft/safety/384",
+    "LD_R02/machinery-craft/safety/385",
+    "LD_R02/machinery-craft/safety/386",
+    "LD_R02/machinery-craft/safety/387",
+    "LD_R02/machinery-craft/safety/388",
+    "LD_R02/machinery-craft/safety/389",
+    "LD_R02/machinery-craft/safety/390",
+    "LD_R02/machinery-craft/safety/391",
+    "LD_R02/machinery-craft/safety/392",
+    "LD_R02/machinery-craft/safety/393",
+    "LD_R02/machinery-craft/safety/394",
+    "LD_R02/machinery-craft/safety/395",
+    "LD_R02/machinery-craft/safety/396",
+    "LD_R02/machinery-craft/safety/397",
+    "LD_R02/machinery-craft/safety/398",
+    "LD_R02/machinery-craft/safety/399",
+    "LD_R02/machinery-craft/safety/400",
+    "LD_R02/machinery-craft/safety/401",
+    "LD_R02/machinery-craft/safety/402",
+    "LD_R02/machinery-craft/safety/403",
+    "LD_R02/machinery-craft/safety/404",
+    "LD_R02/machinery-craft/safety/405",
+    "LD_R02/machinery-craft/safety/406",
+    "LD_R02/machinery-craft/safety/407",
+    "LD_R02/machinery-craft/safety/408",
+    "LD_R02/machinery-craft/safety/409",
+    "LD_R02/machinery-craft/safety/410",
+    "LD_R02/machinery-craft/safety/411",
+    "LD_R02/machinery-craft/safety/412",
+    "LD_R02/machinery-craft/safety/413",
     "LD_R02/machinery-craft/tools/427",
     "LD_R02/machinery-craft/tools/428",
     "LD_R02/machinery-craft/tools/429",
@@ -103,6 +142,20 @@
     "LD_R02/machinery/asea-1/2",
     "LD_R02/machinery/asea-1/4",
     "LD_R02/machinery/asea-1/5",
+    "LD_R02/machinery/cables/20",
+    "LD_R02/machinery/cables/21",
+    "LD_R02/machinery/cables/22",
+    "LD_R02/machinery/cables/23",
+    "LD_R02/machinery/cables/24",
+    "LD_R02/machinery/cables/25",
+    "LD_R02/machinery/cables/26",
+    "LD_R02/machinery/cables/27",
+    "LD_R02/machinery/cables/28",
+    "LD_R02/machinery/cables/29",
+    "LD_R02/machinery/cables/30",
+    "LD_R02/machinery/cables/31",
+    "LD_R02/machinery/cables/32",
+    "LD_R02/machinery/ceiling/16",
     "LD_R02/machinery/generator-port/0",
     "LD_R02/machinery/generator-port/1",
     "LD_R02/machinery/generator-port/2",
@@ -113,6 +166,12 @@
     "LD_R02/machinery/generator-port/7",
     "LD_R02/machinery/generator-port/8",
     "LD_R02/machinery/generator-port/9",
+    "LD_R02/machinery/lining/0",
+    "LD_R02/machinery/safety/0",
+    "LD_R02/machinery/safety/1",
+    "LD_R02/machinery/safety/2",
+    "LD_R02/machinery/safety/7",
+    "LD_R02/machinery/safety/8",
     "LD_R02/machinery/switchboard/0",
     "LD_R02/machinery/switchboard/1",
     "LD_R02/machinery/switchboard/10",
@@ -189,11 +248,17 @@
     "LD_R02/photo-layout/asea-base/3",
     "LD_R02/photo-layout/asea-base/4",
     "LD_R02/photo-layout/asea-base/5",
+    "LD_R02/photo-layout/ceiling/97",
+    "LD_R02/photo-layout/ceiling/98",
+    "LD_R02/photo-layout/ceiling/99",
     "LD_R02/photo-layout/floor/100",
-    "LD_R02/photo-layout/floor/101"
+    "LD_R02/photo-layout/floor/101",
+    "LD_R02/photo-layout/safety/110",
+    "LD_R02/photo-layout/safety/111",
+    "LD_R02/photo-layout/safety/112"
   ],
   "removedContextTriangles": 3878,
-  "editableObjects": 1510,
+  "editableObjects": 1864,
   "sourceTriangles": 114933,
   "camera": {
     "sourcePosition": [
@@ -204,8 +269,8 @@
     "estimated": true,
     "fixedForAllViews": true
   },
-  "neutralGeometrySHA256": "f473d66a15367107341d9971ba30a10a21ab66300e03ee8977a95c1ca547c08a",
-  "stage": "Stairs removed at user request; relocation deferred.",
+  "neutralGeometrySHA256": "13a468c34078dbddbe905f6fc5e64bf55de00a8d377632831a43fb63198d92cc",
+  "stage": "generator material candidate; strict VR acceptance remains documented separately",
   "visualAcceptance": false,
   "sourceFaces": [
     "b",
@@ -329,123 +394,121 @@
   "hiddenFloorUndersideExcludedFromDerivative": true,
   "removedSubmillimetreSlivers": {
     "triangles": 309,
-    "areaSquareMetres": 0.0000024740357651431566,
+    "areaSquareMetres": 2.4740357651431566e-06,
     "scope": "Optimized electrical derivative only; editable components retained"
   },
   "uv": {
     "packing": {
       "method": "xatlas 0.0.11; independent UV1 on broad static surfaces; small manufactured components receive separately baked per-corner HDR irradiance; physical geometry and UV0 unchanged",
       "atlasCount": 1,
-      "width": 1903,
-      "height": 1894,
-      "utilization": 0.8284221291542053,
-      "coverage": 0.6166050434112549,
+      "width": 1932,
+      "height": 1930,
+      "utilization": 0.8358746767044067,
+      "coverage": 0.5961226224899292,
       "paddingPixels": 4,
-      "effectivePaddingAt2048": 4.304781923279033,
-      "charts": 672,
-      "retainedLayoutAfterRemoval": true
+      "effectivePaddingAt2048": 4.24016563146998,
+      "charts": 996
     },
-    "coverage": 0.5535106658935547,
+    "coverage": 0.5961226224899292,
     "minimumGutterPixels": 4,
     "degenerateTriangleFraction": 0,
-    "uvTrianglesSHA256": "ef865058c39570c08dc5cd6f665f710c287b474eea2f3e72443ed95021e27530",
-    "atlasTriangles": 10130,
-    "vertexIrradianceTriangles": 104448,
-    "microLighting": "Cycles full diffuse without albedo baked per corner for small manufactured parts and narrow grating bars; _BAKE_MODE selects this HDR irradiance instead of the atlas. UV tests apply to atlas participants."
+    "uvTrianglesSHA256": "d4f11c280bb66a2d8b6fa61db0cbd7399d1d368b05b8fcf05bc3072126825864",
+    "atlasTriangles": 19922,
+    "vertexIrradianceTriangles": 158314,
+    "microLighting": "Cycles diffuse direct+indirect without albedo at actual corners; split atlas/micro boundaries preserve evaluated normals."
   },
-  "staticTriangles": 114578,
+  "staticTriangles": 178236,
   "dynamicTriangles": 44,
-  "triangles": 114622,
+  "triangles": 178280,
   "dynamicDoorLighting": "Live room lighting and probes; excluded from static irradiance and shadow imprints.",
   "neutralMilestone": {
-    "version": 2,
-    "neutralGeometrySHA256": "f473d66a15367107341d9971ba30a10a21ab66300e03ee8977a95c1ca547c08a",
+    "version": 1,
     "advanceToFinish": true,
+    "neutralGeometrySHA256": "13a468c34078dbddbe905f6fc5e64bf55de00a8d377632831a43fb63198d92cc",
     "reviewedViews": [
-      "lower-wide",
-      "pedestal",
-      "floor-side",
-      "distribution-lower"
+      "context",
+      "controller",
+      "ventilation"
     ],
-    "findings": [
-      "Closed pedestal and its slot now occupy the reference region; compact pads replace long exposed feet.",
-      "Source-traced lateral grating and auxiliary controls are present; all three green indicator meshes have visible native-L ID pixels.",
-      "Old toolboxes and port-generator front removed atomically; new casing clears the controls.",
-      "Main-board casing shortened to the observed bottom and its mounting frame moved behind the doors.",
-      "Depths and concealed mounting details remain estimated; no global four-pixel acceptance asserted.",
-      "Rechecked final three neutral renders after source-native lower grille relocation to B176..296,1658..1765 and right maker-label alignment; historical grille control D-V06 was on blank panel and is invalid.",
-      "Final three neutral views rechecked after D-native pedestal corner calibration, continuous mitered grating perimeter, removal of overlapping frame/grid faces, and pilot depth projection correction.",
-      "Native source close-up resolves nine broad, steeply folded chevron blades rather than wire strokes. New closed solids reviewed in neutral close view; ray checks confirm the blades are visible in front of the backing.",
-      "Rechecked full neutral lower view after native-D slot measurements:33×11.65px repeat,9/7px webs,24×4.65px slots; removed the incorrect sparse square-grid interpretation."
+    "checks": {
+      "controllerStopKeysAndSelector": true,
+      "doorSeamAndThreeLatches": true,
+      "headsetClearOfLatch": true,
+      "continuousHose": true,
+      "seatedFeet": true,
+      "closedLocalCeiling": true
+    },
+    "limitations": [
+      "The eight/four-pixel grid is a review index, not a claim of per-cell visual acceptance.",
+      "Hidden depth and rear connections are inferred from a single panoramic station.",
+      "Final browser comparisons and quantitative landmark measurements pending."
     ],
-    "strictVisualAcceptance": false
+    "pilotRevision": "Pilots resized to source native-pixel radii after neutral draft; ear shells smooth shading.",
+    "optimizedGuard": "24 observed concentric rings, 56 angular segments each; less than a native-pixel deviation.",
+    "grilleRevision": "Guard lowered26mm to expose underside below housing lip; white painted rings instead of polished steel.",
+    "pilotCenterRevision": "Lens front centers intersect the common offset panel plane at the native reference pixels; solves6\u201313px relief parallax.",
+    "upperDetailRevision": "Side speaker grille, two central actuator-frame screws, ear-cup pivots/inset, white upper junction and observed left arrow; actuator wires terminate in glands.",
+    "contactRevision": "Side grille layers separated by0.2mm and ear-cup inset/pivot stems overlap their supporting body or yoke.",
+    "surfaceRevision": "Readably observed intercom markings projected on the actual common lid plane; softer blue polymer, attached upper mount and lower yoke.",
+    "foundationRevision": "Six inferred pads bridge exported floor heights1.58/1.55m to the1.5955m rail underside; originalVR does not establish hidden support design.",
+    "proxyRemoval": {
+      "method": "Evaluated original proxy BVH,0.3mm surface tolerance. The compressed black bezel additionally uses its evaluated1mm-expanded ownership bounds and matching material; no retained authored component intersects that volume. Reverse centroid check on the retained front.",
+      "evaluatedProxyTriangles": 1565,
+      "removedMergedTriangles": 1595,
+      "roundedKeyOnlyMatches": 427,
+      "additionalSurfaceMatches": 1140,
+      "boundedBezelAdditionalTriangles": 28,
+      "boundedBezelForeignComponentIntersections": 0,
+      "toleranceMetres": 0.0003,
+      "remainingProxyCentroidMatches": 0
+    },
+    "hoseEntryRevision": "Source-observed hose turns behind the casing left edge before the KOHLER lettering; prior endpoint blocked2 of252 source-grid rays in the manufacturer area."
   },
   "sourceTextures": {
-    "cream-color.png": "14acc3aae2cf2bf6b22f19a24d20bb67694d0c2c82321c0e10da14ffc7d04aad",
-    "grating-orm.png": "f806aa21d7a741a033bf5b187cce357775bad76165ee941b9485db3025428a32",
-    "blue-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "screen-pale-color.png": "e62e34d42b3f34df73a46a197c928d32620b8bb23e21af3fbd13acb612c76f50",
-    "grating-normal.png": "64d384e6e7d068eaaa1df72835effc9e644466f234f53ba4c30930f269b16862",
-    "screen-pale-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "screen-pale-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
-    "metal-orm.png": "e1d194f21540a321a8a97d1385ebacf5e6b194b949ba31a669b2b9e585afcca5",
-    "amber-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "screen-color.png": "f64dba80eccfe18790368410fd417a95569f9d17551d53e81685327089694cb4",
-    "green-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "metal-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "checker-normal.png": "64fefc163440db2574ce278bd83947a16bc47891bda51d98e4823e2805e385b1",
-    "edge-orm.png": "4d726d0c149d875579e1b91a73321565b60d67992365ff8cc03bc0804224220e",
-    "red-color.png": "c72afbdf425ab35b75b555d385c778bb20d9146e0a106e18cfb107233cf204bd",
-    "brass-color.png": "f8d59b65c13b09d143f9e18fb1258bf0f51e119f17080553e3b1a3e9675bc9e8",
-    "red-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "green-lit-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
-    "warning-yellow-orm.png": "c7641a47fe105446c8271d8bc89ff6f083363b806cece36cb6d3ba81f7925eff",
-    "green-orm.png": "ea9df2126f9927c85488f751aa13ce7dcea24c5edc4ace60bb8ba11c1941e57e",
-    "brass-orm.png": "675fb5c0b093f556c4643127a97d4fcfd273cc903ce70c61f984aa7755757859",
-    "rubber-normal.png": "3b3c58f5f79041c01085cd5e3baa2d47d8bbce9dbd132504bd2eae436c9894b9",
-    "copper-color.png": "c0a6adbbe6673d2be7764402c652dc1082f230a9fba7c3af4c7ab8bb7bed3861",
-    "paint-color.png": "e3ab6583364b7f020d84f7681e04071a4c021ca51776699b8806ae773cca23ae",
-    "amber-color.png": "3220b8712ac8b58b0efcad40df33c18c98790dcf89793e83d4be6aa304a05a28",
-    "paint-normal.png": "61befd15374e5692fee530f8b6b23eaa933770e6bb5d64833b75a1624b445cda",
-    "checker-color.png": "f3ec76e2662bb65888c1cea95d7cc2e12ba1c164905521ac56e360bf21b7d1ee",
-    "paint-orm.png": "278f405872c16d8af3de6eeb86e6d764740d44eab86958f46be96112eb7dc6c1",
-    "red-orm.png": "67c81958d3a2fa2fc8d9dc54958c9e3ca6c42e564e4744969c6af83467c7e8a8",
-    "edge-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "copper-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "blue-lit-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
-    "glass-color.png": "6bb91bef85bf1dd0a6362103f6dfbb7ca3f9a66a2b2d855580c3df1993a4fd27",
-    "glass-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "amber-orm.png": "ea9df2126f9927c85488f751aa13ce7dcea24c5edc4ace60bb8ba11c1941e57e",
-    "warning-yellow-color.png": "ea5526871a2e5af44c6330a5c0e4f325ea7a80f825b2cd99c0095878fafc1844",
-    "grating-color.png": "f2d2c74e1e5a1b170560fd700718c134006cf4a9431a4564065f7420ade6c9f0",
-    "screen-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "rubber-color.png": "3d93b9873a2e69fe2787f06db50e1ac359497c75fe7411ed13c220f1f8fb6904",
-    "green-color.png": "9d4a57b0231c725219eec035f86b4b30690513e2d089b0a8d018b53d4d1924d2",
-    "blue-lit-color.png": "af87d413f78f73a77a1ce304935d656c05023e82a0033ccf50b4e05a56aecb2f",
-    "blue-orm.png": "278f405872c16d8af3de6eeb86e6d764740d44eab86958f46be96112eb7dc6c1",
-    "screen-orm.png": "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
-    "checker-orm.png": "03ff8468d90f552c2c90797c8310ec434d1cf9970e5eee64e6f7ea65cf58955b",
-    "brass-normal.png": "64d384e6e7d068eaaa1df72835effc9e644466f234f53ba4c30930f269b16862",
-    "glass-orm.png": "6ec78217dd181d9016c2d738936f1a562867e1d791c3cc3e4bfcce90193be4a1",
-    "copper-orm.png": "79ef73499b4c1ce846ceabb9ff7a35da9de1ae243fb16f2d8b2baad9a4544716",
-    "blue-color.png": "42a588397eedc797cf5b48d825cebb57ad5180d220774ea2adf54107826c65d5",
-    "green-lit-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "blue-lit-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "rubber-orm.png": "6037ccad2b87469b06f012da4675544ffd79d2c6835a8bf8b813acf27e695c41",
-    "cream-orm.png": "a8606c1e6f9474c960e7527609ef9496097b3fc9cb04c597a58251812157e257",
-    "warning-yellow-normal.png": "64d384e6e7d068eaaa1df72835effc9e644466f234f53ba4c30930f269b16862",
-    "metal-color.png": "29ad966cb185bdb75596c0070950319fa59903da6634f1709b9a40a207574aa5",
-    "green-lit-color.png": "d1e8c5108814d5a9fc9303e47b01ba68a555c5d81abd9411d942e6654c9602c4",
-    "dark-orm.png": "720f0b18b580501c16484febceb2be437e7f0eed217fbc47fd347fa7e5e65a43",
-    "dark-color.png": "1013f7a09c8a8591e50bf8ad505d7de857a0c278376442c939f0f10567b3cd5a",
-    "edge-color.png": "e799cabaa4d80bb1e0aa3942dfcb27e5b8372de532323799ea6015791c6bf672",
-    "cream-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "dark-normal.png": "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
-    "service-wood-orm.png": "e8690451c53fcc3afeff04d187900c61c0b4b0a76be88951e7ea0d451d1fa710",
-    "service-wood-normal.png": "fb3e6a16dd3a0af57f37463deccacb6c77b8a464e279280841b7633767b1f3a9",
-    "service-wood-color.png": "ea2c68a4b79125c4df56eb3231debaf3af6a4cf955f454aedde54cea0dfa9a7e"
+    "intercom-blue-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "intercom-blue-orm.png": "2c734e22c473be14f05be233d4db884a3bf5e65859054b9f63b80166b22b94af",
+    "intercom-blue-color.png": "ad982aa90a718c9b05dca84609181eb783b33b53ab3e6c958caf10d9d857dd9a",
+    "white-ink-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "white-ink-orm.png": "ae3cc105dbabd6db7abf843acf2f06bcc992ed5b9bcff6ba38adf422cc0fd284",
+    "white-ink-color.png": "9d919a753b0bb1e9180f3994b4d175aa944f7c7dd5e84cec10d32ed12277a0be",
+    "pilot-green-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "pilot-green-orm.png": "c9e242de80acd3c575fed531c57dd307b08df1d4d74e5d4aba2d941a5c0a6de7",
+    "pilot-green-color.png": "55ef446c7f2b22c086447cb978bff79934b60e287e885d1976caab6b35ab909a",
+    "orange-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "orange-orm.png": "a572f64c3799977789fb4264bd101bc78203ded6c5b74e756f0d963c025e326b",
+    "orange-color.png": "9477dc7eef23d9e363b8947bcdf83f20dfeb79a2f6b6b6ee88dc60b64b63a076",
+    "olive-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "olive-orm.png": "18593510d8dcb77d0560def79600a00384d8dea772d2eb292007af213111a8a4",
+    "olive-color.png": "ea843ae837b7ec9ec5bf90c46b4385e6ca08bfceaed784e63b33d60281d01860",
+    "lcd-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "lcd-orm.png": "02eacf0fdeb459489a6db7e5635f888c802f88774292bdc19ce4e2fcf14e3dd7",
+    "lcd-color.png": "d5349c428727309d16cf6c71bbfed9e9d2f1ff1720e8172f08d4a4f82451d8c1",
+    "lamp-emitter-1-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "lamp-emitter-1-orm.png": "459928272d1f81ec6a266daede4c7bb74d97a646db5f221c56858d2712d1f4de",
+    "lamp-emitter-1-color.png": "ebb63796109ef7dd94b5f235c6465029807239d8699fee7ddb521b7b2043b922",
+    "lamp-emitter-0-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "lamp-emitter-0-orm.png": "459928272d1f81ec6a266daede4c7bb74d97a646db5f221c56858d2712d1f4de",
+    "lamp-emitter-0-color.png": "ebb63796109ef7dd94b5f235c6465029807239d8699fee7ddb521b7b2043b922",
+    "key-violet-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "key-violet-orm.png": "8951e756ab1844acf9820002c9b5ee40a12a01067c8a19914ba1d334af5ad8da",
+    "key-violet-color.png": "138d9ca5f834e69e8dd47269a4f9013ad1343eee819dc26527179c5d2d86aa17",
+    "key-pink-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "key-pink-orm.png": "6961f2f6d8bf07227cf5631c6db4edcfa0228e5dd6f95ded0ce4826e66dabf83",
+    "key-pink-color.png": "4ff25199161ffb716eb53c767dd7c2f002f51092bd5d49547f4d153859228543",
+    "key-blue-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "key-blue-orm.png": "8951e756ab1844acf9820002c9b5ee40a12a01067c8a19914ba1d334af5ad8da",
+    "key-blue-color.png": "49ee347d0100338cc3218cbdd414f8dd17f094e5b3acb81fd5db8154cc041429",
+    "enamel-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "enamel-orm.png": "4c3d74c707ecaec4da06b6c8dd22a0ac5038c6fdbf70655abc6e115a224b3227",
+    "enamel-color.png": "8eca743d39adefb1f5169dcb0d77c49aeddd30dc319fb4813978a1552931938f",
+    "ceiling-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "ceiling-orm.png": "3e0115dbd9b07124bee3bb177da003eb0eb244fdc2decb67d32fe61a75f09f64",
+    "ceiling-color.png": "b9923a774c14c67f98896baae91f382e00c0ec6c798a634021f999c153453b1d",
+    "brushed-normal.png": "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+    "brushed-orm.png": "9c2f68101d6aa35da61bc024368addc1d0697f6427becbbb747f94ec564db056",
+    "brushed-color.png": "fd1f3503743b558f46886ad38818a8c357c4b3b7d6f0233445f845b81461bdc7"
   },
-  "masterSHA256": "38a069552e771924af85c4f9571e8368bda622f5a5fb03cba3b8a41e54aec080",
+  "masterSHA256": "7edf3a4898a3032ec387fb17b802ff94ffc8e81dadaee153f44651c18ce948e5",
   "lighting": {
     "diffuseSamples": 64,
     "reflectionSamples": 128,
@@ -454,42 +517,42 @@
     "hdr": "Linear RGB half-float EXR DWAA",
     "files": {
       "electrical-irradiance.exr": {
-        "rawSHA256": "2cae44e9b205ccd5971574aa3fbc6a89d5e17427bcfbdb584a31c180cf9cf4a5",
-        "sha256": "8cc783e8ad6617cbed7ad074dc1d3965ec27452b25d63164406bdf8226e52e29",
-        "bytes": 5016336
+        "rawSHA256": "afe5d4c00035b68fd4ad28636e40616d7acbe0f797f8c9d6b735564b8e40ca25",
+        "sha256": "5944eb4a646278d191a2bce504dbb33ac2d41b4eb5f6abd7b5172b376c411703",
+        "bytes": 5233383
       },
       "bulkhead-irradiance.exr": {
-        "rawSHA256": "bdd89ff9021e4f37a7427ba255e49e6704a5faac5df65c0a077afb676bcf4ebe",
-        "sha256": "65be9aa7ce9cd9eacb11a955996b5d57ab2ffe596d7405c11877fa65c4ec9df3",
-        "bytes": 7410649
+        "rawSHA256": "edee2387bef0139b6ba0b5d1c5243fac6eff73f0c4e2a6bdb5f9bfedbcafb5b2",
+        "sha256": "148451f79270f2e1a791e2705b9f2aed8347aea70b4fa1e0820da0fe694847e1",
+        "bytes": 7513105
       },
       "port-irradiance.exr": {
-        "rawSHA256": "804385e9436c2fcccb2b421198c9fbc659687eacba8f509e9f3e53f4bc6be963",
-        "sha256": "6ab87484488db61f83b67a39a320165a53e1cb5ab56b1f5d13e8c913c9729112",
-        "bytes": 6549904
+        "rawSHA256": "7da749282787b4a4605270cc466ce3d464c2f2909be1d3994c76e750faea50f6",
+        "sha256": "c73e62f0a44a1ef9bf440aac24632c918b7436d787efa3685907ae577fc1c708",
+        "bytes": 6713581
       },
       "starboard-irradiance.exr": {
-        "rawSHA256": "37a51393732674eb16b5430409caabe83b252dc8d77265b7559ac5d5cdc62542",
-        "sha256": "c53b15697bcee09ecdf84b0b9d00bf5386d27e009bb6cbeba96f9e625ff51ca6",
-        "bytes": 6381357
+        "rawSHA256": "d4aa619edb24ec843f6f8f00c536f6fcbfaffc91c5c9532423230916cf3408b2",
+        "sha256": "b39df862d86c42cb351733a384e8367df086b8d984b53632643f77b6173212e6",
+        "bytes": 6479129
       },
       "room-probe-0.exr": {
-        "sha256": "c73a3cd3597a0d81f9cba30f27c52a29a256668a40b8000f57bbbf5613d21a8c",
-        "bytes": 738428
+        "sha256": "adf79bce5a73729750a3385f33d3e68ac860f810292ee7689758a9f610a1926f",
+        "bytes": 759979
       },
       "room-probe-1.exr": {
-        "sha256": "ed41fcfcd498cf2ebaa28940d83589f2d5dac2ce785fe6f5dd658c3a7f006817",
-        "bytes": 552048
+        "sha256": "9ac83b0237280bb4922aaa537ea7fe914baf33ef3384bcddeb53032654af9ae8",
+        "bytes": 559306
       },
       "room-probe-2.exr": {
-        "sha256": "c0131138422cdde4b4206434cd3fdbf8bc7f678d1bae28c305ab323d7ec11cbb",
-        "bytes": 631029
+        "sha256": "5b2b4840d5aeb235a620a4b604829d278924aa928d1128bfbdeefee403269a95",
+        "bytes": 634338
       }
     },
     "engineUVBindings": {
       "electrical": {
-        "cornerSHA256": "52cd26d8a8ef5c29f288bba4eadb0520a544fc58224afb8c29913d5b9c043f7e",
-        "triangles": 114578,
+        "cornerSHA256": "6ec8bef339559748fdbdc64937022eee6d1080e178fc33babc3796e1bfe4efa1",
+        "triangles": 178236,
         "originalGeometryUnchanged": false
       },
       "bulkhead": {
@@ -510,11 +573,21 @@
     },
     "cornerIrradiance": {
       "samples": 64,
-      "corners": 343734,
-      "maximum": 1580.0013427734375,
+      "corners": 534708,
+      "maximum": 1566.111083984375,
       "minimum": 0,
-      "sha256": "54274eaa8cf8fa2a86ec1f4f19149731f4310b5d6c070c14f418de03017b0377",
-      "mode": "Full diffuse direct + indirect without albedo, actual corner positions/normals; only _BAKE_MODE=1 consumes these values."
+      "sha256": "03e534fe27be7b532e722575c64de002105f334e03b9f8ee11db056fcb67b11d",
+      "mode": "Full diffuse direct + indirect without albedo, actual corner positions/normals; only _BAKE_MODE=1 consumes these values.",
+      "continuity": {
+        "method": "Mean of equal-sample Cycles CORNER estimates at the same position (1um key), normal (1e-5 key), material and micro-transport mode. New generator ID2 only; hard edges and retained-front samples are not mixed.",
+        "selectedCorners": 165609,
+        "physicalSampleGroups": 76898,
+        "sharedGroups": 21504,
+        "discontinuousGroupsBefore": 15836,
+        "maximumSharedCornerDisagreementBefore": 237.1933463215828,
+        "maximumSharedCornerDisagreementAfter": 0,
+        "retainedFrontTransportUnchanged": true
+      }
     },
     "removableShadowPolicy": "Installed engines excluded from electrical floor/grating/cabinet diffuse transport; reversible runtime contact receivers remain. Engines included in static reflection capture.",
     "probes": {
@@ -579,23 +652,22 @@
       ]
     }
   },
-  "sourceGeometrySHA256": "cf2a760245ef02cf70f255a05088ed3d39efaf978c485d31e6ffc76805e1ef7c",
+  "sourceGeometrySHA256": "e81be4008801a0168365bf3505930fad5242c99d62f23fd2b23450e4438078ee",
   "removedUnusedUVLayers": [],
-  "transportSourceGeometrySHA256": "ba7f5efd8899eb62d4875d5cb314c6df04d45a321add58463e6bb60f31ba31a9",
   "bakedUV1BindingPreservedDuringExportRepair": true,
   "display": {
     "transform": "Khronos PBR Neutral",
     "exposureMultiplier": 0.05,
     "output": "sRGB"
   },
-  "runtimeGeometrySHA256": "dec7d5a20c37f2cdc5df31bc1d975ff4c347e927947504c0fb8117f7bf002796",
-  "replacedTriangles": 12225,
+  "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+  "replacedTriangles": 17362,
   "louvreFrontLighting": {
     "components": 112,
     "method": "Front faces use spatial HDR atlas irradiance; split boundaries isolate corner-lit side faces. Geometry and physical UV0 preserved."
   },
   "inputR02MasterSHA256": "eff95b58964187331c972b17e9ec0dd05c4e958e76d3435477e859527ec8b7ee",
-  "parentAuthoringVersion": "electrical-clearance-r03",
+  "parentAuthoringVersion": "electrical-no-stairs-r04",
   "removedSourceIDs": [
     "LD/service-route/67",
     "LD/service-route/68",
@@ -1135,5 +1207,1012 @@
         5.551115123125783e-17
       ]
     ]
+  },
+  "proxyRemoval": {
+    "method": "Evaluated original proxy BVH,0.3mm surface tolerance. The compressed black bezel additionally uses its evaluated1mm-expanded ownership bounds and matching material; no retained authored component intersects that volume. Reverse centroid check on the retained front.",
+    "evaluatedProxyTriangles": 1565,
+    "removedMergedTriangles": 1595,
+    "roundedKeyOnlyMatches": 427,
+    "additionalSurfaceMatches": 1140,
+    "boundedBezelAdditionalTriangles": 28,
+    "boundedBezelForeignComponentIntersections": 0,
+    "toleranceMetres": 0.0003,
+    "remainingProxyCentroidMatches": 0
+  },
+  "generatorReplacedIDs": [
+    "LD_R02/machinery/lining/0",
+    "LD_R02/machinery/cables/20",
+    "LD_R02/machinery/cables/21",
+    "LD_R02/machinery/cables/22",
+    "LD_R02/machinery/cables/23",
+    "LD_R02/machinery/cables/24",
+    "LD_R02/machinery/cables/25",
+    "LD_R02/machinery/cables/26",
+    "LD_R02/machinery/cables/27",
+    "LD_R02/machinery/cables/28",
+    "LD_R02/machinery/cables/29",
+    "LD_R02/machinery/cables/30",
+    "LD_R02/machinery/cables/31",
+    "LD_R02/machinery/cables/32",
+    "LD_R02/machinery/ceiling/16",
+    "LD_R02/machinery/safety/0",
+    "LD_R02/machinery/safety/1",
+    "LD_R02/machinery/safety/2",
+    "LD_R02/machinery/safety/7",
+    "LD_R02/machinery/safety/8",
+    "LD_R02/photo-layout/ceiling/97",
+    "LD_R02/photo-layout/ceiling/98",
+    "LD_R02/photo-layout/ceiling/99",
+    "LD_R02/photo-layout/safety/110",
+    "LD_R02/photo-layout/safety/111",
+    "LD_R02/photo-layout/safety/112",
+    "LD_R02/machinery-craft/safety/378",
+    "LD_R02/machinery-craft/safety/379",
+    "LD_R02/machinery-craft/safety/380",
+    "LD_R02/machinery-craft/safety/381",
+    "LD_R02/machinery-craft/safety/382",
+    "LD_R02/machinery-craft/safety/383",
+    "LD_R02/machinery-craft/safety/384",
+    "LD_R02/machinery-craft/safety/385",
+    "LD_R02/machinery-craft/safety/386",
+    "LD_R02/machinery-craft/safety/387",
+    "LD_R02/machinery-craft/safety/388",
+    "LD_R02/machinery-craft/safety/389",
+    "LD_R02/machinery-craft/safety/390",
+    "LD_R02/machinery-craft/safety/391",
+    "LD_R02/machinery-craft/safety/392",
+    "LD_R02/machinery-craft/safety/393",
+    "LD_R02/machinery-craft/safety/394",
+    "LD_R02/machinery-craft/safety/395",
+    "LD_R02/machinery-craft/safety/396",
+    "LD_R02/machinery-craft/safety/397",
+    "LD_R02/machinery-craft/safety/398",
+    "LD_R02/machinery-craft/safety/399",
+    "LD_R02/machinery-craft/safety/400",
+    "LD_R02/machinery-craft/safety/401",
+    "LD_R02/machinery-craft/safety/402",
+    "LD_R02/machinery-craft/safety/403",
+    "LD_R02/machinery-craft/safety/404",
+    "LD_R02/machinery-craft/safety/405",
+    "LD_R02/machinery-craft/safety/406",
+    "LD_R02/machinery-craft/safety/407",
+    "LD_R02/machinery-craft/safety/408",
+    "LD_R02/machinery-craft/safety/409",
+    "LD_R02/machinery-craft/safety/410",
+    "LD_R02/machinery-craft/safety/411",
+    "LD_R02/machinery-craft/safety/412",
+    "LD_R02/machinery-craft/safety/413",
+    "LD_R02/machinery-craft/ceiling/466",
+    "LD_R02/machinery-craft/ceiling/467",
+    "LD_R02/machinery-craft/ceiling/468"
+  ],
+  "replacedEditableIDs": [
+    "EVR/side generator closed enclosure",
+    "EVR/side generator control door",
+    "EVR/side generator service door",
+    "EVR/side generator lower small door",
+    "EVR/side generator control black bezel",
+    "EVR/side generator control LCD",
+    "EVR/side generator pilot 0",
+    "EVR/side generator pilot 1",
+    "EVR/side generator pilot 2",
+    "EVR/side generator recessed latch (421, 1225)",
+    "EVR/side generator recessed latch (546, 1225)",
+    "EVR/side generator recessed latch (685, 1070)",
+    "EVR/side generator low mounting rail 2.92",
+    "EVR/side generator low mounting rail 3.33",
+    "EVR/side generator readable manufacturer",
+    "EVR/three green pilot enclosure",
+    "EVR/auxiliary pilot bezel 0",
+    "EVR/auxiliary green lens 0",
+    "EVR/auxiliary pilot bezel 1",
+    "EVR/auxiliary green lens 1",
+    "EVR/auxiliary pilot bezel 2",
+    "EVR/auxiliary green lens 2",
+    "EVR/auxiliary selector round base",
+    "EVR/auxiliary selector handle",
+    "EVR/auxiliary bracket",
+    "EVR/auxiliary cable 0",
+    "EVR/auxiliary cable 1",
+    "EVR/auxiliary cable 2",
+    "EVR/auxiliary cable 3",
+    "EVR/auxiliary bonded conductor",
+    "EVR/side white lower pipe",
+    "EVR/side brass elbow",
+    "EVR/side black connected hose",
+    "EVR/side pipe metal clamp (203, 1493)",
+    "EVR/side pipe metal clamp (229, 1493)",
+    "EVR/side pipe metal clamp (272, 1486)"
+  ],
+  "retainedFrontTriangles": 112983,
+  "removedProxyTriangles": 1595,
+  "generatorEditableObjects": 390,
+  "triangleBudget": 180000,
+  "generatorReconstruction": {
+    "sourceRegions": 29,
+    "camera": {
+      "sourcePosition": [
+        9.15,
+        0,
+        3.18
+      ],
+      "estimated": true,
+      "fixedForAllViews": true
+    },
+    "grid": {
+      "basePixels": 8,
+      "detailPixels": 4,
+      "automaticAcceptance": false
+    },
+    "oldContextRemoved": [
+      {
+        "object": "LD_R02 | architecture",
+        "triangles": 12
+      },
+      {
+        "object": "EVR context | lower R02 LD_R02 | architecture",
+        "triangles": 12
+      },
+      {
+        "object": "R04 without stairs | LD_R02 | furniture",
+        "triangles": 6520
+      },
+      {
+        "object": "R04 without stairs | KEEP | furniture",
+        "triangles": 6520
+      },
+      {
+        "object": "R04 without stairs | BVR context | KEEP | furniture",
+        "triangles": 6520
+      },
+      {
+        "object": "R04 without stairs | EVR context | BVR context | KEEP | furnitu",
+        "triangles": 6520
+      },
+      {
+        "object": "R04 without stairs | EVR context | lower R02 EVR context | BVR ",
+        "triangles": 6520
+      },
+      {
+        "object": "R04 without stairs | R03 context | EVR context | lower R02 EVR ",
+        "triangles": 6520
+      },
+      {
+        "object": "port perforated acoustic lining | 135",
+        "triangles": 12
+      },
+      {
+        "object": "continuous pipe or hose | 441",
+        "triangles": 24
+      },
+      {
+        "object": "continuous pipe or hose | 442",
+        "triangles": 24
+      },
+      {
+        "object": "continuous pipe or hose | 443",
+        "triangles": 24
+      },
+      {
+        "object": "continuous pipe or hose | 444",
+        "triangles": 24
+      },
+      {
+        "object": "continuous pipe or hose | 445",
+        "triangles": 24
+      },
+      {
+        "object": "continuous pipe or hose | 446",
+        "triangles": 24
+      },
+      {
+        "object": "cable tray retaining tie | 447",
+        "triangles": 12
+      },
+      {
+        "object": "cable tray retaining tie | 448",
+        "triangles": 12
+      },
+      {
+        "object": "cable tray retaining tie | 449",
+        "triangles": 12
+      },
+      {
+        "object": "cable tray retaining tie | 450",
+        "triangles": 12
+      },
+      {
+        "object": "cable tray retaining tie | 451",
+        "triangles": 12
+      },
+      {
+        "object": "cable tray retaining tie | 452",
+        "triangles": 12
+      },
+      {
+        "object": "cable tray retaining tie | 453",
+        "triangles": 12
+      },
+      {
+        "object": "white ventilation trunk | 475",
+        "triangles": 84
+      },
+      {
+        "object": "gas detection enclosure | 476",
+        "triangles": 108
+      },
+      {
+        "object": "gas panel black face and amber LCD | 477",
+        "triangles": 12
+      },
+      {
+        "object": "amber gas detection display | 478",
+        "triangles": 12
+      },
+      {
+        "object": "engine room intercom box | 479",
+        "triangles": 108
+      },
+      {
+        "object": "raised indicator or pushbutton | 480",
+        "triangles": 32
+      },
+      {
+        "object": "horizontal equipment-bay ventilation louvres | 594",
+        "triangles": 140
+      },
+      {
+        "object": "horizontal equipment-bay ventilation louvres | 595",
+        "triangles": 60
+      },
+      {
+        "object": "horizontal equipment-bay ventilation louvres | 596",
+        "triangles": 60
+      },
+      {
+        "object": "hearing protection connected headband | 607",
+        "triangles": 288
+      },
+      {
+        "object": "headset wall hook | 608",
+        "triangles": 72
+      },
+      {
+        "object": "intercom lower selector | 609",
+        "triangles": 48
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 940",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 941",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 942",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 943",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 944",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 945",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 946",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 947",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 948",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 949",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 950",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 951",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 952",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 953",
+        "triangles": 40
+      },
+      {
+        "object": "gas detector metal status-lamp ring | 954",
+        "triangles": 104
+      },
+      {
+        "object": "gas detector alarm or fault lens | 955",
+        "triangles": 40
+      },
+      {
+        "object": "gas panel alarm and fault white keylines | 956",
+        "triangles": 64
+      },
+      {
+        "object": "PLC grey body and keypad region | 957",
+        "triangles": 14
+      },
+      {
+        "object": "PLC five individual navigation keys | 958",
+        "triangles": 70
+      },
+      {
+        "object": "gas cabinet seated triangular lock rings | 959",
+        "triangles": 272
+      },
+      {
+        "object": "seated metal fastener heads | 960",
+        "triangles": 96
+      },
+      {
+        "object": "fastener recessed driver slots | 961",
+        "triangles": 64
+      },
+      {
+        "object": "intercom thin printed perimeter | 962",
+        "triangles": 32
+      },
+      {
+        "object": "seated metal fastener heads | 963",
+        "triangles": 96
+      },
+      {
+        "object": "fastener recessed driver slots | 964",
+        "triangles": 64
+      },
+      {
+        "object": "INTERCOM SYSTEM technical marking | 965",
+        "triangles": 274
+      },
+      {
+        "object": "ENGINE ROOM AREA technical marking | 966",
+        "triangles": 312
+      },
+      {
+        "object": "intercom selector white index | 967",
+        "triangles": 20
+      },
+      {
+        "object": "sounder rounded outer flange and inner dome | 968",
+        "triangles": 336
+      },
+      {
+        "object": "sounder closed centre cap | 969",
+        "triangles": 80
+      },
+      {
+        "object": "sounder circular perimeter lip | 970",
+        "triangles": 232
+      },
+      {
+        "object": "ear defender rounded oval outer shell | 971",
+        "triangles": 124
+      },
+      {
+        "object": "ear defender soft oval cushion | 972",
+        "triangles": 124
+      },
+      {
+        "object": "ear defender rounded oval outer shell | 973",
+        "triangles": 124
+      },
+      {
+        "object": "ear defender soft oval cushion | 974",
+        "triangles": 124
+      },
+      {
+        "object": "intercom shallow hanging continuous spiral le | 975",
+        "triangles": 1490
+      },
+      {
+        "object": "ventilation grille shallow enamel surround | 1028",
+        "triangles": 40
+      },
+      {
+        "object": "ventilation grille shallow enamel surround | 1029",
+        "triangles": 32
+      },
+      {
+        "object": "ventilation grille shallow enamel surround | 1030",
+        "triangles": 32
+      }
+    ],
+    "newIDs": [
+      "GVR/sound enclosure rolled shell",
+      "GVR/controller door gasket",
+      "GVR/controller door",
+      "GVR/lower service door gasket",
+      "GVR/lower service door",
+      "GVR/large service door gasket",
+      "GVR/large service door",
+      "GVR/upper rolled shoulder joint",
+      "GVR/bottom folded retaining lip",
+      "GVR/controller black outer seat",
+      "GVR/controller metal perimeter",
+      "GVR/controller inner black fascia",
+      "GVR/controller LCD bezel",
+      "GVR/controller LCD face",
+      "GVR/controller protective top hinge",
+      "GVR/controller frame screw (413, 1099)",
+      "GVR/controller frame screw (413, 1099) driver",
+      "GVR/controller frame screw (413, 1180)",
+      "GVR/controller frame screw (413, 1180) driver",
+      "GVR/controller frame screw (542, 1099)",
+      "GVR/controller frame screw (542, 1099) driver",
+      "GVR/controller frame screw (542, 1180)",
+      "GVR/controller frame screw (542, 1180) driver",
+      "GVR/stop contrast field",
+      "GVR/stop hazard stripe 1535",
+      "GVR/stop hazard stripe 1542",
+      "GVR/stop hazard stripe 1549",
+      "GVR/stop hazard stripe 1556",
+      "GVR/stop hazard stripe 1563",
+      "GVR/stop hazard stripe 1570",
+      "GVR/stop hazard stripe 1577",
+      "GVR/stop hazard stripe 1584",
+      "GVR/stop hazard stripe 1591",
+      "GVR/stop hazard stripe 1598",
+      "GVR/stop mounting collar",
+      "GVR/red emergency stop",
+      "GVR/controller key seat 0",
+      "GVR/controller colored key 0",
+      "GVR/key printed mark 0",
+      "GVR/controller key seat 1",
+      "GVR/controller colored key 1",
+      "GVR/key printed mark 1",
+      "GVR/controller key seat 2",
+      "GVR/controller colored key 2",
+      "GVR/key printed mark 2",
+      "GVR/controller selector silver keyline",
+      "GVR/controller selector black field",
+      "GVR/controller right rotary knob",
+      "GVR/rotary index",
+      "GVR/controller lower right switch",
+      "GVR/controller lower left switch",
+      "GVR/controller manufacturer",
+      "GVR/generator manufacturer",
+      "GVR/latch recessed seat 0",
+      "GVR/latch brushed rim 0",
+      "GVR/latch moving tongue 0",
+      "GVR/latch keyway 0",
+      "GVR/latch keyway slit 0",
+      "GVR/latch recessed seat 1",
+      "GVR/latch brushed rim 1",
+      "GVR/latch moving tongue 1",
+      "GVR/latch keyway 1",
+      "GVR/latch keyway slit 1",
+      "GVR/latch recessed seat 2",
+      "GVR/latch brushed rim 2",
+      "GVR/latch moving tongue 2",
+      "GVR/latch keyway 2",
+      "GVR/latch keyway slit 2",
+      "GVR/generator warning plate",
+      "GVR/generator warning top stripe",
+      "GVR/generator warning unreadable line 0",
+      "GVR/generator warning unreadable line 1",
+      "GVR/generator warning unreadable line 2",
+      "GVR/lower warning plate",
+      "GVR/lower warning top stripe",
+      "GVR/lower warning unreadable line 0",
+      "GVR/lower warning unreadable line 1",
+      "GVR/lower warning unreadable line 2",
+      "GVR/generator continuous support rail 2.94",
+      "GVR/generator inferred foundation pad (7.34, 2.94)",
+      "GVR/generator seated mounting foot (7.34, 2.94)",
+      "GVR/foot isolation core (7.34, 2.94)",
+      "GVR/foot fastener (7.34, 2.94, -0.023)",
+      "GVR/foot fastener (7.34, 2.94, 0.023)",
+      "GVR/generator inferred foundation pad (8.5, 2.94)",
+      "GVR/generator seated mounting foot (8.5, 2.94)",
+      "GVR/foot isolation core (8.5, 2.94)",
+      "GVR/foot fastener (8.5, 2.94, -0.023)",
+      "GVR/foot fastener (8.5, 2.94, 0.023)",
+      "GVR/generator inferred foundation pad (9.66, 2.94)",
+      "GVR/generator seated mounting foot (9.66, 2.94)",
+      "GVR/foot isolation core (9.66, 2.94)",
+      "GVR/foot fastener (9.66, 2.94, -0.023)",
+      "GVR/foot fastener (9.66, 2.94, 0.023)",
+      "GVR/generator continuous support rail 3.32",
+      "GVR/generator inferred foundation pad (7.34, 3.32)",
+      "GVR/generator seated mounting foot (7.34, 3.32)",
+      "GVR/foot isolation core (7.34, 3.32)",
+      "GVR/foot fastener (7.34, 3.32, -0.023)",
+      "GVR/foot fastener (7.34, 3.32, 0.023)",
+      "GVR/generator inferred foundation pad (8.5, 3.32)",
+      "GVR/generator seated mounting foot (8.5, 3.32)",
+      "GVR/foot isolation core (8.5, 3.32)",
+      "GVR/foot fastener (8.5, 3.32, -0.023)",
+      "GVR/foot fastener (8.5, 3.32, 0.023)",
+      "GVR/generator inferred foundation pad (9.66, 3.32)",
+      "GVR/generator seated mounting foot (9.66, 3.32)",
+      "GVR/foot isolation core (9.66, 3.32)",
+      "GVR/foot fastener (9.66, 3.32, -0.023)",
+      "GVR/foot fastener (9.66, 3.32, 0.023)",
+      "GVR/auxiliary case",
+      "GVR/auxiliary lid gasket",
+      "GVR/auxiliary cover",
+      "GVR/intercom case",
+      "GVR/intercom lid gasket",
+      "GVR/intercom cover",
+      "GVR/auxiliary green indicator 0 bezel",
+      "GVR/auxiliary green indicator 0 lens",
+      "GVR/auxiliary green indicator 1 bezel",
+      "GVR/auxiliary green indicator 1 lens",
+      "GVR/auxiliary green indicator 2 bezel",
+      "GVR/auxiliary green indicator 2 lens",
+      "GVR/intercom blue pilot bezel",
+      "GVR/intercom blue pilot lens",
+      "GVR/intercom green selector bezel",
+      "GVR/intercom green selector lens",
+      "GVR/intercom lid fastener 0",
+      "GVR/intercom lid fastener 1",
+      "GVR/intercom lid fastener 2",
+      "GVR/intercom lid fastener 3",
+      "GVR/auxiliary selector base",
+      "GVR/auxiliary selector lever",
+      "GVR/intercom area marking",
+      "GVR/intercom observed maker",
+      "GVR/intercom nameplate outline 0",
+      "GVR/intercom nameplate outline 1",
+      "GVR/intercom nameplate outline 2",
+      "GVR/intercom nameplate outline 3",
+      "GVR/intercom side speaker border",
+      "GVR/intercom side speaker field",
+      "GVR/intercom speaker slot 0",
+      "GVR/intercom speaker slot 1",
+      "GVR/intercom speaker slot 2",
+      "GVR/intercom speaker slot 3",
+      "GVR/intercom speaker slot 4",
+      "GVR/intercom speaker slot 5",
+      "GVR/intercom speaker slot 6",
+      "GVR/intercom speaker slot 7",
+      "GVR/auxiliary perforated support",
+      "GVR/auxiliary bundled cable 0",
+      "GVR/auxiliary bundled cable 1",
+      "GVR/auxiliary bundled cable 2",
+      "GVR/auxiliary bundled cable 3",
+      "GVR/auxiliary bundled cable 4",
+      "GVR/auxiliary cable saddle 1366",
+      "GVR/auxiliary cable saddle 1420",
+      "GVR/auxiliary cable saddle 1473",
+      "GVR/white lower service elbow",
+      "GVR/yellow metal elbow",
+      "GVR/connected black hose",
+      "GVR/hose stainless band 0",
+      "GVR/hose band screw 0",
+      "GVR/hose stainless band 1",
+      "GVR/hose band screw 1",
+      "GVR/hose stainless band 2",
+      "GVR/hose band screw 2",
+      "GVR/white pipe collar 1534",
+      "GVR/white pipe collar 1550",
+      "GVR/white pipe wall saddle",
+      "GVR/yellow green bonded conductor",
+      "GVR/recessed local backing wall",
+      "GVR/forward retained wall continuation",
+      "GVR/backing wall transition return",
+      "GVR/closed local ceiling panel",
+      "GVR/ceiling panel seam 6.84",
+      "GVR/ceiling panel seam 7.55",
+      "GVR/ceiling panel seam 8.25",
+      "GVR/ceiling panel seam 8.95",
+      "GVR/ceiling panel seam 9.95",
+      "GVR/ceiling transverse trim 0.85",
+      "GVR/ceiling transverse trim 1.8",
+      "GVR/ceiling transverse trim 2.75",
+      "GVR/linear lamp housing 0",
+      "GVR/linear lamp diffuser 0",
+      "GVR/linear lamp housing 1",
+      "GVR/linear lamp diffuser 1",
+      "GVR/rear cabinet mounting board",
+      "GVR/rear cabinet shell",
+      "GVR/rear cabinet perimeter gasket",
+      "GVR/rear cabinet closed door",
+      "GVR/rear cabinet lock",
+      "GVR/rear cabinet green pilot",
+      "GVR/rear cabinet red switch yellow seat",
+      "GVR/rear cabinet red isolator",
+      "GVR/rear cabinet isolator handle",
+      "GVR/rear cabinet observed maker",
+      "GVR/rear cabinet side ventilation 0",
+      "GVR/rear cabinet side ventilation 1",
+      "GVR/rear cabinet side ventilation 2",
+      "GVR/rear cabinet side ventilation 3",
+      "GVR/rear cabinet side ventilation 4",
+      "GVR/rear cabinet side ventilation 5",
+      "GVR/rear cabinet side ventilation 6",
+      "GVR/rear cable gland 0",
+      "GVR/rear cabinet cable 0",
+      "GVR/rear cable gland 1",
+      "GVR/rear cabinet cable 1",
+      "GVR/rear cable gland 2",
+      "GVR/rear cabinet cable 2",
+      "GVR/rear cable gland 3",
+      "GVR/rear cabinet cable 3",
+      "GVR/rear vertical conduit 0",
+      "GVR/conduit mounting pad (0, 900)",
+      "GVR/conduit retaining saddle (0, 900)",
+      "GVR/conduit saddle screw (0, 900, -10)",
+      "GVR/conduit saddle screw (0, 900, -10) driver",
+      "GVR/conduit saddle screw (0, 900, 10)",
+      "GVR/conduit saddle screw (0, 900, 10) driver",
+      "GVR/conduit mounting pad (0, 1002)",
+      "GVR/conduit retaining saddle (0, 1002)",
+      "GVR/conduit saddle screw (0, 1002, -10)",
+      "GVR/conduit saddle screw (0, 1002, -10) driver",
+      "GVR/conduit saddle screw (0, 1002, 10)",
+      "GVR/conduit saddle screw (0, 1002, 10) driver",
+      "GVR/rear vertical conduit 1",
+      "GVR/conduit mounting pad (1, 900)",
+      "GVR/conduit retaining saddle (1, 900)",
+      "GVR/conduit saddle screw (1, 900, -10)",
+      "GVR/conduit saddle screw (1, 900, -10) driver",
+      "GVR/conduit saddle screw (1, 900, 10)",
+      "GVR/conduit saddle screw (1, 900, 10) driver",
+      "GVR/conduit mounting pad (1, 1002)",
+      "GVR/conduit retaining saddle (1, 1002)",
+      "GVR/conduit saddle screw (1, 1002, -10)",
+      "GVR/conduit saddle screw (1, 1002, -10) driver",
+      "GVR/conduit saddle screw (1, 1002, 10)",
+      "GVR/conduit saddle screw (1, 1002, 10) driver",
+      "GVR/rear dense cable bundle 0",
+      "GVR/rear dense cable bundle 1",
+      "GVR/rear dense cable bundle 2",
+      "GVR/rear dense cable bundle 3",
+      "GVR/rear dense cable bundle 4",
+      "GVR/rear dense cable bundle 5",
+      "GVR/rear dense cable bundle 6",
+      "GVR/rear dense cable bundle 7",
+      "GVR/rear cable tie 875",
+      "GVR/rear cable tie 938",
+      "GVR/rear cable tie 1003",
+      "GVR/intercom open bracket back",
+      "GVR/intercom bracket folded edge [210, 812, 500, 826]",
+      "GVR/intercom bracket folded edge [210, 977, 500, 991]",
+      "GVR/intercom bracket folded edge [210, 812, 224, 991]",
+      "GVR/intercom underside gland 0",
+      "GVR/intercom lead 0",
+      "GVR/intercom underside gland 1",
+      "GVR/intercom lead 1",
+      "GVR/intercom underside gland 2",
+      "GVR/intercom lead 2",
+      "GVR/intercom underside gland 3",
+      "GVR/intercom lead 3",
+      "GVR/intercom underside gland 4",
+      "GVR/intercom lead 4",
+      "GVR/intercom underside gland 5",
+      "GVR/intercom lead 5",
+      "GVR/intercom loom clip 640",
+      "GVR/intercom loom clip 696",
+      "GVR/intercom loom clip 756",
+      "GVR/ear protection upper shell",
+      "GVR/ear protection upper padded edge",
+      "GVR/ear protection lower shell",
+      "GVR/ear protection lower padded edge",
+      "GVR/ear protection curved headband",
+      "GVR/ear protection left yoke connection",
+      "GVR/ear protection lower hanging strap",
+      "GVR/ear protection upper inset face",
+      "GVR/ear protection upper center boss",
+      "GVR/ear protection yoke pivot (110, 690)",
+      "GVR/ear protection yoke pivot (202, 694)",
+      "GVR/ear protection yoke pivot (109, 754)",
+      "GVR/ear protection yoke pivot (190, 767)",
+      "GVR/ear protection lower woven strap",
+      "GVR/upper junction white front",
+      "GVR/upper junction roof mounting 463",
+      "GVR/upper junction roof mounting 620",
+      "GVR/upper junction left upright",
+      "GVR/upper junction inclined inner panel",
+      "GVR/upper junction right enclosure",
+      "GVR/upper junction fastener (455, 666)",
+      "GVR/upper junction fastener (455, 666) driver",
+      "GVR/upper junction fastener (636, 666)",
+      "GVR/upper junction fastener (636, 666) driver",
+      "GVR/observed green direction plate",
+      "GVR/observed white left arrow",
+      "GVR/upper junction cable gland (652, 638)",
+      "GVR/upper junction gland aperture (652, 638)",
+      "GVR/upper junction cable gland (656, 660)",
+      "GVR/upper junction gland aperture (656, 660)",
+      "GVR/ventilator brushed housing",
+      "GVR/actuator black backing",
+      "GVR/actuator cast frame",
+      "GVR/orange actuator face",
+      "GVR/actuator rotary seat",
+      "GVR/actuator blue lever",
+      "GVR/actuator frame screw (736, 675)",
+      "GVR/actuator frame screw (736, 675) driver",
+      "GVR/actuator frame screw (815, 675)",
+      "GVR/actuator frame screw (815, 675) driver",
+      "GVR/actuator frame screw (896, 675)",
+      "GVR/actuator frame screw (896, 675) driver",
+      "GVR/actuator frame screw (736, 731)",
+      "GVR/actuator frame screw (736, 731) driver",
+      "GVR/actuator frame screw (815, 731)",
+      "GVR/actuator frame screw (815, 731) driver",
+      "GVR/actuator frame screw (896, 731)",
+      "GVR/actuator frame screw (896, 731) driver",
+      "GVR/ventilator casing screw (727, 655)",
+      "GVR/ventilator casing screw (727, 655) driver",
+      "GVR/ventilator casing screw (885, 655)",
+      "GVR/ventilator casing screw (885, 655) driver",
+      "GVR/ventilator casing screw (1030, 655)",
+      "GVR/ventilator casing screw (1030, 655) driver",
+      "GVR/ventilator casing screw (727, 781)",
+      "GVR/ventilator casing screw (727, 781) driver",
+      "GVR/ventilator casing screw (885, 781)",
+      "GVR/ventilator casing screw (885, 781) driver",
+      "GVR/ventilator casing screw (1030, 781)",
+      "GVR/ventilator casing screw (1030, 781) driver",
+      "GVR/ventilator actuator lead 0",
+      "GVR/ventilator actuator lead 1",
+      "GVR/rear copper service bend",
+      "GVR/circular ventilation riser",
+      "GVR/riser flange 3.7",
+      "GVR/flange stud (3.7, np.float64(0.0))",
+      "GVR/flange stud (3.7, np.float64(0.5235987755982988))",
+      "GVR/flange stud (3.7, np.float64(1.0471975511965976))",
+      "GVR/flange stud (3.7, np.float64(1.5707963267948966))",
+      "GVR/flange stud (3.7, np.float64(2.0943951023931953))",
+      "GVR/flange stud (3.7, np.float64(2.617993877991494))",
+      "GVR/flange stud (3.7, np.float64(3.141592653589793))",
+      "GVR/flange stud (3.7, np.float64(3.665191429188092))",
+      "GVR/flange stud (3.7, np.float64(4.1887902047863905))",
+      "GVR/flange stud (3.7, np.float64(4.71238898038469))",
+      "GVR/flange stud (3.7, np.float64(5.235987755982988))",
+      "GVR/flange stud (3.7, np.float64(5.759586531581287))",
+      "GVR/riser flange 3.77",
+      "GVR/flange stud (3.77, np.float64(0.0))",
+      "GVR/flange stud (3.77, np.float64(0.5235987755982988))",
+      "GVR/flange stud (3.77, np.float64(1.0471975511965976))",
+      "GVR/flange stud (3.77, np.float64(1.5707963267948966))",
+      "GVR/flange stud (3.77, np.float64(2.0943951023931953))",
+      "GVR/flange stud (3.77, np.float64(2.617993877991494))",
+      "GVR/flange stud (3.77, np.float64(3.141592653589793))",
+      "GVR/flange stud (3.77, np.float64(3.665191429188092))",
+      "GVR/flange stud (3.77, np.float64(4.1887902047863905))",
+      "GVR/flange stud (3.77, np.float64(4.71238898038469))",
+      "GVR/flange stud (3.77, np.float64(5.235987755982988))",
+      "GVR/flange stud (3.77, np.float64(5.759586531581287))",
+      "GVR/fan lower hood back",
+      "GVR/fan lower hood side -0.225",
+      "GVR/fan lower hood side 0.225",
+      "GVR/fan lower hood lower lip",
+      "GVR/fan circular guard 0.012",
+      "GVR/fan circular guard 0.019869565217391305",
+      "GVR/fan circular guard 0.02773913043478261",
+      "GVR/fan circular guard 0.035608695652173915",
+      "GVR/fan circular guard 0.043478260869565216",
+      "GVR/fan circular guard 0.051347826086956525",
+      "GVR/fan circular guard 0.05921739130434783",
+      "GVR/fan circular guard 0.06708695652173913",
+      "GVR/fan circular guard 0.07495652173913044",
+      "GVR/fan circular guard 0.08282608695652174",
+      "GVR/fan circular guard 0.09069565217391305",
+      "GVR/fan circular guard 0.09856521739130435",
+      "GVR/fan circular guard 0.10643478260869565",
+      "GVR/fan circular guard 0.11430434782608696",
+      "GVR/fan circular guard 0.12217391304347826",
+      "GVR/fan circular guard 0.13004347826086957",
+      "GVR/fan circular guard 0.1379130434782609",
+      "GVR/fan circular guard 0.14578260869565218",
+      "GVR/fan circular guard 0.1536521739130435",
+      "GVR/fan circular guard 0.1615217391304348",
+      "GVR/fan circular guard 0.16939130434782612",
+      "GVR/fan circular guard 0.17726086956521742",
+      "GVR/fan circular guard 0.1851304347826087",
+      "GVR/fan circular guard 0.193",
+      "GVR/fan guard cross brace 0.0",
+      "GVR/fan guard cross brace 0.7853981633974483",
+      "GVR/fan guard cross brace 1.5707963267948966",
+      "GVR/fan guard cross brace 2.356194490192345",
+      "GVR/fan dark interior"
+    ],
+    "rigidPanelFrames": {
+      "auxiliary": {
+        "sourceQuad": [
+          [
+            177,
+            1222
+          ],
+          [
+            303,
+            1198
+          ],
+          [
+            303,
+            1298
+          ],
+          [
+            177,
+            1339
+          ]
+        ],
+        "heightMetresInferred": 0.28,
+        "widthMetresInferred": 0.2427138555425103,
+        "centerWebRelativeCamera": [
+          2.342632147212647,
+          -0.5451628172289454,
+          -1.7908281801928905
+        ],
+        "axesWeb": [
+          [
+            0.37123487079046813,
+            0.5073401591996242,
+            -0.7776828618225324
+          ],
+          [
+            0.2165704828757682,
+            0.7671250916329924,
+            0.6038346791415918
+          ],
+          [
+            0.9029296188829674,
+            -0.39258764199904783,
+            0.17490868101236828
+          ]
+        ],
+        "projectedQuad": [
+          [
+            178.65279275261332,
+            1224.6177497127053
+          ],
+          [
+            300.904722453937,
+            1195.373719249793
+          ],
+          [
+            305.1536270412364,
+            1300.8251089245598
+          ],
+          [
+            175.27390309244515,
+            1336.202317535024
+          ]
+        ],
+        "cornerErrorsPixels": [
+          3.0958581106794534,
+          3.359693226165614,
+          3.5523724281629168,
+          3.2873146653621683
+        ],
+        "camera": [
+          9.15,
+          0,
+          3.18
+        ]
+      },
+      "intercom": {
+        "sourceQuad": [
+          [
+            214,
+            609
+          ],
+          [
+            360,
+            607
+          ],
+          [
+            365,
+            729
+          ],
+          [
+            214,
+            730
+          ]
+        ],
+        "heightMetresInferred": 0.17,
+        "widthMetresInferred": 0.18229906007447066,
+        "centerWebRelativeCamera": [
+          1.3793604302775841,
+          0.4789867297547836,
+          -0.9900599053040854
+        ],
+        "axesWeb": [
+          [
+            0.15526158872535117,
+            0.08733493819758463,
+            -0.9840053087440658
+          ],
+          [
+            0.06641931512501621,
+            0.9929076083037061,
+            0.09860505033180862
+          ],
+          [
+            0.9856380236399181,
+            -0.08066653545702078,
+            0.14835968594115284
+          ]
+        ],
+        "projectedQuad": [
+          [
+            213.26611830697357,
+            608.2252313611922
+          ],
+          [
+            360.9818482232632,
+            607.7750547238517
+          ],
+          [
+            364.01097562142616,
+            728.0167506861313
+          ],
+          [
+            214.74316636284857,
+            730.9783778640224
+          ]
+        ],
+        "cornerErrorsPixels": [
+          1.067168582295907,
+          1.2508939837132247,
+          1.3946140808971448,
+          1.2286250394968194
+        ],
+        "camera": [
+          9.15,
+          0,
+          3.18
+        ]
+      }
+    },
+    "scope": "KOHLER casing/controller/supports, auxiliary box and hoses, upper controls/headset/ventilator, rear runs and local envelope. Engine geometry/materials unchanged.",
+    "inference": "Hidden depths, supports and routes are estimates; unreadable text and capacities are not invented."
+  },
+  "generatorTriangles": 65253,
+  "transportSourceGeometrySHA256": "e81be4008801a0168365bf3505930fad5242c99d62f23fd2b23450e4438078ee",
+  "runtimeCornerPrecision": {
+    "method": "Binary16 rounded values stored in float32; unchanged attribute/shader format",
+    "values": 1201779,
+    "maximumAbsoluteError": 0.9986572265625,
+    "maximumRelativeError": 0.0009754907792838676
+  },
+  "generatorCornerContinuity": {
+    "method": "Mean of equal-sample Cycles CORNER estimates at the same position (1um key), normal (1e-5 key), material and micro-transport mode. New generator ID2 only; hard edges and retained-front samples are not mixed.",
+    "selectedCorners": 165609,
+    "physicalSampleGroups": 76898,
+    "sharedGroups": 21504,
+    "discontinuousGroupsBefore": 15836,
+    "maximumSharedCornerDisagreementBefore": 237.1933463215828,
+    "maximumSharedCornerDisagreementAfter": 0,
+    "retainedFrontTransportUnchanged": true
+  },
+  "authoringCamera": {
+    "positionSource": [
+      9.15,
+      0,
+      3.18
+    ],
+    "targetSource": [
+      8.73595515342995,
+      0.9259070246863599,
+      3.092844257252342
+    ],
+    "horizontalDegrees": 90.0,
+    "verticalDegrees": 67.38013505195957,
+    "pose": "context",
+    "fixedEstimatedStation": true
   }
 }

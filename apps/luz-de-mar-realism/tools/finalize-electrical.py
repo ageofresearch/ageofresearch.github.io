@@ -9,7 +9,10 @@ unused=[uv.name for uv in d.uv_layers if uv.name not in ['UV0','UV1']]
 for name in unused:d.uv_layers.remove(d.uv_layers[name])
 assert uvhash()==before,'Removing an unused layer changed baked UV1'
 d.uv_layers.active_index=d.uv_layers.find('UV0');d.uv_layers['UV0'].active_render=True;a['removedUnusedUVLayers']=list(set(a.get('removedUnusedUVLayers',[])+unused))
-if (W/'electrical-source.glb').exists():a.setdefault('transportSourceGeometrySHA256',hashlib.sha256((W/'electrical-source.glb').read_bytes()).hexdigest())
+if (W/'electrical-source.glb').exists():
+ digest=hashlib.sha256((W/'electrical-source.glb').read_bytes()).hexdigest()
+ if a.get('version',1)>=5:a['transportSourceGeometrySHA256']=digest
+ else:a.setdefault('transportSourceGeometrySHA256',digest)
 bpy.ops.object.select_all(action='DESELECT');hero.select_set(True);bpy.context.view_layer.objects.active=hero
 for o in S.objects:
  if o.get('appearanceDoor')and not o.data.attributes.get('_BAKE_MODE'):
@@ -22,6 +25,11 @@ S.view_settings.view_transform='Khronos PBR Neutral';S.view_settings.exposure=ma
 from mathutils import Vector
 def point(p):return Vector((p[1]*7.47/7.6,-(p[0]*35.23/36-17.615),p[2]-2.01))
 cam=S.camera;cam.data.type='PERSP';cam.data.sensor_fit='VERTICAL';cam.data.angle=math.radians(72);cam.data.clip_start=.035;cam.location=point([9.15,0,3.18]);cam.rotation_euler=(point([7.8,-.12,2.8])-cam.location).to_track_quat('-Z','Y').to_euler();S.render.resolution_x=1200;S.render.resolution_y=800;S.render.resolution_percentage=100
+if a.get('version',1)>=5:
+ evidence=json.loads((W/'evidence-frozen.json').read_text());pose=next(p for p in evidence['poses']if p['id']=='context');position=evidence['camera']['sourcePosition'];h=math.radians(pose['h']);v=math.radians(pose['v']);target=[position[0]+math.cos(v)*math.cos(h)/(35.23/36),position[1]-math.cos(v)*math.sin(h)/(7.47/7.6),position[2]-math.sin(v)]
+ S.render.pixel_aspect_x=1;S.render.pixel_aspect_y=1;cam.data.lens=cam.data.sensor_height/(2*math.tan(math.radians(pose['vfov'])/2));cam.location=point(position);cam.rotation_euler=(point(target)-cam.location).to_track_quat('-Z','Y').to_euler()
+ frame=cam.data.view_frame(scene=S);actual_h=math.degrees(2*math.atan(max(abs(p.x/p.z)for p in frame)));actual_v=math.degrees(2*math.atan(max(abs(p.y/p.z)for p in frame)));assert abs(actual_h-pose['hfov'])<1e-4 and abs(actual_v-pose['vfov'])<1e-4
+ a['authoringCamera']={'positionSource':position,'targetSource':target,'horizontalDegrees':actual_h,'verticalDegrees':actual_v,'pose':'context','fixedEstimatedStation':True}
 for image in bpy.data.images:
  if image.source=='FILE'and image.has_data and not image.packed_file:image.pack()
 S['displayComparison']='Khronos PBR Neutral, exposure multiplier 0.05, sRGB; native comparison PNGs use the corresponding fixed Neutral transform'

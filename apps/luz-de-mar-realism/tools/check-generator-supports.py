@@ -1,0 +1,10 @@
+"""Check six new supports against the exported ground and chassis surfaces."""
+import os,json,numpy as np
+from pathlib import Path
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+W=Path(os.environ['ELECTRICAL_AUTHORING_WORK']);m=json.loads((W/'audit/generator-triangles.json').read_text());a=np.fromfile(W/'audit/generator-triangles.bin',dtype='<f8').reshape(-1,10);names=m['names'];isgen=np.array([names[str(int(i))].startswith('generator | ')for i in a[:,9]]);ground=a[~isgen,:9].reshape(-1,3);t=BVHTree.FromPolygons([Vector(p)for p in ground],np.arange(len(ground)).reshape(-1,3).tolist(),all_triangles=True);items=json.loads((W/'component-inventory.json').read_text());results=[]
+for p in items:
+ if not p['id'].startswith('GVR/generator inferred foundation pad '):continue
+ lo,hi=np.array(p['boundsSource'][:3]),np.array(p['boundsSource'][3:]);center=(lo+hi)/2;hit,n,i,d=t.ray_cast(Vector((center[1]*7.47/7.6,1.61-2.01,center[0]*35.23/36-17.615)),Vector((0,-1,0)),.15);z=hit.y+2.01 if hit is not None else None;railBottom=1.5955;results.append({'id':p['id'],'boundsSource':p['boundsSource'],'groundHeightSource':z,'groundFirstHit':None if i is None else names[str(int(a[~isgen][i,9]))],'railUndersideSource':railBottom,'bottomOverlapMetres':None if z is None else z-lo[2],'topOverlapMetres':hi[2]-railBottom,'pass':bool(z is not None and lo[2]<=z+.0002 and hi[2]>=railBottom and lo[2]<railBottom)})
+report={'pass':len(results)==6 and all(p['pass']for p in results),'runtimeGeometrySHA256':m['runtimeGeometrySHA256'],'method':'Downward BVH rays on decoded non-generator production triangles at the six support centers. Each pad must span the actual ground to the chassis underside; intentional contact overlaps avoid coplanar faces.','classification':'Inferred support arrangement, not a surveyed construction detail of the real yacht.','supports':results};(W/'support-contact-proof.json').write_text(json.dumps(report,indent=2)+'\n');print('GENERATOR SUPPORT CONTACTS',report['pass'],[(p['id'],p['groundHeightSource'])for p in results]);assert report['pass']

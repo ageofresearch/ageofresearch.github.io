@@ -1,0 +1,5826 @@
+{
+  "version": "generator-vr-r01",
+  "pass": true,
+  "scope": "KOHLER installation and immediate upper/auxiliary equipment; engines, nominal inspection and electrical front retained.",
+  "browser": {
+    "url": "http://127.0.0.1:5283/",
+    "renderer": "Chromium SwiftShader; correctness/resource checks only",
+    "hardware": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "softwareRenderer": true,
+      "viewport": [
+        600,
+        400
+      ],
+      "DPR": 1
+    },
+    "checks": {
+      "httpFailureRetainsOriginal": true,
+      "hashFailureRetainsOriginal": true,
+      "atomicRetryAndBudgets": true,
+      "originalServiceDoorWalkBothDirections": true,
+      "serviceHeightAndDoorAppearance": true,
+      "sharedLightingBound": true,
+      "identicalCameraFrames": true,
+      "bothNominalCutsKeepBulkhead": true,
+      "filterRegisterAndReset": true,
+      "threeResourceCyclesStable": true,
+      "restoresOriginalAndReactivates": true,
+      "slowLoadFallbackAndExitCancellation": true,
+      "hiddenPausesAndResumes": true,
+      "contextRestoresCandidate": true,
+      "mobileTouchWalkAndOrientation": true
+    },
+    "errors": [],
+    "cycles": [
+      {
+        "memory": {
+          "geometries": 180,
+          "textures": 157
+        },
+        "pool": {
+          "textures": 81,
+          "references": 81
+        },
+        "programs": 44
+      },
+      {
+        "memory": {
+          "geometries": 180,
+          "textures": 157
+        },
+        "pool": {
+          "textures": 81,
+          "references": 81
+        },
+        "programs": 44
+      },
+      {
+        "memory": {
+          "geometries": 180,
+          "textures": 157
+        },
+        "pool": {
+          "textures": 81,
+          "references": 81
+        },
+        "programs": 44
+      }
+    ],
+    "before": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": false,
+          "loading": false,
+          "error": "No se pudo preparar el frente eléctrico y KOHLER (503)",
+          "active": true,
+          "committed": false,
+          "waitingForSafePosition": false,
+          "triangles": 178280,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 6,
+      "ratio": 0.5,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 0.5,
+        "effectiveDPR": 0.5,
+        "hardwareLimited": false,
+        "canvas": [
+          300,
+          200
+        ]
+      },
+      "canvas": [
+        300,
+        200
+      ],
+      "calls": 73,
+      "triangles": 204414,
+      "memory": {
+        "geometries": 141,
+        "textures": 54
+      },
+      "estimatedMemory": {
+        "geometryBytes": 58021166,
+        "textureBytes": 415587857,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 481997631,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 4,
+        "p50": 2562.39999999851,
+        "p95": 3510.2999999970198
+      },
+      "shadowUpdates": 11,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "after": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178280,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 10,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          600,
+          400
+        ]
+      },
+      "canvas": [
+        600,
+        400
+      ],
+      "calls": 72,
+      "triangles": 428151,
+      "memory": {
+        "geometries": 180,
+        "textures": 157
+      },
+      "estimatedMemory": {
+        "geometryBytes": 84922780,
+        "textureBytes": 584804369,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 678115757,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 2.5,
+        "p95": 2.5
+      },
+      "shadowUpdates": 12,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "additionalResidentBytes": 196118126,
+    "serviceWalk": {
+      "closedRoute": [
+        [
+          8.62,
+          0
+        ],
+        [
+          8.58,
+          0
+        ],
+        [
+          8.54,
+          0
+        ],
+        [
+          8.5,
+          0
+        ],
+        [
+          8.46,
+          0
+        ],
+        [
+          8.42,
+          0
+        ],
+        [
+          8.379999999999999,
+          0
+        ],
+        [
+          8.34,
+          0
+        ],
+        [
+          8.3,
+          0
+        ],
+        [
+          8.26,
+          0
+        ],
+        [
+          8.219999999999999,
+          0
+        ],
+        [
+          8.18,
+          0
+        ],
+        [
+          8.18,
+          0.040000000000000036
+        ],
+        [
+          8.18,
+          0.08000000000000007
+        ],
+        [
+          8.18,
+          0.1200000000000001
+        ],
+        [
+          8.18,
+          0.16000000000000014
+        ],
+        [
+          8.18,
+          0.19999999999999973
+        ],
+        [
+          8.18,
+          0.23999999999999977
+        ],
+        [
+          8.18,
+          0.2799999999999998
+        ],
+        [
+          8.18,
+          0.31999999999999984
+        ],
+        [
+          8.18,
+          0.3599999999999999
+        ],
+        [
+          8.18,
+          0.3999999999999999
+        ],
+        [
+          8.18,
+          0.43999999999999995
+        ],
+        [
+          8.18,
+          0.48
+        ],
+        [
+          8.18,
+          0.52
+        ],
+        [
+          8.18,
+          0.56
+        ],
+        [
+          8.18,
+          0.6000000000000001
+        ],
+        [
+          8.18,
+          0.6400000000000001
+        ],
+        [
+          8.18,
+          0.6800000000000002
+        ],
+        [
+          8.18,
+          0.7199999999999998
+        ],
+        [
+          8.18,
+          0.7599999999999998
+        ],
+        [
+          8.18,
+          0.7999999999999998
+        ],
+        [
+          8.18,
+          0.8399999999999999
+        ],
+        [
+          8.18,
+          0.8800000000000003
+        ],
+        [
+          8.18,
+          0.9200000000000004
+        ],
+        [
+          8.18,
+          0.9599999999999995
+        ],
+        [
+          8.18,
+          0.9999999999999996
+        ],
+        [
+          8.18,
+          1.0399999999999996
+        ],
+        [
+          8.14,
+          1.0399999999999996
+        ],
+        [
+          8.14,
+          1.0799999999999996
+        ],
+        [
+          8.1,
+          1.0799999999999996
+        ],
+        [
+          8.059999999999999,
+          1.0799999999999996
+        ],
+        [
+          8.02,
+          1.0799999999999996
+        ],
+        [
+          7.98,
+          1.0799999999999996
+        ],
+        [
+          7.9399999999999995,
+          1.0799999999999996
+        ],
+        [
+          7.9,
+          1.0799999999999996
+        ],
+        [
+          7.859999999999999,
+          1.0799999999999996
+        ],
+        [
+          7.82,
+          1.0799999999999996
+        ],
+        [
+          7.779999999999999,
+          1.0799999999999996
+        ],
+        [
+          7.779999999999999,
+          1.1199999999999997
+        ],
+        [
+          7.779999999999999,
+          1.1599999999999997
+        ],
+        [
+          7.779999999999999,
+          1.1999999999999997
+        ],
+        [
+          7.779999999999999,
+          1.2399999999999998
+        ],
+        [
+          7.779999999999999,
+          1.2799999999999998
+        ],
+        [
+          7.779999999999999,
+          1.3199999999999998
+        ],
+        [
+          7.779999999999999,
+          1.3599999999999999
+        ],
+        [
+          7.779999999999999,
+          1.4
+        ],
+        [
+          7.779999999999999,
+          1.44
+        ],
+        [
+          7.779999999999999,
+          1.48
+        ],
+        [
+          7.779999999999999,
+          1.52
+        ],
+        [
+          7.779999999999999,
+          1.56
+        ],
+        [
+          7.779999999999999,
+          1.6
+        ],
+        [
+          7.779999999999999,
+          1.6400000000000001
+        ],
+        [
+          7.74,
+          1.6400000000000001
+        ],
+        [
+          7.74,
+          1.6800000000000002
+        ],
+        [
+          7.699999999999999,
+          1.6800000000000002
+        ],
+        [
+          7.699999999999999,
+          1.7200000000000002
+        ],
+        [
+          7.699999999999999,
+          1.7600000000000002
+        ],
+        [
+          7.699999999999999,
+          1.8000000000000003
+        ],
+        [
+          7.699999999999999,
+          1.8400000000000003
+        ],
+        [
+          7.699999999999999,
+          1.8800000000000003
+        ],
+        [
+          7.699999999999999,
+          1.9200000000000004
+        ],
+        [
+          7.699999999999999,
+          1.9600000000000004
+        ],
+        [
+          7.66,
+          1.9600000000000004
+        ],
+        [
+          7.66,
+          1.9999999999999996
+        ],
+        [
+          7.62,
+          1.9999999999999996
+        ],
+        [
+          7.58,
+          1.9999999999999996
+        ],
+        [
+          7.54,
+          1.9999999999999996
+        ],
+        [
+          7.5,
+          1.9999999999999996
+        ],
+        [
+          7.46,
+          1.9999999999999996
+        ],
+        [
+          7.42,
+          1.9999999999999996
+        ],
+        [
+          7.38,
+          1.9999999999999996
+        ],
+        [
+          7.34,
+          1.9999999999999996
+        ],
+        [
+          7.3,
+          1.9999999999999996
+        ],
+        [
+          7.26,
+          1.9999999999999996
+        ],
+        [
+          7.22,
+          1.9999999999999996
+        ],
+        [
+          7.18,
+          1.9999999999999996
+        ],
+        [
+          7.18,
+          1.9600000000000004
+        ],
+        [
+          7.18,
+          1.9200000000000004
+        ],
+        [
+          7.18,
+          1.8800000000000003
+        ],
+        [
+          7.18,
+          1.8400000000000003
+        ],
+        [
+          7.18,
+          1.8000000000000003
+        ],
+        [
+          7.18,
+          1.7600000000000002
+        ],
+        [
+          7.18,
+          1.7200000000000002
+        ],
+        [
+          7.18,
+          1.6800000000000002
+        ],
+        [
+          7.18,
+          1.6400000000000001
+        ],
+        [
+          7.18,
+          1.6
+        ],
+        [
+          7.18,
+          1.56
+        ]
+      ],
+      "openRoute": [
+        [
+          7.18,
+          1.56
+        ],
+        [
+          7.14,
+          1.56
+        ],
+        [
+          7.1,
+          1.56
+        ],
+        [
+          7.06,
+          1.56
+        ],
+        [
+          7.06,
+          1.52
+        ],
+        [
+          7.06,
+          1.48
+        ],
+        [
+          7.06,
+          1.44
+        ],
+        [
+          7.06,
+          1.4
+        ],
+        [
+          7.06,
+          1.3599999999999999
+        ],
+        [
+          7.06,
+          1.3199999999999998
+        ],
+        [
+          7.06,
+          1.2799999999999998
+        ],
+        [
+          7.06,
+          1.2399999999999998
+        ],
+        [
+          7.06,
+          1.1999999999999997
+        ],
+        [
+          7.06,
+          1.1599999999999997
+        ],
+        [
+          7.02,
+          1.1599999999999997
+        ],
+        [
+          6.9799999999999995,
+          1.1599999999999997
+        ],
+        [
+          6.9399999999999995,
+          1.1599999999999997
+        ],
+        [
+          6.8999999999999995,
+          1.1599999999999997
+        ],
+        [
+          6.859999999999999,
+          1.1599999999999997
+        ],
+        [
+          6.82,
+          1.1599999999999997
+        ],
+        [
+          6.779999999999999,
+          1.1599999999999997
+        ],
+        [
+          6.74,
+          1.1599999999999997
+        ],
+        [
+          6.699999999999999,
+          1.1599999999999997
+        ],
+        [
+          6.66,
+          1.1599999999999997
+        ],
+        [
+          6.62,
+          1.1599999999999997
+        ],
+        [
+          6.58,
+          1.1599999999999997
+        ],
+        [
+          6.54,
+          1.1599999999999997
+        ],
+        [
+          6.5,
+          1.1599999999999997
+        ],
+        [
+          6.46,
+          1.1599999999999997
+        ],
+        [
+          6.42,
+          1.1599999999999997
+        ],
+        [
+          6.38,
+          1.1599999999999997
+        ]
+      ],
+      "roundTrip": true,
+      "originalDoorOperated": true,
+      "appearanceDoorRotated": true,
+      "heightSamples": [
+        {
+          "position": [
+            8.62,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.58,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.54,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.5,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.46,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.42,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.379999999999999,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.34,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.3,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.26,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.219999999999999,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.040000000000000036
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.08000000000000007
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.1200000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.16000000000000014
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.19999999999999973
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.23999999999999977
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.2799999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.31999999999999984
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.3599999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.3999999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.43999999999999995
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.48
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.52
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.6000000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.7199999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.7599999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.7999999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.8399999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.8800000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.9200000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.9599999999999995
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            1.0399999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.14,
+            1.0399999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.14,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.1,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.059999999999999,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.02,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.98,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.9399999999999995,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.9,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.859999999999999,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.82,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.1199999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.1999999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.2399999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.2799999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.3199999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.3599999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.4
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.44
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.48
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.52
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.6
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.74,
+            1.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.74,
+            1.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.7200000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.7600000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.8000000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.8400000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.8800000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.9200000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.9600000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.66,
+            1.9600000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.66,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.62,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.58,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.54,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.5,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.46,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.42,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.38,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.34,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.3,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.26,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.22,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.9600000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.9200000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.8800000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.8400000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.8000000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.7600000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.7200000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.6
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.14,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.1,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.52
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.48
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.44
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.4
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.3599999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.3199999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.2799999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.2399999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.1999999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.02,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.9799999999999995,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.9399999999999995,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.8999999999999995,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.859999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.82,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.779999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.74,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.699999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.66,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.62,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.58,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.54,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.5,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.46,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.42,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.38,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.42,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.46,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.5,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.54,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.58,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.62,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.66,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.699999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.74,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.779999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.82,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.859999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.8999999999999995,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.9399999999999995,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            6.9799999999999995,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.02,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.1999999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.2399999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.2799999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.3199999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.3599999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.4
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.44
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.48
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.52
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.06,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.1,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.14,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.6
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.7200000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.7600000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.8000000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.8400000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.8800000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.9200000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.9600000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.18,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.22,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.26,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.3,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.34,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.38,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.42,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.46,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.5,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.54,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.58,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.62,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.66,
+            1.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.66,
+            1.9600000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.9600000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.9200000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.8800000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.8400000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.8000000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.7600000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.7200000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.699999999999999,
+            1.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.74,
+            1.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.74,
+            1.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.6
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.52
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.48
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.44
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.4
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.3599999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.3199999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.2799999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.2399999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.1999999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.1599999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.1199999999999997
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.779999999999999,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.82,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.859999999999999,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.9,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.9399999999999995,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            7.98,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.02,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.059999999999999,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.1,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.14,
+            1.0799999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.14,
+            1.0399999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            1.0399999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.9999999999999996
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.9599999999999995
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.9200000000000004
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.8800000000000003
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.8399999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.7999999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.7599999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.7199999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.6800000000000002
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.6400000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.6000000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.56
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.52
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.48
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.43999999999999995
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.3999999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.3599999999999999
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.31999999999999984
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.2799999999999998
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.23999999999999977
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.19999999999999973
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.16000000000000014
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.1200000000000001
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.08000000000000007
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0.040000000000000036
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.18,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.219999999999999,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.26,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.3,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.34,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.379999999999999,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.42,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.46,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.5,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.54,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.58,
+            0
+          ],
+          "eyeHeight": 1.6
+        },
+        {
+          "position": [
+            8.62,
+            0
+          ],
+          "eyeHeight": 1.6
+        }
+      ],
+      "minimumEyeHeight": 1.6,
+      "restoredEyeHeight": 1.6
+    },
+    "walkingSequence": {
+      "frames": [
+        {
+          "time": 41019.59999999404,
+          "calls": 72,
+          "triangles": 428753,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 41031.79999999702,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 43031.39999999851,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 44980.19999999553,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 46896.39999999851,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 48807.69999999553,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 50748.69999999553,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 52639.29999999702,
+          "calls": 71,
+          "triangles": 420157,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 54573.5,
+          "calls": 70,
+          "triangles": 395865,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 56445.59999999404,
+          "calls": 70,
+          "triangles": 395865,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 58353.19999999553,
+          "calls": 68,
+          "triangles": 378168,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 60236.29999999702,
+          "calls": 68,
+          "triangles": 378168,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 62106.69999999553,
+          "calls": 67,
+          "triangles": 378154,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 63982.59999999404,
+          "calls": 67,
+          "triangles": 378154,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 65853.09999999404,
+          "calls": 66,
+          "triangles": 353846,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 67986.5,
+          "calls": 66,
+          "triangles": 353846,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 70114.59999999404,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 72199.29999999702,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 74487.79999999702,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 76722.39999999851,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 78980.09999999404,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 81223.39999999851,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 83478.09999999404,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 85772.19999999553,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 88022.5,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 90301.79999999702,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 92283.19999999553,
+          "calls": 63,
+          "triangles": 339790,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 94074.29999999702,
+          "calls": 61,
+          "triangles": 306179,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 95884.5,
+          "calls": 61,
+          "triangles": 306179,
+          "canvas": [
+            600,
+            400
+          ]
+        },
+        {
+          "time": 97677.39999999851,
+          "calls": 61,
+          "triangles": 306179,
+          "canvas": [
+            600,
+            400
+          ]
+        }
+      ],
+      "frameMs": {
+        "samples": 29,
+        "p50": 1933.2000000000044,
+        "p95": 2283.300000000003
+      },
+      "submissionMs": {
+        "samples": 33,
+        "p50": 2.7000000029802322,
+        "p95": 10.399999998509884
+      }
+    },
+    "downloads": [
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical.glb?v=generator-vr-r01",
+        "encodedBytes": 19,
+        "transferBytes": 319,
+        "durationMs": 20.5
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.79999999702
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.79999999702
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-0.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.80000000447
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-1.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.80000000447
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-2.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.70000000298
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/port-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.70000000298
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/starboard-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 0,
+        "transferBytes": 0,
+        "durationMs": 4998.5
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical.glb?v=generator-vr-r01",
+        "encodedBytes": 8985140,
+        "transferBytes": 8985440,
+        "durationMs": 231.09999999403954
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 5233383,
+        "transferBytes": 5233683,
+        "durationMs": 136.5
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-0.exr?v=generator-vr-r01",
+        "encodedBytes": 759979,
+        "transferBytes": 760279,
+        "durationMs": 54.600000001490116
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-1.exr?v=generator-vr-r01",
+        "encodedBytes": 559306,
+        "transferBytes": 559606,
+        "durationMs": 55
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 7513105,
+        "transferBytes": 7513405,
+        "durationMs": 173.69999999552965
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-2.exr?v=generator-vr-r01",
+        "encodedBytes": 634338,
+        "transferBytes": 634638,
+        "durationMs": 56
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/port-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 6713581,
+        "transferBytes": 6713881,
+        "durationMs": 149
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/starboard-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 6479129,
+        "transferBytes": 6479429,
+        "durationMs": 169.10000000149012
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical.glb?v=generator-vr-r01",
+        "encodedBytes": 8985140,
+        "transferBytes": 8985440,
+        "durationMs": 238
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 5233383,
+        "transferBytes": 5233683,
+        "durationMs": 125.70000000298023
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 7513105,
+        "transferBytes": 7513405,
+        "durationMs": 138.60000000149012
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-0.exr?v=generator-vr-r01",
+        "encodedBytes": 759979,
+        "transferBytes": 760279,
+        "durationMs": 36.19999999552965
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-1.exr?v=generator-vr-r01",
+        "encodedBytes": 559306,
+        "transferBytes": 559606,
+        "durationMs": 34.5
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-2.exr?v=generator-vr-r01",
+        "encodedBytes": 634338,
+        "transferBytes": 634638,
+        "durationMs": 52
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/port-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 6713581,
+        "transferBytes": 6713881,
+        "durationMs": 140.19999999552965
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/starboard-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 6479129,
+        "transferBytes": 6479429,
+        "durationMs": 332.1000000014901
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical.glb?v=generator-vr-r01",
+        "encodedBytes": 8985140,
+        "transferBytes": 8985440,
+        "durationMs": 11608.5
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/electrical-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 5233383,
+        "transferBytes": 5233683,
+        "durationMs": 11468.69999999553
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 7513105,
+        "transferBytes": 7513405,
+        "durationMs": 11602.60000000149
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-0.exr?v=generator-vr-r01",
+        "encodedBytes": 759979,
+        "transferBytes": 760279,
+        "durationMs": 6414.20000000298
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-1.exr?v=generator-vr-r01",
+        "encodedBytes": 559306,
+        "transferBytes": 559606,
+        "durationMs": 6424.19999999553
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-2.exr?v=generator-vr-r01",
+        "encodedBytes": 634338,
+        "transferBytes": 634638,
+        "durationMs": 6430.29999999702
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/port-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 6713581,
+        "transferBytes": 6713881,
+        "durationMs": 11625.70000000298
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/starboard-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 6479129,
+        "transferBytes": 6479429,
+        "durationMs": 11618.70000000298
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/bulkhead-irradiance.exr?v=generator-vr-r01",
+        "encodedBytes": 7513105,
+        "transferBytes": 7513405,
+        "durationMs": 11825.5
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-0.exr?v=generator-vr-r01",
+        "encodedBytes": 759979,
+        "transferBytes": 760279,
+        "durationMs": 9100.10000000149
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-1.exr?v=generator-vr-r01",
+        "encodedBytes": 559306,
+        "transferBytes": 559606,
+        "durationMs": 9105.20000000298
+      },
+      {
+        "url": "http://127.0.0.1:5283/assets/machinery/electrical-vr-r01/room-probe-2.exr?v=generator-vr-r01",
+        "encodedBytes": 634338,
+        "transferBytes": 634638,
+        "durationMs": 9113.39999999851
+      }
+    ],
+    "pass": true
+  },
+  "resources": {
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "additionalResidentBytes": 7059812,
+    "maximumAdditionalBytes": 67108864,
+    "peakEstimatedBytes": 678115757,
+    "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches.",
+    "implicitBulkheadDependencyVerified": true,
+    "hybridMaterialsCompiled": 34,
+    "pass": true
+  },
+  "physicalFront": {
+    "pass": true,
+    "unchangedTriangles": 112983,
+    "maxPositionDifferenceMetres": 0,
+    "maxNormalDifference": 0.00012026043106250217,
+    "normalReencodingTolerance": 0.0002,
+    "maximumNormalAngleDegrees": 0.006890415158914214,
+    "maxPhysicalUVDifference": 0,
+    "unchangedMaterialTextures": [
+      "EVR | paint",
+      "EVR | dark",
+      "EVR | edge",
+      "EVR | metal",
+      "EVR | screen",
+      "EVR | green",
+      "EVR | cream",
+      "EVR | blue-lit",
+      "EVR | red",
+      "EVR | blue",
+      "EVR | screen-pale",
+      "EVR | amber",
+      "EVR | green-lit",
+      "EVR | glass",
+      "EVR | rubber",
+      "EVR | copper",
+      "EVR | checker",
+      "EVR | grating",
+      "EVR | brass",
+      "EVR | warning-yellow"
+    ],
+    "scope": "Electrical-front surfaces excluding the36 intentionally replaced generator/auxiliary proxies. UV1 and irradiance are allowed to change."
+  },
+  "navigation": {
+    "radius": 0.14,
+    "step": 0.04,
+    "states": {
+      "closed": {
+        "reachableCells": 6357,
+        "path": [
+          [
+            8.62,
+            0
+          ],
+          [
+            8.58,
+            0
+          ],
+          [
+            8.54,
+            0
+          ],
+          [
+            8.5,
+            0
+          ],
+          [
+            8.46,
+            0
+          ],
+          [
+            8.42,
+            0
+          ],
+          [
+            8.379999999999999,
+            0
+          ],
+          [
+            8.34,
+            0
+          ],
+          [
+            8.3,
+            0
+          ],
+          [
+            8.26,
+            0
+          ],
+          [
+            8.219999999999999,
+            0
+          ],
+          [
+            8.18,
+            0
+          ],
+          [
+            8.18,
+            0.040000000000000036
+          ],
+          [
+            8.18,
+            0.08000000000000007
+          ],
+          [
+            8.18,
+            0.1200000000000001
+          ],
+          [
+            8.18,
+            0.16000000000000014
+          ],
+          [
+            8.18,
+            0.19999999999999973
+          ],
+          [
+            8.18,
+            0.23999999999999977
+          ],
+          [
+            8.18,
+            0.2799999999999998
+          ],
+          [
+            8.18,
+            0.31999999999999984
+          ],
+          [
+            8.18,
+            0.3599999999999999
+          ],
+          [
+            8.18,
+            0.3999999999999999
+          ],
+          [
+            8.18,
+            0.43999999999999995
+          ],
+          [
+            8.18,
+            0.48
+          ],
+          [
+            8.18,
+            0.52
+          ],
+          [
+            8.18,
+            0.56
+          ],
+          [
+            8.18,
+            0.6000000000000001
+          ],
+          [
+            8.18,
+            0.6400000000000001
+          ],
+          [
+            8.18,
+            0.6800000000000002
+          ],
+          [
+            8.18,
+            0.7199999999999998
+          ],
+          [
+            8.18,
+            0.7599999999999998
+          ],
+          [
+            8.18,
+            0.7999999999999998
+          ],
+          [
+            8.18,
+            0.8399999999999999
+          ],
+          [
+            8.18,
+            0.8800000000000003
+          ],
+          [
+            8.18,
+            0.9200000000000004
+          ],
+          [
+            8.18,
+            0.9599999999999995
+          ],
+          [
+            8.18,
+            0.9999999999999996
+          ],
+          [
+            8.18,
+            1.0399999999999996
+          ],
+          [
+            8.14,
+            1.0399999999999996
+          ],
+          [
+            8.14,
+            1.0799999999999996
+          ],
+          [
+            8.1,
+            1.0799999999999996
+          ],
+          [
+            8.059999999999999,
+            1.0799999999999996
+          ],
+          [
+            8.02,
+            1.0799999999999996
+          ],
+          [
+            7.98,
+            1.0799999999999996
+          ],
+          [
+            7.9399999999999995,
+            1.0799999999999996
+          ],
+          [
+            7.9,
+            1.0799999999999996
+          ],
+          [
+            7.859999999999999,
+            1.0799999999999996
+          ],
+          [
+            7.82,
+            1.0799999999999996
+          ],
+          [
+            7.779999999999999,
+            1.0799999999999996
+          ],
+          [
+            7.779999999999999,
+            1.1199999999999997
+          ],
+          [
+            7.779999999999999,
+            1.1599999999999997
+          ],
+          [
+            7.779999999999999,
+            1.1999999999999997
+          ],
+          [
+            7.779999999999999,
+            1.2399999999999998
+          ],
+          [
+            7.779999999999999,
+            1.2799999999999998
+          ],
+          [
+            7.779999999999999,
+            1.3199999999999998
+          ],
+          [
+            7.779999999999999,
+            1.3599999999999999
+          ],
+          [
+            7.779999999999999,
+            1.4
+          ],
+          [
+            7.779999999999999,
+            1.44
+          ],
+          [
+            7.779999999999999,
+            1.48
+          ],
+          [
+            7.779999999999999,
+            1.52
+          ],
+          [
+            7.779999999999999,
+            1.56
+          ],
+          [
+            7.779999999999999,
+            1.6
+          ],
+          [
+            7.779999999999999,
+            1.6400000000000001
+          ],
+          [
+            7.74,
+            1.6400000000000001
+          ],
+          [
+            7.74,
+            1.6800000000000002
+          ],
+          [
+            7.699999999999999,
+            1.6800000000000002
+          ],
+          [
+            7.699999999999999,
+            1.7200000000000002
+          ],
+          [
+            7.699999999999999,
+            1.7600000000000002
+          ],
+          [
+            7.699999999999999,
+            1.8000000000000003
+          ],
+          [
+            7.699999999999999,
+            1.8400000000000003
+          ],
+          [
+            7.699999999999999,
+            1.8800000000000003
+          ],
+          [
+            7.699999999999999,
+            1.9200000000000004
+          ],
+          [
+            7.699999999999999,
+            1.9600000000000004
+          ],
+          [
+            7.66,
+            1.9600000000000004
+          ],
+          [
+            7.66,
+            1.9999999999999996
+          ],
+          [
+            7.62,
+            1.9999999999999996
+          ],
+          [
+            7.58,
+            1.9999999999999996
+          ],
+          [
+            7.54,
+            1.9999999999999996
+          ],
+          [
+            7.5,
+            1.9999999999999996
+          ],
+          [
+            7.46,
+            1.9999999999999996
+          ],
+          [
+            7.42,
+            1.9999999999999996
+          ],
+          [
+            7.38,
+            1.9999999999999996
+          ],
+          [
+            7.34,
+            1.9999999999999996
+          ],
+          [
+            7.3,
+            1.9999999999999996
+          ],
+          [
+            7.26,
+            1.9999999999999996
+          ],
+          [
+            7.22,
+            1.9999999999999996
+          ],
+          [
+            7.18,
+            1.9999999999999996
+          ],
+          [
+            7.18,
+            1.9600000000000004
+          ],
+          [
+            7.18,
+            1.9200000000000004
+          ],
+          [
+            7.18,
+            1.8800000000000003
+          ],
+          [
+            7.18,
+            1.8400000000000003
+          ],
+          [
+            7.18,
+            1.8000000000000003
+          ],
+          [
+            7.18,
+            1.7600000000000002
+          ],
+          [
+            7.18,
+            1.7200000000000002
+          ],
+          [
+            7.18,
+            1.6800000000000002
+          ],
+          [
+            7.18,
+            1.6400000000000001
+          ],
+          [
+            7.18,
+            1.6
+          ],
+          [
+            7.18,
+            1.56
+          ]
+        ],
+        "roundTripViaActualMove": true
+      },
+      "open": {
+        "reachableCells": 6421,
+        "path": [
+          [
+            8.62,
+            0
+          ],
+          [
+            8.58,
+            0
+          ],
+          [
+            8.54,
+            0
+          ],
+          [
+            8.5,
+            0
+          ],
+          [
+            8.46,
+            0
+          ],
+          [
+            8.42,
+            0
+          ],
+          [
+            8.379999999999999,
+            0
+          ],
+          [
+            8.34,
+            0
+          ],
+          [
+            8.3,
+            0
+          ],
+          [
+            8.26,
+            0
+          ],
+          [
+            8.219999999999999,
+            0
+          ],
+          [
+            8.18,
+            0
+          ],
+          [
+            8.18,
+            0.040000000000000036
+          ],
+          [
+            8.18,
+            0.08000000000000007
+          ],
+          [
+            8.18,
+            0.1200000000000001
+          ],
+          [
+            8.18,
+            0.16000000000000014
+          ],
+          [
+            8.18,
+            0.19999999999999973
+          ],
+          [
+            8.18,
+            0.23999999999999977
+          ],
+          [
+            8.18,
+            0.2799999999999998
+          ],
+          [
+            8.18,
+            0.31999999999999984
+          ],
+          [
+            8.18,
+            0.3599999999999999
+          ],
+          [
+            8.18,
+            0.3999999999999999
+          ],
+          [
+            8.18,
+            0.43999999999999995
+          ],
+          [
+            8.18,
+            0.48
+          ],
+          [
+            8.18,
+            0.52
+          ],
+          [
+            8.18,
+            0.56
+          ],
+          [
+            8.18,
+            0.6000000000000001
+          ],
+          [
+            8.18,
+            0.6400000000000001
+          ],
+          [
+            8.18,
+            0.6800000000000002
+          ],
+          [
+            8.18,
+            0.7199999999999998
+          ],
+          [
+            8.18,
+            0.7599999999999998
+          ],
+          [
+            8.18,
+            0.7999999999999998
+          ],
+          [
+            8.18,
+            0.8399999999999999
+          ],
+          [
+            8.18,
+            0.8800000000000003
+          ],
+          [
+            8.18,
+            0.9200000000000004
+          ],
+          [
+            8.18,
+            0.9599999999999995
+          ],
+          [
+            8.18,
+            0.9999999999999996
+          ],
+          [
+            8.18,
+            1.0399999999999996
+          ],
+          [
+            8.14,
+            1.0399999999999996
+          ],
+          [
+            8.14,
+            1.0799999999999996
+          ],
+          [
+            8.1,
+            1.0799999999999996
+          ],
+          [
+            8.059999999999999,
+            1.0799999999999996
+          ],
+          [
+            8.02,
+            1.0799999999999996
+          ],
+          [
+            7.98,
+            1.0799999999999996
+          ],
+          [
+            7.9399999999999995,
+            1.0799999999999996
+          ],
+          [
+            7.9,
+            1.0799999999999996
+          ],
+          [
+            7.859999999999999,
+            1.0799999999999996
+          ],
+          [
+            7.82,
+            1.0799999999999996
+          ],
+          [
+            7.779999999999999,
+            1.0799999999999996
+          ],
+          [
+            7.779999999999999,
+            1.1199999999999997
+          ],
+          [
+            7.779999999999999,
+            1.1599999999999997
+          ],
+          [
+            7.779999999999999,
+            1.1999999999999997
+          ],
+          [
+            7.779999999999999,
+            1.2399999999999998
+          ],
+          [
+            7.779999999999999,
+            1.2799999999999998
+          ],
+          [
+            7.779999999999999,
+            1.3199999999999998
+          ],
+          [
+            7.779999999999999,
+            1.3599999999999999
+          ],
+          [
+            7.779999999999999,
+            1.4
+          ],
+          [
+            7.779999999999999,
+            1.44
+          ],
+          [
+            7.779999999999999,
+            1.48
+          ],
+          [
+            7.779999999999999,
+            1.52
+          ],
+          [
+            7.779999999999999,
+            1.56
+          ],
+          [
+            7.779999999999999,
+            1.6
+          ],
+          [
+            7.779999999999999,
+            1.6400000000000001
+          ],
+          [
+            7.74,
+            1.6400000000000001
+          ],
+          [
+            7.74,
+            1.6800000000000002
+          ],
+          [
+            7.699999999999999,
+            1.6800000000000002
+          ],
+          [
+            7.699999999999999,
+            1.7200000000000002
+          ],
+          [
+            7.699999999999999,
+            1.7600000000000002
+          ],
+          [
+            7.699999999999999,
+            1.8000000000000003
+          ],
+          [
+            7.699999999999999,
+            1.8400000000000003
+          ],
+          [
+            7.699999999999999,
+            1.8800000000000003
+          ],
+          [
+            7.699999999999999,
+            1.9200000000000004
+          ],
+          [
+            7.699999999999999,
+            1.9600000000000004
+          ],
+          [
+            7.66,
+            1.9600000000000004
+          ],
+          [
+            7.66,
+            1.9999999999999996
+          ],
+          [
+            7.62,
+            1.9999999999999996
+          ],
+          [
+            7.58,
+            1.9999999999999996
+          ],
+          [
+            7.54,
+            1.9999999999999996
+          ],
+          [
+            7.5,
+            1.9999999999999996
+          ],
+          [
+            7.46,
+            1.9999999999999996
+          ],
+          [
+            7.42,
+            1.9999999999999996
+          ],
+          [
+            7.38,
+            1.9999999999999996
+          ],
+          [
+            7.34,
+            1.9999999999999996
+          ],
+          [
+            7.3,
+            1.9999999999999996
+          ],
+          [
+            7.26,
+            1.9999999999999996
+          ],
+          [
+            7.22,
+            1.9999999999999996
+          ],
+          [
+            7.18,
+            1.9999999999999996
+          ],
+          [
+            7.14,
+            1.9999999999999996
+          ],
+          [
+            7.1,
+            1.9999999999999996
+          ],
+          [
+            7.06,
+            1.9999999999999996
+          ],
+          [
+            7.02,
+            1.9999999999999996
+          ],
+          [
+            7.02,
+            1.9600000000000004
+          ],
+          [
+            7.02,
+            1.9200000000000004
+          ],
+          [
+            7.02,
+            1.8800000000000003
+          ],
+          [
+            7.02,
+            1.8400000000000003
+          ],
+          [
+            6.9799999999999995,
+            1.8400000000000003
+          ],
+          [
+            6.9799999999999995,
+            1.8000000000000003
+          ],
+          [
+            6.9399999999999995,
+            1.8000000000000003
+          ],
+          [
+            6.8999999999999995,
+            1.8000000000000003
+          ],
+          [
+            6.859999999999999,
+            1.8000000000000003
+          ],
+          [
+            6.82,
+            1.8000000000000003
+          ],
+          [
+            6.779999999999999,
+            1.8000000000000003
+          ],
+          [
+            6.74,
+            1.8000000000000003
+          ],
+          [
+            6.699999999999999,
+            1.8000000000000003
+          ],
+          [
+            6.66,
+            1.8000000000000003
+          ],
+          [
+            6.62,
+            1.8000000000000003
+          ],
+          [
+            6.58,
+            1.8000000000000003
+          ],
+          [
+            6.54,
+            1.8000000000000003
+          ],
+          [
+            6.5,
+            1.8000000000000003
+          ],
+          [
+            6.46,
+            1.8000000000000003
+          ],
+          [
+            6.42,
+            1.8000000000000003
+          ],
+          [
+            6.38,
+            1.8000000000000003
+          ],
+          [
+            6.38,
+            1.7600000000000002
+          ],
+          [
+            6.38,
+            1.7200000000000002
+          ],
+          [
+            6.38,
+            1.6800000000000002
+          ],
+          [
+            6.38,
+            1.6400000000000001
+          ],
+          [
+            6.38,
+            1.6
+          ],
+          [
+            6.38,
+            1.56
+          ],
+          [
+            6.38,
+            1.52
+          ],
+          [
+            6.38,
+            1.48
+          ],
+          [
+            6.38,
+            1.44
+          ],
+          [
+            6.38,
+            1.4
+          ]
+        ],
+        "roundTripViaActualMove": true
+      }
+    },
+    "registerBlocked": true,
+    "pass": true,
+    "local": {
+      "pass": true,
+      "scopeSource": [
+        6.1,
+        0.9,
+        10.05,
+        3.7
+      ],
+      "radius": 0.14,
+      "states": {
+        "closed": {
+          "changedCellsFromR04": 165,
+          "reopenedCells": 28,
+          "newlyBlockedCells": 137,
+          "unchangedOutsideScope": true,
+          "safeCells": 7675
+        },
+        "open": {
+          "changedCellsFromR04": 165,
+          "reopenedCells": 28,
+          "newlyBlockedCells": 137,
+          "unchangedOutsideScope": true,
+          "safeCells": 7741
+        }
+      },
+      "sourceFloorAndRetainedTriangleChecksReused": true,
+      "standingHeightPreserved": true
+    }
+  },
+  "projection": {
+    "pass": true,
+    "projection": "Native L cube,2048²; one estimated fixed station",
+    "cameraSource": [
+      9.15,
+      0,
+      3.18
+    ],
+    "landmarkClass": "fit controls; not held out",
+    "points": 16,
+    "maximumErrorPixels": 3.0411963863877514,
+    "results": [
+      {
+        "component": "GVR/red emergency stop",
+        "face": "l",
+        "referenceUV": [
+          432,
+          1136
+        ],
+        "projectedUV": [
+          429.0118197833523,
+          1136.5653799195347
+        ],
+        "errorPixels": 3.0411963863877514,
+        "pass": true
+      },
+      {
+        "component": "GVR/auxiliary green indicator 0 lens",
+        "face": "l",
+        "referenceUV": [
+          214.5,
+          1251.8
+        ],
+        "projectedUV": [
+          214.49989540369177,
+          1251.8000021654643
+        ],
+        "errorPixels": 0.00010461872170870995,
+        "pass": true
+      },
+      {
+        "component": "GVR/auxiliary green indicator 1 lens",
+        "face": "l",
+        "referenceUV": [
+          248.9,
+          1241
+        ],
+        "projectedUV": [
+          248.90011326960382,
+          1241.0000141181492
+        ],
+        "errorPixels": 0.0001141460699561574,
+        "pass": true
+      },
+      {
+        "component": "GVR/auxiliary green indicator 2 lens",
+        "face": "l",
+        "referenceUV": [
+          280.4,
+          1231.8
+        ],
+        "projectedUV": [
+          280.39993969700095,
+          1231.8000383996996
+        ],
+        "errorPixels": 0.00007149117864560258,
+        "pass": true
+      },
+      {
+        "component": "GVR/intercom blue pilot lens",
+        "face": "l",
+        "referenceUV": [
+          241,
+          638
+        ],
+        "projectedUV": [
+          241.00021621963072,
+          637.9999452686724
+        ],
+        "errorPixels": 0.0002230391152467737,
+        "pass": true
+      },
+      {
+        "component": "GVR/intercom green selector lens",
+        "face": "l",
+        "referenceUV": [
+          237,
+          701
+        ],
+        "projectedUV": [
+          236.99984521828435,
+          701.0000261154878
+        ],
+        "errorPixels": 0.00015696941804929412,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller frame screw (413, 1099)",
+        "face": "l",
+        "referenceUV": [
+          413,
+          1099
+        ],
+        "projectedUV": [
+          412.4541179765124,
+          1099.0669834983228
+        ],
+        "errorPixels": 0.5499763382314421,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller frame screw (413, 1180)",
+        "face": "l",
+        "referenceUV": [
+          413,
+          1180
+        ],
+        "projectedUV": [
+          412.4541179765124,
+          1180.1394116825963
+        ],
+        "errorPixels": 0.5634028761119821,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller frame screw (542, 1099)",
+        "face": "l",
+        "referenceUV": [
+          542,
+          1099
+        ],
+        "projectedUV": [
+          541.5693566799596,
+          1099.0669834983228
+        ],
+        "errorPixels": 0.4358215898082491,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller frame screw (542, 1180)",
+        "face": "l",
+        "referenceUV": [
+          542,
+          1180
+        ],
+        "projectedUV": [
+          541.5693566799596,
+          1180.1394116825963
+        ],
+        "errorPixels": 0.4526469776103422,
+        "pass": true
+      },
+      {
+        "component": "GVR/latch moving tongue 0",
+        "face": "l",
+        "referenceUV": [
+          408,
+          1226
+        ],
+        "projectedUV": [
+          407.99999559485866,
+          1225.9999811015127
+        ],
+        "errorPixels": 0.000019405104774043697,
+        "pass": true
+      },
+      {
+        "component": "GVR/latch moving tongue 1",
+        "face": "l",
+        "referenceUV": [
+          550,
+          1226
+        ],
+        "projectedUV": [
+          549.9998218855878,
+          1225.9999811015127
+        ],
+        "errorPixels": 0.00017911420000095828,
+        "pass": true
+      },
+      {
+        "component": "GVR/latch moving tongue 2",
+        "face": "l",
+        "referenceUV": [
+          731,
+          1108
+        ],
+        "projectedUV": [
+          730.9999830904948,
+          1107.999968259193
+        ],
+        "errorPixels": 0.00003596401241885945,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller colored key 0",
+        "face": "l",
+        "referenceUV": [
+          461,
+          1159.5
+        ],
+        "projectedUV": [
+          461.00002112549805,
+          1159.5000049706787
+        ],
+        "errorPixels": 0.000021702403424437285,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller colored key 1",
+        "face": "l",
+        "referenceUV": [
+          476,
+          1159.5
+        ],
+        "projectedUV": [
+          476.000086923921,
+          1159.5000049706787
+        ],
+        "errorPixels": 0.00008706592725668507,
+        "pass": true
+      },
+      {
+        "component": "GVR/controller colored key 2",
+        "face": "l",
+        "referenceUV": [
+          491,
+          1159.5
+        ],
+        "projectedUV": [
+          491.00015272234396,
+          1159.5000049706787
+        ],
+        "errorPixels": 0.00015280321328317993,
+        "pass": true
+      }
+    ],
+    "limitations": [
+      "A center match does not validate every edge or hidden depth.",
+      "No95% clear-edge or per-cell visual acceptance is claimed."
+    ]
+  },
+  "geometry": {
+    "pass": true,
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "cameraSource": [
+      9.15,
+      0,
+      3.18
+    ],
+    "projection": "Native2048² cube L; preserved electrical masks in cube B",
+    "method": "Nearest intersection against all opaque decoded production GLB triangles, including both detailed engines. Controls must be the actual first visible surface, not just exist behind another mesh.",
+    "checks": [
+      {
+        "name": "red stop",
+        "nativeUV": [
+          432,
+          1136
+        ],
+        "firstHit": "generator | EVR | red",
+        "distanceMetres": 3.217963933944702,
+        "expectedMaterial": "EVR | red",
+        "pass": true
+      },
+      {
+        "name": "LCD",
+        "nativeUV": [
+          475,
+          1135
+        ],
+        "firstHit": "generator | GVR | lcd",
+        "distanceMetres": 3.189512014389038,
+        "expectedMaterial": "GVR | lcd",
+        "pass": true
+      },
+      {
+        "name": "pink key",
+        "nativeUV": [
+          461,
+          1159.5
+        ],
+        "firstHit": "generator | GVR | key-pink",
+        "distanceMetres": 3.2136030197143555,
+        "expectedMaterial": "GVR | key-pink",
+        "pass": true
+      },
+      {
+        "name": "blue key",
+        "nativeUV": [
+          476,
+          1159.5
+        ],
+        "firstHit": "generator | GVR | key-blue",
+        "distanceMetres": 3.194195032119751,
+        "expectedMaterial": "GVR | key-blue",
+        "pass": true
+      },
+      {
+        "name": "violet key",
+        "nativeUV": [
+          491,
+          1159.5
+        ],
+        "firstHit": "generator | GVR | key-violet",
+        "distanceMetres": 3.1751983165740967,
+        "expectedMaterial": "GVR | key-violet",
+        "pass": true
+      },
+      {
+        "name": "lower left latch",
+        "nativeUV": [
+          408,
+          1226
+        ],
+        "firstHit": "generator | GVR | olive",
+        "distanceMetres": 3.339801073074341,
+        "expectedMaterial": "GVR | olive",
+        "pass": true
+      },
+      {
+        "name": "lower right latch",
+        "nativeUV": [
+          550,
+          1226
+        ],
+        "firstHit": "generator | GVR | olive",
+        "distanceMetres": 3.158936023712158,
+        "expectedMaterial": "GVR | olive",
+        "pass": true
+      },
+      {
+        "name": "large door latch",
+        "nativeUV": [
+          731,
+          1108
+        ],
+        "firstHit": "generator | GVR | olive",
+        "distanceMetres": 2.9442057609558105,
+        "expectedMaterial": "GVR | olive",
+        "pass": true
+      },
+      {
+        "name": "auxiliary left pilot",
+        "nativeUV": [
+          214.5,
+          1251.8
+        ],
+        "firstHit": "generator | GVR | pilot-green",
+        "distanceMetres": 3.0089354515075684,
+        "expectedMaterial": "GVR | pilot-green",
+        "pass": true
+      },
+      {
+        "name": "auxiliary center pilot",
+        "nativeUV": [
+          248.9,
+          1241
+        ],
+        "firstHit": "generator | GVR | pilot-green",
+        "distanceMetres": 2.9926068782806396,
+        "expectedMaterial": "GVR | pilot-green",
+        "pass": true
+      },
+      {
+        "name": "auxiliary right pilot",
+        "nativeUV": [
+          280.4,
+          1231.8
+        ],
+        "firstHit": "generator | GVR | pilot-green",
+        "distanceMetres": 2.977602958679199,
+        "expectedMaterial": "GVR | pilot-green",
+        "pass": true
+      },
+      {
+        "name": "intercom blue pilot",
+        "nativeUV": [
+          241,
+          638
+        ],
+        "firstHit": "generator | GVR | intercom-blue",
+        "distanceMetres": 1.7784274816513062,
+        "expectedMaterial": "GVR | intercom-blue",
+        "pass": true
+      },
+      {
+        "name": "intercom green selector",
+        "nativeUV": [
+          237,
+          701
+        ],
+        "firstHit": "generator | GVR | pilot-green",
+        "distanceMetres": 1.7485064268112183,
+        "expectedMaterial": "GVR | pilot-green",
+        "pass": true
+      },
+      {
+        "name": "upper closure",
+        "nativeUV": [
+          685,
+          540
+        ],
+        "firstHit": "generator | GVR | ceiling",
+        "distanceMetres": 1.4533556699752808,
+        "expectedMaterial": null,
+        "pass": true
+      },
+      {
+        "name": "manufacturer area clear of the service hose",
+        "referenceRect": [
+          372,
+          1442,
+          516,
+          1468
+        ],
+        "sampleStepPixels": 4,
+        "rays": 252,
+        "blockers": [],
+        "pass": true
+      }
+    ],
+    "preservedTenControls": [
+      {
+        "id": "large-1",
+        "rays": 599,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "large-2",
+        "rays": 605,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "large-3",
+        "rays": 607,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "large-4",
+        "rays": 605,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "small-1",
+        "rays": 315,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "small-2",
+        "rays": 272,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "small-3",
+        "rays": 272,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "small-4",
+        "rays": 237,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "small-5",
+        "rays": 315,
+        "blockers": {},
+        "pass": true
+      },
+      {
+        "id": "small-6",
+        "rays": 272,
+        "blockers": {},
+        "pass": true
+      }
+    ]
+  },
+  "supports": {
+    "pass": true,
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "method": "Downward BVH rays on decoded non-generator production triangles at the six support centers. Each pad must span the actual ground to the chassis underside; intentional contact overlaps avoid coplanar faces.",
+    "classification": "Inferred support arrangement, not a surveyed construction detail of the real yacht.",
+    "supports": [
+      {
+        "id": "GVR/generator inferred foundation pad (7.34, 2.94)",
+        "boundsSource": [
+          7.288906992886034,
+          2.9043907078713618,
+          1.5790000057220457,
+          7.391093019934293,
+          2.9756090886781172,
+          1.6020000076293943
+        ],
+        "groundHeightSource": 1.5981541967391966,
+        "groundFirstHit": "electrical | EVR | metal",
+        "railUndersideSource": 1.5955,
+        "bottomOverlapMetres": 0.01915419101715088,
+        "topOverlapMetres": 0.0065000076293944,
+        "pass": true
+      },
+      {
+        "id": "GVR/generator inferred foundation pad (8.5, 2.94)",
+        "boundsSource": [
+          8.448907164054738,
+          2.9043907078713618,
+          1.5790000057220457,
+          8.551093191102996,
+          2.9756090886781172,
+          1.6020000076293943
+        ],
+        "groundHeightSource": 1.5981541967391966,
+        "groundFirstHit": "electrical | EVR | metal",
+        "railUndersideSource": 1.5955,
+        "bottomOverlapMetres": 0.01915419101715088,
+        "topOverlapMetres": 0.0065000076293944,
+        "pass": true
+      },
+      {
+        "id": "GVR/generator inferred foundation pad (9.66, 2.94)",
+        "boundsSource": [
+          9.608907335223442,
+          2.9043907078713618,
+          1.5790000057220457,
+          9.7110933622717,
+          2.9756090886781172,
+          1.6020000076293943
+        ],
+        "groundHeightSource": 1.5799999928474424,
+        "groundFirstHit": "context | Machinery metal 39 | architecture",
+        "railUndersideSource": 1.5955,
+        "bottomOverlapMetres": 0.0009999871253967285,
+        "topOverlapMetres": 0.0065000076293944,
+        "pass": true
+      },
+      {
+        "id": "GVR/generator inferred foundation pad (7.34, 3.32)",
+        "boundsSource": [
+          7.288906992886034,
+          3.2843908184822626,
+          1.5490000045299528,
+          7.391093019934293,
+          3.355609199289018,
+          1.601999977827072
+        ],
+        "groundHeightSource": 1.5499999618530271,
+        "groundFirstHit": "context | Machinery paint 1 | furniture",
+        "railUndersideSource": 1.5955,
+        "bottomOverlapMetres": 0.0009999573230743408,
+        "topOverlapMetres": 0.006499977827072012,
+        "pass": true
+      },
+      {
+        "id": "GVR/generator inferred foundation pad (8.5, 3.32)",
+        "boundsSource": [
+          8.448907164054738,
+          3.2843908184822626,
+          1.5490000045299528,
+          8.551093191102996,
+          3.355609199289018,
+          1.601999977827072
+        ],
+        "groundHeightSource": 1.5499999618530271,
+        "groundFirstHit": "context | Machinery paint 1 | furniture",
+        "railUndersideSource": 1.5955,
+        "bottomOverlapMetres": 0.0009999573230743408,
+        "topOverlapMetres": 0.006499977827072012,
+        "pass": true
+      },
+      {
+        "id": "GVR/generator inferred foundation pad (9.66, 3.32)",
+        "boundsSource": [
+          9.608907335223442,
+          3.2843908184822626,
+          1.5490000045299528,
+          9.7110933622717,
+          3.355609199289018,
+          1.601999977827072
+        ],
+        "groundHeightSource": 1.5499999618530271,
+        "groundFirstHit": "context | Machinery paint 1 | furniture",
+        "railUndersideSource": 1.5955,
+        "bottomOverlapMetres": 0.0009999573230743408,
+        "topOverlapMetres": 0.006499977827072012,
+        "pass": true
+      }
+    ]
+  },
+  "proxyResidual": {
+    "pass": true,
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "oldAuthoredSurfaceCentroidsTested": 1565,
+    "residualMatches": [],
+    "minimumDistanceToRetainedFrontMetres": 0.00031018402660265565,
+    "toleranceMetres": 0.0003,
+    "method": "Old evaluated proxy triangles from the immutable R04 Blender versus only retained electrical triangles decoded from the actual new GLB. New generator triangles are excluded; submillimetre slivers excluded as in the original derivative."
+  },
+  "transportContinuity": {
+    "pass": true,
+    "beforeRuntimeSHA256": "b1b671562484dae9f102615ac59df9be3d6a066ccd2a65de03bcf0bbb67ff709",
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "physical": {
+      "triangles": 178280,
+      "aggregate": "8cddf445932edf19661407c6446f5b9bd999084582bc1aeb06dd9c635c15db0b",
+      "textures": [
+        "02eacf0fdeb459489a6db7e5635f888c802f88774292bdc19ce4e2fcf14e3dd7",
+        "03ff8468d90f552c2c90797c8310ec434d1cf9970e5eee64e6f7ea65cf58955b",
+        "1013f7a09c8a8591e50bf8ad505d7de857a0c278376442c939f0f10567b3cd5a",
+        "138d9ca5f834e69e8dd47269a4f9013ad1343eee819dc26527179c5d2d86aa17",
+        "14acc3aae2cf2bf6b22f19a24d20bb67694d0c2c82321c0e10da14ffc7d04aad",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "185197a4772fe12e2adf6c76d2417d0dc8c0918b2949e122c1f2feec3cdb0a34",
+        "18593510d8dcb77d0560def79600a00384d8dea772d2eb292007af213111a8a4",
+        "278f405872c16d8af3de6eeb86e6d764740d44eab86958f46be96112eb7dc6c1",
+        "278f405872c16d8af3de6eeb86e6d764740d44eab86958f46be96112eb7dc6c1",
+        "29ad966cb185bdb75596c0070950319fa59903da6634f1709b9a40a207574aa5",
+        "2c734e22c473be14f05be233d4db884a3bf5e65859054b9f63b80166b22b94af",
+        "3220b8712ac8b58b0efcad40df33c18c98790dcf89793e83d4be6aa304a05a28",
+        "3b3c58f5f79041c01085cd5e3baa2d47d8bbce9dbd132504bd2eae436c9894b9",
+        "3d93b9873a2e69fe2787f06db50e1ac359497c75fe7411ed13c220f1f8fb6904",
+        "3e0115dbd9b07124bee3bb177da003eb0eb244fdc2decb67d32fe61a75f09f64",
+        "42a588397eedc797cf5b48d825cebb57ad5180d220774ea2adf54107826c65d5",
+        "459928272d1f81ec6a266daede4c7bb74d97a646db5f221c56858d2712d1f4de",
+        "459928272d1f81ec6a266daede4c7bb74d97a646db5f221c56858d2712d1f4de",
+        "49ee347d0100338cc3218cbdd414f8dd17f094e5b3acb81fd5db8154cc041429",
+        "4c3d74c707ecaec4da06b6c8dd22a0ac5038c6fdbf70655abc6e115a224b3227",
+        "4d726d0c149d875579e1b91a73321565b60d67992365ff8cc03bc0804224220e",
+        "4ff25199161ffb716eb53c767dd7c2f002f51092bd5d49547f4d153859228543",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "51a8f0e28e6839b39d399923b5e208908517e2a2997f68e1952756a817e5ea5c",
+        "55ef446c7f2b22c086447cb978bff79934b60e287e885d1976caab6b35ab909a",
+        "6037ccad2b87469b06f012da4675544ffd79d2c6835a8bf8b813acf27e695c41",
+        "61befd15374e5692fee530f8b6b23eaa933770e6bb5d64833b75a1624b445cda",
+        "64d384e6e7d068eaaa1df72835effc9e644466f234f53ba4c30930f269b16862",
+        "64d384e6e7d068eaaa1df72835effc9e644466f234f53ba4c30930f269b16862",
+        "64d384e6e7d068eaaa1df72835effc9e644466f234f53ba4c30930f269b16862",
+        "64fefc163440db2574ce278bd83947a16bc47891bda51d98e4823e2805e385b1",
+        "675fb5c0b093f556c4643127a97d4fcfd273cc903ce70c61f984aa7755757859",
+        "67c81958d3a2fa2fc8d9dc54958c9e3ca6c42e564e4744969c6af83467c7e8a8",
+        "6961f2f6d8bf07227cf5631c6db4edcfa0228e5dd6f95ded0ce4826e66dabf83",
+        "6bb91bef85bf1dd0a6362103f6dfbb7ca3f9a66a2b2d855580c3df1993a4fd27",
+        "6ec78217dd181d9016c2d738936f1a562867e1d791c3cc3e4bfcce90193be4a1",
+        "720f0b18b580501c16484febceb2be437e7f0eed217fbc47fd347fa7e5e65a43",
+        "79ef73499b4c1ce846ceabb9ff7a35da9de1ae243fb16f2d8b2baad9a4544716",
+        "8951e756ab1844acf9820002c9b5ee40a12a01067c8a19914ba1d334af5ad8da",
+        "8951e756ab1844acf9820002c9b5ee40a12a01067c8a19914ba1d334af5ad8da",
+        "8eca743d39adefb1f5169dcb0d77c49aeddd30dc319fb4813978a1552931938f",
+        "9477dc7eef23d9e363b8947bcdf83f20dfeb79a2f6b6b6ee88dc60b64b63a076",
+        "9c2f68101d6aa35da61bc024368addc1d0697f6427becbbb747f94ec564db056",
+        "9d4a57b0231c725219eec035f86b4b30690513e2d089b0a8d018b53d4d1924d2",
+        "9d919a753b0bb1e9180f3994b4d175aa944f7c7dd5e84cec10d32ed12277a0be",
+        "a572f64c3799977789fb4264bd101bc78203ded6c5b74e756f0d963c025e326b",
+        "a8606c1e6f9474c960e7527609ef9496097b3fc9cb04c597a58251812157e257",
+        "ad982aa90a718c9b05dca84609181eb783b33b53ab3e6c958caf10d9d857dd9a",
+        "ae3cc105dbabd6db7abf843acf2f06bcc992ed5b9bcff6ba38adf422cc0fd284",
+        "af87d413f78f73a77a1ce304935d656c05023e82a0033ccf50b4e05a56aecb2f",
+        "b9923a774c14c67f98896baae91f382e00c0ec6c798a634021f999c153453b1d",
+        "c0a6adbbe6673d2be7764402c652dc1082f230a9fba7c3af4c7ab8bb7bed3861",
+        "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+        "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+        "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+        "c5d1dab4791a8cb7ca45abc67124bc565227dfbd8b7bb8917d667bf471448bd4",
+        "c72afbdf425ab35b75b555d385c778bb20d9146e0a106e18cfb107233cf204bd",
+        "c7641a47fe105446c8271d8bc89ff6f083363b806cece36cb6d3ba81f7925eff",
+        "c9e242de80acd3c575fed531c57dd307b08df1d4d74e5d4aba2d941a5c0a6de7",
+        "d1e8c5108814d5a9fc9303e47b01ba68a555c5d81abd9411d942e6654c9602c4",
+        "d5349c428727309d16cf6c71bbfed9e9d2f1ff1720e8172f08d4a4f82451d8c1",
+        "e1d194f21540a321a8a97d1385ebacf5e6b194b949ba31a669b2b9e585afcca5",
+        "e3ab6583364b7f020d84f7681e04071a4c021ca51776699b8806ae773cca23ae",
+        "e62e34d42b3f34df73a46a197c928d32620b8bb23e21af3fbd13acb612c76f50",
+        "e799cabaa4d80bb1e0aa3942dfcb27e5b8372de532323799ea6015791c6bf672",
+        "ea5526871a2e5af44c6330a5c0e4f325ea7a80f825b2cd99c0095878fafc1844",
+        "ea843ae837b7ec9ec5bf90c46b4385e6ca08bfceaed784e63b33d60281d01860",
+        "ea9df2126f9927c85488f751aa13ce7dcea24c5edc4ace60bb8ba11c1941e57e",
+        "ea9df2126f9927c85488f751aa13ce7dcea24c5edc4ace60bb8ba11c1941e57e",
+        "ebb63796109ef7dd94b5f235c6465029807239d8699fee7ddb521b7b2043b922",
+        "ebb63796109ef7dd94b5f235c6465029807239d8699fee7ddb521b7b2043b922",
+        "f2d2c74e1e5a1b170560fd700718c134006cf4a9431a4564065f7420ade6c9f0",
+        "f3ec76e2662bb65888c1cea95d7cc2e12ba1c164905521ac56e360bf21b7d1ee",
+        "f64dba80eccfe18790368410fd417a95569f9d17551d53e81685327089694cb4",
+        "f806aa21d7a741a033bf5b187cce357775bad76165ee941b9485db3025428a32",
+        "f8d59b65c13b09d143f9e18fb1258bf0f51e119f17080553e3b1a3e9675bc9e8",
+        "fd1f3503743b558f46886ad38818a8c357c4b3b7d6f0233445f845b81461bdc7"
+      ],
+      "materials": [
+        {
+          "name": "EVR | amber",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | blue",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | blue-lit",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0.1276595719384629,
+            0.3404255251692344,
+            1
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | brass",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | checker",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.7200000286102295,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | copper",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | cream",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | dark",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | edge",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | glass",
+          "base": [
+            1,
+            1,
+            1,
+            0.11999999731779099
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "BLEND",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | grating",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | green",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | green-lit",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0.11764705727669611,
+            1,
+            0.352941180595477
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | metal",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | paint",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | paint.001",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | red",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | rubber",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | screen",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | screen-pale",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "EVR | warning-yellow",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.15000000596046448,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | brushed",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | ceiling",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | enamel",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | intercom-blue",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | key-blue",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | key-pink",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | key-violet",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | lamp emitter 0",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0.9680851367384452,
+            1,
+            0.9148936345599906
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | lamp emitter 1",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0.9680851367384452,
+            1,
+            0.9148936345599906
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | lcd",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | olive",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | orange",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | pilot-green",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        },
+        {
+          "name": "GVR | white-ink",
+          "base": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "roughness": 1,
+          "metalness": 1,
+          "emissive": [
+            0,
+            0,
+            0
+          ],
+          "normalScale": 0.11999999731779099,
+          "alpha": "OPAQUE",
+          "doubleSided": true
+        }
+      ]
+    },
+    "physicalPrecision": "10um/component; world normals, UV0, UV1 and winding included",
+    "beforeLCD": 3.382925033569336,
+    "afterLCD": 0,
+    "sharedLCDPoints": 2,
+    "allSevenHDRFilesByteIdentical": true,
+    "repair": {
+      "method": "Mean of equal-sample Cycles CORNER estimates at the same position (1um key), normal (1e-5 key), material and micro-transport mode. New generator ID2 only; hard edges and retained-front samples are not mixed.",
+      "selectedCorners": 165609,
+      "physicalSampleGroups": 76898,
+      "sharedGroups": 21504,
+      "discontinuousGroupsBefore": 15836,
+      "maximumSharedCornerDisagreementBefore": 237.1933463215828,
+      "maximumSharedCornerDisagreementAfter": 0,
+      "retainedFrontTransportUnchanged": true,
+      "pass": true,
+      "physicalBindingSHA256": "cfa958c0e4b852f12c468b09d6c3ebe4529e6296ca5123016a930ff240e904c1",
+      "geometryNormalsUV0UV1MaterialsAndModeUnchanged": true,
+      "atlasesAndReflectionProbesReusedBecausePhysicalSceneUnchanged": true
+    }
+  },
+  "hoseEntry": {
+    "before": {
+      "stage": "Unpublished R01 candidate",
+      "runtimeGeometrySHA256": "fbf29c856626d907642c2f81933d75c5d637daf0ef7ad261c2c21f4e0daf85d3",
+      "name": "manufacturer area clear of the service hose",
+      "referenceRect": [
+        372,
+        1442,
+        516,
+        1468
+      ],
+      "sampleStepPixels": 4,
+      "rays": 252,
+      "blockers": [
+        {
+          "uv": [
+            372,
+            1462
+          ],
+          "firstHit": "generator | EVR | rubber"
+        },
+        {
+          "uv": [
+            372,
+            1466
+          ],
+          "firstHit": "generator | EVR | rubber"
+        }
+      ],
+      "pass": false
+    },
+    "after": {
+      "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+      "name": "manufacturer area clear of the service hose",
+      "referenceRect": [
+        372,
+        1442,
+        516,
+        1468
+      ],
+      "sampleStepPixels": 4,
+      "rays": 252,
+      "blockers": [],
+      "pass": true
+    },
+    "pass": true
+  },
+  "defaultRegression": {
+    "viewport": [
+      600,
+      400
+    ],
+    "DPR": 1,
+    "camera": [
+      9.15,
+      0,
+      3.18
+    ],
+    "electricalParameterAbsent": true,
+    "bulkheadParameterAbsent": true,
+    "views": [
+      {
+        "stage": "candidate",
+        "face": "front",
+        "differentPixels": 0,
+        "maximumChannelDifference": 0,
+        "identical": true
+      },
+      {
+        "stage": "candidate",
+        "face": "rear",
+        "differentPixels": 4,
+        "maximumChannelDifference": 30,
+        "identical": false
+      },
+      {
+        "stage": "isolated-old-mesh",
+        "face": "front",
+        "differentPixels": 0,
+        "maximumChannelDifference": 0,
+        "identical": true
+      },
+      {
+        "stage": "isolated-old-mesh",
+        "face": "rear",
+        "differentPixels": 1,
+        "maximumChannelDifference": 30,
+        "identical": false
+      }
+    ],
+    "interpretation": "Independent viewer sessions differ within the recorded six-pixel /32-channel edge tolerance, including one pixel with the original unpartitioned mesh. Full source face attributes and material bytes are checked independently. The same-camera movement/rest test retains its zero-difference requirement; cross-session pixel identity is not claimed.",
+    "recordedCrossSessionRasterTolerance": {
+      "maximumDifferentPixels": 6,
+      "maximumChannelDifference": 32
+    },
+    "pixelExact": false,
+    "crossSessionRasterDifferences": [
+      {
+        "stage": "candidate",
+        "face": "rear",
+        "differentPixels": 4,
+        "maximumChannelDifference": 30,
+        "identical": false
+      },
+      {
+        "stage": "isolated-old-mesh",
+        "face": "rear",
+        "differentPixels": 1,
+        "maximumChannelDifference": 30,
+        "identical": false
+      }
+    ],
+    "pass": true
+  },
+  "walking": {
+    "hardware": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "renderer": "Chromium SwiftShader",
+      "softwareOnly": true
+    },
+    "viewport": [
+      600,
+      400
+    ],
+    "DPR": 1,
+    "framesPerVariant": 20,
+    "simulationStepSeconds": 0.016666666666666666,
+    "maximumWalkingPositionDeviation": 0,
+    "before": {
+      "p50Ms": 1818.2999999970198,
+      "p95Ms": 1886.2000000029802,
+      "maximumCalls": 65,
+      "maximumTriangles": 372563,
+      "measuredResourceTransferBytes": 182600446
+    },
+    "after": {
+      "p50Ms": 1877.2999999970198,
+      "p95Ms": 1919.5,
+      "maximumCalls": 72,
+      "maximumTriangles": 428753,
+      "measuredResourceTransferBytes": 184473921
+    },
+    "interpretation": "Fixed-resolution rendering plus forced full-frame RGBA readback on SwiftShader. Synchronization/readback overhead is included; not GPU hardware FPS.",
+    "pass": true
+  },
+  "originals": {
+    "pass": true,
+    "protectedMechanicalAssets": 73,
+    "originalYachtFiles": 629,
+    "mismatches": []
+  },
+  "grid": {
+    "version": "generator-vr-r01",
+    "camera": {
+      "sourcePosition": [
+        9.15,
+        0,
+        3.18
+      ],
+      "estimated": true,
+      "fixedForAllViews": true
+    },
+    "nativeSize": 2048,
+    "grid": {
+      "basePixels": 8,
+      "detailPixels": 4,
+      "automaticAcceptance": false
+    },
+    "totalCells": 72046,
+    "cells8": 35022,
+    "cells4": 37024,
+    "measuredCells": 72046,
+    "coverage": {
+      "l": {
+        "region": [
+          0,
+          0,
+          1248,
+          2048
+        ],
+        "pixels": 2555904,
+        "complete": true,
+        "overlaps": 0
+      },
+      "b": {
+        "region": [
+          1840,
+          680,
+          2048,
+          2016
+        ],
+        "pixels": 277888,
+        "complete": true,
+        "overlaps": 0
+      }
+    },
+    "regions": 29,
+    "automaticCellAcceptance": false,
+    "individuallyAcceptedCells": 0,
+    "strictVisualAcceptance": false,
+    "views": 15,
+    "nativeFaces": [
+      "b",
+      "l"
+    ],
+    "runtimeGeometrySHA256": "98342260c4ad2b58e5e59794482f2821ade61a4fef4a52f5a8d782249e67488a",
+    "privacy": "VR originals remain private; published textures are authored.",
+    "diagnosticLimits": "SRGB differences include exposure, shadows and reflection. They are not a geometry score. Sixteen control centers are fitting landmarks, not independent holdouts."
+  },
+  "lighting": {
+    "atlases": 4,
+    "localProbes": 3,
+    "diffuseSamples": 64,
+    "reflectionSamples": 128,
+    "files": {
+      "electrical-irradiance.exr": {
+        "rawSHA256": "afe5d4c00035b68fd4ad28636e40616d7acbe0f797f8c9d6b735564b8e40ca25",
+        "sha256": "5944eb4a646278d191a2bce504dbb33ac2d41b4eb5f6abd7b5172b376c411703",
+        "bytes": 5233383
+      },
+      "bulkhead-irradiance.exr": {
+        "rawSHA256": "edee2387bef0139b6ba0b5d1c5243fac6eff73f0c4e2a6bdb5f9bfedbcafb5b2",
+        "sha256": "148451f79270f2e1a791e2705b9f2aed8347aea70b4fa1e0820da0fe694847e1",
+        "bytes": 7513105
+      },
+      "port-irradiance.exr": {
+        "rawSHA256": "7da749282787b4a4605270cc466ce3d464c2f2909be1d3994c76e750faea50f6",
+        "sha256": "c73e62f0a44a1ef9bf440aac24632c918b7436d787efa3685907ae577fc1c708",
+        "bytes": 6713581
+      },
+      "starboard-irradiance.exr": {
+        "rawSHA256": "d4aa619edb24ec843f6f8f00c536f6fcbfaffc91c5c9532423230916cf3408b2",
+        "sha256": "b39df862d86c42cb351733a384e8367df086b8d984b53632643f77b6173212e6",
+        "bytes": 6479129
+      },
+      "room-probe-0.exr": {
+        "sha256": "adf79bce5a73729750a3385f33d3e68ac860f810292ee7689758a9f610a1926f",
+        "bytes": 759979
+      },
+      "room-probe-1.exr": {
+        "sha256": "9ac83b0237280bb4922aaa537ea7fe914baf33ef3384bcddeb53032654af9ae8",
+        "bytes": 559306
+      },
+      "room-probe-2.exr": {
+        "sha256": "5b2b4840d5aeb235a620a4b604829d278924aa928d1128bfbdeefee403269a95",
+        "bytes": 634338
+      }
+    },
+    "engineUVBindings": {
+      "electrical": {
+        "cornerSHA256": "6ec8bef339559748fdbdc64937022eee6d1080e178fc33babc3796e1bfe4efa1",
+        "triangles": 178236,
+        "originalGeometryUnchanged": false
+      },
+      "bulkhead": {
+        "cornerSHA256": "200e63598a35c7d5b532e3e5044c33ee3782ced543dac4801aadcaa73e15ee0d",
+        "triangles": 88293,
+        "originalGeometryUnchanged": false
+      },
+      "port": {
+        "cornerSHA256": "078d47b61afd468c2f9b97d759460e917eef7df7253d669748040f9394184e09",
+        "triangles": 142465,
+        "originalGeometryUnchanged": true
+      },
+      "starboard": {
+        "cornerSHA256": "93be7c3dd230bef638c0f5a0cfbe0b2ee511643b3838c18d8c5c1c69e43ae989",
+        "triangles": 170607,
+        "originalGeometryUnchanged": true
+      }
+    },
+    "cornerPrecision": {
+      "method": "Binary16 rounded values stored in float32; unchanged attribute/shader format",
+      "values": 1201779,
+      "maximumAbsoluteError": 0.9986572265625,
+      "maximumRelativeError": 0.0009754907792838676
+    },
+    "exposure": 0.05,
+    "transform": "Neutral",
+    "output": "sRGB"
+  },
+  "motionCheck": {
+    "sameCamera": true,
+    "canvas": [
+      600,
+      400
+    ],
+    "identicalPixels": true,
+    "renderer": "SwiftShader",
+    "fixedRatioOverride": false,
+    "mode": "Nitidez"
+  },
+  "triangles": {
+    "retainedElectrical": 112983,
+    "newGenerator": 65253,
+    "combined": 178280,
+    "combinedBudget": 180000
+  },
+  "strictVisualAcceptance": false,
+  "hardwareFPSMeasured": false,
+  "limitations": [
+    "VR is one physical station. Hidden depths, support design and concealed connections are inferred.",
+    "Sixteen measured controls are fitting points, not independent hold-outs.",
+    "The native8/4 grid is measured and reviewed by component; no automatic cell acceptance or95% edge equivalence is claimed.",
+    "Fine photographic texture and the rest of the machinery room remain distinguishable from VR.",
+    "Independent default-viewer sessions retained four changed candidate pixels and one original-mesh isolation pixel within the recorded six-pixel/32-channel tolerance. The same-camera movement/rest test remained pixel-identical."
+  ],
+  "authoringRelease": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-generator-vr-r01"
+}

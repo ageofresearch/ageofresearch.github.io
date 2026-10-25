@@ -1,0 +1,374 @@
+{
+  "id": "filter-well-r01",
+  "pass": true,
+  "deployment": {
+    "commit": "44fb0cf4ee7242c1c46926902da5180a861c2aec",
+    "run": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40219737221",
+    "conclusion": "success"
+  },
+  "public": {
+    "pass": true,
+    "commit": "44fb0cf4ee7242c1c46926902da5180a861c2aec",
+    "publicAssets": [
+      {
+        "path": "luz-de-mar-realism/index.html",
+        "bytes": 5794,
+        "sha256": "b0916f3daa6a0cadd24eb0651ce39936c3fd6b5f65733cd138805b3817ae58d8"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/manifest.json",
+        "bytes": 20018,
+        "sha256": "0f2d84b0b98d1f4273ca951087aeb1ab48b9c6909695fb2b804bd895e9454224"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/hashes.json",
+        "bytes": 65712,
+        "sha256": "6164cffa5d6bd6db2c97dd1c1297bccce55f3c91f30204804668b7e208fe10c8"
+      },
+      {
+        "path": "luz-de-mar-realism/publication.json",
+        "bytes": 2295,
+        "sha256": "ddcec894ce363da15800a42763fdc789b86fa8927242be514063832d38960f04"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/room.json",
+        "bytes": 432793,
+        "sha256": "7df5f9621e94de47551386ecd1bc6b5005879699044592cd6f40ec0a4748513d"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/room.glb",
+        "bytes": 12062572,
+        "sha256": "d596ee1cd41ac15eb63027a819acf67f4a21b1f05d6202ab4e9ea567d3714e9a"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/asset-version-BkUu_I7m.js",
+        "bytes": 539629,
+        "sha256": "20514b57db70fad55eaef014453e9d9ebaad251120476add80bd2bfd881e6aca"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/asset-version-Curezzlb.js",
+        "bytes": 539603,
+        "sha256": "115e6272996197cc19df376a17531565ac637987361035c07a788e3f3931a2fc"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/index-B63_j5My.css",
+        "bytes": 11614,
+        "sha256": "ee88006a2d53f399c97e440f7ea9a3538b52c4c281b77d586d1ed1d664c21808"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/index-BcEB3HbN.js",
+        "bytes": 214538,
+        "sha256": "a81064c629a07d0e29e0e46869fc8544d014a9dee61a84a25d851cec48102656"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/index-JiWf8mUx.js",
+        "bytes": 221105,
+        "sha256": "295dbf8e362ea6d6ae1ff919fef86fe0a3df388c4536551076335835c57fd9a4"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/filter-well-r01/authoring.json",
+        "bytes": 2053,
+        "sha256": "c4933b877765a0d97af9d20d5378d3603f13f34537d014efebccda69e0abf6e2"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/filter-well-r01/inventory.json",
+        "bytes": 32648,
+        "sha256": "a3bc9e9a341fc97a3dbcb01eaa9ad2c7d9b7d46c0df09eea8810e325c5070853"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/filter-well-r01/irradiance.ktx2",
+        "bytes": 479278,
+        "sha256": "dcb8ec925753ea147f7448f9e3a2e01ab918cd269ba6136b26f377b8a70ea1df"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/machinery/filter-well-r01/well.glb",
+        "bytes": 1303236,
+        "sha256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/mechanics-Dsyc_iN3.js",
+        "bytes": 263354,
+        "sha256": "06f948b7d7a3b4a596eda8fdd170af8d69b64de967481f50084d3a323a28f880"
+      },
+      {
+        "path": "luz-de-mar-realism/assets/mechanics-FQLybPg1.js",
+        "bytes": 262914,
+        "sha256": "88c3313805cd3980e857cfedd49c8032e8759bf7905c62c17894e39f96e4c466"
+      },
+      {
+        "path": "luz-de-mar-realism/review/filter-well-r01/comparacion.webp",
+        "bytes": 46210,
+        "sha256": "de009b744fd66fb1d0bc35a3d5795736a4e13b4f62ceab80fdc345c4c5082c45"
+      },
+      {
+        "path": "luz-de-mar-realism/review/filter-well-r01/index.html",
+        "bytes": 2056,
+        "sha256": "bc779f569c2757fcb69e272e376ab9e3134b1e8ace7e0611233b04f0cc0b0ea5"
+      },
+      {
+        "path": "luz-de-mar-realism/review/filter-well-r01/validation.json",
+        "bytes": 7705,
+        "sha256": "72fb80215a3dc5e2a30352105b97f12987724053dce1f6fbd4bb73038fa1135e"
+      },
+      {
+        "path": "tidewater-rocha/play.html",
+        "bytes": 3370,
+        "sha256": "18b557dc6e33e897de448fb9fc701ca25bebdf3fea2baa368d11e0b096eccea4"
+      }
+    ],
+    "originalFilesLocallyVerified": 629,
+    "originalGitTree": "f5475b87b550c4d5dfb999a49d37d86dcefe4c25",
+    "originalPublishedEntryVerified": true,
+    "allOriginalPublicBytesRedownloadedThisTurn": false
+  },
+  "browser": {
+    "renderer": "Chromium / SwiftShader; correctness, not hardware FPS",
+    "checks": {
+      "installed": true,
+      "extendedOpeningBlocksWalking": true,
+      "bothFiltersExtractScrubCleanDirtyReset": true,
+      "downloadFailureFallbackRetry": true,
+      "cancelledLoadCannotCommit": true,
+      "nominalCutPlaybackBothSides": true,
+      "threeRoomCycles": {
+        "stable": true,
+        "samples": [
+          {
+            "gpu": 917611385,
+            "bindings": 83,
+            "geometry": 288,
+            "textures": 218
+          },
+          {
+            "gpu": 917611385,
+            "bindings": 83,
+            "geometry": 288,
+            "textures": 218
+          },
+          {
+            "gpu": 917611385,
+            "bindings": 83,
+            "geometry": 288,
+            "textures": 218
+          }
+        ]
+      },
+      "movementRest": {
+        "sameBuffer": [
+          600,
+          400
+        ],
+        "differentPixels": 0
+      }
+    },
+    "errors": [],
+    "hashes": {
+      "id": "filter-well-r01",
+      "base": "./assets/machinery/filter-well-r01/",
+      "asset": "well.glb",
+      "sha256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5",
+      "lightmap": {
+        "asset": "irradiance.ktx2",
+        "sha256": "dcb8ec925753ea147f7448f9e3a2e01ab918cd269ba6136b26f377b8a70ea1df",
+        "range": 128
+      },
+      "register": [
+        11.05,
+        -0.49,
+        12.75,
+        0.49
+      ],
+      "triangles": 27668,
+      "reference": "Owner maintenance photograph IMG-20261016-WA0004.jpg,1200x1600; private",
+      "dimensionStatus": "Image-fitted estimated installation; nominal basket dimensions retained",
+      "lighting": "Cycles64-sample full diffuse without albedo;2048 authoring EXR,1024 runtime spatial RGBM128 atlas and shared physical corner transport; existing local room reflections; removable lids excluded from fixed transport"
+    },
+    "stats": {
+      "room": "machinery",
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente el\u00e9ctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "detail",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 142465,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "detail",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 170607,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": true,
+        "filterInspectionLoaded": true,
+        "processingMechanics": false,
+        "poseTextureBytes": 20320,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": true,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery",
+        "saloon"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 93,
+        "references": 110
+      },
+      "elevation": 1.58,
+      "position": [
+        10.7,
+        0
+      ],
+      "frames": 51,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          600,
+          400
+        ]
+      },
+      "canvas": [
+        600,
+        400
+      ],
+      "calls": 92,
+      "triangles": 455913,
+      "memory": {
+        "geometries": 293,
+        "textures": 230
+      },
+      "estimatedMemory": {
+        "geometryBytes": 169994632,
+        "textureBytes": 722450929,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 917611385,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 2,
+        "p50": 1388.2999999970198,
+        "p95": 1388.2999999970198
+      },
+      "shadowUpdates": 141,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "geometry": {
+    "pass": true,
+    "runtimeSHA256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5",
+    "scope": "Only the open central filter well and removable floor portions",
+    "triangles": 27668,
+    "duplicateTriangles": 0,
+    "degenerateTriangles": 0,
+    "lidSupportClearanceMetres": 0.010296476676262616,
+    "supportLocation": "Estimated seat offset for clearance; not a vessel measurement",
+    "originalYachtFiles": 629,
+    "protectedMechanicalFiles": 73,
+    "strategyUnchanged": true
+  },
+  "release": {
+    "url": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-filter-well-r01",
+    "archiveSHA256": "95d881e9697875cda7876f77e122ff35b37c51f06681da50dfbedfe66148af41",
+    "bytes": 21519042,
+    "masterSHA256": "37403393856443a91508c3cb0fe894304e5d01330498d36b5b30e80b6e6bb9e5",
+    "privateReferenceIncluded": false,
+    "downloadVerified": true,
+    "downloadURL": "https://github.com/ageofresearch/ageofresearch.github.io/releases/download/luz-filter-well-r01/luz-filter-well-r01-authoring.zip"
+  },
+  "tests": {
+    "files": 18,
+    "passed": 18
+  },
+  "privateComparison": {
+    "nativeResolution": [
+      1200,
+      1600
+    ],
+    "grid": [
+      8,
+      4
+    ],
+    "cells": 56680,
+    "referenceBytesUnchanged": true,
+    "losslessCandidateAndOverlay": true,
+    "automaticAcceptance": false
+  },
+  "pages": {
+    "bytes": 1039616000,
+    "limit": 1073741824,
+    "minimumHeadroomBytes": 33554432,
+    "headroomBytes": 34125824
+  }
+}

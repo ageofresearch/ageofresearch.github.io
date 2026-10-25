@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A Renderpeople Posed People Plus scan and a genuine 4D performance, rendered in a matching Blender studio. Explore full-body views, faces, profiles, and captured motion.">
+  <meta name="theme-color" content="#f4f2ec">
+  <title>Renderpeople, side by side — Scan Study</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="gallery.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#comparison">Skip to comparison</a>
+  <header class="masthead wrap">
+    <a class="wordmark" href="./" aria-label="Scan Study home"><span class="mark" aria-hidden="true">◒</span> SCAN STUDY <span class="edition">/ 01</span></a>
+    <a class="text-link" href="https://renderpeople.com/free-3d-people/" target="_blank" rel="noopener noreferrer">Renderpeople sources <span aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
+  </header>
+  <main>
+    <section class="intro wrap" aria-labelledby="title">
+      <p class="eyebrow">A BLENDER STUDIO COMPARISON</p>
+      <h1 id="title">Renderpeople, <br><em>side by side.</em></h1>
+      <div class="intro-bottom">
+        <p class="lede">A detailed posed scan and a captured 4D performance.<br class="desktop-break"> The same neutral studio, two ways to see the source.</p>
+        <p class="study-status"><span class="status-dot" aria-hidden="true"></span> PARTIAL STUDY <span>Different individuals · 25 October 2026</span></p>
+      </div>
+    </section>
+
+    <section class="comparison wrap" id="comparison" aria-labelledby="comparison-title">
+      <div class="viewbar">
+        <h2 id="comparison-title" class="section-label">01 / INSPECT THE SCANS</h2>
+        <div class="view-options" role="group" aria-label="Comparison view">
+          <button type="button" data-view="full_body" aria-pressed="true">Full body</button>
+          <button type="button" data-view="face" aria-pressed="false">Face</button>
+          <button type="button" data-view="three_quarter" aria-pressed="false">Three-quarter</button>
+          <button type="button" data-view="profile" aria-pressed="false">Profile</button>
+        </div>
+      </div>
+      <div class="scan-grid" data-current-view="full_body">
+        <article class="scan-card">
+          <div class="scan-heading"><span class="scan-letter">A</span><div><p class="eyebrow">STATIC SCAN</p><h3>Posed People Plus</h3></div></div>
+          <a class="image-link" data-person="posed_plus" href="assets/posed_plus_full_body.png" aria-label="Enlarge the Posed People Plus full-body render">
+            <img id="posed-image" src="assets/posed_plus_full_body.png" alt="Full-body render of an adult male scan in a plaid shirt, dark trousers, and white shoes, with arms crossed and gaze raised." width="2048" height="3072" fetchpriority="high">
+            <span class="enlarge" aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+          </a>
+          <div class="scan-caption"><span>300,066 triangles · 8K maps</span><a id="posed-original" href="assets/posed_plus_full_body.png" target="_blank" rel="noopener">Original PNG <span aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div>
+        </article>
+        <article class="scan-card">
+          <div class="scan-heading"><span class="scan-letter">B</span><div><p class="eyebrow">VOLUMETRIC CAPTURE</p><h3>4D People</h3></div></div>
+          <a class="image-link" data-person="four_d" href="assets/four_d_full_body.png" aria-label="Enlarge the 4D People full-body render">
+            <img id="four-d-image" src="assets/four_d_full_body.png" alt="Full-body frame of Aliyah dancing, wearing a red plaid shirt, jeans, and boots, captured as a changing volumetric mesh." width="2048" height="3072" fetchpriority="high">
+            <span class="enlarge" aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></span>
+          </a>
+          <div class="scan-caption"><span>~30K triangles/frame · 4K frames</span><a id="four-d-original" href="assets/four_d_full_body.png" target="_blank" rel="noopener">Original PNG <span aria-hidden="true"><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a></div>
+        </article>
+      </div>
+      <p class="view-note" aria-live="polite" id="view-note">Full-body studio renders · 2048 × 3072 px · Select either image to enlarge.</p>
+      <aside class="comparison-note"><span class="note-index"><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 3v10h14m-5-5 5 5-5 5"/></svg></span><p><strong>A category reference, with different subjects.</strong> The free Posed Plus sample is an adult male reference; the free 4D sample is Aliyah, a female subject. The requested male-to-male comparison remains incomplete. Exact ages and nationalities are undocumented.</p></aside>
+      <noscript><p>JavaScript enables the view selector. You can also open the <a href="assets/posed_plus_face.png">Posed Plus face</a>, <a href="assets/four_d_face.png">4D face</a>, and <a href="assets/four_d_preview.mp4">playback preview</a> directly.</p></noscript>
+    </section>
+
+    <section class="motion-band" id="motion" aria-labelledby="motion-title">
+      <div class="motion-layout wrap">
+        <div class="motion-copy">
+          <p class="section-label">02 / SEE THE PERFORMANCE</p>
+          <h2 id="motion-title">The scan<br><em>in motion.</em></h2>
+          <p>The geometry changes. The texture changes with it. This is a short excerpt of the genuine volumetric capture, rendered from its original mesh and image sequence.</p>
+          <dl class="motion-facts"><div><dt>Full capture</dt><dd>37.07 seconds</dd></div><div><dt>Source timing</dt><dd>1,112 frames / 30 fps</dd></div><div><dt>This preview</dt><dd>6 seconds / 10 fps</dd></div></dl>
+          <p class="fine">The complete capture is preserved in the private Blender project. This silent preview samples every third source frame; no motion interpolation is added.</p>
+        </div>
+        <figure class="video-figure">
+          <video controls loop muted playsinline preload="metadata" poster="assets/four_d_full_body.png" aria-label="Six-second rendered preview of Aliyah's real volumetric dancing performance">
+            <source src="assets/four_d_preview.mp4" type="video/mp4">
+            Your browser can <a href="assets/four_d_preview.mp4">download the playback preview</a>.
+          </video>
+          <figcaption><span>ALIYAH / 4D 004 DANCING</span><a href="assets/four_d_preview.mp4" download>Download preview</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="method wrap" id="method" aria-labelledby="method-title">
+      <div class="method-heading"><p class="section-label">03 / READ THE EVIDENCE</p><h2 id="method-title">What you’re seeing.</h2><p>Direct Cycles renders from tested Blender projects. Original appearance and scan limitations stay visible.</p></div>
+      <div class="method-grid">
+        <div class="method-item"><span class="method-number">01</span><h3>Matched studio</h3><p>Neutral lighting, 85 mm cameras, exposure 0, and AgX Base Contrast. Full-body and face renders use 64 CPU samples. Depth of field, motion blur, and denoising are off.</p></div>
+        <div class="method-item"><span class="method-number">02</span><h3>Source detail</h3><p>Posed Plus keeps its 300K mesh and original 8192 × 8192 maps. The 4D capture keeps changing topology and UVs with a 4096 × 4096 diffuse texture per frame.</p></div>
+        <div class="method-item"><span class="method-number">03</span><h3>Honest limits</h3><p>Posed Plus shows stronger facial detail. The 4D face is softer and includes captured texture grain and baked lighting. Neither scan has generated facial detail or restoration.</p></div>
+      </div>
+      <details class="technical-notes"><summary>Scale, output sizes &amp; validation <span aria-hidden="true">+</span></summary><div class="technical-content">
+        <p><strong>Stature:</strong> both projects target an estimated 1.70 m barefoot upright height. Footwear, hair, and bent poses prevent exact measurement. Indicative uncertainty is ±6 cm for Posed Plus and ±8 cm for 4D. One uniform root scale stays constant throughout the capture.</p>
+        <p><strong>Output:</strong> full body 2048 × 3072; face 2048 × 2048; three-quarter and profile 768 × 1152. Render dimensions do not add detail to the original source textures. The 384 × 576 playback preview is rendered at 16 samples.</p>
+        <p><strong>Validation:</strong> saved projects were reopened in fresh Blender 4.5.15 LTS processes and retested after ZIP extraction. All dependencies were present. Geometry, UVs, and actual texture advancement were checked at frames 1, 279, 557, 835, and 1112. All 1,117 active source images were preserved byte for byte.</p>
+        <p><strong>Capture limitations:</strong> native poses, clothing, and hair are retained. The posed scan has no body or face rig. The 4D source has diffuse-only captured imagery and small foot-contact jitter; it is not fully relightable PBR.</p>
+      </div></details>
+    </section>
+  </main>
+  <footer class="footer wrap">
+    <div><a class="wordmark" href="./"><span class="mark" aria-hidden="true">◒</span> SCAN STUDY</a><p>Rendered previews of licensed Renderpeople scans.<br>Original model files remain private under the publisher’s terms.</p></div>
+    <div class="footer-links"><a href="https://renderpeople.com/posed-plus/" target="_blank" rel="noopener noreferrer">Posed Plus source <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a href="https://renderpeople.com/free-3d-people/" target="_blank" rel="noopener noreferrer">Free sample sources <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a href="https://renderpeople.com/general-terms-and-conditions/" target="_blank" rel="noopener noreferrer">Renderpeople license <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
+  </footer>
+  <dialog id="image-viewer" aria-label="Enlarged scan render">
+    <div class="viewer-inner"><div class="viewer-bar"><p id="viewer-title">Scan render</p><button id="viewer-close" type="button" aria-label="Close enlarged render">Close <span aria-hidden="true">×</span></button></div><img id="viewer-image" alt=""><a id="viewer-original" href="assets/posed_plus_full_body.png" target="_blank" rel="noopener">Open original PNG <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
+  </dialog>
+</body>
+</html>

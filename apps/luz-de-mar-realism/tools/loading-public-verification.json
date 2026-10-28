@@ -1,0 +1,74 @@
+{
+  "verifiedAt": "2026-10-28T08:45:25.957572+00:00",
+  "deployedCommit": "b0e26ea5",
+  "deployment": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40657878218",
+  "url": "https://ageofresearch.github.io/luz-de-mar-realism/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=equipment-selection-r01",
+  "publicCheckPassed": true,
+  "initialContentBytes": 185742923,
+  "completedFiles": 87,
+  "requiredFiles": 87,
+  "gpuPresentationReady": true,
+  "downloadBuffersAfterReady": 0,
+  "bothEngineLODsReady": true,
+  "electricalAndBulkheadCommitted": true,
+  "filterWellCommitted": true,
+  "inspectionDeferred": true,
+  "firstRevealWasReady": true,
+  "publicHashes": [
+    {
+      "path": "index.html",
+      "sha256": "05baf44992e8483fb7c1b75582eb31288e43e87ba43d463afc3880838c110819"
+    },
+    {
+      "path": "publication.json",
+      "sha256": "809472b03490fbb37985dec291448bdf2061418f59a330198f7b9399f0496626"
+    },
+    {
+      "path": "assets/hashes.json",
+      "sha256": "8cfcad1cf96b6b76ee0d1632483c73f677810b533815c6001ab1c0f95a37ac79"
+    },
+    {
+      "path": "assets/entry-load-r01.json",
+      "sha256": "9477914888716bdb175f139449d4f00bb7663b9d05e7f9ed6097d48af53c82c3"
+    },
+    {
+      "path": "review/loading-r01/validation.json",
+      "sha256": "ce1a1b04cceb4c0797da0dab675dd6ec05b726bdce5170cf07c3b776c688d321"
+    },
+    {
+      "path": "assets/mechanics-D1trw_Hi.js",
+      "sha256": "ff736a657e19450346a050a52d4c86dcd24662a330d3915abf9de14270f0e899"
+    },
+    {
+      "path": "assets/shading-DQq6AEXp.js",
+      "sha256": "8b229222a11ac7ca0b421fa60b849a6b512313a3aae806b03ba61669ab957592"
+    },
+    {
+      "path": "assets/index-Dh6Aj5m6.js",
+      "sha256": "2d90e217ffd1dd33c5e23e1678210f8b331c02513875b7b1ca511532a71d7a95"
+    },
+    {
+      "path": "assets/index-CrB7J_xO.css",
+      "sha256": "522614cd4f1062cea604b24fda2b11b0f561b4717760183857a55411a092576b"
+    }
+  ],
+  "originalFilesPreserved": 629,
+  "existingNonCodeFilesPreserved": 400,
+  "softwareRenderer": true,
+  "hardwareFPSMeasured": false,
+  "publicInitialMsInSoftwareWithProxy": 78610,
+  "graphicsPayloadEstimate": {
+    "geometryBytes": 96751308,
+    "textureBytes": 586115409,
+    "shadowDepthBytes": 8388608,
+    "totalBytes": 691255325,
+    "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+  },
+  "jsHeap": {
+    "usedSize": 13605468,
+    "totalSize": 16302080,
+    "embedderHeapUsedSize": 2403104,
+    "backingStorageSize": 652466343
+  },
+  "errors": []
+}

@@ -1,0 +1,79 @@
+{
+  "verifiedAt": "2026-10-28T04:01:31.770018+00:00",
+  "deployedCommit": "b00dadfe",
+  "deployment": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40629388019",
+  "publicURL": "https://ageofresearch.github.io/luz-de-mar-realism/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=equipment-selection-r01",
+  "defaultSelectionEnabled": true,
+  "actualPublicClick": true,
+  "exactRestoration": true,
+  "catalogObjects": 56,
+  "distinctObjectsTested": 56,
+  "maskChecks": 149,
+  "views": 14,
+  "outsideMaskPixels": 0,
+  "originalYachtFilesVerified": 629,
+  "geometryFilesPreserved": 8,
+  "unassignedComponents": 283,
+  "publicAssetHashes": [
+    {
+      "path": "index.html",
+      "sha256": "80e48e2aed50f3bbafc5bf371f6247012023db07c8be01464e853ceca1e62dcb"
+    },
+    {
+      "path": "publication.json",
+      "sha256": "e8c00c1d50ea65fd4687adab009e1aa831c215132805452074da179741afbfb1"
+    },
+    {
+      "path": "assets/hashes.json",
+      "sha256": "4b36467d2a4a1bdc3811855bf2b4a1bb73bed7d203f868ffab0160034dfe9490"
+    },
+    {
+      "path": "assets/selection-r01/catalog.json",
+      "sha256": "e8f3c5c2117d6691ba93a40b2d75af8a8181e4a9633ca2233831af82903e412f"
+    },
+    {
+      "path": "review/selection-r01/validation.json",
+      "sha256": "113befacbe187da0d02c404af7d8a7b0d101f4a48fdeba52330b5eea82dcaed5"
+    },
+    {
+      "path": "assets/selection-r01/mechanics-left-vr-r01-walk.glb.ids.bin",
+      "sha256": "93c319fedba83fc61d4784f844c3227a2b644d425111ce1f752994a082edf218"
+    },
+    {
+      "path": "assets/selection-r01/mechanics-left-vr-r01-detail.glb.ids.bin",
+      "sha256": "55b3c4cbec4bebdb3dd24bcca8dd4742fe9dabd49fcea64b6099ec779b71db4d"
+    },
+    {
+      "path": "assets/selection-r01/mechanics-right-vr-r01-walk.glb.ids.bin",
+      "sha256": "780ea1b3e347b4caef12c6e34fbd45b0fa37e63326ee205a8691d717deabfe53"
+    },
+    {
+      "path": "assets/selection-r01/mechanics-right-vr-r01-detail.glb.ids.bin",
+      "sha256": "c61aa262348028c71994428290c72c74c4ec7660686a132ba613a67cc25d679a"
+    },
+    {
+      "path": "assets/selection-r01/machinery-bulkhead-vr-r01-bulkhead.glb.ids.bin",
+      "sha256": "1d9faf081a839bb12db2bf353798817c937d948bf3e4f6d80f38e1b2be1c0f04"
+    },
+    {
+      "path": "assets/selection-r01/machinery-electrical-vr-r01-electrical.glb.ids.bin",
+      "sha256": "eeed7247bbb2ac57ae06b831fc0a1c4767466a894961866b51640e2dc18768ac"
+    },
+    {
+      "path": "assets/selection-r01/machinery-filter-well-r01-well.glb.ids.bin",
+      "sha256": "ae7db9443b7165c726ee69835b7dc9cbd3f5c200289b4d9c3e1c7bc90a8e34b8"
+    },
+    {
+      "path": "assets/selection-r01/machinery-room.glb.ids.bin",
+      "sha256": "98043a20f0f70d4508e69b287324a959607bfcd9e673d6c534d62c400b0dd9cd"
+    }
+  ],
+  "graphicsErrors": [],
+  "softwareRenderer": true,
+  "hardwareFPSMeasured": false,
+  "imageHashes": {
+    "before.png": "b036a6aca1aaa2984856b71ee6f49fd295fc5e5536c6d5434b2bca85481d5a57",
+    "selected.png": "c8976383c9b8085b468b3b02f13115977268821b55bfca5fb05c2236ca3902a2",
+    "restored.png": "b036a6aca1aaa2984856b71ee6f49fd295fc5e5536c6d5434b2bca85481d5a57"
+  }
+}

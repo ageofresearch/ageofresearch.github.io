@@ -1,11 +1,11 @@
 {
-  "version": 9,
-  "build": "equipment-selection-r01",
+  "version": 10,
+  "build": "machinery-loading-r01",
   "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&selection=equipment-r01&release=equipment-selection-r01",
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
   "visualStatus": "KOHLER and local equipment corrected; private native8/4 comparison retained. Hidden depth inferred. No complete photometric or95% edge equivalence claimed.",
-  "assetManifestSHA256": "4b36467d2a4a1bdc3811855bf2b4a1bb73bed7d203f868ffab0160034dfe9490",
+  "assetManifestSHA256": "8cfcad1cf96b6b76ee0d1632483c73f677810b533815c6001ab1c0f95a37ac79",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -33,14 +33,14 @@
   "functionalBrowserChecks": true,
   "renderer": "Three.js0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1065461760,
+    "bytes": 1065748480,
     "limit": 1073741824,
-    "headroomBytes": 8280064,
+    "headroomBytes": 7993344,
     "preferredHeadroomBytes": 33554432,
     "preferredHeadroomMet": false,
     "note": "The independent Renderpeople gallery commit reduced the previously reported 32 MiB reserve before this selection change. This release preserves that gallery and the original yacht; the actual entire Pages artifact remains below 1 GiB."
   },
-  "previousBuild": "pedestal-r01",
+  "previousBuild": "equipment-selection-r01",
   "pedestalRepair": {
     "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
     "closedBoundary": true,
@@ -65,5 +65,13 @@
     "checks": 149,
     "outsideMaskPixels": 0,
     "review": "review/selection-r01/"
+  },
+  "loading": {
+    "id": "machinery-loading-r01",
+    "scope": "Complete walking scene and both engine LODs; inspection remains on request",
+    "resources": 87,
+    "bytes": 185742923,
+    "verifiedGpuBarrier": true,
+    "review": "review/loading-r01/"
   }
 }

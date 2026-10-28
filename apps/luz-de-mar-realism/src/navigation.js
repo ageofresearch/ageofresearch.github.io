@@ -15,9 +15,9 @@ export class RoomNavigation{
 export class WalkingControls{
  constructor(app){this.app=app;this.keys=new Set();this.disposers=[];this.yaw=0;this.pitch=0;const canvas=app.renderer.domElement;let pointer=null,last=[0,0];
   const on=(el,k,fn,o)=>{el.addEventListener(k,fn,o);this.disposers.push(()=>el.removeEventListener(k,fn,o));};
-  on(window,'keydown',e=>{if(app.deckMap?.open)return;if(/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();this.keys.add(e.code);app.invalidate(true);}if(e.code==='KeyE'&&!e.repeat)app.toggleDoor();});
+  on(window,'keydown',e=>{if(app.loading||app.deckMap?.open)return;if(/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();this.keys.add(e.code);app.invalidate(true);}if(e.code==='KeyE'&&!e.repeat)app.toggleDoor();});
   on(window,'keyup',e=>this.keys.delete(e.code));on(window,'blur',()=>this.clear());
-  on(canvas,'pointerdown',e=>{pointer=e.pointerId;last=[e.clientX,e.clientY];canvas.setPointerCapture(pointer);});
+  on(canvas,'pointerdown',e=>{if(app.loading)return;pointer=e.pointerId;last=[e.clientX,e.clientY];canvas.setPointerCapture(pointer);});
   on(canvas,'pointermove',e=>{if(e.pointerId!==pointer)return;this.yaw-=(e.clientX-last[0])*.0022;this.pitch=Math.max(-1.35,Math.min(1.35,this.pitch-(e.clientY-last[1])*.0022));last=[e.clientX,e.clientY];this.apply();app.invalidate(true);});
   on(canvas,'pointerup',()=>pointer=null);on(canvas,'pointercancel',()=>pointer=null);
   for(const b of document.querySelectorAll('[data-move]')){const key=b.dataset.move;on(b,'pointerdown',e=>{e.preventDefault();this.keys.add(key);b.setPointerCapture(e.pointerId);app.invalidate(true);});for(const k of['pointerup','pointercancel','lostpointercapture'])on(b,k,()=>this.keys.delete(key));}

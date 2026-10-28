@@ -13,6 +13,7 @@ export class InstalledBulkhead {
   this.externalSignal=signal;this.onAbort=()=>this.dispose();signal.addEventListener('abort',this.onAbort,{once:true});
  }
  async bytes(name,signal){
+  if(this.app.assets){const bytes=await this.app.assets.bytes(this.spec.base+name,signal),expected=this.spec.hashes[name];if(!expected)throw Error('Falta la versión del activo del '+this.label);const actual=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join('');if(actual!==expected)throw Error('El activo del '+this.label+' no coincide con su versión');signal.throwIfAborted();return bytes;}
   const response=await fetch(assetURL(this.spec.base+name),{signal});if(!response.ok)throw Error('No se pudo preparar el '+this.label+' ('+response.status+')');
   const bytes=await response.arrayBuffer(),expected=this.spec.hashes[name];if(!expected)throw Error('Falta la versión del activo del '+this.label);
   const digest=await crypto.subtle.digest('SHA-256',bytes),actual=[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('');

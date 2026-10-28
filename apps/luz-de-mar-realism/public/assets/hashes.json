@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "algorithm": "SHA-256",
   "scope": "New page subtree excluding hashes.json and publication.json",
   "files": {
@@ -115,17 +115,21 @@
       "bytes": 4435,
       "sha256": "911f9fa8e7b415094258ac64d0cbc0c6d24330e5ba6ee952db3a7d349c811a55"
     },
+    "assets/entry-load-r01.json": {
+      "bytes": 29034,
+      "sha256": "9477914888716bdb175f139449d4f00bb7663b9d05e7f9ed6097d48af53c82c3"
+    },
     "assets/exterior-inventory.json": {
       "bytes": 73028,
       "sha256": "1b1f5a05fd29b12889951b6ad5ee1b424503ded9b3da969dec468f2963586093"
     },
-    "assets/index-B63_j5My.css": {
-      "bytes": 11614,
-      "sha256": "ee88006a2d53f399c97e440f7ea9a3538b52c4c281b77d586d1ed1d664c21808"
+    "assets/index-CrB7J_xO.css": {
+      "bytes": 12087,
+      "sha256": "522614cd4f1062cea604b24fda2b11b0f561b4717760183857a55411a092576b"
     },
-    "assets/index-CWOg_-W0.js": {
-      "bytes": 231147,
-      "sha256": "344370cf8d293409ce35bca92cf4e623199a5c90f06d8db15d6b6884e9f09d2b"
+    "assets/index-Dh6Aj5m6.js": {
+      "bytes": 235664,
+      "sha256": "2d90e217ffd1dd33c5e23e1678210f8b331c02513875b7b1ca511532a71d7a95"
     },
     "assets/machinery/ambient-architecture.exr": {
       "bytes": 12462030,
@@ -307,9 +311,9 @@
       "bytes": 20018,
       "sha256": "0f2d84b0b98d1f4273ca951087aeb1ab48b9c6909695fb2b804bd895e9454224"
     },
-    "assets/mechanics-SjsC9Jei.js": {
-      "bytes": 263985,
-      "sha256": "9cacd61aa4b9d1bf18dcb81923a4314e907892e4e074cdcc4b13dd3ad0cc9f7d"
+    "assets/mechanics-D1trw_Hi.js": {
+      "bytes": 266710,
+      "sha256": "ff736a657e19450346a050a52d4c86dcd24662a330d3915abf9de14270f0e899"
     },
     "assets/mechanics/left-vr-r01/authoring.json": {
       "bytes": 88483,
@@ -675,9 +679,9 @@
       "bytes": 219156,
       "sha256": "5fa1b993d43affb86645965c4084b3e58dcc07cd3781794cac217805e09ec36f"
     },
-    "assets/shading-D8DGXUaJ.js": {
-      "bytes": 539663,
-      "sha256": "1497caa252fa422964f22bd5d49d349974f98d07f9155bfe948bfde0a68d0815"
+    "assets/shading-DQq6AEXp.js": {
+      "bytes": 548216,
+      "sha256": "8b229222a11ac7ca0b421fa60b849a6b512313a3aae806b03ba61669ab957592"
     },
     "assets/starboard-side/ambient-starboard-side.exr": {
       "bytes": 12903807,
@@ -740,8 +744,8 @@
       "sha256": "d9a3769d62ff8947f43fc0dcb9f8422e1ebd213aa32f5d035ef4a51a708c0671"
     },
     "index.html": {
-      "bytes": 5788,
-      "sha256": "80e48e2aed50f3bbafc5bf371f6247012023db07c8be01464e853ceca1e62dcb"
+      "bytes": 6894,
+      "sha256": "05baf44992e8483fb7c1b75582eb31288e43e87ba43d463afc3880838c110819"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -1294,6 +1298,26 @@
     "review/left-engine-grid.html": {
       "bytes": 10374,
       "sha256": "17569963286dfc7107ab5da668f7a68ed264e9c77726796c35a388b0799dcec2"
+    },
+    "review/loading-r01/download.webp": {
+      "bytes": 7382,
+      "sha256": "2d690e1000594effbc95987231b9f7c9bf508ed7fea31e25a70f38b3b527c9fa"
+    },
+    "review/loading-r01/graphics.webp": {
+      "bytes": 7816,
+      "sha256": "ff16efef5b8433d16f8447679d67d50faa362f83b612bb1269cdac4e28b1b6ae"
+    },
+    "review/loading-r01/index.html": {
+      "bytes": 2759,
+      "sha256": "0f42a77c163bf6ce6f78c1528805b34138494671102f82be04b5afb76d825018"
+    },
+    "review/loading-r01/ready.webp": {
+      "bytes": 109006,
+      "sha256": "a5e9e47543fa95669049b6f8bb98831e159f762e8b7154dbe4961e566b52af97"
+    },
+    "review/loading-r01/validation.json": {
+      "bytes": 102564,
+      "sha256": "ce1a1b04cceb4c0797da0dab675dd6ec05b726bdce5170cf07c3b776c688d321"
     },
     "review/machinery-candidate-floor.webp": {
       "bytes": 95884,

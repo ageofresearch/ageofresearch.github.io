@@ -1,0 +1,3792 @@
+{
+  "id": "machinery-loading-r01",
+  "success": true,
+  "sceneResources": 87,
+  "sceneBytes": 185742923,
+  "payloadPeakBytes": 185742923,
+  "payloadBytesAfterReady": 0,
+  "normalCaptureMs": 77971,
+  "normalCaptureConditions": "New browser context; CDN cache state unknown",
+  "softwareRenderer": true,
+  "hardwareFPSMeasured": false,
+  "initialGraphicsEstimate": {
+    "geometryBytes": 96751308,
+    "textureBytes": 586115409,
+    "shadowDepthBytes": 8388608,
+    "totalBytes": 691255325,
+    "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+  },
+  "jsHeap": {
+    "usedSize": 14629384,
+    "totalSize": 17874944,
+    "embedderHeapUsedSize": 2400264,
+    "backingStorageSize": 652463074
+  },
+  "originalYachtFilesVerified": 629,
+  "existingNonCodeFilesPreserved": 400,
+  "browser": {
+    "checks": {
+      "everyDelayedDependencyBlocksReveal": true,
+      "download100IsNotReady": true,
+      "controlsLocked": true,
+      "completeSceneAndLazyInspection": true,
+      "uniqueDownloads": true,
+      "approachNeedsNoDownloads": true,
+      "compilationFailureRetainsLoader": true,
+      "preparationRetry": true,
+      "downloadFailureAndRetry": true
+    },
+    "errors": [],
+    "softwareRenderer": true,
+    "initialMs": 59643,
+    "initial": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 185742923,
+        "totalBytes": 185742923,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 185742923
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 9,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          640,
+          400
+        ]
+      },
+      "canvas": [
+        640,
+        400
+      ],
+      "calls": 75,
+      "triangles": 428439,
+      "memory": {
+        "geometries": 266,
+        "textures": 212
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 691255325,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "progress": [
+      {
+        "phase": "download",
+        "bytes": 0,
+        "total": 185742923,
+        "files": 0,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 14408229,
+        "total": 185742923,
+        "files": 16,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 51036967,
+        "total": 185742923,
+        "files": 21,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 57045076,
+        "total": 185742923,
+        "files": 27,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 65104468,
+        "total": 185742923,
+        "files": 27,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 73697091,
+        "total": 185742923,
+        "files": 28,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 86422775,
+        "total": 185742923,
+        "files": 30,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 91070644,
+        "total": 185742923,
+        "files": 31,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 94432379,
+        "total": 185742923,
+        "files": 32,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 96692807,
+        "total": 185742923,
+        "files": 35,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 96810451,
+        "total": 185742923,
+        "files": 36,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 98580231,
+        "total": 185742923,
+        "files": 53,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 98673852,
+        "total": 185742923,
+        "files": 55,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 98969408,
+        "total": 185742923,
+        "files": 59,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 100323030,
+        "total": 185742923,
+        "files": 63,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 103600748,
+        "total": 185742923,
+        "files": 63,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 106113326,
+        "total": 185742923,
+        "files": 63,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 108390124,
+        "total": 185742923,
+        "files": 63,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 111916462,
+        "total": 185742923,
+        "files": 64,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 118120454,
+        "total": 185742923,
+        "files": 64,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 129639030,
+        "total": 185742923,
+        "files": 66,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 147576152,
+        "total": 185742923,
+        "files": 68,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 161640812,
+        "total": 185742923,
+        "files": 71,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 165840438,
+        "total": 185742923,
+        "files": 72,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 178631935,
+        "total": 185742923,
+        "files": 74,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 184434495,
+        "total": 185742923,
+        "files": 78,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 184435618,
+        "total": 185742923,
+        "files": 81,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 185713066,
+        "total": 185742923,
+        "files": 85,
+        "totalFiles": 87
+      },
+      {
+        "phase": "download",
+        "bytes": 185741422,
+        "total": 185742923,
+        "files": 86,
+        "totalFiles": 87
+      },
+      {
+        "phase": "processing",
+        "bytes": 185742923,
+        "total": 185742923,
+        "files": 87,
+        "totalFiles": 87
+      }
+    ],
+    "reveals": [
+      {
+        "status": "ready",
+        "loading": {
+          "id": "entry-1",
+          "label": "Cuarto de máquinas",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 185742923,
+          "totalBytes": 185742923,
+          "files": 87,
+          "totalFiles": 87,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 185742923
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "time": 59628.20000000298
+      },
+      {
+        "status": "ready",
+        "loading": {
+          "id": "entry-3",
+          "label": "Cuarto de máquinas",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 181453287,
+          "totalBytes": 181453287,
+          "files": 75,
+          "totalFiles": 75,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 181453287
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "time": 97483.5
+      },
+      {
+        "status": "ready",
+        "loading": {
+          "id": "entry-5",
+          "label": "Cuarto de máquinas",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 181453287,
+          "totalBytes": 181453287,
+          "files": 75,
+          "totalFiles": 75,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 181453287
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "time": 123793
+      }
+    ],
+    "final": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-5",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 181453287,
+        "totalBytes": 181453287,
+        "files": 75,
+        "totalFiles": 75,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 181453287
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 27,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          640,
+          400
+        ]
+      },
+      "canvas": [
+        640,
+        400
+      ],
+      "calls": 116,
+      "triangles": 507070,
+      "memory": {
+        "geometries": 273,
+        "textures": 212
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 691255325,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 1000.6999999880791,
+        "p95": 1000.6999999880791
+      },
+      "shadowUpdates": 58,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true,
+    "last": {
+      "status": "ready",
+      "loading": {
+        "id": "entry-5",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 181453287,
+        "totalBytes": 181453287,
+        "files": 75,
+        "totalFiles": 75,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 181453287
+      },
+      "detail": "Listo"
+    }
+  },
+  "lifecycle": {
+    "checks": {
+      "hiddenTabWaitsBeforePresentation": true,
+      "obsoleteSessionCannotReveal": true,
+      "inspectionHasRealProgress": true,
+      "resourcesStable": true,
+      "contextRecoveryUsesBarrier": true,
+      "demandDrawingPreserved": true
+    },
+    "errors": [],
+    "cycles": [
+      {
+        "memory": {
+          "geometries": 306,
+          "textures": 232
+        },
+        "buffers": 0,
+        "presentationReady": true
+      },
+      {
+        "memory": {
+          "geometries": 306,
+          "textures": 232
+        },
+        "buffers": 0,
+        "presentationReady": true
+      },
+      {
+        "memory": {
+          "geometries": 306,
+          "textures": 232
+        },
+        "buffers": 0,
+        "presentationReady": true
+      }
+    ],
+    "softwareRenderer": true,
+    "operations": [
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 364697,
+        "totalBytes": 15364833,
+        "files": 0,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz",
+          "assets/mechanics/mtu-r03/inspection.json"
+        ],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 0
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 364697,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 909465,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1224857,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1320089,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1415321,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1480857,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1576089,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1701017,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1957017,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1986713,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2052249,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2081945,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2147481,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2177177,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2242713,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2272409,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2337945,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2433177,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2461849,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2462873,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2528409,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2558105,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2909337,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 3319961,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 3415193,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 3891353,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4559001,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4784281,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4849817,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4915353,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 5111961,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 5314960,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 5558884,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 5874329,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 5939865,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 6070937,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 6195759,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 6261295,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 6326831,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 6656153,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 8686127,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 8753305,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 8818841,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 8884377,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 8949913,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9080985,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9146521,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9212057,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9277593,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9343129,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9408665,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9474201,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9605273,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9736345,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9801881,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 9867417,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 10064025,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 10129561,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 10457241,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 10850457,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 12423321,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 12947609,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 14782617,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 15044761,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 15364833,
+        "totalBytes": 15364833,
+        "files": 1,
+        "totalFiles": 2,
+        "pending": [
+          "assets/mechanics/mtu-r03/inspection.bin.gz"
+        ],
+        "bufferedBytes": 364697,
+        "peakBufferedBytes": 364697
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 15364833,
+        "totalBytes": 15364833,
+        "files": 2,
+        "totalFiles": 2,
+        "pending": [],
+        "bufferedBytes": 15364833,
+        "peakBufferedBytes": 15364833
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "processing",
+        "message": "Descomprimiendo y comprobando la geometría…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 15364833,
+        "totalBytes": 15364833,
+        "files": 2,
+        "totalFiles": 2,
+        "pending": [],
+        "bufferedBytes": 15364833,
+        "peakBufferedBytes": 15364833
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "graphics",
+        "message": "Preparando materiales del mecanismo…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 15364833,
+        "totalBytes": 15364833,
+        "files": 2,
+        "totalFiles": 2,
+        "pending": [],
+        "bufferedBytes": 15364833,
+        "peakBufferedBytes": 15364833
+      },
+      {
+        "id": "inspection/motor",
+        "label": "Corte y animación interna",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 15364833,
+        "totalBytes": 15364833,
+        "files": 2,
+        "totalFiles": 2,
+        "pending": [],
+        "bufferedBytes": 15364833,
+        "peakBufferedBytes": 15364833
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1530,
+        "totalBytes": 4394729,
+        "files": 0,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz",
+          "assets/mechanics/sea-strainers/inspection.json",
+          "assets/mechanics/sea-strainers/motion.json"
+        ],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 0
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 1530,
+        "totalBytes": 4394729,
+        "files": 1,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz",
+          "assets/mechanics/sea-strainers/motion.json"
+        ],
+        "bufferedBytes": 1530,
+        "peakBufferedBytes": 1530
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 12039,
+        "totalBytes": 4394729,
+        "files": 1,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz",
+          "assets/mechanics/sea-strainers/motion.json"
+        ],
+        "bufferedBytes": 1530,
+        "peakBufferedBytes": 1530
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 12039,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2109191,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2155271,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2220807,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2286343,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2307847,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2373383,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2460423,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 2678535,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 3049223,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 3659527,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4138759,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4206343,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4271879,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4291335,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4394729,
+        "totalBytes": 4394729,
+        "files": 2,
+        "totalFiles": 3,
+        "pending": [
+          "assets/mechanics/sea-strainers/inspection.bin.gz"
+        ],
+        "bufferedBytes": 12039,
+        "peakBufferedBytes": 12039
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "download",
+        "message": "Descargando recursos…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4394729,
+        "totalBytes": 4394729,
+        "files": 3,
+        "totalFiles": 3,
+        "pending": [],
+        "bufferedBytes": 4394729,
+        "peakBufferedBytes": 4394729
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "processing",
+        "message": "Descomprimiendo y comprobando la geometría…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4394729,
+        "totalBytes": 4394729,
+        "files": 3,
+        "totalFiles": 3,
+        "pending": [],
+        "bufferedBytes": 4394729,
+        "peakBufferedBytes": 4394729
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "graphics",
+        "message": "Preparando materiales del cesto…",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4394729,
+        "totalBytes": 4394729,
+        "files": 3,
+        "totalFiles": 3,
+        "pending": [],
+        "bufferedBytes": 4394729,
+        "peakBufferedBytes": 4394729
+      },
+      {
+        "id": "inspection/filter",
+        "label": "Extracción de filtros",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": false,
+        "bytes": 4394729,
+        "totalBytes": 4394729,
+        "files": 3,
+        "totalFiles": 3,
+        "pending": [],
+        "bufferedBytes": 4394729,
+        "peakBufferedBytes": 4394729
+      }
+    ],
+    "final": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-11",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 181453287,
+        "totalBytes": 181453287,
+        "files": 75,
+        "totalFiles": 75,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 181453287
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 51,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          480,
+          300
+        ]
+      },
+      "canvas": [
+        480,
+        300
+      ],
+      "calls": 75,
+      "triangles": 428439,
+      "memory": {
+        "geometries": 266,
+        "textures": 212
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 602892625,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 724809757,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "shadowUpdates": 155,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true,
+    "last": {
+      "status": "ready",
+      "stats": {
+        "room": "machinery",
+        "loading": {
+          "id": "entry-11",
+          "label": "Cuarto de máquinas",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 181453287,
+          "totalBytes": 181453287,
+          "files": 75,
+          "totalFiles": 75,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 181453287
+        },
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 0
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          0
+        ],
+        "frames": 51,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "machinery",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            480,
+            300
+          ]
+        },
+        "canvas": [
+          480,
+          300
+        ],
+        "calls": 75,
+        "triangles": 428439,
+        "memory": {
+          "geometries": 266,
+          "textures": 212
+        },
+        "estimatedMemory": {
+          "geometryBytes": 96751308,
+          "textureBytes": 602892625,
+          "shadowDepthBytes": 25165824,
+          "totalBytes": 724809757,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "shadowUpdates": 155,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  },
+  "selection": {
+    "url": "http://127.0.0.1:5261/",
+    "checks": {
+      "exactRestoration": true,
+      "escape": true,
+      "frontmostEquipmentAndReplacement": true,
+      "unselectableClears": true,
+      "dragDoesNotSelect": true
+    },
+    "errors": [],
+    "softwareRenderer": true,
+    "initial": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 185742923,
+        "totalBytes": 185742923,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 185742923
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 11,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          800,
+          500
+        ]
+      },
+      "canvas": [
+        800,
+        500
+      ],
+      "calls": 116,
+      "triangles": 507070,
+      "memory": {
+        "geometries": 269,
+        "textures": 212
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 691255325,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 3,
+        "p50": 5,
+        "p95": 4687.9000000059605
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "points": [
+      {
+        "x": 250,
+        "y": 270,
+        "value": 23,
+        "id": "engine-port"
+      },
+      {
+        "x": 400,
+        "y": 270,
+        "value": 23,
+        "id": "engine-port"
+      },
+      {
+        "x": 500,
+        "y": 280,
+        "value": 23,
+        "id": "engine-port"
+      },
+      {
+        "x": 370,
+        "y": 400,
+        "value": 25,
+        "id": "extinguisher-port"
+      },
+      {
+        "x": 390,
+        "y": 180,
+        "value": 40,
+        "id": "rail-port"
+      },
+      {
+        "x": 350,
+        "y": 120,
+        "value": 40,
+        "id": "rail-port"
+      },
+      {
+        "x": 700,
+        "y": 380,
+        "value": 29,
+        "id": "floor-register"
+      }
+    ],
+    "clickTiming": {
+      "softwareRenderer": true,
+      "cssPoint": [
+        250,
+        270
+      ],
+      "milliseconds": [
+        7452.0999999940395,
+        140,
+        154.79999999701977,
+        137.5,
+        293
+      ],
+      "identityAttributeBytes": 3635720
+    },
+    "final": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 185742923,
+        "totalBytes": 185742923,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 185742923
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 19,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 8
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 24,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          800,
+          500
+        ]
+      },
+      "canvas": [
+        800,
+        500
+      ],
+      "calls": 72,
+      "triangles": 427525,
+      "memory": {
+        "geometries": 269,
+        "textures": 213
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 691255325,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 2,
+        "p50": 4716.5,
+        "p95": 4716.5
+      },
+      "submissionMs": {
+        "samples": 16,
+        "p50": 5,
+        "p95": 4687.9000000059605
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true,
+    "lastState": {
+      "status": "ready",
+      "stats": {
+        "room": "machinery",
+        "loading": {
+          "id": "entry-1",
+          "label": "Cuarto de máquinas",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 185742923,
+          "totalBytes": 185742923,
+          "files": 87,
+          "totalFiles": 87,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 185742923
+        },
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 19,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 8
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": true,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          0
+        ],
+        "frames": 24,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            800,
+            500
+          ]
+        },
+        "canvas": [
+          800,
+          500
+        ],
+        "calls": 72,
+        "triangles": 427525,
+        "memory": {
+          "geometries": 269,
+          "textures": 213
+        },
+        "estimatedMemory": {
+          "geometryBytes": 96751308,
+          "textureBytes": 586115409,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 691255325,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 2,
+          "p50": 4716.5,
+          "p95": 4716.5
+        },
+        "submissionMs": {
+          "samples": 16,
+          "p50": 5,
+          "p95": 4687.9000000059605
+        },
+        "shadowUpdates": 16,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "loading": "Listo"
+    }
+  },
+  "bootstrap": {
+    "cases": [
+      {
+        "kind": "js",
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 400
+        },
+        "status": null,
+        "retryVisible": true
+      },
+      {
+        "kind": "css",
+        "box": {
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 400
+        },
+        "status": "error",
+        "retryVisible": true
+      }
+    ],
+    "pass": true
+  },
+  "normalCapture": {
+    "url": "http://127.0.0.1:5261/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=equipment-selection-r01",
+    "errors": [],
+    "softwareRenderer": true,
+    "cache": "New browser context; CDN cache state unknown",
+    "firstReveal": [
+      {
+        "time": 77948.80000001192,
+        "stats": {
+          "room": "machinery",
+          "loading": {
+            "id": "entry-1",
+            "label": "Cuarto de máquinas",
+            "phase": "ready",
+            "message": "Listo",
+            "error": "",
+            "presentationReady": true,
+            "bytes": 185742923,
+            "totalBytes": 185742923,
+            "files": 87,
+            "totalFiles": 87,
+            "pending": [],
+            "bufferedBytes": 0,
+            "peakBufferedBytes": 185742923
+          },
+          "selection": {
+            "enabled": true,
+            "selected": null,
+            "pickPasses": 0,
+            "errors": [],
+            "catalogCount": 56,
+            "targetBytes": 0
+          },
+          "machinery": {
+            "active": true,
+            "bulkhead": {
+              "ready": true,
+              "loading": false,
+              "error": "",
+              "active": true,
+              "committed": true,
+              "waitingForSafePosition": false,
+              "triangles": 178508,
+              "version": "generator-vr-r01",
+              "label": "frente eléctrico y KOHLER"
+            },
+            "filterWell": {
+              "waitingForSafePosition": false,
+              "ready": true,
+              "loading": false,
+              "committed": true,
+              "error": "",
+              "version": "filter-well-r01",
+              "register": [
+                11.05,
+                -0.49,
+                12.75,
+                0.49
+              ]
+            },
+            "exteriorTrianglesPerEngine": 382211,
+            "installed": {
+              "configured": true,
+              "ready": true,
+              "loading": false,
+              "error": "",
+              "active": true,
+              "lod": "walk",
+              "detailLoaded": true,
+              "visible": true,
+              "triangles": 102574,
+              "lighting": "Full baked diffuse and local probe specular",
+              "receiverEnabled": true
+            },
+            "installedRight": {
+              "configured": true,
+              "ready": true,
+              "loading": false,
+              "error": "",
+              "active": true,
+              "lod": "walk",
+              "detailLoaded": true,
+              "visible": true,
+              "triangles": 122837,
+              "lighting": "Full baked diffuse and local probe specular",
+              "receiverEnabled": true
+            },
+            "inspectionLoaded": false,
+            "filterInspectionLoaded": false,
+            "processingMechanics": false,
+            "poseTextureBytes": 0,
+            "motor": {
+              "selected": "port",
+              "cutaway": false,
+              "requestedCut": false,
+              "playing": false,
+              "time": 0,
+              "loading": false,
+              "error": ""
+            },
+            "filters": {
+              "selected": "port",
+              "accessOpen": false,
+              "progress": 0,
+              "target": 0,
+              "moving": false,
+              "dirty": false,
+              "loading": false,
+              "error": ""
+            },
+            "doorOpen": false
+          },
+          "residentZones": [
+            "machinery"
+          ],
+          "pendingZones": [],
+          "sharedTextures": {
+            "textures": 81,
+            "references": 81
+          },
+          "elevation": 1.58,
+          "position": [
+            9.15,
+            0
+          ],
+          "frames": 8,
+          "ratio": 1,
+          "quality": 1,
+          "resolution": {
+            "mode": "sharp",
+            "source": "machinery",
+            "requestedDPR": 1,
+            "effectiveDPR": 1,
+            "hardwareLimited": false,
+            "canvas": [
+              1000,
+              625
+            ]
+          },
+          "canvas": [
+            1000,
+            625
+          ],
+          "calls": 75,
+          "triangles": 428439,
+          "memory": {
+            "geometries": 266,
+            "textures": 212
+          },
+          "estimatedMemory": {
+            "geometryBytes": 96751308,
+            "textureBytes": 586115409,
+            "shadowDepthBytes": 8388608,
+            "totalBytes": 691255325,
+            "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+          },
+          "frameMs": {
+            "samples": 0,
+            "p50": 0,
+            "p95": 0
+          },
+          "submissionMs": {
+            "samples": 0,
+            "p50": 0,
+            "p95": 0
+          },
+          "shadowUpdates": 16,
+          "errors": [],
+          "renderer": "WebKit WebGL"
+        },
+        "status": "ready"
+      }
+    ],
+    "initialMs": 77971,
+    "stats": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 185742923,
+        "totalBytes": 185742923,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 185742923
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 8,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          1000,
+          625
+        ]
+      },
+      "canvas": [
+        1000,
+        625
+      ],
+      "calls": 75,
+      "triangles": 428439,
+      "memory": {
+        "geometries": 266,
+        "textures": 212
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 691255325,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "jsHeap": {
+      "usedSize": 14629384,
+      "totalSize": 17874944,
+      "embedderHeapUsedSize": 2400264,
+      "backingStorageSize": 652463074
+    },
+    "pass": true,
+    "last": {
+      "status": "ready",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de máquinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 185742923,
+        "totalBytes": 185742923,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 185742923
+      },
+      "detail": "Listo"
+    }
+  },
+  "notes": [
+    "Download progress counts verified scene-content bytes, not estimated GPU preparation time.",
+    "Main application modules load during the indeterminate application stage.",
+    "Initial inspection buffers are absent; cutaway and basket extraction have separate progress.",
+    "The test-gated entry duration includes deliberate delays and must not be reported as ordinary loading time.",
+    "GPU memory is an estimate of resident payloads and excludes canvas/MSAA and driver/program caches."
+  ]
+}

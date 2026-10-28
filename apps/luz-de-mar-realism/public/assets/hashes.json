@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "algorithm": "SHA-256",
   "scope": "New page subtree excluding hashes.json and publication.json",
   "files": {
@@ -18,14 +18,6 @@
     "THREE-LICENSE.txt": {
       "bytes": 1081,
       "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
-    },
-    "assets/asset-version-BkUu_I7m.js": {
-      "bytes": 539629,
-      "sha256": "20514b57db70fad55eaef014453e9d9ebaad251120476add80bd2bfd881e6aca"
-    },
-    "assets/asset-version-Curezzlb.js": {
-      "bytes": 539603,
-      "sha256": "115e6272996197cc19df376a17531565ac637987361035c07a788e3f3931a2fc"
     },
     "assets/beach-club/ambient-beach-club.exr": {
       "bytes": 12815691,
@@ -131,13 +123,9 @@
       "bytes": 11614,
       "sha256": "ee88006a2d53f399c97e440f7ea9a3538b52c4c281b77d586d1ed1d664c21808"
     },
-    "assets/index-BcEB3HbN.js": {
-      "bytes": 214538,
-      "sha256": "a81064c629a07d0e29e0e46869fc8544d014a9dee61a84a25d851cec48102656"
-    },
-    "assets/index-JiWf8mUx.js": {
-      "bytes": 221105,
-      "sha256": "295dbf8e362ea6d6ae1ff919fef86fe0a3df388c4536551076335835c57fd9a4"
+    "assets/index-CWOg_-W0.js": {
+      "bytes": 231147,
+      "sha256": "344370cf8d293409ce35bca92cf4e623199a5c90f06d8db15d6b6884e9f09d2b"
     },
     "assets/machinery/ambient-architecture.exr": {
       "bytes": 12462030,
@@ -319,13 +307,9 @@
       "bytes": 20018,
       "sha256": "0f2d84b0b98d1f4273ca951087aeb1ab48b9c6909695fb2b804bd895e9454224"
     },
-    "assets/mechanics-Dsyc_iN3.js": {
-      "bytes": 263354,
-      "sha256": "06f948b7d7a3b4a596eda8fdd170af8d69b64de967481f50084d3a323a28f880"
-    },
-    "assets/mechanics-FQLybPg1.js": {
-      "bytes": 262914,
-      "sha256": "88c3313805cd3980e857cfedd49c8032e8759bf7905c62c17894e39f96e4c466"
+    "assets/mechanics-SjsC9Jei.js": {
+      "bytes": 263985,
+      "sha256": "9cacd61aa4b9d1bf18dcb81923a4314e907892e4e074cdcc4b13dd3ad0cc9f7d"
     },
     "assets/mechanics/left-vr-r01/authoring.json": {
       "bytes": 88483,
@@ -651,6 +635,50 @@
       "bytes": 59833,
       "sha256": "b58e8d212beca9d626423a62f4313e857ba3056d408dce71b77a6e9d33f0c6ee"
     },
+    "assets/selection-r01/catalog.json": {
+      "bytes": 378826,
+      "sha256": "18eb14f78a0d4933c81319d4a635b1d991dcf7b0c58a0a3ef7ab96b7f55b496e"
+    },
+    "assets/selection-r01/machinery-bulkhead-vr-r01-bulkhead.glb.ids.bin": {
+      "bytes": 844,
+      "sha256": "1d9faf081a839bb12db2bf353798817c937d948bf3e4f6d80f38e1b2be1c0f04"
+    },
+    "assets/selection-r01/machinery-electrical-vr-r01-electrical.glb.ids.bin": {
+      "bytes": 901,
+      "sha256": "eeed7247bbb2ac57ae06b831fc0a1c4767466a894961866b51640e2dc18768ac"
+    },
+    "assets/selection-r01/machinery-filter-well-r01-well.glb.ids.bin": {
+      "bytes": 419,
+      "sha256": "ae7db9443b7165c726ee69835b7dc9cbd3f5c200289b4d9c3e1c7bc90a8e34b8"
+    },
+    "assets/selection-r01/machinery-room.glb.ids.bin": {
+      "bytes": 1501,
+      "sha256": "98043a20f0f70d4508e69b287324a959607bfcd9e673d6c534d62c400b0dd9cd"
+    },
+    "assets/selection-r01/mechanics-left-vr-r01-detail.glb.ids.bin": {
+      "bytes": 342,
+      "sha256": "55b3c4cbec4bebdb3dd24bcca8dd4742fe9dabd49fcea64b6099ec779b71db4d"
+    },
+    "assets/selection-r01/mechanics-left-vr-r01-walk.glb.ids.bin": {
+      "bytes": 373,
+      "sha256": "93c319fedba83fc61d4784f844c3227a2b644d425111ce1f752994a082edf218"
+    },
+    "assets/selection-r01/mechanics-right-vr-r01-detail.glb.ids.bin": {
+      "bytes": 408,
+      "sha256": "c61aa262348028c71994428290c72c74c4ec7660686a132ba613a67cc25d679a"
+    },
+    "assets/selection-r01/mechanics-right-vr-r01-walk.glb.ids.bin": {
+      "bytes": 404,
+      "sha256": "780ea1b3e347b4caef12c6e34fbd45b0fa37e63326ee205a8691d717deabfe53"
+    },
+    "assets/selection-r01/validation.json": {
+      "bytes": 219156,
+      "sha256": "5fa1b993d43affb86645965c4084b3e58dcc07cd3781794cac217805e09ec36f"
+    },
+    "assets/shading-D8DGXUaJ.js": {
+      "bytes": 539663,
+      "sha256": "1497caa252fa422964f22bd5d49d349974f98d07f9155bfe948bfde0a68d0815"
+    },
     "assets/starboard-side/ambient-starboard-side.exr": {
       "bytes": 12903807,
       "sha256": "f249a5461c7b690359c34bc9b73dd80bee89d1e89257ff4eac78a08c774a5788"
@@ -712,8 +740,8 @@
       "sha256": "d9a3769d62ff8947f43fc0dcb9f8422e1ebd213aa32f5d035ef4a51a708c0671"
     },
     "index.html": {
-      "bytes": 5794,
-      "sha256": "b0916f3daa6a0cadd24eb0651ce39936c3fd6b5f65733cd138805b3817ae58d8"
+      "bytes": 5788,
+      "sha256": "80e48e2aed50f3bbafc5bf371f6247012023db07c8be01464e853ceca1e62dcb"
     },
     "review/baseline-performance.json": {
       "bytes": 8559,
@@ -1526,6 +1554,22 @@
     "review/saloon-wood.webp": {
       "bytes": 60020,
       "sha256": "e5a4a312f1049230772abd76877bcd9d357c0ed06c006422be984ac0f05daca4"
+    },
+    "review/selection-r01/babor.webp": {
+      "bytes": 24386,
+      "sha256": "075878022151b703c5563a98b2b807c362a0e70b47da72c43d8c4c61a94fefd9"
+    },
+    "review/selection-r01/estribor.webp": {
+      "bytes": 23040,
+      "sha256": "070de467a1edca3d05d77ce680533c51f4b357d7104941b83186baf27be59e6f"
+    },
+    "review/selection-r01/index.html": {
+      "bytes": 2152,
+      "sha256": "2112a57a7a180457878531ce1f27261a2967e3849758623fdd0a8c43409b3ebb"
+    },
+    "review/selection-r01/validation.json": {
+      "bytes": 60888,
+      "sha256": "f5321350363714b8afac6929090f3f12a9983f778fbc8bd4d514ca61e2c16672"
     },
     "review/stage1-public-verification.json": {
       "bytes": 153976,

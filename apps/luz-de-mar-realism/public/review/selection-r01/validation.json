@@ -1,0 +1,2487 @@
+{
+  "id": "equipment-selection-r01",
+  "promoted": false,
+  "objects": 56,
+  "objectChecks": 149,
+  "distinctVisibleObjects": [
+    "asea-0",
+    "asea-1",
+    "battery-switchboard",
+    "bulkhead-manifold",
+    "bulkhead-manual-pump",
+    "bulkhead-pump",
+    "bulkhead-valve-middle-0",
+    "bulkhead-valve-middle-1",
+    "bulkhead-valve-middle-2",
+    "bulkhead-valve-upper-0",
+    "bulkhead-valve-upper-1",
+    "bulkhead-valve-upper-2",
+    "charger-0",
+    "charger-1",
+    "charger-2",
+    "charger-3",
+    "charger-4",
+    "climma-0",
+    "climma-1",
+    "climma-2",
+    "control-eco",
+    "control-epu",
+    "control-port-local",
+    "control-port-operating",
+    "control-scu",
+    "control-starboard-local",
+    "control-starboard-operating",
+    "engine-port",
+    "engine-starboard",
+    "extinguisher-port",
+    "extinguisher-starboard",
+    "filter-port",
+    "filter-starboard",
+    "floor-register",
+    "gearbox-port",
+    "gearbox-starboard",
+    "generator-auxiliary",
+    "generator-junction-upper",
+    "generator-port",
+    "generator-rear-control",
+    "generator-starboard",
+    "hearing-protection",
+    "intercom",
+    "main-switchboard",
+    "rail-port",
+    "rail-starboard",
+    "service-door",
+    "shore-power",
+    "vented-cabinet",
+    "ventilator",
+    "watermaker",
+    "well-manifold",
+    "well-valve-port-front",
+    "well-valve-port-rear",
+    "well-valve-starboard-front",
+    "well-valve-starboard-rear"
+  ],
+  "outsideMaskPixels": 0,
+  "exactRestoration": true,
+  "basic": {
+    "url": "http://127.0.0.1:5261/",
+    "checks": {
+      "exactRestoration": true,
+      "escape": true,
+      "frontmostEquipmentAndReplacement": true,
+      "unselectableClears": true,
+      "dragDoesNotSelect": true
+    },
+    "errors": [],
+    "softwareRenderer": true,
+    "initial": {
+      "room": "machinery",
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 8,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          800,
+          500
+        ]
+      },
+      "canvas": [
+        800,
+        500
+      ],
+      "calls": 116,
+      "triangles": 507070,
+      "memory": {
+        "geometries": 228,
+        "textures": 192
+      },
+      "estimatedMemory": {
+        "geometryBytes": 80805852,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 675309869,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 3,
+        "p50": 2.5,
+        "p95": 6935.699999988079
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "points": [
+      {
+        "x": 250,
+        "y": 270,
+        "value": 23,
+        "id": "engine-port"
+      },
+      {
+        "x": 400,
+        "y": 270,
+        "value": 23,
+        "id": "engine-port"
+      },
+      {
+        "x": 500,
+        "y": 280,
+        "value": 23,
+        "id": "engine-port"
+      },
+      {
+        "x": 370,
+        "y": 400,
+        "value": 25,
+        "id": "extinguisher-port"
+      },
+      {
+        "x": 390,
+        "y": 180,
+        "value": 40,
+        "id": "rail-port"
+      },
+      {
+        "x": 350,
+        "y": 120,
+        "value": 40,
+        "id": "rail-port"
+      },
+      {
+        "x": 700,
+        "y": 380,
+        "value": 29,
+        "id": "floor-register"
+      }
+    ],
+    "clickTiming": {
+      "softwareRenderer": true,
+      "cssPoint": [
+        250,
+        270
+      ],
+      "milliseconds": [
+        6369.5999999940395,
+        146.1000000089407,
+        137.09999999403954,
+        138,
+        128.1000000089407
+      ],
+      "identityAttributeBytes": 2982798
+    },
+    "final": {
+      "room": "machinery",
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 19,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 8
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 22,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          800,
+          500
+        ]
+      },
+      "canvas": [
+        800,
+        500
+      ],
+      "calls": 72,
+      "triangles": 427525,
+      "memory": {
+        "geometries": 228,
+        "textures": 193
+      },
+      "estimatedMemory": {
+        "geometryBytes": 80805852,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 675309869,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 2,
+        "p50": 2816.5,
+        "p95": 2816.5
+      },
+      "submissionMs": {
+        "samples": 17,
+        "p50": 4.799999997019768,
+        "p95": 6935.699999988079
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true,
+    "lastState": {
+      "status": "ready",
+      "stats": {
+        "room": "machinery",
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 19,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 8
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          0
+        ],
+        "frames": 22,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            800,
+            500
+          ]
+        },
+        "canvas": [
+          800,
+          500
+        ],
+        "calls": 72,
+        "triangles": 427525,
+        "memory": {
+          "geometries": 228,
+          "textures": 193
+        },
+        "estimatedMemory": {
+          "geometryBytes": 80805852,
+          "textureBytes": 586115409,
+          "shadowDepthBytes": 8388608,
+          "totalBytes": 675309869,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 2,
+          "p50": 2816.5,
+          "p95": 2816.5
+        },
+        "submissionMs": {
+          "samples": 17,
+          "p50": 4.799999997019768,
+          "p95": 6935.699999988079
+        },
+        "shadowUpdates": 16,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "loading": "Preparando materiales y luz…"
+    }
+  },
+  "masks": {
+    "url": "http://127.0.0.1:5261/",
+    "views": [
+      {
+        "name": "port",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          10.9,
+          1.2,
+          2.5
+        ],
+        "fov": 58,
+        "objects": [
+          {
+            "id": 30,
+            "count": 2236,
+            "label": "gearbox-port",
+            "changedPixels": 2262,
+            "outsideMask": 0
+          },
+          {
+            "id": 23,
+            "count": 46303,
+            "label": "engine-port",
+            "changedPixels": 47128,
+            "outsideMask": 0
+          },
+          {
+            "id": 25,
+            "count": 3461,
+            "label": "extinguisher-port",
+            "changedPixels": 3576,
+            "outsideMask": 0
+          },
+          {
+            "id": 40,
+            "count": 6142,
+            "label": "rail-port",
+            "changedPixels": 6750,
+            "outsideMask": 0
+          },
+          {
+            "id": 24,
+            "count": 75,
+            "label": "engine-starboard",
+            "changedPixels": 88,
+            "outsideMask": 0
+          },
+          {
+            "id": 29,
+            "count": 4461,
+            "label": "floor-register",
+            "changedPixels": 4712,
+            "outsideMask": 0
+          },
+          {
+            "id": 34,
+            "count": 52,
+            "label": "generator-port",
+            "changedPixels": 68,
+            "outsideMask": 0
+          },
+          {
+            "id": 41,
+            "count": 169,
+            "label": "rail-starboard",
+            "changedPixels": 198,
+            "outsideMask": 0
+          },
+          {
+            "id": 51,
+            "count": 27,
+            "label": "well-valve-starboard-rear",
+            "changedPixels": 41,
+            "outsideMask": 0
+          },
+          {
+            "id": 49,
+            "count": 19,
+            "label": "well-valve-port-rear",
+            "changedPixels": 33,
+            "outsideMask": 0
+          },
+          {
+            "id": 47,
+            "count": 392,
+            "label": "well-manifold",
+            "changedPixels": 457,
+            "outsideMask": 0
+          },
+          {
+            "id": 4,
+            "count": 2291,
+            "label": "bulkhead-manifold",
+            "changedPixels": 2765,
+            "outsideMask": 0
+          },
+          {
+            "id": 5,
+            "count": 462,
+            "label": "bulkhead-manual-pump",
+            "changedPixels": 510,
+            "outsideMask": 0
+          },
+          {
+            "id": 46,
+            "count": 747,
+            "label": "watermaker",
+            "changedPixels": 869,
+            "outsideMask": 0
+          },
+          {
+            "id": 6,
+            "count": 1114,
+            "label": "bulkhead-pump",
+            "changedPixels": 1222,
+            "outsideMask": 0
+          },
+          {
+            "id": 17,
+            "count": 1599,
+            "label": "control-epu",
+            "changedPixels": 1685,
+            "outsideMask": 0
+          },
+          {
+            "id": 19,
+            "count": 704,
+            "label": "control-port-operating",
+            "changedPixels": 763,
+            "outsideMask": 0
+          },
+          {
+            "id": 7,
+            "count": 75,
+            "label": "bulkhead-valve-middle-0",
+            "changedPixels": 91,
+            "outsideMask": 0
+          },
+          {
+            "id": 8,
+            "count": 71,
+            "label": "bulkhead-valve-middle-1",
+            "changedPixels": 90,
+            "outsideMask": 0
+          },
+          {
+            "id": 9,
+            "count": 85,
+            "label": "bulkhead-valve-middle-2",
+            "changedPixels": 93,
+            "outsideMask": 0
+          },
+          {
+            "id": 18,
+            "count": 1059,
+            "label": "control-port-local",
+            "changedPixels": 1096,
+            "outsideMask": 0
+          },
+          {
+            "id": 16,
+            "count": 264,
+            "label": "control-eco",
+            "changedPixels": 279,
+            "outsideMask": 0
+          },
+          {
+            "id": 10,
+            "count": 82,
+            "label": "bulkhead-valve-upper-0",
+            "changedPixels": 114,
+            "outsideMask": 0
+          },
+          {
+            "id": 12,
+            "count": 100,
+            "label": "bulkhead-valve-upper-2",
+            "changedPixels": 143,
+            "outsideMask": 0
+          },
+          {
+            "id": 11,
+            "count": 87,
+            "label": "bulkhead-valve-upper-1",
+            "changedPixels": 133,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "starboard",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          10.9,
+          -1.2,
+          2.5
+        ],
+        "fov": 58,
+        "objects": [
+          {
+            "id": 41,
+            "count": 6281,
+            "label": "rail-starboard",
+            "changedPixels": 6871,
+            "outsideMask": 0
+          },
+          {
+            "id": 24,
+            "count": 47270,
+            "label": "engine-starboard",
+            "changedPixels": 48119,
+            "outsideMask": 0
+          },
+          {
+            "id": 26,
+            "count": 2481,
+            "label": "extinguisher-starboard",
+            "changedPixels": 2743,
+            "outsideMask": 0
+          },
+          {
+            "id": 31,
+            "count": 2445,
+            "label": "gearbox-starboard",
+            "changedPixels": 2490,
+            "outsideMask": 0
+          },
+          {
+            "id": 23,
+            "count": 75,
+            "label": "engine-port",
+            "changedPixels": 89,
+            "outsideMask": 0
+          },
+          {
+            "id": 29,
+            "count": 4462,
+            "label": "floor-register",
+            "changedPixels": 4701,
+            "outsideMask": 0
+          },
+          {
+            "id": 40,
+            "count": 170,
+            "label": "rail-port",
+            "changedPixels": 194,
+            "outsideMask": 0
+          },
+          {
+            "id": 49,
+            "count": 27,
+            "label": "well-valve-port-rear",
+            "changedPixels": 38,
+            "outsideMask": 0
+          },
+          {
+            "id": 51,
+            "count": 19,
+            "label": "well-valve-starboard-rear",
+            "changedPixels": 31,
+            "outsideMask": 0
+          },
+          {
+            "id": 47,
+            "count": 390,
+            "label": "well-manifold",
+            "changedPixels": 453,
+            "outsideMask": 0
+          },
+          {
+            "id": 4,
+            "count": 2517,
+            "label": "bulkhead-manifold",
+            "changedPixels": 3054,
+            "outsideMask": 0
+          },
+          {
+            "id": 5,
+            "count": 468,
+            "label": "bulkhead-manual-pump",
+            "changedPixels": 523,
+            "outsideMask": 0
+          },
+          {
+            "id": 14,
+            "count": 370,
+            "label": "climma-1",
+            "changedPixels": 432,
+            "outsideMask": 0
+          },
+          {
+            "id": 6,
+            "count": 1065,
+            "label": "bulkhead-pump",
+            "changedPixels": 1157,
+            "outsideMask": 0
+          },
+          {
+            "id": 15,
+            "count": 178,
+            "label": "climma-2",
+            "changedPixels": 224,
+            "outsideMask": 0
+          },
+          {
+            "id": 22,
+            "count": 719,
+            "label": "control-starboard-operating",
+            "changedPixels": 820,
+            "outsideMask": 0
+          },
+          {
+            "id": 20,
+            "count": 603,
+            "label": "control-scu",
+            "changedPixels": 643,
+            "outsideMask": 0
+          },
+          {
+            "id": 7,
+            "count": 102,
+            "label": "bulkhead-valve-middle-0",
+            "changedPixels": 119,
+            "outsideMask": 0
+          },
+          {
+            "id": 8,
+            "count": 81,
+            "label": "bulkhead-valve-middle-1",
+            "changedPixels": 88,
+            "outsideMask": 0
+          },
+          {
+            "id": 9,
+            "count": 68,
+            "label": "bulkhead-valve-middle-2",
+            "changedPixels": 84,
+            "outsideMask": 0
+          },
+          {
+            "id": 21,
+            "count": 1048,
+            "label": "control-starboard-local",
+            "changedPixels": 1086,
+            "outsideMask": 0
+          },
+          {
+            "id": 12,
+            "count": 84,
+            "label": "bulkhead-valve-upper-2",
+            "changedPixels": 123,
+            "outsideMask": 0
+          },
+          {
+            "id": 10,
+            "count": 106,
+            "label": "bulkhead-valve-upper-0",
+            "changedPixels": 141,
+            "outsideMask": 0
+          },
+          {
+            "id": 11,
+            "count": 94,
+            "label": "bulkhead-valve-upper-1",
+            "changedPixels": 138,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "electrical",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          7.8,
+          0,
+          2.65
+        ],
+        "fov": 72,
+        "objects": [
+          {
+            "id": 36,
+            "count": 1260,
+            "label": "generator-starboard",
+            "changedPixels": 1337,
+            "outsideMask": 0
+          },
+          {
+            "id": 44,
+            "count": 14409,
+            "label": "vented-cabinet",
+            "changedPixels": 14627,
+            "outsideMask": 0
+          },
+          {
+            "id": 3,
+            "count": 14127,
+            "label": "battery-switchboard",
+            "changedPixels": 14271,
+            "outsideMask": 0
+          },
+          {
+            "id": 39,
+            "count": 21894,
+            "label": "main-switchboard",
+            "changedPixels": 22221,
+            "outsideMask": 0
+          },
+          {
+            "id": 32,
+            "count": 58,
+            "label": "generator-auxiliary",
+            "changedPixels": 74,
+            "outsideMask": 0
+          },
+          {
+            "id": 43,
+            "count": 8328,
+            "label": "shore-power",
+            "changedPixels": 8489,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "bulkhead",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          13,
+          0,
+          2.8
+        ],
+        "fov": 72,
+        "objects": [
+          {
+            "id": 23,
+            "count": 19077,
+            "label": "engine-port",
+            "changedPixels": 19558,
+            "outsideMask": 0
+          },
+          {
+            "id": 25,
+            "count": 1060,
+            "label": "extinguisher-port",
+            "changedPixels": 1127,
+            "outsideMask": 0
+          },
+          {
+            "id": 40,
+            "count": 4293,
+            "label": "rail-port",
+            "changedPixels": 4735,
+            "outsideMask": 0
+          },
+          {
+            "id": 41,
+            "count": 4317,
+            "label": "rail-starboard",
+            "changedPixels": 4768,
+            "outsideMask": 0
+          },
+          {
+            "id": 24,
+            "count": 18625,
+            "label": "engine-starboard",
+            "changedPixels": 19146,
+            "outsideMask": 0
+          },
+          {
+            "id": 26,
+            "count": 1401,
+            "label": "extinguisher-starboard",
+            "changedPixels": 1537,
+            "outsideMask": 0
+          },
+          {
+            "id": 29,
+            "count": 1963,
+            "label": "floor-register",
+            "changedPixels": 2115,
+            "outsideMask": 0
+          },
+          {
+            "id": 47,
+            "count": 148,
+            "label": "well-manifold",
+            "changedPixels": 197,
+            "outsideMask": 0
+          },
+          {
+            "id": 4,
+            "count": 786,
+            "label": "bulkhead-manifold",
+            "changedPixels": 1066,
+            "outsideMask": 0
+          },
+          {
+            "id": 5,
+            "count": 155,
+            "label": "bulkhead-manual-pump",
+            "changedPixels": 180,
+            "outsideMask": 0
+          },
+          {
+            "id": 46,
+            "count": 299,
+            "label": "watermaker",
+            "changedPixels": 353,
+            "outsideMask": 0
+          },
+          {
+            "id": 15,
+            "count": 104,
+            "label": "climma-2",
+            "changedPixels": 136,
+            "outsideMask": 0
+          },
+          {
+            "id": 6,
+            "count": 346,
+            "label": "bulkhead-pump",
+            "changedPixels": 377,
+            "outsideMask": 0
+          },
+          {
+            "id": 22,
+            "count": 532,
+            "label": "control-starboard-operating",
+            "changedPixels": 628,
+            "outsideMask": 0
+          },
+          {
+            "id": 17,
+            "count": 981,
+            "label": "control-epu",
+            "changedPixels": 1026,
+            "outsideMask": 0
+          },
+          {
+            "id": 20,
+            "count": 575,
+            "label": "control-scu",
+            "changedPixels": 620,
+            "outsideMask": 0
+          },
+          {
+            "id": 19,
+            "count": 566,
+            "label": "control-port-operating",
+            "changedPixels": 649,
+            "outsideMask": 0
+          },
+          {
+            "id": 7,
+            "count": 20,
+            "label": "bulkhead-valve-middle-0",
+            "changedPixels": 32,
+            "outsideMask": 0
+          },
+          {
+            "id": 8,
+            "count": 17,
+            "label": "bulkhead-valve-middle-1",
+            "changedPixels": 31,
+            "outsideMask": 0
+          },
+          {
+            "id": 9,
+            "count": 18,
+            "label": "bulkhead-valve-middle-2",
+            "changedPixels": 33,
+            "outsideMask": 0
+          },
+          {
+            "id": 21,
+            "count": 423,
+            "label": "control-starboard-local",
+            "changedPixels": 441,
+            "outsideMask": 0
+          },
+          {
+            "id": 18,
+            "count": 455,
+            "label": "control-port-local",
+            "changedPixels": 473,
+            "outsideMask": 0
+          },
+          {
+            "id": 16,
+            "count": 253,
+            "label": "control-eco",
+            "changedPixels": 280,
+            "outsideMask": 0
+          },
+          {
+            "id": 10,
+            "count": 23,
+            "label": "bulkhead-valve-upper-0",
+            "changedPixels": 47,
+            "outsideMask": 0
+          },
+          {
+            "id": 12,
+            "count": 20,
+            "label": "bulkhead-valve-upper-2",
+            "changedPixels": 45,
+            "outsideMask": 0
+          },
+          {
+            "id": 11,
+            "count": 19,
+            "label": "bulkhead-valve-upper-1",
+            "changedPixels": 51,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "charging",
+        "position": [
+          8.6,
+          -1.73,
+          3.23
+        ],
+        "target": [
+          7.9,
+          -3,
+          3.15
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 36,
+            "count": 17842,
+            "label": "generator-starboard",
+            "changedPixels": 18015,
+            "outsideMask": 0
+          },
+          {
+            "id": 39,
+            "count": 12395,
+            "label": "main-switchboard",
+            "changedPixels": 12490,
+            "outsideMask": 0
+          },
+          {
+            "id": 53,
+            "count": 4799,
+            "label": "charger-1",
+            "changedPixels": 4950,
+            "outsideMask": 0
+          },
+          {
+            "id": 55,
+            "count": 477,
+            "label": "charger-3",
+            "changedPixels": 696,
+            "outsideMask": 0
+          },
+          {
+            "id": 52,
+            "count": 1097,
+            "label": "charger-0",
+            "changedPixels": 1272,
+            "outsideMask": 0
+          },
+          {
+            "id": 56,
+            "count": 479,
+            "label": "charger-4",
+            "changedPixels": 689,
+            "outsideMask": 0
+          },
+          {
+            "id": 54,
+            "count": 1063,
+            "label": "charger-2",
+            "changedPixels": 1121,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "watermaker",
+        "position": [
+          10.7,
+          1.9,
+          3.18
+        ],
+        "target": [
+          11.3,
+          2.9,
+          2.5
+        ],
+        "fov": 72,
+        "objects": [
+          {
+            "id": 46,
+            "count": 31009,
+            "label": "watermaker",
+            "changedPixels": 31811,
+            "outsideMask": 0
+          },
+          {
+            "id": 40,
+            "count": 8716,
+            "label": "rail-port",
+            "changedPixels": 8904,
+            "outsideMask": 0
+          },
+          {
+            "id": 23,
+            "count": 1045,
+            "label": "engine-port",
+            "changedPixels": 1072,
+            "outsideMask": 0
+          },
+          {
+            "id": 19,
+            "count": 585,
+            "label": "control-port-operating",
+            "changedPixels": 609,
+            "outsideMask": 0
+          },
+          {
+            "id": 16,
+            "count": 215,
+            "label": "control-eco",
+            "changedPixels": 247,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "filters",
+        "position": [
+          10.6,
+          0,
+          3.18
+        ],
+        "target": [
+          12,
+          0,
+          1.15
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 23,
+            "count": 26814,
+            "label": "engine-port",
+            "changedPixels": 27082,
+            "outsideMask": 0
+          },
+          {
+            "id": 40,
+            "count": 1965,
+            "label": "rail-port",
+            "changedPixels": 2191,
+            "outsideMask": 0
+          },
+          {
+            "id": 41,
+            "count": 1965,
+            "label": "rail-starboard",
+            "changedPixels": 2177,
+            "outsideMask": 0
+          },
+          {
+            "id": 24,
+            "count": 26814,
+            "label": "engine-starboard",
+            "changedPixels": 27052,
+            "outsideMask": 0
+          },
+          {
+            "id": 48,
+            "count": 52,
+            "label": "well-valve-port-front",
+            "changedPixels": 82,
+            "outsideMask": 0
+          },
+          {
+            "id": 50,
+            "count": 52,
+            "label": "well-valve-starboard-front",
+            "changedPixels": 81,
+            "outsideMask": 0
+          },
+          {
+            "id": 27,
+            "count": 1034,
+            "label": "filter-port",
+            "changedPixels": 1085,
+            "outsideMask": 0
+          },
+          {
+            "id": 28,
+            "count": 1031,
+            "label": "filter-starboard",
+            "changedPixels": 1091,
+            "outsideMask": 0
+          },
+          {
+            "id": 49,
+            "count": 125,
+            "label": "well-valve-port-rear",
+            "changedPixels": 151,
+            "outsideMask": 0
+          },
+          {
+            "id": 51,
+            "count": 124,
+            "label": "well-valve-starboard-rear",
+            "changedPixels": 152,
+            "outsideMask": 0
+          },
+          {
+            "id": 47,
+            "count": 534,
+            "label": "well-manifold",
+            "changedPixels": 633,
+            "outsideMask": 0
+          },
+          {
+            "id": 4,
+            "count": 385,
+            "label": "bulkhead-manifold",
+            "changedPixels": 469,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "generator-upper",
+        "position": [
+          9.15,
+          0,
+          3.18
+        ],
+        "target": [
+          8.1,
+          1.5,
+          3.6
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 44,
+            "count": 2677,
+            "label": "vented-cabinet",
+            "changedPixels": 2716,
+            "outsideMask": 0
+          },
+          {
+            "id": 42,
+            "count": 6589,
+            "label": "service-door",
+            "changedPixels": 6742,
+            "outsideMask": 0
+          },
+          {
+            "id": 3,
+            "count": 7667,
+            "label": "battery-switchboard",
+            "changedPixels": 7792,
+            "outsideMask": 0
+          },
+          {
+            "id": 32,
+            "count": 509,
+            "label": "generator-auxiliary",
+            "changedPixels": 589,
+            "outsideMask": 0
+          },
+          {
+            "id": 34,
+            "count": 9670,
+            "label": "generator-port",
+            "changedPixels": 9883,
+            "outsideMask": 0
+          },
+          {
+            "id": 23,
+            "count": 13892,
+            "label": "engine-port",
+            "changedPixels": 13959,
+            "outsideMask": 0
+          },
+          {
+            "id": 33,
+            "count": 1087,
+            "label": "generator-junction-upper",
+            "changedPixels": 1136,
+            "outsideMask": 0
+          },
+          {
+            "id": 35,
+            "count": 1767,
+            "label": "generator-rear-control",
+            "changedPixels": 1871,
+            "outsideMask": 0
+          },
+          {
+            "id": 43,
+            "count": 4881,
+            "label": "shore-power",
+            "changedPixels": 4964,
+            "outsideMask": 0
+          },
+          {
+            "id": 45,
+            "count": 4155,
+            "label": "ventilator",
+            "changedPixels": 4279,
+            "outsideMask": 0
+          },
+          {
+            "id": 37,
+            "count": 191,
+            "label": "hearing-protection",
+            "changedPixels": 239,
+            "outsideMask": 0
+          },
+          {
+            "id": 38,
+            "count": 486,
+            "label": "intercom",
+            "changedPixels": 528,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "generator-rear",
+        "position": [
+          8.95,
+          1.6,
+          3.18
+        ],
+        "target": [
+          8.2,
+          3.1,
+          3.4
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 32,
+            "count": 1680,
+            "label": "generator-auxiliary",
+            "changedPixels": 1730,
+            "outsideMask": 0
+          },
+          {
+            "id": 34,
+            "count": 28244,
+            "label": "generator-port",
+            "changedPixels": 28656,
+            "outsideMask": 0
+          },
+          {
+            "id": 35,
+            "count": 6958,
+            "label": "generator-rear-control",
+            "changedPixels": 7204,
+            "outsideMask": 0
+          },
+          {
+            "id": 45,
+            "count": 22451,
+            "label": "ventilator",
+            "changedPixels": 22606,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "asea",
+        "position": [
+          8.1,
+          -1.7,
+          3.18
+        ],
+        "target": [
+          7.02,
+          -2,
+          2.77
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 36,
+            "count": 11341,
+            "label": "generator-starboard",
+            "changedPixels": 11413,
+            "outsideMask": 0
+          },
+          {
+            "id": 39,
+            "count": 79908,
+            "label": "main-switchboard",
+            "changedPixels": 80360,
+            "outsideMask": 0
+          },
+          {
+            "id": 55,
+            "count": 126,
+            "label": "charger-3",
+            "changedPixels": 191,
+            "outsideMask": 0
+          },
+          {
+            "id": 56,
+            "count": 160,
+            "label": "charger-4",
+            "changedPixels": 239,
+            "outsideMask": 0
+          },
+          {
+            "id": 54,
+            "count": 1368,
+            "label": "charger-2",
+            "changedPixels": 1494,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "climma",
+        "position": [
+          9.7,
+          -2,
+          3.18
+        ],
+        "target": [
+          10.15,
+          -2.85,
+          2.21
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 41,
+            "count": 1189,
+            "label": "rail-starboard",
+            "changedPixels": 1278,
+            "outsideMask": 0
+          },
+          {
+            "id": 24,
+            "count": 456,
+            "label": "engine-starboard",
+            "changedPixels": 478,
+            "outsideMask": 0
+          },
+          {
+            "id": 36,
+            "count": 2102,
+            "label": "generator-starboard",
+            "changedPixels": 2121,
+            "outsideMask": 0
+          },
+          {
+            "id": 13,
+            "count": 16134,
+            "label": "climma-0",
+            "changedPixels": 16573,
+            "outsideMask": 0
+          },
+          {
+            "id": 14,
+            "count": 9409,
+            "label": "climma-1",
+            "changedPixels": 9838,
+            "outsideMask": 0
+          },
+          {
+            "id": 15,
+            "count": 5519,
+            "label": "climma-2",
+            "changedPixels": 5807,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "door",
+        "position": [
+          8,
+          0.8,
+          3.18
+        ],
+        "target": [
+          6.88,
+          1,
+          2.63
+        ],
+        "fov": 65,
+        "objects": [
+          {
+            "id": 44,
+            "count": 16825,
+            "label": "vented-cabinet",
+            "changedPixels": 16911,
+            "outsideMask": 0
+          },
+          {
+            "id": 3,
+            "count": 35133,
+            "label": "battery-switchboard",
+            "changedPixels": 35332,
+            "outsideMask": 0
+          },
+          {
+            "id": 42,
+            "count": 21602,
+            "label": "service-door",
+            "changedPixels": 21812,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "legacy-asea-port",
+        "position": [
+          8.2,
+          -2.5,
+          3.18
+        ],
+        "target": [
+          7.02,
+          -2.05,
+          2.75
+        ],
+        "fov": 72,
+        "objects": [
+          {
+            "id": 36,
+            "count": 29526,
+            "label": "generator-starboard",
+            "changedPixels": 29679,
+            "outsideMask": 0
+          },
+          {
+            "id": 2,
+            "count": 12642,
+            "label": "asea-1",
+            "changedPixels": 12742,
+            "outsideMask": 0
+          },
+          {
+            "id": 56,
+            "count": 288,
+            "label": "charger-4",
+            "changedPixels": 319,
+            "outsideMask": 0
+          },
+          {
+            "id": 55,
+            "count": 81,
+            "label": "charger-3",
+            "changedPixels": 95,
+            "outsideMask": 0
+          },
+          {
+            "id": 1,
+            "count": 16052,
+            "label": "asea-0",
+            "changedPixels": 16138,
+            "outsideMask": 0
+          },
+          {
+            "id": 54,
+            "count": 2009,
+            "label": "charger-2",
+            "changedPixels": 2045,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      },
+      {
+        "name": "legacy-asea-starboard",
+        "position": [
+          8.2,
+          -1.2,
+          3.18
+        ],
+        "target": [
+          7.02,
+          -1.7,
+          2.75
+        ],
+        "fov": 72,
+        "objects": [
+          {
+            "id": 36,
+            "count": 20574,
+            "label": "generator-starboard",
+            "changedPixels": 20671,
+            "outsideMask": 0
+          },
+          {
+            "id": 2,
+            "count": 18695,
+            "label": "asea-1",
+            "changedPixels": 18878,
+            "outsideMask": 0
+          },
+          {
+            "id": 1,
+            "count": 8242,
+            "label": "asea-0",
+            "changedPixels": 8401,
+            "outsideMask": 0
+          },
+          {
+            "id": 52,
+            "count": 423,
+            "label": "charger-0",
+            "changedPixels": 465,
+            "outsideMask": 0
+          },
+          {
+            "id": 53,
+            "count": 4,
+            "label": "charger-1",
+            "changedPixels": 9,
+            "outsideMask": 0
+          },
+          {
+            "id": 55,
+            "count": 1153,
+            "label": "charger-3",
+            "changedPixels": 1453,
+            "outsideMask": 0
+          },
+          {
+            "id": 56,
+            "count": 1130,
+            "label": "charger-4",
+            "changedPixels": 1461,
+            "outsideMask": 0
+          },
+          {
+            "id": 54,
+            "count": 1580,
+            "label": "charger-2",
+            "changedPixels": 1679,
+            "outsideMask": 0
+          }
+        ],
+        "restoredIdentically": true
+      }
+    ],
+    "checks": {
+      "maskContainment": true,
+      "restoration": true
+    },
+    "errors": [],
+    "softwareRenderer": true,
+    "stats": {
+      "room": "machinery",
+      "selection": {
+        "selected": null,
+        "pickPasses": 7,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "detail",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 142465,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "detail",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 170607,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": true,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 26,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          400,
+          250
+        ]
+      },
+      "canvas": [
+        400,
+        250
+      ],
+      "calls": 92,
+      "triangles": 455913,
+      "memory": {
+        "geometries": 257,
+        "textures": 207
+      },
+      "estimatedMemory": {
+        "geometryBytes": 96751308,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 691255325,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 21,
+        "p50": 3.2999999970197678,
+        "p95": 369.40000000596046
+      },
+      "shadowUpdates": 17,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "lifecycle": {
+    "checks": {
+      "cutaway-port": {
+        "selected": "engine-port",
+        "ids": [
+          23
+        ],
+        "motor": {
+          "selected": "port",
+          "cutaway": true,
+          "requestedCut": true,
+          "playing": false,
+          "time": 3.25,
+          "loading": false,
+          "error": ""
+        }
+      },
+      "cutaway-starboard": {
+        "selected": "engine-starboard",
+        "ids": [
+          24
+        ],
+        "motor": {
+          "selected": "starboard",
+          "cutaway": true,
+          "requestedCut": true,
+          "playing": false,
+          "time": 3.25,
+          "loading": false,
+          "error": ""
+        }
+      },
+      "playbackKeepsSelection": true,
+      "extracted-filter-port": {
+        "selected": "filter-port",
+        "basketIds": [
+          27
+        ],
+        "dirtyIds": [
+          27
+        ],
+        "lid": [
+          0.2653815671801567,
+          -0.33250007033348083,
+          -6.184661090373993
+        ]
+      },
+      "extracted-filter-starboard": {
+        "selected": "filter-starboard",
+        "basketIds": [
+          28
+        ],
+        "dirtyIds": [
+          28
+        ],
+        "lid": [
+          -0.2653815671801567,
+          -0.33250007033348083,
+          -6.184661090373993
+        ]
+      },
+      "touch": true,
+      "cancelledTouch": true,
+      "multiTouchDoesNotSelect": true,
+      "uiAndReset": true,
+      "demandRendering": true,
+      "roomCyclesStable": true,
+      "contextRecovery": true
+    },
+    "errors": [],
+    "softwareRenderer": true,
+    "cycles": [
+      {
+        "memory": {
+          "geometries": 266,
+          "textures": 206
+        },
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 2,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 0
+        }
+      },
+      {
+        "memory": {
+          "geometries": 266,
+          "textures": 206
+        },
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 2,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 0
+        }
+      },
+      {
+        "memory": {
+          "geometries": 266,
+          "textures": 206
+        },
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 2,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 0
+        }
+      }
+    ],
+    "final": {
+      "room": "machinery",
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 2,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 42,
+      "ratio": 0.5,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 0.5,
+        "effectiveDPR": 0.5,
+        "hardwareLimited": false,
+        "canvas": [
+          320,
+          200
+        ]
+      },
+      "canvas": [
+        320,
+        200
+      ],
+      "calls": 75,
+      "triangles": 428439,
+      "memory": {
+        "geometries": 213,
+        "textures": 157
+      },
+      "estimatedMemory": {
+        "geometryBytes": 80805852,
+        "textureBytes": 602892625,
+        "shadowDepthBytes": 25165824,
+        "totalBytes": 708864301,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 3,
+        "p50": 2702.9000000059605,
+        "p95": 4988.100000008941
+      },
+      "shadowUpdates": 143,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true,
+    "lastState": {
+      "status": "ready",
+      "stats": {
+        "room": "machinery",
+        "selection": {
+          "enabled": true,
+          "selected": null,
+          "pickPasses": 2,
+          "errors": [],
+          "catalogCount": 56,
+          "targetBytes": 0
+        },
+        "machinery": {
+          "active": true,
+          "bulkhead": {
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "committed": true,
+            "waitingForSafePosition": false,
+            "triangles": 178508,
+            "version": "generator-vr-r01",
+            "label": "frente eléctrico y KOHLER"
+          },
+          "filterWell": {
+            "waitingForSafePosition": false,
+            "ready": true,
+            "loading": false,
+            "committed": true,
+            "error": "",
+            "version": "filter-well-r01",
+            "register": [
+              11.05,
+              -0.49,
+              12.75,
+              0.49
+            ]
+          },
+          "exteriorTrianglesPerEngine": 382211,
+          "installed": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 102574,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "installedRight": {
+            "configured": true,
+            "ready": true,
+            "loading": false,
+            "error": "",
+            "active": true,
+            "lod": "walk",
+            "detailLoaded": false,
+            "visible": true,
+            "triangles": 122837,
+            "lighting": "Full baked diffuse and local probe specular",
+            "receiverEnabled": true
+          },
+          "inspectionLoaded": false,
+          "filterInspectionLoaded": false,
+          "processingMechanics": false,
+          "poseTextureBytes": 0,
+          "motor": {
+            "selected": "port",
+            "cutaway": false,
+            "requestedCut": false,
+            "playing": false,
+            "time": 0,
+            "loading": false,
+            "error": ""
+          },
+          "filters": {
+            "selected": "port",
+            "accessOpen": false,
+            "progress": 0,
+            "target": 0,
+            "moving": false,
+            "dirty": false,
+            "loading": false,
+            "error": ""
+          },
+          "doorOpen": false
+        },
+        "residentZones": [
+          "machinery"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 81,
+          "references": 81
+        },
+        "elevation": 1.58,
+        "position": [
+          9.15,
+          0
+        ],
+        "frames": 42,
+        "ratio": 0.5,
+        "quality": 1,
+        "resolution": {
+          "mode": "sharp",
+          "source": "fixed",
+          "requestedDPR": 0.5,
+          "effectiveDPR": 0.5,
+          "hardwareLimited": false,
+          "canvas": [
+            320,
+            200
+          ]
+        },
+        "canvas": [
+          320,
+          200
+        ],
+        "calls": 75,
+        "triangles": 428439,
+        "memory": {
+          "geometries": 213,
+          "textures": 157
+        },
+        "estimatedMemory": {
+          "geometryBytes": 80805852,
+          "textureBytes": 602892625,
+          "shadowDepthBytes": 25165824,
+          "totalBytes": 708864301,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 3,
+          "p50": 2702.9000000059605,
+          "p95": 4988.100000008941
+        },
+        "shadowUpdates": 143,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    }
+  },
+  "recovery": {
+    "errors": [],
+    "checks": {
+      "contextRecovery": true,
+      "corruptIdentityRetainsGeometry": true,
+      "retryOnReload": true,
+      "leavingClearsSelection": true
+    },
+    "pass": true
+  },
+  "geometryFilesPreserved": [
+    {
+      "file": "mechanics/left-vr-r01/walk.glb",
+      "sha256": "0372ed6bd9948977d06d03447b04d8d4acca79db5643d07e19b6870117f65c45"
+    },
+    {
+      "file": "mechanics/left-vr-r01/detail.glb",
+      "sha256": "091327b7ae9db8695ed1c22b6e425919a8c71234812ae1b03a09fa15a718db5f"
+    },
+    {
+      "file": "mechanics/right-vr-r01/walk.glb",
+      "sha256": "b0192b0466f3a77d01413378fd293c8ca743cc99a63f61fdcc71a338a1540b4f"
+    },
+    {
+      "file": "mechanics/right-vr-r01/detail.glb",
+      "sha256": "d36042c736c8615f0b660543b755399779877c56e53740b351e17a1eba6dc84e"
+    },
+    {
+      "file": "machinery/bulkhead-vr-r01/bulkhead.glb",
+      "sha256": "df23152e0dc761481a238c8d56f934a02a737b265e740e5062713279949070da"
+    },
+    {
+      "file": "machinery/electrical-vr-r01/electrical.glb",
+      "sha256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4"
+    },
+    {
+      "file": "machinery/filter-well-r01/well.glb",
+      "sha256": "12e3ab4c8cc9f5fbce9afd08be31002a446d6b53ae4a1e233855949507e08ff5"
+    },
+    {
+      "file": "machinery/room.glb",
+      "sha256": "d596ee1cd41ac15eb63027a819acf67f4a21b1f05d6202ab4e9ea567d3714e9a"
+    }
+  ],
+  "originalFilesVerified": 629,
+  "unassignedComponents": 283,
+  "limitations": [
+    "Objects and inferred boundaries describe the digital model; equipment identity on the real vessel is not certified.",
+    "Unassigned routing, shared supports and ambiguous hardware remain physical occluders without a tint.",
+    "SwiftShader verifies correctness; these timings are not hardware GPU FPS."
+  ]
+}

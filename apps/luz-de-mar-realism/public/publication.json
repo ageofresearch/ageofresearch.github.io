@@ -1,11 +1,11 @@
 {
-  "version": 8,
-  "build": "filter-well-r01",
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=filter-well-r01",
+  "version": 9,
+  "build": "equipment-selection-r01",
+  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&selection=equipment-r01&release=equipment-selection-r01",
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
   "visualStatus": "KOHLER and local equipment corrected; private native8/4 comparison retained. Hidden depth inferred. No complete photometric or95% edge equivalence claimed.",
-  "assetManifestSHA256": "6164cffa5d6bd6db2c97dd1c1297bccce55f3c91f30204804668b7e208fe10c8",
+  "assetManifestSHA256": "c2ece6c0b32e9309fc94918af07846fc358d61e8f5a7face48a3831ba24e8d6e",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -33,10 +33,12 @@
   "functionalBrowserChecks": true,
   "renderer": "Three.js0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1039616000,
+    "bytes": 1065451520,
     "limit": 1073741824,
-    "minimumHeadroomBytes": 33554432,
-    "headroomBytes": 34125824
+    "headroomBytes": 8290304,
+    "preferredHeadroomBytes": 33554432,
+    "preferredHeadroomMet": false,
+    "note": "The independent Renderpeople gallery commit reduced the previously reported 32 MiB reserve before this selection change. This release preserves that gallery and the original yacht; the actual entire Pages artifact remains below 1 GiB."
   },
   "previousBuild": "pedestal-r01",
   "pedestalRepair": {
@@ -55,5 +57,13 @@
       4
     ],
     "authoring": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-filter-well-r01"
+  },
+  "selection": {
+    "id": "equipment-r01",
+    "promoted": false,
+    "objects": 56,
+    "checks": 149,
+    "outsideMaskPixels": 0,
+    "review": "review/selection-r01/"
   }
 }

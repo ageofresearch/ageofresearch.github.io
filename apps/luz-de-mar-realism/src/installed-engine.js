@@ -48,7 +48,7 @@ export class InstalledEngine {
   const lighting=this.lightingOverride||this;if(!lighting.irradiance||!lighting.targets?.length)return;
   for(const root of this.lods.values()){
    root.traverse(o=>{if(o.isMesh)for(const m of Array.isArray(o.material)?o.material:[o.material]){m.lightMap=lighting.irradiance;m.envMap=lighting.targets[0].texture;}});
-   const local=this.lightingRooms?.get(root);if(!local)continue;local.environments=lighting.targets;
+   const local=this.lightingRooms?.get(root);if(!local)continue;local.environments=lighting.targets;local.probeSpecs=lighting.specs||this.spec.probes;local.probePosition=local.probeSpecs[0].position;
    for(const uniforms of local.probeBindings.values())for(const [i,name]of ['A','B','C'].entries()){const index=Math.min(i,lighting.targets.length-1);uniforms['uRoomProbe'+name].value=lighting.targets[index].texture;uniforms['uRoomPosition'+name].value.fromArray((lighting.specs||this.spec.probes)[index].position);}
   }
  }

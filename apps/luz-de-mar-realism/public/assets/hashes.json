@@ -636,8 +636,8 @@
       "sha256": "b58e8d212beca9d626423a62f4313e857ba3056d408dce71b77a6e9d33f0c6ee"
     },
     "assets/selection-r01/catalog.json": {
-      "bytes": 378826,
-      "sha256": "18eb14f78a0d4933c81319d4a635b1d991dcf7b0c58a0a3ef7ab96b7f55b496e"
+      "bytes": 378825,
+      "sha256": "e8f3c5c2117d6691ba93a40b2d75af8a8181e4a9633ca2233831af82903e412f"
     },
     "assets/selection-r01/machinery-bulkhead-vr-r01-bulkhead.glb.ids.bin": {
       "bytes": 844,
@@ -1568,8 +1568,8 @@
       "sha256": "2112a57a7a180457878531ce1f27261a2967e3849758623fdd0a8c43409b3ebb"
     },
     "review/selection-r01/validation.json": {
-      "bytes": 60888,
-      "sha256": "f5321350363714b8afac6929090f3f12a9983f778fbc8bd4d514ca61e2c16672"
+      "bytes": 66896,
+      "sha256": "113befacbe187da0d02c404af7d8a7b0d101f4a48fdeba52330b5eea82dcaed5"
     },
     "review/stage1-public-verification.json": {
       "bytes": 153976,

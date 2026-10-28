@@ -1,6 +1,6 @@
 {
   "id": "equipment-selection-r01",
-  "promoted": false,
+  "promoted": true,
   "objects": 56,
   "objectChecks": 149,
   "distinctVisibleObjects": [
@@ -2483,5 +2483,215 @@
     "Objects and inferred boundaries describe the digital model; equipment identity on the real vessel is not certified.",
     "Unassigned routing, shared supports and ambiguous hardware remain physical occluders without a tint.",
     "SwiftShader verifies correctness; these timings are not hardware GPU FPS."
+  ],
+  "publicCandidate": {
+    "url": "https://ageofresearch.github.io/luz-de-mar-realism/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=equipment-selection-r01&selection=equipment-r01",
+    "promoted": false,
+    "errors": [],
+    "checks": {
+      "actualPublicClick": true,
+      "exactRestoration": true
+    },
+    "softwareRenderer": true,
+    "stats": {
+      "room": "machinery",
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 1,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 8
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente eléctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": false,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "frames": 11,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "fixed",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          1000,
+          625
+        ]
+      },
+      "canvas": [
+        1000,
+        625
+      ],
+      "calls": 116,
+      "triangles": 507070,
+      "memory": {
+        "geometries": 228,
+        "textures": 193
+      },
+      "estimatedMemory": {
+        "geometryBytes": 80805852,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 675309869,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 6,
+        "p50": 6.100000008940697,
+        "p95": 8398
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "publicAssetHashes": [
+    {
+      "path": "index.html",
+      "sha256": "80e48e2aed50f3bbafc5bf371f6247012023db07c8be01464e853ceca1e62dcb",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/catalog.json",
+      "sha256": "18eb14f78a0d4933c81319d4a635b1d991dcf7b0c58a0a3ef7ab96b7f55b496e",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/mechanics-left-vr-r01-walk.glb.ids.bin",
+      "sha256": "93c319fedba83fc61d4784f844c3227a2b644d425111ce1f752994a082edf218",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/mechanics-left-vr-r01-detail.glb.ids.bin",
+      "sha256": "55b3c4cbec4bebdb3dd24bcca8dd4742fe9dabd49fcea64b6099ec779b71db4d",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/mechanics-right-vr-r01-walk.glb.ids.bin",
+      "sha256": "780ea1b3e347b4caef12c6e34fbd45b0fa37e63326ee205a8691d717deabfe53",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/mechanics-right-vr-r01-detail.glb.ids.bin",
+      "sha256": "c61aa262348028c71994428290c72c74c4ec7660686a132ba613a67cc25d679a",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/machinery-bulkhead-vr-r01-bulkhead.glb.ids.bin",
+      "sha256": "1d9faf081a839bb12db2bf353798817c937d948bf3e4f6d80f38e1b2be1c0f04",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/machinery-electrical-vr-r01-electrical.glb.ids.bin",
+      "sha256": "eeed7247bbb2ac57ae06b831fc0a1c4767466a894961866b51640e2dc18768ac",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/machinery-filter-well-r01-well.glb.ids.bin",
+      "sha256": "ae7db9443b7165c726ee69835b7dc9cbd3f5c200289b4d9c3e1c7bc90a8e34b8",
+      "match": true
+    },
+    {
+      "path": "assets/selection-r01/machinery-room.glb.ids.bin",
+      "sha256": "98043a20f0f70d4508e69b287324a959607bfcd9e673d6c534d62c400b0dd9cd",
+      "match": true
+    }
   ]
 }

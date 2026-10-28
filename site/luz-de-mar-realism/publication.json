@@ -5,7 +5,7 @@
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
   "visualStatus": "KOHLER and local equipment corrected; private native8/4 comparison retained. Hidden depth inferred. No complete photometric or95% edge equivalence claimed.",
-  "assetManifestSHA256": "c2ece6c0b32e9309fc94918af07846fc358d61e8f5a7face48a3831ba24e8d6e",
+  "assetManifestSHA256": "4b36467d2a4a1bdc3811855bf2b4a1bb73bed7d203f868ffab0160034dfe9490",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -33,9 +33,9 @@
   "functionalBrowserChecks": true,
   "renderer": "Three.js0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1065451520,
+    "bytes": 1065461760,
     "limit": 1073741824,
-    "headroomBytes": 8290304,
+    "headroomBytes": 8280064,
     "preferredHeadroomBytes": 33554432,
     "preferredHeadroomMet": false,
     "note": "The independent Renderpeople gallery commit reduced the previously reported 32 MiB reserve before this selection change. This release preserves that gallery and the original yacht; the actual entire Pages artifact remains below 1 GiB."
@@ -60,7 +60,7 @@
   },
   "selection": {
     "id": "equipment-r01",
-    "promoted": false,
+    "promoted": true,
     "objects": 56,
     "checks": 149,
     "outsideMaskPixels": 0,

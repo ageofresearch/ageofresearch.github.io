@@ -1,9 +1,9 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {DeckNavigation} from '../src/deck-navigation.js';
 const layout=JSON.parse(fs.readFileSync(new URL('../public/assets/navigation.json',import.meta.url))),saloon=JSON.parse(fs.readFileSync(new URL('../public/assets/saloon/room.json',import.meta.url)));
 test('connected walking graph reaches both transom stairs, side decks and working bow',()=>{
- const n=new DeckNavigation(layout,saloon),step=.05,key=(x,y,z)=>[Math.round(x/step),Math.round(y/step),Math.round(z/.05)].join(','),q=[[9.2,0,3.95]],seen=new Set([key(...q[0])]);
- for(let i=0;i<q.length;i++){assert.ok(q.length<160000,'Unbounded navigation graph');const[x,y,z]=q[i];for(const[a,b]of[[x+step,y],[x-step,y],[x,y+step],[x,y-step]]){const f=n.candidate(a,b,{fromHeight:z,ignoreAvailability:true});if(!f)continue;const k=key(a,b,f.z);if(!seen.has(k)){seen.add(k);q.push([a,b,f.z]);}}}
- const targets=[[7.1,0,3.95],[2.1,0,2.12],[2.3,2.85,3.035],[2.3,-2.85,3.035],[12,3.14,3.95],[12,-3.14,3.95],[27.1,-2.35,6],[35.15,0,5.1]];
+ const n=new DeckNavigation(layout,saloon),step=.05,key=(x,y,z,layer)=>[Math.round(x/step),Math.round(y/step),Math.round(z/.05),layer].join(','),q=[[9.2,0,3.95,'deck']],seen=new Set([key(...q[0])]);
+ for(let i=0;i<q.length;i++){assert.ok(q.length<160000,'Unbounded navigation graph');const[x,y,z,layer]=q[i];for(const[a,b]of[[x+step,y],[x-step,y],[x,y+step],[x,y-step]]){const f=n.candidate(a,b,{fromHeight:z,fromLayer:layer,ignoreAvailability:true});if(!f)continue;const k=key(a,b,f.z,f.layer);if(!seen.has(k)){seen.add(k);q.push([a,b,f.z,f.layer]);}}}
+ const targets=[[7.1,0,3.95],[2.1,0,2.12],[2.3,2.5,3.1737],[2.3,-2.85,3.035],[12,3.14,3.95],[12,-3.14,3.95],[27.1,-2.35,6],[35.15,0,5.1]];
  const report=[];for(const p of targets){let d=Infinity,point;for(const v of q){const distance=Math.hypot(v[0]-p[0],v[1]-p[1],(v[2]-p[2])*.25);if(distance<d){d=distance;point=v;}}report.push({target:p,distance:d,reached:point});}
  console.log(JSON.stringify({nodes:q.length,routes:report}));for(const r of report)assert.ok(r.distance<.10,'Disconnected route '+r.target+'; closest '+r.reached);
 });

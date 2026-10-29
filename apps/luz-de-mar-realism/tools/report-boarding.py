@@ -1,0 +1,43 @@
+from pathlib import Path
+from PIL import Image,ImageDraw
+import json,shutil
+R=Path(__file__).resolve().parents[1];W=R/'work/boarding-vr-r01';P=R/'public/review/boarding-vr-r01';P.mkdir(exist_ok=True)
+read=lambda p:json.load(open(p))
+assessment=read(W/'comparison/assessment.json');browser=read(W/'browser-validation.json');captures=read(W/'candidate/captures.json');geometry=read(W/'geometry.json');lighting=read(W/'lighting.json');preservation=read(W/'preservation.json')
+report={'revision':'boarding-vr-r01','status':'candidate — not accepted for visual parity','defaultUnchangedGeometry':True,'candidateURL':'?room=beach-club&release=boarding-vr-r01','grid':assessment['grid'],'referenceFaces':24,'newEditableComponents':geometry['newComponents'],'replacedComponents':geometry['removed'],'referenceAssessment':assessment,'lighting':lighting,'preservation':preservation,'navigation':{'keyboard':True,'touch':True,'roundTrip':True,'freeEndStops':True,'noLayerJump':True,'threeRoomCyclesStable':True},'resources':{'maxDrawCallsInCaptures':max(q['stats']['calls']for q in captures['poses']),'maxTrianglesInCaptures':max(q['stats']['triangles']for q in captures['poses']),'residentEstimate':browser['tip']['estimatedMemory'],'threeCycles':[{k:v[k]for k in['memory','residentZones']}for v in browser['cycles']]},'authoring':{'status':'prepared locally; Release upload pending','intendedRelease':'https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-boarding-vr-r01'},'limits':['Pixel acceptance is NOT passed. Stair, landing, mount registration and detailed stanchion correspondence remain unresolved.','Six diagnostic control points were projected; three ambiguous correspondences are excluded, and full independent 24-point acceptance is pending.','No cell has been automatically accepted. Reference originals and VR composites remain private.','SwiftShader checks correctness and resource stability, not desktop/mobile hardware FPS.','Concealed reverse faces and physical dimensions remain estimated.','Baseline HDR files are recompressed as linear DWAA; geometry and UVs are preserved. Compression error is recorded separately.']}
+for file in ['loading-validation.json','baseline-hdr-compression.json','machinery-regression/report.json','refinement-review.json','render-sequence.json']:
+ if(W/file).exists():report[file[:-5].replace('/','-')]=read(W/file)
+(P/'validation.json').write_text(json.dumps(report,indent=2)+'\n')
+for name in['mount','stairs','side']:
+ im=Image.open(W/'candidate'/(name+'.png'));im.save(P/(name+'.webp'),quality=90)
+html='''<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Embarque de popa · candidata VR R01</title><style>body{max-width:1050px;margin:45px auto;padding:0 22px;background:#f3f0e7;color:#24352c;font:18px/1.6 system-ui}img{width:100%;height:auto}a{color:#175e3b}.status{padding:18px;border-left:4px solid #ae6b22;background:#fff5df}small{display:block}</style><h1>Embarque de popa · candidata VR R01</h1><p class="status">La pasarela es fija y caminable. Esta candidata todavía no cumple la correspondencia visual exigida con la VR. La versión habitual conserva su geometría y recorrido anteriores.</p><p><a href="../../?room=beach-club&amp;release=boarding-vr-r01">Abrir la candidata</a> · <a href="../../?room=beach-club">Abrir la versión habitual</a></p><img src="mount.webp" alt="Pasarela fija y encuentro con la escalera, candidata"><p>Incluye tres tramos, perfiles y guías, montantes acodados, pasamanos, teca y una escalera entre envolventes moldeadas. Las dimensiones y la construcción oculta son estimadas. No se añade un muelle.</p><p>La escena Blender editable y sus fuentes están preparadas. Su descarga desde GitHub Releases está pendiente de completar la subida autenticada.</p><h2>Verificación</h2><p>Las comparaciones privadas usan cuadros nativos de 8 × 8 y 4 × 4 píxeles, ocho encuadres y dos caras completas de 2048². Las imágenes VR no se publican. Generar la cuadrícula no aprueba sus celdas: ninguna se declara aceptada.</p><p>La escalera, el desembarco, el montaje y varios montantes aún presentan discrepancias de proyección. No se ha alcanzado el límite de cuatro píxeles ni el 95 % de bordes dentro de seis píxeles. El informe separa las mediciones diagnósticas de la aceptación independiente pendiente.</p><img src="stairs.webp" alt="Escalera de la candidata, aún pendiente de correspondencia exacta"><p>Comprobados: ida y vuelta, extremo libre, teclado, controles táctiles, separación de niveles, carga lenta, fallo y reintento, cancelación y tres ciclos de cambio de zona. Se mantienen hasta dos zonas detalladas. Las pruebas gráficas usan Chromium/SwiftShader; no acreditan FPS de una GPU real.</p><p>Se verificaron sin cambios los 629 archivos originales, 115 activos de maquinaria y el documento LDM-VR-EST-001. La geometría del cockpit permanece intacta. Los HDR originales de estas dos zonas se conservan en la autoría y sus copias de distribución usan compresión DWAA con error documentado.</p><p><a href="validation.json">Informe completo</a> · <a href="https://vrcloud.com/?pv=1667308298">Visita VR de referencia</a></p></html>'''
+(P/'index.html').write_text(html)
+readme='''# Embarque de popa · VR R01 — candidata
+
+Estado: implementado el recorrido y una primera reconstrucción; **no aceptada la correspondencia visual**. No promocionar como reproducción exacta.
+
+## Uso
+
+`?room=beach-club&release=boarding-vr-r01` activa la geometría, iluminación, proxies y navegación de la candidata. Sin ese parámetro se mantiene la geometría anterior. La pasarela permanece desplegada, fija; su extremo y bordes detienen la caminata. No hay muelle ni accionamiento hidráulico.
+
+## Referencias y precisión
+
+24 caras originales de 2048² con hashes; inventario de cuadros nativos de 8×8 y detalle de 4×4. Los originales y montajes VR permanecen privados. Las coordenadas de cámara iniciales eran provisionales; se conserva ese registro y se registra aparte la estación aproximada empleada para las comparaciones finales. No se ajusta una cámara por pieza.
+
+Las seis medidas diagnósticas no cumplen el conjunto de tolerancias; tres correspondencias ambiguas se excluyen expresamente. La inscripción de 24 controles no equivale a medirlos ni aprobarlos; varias referencias también informaron la calibración y el ajuste aproximados y se excluyen de una futura aceptación independiente. Deben completarse la calibración entre panoramas, los controles independientes y la revisión manual de las celdas. Las métricas automáticas de bordes incluyen textura y son diagnósticas, nunca una certificación del 95 %.
+
+## Autoría
+
+`work/boarding-vr-r01/boarding-lit.blend`: escena editable, materiales propios y bakes empaquetados. Los objetos BVR conservan identificadores, grupo de procedencia y certeza. `work/exteriors-final.blend` preserva el origen usado. `work/boarding-vr-r01/raw/` contiene bakes Cycles sin filtrar y versiones filtradas sin pérdida. La iluminación ambiental excluye el sol directo que renderiza el visor. Difuso: 64 muestras, atlas 2048²; reflejos: 128 muestras, 1024×512. UV0 y UV1 independientes.
+
+`tools/` contiene scripts de autoría, exportación, navegación y validación. Se requiere Blender 4.3.2, OIDN 2.5.1, Node y las dependencias del repositorio. Los scripts asumen la estructura `apps/luz-de-mar-realism`; reconstruir en un checkout aislado. Los originales VR no forman parte del archivo. Para ejecutar la automatización, colocar los JSON de `evidence/` en `work/boarding-vr-r01/` y conservar las demás autorías previas requeridas por la batería completa de pruebas; abrir `boarding-lit.blend` no requiere esos registros externos. Los materiales KTX2 se reutilizan sin reencodificar desde la versión anterior; las geometrías usan meshopt. La compresión EXR DWAA de distribución tiene errores lineales documentados y conserva originales lossless en el archivo.
+
+## Límites conocidos
+
+La forma, profundidad y situación exactas del desembarco, escalera y varios herrajes todavía requieren ajuste. Las medidas no son un levantamiento del barco. La VR corresponde a un Azimut Grande 36M; no se acredita que sea Luz de Mar. La comparación de rendimiento es por software, sin promesa de 60/30 FPS en hardware no medido.
+
+## Preservación
+
+Documento de estrategia intacto; 629 archivos originales y 115 activos de maquinaria verificados. Se mantienen los motores, inspección, selección y loader real. No se publican imágenes originales VR.
+'''
+(W/'README.md').write_text(readme);print('Boarding review written; candidate acceptance remains false')

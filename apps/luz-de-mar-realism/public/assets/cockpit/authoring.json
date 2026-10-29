@@ -1,6 +1,6 @@
 {
   "room": "cockpit",
-  "revision": 9,
+  "revision": "boarding-vr-r01",
   "replacementBasis": "VR-led exterior reconstruction; inherited yacht transformation; all unmeasured dimensions inferred",
   "atlasSize": 2048,
   "atlases": [
@@ -11,12 +11,12 @@
       "marginMethod": "FRACTION",
       "islandMargin": 0.006,
       "coverage": 0.43707749247550964,
-      "degenerateTriangleFraction": 0.0,
+      "degenerateTriangleFraction": 0,
       "bakeMarginPixels": 4,
       "uvTrianglesSHA256": "2ae3074bd3f7bb699c2ce88760a31bc429f87200cf013351a5841c11a74fec2a"
     }
   },
-  "samples": 24,
+  "samples": 64,
   "blender": "4.3.2",
   "uvRoles": {
     "material": 0,
@@ -28,42 +28,42 @@
   "bakedOccludersExcludeDynamic": true,
   "ambientEnvironmentSHA256": "2ad29e6bb9153c371d667c7c43cb97ec6630f323a44e469f4dd3c3ba64984fd0",
   "rawNativeBakesPacked": true,
-  "denoise": "OIDN 2.5.1 CPU RTLightmap, full linear HDR atlas",
+  "denoise": "OIDN 2.5.1 CPU RTLightmap; raw unfiltered EXR retained in authoring archive",
   "probes": [
     {
       "id": "cockpit-0",
       "position": [
-        0.0,
+        0,
         2.99,
         -10.862583333333333
       ],
       "sourcePosition": [
         6.9,
         0,
-        5.0
+        5
       ],
       "asset": "probe.exr",
       "width": 1024,
       "height": 512,
-      "samples": 24,
+      "samples": 128,
       "purpose": "Local static specular capture; live sun excluded"
     }
   ],
   "probePosition": [
-    0.0,
+    0,
     2.99,
     -10.862583333333333
   ],
   "halfFloatLinearAtlases": true,
-  "bakeSeconds": 131.21,
+  "bakeSeconds": 417.05,
   "ambientStrength": 0.5,
   "nativeOutdoorWoodCoat": 0.18,
   "ambientCalibration": "Fixed illustrative daylight, not photometrically measured. Linear ambient HDR strength 0.5; live sun 1.15 excluded from bakes.",
   "rawBakesSHA256": {
-    "cockpit": "749a98007c477cfba7627dc9d5d9af0a992972e550bb4b37ba900e1f411ef6a8"
+    "cockpit": "1dea25e9b3ff05c6a1e128fee7a82dacf848753b27d3b6aca3a615e9aa7c3ec0"
   },
-  "masterSHA256": "afad75bb74b0849622d1ab8d9d0515807f1e021d6b03e5ff01e968992c22d710",
-  "cameraExposure": 3,
+  "masterSHA256": "5dcb4596510a1de135583317c8439ae4d69a2d0fc3f1ddee0cba94e313de4e23",
+  "cameraExposure": 2,
   "presentationCamera": {
     "sourcePosition": [
       7.1,
@@ -78,5 +78,99 @@
     "verticalFov": 72,
     "viewerToneCurve": "Three.js Neutral",
     "nativeToneCurve": "Blender AgX"
-  }
+  },
+  "boardingRevision": "boarding-vr-r01",
+  "distributionCodec": "DWAA half-float linear HDR; lossless filtered and raw masters retained",
+  "compressionError": {
+    "meanAbsoluteLinearError": 0.00019431843247730285,
+    "p99AbsoluteLinearError": 0.0022064149379730225,
+    "maxAbsoluteLinearError": 0.03162109851837158
+  },
+  "nativeToneCurve": "Khronos PBR Neutral",
+  "masterPath": "work/boarding-vr-r01/boarding-lit.blend",
+  "sourcePath": "work/cockpit-source.glb",
+  "baselineBinding": {
+    "room": "cockpit",
+    "revision": 9,
+    "replacementBasis": "VR-led exterior reconstruction; inherited yacht transformation; all unmeasured dimensions inferred",
+    "atlasSize": 2048,
+    "atlases": [
+      "cockpit"
+    ],
+    "atlasPadding": {
+      "cockpit": {
+        "marginMethod": "FRACTION",
+        "islandMargin": 0.006,
+        "coverage": 0.43707749247550964,
+        "degenerateTriangleFraction": 0,
+        "bakeMarginPixels": 4,
+        "uvTrianglesSHA256": "2ae3074bd3f7bb699c2ce88760a31bc429f87200cf013351a5841c11a74fec2a"
+      }
+    },
+    "samples": 24,
+    "blender": "4.3.2",
+    "uvRoles": {
+      "material": 0,
+      "ambient": 1
+    },
+    "bakeGeometrySHA256": "e4ad5a3d67949fadc8104d1d020e1eebe03de82b250a0c553b7a5ce151a615e8",
+    "reference": "https://vrcloud.com/?pv=1667308298",
+    "dynamicObjects": [],
+    "bakedOccludersExcludeDynamic": true,
+    "ambientEnvironmentSHA256": "2ad29e6bb9153c371d667c7c43cb97ec6630f323a44e469f4dd3c3ba64984fd0",
+    "rawNativeBakesPacked": true,
+    "denoise": "OIDN 2.5.1 CPU RTLightmap, full linear HDR atlas",
+    "probes": [
+      {
+        "id": "cockpit-0",
+        "position": [
+          0,
+          2.99,
+          -10.862583333333333
+        ],
+        "sourcePosition": [
+          6.9,
+          0,
+          5
+        ],
+        "asset": "probe.exr",
+        "width": 1024,
+        "height": 512,
+        "samples": 24,
+        "purpose": "Local static specular capture; live sun excluded"
+      }
+    ],
+    "probePosition": [
+      0,
+      2.99,
+      -10.862583333333333
+    ],
+    "halfFloatLinearAtlases": true,
+    "bakeSeconds": 131.21,
+    "ambientStrength": 0.5,
+    "nativeOutdoorWoodCoat": 0.18,
+    "ambientCalibration": "Fixed illustrative daylight, not photometrically measured. Linear ambient HDR strength 0.5; live sun 1.15 excluded from bakes.",
+    "rawBakesSHA256": {
+      "cockpit": "749a98007c477cfba7627dc9d5d9af0a992972e550bb4b37ba900e1f411ef6a8"
+    },
+    "masterSHA256": "afad75bb74b0849622d1ab8d9d0515807f1e021d6b03e5ff01e968992c22d710",
+    "cameraExposure": 3,
+    "presentationCamera": {
+      "sourcePosition": [
+        7.1,
+        0,
+        5.5
+      ],
+      "target": [
+        4,
+        0,
+        5.35
+      ],
+      "verticalFov": 72,
+      "viewerToneCurve": "Three.js Neutral",
+      "nativeToneCurve": "Blender AgX"
+    }
+  },
+  "authoringRelease": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-boarding-vr-r01",
+  "authoringReleaseStatus": "pending-upload"
 }

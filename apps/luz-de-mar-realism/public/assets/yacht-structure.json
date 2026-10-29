@@ -163,7 +163,7 @@
         {
           "id": "LD_R02",
           "deck": "LD",
-          "label": "Cuarto de máquinas",
+          "label": "Cuarto de m\u00e1quinas",
           "bounds": [
             6.73584,
             -3.59987,
@@ -177,7 +177,7 @@
         {
           "id": "LD_R03",
           "deck": "LD",
-          "label": "Camarote de popa · babor",
+          "label": "Camarote de popa \u00b7 babor",
           "bounds": [
             14.3067,
             0.42679,
@@ -191,7 +191,7 @@
         {
           "id": "LD_R04",
           "deck": "LD",
-          "label": "Baño de popa · babor",
+          "label": "Ba\u00f1o de popa \u00b7 babor",
           "bounds": [
             13.26756,
             0.57524,
@@ -205,7 +205,7 @@
         {
           "id": "LD_R05",
           "deck": "LD",
-          "label": "Camarote de popa · estribor",
+          "label": "Camarote de popa \u00b7 estribor",
           "bounds": [
             14.3067,
             -3.41431,
@@ -219,7 +219,7 @@
         {
           "id": "LD_R06",
           "deck": "LD",
-          "label": "Baño de popa · estribor",
+          "label": "Ba\u00f1o de popa \u00b7 estribor",
           "bounds": [
             13.26756,
             -2.43084,
@@ -233,7 +233,7 @@
         {
           "id": "LD_R07",
           "deck": "LD",
-          "label": "Camarote de proa · babor",
+          "label": "Camarote de proa \u00b7 babor",
           "bounds": [
             20.0034,
             0.50101,
@@ -247,7 +247,7 @@
         {
           "id": "LD_R08",
           "deck": "LD",
-          "label": "Baño de proa · babor",
+          "label": "Ba\u00f1o de proa \u00b7 babor",
           "bounds": [
             17.88801,
             0.85358,
@@ -261,7 +261,7 @@
         {
           "id": "LD_R09",
           "deck": "LD",
-          "label": "Camarote de proa · estribor",
+          "label": "Camarote de proa \u00b7 estribor",
           "bounds": [
             20.0034,
             -3.21019,
@@ -275,7 +275,7 @@
         {
           "id": "LD_R10",
           "deck": "LD",
-          "label": "Baño de proa · estribor",
+          "label": "Ba\u00f1o de proa \u00b7 estribor",
           "bounds": [
             17.88801,
             -3.28442,
@@ -373,7 +373,7 @@
         {
           "id": "LD_R17",
           "deck": "LD",
-          "label": "Baño de servicio",
+          "label": "Ba\u00f1o de servicio",
           "bounds": [
             24.82796,
             -2.09683,
@@ -387,7 +387,7 @@
         {
           "id": "LD_R18",
           "deck": "LD",
-          "label": "Baño de proa · babor",
+          "label": "Ba\u00f1o de proa \u00b7 babor",
           "bounds": [
             29.13296,
             0.167,
@@ -401,7 +401,7 @@
         {
           "id": "LD_R19",
           "deck": "LD",
-          "label": "Baño de proa · estribor",
+          "label": "Ba\u00f1o de proa \u00b7 estribor",
           "bounds": [
             29.13296,
             -1.55871,
@@ -708,7 +708,7 @@
         {
           "id": "MD_R02",
           "deck": "MD",
-          "label": "Salón principal",
+          "label": "Sal\u00f3n principal",
           "bounds": [
             8.53608,
             -2.56082,
@@ -722,7 +722,7 @@
         {
           "id": "MD_R03",
           "deck": "MD",
-          "label": "Núcleo de servicio",
+          "label": "N\u00facleo de servicio",
           "bounds": [
             17.81443,
             -2.87629,
@@ -750,7 +750,7 @@
         {
           "id": "MD_R05",
           "deck": "MD",
-          "label": "Baños de la suite",
+          "label": "Ba\u00f1os de la suite",
           "bounds": [
             27.22268,
             -2.4866,
@@ -764,7 +764,7 @@
         {
           "id": "MD_R06",
           "deck": "MD",
-          "label": "Aseo de día",
+          "label": "Aseo de d\u00eda",
           "bounds": [
             20.44948,
             -3.19175,
@@ -986,7 +986,7 @@
     },
     {
       "id": "SD",
-      "label": "Solárium",
+      "label": "Sol\u00e1rium",
       "floor": 8.2,
       "outlines": [
         {
@@ -1094,7 +1094,7 @@
         {
           "id": "SD_R01",
           "deck": "SD",
-          "label": "Solárium superior",
+          "label": "Sol\u00e1rium superior",
           "bounds": [
             11.02119,
             -2.38339,
@@ -1111,7 +1111,7 @@
   "areas": [
     {
       "id": "saloon",
-      "label": "Salón",
+      "label": "Sal\u00f3n",
       "sourceID": "MD_R02",
       "deck": "MD",
       "floor": 3.95,
@@ -1193,6 +1193,8 @@
       ],
       "polygons": [
         {
+          "id": "beach-club-2",
+          "zone": "beach-club",
           "polygon": [
             [
               -0.15,
@@ -1204,6 +1206,14 @@
             ],
             [
               2.6,
+              2
+            ],
+            [
+              1.2,
+              2
+            ],
+            [
+              1.2,
               3.28
             ],
             [
@@ -1218,6 +1228,8 @@
           }
         },
         {
+          "id": "beach-club-3",
+          "zone": "beach-club",
           "polygon": [
             [
               2.5,
@@ -1243,6 +1255,8 @@
           }
         },
         {
+          "id": "beach-club-4",
+          "zone": "beach-club",
           "polygon": [
             [
               1.2,
@@ -1268,29 +1282,301 @@
           }
         },
         {
+          "id": "boarding-port-stair-0",
+          "zone": "beach-club",
+          "layer": "port-stair",
           "polygon": [
             [
               1.2,
-              2.4250000000000003
+              2.18
             ],
             [
-              3.4,
-              2.4250000000000003
+              1.5142857142857142,
+              2.18
             ],
             [
-              3.4,
-              3.275
+              1.5142857142857142,
+              2.82
             ],
             [
               1.2,
-              3.275
+              2.82
             ]
           ],
           "height": {
-            "x0": 1.2,
-            "z0": 2.12,
-            "slope": 0.8318181818181818
-          }
+            "plane": [
+              0,
+              0,
+              2.3894285714285717
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-port-stair-1",
+          "zone": "beach-club",
+          "layer": "port-stair",
+          "polygon": [
+            [
+              1.5142857142857142,
+              2.18
+            ],
+            [
+              1.8285714285714287,
+              2.18
+            ],
+            [
+              1.8285714285714287,
+              2.82
+            ],
+            [
+              1.5142857142857142,
+              2.82
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              2.6508571428571432
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-port-stair-2",
+          "zone": "beach-club",
+          "layer": "port-stair",
+          "polygon": [
+            [
+              1.8285714285714287,
+              2.18
+            ],
+            [
+              2.142857142857143,
+              2.18
+            ],
+            [
+              2.142857142857143,
+              2.82
+            ],
+            [
+              1.8285714285714287,
+              2.82
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              2.9122857142857144
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-port-stair-3",
+          "zone": "beach-club",
+          "layer": "port-stair",
+          "polygon": [
+            [
+              2.142857142857143,
+              2.18
+            ],
+            [
+              2.4571428571428573,
+              2.18
+            ],
+            [
+              2.4571428571428573,
+              2.82
+            ],
+            [
+              2.142857142857143,
+              2.82
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              3.173714285714286
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-port-stair-4",
+          "zone": "beach-club",
+          "layer": "port-stair",
+          "polygon": [
+            [
+              2.4571428571428573,
+              2.18
+            ],
+            [
+              2.7714285714285714,
+              2.18
+            ],
+            [
+              2.7714285714285714,
+              2.82
+            ],
+            [
+              2.4571428571428573,
+              2.82
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              3.435142857142857
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-port-stair-5",
+          "zone": "beach-club",
+          "layer": "port-stair",
+          "polygon": [
+            [
+              2.7714285714285714,
+              2.18
+            ],
+            [
+              3.085714285714286,
+              2.18
+            ],
+            [
+              3.085714285714286,
+              2.82
+            ],
+            [
+              2.7714285714285714,
+              2.82
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              3.6965714285714286
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-port-stair-6",
+          "zone": "beach-club",
+          "layer": "port-stair",
+          "polygon": [
+            [
+              3.085714285714286,
+              2.18
+            ],
+            [
+              3.4000000000000004,
+              2.18
+            ],
+            [
+              3.4000000000000004,
+              2.82
+            ],
+            [
+              3.085714285714286,
+              2.82
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              3.958
+            ]
+          },
+          "maxStep": 0.28
+        },
+        {
+          "id": "boarding-walkway",
+          "zone": "beach-club",
+          "layer": "gangway",
+          "polygon": [
+            [
+              -0.3,
+              3.052
+            ],
+            [
+              0.97,
+              3.052
+            ],
+            [
+              0.97,
+              3.032
+            ],
+            [
+              2.2,
+              3.032
+            ],
+            [
+              2.2,
+              3.012
+            ],
+            [
+              3.39,
+              3.012
+            ],
+            [
+              3.39,
+              3.01
+            ],
+            [
+              3.98,
+              3.01
+            ],
+            [
+              3.98,
+              3.78
+            ],
+            [
+              3.39,
+              3.78
+            ],
+            [
+              3.39,
+              3.788
+            ],
+            [
+              2.2,
+              3.788
+            ],
+            [
+              2.2,
+              3.768
+            ],
+            [
+              0.97,
+              3.768
+            ],
+            [
+              0.97,
+              3.748
+            ],
+            [
+              -0.3,
+              3.748
+            ]
+          ],
+          "height": {
+            "plane": [
+              0,
+              0,
+              3.952
+            ]
+          },
+          "solidUnderside": true,
+          "thickness": 0.2
         }
       ],
       "sourceRoomBounds": null
@@ -1596,7 +1882,7 @@
     },
     {
       "id": "machinery",
-      "label": "Cuarto de máquinas",
+      "label": "Cuarto de m\u00e1quinas",
       "sourceID": "LD_R02",
       "deck": "LD",
       "floor": 1.58,
@@ -1632,7 +1918,7 @@
       ],
       "at": [
         3.4,
-        2.85
+        2.5
       ]
     },
     {
@@ -1674,12 +1960,22 @@
         24.6,
         -3
       ]
+    },
+    {
+      "zones": [
+        "cockpit",
+        "beach-club"
+      ],
+      "at": [
+        3.8,
+        3.4
+      ]
     }
   ],
   "limitations": [
-    "Las huellas de habitaciones del original son límites aproximados, no tabiques levantados ni planos as-built.",
-    "Los nombres de camarotes y usos de servicio conservan el carácter inferido del original.",
-    "La disposición de muebles sigue la VR; no se fuerza a coincidir con los muebles esquemáticos del original."
+    "Las huellas de habitaciones del original son l\u00edmites aproximados, no tabiques levantados ni planos as-built.",
+    "Los nombres de camarotes y usos de servicio conservan el car\u00e1cter inferido del original.",
+    "La disposici\u00f3n de muebles sigue la VR; no se fuerza a coincidir con los muebles esquem\u00e1ticos del original."
   ],
   "reconciliation": [
     {
@@ -1697,7 +1993,7 @@
         "sides": 3.95,
         "bowLounge": 6
       },
-      "note": "El lounge de proa pertenece a la cubierta superior. La maquinaria queda debajo del salón, en LD_R02; el puente queda a popa del lounge de proa en UD_R03."
+      "note": "El lounge de proa pertenece a la cubierta superior. La maquinaria queda debajo del sal\u00f3n, en LD_R02; el puente queda a popa del lounge de proa en UD_R03."
     },
     {
       "id": "beach-platform",
@@ -1706,7 +2002,7 @@
       "originalTop": 2.84,
       "realismTop": 2.12,
       "difference": -0.72,
-      "note": "Se conserva la plataforma baja y el nicho abierto de la VR. El original tiene una plataforma esquemática más alta; no se presenta esta diferencia como una medida real."
+      "note": "Se conserva la plataforma baja y el nicho abierto de la VR. El original tiene una plataforma esquem\u00e1tica m\u00e1s alta; no se presenta esta diferencia como una medida real."
     },
     {
       "id": "working-bow",
@@ -1715,7 +2011,7 @@
       "originalTop": 6,
       "realismTop": 5.1,
       "difference": -0.9,
-      "note": "La VR muestra dos escaleras descendentes al área de maniobra. Su desnivel es estimado; el original emplea una losa plana en esa zona."
+      "note": "La VR muestra dos escaleras descendentes al \u00e1rea de maniobra. Su desnivel es estimado; el original emplea una losa plana en esa zona."
     },
     {
       "id": "foredeck-envelope",
@@ -1724,7 +2020,7 @@
         "HULL_HUL_001",
         "HULL_HUL_002"
       ],
-      "note": "Se recuperan las secciones originales del casco bajo proa y se cierra su encuentro con la cubierta reconstruida. La banda de unión es inferida; no modifica las superficies transitables."
+      "note": "Se recuperan las secciones originales del casco bajo proa y se cierra su encuentro con la cubierta reconstruida. La banda de uni\u00f3n es inferida; no modifica las superficies transitables."
     },
     {
       "id": "aft-upper-stair",
@@ -1749,7 +2045,7 @@
           2.83
         ]
       ],
-      "note": "La escalera visible en popa aún no permite subir. La posición de la VR y la ruta fotográfica del original difieren; no se abre un recorrido superior sin reconciliar el desembarco y el techo del salón."
+      "note": "La escalera visible en popa a\u00fan no permite subir. La posici\u00f3n de la VR y la ruta fotogr\u00e1fica del original difieren; no se abre un recorrido superior sin reconciliar el desembarco y el techo del sal\u00f3n."
     }
   ],
   "counts": {
@@ -2148,5 +2444,183 @@
         7.09
       ]
     }
-  ]
+  ],
+  "boarding": {
+    "revision": "boarding-vr-r01",
+    "state": "deployed, fixed; unmeasured reconstruction"
+  },
+  "baseline": {
+    "connections": [
+      {
+        "zones": [
+          "saloon",
+          "cockpit"
+        ],
+        "at": [
+          8.57,
+          0
+        ]
+      },
+      {
+        "zones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "at": [
+          3.4,
+          2.85
+        ]
+      },
+      {
+        "zones": [
+          "cockpit",
+          "beach-club"
+        ],
+        "at": [
+          3.4,
+          -2.85
+        ]
+      },
+      {
+        "zones": [
+          "cockpit",
+          "port-side"
+        ],
+        "at": [
+          8.57,
+          3.15
+        ]
+      },
+      {
+        "zones": [
+          "cockpit",
+          "starboard-side"
+        ],
+        "at": [
+          8.57,
+          -3.15
+        ]
+      },
+      {
+        "zones": [
+          "starboard-side",
+          "bow"
+        ],
+        "at": [
+          24.6,
+          -3.0
+        ]
+      }
+    ],
+    "beachPolygons": [
+      {
+        "id": "beach-club-2",
+        "zone": "beach-club",
+        "polygon": [
+          [
+            -0.15,
+            -3.28
+          ],
+          [
+            2.6,
+            -3.28
+          ],
+          [
+            2.6,
+            3.28
+          ],
+          [
+            -0.15,
+            3.28
+          ]
+        ],
+        "height": {
+          "x0": -0.15,
+          "z0": 2.12,
+          "slope": 0
+        }
+      },
+      {
+        "id": "beach-club-3",
+        "zone": "beach-club",
+        "polygon": [
+          [
+            2.5,
+            -1.93
+          ],
+          [
+            4.17,
+            -1.93
+          ],
+          [
+            4.17,
+            1.93
+          ],
+          [
+            2.5,
+            1.93
+          ]
+        ],
+        "height": {
+          "x0": 2.5,
+          "z0": 2.12,
+          "slope": 0
+        }
+      },
+      {
+        "id": "beach-club-4",
+        "zone": "beach-club",
+        "polygon": [
+          [
+            1.2,
+            -3.275
+          ],
+          [
+            3.4,
+            -3.275
+          ],
+          [
+            3.4,
+            -2.4250000000000003
+          ],
+          [
+            1.2,
+            -2.4250000000000003
+          ]
+        ],
+        "height": {
+          "x0": 1.2,
+          "z0": 2.12,
+          "slope": 0.8318181818181818
+        }
+      },
+      {
+        "id": "beach-club-5",
+        "zone": "beach-club",
+        "polygon": [
+          [
+            1.2,
+            2.4250000000000003
+          ],
+          [
+            3.4,
+            2.4250000000000003
+          ],
+          [
+            3.4,
+            3.275
+          ],
+          [
+            1.2,
+            3.275
+          ]
+        ],
+        "height": {
+          "x0": 1.2,
+          "z0": 2.12,
+          "slope": 0.8318181818181818
+        }
+      }
+    ]
+  }
 }

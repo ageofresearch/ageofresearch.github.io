@@ -1,11 +1,11 @@
 {
-  "version": 10,
-  "build": "machinery-loading-r01",
-  "candidateURL": "?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&selection=equipment-r01&release=equipment-selection-r01",
+  "version": 11,
+  "build": "boarding-vr-r01",
+  "candidateURL": "?room=beach-club&release=boarding-vr-r01",
   "defaultElectricalChanged": false,
   "strictVisualAcceptance": false,
-  "visualStatus": "KOHLER and local equipment corrected; private native8/4 comparison retained. Hidden depth inferred. No complete photometric or95% edge equivalence claimed.",
-  "assetManifestSHA256": "8cfcad1cf96b6b76ee0d1632483c73f677810b533815c6001ab1c0f95a37ac79",
+  "visualStatus": "Opt-in boarding candidate. Independent registration, stair/landing alignment and native-cell acceptance remain incomplete.",
+  "assetManifestSHA256": "2cf163033cb70b97efdc44b1d6b02dfeefe1415f4abed066efe4546330747f3a",
   "originalYacht": {
     "filesVerified": 629,
     "allOriginalSHA256Match": true
@@ -33,14 +33,14 @@
   "functionalBrowserChecks": true,
   "renderer": "Three.js0.180.0 / WebGL2",
   "pagesArtifact": {
-    "bytes": 1065748480,
+    "bytes": 1054146560,
     "limit": 1073741824,
-    "headroomBytes": 7993344,
+    "headroomBytes": 19595264,
     "preferredHeadroomBytes": 33554432,
     "preferredHeadroomMet": false,
-    "note": "The independent Renderpeople gallery commit reduced the previously reported 32 MiB reserve before this selection change. This release preserves that gallery and the original yacht; the actual entire Pages artifact remains below 1 GiB."
+    "note": "Entire Pages artifact measured. Existing unrelated content retained. Candidate replaces affected bundles. Authoring is excluded from Pages; Release upload remains pending."
   },
-  "previousBuild": "equipment-selection-r01",
+  "previousBuild": "machinery-loading-r01",
   "pedestalRepair": {
     "runtimeSHA256": "cb526153063ced232cba8fed57b4a20fc52f6c7bc0e63944b842e4f1b01eb6e4",
     "closedBoundary": true,
@@ -73,5 +73,78 @@
     "bytes": 185742923,
     "verifiedGpuBarrier": true,
     "review": "review/loading-r01/"
+  },
+  "boarding": {
+    "promoted": false,
+    "defaultGeometryUnchanged": true,
+    "review": "review/boarding-vr-r01/",
+    "authoring": {
+      "archive": "luz-boarding-vr-r01-authoring.zip",
+      "sha256": "7f3fe13b0ec55586724641698f6872f5272098e17e974a61a226abb8861e9fea",
+      "bytes": 573838800,
+      "files": 94,
+      "referencePhotosIncluded": false,
+      "candidateVisualAcceptance": false,
+      "status": "pending-upload",
+      "reason": "Direct Release upload returned HTTP 401. Automatic approval review rejected a public branch transfer; the local authoring archive is ready and no transfer branch was pushed.",
+      "pass": false
+    },
+    "resources": {
+      "maxDrawCallsInCaptures": 45,
+      "maxTrianglesInCaptures": 208906,
+      "residentEstimate": {
+        "geometryBytes": 21489462,
+        "textureBytes": 279620721,
+        "shadowDepthBytes": 16777216,
+        "totalBytes": 317887399,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "threeCycles": [
+        {
+          "memory": {
+            "geometries": 58,
+            "textures": 26
+          },
+          "residentZones": [
+            "beach-club",
+            "cockpit"
+          ]
+        },
+        {
+          "memory": {
+            "geometries": 58,
+            "textures": 26
+          },
+          "residentZones": [
+            "beach-club",
+            "cockpit"
+          ]
+        },
+        {
+          "memory": {
+            "geometries": 58,
+            "textures": 26
+          },
+          "residentZones": [
+            "beach-club",
+            "cockpit"
+          ]
+        }
+      ]
+    },
+    "preservation": {
+      "originalFilesVerified": 629,
+      "machineryAssetsVerified": 115,
+      "strategySHA256": "7cfb4757350071bf1b7206b06e9939d43d19b21cea8ed6829fbcf5c183d34627",
+      "cockpitGeometryUnchanged": true,
+      "mechanicsManifestUnchanged": true,
+      "pass": true
+    },
+    "referenceFaces": 24,
+    "grid": [
+      8,
+      4
+    ],
+    "acceptedCells": 0
   }
 }

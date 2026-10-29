@@ -1,3 +1,4 @@
+import {boardingEnabled,applyBoardingVisibility} from './boarding-profile.js';
 import * as THREE from 'three';import {applyRoomShading} from './shading.js';import {TexturePool} from './streaming.js';import {InstalledEngine} from './installed-engine.js';
 import {assetURL} from './asset-version.js';
 import {InstalledBulkhead} from './installed-bulkhead.js';
@@ -14,11 +15,11 @@ export function roomAssets({gltf,exr,pmrem,app,mechanics}){
   for(const m of materials){for(const v of Object.values(m))if(v?.isTexture&&!pooled.has(v)&&!environmentTargets.has(v))textures.add(v);m.dispose();}for(const g of geometries)g.dispose();for(const t of textures)t.dispose();for(const e of room.environments||[])e.dispose();pool.release(room.lease||new Set());
  }
  async function load(id,signal){
-  const base='./assets/'+id+'/',meta=await app.assets.json(base+'room.json',signal),atlases=meta.atlases,probeSpecs=meta.probes;
+  const base='./assets/'+id+'/',rawMeta=await app.assets.json(base+'room.json',signal),meta={...rawMeta,...rawMeta.boardingProfiles?.[boardingEnabled()?'candidate':'baseline']},atlases=meta.atlases,probeSpecs=meta.probes;
   const buffers=await Promise.all([bytes(base+'room.glb',signal),...atlases.map(a=>bytes(base+a.asset,signal)),...probeSpecs.map(p=>bytes(base+p.asset,signal)),...(meta.supplementGeometry?[bytes(base+meta.supplementGeometry.asset,signal)]:[])]);
   signal.throwIfAborted();const room={id,meta,dynamic:{register:[],door:[]},atlases:{},environments:[],probeSpecs,probePosition:meta.probePosition,probeBounds:meta.probeBounds,lease:new Set()};
   try{
-   if(id==='machinery'&&!await app.selection.load())throw Error('No se pudo preparar la selección de equipos');const model=await gltf.parseAsync(buffers[0],new URL(base,location.href).href);room.root=model.scene;if(meta.supplementGeometry){const extra=await gltf.parseAsync(buffers.at(-1),new URL(base,location.href).href);room.root.add(extra.scene);}room.root.traverse(o=>{if(['filter-well-context','filter-well-register'].includes(o.userData.variant))o.visible=false;if(o.userData.dynamic&&room.dynamic[o.userData.dynamic])room.dynamic[o.userData.dynamic].push(o);});signal.throwIfAborted();
+   if(id==='machinery'&&!await app.selection.load())throw Error('No se pudo preparar la selección de equipos');const model=await gltf.parseAsync(buffers[0],new URL(base,location.href).href);room.root=model.scene;applyBoardingVisibility(room.root,boardingEnabled());if(meta.supplementGeometry){const extra=await gltf.parseAsync(buffers.at(-1),new URL(base,location.href).href);room.root.add(extra.scene);}room.root.traverse(o=>{if(['filter-well-context','filter-well-register'].includes(o.userData.variant))o.visible=false;if(o.userData.dynamic&&room.dynamic[o.userData.dynamic])room.dynamic[o.userData.dynamic].push(o);});signal.throwIfAborted();
    atlases.forEach((a,i)=>room.atlases[a.key]=texture(buffers[i+1],true));
    for(let i=0;i<probeSpecs.length;i++){const raw=texture(buffers[1+atlases.length+i]);raw.mapping=THREE.EquirectangularReflectionMapping;room.environments.push(pmrem.fromEquirectangular(raw));raw.dispose();}
    room.environment=room.environments[Math.floor(room.environments.length/2)];const configured=new Set();

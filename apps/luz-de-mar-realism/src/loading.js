@@ -1,3 +1,4 @@
+import {boardingEnabled} from './boarding-profile.js';
 import {assetURL} from './asset-version.js';
 
 export const engineAllowed=(spec,query)=>!!spec&&(!spec.previewQuery||query===spec.previewQuery||spec.previewAliases?.includes(query));
@@ -7,7 +8,7 @@ export function appearanceProfile(meta,params){
  return b&&(b.promoted||params.get('bulkhead')==='vr-r01')?'bulkhead':null;
 }
 export function entryResources(inventory,id,params=new URLSearchParams(),bootstrap=false){
- const groups=[...(bootstrap?['bootstrap']:[]),'decoders','room/'+id];
+ const groups=[...(bootstrap?['bootstrap']:[]),'decoders','room/'+id,'boarding/'+id+'/'+(boardingEnabled(params)?'candidate':'baseline')];
  if(id==='machinery'){
   groups.push('machinery-native','selection');for(const[side,s]of Object.entries(inventory.choices.engines))if(engineAllowed(s,params.get('engine')))groups.push('engine/'+side);
   const profile=appearanceProfile(inventory.choices,params);if(profile)groups.push(profile);if(inventory.choices.well)groups.push('well');

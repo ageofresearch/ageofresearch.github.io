@@ -1,0 +1,4140 @@
+{
+  "revision": "boarding-vr-r01",
+  "status": "candidate \u2014 not accepted for visual parity",
+  "defaultUnchangedGeometry": true,
+  "candidateURL": "?room=beach-club&release=boarding-vr-r01",
+  "grid": {
+    "nativeSize": 2048,
+    "basePixels": 8,
+    "detailPixels": 4,
+    "acceptedCells": 0
+  },
+  "referenceFaces": 24,
+  "newEditableComponents": 299,
+  "replacedComponents": [
+    {
+      "id": "beach-club/B02/0202",
+      "name": "B02 Port transom stairs white riser"
+    },
+    {
+      "id": "beach-club/B02/0203",
+      "name": "B02 Port transom stairs teak tread"
+    },
+    {
+      "id": "beach-club/B02/0204",
+      "name": "B02 Port transom stairs white riser.001"
+    },
+    {
+      "id": "beach-club/B02/0205",
+      "name": "B02 Port transom stairs teak tread.001"
+    },
+    {
+      "id": "beach-club/B02/0206",
+      "name": "B02 Port transom stairs white riser.002"
+    },
+    {
+      "id": "beach-club/B02/0207",
+      "name": "B02 Port transom stairs teak tread.002"
+    },
+    {
+      "id": "beach-club/B02/0208",
+      "name": "B02 Port transom stairs white riser.003"
+    },
+    {
+      "id": "beach-club/B02/0209",
+      "name": "B02 Port transom stairs teak tread.003"
+    },
+    {
+      "id": "beach-club/B02/0210",
+      "name": "B02 Port transom stairs white riser.004"
+    },
+    {
+      "id": "beach-club/B02/0211",
+      "name": "B02 Port transom stairs teak tread.004"
+    },
+    {
+      "id": "beach-club/B02/0212",
+      "name": "B02 Port transom stairs white riser.005"
+    },
+    {
+      "id": "beach-club/B02/0213",
+      "name": "B02 Port transom stairs teak tread.005"
+    },
+    {
+      "id": "beach-club/B02/0214",
+      "name": "B02 Port transom stairs white riser.006"
+    },
+    {
+      "id": "beach-club/B02/0215",
+      "name": "B02 Port transom stairs teak tread.006"
+    },
+    {
+      "id": "beach-club/B02/0216",
+      "name": "B02 Port transom stairs white riser.007"
+    },
+    {
+      "id": "beach-club/B02/0217",
+      "name": "B02 Port transom stairs teak tread.007"
+    },
+    {
+      "id": "beach-club/B02/0218",
+      "name": "B02 Port transom stairs white riser.008"
+    },
+    {
+      "id": "beach-club/B02/0219",
+      "name": "B02 Port transom stairs teak tread.008"
+    },
+    {
+      "id": "beach-club/B02/0220",
+      "name": "B02 Port transom stairs sloped handrail"
+    },
+    {
+      "id": "beach-club/B02/0221",
+      "name": "B02 Port transom stairs handrail post"
+    },
+    {
+      "id": "beach-club/B02/0222",
+      "name": "B02 Port transom stairs handrail post.001"
+    },
+    {
+      "id": "beach-club/B02/0223",
+      "name": "B02 Port transom stairs handrail post.002"
+    },
+    {
+      "id": "beach-club/B02/0224",
+      "name": "B02 Port transom stairs sloped handrail.001"
+    },
+    {
+      "id": "beach-club/B02/0225",
+      "name": "B02 Port transom stairs handrail post.003"
+    },
+    {
+      "id": "beach-club/B02/0226",
+      "name": "B02 Port transom stairs handrail post.004"
+    },
+    {
+      "id": "beach-club/B02/0227",
+      "name": "B02 Port transom stairs handrail post.005"
+    },
+    {
+      "id": "beach-club/B03/0228",
+      "name": "B03 Sculpted transom shoulder.001"
+    }
+  ],
+  "referenceAssessment": {
+    "revision": "boarding-vr-r01",
+    "accepted": false,
+    "grid": {
+      "nativeSize": 2048,
+      "basePixels": 8,
+      "detailPixels": 4,
+      "acceptedCells": 0
+    },
+    "station": {
+      "Beach_Club": [
+        0.3,
+        2.22,
+        3.6
+      ],
+      "state": "approximate registration; supersedes initial provisional station without altering frozen source evidence"
+    },
+    "views": 10,
+    "diagnosticEdges": [
+      {
+        "component": "telescopic",
+        "referenceEdgePixels": 116465,
+        "candidateEdgePixels": 66571,
+        "referenceToCandidateWithin6px": 0.8561198643369252,
+        "candidateToReferenceWithin6px": 0.9510597707710564,
+        "status": "diagnostic only; requires curated contours and camera registration; not accepted"
+      },
+      {
+        "component": "stanchions",
+        "referenceEdgePixels": 73445,
+        "candidateEdgePixels": 27965,
+        "referenceToCandidateWithin6px": 0.5215058887602968,
+        "candidateToReferenceWithin6px": 0.754335776863937,
+        "status": "diagnostic only; requires curated contours and camera registration; not accepted"
+      },
+      {
+        "component": "mount",
+        "referenceEdgePixels": 36779,
+        "candidateEdgePixels": 20173,
+        "referenceToCandidateWithin6px": 0.6475162456836782,
+        "candidateToReferenceWithin6px": 0.8674961582312992,
+        "status": "diagnostic only; requires curated contours and camera registration; not accepted"
+      },
+      {
+        "component": "stairs",
+        "referenceEdgePixels": 62780,
+        "candidateEdgePixels": 64686,
+        "referenceToCandidateWithin6px": 0.7318254221089519,
+        "candidateToReferenceWithin6px": 0.699455832792258,
+        "status": "diagnostic only; requires curated contours and camera registration; not accepted"
+      },
+      {
+        "component": "hardware",
+        "referenceEdgePixels": 7141,
+        "candidateEdgePixels": 6598,
+        "referenceToCandidateWithin6px": 0.5311581011062876,
+        "candidateToReferenceWithin6px": 0.5357684146711125,
+        "status": "diagnostic only; requires curated contours and camera registration; not accepted"
+      }
+    ],
+    "controls": [
+      {
+        "id": "tip-upper",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          258,
+          566
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": true,
+        "status": "measured diagnostic; unaccepted",
+        "candidatePixel": [
+          259.3470771976796,
+          565.5989290495315
+        ],
+        "errorPixels": 1.405515878180674,
+        "independence": "Feature informed approximate camera/scale or geometry adjustment; excluded from independent acceptance"
+      },
+      {
+        "id": "tip-lower",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          280,
+          657
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "measured diagnostic; unaccepted",
+        "candidatePixel": [
+          259.3470771976796,
+          669.7809906291836
+        ],
+        "errorPixels": 24.28779408966335
+      },
+      {
+        "id": "guide-end",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          404,
+          720
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "guide-splice",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          1050,
+          723
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "deck-splice",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          1939,
+          565
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": true,
+        "status": "measured diagnostic; unaccepted",
+        "candidatePixel": [
+          1877.862430462591,
+          565.5989290495315
+        ],
+        "errorPixels": 61.14050314601523,
+        "independence": "Feature informed approximate camera/scale or geometry adjustment; excluded from independent acceptance"
+      },
+      {
+        "id": "under-guide",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          1714,
+          744
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "post1-knee",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          354,
+          396
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "ambiguous correspondence; excluded from point acceptance",
+        "reason": "Frozen marker falls along a bend rather than an identified corner; correspondence must be re-annotated separately from held-out controls."
+      },
+      {
+        "id": "post1-foot",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          374,
+          566
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": true,
+        "status": "measured diagnostic; unaccepted",
+        "candidatePixel": [
+          370.45049333135,
+          556.5163903477154
+        ],
+        "errorPixels": 10.12609745300214,
+        "independence": "Feature informed approximate camera/scale or geometry adjustment; excluded from independent acceptance"
+      },
+      {
+        "id": "post2-foot",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          1042,
+          565
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": true,
+        "status": "measured diagnostic; unaccepted",
+        "candidatePixel": [
+          1043.6064852000595,
+          556.5163903477154
+        ],
+        "errorPixels": 8.634374756190903,
+        "independence": "Feature informed approximate camera/scale or geometry adjustment; excluded from independent acceptance"
+      },
+      {
+        "id": "rail-left",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          531,
+          189
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": true,
+        "status": "measured diagnostic; unaccepted",
+        "candidatePixel": [
+          536.8160702820659,
+          147.02441834849947
+        ],
+        "errorPixels": 42.37659883128563,
+        "independence": "Feature informed approximate camera/scale or geometry adjustment; excluded from independent acceptance"
+      },
+      {
+        "id": "rail-right",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          1940,
+          149
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": true,
+        "status": "ambiguous correspondence; excluded from point acceptance",
+        "reason": "Frozen point is along a continuous rail; no unique 3D feature has been established.",
+        "independence": "Feature informed approximate camera/scale or geometry adjustment; excluded from independent acceptance"
+      },
+      {
+        "id": "far-post-foot",
+        "station": "Beach_Club",
+        "face": "b",
+        "pixel": [
+          1741,
+          566
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "ambiguous correspondence; excluded from point acceptance",
+        "reason": "Far stanchion root is hidden by the near deck blade; the visible endpoint is an occlusion boundary, not a physical foot."
+      },
+      {
+        "id": "mount-inner",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          633,
+          886
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "mount-lower",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          508,
+          865
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "outer-rail-foot",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          78,
+          1151
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "step1-left",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          305,
+          1144
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "step2-left",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          365,
+          1071
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "step3-left",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          398,
+          990
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "step4-left",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          468,
+          925
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "shoulder-bottom",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          607,
+          1255
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "access-cover-left",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          556,
+          938
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "access-cover-right",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          700,
+          951
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "cleat-support",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          590,
+          727
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      },
+      {
+        "id": "base-joint",
+        "station": "Beach_Club",
+        "face": "l",
+        "pixel": [
+          225,
+          1241
+        ],
+        "annotationUncertaintyPixels": 4,
+        "usedForAdjustment": false,
+        "status": "unmeasured / registration pending"
+      }
+    ],
+    "remaining": [
+      "Complete independent camera registration against rigid shared features.",
+      "Align stair, landing and mount to all four panoramas.",
+      "Curate component contours and finish manual 8/4-pixel cell review.",
+      "Do not promote candidate until independent points and bidirectional edges meet thresholds."
+    ]
+  },
+  "lighting": {
+    "beach-club": {
+      "seconds": 307.78,
+      "rawSHA256": "ebdddd0628b9d62dbe9db7c83f7ffa9be6d0d4645dd206c7a76f8f6e79f6ae8b",
+      "publishedAtlasSHA256": "245fe7d1f0f5bf6c57ffe10b12a3192d99856999ae7e16d92d59b55fbba60333",
+      "publishedProbeSHA256": "e347877f8a9feb9259cef78b0939bd45457d33a8dc3c5ac80e7340944c54bf95",
+      "compression": {
+        "meanAbsoluteLinearError": 0.00017960724653676152,
+        "p99AbsoluteLinearError": 0.0024316683411598206,
+        "maxAbsoluteLinearError": 0.027708709239959717
+      }
+    },
+    "cockpit": {
+      "seconds": 417.05,
+      "rawSHA256": "1dea25e9b3ff05c6a1e128fee7a82dacf848753b27d3b6aca3a615e9aa7c3ec0",
+      "publishedAtlasSHA256": "b3f9688a45d38116e2fe469996b9a9f96dbc44fb84e7d5354ad3a9ab7e70de0c",
+      "publishedProbeSHA256": "1b35f3afc591d3662e09064d1e3a701bab2706339c63cb15f13418a417304c8d",
+      "compression": {
+        "meanAbsoluteLinearError": 0.00019431843247730285,
+        "p99AbsoluteLinearError": 0.0022064149379730225,
+        "maxAbsoluteLinearError": 0.03162109851837158
+      }
+    }
+  },
+  "preservation": {
+    "originalFilesVerified": 629,
+    "machineryAssetsVerified": 115,
+    "strategySHA256": "7cfb4757350071bf1b7206b06e9939d43d19b21cea8ed6829fbcf5c183d34627",
+    "cockpitGeometryUnchanged": true,
+    "mechanicsManifestUnchanged": true,
+    "pass": true
+  },
+  "navigation": {
+    "keyboard": true,
+    "touch": true,
+    "roundTrip": true,
+    "freeEndStops": true,
+    "noLayerJump": true,
+    "threeRoomCyclesStable": true
+  },
+  "resources": {
+    "maxDrawCallsInCaptures": 45,
+    "maxTrianglesInCaptures": 208906,
+    "residentEstimate": {
+      "geometryBytes": 21489462,
+      "textureBytes": 279620721,
+      "shadowDepthBytes": 16777216,
+      "totalBytes": 317887399,
+      "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+    },
+    "threeCycles": [
+      {
+        "memory": {
+          "geometries": 58,
+          "textures": 26
+        },
+        "residentZones": [
+          "beach-club",
+          "cockpit"
+        ]
+      },
+      {
+        "memory": {
+          "geometries": 58,
+          "textures": 26
+        },
+        "residentZones": [
+          "beach-club",
+          "cockpit"
+        ]
+      },
+      {
+        "memory": {
+          "geometries": 58,
+          "textures": 26
+        },
+        "residentZones": [
+          "beach-club",
+          "cockpit"
+        ]
+      }
+    ]
+  },
+  "authoring": {
+    "status": "prepared locally; Release upload pending",
+    "intendedRelease": "https://github.com/ageofresearch/ageofresearch.github.io/releases/tag/luz-boarding-vr-r01"
+  },
+  "limits": [
+    "Pixel acceptance is NOT passed. Stair, landing, mount registration and detailed stanchion correspondence remain unresolved.",
+    "Six diagnostic control points were projected; three ambiguous correspondences are excluded, and full independent 24-point acceptance is pending.",
+    "No cell has been automatically accepted. Reference originals and VR composites remain private.",
+    "SwiftShader checks correctness and resource stability, not desktop/mobile hardware FPS.",
+    "Concealed reverse faces and physical dimensions remain estimated.",
+    "Baseline HDR files are recompressed as linear DWAA; geometry and UVs are preserved. Compression error is recorded separately."
+  ],
+  "loading-validation": {
+    "softwareRenderer": true,
+    "blocked": {
+      "stats": {
+        "room": "cockpit",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22698097,
+          "totalBytes": 22698097,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22698097
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "cockpit"
+        ],
+        "pendingZones": [
+          "saloon",
+          "beach-club"
+        ],
+        "sharedTextures": {
+          "textures": 17,
+          "references": 17
+        },
+        "elevation": 3.95,
+        "position": [
+          3.8,
+          3.1200000000000006
+        ],
+        "navigationLayer": "deck",
+        "boarding": null,
+        "frames": 3,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "adaptive",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            800,
+            550
+          ]
+        },
+        "canvas": [
+          800,
+          550
+        ],
+        "calls": 20,
+        "triangles": 124136,
+        "memory": {
+          "geometries": 39,
+          "textures": 24
+        },
+        "estimatedMemory": {
+          "geometryBytes": 16462526,
+          "textureBytes": 239774833,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 273014575,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 1,
+          "p50": 3.5,
+          "p95": 3.5
+        },
+        "shadowUpdates": 8,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      "notice": "Preparando el siguiente tramo\u2026"
+    },
+    "failure": "El siguiente tramo no se ha cargado. Puedes seguir en esta zona.Reintentar",
+    "retry": {
+      "room": "beach-club",
+      "loading": {
+        "id": "entry-1",
+        "label": "Terraza de popa",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 22698097,
+        "totalBytes": 22698097,
+        "files": 18,
+        "totalFiles": 18,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 22698097
+      },
+      "selection": {
+        "enabled": false,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 0,
+        "targetBytes": 0
+      },
+      "machinery": null,
+      "residentZones": [
+        "cockpit",
+        "beach-club"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 17,
+        "references": 32
+      },
+      "elevation": 3.952,
+      "position": [
+        3.8,
+        3.620000000000001
+      ],
+      "navigationLayer": "gangway",
+      "boarding": "boarding-vr-r01",
+      "frames": 6,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "adaptive",
+        "source": "adaptive",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          800,
+          550
+        ]
+      },
+      "canvas": [
+        800,
+        550
+      ],
+      "calls": 31,
+      "triangles": 142576,
+      "memory": {
+        "geometries": 52,
+        "textures": 26
+      },
+      "estimatedMemory": {
+        "geometryBytes": 21543686,
+        "textureBytes": 279620721,
+        "shadowDepthBytes": 16777216,
+        "totalBytes": 317941623,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 5.1000000005587935,
+        "p95": 5.1000000005587935
+      },
+      "shadowUpdates": 12,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "cancel": {
+      "room": "bow",
+      "loading": {
+        "id": "entry-3",
+        "label": "Proa",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 25511267,
+        "totalBytes": 25511267,
+        "files": 6,
+        "totalFiles": 6,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 25511267
+      },
+      "selection": {
+        "enabled": false,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 0,
+        "targetBytes": 0
+      },
+      "machinery": null,
+      "residentZones": [
+        "cockpit",
+        "bow"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 17,
+        "references": 32
+      },
+      "elevation": 6,
+      "position": [
+        27.1,
+        -2.35
+      ],
+      "navigationLayer": "deck",
+      "boarding": null,
+      "frames": 12,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "adaptive",
+        "source": "adaptive",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          800,
+          550
+        ]
+      },
+      "canvas": [
+        800,
+        550
+      ],
+      "calls": 16,
+      "triangles": 74748,
+      "memory": {
+        "geometries": 52,
+        "textures": 26
+      },
+      "estimatedMemory": {
+        "geometryBytes": 18951322,
+        "textureBytes": 279620721,
+        "shadowDepthBytes": 16777216,
+        "totalBytes": 315349259,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "shadowUpdates": 25,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "pass": true
+  },
+  "baseline-hdr-compression": {
+    "beach-club": {
+      "ambient-beach-club-baseline.exr": {
+        "maxLinearError": 0.02197265625,
+        "meanLinearError": 0.00013064987433608621,
+        "originalSHA256": "f7f74cbb12d2654afadca747e43f1fadc8c6e76e18d7abff3b6864cd4e865fe0"
+      },
+      "probe-baseline.exr": {
+        "maxLinearError": 0.0390625,
+        "meanLinearError": 0.0010216208174824715,
+        "originalSHA256": "fc7223b06e0897900a5315b795f7674efb971140616acc1a34a24e52cf651040"
+      }
+    },
+    "cockpit": {
+      "ambient-cockpit-baseline.exr": {
+        "maxLinearError": 0.0263671875,
+        "meanLinearError": 0.0001699812855804339,
+        "originalSHA256": "5655aa0d117ed2aad920eda3f081d6214d2b3c191feb22a31a7e75054baea9f2"
+      },
+      "probe-baseline.exr": {
+        "maxLinearError": 0.04296875,
+        "meanLinearError": 0.0009055798291228712,
+        "originalSHA256": "d393cee41b33dbebb36ed38194dd91b6e1fd4a5186084ae93602060ffac09c71"
+      }
+    }
+  },
+  "machinery-regression-report": {
+    "url": "http://127.0.0.1:5261/?room=machinery&engine=right-vr-r01&bulkhead=vr-r01&electrical=vr-r03&release=equipment-selection-r01",
+    "errors": [],
+    "softwareRenderer": true,
+    "cache": "New browser context; CDN cache state unknown",
+    "firstReveal": [
+      {
+        "time": 86257.29999999981,
+        "stats": {
+          "room": "machinery",
+          "loading": {
+            "id": "entry-1",
+            "label": "Cuarto de m\u00e1quinas",
+            "phase": "ready",
+            "message": "Listo",
+            "error": "",
+            "presentationReady": true,
+            "bytes": 187281744,
+            "totalBytes": 187281744,
+            "files": 87,
+            "totalFiles": 87,
+            "pending": [],
+            "bufferedBytes": 0,
+            "peakBufferedBytes": 187281744
+          },
+          "selection": {
+            "enabled": true,
+            "selected": null,
+            "pickPasses": 0,
+            "errors": [],
+            "catalogCount": 56,
+            "targetBytes": 0
+          },
+          "machinery": {
+            "active": true,
+            "bulkhead": {
+              "ready": true,
+              "loading": false,
+              "error": "",
+              "active": true,
+              "committed": true,
+              "waitingForSafePosition": false,
+              "triangles": 178508,
+              "version": "generator-vr-r01",
+              "label": "frente el\u00e9ctrico y KOHLER"
+            },
+            "filterWell": {
+              "waitingForSafePosition": false,
+              "ready": true,
+              "loading": false,
+              "committed": true,
+              "error": "",
+              "version": "filter-well-r01",
+              "register": [
+                11.05,
+                -0.49,
+                12.75,
+                0.49
+              ]
+            },
+            "exteriorTrianglesPerEngine": 382211,
+            "installed": {
+              "configured": true,
+              "ready": true,
+              "loading": false,
+              "error": "",
+              "active": true,
+              "lod": "walk",
+              "detailLoaded": true,
+              "visible": true,
+              "triangles": 102574,
+              "lighting": "Full baked diffuse and local probe specular",
+              "receiverEnabled": true
+            },
+            "installedRight": {
+              "configured": true,
+              "ready": true,
+              "loading": false,
+              "error": "",
+              "active": true,
+              "lod": "walk",
+              "detailLoaded": true,
+              "visible": true,
+              "triangles": 122837,
+              "lighting": "Full baked diffuse and local probe specular",
+              "receiverEnabled": true
+            },
+            "inspectionLoaded": false,
+            "filterInspectionLoaded": false,
+            "processingMechanics": false,
+            "poseTextureBytes": 0,
+            "motor": {
+              "selected": "port",
+              "cutaway": false,
+              "requestedCut": false,
+              "playing": false,
+              "time": 0,
+              "loading": false,
+              "error": ""
+            },
+            "filters": {
+              "selected": "port",
+              "accessOpen": false,
+              "progress": 0,
+              "target": 0,
+              "moving": false,
+              "dirty": false,
+              "loading": false,
+              "error": ""
+            },
+            "doorOpen": false
+          },
+          "residentZones": [
+            "machinery"
+          ],
+          "pendingZones": [],
+          "sharedTextures": {
+            "textures": 81,
+            "references": 81
+          },
+          "elevation": 1.58,
+          "position": [
+            9.15,
+            0
+          ],
+          "navigationLayer": "deck",
+          "boarding": null,
+          "frames": 8,
+          "ratio": 1,
+          "quality": 1,
+          "resolution": {
+            "mode": "sharp",
+            "source": "machinery",
+            "requestedDPR": 1,
+            "effectiveDPR": 1,
+            "hardwareLimited": false,
+            "canvas": [
+              1000,
+              625
+            ]
+          },
+          "canvas": [
+            1000,
+            625
+          ],
+          "calls": 75,
+          "triangles": 428439,
+          "memory": {
+            "geometries": 266,
+            "textures": 212
+          },
+          "estimatedMemory": {
+            "geometryBytes": 100726908,
+            "textureBytes": 586115409,
+            "shadowDepthBytes": 8388608,
+            "totalBytes": 695230925,
+            "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+          },
+          "frameMs": {
+            "samples": 0,
+            "p50": 0,
+            "p95": 0
+          },
+          "submissionMs": {
+            "samples": 0,
+            "p50": 0,
+            "p95": 0
+          },
+          "shadowUpdates": 16,
+          "errors": [],
+          "renderer": "WebKit WebGL"
+        },
+        "status": "ready"
+      }
+    ],
+    "initialMs": 86281,
+    "stats": {
+      "room": "machinery",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de m\u00e1quinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 187281744,
+        "totalBytes": 187281744,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 187281744
+      },
+      "selection": {
+        "enabled": true,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 56,
+        "targetBytes": 0
+      },
+      "machinery": {
+        "active": true,
+        "bulkhead": {
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "committed": true,
+          "waitingForSafePosition": false,
+          "triangles": 178508,
+          "version": "generator-vr-r01",
+          "label": "frente el\u00e9ctrico y KOHLER"
+        },
+        "filterWell": {
+          "waitingForSafePosition": false,
+          "ready": true,
+          "loading": false,
+          "committed": true,
+          "error": "",
+          "version": "filter-well-r01",
+          "register": [
+            11.05,
+            -0.49,
+            12.75,
+            0.49
+          ]
+        },
+        "exteriorTrianglesPerEngine": 382211,
+        "installed": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 102574,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "installedRight": {
+          "configured": true,
+          "ready": true,
+          "loading": false,
+          "error": "",
+          "active": true,
+          "lod": "walk",
+          "detailLoaded": true,
+          "visible": true,
+          "triangles": 122837,
+          "lighting": "Full baked diffuse and local probe specular",
+          "receiverEnabled": true
+        },
+        "inspectionLoaded": false,
+        "filterInspectionLoaded": false,
+        "processingMechanics": false,
+        "poseTextureBytes": 0,
+        "motor": {
+          "selected": "port",
+          "cutaway": false,
+          "requestedCut": false,
+          "playing": false,
+          "time": 0,
+          "loading": false,
+          "error": ""
+        },
+        "filters": {
+          "selected": "port",
+          "accessOpen": false,
+          "progress": 0,
+          "target": 0,
+          "moving": false,
+          "dirty": false,
+          "loading": false,
+          "error": ""
+        },
+        "doorOpen": false
+      },
+      "residentZones": [
+        "machinery"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 81,
+        "references": 81
+      },
+      "elevation": 1.58,
+      "position": [
+        9.15,
+        0
+      ],
+      "navigationLayer": "deck",
+      "boarding": null,
+      "frames": 8,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "sharp",
+        "source": "machinery",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          1000,
+          625
+        ]
+      },
+      "canvas": [
+        1000,
+        625
+      ],
+      "calls": 75,
+      "triangles": 428439,
+      "memory": {
+        "geometries": 266,
+        "textures": 212
+      },
+      "estimatedMemory": {
+        "geometryBytes": 100726908,
+        "textureBytes": 586115409,
+        "shadowDepthBytes": 8388608,
+        "totalBytes": 695230925,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "jsHeap": {
+      "usedSize": 13972616,
+      "totalSize": 16826368,
+      "embedderHeapUsedSize": 2468096,
+      "backingStorageSize": 657980168
+    },
+    "pass": true,
+    "last": {
+      "status": "ready",
+      "loading": {
+        "id": "entry-1",
+        "label": "Cuarto de m\u00e1quinas",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 187281744,
+        "totalBytes": 187281744,
+        "files": 87,
+        "totalFiles": 87,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 187281744
+      },
+      "detail": "Listo"
+    }
+  },
+  "refinement-review": {
+    "revision": "boarding-vr-r01",
+    "cameraChanged": false,
+    "station": [
+      0.3,
+      2.22,
+      3.6
+    ],
+    "geometryRefinements": [
+      {
+        "components": "BVR07/BVR08",
+        "observed": "Near stanchion doglegs bend along the gangway length; far roots are occluded by the near side blade.",
+        "change": "Fore/aft bends, thinner tubes, smaller sockets and separately spaced far posts.",
+        "confidence": "Visible portions referenced; concealed attachment depth remains estimated."
+      },
+      {
+        "components": "BVR01/BVR03/BVR04/BVR05/BVR06",
+        "observed": "Side blade and guides read as slim profiles, with warm timber visible on the underside.",
+        "change": "Reduced tray, shoe, guide and crossmember thickness; added authored timber underside.",
+        "confidence": "Proportions estimated from Beach_Club-b; no measured manufacturer dimensions."
+      }
+    ],
+    "notAccepted": [
+      "Complete camera calibration to rigid shared points",
+      "Stair and landing placement",
+      "Independent 24-point tolerance and curated bidirectional edge validation",
+      "Manual review of every native 8/4-pixel grid cell"
+    ],
+    "gridCellsAccepted": 0
+  },
+  "render-sequence": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "viewport": [
+      900,
+      600
+    ],
+    "dpr": 1,
+    "frames": 32,
+    "p50": 311.8999999985099,
+    "p95": 766.3999999985099,
+    "samples": [
+      {
+        "completedFrameMs": 2784.39999999851,
+        "position": [
+          3.5999999999999996,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 5,
+        "ratio": 1,
+        "quality": 1,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 21,
+        "triangles": 102262,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 0,
+          "p50": 0,
+          "p95": 0
+        },
+        "submissionMs": {
+          "samples": 1,
+          "p50": 2773.89999999851,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 3.199999999254942,
+        "position": [
+          3.3999999999999995,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 6,
+        "ratio": 1,
+        "quality": 0.85,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 19,
+        "triangles": 95674,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 1,
+          "p50": 2766.6000000000004,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 2,
+          "p50": 2773.89999999851,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 6.899999998509884,
+        "position": [
+          3.1999999999999993,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 7,
+        "ratio": 1,
+        "quality": 0.85,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 18,
+        "triangles": 95354,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 2,
+          "p50": 2766.6000000000004,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 3,
+          "p50": 1.3999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 105.30000000074506,
+        "position": [
+          2.999999999999999,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 8,
+        "ratio": 1,
+        "quality": 0.85,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 17,
+        "triangles": 88874,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 3,
+          "p50": 100,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 4,
+          "p50": 1.3999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 473.5,
+        "position": [
+          2.799999999999999,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 9,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 14,
+        "triangles": 78390,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 5,
+          "p50": 0.8999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 469.6000000014901,
+        "position": [
+          2.5999999999999988,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 10,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 13,
+        "triangles": 77310,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 6,
+          "p50": 0.8999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 472.9000000022352,
+        "position": [
+          2.3999999999999986,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 11,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 13,
+        "triangles": 77310,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 7,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 428.8999999985099,
+        "position": [
+          2.1999999999999984,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 12,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 8,
+          "p50": 0.8999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 398.3999999985099,
+        "position": [
+          1.9999999999999982,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 13,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 9,
+          "p50": 0.8999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 383.70000000298023,
+        "position": [
+          1.799999999999998,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 14,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 10,
+          "p50": 0.9000000022351742,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 349.8999999985099,
+        "position": [
+          1.5999999999999979,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 15,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 11,
+        "triangles": 67066,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 11,
+          "p50": 0.8999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 359.19999999925494,
+        "position": [
+          1.3999999999999977,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 16,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 9,
+        "triangles": 58614,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 12,
+          "p50": 0.8999999985098839,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 311.8999999985099,
+        "position": [
+          1.1999999999999975,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 17,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 9,
+        "triangles": 58614,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 13,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 284.5999999977648,
+        "position": [
+          0.9999999999999973,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 18,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 8,
+        "triangles": 56610,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 14,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 223.5,
+        "position": [
+          0.7999999999999972,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 19,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 8,
+        "triangles": 56610,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 15,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 217.80000000074506,
+        "position": [
+          0.599999999999997,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 20,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 6,
+        "triangles": 55206,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 16,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 234.60000000149012,
+        "position": [
+          0.7999999999999972,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 21,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 8,
+        "triangles": 56610,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 17,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 219.79999999701977,
+        "position": [
+          0.9999999999999973,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 22,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 8,
+        "triangles": 56610,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 18,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 200.60000000149012,
+        "position": [
+          1.1999999999999975,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 23,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 10,
+        "triangles": 64374,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 19,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 213.69999999925494,
+        "position": [
+          1.3999999999999977,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 24,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 10,
+        "triangles": 64374,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 20,
+          "p50": 0.8000000007450581,
+          "p95": 2773.89999999851
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 218.29999999701977,
+        "position": [
+          1.5999999999999979,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 25,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 21,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 244.79999999701977,
+        "position": [
+          1.799999999999998,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 26,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 22,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 231.79999999701977,
+        "position": [
+          1.9999999999999982,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 27,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 23,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 296.5,
+        "position": [
+          2.1999999999999984,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 28,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 12,
+        "triangles": 67530,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 24,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 313.80000000074506,
+        "position": [
+          2.3999999999999986,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 29,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 14,
+        "triangles": 78390,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 25,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 357.29999999701977,
+        "position": [
+          2.5999999999999988,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 30,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 14,
+        "triangles": 78390,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 26,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 382.19999999925494,
+        "position": [
+          2.799999999999999,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 31,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 15,
+        "triangles": 88442,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 27,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 766.3999999985099,
+        "position": [
+          2.999999999999999,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 32,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 18,
+        "triangles": 95354,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 28,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 455.29999999701977,
+        "position": [
+          3.1999999999999993,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 33,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 19,
+        "triangles": 95674,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 29,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 450.69999999925494,
+        "position": [
+          3.3999999999999995,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 34,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 20,
+        "triangles": 102154,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 30,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 205.39999999850988,
+        "position": [
+          3.5999999999999996,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 35,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 21,
+        "triangles": 102262,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 31,
+          "p50": 0.6999999992549419,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      },
+      {
+        "completedFrameMs": 282.80000000074506,
+        "position": [
+          3.8,
+          3.400000000000001
+        ],
+        "room": "beach-club",
+        "loading": {
+          "id": "entry-1",
+          "label": "Terraza de popa",
+          "phase": "ready",
+          "message": "Listo",
+          "error": "",
+          "presentationReady": true,
+          "bytes": 22685577,
+          "totalBytes": 22685577,
+          "files": 18,
+          "totalFiles": 18,
+          "pending": [],
+          "bufferedBytes": 0,
+          "peakBufferedBytes": 22685577
+        },
+        "selection": {
+          "enabled": false,
+          "selected": null,
+          "pickPasses": 0,
+          "errors": [],
+          "catalogCount": 0,
+          "targetBytes": 0
+        },
+        "machinery": null,
+        "residentZones": [
+          "beach-club",
+          "saloon"
+        ],
+        "pendingZones": [],
+        "sharedTextures": {
+          "textures": 35,
+          "references": 44
+        },
+        "elevation": 3.952,
+        "navigationLayer": "gangway",
+        "boarding": "boarding-vr-r01",
+        "frames": 36,
+        "ratio": 1,
+        "quality": 0.7224999999999999,
+        "resolution": {
+          "mode": "adaptive",
+          "source": "fixed",
+          "requestedDPR": 1,
+          "effectiveDPR": 1,
+          "hardwareLimited": false,
+          "canvas": [
+            900,
+            600
+          ]
+        },
+        "canvas": [
+          900,
+          600
+        ],
+        "calls": 21,
+        "triangles": 102262,
+        "memory": {
+          "geometries": 62,
+          "textures": 47
+        },
+        "estimatedMemory": {
+          "geometryBytes": 27775602,
+          "textureBytes": 361410129,
+          "shadowDepthBytes": 16777216,
+          "totalBytes": 405962947,
+          "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+        },
+        "frameMs": {
+          "samples": 4,
+          "p50": 483.3000000000029,
+          "p95": 2766.6000000000004
+        },
+        "submissionMs": {
+          "samples": 32,
+          "p50": 0.8000000007450581,
+          "p95": 5.800000000745058
+        },
+        "shadowUpdates": 12,
+        "errors": [],
+        "renderer": "WebKit WebGL"
+      }
+    ],
+    "method": "Sequential camera movement + actual render + gl.finish; includes scheduling and software GPU completion, not hardware FPS.",
+    "pass": true
+  }
+}

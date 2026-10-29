@@ -1,0 +1,499 @@
+{
+  "checkedAt": "2026-10-29T10:48:50.921615+00:00",
+  "deployedCommit": "91a3355f1703d2810cea4e35b54fb32336b44347",
+  "deployment": "https://github.com/ageofresearch/ageofresearch.github.io/actions/runs/40859618763",
+  "assets": {
+    "pass": true,
+    "url": "https://ageofresearch.github.io/luz-de-mar-realism/?room=beach-club&release=boarding-vr-r01",
+    "build": "boarding-vr-r01",
+    "downloadedFiles": [
+      {
+        "path": "assets/beach-club/ambient-beach-club-baseline.exr",
+        "bytes": 2591588,
+        "sha256": "08246d8ebfbd63fa942a49c03f169cb05f487c7b3ffebace140993f43c1e067d"
+      },
+      {
+        "path": "assets/beach-club/ambient-beach-club.exr",
+        "bytes": 2813418,
+        "sha256": "245fe7d1f0f5bf6c57ffe10b12a3192d99856999ae7e16d92d59b55fbba60333"
+      },
+      {
+        "path": "assets/beach-club/authoring.json",
+        "bytes": 5422,
+        "sha256": "4e387187aad940e455d192a95ba087bd8a13b867704525a94fc9d9772a83eb06"
+      },
+      {
+        "path": "assets/beach-club/context.glb",
+        "bytes": 1708864,
+        "sha256": "8a3377d6648c63d9f1e3b43210823b7ff7ea4478b87c53da8d1159a9006ac8e8"
+      },
+      {
+        "path": "assets/beach-club/probe-baseline.exr",
+        "bytes": 653864,
+        "sha256": "9514ba39f719c1186258cbdeefa53de3c2cad3bfd3d356f6cc937a4fa80e56e3"
+      },
+      {
+        "path": "assets/beach-club/probe.exr",
+        "bytes": 475431,
+        "sha256": "e347877f8a9feb9259cef78b0939bd45457d33a8dc3c5ac80e7340944c54bf95"
+      },
+      {
+        "path": "assets/beach-club/reference-components.json",
+        "bytes": 20985,
+        "sha256": "982931b9c416eb24a984feb0430eca6c4613afe4acab96eddd2af27a56d515af"
+      },
+      {
+        "path": "assets/beach-club/room.glb",
+        "bytes": 11593764,
+        "sha256": "8354f587662d6fc58b7ee666a20db0525997ad0d5d283a6c8396581bf8d32e86"
+      },
+      {
+        "path": "assets/beach-club/room.json",
+        "bytes": 65273,
+        "sha256": "ecb69ba1e6a0bf80d6bf9d78b9820f842cc038f72b335ab9cb8d17e3c9dce3b0"
+      },
+      {
+        "path": "assets/cockpit/ambient-cockpit-baseline.exr",
+        "bytes": 2710487,
+        "sha256": "e9911e068de045cc777bfcf044d34b06a595db75210c33aa52dcdc2e97309395"
+      },
+      {
+        "path": "assets/cockpit/ambient-cockpit.exr",
+        "bytes": 2543647,
+        "sha256": "b3f9688a45d38116e2fe469996b9a9f96dbc44fb84e7d5354ad3a9ab7e70de0c"
+      },
+      {
+        "path": "assets/cockpit/authoring.json",
+        "bytes": 5262,
+        "sha256": "aee86a66da198d2beed0898eb0413790769a6c25746829cab1487b8076da0a63"
+      },
+      {
+        "path": "assets/cockpit/context.glb",
+        "bytes": 829444,
+        "sha256": "30dc5327677daf2e4761910704c889dcf1206f3c2ec3c1952fbc1acc1093b1db"
+      },
+      {
+        "path": "assets/cockpit/probe-baseline.exr",
+        "bytes": 1145503,
+        "sha256": "3aa4578736a60a09e0e2eb2a4e5521a21d76c8e685953dc1dc94ec5025647682"
+      },
+      {
+        "path": "assets/cockpit/probe.exr",
+        "bytes": 936397,
+        "sha256": "1b35f3afc591d3662e09064d1e3a701bab2706339c63cb15f13418a417304c8d"
+      },
+      {
+        "path": "assets/cockpit/reference-components.json",
+        "bytes": 34004,
+        "sha256": "0f62cdebb91ad65946913c6f037e9aef8ac6b26c97629b125ba1a9710be9bd77"
+      },
+      {
+        "path": "assets/cockpit/room.glb",
+        "bytes": 12774460,
+        "sha256": "d29cb12137adde0deae493ab88923ff7de1f67a61f260142ad5cdcdd3e3d35f2"
+      },
+      {
+        "path": "assets/cockpit/room.json",
+        "bytes": 29678,
+        "sha256": "744b0b54866d3a2519966a0c292caa86c20a1f6cc38127b2b0f5c45072be7095"
+      },
+      {
+        "path": "assets/entry-load-r01.json",
+        "bytes": 30113,
+        "sha256": "acd835e9b0be6b2dbb9e3d5587e7d1744e006c668e52ff02d0f83f6ee899ef9f"
+      },
+      {
+        "path": "assets/index-CevyAtVM.js",
+        "bytes": 237754,
+        "sha256": "7a1227f5fda295f0bcce320b674eb114582687ae36113cb7bf730ab19e533e9e"
+      },
+      {
+        "path": "assets/index-CrB7J_xO.css",
+        "bytes": 12087,
+        "sha256": "522614cd4f1062cea604b24fda2b11b0f561b4717760183857a55411a092576b"
+      },
+      {
+        "path": "assets/manifest.json",
+        "bytes": 32565,
+        "sha256": "33aa7d3b54b2e69e97260eac6293274f522ec3b0da2a8710a0700b1991a62442"
+      },
+      {
+        "path": "assets/mechanics-DZEzmf99.js",
+        "bytes": 266710,
+        "sha256": "6627f0b8b1f90e18a65f4274caa36d65d691363d9896b1c099529eac6ff363b6"
+      },
+      {
+        "path": "assets/navigation.json",
+        "bytes": 33544,
+        "sha256": "f4efefde859ca6ac07b3b51f40a3a4c3e8fc8360568f393809aca350a93b160b"
+      },
+      {
+        "path": "assets/shading-DodomaD9.js",
+        "bytes": 548549,
+        "sha256": "33286b8b741a4337980b5a8f40932960408a0b623a6b704f7742c1bd86574dd3"
+      },
+      {
+        "path": "assets/yacht-structure.json",
+        "bytes": 51708,
+        "sha256": "0d2ba4972219208e05b1eecf52a3d51814c1cae9cb0449c8d149f9686496f6ba"
+      },
+      {
+        "path": "index.html",
+        "bytes": 6894,
+        "sha256": "647a4ab63ad97bfa0351bdf54b708b7aef5469bcb5528b659f37e9a5972f1edb"
+      },
+      {
+        "path": "review/boarding-vr-r01/index.html",
+        "bytes": 2653,
+        "sha256": "2b4b8d29e9c0189cc56895e7c19ab52f912786de25a6807ccd7a1f97f368b143"
+      },
+      {
+        "path": "review/boarding-vr-r01/mount.webp",
+        "bytes": 82156,
+        "sha256": "b88a6038844b95956ca678546cfc844def475de08b7458f1bf19c820c8f8ec21"
+      },
+      {
+        "path": "review/boarding-vr-r01/side.webp",
+        "bytes": 59338,
+        "sha256": "64d1bb4542bacbf06610b53b0dc4b8b28be2826f88a95b0ed0e6715e4cfcd5af"
+      },
+      {
+        "path": "review/boarding-vr-r01/stairs.webp",
+        "bytes": 52190,
+        "sha256": "45d68250df44d5cb68912e3ad4fa7740b26bd3c3216dceba090108d4c1ef7b94"
+      },
+      {
+        "path": "review/boarding-vr-r01/validation.json",
+        "bytes": 112565,
+        "sha256": "b26044ff8caaa4c1c30038678c233f8c12f991f9f865430f19ba6fefac00bce3"
+      }
+    ],
+    "candidatePromoted": false,
+    "pagesArtifact": {
+      "bytes": 1054146560,
+      "limit": 1073741824,
+      "headroomBytes": 19595264,
+      "preferredHeadroomBytes": 33554432,
+      "preferredHeadroomMet": false,
+      "note": "Entire Pages artifact measured. Existing unrelated content retained. Candidate replaces affected bundles. Authoring is excluded from Pages; Release upload remains pending."
+    },
+    "method": "Downloaded bytes compared with the published hash manifest, whose hash is bound to publication.json. Full original-yacht preservation is checked separately on the deployed source tree."
+  },
+  "publicBrowser": {
+    "url": "https://ageofresearch.github.io/luz-de-mar-realism/?room=beach-club&release=boarding-vr-r01",
+    "errors": [],
+    "softwareRenderer": true,
+    "candidate": {
+      "room": "beach-club",
+      "loading": {
+        "id": "entry-1",
+        "label": "Beach club",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 21349281,
+        "totalBytes": 21349281,
+        "files": 18,
+        "totalFiles": 18,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 21349281
+      },
+      "selection": {
+        "enabled": false,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 0,
+        "targetBytes": 0
+      },
+      "machinery": null,
+      "residentZones": [
+        "beach-club"
+      ],
+      "pendingZones": [],
+      "sharedTextures": {
+        "textures": 15,
+        "references": 15
+      },
+      "elevation": 2.12,
+      "position": [
+        0.95,
+        2.5
+      ],
+      "navigationLayer": "deck",
+      "boarding": "boarding-vr-r01",
+      "frames": 2,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "adaptive",
+        "source": "adaptive",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          1100,
+          760
+        ]
+      },
+      "canvas": [
+        1100,
+        760
+      ],
+      "calls": 33,
+      "triangles": 162524,
+      "memory": {
+        "geometries": 43,
+        "textures": 22
+      },
+      "estimatedMemory": {
+        "geometryBytes": 18632922,
+        "textureBytes": 232784273,
+        "shadowDepthBytes": 16777216,
+        "totalBytes": 268194411,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "shadowUpdates": 6,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "walk": {
+      "room": "beach-club",
+      "loading": {
+        "id": "entry-2",
+        "label": "Terraza de popa",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 16869044,
+        "totalBytes": 16869044,
+        "files": 6,
+        "totalFiles": 6,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 16869044
+      },
+      "selection": {
+        "enabled": false,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 0,
+        "targetBytes": 0
+      },
+      "machinery": null,
+      "residentZones": [
+        "beach-club",
+        "cockpit"
+      ],
+      "pendingZones": [
+        "saloon"
+      ],
+      "sharedTextures": {
+        "textures": 17,
+        "references": 32
+      },
+      "elevation": 3.952,
+      "position": [
+        3.8,
+        3.432182061579654
+      ],
+      "navigationLayer": "gangway",
+      "boarding": "boarding-vr-r01",
+      "frames": 7,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "adaptive",
+        "source": "adaptive",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          1100,
+          760
+        ]
+      },
+      "canvas": [
+        1100,
+        760
+      ],
+      "calls": 13,
+      "triangles": 85094,
+      "memory": {
+        "geometries": 57,
+        "textures": 26
+      },
+      "estimatedMemory": {
+        "geometryBytes": 21489462,
+        "textureBytes": 279620721,
+        "shadowDepthBytes": 16777216,
+        "totalBytes": 317887399,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 2,
+        "p50": 16.700000000000728,
+        "p95": 16.700000000000728
+      },
+      "submissionMs": {
+        "samples": 3,
+        "p50": 1.199999999254942,
+        "p95": 2.2999999970197678
+      },
+      "shadowUpdates": 16,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "reset": {
+      "room": "beach-club",
+      "loading": {
+        "id": "entry-2",
+        "label": "Terraza de popa",
+        "phase": "ready",
+        "message": "Listo",
+        "error": "",
+        "presentationReady": true,
+        "bytes": 16869044,
+        "totalBytes": 16869044,
+        "files": 6,
+        "totalFiles": 6,
+        "pending": [],
+        "bufferedBytes": 0,
+        "peakBufferedBytes": 16869044
+      },
+      "selection": {
+        "enabled": false,
+        "selected": null,
+        "pickPasses": 0,
+        "errors": [],
+        "catalogCount": 0,
+        "targetBytes": 0
+      },
+      "machinery": null,
+      "residentZones": [
+        "beach-club",
+        "cockpit"
+      ],
+      "pendingZones": [
+        "saloon"
+      ],
+      "sharedTextures": {
+        "textures": 17,
+        "references": 32
+      },
+      "elevation": 2.12,
+      "position": [
+        0.95,
+        2.5
+      ],
+      "navigationLayer": "deck",
+      "boarding": "boarding-vr-r01",
+      "frames": 12,
+      "ratio": 1,
+      "quality": 1,
+      "resolution": {
+        "mode": "adaptive",
+        "source": "adaptive",
+        "requestedDPR": 1,
+        "effectiveDPR": 1,
+        "hardwareLimited": false,
+        "canvas": [
+          1100,
+          760
+        ]
+      },
+      "canvas": [
+        1100,
+        760
+      ],
+      "calls": 44,
+      "triangles": 202426,
+      "memory": {
+        "geometries": 57,
+        "textures": 26
+      },
+      "estimatedMemory": {
+        "geometryBytes": 21489462,
+        "textureBytes": 279620721,
+        "shadowDepthBytes": 16777216,
+        "totalBytes": 317887399,
+        "method": "Resident buffer and texture payload estimate; excludes canvas/MSAA, global light lookup tables, programs and driver caches."
+      },
+      "frameMs": {
+        "samples": 0,
+        "p50": 0,
+        "p95": 0
+      },
+      "submissionMs": {
+        "samples": 1,
+        "p50": 2.899999998509884,
+        "p95": 2.899999998509884
+      },
+      "shadowUpdates": 18,
+      "errors": [],
+      "renderer": "WebKit WebGL"
+    },
+    "default": {
+      "branches": [
+        {
+          "id": "candidate",
+          "visible": false
+        },
+        {
+          "id": "candidate",
+          "visible": false
+        },
+        {
+          "id": "baseline",
+          "visible": true
+        },
+        {
+          "id": "baseline",
+          "visible": true
+        }
+      ],
+      "boarding": null
+    },
+    "pass": true
+  },
+  "preservation": {
+    "originalFilesVerified": 629,
+    "machineryAssetsVerified": 115,
+    "strategySHA256": "7cfb4757350071bf1b7206b06e9939d43d19b21cea8ed6829fbcf5c183d34627",
+    "cockpitGeometryUnchanged": true,
+    "mechanicsManifestUnchanged": true,
+    "pass": true
+  },
+  "authoring": {
+    "archive": "luz-boarding-vr-r01-authoring.zip",
+    "sha256": "7f3fe13b0ec55586724641698f6872f5272098e17e974a61a226abb8861e9fea",
+    "bytes": 573838800,
+    "files": 94,
+    "referencePhotosIncluded": false,
+    "candidateVisualAcceptance": false,
+    "status": "pending-upload",
+    "reason": "Direct Release upload returned HTTP 401. Automatic approval review rejected a public branch transfer; the local authoring archive is ready and no transfer branch was pushed.",
+    "pass": false
+  },
+  "visualAcceptance": false,
+  "remaining": [
+    "Independent camera calibration and 24 control points",
+    "Stair and landing correspondence",
+    "Manual 8/4-pixel cell acceptance",
+    "Authoring upload to Releases"
+  ]
+}

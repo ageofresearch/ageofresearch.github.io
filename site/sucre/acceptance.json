@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "authoringCommit": "83d9aa8289d7a8028c621d05b7b2e4bb1caa8140",
-  "testedManifestSha256": "0e07445f4068cc9ac729a0874b8d09beea1f94e6ffe045f959e489520e3fec4a",
+  "authoringCommit": "ed3aa9f64a1be040142f0900400ebaf7746f3675",
+  "testedManifestSha256": "138fac03fef8b4a5ab06f49a19d5a4862e37ff0fe3a3bd9f46609dd7dcb4df4f",
   "source": {
     "name": "COTENDO_V19_Colores_Plano_Editable.dwg",
     "sha256": "b73e00aa1a198e63f98f8145bcabfc925f1b51c632aaf2a9060339e1b990573e",
@@ -22,6 +22,7 @@
     "Selected 2D parcel remains highlighted when starting 3D",
     "Visible nonblank 3D map pixels",
     "Lake water is visible in the measured footprint",
+    "Surface stability: all 694 audited overlaps resolved, nine families captured in motion",
     "Frame selected parcel and illustrative retail mass",
     "Fly controls move the camera and Escape releases it",
     "Vegetation and 66 reference-contour layer toggles",
@@ -29,7 +30,7 @@
     "Accessible measured plan without WebGPU"
   ],
   "runtime": {
-    "frames": 15,
+    "frames": 14,
     "errors": [],
     "adapter": true,
     "counts": {
@@ -74,5 +75,357 @@
       0.37591332564291735
     ]
   },
-  "workflowRun": "https://github.com/ageofresearch/tidewater-rocha/actions/runs/42573920370"
+  "surfaceStability": {
+    "affectedFills": 605,
+    "overlapPairs": 694,
+    "samples": 3425,
+    "subpixel": 9
+  },
+  "motion": [
+    {
+      "family": "soccer-field",
+      "featureId": "PART-4117",
+      "frames": [
+        "motion-soccer-field-0.jpg",
+        "motion-soccer-field-1.jpg",
+        "motion-soccer-field-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -96.47979426439863,
+            30.308633250216268,
+            73.50952839454908
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -92.37666475255247,
+            30.153487406097913,
+            75.71349535786622
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -87.0572103958265,
+            30.24647599114214,
+            77.07488765564042
+          ]
+        }
+      ]
+    },
+    {
+      "family": "pools",
+      "featureId": "SOC02A",
+      "frames": [
+        "motion-pools-0.jpg",
+        "motion-pools-1.jpg",
+        "motion-pools-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -73.83984206290923,
+            12.510782249521782,
+            63.93773779977606
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -71.87508493369789,
+            13.914786050537158,
+            65.66546867420833
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -69.30697958947592,
+            14.272636321945706,
+            66.48282051133735
+          ]
+        }
+      ]
+    },
+    {
+      "family": "playground",
+      "featureId": "SOC03",
+      "frames": [
+        "motion-playground-0.jpg",
+        "motion-playground-1.jpg",
+        "motion-playground-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -118.12326313286377,
+            6.645659425685565,
+            65.11298077403903
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -117.12097995147872,
+            7.167327091800143,
+            65.90585838471868
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -115.76073911055012,
+            7.45567378736051,
+            66.38932992267023
+          ]
+        }
+      ]
+    },
+    {
+      "family": "pavilion",
+      "featureId": "SOC04",
+      "frames": [
+        "motion-pavilion-0.jpg",
+        "motion-pavilion-1.jpg",
+        "motion-pavilion-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -53.2729596754786,
+            15.394848075501214,
+            66.6043307737657
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -51.401849761697044,
+            15.269834368672047,
+            67.58470318335581
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -48.94488732977516,
+            15.38950509389449,
+            68.25275557134331
+          ]
+        }
+      ]
+    },
+    {
+      "family": "bathrooms",
+      "featureId": "SOC05",
+      "frames": [
+        "motion-bathrooms-0.jpg",
+        "motion-bathrooms-1.jpg",
+        "motion-bathrooms-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -42.63172142135297,
+            7.970623388149131,
+            63.528680019949284
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -41.69441753886137,
+            8.26960729998201,
+            64.1842532692353
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -40.474916826905556,
+            8.360651554816569,
+            64.53202740021385
+          ]
+        }
+      ]
+    },
+    {
+      "family": "gatehouse",
+      "featureId": "PART-40F1",
+      "frames": [
+        "motion-gatehouse-0.jpg",
+        "motion-gatehouse-1.jpg",
+        "motion-gatehouse-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -19.66214713155631,
+            9.600903979588546,
+            -149.57086658391339
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -18.620448449132688,
+            9.261638045190047,
+            -149.14771944532262
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -17.3998027352698,
+            8.872724114708985,
+            -149.045201584058
+          ]
+        }
+      ]
+    },
+    {
+      "family": "trees",
+      "featureId": "TREE-01",
+      "frames": [
+        "motion-trees-0.jpg",
+        "motion-trees-1.jpg",
+        "motion-trees-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -137.25720685692042,
+            19.201807959177092,
+            99.36230698261893
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -135.17380949207316,
+            18.523276090380094,
+            100.20860125980049
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -132.7325180643474,
+            17.74544822941797,
+            100.41363698232976
+          ]
+        }
+      ]
+    },
+    {
+      "family": "vehicles",
+      "featureId": "CAR-01",
+      "frames": [
+        "motion-vehicles-0.jpg",
+        "motion-vehicles-1.jpg",
+        "motion-vehicles-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            116.62422056982027,
+            7.368587104952703,
+            -131.9120982667618
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            117.49881014404478,
+            7.237142486345696,
+            -131.48706276023276
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            118.4502082799362,
+            6.733093681494606,
+            -131.5099459702252
+          ]
+        }
+      ]
+    },
+    {
+      "family": "social-walkways",
+      "featureId": "COT_COL_CIRCULACION_SOCIAL:social_walkway",
+      "frames": [
+        "motion-social-walkways-0.jpg",
+        "motion-social-walkways-1.jpg",
+        "motion-social-walkways-2.jpg"
+      ],
+      "poses": [
+        {
+          "az": 0.1,
+          "el": 1.12,
+          "position": [
+            -79.06899745438272,
+            105.37078621409893,
+            146.43735744966767
+          ]
+        },
+        {
+          "az": 0.32,
+          "el": 1.04,
+          "position": [
+            -63.12164158048354,
+            113.94310735625231,
+            159.1765934487834
+          ]
+        },
+        {
+          "az": 0.54,
+          "el": 0.9600000000000001,
+          "position": [
+            -42.05302428175563,
+            116.98270422594877,
+            165.9352175354565
+          ]
+        }
+      ]
+    }
+  ],
+  "motionVideo": "video/page@abf9d81645b99700b798d2788fba177d.webm",
+  "workflowRun": "https://github.com/ageofresearch/tidewater-rocha/actions/runs/42617002793",
+  "motionArtifact": "cotendo-motion-video"
 }

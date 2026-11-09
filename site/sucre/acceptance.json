@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "authoringCommit": "ed3aa9f64a1be040142f0900400ebaf7746f3675",
-  "testedManifestSha256": "138fac03fef8b4a5ab06f49a19d5a4862e37ff0fe3a3bd9f46609dd7dcb4df4f",
+  "authoringCommit": "ba1879934e0bde0e2c0fa51dabc178e88b4d1f66",
+  "testedManifestSha256": "d247f9cad02ff6032dc8759d2d254e1215de29048c18a63ee32fed5006b3f9e8",
   "source": {
     "name": "COTENDO_V19_Colores_Plano_Editable.dwg",
     "sha256": "b73e00aa1a198e63f98f8145bcabfc925f1b51c632aaf2a9060339e1b990573e",
@@ -22,12 +22,13 @@
     "Selected 2D parcel remains highlighted when starting 3D",
     "Visible nonblank 3D map pixels",
     "Lake water is visible in the measured footprint",
-    "Surface stability: all 694 audited overlaps resolved, nine families captured in motion",
     "Frame selected parcel and illustrative retail mass",
+    "Surface stability: all 694 audited overlaps resolved, nine families captured in motion",
     "Fly controls move the camera and Escape releases it",
     "Vegetation and 66 reference-contour layer toggles",
     "Narrow layout, 100px header, collapsible inspector and lake measurement",
-    "Accessible measured plan without WebGPU"
+    "Accessible measured plan without WebGPU",
+    "Anti-aliasing quality: analytic coverage, real DPR matrix, bounded SMAA failures and full-scene flight"
   ],
   "runtime": {
     "frames": 14,
@@ -75,6 +76,25 @@
       0.37591332564291735
     ]
   },
+  "commercialFrame": {
+    "feature": "CO088",
+    "position": [
+      13.659307860809381,
+      13.88124333220218,
+      -113.32073460852777
+    ],
+    "bounds": [
+      -0.7142857057437284,
+      0.6443561677340518,
+      -0.5797821490590026,
+      0.6119745101097147
+    ],
+    "roofRGB": [
+      140.83999999999997,
+      135.79999999999998,
+      101.67999999999999
+    ]
+  },
   "surfaceStability": {
     "affectedFills": 605,
     "overlapPairs": 694,
@@ -86,9 +106,9 @@
       "family": "soccer-field",
       "featureId": "PART-4117",
       "frames": [
-        "motion-soccer-field-0.jpg",
-        "motion-soccer-field-1.jpg",
-        "motion-soccer-field-2.jpg"
+        "motion-soccer-field-0.png",
+        "motion-soccer-field-1.png",
+        "motion-soccer-field-2.png"
       ],
       "poses": [
         {
@@ -124,9 +144,9 @@
       "family": "pools",
       "featureId": "SOC02A",
       "frames": [
-        "motion-pools-0.jpg",
-        "motion-pools-1.jpg",
-        "motion-pools-2.jpg"
+        "motion-pools-0.png",
+        "motion-pools-1.png",
+        "motion-pools-2.png"
       ],
       "poses": [
         {
@@ -162,9 +182,9 @@
       "family": "playground",
       "featureId": "SOC03",
       "frames": [
-        "motion-playground-0.jpg",
-        "motion-playground-1.jpg",
-        "motion-playground-2.jpg"
+        "motion-playground-0.png",
+        "motion-playground-1.png",
+        "motion-playground-2.png"
       ],
       "poses": [
         {
@@ -200,9 +220,9 @@
       "family": "pavilion",
       "featureId": "SOC04",
       "frames": [
-        "motion-pavilion-0.jpg",
-        "motion-pavilion-1.jpg",
-        "motion-pavilion-2.jpg"
+        "motion-pavilion-0.png",
+        "motion-pavilion-1.png",
+        "motion-pavilion-2.png"
       ],
       "poses": [
         {
@@ -238,9 +258,9 @@
       "family": "bathrooms",
       "featureId": "SOC05",
       "frames": [
-        "motion-bathrooms-0.jpg",
-        "motion-bathrooms-1.jpg",
-        "motion-bathrooms-2.jpg"
+        "motion-bathrooms-0.png",
+        "motion-bathrooms-1.png",
+        "motion-bathrooms-2.png"
       ],
       "poses": [
         {
@@ -276,9 +296,9 @@
       "family": "gatehouse",
       "featureId": "PART-40F1",
       "frames": [
-        "motion-gatehouse-0.jpg",
-        "motion-gatehouse-1.jpg",
-        "motion-gatehouse-2.jpg"
+        "motion-gatehouse-0.png",
+        "motion-gatehouse-1.png",
+        "motion-gatehouse-2.png"
       ],
       "poses": [
         {
@@ -314,9 +334,9 @@
       "family": "trees",
       "featureId": "TREE-01",
       "frames": [
-        "motion-trees-0.jpg",
-        "motion-trees-1.jpg",
-        "motion-trees-2.jpg"
+        "motion-trees-0.png",
+        "motion-trees-1.png",
+        "motion-trees-2.png"
       ],
       "poses": [
         {
@@ -352,9 +372,9 @@
       "family": "vehicles",
       "featureId": "CAR-01",
       "frames": [
-        "motion-vehicles-0.jpg",
-        "motion-vehicles-1.jpg",
-        "motion-vehicles-2.jpg"
+        "motion-vehicles-0.png",
+        "motion-vehicles-1.png",
+        "motion-vehicles-2.png"
       ],
       "poses": [
         {
@@ -390,9 +410,9 @@
       "family": "social-walkways",
       "featureId": "COT_COL_CIRCULACION_SOCIAL:social_walkway",
       "frames": [
-        "motion-social-walkways-0.jpg",
-        "motion-social-walkways-1.jpg",
-        "motion-social-walkways-2.jpg"
+        "motion-social-walkways-0.png",
+        "motion-social-walkways-1.png",
+        "motion-social-walkways-2.png"
       ],
       "poses": [
         {
@@ -425,7 +445,647 @@
       ]
     }
   ],
-  "motionVideo": "video/page@abf9d81645b99700b798d2788fba177d.webm",
-  "workflowRun": "https://github.com/ageofresearch/tidewater-rocha/actions/runs/42617002793",
-  "motionArtifact": "cotendo-motion-video"
+  "motionVideo": "video/page@2f6dba1c9bfc2fe7dd655d6e37d7d486.webm",
+  "antiAliasing": {
+    "runtime": {
+      "display": {
+        "cssWidth": 1096,
+        "cssHeight": 900,
+        "devicePixelRatio": 1,
+        "targetDensity": 1,
+        "effectiveDensity": 1,
+        "width": 1096,
+        "height": 900,
+        "pixels": 986400,
+        "dprCap": 1.5,
+        "pixelBudget": 2000000,
+        "pixelBudgetExceeded": false,
+        "hardwareLimit": 8192,
+        "hardwareLimited": false
+      },
+      "aa": {
+        "requestedMode": "smaa",
+        "effectiveMode": "smaa",
+        "lookupState": "ready",
+        "reason": null,
+        "code": null,
+        "deadlineMS": 5000,
+        "dimensions": {
+          "area": [
+            160,
+            560
+          ],
+          "search": [
+            66,
+            33
+          ]
+        },
+        "renderedFrames": 15
+      },
+      "sharpen": 0.1,
+      "scale": 1
+    },
+    "flight": {
+      "elapsedMs": 12142,
+      "submittedFrames": 9,
+      "completedFrames": 10,
+      "pacing": {
+        "callbacks": 245,
+        "submitted": 241,
+        "completed": 240,
+        "skipped": 4,
+        "inFlight": 1,
+        "maxInFlight": 2
+      },
+      "note": "Software CI presentation and input check; not a hardware FPS claim."
+    },
+    "mobileStrokes": {
+      "display": {
+        "cssWidth": 390,
+        "cssHeight": 744,
+        "devicePixelRatio": 1,
+        "targetDensity": 1,
+        "effectiveDensity": 1,
+        "width": 390,
+        "height": 744,
+        "pixels": 290160,
+        "dprCap": 1.5,
+        "pixelBudget": 2000000,
+        "pixelBudgetExceeded": false,
+        "hardwareLimit": 8192,
+        "hardwareLimited": false
+      },
+      "viewports": [
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ],
+        [
+          390,
+          744
+        ]
+      ]
+    },
+    "browser": {
+      "status": "passed",
+      "method": "Real browser deviceScaleFactor contexts importing production controller and bounded lookup adapter; no second full WebGPU map initialization",
+      "displayMatrix": [
+        {
+          "nativeDpr": 1,
+          "cssWidth": 500.5,
+          "cssHeight": 300.25,
+          "canvasWidth": 500,
+          "canvasHeight": 300,
+          "aspect": 1.6669442131557035,
+          "quality": {
+            "cssWidth": 500.5,
+            "cssHeight": 300.25,
+            "devicePixelRatio": 1,
+            "targetDensity": 1,
+            "effectiveDensity": 1,
+            "width": 500,
+            "height": 300,
+            "pixels": 150000,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          }
+        },
+        {
+          "nativeDpr": 1.25,
+          "cssWidth": 500.5,
+          "cssHeight": 300.25,
+          "canvasWidth": 625,
+          "canvasHeight": 375,
+          "aspect": 1.6669442131557035,
+          "quality": {
+            "cssWidth": 500.5,
+            "cssHeight": 300.25,
+            "devicePixelRatio": 1.25,
+            "targetDensity": 1.25,
+            "effectiveDensity": 1.25,
+            "width": 625,
+            "height": 375,
+            "pixels": 234375,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          }
+        },
+        {
+          "nativeDpr": 1.5,
+          "cssWidth": 500.5,
+          "cssHeight": 300.25,
+          "canvasWidth": 750,
+          "canvasHeight": 450,
+          "aspect": 1.6669442131557035,
+          "quality": {
+            "cssWidth": 500.5,
+            "cssHeight": 300.25,
+            "devicePixelRatio": 1.5,
+            "targetDensity": 1.5,
+            "effectiveDensity": 1.5,
+            "width": 750,
+            "height": 450,
+            "pixels": 337500,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          }
+        },
+        {
+          "nativeDpr": 2,
+          "cssWidth": 500.5,
+          "cssHeight": 300.25,
+          "canvasWidth": 750,
+          "canvasHeight": 450,
+          "aspect": 1.6669442131557035,
+          "quality": {
+            "cssWidth": 500.5,
+            "cssHeight": 300.25,
+            "devicePixelRatio": 2,
+            "targetDensity": 1.5,
+            "effectiveDensity": 1.5,
+            "width": 750,
+            "height": 450,
+            "pixels": 337500,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          }
+        },
+        {
+          "nativeDpr": 3,
+          "cssWidth": 500.5,
+          "cssHeight": 300.25,
+          "canvasWidth": 750,
+          "canvasHeight": 450,
+          "aspect": 1.6669442131557035,
+          "quality": {
+            "cssWidth": 500.5,
+            "cssHeight": 300.25,
+            "devicePixelRatio": 3,
+            "targetDensity": 1.5,
+            "effectiveDensity": 1.5,
+            "width": 750,
+            "height": 450,
+            "pixels": 337500,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          }
+        }
+      ],
+      "resize": {
+        "largeCssViewport": {
+          "nativeDpr": 1,
+          "cssWidth": 2000,
+          "cssHeight": 1200,
+          "canvasWidth": 2000,
+          "canvasHeight": 1200,
+          "aspect": 1.6666666666666667,
+          "quality": {
+            "cssWidth": 2000,
+            "cssHeight": 1200,
+            "devicePixelRatio": 1,
+            "targetDensity": 1,
+            "effectiveDensity": 1,
+            "width": 2000,
+            "height": 1200,
+            "pixels": 2400000,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": true,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          }
+        },
+        "hardwareLimit": {
+          "nativeDpr": 1,
+          "cssWidth": 1000,
+          "cssHeight": 700,
+          "canvasWidth": 512,
+          "canvasHeight": 358,
+          "aspect": 1.4285714285714286,
+          "quality": {
+            "cssWidth": 1000,
+            "cssHeight": 700,
+            "devicePixelRatio": 1,
+            "targetDensity": 1,
+            "effectiveDensity": 0.512,
+            "width": 512,
+            "height": 358,
+            "pixels": 183296,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 512,
+            "hardwareLimited": true
+          }
+        },
+        "coalescedNoOp": {
+          "assignments": {
+            "width": 0,
+            "height": 0
+          },
+          "events": 50,
+          "measuredResizes": 1,
+          "changes": 0,
+          "projectionChanges": 0
+        },
+        "densityOnly": {
+          "nativeDpr": 1,
+          "requestedDpr": 1.5,
+          "cssWidth": 500.5,
+          "cssHeight": 300.25,
+          "canvasWidth": 750,
+          "canvasHeight": 450,
+          "aspect": 1.6669442131557035,
+          "quality": {
+            "cssWidth": 500.5,
+            "cssHeight": 300.25,
+            "devicePixelRatio": 1.5,
+            "targetDensity": 1.5,
+            "effectiveDensity": 1.5,
+            "width": 750,
+            "height": 450,
+            "pixels": 337500,
+            "dprCap": 1.5,
+            "pixelBudget": 2000000,
+            "pixelBudgetExceeded": false,
+            "hardwareLimit": 8192,
+            "hardwareLimited": false
+          },
+          "changes": [
+            {
+              "quality": {
+                "cssWidth": 500.5,
+                "cssHeight": 300.25,
+                "devicePixelRatio": 1.5,
+                "targetDensity": 1.5,
+                "effectiveDensity": 1.5,
+                "width": 750,
+                "height": 450,
+                "pixels": 337500,
+                "dprCap": 1.5,
+                "pixelBudget": 2000000,
+                "pixelBudgetExceeded": false,
+                "hardwareLimit": 8192,
+                "hardwareLimited": false
+              },
+              "cssChanged": false,
+              "pixelChanged": true,
+              "densityChanged": true,
+              "aspectChanged": false
+            }
+          ],
+          "poseUnchanged": true,
+          "projectionChanges": 0
+        }
+      },
+      "lookupCases": [
+        {
+          "mode": "success",
+          "settledMs": 9,
+          "diagnostics": {
+            "requestedMode": "smaa",
+            "effectiveMode": "smaa",
+            "lookupState": "ready",
+            "reason": null,
+            "code": null,
+            "deadlineMS": 5000,
+            "dimensions": {
+              "area": [
+                160,
+                560
+              ],
+              "search": [
+                66,
+                33
+              ]
+            },
+            "renderedFrames": 1
+          },
+          "requests": [
+            {
+              "url": "/quality-assets/success/textures/smaa/area.png",
+              "aborted": false
+            },
+            {
+              "url": "/quality-assets/success/textures/smaa/search.png",
+              "aborted": false
+            }
+          ],
+          "warnings": [],
+          "routedModes": [
+            "smaa"
+          ],
+          "sessionStable": true,
+          "texturesInstalled": true,
+          "settledLookupState": "ready"
+        },
+        {
+          "mode": "missing",
+          "settledMs": 4,
+          "diagnostics": {
+            "requestedMode": "smaa",
+            "effectiveMode": "fxaa",
+            "lookupState": "failed",
+            "reason": "SMAA area.png: HTTP 404",
+            "code": "http",
+            "deadlineMS": 5000,
+            "dimensions": {},
+            "renderedFrames": 1
+          },
+          "requests": [
+            {
+              "url": "/quality-assets/missing/textures/smaa/area.png",
+              "aborted": true
+            },
+            {
+              "url": "/quality-assets/missing/textures/smaa/search.png",
+              "aborted": true
+            }
+          ],
+          "warnings": [
+            "COTENDO SMAA unavailable; using FXAA: SMAA area.png: HTTP 404"
+          ],
+          "routedModes": [
+            "fxaa"
+          ],
+          "sessionStable": true,
+          "texturesInstalled": false,
+          "settledLookupState": "failed"
+        },
+        {
+          "mode": "malformed",
+          "settledMs": 7,
+          "diagnostics": {
+            "requestedMode": "smaa",
+            "effectiveMode": "fxaa",
+            "lookupState": "failed",
+            "reason": "SMAA area.png: The image could not be decoded",
+            "code": "decode",
+            "deadlineMS": 5000,
+            "dimensions": {},
+            "renderedFrames": 1
+          },
+          "requests": [
+            {
+              "url": "/quality-assets/malformed/textures/smaa/area.png",
+              "aborted": true
+            },
+            {
+              "url": "/quality-assets/malformed/textures/smaa/search.png",
+              "aborted": true
+            }
+          ],
+          "warnings": [
+            "COTENDO SMAA unavailable; using FXAA: SMAA area.png: The image could not be decoded"
+          ],
+          "routedModes": [
+            "fxaa"
+          ],
+          "sessionStable": true,
+          "texturesInstalled": false,
+          "settledLookupState": "failed"
+        },
+        {
+          "mode": "stall",
+          "settledMs": 5001,
+          "diagnostics": {
+            "requestedMode": "smaa",
+            "effectiveMode": "fxaa",
+            "lookupState": "failed",
+            "reason": "SMAA lookup loading exceeded 5000 ms",
+            "code": "timeout",
+            "deadlineMS": 5000,
+            "dimensions": {},
+            "renderedFrames": 1
+          },
+          "requests": [
+            {
+              "url": "/quality-assets/stall/textures/smaa/area.png",
+              "aborted": true
+            },
+            {
+              "url": "/quality-assets/stall/textures/smaa/search.png",
+              "aborted": true
+            }
+          ],
+          "warnings": [
+            "COTENDO SMAA unavailable; using FXAA: SMAA lookup loading exceeded 5000 ms"
+          ],
+          "routedModes": [
+            "fxaa"
+          ],
+          "sessionStable": true,
+          "texturesInstalled": false,
+          "settledLookupState": "failed"
+        }
+      ],
+      "pageErrors": []
+    },
+    "numeric": {
+      "source": {
+        "sha256": "b73e00aa1a198e63f98f8145bcabfc925f1b51c632aaf2a9060339e1b990573e",
+        "catalogSha256": "aa50ff35a2cd3f6c033e6716c876a6b6d6e53b8cfd4d2c98c76ab2ff91d931fb",
+        "revision": "V19-P3",
+        "files": {
+          "app/src/cotendo/AnalyticStrokes.js": "2b8cf41bdb4b9e1f2d6f9a19118f1cbcbeb9fd6db10008d9d849899a5d4beb49",
+          "app/src/cotendo/FilteredPaving.js": "d7b2faa7fc6d26dafc4fb93c42a64b098a5b52c044e597205843d0b162d2f686",
+          "app/src/cotendo/CotendoScene.js": "decd90d2044c79194cd157901d632ce6aabb540023693ee209593066142471ec",
+          "app/src/cotendo/SurfaceOrder.js": "abb9c1adc22ce727497be6aadc1787f83cf1c960cd05222f5c188464ad19b501",
+          "app/src/cotendo/DisplayQuality.js": "7c35a22f7641cb9d7d90ea288eaa7c898cca71b2f417ac53967b878a5b789ced",
+          "app/src/cotendo/CotendoAntiAlias.js": "b764f0fad3998c4003361e5f317fa2323643cd83f57da7f3f3468be3d66e508e",
+          "app/src/cotendo/CotendoApp.js": "53995665eb9384b8e1baca42a60aa9c54274eae45b4707a9c66c0f17590a7f38",
+          "app/src/post/PostFX.js": "6f20662ee603f6c958e1bdf2c64573503afb2c50b36730ed0ec133295aa130f8",
+          "tools/cotendo/aa-test.mjs": "acb3b2c74c6fc8aaa419fb704dbb2df027996b00eabad80889a46e35cadf9b69",
+          "tools/cotendo/aa-reference.mjs": "2dd79d0286e567fd6308b9ebedf38a6a09496266e561ac826b4a792eb36e52d8"
+        }
+      },
+      "strokes": {
+        "analyticRmse": 13.758204238153892,
+        "hardRmse": 71.58640340783607,
+        "analyticSquaredError": 5650063,
+        "hardSquaredError": 152964578,
+        "edgePixelReductionPercent": 80.78098132717773
+      },
+      "missingCrossSections": 0,
+      "performance": {
+        "status": "passed",
+        "workload": "49 long crossing polylines; production material; CSS192\u00d7128; native WebGPU; not browser FPS",
+        "warmupFramesPerBranch": 6,
+        "pairs": 24,
+        "order": "alternating paired",
+        "samplesMs": {
+          "analytic": [
+            1.8235580000000482,
+            1.8354399999989255,
+            1.8369929999989836,
+            1.855477000000974,
+            1.8637720000006084,
+            1.848363999999492,
+            1.9697510000005423,
+            1.8323939999991126,
+            2.5781779999997525,
+            2.0141530000000785,
+            1.8589040000006207,
+            1.8453180000014981,
+            1.8518110000004526,
+            1.8203910000011092,
+            1.828215999999884,
+            1.8089299999992363,
+            1.826563000000533,
+            1.8171449999990728,
+            1.834327000000485,
+            1.8168449999993754,
+            1.918695000000298,
+            1.8015359999990324,
+            1.8468410000004951,
+            1.8343370000002324
+          ],
+          "hard": [
+            2.736042999998972,
+            2.5898200000010547,
+            2.589758999998594,
+            2.5720560000008845,
+            2.73788599999898,
+            2.5975539999999455,
+            2.7045839999991586,
+            3.3711499999990338,
+            6.7008719999994355,
+            2.6937639999996463,
+            3.5946969999986322,
+            2.5755019999996875,
+            2.5691209999986313,
+            2.54351300000053,
+            2.5853409999999712,
+            2.550895999998829,
+            2.5945080000001326,
+            2.554242999998678,
+            2.6196250000011787,
+            2.7363229999991745,
+            2.612181000000419,
+            2.5745310000002064,
+            2.6163089999990916,
+            2.6168200000010984
+          ]
+        },
+        "analytic": {
+          "medianMs": 1.8354399999989255,
+          "p95Ms": 1.9697510000005423
+        },
+        "hard": {
+          "medianMs": 2.5975539999999455,
+          "p95Ms": 3.3711499999990338
+        }
+      }
+    }
+  },
+  "workflowRun": "https://github.com/ageofresearch/tidewater-rocha/actions/runs/42628216240",
+  "motionArtifact": "cotendo-motion-video",
+  "motionLosslessArtifacts": [
+    "cotendo-motion-recreation-lossless",
+    "cotendo-motion-buildings-lossless",
+    "cotendo-motion-landscape-lossless"
+  ],
+  "visualAcceptance": {
+    "status": "passed",
+    "format": "lossless PNG",
+    "families": 9,
+    "motionFrames": 27,
+    "commercialFrame": "verified roof pixels and selected feature bounds",
+    "captureSha256": {
+      "motion-soccer-field-0.png": "772833c7bcd7b681d6a5e1deb542f64ba1ea13ad6533713826ff7d56cfbdf770",
+      "motion-soccer-field-1.png": "215dac60b02fbe7e9dbe49c0f3e581c42af2d5059e65013669cfed2e88730693",
+      "motion-soccer-field-2.png": "29060a13bc5c45dd2e4469a2cff5754b22307f976954e914e2ae887987f7348f",
+      "motion-pools-0.png": "44aab6f60a6afbd4cbb05edcdd52b0775049ccb27e4c4bbf38d6e2f48c1976c9",
+      "motion-pools-1.png": "be4cd74dd82cd3850601a84d53c15d312ef89d02402062049544b23a820c1189",
+      "motion-pools-2.png": "99582285c26af83ae3de161972ac410d6c11835abfbe8ef83cc2651347ca67df",
+      "motion-playground-0.png": "ae7e0bc7a526f1737e07fbea333537d4102a99e0e416725ea104219aa43e1c6d",
+      "motion-playground-1.png": "f88b9ec0271c1cb8bb68dc63db5cfdd8b72dedfddecee0e1571d89448abe5795",
+      "motion-playground-2.png": "73a1a12c6b9d910d6ea8114a5097c94badd0714edfa7a917b7ccaa6ff6436e8a",
+      "motion-pavilion-0.png": "7e73d19c9889ec1ca64f8f351936b402e3232391d2a6617b4a1eb323e107f008",
+      "motion-pavilion-1.png": "9d212b1631541078cc0fe07ef6a826ccfe216afd60f920dbba90667919a771f1",
+      "motion-pavilion-2.png": "b64130c05e0a4dbf43dfd2c694ec97a8525e25a6e9d02bc5b02c069beaf0f84b",
+      "motion-bathrooms-0.png": "539d35b2ba5c9290f9c2463f576d027ffb24973076527a0c9ef130cb04c679c9",
+      "motion-bathrooms-1.png": "4976e7056d59d23ae6fb9b4a9630c66a596c87a9b6db653d61c989e5930d8f3e",
+      "motion-bathrooms-2.png": "42ba2e3810517a1c8c80abd55f1f771051062b308a3230ba7bdd2f774fbfac4b",
+      "motion-gatehouse-0.png": "87b9f0e194f7656a072a931536b3cc6a09db25874d5cf75f6bc8d795564866f1",
+      "motion-gatehouse-1.png": "0ffec99ab9cb952bff15d65e6696473f2ff1cf7f7932e978226ad2844ca69d88",
+      "motion-gatehouse-2.png": "973938104799804caa51eba435e50ac933c415a66aa6fd96f1e8aae52be3a53c",
+      "motion-trees-0.png": "32196c1b2a59b4417a4dd19eaab8fcec97d5d712f2b55a2e5cb70ddea452cc5f",
+      "motion-trees-1.png": "d5f3d0f4de015ed6ef4f9b24797738a6807ee4ea0054f144d78b6b3319b41e86",
+      "motion-trees-2.png": "4f4deabdcd1e241069404a29e98013980dca206260b2cf365337fe0ec6bd9707",
+      "motion-vehicles-0.png": "054ccd83a670c1c1e092a10592a3955f52ad40f6181320c5bbc2d84a0292951c",
+      "motion-vehicles-1.png": "4de2cb1098be68413576fbe0a262ae13f6defb4fa5e439edc917a0d4a2c01988",
+      "motion-vehicles-2.png": "4d02c00fdc2ba49f25d54b4e58b72c84de58d5619d58ce0afe453b2b2d69b009",
+      "motion-social-walkways-0.png": "8d0f619d52d5ebd024643460e6458a0c3a9054fbab372e2f80332d4aeb409b13",
+      "motion-social-walkways-1.png": "785c6f6b7e1d8e8a4ac136eed320fe09049706027b81713b251692a6def0b318",
+      "motion-social-walkways-2.png": "0c94052d6fbc6d386859737d94b7333459ad5ba6d3294d95f5fe0688a4bb3552"
+    }
+  }
 }

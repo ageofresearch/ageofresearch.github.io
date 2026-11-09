@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "errors": [],
+  "filtering": {
+    "status": "passed",
+    "reference": "Explicit body/pixel rectangle intersections in source metres; no periodic integration formula",
+    "fixtures": [
+      {
+        "pattern": "herringbone-90",
+        "pixelM": 0.001,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": -0.000244140625,
+        "rmseLsb": 0.015625
+      },
+      {
+        "pattern": "herringbone-90",
+        "pixelM": 0.006,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": -0.014892578125,
+        "rmseLsb": 0.12401959270615269
+      },
+      {
+        "pattern": "herringbone-90",
+        "pixelM": 0.02,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": -0.025146484375,
+        "rmseLsb": 0.171875
+      },
+      {
+        "pattern": "herringbone-90",
+        "pixelM": 0.08,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": 0.000732421875,
+        "rmseLsb": 0.04133986423538423
+      },
+      {
+        "pattern": "herringbone-90",
+        "pixelM": 0.5,
+        "maxErrorLsb": 0,
+        "meanErrorLsb": 0,
+        "rmseLsb": 0
+      },
+      {
+        "pattern": "header-course",
+        "pixelM": 0.001,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": -0.000244140625,
+        "rmseLsb": 0.015625
+      },
+      {
+        "pattern": "header-course",
+        "pixelM": 0.006,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": -0.029052734375,
+        "rmseLsb": 0.17044862679118303
+      },
+      {
+        "pattern": "header-course",
+        "pixelM": 0.02,
+        "maxErrorLsb": 1,
+        "meanErrorLsb": -0.05029296875,
+        "rmseLsb": 0.23696485762661096
+      },
+      {
+        "pattern": "header-course",
+        "pixelM": 0.08,
+        "maxErrorLsb": 0,
+        "meanErrorLsb": 0,
+        "rmseLsb": 0
+      },
+      {
+        "pattern": "header-course",
+        "pixelM": 0.5,
+        "maxErrorLsb": 0,
+        "meanErrorLsb": 0,
+        "rmseLsb": 0
+      }
+    ]
+  },
+  "mainDepthUnchanged": true,
+  "bypassWithoutNear": true,
+  "buriedFacePixelIdentity": true,
+  "discardedFixtureTriangles": 5778,
+  "privateDepthCopies": 7,
+  "fixture": {
+    "pieces": 32,
+    "triangles": 13806,
+    "bytes": 263316
+  },
+  "source": {
+    "files": {
+      "app/src/cotendo/RoadPaving.js": "029b2d72f1f2f29afcf6f195e10c4b3bec3a30682347c0ff0a4f5accaaa6bb49",
+      "app/src/cotendo/RoadPavingMath.js": "60ebe8d496161a4490aa5edb0e4d1ddd881504b363c1acf7644a58f2e19b6138",
+      "app/src/cotendo/RoadPavingMaterial.js": "9204af8a0c374f744cc902c38735f9aef619736bf7bba9bdeb6328f93b33c541",
+      "app/src/cotendo/RoadPavingWorker.js": "e88c831b550f5d93cd34fa36ed2d046c4db13eb6867ea092e331ff3d77597b72",
+      "app/src/cotendo/CotendoApp.js": "81ba0886669f2aeed347e1a32c5e09e6ef10f4fc9111593a507b1e7893ec72ae",
+      "app/src/cotendo/CotendoScene.js": "8a14640a3aaf1f50009273737a35024e1cdadc79d0c79795dea941340bd1ea5c",
+      "app/src/engine/render/SceneRenderer.js": "a2222c632368afff23ae0d0185de47af8a7716d345b802339aeff23940c34ae6",
+      "app/src/paver/PaverMaterial.js": "674e059dafbddc2a0065039c2dab1a18016fc452b3f56cfd97712850a23ad323",
+      "app/src/paver/PaverGeometry.js": "b0126110884afdada4940f516348dbdcb3ee7542d757d74e33ea8f31f08141ec"
+    },
+    "layoutSha256": "ba7a058efc2f0023392941993b3744fa9441c2af1419496c34888b87f0a82f0e"
+  }
+}

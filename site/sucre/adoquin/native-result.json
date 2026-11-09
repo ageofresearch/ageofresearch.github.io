@@ -1,0 +1,140 @@
+{
+  "status": "passed",
+  "checks": [
+    "Actual Rocha sky/IBL/shadows/GTAO/ACES/SMAA",
+    "Real closed geometry in metres",
+    "One shared PBR material with per-family and per-instance seeds",
+    "1/16/96 actual visible piece counts",
+    "16 distinct geometry family seeds",
+    "Stationary render deterministic",
+    "Seed changes visible geometry and finish",
+    "Wetness changes PBR response",
+    "Raking light and top-detail captures",
+    "No WebGPU validation errors"
+  ],
+  "errors": [],
+  "captures": [
+    {
+      "name": "single",
+      "width": 1024,
+      "height": 768,
+      "sha256": "607ce7f16e5b9a570a73486e32b1e9c663dbac37d602fcf1dfea404f10431e28"
+    },
+    {
+      "name": "variants",
+      "width": 1024,
+      "height": 768,
+      "sha256": "ab960a4ca1f888a1e10254d0c57dbf4c5b3d0493b94e10f0b4e6fc6716eee5b5"
+    },
+    {
+      "name": "patch",
+      "width": 1024,
+      "height": 768,
+      "sha256": "3a51ac246cd06ebd24b6b673a309a1d66b1148ad3c055687b30570313b7a6155"
+    },
+    {
+      "name": "hero-dry",
+      "width": 1024,
+      "height": 768,
+      "sha256": "607ce7f16e5b9a570a73486e32b1e9c663dbac37d602fcf1dfea404f10431e28"
+    },
+    {
+      "name": "hero-repeat",
+      "width": 1024,
+      "height": 768,
+      "sha256": "607ce7f16e5b9a570a73486e32b1e9c663dbac37d602fcf1dfea404f10431e28"
+    },
+    {
+      "name": "hero-other",
+      "width": 1024,
+      "height": 768,
+      "sha256": "343eb0a5346040931437d8fb5cf3a829d5a808308919d1c09b0c1387e55098dc"
+    },
+    {
+      "name": "hero-wet",
+      "width": 1024,
+      "height": 768,
+      "sha256": "5780459b44c5191ddfda61507a66d2b6e5304c0354d28aaa5f5d4195892a127a"
+    },
+    {
+      "name": "hero-raking",
+      "width": 1024,
+      "height": 768,
+      "sha256": "602a5b8f21f2ca93249eae1038c89fbe778d83a45a25aece0fe2bad751c5c89e"
+    },
+    {
+      "name": "hero-top",
+      "width": 1024,
+      "height": 768,
+      "sha256": "67dd91df149b5a49ec3a2315a521ccc4d2f60bd6279755aa3fabad015c1838f8"
+    }
+  ],
+  "sceneModes": [
+    {
+      "mode": "single",
+      "pieces": 1,
+      "triangles": 4176
+    },
+    {
+      "mode": "variants",
+      "pieces": 16,
+      "triangles": 66816
+    },
+    {
+      "mode": "patch",
+      "pieces": 96,
+      "triangles": 58752
+    }
+  ],
+  "source": {
+    "files": {
+      "app/src/paver/PaverGeometry.js": "d157093f13be9b121f1728af71cda8da6d61fa6fbad7f978b82a9fb0f05d1b23",
+      "app/src/paver/PaverMaterial.js": "5de7760a6d084904b17708510d14d4cd73ae93c8a2cbbd2bf9e67d1f26ce948a",
+      "app/src/paver/PaverScene.js": "6466ec84ad04dad55530d21de148e3b6530478ad06915357bb4f9bda127a1724",
+      "app/src/paver/PaverRenderer.js": "ecc33604cf1fcd7517cf909e273c8a01177ae5695d41aee05a15e40bd503ca2c",
+      "app/src/paver/PaverStudy.js": "27b1a6af23dff7066d5cd7ec4192e3cc6714b387845a6730eac4fc4cd280ebda"
+    }
+  },
+  "assumptions": {
+    "length": 0.2,
+    "width": 0.1,
+    "height": 0.06,
+    "variantCount": 16,
+    "patchCount": 96,
+    "units": "m",
+    "basis": "Propuesta visual: dimensiones y composición no especificadas en el plano PU-01.",
+    "seed": 1,
+    "mode": "single",
+    "visiblePieces": 1,
+    "geometryFamilies": 16,
+    "materials": 1,
+    "triangles": 4176
+  },
+  "runtime": {
+    "frames": 48,
+    "aa": {
+      "requestedMode": "smaa",
+      "effectiveMode": "smaa",
+      "lookupState": "ready",
+      "reason": null,
+      "code": null,
+      "deadlineMS": 5000,
+      "dimensions": {
+        "area": [
+          160,
+          560
+        ],
+        "search": [
+          66,
+          33
+        ]
+      },
+      "renderedFrames": 48
+    },
+    "redPixels": 70169,
+    "changedPixels": 52500,
+    "materialCount": 1,
+    "captureFrameIndex": 7,
+    "note": "Fixed original post dither index for reproducible numeric captures; interactive viewer retains normal Rocha dither."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "authoringCommit": "4ffba19e7efb036831d3ab5137f4f57f99bf0c4c",
+  "proposal": {
+    "name": "Adoquín rojo · Estudio 001",
+    "basis": "Visual proposal; the COTENDO PU-01 plan specifies red pavers, not their dimensions or composition.",
+    "dimensionsM": {
+      "length": 0.2,
+      "width": 0.1,
+      "height": 0.06
+    },
+    "composition": "Illustrative mineral-red finish; no concrete/clay construction claim.",
+    "geometryFamilies": 16,
+    "patchPieces": 96,
+    "variation": "Seeded geometry, per-family relief and per-instance procedural PBR finish.",
+    "engine": "Original Tidewater Rocha rendering engine, physically based atmosphere/IBL/shadows/GTAO/ACES.",
+    "sourceBaseline": "9d7394a1015545ad835cfc63407a762e6acfddde"
+  },
+  "inputs": {
+    "app/paver-vite.config.mjs": "2f6f02cabfad3f59a7cbe6ad6f2e9aa77d4b89bf1458719fbfaa3152329954f9",
+    "app/paver.html": "1352946745675ccbef82bf22a4e8be4e2c0a1c640da333df13080bdb09298eb9",
+    "app/src/cotendo/ComputeMips.js": "aebf50d209128d41e9c77e70027b041354a7a5fdf7f38f8ef7994e1f85811fa1",
+    "app/src/cotendo/CotendoAntiAlias.js": "b764f0fad3998c4003361e5f317fa2323643cd83f57da7f3f3468be3d66e508e",
+    "app/src/cotendo/DisplayQuality.js": "7c35a22f7641cb9d7d90ea288eaa7c898cca71b2f417ac53967b878a5b789ced",
+    "app/src/paver/PaverGeometry.js": "d157093f13be9b121f1728af71cda8da6d61fa6fbad7f978b82a9fb0f05d1b23",
+    "app/src/paver/PaverMaterial.js": "5de7760a6d084904b17708510d14d4cd73ae93c8a2cbbd2bf9e67d1f26ce948a",
+    "app/src/paver/PaverRenderer.js": "ecc33604cf1fcd7517cf909e273c8a01177ae5695d41aee05a15e40bd503ca2c",
+    "app/src/paver/PaverScene.js": "6466ec84ad04dad55530d21de148e3b6530478ad06915357bb4f9bda127a1724",
+    "app/src/paver/PaverStudy.js": "27b1a6af23dff7066d5cd7ec4192e3cc6714b387845a6730eac4fc4cd280ebda",
+    "app/src/paver/main.js": "c077f101e7d2e5bf44c6fd11c3f7a48a5f5a8b39dfc2e9357c395aad96fc1468",
+    "app/src/paver/style.css": "d41b817d8f491617ae6d6add94fc903ab6446f6eb0deaf8d8e3b37a2632230ae",
+    "app/src/post/PostFX.js": "6f20662ee603f6c958e1bdf2c64573503afb2c50b36730ed0ec133295aa130f8",
+    "tools/paver/README.md": "9a67f6019f7bcf3170c53feea510743255181c7dc0baa90b48b281f8afd54861",
+    "tools/paver/browser-test.mjs": "8751e56b0eccd2d8a91a1b63232916f9a40c7d1772965a5fbeab00ddf90bbaab",
+    "tools/paver/build.mjs": "61e70aff7a5df2f007a5a5534c7baaa6cdeb90236210a4aff6e01b8f28aa17fa",
+    "tools/paver/geometry-test.mjs": "43ac0dad097993138dacf940ae32cc14344c654899a1732fce892c22ab005bca",
+    "tools/paver/material-test.mjs": "c02388dfd3808cd8c82e081f27206841eb5bf34d63f01d29e3d5457279466af3",
+    "tools/paver/native-test.mjs": "ffa89f09946451b0bb529ab49faf30c657138249165791bbf7025e4f265aee83",
+    "tools/paver/scene-test.mjs": "7955a74206aa905f73cc4d0c36d4bf14144b1fa972703c3fc01522b192baaf0d"
+  },
+  "files": {
+    "assets/PaverStudy-B36FwSoB.js": "751f794042b06e5814c5b3e5d80e7fbfdb402e07262f241d3d67a96ac3b0b83f",
+    "assets/paver-BYIQ9pTq.css": "5a75822306a2cc9c42723f6924ce2a728fb6b66e3dd91fb87116545a938edec1",
+    "assets/paver-DhwPgijV.js": "3de56a5324221a9f057c8e72cc3d39b8c9e699ff5077d887477e6c21898a5cf7",
+    "engine-license.txt": "413204504456b6b29e99d565629023e9aeee5916907e41fe8ffe8549219348ec",
+    "fonts/dm-sans-LICENSE.txt": "6fbd040a29c2037a765dfb9f2561e9965b5c95c6dcb5dce516089d63d5f17af7",
+    "fonts/dm-sans-latin-wght-normal.woff2": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543",
+    "fonts/manrope-LICENSE.txt": "d826ab6583b12c26807d8716a545bdbbb672df04f48608a364ba9efdbe501c30",
+    "fonts/manrope-latin-wght-normal.woff2": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972",
+    "index.html": "e4741f7ecf0f86a0d907634dfa839a00749456d3ed4cfe83244a158ea0120b60",
+    "native-result.json": "521b927ce810f683be4905dd8ac33cb3c29eca507afce25c931dca9496d68e08",
+    "proposal.json": "39dfcec40eefbeafe0cb1f9729412c9cd3ece3876d07d858487380377045a98d",
+    "renders/patch.png": "3a51ac246cd06ebd24b6b673a309a1d66b1148ad3c055687b30570313b7a6155",
+    "renders/single.png": "607ce7f16e5b9a570a73486e32b1e9c663dbac37d602fcf1dfea404f10431e28",
+    "renders/variants.png": "ab960a4ca1f888a1e10254d0c57dbf4c5b3d0493b94e10f0b4e6fc6716eee5b5",
+    "textures/smaa/area.png": "b5a8e3bb3fbf11136d1411c6b7454f4469358559352987a074e22047582c0625",
+    "textures/smaa/search.png": "025eb54fb8c4c2858a7d6d9743b88919fe5f9c661329c447a8f1e28971ae7403"
+  }
+}

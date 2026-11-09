@@ -1,0 +1,20 @@
+import {readFileSync,existsSync} from 'node:fs';
+import {resolve,join,sep} from 'node:path';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+const root=resolve(import.meta.dirname,'../site/sucre/adoquin');
+const read=name=>JSON.parse(readFileSync(join(root,name),'utf8'));
+const sha=file=>createHash('sha256').update(readFileSync(file)).digest('hex');
+const release=read('release.json'),proposal=read('proposal.json'),native=read('native-result.json'),acceptance=read('acceptance.json');
+assert.equal(acceptance.status,'passed');assert.equal(acceptance.authoringCommit,release.authoringCommit);assert.equal(acceptance.testedManifestSha256,sha(join(root,'release.json')),'Paver acceptance belongs to a different build');
+for(const [name,digest]of Object.entries(release.files)){const file=resolve(root,name);assert.ok(file.startsWith(root+sep),'Release path escapes study');assert.ok(existsSync(file),'Missing paver release file '+name);assert.equal(sha(file),digest,'Changed paver release file '+name);}
+assert.deepEqual(proposal.dimensionsM,{length:.2,width:.1,height:.06});assert.equal(proposal.geometryFamilies,16);assert.equal(proposal.patchPieces,96);assert.match(proposal.basis,/visual proposal/i);assert.match(proposal.composition,/illustrative/i);
+assert.equal(native.status,'passed');assert.deepEqual(native.errors,[]);assert.equal(native.runtime.aa.lookupState,'ready');assert.equal(native.runtime.aa.effectiveMode,'smaa');assert.ok(native.runtime.frames>=40);assert.ok(native.runtime.redPixels>30000);assert.ok(native.runtime.changedPixels>native.runtime.redPixels*.15);assert.equal(native.runtime.materialCount,1);
+for(const [name,digest]of Object.entries(native.source.files))assert.equal(release.inputs[name],digest,'Stale paver source proof '+name);
+assert.deepEqual(native.sceneModes.map(m=>m.pieces),[1,16,96]);assert.deepEqual(acceptance.pageErrors,[]);assert.deepEqual(acceptance.runtime.errors,[]);assert.equal(acceptance.runtime.aa.effectiveMode,'smaa');assert.ok(acceptance.runtime.frames>6);
+for(const [mode,count]of [['single',1],['variants',16],['patch',96]])assert.equal(acceptance.sceneModes[mode].pieces,count);
+for(const prefix of ['Visible WebGPU','Compiled Rocha','100px welcome','Visible detailed','Seeded variant','Pointer orbit','Raking-light','Wetness control','All 16','Narrow-screen','All three actual-render'])assert.ok(acceptance.checks.some(s=>s.startsWith(prefix)),'Missing paver browser scenario '+prefix);
+assert.ok(acceptance.seedVariation.changedPixelFraction>.002);assert.ok(acceptance.lighting.meanAbsoluteRgbError>.1);assert.ok(acceptance.wetness.meanAbsoluteRgbError>.1);assert.equal(acceptance.mobile.welcomeHeight,100);assert.ok(acceptance.mobile.scrollWidth<=acceptance.mobile.clientWidth+1);assert.equal(acceptance.fallback.length,3);assert.ok(acceptance.fallback.every(f=>f.width>100&&f.alt));
+assert.equal(acceptance.visualAcceptance.status,'passed');assert.ok(acceptance.captures.length>=8);assert.ok(acceptance.captures.every(c=>c.format==='lossless PNG'&&c.sha256));
+const html=readFileSync(join(root,'index.html'),'utf8');assert.ok(html.includes('welcome to sucre')&&html.includes('Adoquín rojo')&&html.includes('propuesta visual'));
+console.log('Paver study validation passed: detailed closed geometry, 16 variants, 96 pieces, accepted Rocha WebGPU build and unchanged illustrative dimensions.');

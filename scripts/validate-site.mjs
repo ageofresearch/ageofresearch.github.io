@@ -567,6 +567,15 @@ if (existsSync(join(siteRoot, "sucre/release.json"))) {
   if (cotendoValidation.status !== 0) failures.push(`COTENDO validation failed:\n${cotendoValidation.stderr || cotendoValidation.stdout}`);
 }
 
+if (existsSync(join(siteRoot, "sucre/adoquin/release.json"))) {
+  const paverValidation = spawnSync(
+    process.execPath,
+    [join(repositoryRoot, "scripts/validate-paver.mjs")],
+    { encoding: "utf8" },
+  );
+  if (paverValidation.status !== 0) failures.push(`Paver validation failed:\n${paverValidation.stderr || paverValidation.stdout}`);
+}
+
 if (failures.length > 0) {
   console.error("Site validation failed:");
   for (const failure of failures) console.error(`- ${failure}`);

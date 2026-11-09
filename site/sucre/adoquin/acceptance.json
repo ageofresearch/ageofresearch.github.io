@@ -1,0 +1,303 @@
+{
+  "status": "passed",
+  "authoringCommit": "4ffba19e7efb036831d3ab5137f4f57f99bf0c4c",
+  "testedManifestSha256": "86118e404668fb066f836edca4e54c59e389673433e379cf78829192b8026d95",
+  "checks": [
+    "Visible WebGPU presentation preflight",
+    "Compiled Rocha WebGPU renderer and complete 16-variant, 96-piece scene",
+    "100px welcome bar and clearly proposed dimensions",
+    "Visible detailed red paver with solid depth, surface and bevels",
+    "Seeded variant control visibly changes the actual rendered paver",
+    "Pointer orbit, wheel zoom, scoped canvas keys and reset controls",
+    "Raking-light control reveals real top relief without global keyboard leakage",
+    "Wetness control changes the PBR material appearance",
+    "All 16 individual variants and the 96-piece laid pavement visibly render",
+    "Narrow-screen 3D stage, 100px header and reachable keyboard controls",
+    "All three actual-render fallback previews work without WebGPU"
+  ],
+  "runtime": {
+    "frames": 9,
+    "errors": [],
+    "summary": {
+      "length": 0.2,
+      "width": 0.1,
+      "height": 0.06,
+      "variantCount": 16,
+      "patchCount": 96,
+      "units": "m",
+      "basis": "Propuesta visual: dimensiones y composici\u00f3n no especificadas en el plano PU-01.",
+      "seed": 1,
+      "mode": "single",
+      "visiblePieces": 1,
+      "geometryFamilies": 16,
+      "materials": 1,
+      "triangles": 4176
+    },
+    "view": "single",
+    "seed": 1,
+    "light": 16.1,
+    "wetness": 0,
+    "adapter": true,
+    "canvas": [
+      950,
+      800
+    ],
+    "aa": {
+      "requestedMode": "smaa",
+      "effectiveMode": "smaa",
+      "lookupState": "ready",
+      "reason": null,
+      "code": null,
+      "deadlineMS": 5000,
+      "dimensions": {
+        "area": [
+          160,
+          560
+        ],
+        "search": [
+          66,
+          33
+        ]
+      },
+      "renderedFrames": 9
+    }
+  },
+  "drivers": [
+    {
+      "profile": "chromium-mesa",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: The browser executed WebGPU but did not visibly present the green frame"
+    },
+    {
+      "profile": "firefox-mesa",
+      "status": "passed",
+      "adapter": "{}"
+    }
+  ],
+  "captures": [
+    {
+      "name": "single-dry",
+      "format": "lossless PNG",
+      "canvas": "single-dry-canvas.png",
+      "sha256": "bd207f605a9d33129b9184010283f7e401121bc42b052f201d8395e502592052",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 96,
+      "redFraction": 0.8344747899159664,
+      "nonwhiteFraction": 0.9971848739495799
+    },
+    {
+      "name": "single-next-variant",
+      "format": "lossless PNG",
+      "canvas": "single-next-variant-canvas.png",
+      "sha256": "294bc030076646e89107716da02ea19ecbc0feafa14e8489b651ff96fe0fa3d7",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 93,
+      "redFraction": 0.836281512605042,
+      "nonwhiteFraction": 0.9971848739495799
+    },
+    {
+      "name": "single-oblique",
+      "format": "lossless PNG",
+      "canvas": "single-oblique-canvas.png",
+      "sha256": "d434a2deac382978eae9f3633e3307a1fb2b58c6fad7d1fd2d3041c5501328ed",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 92,
+      "redFraction": 0.8847899159663866,
+      "nonwhiteFraction": 0.9971848739495799
+    },
+    {
+      "name": "single-grazing-light",
+      "format": "lossless PNG",
+      "canvas": "single-grazing-light-canvas.png",
+      "sha256": "71fe7b1cf726e551e2b09ec5b14724f546d12cfed2d2fd716a21ef4346baf589",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 67,
+      "redFraction": 0.7774159663865546,
+      "nonwhiteFraction": 0.9972268907563026
+    },
+    {
+      "name": "single-wet",
+      "format": "lossless PNG",
+      "canvas": "single-wet-canvas.png",
+      "sha256": "a05b71054025d4dad17a02c9eea9c50184f704e7125f1f614ea4837530bcdf97",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 71,
+      "redFraction": 0.776890756302521,
+      "nonwhiteFraction": 0.9972268907563026
+    },
+    {
+      "name": "variants",
+      "format": "lossless PNG",
+      "canvas": "variants-canvas.png",
+      "sha256": "4703ea6d3387aa840913c74bbdf7bdeed3a10e63b049a77b3181bcd177d25f8c",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 112,
+      "redFraction": 0.2821848739495798,
+      "nonwhiteFraction": 0.9971218487394958
+    },
+    {
+      "name": "patch",
+      "format": "lossless PNG",
+      "canvas": "patch-canvas.png",
+      "sha256": "3bc2fe0e349824abc8e38ed89cc24d31d6853266f3ba9e768e663e10ac191a30",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 109,
+      "redFraction": 0.49756302521008405,
+      "nonwhiteFraction": 0.9971218487394958
+    },
+    {
+      "name": "patch-low-angle",
+      "format": "lossless PNG",
+      "canvas": "patch-low-angle-canvas.png",
+      "sha256": "686a5f264aeae455148bbbb3a3ed1b998db080ee4723ade9aa254977fa751d8a",
+      "width": 950,
+      "height": 800,
+      "quantizedColors": 108,
+      "redFraction": 0.2901470588235294,
+      "nonwhiteFraction": 0.9971218487394958
+    },
+    {
+      "name": "mobile-single",
+      "format": "lossless PNG",
+      "canvas": "mobile-single-canvas.png",
+      "sha256": "98629eff7717b1078219c85589bae410a903866164e9206f5176694853919fda",
+      "width": 390,
+      "height": 744,
+      "quantizedColors": 88,
+      "redFraction": 0.07345841562431424,
+      "nonwhiteFraction": 0.9885889839806891
+    }
+  ],
+  "sceneModes": {
+    "single": {
+      "pieces": 1,
+      "drawables": 1,
+      "triangles": 4176
+    },
+    "variants": {
+      "pieces": 16,
+      "drawables": 16,
+      "triangles": 66816
+    },
+    "patch": {
+      "pieces": 96,
+      "drawables": 16,
+      "triangles": 58752
+    }
+  },
+  "camera": {
+    "initial": {
+      "az": 0.68,
+      "el": 0.7,
+      "distance": 0.44
+    },
+    "beforeDrag": {
+      "az": 0.68,
+      "el": 0.7,
+      "distance": 0.44
+    },
+    "afterDrag": {
+      "az": -0.22999999999999993,
+      "el": 0.9100000000000001,
+      "distance": 0.44
+    },
+    "beforeZoom": {
+      "az": -0.22999999999999993,
+      "el": 0.9100000000000001,
+      "distance": 0.44
+    },
+    "afterZoom": {
+      "az": -0.22999999999999993,
+      "el": 0.9100000000000001,
+      "distance": 0.37871150962702543
+    },
+    "afterKey": {
+      "az": -0.12999999999999992,
+      "el": 0.9100000000000001,
+      "distance": 0.37871150962702543
+    },
+    "reset": {
+      "az": 0.68,
+      "el": 0.7,
+      "distance": 0.44
+    }
+  },
+  "seedVariation": {
+    "before": 1,
+    "after": 2,
+    "meanAbsoluteRgbError": 0.7920912280701754,
+    "changedPixelFraction": 0.126575
+  },
+  "lighting": {
+    "before": 16.2,
+    "after": 17.3,
+    "rangeValue": 17.3,
+    "meanAbsoluteRgbError": 37.71683114035088,
+    "changedPixelFraction": 0.9846592105263158
+  },
+  "wetness": {
+    "value": 1,
+    "meanAbsoluteRgbError": 1.0516618421052633,
+    "changedPixelFraction": 0.14577763157894738
+  },
+  "mobile": {
+    "viewport": 390,
+    "cssWidth": 390,
+    "cssHeight": 744,
+    "canvas": [
+      390,
+      744
+    ],
+    "welcomeHeight": 100,
+    "scrollWidth": 390,
+    "clientWidth": 390
+  },
+  "fallback": [
+    {
+      "src": "/renders/single.png",
+      "width": 1024,
+      "height": 768,
+      "alt": "Render de un adoqu\u00edn rojo con relieve, poros y bordes biselados"
+    },
+    {
+      "src": "/renders/variants.png",
+      "width": 1024,
+      "height": 768,
+      "alt": "Render de diecis\u00e9is adoquines rojos distintos"
+    },
+    {
+      "src": "/renders/patch.png",
+      "width": 1024,
+      "height": 768,
+      "alt": "Render de un pa\u00f1o de noventa y seis adoquines rojos variados"
+    }
+  ],
+  "pageErrors": [],
+  "motionVideo": "video/page@6d853a107a3d9b2b3e2397bc686651db.webm",
+  "workflowRun": "https://github.com/ageofresearch/tidewater-rocha/actions/runs/42655630361",
+  "visualArtifact": "paver-visual-acceptance",
+  "motionArtifact": "paver-motion-video",
+  "visualAcceptance": {
+    "status": "passed",
+    "format": "lossless PNG",
+    "capturesReviewed": [
+      "single-dry",
+      "single-next-variant",
+      "single-oblique",
+      "single-grazing-light",
+      "single-wet",
+      "variants",
+      "patch",
+      "patch-low-angle",
+      "mobile-single"
+    ],
+    "scope": "Hero, 16 variants, 96-piece patch, light/wetness, mobile and actual-render fallback."
+  }
+}

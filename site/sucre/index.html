@@ -1,38 +1,40 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Welcome to Sucre.">
-    <link rel="icon" href="data:,">
-    <title>Sucre</title>
-    <style>
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: system-ui, sans-serif;
-        color: #111827;
-        background: #fff;
-      }
-      .top-bar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100px;
-        padding: 0 20px;
-        background: #f3f4f6;
-      }
-      h1 {
-        margin: 0;
-        font-size: 24px;
-        font-weight: 600;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="top-bar">
-      <h1>welcome to sucre</h1>
-    </header>
-  </body>
-</html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore the COTENDO V19-P3 design in 3D. Exact DWG parcel boundaries, a searchable measurement schedule, and an accessible vector plan.">
+  <meta name="theme-color" content="#254c3f"><link rel="icon" href="data:,">
+  <title>Sucre · COTENDO</title>
+  <script type="module" crossorigin src="./assets/cotendo-AJ-bNteK.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/cotendo-DnDemny_.css">
+</head>
+<body>
+  <header class="welcome"><h1>welcome to sucre</h1><span class="welcome-mark">COTENDO <span>CONDOMINIO</span></span></header>
+  <main class="workspace">
+    <section class="map-area" aria-label="COTENDO interactive map">
+      <div id="plan" tabindex="0" role="region" aria-label="Measured 2D plan. Drag to pan, scroll to zoom, or select a parcel."></div>
+      <div id="scene" hidden aria-label="3D fly-through viewport"></div>
+      <div class="map-heading"><p class="eyebrow">A PLACE, PRECISELY DRAWN</p><h2>COTENDO</h2><p>V19-P3 <span>·</span> 100,029.05 m²</p></div>
+      <div class="map-badge"><span class="status-dot"></span><span id="view-label">Measured design plan</span></div>
+      <div class="map-tools" role="toolbar" aria-label="Map controls">
+        <button id="view-3d" aria-pressed="false">3D map</button><button id="view-plan" aria-pressed="true">2D plan</button><span class="tool-divider"></span>
+        <button id="overview">Overview</button><button id="frame" disabled>Frame selection</button><button id="fly" disabled>Fly</button>
+      </div>
+      <div id="map-status" class="map-status" role="status" aria-live="polite">Loading the measured design…</div>
+      <p class="map-hint" id="hint">Drag to pan · Scroll to zoom · Select a parcel</p>
+      <button id="mobile-panel" class="mobile-panel" aria-expanded="false" aria-controls="inspector">Measurements <span>↗</span></button>
+      <div class="touch-flight" id="touch-flight" hidden aria-label="Touch flight controls"><button data-key="KeyW" aria-label="Fly forward">↑</button><button data-key="KeyA" aria-label="Fly left">←</button><button data-key="KeyS" aria-label="Fly backward">↓</button><button data-key="KeyD" aria-label="Fly right">→</button><button data-key="KeyE" aria-label="Fly up">＋</button><button data-key="KeyQ" aria-label="Fly down">−</button></div>
+    </section>
+    <aside class="inspector" id="inspector" aria-label="Measurements and map layers">
+      <div class="panel-head"><p class="eyebrow">THE V19-P3 DESIGN</p><h2>Every boundary.<br>One source.</h2><p class="panel-intro">Explore the original plan, select an area, and inspect its measured geometry.</p></div>
+      <div class="summary"><div><strong>434</strong><span>Residential lots</span></div><div><strong>89</strong><span>Commercial lots</span></div><div><strong>70</strong><span>Parking spaces</span></div></div>
+      <section class="selection" id="selection" aria-labelledby="selection-name" hidden><div class="selection-top"><span class="eyebrow" id="selection-category"></span><button id="clear-selection" aria-label="Clear selection">×</button></div><h3 id="selection-name"></h3><p id="selection-description"></p><dl id="selection-metrics"></dl><p id="selection-basis" class="basis"></p><details id="component-details"><summary>Edges, vertices &amp; source details</summary><div id="components"></div></details></section>
+      <div class="tabs" role="tablist" aria-label="Inspector sections"><button id="tab-features" role="tab" aria-controls="features-panel" aria-selected="true">Measurements</button><button id="tab-layers" role="tab" aria-controls="layers-panel" aria-selected="false">Layers</button><button id="tab-source" role="tab" aria-controls="source-panel" aria-selected="false">Source</button></div>
+      <section id="features-panel" role="tabpanel" aria-labelledby="tab-features"><label class="search-label" for="search">Find an area or element</label><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="R250, lake, parking…" autocomplete="off"></div><label class="sr-only" for="category">Category</label><select id="category"><option value="">All categories</option></select><p class="result-count" id="result-count" aria-live="polite"></p><div id="feature-list" class="feature-list"></div><button id="more" class="more" hidden>Show more results</button></section>
+      <section id="layers-panel" role="tabpanel" aria-labelledby="tab-layers" hidden><h3>Map layers</h3><div id="layers"></div><label class="layer-option"><input type="checkbox" id="show-references">Include reference geometry</label><p class="fine-print">Reference contours and historical geometry are separate from the active design. Contour labels retain their source elevations; the map surface stays flat.</p></section>
+      <section id="source-panel" role="tabpanel" aria-labelledby="tab-source" hidden><h3>From the editable drawing</h3><p>The V19-P3 DWG is the measurement authority. Original coordinates are preserved; displayed lengths are rounded to 0.001 m and areas to 0.01 m².</p><p class="source-note">Buildings, vegetation, and other vertical details are illustrative. Residential parcels are undeveloped. This is a digital design, with an unconfirmed survey coordinate reference system.</p><h4>Area reconciliation</h4><dl id="area-schedule" class="area-schedule"></dl><h4>Geometry audit</h4><p id="audit-summary"></p><a href="./data/audit.json" download>Download the source audit ↗</a><p class="fine-print">A near-zero source ring is retained in the registry and omitted from surface triangulation. Unsupported AEC/Civil settings are preserved in the original drawing; all native drawable entities have been reconciled.</p><p class="fingerprint" id="fingerprint"></p><a href="./credits.txt">Engine credits &amp; licenses ↗</a></section>
+      <footer class="panel-footer"><p class="eyebrow">TAKE THE MEASUREMENTS WITH YOU</p><div class="downloads"><a href="./data/measurements.csv" download>CSV ↗</a><a href="./data/catalog.json" download>Full data ↗</a><a href="./data/plan.svg" download>Vector plan ↗</a></div><p>DWG geometry · Flat design surface<br>Illustrative heights · No survey accuracy certification</p></footer>
+    </aside>
+  </main>
+  <noscript><div class="no-script"><p>Explore the measured design without JavaScript:</p><a href="./data/plan.svg">Open the annotated vector plan</a> · <a href="./data/measurements.csv">Download all measurements</a> · <a href="./data/catalog.json">Download the full registry</a></div></noscript>
+</body></html>

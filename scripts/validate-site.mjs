@@ -558,6 +558,15 @@ if (aristotleTest.status !== 0) {
   );
 }
 
+if (existsSync(join(siteRoot, "sucre/release.json"))) {
+  const cotendoValidation = spawnSync(
+    process.execPath,
+    [join(repositoryRoot, "scripts/validate-cotendo.mjs")],
+    { encoding: "utf8" },
+  );
+  if (cotendoValidation.status !== 0) failures.push(`COTENDO validation failed:\n${cotendoValidation.stderr || cotendoValidation.stdout}`);
+}
+
 if (failures.length > 0) {
   console.error("Site validation failed:");
   for (const failure of failures) console.error(`- ${failure}`);

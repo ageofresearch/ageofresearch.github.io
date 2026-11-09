@@ -1,0 +1,78 @@
+{
+  "status": "passed",
+  "authoringCommit": "83d9aa8289d7a8028c621d05b7b2e4bb1caa8140",
+  "testedManifestSha256": "0e07445f4068cc9ac729a0874b8d09beea1f94e6ffe045f959e489520e3fec4a",
+  "source": {
+    "name": "COTENDO_V19_Colores_Plano_Editable.dwg",
+    "sha256": "b73e00aa1a198e63f98f8145bcabfc925f1b51c632aaf2a9060339e1b990573e",
+    "revision": "V19-P3",
+    "units": "m",
+    "coordinateSystem": "Unconfirmed source CRS; original coordinates preserved",
+    "engineCommit": "9d7394a1015545ad835cfc63407a762e6acfddde",
+    "decoder": "@mlightcad/libredwg-web@0.8.7",
+    "decodeErrorFlags": 4,
+    "modelEntityCount": 4775
+  },
+  "checks": [
+    "WebGPU canvas presentation preflight",
+    "100px full-width welcome bar",
+    "Search, parcel selection, area and edge measurements",
+    "Complete CSV download",
+    "WebGPU adapter, compiled pipelines, complete scene and rendered frames",
+    "Selected 2D parcel remains highlighted when starting 3D",
+    "Visible nonblank 3D map pixels",
+    "Lake water is visible in the measured footprint",
+    "Frame selected parcel and illustrative retail mass",
+    "Fly controls move the camera and Escape releases it",
+    "Vegetation and 66 reference-contour layer toggles",
+    "Narrow layout, 100px header, collapsible inspector and lake measurement",
+    "Accessible measured plan without WebGPU"
+  ],
+  "runtime": {
+    "frames": 15,
+    "errors": [],
+    "adapter": true,
+    "counts": {
+      "residential": 434,
+      "commercial": 89,
+      "parking": 70,
+      "treeSymbols": 34,
+      "vehicleSymbols": 51
+    },
+    "canvas": [
+      1096,
+      900
+    ]
+  },
+  "drivers": [
+    {
+      "profile": "chromium-mesa",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: The GPU canvas did not visibly present the green test frame"
+    },
+    {
+      "profile": "firefox-mesa",
+      "status": "passed",
+      "adapter": "{}"
+    }
+  ],
+  "pageErrors": [],
+  "mobileOverview": {
+    "feature": "PROPERTY",
+    "aspect": 0.5241935483870968,
+    "elevation": 1.35,
+    "distance": 1050.6573390625417,
+    "position": [
+      76.4460387840171,
+      1025.150906795326,
+      247.7571593288278
+    ],
+    "bounds": [
+      -0.8827887240773314,
+      0.8928571420840002,
+      -0.3937872573558288,
+      0.37591332564291735
+    ]
+  },
+  "workflowRun": "https://github.com/ageofresearch/tidewater-rocha/actions/runs/42573920370"
+}

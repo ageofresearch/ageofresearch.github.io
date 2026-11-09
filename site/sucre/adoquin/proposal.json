@@ -8,7 +8,47 @@
   },
   "composition": "Illustrative mineral-red finish; no concrete/clay construction claim.",
   "geometryFamilies": 16,
-  "patchPieces": 96,
+  "patchPieces": 103,
+  "patchFullUnitEquivalents": 96,
+  "installation": {
+    "pattern": "herringbone-90",
+    "columns": 16,
+    "rows": 12,
+    "cellPitchM": 0.102,
+    "fieldWidthM": 1.632,
+    "fieldDepthM": 1.224,
+    "fieldSizeM": [
+      1.632,
+      1.224
+    ],
+    "fullPieces": 89,
+    "cutPieces": 14,
+    "pieceCount": 103,
+    "fullUnitEquivalents": 96,
+    "bodyJointRangeM": [
+      0.002,
+      0.004
+    ],
+    "nominalJointWidthsM": [
+      0.002,
+      0.003,
+      0.004
+    ],
+    "baseHeightM": -0.049,
+    "nominalTopM": 0.011,
+    "sandTopM": 0.0098,
+    "maximumVerticalJitterM": 0.00005,
+    "perimeterJointM": 0.002,
+    "confinementWidthM": 0.035,
+    "confinementTopM": 0.0108,
+    "profile": "installed",
+    "basis": "Visual installation proposal informed by Colombian paving references; not a COTENDO construction specification."
+  },
+  "referenceStudy": {
+    "count": 20,
+    "data": "references.json",
+    "page": "referencias.html"
+  },
   "variation": "Seeded geometry, per-family relief and per-instance procedural PBR finish.",
   "engine": "Original Tidewater Rocha rendering engine, physically based atmosphere/IBL/shadows/GTAO/ACES.",
   "sourceBaseline": "9d7394a1015545ad835cfc63407a762e6acfddde"

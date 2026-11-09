@@ -7,6 +7,7 @@ const site=resolve(import.meta.dirname,'../site/sucre');
 const read=name=>JSON.parse(readFileSync(join(site,name),'utf8'));
 const hash=file=>createHash('sha256').update(readFileSync(file)).digest('hex');
 const release=read('release.json'),data=read('data/catalog.json'),audit=read('data/audit.json'),acceptance=read('acceptance.json');
+const rendering=read('data/render-audit.json');
 assert.equal(data.source.sha256,'b73e00aa1a198e63f98f8145bcabfc925f1b51c632aaf2a9060339e1b990573e','Unexpected source DWG fingerprint');
 for(const source of [release.source,audit.source])assert.deepEqual(source,data.source,'Stale source metadata');
 assert.equal(data.source.units,'m');assert.equal(data.source.revision,'V19-P3');assert.equal(data.source.engineCommit,'9d7394a1015545ad835cfc63407a762e6acfddde');
@@ -14,9 +15,14 @@ assert.equal(hash(join(site,'data/catalog.json')),audit.catalogSha256,'Stale cat
 for(const[name,expected]of Object.entries(release.files)){assert.ok(existsSync(join(site,name)),'Missing release file '+name);assert.equal(hash(join(site,name)),expected,'Changed or stale release file '+name);}
 assert.equal(acceptance.status,'passed','WebGPU browser acceptance is required');assert.equal(acceptance.testedManifestSha256,hash(join(site,'release.json')),'Browser acceptance belongs to a different build');assert.equal(acceptance.source.sha256,data.source.sha256);
 assert.equal(acceptance.authoringCommit,release.authoringCommit);assert.ok(acceptance.runtime.frames>12);assert.deepEqual(acceptance.runtime.errors,[]);
-for(const prefix of ['WebGPU adapter','Selected 2D parcel','Visible nonblank','Lake water','Fly controls','Narrow layout','Accessible measured plan'])assert.ok(acceptance.checks.some(c=>c.startsWith(prefix)),'Missing browser acceptance scenario '+prefix);
+for(const prefix of ['WebGPU adapter','Selected 2D parcel','Visible nonblank','Lake water','Surface stability','Fly controls','Narrow layout','Accessible measured plan'])assert.ok(acceptance.checks.some(c=>c.startsWith(prefix)),'Missing browser acceptance scenario '+prefix);
+assert.equal(rendering.status,'passed');assert.equal(rendering.sourceSha256,data.source.sha256);assert.equal(rendering.catalogSha256,audit.catalogSha256);assert.equal(rendering.affectedFills,605);assert.equal(rendering.overlapPairs,694);assert.equal(rendering.pairs.length,694);assert.equal(rendering.gpuProbes.resolvable+rendering.gpuProbes.subpixel,694);assert.equal(rendering.gpuProbes.passedProbes,rendering.gpuProbes.resolvable);assert.ok(rendering.gpuProbes.samples>=3425);assert.deepEqual(rendering.gpuProbes.failures,[]);assert.deepEqual(rendering.gpuProbes.errors,[]);assert.deepEqual(rendering.structures.remainingExactDuplicates,[]);assert.equal(rendering.structures.removedEquivalentFaces,80);assert.equal(acceptance.surfaceStability.overlapPairs,694);assert.equal(acceptance.motion.length,9);assert.ok(acceptance.motion.every(f=>f.frames.length===3));
+assert.equal(rendering.structures.removedGlazingFaces,1);assert.equal(rendering.coveredPavilionCaps.featureIds.length,6);assert.ok(rendering.lines.sharedSegments.length>0);
+assert.ok(acceptance.motion.every(f=>f.poses.length===3&&f.poses.every((p,i)=>Math.abs(p.az-(.10+i*.22))<1e-9)),'Motion acceptance must exercise distinct camera views');
+for(const[name,digest]of Object.entries(rendering.unchangedMeasurementExports))assert.equal(hash(join(site,'data',name)),digest,'Measured export changed '+name);
 assert.equal(acceptance.mobileOverview.feature,'PROPERTY');assert.ok(acceptance.mobileOverview.bounds.every(n=>Math.abs(n)<.9),'Mobile overview clips the property');
 const features=new Map(data.features.map(f=>[f.id,f]));assert.equal(features.size,data.features.length,'Duplicate feature IDs');
+for(const pair of rendering.pairs)for(const id of pair.featureIds)assert.ok(features.has(id),'Unknown rendered overlap feature '+id);
 assert.equal(audit.coverage.length,4775);assert.equal(new Set(audit.coverage.map(e=>e.handle)).size,4775);assert.deepEqual(audit.decode.missingEntities,[]);assert.deepEqual(audit.decode.customEntityClasses,[]);assert.equal(audit.decode.stats.unknownEntityCount,0);assert.equal(audit.decode.warningResolution.status,'resolved for drawable geometry');
 const geometry=new Map(audit.coverage.filter(e=>['geometry','reference'].includes(e.classification)).map(e=>[e.handle,e]));let vertices=0,edges=0;
 for(const record of audit.coverage){if(record.featureId)assert.ok(features.has(record.featureId),'Missing record '+record.featureId);}

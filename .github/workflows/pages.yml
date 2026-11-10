@@ -7,6 +7,8 @@ on:
       - "site/**"
       - "scripts/validate-site.mjs"
       - "scripts/validate-cotendo.mjs"
+      - "scripts/cotendo-detail-contract.mjs"
+      - "scripts/cotendo-preview-contract.mjs"
       - "scripts/validate-paver.mjs"
       - ".github/workflows/pages.yml"
   pull_request:
@@ -15,6 +17,8 @@ on:
       - "site/**"
       - "scripts/validate-site.mjs"
       - "scripts/validate-cotendo.mjs"
+      - "scripts/cotendo-detail-contract.mjs"
+      - "scripts/cotendo-preview-contract.mjs"
       - "scripts/validate-paver.mjs"
       - ".github/workflows/pages.yml"
   workflow_dispatch:

@@ -1,0 +1,613 @@
+{
+  "status": "passed",
+  "profile": "cotendo-installed-6",
+  "fixtures": [
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        0,
+        0.2,
+        1
+      ],
+      "probes": 1307,
+      "shadowed": 0,
+      "lit": 1307,
+      "installedCast": 0,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        0,
+        0.2,
+        -1
+      ],
+      "probes": 1319,
+      "shadowed": 0,
+      "lit": 1319,
+      "installedCast": 0,
+      "mismatches": 1,
+      "mismatchFraction": 0.000758150113722517
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        1,
+        0.15,
+        0.6
+      ],
+      "probes": 1319,
+      "shadowed": 0,
+      "lit": 1319,
+      "installedCast": 0,
+      "mismatches": 2,
+      "mismatchFraction": 0.001516300227445034
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        -1,
+        0.15,
+        -0.6
+      ],
+      "probes": 1313,
+      "shadowed": 0,
+      "lit": 1313,
+      "installedCast": 0,
+      "mismatches": 2,
+      "mismatchFraction": 0.0015232292460015233
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        0,
+        0.12,
+        1
+      ],
+      "probes": 1306,
+      "shadowed": 14,
+      "lit": 1292,
+      "installedCast": 14,
+      "mismatches": 2,
+      "mismatchFraction": 0.0015313935681470138
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        0,
+        0.12,
+        -1
+      ],
+      "probes": 1301,
+      "shadowed": 19,
+      "lit": 1282,
+      "installedCast": 19,
+      "mismatches": 2,
+      "mismatchFraction": 0.0015372790161414297
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        1,
+        0.1,
+        0.6
+      ],
+      "probes": 1286,
+      "shadowed": 9,
+      "lit": 1277,
+      "installedCast": 9,
+      "mismatches": 1,
+      "mismatchFraction": 0.0007776049766718507
+    },
+    {
+      "pattern": "herringbone-90",
+      "sun": [
+        -1,
+        0.1,
+        -0.6
+      ],
+      "probes": 1267,
+      "shadowed": 7,
+      "lit": 1260,
+      "installedCast": 7,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        0,
+        0.2,
+        1
+      ],
+      "probes": 1399,
+      "shadowed": 21,
+      "lit": 1378,
+      "installedCast": 21,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        0,
+        0.2,
+        -1
+      ],
+      "probes": 1416,
+      "shadowed": 0,
+      "lit": 1416,
+      "installedCast": 0,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        1,
+        0.15,
+        0.6
+      ],
+      "probes": 1390,
+      "shadowed": 0,
+      "lit": 1390,
+      "installedCast": 0,
+      "mismatches": 1,
+      "mismatchFraction": 0.0007194244604316547
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        -1,
+        0.15,
+        -0.6
+      ],
+      "probes": 1416,
+      "shadowed": 0,
+      "lit": 1416,
+      "installedCast": 0,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        0,
+        0.12,
+        1
+      ],
+      "probes": 1407,
+      "shadowed": 38,
+      "lit": 1369,
+      "installedCast": 38,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        0,
+        0.12,
+        -1
+      ],
+      "probes": 1365,
+      "shadowed": 0,
+      "lit": 1365,
+      "installedCast": 0,
+      "mismatches": 4,
+      "mismatchFraction": 0.0029304029304029304
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        1,
+        0.1,
+        0.6
+      ],
+      "probes": 1382,
+      "shadowed": 37,
+      "lit": 1345,
+      "installedCast": 37,
+      "mismatches": 0,
+      "mismatchFraction": 0
+    },
+    {
+      "pattern": "header-course",
+      "sun": [
+        -1,
+        0.1,
+        -0.6
+      ],
+      "probes": 1397,
+      "shadowed": 2,
+      "lit": 1395,
+      "installedCast": 2,
+      "mismatches": 4,
+      "mismatchFraction": 0.002863278453829635
+    }
+  ],
+  "filtering": {
+    "method": "Finite projected-shadow intervals box-filtered along sunlight; interval union near receiver-bevel support, nested/max broad-face fast path",
+    "fullThroughFootprintM": 0.0125,
+    "zeroAtFootprintM": 0.025,
+    "hardLitSupportWitnesses": 268,
+    "maxHardLitKernelCoverageError": 0.10669685132575757,
+    "maxAllowedCoverageError": 0.15,
+    "fixtures": [
+      {
+        "q": [
+          0.51,
+          0.499
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.00625,
+        "shortDimensionPixels": 16,
+        "resolved": 1,
+        "hardCentreOccluded": false,
+        "actualCoverage": 0.3759765625,
+        "expectedCoverage": 0.36363636363636365,
+        "absoluteCoverageError": 0.012340198863636354,
+        "kernel": {
+          "radiusM": 0.0036494883076378555,
+          "taps": 33,
+          "occluded": 12,
+          "coverage": 0.36363636363636365
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.503
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.00625,
+        "shortDimensionPixels": 16,
+        "resolved": 1,
+        "hardCentreOccluded": true,
+        "actualCoverage": 0.92718505859375,
+        "expectedCoverage": 0.8787878787878788,
+        "absoluteCoverageError": 0.048397179805871215,
+        "kernel": {
+          "radiusM": 0.0036504596036792884,
+          "taps": 33,
+          "occluded": 29,
+          "coverage": 0.8787878787878788
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.505
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.00625,
+        "shortDimensionPixels": 16,
+        "resolved": 1,
+        "hardCentreOccluded": true,
+        "actualCoverage": 1,
+        "expectedCoverage": 1,
+        "absoluteCoverageError": 0,
+        "kernel": {
+          "radiusM": 0.003651204025572147,
+          "taps": 33,
+          "occluded": 33,
+          "coverage": 1
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.499
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.0125,
+        "shortDimensionPixels": 8,
+        "resolved": 1,
+        "hardCentreOccluded": false,
+        "actualCoverage": 0.43359375,
+        "expectedCoverage": 0.42424242424242425,
+        "absoluteCoverageError": 0.009351325757575746,
+        "kernel": {
+          "radiusM": 0.006774488307637856,
+          "taps": 33,
+          "occluded": 14,
+          "coverage": 0.42424242424242425
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.503
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.0125,
+        "shortDimensionPixels": 8,
+        "resolved": 1,
+        "hardCentreOccluded": true,
+        "actualCoverage": 0.730224609375,
+        "expectedCoverage": 0.696969696969697,
+        "absoluteCoverageError": 0.03325491240530298,
+        "kernel": {
+          "radiusM": 0.006775459603679289,
+          "taps": 33,
+          "occluded": 23,
+          "coverage": 0.696969696969697
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.505
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.0125,
+        "shortDimensionPixels": 8,
+        "resolved": 1,
+        "hardCentreOccluded": true,
+        "actualCoverage": 0.879150390625,
+        "expectedCoverage": 0.8484848484848485,
+        "absoluteCoverageError": 0.03066554214015149,
+        "kernel": {
+          "radiusM": 0.006776204025572148,
+          "taps": 33,
+          "occluded": 28,
+          "coverage": 0.8484848484848485
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.499
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.02,
+        "shortDimensionPixels": 5,
+        "resolved": 0.352,
+        "hardCentreOccluded": false,
+        "actualCoverage": 0.1611328125,
+        "expectedCoverage": 0.15999999999999998,
+        "absoluteCoverageError": 0.0011328125000000244,
+        "kernel": {
+          "radiusM": 0.010524488307637855,
+          "taps": 33,
+          "occluded": 15,
+          "coverage": 0.45454545454545453
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.503
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.02,
+        "shortDimensionPixels": 5,
+        "resolved": 0.352,
+        "hardCentreOccluded": true,
+        "actualCoverage": 0.21142578125,
+        "expectedCoverage": 0.20266666666666666,
+        "absoluteCoverageError": 0.008759114583333338,
+        "kernel": {
+          "radiusM": 0.010525459603679288,
+          "taps": 33,
+          "occluded": 19,
+          "coverage": 0.5757575757575758
+        }
+      },
+      {
+        "q": [
+          0.51,
+          0.505
+        ],
+        "sun": [
+          0,
+          0.12,
+          1
+        ],
+        "footprintM": 0.02,
+        "shortDimensionPixels": 5,
+        "resolved": 0.352,
+        "hardCentreOccluded": true,
+        "actualCoverage": 0.21142578125,
+        "expectedCoverage": 0.20266666666666666,
+        "absoluteCoverageError": 0.008759114583333338,
+        "kernel": {
+          "radiusM": 0.010526204025572148,
+          "taps": 33,
+          "occluded": 19,
+          "coverage": 0.5757575757575758
+        }
+      }
+    ]
+  },
+  "sourceClipping": {
+    "receiverWorld": [
+      0.9989999999999999,
+      0.75
+    ],
+    "patternQ": [
+      0.578,
+      0.51
+    ],
+    "pattern": "herringbone-90",
+    "sun": [
+      1,
+      0.055,
+      0
+    ],
+    "edgeAxis": "x",
+    "edgeWorldX": 1.033,
+    "distanceM": 0.03389999237060558,
+    "firstExternalOccluderM": 0.03606,
+    "unboundedVisibility": 0.68603515625,
+    "clippedVisibility": 1,
+    "crossMetreCell": true
+  },
+  "ambientPixelIdentity": true,
+  "errors": [],
+  "adapter": {
+    "subgroupMatrixConfigs": []
+  },
+  "source": {
+    "files": {
+      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
+      "app/src/cotendo/RoadPavingSun.js": "02dd1e18e3899d4df8b86b15b4d2aa722429b8b51f7a0ee73c927cca64b64b2c",
+      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingBoundary.js": "dce99a0687fa522f3573d932319e73ce49062fdac39312b3a70f9a4b24bd9a7c",
+      "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
+      "tools/cotendo/paving-sun-gpu.mjs": "02b98fb948a16f8a6b45af654df668a75b7c6b028e433246f783bdafcb2077e8",
+      "tools/cotendo/paving-shadow-oracle.mjs": "6e5fb457e86a5bb27d4320e5a04a93ec9e6fec64cf00bab719bd3f45aef06f38"
+    }
+  },
+  "artifacts": [
+    {
+      "file": "sun-relief/ambient-off.png",
+      "sha256": "4177dedbad3a768760dddec46ffff00a56411bab254204dba0f46a846155a82d"
+    },
+    {
+      "file": "sun-relief/ambient-on.png",
+      "sha256": "4177dedbad3a768760dddec46ffff00a56411bab254204dba0f46a846155a82d"
+    },
+    {
+      "file": "sun-relief/boundary-clipped.png",
+      "sha256": "3f0065d72877f0b2b1f122f6d1d59086f230937481998e806e83e20615dee96f"
+    },
+    {
+      "file": "sun-relief/boundary-unbounded.png",
+      "sha256": "5693824390abbdb3a0d44ab23214eb17c3a53f12bea6dadd880cffb1928565d1"
+    },
+    {
+      "file": "sun-relief/footprint-0.00625-q0.499.png",
+      "sha256": "5c495eca10085f26f1346fc87e37ea73ede290847ed3edd18772428fbfa4032f"
+    },
+    {
+      "file": "sun-relief/footprint-0.00625-q0.503.png",
+      "sha256": "5f2a38aade492533060bd2dc95ca4f2c0c4b42d5c8a128f8c03f33038fe5e81a"
+    },
+    {
+      "file": "sun-relief/footprint-0.00625-q0.505.png",
+      "sha256": "772623b103c3f05341ddcdb533022e462908cb1bbc8415dd4e09d406988d0e5b"
+    },
+    {
+      "file": "sun-relief/footprint-0.0125-q0.499.png",
+      "sha256": "12c75d8bb00ffa5b5cb8e0d414ecff736cdd66ddd2e7c9d2ffcbf5dafb08500e"
+    },
+    {
+      "file": "sun-relief/footprint-0.0125-q0.503.png",
+      "sha256": "c703cc3ee66a2a9be6714d50c60c49174bada9360ad2397234b3365ba50fdc0b"
+    },
+    {
+      "file": "sun-relief/footprint-0.0125-q0.505.png",
+      "sha256": "e6a7eb432b01c6eeeaa2215dc333ba284e68e6d3a8c49d3d9c2980d85588acd2"
+    },
+    {
+      "file": "sun-relief/footprint-0.02-q0.499.png",
+      "sha256": "b2d231b406c0e9ac5cd81ac514d0ea0081acf23cc71068f7713a287ab5021bc3"
+    },
+    {
+      "file": "sun-relief/footprint-0.02-q0.503.png",
+      "sha256": "cde97596a90071179366942f0931b0ec6b89c362ed158d0040019a5694876064"
+    },
+    {
+      "file": "sun-relief/footprint-0.02-q0.505.png",
+      "sha256": "1edf7fe274ab166a8fad6c59219368f969365eb855a41b9aadc4b36cdc00bb6d"
+    },
+    {
+      "file": "sun-relief/header-course--1_0p15_-0p6.png",
+      "sha256": "acba1602cfb66c5d151f9be9616b200dcdd027227fe0e957a6b5c4091e9c3b04"
+    },
+    {
+      "file": "sun-relief/header-course--1_0p1_-0p6.png",
+      "sha256": "c10c542ecc26470df6357d5a38bdb9f23dce8e7477aabb919821453dd6b13da4"
+    },
+    {
+      "file": "sun-relief/header-course-0_0p12_-1.png",
+      "sha256": "fc71a9d0abba330ec5653f89f458bb0af677a0c280a1717d880ca36dc893b378"
+    },
+    {
+      "file": "sun-relief/header-course-0_0p12_1.png",
+      "sha256": "c5d51aa9978c3096fda56ae0c96f112f1b6da7c7e93f0e53b62e716eff11542d"
+    },
+    {
+      "file": "sun-relief/header-course-0_0p2_-1.png",
+      "sha256": "37649c12693ccb3b66dba2c5b42a6b4d1bf25080478ac384d7e843b976c22437"
+    },
+    {
+      "file": "sun-relief/header-course-0_0p2_1.png",
+      "sha256": "5f6a6461b91cb220702cf997dc909e44a92a65d438494b98bc8361c7f55bc208"
+    },
+    {
+      "file": "sun-relief/header-course-1_0p15_0p6.png",
+      "sha256": "7c68b5507b4370c567142b8783a643f023a5c81548f875bca3c23b916106a458"
+    },
+    {
+      "file": "sun-relief/header-course-1_0p1_0p6.png",
+      "sha256": "c1ef755ad5c5e4289e6576997646874e788135583788e7199478463871dcccdd"
+    },
+    {
+      "file": "sun-relief/herringbone-90--1_0p15_-0p6.png",
+      "sha256": "da2efb9203fa1f85b3932788d2f481d65e0f3dca170fdf40f3e1a905d8f8be79"
+    },
+    {
+      "file": "sun-relief/herringbone-90--1_0p1_-0p6.png",
+      "sha256": "3581a161f6b3891f906c6c08473a613189c7519428038dd7aed3d48d3d60afcd"
+    },
+    {
+      "file": "sun-relief/herringbone-90-0_0p12_-1.png",
+      "sha256": "f5094927aa9a484ee818e6b5d7df910b9d27fc5d3a70b1ec77a750532c452ea4"
+    },
+    {
+      "file": "sun-relief/herringbone-90-0_0p12_1.png",
+      "sha256": "dbec0df8406170266232f2efcf5182b7af001a654a932678df8292ac1e916a0e"
+    },
+    {
+      "file": "sun-relief/herringbone-90-0_0p2_-1.png",
+      "sha256": "ab0bf1663f48f6d28ac7ad69a0db4fcb1096f68bb207692c92fefda3efb4b94b"
+    },
+    {
+      "file": "sun-relief/herringbone-90-0_0p2_1.png",
+      "sha256": "c8ff5384da00ca9884259178a1a2b7b58a644351091d210ff805c2dacbb12a6b"
+    },
+    {
+      "file": "sun-relief/herringbone-90-1_0p15_0p6.png",
+      "sha256": "0566bbe19fb35abde44de1f15fc73d72583a9f49357445ab3fa586a52b2701ed"
+    },
+    {
+      "file": "sun-relief/herringbone-90-1_0p1_0p6.png",
+      "sha256": "50d7fca21481a4ac6138eb3c51745b7ca696dcee855804c94b76f948d38caa53"
+    }
+  ]
+}

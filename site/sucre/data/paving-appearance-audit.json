@@ -7,123 +7,135 @@
     "description": "llvmpipe: Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)"
   },
   "profile": {
-    "version": "cotendo-installed-3",
+    "version": "cotendo-installed-6",
     "length": 0.2,
     "width": 0.1,
     "height": 0.06,
     "level": 0.09,
     "bevelWidth": 0.0015,
-    "bevelDepth": 0.001,
+    "bevelDepth": 0.0012,
     "cornerRadius": 0.0006,
-    "sandInset": 0.0015,
+    "sandInset": 0.002,
+    "installedAmplitude": 0.00075,
+    "installedLevels": 4,
     "faceAmplitude": 0.00006,
     "crown": 0.00004,
     "parallaxLimit": 0.008,
-    "normalStep": 0.00002
+    "normalStep": 0.00002,
+    "shadowReach": 0.04,
+    "baseLevel": 0.03,
+    "sandHeight": 0.057999999999999996,
+    "minTopHeight": 0.05805,
+    "maxTopHeight": 0.060849999999999994,
+    "minFaceHeight": 0.05919,
+    "maxFaceOffset": 0.0008500000000000001,
+    "fieldHeightRange": 0.0028499999999999984
   },
   "parity": {
     "samples": 4096,
-    "maxHeightErrorM": 6.752843270674269e-9,
+    "maxHeightErrorM": 1.0171269458625343e-8,
     "maxNormalAngleDeg": 0.5962350493130436
   },
   "raking": {
     "rims": 12234,
     "tilted": 12234,
     "tiltFraction": 1,
-    "medianLuminanceDifferenceLsb": 13.759799999999995,
+    "medianLuminanceDifferenceLsb": 13.474999999999994,
     "roughness": [
       0.8798828125,
       0.9228515625
     ],
-    "medianSpecularFraction": 0.24377079932494267
+    "medianSpecularFraction": 0.2387547208331725
   },
-  "nonGrazingSpecularFraction": 0.152067927484999,
+  "nonGrazingSpecularFraction": 0.15154014147718117,
   "transitions": [
     {
       "distanceM": 3,
       "pixels": 131072,
-      "meanDeltaE00": 0.220591862414679,
-      "meanLuminanceDiscontinuity": 0.003770537127946261
+      "meanDeltaE00": 0.2280685524478299,
+      "meanLuminanceDiscontinuity": 0.0029002898537997942
     },
     {
       "distanceM": 3.5,
       "pixels": 131044,
-      "meanDeltaE00": 0.23797068979341296,
-      "meanLuminanceDiscontinuity": 0.005047868790623462
+      "meanDeltaE00": 0.2408433065166474,
+      "meanLuminanceDiscontinuity": 0.002105802040497786
     },
     {
       "distanceM": 4,
       "pixels": 109940,
-      "meanDeltaE00": 0.1712126751635521,
-      "meanLuminanceDiscontinuity": 0.0036551528705865816
+      "meanDeltaE00": 0.17922425570445027,
+      "meanLuminanceDiscontinuity": 0.0017018670232004556
     }
   ],
   "errors": [],
   "artifacts": [
     {
       "file": "appearance/albedo.png",
-      "sha256": "4cf94962a6eda16581f8997f3cc6672bafd56dacdceb357e0dcc219bb283fc06"
+      "sha256": "c176b7dd25c05ab6507a33f3f0aceb46c751e4b9b22a819cae44c661355ac04b"
     },
     {
       "file": "appearance/beauty-flat.png",
-      "sha256": "47c0c1b814c9969d07446ffdedf1ab4b10d5da25bfd55f57df32efdb420e489d"
+      "sha256": "2ac9db4d5a30de952230c15f1b7abe91c9fbc315046c5f3e624cae9b3dbc5b0d"
     },
     {
       "file": "appearance/beauty.png",
-      "sha256": "c03861ecbe353851a2016f1673b4477111e80850519461012c99f42aa27ee126"
+      "sha256": "5314a8f0dae3e7bf778b38e289d6ecb71a97ed3a917895fe69255044ba168a4c"
     },
     {
       "file": "appearance/diffuse.png",
-      "sha256": "a7084dfdd0026c2f7c305e1ae636c1b22a1b87d6819c4f57bf6f52a0f28ef9f1"
+      "sha256": "03765c52837f9126e57b8fc4a007569dfe995e28797a6a08540cfbcc76d3e771"
     },
     {
       "file": "appearance/directSpecular.png",
-      "sha256": "89aaface84ab6ba68eedcfbac55133304e5685ad6a53875a4bb2c87dcb154b85"
+      "sha256": "8392da5dd8fe2e64569958401af8762f62e9bf8c745493f41b1ad457e6ac3616"
     },
     {
       "file": "appearance/environmentSpecular.png",
-      "sha256": "55dac5a8e527607cf6612064fe22a1057ddb844950e13275eab30974a2197795"
+      "sha256": "b1d22890b87db8a581a05e2ba2b57a8dc8f6291e43c8c18e06e2994f784269d9"
     },
     {
       "file": "appearance/macroNormals.png",
-      "sha256": "977459f93f2575a7018e331dc02ce80d3867afd597ea115de0b09613a09f4b6f"
+      "sha256": "1cd942363b0c4b31c2c15e16ee3fdd740365113ea6bfa50ee1645952058786b0"
     },
     {
       "file": "appearance/raking-beauty-flat.png",
-      "sha256": "47c0c1b814c9969d07446ffdedf1ab4b10d5da25bfd55f57df32efdb420e489d"
+      "sha256": "2ac9db4d5a30de952230c15f1b7abe91c9fbc315046c5f3e624cae9b3dbc5b0d"
     },
     {
       "file": "appearance/raking-beauty.png",
-      "sha256": "f59e91bfff66798ad905bdbe3bd859651711cfc4095fa6f48ac5a5928512e6bd"
+      "sha256": "1b54fcdf1eeb7ba5ca0aca336070bb41a516e9d951a21145b13de6ebe6699cb0"
     },
     {
       "file": "appearance/raking-diffuse.png",
-      "sha256": "a7084dfdd0026c2f7c305e1ae636c1b22a1b87d6819c4f57bf6f52a0f28ef9f1"
+      "sha256": "03765c52837f9126e57b8fc4a007569dfe995e28797a6a08540cfbcc76d3e771"
     },
     {
       "file": "appearance/raking-directSpecular.png",
-      "sha256": "92e47754677ae85ebe1e747c768448be91586587e46d64948c35e3118a350c88"
+      "sha256": "03894a78cd7bd84adeb4a377b7a78f47a86b633c6a23c815c0e5fcfcf76b6d4d"
     },
     {
       "file": "appearance/raking-environmentSpecular.png",
-      "sha256": "55dac5a8e527607cf6612064fe22a1057ddb844950e13275eab30974a2197795"
+      "sha256": "b1d22890b87db8a581a05e2ba2b57a8dc8f6291e43c8c18e06e2994f784269d9"
     },
     {
       "file": "appearance/roughness.png",
-      "sha256": "72ff124a674c572f3914c26716a7c1c5471d11c52baabfeab778549341a80000"
+      "sha256": "d89073a905322f29fb6f571e7fa029b9bda4774198e2bc14a35ada14ba166927"
     }
   ],
   "source": {
     "files": {
-      "app/src/cotendo/RoadPaving.js": "4c1bbcdde39758317ca7d27ee53a2968d00e5ac48d8502120c5757a189df9e49",
+      "app/src/cotendo/RoadPaving.js": "f513134d4c001d8e7dcd5982a6cb477f6e443937034053fddbdacb54aa1410d1",
       "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
-      "app/src/cotendo/RoadPavingMaterial.js": "32b45b50cf911334d9b2611d6710a08af4abd862439efc60716578042ae87a65",
-      "app/src/cotendo/RoadPavingWorker.js": "4283d40fc55f93319e0bb11c7de7e0fbe74934f2c310a19a9553e13f97a1e953",
-      "app/src/cotendo/RoadPavingProfile.js": "6ccb143035efc8fd99f2ebc2d65cbc86099c85bfb0626795bc50a20224b0c050",
-      "app/src/cotendo/RoadPavingBoundary.js": "14eabb476b68398b8035bcb99bb785e5b6dc6b517663aa8e12ea1c0126db8df9",
+      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
+      "app/src/cotendo/RoadPavingWorker.js": "b3b2d1e3f8ef016bfad0794a43aa28b4da603f064186d45ae09ff7433b79d5d3",
+      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingSun.js": "02dd1e18e3899d4df8b86b15b4d2aa722429b8b51f7a0ee73c927cca64b64b2c",
+      "app/src/cotendo/RoadPavingLighting.js": "a4595ca1496c420a6ec9da475cba5c72030e90e5f21abd7285b843671fab39d7",
+      "app/src/cotendo/RoadPavingBoundary.js": "dce99a0687fa522f3573d932319e73ce49062fdac39312b3a70f9a4b24bd9a7c",
       "app/src/cotendo/RoadPavingResidency.js": "cfec84c28258b043977d015b5c817912e326115ce9572e110560c5537f4a5963",
       "app/src/cotendo/PavementInspection.js": "4ecbe6d9c8d92beb43824f4243b206ec1708af797e0418e68272c405e3e68ee7",
-      "app/src/cotendo/CotendoApp.js": "1af5ded5c0142ffadcd8646d57612e0dd81d4b97d8e33e0866fdb14d204517ca",
+      "app/src/cotendo/CotendoApp.js": "cde01609a331e43b59411bdc983a97b329ec7cd3ccf55434cb886a64fba77f4a",
       "app/src/cotendo/CotendoScene.js": "29c8d367611d4fe2843f3e896bbdaa8a46b2dcf49cd891b7ce7c366700533e97",
       "app/src/cotendo/main.js": "8c03ad7cf7d6911c818b661592d42b827846762143e560a20509720e1a4a3ac3"
     },

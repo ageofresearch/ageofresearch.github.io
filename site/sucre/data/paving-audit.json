@@ -1,5 +1,39 @@
 {
   "status": "passed",
+  "detail": {
+    "version": "cotendo-road-detail-2",
+    "fullDistance": 7,
+    "endDistance": 8,
+    "minProjectedPixels": 8,
+    "tileSupportRadius": 0.8654987001723342,
+    "candidateDistance": 8.865498700172335,
+    "domainMargin": 9,
+    "scanRadius": 12,
+    "residencySide": 24,
+    "residencyOriginOffset": 11,
+    "transitionSeconds": 0.2,
+    "maxPending": 4,
+    "geometryByteLimit": 25165824,
+    "combinedByteLimit": 33554432,
+    "desktop": {
+      "resident": 64,
+      "desired": 60,
+      "pieces": 2048,
+      "cached": 128,
+      "triangles": 630000,
+      "coverage": 0.97,
+      "reserved": 4
+    },
+    "mobile": {
+      "resident": 32,
+      "desired": 30,
+      "pieces": 1024,
+      "cached": 64,
+      "triangles": 160000,
+      "coverage": 0.94,
+      "reserved": 2
+    }
+  },
   "errors": [],
   "filtering": {
     "status": "passed",
@@ -201,7 +235,7 @@
         "gBufferPixelIdentity": true
       }
     ],
-    "sensitivityPixels": 38152
+    "sensitivityPixels": 39670
   },
   "mainDepthUnchanged": true,
   "bypassWithoutNear": true,
@@ -215,15 +249,15 @@
   },
   "source": {
     "files": {
-      "app/src/cotendo/RoadPaving.js": "f513134d4c001d8e7dcd5982a6cb477f6e443937034053fddbdacb54aa1410d1",
+      "app/src/cotendo/RoadPaving.js": "19a70a9decaec3909d41a9cc1593206ec9041c279960e5118dcb54d86994cfa4",
       "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
-      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
+      "app/src/cotendo/RoadPavingMaterial.js": "2cfe418935e17ba77aa2d4c994c9084db409cdb337f35992aae6724d736e5443",
       "app/src/cotendo/RoadPavingWorker.js": "b3b2d1e3f8ef016bfad0794a43aa28b4da603f064186d45ae09ff7433b79d5d3",
-      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingProfile.js": "fbcd1970904d6888cba88cc634f6d52896b19f87bbc13791c8dadecf9171c43c",
       "app/src/cotendo/RoadPavingSun.js": "02dd1e18e3899d4df8b86b15b4d2aa722429b8b51f7a0ee73c927cca64b64b2c",
       "app/src/cotendo/RoadPavingLighting.js": "a4595ca1496c420a6ec9da475cba5c72030e90e5f21abd7285b843671fab39d7",
       "app/src/cotendo/RoadPavingBoundary.js": "dce99a0687fa522f3573d932319e73ce49062fdac39312b3a70f9a4b24bd9a7c",
-      "app/src/cotendo/RoadPavingResidency.js": "cfec84c28258b043977d015b5c817912e326115ce9572e110560c5537f4a5963",
+      "app/src/cotendo/RoadPavingResidency.js": "c3409d336043d204b48bd9b391b2353bedc13b43554374fa83aabce382e6fc48",
       "app/src/cotendo/PavementInspection.js": "4ecbe6d9c8d92beb43824f4243b206ec1708af797e0418e68272c405e3e68ee7",
       "app/src/cotendo/CotendoApp.js": "cde01609a331e43b59411bdc983a97b329ec7cd3ccf55434cb886a64fba77f4a",
       "app/src/cotendo/CotendoScene.js": "29c8d367611d4fe2843f3e896bbdaa8a46b2dcf49cd891b7ce7c366700533e97",

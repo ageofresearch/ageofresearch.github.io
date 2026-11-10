@@ -1,5 +1,39 @@
 {
   "status": "passed",
+  "detail": {
+    "version": "cotendo-road-detail-2",
+    "fullDistance": 7,
+    "endDistance": 8,
+    "minProjectedPixels": 8,
+    "tileSupportRadius": 0.8654987001723342,
+    "candidateDistance": 8.865498700172335,
+    "domainMargin": 9,
+    "scanRadius": 12,
+    "residencySide": 24,
+    "residencyOriginOffset": 11,
+    "transitionSeconds": 0.2,
+    "maxPending": 4,
+    "geometryByteLimit": 25165824,
+    "combinedByteLimit": 33554432,
+    "desktop": {
+      "resident": 64,
+      "desired": 60,
+      "pieces": 2048,
+      "cached": 128,
+      "triangles": 630000,
+      "coverage": 0.97,
+      "reserved": 4
+    },
+    "mobile": {
+      "resident": 32,
+      "desired": 30,
+      "pieces": 1024,
+      "cached": 64,
+      "triangles": 160000,
+      "coverage": 0.94,
+      "reserved": 2
+    }
+  },
   "profile": "cotendo-installed-6",
   "installedAmplitudeM": 0.00075,
   "sourceEdgeWorldZ": 1.033,
@@ -236,19 +270,45 @@
   ],
   "morph": [
     {
-      "cameraRangeM": 3.25,
+      "cameraRangeM": 7.25,
+      "cameraPosition": [
+        0.408,
+        4.077500000000001,
+        6.834943744577649
+      ],
+      "target": [
+        0.408,
+        0.09,
+        0.78
+      ],
+      "transitionElisionPixels": 475,
       "morphVertices": 1564,
+      "minVertexDistanceM": 7.040617263217725,
+      "maxVertexDistanceM": 7.5074626722411795,
       "changedPixelsWithNear": true,
-      "changedPixels": 91,
+      "changedPixels": 275,
       "hdrPixelIdentity": true,
       "gBufferPixelIdentity": true,
       "mainDepthIdentity": true
     },
     {
-      "cameraRangeM": 3.75,
-      "morphVertices": 956,
+      "cameraRangeM": 7.75,
+      "cameraPosition": [
+        0.408,
+        4.3525,
+        7.252526071789901
+      ],
+      "target": [
+        0.408,
+        0.09,
+        0.78
+      ],
+      "transitionElisionPixels": 421,
+      "morphVertices": 1558,
+      "minVertexDistanceM": 7.540525001258466,
+      "maxVertexDistanceM": 8.006744830594615,
       "changedPixelsWithNear": true,
-      "changedPixels": 72,
+      "changedPixels": 54,
       "hdrPixelIdentity": true,
       "gBufferPixelIdentity": true,
       "mainDepthIdentity": true
@@ -451,17 +511,17 @@
         "mainDepthIdentity": true
       },
       {
-        "caseId": "morph:range-3.25",
+        "caseId": "morph:range-7.25",
         "name": "morph",
-        "cameraRangeM": 3.25,
+        "cameraRangeM": 7.25,
         "hdrPixelIdentity": true,
         "gBufferPixelIdentity": true,
         "mainDepthIdentity": true
       },
       {
-        "caseId": "morph:range-3.75",
+        "caseId": "morph:range-7.75",
         "name": "morph",
-        "cameraRangeM": 3.75,
+        "cameraRangeM": 7.75,
         "hdrPixelIdentity": true,
         "gBufferPixelIdentity": true,
         "mainDepthIdentity": true
@@ -469,7 +529,7 @@
     ]
   },
   "errors": [],
-  "minimumNonblankPixels": 79086,
+  "minimumNonblankPixels": 83467,
   "renderPixels": 153600,
   "mainDepthUnchanged": true,
   "lowLiftSensitivityPixels": 203,
@@ -477,19 +537,19 @@
   "privateDepthCopies": 72,
   "source": {
     "files": {
-      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
-      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingMaterial.js": "2cfe418935e17ba77aa2d4c994c9084db409cdb337f35992aae6724d736e5443",
+      "app/src/cotendo/RoadPavingProfile.js": "fbcd1970904d6888cba88cc634f6d52896b19f87bbc13791c8dadecf9171c43c",
       "app/src/cotendo/RoadPavingWorker.js": "b3b2d1e3f8ef016bfad0794a43aa28b4da603f064186d45ae09ff7433b79d5d3",
       "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
       "app/src/cotendo/RoadPavingBoundary.js": "dce99a0687fa522f3573d932319e73ce49062fdac39312b3a70f9a4b24bd9a7c",
-      "app/src/cotendo/RoadPavingResidency.js": "cfec84c28258b043977d015b5c817912e326115ce9572e110560c5537f4a5963",
-      "app/src/cotendo/RoadPaving.js": "f513134d4c001d8e7dcd5982a6cb477f6e443937034053fddbdacb54aa1410d1",
+      "app/src/cotendo/RoadPavingResidency.js": "c3409d336043d204b48bd9b391b2353bedc13b43554374fa83aabce382e6fc48",
+      "app/src/cotendo/RoadPaving.js": "19a70a9decaec3909d41a9cc1593206ec9041c279960e5118dcb54d86994cfa4",
       "app/src/cotendo/RoadPavingSun.js": "02dd1e18e3899d4df8b86b15b4d2aa722429b8b51f7a0ee73c927cca64b64b2c",
       "app/src/cotendo/RoadPavingLighting.js": "a4595ca1496c420a6ec9da475cba5c72030e90e5f21abd7285b843671fab39d7",
       "app/src/engine/render/SceneRenderer.js": "a2222c632368afff23ae0d0185de47af8a7716d345b802339aeff23940c34ae6",
       "app/src/paver/PaverMaterial.js": "674e059dafbddc2a0065039c2dab1a18016fc452b3f56cfd97712850a23ad323",
       "app/src/paver/PaverGeometry.js": "b0126110884afdada4940f516348dbdcb3ee7542d757d74e33ea8f31f08141ec",
-      "tools/cotendo/paving-elision-gpu.mjs": "d0daeef17a545cb065124c15b0255b9868a83861f5b94ea3aea508e474d45e2f"
+      "tools/cotendo/paving-elision-gpu.mjs": "6130c8f0834eeff2242ae73440d9c75ce1043e326deab602db7fb30aaeb1a5d4"
     }
   },
   "adapter": {

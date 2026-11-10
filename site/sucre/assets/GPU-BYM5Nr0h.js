@@ -1,0 +1,1 @@
+import{n as e}from"./CotendoApp-s5oImHa6.js";export{e as formatInfo};

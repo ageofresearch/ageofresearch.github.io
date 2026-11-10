@@ -1,0 +1,1194 @@
+{
+  "status": "passed",
+  "profile": "cotendo-installed-6",
+  "installedAmplitudeM": 0.00075,
+  "source": {
+    "files": {
+      "app/src/cotendo/RoadPaving.js": "f513134d4c001d8e7dcd5982a6cb477f6e443937034053fddbdacb54aa1410d1",
+      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
+      "app/src/cotendo/RoadPavingWorker.js": "b3b2d1e3f8ef016bfad0794a43aa28b4da603f064186d45ae09ff7433b79d5d3",
+      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
+      "app/src/cotendo/RoadPavingBoundary.js": "dce99a0687fa522f3573d932319e73ce49062fdac39312b3a70f9a4b24bd9a7c",
+      "app/src/cotendo/RoadPavingResidency.js": "cfec84c28258b043977d015b5c817912e326115ce9572e110560c5537f4a5963",
+      "app/src/cotendo/RoadPavingSun.js": "02dd1e18e3899d4df8b86b15b4d2aa722429b8b51f7a0ee73c927cca64b64b2c",
+      "app/src/cotendo/RoadPavingLighting.js": "a4595ca1496c420a6ec9da475cba5c72030e90e5f21abd7285b843671fab39d7",
+      "app/src/engine/render/SceneRenderer.js": "a2222c632368afff23ae0d0185de47af8a7716d345b802339aeff23940c34ae6",
+      "app/src/engine/render/MeshRenderer.js": "01b3b9fc400d03fb19aec8e8b31308c648f7e1b7e55eebcf899f0dac78a5d138",
+      "app/src/paver/PaverMaterial.js": "674e059dafbddc2a0065039c2dab1a18016fc452b3f56cfd97712850a23ad323",
+      "app/src/paver/PaverGeometry.js": "b0126110884afdada4940f516348dbdcb3ee7542d757d74e33ea8f31f08141ec",
+      "tools/cotendo/paving-material-sharing-gpu.mjs": "5287f81d23a7ed7a81f98cccd2f5c8257158b8bb07d4b49a3135bde4e019afd9"
+    },
+    "layoutSha256": "ba7a058efc2f0023392941993b3744fa9441c2af1419496c34888b87f0a82f0e"
+  },
+  "cases": [
+    {
+      "name": "inspection",
+      "eye": 0.45,
+      "range": 1.2,
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "03e064d81d3eb18a879f21950d60cc4847029f7e2037777c7e0c3b8859083b5e",
+        "ceff5ab80d722ab954e5b679f5e5d51bab7011009b438595faa58535680be77d",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "e221f2b9a93a5dd554761d64d370684838427254037092f401125e0dacb700f7"
+      ],
+      "sharedHashes": [
+        "03e064d81d3eb18a879f21950d60cc4847029f7e2037777c7e0c3b8859083b5e",
+        "ceff5ab80d722ab954e5b679f5e5d51bab7011009b438595faa58535680be77d",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "e221f2b9a93a5dd554761d64d370684838427254037092f401125e0dacb700f7"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 614016
+    },
+    {
+      "name": "ordinary-desktop",
+      "eye": 1.4,
+      "range": 2.5,
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "d77e676a309a9f219d52f88a4210955fa999abfc2ee80e882db2352bbd79f888",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "sharedHashes": [
+        "d77e676a309a9f219d52f88a4210955fa999abfc2ee80e882db2352bbd79f888",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 748800,
+      "capture": {
+        "file": "ordinary-desktop-shared.png",
+        "width": 936,
+        "height": 800,
+        "sha256": "c3849f66035700f826f0e2cc8e767454627d0917be4bb58fd5c5738b9a4d923d"
+      }
+    },
+    {
+      "name": "ordinary-narrow",
+      "W": 390,
+      "H": 744,
+      "eye": 1.4,
+      "range": 2.5,
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "e3501b8a1e361c5475f532d2997068a7672073548e5fa24f8bccfff345b334dc",
+        "849c1f2f00a867f5149489c96314cb448bac068345f1365a8bdbca6ef604d6a5",
+        "aa0f165120b271440f2ff9defe87f2c4fdd505853a3a7c9cffb30a61d80c2883",
+        "15dd1853130e6034a00599559f14a9e2ffa5690c8e53c24558ccfd1937cf004f"
+      ],
+      "sharedHashes": [
+        "e3501b8a1e361c5475f532d2997068a7672073548e5fa24f8bccfff345b334dc",
+        "849c1f2f00a867f5149489c96314cb448bac068345f1365a8bdbca6ef604d6a5",
+        "aa0f165120b271440f2ff9defe87f2c4fdd505853a3a7c9cffb30a61d80c2883",
+        "15dd1853130e6034a00599559f14a9e2ffa5690c8e53c24558ccfd1937cf004f"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 10,
+        "group1Sets": 10,
+        "drawCalls": 10,
+        "triangles": 24194,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 10,
+        "triangles": 24194,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4"
+        ]
+      },
+      "nonblankPixels": 290160
+    },
+    {
+      "name": "morph325",
+      "eye": 0.45,
+      "range": 3.25,
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "acd3ade8f041b4d4b0f8be9c265ddd8940dcafb10ddafe4f08c29fcb36d4adf6",
+        "b1ac868c6054089d8988828d53b141cc7b7fc56c73ca838ed5cbb076fed97725",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "4f7a6ace57f8f785f3d14038a5d41b7bda017ddd2b9a6873b913d47472a3d115"
+      ],
+      "sharedHashes": [
+        "acd3ade8f041b4d4b0f8be9c265ddd8940dcafb10ddafe4f08c29fcb36d4adf6",
+        "b1ac868c6054089d8988828d53b141cc7b7fc56c73ca838ed5cbb076fed97725",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "4f7a6ace57f8f785f3d14038a5d41b7bda017ddd2b9a6873b913d47472a3d115"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 461448
+    },
+    {
+      "name": "morph375",
+      "eye": 0.45,
+      "range": 3.75,
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "1931388c9cf3ae03ac6f119985af1ea3e0cd2b3e51bc028ed456790e2dbc3e1c",
+        "60c47826bb56f1098258dda60ac1958f97574d9ffa0b795a6f6594df85b8b59f",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "da1bab7a06f2efee67fa3aa0a0cbcf2b5d506472999206f856cdbc3a512faba6"
+      ],
+      "sharedHashes": [
+        "1931388c9cf3ae03ac6f119985af1ea3e0cd2b3e51bc028ed456790e2dbc3e1c",
+        "60c47826bb56f1098258dda60ac1958f97574d9ffa0b795a6f6594df85b8b59f",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "da1bab7a06f2efee67fa3aa0a0cbcf2b5d506472999206f856cdbc3a512faba6"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 450216
+    },
+    {
+      "name": "admission025",
+      "eye": 0.45,
+      "range": 1.2,
+      "fade": 0.25,
+      "mixed": true,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        0.025,
+        0.05,
+        0.075,
+        0.1,
+        0.125,
+        0.15,
+        0.175,
+        0.2,
+        0.225,
+        0.25
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "cf992057b935d2d9bf8eb47eaf4b7ac70580edf5f82c080bf904486b036d0d67",
+        "ceff5ab80d722ab954e5b679f5e5d51bab7011009b438595faa58535680be77d",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "e221f2b9a93a5dd554761d64d370684838427254037092f401125e0dacb700f7"
+      ],
+      "sharedHashes": [
+        "cf992057b935d2d9bf8eb47eaf4b7ac70580edf5f82c080bf904486b036d0d67",
+        "ceff5ab80d722ab954e5b679f5e5d51bab7011009b438595faa58535680be77d",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "e221f2b9a93a5dd554761d64d370684838427254037092f401125e0dacb700f7"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 614016
+    },
+    {
+      "name": "admission075",
+      "eye": 0.45,
+      "range": 1.2,
+      "fade": 0.75,
+      "mixed": true,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        0.075,
+        0.15,
+        0.225,
+        0.3,
+        0.375,
+        0.45,
+        0.525,
+        0.6,
+        0.675,
+        0.75
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "5ef6497da72923f0bfc195dac8d1ea760c7410f80fb17b9721ea5f9e475656a6",
+        "ceff5ab80d722ab954e5b679f5e5d51bab7011009b438595faa58535680be77d",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "e221f2b9a93a5dd554761d64d370684838427254037092f401125e0dacb700f7"
+      ],
+      "sharedHashes": [
+        "5ef6497da72923f0bfc195dac8d1ea760c7410f80fb17b9721ea5f9e475656a6",
+        "ceff5ab80d722ab954e5b679f5e5d51bab7011009b438595faa58535680be77d",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "e221f2b9a93a5dd554761d64d370684838427254037092f401125e0dacb700f7"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 614016
+    },
+    {
+      "name": "building-occlusion",
+      "fade": 1,
+      "capture": {
+        "file": "building-occlusion-shared.png",
+        "width": 936,
+        "height": 800,
+        "sha256": "480c348b198d1a86a4781fa9fab72b4108940796137240ccac833bc254996ab1"
+      },
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "045a2a720f97e730258a9f9bf9380e6083bcff79aa6779fbe829d08a91760be2",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "ca99f76dc187758067f985816ebcbc77f7ad2da13c3e6aff10c526dd63140144"
+      ],
+      "sharedHashes": [
+        "045a2a720f97e730258a9f9bf9380e6083bcff79aa6779fbe829d08a91760be2",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "ca99f76dc187758067f985816ebcbc77f7ad2da13c3e6aff10c526dd63140144"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 748800
+    },
+    {
+      "name": "layer-hidden",
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "c22c1fb570fe711c96357663b9c8adc9ae5d610e1427067f72623583adb01b7c",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "sharedHashes": [
+        "c22c1fb570fe711c96357663b9c8adc9ae5d610e1427067f72623583adb01b7c",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 0,
+        "group1Sets": 0,
+        "drawCalls": 0,
+        "triangles": 0,
+        "drawOrder": []
+      },
+      "sharedCounters": {
+        "pipelineSets": 0,
+        "group1Sets": 0,
+        "drawCalls": 0,
+        "triangles": 0,
+        "drawOrder": []
+      },
+      "nonblankPixels": 748800
+    },
+    {
+      "name": "retired-readmitted-order",
+      "fade": 0.75,
+      "mixed": true,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 1,
+      "perTileFades": [
+        0.075,
+        0.15,
+        0.225,
+        0.3,
+        0.375,
+        0.45,
+        0.525,
+        0.6,
+        0.675,
+        0.75
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "0cf311dcae74ebb1fdf6c205bc7fbca615e58e04f2a3e3f0fe647f40442e1514",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "sharedHashes": [
+        "0cf311dcae74ebb1fdf6c205bc7fbca615e58e04f2a3e3f0fe647f40442e1514",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 2,
+        "group1Sets": 2,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0:70:-2",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0:71:-4",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 748800
+    },
+    {
+      "name": "interleaved-domain-order",
+      "fade": 0.75,
+      "mixed": true,
+      "capture": {
+        "file": "interleaved-domain-order-shared.png",
+        "width": 936,
+        "height": 800,
+        "sha256": "d0f89e04783f57c73195c7b74bf505aa108192eae17d7a8f351e72d3e7836808"
+      },
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 2,
+      "perTileFades": [
+        0.075,
+        0.15,
+        0.225,
+        0.3,
+        0.375,
+        0.45,
+        0.525,
+        0.6,
+        0.675,
+        0.75
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "700e0b7037b5d102185b8150e466fcbdd29b80d97e83771fca543aad7a4f18f9",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "sharedHashes": [
+        "700e0b7037b5d102185b8150e466fcbdd29b80d97e83771fca543aad7a4f18f9",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0-sharing-order-control:71:-4",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0-sharing-order-control:70:-2",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 6,
+        "group1Sets": 6,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0-sharing-order-control:71:-4",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0-sharing-order-control:70:-2",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 748800
+    },
+    {
+      "name": "shared-lighting-flags",
+      "fade": 1,
+      "activeTiles": 10,
+      "pieces": 320,
+      "domainCount": 2,
+      "perTileFades": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hdrPixelIdentity": true,
+      "auxiliaryPixelIdentity": true,
+      "mainDepthIdentity": true,
+      "privateMainDepthUnchanged": true,
+      "changedBytes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "referenceHashes": [
+        "e7df52fa97eb0c531b3a05b3a0531c6ee8cc3a12aca53bc6e1bc7a8237eb869c",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "sharedHashes": [
+        "e7df52fa97eb0c531b3a05b3a0531c6ee8cc3a12aca53bc6e1bc7a8237eb869c",
+        "c4bce92974f686ca0534c90b0ca4d97e4e3ee52ba75c3d6263e654883d0a825e",
+        "266d5e9b20319fab43c8bf326b06a932c733ceebf978e7ae787acf251dc7b6f1",
+        "3a43be6e2438ae26c5273bd270e4c6cf03f2b39131468e2bb4c252d6098d0302"
+      ],
+      "referenceCounters": {
+        "pipelineSets": 11,
+        "group1Sets": 11,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0-sharing-order-control:71:-4",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0-sharing-order-control:70:-2",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "sharedCounters": {
+        "pipelineSets": 6,
+        "group1Sets": 6,
+        "drawCalls": 11,
+        "triangles": 26882,
+        "drawOrder": [
+          "Private continuous sealing sand",
+          "Paving relief 40E1-0:71:-2",
+          "Paving relief 40E1-0:71:-3",
+          "Paving relief 40E1-0-sharing-order-control:71:-4",
+          "Paving relief 40E1-0:72:-3",
+          "Paving relief 40E1-0:72:-2",
+          "Paving relief 40E1-0:70:-3",
+          "Paving relief 40E1-0-sharing-order-control:70:-2",
+          "Paving relief 40E1-0:72:-4",
+          "Paving relief 40E1-0:70:-4",
+          "Paving relief 40E1-0:73:-4"
+        ]
+      },
+      "nonblankPixels": 748800
+    }
+  ],
+  "errors": [],
+  "controls": {
+    "uniformReference": true,
+    "integratedObjectFade": true,
+    "independentOldSlotModel": true,
+    "mainDepthBeforeAfter": true,
+    "noTimingAcceptance": true,
+    "coldReadinessAndOwnership": true,
+    "caseCount": 12,
+    "ordinaryPieces": 320,
+    "domainCount": 2,
+    "layerBypass": true,
+    "buildingOcclusion": true,
+    "slotReuseCount": 5
+  },
+  "switchReduction": {
+    "reference": {
+      "pipelineSets": 11,
+      "group1Sets": 11,
+      "drawCalls": 11,
+      "triangles": 26882,
+      "drawOrder": [
+        "Private continuous sealing sand",
+        "Paving relief 40E1-0:71:-2",
+        "Paving relief 40E1-0:72:-2",
+        "Paving relief 40E1-0:70:-2",
+        "Paving relief 40E1-0:72:-3",
+        "Paving relief 40E1-0:71:-3",
+        "Paving relief 40E1-0:70:-3",
+        "Paving relief 40E1-0:71:-4",
+        "Paving relief 40E1-0:72:-4",
+        "Paving relief 40E1-0:70:-4",
+        "Paving relief 40E1-0:73:-4"
+      ]
+    },
+    "shared": {
+      "pipelineSets": 2,
+      "group1Sets": 2,
+      "drawCalls": 11,
+      "triangles": 26882,
+      "drawOrder": [
+        "Private continuous sealing sand",
+        "Paving relief 40E1-0:71:-2",
+        "Paving relief 40E1-0:72:-2",
+        "Paving relief 40E1-0:70:-2",
+        "Paving relief 40E1-0:72:-3",
+        "Paving relief 40E1-0:71:-3",
+        "Paving relief 40E1-0:70:-3",
+        "Paving relief 40E1-0:71:-4",
+        "Paving relief 40E1-0:72:-4",
+        "Paving relief 40E1-0:70:-4",
+        "Paving relief 40E1-0:73:-4"
+      ]
+    }
+  },
+  "disposal": {
+    "oldModelLiveBefore": 10,
+    "activeBefore": 10,
+    "activeAfter": 0,
+    "workerTerminated": true,
+    "privateDepthDestroyed": true,
+    "releasedVertexBuffers": 32,
+    "releasedIndexBuffers": 11
+  },
+  "hdrPixelIdentity": true,
+  "gBufferPixelIdentity": true,
+  "mainDepthIdentity": true,
+  "caseCount": 12,
+  "geometryIdentity": true,
+  "mainDepthUnchanged": true,
+  "oldSlotEvents": [
+    {
+      "event": "admit",
+      "key": "40E1-0:71:-2",
+      "slot": 0,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:72:-2",
+      "slot": 1,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:70:-2",
+      "slot": 2,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:72:-3",
+      "slot": 3,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:71:-3",
+      "slot": 4,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:70:-3",
+      "slot": 5,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:71:-4",
+      "slot": 6,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:72:-4",
+      "slot": 7,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:70:-4",
+      "slot": 8,
+      "reused": false
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:73:-4",
+      "slot": 9,
+      "reused": false
+    },
+    {
+      "event": "retire",
+      "key": "40E1-0:72:-2",
+      "slot": 1
+    },
+    {
+      "event": "retire",
+      "key": "40E1-0:71:-3",
+      "slot": 4
+    },
+    {
+      "event": "retire",
+      "key": "40E1-0:70:-4",
+      "slot": 8
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:70:-4",
+      "slot": 8,
+      "reused": true
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:72:-2",
+      "slot": 4,
+      "reused": true
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0:71:-3",
+      "slot": 1,
+      "reused": true
+    },
+    {
+      "event": "retire",
+      "key": "40E1-0:70:-2",
+      "slot": 2
+    },
+    {
+      "event": "retire",
+      "key": "40E1-0:71:-4",
+      "slot": 6
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0-sharing-order-control:70:-2",
+      "slot": 6,
+      "reused": true
+    },
+    {
+      "event": "admit",
+      "key": "40E1-0-sharing-order-control:71:-4",
+      "slot": 2,
+      "reused": true
+    }
+  ],
+  "adapter": {
+    "subgroupMatrixConfigs": []
+  },
+  "productionSunDirection": [
+    -0.8861254972299324,
+    0.45498452071536893,
+    0.08815151200297767
+  ],
+  "captureBytes": 643857
+}

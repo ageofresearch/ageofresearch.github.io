@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "profile": {
+    "id": "cotendo-dry-porous-1",
+    "normalF0": 0.04,
+    "defaultRoughness": 0.9,
+    "roughnessRange": [
+      0.86,
+      0.95
+    ],
+    "effectiveDirectF90": "specF90 * max(0.04, 1 - roughness)",
+    "illustrative": true
+  },
+  "f0": 0.04,
+  "roughnessPreserved": true,
+  "roughnessPixelIdentity": true,
+  "roughnessRenderedRangeIncludingFilledJoints": [
+    0.89990234375,
+    0.93017578125
+  ],
+  "grazing": {
+    "viewElevationDeg": 5,
+    "sunElevationDeg": 27.06393827039336,
+    "controlMeanDirectSpecular": 0.08336380998933507,
+    "matteMeanDirectSpecular": 0.02098908061733493,
+    "meanDirectSpecularRatio": 0.2517768875969094,
+    "nonzero": true,
+    "samples": 4928
+  },
+  "normal": {
+    "viewElevationDeg": 90,
+    "sunElevationDeg": 90,
+    "controlMeanDirectSpecular": 0.010276604003410903,
+    "matteMeanDirectSpecular": 0.010231226125166047,
+    "meanDirectSpecularRatio": 0.9955843508001481,
+    "note": "F0 parameter is unchanged; the engine exp2 Schlick approximation has a small nonzero endpoint residual."
+  },
+  "diffusePixelIdentity": true,
+  "environmentSpecularPixelIdentity": true,
+  "ambientPixelIdentity": true,
+  "albedoPixelIdentity": true,
+  "hooksPreserved": true,
+  "hookReplacementPreserved": true,
+  "comparison": {
+    "format": "rgba16float",
+    "stage": "actual road shader HDR before exposure and post-processing",
+    "diffuseIsolation": "temporary QA-only specularIntensity=0; original F90 scales to zero",
+    "environmentIsolation": "sun colour zero; nonzero bound environment texture",
+    "geometryIsolation": "macro relief, parallax, fine bump and self-shadow disabled equally for both BRDF controls"
+  },
+  "captures": {
+    "grazing-direct-original": {
+      "sha256": "47df995f318d60ce0605f2104dfc006523e13124477fcfd0e8802c8eb83ca762",
+      "diagnostic": "directSpecular",
+      "porous": false,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "grazing-direct-matte": {
+      "sha256": "da71c9d5cec410ac150ff8e9e3d6e712abef9ec5a2f3dcd637f4c2aad195195e",
+      "diagnostic": "directSpecular",
+      "porous": true,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "diffuse-original": {
+      "sha256": "54476cfb221035005132bbd1a39df180dc1ed7b665f38f44bf10d75e9f4c7a7c",
+      "diagnostic": "beauty",
+      "porous": false,
+      "diffuseOnly": true,
+      "ambientOnly": false
+    },
+    "diffuse-matte": {
+      "sha256": "54476cfb221035005132bbd1a39df180dc1ed7b665f38f44bf10d75e9f4c7a7c",
+      "diagnostic": "beauty",
+      "porous": true,
+      "diffuseOnly": true,
+      "ambientOnly": false
+    },
+    "environment-original": {
+      "sha256": "5abf55ea6b45186bebe41f88912acf8133040c93483dff66150213a4eb88108a",
+      "diagnostic": "environmentSpecular",
+      "porous": false,
+      "diffuseOnly": false,
+      "ambientOnly": true
+    },
+    "environment-matte": {
+      "sha256": "5abf55ea6b45186bebe41f88912acf8133040c93483dff66150213a4eb88108a",
+      "diagnostic": "environmentSpecular",
+      "porous": true,
+      "diffuseOnly": false,
+      "ambientOnly": true
+    },
+    "ambient-original": {
+      "sha256": "68d62acdfbc263a780e5b00349699558f8d89ed919ba14263250f2ead8f44116",
+      "diagnostic": "beauty",
+      "porous": false,
+      "diffuseOnly": false,
+      "ambientOnly": true
+    },
+    "ambient-matte": {
+      "sha256": "68d62acdfbc263a780e5b00349699558f8d89ed919ba14263250f2ead8f44116",
+      "diagnostic": "beauty",
+      "porous": true,
+      "diffuseOnly": false,
+      "ambientOnly": true
+    },
+    "roughness-original": {
+      "sha256": "b412e2b63771faaccfa82e33c8642e1120eda99303a96c5769b2dc1b023ea876",
+      "diagnostic": "roughness",
+      "porous": false,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "roughness-matte": {
+      "sha256": "b412e2b63771faaccfa82e33c8642e1120eda99303a96c5769b2dc1b023ea876",
+      "diagnostic": "roughness",
+      "porous": true,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "albedo-original": {
+      "sha256": "aaac99d41978b404fc0adf485a7b0f8c92fb00fe26fe80baf20eda7d578b68a8",
+      "diagnostic": "albedo",
+      "porous": false,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "albedo-matte": {
+      "sha256": "aaac99d41978b404fc0adf485a7b0f8c92fb00fe26fe80baf20eda7d578b68a8",
+      "diagnostic": "albedo",
+      "porous": true,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "normal-direct-original": {
+      "sha256": "794a25ec6d326712d5d5c32d687af9e7c3918315eeef8610fbd465902d1001bb",
+      "diagnostic": "directSpecular",
+      "porous": false,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    },
+    "normal-direct-matte": {
+      "sha256": "08419ad42501294bf5df78ba693fcdedf6ec74824ddca0fbdfb6c7d3c058a317",
+      "diagnostic": "directSpecular",
+      "porous": true,
+      "diffuseOnly": false,
+      "ambientOnly": false
+    }
+  },
+  "errors": [],
+  "adapter": {
+    "vendor": "mesa",
+    "architecture": "software",
+    "device": "llvmpipe-llvm-20-1-2-256-bits-",
+    "description": "llvmpipe: Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)"
+  },
+  "source": {
+    "files": {
+      "app/src/cotendo/RoadPavingLighting.js": "a4595ca1496c420a6ec9da475cba5c72030e90e5f21abd7285b843671fab39d7",
+      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
+      "app/src/engine/render/wgsl/lighting.js": "6f8ed6fa5198ace6c5131429ea356acc8eb2c3de2dbf8761b7954e4c9795f38b",
+      "app/src/engine/render/MeshShader.js": "b97b59b5a9060ea216c0e017ac9252488bf281ce47fd17ba202d48327053985d",
+      "app/src/engine/render/Material.js": "a84b1a3363c954ca4e3c7a5e0bfa0995a3f1e385506f3b05de2dea6b50713d22",
+      "tools/cotendo/paving-lighting-gpu.mjs": "548c29e8cf0e66d391b77070528f282a51964fb6af8df04c563ad2e0c684efb5"
+    }
+  }
+}

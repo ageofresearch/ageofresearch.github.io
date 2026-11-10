@@ -1,0 +1,498 @@
+{
+  "status": "passed",
+  "profile": "cotendo-installed-6",
+  "installedAmplitudeM": 0.00075,
+  "sourceEdgeWorldZ": 1.033,
+  "hole": [
+    [
+      0.35,
+      0.969
+    ],
+    [
+      0.47,
+      0.969
+    ],
+    [
+      0.47,
+      1.015
+    ],
+    [
+      0.35,
+      1.015
+    ]
+  ],
+  "crossMetreCell": true,
+  "tile": {
+    "pieces": 20,
+    "cuts": 4,
+    "triangles": 2143,
+    "maxOutsideM": 1.4305114648394124e-8
+  },
+  "fixtures": [
+    {
+      "name": "along-z",
+      "position": [
+        0.51,
+        0.22,
+        3
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.01,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-z",
+      "position": [
+        0.51,
+        0.22,
+        3
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.25,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-z",
+      "position": [
+        0.51,
+        0.22,
+        3
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.5,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-z",
+      "position": [
+        0.51,
+        0.22,
+        3
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.75,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-z",
+      "position": [
+        0.51,
+        0.22,
+        3
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 1,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-x",
+      "position": [
+        2.5,
+        0.22,
+        1
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.01,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-x",
+      "position": [
+        2.5,
+        0.22,
+        1
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.25,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-x",
+      "position": [
+        2.5,
+        0.22,
+        1
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.5,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-x",
+      "position": [
+        2.5,
+        0.22,
+        1
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 0.75,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "name": "along-x",
+      "position": [
+        2.5,
+        0.22,
+        1
+      ],
+      "target": [
+        0.51,
+        0.09,
+        1
+      ],
+      "eyeHeightM": 0.22,
+      "admissionFraction": 1,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    }
+  ],
+  "sensitivity": [
+    {
+      "name": "along-z",
+      "changedPixels": 336,
+      "pixelsByInstalledLiftM": {
+        "-0.00075": 75,
+        "-0.00025": 86,
+        "0.00025": 149,
+        "0.00075": 26
+      },
+      "missingNearControl": true
+    },
+    {
+      "name": "along-x",
+      "changedPixels": 516,
+      "pixelsByInstalledLiftM": {
+        "-0.00075": 128,
+        "-0.00025": 117,
+        "0.00025": 193,
+        "0.00075": 78
+      },
+      "missingNearControl": true
+    }
+  ],
+  "morph": [
+    {
+      "cameraRangeM": 3.25,
+      "morphVertices": 1564,
+      "changedPixelsWithNear": true,
+      "changedPixels": 91,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    },
+    {
+      "cameraRangeM": 3.75,
+      "morphVertices": 956,
+      "changedPixelsWithNear": true,
+      "changedPixels": 72,
+      "hdrPixelIdentity": true,
+      "gBufferPixelIdentity": true,
+      "mainDepthIdentity": true
+    }
+  ],
+  "geometrySpecialization": {
+    "cases": 12,
+    "hdrPixelIdentity": true,
+    "gBufferPixelIdentity": true,
+    "mainDepthIdentity": true,
+    "fixtures": [
+      {
+        "caseId": "along-z:admission-0.01",
+        "name": "along-z",
+        "position": [
+          0.51,
+          0.22,
+          3
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.01,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-z:admission-0.25",
+        "name": "along-z",
+        "position": [
+          0.51,
+          0.22,
+          3
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.25,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-z:admission-0.5",
+        "name": "along-z",
+        "position": [
+          0.51,
+          0.22,
+          3
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.5,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-z:admission-0.75",
+        "name": "along-z",
+        "position": [
+          0.51,
+          0.22,
+          3
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.75,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-z:admission-1",
+        "name": "along-z",
+        "position": [
+          0.51,
+          0.22,
+          3
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 1,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-x:admission-0.01",
+        "name": "along-x",
+        "position": [
+          2.5,
+          0.22,
+          1
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.01,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-x:admission-0.25",
+        "name": "along-x",
+        "position": [
+          2.5,
+          0.22,
+          1
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.25,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-x:admission-0.5",
+        "name": "along-x",
+        "position": [
+          2.5,
+          0.22,
+          1
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.5,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-x:admission-0.75",
+        "name": "along-x",
+        "position": [
+          2.5,
+          0.22,
+          1
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.75,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "along-x:admission-1",
+        "name": "along-x",
+        "position": [
+          2.5,
+          0.22,
+          1
+        ],
+        "target": [
+          0.51,
+          0.09,
+          1
+        ],
+        "eyeHeightM": 0.22,
+        "admissionFraction": 1,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "morph:range-3.25",
+        "name": "morph",
+        "cameraRangeM": 3.25,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      },
+      {
+        "caseId": "morph:range-3.75",
+        "name": "morph",
+        "cameraRangeM": 3.75,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true,
+        "mainDepthIdentity": true
+      }
+    ]
+  },
+  "errors": [],
+  "minimumNonblankPixels": 79086,
+  "renderPixels": 153600,
+  "mainDepthUnchanged": true,
+  "lowLiftSensitivityPixels": 203,
+  "highLiftSensitivityPixels": 104,
+  "privateDepthCopies": 72,
+  "source": {
+    "files": {
+      "app/src/cotendo/RoadPavingMaterial.js": "60b039686d390092e5cc027bc27e0c9202d09c9fbb69c4acb723c35075774e24",
+      "app/src/cotendo/RoadPavingProfile.js": "6b3afae6894f227045d80ed55222d95eda894dbc12ba2e465f7677f44f26a3f3",
+      "app/src/cotendo/RoadPavingWorker.js": "b3b2d1e3f8ef016bfad0794a43aa28b4da603f064186d45ae09ff7433b79d5d3",
+      "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
+      "app/src/cotendo/RoadPavingBoundary.js": "dce99a0687fa522f3573d932319e73ce49062fdac39312b3a70f9a4b24bd9a7c",
+      "app/src/cotendo/RoadPavingResidency.js": "cfec84c28258b043977d015b5c817912e326115ce9572e110560c5537f4a5963",
+      "app/src/cotendo/RoadPaving.js": "f513134d4c001d8e7dcd5982a6cb477f6e443937034053fddbdacb54aa1410d1",
+      "app/src/cotendo/RoadPavingSun.js": "02dd1e18e3899d4df8b86b15b4d2aa722429b8b51f7a0ee73c927cca64b64b2c",
+      "app/src/cotendo/RoadPavingLighting.js": "a4595ca1496c420a6ec9da475cba5c72030e90e5f21abd7285b843671fab39d7",
+      "app/src/engine/render/SceneRenderer.js": "a2222c632368afff23ae0d0185de47af8a7716d345b802339aeff23940c34ae6",
+      "app/src/paver/PaverMaterial.js": "674e059dafbddc2a0065039c2dab1a18016fc452b3f56cfd97712850a23ad323",
+      "app/src/paver/PaverGeometry.js": "b0126110884afdada4940f516348dbdcb3ee7542d757d74e33ea8f31f08141ec",
+      "tools/cotendo/paving-elision-gpu.mjs": "d0daeef17a545cb065124c15b0255b9868a83861f5b94ea3aea508e474d45e2f"
+    }
+  },
+  "adapter": {
+    "subgroupMatrixConfigs": []
+  }
+}

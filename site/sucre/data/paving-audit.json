@@ -77,24 +77,154 @@
       }
     ]
   },
+  "finishElision": {
+    "status": "passed",
+    "fixtures": [
+      {
+        "eyeHeightM": 0.22,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.45,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 1.4,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 3,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 6,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      }
+    ]
+  },
+  "overdrawElision": {
+    "status": "passed",
+    "fixtures": [
+      {
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.01,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.25,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.5,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.22,
+        "admissionFraction": 0.75,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.22,
+        "admissionFraction": 1,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.45,
+        "admissionFraction": 0.01,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.45,
+        "admissionFraction": 0.25,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.45,
+        "admissionFraction": 0.5,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.45,
+        "admissionFraction": 0.75,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 0.45,
+        "admissionFraction": 1,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 1.4,
+        "admissionFraction": 0.01,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 1.4,
+        "admissionFraction": 0.25,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 1.4,
+        "admissionFraction": 0.5,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 1.4,
+        "admissionFraction": 0.75,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      },
+      {
+        "eyeHeightM": 1.4,
+        "admissionFraction": 1,
+        "hdrPixelIdentity": true,
+        "gBufferPixelIdentity": true
+      }
+    ],
+    "sensitivityPixels": 38152
+  },
   "mainDepthUnchanged": true,
   "bypassWithoutNear": true,
   "buriedFacePixelIdentity": true,
-  "discardedFixtureTriangles": 5778,
-  "privateDepthCopies": 7,
+  "discardedFixtureTriangles": 384,
+  "privateDepthCopies": 48,
   "fixture": {
     "pieces": 32,
-    "triangles": 13806,
-    "bytes": 263316
+    "triangles": 2688,
+    "bytes": 62976
   },
   "source": {
     "files": {
-      "app/src/cotendo/RoadPaving.js": "029b2d72f1f2f29afcf6f195e10c4b3bec3a30682347c0ff0a4f5accaaa6bb49",
-      "app/src/cotendo/RoadPavingMath.js": "60ebe8d496161a4490aa5edb0e4d1ddd881504b363c1acf7644a58f2e19b6138",
-      "app/src/cotendo/RoadPavingMaterial.js": "9204af8a0c374f744cc902c38735f9aef619736bf7bba9bdeb6328f93b33c541",
-      "app/src/cotendo/RoadPavingWorker.js": "e88c831b550f5d93cd34fa36ed2d046c4db13eb6867ea092e331ff3d77597b72",
-      "app/src/cotendo/CotendoApp.js": "81ba0886669f2aeed347e1a32c5e09e6ef10f4fc9111593a507b1e7893ec72ae",
-      "app/src/cotendo/CotendoScene.js": "8a14640a3aaf1f50009273737a35024e1cdadc79d0c79795dea941340bd1ea5c",
+      "app/src/cotendo/RoadPaving.js": "4c1bbcdde39758317ca7d27ee53a2968d00e5ac48d8502120c5757a189df9e49",
+      "app/src/cotendo/RoadPavingMath.js": "86b41c0ab9df01b0c3fd384446db66c6c184faada2452d8ea21a8ec1a3990071",
+      "app/src/cotendo/RoadPavingMaterial.js": "32b45b50cf911334d9b2611d6710a08af4abd862439efc60716578042ae87a65",
+      "app/src/cotendo/RoadPavingWorker.js": "4283d40fc55f93319e0bb11c7de7e0fbe74934f2c310a19a9553e13f97a1e953",
+      "app/src/cotendo/RoadPavingProfile.js": "6ccb143035efc8fd99f2ebc2d65cbc86099c85bfb0626795bc50a20224b0c050",
+      "app/src/cotendo/RoadPavingBoundary.js": "14eabb476b68398b8035bcb99bb785e5b6dc6b517663aa8e12ea1c0126db8df9",
+      "app/src/cotendo/RoadPavingResidency.js": "cfec84c28258b043977d015b5c817912e326115ce9572e110560c5537f4a5963",
+      "app/src/cotendo/PavementInspection.js": "4ecbe6d9c8d92beb43824f4243b206ec1708af797e0418e68272c405e3e68ee7",
+      "app/src/cotendo/CotendoApp.js": "1af5ded5c0142ffadcd8646d57612e0dd81d4b97d8e33e0866fdb14d204517ca",
+      "app/src/cotendo/CotendoScene.js": "29c8d367611d4fe2843f3e896bbdaa8a46b2dcf49cd891b7ce7c366700533e97",
       "app/src/engine/render/SceneRenderer.js": "a2222c632368afff23ae0d0185de47af8a7716d345b802339aeff23940c34ae6",
       "app/src/paver/PaverMaterial.js": "674e059dafbddc2a0065039c2dab1a18016fc452b3f56cfd97712850a23ad323",
       "app/src/paver/PaverGeometry.js": "b0126110884afdada4940f516348dbdcb3ee7542d757d74e33ea8f31f08141ec"

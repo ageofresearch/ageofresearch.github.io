@@ -1,5 +1,6 @@
 import { answerQuestion } from './assistant.js';
 import { GEMINI_MODEL } from './gemini.js';
+import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
 
 const ROOT_ID = 'ldm-chat-widget';
 const MAX_MESSAGE = 2000;
@@ -72,6 +73,7 @@ function installStyles() {
 export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = document.body } = {}) {
   const existing = document.getElementById(ROOT_ID);
   if (existing) return existing.__ldmChat;
+  installGlobalDiagnostics(window);
   installStyles();
 
   const history = [];
@@ -170,6 +172,50 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   keyConnected.append(changeKey, disconnectKey);
   connection.append(connectionTitle, keyStatus, keyForm, keyConnected);
 
+  const diagnosticPanel = el('details', 'ldm-chat-diagnostics');
+  diagnosticPanel.append(el('summary', '', 'Diagnóstico del chat'));
+  const diagnosticNote = el('p', 'ldm-chat-key-note', 'Este informe contiene etapas, tiempos y códigos; no incluye tu clave ni los mensajes. Se conserva solo en esta pestaña.');
+  const diagnosticField = el('textarea', 'ldm-chat-diagnostic-report');
+  diagnosticField.readOnly = true;
+  diagnosticField.rows = 8;
+  diagnosticField.setAttribute('aria-label', 'Informe de diagnóstico sin clave ni mensajes');
+  const diagnosticActions = el('div', 'ldm-chat-key-actions');
+  const copyDiagnostic = el('button', 'ldm-chat-key-action', 'Copiar diagnóstico');
+  copyDiagnostic.type = 'button';
+  const refreshDiagnostic = el('button', 'ldm-chat-key-action', 'Actualizar informe');
+  refreshDiagnostic.type = 'button';
+  const diagnosticStatus = el('p', 'ldm-chat-key-note');
+  diagnosticStatus.setAttribute('role', 'status');
+  diagnosticActions.append(copyDiagnostic, refreshDiagnostic);
+  diagnosticPanel.append(diagnosticNote, diagnosticField, diagnosticActions, diagnosticStatus, el('code', 'ldm-chat-diagnostic-build', CHAT_BUILD));
+  function refreshReport() {
+    try { diagnosticField.value = diagnostics.report(); }
+    catch (error) {
+      const trace = diagnostics.start('runtime');
+      trace.stage('diagnostic_render');
+      trace.fail('diagnostic_render', error);
+      diagnosticStatus.textContent = 'No se pudo mostrar el informe. El fallo quedó registrado.';
+    }
+  }
+  diagnosticPanel.addEventListener('toggle', refreshReport);
+  refreshDiagnostic.addEventListener('click', refreshReport);
+  copyDiagnostic.addEventListener('click', async () => {
+    refreshReport();
+    try {
+      if (!globalThis.navigator?.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(diagnosticField.value);
+      diagnosticStatus.textContent = 'Diagnóstico copiado. Puedes compartirlo para revisar el fallo.';
+    } catch (error) {
+      const trace = diagnostics.start('runtime');
+      trace.stage('diagnostic_copy');
+      trace.fail('diagnostic_copy', error);
+      refreshReport();
+      diagnosticField.focus();
+      diagnosticField.select?.();
+      diagnosticStatus.textContent = 'No se pudo copiar automáticamente. Selecciona el informe y cópialo manualmente.';
+    }
+  });
+
   const log = el('div', 'ldm-chat-log');
   log.setAttribute('role', 'log');
   log.setAttribute('aria-label', 'Mensajes de la conversación');
@@ -207,10 +253,10 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   cancelRequest.hidden = true;
   cancelRequest.addEventListener('click', () => {
     cancelRequest.disabled = true;
-    requestController?.abort();
+    requestController?.abort('user');
   });
   form.append(inputRow, cancelRequest, help, scope);
-  panel.append(header, context, connection, log, status, form);
+  panel.append(header, context, connection, diagnosticPanel, log, status, form);
   root.append(panel, launcher);
   mountPoint.append(root);
 
@@ -281,18 +327,41 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     send.setAttribute('aria-label', value ? 'Consulta en curso' : 'Enviar pregunta');
   }
 
-  async function sendQuestion(rawQuestion, { retry = false } = {}) {
+  async function sendQuestion(rawQuestion, options = {}) {
+    if (pending || disposed) return;
+    const trace = diagnostics.start(geminiApiKey ? 'gemini' : endpoint ? 'server' : 'local');
+    try { await sendQuestionInner(rawQuestion, options, trace); }
+    catch (error) {
+      trace.fail('chat_unexpected', error);
+      try {
+        requestController?.abort('external');
+        if (!disposed) setPending(false);
+        status.hidden = false;
+        status.textContent = 'Ocurrió un error en el chat. Abre «Diagnóstico del chat» y copia el informe.';
+      } catch (viewError) {
+        trace.stage('ui_error');
+        trace.fail('chat_unexpected', viewError);
+      }
+    } finally { refreshReport(); }
+  }
+
+  async function sendQuestionInner(rawQuestion, { retry = false } = {}, trace) {
+    trace.stage('ui_prepare');
     const question = String(rawQuestion || '').trim().slice(0, MAX_MESSAGE);
-    if (!question || pending || disposed) return;
+    if (!question || pending || disposed) { trace.finish('skipped'); return; }
     if (geminiApiKey && question.includes(geminiApiKey)) {
       field.value = '';
       send.disabled = true;
       status.hidden = false;
       status.textContent = 'La pregunta contiene tu clave. Escríbela solo en el campo de conexión de Gemini.';
+      trace.fail('chat_key_in_question');
       return;
     }
+    trace.stage('ui_context');
     const context = viewContext();
     const prior = history.map(message => ({ ...message }));
+    trace.update({ historyMessages: prior.length });
+    trace.stage('ui_message');
     if (!retry) {
       failed?.row.remove();
       failed = null;
@@ -312,12 +381,14 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       }
     }, 15000) : null;
     try {
+      trace.stage('ui_dispatch');
       const result = await answerQuestion(question, {
         history: boundedHistory(question, retry ? prior.slice(0, -1) : prior, context),
         viewContext: context,
         endpoint,
         geminiApiKey,
         signal: controller.signal,
+        trace,
         onText(text) {
           if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
           if (!partial) partial = addMessage('assistant', '');
@@ -330,6 +401,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       if (!result || typeof result.answer !== 'string' || !result.answer.trim()) {
         throw new Error('No se recibió una respuesta. Puedes volver a intentarlo.');
       }
+      trace.stage('ui_complete');
       failed?.row.remove();
       failed = null;
       partial?.remove();
@@ -339,8 +411,11 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       mode.textContent = result.mode === 'gemini' ? 'Gemini 3.8 Flash' : result.mode === 'ai' ? 'IA conectada' : 'Orientación local';
       mode.dataset.mode = ['gemini', 'ai'].includes(result.mode) ? 'ai' : 'local';
       if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
+      trace.finish();
     } catch (error) {
       if (disposed || requestVersion !== connectionVersion) return;
+      trace.fail(error?.code || 'chat_unexpected', error);
+      trace.stage('ui_error');
       if (error?.code !== 'gemini_cancelled' && (geminiApiKey || endpoint)) {
         mode.textContent = geminiApiKey ? 'Gemini · revisa la conexión' : 'Conexión pendiente';
         mode.dataset.mode = 'error';
@@ -352,12 +427,20 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       const retryButton = el('button', 'ldm-chat-retry', 'Volver a intentar');
       retryButton.type = 'button';
       retryButton.addEventListener('click', () => sendQuestion(question, { retry: true }));
-      row.append(retryButton);
+      const diagnosticButton = el('button', 'ldm-chat-retry', 'Ver diagnóstico');
+      diagnosticButton.type = 'button';
+      diagnosticButton.addEventListener('click', () => {
+        refreshReport();
+        diagnosticPanel.open = true;
+        diagnosticField.focus({ preventScroll: false });
+      });
+      row.append(retryButton, diagnosticButton);
       failed?.row.remove();
       failed = { question, row };
       log.append(row);
       scrollToLatest();
     } finally {
+      trace.stage('ui_finally');
       clearTimeout(waiting);
       partial?.remove();
       if (requestController === controller) requestController = null;
@@ -395,9 +478,9 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     else launcher.focus({ preventScroll: true });
   }
 
-  function resetGemini() {
+  function resetGemini(event) {
     connectionVersion += 1;
-    requestController?.abort();
+    requestController?.abort(event?.type === 'pagehide' ? 'pagehide' : event === 'destroy' ? 'destroy' : 'disconnect');
     geminiApiKey = '';
     keyField.value = '';
     keyForm.hidden = false;
@@ -414,9 +497,13 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   keyForm.addEventListener('submit', event => {
     event.preventDefault();
     if (pending || disposed) return;
+    const trace = diagnostics.start('configuration');
+    trace.stage('validate_input');
     const candidate = keyField.value.trim();
     if (candidate.length < 8 || candidate.length > 512 || /[\s\u0000-\u001f\u007f]/.test(candidate)) {
       keyStatus.textContent = 'Revisa la clave: entre 8 y 512 caracteres, sin espacios ni saltos de línea.';
+      trace.fail('gemini_key');
+      refreshReport();
       return;
     }
     geminiApiKey = candidate;
@@ -429,6 +516,8 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     mode.textContent = 'Gemini configurado';
     mode.dataset.mode = 'configured';
     field.focus({ preventScroll: true });
+    trace.finish();
+    refreshReport();
   });
   changeKey.addEventListener('click', () => {
     if (pending) return;
@@ -495,7 +584,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     root, open, close, sendQuestion,
     destroy() {
       if (opened) close();
-      resetGemini();
+      resetGemini('destroy');
       window.removeEventListener('pagehide', resetGemini);
       disposed = true;
       root.remove();

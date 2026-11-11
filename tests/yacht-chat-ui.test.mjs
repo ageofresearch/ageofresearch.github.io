@@ -556,3 +556,45 @@ test('an exception before sending a question is caught and reported as a UI cont
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });
+
+test('the connectivity button checks public access and model metadata without generating or adding chat history', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    ui.respond = call => call.url.includes('$discovery') ? new Response('{}') : new Response(JSON.stringify({ name: 'models/' + MODEL, supportedGenerationMethods: ['generateContent'] }), { headers: { 'content-type': 'application/json' } });
+    click(button(ui, 'Comprobar conexión'));
+    await settle(() => ui.calls.length === 2 && ui.document.querySelector('[role="log"]').getAttribute('aria-busy') === 'false');
+    assert.ok(ui.calls.every(call => call.options.method === 'GET' && call.options.body === undefined));
+    assert.match(ui.document.body.textContent, /Datos del modelo: HTTP 200/);
+    assert.match(ui.document.body.textContent, /generación pendiente de comprobar/);
+    assert.equal(ui.document.body.textContent.includes('Gemini respondió'), false);
+    ui.respond = success;
+    await ui.api.sendQuestion('Primera pregunta tras la comprobación');
+    assert.equal(ui.calls.length, 3);
+    const sent = JSON.parse(ui.calls[2].options.body);
+    assert.equal(sent.contents.length, 1);
+    assert.equal(sent.contents[0].parts[0].text, 'Primera pregunta tras la comprobación');
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('a stalled connectivity check finishes after its short deadline, retains diagnostics and unlocks the chat', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  await withUI(async ui => {
+    configure(ui);
+    ui.respond = () => new Promise(() => {});
+    click(button(ui, 'Comprobar conexión'));
+    assert.equal(ui.calls.length, 2);
+    assert.equal(button(ui, 'Comprobar conexión').disabled, true);
+    t.mock.timers.tick(10001);
+    await settle(() => ui.document.querySelector('[role="log"]').getAttribute('aria-busy') === 'false');
+    assert.match(ui.document.body.textContent, /sin respuesta dentro del plazo/);
+    const reports = diagnostics.snapshot().reports.filter(report => report.provider.startsWith('connectivity_'));
+    assert.equal(reports.length, 2);
+    assert.ok(reports.every(report => report.failureCode === 'gemini_timeout' && report.failureStage === 'wait_response_headers'));
+    assert.equal(button(ui, 'Comprobar conexión').disabled, false);
+    ui.respond = success;
+    await ui.api.sendQuestion('Nueva pregunta después de la prueba');
+    assert.equal(new Headers(ui.calls[2].options.headers).get('x-goog-api-key'), FAKE_KEY);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});

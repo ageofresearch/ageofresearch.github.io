@@ -290,6 +290,7 @@ async function requestAnswer(question, {
   trace,
 } = {}) {
   trace.stage('validate_input');
+  trace.update({ requestMethod: 'POST', requestKind: 'generation_stream' });
   const text = typeof question === 'string' ? question.trim() : '';
   if (!text || text.length > 2000) throw failure('gemini_question', 'Escribe una pregunta de hasta 2.000 caracteres.');
   const key = typeof apiKey === 'string' ? apiKey.trim() : '';
@@ -389,4 +390,104 @@ export async function geminiAnswer(question, options = {}) {
     trace.fail(knownFailures.has(error) ? error.code : 'chat_unexpected', error);
     throw error;
   }
+}
+
+async function modelMetadata(response, signal, trace) {
+  trace.stage('read_model_metadata');
+  if (mediaType(response) !== 'application/json') throw failure('gemini_probe_response', 'La consulta del modelo devolvió un formato inesperado. Abre el diagnóstico.');
+  const reader = response.body?.getReader?.();
+  if (!reader) throw failure('gemini_probe_response', 'No se pudo leer la información del modelo.');
+  const cancel = () => { try { reader.cancel()?.catch?.(() => {}); } catch { /* Best effort. */ } };
+  signal.addEventListener('abort', cancel, { once: true });
+  let length = 0, chunks = 0, text = '';
+  const decoder = new TextDecoder();
+  try {
+    while (true) {
+      if (signal.aborted) throw failure('gemini_cancelled', 'Comprobación cancelada.');
+      const { done, value } = await reader.read();
+      if (signal.aborted) throw failure('gemini_cancelled', 'Comprobación cancelada.');
+      if (done) break;
+      length += value.byteLength;
+      trace.update({ bytesReceived: length, chunksReceived: ++chunks });
+      if (length > 16384) throw failure('gemini_probe_response', 'La información del modelo supera el límite de la comprobación.');
+      text += decoder.decode(value, { stream: true });
+    }
+    let data;
+    try { data = JSON.parse(text + decoder.decode()); }
+    catch (error) { throw failure('gemini_probe_response', 'No se pudo interpretar la información del modelo.', error); }
+    if (data?.name !== 'models/' + GEMINI_MODEL && !/^models\/gemini-3\.8-flash-\d{3,8}$/.test(data?.name || '') && data?.baseModelId !== GEMINI_MODEL) {
+      throw failure('gemini_probe_response', 'Google no confirmó el modelo solicitado en esta comprobación.');
+    }
+    trace.update({ modelMetadataReceived: true });
+    if (Array.isArray(data.supportedGenerationMethods)) {
+      trace.update({ generationSupported: data.supportedGenerationMethods.some(method => typeof method === 'string' && method.toLowerCase() === 'generatecontent') });
+    }
+  } finally {
+    signal.removeEventListener('abort', cancel);
+    cancel();
+    try { reader.releaseLock(); } catch { /* A cancelled read may still be closing. */ }
+  }
+}
+
+/** Two GETs, no prompt and no generation. Each result describes only its own request. */
+export async function checkGeminiConnection({ apiKey, signal, fetchImpl = globalThis.fetch, timeoutMs = 10000 } = {}) {
+  const key = typeof apiKey === 'string' ? apiKey.trim() : '';
+  const wait = Number.isFinite(timeoutMs) && timeoutMs > 0 ? Math.min(timeoutMs, 15000) : 10000;
+  async function probe(kind) {
+    const trace = diagnostics.start(kind === 'public' ? 'connectivity_public' : 'connectivity_model');
+    trace.stage('validate_input', { deadlineMs: wait, requestMethod: 'GET', requestKind: kind === 'public' ? 'public_discovery' : 'model_metadata' });
+    const controller = new AbortController();
+    let timer, timedOut = false, aborted = false, httpStatus = null, rejectCancellation;
+    const cancelled = new Promise((resolve, reject) => { rejectCancellation = reject; });
+    const cancel = () => {
+      aborted = true;
+      trace.update({ cancellationSource: signal?.reason });
+      controller.abort();
+      rejectCancellation(failure('gemini_cancelled', 'Comprobación cancelada.'));
+    };
+    signal?.addEventListener('abort', cancel, { once: true });
+    try {
+      if (signal?.aborted) throw failure('gemini_cancelled', 'Comprobación cancelada.');
+      if (key.length < 8 || key.length > 512 || /\s/.test(key)) throw failure('gemini_key', 'Introduce primero una clave API de Gemini válida.');
+      const deadline = new Promise((resolve, reject) => {
+        timer = setTimeout(() => {
+          timedOut = true;
+          controller.abort();
+          reject(failure('gemini_timeout', 'Google no completó esta comprobación dentro del plazo.'));
+        }, wait);
+      });
+      const operation = async () => {
+        const url = kind === 'public'
+          ? 'https://generativelanguage.googleapis.com/$discovery/rest?version=v1beta'
+          : 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL;
+        trace.stage('wait_response_headers');
+        const response = await fetchImpl(url, {
+          method: 'GET', headers: kind === 'model' ? { 'x-goog-api-key': key } : {},
+          credentials: 'omit', referrerPolicy: 'strict-origin', cache: 'no-store', signal: controller.signal,
+        });
+        if (controller.signal.aborted) { cancelBody(response.body); throw failure('gemini_cancelled', 'Comprobación cancelada.'); }
+        httpStatus = response.status;
+        trace.stage('response_headers', { httpStatus, responseType: response.type, contentType: mediaType(response) });
+        if (!response.ok) {
+          trace.stage('read_error_body');
+          throw httpFailure(response.status, await readErrorDetails(response, trace));
+        }
+        if (kind === 'model') await modelMetadata(response, controller.signal, trace);
+        else cancelBody(response.body);
+      };
+      await Promise.race([operation(), deadline, cancelled]);
+      trace.finish();
+      return { kind, ok: true, httpStatus };
+    } catch (error) {
+      const safe = timedOut ? failure('gemini_timeout', 'Google no completó esta comprobación dentro del plazo.')
+        : aborted ? failure('gemini_cancelled', 'Comprobación cancelada.')
+          : knownFailures.has(error) ? error : failure('gemini_network', 'No se pudo completar la conexión con Google.', error);
+      trace.fail(safe.code, safe);
+      return { kind, ok: false, httpStatus, code: safe.code, message: safe.message };
+    } finally {
+      clearTimeout(timer);
+      signal?.removeEventListener('abort', cancel);
+    }
+  }
+  return Promise.all([probe('public'), probe('model')]);
 }

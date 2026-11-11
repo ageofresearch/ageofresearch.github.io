@@ -44,6 +44,12 @@ Los puntos de captura cubren validación, preparación, espera de cabeceras, cue
 
 Un `fetch` rechazado sin HTTP no permite identificar por sí solo DNS, TLS, CORS, una extensión o un bloqueo de red. El informe conserva esa limitación en vez de atribuirle una causa sin evidencia.
 
+### Comprobación rápida de conexión
+
+Después de configurar la clave, **Comprobar conexión** realiza dos GET independientes de hasta diez segundos: consulta el documento público de descubrimiento de Google sin autenticación y consulta los datos de `gemini-3.8-flash` con la clave en su encabezado. No envía preguntas ni inicia una generación; tampoco modifica el historial. Se puede cancelar y se ejecuta solo al pulsar el botón. Las lecturas omiten la caché y los metadatos se limitan a 16 KiB.
+
+Los registros `connectivity_public` y `connectivity_model` permiten separar la respuesta pública de la consulta autenticada. Una respuesta correcta del modelo confirma que se pudo consultar su información; la disponibilidad, cuota y permisos de generación se comprueban al hacer una pregunta. Si ambas pruebas responden y una generación sigue sin cabeceras, la investigación debe centrarse en la ruta de generación. Si no hay HTTP en las pruebas, hace falta comparar el acceso desde otro navegador o red; no demuestra que la clave sea inválida. El informe identifica el método y tipo de cada solicitud sin guardar URLs ni credenciales.
+
 ## Adaptador opcional y contexto del operador
 
 Como alternativa a la clave Gemini, se puede usar `POST /api/yacht-chat` del adaptador: `OPENAI_API_KEY`, `OPENAI_MODEL` y el contenido autorizado para la audiencia en `YACHT_CONTEXT_TEXT` se configuran solo en el entorno del servidor. Una clave Gemini configurada en la interfaz tiene prioridad sobre este endpoint. Nunca se incluyen claves ni un historial privado en los archivos públicos.

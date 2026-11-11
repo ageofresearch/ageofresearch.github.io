@@ -1,7 +1,7 @@
 import { contextText, PROJECT_SOURCE } from './context.js';
 
 export const GEMINI_MODEL = 'gemini-3.8-flash';
-const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent';
+const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':streamGenerateContent?alt=sse';
 const MAX_RESPONSE_BYTES = 256 * 1024;
 const MAX_ANSWER = 12000;
 const knownFailures = new WeakSet();
@@ -52,38 +52,93 @@ function contentsFor(question, history, viewContext, apiKey) {
   return contents;
 }
 
-async function readResponse(response, signal) {
+async function readResponse(response, signal, apiKey, onText) {
   if (Number(response.headers?.get?.('content-length')) > MAX_RESPONSE_BYTES) {
     cancelBody(response.body);
     throw failure('gemini_response', 'Gemini devolvió una respuesta demasiado grande. Intenta una pregunta más breve.');
   }
   const reader = response.body?.getReader?.();
   if (!reader) throw failure('gemini_response', 'No se pudo leer la respuesta de Gemini. Vuelve a intentarlo.');
-  const chunks = [];
+  const decoder = new TextDecoder();
+  let buffer = '', event = [], text = '', finishReason = '';
   let length = 0;
+  function dispatch() {
+    if (!event.length) return;
+    const data = event.join('\n');
+    event = [];
+    let payload;
+    try { payload = JSON.parse(data); }
+    catch { throw failure('gemini_response', 'Gemini devolvió una respuesta que no se pudo interpretar. Vuelve a intentarlo.'); }
+    if (payload?.error) throw httpFailure(Number(payload.error.code));
+    const blocked = payload?.promptFeedback?.blockReason;
+    const candidate = payload?.candidates?.find(item => !item.index) || payload?.candidates?.[0];
+    if ((blocked && blocked !== 'BLOCK_REASON_UNSPECIFIED') || candidate?.safetyRatings?.some(item => item?.blocked)) {
+      throw failure('gemini_blocked', 'Gemini no pudo responder a esa consulta. Reformula la pregunta.');
+    }
+    if (candidate?.content?.role && candidate.content.role !== 'model') {
+      throw failure('gemini_response', 'Gemini devolvió una respuesta no válida. Vuelve a intentarlo.');
+    }
+    if (candidate?.finishReason && candidate.finishReason !== 'FINISH_REASON_UNSPECIFIED') {
+      finishReason = candidate.finishReason;
+      if (finishReason !== 'STOP') responseText({ candidates: [{ finishReason }] }, apiKey);
+    }
+    const delta = (Array.isArray(candidate?.content?.parts) ? candidate.content.parts : [])
+      .filter(part => part?.thought !== true && typeof part?.text === 'string')
+      .map(part => part.text).join('');
+    text += delta;
+    if (text.length > MAX_ANSWER) {
+      throw failure('gemini_response', 'Gemini devolvió una respuesta demasiado grande. Intenta una pregunta más breve.');
+    }
+    if (delta && typeof onText === 'function') onText(text.split(apiKey).join('[clave omitida]'));
+  }
+  function line(value) {
+    if (!value) dispatch();
+    else if (value.startsWith('data:')) event.push(value.slice(5).replace(/^ /, ''));
+  }
+  function parseLines(final = false) {
+    let index;
+    while ((index = buffer.search(/[\r\n]/)) >= 0) {
+      // A CRLF delimiter can be split across transport chunks.
+      if (buffer[index] === '\r' && index === buffer.length - 1 && !final) break;
+      const width = buffer[index] === '\r' && buffer[index + 1] === '\n' ? 2 : 1;
+      line(buffer.slice(0, index));
+      buffer = buffer.slice(index + width);
+    }
+    if (final) {
+      if (buffer) line(buffer);
+      dispatch();
+    }
+  }
   const cancel = () => { try { reader.cancel().catch(() => {}); } catch { /* Best effort. */ } };
   signal.addEventListener('abort', cancel, { once: true });
   try {
     while (true) {
-      if (signal.aborted) throw failure('gemini_timeout', 'Gemini tardó demasiado en responder. Vuelve a intentarlo.');
+      if (signal.aborted) throw failure('gemini_cancelled', 'Consulta cancelada.');
       const { done, value } = await reader.read();
+      if (signal.aborted) throw failure('gemini_cancelled', 'Consulta cancelada.');
       if (done) break;
       length += value.byteLength;
       if (length > MAX_RESPONSE_BYTES) {
         cancel();
         throw failure('gemini_response', 'Gemini devolvió una respuesta demasiado grande. Intenta una pregunta más breve.');
       }
-      chunks.push(value);
+      buffer += decoder.decode(value, { stream: true });
+      parseLines();
+      if (finishReason === 'STOP') {
+        cancel();
+        return responseText({ candidates: [{ finishReason, content: { role: 'model', parts: [{ text }] } }] }, apiKey);
+      }
     }
+    buffer += decoder.decode();
+    parseLines(true);
+    return responseText({ candidates: [{ finishReason, content: { role: 'model', parts: [{ text }] } }] }, apiKey);
+  } catch (error) {
+    cancel();
+    throw error;
   } finally {
     signal.removeEventListener('abort', cancel);
     try { reader.releaseLock(); } catch { /* A timed-out stream may still be closing. */ }
   }
-  const bytes = new Uint8Array(length);
-  let offset = 0;
-  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-  try { return JSON.parse(new TextDecoder().decode(bytes)); }
-  catch { throw failure('gemini_response', 'Gemini devolvió una respuesta que no se pudo interpretar. Vuelve a intentarlo.'); }
 }
 
 function responseText(payload, apiKey) {
@@ -119,6 +174,7 @@ function httpFailure(status) {
   if (status === 401 || status === 403) return failure('gemini_key', 'Google rechazó la clave de Gemini o sus permisos. Comprueba la clave y sus restricciones.');
   if (status === 404) return failure('gemini_model', 'El modelo ' + GEMINI_MODEL + ' no está disponible para esta clave o esta versión de la API. No se ha cambiado a otro modelo.');
   if (status === 429) return failure('gemini_quota', 'Se alcanzó la cuota o el límite de consultas de Gemini. Espera un momento y revisa la cuota de tu proyecto.');
+  if (status === 504) return failure('gemini_unavailable', 'Google agotó su tiempo de procesamiento. Vuelve a intentarlo más tarde.');
   if (status >= 500) return failure('gemini_unavailable', 'Gemini no está disponible ahora. Vuelve a intentarlo en unos momentos.');
   return failure('gemini_request', 'No se pudo completar la consulta a Gemini. Vuelve a intentarlo.');
 }
@@ -128,28 +184,42 @@ export async function geminiAnswer(question, {
   history = [],
   viewContext = '',
   fetchImpl = globalThis.fetch,
-  timeoutMs = 30000,
+  timeoutMs = 120000,
+  signal,
+  onText,
 } = {}) {
   const text = typeof question === 'string' ? question.trim() : '';
   if (!text || text.length > 2000) throw failure('gemini_question', 'Escribe una pregunta de hasta 2.000 caracteres.');
   const key = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (key.length < 8 || key.length > 512 || /\s/.test(key)) throw failure('gemini_key', 'Introduce una clave API de Gemini válida.');
   if (typeof fetchImpl !== 'function') throw failure('gemini_network', 'El navegador no puede conectar con Gemini.');
-  const wait = Number.isFinite(timeoutMs) && timeoutMs > 0 ? Math.min(timeoutMs, 120000) : 30000;
+  if (signal?.aborted) throw failure('gemini_cancelled', 'Consulta cancelada.');
+  const wait = Number.isFinite(timeoutMs) && timeoutMs > 0 ? Math.min(timeoutMs, 120000) : 120000;
   const controller = new AbortController();
-  let timedOut = false;
+  let timedOut = false, responseStarted = false, cancelled = false;
   let timer;
+  let rejectCancellation;
+  const cancellation = new Promise((resolve, reject) => { rejectCancellation = reject; });
+  const cancel = () => {
+    cancelled = true;
+    controller.abort();
+    rejectCancellation(failure('gemini_cancelled', 'Consulta cancelada.'));
+  };
+  signal?.addEventListener('abort', cancel, { once: true });
+  const deadlineMessage = () => responseStarted
+    ? 'Google inició la respuesta, pero no la completó dentro del plazo. Puedes volver a intentarlo.'
+    : 'No llegó una respuesta de Google dentro del plazo. Comprueba tu conexión o vuelve a intentarlo más tarde.';
   const timeout = new Promise((resolve, reject) => {
     timer = setTimeout(() => {
       timedOut = true;
       controller.abort();
-      reject(failure('gemini_timeout', 'Gemini tardó demasiado en responder. Vuelve a intentarlo.'));
+      reject(failure('gemini_timeout', deadlineMessage()));
     }, wait);
   });
   const operation = async () => {
     const response = await fetchImpl(ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream', 'x-goog-api-key': key },
       credentials: 'omit',
       // Website-restricted keys need the HTTPS origin, never the page path or query.
       referrerPolicy: 'strict-origin',
@@ -160,12 +230,13 @@ export async function geminiAnswer(question, {
       }),
       signal: controller.signal,
     });
+    responseStarted = true;
     if (!response.ok) {
       cancelBody(response.body);
       throw httpFailure(response.status);
     }
     return {
-      answer: responseText(await readResponse(response, controller.signal), key),
+      answer: await readResponse(response, controller.signal, key, onText),
       sources: [PROJECT_SOURCE],
       mode: 'gemini',
       model: GEMINI_MODEL,
@@ -173,11 +244,15 @@ export async function geminiAnswer(question, {
     };
   };
   try {
-    return await Promise.race([operation(), timeout]);
+    return await Promise.race([operation(), timeout, cancellation]);
   } catch (error) {
-    if (timedOut) throw failure('gemini_timeout', 'Gemini tardó demasiado en responder. Vuelve a intentarlo.');
+    if (timedOut) throw failure('gemini_timeout', deadlineMessage());
+    if (cancelled) throw failure('gemini_cancelled', 'Consulta cancelada.');
     // Never forward arbitrary provider, browser, or fetch error text (it can contain a key).
     if (error instanceof Error && knownFailures.has(error)) throw error;
     throw failure('gemini_network', 'No se pudo conectar con Gemini. Revisa la conexión y vuelve a intentar.');
-  } finally { clearTimeout(timer); }
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener('abort', cancel);
+  }
 }

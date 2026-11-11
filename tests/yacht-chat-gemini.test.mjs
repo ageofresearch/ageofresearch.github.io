@@ -6,8 +6,8 @@ const KEY = 'fixture-key-not-a-real-credential';
 const payload = (text = 'La comprobación sigue pendiente.') => ({
   candidates: [{ finishReason: 'STOP', content: { role: 'model', parts: [{ text }] } }],
 });
-const response = (value = payload(), status = 200) => new Response(JSON.stringify(value), {
-  status, headers: { 'Content-Type': 'application/json' },
+const response = (value = payload(), status = 200) => new Response('data: ' + JSON.stringify(value) + '\n\n', {
+  status, headers: { 'Content-Type': 'text/event-stream' },
 });
 
 test('Gemini uses the exact requested model, header authentication and yacht context', async () => {
@@ -18,8 +18,9 @@ test('Gemini uses the exact requested model, header authentication and yacht con
     fetchImpl: async (url, options) => { request = { url, ...options }; return response(); },
   });
   assert.equal(GEMINI_MODEL, 'gemini-3.8-flash');
-  assert.equal(request.url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent');
+  assert.equal(request.url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:streamGenerateContent?alt=sse');
   assert.equal(request.headers['x-goog-api-key'], KEY);
+  assert.equal(request.headers.Accept, 'text/event-stream');
   assert.equal(request.credentials, 'omit');
   assert.equal(request.referrerPolicy, 'strict-origin');
   assert.ok(!request.url.includes(KEY));
@@ -95,8 +96,10 @@ test('HTTP errors use safe messages, expose no provider body, and never switch m
 });
 
 test('thought parts are omitted, and accidental credential echoes are redacted', async () => {
+  const visible = [];
   const result = await geminiAnswer('Hola', {
     apiKey: KEY,
+    onText: text => visible.push(text),
     fetchImpl: async () => response({ candidates: [{ finishReason: 'STOP', content: { role: 'model', parts: [
       { thought: true, text: 'private reasoning' }, { text: 'Respuesta final ' + KEY }, { functionCall: { name: 'do_not_call' } },
     ] } }] }),
@@ -104,6 +107,8 @@ test('thought parts are omitted, and accidental credential echoes are redacted',
   assert.match(result.answer, /Respuesta final/);
   assert.ok(!result.answer.includes('private reasoning'));
   assert.ok(!result.answer.includes(KEY));
+  assert.ok(visible.length > 0);
+  assert.ok(visible.every(text => !text.includes(KEY) && !text.includes('private reasoning')));
 });
 
 test('blocked, truncated, missing and non-text replies never count as a successful answer', async () => {
@@ -149,13 +154,88 @@ test('timeout covers a stalled fetch and aborts its signal', async () => {
   await assert.rejects(geminiAnswer('Hola', {
     apiKey: KEY, timeoutMs: 10,
     fetchImpl: async (url, options) => { signal = options.signal; return new Promise(() => {}); },
-  }), /tardó demasiado/);
+  }), /No llegó una respuesta de Google.*plazo/);
   assert.equal(signal.aborted, true);
 });
 
 test('timeout covers reading a stalled response body', async () => {
   let canceled = false;
   const stream = new ReadableStream({ start() {}, cancel() { canceled = true; } });
-  await assert.rejects(geminiAnswer('Hola', { apiKey: KEY, timeoutMs: 10, fetchImpl: async () => new Response(stream) }), /tardó demasiado/);
+  await assert.rejects(geminiAnswer('Hola', { apiKey: KEY, timeoutMs: 10, fetchImpl: async () => new Response(stream) }), /Google inició la respuesta.*plazo/);
   assert.equal(canceled, true);
+});
+
+test('a valid response arriving after 30 seconds still succeeds under the default deadline', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let resolve;
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY,
+    fetchImpl: () => new Promise(done => { resolve = done; }),
+  });
+  t.mock.timers.tick(31000);
+  resolve(response());
+  assert.equal((await request).answer, 'La comprobación sigue pendiente.');
+});
+
+test('streaming delivers text before completion and handles fragmented UTF-8, CRLF and multiline events', async () => {
+  let feed, cancelled = false;
+  const visible = [];
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({ start(controller) { feed = controller; }, cancel() { cancelled = true; } });
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY, onText: text => visible.push(text),
+    fetchImpl: async () => new Response(stream),
+  });
+  const first = JSON.stringify({ candidates: [{ content: { parts: [{ text: 'Revisión ' }] } }] })
+    .replace(':', ':\n').split('\n').map(line => 'data: ' + line).join('\r\n');
+  for (const byte of encoder.encode(': heartbeat\r\n\r\n' + first + '\r\n\r\n')) feed.enqueue(new Uint8Array([byte]));
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(visible, ['Revisión ']);
+  feed.enqueue(encoder.encode('data: ' + JSON.stringify(payload('pendiente.')) + '\n\n'));
+  // Google has marked STOP: a connection held open afterwards must not hang the UI.
+  assert.equal((await request).answer, 'Revisión pendiente.');
+  assert.equal(cancelled, true);
+});
+
+test('a disconnected stream without a terminal STOP never becomes a successful answer', async () => {
+  const partial = { candidates: [{ content: { parts: [{ text: 'Incompleta' }] } }] };
+  await assert.rejects(geminiAnswer('Hola', { apiKey: KEY, fetchImpl: async () => response(partial) }), error => {
+    assert.equal(error.code, 'gemini_incomplete');
+    return true;
+  });
+});
+
+test('errors inside an HTTP 200 stream are handled without exposing provider details', async () => {
+  await assert.rejects(geminiAnswer('Hola', {
+    apiKey: KEY, fetchImpl: async () => response({ error: { code: 503, message: 'Private detail ' + KEY } }),
+  }), error => {
+    assert.equal(error.code, 'gemini_unavailable');
+    assert.ok(!error.message.includes(KEY));
+    assert.ok(!error.message.includes('Private detail'));
+    return true;
+  });
+});
+
+test('cancellation aborts an in-flight fetch without waiting for its deadline or retrying', async () => {
+  const controller = new AbortController();
+  let sentSignal, calls = 0;
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY, signal: controller.signal,
+    fetchImpl: async (url, options) => { calls++; sentSignal = options.signal; return new Promise(() => {}); },
+  });
+  controller.abort();
+  await assert.rejects(request, error => error.code === 'gemini_cancelled');
+  assert.equal(sentSignal.aborted, true);
+  assert.equal(calls, 1);
+});
+
+test('cancellation also stops reading an active response stream', async () => {
+  const controller = new AbortController();
+  let cancelled = false;
+  const stream = new ReadableStream({ cancel() { cancelled = true; } });
+  const request = geminiAnswer('Hola', { apiKey: KEY, signal: controller.signal, fetchImpl: async () => new Response(stream) });
+  await new Promise(resolve => setImmediate(resolve));
+  controller.abort();
+  await assert.rejects(request, error => error.code === 'gemini_cancelled');
+  assert.equal(cancelled, true);
 });

@@ -77,6 +77,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   const history = [];
   let geminiApiKey = '';
   let connectionVersion = 0;
+  let requestController = null;
   let pending = false, opened = false, disposed = false;
   let previousFocus = null, failed = null;
   const root = el('section', 'ldm-chat');
@@ -201,7 +202,14 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   help.id = 'ldm-chat-input-help';
   const scope = el('p', 'ldm-chat-scope', 'Modelo y orientación local, sin telemetría. La salida la autoriza el capitán.');
   scope.id = 'ldm-chat-scope';
-  form.append(inputRow, help, scope);
+  const cancelRequest = el('button', 'ldm-chat-key-action ldm-chat-cancel', 'Cancelar consulta');
+  cancelRequest.type = 'button';
+  cancelRequest.hidden = true;
+  cancelRequest.addEventListener('click', () => {
+    cancelRequest.disabled = true;
+    requestController?.abort();
+  });
+  form.append(inputRow, cancelRequest, help, scope);
   panel.append(header, context, connection, log, status, form);
   root.append(panel, launcher);
   mountPoint.append(root);
@@ -267,6 +275,8 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     for (const button of log.querySelectorAll('button')) button.disabled = value;
     status.hidden = !value;
     status.textContent = value ? (geminiApiKey ? 'Consultando Gemini…' : 'Consultando el contexto del yate…') : '';
+    cancelRequest.hidden = !value || !geminiApiKey;
+    cancelRequest.disabled = !value;
     send.textContent = value ? '···' : '↑';
     send.setAttribute('aria-label', value ? 'Consulta en curso' : 'Enviar pregunta');
   }
@@ -293,12 +303,28 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     }
     setPending(true);
     const requestVersion = connectionVersion;
+    const controller = new AbortController();
+    requestController = controller;
+    let partial = null;
+    const waiting = geminiApiKey ? setTimeout(() => {
+      if (pending && requestVersion === connectionVersion && !partial) {
+        status.textContent = 'Esperando la respuesta de Google. Puedes esperar o cancelar la consulta.';
+      }
+    }, 15000) : null;
     try {
       const result = await answerQuestion(question, {
         history: boundedHistory(question, retry ? prior.slice(0, -1) : prior, context),
         viewContext: context,
         endpoint,
         geminiApiKey,
+        signal: controller.signal,
+        onText(text) {
+          if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
+          if (!partial) partial = addMessage('assistant', '');
+          partial.querySelector('.ldm-chat-message-text').textContent = clipped(text, MAX_ANSWER);
+          status.textContent = 'Recibiendo la respuesta de Gemini…';
+          scrollToLatest();
+        },
       });
       if (disposed || requestVersion !== connectionVersion) return;
       if (!result || typeof result.answer !== 'string' || !result.answer.trim()) {
@@ -306,6 +332,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       }
       failed?.row.remove();
       failed = null;
+      partial?.remove();
       const text = clipped(result.answer.trim(), MAX_ANSWER);
       addMessage('assistant', text, result.sources);
       remember({ role: 'assistant', content: text, ...(result.topic ? { topic: result.topic } : {}) });
@@ -314,7 +341,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
     } catch (error) {
       if (disposed || requestVersion !== connectionVersion) return;
-      if (geminiApiKey || endpoint) {
+      if (error?.code !== 'gemini_cancelled' && (geminiApiKey || endpoint)) {
         mode.textContent = geminiApiKey ? 'Gemini · revisa la conexión' : 'Conexión pendiente';
         mode.dataset.mode = 'error';
       }
@@ -331,6 +358,9 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       log.append(row);
       scrollToLatest();
     } finally {
+      clearTimeout(waiting);
+      partial?.remove();
+      if (requestController === controller) requestController = null;
       if (!disposed) setPending(false);
     }
   }
@@ -367,6 +397,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
 
   function resetGemini() {
     connectionVersion += 1;
+    requestController?.abort();
     geminiApiKey = '';
     keyField.value = '';
     keyForm.hidden = false;

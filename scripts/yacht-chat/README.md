@@ -28,6 +28,8 @@ La clave se mantiene en una variable de la pestaña. El área se vacía al confi
 
 Las solicitudes van directamente del navegador a `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent`, con la clave en `x-goog-api-key`. Google recibe la pregunta, hasta ocho mensajes anteriores y el contexto público del yate. No pasan por un servidor de este proyecto. Los errores de permisos, cuota o disponibilidad se muestran sin sustituir el modelo ni repetir consultas automáticamente. Sin clave sigue disponible la orientación local.
 
+Si la clave tiene una restricción de sitio web, debe permitir `https://ageofresearch.github.io/*`. La política `strict-origin` envía a Google solo el origen HTTPS, sin ruta ni parámetros; las restricciones limitadas a una ruta concreta no son compatibles con este flujo.
+
 Las pruebas usan respuestas simuladas y claves ficticias; no verifican permisos de una clave real, facturación ni generación real de Gemini. La suite de interfaz usa un DOM simulado y no sustituye una revisión visual en navegador.
 
 ## Adaptador opcional y contexto del operador

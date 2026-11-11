@@ -21,7 +21,7 @@ test('Gemini uses the exact requested model, header authentication and yacht con
   assert.equal(request.url, 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent');
   assert.equal(request.headers['x-goog-api-key'], KEY);
   assert.equal(request.credentials, 'omit');
-  assert.equal(request.referrerPolicy, 'no-referrer');
+  assert.equal(request.referrerPolicy, 'strict-origin');
   assert.ok(!request.url.includes(KEY));
   const body = JSON.parse(request.body);
   assert.ok(!request.body.includes(KEY));

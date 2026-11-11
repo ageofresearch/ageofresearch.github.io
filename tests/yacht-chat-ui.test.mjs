@@ -418,9 +418,9 @@ test('a pending Gemini reply cannot restore a connection cleared by pagehide', a
     const request = ui.api.sendQuestion('Consulta antes de abandonar la página');
     await settle(() => ui.calls.length === 1);
     ui.window.dispatchEvent(new UIEvent('pagehide', { bubbles: false }));
-    resolve(success('RESPUESTA DE LA CONEXIÓN ANTERIOR'));
+    resolve(success());
     await request;
-    assert.equal(ui.document.body.textContent.includes('RESPUESTA DE LA CONEXIÓN ANTERIOR'), false);
+    assert.equal(ui.document.body.textContent.includes('Respuesta de Gemini de prueba.'), false);
     assert.equal(ui.document.body.textContent.includes('Gemini respondió'), false);
     assert.match(ui.document.body.textContent, /Sin clave · orientación local/);
     await ui.api.sendQuestion('¿Qué es un PMS?');

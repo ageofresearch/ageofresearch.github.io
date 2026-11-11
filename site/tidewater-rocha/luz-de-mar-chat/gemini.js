@@ -151,7 +151,8 @@ export async function geminiAnswer(question, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
       credentials: 'omit',
-      referrerPolicy: 'no-referrer',
+      // Website-restricted keys need the HTTPS origin, never the page path or query.
+      referrerPolicy: 'strict-origin',
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: instructions() }] },
         contents: contentsFor(text, history, viewContext, key),

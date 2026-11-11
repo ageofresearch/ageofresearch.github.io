@@ -10,6 +10,8 @@ on:
       - "scripts/cotendo-detail-contract.mjs"
       - "scripts/cotendo-preview-contract.mjs"
       - "scripts/validate-paver.mjs"
+      - "scripts/yacht-chat/**"
+      - "tests/yacht-chat-*.test.mjs"
       - ".github/workflows/pages.yml"
   pull_request:
     branches: [main]
@@ -20,6 +22,8 @@ on:
       - "scripts/cotendo-detail-contract.mjs"
       - "scripts/cotendo-preview-contract.mjs"
       - "scripts/validate-paver.mjs"
+      - "scripts/yacht-chat/**"
+      - "tests/yacht-chat-*.test.mjs"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -41,8 +45,8 @@ jobs:
           persist-credentials: false
       - name: Check internal links and required pages
         run: node scripts/validate-site.mjs
-      - name: Test the yacht chat and its optional server adapter
-        run: node --test tests/yacht-chat-context.test.mjs tests/yacht-chat-server.test.mjs
+      - name: Test the yacht chat, Gemini client, UI behavior and optional server adapter
+        run: node --test tests/yacht-chat-context.test.mjs tests/yacht-chat-gemini.test.mjs tests/yacht-chat-ui.test.mjs tests/yacht-chat-server.test.mjs
 
   deploy:
     name: Deploy GitHub Pages

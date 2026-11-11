@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GEMINI_MODEL, geminiAnswer } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
+import { GEMINI_MODEL, geminiAnswer, checkGeminiConnection } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
 import { diagnostics } from '../site/tidewater-rocha/luz-de-mar-chat/diagnostics.js';
 
 const KEY = 'fixture-key-not-a-real-credential';
@@ -341,4 +341,101 @@ test('unsupported request fields can be classified without copying the original 
   assert.equal(report.metrics.requestField, 'thinkingLevel');
   assert.equal(diagnostics.report().includes(KEY), false);
   assert.equal(diagnostics.report().includes('PRIVATE PROVIDER DETAIL'), false);
+});
+
+const modelResponse = () => new Response(JSON.stringify({ name: 'models/' + GEMINI_MODEL, supportedGenerationMethods: ['generateContent'] }), { headers: { 'content-type': 'application/json' } });
+
+test('connectivity checks use two fresh GETs, send no prompt, and authenticate only the exact model request', async () => {
+  diagnostics.clear();
+  const calls = [];
+  const results = await checkGeminiConnection({ apiKey: KEY, fetchImpl: async (url, options) => {
+    calls.push({ url, options });
+    return url.includes('$discovery') ? new Response('{}') : modelResponse();
+  } });
+  assert.ok(results.every(result => result.ok));
+  assert.equal(calls.length, 2);
+  for (const { url, options } of calls) {
+    assert.equal(options.method, 'GET');
+    assert.equal(options.cache, 'no-store');
+    assert.equal(options.body, undefined);
+    assert.equal(url.includes(KEY), false);
+    assert.equal(new URL(url).hostname, 'generativelanguage.googleapis.com');
+  }
+  assert.deepEqual(calls[0].options.headers, {});
+  assert.equal(calls[1].url, 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL);
+  assert.equal(calls[1].options.headers['x-goog-api-key'], KEY);
+  const reports = diagnostics.snapshot().reports;
+  assert.deepEqual(reports.map(report => report.provider), ['connectivity_public', 'connectivity_model']);
+  assert.equal(reports[1].metrics.modelMetadataReceived, true);
+  assert.equal(reports[1].metrics.generationSupported, true);
+  assert.ok(!diagnostics.report().includes(KEY));
+});
+
+test('a public endpoint failure cannot hide a successful authenticated model check', async () => {
+  diagnostics.clear();
+  const results = await checkGeminiConnection({ apiKey: KEY, fetchImpl: async url => {
+    if (url.includes('$discovery')) throw new TypeError(KEY);
+    return modelResponse();
+  } });
+  assert.equal(results[0].ok, false);
+  assert.equal(results[1].ok, true);
+  const reports = diagnostics.snapshot().reports;
+  assert.equal(reports[0].metrics.httpStatus, undefined);
+  assert.equal(reports[1].metrics.httpStatus, 200);
+  assert.equal(reports[0].failureStage, 'wait_response_headers');
+  assert.ok(!JSON.stringify(results).includes(KEY));
+  assert.ok(!diagnostics.report().includes(KEY));
+});
+
+test('model authorization failures retain the Google reason without initiating a generation', async () => {
+  diagnostics.clear();
+  const results = await checkGeminiConnection({ apiKey: KEY, fetchImpl: async url => url.includes('$discovery') ? new Response('{}') : new Response(JSON.stringify({ error: {
+    code: 400, status: 'INVALID_ARGUMENT', message: KEY, details: [{ reason: 'API_KEY_INVALID' }],
+  } }), { status: 400, headers: { 'content-type': 'application/json' } }) });
+  assert.equal(results[0].ok, true);
+  assert.equal(results[1].code, 'gemini_key');
+  const report = diagnostics.snapshot().reports.at(-1);
+  assert.equal(report.metrics.httpStatus, 400);
+  assert.equal(report.metrics.providerReason, 'API_KEY_INVALID');
+  assert.equal(report.metrics.requestKind, 'model_metadata');
+  assert.ok(!diagnostics.report().includes(KEY));
+});
+
+test('both connectivity requests have their own bounded deadline and abort stalled fetches', async () => {
+  diagnostics.clear();
+  const signals = [];
+  const results = await checkGeminiConnection({ apiKey: KEY, timeoutMs: 10, fetchImpl: (url, options) => {
+    signals.push(options.signal);
+    return new Promise(() => {});
+  } });
+  assert.ok(results.every(result => result.code === 'gemini_timeout' && result.httpStatus === null));
+  assert.ok(signals.every(signal => signal.aborted));
+  assert.ok(diagnostics.snapshot().reports.every(report => report.failureStage === 'wait_response_headers'));
+});
+
+test('the connectivity deadline also cancels a stalled model metadata body', async () => {
+  diagnostics.clear();
+  let cancelled = false;
+  const results = await checkGeminiConnection({ apiKey: KEY, timeoutMs: 10, fetchImpl: async url => url.includes('$discovery') ? new Response('{}') : new Response(new ReadableStream({ cancel() { cancelled = true; } }), { headers: { 'content-type': 'application/json' } }) });
+  assert.equal(results[1].code, 'gemini_timeout');
+  assert.equal(results[1].httpStatus, 200);
+  assert.equal(cancelled, true);
+  assert.equal(diagnostics.snapshot().reports.at(-1).failureStage, 'read_model_metadata');
+});
+
+test('cancelling connectivity checks aborts both requests and records the cancellation source', async () => {
+  diagnostics.clear();
+  const controller = new AbortController();
+  const request = checkGeminiConnection({ apiKey: KEY, signal: controller.signal, fetchImpl: () => new Promise(() => {}) });
+  controller.abort('user');
+  const results = await request;
+  assert.ok(results.every(result => result.code === 'gemini_cancelled'));
+  assert.ok(diagnostics.snapshot().reports.every(report => report.state === 'cancelled' && report.metrics.cancellationSource === 'user'));
+});
+
+test('invalid keys stop connectivity checks before any network request', async () => {
+  let calls = 0;
+  const results = await checkGeminiConnection({ apiKey: '', fetchImpl: () => { calls++; } });
+  assert.equal(calls, 0);
+  assert.ok(results.every(result => result.code === 'gemini_key'));
 });

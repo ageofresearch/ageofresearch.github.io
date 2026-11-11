@@ -1,10 +1,11 @@
-export const CHAT_BUILD = '2026-11-11-diagnostics-1';
+export const CHAT_BUILD = '2026-11-11-connectivity-2';
 const STAGES = new Set([
   'start', 'bootstrap_import', 'runtime_error', 'unhandled_rejection', 'resource_error', 'security_policy',
   'validate_input', 'build_request', 'wait_response_headers', 'response_headers', 'read_error_body',
   'stream_read', 'first_byte', 'parse_stream_event', 'first_event', 'first_text', 'stream_eof',
   'provider_complete', 'ui_prepare', 'ui_context', 'ui_message', 'ui_dispatch', 'ui_stream_render',
   'ui_complete', 'ui_error', 'ui_finally', 'diagnostic_render', 'diagnostic_copy',
+  'read_model_metadata',
 ]);
 const CODES = new Set([
   'gemini_question', 'gemini_key', 'gemini_request', 'gemini_model', 'gemini_quota', 'gemini_billing',
@@ -13,8 +14,11 @@ const CODES = new Set([
   'gemini_stream_schema', 'gemini_stream_read', 'gemini_render', 'chat_unexpected', 'chat_key_in_question',
   'chat_runtime', 'chat_rejection', 'chat_resource', 'chat_csp', 'bootstrap_import',
   'diagnostic_copy', 'diagnostic_render',
+  'gemini_probe_response',
 ]);
 const ENUMS = {
+  requestMethod: ['GET', 'POST', 'unknown'],
+  requestKind: ['public_discovery', 'model_metadata', 'generation_stream', 'unknown'],
   contentType: ['text/event-stream', 'application/json', 'text/html', 'other', 'missing'],
   responseType: ['basic', 'cors', 'default', 'opaque', 'opaqueredirect', 'error'],
   providerStatus: ['INVALID_ARGUMENT', 'FAILED_PRECONDITION', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
@@ -48,6 +52,7 @@ function fields(input = {}) {
     if (input[name] !== undefined) result[name] = values.includes(input[name]) ? input[name] : values.at(-1);
   }
   if (typeof input.providerInstrumented === 'boolean') result.providerInstrumented = input.providerInstrumented;
+  for (const name of ['modelMetadataReceived', 'generationSupported']) if (typeof input[name] === 'boolean') result[name] = input[name];
   return result;
 }
 
@@ -88,7 +93,7 @@ export function createDiagnostics({ clock = () => globalThis.performance?.now?.(
     const started = clock();
     const report = {
       id: 'ldm-' + Date.now().toString(36) + '-' + (++sequence).toString(36),
-      startedAt: new Date().toISOString(), provider: ['gemini', 'local', 'server', 'bootstrap', 'runtime', 'configuration'].includes(provider) ? provider : 'runtime',
+      startedAt: new Date().toISOString(), provider: ['gemini', 'local', 'server', 'bootstrap', 'runtime', 'configuration', 'connectivity_public', 'connectivity_model'].includes(provider) ? provider : 'runtime',
       state: 'pending', stage: 'start', environment: environment(), metrics: provider === 'gemini' ? { providerInstrumented: false } : {}, events: [],
     };
     const seen = new Set();

@@ -1,5 +1,5 @@
 import { answerQuestion } from './assistant.js';
-import { GEMINI_MODEL } from './gemini.js';
+import { GEMINI_MODEL, checkGeminiConnection } from './gemini.js';
 import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
 
 const ROOT_ID = 'ldm-chat-widget';
@@ -169,7 +169,9 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   changeKey.type = 'button';
   const disconnectKey = el('button', 'ldm-chat-key-action', 'Desconectar Gemini');
   disconnectKey.type = 'button';
-  keyConnected.append(changeKey, disconnectKey);
+  const checkConnection = el('button', 'ldm-chat-key-action', 'Comprobar conexión');
+  checkConnection.type = 'button';
+  keyConnected.append(changeKey, disconnectKey, checkConnection);
   connection.append(connectionTitle, keyStatus, keyForm, keyConnected);
 
   const diagnosticPanel = el('details', 'ldm-chat-diagnostics');
@@ -315,7 +317,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     clear.disabled = value;
     keyField.disabled = value;
     useKey.disabled = value || !keyField.value.trim();
-    changeKey.disabled = disconnectKey.disabled = cancelKey.disabled = value;
+    changeKey.disabled = disconnectKey.disabled = cancelKey.disabled = checkConnection.disabled = value;
     send.disabled = value || !field.value.trim();
     log.setAttribute('aria-busy', String(value));
     for (const button of log.querySelectorAll('button')) button.disabled = value;
@@ -537,6 +539,44 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   });
   disconnectKey.addEventListener('click', () => {
     if (!pending) resetGemini();
+  });
+  checkConnection.addEventListener('click', async () => {
+    if (pending || disposed || !geminiApiKey) return;
+    const version = connectionVersion;
+    const controller = new AbortController();
+    requestController = controller;
+    let notice = '';
+    setPending(true);
+    status.textContent = 'Comprobando acceso a Google y datos del modelo, sin iniciar una generación…';
+    try {
+      const results = await checkGeminiConnection({ apiKey: geminiApiKey, signal: controller.signal });
+      if (disposed || version !== connectionVersion) return;
+      const publicResult = results.find(result => result.kind === 'public');
+      const modelResult = results.find(result => result.kind === 'model');
+      const label = result => result.httpStatus !== null ? 'HTTP ' + result.httpStatus
+        : result.code === 'gemini_cancelled' ? 'cancelada' : result.code === 'gemini_timeout' ? 'sin respuesta dentro del plazo' : 'sin respuesta HTTP';
+      notice = 'Acceso público: ' + label(publicResult) + '. Datos del modelo: ' + label(modelResult) + '. ';
+      if (controller.signal.aborted) notice = 'Comprobación cancelada.';
+      else if (modelResult.ok) {
+        notice += 'Google respondió a la consulta del modelo. Prueba ahora una pregunta.';
+        keyStatus.textContent = 'Datos del modelo recibidos · generación pendiente de comprobar';
+      } else {
+        notice += modelResult.message + ' Copia el diagnóstico para revisar el resultado.';
+        keyStatus.textContent = 'La comprobación encontró un problema · abre el diagnóstico';
+      }
+    } catch (error) {
+      const trace = diagnostics.start('runtime');
+      trace.stage('ui_error');
+      trace.fail('chat_unexpected', error);
+      notice = 'No se pudo mostrar la comprobación. Abre el diagnóstico del chat.';
+    } finally {
+      if (requestController === controller) requestController = null;
+      if (!disposed) {
+        setPending(false);
+        if (notice && version === connectionVersion) { status.hidden = false; status.textContent = notice; }
+      }
+      refreshReport();
+    }
   });
   window.addEventListener('pagehide', resetGemini);
 

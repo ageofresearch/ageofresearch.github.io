@@ -125,7 +125,10 @@ export async function answerQuestion(question, options = {}) {
   const text = String(question ?? '').trim();
   if (!text) throw new Error('Escribe una pregunta sobre Luz de Mar.');
   if (text.length > 2000) throw new Error('La pregunta debe tener como máximo 2.000 caracteres.');
-  if (options.geminiApiKey) return geminiAnswer(text, { apiKey: options.geminiApiKey, history: options.history, viewContext: options.viewContext });
+  if (options.geminiApiKey) return geminiAnswer(text, {
+    apiKey: options.geminiApiKey, history: options.history, viewContext: options.viewContext,
+    signal: options.signal, onText: options.onText,
+  });
   if (options.endpoint) return connectedAnswer(text, options);
   return localAnswer(text, { ...options, history: boundedHistory(options.history, text) });
 }

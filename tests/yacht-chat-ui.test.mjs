@@ -205,9 +205,9 @@ function assertNoDOMSecret(ui, ...secrets) {
   }
 }
 
-const success = () => new Response(JSON.stringify({ candidates: [{
+const success = () => new Response('data: ' + JSON.stringify({ candidates: [{
   content: { role: 'model', parts: [{ text: 'Respuesta de Gemini de prueba.' }] }, finishReason: 'STOP',
-}] }), { status: 200, headers: { 'content-type': 'application/json' } });
+}] }) + '\n\n', { status: 200, headers: { 'content-type': 'text/event-stream' } });
 
 async function settle(check = () => true) {
   for (let i = 0; i < 40; i++) {
@@ -289,7 +289,8 @@ test('sending uses the exact Gemini model and header, without putting the key in
     for (const { url, options } of ui.calls) {
       const address = new URL(url);
       assert.equal(address.hostname, 'generativelanguage.googleapis.com');
-      assert.equal(address.pathname.endsWith('/models/' + MODEL + ':generateContent'), true);
+      assert.equal(address.pathname.endsWith('/models/' + MODEL + ':streamGenerateContent'), true);
+      assert.equal(address.searchParams.get('alt'), 'sse');
       assert.equal(address.search.includes(FAKE_KEY), false);
       assert.equal(address.searchParams.has('key'), false);
       assert.equal(new Headers(options.headers).get('x-goog-api-key'), FAKE_KEY);
@@ -425,6 +426,54 @@ test('a pending Gemini reply cannot restore a connection cleared by pagehide', a
     assert.match(ui.document.body.textContent, /Sin clave · orientación local/);
     await ui.api.sendQuestion('¿Qué es un PMS?');
     assert.equal(ui.calls.length, 1);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('a slow streamed answer shows progress, can be cancelled, and never stores unfinished text in history', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  await withUI(async ui => {
+    configure(ui);
+    let feed, cancelled = false;
+    const stream = new ReadableStream({ start(controller) { feed = controller; }, cancel() { cancelled = true; } });
+    ui.respond = () => new Response(stream);
+    const request = ui.api.sendQuestion('Consulta lenta de mantenimiento');
+    t.mock.timers.tick(15001);
+    assert.match(ui.document.body.textContent, /Esperando la respuesta de Google/);
+    const partial = { candidates: [{ content: { parts: [{ text: 'BORRADOR INCOMPLETO' }] } }] };
+    feed.enqueue(new TextEncoder().encode('data: ' + JSON.stringify(partial) + '\n\n'));
+    await settle(() => ui.document.body.textContent.includes('BORRADOR INCOMPLETO'));
+    assert.match(ui.document.body.textContent, /Recibiendo la respuesta/);
+    click(button(ui, 'Cancelar consulta'));
+    await request;
+    assert.equal(cancelled, true);
+    assert.equal(ui.document.body.textContent.includes('BORRADOR INCOMPLETO'), false);
+    assert.match(ui.document.body.textContent, /Consulta cancelada/);
+    ui.respond = success;
+    await ui.api.sendQuestion('Una consulta nueva');
+    assert.equal(ui.calls.length, 2);
+    assert.equal(String(ui.calls[1].options.body).includes('BORRADOR INCOMPLETO'), false);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('a streamed answer is displayed progressively and committed to history only once it is complete', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    let feed;
+    ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
+    const encode = payload => new TextEncoder().encode('data: ' + JSON.stringify(payload) + '\n\n');
+    const request = ui.api.sendQuestion('Consulta en partes');
+    feed.enqueue(encode({ candidates: [{ content: { parts: [{ text: 'Respuesta progresiva ' }] } }] }));
+    await settle(() => ui.document.body.textContent.includes('Respuesta progresiva '));
+    feed.enqueue(encode({ candidates: [{ content: { parts: [{ text: 'completa.' }] }, finishReason: 'STOP' }] }));
+    await request;
+    assert.equal(ui.document.body.textContent.split('Respuesta progresiva completa.').length - 1, 1);
+    assert.equal(visible(button(ui, 'Cancelar consulta', { visibleOnly: false })), false);
+    ui.respond = success;
+    await ui.api.sendQuestion('Seguimiento');
+    const history = JSON.parse(ui.calls[1].options.body).contents;
+    assert.equal(history.filter(message => message.role === 'model' && message.parts[0].text === 'Respuesta progresiva completa.').length, 1);
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });

@@ -1,4 +1,5 @@
 import { contextFacts, PROJECT_SOURCE } from './context.js';
+import { geminiAnswer } from './gemini.js';
 
 const normalize = value => String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
 const topics = new Map(contextFacts.map(fact => [fact.id, fact]));
@@ -124,6 +125,7 @@ export async function answerQuestion(question, options = {}) {
   const text = String(question ?? '').trim();
   if (!text) throw new Error('Escribe una pregunta sobre Luz de Mar.');
   if (text.length > 2000) throw new Error('La pregunta debe tener como máximo 2.000 caracteres.');
+  if (options.geminiApiKey) return geminiAnswer(text, { apiKey: options.geminiApiKey, history: options.history, viewContext: options.viewContext });
   if (options.endpoint) return connectedAnswer(text, options);
   return localAnswer(text, { ...options, history: boundedHistory(options.history, text) });
 }

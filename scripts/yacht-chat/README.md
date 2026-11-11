@@ -9,7 +9,7 @@ La consulta local utiliza la documentación pública del modelo y reglas general
 ## Pruebas
 
 ```sh
-node --test tests/yacht-chat-context.test.mjs tests/yacht-chat-server.test.mjs
+node --test tests/yacht-chat-context.test.mjs tests/yacht-chat-gemini.test.mjs tests/yacht-chat-ui.test.mjs tests/yacht-chat-server.test.mjs
 ```
 
 ## Vista local
@@ -20,8 +20,18 @@ node scripts/yacht-chat/server.mjs
 
 Abre `http://127.0.0.1:5199/preview?world=rocha`. La vista usa los recursos publicados para conservar la escena y monta los módulos del chat de este checkout.
 
-## IA y contexto del operador
+## Gemini con la clave del visitante
 
-Sin servidor configurado, el widget muestra **Orientación local** y responde dentro de su contexto limitado. Para conectar un modelo se usa `POST /api/yacht-chat` del adaptador: `OPENAI_API_KEY`, `OPENAI_MODEL` y el contenido autorizado para la audiencia en `YACHT_CONTEXT_TEXT` se configuran solo en el entorno del servidor. Nunca se incluyen claves ni un historial privado en los archivos públicos.
+Abre el chat, pega tu clave en el área **Clave API de Gemini** y pulsa **Usar Gemini**. Las preguntas siguientes consultan exclusivamente `gemini-3.8-flash` mediante `generateContent`. Configurar la clave no hace una consulta de pago ni comprueba todavía sus permisos: el estado se actualiza al recibir la primera respuesta.
+
+La clave se mantiene en una variable de la pestaña. El área se vacía al configurarla; no se guarda en almacenamiento, historial, URL, HTML ni registros del servidor. **Cambiar clave** permite sustituirla y **Desconectar Gemini** la elimina. Recargar o abandonar la página también la elimina. Limpiar la conversación conserva la conexión para iniciar otro hilo.
+
+Las solicitudes van directamente del navegador a `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent`, con la clave en `x-goog-api-key`. Google recibe la pregunta, hasta ocho mensajes anteriores y el contexto público del yate. No pasan por un servidor de este proyecto. Los errores de permisos, cuota o disponibilidad se muestran sin sustituir el modelo ni repetir consultas automáticamente. Sin clave sigue disponible la orientación local.
+
+Las pruebas usan respuestas simuladas y claves ficticias; no verifican permisos de una clave real, facturación ni generación real de Gemini. La suite de interfaz usa un DOM simulado y no sustituye una revisión visual en navegador.
+
+## Adaptador opcional y contexto del operador
+
+Como alternativa a la clave Gemini, se puede usar `POST /api/yacht-chat` del adaptador: `OPENAI_API_KEY`, `OPENAI_MODEL` y el contenido autorizado para la audiencia en `YACHT_CONTEXT_TEXT` se configuran solo en el entorno del servidor. Una clave Gemini configurada en la interfaz tiene prioridad sobre este endpoint. Nunca se incluyen claves ni un historial privado en los archivos públicos.
 
 El endpoint puede indicarse en una metaetiqueta `yacht-chat-endpoint` o mediante `data-endpoint` en el script `data-yacht-chat`. GitHub Pages es estático y no ejecuta este servidor. Una instalación remota requiere su propio alojamiento, orígenes permitidos y autenticación apropiada a los datos que se vayan a consultar. El adaptador se inicia en loopback para las pruebas y no constituye un servicio privado de producción.

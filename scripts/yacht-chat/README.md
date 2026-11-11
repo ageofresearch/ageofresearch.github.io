@@ -9,7 +9,7 @@ La consulta local utiliza la documentación pública del modelo y reglas general
 ## Pruebas
 
 ```sh
-node --test tests/yacht-chat-context.test.mjs tests/yacht-chat-gemini.test.mjs tests/yacht-chat-ui.test.mjs tests/yacht-chat-server.test.mjs
+node --test tests/yacht-chat-context.test.mjs tests/yacht-chat-gemini.test.mjs tests/yacht-chat-diagnostics.test.mjs tests/yacht-chat-ui.test.mjs tests/yacht-chat-server.test.mjs
 ```
 
 ## Vista local
@@ -33,6 +33,16 @@ La respuesta aparece conforme llega. El plazo máximo de consulta es de dos minu
 Si la clave tiene una restricción de sitio web, debe permitir `https://ageofresearch.github.io/*`. La política `strict-origin` envía a Google solo el origen HTTPS, sin ruta ni parámetros; las restricciones limitadas a una ruta concreta no son compatibles con este flujo.
 
 Las pruebas usan respuestas simuladas y claves ficticias; no verifican permisos de una clave real, facturación ni generación real de Gemini. La suite de interfaz usa un DOM simulado y no sustituye una revisión visual en navegador.
+
+## Diagnóstico de errores
+
+Abre **Diagnóstico del chat** o **Ver diagnóstico** debajo de un error, y pulsa **Copiar diagnóstico**. El informe también se puede copiar mientras una consulta está pendiente. Si el navegador bloquea el portapapeles, queda disponible un campo de solo lectura para seleccionarlo y copiarlo manualmente. **Actualizar informe** muestra el estado actual. No se envía a ningún servicio de registro; es necesario compartirlo para que otra persona lo examine. También está disponible en consola con `window.__luzDeMarDiagnostics.report()`.
+
+Se conservan en memoria los últimos ocho intentos o fallos: versión del código, etapa, tiempos, HTTP, formato de respuesta, contadores de bytes y eventos, motivo de terminación, código de Google y razones reconocidas de permisos o cuota. Los errores JSON se leen con un máximo de 16 KiB y 1,5 segundos, sin demorar indefinidamente el error HTTP. Los campos `providerStatus` y `providerReason` provienen de códigos estructurados de Google; `providerHint` y `requestField` son clasificaciones orientativas de su texto. No se conservan mensajes originales, preguntas, respuestas, claves, cabeceras completas, identificadores de proyecto ni URL con parámetros. Las excepciones solo aportan tipo y posiciones dentro de los módulos del chat.
+
+Los puntos de captura cubren validación, preparación, espera de cabeceras, cuerpo de error HTTP, lectura del flujo, JSON, visualización parcial, contexto y actualización del chat, portapapeles, importaciones y recursos. Los observadores globales registran errores y promesas rechazadas que pertenecen al chat, y bloqueos CSP del chat o de Google. La carga fallida dispone de una vista alternativa para copiar el informe. Los errores se registran conservando su etapa original; no se convierten en respuestas exitosas.
+
+Un `fetch` rechazado sin HTTP no permite identificar por sí solo DNS, TLS, CORS, una extensión o un bloqueo de red. El informe conserva esa limitación en vez de atribuirle una causa sin evidencia.
 
 ## Adaptador opcional y contexto del operador
 

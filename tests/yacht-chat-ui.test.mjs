@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { diagnostics, CHAT_BUILD } from '../site/tidewater-rocha/luz-de-mar-chat/diagnostics.js';
 
 // Deliberately small DOM contract simulation. These tests import the real chat,
 // assistant and Gemini client; they do not claim browser or visual validation.
@@ -218,6 +219,7 @@ async function settle(check = () => true) {
 }
 
 async function withUI(run, { endpoint } = {}) {
+  diagnostics.clear();
   const previous = new Map();
   const window = new Target();
   const document = new Document(window);
@@ -227,11 +229,13 @@ async function withUI(run, { endpoint } = {}) {
     storageCalls.push({ name, args });
     throw new Error('Storage is forbidden in the API-key UI test');
   }]));
-  const ui = { window, document, calls, storageCalls, respond: success };
+  const copiedReports = [];
+  const navigator = { onLine: true, clipboard: { writeText: async text => { copiedReports.push(text); } } };
+  const ui = { window, document, calls, storageCalls, copiedReports, navigator, respond: success };
   const location = new URL('https://ageofresearch.github.io/tidewater-rocha/play.html?world=rocha');
   Object.assign(window, { document, location, localStorage: storage, sessionStorage: storage });
   const globals = {
-    window, document, location, localStorage: storage, sessionStorage: storage,
+    window, document, location, localStorage: storage, sessionStorage: storage, navigator,
     CustomEvent: class extends UIEvent { constructor(type, options = {}) { super(type, options); } },
     fetch: async (url, options) => {
       const call = { url: String(url), options };
@@ -474,6 +478,81 @@ test('a streamed answer is displayed progressively and committed to history only
     await ui.api.sendQuestion('Seguimiento');
     const history = JSON.parse(ui.calls[1].options.body).contents;
     assert.equal(history.filter(message => message.role === 'model' && message.parts[0].text === 'Respuesta progresiva completa.').length, 1);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('an error exposes a copyable safe diagnostic retaining the provider failure stage', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    const privateQuestion = 'PRIVATE QUESTION NOT FOR LOGS';
+    ui.respond = () => new Response(JSON.stringify({ error: {
+      code: 429, status: 'RESOURCE_EXHAUSTED', message: privateQuestion + FAKE_KEY,
+    } }), { status: 429, headers: { 'content-type': 'application/json' } });
+    await ui.api.sendQuestion(privateQuestion);
+    click(button(ui, 'Ver diagnóstico'));
+    assert.equal(ui.document.querySelector('.ldm-chat-diagnostics').open, true);
+    click(button(ui, 'Copiar diagnóstico'));
+    await settle(() => ui.copiedReports.length === 1);
+    const text = ui.copiedReports[0];
+    const report = JSON.parse(text);
+    assert.equal(report.build, CHAT_BUILD);
+    assert.equal(report.reports.at(-1).failureStage, 'read_error_body');
+    assert.equal(report.reports.at(-1).metrics.httpStatus, 429);
+    assert.equal(report.reports.at(-1).metrics.providerStatus, 'RESOURCE_EXHAUSTED');
+    assert.equal(text.includes(FAKE_KEY), false);
+    assert.equal(text.includes(privateQuestion), false);
+    assert.equal(ui.storageCalls.length, 0);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('diagnostics can be copied while a request is still waiting for headers', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    ui.respond = () => new Promise(() => {});
+    const request = ui.api.sendQuestion('PRIVATE QUESTION');
+    click(button(ui, 'Copiar diagnóstico', { visibleOnly: false }));
+    await settle(() => ui.copiedReports.length === 1);
+    const report = JSON.parse(ui.copiedReports[0]).reports.at(-1);
+    assert.equal(report.state, 'pending');
+    assert.equal(report.stage, 'wait_response_headers');
+    assert.equal(report.metrics.httpStatus, undefined);
+    click(button(ui, 'Cancelar consulta'));
+    await request;
+  });
+});
+
+test('clipboard failure leaves a selectable report and records only safe exception metadata', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    ui.navigator.clipboard.writeText = async () => { throw new Error(FAKE_KEY + ' PRIVATE CONTENT'); };
+    click(button(ui, 'Copiar diagnóstico', { visibleOnly: false }));
+    await settle(() => ui.document.body.textContent.includes('cópialo manualmente'));
+    const field = ui.document.querySelector('.ldm-chat-diagnostic-report');
+    assert.equal(field.readOnly, true);
+    assert.equal(JSON.parse(field.value).reports.at(-1).failureCode, 'diagnostic_copy');
+    assert.equal(field.value.includes('PRIVATE CONTENT'), false);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('an exception before sending a question is caught and reported as a UI context failure', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    const controls = ui.document.createElement('div');
+    controls.setAttribute('aria-label', 'Controles del yate');
+    controls.getClientRects = () => { throw new TypeError('PRIVATE CONTEXT ' + FAKE_KEY); };
+    ui.document.body.append(controls);
+    await ui.api.sendQuestion('PRIVATE QUESTION');
+    assert.equal(ui.calls.length, 0);
+    const report = diagnostics.snapshot().reports.at(-1);
+    assert.equal(report.failureCode, 'chat_unexpected');
+    assert.equal(report.failureStage, 'ui_context');
+    assert.equal(report.exception.name, 'TypeError');
+    assert.match(ui.document.body.textContent, /Ocurrió un error en el chat/);
+    assert.equal(diagnostics.report().includes('PRIVATE CONTEXT'), false);
+    assert.equal(diagnostics.report().includes('PRIVATE QUESTION'), false);
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });

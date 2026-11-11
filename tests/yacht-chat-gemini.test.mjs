@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GEMINI_MODEL, geminiAnswer } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
+import { diagnostics } from '../site/tidewater-rocha/luz-de-mar-chat/diagnostics.js';
 
 const KEY = 'fixture-key-not-a-real-credential';
 const payload = (text = 'La comprobación sigue pendiente.') => ({
@@ -238,4 +239,106 @@ test('cancellation also stops reading an active response stream', async () => {
   controller.abort();
   await assert.rejects(request, error => error.code === 'gemini_cancelled');
   assert.equal(cancelled, true);
+});
+
+test('Google JSON error codes and reasons survive without storing provider text, headers or credentials', async () => {
+  diagnostics.clear();
+  const privateText = 'PRIVATE PROVIDER BODY AND QUESTION';
+  await assert.rejects(geminiAnswer(privateText, {
+    apiKey: KEY,
+    fetchImpl: async () => new Response(JSON.stringify({ error: {
+      code: 403, status: 'PERMISSION_DENIED', message: privateText + KEY,
+      details: [{ reason: 'API_KEY_HTTP_REFERRER_BLOCKED', metadata: { consumer: 'projects/private-project', key: KEY } }],
+    } }), { status: 403, headers: { 'content-type': 'application/json', 'retry-after': '7', 'x-private': KEY } }),
+  }), error => error.code === 'gemini_key' && /restricción de sitio/.test(error.message));
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(report.failureStage, 'read_error_body');
+  assert.equal(report.metrics.httpStatus, 403);
+  assert.equal(report.metrics.providerStatus, 'PERMISSION_DENIED');
+  assert.equal(report.metrics.providerReason, 'API_KEY_HTTP_REFERRER_BLOCKED');
+  assert.equal(report.metrics.providerHttpCode, 403);
+  assert.equal(report.metrics.retryAfterSeconds, 7);
+  assert.equal(report.metrics.errorBody, 'parsed');
+  assert.ok(!diagnostics.report().includes(KEY));
+  assert.ok(!diagnostics.report().includes(privateText));
+  assert.ok(!diagnostics.report().includes('private-project'));
+});
+
+test('a deadline before response headers differs from a deadline while reading the stream', async () => {
+  diagnostics.clear();
+  await assert.rejects(geminiAnswer('PRIVATE QUESTION', {
+    apiKey: KEY, timeoutMs: 10, fetchImpl: () => new Promise(() => {}),
+  }));
+  let report = diagnostics.snapshot().reports.at(-1);
+  assert.equal(report.failureCode, 'gemini_timeout');
+  assert.equal(report.failureStage, 'wait_response_headers');
+  assert.equal(report.metrics.httpStatus, undefined);
+  const part = 'data: ' + JSON.stringify({ candidates: [{ content: { parts: [{ text: 'PRIVATE ANSWER' }] } }] }) + '\n\n';
+  await assert.rejects(geminiAnswer('PRIVATE QUESTION', {
+    apiKey: KEY, timeoutMs: 10,
+    fetchImpl: async () => new Response(new ReadableStream({ start(controller) { controller.enqueue(new TextEncoder().encode(part)); } })),
+  }));
+  report = diagnostics.snapshot().reports.at(-1);
+  assert.equal(report.failureStage, 'stream_read');
+  assert.equal(report.metrics.httpStatus, 200);
+  assert.ok(report.metrics.bytesReceived > 0);
+  assert.equal(report.metrics.eventsReceived, 1);
+  assert.equal(report.metrics.textChars, 'PRIVATE ANSWER'.length);
+  assert.ok(!diagnostics.report().includes('PRIVATE ANSWER'));
+  assert.ok(!diagnostics.report().includes('PRIVATE QUESTION'));
+});
+
+test('parser, stream read and display callback failures are reported as distinct stages', async () => {
+  const scenarios = [
+    { fetchImpl: async () => new Response('data: ' + KEY + '\n\n', { headers: { 'content-type': 'text/event-stream' } }), code: 'gemini_stream_json', stage: 'parse_stream_event', exception: 'SyntaxError' },
+    { fetchImpl: async () => new Response(new ReadableStream({ start(controller) { controller.error(new TypeError(KEY)); } })), code: 'gemini_stream_read', stage: 'stream_read', exception: 'TypeError' },
+    { fetchImpl: async () => response(), onText: () => { throw new TypeError(KEY); }, code: 'gemini_render', stage: 'ui_stream_render', exception: 'TypeError' },
+  ];
+  for (const scenario of scenarios) {
+    diagnostics.clear();
+    await assert.rejects(geminiAnswer('Hola', { apiKey: KEY, ...scenario }), error => error.code === scenario.code);
+    const report = diagnostics.snapshot().reports[0];
+    assert.equal(report.failureStage, scenario.stage);
+    assert.equal(report.exception.name, scenario.exception);
+    assert.ok(!diagnostics.report().includes(KEY));
+  }
+});
+
+test('a request-building exception is captured before any network call', async () => {
+  diagnostics.clear();
+  let called = false;
+  const message = { role: 'user', get content() { throw new TypeError(KEY); } };
+  await assert.rejects(geminiAnswer('Hola', { apiKey: KEY, history: [message], fetchImpl: () => { called = true; } }), error => error.code === 'gemini_request');
+  assert.equal(called, false);
+  assert.equal(diagnostics.snapshot().reports[0].failureStage, 'build_request');
+  assert.ok(!diagnostics.report().includes(KEY));
+});
+
+test('an unreadable error body cannot hide its HTTP status indefinitely', async t => {
+  diagnostics.clear();
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let cancelled = false;
+  const stream = new ReadableStream({ cancel() { cancelled = true; } });
+  const request = geminiAnswer('Hola', { apiKey: KEY, fetchImpl: async () => new Response(stream, { status: 403, headers: { 'content-type': 'application/json' } }) });
+  await new Promise(resolve => setImmediate(resolve));
+  t.mock.timers.tick(1501);
+  await assert.rejects(request, error => error.code === 'gemini_key');
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(report.metrics.httpStatus, 403);
+  assert.equal(report.metrics.errorBody, 'timed_out');
+  assert.equal(cancelled, true);
+});
+
+test('unsupported request fields can be classified without copying the original provider message', async () => {
+  diagnostics.clear();
+  await assert.rejects(geminiAnswer('Hola', {
+    apiKey: KEY, fetchImpl: async () => new Response(JSON.stringify({ error: {
+      code: 400, status: 'INVALID_ARGUMENT', message: 'Unknown name "thinking_level": PRIVATE PROVIDER DETAIL ' + KEY,
+    } }), { status: 400, headers: { 'content-type': 'application/json' } }),
+  }));
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(report.metrics.providerHint, 'REQUEST_PARAMETER');
+  assert.equal(report.metrics.requestField, 'thinkingLevel');
+  assert.equal(diagnostics.report().includes(KEY), false);
+  assert.equal(diagnostics.report().includes('PRIVATE PROVIDER DETAIL'), false);
 });

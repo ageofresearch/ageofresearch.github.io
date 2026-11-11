@@ -184,6 +184,10 @@ test('la vista conserva los módulos publicados y añade chat local sin claves',
   assert.ok(html.includes(base + '/luz-de-mar-chat/chat.css'));
   assert.doesNotMatch(html, /data-endpoint/);
   assert.deepEqual(requested, ['https://ageofresearch.github.io/tidewater-rocha/play.html?world=rocha']);
+  const diagnosticModule = await fetch(base + '/luz-de-mar-chat/diagnostics.js');
+  assert.equal(diagnosticModule.status, 200);
+  assert.match(diagnosticModule.headers.get('content-type'), /javascript/);
+  assert.match(await diagnosticModule.text(), /export const CHAT_BUILD/);
 });
 
 test('vista con IA usa endpoint local sin revelar su credencial', async t => {

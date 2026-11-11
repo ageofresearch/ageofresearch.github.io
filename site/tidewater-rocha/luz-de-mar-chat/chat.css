@@ -78,6 +78,10 @@
 #ldm-chat-widget .ldm-chat-key-use:not(:disabled):hover { background: #205046; }
 #ldm-chat-widget .ldm-chat-key-action:not(:disabled):hover { background: #e5eee4; }
 #ldm-chat-widget .ldm-chat-key-note { margin: 7px 0 0; color: #66776d; font-size: 10px; line-height: 1.45; }
+#ldm-chat-widget .ldm-chat-diagnostics { flex-shrink: 0; padding: 8px 16px; border-bottom: 1px solid #dce4de; color: #526c60; font-size: 11px; }
+#ldm-chat-widget .ldm-chat-diagnostics > summary { cursor: pointer; }
+#ldm-chat-widget .ldm-chat-diagnostic-report { display: block; width: 100%; height: 148px; min-height: 80px; max-height: 220px; margin-top: 8px; padding: 8px; resize: vertical; border: 1px solid #bacdbf; border-radius: 8px; background: #fff; color: var(--ldm-ink); font: 10px/1.5 ui-monospace, monospace; }
+#ldm-chat-widget .ldm-chat-diagnostic-build { display: block; margin-top: 6px; font-size: 9px; }
 #ldm-chat-widget .ldm-chat-log { flex: 1 1 auto; min-height: 100px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; padding: 20px 18px 10px; scrollbar-width: thin; scrollbar-color: #b8c8bf transparent; }
 #ldm-chat-widget .ldm-chat-message { margin: 0 0 18px; max-width: 100%; }
 #ldm-chat-widget .ldm-chat-message-label { margin: 0 0 5px; color: #687b73; font-size: 10px; font-weight: 600; }
@@ -98,6 +102,7 @@
 #ldm-chat-widget .ldm-chat-error { margin-bottom: 16px; padding: 12px; border: 1px solid #dfc9af; border-radius: 11px; background: #fbf1e4; color: #76572e; }
 #ldm-chat-widget .ldm-chat-error p { margin: 0 0 8px; overflow-wrap: anywhere; font-size: 12px; }
 #ldm-chat-widget .ldm-chat-retry { padding: 5px 9px; border: 1px solid #c8b498; border-radius: 6px; background: transparent; color: inherit; font-size: 11px; }
+#ldm-chat-widget .ldm-chat-retry + .ldm-chat-retry { margin-left: 7px; }
 #ldm-chat-widget .ldm-chat-form { flex-shrink: 0; padding: 10px 13px 12px; border-top: 1px solid #e0e6dd; background: #f8f9f3; }
 #ldm-chat-widget .ldm-chat-input-row { display: flex; align-items: flex-end; gap: 8px; padding: 10px 9px 9px 12px; border: 1px solid #bacdbf; border-radius: 13px; background: #fff; }
 #ldm-chat-widget .ldm-chat-input-row:focus-within { border-color: #5d9984; box-shadow: 0 0 0 3px #82af981a; }

@@ -126,7 +126,7 @@ export async function answerQuestion(question, options = {}) {
   if (!text) throw new Error('Escribe una pregunta sobre Luz de Mar.');
   if (text.length > 2000) throw new Error('La pregunta debe tener como máximo 2.000 caracteres.');
   if (options.geminiApiKey) return geminiAnswer(text, {
-    apiKey: options.geminiApiKey, history: options.history, viewContext: options.viewContext,
+    apiKey: options.geminiApiKey, thinkingLevel: options.thinkingLevel, history: options.history, viewContext: options.viewContext,
     signal: options.signal, onText: options.onText, onState: options.onState, trace: options.trace,
   });
   if (options.endpoint) return connectedAnswer(text, options);

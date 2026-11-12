@@ -1,5 +1,5 @@
 import { answerQuestion } from './assistant.js';
-import { GEMINI_MODEL, checkGeminiConnection, testGeminiGeneration } from './gemini.js';
+import { GEMINI_MODEL, DEFAULT_THINKING_LEVEL, THINKING_LEVELS, checkGeminiConnection, testGeminiGeneration } from './gemini.js';
 import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
 
 const ROOT_ID = 'ldm-chat-widget';
@@ -64,7 +64,7 @@ function installStyles() {
   if (document.querySelector('link[data-ldm-chat-style]')) return;
   const link = el('link');
   link.rel = 'stylesheet';
-  link.href = new URL('./chat.css', import.meta.url).href;
+  link.href = new URL('./chat.css?v=reasoning-1', import.meta.url).href;
   link.dataset.ldmChatStyle = '';
   document.head.append(link);
 }
@@ -176,7 +176,18 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   testGeneration.hidden = true;
   const generationNote = el('p', 'ldm-chat-key-note', 'Prueba de hasta 30 s sin contexto del yate. Usa la API y puede consumir tokens.');
   generationNote.hidden = true;
-  keyConnected.append(changeKey, disconnectKey, checkConnection);
+  const reasoningRow = el('div', 'ldm-chat-reasoning');
+  const reasoningLabel = el('label', '', 'Razonamiento');
+  const reasoningSelect = el('select', '');
+  reasoningLabel.htmlFor = reasoningSelect.id = 'ldm-gemini-thinking';
+  for (const [value, title] of Object.entries(THINKING_LEVELS)) {
+    const option = el('option', '', title);
+    option.value = value;
+    reasoningSelect.append(option);
+  }
+  reasoningSelect.value = DEFAULT_THINKING_LEVEL;
+  reasoningRow.append(reasoningLabel, reasoningSelect);
+  keyConnected.append(reasoningRow, changeKey, disconnectKey, checkConnection);
   connection.append(connectionTitle, keyStatus, keyForm, keyConnected);
 
   const diagnosticPanel = el('details', 'ldm-chat-diagnostics');
@@ -321,6 +332,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     pending = value;
     clear.disabled = value;
     keyField.disabled = value;
+    reasoningSelect.disabled = value;
     useKey.disabled = value || !keyField.value.trim();
     changeKey.disabled = disconnectKey.disabled = cancelKey.disabled = checkConnection.disabled = testGeneration.disabled = value;
     send.disabled = value || !field.value.trim();
@@ -394,6 +406,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         viewContext: context,
         endpoint,
         geminiApiKey,
+        thinkingLevel: reasoningSelect.value,
         signal: controller.signal,
         trace,
         onState(state) {
@@ -606,7 +619,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       setPending(true);
       status.textContent = 'Probando una respuesta breve sin contexto del yate…';
       await testGeminiGeneration({
-        apiKey: geminiApiKey, signal: controller.signal,
+        apiKey: geminiApiKey, thinkingLevel: reasoningSelect.value, signal: controller.signal,
         onState(state) {
           if (disposed || controller.signal.aborted || version !== connectionVersion) return;
           if (state === 'accepted') {

@@ -278,6 +278,19 @@ function openDiagnostics(ui) {
   panel.dispatchEvent(new UIEvent('toggle', { bubbles: false }));
 }
 
+test('opens with an empty conversation and an accessible key textarea', async () => {
+  await withUI(async ui => {
+    assert.equal(ui.document.querySelector('[role="log"]').children.length, 0);
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-context')), false);
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-connection-title')), false);
+    assert.equal(ui.document.querySelector('.ldm-chat-key-status').textContent, '');
+    assert.ok(visible(labelled(ui, 'Clave API de Gemini')));
+    assert.ok(ui.document.querySelectorAll('label').some(label =>
+      label.htmlFor === 'ldm-gemini-key' && label.classList.contains('ldm-chat-sr-only')));
+    assert.doesNotMatch(ui.document.body.textContent, /Solo en memoria de esta pestaña|Preguntas sugeridas|Conoce tu yate/);
+  });
+});
+
 test('configuring Gemini clears the editor, makes no request, and stores no key in the DOM or storage', async () => {
   await withUI(async ui => {
     configure(ui);
@@ -348,7 +361,7 @@ test('disconnecting removes Gemini credentials and returns the next question to 
     assert.equal(labelled(ui, 'Clave API de Gemini').value, '');
     await ui.api.sendQuestion('¿Qué es un PMS?');
     assert.equal(ui.calls.length, 1, 'A local follow-up sends no Gemini request');
-    assert.match(ui.document.body.textContent, /Orientación local/);
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-context')), false);
     assertNoDOMSecret(ui, FAKE_KEY);
     assert.equal(ui.storageCalls.length, 0);
   });
@@ -405,6 +418,7 @@ test('a new conversation keeps the session key but clears prior messages from th
     configure(ui);
     await ui.api.sendQuestion('MARCADOR HISTORIAL ANTERIOR');
     click(button(ui, 'Limpiar la conversación'));
+    assert.equal(ui.document.querySelector('[role="log"]').children.length, 0);
     assert.equal(ui.calls.length, 1);
     await ui.api.sendQuestion('Nueva conversación de mantenimiento');
     assert.equal(new Headers(ui.calls[1].options.headers).get('x-goog-api-key'), FAKE_KEY);
@@ -442,7 +456,7 @@ test('a pending Gemini reply cannot restore a connection cleared by pagehide', a
     await request;
     assert.equal(ui.document.body.textContent.includes('Respuesta de Gemini de prueba.'), false);
     assert.equal(ui.document.body.textContent.includes('Gemini respondió'), false);
-    assert.match(ui.document.body.textContent, /Sin clave · orientación local/);
+    assert.equal(ui.document.querySelector('.ldm-chat-key-status').textContent, '');
     await ui.api.sendQuestion('¿Qué es un PMS?');
     assert.equal(ui.calls.length, 1);
     assertNoDOMSecret(ui, FAKE_KEY);
@@ -626,7 +640,7 @@ test('acceptance updates the UI before any answer text without adding an assista
     feed.enqueue(new TextEncoder().encode(encodeEvents(created())));
     await settle(() => ui.document.body.textContent.includes('Google aceptó la consulta'));
     assert.equal(diagnostics.snapshot().reports.at(-1).state, 'pending');
-    assert.equal(ui.document.querySelectorAll('.ldm-chat-message-assistant').length, 1);
+    assert.equal(ui.document.querySelectorAll('.ldm-chat-message-assistant').length, 0);
     feed.enqueue(new TextEncoder().encode(encodeEvents([modelStart(), textDelta('Respuesta confirmada.'), stepStop(), completion()])));
     await request;
     assert.equal(ui.document.body.textContent.split('Respuesta confirmada.').length - 1, 1);

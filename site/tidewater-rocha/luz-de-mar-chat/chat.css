@@ -63,11 +63,11 @@
 #ldm-chat-widget .ldm-chat-mode[data-mode="configured"]::before { background: transparent; }
 #ldm-chat-widget .ldm-chat-mode[data-mode="error"]::before { background: #b9874a; border-color: #b9874a; }
 #ldm-chat-widget .ldm-chat-connection { flex-shrink: 0; padding: 11px 16px 12px; border-bottom: 1px solid #dce4de; background: #f3f6ef; }
-#ldm-chat-widget .ldm-chat-connection-title { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+#ldm-chat-widget .ldm-chat-connection-title { flex-basis: 100%; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 #ldm-chat-widget .ldm-chat-connection-title strong { font-size: 12px; font-weight: 650; }
 #ldm-chat-widget .ldm-chat-connection-title code { color: #526c60; font-size: 10px; }
+#ldm-chat-widget .ldm-chat-key-status:empty { display: none; }
 #ldm-chat-widget .ldm-chat-key-status { margin: 3px 0 8px; color: #526c60; font-size: 10px; }
-#ldm-chat-widget .ldm-chat-key-label { display: block; margin-bottom: 5px; color: #36584c; font-size: 11px; }
 #ldm-chat-widget .ldm-chat-key { display: block; width: 100%; min-height: 48px; max-height: 90px; resize: vertical; padding: 8px 10px; border: 1px solid #bacdbf; border-radius: 9px; background: #fff; color: var(--ldm-ink); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
 #ldm-chat-widget .ldm-chat-key-actions, #ldm-chat-widget .ldm-chat-key-connected { display: flex; flex-wrap: wrap; gap: 7px; }
 #ldm-chat-widget .ldm-chat-key-actions { margin-top: 7px; }
@@ -88,10 +88,6 @@
 #ldm-chat-widget .ldm-chat-message-user { margin-left: 25px; }
 #ldm-chat-widget .ldm-chat-message-user .ldm-chat-message-label { text-align: right; }
 #ldm-chat-widget .ldm-chat-message-user .ldm-chat-message-text { padding: 11px 13px; border: 1px solid #d0ddd3; border-radius: 15px 15px 4px 15px; background: #e5eee4; }
-#ldm-chat-widget .ldm-chat-suggestions { display: flex; flex-direction: column; align-items: stretch; gap: 7px; margin-top: 18px; }
-#ldm-chat-widget .ldm-chat-suggestion { min-height: 38px; padding: 8px 12px; border: 1px solid #d5ded4; border-radius: 10px; background: #fdfdf9; color: #30534c; text-align: left; font-size: 12px; }
-#ldm-chat-widget .ldm-chat-suggestion::after { content: '↗'; float: right; margin-left: 10px; color: #739381; }
-#ldm-chat-widget .ldm-chat-suggestion:hover { background: #eaf2e6; border-color: #abc3af; }
 #ldm-chat-widget .ldm-chat-sources { margin-top: 10px; color: #63786d; font-size: 10px; }
 #ldm-chat-widget .ldm-chat-sources summary { display: list-item; cursor: pointer; }
 #ldm-chat-widget .ldm-chat-sources ul { margin: 7px 0 0; padding-left: 17px; }

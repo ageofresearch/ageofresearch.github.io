@@ -940,3 +940,17 @@ test('connectivity HTTP errors also read safe SSE detail without issuing a gener
   assert.equal(report.metrics.providerReason, 'API_KEY_INVALID');
   assert.ok(!diagnostics.report().includes(KEY));
 });
+
+test('intermediate status updates can precede the completed yacht answer', async () => {
+  const start = created();
+  start.interaction.status = 'queued';
+  const updates = [{ event_type: 'interaction.status_update', status: 'processing' }];
+  const fetchImpl = async () => response([start, ...updates, ...payload('Luz de Mar').slice(1)]);
+  const result = await geminiAnswer('¿Cómo se llama?', { apiKey: KEY, fetchImpl });
+  assert.equal(result.answer, 'Luz de Mar');
+});
+
+test('a completion event without a confirmed status cannot commit the answer', async () => {
+  const fetchImpl = async () => response([...payload().slice(0, -1), { event_type: 'interaction.completed' }]);
+  await assert.rejects(geminiAnswer('¿Cómo se llama?', { apiKey: KEY, fetchImpl }), { code: 'gemini_incomplete' });
+});

@@ -121,10 +121,26 @@ async function connectedAnswer(question, { history = [], viewContext = '', endpo
   }
 }
 
+// Resolve simple inventory questions from the report itself. Diagnosis, other
+// equipment and multi-part questions continue through the configured assistant.
+function asksForDamageReport(question) {
+  const query = normalize(question).replace(/ (?:lee|revisa|consulta)(?: [a-z]+mente)? el contexto$/, '');
+  const existence = /^(?:no )?(?:hay|existe|existen|se ha reportado|se han reportado|se sabe de)(?: (?:algun|alguna|algunos|algunas))? (?:danos?|averias?|fallos?)/;
+  const listing = /^(?:que|cuales) (?:danos?|averias?|fallos?)(?: hay| tiene| se han reportado)?/;
+  const match = query.match(existence) || query.match(listing);
+  if (!match) return false;
+  const subject = query.slice(match[0].length).trim();
+  return /^(?:(?:reportados?|reportadas?|conocidos?|conocidas?) ?)?(?:(?:en |del |de )?(?:el |los )?(?:yate|barco|motores|motor(?: de babor| babor)?|luz de mar))?$/.test(subject);
+}
+
 export async function answerQuestion(question, options = {}) {
   const text = String(question ?? '').trim();
   if (!text) throw new Error('Escribe una pregunta sobre Luz de Mar.');
   if (text.length > 2000) throw new Error('La pregunta debe tener como máximo 2.000 caracteres.');
+  if (asksForDamageReport(text)) {
+    const report = topics.get('port-engine');
+    return { answer: report.answer, sources: report.sources, topic: report.id, mode: 'local' };
+  }
   if (options.geminiApiKey) return geminiAnswer(text, {
     apiKey: options.geminiApiKey, history: options.history, viewContext: options.viewContext,
     signal: options.signal, onText: options.onText, onState: options.onState, trace: options.trace,

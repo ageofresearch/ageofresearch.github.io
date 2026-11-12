@@ -1,4 +1,4 @@
-// Public scene documentation only. No private conversations or operational records.
+// Public scene documentation and user-reported observations for this project.
 export const PROJECT_SOURCE = Object.freeze({ title: 'Documentación pública de Luz de Mar', url: 'https://ageofresearch.github.io/tidewater-rocha/publication.json' });
 export const projectSource = PROJECT_SOURCE;
 export const sources = Object.freeze([PROJECT_SOURCE]);
@@ -17,6 +17,7 @@ export const contextFacts = Object.freeze([
     title: 'Daños reportados en el motor de babor',
     keywords: ['motor de babor', 'motor babor', 'babor', 'daño', 'daños', 'averías'],
     answer: portEngineReport,
+    sources: [{ title: 'Reporte de daños aportado al contexto de Luz de Mar' }],
   },
   {
     id: 'sea-strainers',

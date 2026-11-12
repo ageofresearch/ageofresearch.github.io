@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { diagnostics, CHAT_BUILD } from '../site/tidewater-rocha/luz-de-mar-chat/diagnostics.js';
+import { created, modelStart, textDelta, stepStop, completion, encodeEvents, interactionResponse } from './yacht-chat-interactions-fixtures.mjs';
 
 // Deliberately small DOM contract simulation. These tests import the real chat,
 // assistant and Gemini client; they do not claim browser or visual validation.
@@ -206,9 +207,7 @@ function assertNoDOMSecret(ui, ...secrets) {
   }
 }
 
-const success = () => new Response('data: ' + JSON.stringify({ candidates: [{
-  content: { role: 'model', parts: [{ text: 'Respuesta de Gemini de prueba.' }] }, finishReason: 'STOP',
-}] }) + '\n\n', { status: 200, headers: { 'content-type': 'text/event-stream' } });
+const success = () => interactionResponse([created(), modelStart(), textDelta('Respuesta de Gemini de prueba.'), stepStop(), completion()]);
 
 async function settle(check = () => true) {
   for (let i = 0; i < 40; i++) {
@@ -293,7 +292,7 @@ test('sending uses the exact Gemini model and header, without putting the key in
     for (const { url, options } of ui.calls) {
       const address = new URL(url);
       assert.equal(address.hostname, 'generativelanguage.googleapis.com');
-      assert.equal(address.pathname.endsWith('/models/' + MODEL + ':streamGenerateContent'), true);
+      assert.equal(address.pathname, '/v1beta/interactions');
       assert.equal(address.searchParams.get('alt'), 'sse');
       assert.equal(address.search.includes(FAKE_KEY), false);
       assert.equal(address.searchParams.has('key'), false);
@@ -302,7 +301,9 @@ test('sending uses the exact Gemini model and header, without putting the key in
       assert.equal(String(options.body).includes(FAKE_KEY), false);
     }
     const payload = JSON.parse(ui.calls[1].options.body);
-    assert.ok(JSON.stringify(payload.contents).includes('Primera pregunta sobre mantenimiento'));
+    assert.ok(JSON.stringify(payload.input).includes('Primera pregunta sobre mantenimiento'));
+    assert.equal(payload.model, MODEL);
+    assert.equal(payload.store, false);
     assertNoDOMSecret(ui, FAKE_KEY);
     assert.equal(ui.storageCalls.length, 0);
   }, { endpoint: 'https://example.invalid/must-not-receive-the-key' });
@@ -444,8 +445,7 @@ test('a slow streamed answer shows progress, can be cancelled, and never stores 
     const request = ui.api.sendQuestion('Consulta lenta de mantenimiento');
     t.mock.timers.tick(15001);
     assert.match(ui.document.body.textContent, /Esperando la respuesta de Google/);
-    const partial = { candidates: [{ content: { parts: [{ text: 'BORRADOR INCOMPLETO' }] } }] };
-    feed.enqueue(new TextEncoder().encode('data: ' + JSON.stringify(partial) + '\n\n'));
+    feed.enqueue(new TextEncoder().encode(encodeEvents([created(), modelStart(), textDelta('BORRADOR INCOMPLETO')])));
     await settle(() => ui.document.body.textContent.includes('BORRADOR INCOMPLETO'));
     assert.match(ui.document.body.textContent, /Recibiendo la respuesta/);
     click(button(ui, 'Cancelar consulta'));
@@ -466,18 +466,18 @@ test('a streamed answer is displayed progressively and committed to history only
     configure(ui);
     let feed;
     ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
-    const encode = payload => new TextEncoder().encode('data: ' + JSON.stringify(payload) + '\n\n');
+    const encode = payload => new TextEncoder().encode(encodeEvents(payload));
     const request = ui.api.sendQuestion('Consulta en partes');
-    feed.enqueue(encode({ candidates: [{ content: { parts: [{ text: 'Respuesta progresiva ' }] } }] }));
+    feed.enqueue(encode([created(), modelStart(), textDelta('Respuesta progresiva ')]));
     await settle(() => ui.document.body.textContent.includes('Respuesta progresiva '));
-    feed.enqueue(encode({ candidates: [{ content: { parts: [{ text: 'completa.' }] }, finishReason: 'STOP' }] }));
+    feed.enqueue(encode([textDelta('completa.'), stepStop(), completion()]));
     await request;
     assert.equal(ui.document.body.textContent.split('Respuesta progresiva completa.').length - 1, 1);
     assert.equal(visible(button(ui, 'Cancelar consulta', { visibleOnly: false })), false);
     ui.respond = success;
     await ui.api.sendQuestion('Seguimiento');
-    const history = JSON.parse(ui.calls[1].options.body).contents;
-    assert.equal(history.filter(message => message.role === 'model' && message.parts[0].text === 'Respuesta progresiva completa.').length, 1);
+    const history = JSON.parse(ui.calls[1].options.body).input;
+    assert.equal(history.filter(message => message.type === 'model_output' && message.content[0].text === 'Respuesta progresiva completa.').length, 1);
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });
@@ -571,8 +571,8 @@ test('the connectivity button checks public access and model metadata without ge
     await ui.api.sendQuestion('Primera pregunta tras la comprobación');
     assert.equal(ui.calls.length, 3);
     const sent = JSON.parse(ui.calls[2].options.body);
-    assert.equal(sent.contents.length, 1);
-    assert.equal(sent.contents[0].parts[0].text, 'Primera pregunta tras la comprobación');
+    assert.equal(sent.input.length, 1);
+    assert.equal(sent.input[0].content[0].text, 'Primera pregunta tras la comprobación');
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });
@@ -595,6 +595,24 @@ test('a stalled connectivity check finishes after its short deadline, retains di
     ui.respond = success;
     await ui.api.sendQuestion('Nueva pregunta después de la prueba');
     assert.equal(new Headers(ui.calls[2].options.headers).get('x-goog-api-key'), FAKE_KEY);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('acceptance updates the UI before any answer text without adding an assistant response prematurely', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    let feed;
+    ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
+    const request = ui.api.sendQuestion('Pregunta que necesita procesarse');
+    feed.enqueue(new TextEncoder().encode(encodeEvents(created())));
+    await settle(() => ui.document.body.textContent.includes('Google aceptó la consulta'));
+    assert.equal(diagnostics.snapshot().reports.at(-1).state, 'pending');
+    assert.equal(ui.document.querySelectorAll('.ldm-chat-message-assistant').length, 1);
+    feed.enqueue(new TextEncoder().encode(encodeEvents([modelStart(), textDelta('Respuesta confirmada.'), stepStop(), completion()])));
+    await request;
+    assert.equal(ui.document.body.textContent.split('Respuesta confirmada.').length - 1, 1);
+    assert.equal(diagnostics.snapshot().reports.at(-1).state, 'success');
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });

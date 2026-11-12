@@ -11,7 +11,7 @@ on:
       - "scripts/cotendo-preview-contract.mjs"
       - "scripts/validate-paver.mjs"
       - "scripts/yacht-chat/**"
-      - "tests/yacht-chat-*.test.mjs"
+      - "tests/yacht-chat-*.mjs"
       - ".github/workflows/pages.yml"
   pull_request:
     branches: [main]
@@ -23,7 +23,7 @@ on:
       - "scripts/cotendo-preview-contract.mjs"
       - "scripts/validate-paver.mjs"
       - "scripts/yacht-chat/**"
-      - "tests/yacht-chat-*.test.mjs"
+      - "tests/yacht-chat-*.mjs"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 

@@ -11,7 +11,7 @@
 <body>
 <main>
 <h1>Prueba simple de Gemini</h1>
-<p>gemini-3.8-flash · Cada envío consulta la API de Google y puede consumir tokens.</p>
+<p>gemini-3.6-flash · Cada envío consulta la API de Google y puede consumir tokens.</p>
 <form id="form">
 <label for="key">API key de Gemini</label>
 <textarea id="key" rows="2" required autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="key-note"></textarea>
@@ -54,7 +54,7 @@ form.addEventListener('submit', async event => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'x-goog-api-key': key },
       credentials: 'omit', referrerPolicy: 'strict-origin', signal: controller.signal,
-      body: JSON.stringify({ model: 'gemini-3.8-flash', input: message, stream: false, store: false }),
+      body: JSON.stringify({ model: 'gemini-3.6-flash', input: message, stream: false, store: false }),
     });
     reader = response.body.getReader();
     const decoder = new TextDecoder();

@@ -137,6 +137,5 @@
 #ldm-chat-widget .ldm-chat-reasoning { display: flex; align-items: center; gap: 8px; flex-basis: 100%; font-size: 12px; }
 #ldm-chat-widget .ldm-chat-reasoning select { padding: 3px 8px; color: var(--ldm-ink); border: 1px solid #a5bcb1; border-radius: 5px; background: white; }
 
-.ldm-tour-shade { position: fixed; inset: 0; z-index: 100; background: #10292f; opacity: 0; pointer-events: none; }
 .ldm-tour-panel { position: fixed; z-index: 101; left: 50%; top: max(14px, env(safe-area-inset-top)); transform: translateX(-50%); max-width: 90vw; display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 12px; background: #10292f; color: #fff; font: 13px/1.4 system-ui, sans-serif; }
 .ldm-tour-panel button { flex-shrink: 0; max-width: 45vw; background: #edf5f1; color: #173b33; border: none; padding: 7px 10px; border-radius: 6px; font: inherit; cursor: pointer; }

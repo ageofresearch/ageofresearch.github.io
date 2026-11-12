@@ -908,17 +908,21 @@ test('the camera starts only after a completed damage report and supports return
     const deckRoom = { id: 'boarding', deck: 'MD' };
     const room = { id: 'LD_R02', deck: 'LD' };
     const model = {
-      asset: { data: { rooms: [room], meshes: [{ id: 'LD_MAC_001', bbox: [9, 0.4, 1.7, 12.5, 1.6, 2.7] }] } },
+      asset: { data: { levels: { MD: 4, LD: 1.58 }, rooms: [room], meshes: [{ id: 'LD_MAC_001', bbox: [9, 0.4, 1.7, 12.5, 1.6, 2.7] }] } },
       group: { userData: { yacht: { sx: 1, sy: 1, length: 35, seaReference: 2 } }, localToWorld: p => p },
       updateVisibility() {},
     };
-    let entries = 0;
-    const nav = { deck: 'MD', room: deckRoom, position: [0, 0], location() { return this.room; }, floorSafe: () => true, floorHeight: () => 1.58 };
+    const stairs = { lower: 'LD', upper: 'MD', path: [[6, 0], [2, 0]], distances: [0, 4], length: 4 };
+    const nav = { deck: 'MD', room: deckRoom, position: [0, 0], elevation: 4, asset: model.asset, routes: [stairs],
+      location() { return this.room; }, floorHeight() { return this.asset.data.levels[this.deck]; }, floorSafe: () => true };
     const app = ui.window.__app = { camera, waterEnabled: true };
     const walk = app.yachtWalk = {
-      app, model, nav, active: true, pitch: 0, yaw: 0, resetHistory() {}, applyPosition() {},
-      enterRoom() { entries++; Object.assign(nav, { room, deck: room.deck, position: [8.6, 0] }); return true; },
+      app, model, nav, active: true, eyeHeight: 1.6, pitch: 0, yaw: 0, resetHistory() {},
+      applyPosition() { camera.position.set(nav.position[1], nav.elevation - 0.4, nav.position[0] - 17.5); },
+      enterRoom() { assert.fail('Tour must never teleport the camera to the next deck'); },
     };
+    walk.applyPosition();
+    const initial = camera.position.clone();
     ui.window.matchMedia = () => ({ matches: true });
     globalThis.requestAnimationFrame = fn => { frames.set(++nextFrame, fn); return nextFrame; };
     globalThis.cancelAnimationFrame = id => frames.delete(id);
@@ -938,10 +942,33 @@ test('the camera starts only after a completed damage report and supports return
         t.mock.timers.tick(1000);
         assert.equal(frames.size, cancel ? 0 : 1);
       }
-      for (const [id, cb] of frames) { frames.delete(id); cb(1000); }
-      assert.equal(entries, 1);
+      let now = 1000;
+      function tick() {
+        const [id, cb] = frames.entries().next().value;
+        frames.delete(id);
+        cb(now);
+        now += 16;
+      }
+      function finish() {
+        const halfway = [];
+        for (let i = 0; frames.size && i < 4000; i++) {
+          const before = camera.position.clone(), yaw = walk.yaw;
+          tick();
+          assert.ok(Math.hypot(camera.position.x - before.x, camera.position.y - before.y, camera.position.z - before.z) < 0.09);
+          assert.ok(Math.abs(walk.yaw - yaw) < 0.04);
+          if (nav.stair) halfway.push(nav.elevation);
+        }
+        assert.equal(frames.size, 0);
+        assert.ok(halfway.some(h => h > 2 && h < 3));
+      }
+      tick();
+      assert.deepEqual(nav.position, [0, 0]);
+      assert.equal(camera.position.y, initial.y);
+      assert.equal(walk.yaw, 0);
+      finish();
       assert.deepEqual(nav.position, [9.22, 0]);
       click(button(ui, 'Volver a la vista anterior'));
+      finish();
       assert.deepEqual(walk.nav.position, [0, 0]);
       assert.equal(walk.nav.room, deckRoom);
     } finally {

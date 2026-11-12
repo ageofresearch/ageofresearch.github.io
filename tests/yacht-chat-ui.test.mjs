@@ -273,6 +273,7 @@ function configure(ui, key = FAKE_KEY) {
 
 function openDiagnostics(ui) {
   const panel = ui.document.querySelector('.ldm-chat-diagnostics');
+  panel.hidden = false; // Exercise internal tools without exposing them in the shipped UI.
   panel.open = true;
   panel.dispatchEvent(new UIEvent('toggle', { bubbles: false }));
 }
@@ -281,8 +282,12 @@ test('configuring Gemini clears the editor, makes no request, and stores no key 
   await withUI(async ui => {
     configure(ui);
     assert.ok(ui.document.body.textContent.includes(MODEL));
-    button(ui, 'Cambiar clave');
-    button(ui, 'Desconectar Gemini');
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-diagnostics')), false);
+    for (const name of ['Cambiar clave', 'Desconectar Gemini', 'Comprobar conexión']) {
+      assert.equal(visible(button(ui, name, { visibleOnly: false })), false);
+    }
+    assert.ok(visible(labelled(ui, 'Razonamiento')));
+    assert.doesNotMatch(ui.document.body.textContent, /Enter para enviar|Modelo y orientación local, sin telemetría|Documentación del yate · Sin datos en tiempo real/);
     assert.equal(ui.calls.length, 0);
     assert.equal(ui.storageCalls.length, 0);
     assertNoDOMSecret(ui, FAKE_KEY);
@@ -317,6 +322,7 @@ test('sending uses the exact Gemini model and header, without putting the key in
 
 test('changing or cancelling a key makes no request, and replacing it affects only the next question', async () => {
   await withUI(async ui => {
+    openDiagnostics(ui);
     configure(ui);
     click(button(ui, 'Cambiar clave'));
     assert.equal(labelled(ui, 'Clave API de Gemini').value, '');
@@ -335,6 +341,7 @@ test('changing or cancelling a key makes no request, and replacing it affects on
 
 test('disconnecting removes Gemini credentials and returns the next question to local orientation', async () => {
   await withUI(async ui => {
+    openDiagnostics(ui);
     configure(ui);
     await ui.api.sendQuestion('Pregunta con Gemini');
     click(button(ui, 'Desconectar Gemini'));
@@ -349,6 +356,7 @@ test('disconnecting removes Gemini credentials and returns the next question to 
 
 test('Gemini configuration controls stay disabled during a request and become available when it settles', async () => {
   await withUI(async ui => {
+    openDiagnostics(ui);
     configure(ui);
     let resolve;
     ui.respond = () => new Promise(done => { resolve = done; });
@@ -488,7 +496,7 @@ test('a streamed answer is displayed progressively and committed to history only
   });
 });
 
-test('an error exposes a copyable safe diagnostic retaining the provider failure stage', async () => {
+test('an error keeps diagnostics internal and retains the provider failure stage', async () => {
   await withUI(async ui => {
     configure(ui);
     const privateQuestion = 'PRIVATE QUESTION NOT FOR LOGS';
@@ -496,8 +504,10 @@ test('an error exposes a copyable safe diagnostic retaining the provider failure
       code: 429, status: 'RESOURCE_EXHAUSTED', message: privateQuestion + FAKE_KEY,
     } }), { status: 429, headers: { 'content-type': 'application/json' } });
     await ui.api.sendQuestion(privateQuestion);
-    click(button(ui, 'Ver diagnóstico'));
-    assert.equal(ui.document.querySelector('.ldm-chat-diagnostics').open, true);
+    assert.ok(visible(button(ui, 'Volver a intentar')));
+    assert.ok(!ui.document.body.textContent.includes('Ver diagnóstico'));
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-diagnostics')), false);
+    openDiagnostics(ui);
     click(button(ui, 'Copiar diagnóstico'));
     await settle(() => ui.copiedReports.length === 1);
     const text = ui.copiedReports[0];
@@ -565,6 +575,7 @@ test('an exception before sending a question is caught and reported as a UI cont
 
 test('the connectivity button checks public access and model metadata without generating or adding chat history', async () => {
   await withUI(async ui => {
+    openDiagnostics(ui);
     configure(ui);
     ui.respond = call => call.url.includes('$discovery') ? new Response('{}') : new Response(JSON.stringify({ name: 'models/' + MODEL, supportedGenerationMethods: ['generateContent'] }), { headers: { 'content-type': 'application/json' } });
     click(button(ui, 'Comprobar conexión'));
@@ -586,6 +597,7 @@ test('the connectivity button checks public access and model metadata without ge
 test('a stalled connectivity check finishes after its short deadline, retains diagnostics and unlocks the chat', async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });
   await withUI(async ui => {
+    openDiagnostics(ui);
     configure(ui);
     ui.respond = () => new Promise(() => {});
     click(button(ui, 'Comprobar conexión'));

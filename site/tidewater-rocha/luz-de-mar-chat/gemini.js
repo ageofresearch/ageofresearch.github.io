@@ -205,7 +205,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
   }
   let reader;
   try { reader = response.body?.getReader?.(); }
-  catch (error) { throw failure('gemini_stream_read', 'No se pudo abrir el flujo de respuesta de Gemini. Abre el diagnóstico del chat.', error); }
+  catch (error) { throw failure('gemini_stream_read', 'No se pudo abrir el flujo de respuesta de Gemini.', error); }
   if (!reader) throw failure('gemini_response', 'No se pudo leer la respuesta de Gemini. Vuelve a intentarlo.');
   const decoder = new TextDecoder();
   let buffer = '', event = [], pendingDataChars = 0, text = '', completed = false, accepted = false;
@@ -220,7 +220,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
     if (typeof onState !== 'function') return;
     trace.stage('ui_state_render');
     try { onState(value); }
-    catch (error) { throw failure('gemini_render', 'No se pudo mostrar el estado de la consulta. Abre el diagnóstico.', error); }
+    catch (error) { throw failure('gemini_render', 'No se pudo mostrar el estado de la consulta.', error); }
   }
   framingMetrics();
   function append(delta) {
@@ -232,14 +232,14 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
     if (typeof onText === 'function') {
       trace.stage('ui_stream_render');
       try { onText(text.split(apiKey).join('[clave omitida]')); }
-      catch (error) { throw failure('gemini_render', 'No se pudo mostrar la respuesta. Abre el diagnóstico del chat.', error); }
+      catch (error) { throw failure('gemini_render', 'No se pudo mostrar la respuesta.', error); }
     }
   }
   function status(value) {
     trace.update({ interactionStatus: value });
     if (value === 'cancelled') throw failure('gemini_cancelled', 'Google canceló la consulta. Puedes volver a intentarlo.');
     if (['incomplete', 'requires_action', 'requires_continuation'].includes(value)) throw failure('gemini_incomplete', 'Gemini no completó una respuesta utilizable. Intenta una pregunta más concreta.');
-    if (value === 'failed') throw failure('gemini_unavailable', 'Google indicó que la consulta falló. Abre el diagnóstico del chat.');
+    if (value === 'failed') throw failure('gemini_unavailable', 'Google indicó que la consulta falló.');
   }
   function dispatch() {
     if (!event.length) return;
@@ -250,7 +250,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
     let payload;
     trace.stage('parse_stream_event');
     try { payload = JSON.parse(data); }
-    catch (error) { throw failure('gemini_stream_json', 'Gemini devolvió una respuesta que no se pudo interpretar. Abre el diagnóstico del chat.', error); }
+    catch (error) { throw failure('gemini_stream_json', 'Gemini devolvió una respuesta que no se pudo interpretar.', error); }
     events++;
     framing.eventsReceived = events;
     trace.update({ eventsReceived: events });
@@ -262,12 +262,12 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
       throw httpFailure(typeof payload.error.code === 'number' ? payload.error.code : INTERACTION_ERRORS[payload.error.code], reason);
     }
     if (!payload || typeof payload !== 'object' || typeof payload.event_type !== 'string') {
-      throw failure('gemini_stream_schema', 'El flujo de Gemini tiene un formato inesperado. Abre el diagnóstico del chat.');
+      throw failure('gemini_stream_schema', 'El flujo de Gemini tiene un formato inesperado.');
     }
     trace.update({ interactionEvent: payload.event_type });
     if (payload.event_type === 'interaction.created') {
       status(payload.interaction?.status);
-      if (payload.interaction?.model && !requestedModel(payload.interaction.model)) throw failure('gemini_model', 'Google devolvió un modelo distinto del solicitado. Abre el diagnóstico.');
+      if (payload.interaction?.model && !requestedModel(payload.interaction.model)) throw failure('gemini_model', 'Google devolvió un modelo distinto del solicitado.');
       if (!accepted) {
         accepted = true;
         trace.stage('provider_accepted', { acceptedMs: trace.elapsed() });
@@ -276,17 +276,17 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
     } else if (payload.event_type === 'interaction.status_update') {
       status(payload.status);
     } else if (payload.event_type === 'step.start') {
-      if (!Number.isInteger(payload.index) || payload.index < 0 || payload.index >= 64 || steps.has(payload.index) || typeof payload.step?.type !== 'string') throw failure('gemini_stream_schema', 'El flujo de Gemini contiene un paso inesperado. Abre el diagnóstico.');
+      if (!Number.isInteger(payload.index) || payload.index < 0 || payload.index >= 64 || steps.has(payload.index) || typeof payload.step?.type !== 'string') throw failure('gemini_stream_schema', 'El flujo de Gemini contiene un paso inesperado.');
       steps.set(payload.index, payload.step.type);
       if (payload.step.type === 'model_output') {
         const initial = Array.isArray(payload.step.content) ? payload.step.content : [];
         append(initial.filter(part => part?.type === 'text' && typeof part.text === 'string').map(part => part.text).join(''));
       }
     } else if (payload.event_type === 'step.delta') {
-      if (!steps.has(payload.index)) throw failure('gemini_stream_schema', 'Llegó un fragmento de Gemini sin su paso inicial. Abre el diagnóstico.');
+      if (!steps.has(payload.index)) throw failure('gemini_stream_schema', 'Llegó un fragmento de Gemini sin su paso inicial.');
       if (steps.get(payload.index) === 'model_output' && payload.delta?.type === 'text' && typeof payload.delta.text === 'string') append(payload.delta.text);
     } else if (payload.event_type === 'interaction.completed') {
-      if (payload.interaction?.model && !requestedModel(payload.interaction.model)) throw failure('gemini_model', 'Google devolvió un modelo distinto del solicitado. Abre el diagnóstico.');
+      if (payload.interaction?.model && !requestedModel(payload.interaction.model)) throw failure('gemini_model', 'Google devolvió un modelo distinto del solicitado.');
       const usage = payload.interaction?.usage || {};
       trace.update({ totalInputTokens: usage.total_input_tokens, totalOutputTokens: usage.total_output_tokens, thoughtTokens: usage.total_thought_tokens, totalTokens: usage.total_tokens });
       status(payload.interaction?.status);
@@ -369,7 +369,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
   } catch (error) {
     cancel();
     if (knownFailures.has(error)) throw error;
-    throw failure('gemini_stream_read', 'Se interrumpió la conexión mientras llegaba la respuesta de Gemini. Abre el diagnóstico del chat.', error);
+    throw failure('gemini_stream_read', 'Se interrumpió la conexión mientras llegaba la respuesta de Gemini.', error);
   } finally {
     signal.removeEventListener('abort', cancel);
     try { reader.releaseLock(); } catch { /* A timed-out stream may still be closing. */ }
@@ -392,7 +392,7 @@ function httpFailure(status, reason) {
   if (reason === 'API_KEY_HTTP_REFERRER_BLOCKED') return failure('gemini_key', 'Google bloqueó la clave por su restricción de sitio web. Debe permitir https://ageofresearch.github.io/*.');
   if (['API_KEY_INVALID', 'API_KEY_EXPIRED', 'API_KEY_NOT_FOUND', 'API_KEY_LEAKED'].includes(reason)) return failure('gemini_key', 'Google indicó que la clave de Gemini no es válida o está bloqueada. Revisa su estado en Google AI Studio.');
   if (status === 402 || ['BILLING_DISABLED', 'BILLING_NOT_ACTIVE'].includes(reason)) return failure('gemini_billing', 'Google rechazó la consulta por el estado de facturación del proyecto. Revisa su estado en Google AI Studio.');
-  if (status === 400) return failure('gemini_request', 'Gemini no aceptó la consulta. Abre el diagnóstico para revisar el código y los parámetros señalados.');
+  if (status === 400) return failure('gemini_request', 'Gemini no aceptó la consulta.');
   if (status === 401 || status === 403) return failure('gemini_key', 'Google rechazó la clave de Gemini o sus permisos. Comprueba la clave y sus restricciones.');
   if (status === 404) return failure('gemini_model', 'El modelo ' + GEMINI_MODEL + ' no está disponible para esta clave o esta versión de la API. No se ha cambiado a otro modelo.');
   if (status === 429) return failure('gemini_quota', 'Se alcanzó la cuota o el límite de consultas de Gemini. Espera un momento y revisa la cuota de tu proyecto.');
@@ -464,7 +464,7 @@ async function requestAnswer(question, {
         }),
         generation_config: { max_output_tokens: 2048, thinking_level: Object.hasOwn(THINKING_LEVELS, thinkingLevel) ? thinkingLevel : DEFAULT_THINKING_LEVEL, thinking_summaries: 'none' },
       });
-    } catch (error) { throw failure('gemini_request', 'No se pudo preparar la consulta. Abre el diagnóstico del chat.', error); }
+    } catch (error) { throw failure('gemini_request', 'No se pudo preparar la consulta.', error); }
     trace.update({ requestBytes: new TextEncoder().encode(body).byteLength });
     trace.stage('wait_response_headers');
     const response = await fetchImpl(ENDPOINT, {
@@ -488,7 +488,7 @@ async function requestAnswer(question, {
     }
     if (!['text/event-stream', 'missing'].includes(mediaType(response))) {
       cancelBody(response.body);
-      throw failure('gemini_content_type', 'Se recibió un formato inesperado en lugar de la respuesta de Gemini. Abre el diagnóstico del chat.');
+      throw failure('gemini_content_type', 'Se recibió un formato inesperado en lugar de la respuesta de Gemini.');
     }
     return {
       answer: await readResponse(response, controller.signal, key, onText, onState, trace, framing),
@@ -505,7 +505,7 @@ async function requestAnswer(question, {
     if (cancelled) throw failure('gemini_cancelled', 'Consulta cancelada.');
     // Never forward arbitrary provider, browser, or fetch error text (it can contain a key).
     if (error instanceof Error && knownFailures.has(error)) throw error;
-    throw failure('gemini_network', 'No se pudo conectar con Gemini. Revisa la conexión y abre el diagnóstico del chat.', error);
+    throw failure('gemini_network', 'No se pudo conectar con Gemini. Revisa la conexión.', error);
   } finally {
     clearTimeout(timer);
     signal?.removeEventListener('abort', cancel);
@@ -537,7 +537,7 @@ export async function testGeminiGeneration({ apiKey, thinkingLevel, fetchImpl, t
 
 async function modelMetadata(response, signal, trace) {
   trace.stage('read_model_metadata');
-  if (mediaType(response) !== 'application/json') throw failure('gemini_probe_response', 'La consulta del modelo devolvió un formato inesperado. Abre el diagnóstico.');
+  if (mediaType(response) !== 'application/json') throw failure('gemini_probe_response', 'La consulta del modelo devolvió un formato inesperado.');
   const reader = response.body?.getReader?.();
   if (!reader) throw failure('gemini_probe_response', 'No se pudo leer la información del modelo.');
   const cancel = () => { try { reader.cancel()?.catch?.(() => {}); } catch { /* Best effort. */ } };

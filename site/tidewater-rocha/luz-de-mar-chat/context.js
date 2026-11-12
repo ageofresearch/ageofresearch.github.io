@@ -3,12 +3,20 @@ export const PROJECT_SOURCE = Object.freeze({ title: 'Documentación pública de
 export const projectSource = PROJECT_SOURCE;
 export const sources = Object.freeze([PROJECT_SOURCE]);
 
+const portEngineReport = 'Se han reportado daños en el motor de babor de Luz de Mar. El reporte no especifica el componente afectado, la causa, la gravedad ni el estado de la reparación.';
+
 export const contextFacts = Object.freeze([
   {
     id: 'yacht',
     title: 'El yate y el alcance del asistente',
     keywords: ['que sabemos del yate', 'que yate', 'modelo', 'azimut', 'metri', 'luz de mar', 'quien eres', 'que puedes', 'contexto', 'identidad'],
     answer: 'El yate se llama Luz de Mar y es un Azimut 36 Metri. Estás en su recorrido digital en Rocha. La publicación arranca con el yate y la pasarela; el mapa completo se carga al pedirlo. La barra de ubicación y el menú Explorar permiten recorrer sus zonas, también con la tecla N.\n\nLa documentación pública del modelo indica aproximadamente 35,23 m de eslora, 7,47 m de manga y 2,01 m de calado como referencias de su representación. Sus dimensiones y posiciones ajustadas a imágenes no son un levantamiento del barco real.\n\nPuedo consultar esta documentación y orientar sobre mantenimiento, compras y preparación de viajes. No tengo el PMS operativo, las placas verificadas, sensores ni meteorología actual; la apariencia de la escena no demuestra el estado técnico del yate.',
+  },
+  {
+    id: 'port-engine',
+    title: 'Daños reportados en el motor de babor',
+    keywords: ['motor de babor', 'motor babor', 'babor', 'daño', 'daños', 'averías'],
+    answer: portEngineReport,
   },
   {
     id: 'sea-strainers',
@@ -27,7 +35,7 @@ export const contextFacts = Object.freeze([
     id: 'departure',
     title: 'Preparación de una salida',
     keywords: ['salir', 'salida', 'navegar', 'listo', 'preparado', 'apto', 'martes', 'impedimentos', 'bloqueo', 'bloquea', 'autorizar', 'autorizacion', 'capitan', 'dueno', 'propietario'],
-    answer: 'No dispongo del estado técnico ni de las comprobaciones actuales para confirmar una salida: información insuficiente. Una solicitud de viaje debe convertirse en un plan evaluado, no en una autorización automática.\n\nLa revisión debe considerar ruta, salida y regreso, personas, disponibilidad técnica, combustible y agua con las reservas definidas, mantenimiento durante el viaje, documentación y condiciones de cada tramo. Un requisito esencial sin cumplir no queda compensado por tener muchos otros controles completos.\n\nEste chat puede ayudar a identificar preguntas y pendientes. No autoriza la navegación ni sustituye la decisión operacional del capitán. Si cambian el plan o las condiciones, deben revisarse las comprobaciones afectadas.',
+    answer: portEngineReport + '\n\nNo dispongo del estado técnico ni de las comprobaciones actuales para confirmar una salida: información insuficiente. Una solicitud de viaje debe convertirse en un plan evaluado, no en una autorización automática.\n\nLa revisión debe considerar ruta, salida y regreso, personas, disponibilidad técnica, combustible y agua con las reservas definidas, mantenimiento durante el viaje, documentación y condiciones de cada tramo. Un requisito esencial sin cumplir no queda compensado por tener muchos otros controles completos.\n\nEste chat puede ayudar a identificar preguntas y pendientes. No autoriza la navegación ni sustituye la decisión operacional del capitán. Si cambian el plan o las condiciones, deben revisarse las comprobaciones afectadas.',
   },
   {
     id: 'battery',
@@ -69,7 +77,7 @@ export const contextFacts = Object.freeze([
     id: 'defects',
     title: 'Defectos y prioridades',
     keywords: ['defecto', 'defectos', 'audio', 'audiovisual', 'teca', 'cosmetico', 'confort', 'critico', 'criticidad', 'prioridad', 'urgente'],
-    answer: 'La prioridad combina la importancia de la función, las consecuencias del fallo y la urgencia de la intervención. Una inspección rutinaria, una avería esencial activa y un defecto cosmético requieren tratamientos diferentes.\n\nNo conozco los defectos actuales de este yate. Una limitación de confort no se clasifica automáticamente como impedimento de navegación; hay que comprobar sus consecuencias para el plan concreto. Una reserva disponible tampoco borra el defecto del equipo afectado.\n\nCada aviso debe explicar qué ocurre, por qué importa, quién debe revisarlo y qué evidencia permitiría cerrarlo.',
+    answer: portEngineReport + '\n\nLa prioridad combina la importancia de la función, las consecuencias del fallo y la urgencia de la intervención. Una inspección rutinaria, una avería esencial activa y un defecto cosmético requieren tratamientos diferentes.\n\nUna limitación de confort no se clasifica automáticamente como impedimento de navegación; hay que comprobar sus consecuencias para el plan concreto. Una reserva disponible tampoco borra el defecto del equipo afectado.\n\nCada aviso debe explicar qué ocurre, por qué importa, quién debe revisarlo y qué evidencia permitiría cerrarlo.',
   },
 ]);
 

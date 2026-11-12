@@ -11,7 +11,6 @@ const ALLOWED_HOSTS = new Set([
   'mtu-solutions.com', 'www.mtu-solutions.com', 'nmea.org', 'www.nmea.org',
   'imo.org', 'www.imo.org', 'ageofresearch.github.io',
 ]);
-const QUESTIONS = ['¿Qué falta para salir?', '¿Cómo ahorrar?', '¿Qué sabemos del yate?'];
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -64,7 +63,7 @@ function installStyles() {
   if (document.querySelector('link[data-ldm-chat-style]')) return;
   const link = el('link');
   link.rel = 'stylesheet';
-  link.href = new URL('./chat.css?v=reasoning-1', import.meta.url).href;
+  link.href = new URL('./chat.css?v=clean-start-1', import.meta.url).href;
   link.dataset.ldmChatStyle = '';
   document.head.append(link);
 }
@@ -126,20 +125,21 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   actions.append(clear, minimize);
   header.append(brand, actions);
 
-  const context = el('div', 'ldm-chat-context');
-  const mode = el('span', 'ldm-chat-mode', endpoint ? 'Por consultar' : 'Orientación local');
+  const modeRow = el('div', 'ldm-chat-context');
+  const mode = el('span', 'ldm-chat-mode', endpoint ? 'Por consultar' : '');
   mode.dataset.mode = 'local';
-  context.append(mode);
+  modeRow.hidden = !endpoint;
+  modeRow.append(mode);
 
   const connection = el('section', 'ldm-chat-connection');
   connection.setAttribute('aria-label', 'Conexión con Gemini');
   const connectionTitle = el('div', 'ldm-chat-connection-title');
   connectionTitle.append(el('strong', '', 'Gemini'), el('code', '', GEMINI_MODEL));
-  const keyStatus = el('p', 'ldm-chat-key-status', 'Sin clave · orientación local');
+  const keyStatus = el('p', 'ldm-chat-key-status');
   keyStatus.setAttribute('role', 'status');
   keyStatus.setAttribute('aria-live', 'polite');
   const keyForm = el('form', 'ldm-chat-key-form');
-  const keyLabel = el('label', 'ldm-chat-key-label', 'Clave API de Gemini');
+  const keyLabel = el('label', 'ldm-chat-sr-only', 'Clave API de Gemini');
   keyLabel.htmlFor = 'ldm-gemini-key';
   const keyField = el('textarea', 'ldm-chat-key');
   keyField.id = 'ldm-gemini-key';
@@ -150,7 +150,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   keyField.spellcheck = false;
   keyField.setAttribute('autocapitalize', 'off');
   keyField.setAttribute('autocorrect', 'off');
-  keyField.setAttribute('aria-describedby', 'ldm-gemini-note');
   const keyActions = el('div', 'ldm-chat-key-actions');
   const useKey = el('button', 'ldm-chat-key-use', 'Usar Gemini');
   useKey.type = 'submit';
@@ -159,9 +158,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   cancelKey.type = 'button';
   cancelKey.hidden = true;
   keyActions.append(useKey, cancelKey);
-  const keyNote = el('p', 'ldm-chat-key-note', 'Solo en memoria de esta pestaña. Google recibirá tus mensajes y el contexto público del yate.');
-  keyNote.id = 'ldm-gemini-note';
-  keyForm.append(keyLabel, keyField, keyActions, keyNote);
+  keyForm.append(keyLabel, keyField, keyActions);
   const keyConnected = el('div', 'ldm-chat-key-connected');
   keyConnected.hidden = true;
   const changeKey = el('button', 'ldm-chat-key-action', 'Cambiar clave');
@@ -186,8 +183,8 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   reasoningSelect.value = DEFAULT_THINKING_LEVEL;
   reasoningRow.append(reasoningLabel, reasoningSelect);
-  keyConnected.append(reasoningRow);
-  connection.append(connectionTitle, keyStatus, keyForm, keyConnected);
+  keyConnected.append(connectionTitle, reasoningRow);
+  connection.append(keyStatus, keyForm, keyConnected);
 
   const diagnosticPanel = el('details', 'ldm-chat-diagnostics');
   diagnosticPanel.hidden = true;
@@ -269,7 +266,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     requestController?.abort('user');
   });
   form.append(inputRow, cancelRequest);
-  panel.append(header, context, connection, diagnosticPanel, log, status, form);
+  panel.append(header, modeRow, connection, diagnosticPanel, log, status, form);
   root.append(panel, launcher);
   mountPoint.append(root);
 
@@ -308,19 +305,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     log.append(row);
     scrollToLatest();
     return row;
-  }
-
-  function welcome() {
-    const row = addMessage('assistant', 'Conoce tu yate, entiende los pendientes y prepara mejores decisiones. ¿Qué quieres consultar sobre Luz de Mar?');
-    const suggestions = el('div', 'ldm-chat-suggestions');
-    suggestions.setAttribute('aria-label', 'Preguntas sugeridas');
-    for (const question of QUESTIONS) {
-      const button = el('button', 'ldm-chat-suggestion', question);
-      button.type = 'button';
-      button.addEventListener('click', () => sendQuestion(question));
-      suggestions.append(button);
-    }
-    row.append(suggestions);
   }
 
   function setPending(value) {
@@ -432,7 +416,8 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       const text = clipped(result.answer.trim(), MAX_ANSWER);
       addMessage('assistant', text, result.sources);
       remember({ role: 'assistant', content: text, ...(result.topic ? { topic: result.topic } : {}) });
-      mode.textContent = result.mode === 'gemini' ? 'Gemini 4 Hydrogen' : result.mode === 'ai' ? 'IA conectada' : 'Orientación local';
+      mode.textContent = result.mode === 'gemini' ? 'Gemini 4 Hydrogen' : result.mode === 'ai' ? 'IA conectada' : '';
+      modeRow.hidden = !mode.textContent;
       mode.dataset.mode = ['gemini', 'ai'].includes(result.mode) ? 'ai' : 'local';
       if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
       trace.finish();
@@ -442,6 +427,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       trace.stage('ui_error');
       if (error?.code !== 'gemini_cancelled' && (geminiApiKey || endpoint)) {
         mode.textContent = geminiApiKey ? 'Gemini · revisa la conexión' : 'Conexión pendiente';
+        modeRow.hidden = false;
         mode.dataset.mode = 'error';
       }
       const row = el('div', 'ldm-chat-error');
@@ -505,9 +491,10 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     testGeneration.hidden = generationNote.hidden = true;
     cancelKey.hidden = true;
     useKey.disabled = true;
-    mode.textContent = endpoint ? 'Por consultar' : 'Orientación local';
+    mode.textContent = endpoint ? 'Por consultar' : '';
+    modeRow.hidden = !endpoint;
     mode.dataset.mode = 'local';
-    keyStatus.textContent = 'Sin clave · orientación local';
+    keyStatus.textContent = '';
   }
   keyField.addEventListener('input', () => {
     useKey.disabled = pending || !keyField.value.trim();
@@ -533,6 +520,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     useKey.disabled = true;
     keyStatus.textContent = 'Clave cargada en esta pestaña · pendiente de consultar';
     mode.textContent = 'Gemini configurado';
+    modeRow.hidden = false;
     mode.dataset.mode = 'configured';
     field.focus({ preventScroll: true });
     trace.finish();
@@ -649,7 +637,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     field.value = '';
     field.style.height = '';
     send.disabled = true;
-    welcome();
     field.focus({ preventScroll: true });
   });
   field.addEventListener('input', () => {
@@ -678,7 +665,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     root.addEventListener(name, event => event.stopPropagation(), { passive: name === 'wheel' || name.startsWith('touch') });
   }
 
-  welcome();
   const api = {
     root, open, close, sendQuestion,
     destroy() {

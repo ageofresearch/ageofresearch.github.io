@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { interactionResponse, textEvents } from './yacht-chat-interactions-fixtures.mjs';
 import assert from 'node:assert/strict';
 import { answerQuestion } from '../site/tidewater-rocha/luz-de-mar-chat/assistant.js';
 import { contextFacts, contextText, PROJECT_SOURCE } from '../site/tidewater-rocha/luz-de-mar-chat/context.js';
@@ -155,16 +156,22 @@ test('UTF-8 request size is bounded, the question is preserved, and secrets are 
   } finally { globalThis.fetch = originalFetch; }
 });
 
-
-test('direct damage questions use the reported fact even with Gemini and a mistaken prior answer', async () => {
-  const options = { geminiApiKey: 'fixture-key', history: [
-    { role: 'assistant', content: 'El contexto no incluye daños.' },
-  ] };
-  for (const question of ['Hay algun daño en el yate?', 'No hay algun daño en el motor, lee exhausivamente el contexto', '¿Qué averías hay?']) {
-    const result = await answerQuestion(question, options);
-    assert.equal(result.topic, 'port-engine');
-    assert.equal(result.mode, 'local');
-    assert.match(result.answer, /reportado daños en el motor de babor/);
-    assert.match(result.sources[0].title, /Reporte de daños/);
+test('Gemini receives each damage question and the report, and its generated text is returned', async t => {
+  const questions = ['Hay algun daño en el yate?', 'No hay algun daño en el motor, lee exhausivamente el contexto'];
+  const history = [{ role: 'assistant', content: 'El contexto no incluye daños.' }];
+  let calls = 0;
+  t.mock.method(globalThis, 'fetch', async (url, request) => {
+    const body = JSON.parse(request.body);
+    assert.equal(body.model, 'gemini-3.5-flash-lite');
+    assert.match(body.system_instruction, /Se han reportado daños en el motor de babor/);
+    assert.equal(body.input.at(-1).content[0].text, questions[calls]);
+    calls++;
+    return interactionResponse(textEvents('Respuesta del proveedor ' + calls));
+  });
+  for (const [index, question] of questions.entries()) {
+    const result = await answerQuestion(question, { geminiApiKey: 'fixture-key', history });
+    assert.equal(result.mode, 'gemini');
+    assert.equal(result.answer, 'Respuesta del proveedor ' + (index + 1));
   }
+  assert.equal(calls, questions.length);
 });

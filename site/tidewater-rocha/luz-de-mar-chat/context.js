@@ -3,7 +3,7 @@ export const PROJECT_SOURCE = Object.freeze({ title: 'Documentación pública de
 export const projectSource = PROJECT_SOURCE;
 export const sources = Object.freeze([PROJECT_SOURCE]);
 
-const portEngineReport = 'Se han reportado daños en el motor de babor de Luz de Mar. El reporte no especifica el componente afectado, la causa, la gravedad ni el estado de la reparación.';
+const portEngineReport = 'Se han reportado daños en el motor de babor de Luz de Mar. Queda por determinar qué pieza interna está dañada. La causa, la gravedad y el estado de la reparación también se desconocen.';
 
 export const contextFacts = Object.freeze([
   {

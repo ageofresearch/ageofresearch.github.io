@@ -157,13 +157,15 @@ test('UTF-8 request size is bounded, the question is preserved, and secrets are 
 });
 
 test('Gemini receives each damage question and the report, and its generated text is returned', async t => {
-  const questions = ['Hay algun daño en el yate?', 'No hay algun daño en el motor, lee exhausivamente el contexto'];
+  const questions = ['Pasa algo?', 'Hay algun daño en el yate?', 'No hay algun daño en el motor, lee exhausivamente el contexto'];
   const history = [{ role: 'assistant', content: 'El contexto no incluye daños.' }];
   let calls = 0;
   t.mock.method(globalThis, 'fetch', async (url, request) => {
     const body = JSON.parse(request.body);
     assert.equal(body.model, 'gemini-4-hydrogen');
     assert.match(body.system_instruction, /Se han reportado daños en el motor de babor/);
+    assert.match(body.system_instruction, /qué pieza interna está dañada/);
+    assert.doesNotMatch(body.system_instruction, /no especifica el componente afectado/i);
     assert.equal(body.input.at(-1).content[0].text, questions[calls]);
     calls++;
     return interactionResponse(textEvents('Respuesta del proveedor ' + calls));

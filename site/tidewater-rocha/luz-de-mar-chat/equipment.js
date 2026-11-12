@@ -26,15 +26,19 @@ export const damageFormat = {
     type: 'object',
     properties: {
       answer: { type: 'string', description: 'Respuesta visible a la pregunta, en español.' },
-      damageTarget: { type: 'string', enum: ['none', ...equipment.map(part => part.id)] },
+      damageTarget: {
+        type: 'string', enum: ['none', ...equipment.map(part => part.id)],
+        description: 'ID del único equipo que answer identifica con una avería reportada sin cierre conocido. En los demás casos, none.',
+      },
     },
     required: ['answer', 'damageTarget'],
   },
 };
 export const damageInstructions = [
-  'Devuelve answer y damageTarget. Usa damageTarget solo si en este turno el usuario reporta un daño presente o pregunta por un daño reportado y tu respuesta identifica inequívocamente un único equipo del catálogo.',
-  'Usa none para hipótesis, negaciones, averías reparadas, preguntas generales, citas, varios equipos o un equipo sin vista. Una orden de mover la cámara por sí sola no es un reporte.',
-  'Si dice «un motor» sin identificar cuál, pregunta cuál en answer y usa none. No deduzcas babor solo porque sea el único motor del catálogo. No sustituyas una pieza desconocida por otra.',
+  'Redacta answer según el contexto y el historial. A continuación elige damageTarget por lo que comunica esa respuesta, aunque la pregunta sea general o indirecta.',
+  'Si answer informa de una avería reportada sin cierre conocido e identifica un solo equipo afectado, devuelve su ID del catálogo. Atribuir el reporte a su fuente, carecer de verificación a bordo o desconocer la pieza interna no invalida la identificación del equipo.',
+  'Usa none si answer solo plantea una hipótesis, niega el daño, describe una avería ya reparada o menciona un equipo sin atribuirle una avería reportada. También usa none si hay varios equipos afectados, falta identificar el equipo o este no tiene vista en el catálogo.',
+  'Ante un reporte nuevo y ambiguo, pide identificar el equipo y usa none. No asignes el único equipo del catálogo por descarte. Si el usuario pide solo texto o pide que no se mueva la cámara, usa none.',
   'Catálogo: ' + equipment.map(part => part.id + ' = ' + part.name).join(', '),
 ].join('\n');
 

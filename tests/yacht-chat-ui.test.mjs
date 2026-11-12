@@ -994,10 +994,10 @@ test('a completed damage report starts a round trip while the chat stays open an
       let feed;
       ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
       for (const cancel of [true, false]) {
-        const task = ui.api.sendQuestion('Reporto una avería del motor de babor.');
-        const answer = JSON.stringify({ answer: 'Reporte de babor.', damageTarget: 'LD_MAC_001' });
+        const task = ui.api.sendQuestion('Pasa algo?');
+        const answer = JSON.stringify({ answer: 'Hay daños reportados en el motor de babor.', damageTarget: 'LD_MAC_001' });
         feed.enqueue(new TextEncoder().encode(encodeEvents([created(), modelStart(), textDelta(answer)])));
-        await settle(() => ui.document.body.textContent.includes('Reporte de babor.'));
+        await settle(() => ui.document.body.textContent.includes('Hay daños reportados en el motor de babor.'));
         t.mock.timers.tick(1200);
         assert.equal(frames.size, 0);
         if (cancel) click(button(ui, 'Cancelar consulta'));
@@ -1012,7 +1012,7 @@ test('a completed damage report starts a round trip while the chat stays open an
       const log = ui.document.querySelector('[role="log"]');
       assert.ok(visible(chat));
       assert.equal(launcher.getAttribute('aria-expanded'), 'true');
-      assert.match(log.textContent, /Reporte de babor/);
+      assert.match(log.textContent, /Hay daños reportados en el motor de babor/);
       let now = 1000;
       function tick() {
         const [id, cb] = frames.entries().next().value;
@@ -1055,7 +1055,7 @@ test('a completed damage report starts a round trip while the chat stays open an
       t.mock.timers.tick(1000);
       assert.equal(frames.size, 1, 'A follow-up without a new target preserves the active tour');
       assert.match(log.textContent, /Puedes consultar el PMS/);
-      assert.match(log.textContent, /Reporte de babor/);
+      assert.match(log.textContent, /Hay daños reportados en el motor de babor/);
       finish();
       assert.ok(visible(chat));
       assert.deepEqual(nav.position, [9.22, 0]);
@@ -1067,7 +1067,7 @@ test('a completed damage report starts a round trip while the chat stays open an
       assert.equal(launcher.getAttribute('aria-expanded'), 'true');
 
       ui.respond = () => interactionResponse([created(), modelStart(),
-        textDelta(JSON.stringify({ answer: 'Reporte de babor.', damageTarget: 'LD_MAC_001' })), stepStop(), completion()]);
+        textDelta(JSON.stringify({ answer: 'Hay daños reportados en el motor de babor.', damageTarget: 'LD_MAC_001' })), stepStop(), completion()]);
       await ui.api.sendQuestion('Reporto otra avería del motor de babor.');
       t.mock.timers.tick(1000);
       assert.equal(frames.size, 1);

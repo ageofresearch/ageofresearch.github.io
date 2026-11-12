@@ -967,6 +967,9 @@ test('equipment focus streams only the answer and resolves a registered ID after
         const body = JSON.parse(request.body);
         assert.deepEqual(body.response_format.schema.properties.damageTarget.enum, ['none', 'LD_MAC_001']);
         assert.match(body.system_instruction, /LD_MAC_001 = Motor de babor/);
+        assert.match(body.response_format.schema.properties.damageTarget.description, /que answer identifica/);
+        assert.match(body.system_instruction, /aunque la pregunta sea general o indirecta/);
+        assert.doesNotMatch(body.system_instruction, /Usa none para .*preguntas generales/);
         return response(events);
       },
     });

@@ -7,7 +7,7 @@ import { created, modelStart, textDelta, stepStop, completion, encodeEvents, int
 // assistant and Gemini client; they do not claim browser or visual validation.
 const FAKE_KEY = 'AIza_TEST_ONLY_DO_NOT_USE_012345678901234';
 const NEXT_FAKE_KEY = 'AIza_TEST_ONLY_REPLACEMENT_012345678901234';
-const MODEL = 'gemini-3.5-flash-lite';
+const MODEL = 'gemini-4-hydrogen';
 let moduleSequence = 0;
 
 class UIEvent {
@@ -829,8 +829,8 @@ test('reasoning selector applies each level to the next Gemini request', async (
     const selector = labelled(ui, 'Razonamiento');
     assert.ok(visible(selector));
     assert.equal(selector.value, 'low');
-    assert.deepEqual(selector.children.map(option => option.value), ['minimal', 'low', 'medium', 'high']);
-    for (const level of ['low', 'medium', 'high', 'minimal']) {
+    assert.deepEqual(selector.children.map(option => option.value), ['low', 'medium', 'high', 'xhigh']);
+    for (const level of ['low', 'medium', 'high', 'xhigh']) {
       selector.value = level;
       await ui.api.sendQuestion('¿Qué sabemos del motor de babor?');
       assert.equal(JSON.parse(ui.calls.at(-1).options.body).generation_config.thinking_level, level);

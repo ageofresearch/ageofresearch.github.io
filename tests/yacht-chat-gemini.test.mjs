@@ -13,7 +13,7 @@ test('Gemini uses the exact requested model, header authentication and yacht con
     viewContext: 'Muelle y pasarela',
     fetchImpl: async (url, options) => { request = { url, ...options }; return response(); },
   });
-  assert.equal(GEMINI_MODEL, 'gemini-3.5-flash-lite');
+  assert.equal(GEMINI_MODEL, 'gemini-4-hydrogen');
   assert.equal(request.url, 'https://generativelanguage.googleapis.com/v1beta/interactions?alt=sse');
   assert.equal(request.headers['x-goog-api-key'], KEY);
   assert.equal(request.headers.Accept, 'text/event-stream');
@@ -81,7 +81,7 @@ test('missing keys and oversized questions fail without calling Google', async (
 });
 
 test('HTTP errors use safe messages, expose no provider body, and never switch models', async () => {
-  for (const [status, pattern] of [[400, /no aceptó/], [401, /clave/], [403, /permisos/], [404, /gemini-3\.5-flash-lite.*No se ha cambiado/], [429, /cuota/], [500, /no está disponible/]]) {
+  for (const [status, pattern] of [[400, /no aceptó/], [401, /clave/], [403, /permisos/], [404, /gemini-4-hydrogen.*No se ha cambiado/], [429, /cuota/], [500, /no está disponible/]]) {
     let calls = 0;
     await assert.rejects(geminiAnswer('Hola', {
       apiKey: KEY,

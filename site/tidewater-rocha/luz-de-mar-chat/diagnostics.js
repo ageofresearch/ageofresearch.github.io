@@ -1,4 +1,4 @@
-export const CHAT_BUILD = '2026-11-12-stream-status-7';
+export const CHAT_BUILD = '2026-11-12-hydrogen-1';
 const STAGES = new Set([
   'start', 'bootstrap_import', 'runtime_error', 'unhandled_rejection', 'resource_error', 'security_policy',
   'validate_input', 'build_request', 'wait_response_headers', 'response_headers', 'read_error_body',
@@ -146,7 +146,7 @@ export function createDiagnostics({ clock = () => globalThis.performance?.now?.(
     clear() { reports.length = 0; },
     snapshot() {
       return JSON.parse(JSON.stringify({
-        build: CHAT_BUILD, generatedAt: new Date().toISOString(), model: 'gemini-3.5-flash-lite',
+        build: CHAT_BUILD, generatedAt: new Date().toISOString(), model: 'gemini-4-hydrogen',
         transport: 'Interactions API SSE',
         browserLimit: 'Un fallo de fetch sin estado HTTP no permite distinguir por sí solo DNS, TLS, CORS, extensiones o bloqueo de red.',
         reports: reports.map(({ report, elapsed }) => ({ ...report, elapsedMs: report.durationMs ?? elapsed() })),

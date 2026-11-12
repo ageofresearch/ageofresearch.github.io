@@ -85,7 +85,7 @@ if (parameters.get('world') === 'rocha' && !parameters.has('bench')) {
       diagnostics = module.diagnostics;
       module.installGlobalDiagnostics(window);
     } catch {
-      showLoadFailure(() => JSON.stringify({ build: '2026-11-12-stream-status-7', failureCode: 'diagnostics_import', stage: 'bootstrap_import' }, null, 2));
+      showLoadFailure(() => JSON.stringify({ build: '2026-11-12-hydrogen-1', failureCode: 'diagnostics_import', stage: 'bootstrap_import' }, null, 2));
       return;
     }
     const trace = diagnostics.start('bootstrap');

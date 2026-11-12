@@ -1,11 +1,11 @@
-export const CHAT_BUILD = '2026-11-11-connectivity-2';
+export const CHAT_BUILD = '2026-11-11-interactions-3';
 const STAGES = new Set([
   'start', 'bootstrap_import', 'runtime_error', 'unhandled_rejection', 'resource_error', 'security_policy',
   'validate_input', 'build_request', 'wait_response_headers', 'response_headers', 'read_error_body',
   'stream_read', 'first_byte', 'parse_stream_event', 'first_event', 'first_text', 'stream_eof',
   'provider_complete', 'ui_prepare', 'ui_context', 'ui_message', 'ui_dispatch', 'ui_stream_render',
   'ui_complete', 'ui_error', 'ui_finally', 'diagnostic_render', 'diagnostic_copy',
-  'read_model_metadata',
+  'read_model_metadata', 'provider_accepted', 'ui_state_render',
 ]);
 const CODES = new Set([
   'gemini_question', 'gemini_key', 'gemini_request', 'gemini_model', 'gemini_quota', 'gemini_billing',
@@ -17,6 +17,9 @@ const CODES = new Set([
   'gemini_probe_response',
 ]);
 const ENUMS = {
+  interactionEvent: ['interaction.created', 'interaction.status_update', 'step.start', 'step.delta', 'step.stop', 'interaction.completed', 'error', 'other'],
+  interactionStatus: ['in_progress', 'completed', 'failed', 'cancelled', 'incomplete', 'requires_action', 'requires_continuation', 'unknown'],
+  interactionErrorCode: ['invalid_request', 'failed_precondition', 'parameter_unknown', 'authentication', 'payment_required', 'permission_denied', 'not_found', 'model_not_found', 'out_of_range', 'rate_limit_exceeded', 'quota_exceeded', 'too_many_requests', 'cancelled', 'api_error', 'unimplemented', 'service_unavailable', 'deadline_exceeded', 'gateway_timeout', 'safety', 'recitation', 'language', 'prohibited_content', 'spii', 'blocklist', 'image_safety', 'image_prohibited_content', 'image_recitation', 'image_other', 'content_blocked', 'unknown'],
   requestMethod: ['GET', 'POST', 'unknown'],
   requestKind: ['public_discovery', 'model_metadata', 'generation_stream', 'unknown'],
   contentType: ['text/event-stream', 'application/json', 'text/html', 'other', 'missing'],
@@ -40,7 +43,7 @@ const ENUMS = {
 const NUMBERS = new Set([
   'httpStatus', 'providerHttpCode', 'deadlineMs', 'bytesReceived', 'chunksReceived', 'eventsReceived', 'textChars',
   'firstByteMs', 'firstEventMs', 'firstTextMs', 'lastDataMs', 'retryAfterSeconds', 'requestBytes',
-  'historyMessages', 'errorBytes',
+  'historyMessages', 'errorBytes', 'acceptedMs', 'totalInputTokens', 'totalOutputTokens', 'thoughtTokens', 'totalTokens',
 ]);
 
 function fields(input = {}) {
@@ -141,7 +144,7 @@ export function createDiagnostics({ clock = () => globalThis.performance?.now?.(
     snapshot() {
       return JSON.parse(JSON.stringify({
         build: CHAT_BUILD, generatedAt: new Date().toISOString(), model: 'gemini-3.8-flash',
-        transport: 'streamGenerateContent SSE',
+        transport: 'Interactions API SSE',
         browserLimit: 'Un fallo de fetch sin estado HTTP no permite distinguir por sí solo DNS, TLS, CORS, extensiones o bloqueo de red.',
         reports: reports.map(({ report, elapsed }) => ({ ...report, elapsedMs: report.durationMs ?? elapsed() })),
       }));

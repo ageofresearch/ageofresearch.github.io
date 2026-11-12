@@ -376,10 +376,10 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     const requestVersion = connectionVersion;
     const controller = new AbortController();
     requestController = controller;
-    let partial = null;
+    let partial = null, accepted = false;
     const waiting = geminiApiKey ? setTimeout(() => {
       if (pending && requestVersion === connectionVersion && !partial) {
-        status.textContent = 'Esperando la respuesta de Google. Puedes esperar o cancelar la consulta.';
+        status.textContent = accepted ? 'Google aceptó la consulta y sigue procesándola. Puedes esperar o cancelar.' : 'Esperando la respuesta de Google. Puedes esperar o cancelar la consulta.';
       }
     }, 15000) : null;
     try {
@@ -391,6 +391,11 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         geminiApiKey,
         signal: controller.signal,
         trace,
+        onState(state) {
+          if (disposed || controller.signal.aborted || requestVersion !== connectionVersion || state !== 'accepted') return;
+          accepted = true;
+          status.textContent = 'Google aceptó la consulta. Preparando la respuesta…';
+        },
         onText(text) {
           if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
           if (!partial) partial = addMessage('assistant', '');

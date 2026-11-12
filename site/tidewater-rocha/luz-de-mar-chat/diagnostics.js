@@ -1,4 +1,4 @@
-export const CHAT_BUILD = '2026-11-11-interactions-3';
+export const CHAT_BUILD = '2026-11-11-generation-4';
 const STAGES = new Set([
   'start', 'bootstrap_import', 'runtime_error', 'unhandled_rejection', 'resource_error', 'security_policy',
   'validate_input', 'build_request', 'wait_response_headers', 'response_headers', 'read_error_body',
@@ -15,13 +15,14 @@ const CODES = new Set([
   'chat_runtime', 'chat_rejection', 'chat_resource', 'chat_csp', 'bootstrap_import',
   'diagnostic_copy', 'diagnostic_render',
   'gemini_probe_response',
+  'gemini_keepalive_timeout',
 ]);
 const ENUMS = {
   interactionEvent: ['interaction.created', 'interaction.status_update', 'step.start', 'step.delta', 'step.stop', 'interaction.completed', 'error', 'other'],
   interactionStatus: ['in_progress', 'completed', 'failed', 'cancelled', 'incomplete', 'requires_action', 'requires_continuation', 'unknown'],
   interactionErrorCode: ['invalid_request', 'failed_precondition', 'parameter_unknown', 'authentication', 'payment_required', 'permission_denied', 'not_found', 'model_not_found', 'out_of_range', 'rate_limit_exceeded', 'quota_exceeded', 'too_many_requests', 'cancelled', 'api_error', 'unimplemented', 'service_unavailable', 'deadline_exceeded', 'gateway_timeout', 'safety', 'recitation', 'language', 'prohibited_content', 'spii', 'blocklist', 'image_safety', 'image_prohibited_content', 'image_recitation', 'image_other', 'content_blocked', 'unknown'],
   requestMethod: ['GET', 'POST', 'unknown'],
-  requestKind: ['public_discovery', 'model_metadata', 'generation_stream', 'unknown'],
+  requestKind: ['public_discovery', 'model_metadata', 'generation_stream', 'generation_probe', 'unknown'],
   contentType: ['text/event-stream', 'application/json', 'text/html', 'other', 'missing'],
   responseType: ['basic', 'cors', 'default', 'opaque', 'opaqueredirect', 'error'],
   providerStatus: ['INVALID_ARGUMENT', 'FAILED_PRECONDITION', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
@@ -44,6 +45,7 @@ const NUMBERS = new Set([
   'httpStatus', 'providerHttpCode', 'deadlineMs', 'bytesReceived', 'chunksReceived', 'eventsReceived', 'textChars',
   'firstByteMs', 'firstEventMs', 'firstTextMs', 'lastDataMs', 'retryAfterSeconds', 'requestBytes',
   'historyMessages', 'errorBytes', 'acceptedMs', 'totalInputTokens', 'totalOutputTokens', 'thoughtTokens', 'totalTokens',
+  'commentLines', 'dataLines', 'eventLines', 'unknownLines', 'emptyLines', 'pendingBufferChars', 'dataChars',
 ]);
 
 function fields(input = {}) {
@@ -96,7 +98,7 @@ export function createDiagnostics({ clock = () => globalThis.performance?.now?.(
     const started = clock();
     const report = {
       id: 'ldm-' + Date.now().toString(36) + '-' + (++sequence).toString(36),
-      startedAt: new Date().toISOString(), provider: ['gemini', 'local', 'server', 'bootstrap', 'runtime', 'configuration', 'connectivity_public', 'connectivity_model'].includes(provider) ? provider : 'runtime',
+      startedAt: new Date().toISOString(), provider: ['gemini', 'local', 'server', 'bootstrap', 'runtime', 'configuration', 'connectivity_public', 'connectivity_model', 'generation_probe'].includes(provider) ? provider : 'runtime',
       state: 'pending', stage: 'start', environment: environment(), metrics: provider === 'gemini' ? { providerInstrumented: false } : {}, events: [],
     };
     const seen = new Set();

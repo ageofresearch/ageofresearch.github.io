@@ -954,3 +954,36 @@ test('a completion event without a confirmed status cannot commit the answer', a
   const fetchImpl = async () => response([...payload().slice(0, -1), { event_type: 'interaction.completed' }]);
   await assert.rejects(geminiAnswer('¿Cómo se llama?', { apiKey: KEY, fetchImpl }), { code: 'gemini_incomplete' });
 });
+
+test('equipment focus streams only the answer and resolves a registered ID after completion', async () => {
+  for (const [reported, expected] of [['LD_MAC_001', 'LD_MAC_001'], ['none', null], ['unknown', null]]) {
+    const partials = [];
+    const answer = 'El motor de "babor"\nrequiere revisión.';
+    const raw = JSON.stringify({ answer, damageTarget: reported });
+    const events = [created(), modelStart(), ...[...raw].map(ch => textDelta(ch)), stepStop(), completion()];
+    const result = await geminiAnswer('Se reporta un daño en babor', {
+      apiKey: KEY, equipmentFocus: true, onText: value => partials.push(value),
+      fetchImpl: async (_, request) => {
+        const body = JSON.parse(request.body);
+        assert.deepEqual(body.response_format.schema.properties.damageTarget.enum, ['none', 'LD_MAC_001']);
+        assert.match(body.system_instruction, /LD_MAC_001 = Motor de babor/);
+        return response(events);
+      },
+    });
+    assert.equal(result.answer, answer);
+    assert.equal(result.damageTarget, expected);
+    assert.ok(partials.length > 1 && partials.every(part => answer.startsWith(part)));
+  }
+});
+
+test('incomplete damage metadata or unfinished generation never produces a camera action', async () => {
+  const json = JSON.stringify({ answer: 'Motor de babor', damageTarget: 'LD_MAC_001' });
+  for (const events of [
+    [created(), modelStart(), textDelta(json), stepStop()],
+    [created(), modelStart(), textDelta(json.slice(0, -1)), completion()],
+  ]) {
+    await assert.rejects(geminiAnswer('Se reporta un daño', {
+      apiKey: KEY, equipmentFocus: true, fetchImpl: async () => response(events),
+    }));
+  }
+});

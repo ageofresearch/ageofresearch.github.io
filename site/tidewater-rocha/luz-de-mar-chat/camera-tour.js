@@ -28,7 +28,7 @@ function restoreDoors(walk, origin) {
   if (origin.interiorOpen === false) walk.model.setServiceDoor(false, pos);
 }
 
-export function createEquipmentTour() {
+export function createEquipmentTour(chatRoot) {
   let current = null;
   function stop() {
     const s = current;
@@ -40,7 +40,7 @@ export function createEquipmentTour() {
     restoreDoors(s.walk, s.origin);
   }
 
-  function start(id, minimize) {
+  function start(id) {
     const app = window.__app;
     const view = locateEquipment(app, equipment.find(part => part.id === id));
     if (!view || !app.yachtWalk.active) return false;
@@ -126,12 +126,15 @@ export function createEquipmentTour() {
       back.disabled = true;
       session.frame = requestAnimationFrame(frame);
     }
-    minimize();
     walk.controls?.clearInput();
     document.body.append(panel);
     const opts = { capture: true, signal: listeners.signal };
-    window.addEventListener('pointerdown', event => { if (!panel.contains(event.target)) stop(); }, opts);
+    window.addEventListener('pointerdown', event => {
+      const path = event.composedPath();
+      if (!path.includes(chatRoot) && !path.includes(panel)) stop();
+    }, opts);
     window.addEventListener('keydown', event => {
+      if (event.composedPath().includes(chatRoot)) return;
       if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); goBack(); }
       else if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) stop();
     }, opts);

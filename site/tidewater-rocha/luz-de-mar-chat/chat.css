@@ -139,3 +139,27 @@
 
 .ldm-tour-panel { position: fixed; z-index: 101; left: 50%; top: max(14px, env(safe-area-inset-top)); transform: translateX(-50%); max-width: 90vw; display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 12px; background: #10292f; color: #fff; font: 13px/1.4 system-ui, sans-serif; }
 .ldm-tour-panel button { flex-shrink: 0; max-width: 45vw; background: #edf5f1; color: #173b33; border: none; padding: 7px 10px; border-radius: 6px; font: inherit; cursor: pointer; }
+
+/* Keep the conversation and the route in view on small screens. */
+@media (max-width: 760px) and (orientation: portrait) {
+  body:has(.ldm-tour-panel) #ldm-chat-widget.is-open .ldm-chat-launcher { display: none; }
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-panel {
+    inset: auto 10px calc(8px + env(safe-area-inset-bottom, 0px));
+    width: auto; height: min(47dvh, 365px); max-height: 47dvh;
+  }
+}
+@media (max-width: 900px) and (max-height: 510px) and (orientation: landscape) {
+  body:has(.ldm-tour-panel) #ldm-chat-widget.is-open .ldm-chat-launcher { display: none; }
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-panel {
+    inset: 6px 8px 6px auto; width: 42vw; height: auto; max-height: none;
+  }
+  .ldm-tour-panel { left: 8px; max-width: 53vw; transform: none; }
+}
+
+@media (max-width: 760px) and (orientation: portrait), (max-width: 900px) and (max-height: 510px) and (orientation: landscape) {
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-header { padding-block: 6px; }
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-context,
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-connection-title,
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-key-status { display: none; }
+  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-connection { padding-block: 4px; }
+}

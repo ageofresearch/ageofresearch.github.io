@@ -106,7 +106,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   panel.tabIndex = -1;
   panel.setAttribute('role', 'dialog');
   panel.setAttribute('aria-label', 'Chat del yate Luz de Mar');
-  panel.setAttribute('aria-describedby', 'ldm-chat-scope');
 
   const header = el('header', 'ldm-chat-header');
   const brand = el('div', 'ldm-chat-brand');
@@ -130,7 +129,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   const context = el('div', 'ldm-chat-context');
   const mode = el('span', 'ldm-chat-mode', endpoint ? 'Por consultar' : 'Orientación local');
   mode.dataset.mode = 'local';
-  context.append(mode, el('span', 'ldm-chat-context-label', 'Documentación del yate · Sin datos en tiempo real'));
+  context.append(mode);
 
   const connection = el('section', 'ldm-chat-connection');
   connection.setAttribute('aria-label', 'Conexión con Gemini');
@@ -187,10 +186,11 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   reasoningSelect.value = DEFAULT_THINKING_LEVEL;
   reasoningRow.append(reasoningLabel, reasoningSelect);
-  keyConnected.append(reasoningRow, changeKey, disconnectKey, checkConnection);
+  keyConnected.append(reasoningRow);
   connection.append(connectionTitle, keyStatus, keyForm, keyConnected);
 
   const diagnosticPanel = el('details', 'ldm-chat-diagnostics');
+  diagnosticPanel.hidden = true;
   diagnosticPanel.append(el('summary', '', 'Diagnóstico del chat'));
   const diagnosticNote = el('p', 'ldm-chat-key-note', 'Este informe contiene etapas, tiempos y códigos; no incluye tu clave ni los mensajes. Se conserva solo en esta pestaña.');
   const diagnosticField = el('textarea', 'ldm-chat-diagnostic-report');
@@ -204,7 +204,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   refreshDiagnostic.type = 'button';
   const diagnosticStatus = el('p', 'ldm-chat-key-note');
   diagnosticStatus.setAttribute('role', 'status');
-  diagnosticActions.append(copyDiagnostic, refreshDiagnostic);
+  diagnosticActions.append(changeKey, disconnectKey, checkConnection, copyDiagnostic, refreshDiagnostic);
   diagnosticPanel.append(diagnosticNote, diagnosticField, diagnosticActions, generationNote, testGeneration, diagnosticStatus, el('code', 'ldm-chat-diagnostic-build', CHAT_BUILD));
   function refreshReport() {
     try { diagnosticField.value = diagnostics.report(); }
@@ -255,17 +255,12 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   field.rows = 2;
   field.maxLength = MAX_MESSAGE;
   field.placeholder = 'Pregunta sobre el yate…';
-  field.setAttribute('aria-describedby', 'ldm-chat-input-help ldm-chat-scope');
   const send = el('button', 'ldm-chat-send', '↑');
   send.type = 'submit';
   send.disabled = true;
   send.setAttribute('aria-label', 'Enviar pregunta');
   const inputRow = el('div', 'ldm-chat-input-row');
   inputRow.append(fieldLabel, field, send);
-  const help = el('p', 'ldm-chat-input-help', 'Enter para enviar · Mayús + Enter para otra línea');
-  help.id = 'ldm-chat-input-help';
-  const scope = el('p', 'ldm-chat-scope', 'Modelo y orientación local, sin telemetría. La salida la autoriza el capitán.');
-  scope.id = 'ldm-chat-scope';
   const cancelRequest = el('button', 'ldm-chat-key-action ldm-chat-cancel', 'Cancelar consulta');
   cancelRequest.type = 'button';
   cancelRequest.hidden = true;
@@ -273,7 +268,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     cancelRequest.disabled = true;
     requestController?.abort('user');
   });
-  form.append(inputRow, cancelRequest, help, scope);
+  form.append(inputRow, cancelRequest);
   panel.append(header, context, connection, diagnosticPanel, log, status, form);
   root.append(panel, launcher);
   mountPoint.append(root);
@@ -356,7 +351,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         requestController?.abort('external');
         if (!disposed) setPending(false);
         status.hidden = false;
-        status.textContent = 'Ocurrió un error en el chat. Abre «Diagnóstico del chat» y copia el informe.';
+        status.textContent = 'Ocurrió un error en el chat. Vuelve a intentarlo.';
       } catch (viewError) {
         trace.stage('ui_error');
         trace.fail('chat_unexpected', viewError);
@@ -456,14 +451,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       const retryButton = el('button', 'ldm-chat-retry', 'Volver a intentar');
       retryButton.type = 'button';
       retryButton.addEventListener('click', () => sendQuestion(question, { retry: true }));
-      const diagnosticButton = el('button', 'ldm-chat-retry', 'Ver diagnóstico');
-      diagnosticButton.type = 'button';
-      diagnosticButton.addEventListener('click', () => {
-        refreshReport();
-        diagnosticPanel.open = true;
-        diagnosticField.focus({ preventScroll: false });
-      });
-      row.append(retryButton, diagnosticButton);
+      row.append(retryButton);
       failed?.row.remove();
       failed = { question, row };
       log.append(row);

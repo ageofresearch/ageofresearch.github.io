@@ -62,7 +62,6 @@
 #ldm-chat-widget .ldm-chat-mode[data-mode="ai"]::before { background: #2d8a70; }
 #ldm-chat-widget .ldm-chat-mode[data-mode="configured"]::before { background: transparent; }
 #ldm-chat-widget .ldm-chat-mode[data-mode="error"]::before { background: #b9874a; border-color: #b9874a; }
-#ldm-chat-widget .ldm-chat-context-label { color: #66776d; font-size: 10px; }
 #ldm-chat-widget .ldm-chat-connection { flex-shrink: 0; padding: 11px 16px 12px; border-bottom: 1px solid #dce4de; background: #f3f6ef; }
 #ldm-chat-widget .ldm-chat-connection-title { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 #ldm-chat-widget .ldm-chat-connection-title strong { font-size: 12px; font-weight: 650; }
@@ -111,9 +110,7 @@
 #ldm-chat-widget .ldm-chat-input::placeholder { color: #8b9b91; }
 #ldm-chat-widget .ldm-chat-send { flex: 0 0 auto; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 10px; background: var(--ldm-navy); color: #d7eddf; font-size: 21px; line-height: 1; }
 #ldm-chat-widget .ldm-chat-send:not(:disabled):hover { background: #205046; }
-#ldm-chat-widget .ldm-chat-input-help { margin: 6px 2px 0; color: #809084; font-size: 9px; }
 #ldm-chat-widget .ldm-chat-cancel { margin-top: 7px; }
-#ldm-chat-widget .ldm-chat-scope { margin: 5px 2px 0; color: #768475; font-size: 9px; line-height: 1.45; }
 #ldm-chat-widget .ldm-chat-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 @keyframes ldm-chat-appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 520px) {
@@ -124,14 +121,12 @@
   #ldm-chat-widget .ldm-chat-context { padding-left: 15px; padding-right: 15px; }
   #ldm-chat-widget .ldm-chat-log { padding-left: 15px; padding-right: 15px; }
   #ldm-chat-widget .ldm-chat-input, #ldm-chat-widget .ldm-chat-key { font-size: 16px; }
-  #ldm-chat-widget .ldm-chat-input-help { font-size: 8px; }
 }
 @media (max-height: 510px) {
   #ldm-chat-widget .ldm-chat-panel { right: 12px; bottom: 78px; height: calc(100dvh - 88px); max-height: calc(100vh - 88px); }
   #ldm-chat-widget .ldm-chat-header { padding-top: 10px; padding-bottom: 10px; }
   #ldm-chat-widget .ldm-chat-context { padding-top: 7px; padding-bottom: 7px; }
   #ldm-chat-widget .ldm-chat-form { padding-top: 7px; padding-bottom: 7px; }
-  #ldm-chat-widget .ldm-chat-input-help { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   #ldm-chat-widget .ldm-chat-panel { animation: none; }

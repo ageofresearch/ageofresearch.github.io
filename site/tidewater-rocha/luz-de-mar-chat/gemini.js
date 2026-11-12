@@ -237,7 +237,6 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
     if (value === 'cancelled') throw failure('gemini_cancelled', 'Google canceló la consulta. Puedes volver a intentarlo.');
     if (['incomplete', 'requires_action', 'requires_continuation'].includes(value)) throw failure('gemini_incomplete', 'Gemini no completó una respuesta utilizable. Intenta una pregunta más concreta.');
     if (value === 'failed') throw failure('gemini_unavailable', 'Google indicó que la consulta falló. Abre el diagnóstico del chat.');
-    if (!['completed', 'in_progress'].includes(value)) throw failure('gemini_stream_schema', 'Google devolvió un estado de consulta inesperado. Abre el diagnóstico del chat.');
   }
   function dispatch() {
     if (!event.length) return;
@@ -288,7 +287,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
       const usage = payload.interaction?.usage || {};
       trace.update({ totalInputTokens: usage.total_input_tokens, totalOutputTokens: usage.total_output_tokens, thoughtTokens: usage.total_thought_tokens, totalTokens: usage.total_tokens });
       status(payload.interaction?.status);
-      if (payload.interaction.status !== 'completed') throw failure('gemini_incomplete', 'Gemini no confirmó que la respuesta estuviera completa.');
+      if (payload.interaction?.status !== 'completed') throw failure('gemini_incomplete', 'Gemini no confirmó que la respuesta estuviera completa.');
       completed = true;
     }
   }

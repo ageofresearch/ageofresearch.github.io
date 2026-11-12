@@ -891,3 +891,62 @@ test('reasoning selector applies each level to the next Gemini request', async (
     assert.equal(ui.calls.length, 4);
   });
 });
+
+test('the camera starts only after a completed damage report and supports returning', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  await withUI(async ui => {
+    configure(ui);
+    const frames = new Map();
+    let nextFrame = 0;
+    const vector = (x = 0, y = 0, z = 0) => ({
+      x, y, z,
+      clone() { return vector(this.x, this.y, this.z); },
+      set(x, y, z) { Object.assign(this, { x, y, z }); return this; },
+      sub(p) { return this.set(this.x - p.x, this.y - p.y, this.z - p.z); },
+    });
+    const camera = { position: vector(), rotation: { set() {} } };
+    const deckRoom = { id: 'boarding', deck: 'MD' };
+    const room = { id: 'LD_R02', deck: 'LD' };
+    const model = {
+      asset: { data: { rooms: [room], meshes: [{ id: 'LD_MAC_001', bbox: [9, 0.4, 1.7, 12.5, 1.6, 2.7] }] } },
+      group: { userData: { yacht: { sx: 1, sy: 1, length: 35, seaReference: 2 } }, localToWorld: p => p },
+      updateVisibility() {},
+    };
+    let entries = 0;
+    const nav = { deck: 'MD', room: deckRoom, position: [0, 0], location() { return this.room; }, floorSafe: () => true, floorHeight: () => 1.58 };
+    const app = ui.window.__app = { camera, waterEnabled: true };
+    const walk = app.yachtWalk = {
+      app, model, nav, active: true, pitch: 0, yaw: 0, resetHistory() {}, applyPosition() {},
+      enterRoom() { entries++; Object.assign(nav, { room, deck: room.deck, position: [8.6, 0] }); return true; },
+    };
+    ui.window.matchMedia = () => ({ matches: true });
+    globalThis.requestAnimationFrame = fn => { frames.set(++nextFrame, fn); return nextFrame; };
+    globalThis.cancelAnimationFrame = id => frames.delete(id);
+    try {
+      let feed;
+      ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
+      for (const cancel of [true, false]) {
+        const task = ui.api.sendQuestion('Reporto una avería del motor de babor.');
+        const answer = JSON.stringify({ answer: 'Reporte de babor.', damageTarget: 'LD_MAC_001' });
+        feed.enqueue(new TextEncoder().encode(encodeEvents([created(), modelStart(), textDelta(answer)])));
+        await settle(() => ui.document.body.textContent.includes('Reporte de babor.'));
+        t.mock.timers.tick(1200);
+        assert.equal(frames.size, 0);
+        if (cancel) click(button(ui, 'Cancelar consulta'));
+        else feed.enqueue(new TextEncoder().encode(encodeEvents([stepStop(), completion()])));
+        await task;
+        t.mock.timers.tick(1000);
+        assert.equal(frames.size, cancel ? 0 : 1);
+      }
+      for (const [id, cb] of frames) { frames.delete(id); cb(1000); }
+      assert.equal(entries, 1);
+      assert.deepEqual(nav.position, [9.22, 0]);
+      click(button(ui, 'Volver a la vista anterior'));
+      assert.deepEqual(walk.nav.position, [0, 0]);
+      assert.equal(walk.nav.room, deckRoom);
+    } finally {
+      delete globalThis.requestAnimationFrame;
+      delete globalThis.cancelAnimationFrame;
+    }
+  });
+});

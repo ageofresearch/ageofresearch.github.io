@@ -7,7 +7,7 @@ const PUBLISHED_ROOT = new URL('https://ageofresearch.github.io/tidewater-rocha/
 const PUBLISHED_PAGE = new URL('play.html?world=rocha', PUBLISHED_ROOT);
 const WIDGET_ROOT = new URL('../../site/tidewater-rocha/luz-de-mar-chat/', import.meta.url);
 const MAX_BODY_BYTES = 16 * 1024;
-const ALLOWED_ASSETS = new Set(['chat.js', 'chat.css', 'context.js', 'assistant.js', 'bootstrap.js', 'gemini.js', 'diagnostics.js']);
+const ALLOWED_ASSETS = new Set(['chat.js', 'chat.css', 'context.js', 'assistant.js', 'bootstrap.js', 'gemini.js', 'camera-tour.js', 'equipment.js', 'diagnostics.js']);
 
 class HttpError extends Error {
   constructor(status, code, message) {

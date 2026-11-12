@@ -1,3 +1,4 @@
+import { damageFormat, damageInstructions, equipment, streamingAnswer } from './equipment.js';
 import { contextText, PROJECT_SOURCE } from './context.js';
 import { diagnostics } from './diagnostics.js';
 
@@ -197,7 +198,7 @@ async function readErrorDetails(response, trace, signal) {
   }
 }
 
-async function readResponse(response, signal, apiKey, onText, onState, trace, framing) {
+async function readResponse(response, signal, apiKey, onText, onState, trace, framing, textLimit = MAX_ANSWER) {
   trace.stage('stream_read');
   if (Number(response.headers?.get?.('content-length')) > MAX_RESPONSE_BYTES) {
     cancelBody(response.body);
@@ -227,7 +228,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
     if (!delta) return;
     text += delta;
     trace.update({ textChars: text.length });
-    if (text.length > MAX_ANSWER) throw failure('gemini_response', 'Gemini devolvió una respuesta demasiado grande. Intenta una pregunta más breve.');
+    if (text.length > textLimit) throw failure('gemini_response', 'Gemini devolvió una respuesta demasiado grande. Intenta una pregunta más breve.');
     if (!firstText) { firstText = true; trace.stage('first_text', { firstTextMs: trace.elapsed() }); }
     if (typeof onText === 'function') {
       trace.stage('ui_stream_render');
@@ -359,13 +360,13 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
       parseLines();
       if (completed) {
         cancel();
-        return responseText(text, completed, apiKey);
+        return responseText(text, completed, apiKey, textLimit);
       }
     }
     trace.stage('stream_eof');
     buffer += decoder.decode();
     parseLines(true);
-    return responseText(text, completed, apiKey);
+    return responseText(text, completed, apiKey, textLimit);
   } catch (error) {
     cancel();
     if (knownFailures.has(error)) throw error;
@@ -376,12 +377,12 @@ async function readResponse(response, signal, apiKey, onText, onState, trace, fr
   }
 }
 
-function responseText(value, completed, apiKey) {
+function responseText(value, completed, apiKey, textLimit) {
   if (!completed) {
     throw failure('gemini_incomplete', 'Gemini no completó una respuesta utilizable. Reformula la pregunta o vuelve a intentar.');
   }
   const text = value.trim();
-  if (!text || text.length > MAX_ANSWER) {
+  if (!text || text.length > textLimit) {
     throw failure('gemini_response', 'Gemini no devolvió una respuesta de texto utilizable. Intenta una pregunta más concreta.');
   }
   // Credentials are never part of the prompt; omit even an accidental provider echo.
@@ -406,6 +407,7 @@ function httpFailure(status, reason) {
 async function requestAnswer(question, {
   apiKey,
   thinkingLevel = DEFAULT_THINKING_LEVEL,
+  equipmentFocus = false,
   history = [],
   viewContext = '',
   fetchImpl = globalThis.fetch,
@@ -416,6 +418,7 @@ async function requestAnswer(question, {
   trace,
 } = {}, mode) {
   const probe = mode === GENERATION_PROBE;
+  const useFocus = equipmentFocus && !probe;
   trace.stage('validate_input');
   trace.update({ requestMethod: 'POST', requestKind: probe ? 'generation_probe' : 'generation_stream' });
   const text = typeof question === 'string' ? question.trim() : '';
@@ -459,7 +462,8 @@ async function requestAnswer(question, {
       body = JSON.stringify({
         model: GEMINI_MODEL, stream: true, store: false,
         ...(probe ? { input: GENERATION_PROBE_QUESTION } : {
-          system_instruction: instructions(),
+          system_instruction: useFocus ? instructions() + '\n\n' + damageInstructions : instructions(),
+          ...(useFocus ? { response_format: damageFormat } : {}),
           input: contentsFor(text, history, viewContext, key),
         }),
         generation_config: { max_output_tokens: 2048, thinking_level: Object.hasOwn(THINKING_LEVELS, thinkingLevel) ? thinkingLevel : DEFAULT_THINKING_LEVEL, thinking_summaries: 'none' },
@@ -490,8 +494,25 @@ async function requestAnswer(question, {
       cancelBody(response.body);
       throw failure('gemini_content_type', 'Se recibió un formato inesperado en lugar de la respuesta de Gemini.');
     }
+    const updateText = useFocus && onText ? json => {
+      const answer = streamingAnswer(json);
+      if (answer) onText(answer.slice(0, MAX_ANSWER).split(key).join('[clave omitida]'));
+    } : onText;
+    const raw = await readResponse(response, controller.signal, key, updateText, onState, trace, framing, useFocus ? MAX_ANSWER * 6 + 128 : MAX_ANSWER);
+    let answer = raw, damageTarget = null;
+    if (useFocus) {
+      let payload;
+      try { payload = JSON.parse(raw); }
+      catch { throw failure('gemini_response', 'Gemini devolvió una respuesta incompleta. Vuelve a intentarlo.'); }
+      if (typeof payload?.answer !== 'string' || !payload.answer.trim()) {
+        throw failure('gemini_response', 'Gemini no devolvió texto para esta consulta.');
+      }
+      if (payload.answer.length > MAX_ANSWER) throw failure('gemini_response', 'La respuesta es demasiado larga. Intenta una pregunta más concreta.');
+      answer = payload.answer.trim().split(key).join('[clave omitida]');
+      damageTarget = equipment.find(part => part.id === payload.damageTarget)?.id ?? null;
+    }
     return {
-      answer: await readResponse(response, controller.signal, key, onText, onState, trace, framing),
+      answer, damageTarget,
       sources: probe ? [] : [PROJECT_SOURCE],
       mode: 'gemini',
       model: GEMINI_MODEL,

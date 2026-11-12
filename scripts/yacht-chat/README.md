@@ -71,3 +71,9 @@ Un HTTP 503 indica indisponibilidad en esa petición; por sí solo no identifica
 Como alternativa a la clave Gemini, se puede usar `POST /api/yacht-chat` del adaptador: `OPENAI_API_KEY`, `OPENAI_MODEL` y el contenido autorizado para la audiencia en `YACHT_CONTEXT_TEXT` se configuran solo en el entorno del servidor. Una clave Gemini configurada en la interfaz tiene prioridad sobre este endpoint. Nunca se incluyen claves ni un historial privado en los archivos públicos.
 
 El endpoint puede indicarse en una metaetiqueta `yacht-chat-endpoint` o mediante `data-endpoint` en el script `data-yacht-chat`. GitHub Pages es estático y no ejecuta este servidor. Una instalación remota requiere su propio alojamiento, orígenes permitidos y autenticación apropiada a los datos que se vayan a consultar. El adaptador se inicia en loopback para las pruebas y no constituye un servicio privado de producción.
+
+## Vistas de equipos
+
+El catálogo en `equipment.js` enlaza cada ID de `rocha/luz-de-mar/model.json` con su nombre, el ID de la sala y un punto de observación transitable en coordenadas longitudinal/transversal del yate. El objetivo se calcula a partir del centro de la caja de la pieza y la transformación del yate. La primera vista corresponde a `LD_MAC_001`, el motor de babor, en `LD_R02`.
+
+Para añadir una pieza, comprueba su ID y su sala en el modelo, escoge una posición con visibilidad desde el punto de entrada de la sala y añade una entrada al catálogo. Verifica el recorrido desde la pasarela y desde la misma sala. Gemini recibe el catálogo y devuelve una respuesta y un ID validado o `none` en la misma generación. El movimiento empieza después de que el chat muestra la respuesta completada. Los informes ambiguos requieren aclaración. La cámara no crea registros de mantenimiento.

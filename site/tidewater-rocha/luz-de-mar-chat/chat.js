@@ -1,3 +1,4 @@
+import { createEquipmentTour } from './camera-tour.js';
 import { answerQuestion } from './assistant.js';
 import { GEMINI_MODEL, DEFAULT_THINKING_LEVEL, THINKING_LEVELS, checkGeminiConnection, testGeminiGeneration } from './gemini.js';
 import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
@@ -78,7 +79,7 @@ function installStyles() {
   if (document.querySelector('link[data-ldm-chat-style]')) return;
   const link = el('link');
   link.rel = 'stylesheet';
-  link.href = new URL('./chat.css?v=clean-start-1', import.meta.url).href;
+  link.href = new URL('./chat.css?v=equipment-focus-1', import.meta.url).href;
   link.dataset.ldmChatStyle = '';
   document.head.append(link);
 }
@@ -90,6 +91,12 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   installGlobalDiagnostics(window);
   installStyles();
 
+  const tour = createEquipmentTour();
+  let focusTimer = null;
+  function cancelFocus() {
+    clearTimeout(focusTimer);
+    tour.stop();
+  }
   const history = [];
   let geminiApiKey = '';
   let connectionVersion = 0;
@@ -373,6 +380,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       trace.fail('chat_key_in_question');
       return;
     }
+    cancelFocus();
     trace.stage('ui_context');
     const context = viewContext();
     const prior = history.map(message => ({ ...message }));
@@ -403,6 +411,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         viewContext: context,
         endpoint,
         geminiApiKey,
+        equipmentFocus: Boolean(window.__app?.yachtWalk),
         thinkingLevel: reasoningSelect.value,
         signal: controller.signal,
         trace,
@@ -423,7 +432,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
           scrollToLatest();
         },
       });
-      if (disposed || requestVersion !== connectionVersion) return;
+      if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
       if (!result || typeof result.answer !== 'string' || !result.answer.trim()) {
         throw new Error('No se recibió una respuesta. Puedes volver a intentarlo.');
       }
@@ -439,6 +448,15 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       mode.dataset.mode = ['gemini', 'ai'].includes(result.mode) ? 'ai' : 'local';
       if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
       trace.finish();
+      if (opened && result.damageTarget) {
+        focusTimer = setTimeout(() => {
+          if (!opened || disposed || requestVersion !== connectionVersion) return;
+          if (!tour.start(result.damageTarget, close)) {
+            status.hidden = false;
+            status.textContent = 'La vista de esta pieza no está disponible en la escena actual.';
+          }
+        }, 900);
+      }
     } catch (error) {
       if (disposed || requestVersion !== connectionVersion) return;
       trace.fail(error?.code || 'chat_unexpected', error);
@@ -474,6 +492,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   function open() {
     if (disposed || opened) return;
+    cancelFocus();
     previousFocus = document.activeElement;
     opened = true;
     panel.hidden = false;
@@ -487,6 +506,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   function close() {
     if (!opened) return;
+    clearTimeout(focusTimer);
     opened = false;
     keyField.value = '';
     useKey.disabled = true;
@@ -500,6 +520,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
 
   function resetGemini(event) {
+    cancelFocus();
     connectionVersion += 1;
     requestController?.abort(event?.type === 'pagehide' ? 'pagehide' : event === 'destroy' ? 'destroy' : 'disconnect');
     geminiApiKey = '';
@@ -649,6 +670,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   minimize.addEventListener('click', close);
   clear.addEventListener('click', () => {
     if (pending) return;
+    cancelFocus();
     history.length = 0;
     failed = null;
     log.replaceChildren();

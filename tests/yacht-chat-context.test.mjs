@@ -162,7 +162,7 @@ test('Gemini receives each damage question and the report, and its generated tex
   let calls = 0;
   t.mock.method(globalThis, 'fetch', async (url, request) => {
     const body = JSON.parse(request.body);
-    assert.equal(body.model, 'gemini-3.5-flash-lite');
+    assert.equal(body.model, 'gemini-4-hydrogen');
     assert.match(body.system_instruction, /Se han reportado daños en el motor de babor/);
     assert.equal(body.input.at(-1).content[0].text, questions[calls]);
     calls++;

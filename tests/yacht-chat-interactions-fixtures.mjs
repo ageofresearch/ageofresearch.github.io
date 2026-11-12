@@ -1,5 +1,5 @@
 // Wire-format fixtures follow Google's documented Interactions SSE event contract.
-export const created = () => ({ event_type: 'interaction.created', interaction: { model: 'gemini-3.5-flash-lite', status: 'in_progress' } });
+export const created = () => ({ event_type: 'interaction.created', interaction: { model: 'gemini-4-hydrogen', status: 'in_progress' } });
 export const modelStart = (index = 0) => ({ event_type: 'step.start', index, step: { type: 'model_output' } });
 export const textDelta = (text, index = 0) => ({ event_type: 'step.delta', index, delta: { type: 'text', text } });
 export const stepStop = (index = 0) => ({ event_type: 'step.stop', index });

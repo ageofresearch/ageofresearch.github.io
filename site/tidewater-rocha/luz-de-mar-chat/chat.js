@@ -437,7 +437,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       const text = clipped(result.answer.trim(), MAX_ANSWER);
       addMessage('assistant', text, result.sources);
       remember({ role: 'assistant', content: text, ...(result.topic ? { topic: result.topic } : {}) });
-      mode.textContent = result.mode === 'gemini' ? 'Gemini 3.5 Flash-Lite' : result.mode === 'ai' ? 'IA conectada' : 'Orientación local';
+      mode.textContent = result.mode === 'gemini' ? 'Gemini 4 Hydrogen' : result.mode === 'ai' ? 'IA conectada' : 'Orientación local';
       mode.dataset.mode = ['gemini', 'ai'].includes(result.mode) ? 'ai' : 'local';
       if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
       trace.finish();

@@ -1,5 +1,5 @@
 import { answerQuestion } from './assistant.js';
-import { GEMINI_MODEL, checkGeminiConnection } from './gemini.js';
+import { GEMINI_MODEL, checkGeminiConnection, testGeminiGeneration } from './gemini.js';
 import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
 
 const ROOT_ID = 'ldm-chat-widget';
@@ -171,6 +171,11 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   disconnectKey.type = 'button';
   const checkConnection = el('button', 'ldm-chat-key-action', 'Comprobar conexión');
   checkConnection.type = 'button';
+  const testGeneration = el('button', 'ldm-chat-key-action', 'Probar respuesta breve');
+  testGeneration.type = 'button';
+  testGeneration.hidden = true;
+  const generationNote = el('p', 'ldm-chat-key-note', 'Prueba de hasta 30 s sin contexto del yate. Usa la API y puede consumir tokens.');
+  generationNote.hidden = true;
   keyConnected.append(changeKey, disconnectKey, checkConnection);
   connection.append(connectionTitle, keyStatus, keyForm, keyConnected);
 
@@ -189,7 +194,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   const diagnosticStatus = el('p', 'ldm-chat-key-note');
   diagnosticStatus.setAttribute('role', 'status');
   diagnosticActions.append(copyDiagnostic, refreshDiagnostic);
-  diagnosticPanel.append(diagnosticNote, diagnosticField, diagnosticActions, diagnosticStatus, el('code', 'ldm-chat-diagnostic-build', CHAT_BUILD));
+  diagnosticPanel.append(diagnosticNote, diagnosticField, diagnosticActions, generationNote, testGeneration, diagnosticStatus, el('code', 'ldm-chat-diagnostic-build', CHAT_BUILD));
   function refreshReport() {
     try { diagnosticField.value = diagnostics.report(); }
     catch (error) {
@@ -317,7 +322,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     clear.disabled = value;
     keyField.disabled = value;
     useKey.disabled = value || !keyField.value.trim();
-    changeKey.disabled = disconnectKey.disabled = cancelKey.disabled = checkConnection.disabled = value;
+    changeKey.disabled = disconnectKey.disabled = cancelKey.disabled = checkConnection.disabled = testGeneration.disabled = value;
     send.disabled = value || !field.value.trim();
     log.setAttribute('aria-busy', String(value));
     for (const button of log.querySelectorAll('button')) button.disabled = value;
@@ -392,9 +397,13 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         signal: controller.signal,
         trace,
         onState(state) {
-          if (disposed || controller.signal.aborted || requestVersion !== connectionVersion || state !== 'accepted') return;
-          accepted = true;
-          status.textContent = 'Google aceptó la consulta. Preparando la respuesta…';
+          if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
+          if (state === 'accepted') {
+            accepted = true;
+            status.textContent = 'Google aceptó la consulta. Preparando la respuesta…';
+          } else if (state === 'keepalive' && !accepted && !partial) {
+            status.textContent = 'El flujo sigue abierto, pero todavía no llegan eventos de generación.';
+          }
         },
         onText(text) {
           if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
@@ -492,6 +501,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     keyField.value = '';
     keyForm.hidden = false;
     keyConnected.hidden = true;
+    testGeneration.hidden = generationNote.hidden = true;
     cancelKey.hidden = true;
     useKey.disabled = true;
     mode.textContent = endpoint ? 'Por consultar' : 'Orientación local';
@@ -517,6 +527,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     keyField.value = '';
     keyForm.hidden = true;
     keyConnected.hidden = false;
+    testGeneration.hidden = generationNote.hidden = false;
     cancelKey.hidden = false;
     useKey.disabled = true;
     keyStatus.textContent = 'Clave cargada en esta pestaña · pendiente de consultar';
@@ -531,6 +542,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     keyField.value = '';
     keyForm.hidden = false;
     keyConnected.hidden = true;
+    testGeneration.hidden = generationNote.hidden = true;
     useKey.disabled = true;
     cancelKey.hidden = !geminiApiKey;
     keyField.focus({ preventScroll: true });
@@ -540,6 +552,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     keyField.value = '';
     keyForm.hidden = true;
     keyConnected.hidden = false;
+    testGeneration.hidden = generationNote.hidden = false;
     field.focus({ preventScroll: true });
   });
   disconnectKey.addEventListener('click', () => {
@@ -574,6 +587,46 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       trace.stage('ui_error');
       trace.fail('chat_unexpected', error);
       notice = 'No se pudo mostrar la comprobación. Abre el diagnóstico del chat.';
+    } finally {
+      if (requestController === controller) requestController = null;
+      if (!disposed) {
+        setPending(false);
+        if (notice && version === connectionVersion) { status.hidden = false; status.textContent = notice; }
+      }
+      refreshReport();
+    }
+  });
+  testGeneration.addEventListener('click', async () => {
+    if (pending || disposed || !geminiApiKey) return;
+    const version = connectionVersion;
+    const controller = new AbortController();
+    let notice = '', accepted = false;
+    requestController = controller;
+    try {
+      setPending(true);
+      status.textContent = 'Probando una respuesta breve sin contexto del yate…';
+      await testGeminiGeneration({
+        apiKey: geminiApiKey, signal: controller.signal,
+        onState(state) {
+          if (disposed || controller.signal.aborted || version !== connectionVersion) return;
+          if (state === 'accepted') {
+            accepted = true;
+            status.textContent = 'Google aceptó la prueba breve. Esperando su respuesta…';
+          } else if (state === 'keepalive' && !accepted) {
+            status.textContent = 'El flujo sigue abierto, pero todavía no llegan eventos de generación.';
+          }
+        },
+      });
+      if (!disposed && version === connectionVersion) {
+        notice = 'Google completó la respuesta breve. Una pregunta comprobará ahora la conversación con el contexto del yate.';
+        keyStatus.textContent = 'Google generó texto en la prueba breve';
+      }
+    } catch (error) {
+      if (!disposed && version === connectionVersion) {
+        notice = typeof error?.code === 'string' && error.code.startsWith('gemini_') && error instanceof Error
+          ? error.message : 'No se pudo completar la prueba breve. Abre el diagnóstico del chat.';
+        keyStatus.textContent = error?.code === 'gemini_cancelled' ? 'Prueba breve cancelada · clave en esta pestaña' : 'La prueba breve falló · abre el diagnóstico';
+      }
     } finally {
       if (requestController === controller) requestController = null;
       if (!disposed) {

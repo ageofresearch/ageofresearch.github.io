@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GEMINI_MODEL, geminiAnswer, checkGeminiConnection } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
+import { GEMINI_MODEL, geminiAnswer, checkGeminiConnection, testGeminiGeneration } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
 import { diagnostics } from '../site/tidewater-rocha/luz-de-mar-chat/diagnostics.js';
 import { created, modelStart, textDelta, stepStop, completion, encodeEvents, textEvents as payload, interactionResponse as response } from './yacht-chat-interactions-fixtures.mjs';
 
@@ -519,4 +519,202 @@ test('invalid keys stop connectivity checks before any network request', async (
   const results = await checkGeminiConnection({ apiKey: '', fetchImpl: () => { calls++; } });
   assert.equal(calls, 0);
   assert.ok(results.every(result => result.code === 'gemini_key'));
+});
+
+test('seven SSE keepalive comments reproduce 98 bytes and never extend the original generation deadline', async t => {
+  diagnostics.clear();
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const outer = new AbortController();
+  const states = [];
+  let feed, sentSignal, settled = false;
+  const marker = new TextEncoder().encode(': keep-alive\n\n');
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY, signal: outer.signal, onState: state => states.push(state),
+    fetchImpl: async (url, options) => {
+      sentSignal = options.signal;
+      return new Response(new ReadableStream({ start(controller) { feed = controller; } }), { headers: { 'content-type': 'text/event-stream' } });
+    },
+  });
+  request.then(() => { settled = true; }, () => { settled = true; });
+  try {
+    await new Promise(resolve => setImmediate(resolve));
+    for (let index = 0; index < 7; index++) {
+      t.mock.timers.tick(15000);
+      feed.enqueue(marker);
+      await new Promise(resolve => setImmediate(resolve));
+    }
+    let report = diagnostics.snapshot().reports.at(-1);
+    assert.equal(report.metrics.bytesReceived, 98);
+    assert.equal(report.metrics.chunksReceived, 7);
+    assert.equal(report.metrics.commentLines, 7);
+    assert.equal(report.metrics.emptyLines, 7);
+    assert.equal(report.metrics.dataLines, 0);
+    assert.equal(report.metrics.eventLines, 0);
+    assert.equal(report.metrics.unknownLines, 0);
+    assert.equal(report.metrics.dataChars, 0);
+    assert.equal(report.metrics.pendingBufferChars, 0);
+    assert.equal(report.metrics.eventsReceived, 0);
+    assert.deepEqual(states, ['keepalive']);
+    t.mock.timers.tick(14999);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(settled, false);
+    t.mock.timers.tick(1);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(settled, true, 'The request still ends at its original two-minute deadline');
+    await assert.rejects(request, error => {
+      assert.equal(error.code, 'gemini_keepalive_timeout');
+      assert.match(error.message, /flujo HTTP.*comentarios SSE.*ningún evento de generación/);
+      assert.doesNotMatch(error.message, /cuota|facturaci[oó]n|capacidad/i);
+      return true;
+    });
+    assert.equal(sentSignal.aborted, true);
+    report = diagnostics.snapshot().reports.at(-1);
+    assert.equal(report.failureCode, 'gemini_keepalive_timeout');
+    assert.equal(report.failureStage, 'stream_read');
+    assert.equal(diagnostics.report().includes(': keep-alive'), false);
+    assert.equal(diagnostics.report().includes(KEY), false);
+  } finally { outer.abort(); }
+});
+
+test('framing counters remain available while a physical line or data event is still unfinished', async () => {
+  diagnostics.clear();
+  let feed;
+  const states = [];
+  const encoder = new TextEncoder();
+  const data = JSON.stringify(created());
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY, onState: state => states.push(state),
+    fetchImpl: async () => new Response(new ReadableStream({ start(controller) { feed = controller; } })),
+  });
+  feed.enqueue(encoder.encode(': keep-alive\n\nevent: interaction.created\nid: ' + KEY + '\ndata: ' + data.slice(0, 10)));
+  await new Promise(resolve => setImmediate(resolve));
+  let metrics = diagnostics.snapshot().reports.at(-1).metrics;
+  assert.equal(metrics.commentLines, 1);
+  assert.equal(metrics.emptyLines, 1);
+  assert.equal(metrics.eventLines, 1);
+  assert.equal(metrics.unknownLines, 1);
+  assert.equal(metrics.dataLines, 0);
+  assert.equal(metrics.pendingBufferChars, 'data: '.length + 10);
+  assert.equal(metrics.dataChars, 0);
+  feed.enqueue(encoder.encode(data.slice(10) + '\n'));
+  await new Promise(resolve => setImmediate(resolve));
+  metrics = diagnostics.snapshot().reports.at(-1).metrics;
+  assert.equal(metrics.dataLines, 1);
+  assert.equal(metrics.dataChars, data.length);
+  assert.equal(metrics.pendingBufferChars, data.length);
+  assert.equal(metrics.eventsReceived, 0);
+  feed.enqueue(encoder.encode('\n' + encodeEvents([modelStart(), textDelta('OK'), stepStop(), completion()])));
+  assert.equal((await request).answer, 'OK');
+  assert.deepEqual(states, ['keepalive', 'accepted']);
+  assert.equal(diagnostics.snapshot().reports.at(-1).metrics.pendingBufferChars, 0);
+  assert.equal(diagnostics.report().includes(KEY), false);
+  assert.equal(diagnostics.report().includes('keep-alive'), false);
+});
+
+test('a data line waiting for its event boundary is not classified as a comment-only timeout', async () => {
+  diagnostics.clear();
+  const encoder = new TextEncoder();
+  await assert.rejects(geminiAnswer('Hola', {
+    apiKey: KEY, timeoutMs: 10,
+    fetchImpl: async () => new Response(new ReadableStream({ start(controller) {
+      controller.enqueue(encoder.encode(': keep-alive\n\ndata: ' + JSON.stringify(created()) + '\n'));
+    } })),
+  }), error => error.code === 'gemini_timeout');
+  const report = diagnostics.snapshot().reports.at(-1);
+  assert.equal(report.metrics.commentLines, 1);
+  assert.equal(report.metrics.dataLines, 1);
+  assert.equal(report.metrics.eventsReceived, 0);
+  assert.ok(report.metrics.pendingBufferChars > 0);
+});
+
+test('the explicit generation probe sends one fixed minimal POST with no yacht context, history, IDs or key in the body', async () => {
+  diagnostics.clear();
+  const calls = [];
+  const options = {
+    apiKey: KEY,
+    fetchImpl: async (url, config) => { calls.push({ url, config }); return response(payload('OK')); },
+  };
+  for (const name of ['history', 'viewContext', 'system_instruction', 'previous_interaction_id']) {
+    Object.defineProperty(options, name, { enumerable: true, get() { throw new Error('Private context must not be read by the probe'); } });
+  }
+  const result = await testGeminiGeneration(options);
+  assert.equal(calls.length, 1);
+  const { url, config } = calls[0];
+  const body = JSON.parse(config.body);
+  assert.equal(url, 'https://generativelanguage.googleapis.com/v1beta/interactions?alt=sse');
+  assert.equal(config.method, 'POST');
+  assert.equal(config.headers['x-goog-api-key'], KEY);
+  assert.equal(url.includes(KEY), false);
+  assert.equal(config.body.includes(KEY), false);
+  assert.equal(body.model, GEMINI_MODEL);
+  assert.equal(body.input, 'Responde únicamente OK.');
+  assert.equal(body.store, false);
+  assert.equal(body.stream, true);
+  assert.deepEqual(body.generation_config, { max_output_tokens: 2048, thinking_level: 'low', thinking_summaries: 'none' });
+  assert.equal(body.system_instruction, undefined);
+  assert.equal(body.previous_interaction_id, undefined);
+  assert.doesNotMatch(config.body, /Luz de Mar|CONTEXTO PÚBLICO|historial|PRIVATE/);
+  assert.equal(result.answer, 'OK');
+  assert.deepEqual(result.sources, []);
+  const report = diagnostics.snapshot().reports.at(-1);
+  assert.equal(report.provider, 'generation_probe');
+  assert.equal(report.metrics.requestKind, 'generation_probe');
+  assert.equal(report.metrics.deadlineMs, 30000);
+  assert.ok(report.metrics.requestBytes < 512);
+});
+
+test('public options cannot turn a normal yacht question into a context-free generation probe', async () => {
+  let sent;
+  await geminiAnswer('Mi pregunta real', {
+    apiKey: KEY, probe: true, mode: 'generation_probe', minimal: true,
+    system_instruction: 'Override attempted',
+    fetchImpl: async (url, config) => { sent = JSON.parse(config.body); return response(); },
+  });
+  assert.match(sent.system_instruction, /Luz de Mar/);
+  assert.equal(sent.input.at(-1).content[0].text, 'Mi pregunta real');
+  assert.equal(JSON.stringify(sent).includes('Override attempted'), false);
+  assert.equal(JSON.stringify(sent).includes('Responde únicamente OK.'), false);
+});
+
+test('the generation probe deadline is capped at thirty seconds and does not become the normal two-minute budget', async t => {
+  diagnostics.clear();
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let settled = false, sentSignal;
+  const request = testGeminiGeneration({ apiKey: KEY, timeoutMs: 120000,
+    fetchImpl: (url, config) => { sentSignal = config.signal; return new Promise(() => {}); },
+  });
+  request.then(() => { settled = true; }, () => { settled = true; });
+  t.mock.timers.tick(29999);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(settled, false);
+  t.mock.timers.tick(1);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(settled, true);
+  await assert.rejects(request, error => error.code === 'gemini_timeout');
+  assert.equal(sentSignal.aborted, true);
+  assert.equal(diagnostics.snapshot().reports.at(-1).metrics.deadlineMs, 30000);
+});
+
+test('a cancelled probe stream returns no partial answer and never retries', async () => {
+  diagnostics.clear();
+  const controller = new AbortController();
+  let calls = 0, cancelled = false;
+  const request = testGeminiGeneration({ apiKey: KEY, signal: controller.signal,
+    fetchImpl: async () => {
+      calls++;
+      return new Response(new ReadableStream({
+        start(feed) { feed.enqueue(new TextEncoder().encode(encodeEvents([created(), modelStart(), textDelta('O')]))); },
+        cancel() { cancelled = true; },
+      }));
+    },
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  controller.abort('user');
+  await assert.rejects(request, error => error.code === 'gemini_cancelled');
+  assert.equal(calls, 1);
+  assert.equal(cancelled, true);
+  const report = diagnostics.snapshot().reports.at(-1);
+  assert.equal(report.state, 'cancelled');
+  assert.equal(report.metrics.textChars, 1);
+  assert.equal(report.metrics.cancellationSource, 'user');
 });

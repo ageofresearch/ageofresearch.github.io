@@ -6,6 +6,8 @@ const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/interactions?
 const MAX_RESPONSE_BYTES = 256 * 1024;
 const MAX_ANSWER = 12000;
 const knownFailures = new WeakSet();
+const GENERATION_PROBE = Symbol('generation_probe');
+const GENERATION_PROBE_QUESTION = 'Responde únicamente OK.';
 
 function failure(code, message, cause) {
   const error = new Error(message, cause ? { cause } : undefined);
@@ -134,7 +136,7 @@ async function readErrorDetails(response, trace) {
   }
 }
 
-async function readResponse(response, signal, apiKey, onText, onState, trace) {
+async function readResponse(response, signal, apiKey, onText, onState, trace, framing) {
   trace.stage('stream_read');
   if (Number(response.headers?.get?.('content-length')) > MAX_RESPONSE_BYTES) {
     cancelBody(response.body);
@@ -145,9 +147,21 @@ async function readResponse(response, signal, apiKey, onText, onState, trace) {
   catch (error) { throw failure('gemini_stream_read', 'No se pudo abrir el flujo de respuesta de Gemini. Abre el diagnóstico del chat.', error); }
   if (!reader) throw failure('gemini_response', 'No se pudo leer la respuesta de Gemini. Vuelve a intentarlo.');
   const decoder = new TextDecoder();
-  let buffer = '', event = [], text = '', completed = false, accepted = false;
+  let buffer = '', event = [], pendingDataChars = 0, text = '', completed = false, accepted = false;
   const steps = new Map();
-  let length = 0, chunks = 0, events = 0, firstText = false;
+  let length = 0, chunks = 0, events = 0, firstText = false, keepaliveNotified = false;
+  function framingMetrics() {
+    // Include a partial physical line and data waiting for its blank-line boundary.
+    framing.pendingBufferChars = buffer.length + pendingDataChars;
+    trace.update(framing);
+  }
+  function notifyState(value) {
+    if (typeof onState !== 'function') return;
+    trace.stage('ui_state_render');
+    try { onState(value); }
+    catch (error) { throw failure('gemini_render', 'No se pudo mostrar el estado de la consulta. Abre el diagnóstico.', error); }
+  }
+  framingMetrics();
   function append(delta) {
     if (!delta) return;
     text += delta;
@@ -171,12 +185,14 @@ async function readResponse(response, signal, apiKey, onText, onState, trace) {
     if (!event.length) return;
     const data = event.join('\n');
     event = [];
+    pendingDataChars = 0;
     if (data.trim() === '[DONE]') return;
     let payload;
     trace.stage('parse_stream_event');
     try { payload = JSON.parse(data); }
     catch (error) { throw failure('gemini_stream_json', 'Gemini devolvió una respuesta que no se pudo interpretar. Abre el diagnóstico del chat.', error); }
     events++;
+    framing.eventsReceived = events;
     trace.update({ eventsReceived: events });
     if (events === 1) { trace.stage('first_event', { firstEventMs: trace.elapsed() }); }
     trace.stage('parse_stream_event');
@@ -195,11 +211,7 @@ async function readResponse(response, signal, apiKey, onText, onState, trace) {
       if (!accepted) {
         accepted = true;
         trace.stage('provider_accepted', { acceptedMs: trace.elapsed() });
-        if (typeof onState === 'function') {
-          trace.stage('ui_state_render');
-          try { onState('accepted'); }
-          catch (error) { throw failure('gemini_render', 'No se pudo mostrar el estado de la consulta. Abre el diagnóstico.', error); }
-        }
+        notifyState('accepted');
       }
     } else if (payload.event_type === 'interaction.status_update') {
       status(payload.status);
@@ -223,8 +235,31 @@ async function readResponse(response, signal, apiKey, onText, onState, trace) {
     }
   }
   function line(value) {
-    if (!value) dispatch();
-    else if (value.startsWith('data:')) event.push(value.slice(5).replace(/^ /, ''));
+    let notifyKeepalive = false;
+    try {
+      if (!value) {
+        framing.emptyLines++;
+        dispatch();
+      } else if (value.startsWith(':')) {
+        framing.commentLines++;
+        if (!keepaliveNotified && framing.dataLines === 0 && events === 0) {
+          keepaliveNotified = true;
+          notifyKeepalive = true;
+        }
+      } else if (value === 'data' || value.startsWith('data:')) {
+        const data = value === 'data' ? '' : value.slice(5).replace(/^ /, '');
+        framing.dataLines++;
+        framing.dataChars += data.length;
+        event.push(data);
+        pendingDataChars += data.length;
+      } else if (value === 'event' || value.startsWith('event:')) {
+        framing.eventLines++;
+      } else {
+        // Other field names (including ignored id/retry fields) are counted, never retained.
+        framing.unknownLines++;
+      }
+    } finally { framingMetrics(); }
+    if (notifyKeepalive) notifyState('keepalive');
   }
   function parseLines(final = false) {
     let index;
@@ -232,14 +267,16 @@ async function readResponse(response, signal, apiKey, onText, onState, trace) {
       // A CRLF delimiter can be split across transport chunks.
       if (buffer[index] === '\r' && index === buffer.length - 1 && !final) break;
       const width = buffer[index] === '\r' && buffer[index + 1] === '\n' ? 2 : 1;
-      line(buffer.slice(0, index));
+      const value = buffer.slice(0, index);
       buffer = buffer.slice(index + width);
-      if (completed) return;
+      line(value);
+      if (completed) { buffer = ''; event = []; pendingDataChars = 0; framingMetrics(); return; }
     }
     if (final) {
-      if (buffer) line(buffer);
+      if (buffer) { const value = buffer; buffer = ''; line(value); }
       dispatch();
     }
+    framingMetrics();
   }
   const cancel = () => { try { reader.cancel().catch(() => {}); } catch { /* Best effort. */ } };
   signal.addEventListener('abort', cancel, { once: true });
@@ -310,23 +347,26 @@ async function requestAnswer(question, {
   history = [],
   viewContext = '',
   fetchImpl = globalThis.fetch,
-  timeoutMs = 120000,
+  timeoutMs,
   signal,
   onText,
   onState,
   trace,
-} = {}) {
+} = {}, mode) {
+  const probe = mode === GENERATION_PROBE;
   trace.stage('validate_input');
-  trace.update({ requestMethod: 'POST', requestKind: 'generation_stream' });
+  trace.update({ requestMethod: 'POST', requestKind: probe ? 'generation_probe' : 'generation_stream' });
   const text = typeof question === 'string' ? question.trim() : '';
   if (!text || text.length > 2000) throw failure('gemini_question', 'Escribe una pregunta de hasta 2.000 caracteres.');
   const key = typeof apiKey === 'string' ? apiKey.trim() : '';
   if (key.length < 8 || key.length > 512 || /\s/.test(key)) throw failure('gemini_key', 'Introduce una clave API de Gemini válida.');
   if (typeof fetchImpl !== 'function') throw failure('gemini_network', 'El navegador no puede conectar con Gemini.');
   if (signal?.aborted) throw failure('gemini_cancelled', 'Consulta cancelada.');
-  const wait = Number.isFinite(timeoutMs) && timeoutMs > 0 ? Math.min(timeoutMs, 120000) : 120000;
+  const maximumWait = probe ? 30000 : 120000;
+  const wait = Number.isFinite(timeoutMs) && timeoutMs > 0 ? Math.min(timeoutMs, maximumWait) : maximumWait;
   trace.update({ deadlineMs: wait });
   const controller = new AbortController();
+  const framing = { commentLines: 0, dataLines: 0, eventLines: 0, unknownLines: 0, emptyLines: 0, pendingBufferChars: 0, dataChars: 0, eventsReceived: 0 };
   let timedOut = false, responseStarted = false, cancelled = false;
   let timer;
   let rejectCancellation;
@@ -338,14 +378,16 @@ async function requestAnswer(question, {
     rejectCancellation(failure('gemini_cancelled', 'Consulta cancelada.'));
   };
   signal?.addEventListener('abort', cancel, { once: true });
-  const deadlineMessage = () => responseStarted
-    ? 'Google inició la respuesta, pero no la completó dentro del plazo. Puedes volver a intentarlo.'
-    : 'No llegó una respuesta de Google dentro del plazo. Comprueba tu conexión o vuelve a intentarlo más tarde.';
+  const deadlineFailure = () => framing.commentLines > 0 && framing.dataLines === 0 && framing.eventsReceived === 0
+    ? failure('gemini_keepalive_timeout', 'El flujo HTTP permaneció abierto y recibió comentarios SSE, pero no llegó ningún evento de generación dentro del plazo.')
+    : failure('gemini_timeout', responseStarted
+      ? 'Google inició la respuesta, pero no la completó dentro del plazo. Puedes volver a intentarlo.'
+      : 'No llegó una respuesta de Google dentro del plazo. Comprueba tu conexión o vuelve a intentarlo más tarde.');
   const timeout = new Promise((resolve, reject) => {
     timer = setTimeout(() => {
       timedOut = true;
       controller.abort();
-      reject(failure('gemini_timeout', deadlineMessage()));
+      reject(deadlineFailure());
     }, wait);
   });
   const operation = async () => {
@@ -354,8 +396,10 @@ async function requestAnswer(question, {
     try {
       body = JSON.stringify({
         model: GEMINI_MODEL, stream: true, store: false,
-        system_instruction: instructions(),
-        input: contentsFor(text, history, viewContext, key),
+        ...(probe ? { input: GENERATION_PROBE_QUESTION } : {
+          system_instruction: instructions(),
+          input: contentsFor(text, history, viewContext, key),
+        }),
         generation_config: { max_output_tokens: 2048, thinking_level: 'low', thinking_summaries: 'none' },
       });
     } catch (error) { throw failure('gemini_request', 'No se pudo preparar la consulta. Abre el diagnóstico del chat.', error); }
@@ -385,8 +429,8 @@ async function requestAnswer(question, {
       throw failure('gemini_content_type', 'Se recibió un formato inesperado en lugar de la respuesta de Gemini. Abre el diagnóstico del chat.');
     }
     return {
-      answer: await readResponse(response, controller.signal, key, onText, onState, trace),
-      sources: [PROJECT_SOURCE],
+      answer: await readResponse(response, controller.signal, key, onText, onState, trace, framing),
+      sources: probe ? [] : [PROJECT_SOURCE],
       mode: 'gemini',
       model: GEMINI_MODEL,
       topic: null,
@@ -395,7 +439,7 @@ async function requestAnswer(question, {
   try {
     return await Promise.race([operation(), timeout, cancellation]);
   } catch (error) {
-    if (timedOut) throw failure('gemini_timeout', deadlineMessage());
+    if (timedOut) throw deadlineFailure();
     if (cancelled) throw failure('gemini_cancelled', 'Consulta cancelada.');
     // Never forward arbitrary provider, browser, or fetch error text (it can contain a key).
     if (error instanceof Error && knownFailures.has(error)) throw error;
@@ -406,11 +450,11 @@ async function requestAnswer(question, {
   }
 }
 
-export async function geminiAnswer(question, options = {}) {
-  const trace = options.trace || diagnostics.start('gemini');
+async function answerWithMode(question, options, mode) {
+  const trace = mode === GENERATION_PROBE ? diagnostics.start('generation_probe') : options.trace || diagnostics.start('gemini');
   trace.update({ providerInstrumented: true });
   try {
-    const result = await requestAnswer(question, { ...options, trace });
+    const result = await requestAnswer(question, { ...options, trace }, mode);
     trace.stage('provider_complete');
     trace.finish();
     return result;
@@ -418,6 +462,15 @@ export async function geminiAnswer(question, options = {}) {
     trace.fail(knownFailures.has(error) ? error.code : 'chat_unexpected', error);
     throw error;
   }
+}
+
+export async function geminiAnswer(question, options = {}) {
+  return answerWithMode(question, options);
+}
+
+/** Explicit diagnostic generation: exactly one request with fixed input and no yacht context. */
+export async function testGeminiGeneration({ apiKey, fetchImpl, timeoutMs, signal, onText, onState } = {}) {
+  return answerWithMode(GENERATION_PROBE_QUESTION, { apiKey, fetchImpl, timeoutMs, signal, onText, onState }, GENERATION_PROBE);
 }
 
 async function modelMetadata(response, signal, trace) {

@@ -271,6 +271,12 @@ function configure(ui, key = FAKE_KEY) {
   return field;
 }
 
+function openDiagnostics(ui) {
+  const panel = ui.document.querySelector('.ldm-chat-diagnostics');
+  panel.open = true;
+  panel.dispatchEvent(new UIEvent('toggle', { bubbles: false }));
+}
+
 test('configuring Gemini clears the editor, makes no request, and stores no key in the DOM or storage', async () => {
   await withUI(async ui => {
     configure(ui);
@@ -613,6 +619,140 @@ test('acceptance updates the UI before any answer text without adding an assista
     await request;
     assert.equal(ui.document.body.textContent.split('Respuesta confirmada.').length - 1, 1);
     assert.equal(diagnostics.snapshot().reports.at(-1).state, 'success');
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('a brief generation is explicit, sends one fixed prompt without yacht context, and preserves only the real conversation history', async () => {
+  await withUI(async ui => {
+    openDiagnostics(ui);
+    assert.equal(visible(button(ui, 'Probar respuesta breve', { visibleOnly: false })), false);
+    configure(ui);
+    assert.equal(ui.calls.length, 0);
+    const probeButton = button(ui, 'Probar respuesta breve');
+    const noteText = 'Prueba de hasta 30 s sin contexto del yate. Usa la API y puede consumir tokens.';
+    const note = descendants(ui.document).find(node => node.textContent === noteText);
+    assert.ok(note && visible(note), 'The API usage note is visible before starting a generation');
+
+    const privateQuestion = 'PRIVATE PREVIOUS QUESTION ABOUT THE YACHT';
+    await ui.api.sendQuestion(privateQuestion);
+    const log = ui.document.querySelector('[role="log"]');
+    const previousLog = log.textContent;
+    ui.respond = () => interactionResponse([created(), modelStart(), textDelta('PROBE_ONLY_RESPONSE'), stepStop(), completion()]);
+    click(probeButton);
+    await settle(() => ui.document.body.textContent.includes('Google completó la respuesta breve.'));
+    assert.equal(ui.calls.length, 2, 'The explicit click adds exactly one generation request');
+    const request = ui.calls[1];
+    const body = JSON.parse(request.options.body);
+    assert.equal(request.options.method, 'POST');
+    assert.equal(new URL(request.url).pathname, '/v1beta/interactions');
+    assert.equal(new Headers(request.options.headers).get('x-goog-api-key'), FAKE_KEY);
+    assert.equal(request.url.includes(FAKE_KEY), false);
+    assert.equal(request.options.body.includes(FAKE_KEY), false);
+    assert.equal(body.model, MODEL);
+    assert.equal(body.stream, true);
+    assert.equal(body.store, false);
+    assert.equal(body.system_instruction, undefined);
+    assert.equal(body.previous_interaction_id, undefined);
+    assert.equal(body.input, 'Responde únicamente OK.');
+    assert.equal(request.options.body.includes(privateQuestion), false);
+    assert.equal(request.options.body.includes('Luz de Mar'), false);
+    assert.equal(log.textContent, previousLog, 'Probe prompts and responses never become conversation messages');
+    const report = diagnostics.snapshot().reports.find(report => report.provider === 'generation_probe');
+    assert.ok(report);
+    assert.equal(report.state, 'success');
+    assert.equal(report.metrics.requestKind, 'generation_probe');
+    assert.equal(diagnostics.report().includes('PROBE_ONLY_RESPONSE'), false);
+
+    click(button(ui, 'Cambiar clave'));
+    assert.equal(visible(probeButton), false);
+    click(button(ui, 'Cancelar cambio'));
+    assert.equal(visible(probeButton), true);
+    assert.equal(ui.calls.length, 2, 'Editing or restoring the configured key never invokes the probe');
+
+    ui.respond = success;
+    await ui.api.sendQuestion('NEXT REAL QUESTION');
+    const history = JSON.parse(ui.calls[2].options.body).input;
+    assert.equal(history.length, 3, 'The original conversation survives the probe');
+    assert.ok(JSON.stringify(history).includes(privateQuestion));
+    assert.equal(JSON.stringify(history).includes('Responde únicamente OK.'), false);
+    assert.equal(JSON.stringify(history).includes('PROBE_ONLY_RESPONSE'), false);
+    assertNoDOMSecret(ui, FAKE_KEY);
+    assert.equal(ui.storageCalls.length, 0);
+  });
+});
+
+test('a brief probe shows keepalive without claiming acceptance, blocks other requests, and can be cancelled', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    openDiagnostics(ui);
+    let feed, cancelled = false;
+    ui.respond = () => new Response(new ReadableStream({
+      start(controller) { feed = controller; }, cancel() { cancelled = true; },
+    }), { headers: { 'content-type': 'text/event-stream' } });
+    const log = ui.document.querySelector('[role="log"]');
+    const previousLog = log.textContent;
+    click(button(ui, 'Probar respuesta breve'));
+    assert.equal(ui.calls.length, 1);
+    assert.equal(button(ui, 'Probar respuesta breve').disabled, true);
+    assert.equal(button(ui, 'Comprobar conexión').disabled, true);
+    assert.equal(button(ui, 'Cambiar clave').disabled, true);
+    assert.equal(button(ui, 'Desconectar Gemini').disabled, true);
+    click(button(ui, 'Probar respuesta breve'));
+    await ui.api.sendQuestion('MUST NOT BE SENT WHILE PROBING');
+    assert.equal(ui.calls.length, 1);
+    feed.enqueue(new TextEncoder().encode(': keep-alive\n\n'));
+    await settle(() => ui.document.body.textContent.includes('El flujo sigue abierto, pero todavía no llegan eventos de generación.'));
+    assert.equal(ui.document.body.textContent.includes('Google aceptó la consulta'), false);
+    click(button(ui, 'Copiar diagnóstico', { visibleOnly: false }));
+    await settle(() => ui.copiedReports.length === 1);
+    const report = JSON.parse(ui.copiedReports[0]).reports.find(report => report.provider === 'generation_probe');
+    assert.equal(report.state, 'pending');
+    assert.equal(report.metrics.commentLines, 1);
+    assert.equal(report.metrics.dataLines, 0);
+    assert.equal(ui.copiedReports[0].includes(FAKE_KEY), false);
+    click(button(ui, 'Cancelar consulta'));
+    await settle(() => log.getAttribute('aria-busy') === 'false');
+    assert.equal(cancelled, true);
+    assert.equal(ui.calls[0].options.signal.aborted, true);
+    assert.equal(diagnostics.snapshot().reports.find(report => report.provider === 'generation_probe').state, 'cancelled');
+    assert.equal(button(ui, 'Probar respuesta breve').disabled, false);
+    assert.equal(log.textContent, previousLog);
+    assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('a heartbeat-only brief probe reaches its absolute deadline, retains the key and never enters chat history', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  await withUI(async ui => {
+    configure(ui);
+    openDiagnostics(ui);
+    let feed, cancelled = false;
+    ui.respond = () => new Response(new ReadableStream({
+      start(controller) { feed = controller; }, cancel() { cancelled = true; },
+    }), { headers: { 'content-type': 'text/event-stream' } });
+    const log = ui.document.querySelector('[role="log"]');
+    const previousLog = log.textContent;
+    click(button(ui, 'Probar respuesta breve'));
+    await settle(() => diagnostics.snapshot().reports.some(report => report.provider === 'generation_probe' && report.metrics.httpStatus === 200));
+    t.mock.timers.tick(15000);
+    feed.enqueue(new TextEncoder().encode(': keep-alive\n\n'));
+    await settle(() => ui.document.body.textContent.includes('El flujo sigue abierto, pero todavía no llegan eventos de generación.'));
+    t.mock.timers.tick(15001);
+    await settle(() => log.getAttribute('aria-busy') === 'false');
+    const report = diagnostics.snapshot().reports.find(report => report.provider === 'generation_probe');
+    assert.equal(report.failureCode, 'gemini_keepalive_timeout');
+    assert.equal(report.metrics.deadlineMs, 30000);
+    assert.equal(report.metrics.commentLines, 1);
+    assert.equal(report.metrics.eventsReceived || 0, 0);
+    assert.equal(ui.calls.length, 1, 'Heartbeats never cause automatic retries');
+    assert.equal(cancelled, true);
+    assert.equal(log.textContent, previousLog);
+    assert.equal(button(ui, 'Probar respuesta breve').disabled, false);
+    ui.respond = success;
+    await ui.api.sendQuestion('REAL QUESTION AFTER THE PROBE');
+    assert.equal(new Headers(ui.calls[1].options.headers).get('x-goog-api-key'), FAKE_KEY);
+    assert.equal(JSON.parse(ui.calls[1].options.body).input.length, 1);
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });

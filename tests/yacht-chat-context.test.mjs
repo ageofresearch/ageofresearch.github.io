@@ -96,6 +96,7 @@ test('generic server context contains no conversation link or financial history'
 
 test('scene context uses the public model and does not present it as a measured vessel', async () => {
   const result = await answerQuestion('¿Qué sabemos del yate?');
+  assert.match(result.answer, /Luz de Mar.*Azimut 36 Metri/);
   assert.match(result.answer, /35,23 m/);
   assert.match(result.answer, /no son un levantamiento/);
   assert.match(result.answer, /No tengo el PMS operativo/);

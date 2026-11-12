@@ -2,6 +2,8 @@ import { contextText, PROJECT_SOURCE } from './context.js';
 import { diagnostics } from './diagnostics.js';
 
 export const GEMINI_MODEL = 'gemini-3.5-flash-lite';
+export const THINKING_LEVELS = Object.freeze({ minimal: 'Mínimo', low: 'Bajo', medium: 'Medio', high: 'Alto' });
+export const DEFAULT_THINKING_LEVEL = 'low';
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/interactions?alt=sse';
 const MAX_RESPONSE_BYTES = 256 * 1024;
 const MAX_ANSWER = 12000;
@@ -403,6 +405,7 @@ function httpFailure(status, reason) {
 
 async function requestAnswer(question, {
   apiKey,
+  thinkingLevel = DEFAULT_THINKING_LEVEL,
   history = [],
   viewContext = '',
   fetchImpl = globalThis.fetch,
@@ -459,7 +462,7 @@ async function requestAnswer(question, {
           system_instruction: instructions(),
           input: contentsFor(text, history, viewContext, key),
         }),
-        generation_config: { max_output_tokens: 2048, thinking_level: 'low', thinking_summaries: 'none' },
+        generation_config: { max_output_tokens: 2048, thinking_level: Object.hasOwn(THINKING_LEVELS, thinkingLevel) ? thinkingLevel : DEFAULT_THINKING_LEVEL, thinking_summaries: 'none' },
       });
     } catch (error) { throw failure('gemini_request', 'No se pudo preparar la consulta. Abre el diagnóstico del chat.', error); }
     trace.update({ requestBytes: new TextEncoder().encode(body).byteLength });
@@ -528,8 +531,8 @@ export async function geminiAnswer(question, options = {}) {
 }
 
 /** Explicit diagnostic generation: exactly one request with fixed input and no yacht context. */
-export async function testGeminiGeneration({ apiKey, fetchImpl, timeoutMs, signal, onText, onState } = {}) {
-  return answerWithMode(GENERATION_PROBE_QUESTION, { apiKey, fetchImpl, timeoutMs, signal, onText, onState }, GENERATION_PROBE);
+export async function testGeminiGeneration({ apiKey, thinkingLevel, fetchImpl, timeoutMs, signal, onText, onState } = {}) {
+  return answerWithMode(GENERATION_PROBE_QUESTION, { apiKey, thinkingLevel, fetchImpl, timeoutMs, signal, onText, onState }, GENERATION_PROBE);
 }
 
 async function modelMetadata(response, signal, trace) {

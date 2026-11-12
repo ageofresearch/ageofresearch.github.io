@@ -822,3 +822,19 @@ test('an open HTTP 503 SSE error fails the brief probe safely and allows only a 
     assert.equal(ui.storageCalls.length, 0);
   });
 });
+
+test('reasoning selector applies each level to the next Gemini request', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    const selector = labelled(ui, 'Razonamiento');
+    assert.ok(visible(selector));
+    assert.equal(selector.value, 'low');
+    assert.deepEqual(selector.children.map(option => option.value), ['minimal', 'low', 'medium', 'high']);
+    for (const level of ['low', 'medium', 'high', 'minimal']) {
+      selector.value = level;
+      await ui.api.sendQuestion('¿Qué sabemos del motor de babor?');
+      assert.equal(JSON.parse(ui.calls.at(-1).options.body).generation_config.thinking_level, level);
+    }
+    assert.equal(ui.calls.length, 4);
+  });
+});

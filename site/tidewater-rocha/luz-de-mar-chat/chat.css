@@ -14,11 +14,11 @@
 }
 #ldm-chat-widget *, #ldm-chat-widget *::before, #ldm-chat-widget *::after { box-sizing: border-box; }
 #ldm-chat-widget [hidden] { display: none !important; }
-#ldm-chat-widget button, #ldm-chat-widget textarea { font: inherit; }
+#ldm-chat-widget button, #ldm-chat-widget textarea, #ldm-chat-widget select { font: inherit; }
 #ldm-chat-widget button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 #ldm-chat-widget button:disabled { cursor: wait; opacity: .55; }
 #ldm-chat-widget button:focus-visible, #ldm-chat-widget textarea:focus-visible,
-#ldm-chat-widget a:focus-visible, #ldm-chat-widget summary:focus-visible,
+#ldm-chat-widget select:focus-visible, #ldm-chat-widget a:focus-visible, #ldm-chat-widget summary:focus-visible,
 #ldm-chat-widget [tabindex]:focus-visible { outline: 3px solid #3c8e80; outline-offset: 3px; }
 #ldm-chat-widget .ldm-chat-launcher {
   pointer-events: auto; position: absolute; right: 24px;
@@ -142,3 +142,6 @@
   #ldm-chat-widget.is-open .ldm-chat-launcher { display: none; }
 }
 
+
+#ldm-chat-widget .ldm-chat-reasoning { display: flex; align-items: center; gap: 8px; flex-basis: 100%; font-size: 12px; }
+#ldm-chat-widget .ldm-chat-reasoning select { padding: 3px 8px; color: var(--ldm-ink); border: 1px solid #a5bcb1; border-radius: 5px; background: white; }

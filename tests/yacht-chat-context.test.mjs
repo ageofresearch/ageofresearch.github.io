@@ -155,3 +155,16 @@ test('UTF-8 request size is bounded, the question is preserved, and secrets are 
   } finally { globalThis.fetch = originalFetch; }
 });
 
+
+test('direct damage questions use the reported fact even with Gemini and a mistaken prior answer', async () => {
+  const options = { geminiApiKey: 'fixture-key', history: [
+    { role: 'assistant', content: 'El contexto no incluye daños.' },
+  ] };
+  for (const question of ['Hay algun daño en el yate?', 'No hay algun daño en el motor, lee exhausivamente el contexto', '¿Qué averías hay?']) {
+    const result = await answerQuestion(question, options);
+    assert.equal(result.topic, 'port-engine');
+    assert.equal(result.mode, 'local');
+    assert.match(result.answer, /reportado daños en el motor de babor/);
+    assert.match(result.sources[0].title, /Reporte de daños/);
+  }
+});

@@ -7,7 +7,7 @@ import { created, modelStart, textDelta, stepStop, completion, encodeEvents, int
 // assistant and Gemini client; they do not claim browser or visual validation.
 const FAKE_KEY = 'AIza_TEST_ONLY_DO_NOT_USE_012345678901234';
 const NEXT_FAKE_KEY = 'AIza_TEST_ONLY_REPLACEMENT_012345678901234';
-const MODEL = 'gemini-3.8-flash';
+const MODEL = 'gemini-3.5-flash-lite';
 let moduleSequence = 0;
 
 class UIEvent {

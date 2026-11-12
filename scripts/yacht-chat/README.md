@@ -22,7 +22,7 @@ Abre `http://127.0.0.1:5199/preview?world=rocha`. La vista usa los recursos publ
 
 ## Gemini con la clave del visitante
 
-Abre el chat, pega tu clave en el área **Clave API de Gemini** y pulsa **Usar Gemini**. Las preguntas siguientes consultan exclusivamente `gemini-3.8-flash` mediante la API Interactions. Configurar la clave no hace una consulta de pago ni comprueba todavía sus permisos: el estado se actualiza al recibir la primera respuesta completa.
+Abre el chat, pega tu clave en el área **Clave API de Gemini** y pulsa **Usar Gemini**. Las preguntas siguientes consultan exclusivamente `gemini-3.5-flash-lite` mediante la API Interactions. Configurar la clave no hace una consulta de pago ni comprueba todavía sus permisos: el estado se actualiza al recibir la primera respuesta completa.
 
 La clave se mantiene en una variable de la pestaña. El área se vacía al configurarla; no se guarda en almacenamiento, historial, URL, HTML ni registros del servidor. **Cambiar clave** permite sustituirla y **Desconectar Gemini** la elimina. Recargar o abandonar la página también la elimina. Limpiar la conversación conserva la conexión para iniciar otro hilo.
 
@@ -48,7 +48,7 @@ Un `fetch` rechazado sin HTTP no permite identificar por sí solo DNS, TLS, CORS
 
 ### Comprobación rápida de conexión
 
-Después de configurar la clave, **Comprobar conexión** realiza dos GET independientes de hasta diez segundos: consulta el documento público de descubrimiento de Google sin autenticación y consulta los datos de `gemini-3.8-flash` con la clave en su encabezado. No envía preguntas ni inicia una generación; tampoco modifica el historial. Se puede cancelar y se ejecuta solo al pulsar el botón. Las lecturas omiten la caché y los metadatos se limitan a 16 KiB.
+Después de configurar la clave, **Comprobar conexión** realiza dos GET independientes de hasta diez segundos: consulta el documento público de descubrimiento de Google sin autenticación y consulta los datos de `gemini-3.5-flash-lite` con la clave en su encabezado. No envía preguntas ni inicia una generación; tampoco modifica el historial. Se puede cancelar y se ejecuta solo al pulsar el botón. Las lecturas omiten la caché y los metadatos se limitan a 16 KiB.
 
 Los registros `connectivity_public` y `connectivity_model` permiten separar la respuesta pública de la consulta autenticada. Una respuesta correcta del modelo confirma que se pudo consultar su información; la disponibilidad, cuota y permisos de generación se comprueban al hacer una pregunta. Si ambas pruebas responden y una generación sigue sin cabeceras, la investigación debe centrarse en la ruta de generación. Si no hay HTTP en las pruebas, hace falta comparar el acceso desde otro navegador o red; no demuestra que la clave sea inválida. El informe identifica el método y tipo de cada solicitud sin guardar URLs ni credenciales.
 

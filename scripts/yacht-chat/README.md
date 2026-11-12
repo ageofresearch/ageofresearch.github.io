@@ -60,6 +60,12 @@ En **Diagnóstico del chat**, **Probar respuesta breve** inicia una sola generac
 
 Esta prueba acota si puede completarse una generación mínima en ese momento; no prueba por sí sola que el contexto anterior fuera la causa, porque el estado del servicio puede cambiar entre peticiones. Si también recibe solo comentarios sin eventos, hace falta comparar una petición equivalente desde otro cliente o consultar el estado del proyecto y del servicio con Google. Los comentarios y HTTP 200 por sí solos no identifican un fallo de facturación, cuota o capacidad.
 
+### Errores HTTP con cuerpo SSE
+
+Una respuesta HTTP de error puede llevar `Content-Type: text/event-stream`. El lector de errores admite JSON y SSE, extrae el primer objeto `error` completo sin esperar a que se cierre el flujo y conserva el estado HTTP si el cuerpo está vacío, mal formado, incompleto o no contiene errores. La lectura está limitada a 16 KiB y 1,5 segundos y puede cancelarse. `errorFormat` distingue `json`, `sse` y `unsupported`; `errorBody` indica si se pudo interpretar el error o por qué no. Los códigos, motivos e indicios permitidos se obtienen del objeto de error; su texto, campos SSE y credenciales no se guardan ni se muestran.
+
+Un HTTP 503 indica indisponibilidad en esa petición; por sí solo no identifica la causa, no valida la clave y no demuestra una caída general. Esta corrección recupera el detalle cuando Google lo facilita y no ejecuta reintentos automáticos ni cambia de modelo. Referencia de errores y eventos SSE: https://aistudio.google.com/docs/api-errors.
+
 ## Adaptador opcional y contexto del operador
 
 Como alternativa a la clave Gemini, se puede usar `POST /api/yacht-chat` del adaptador: `OPENAI_API_KEY`, `OPENAI_MODEL` y el contenido autorizado para la audiencia en `YACHT_CONTEXT_TEXT` se configuran solo en el entorno del servidor. Una clave Gemini configurada en la interfaz tiene prioridad sobre este endpoint. Nunca se incluyen claves ni un historial privado en los archivos públicos.

@@ -96,8 +96,12 @@ function providerError(payload, trace) {
   return reason;
 }
 
-async function readErrorDetails(response, trace) {
-  if (mediaType(response) !== 'application/json') {
+async function readErrorDetails(response, trace, signal) {
+  if (signal?.aborted) { cancelBody(response.body); return; }
+  const type = mediaType(response);
+  const format = type === 'application/json' ? 'json' : type === 'text/event-stream' ? 'sse' : 'unsupported';
+  trace.update({ errorFormat: format });
+  if (format === 'unsupported') {
     trace.update({ errorBody: 'not_json' });
     cancelBody(response.body);
     return;
@@ -106,32 +110,86 @@ async function readErrorDetails(response, trace) {
   try { reader = response.body?.getReader?.(); }
   catch { trace.update({ errorBody: 'unreadable' }); return; }
   if (!reader) { trace.update({ errorBody: 'unreadable' }); return; }
-  let timer, bytes = 0;
+  let timer, bytes = 0, resolveAbort;
+  const aborted = new Promise(resolve => { resolveAbort = resolve; });
+  const cancel = () => { try { reader.cancel()?.catch?.(() => {}); } catch { /* Preserve the original HTTP failure. */ } };
+  const onAbort = () => { cancel(); resolveAbort({ status: 'unreadable' }); };
+  signal?.addEventListener('abort', onAbort, { once: true });
+  if (signal?.aborted) onAbort();
   const reading = (async () => {
     const decoder = new TextDecoder();
-    let text = '';
+    let text = '', event = [], malformed = false;
+    const usefulError = payload => {
+      const error = payload?.error;
+      return error && typeof error === 'object' && !Array.isArray(error) && (
+        typeof error.code === 'number' || typeof error.code === 'string' ||
+        typeof error.message === 'string' || typeof error.status === 'string' || Array.isArray(error.details)
+      );
+    };
+    function dispatch() {
+      if (!event.length) return;
+      const data = event.join('\n');
+      event = [];
+      if (data.trim() === '[DONE]') return;
+      let payload;
+      try { payload = JSON.parse(data); }
+      catch { malformed = true; return; }
+      if (usefulError(payload)) return payload;
+    }
+    function line(value) {
+      if (!value) return dispatch();
+      if (value === 'data' || value.startsWith('data:')) event.push(value === 'data' ? '' : value.slice(5).replace(/^ /, ''));
+      // Comments and all other SSE fields are ignored; no payload is logged or rendered.
+    }
+    function parseLines(final = false) {
+      let index;
+      while ((index = text.search(/[\r\n]/)) >= 0) {
+        if (text[index] === '\r' && index === text.length - 1 && !final) break;
+        const width = text[index] === '\r' && text[index + 1] === '\n' ? 2 : 1;
+        const value = text.slice(0, index);
+        text = text.slice(index + width);
+        const payload = line(value);
+        if (payload) return payload;
+      }
+      if (final) {
+        if (text) { const value = text; text = ''; const payload = line(value); if (payload) return payload; }
+        return dispatch();
+      }
+    }
     try {
       while (true) {
+        if (signal?.aborted) return { status: 'unreadable' };
         const { value, done } = await reader.read();
+        if (signal?.aborted) return { status: 'unreadable' };
         if (done) break;
         bytes += value.byteLength;
         if (bytes > 16384) return { status: 'too_large' };
         text += decoder.decode(value, { stream: true });
+        if (format === 'sse') {
+          const payload = parseLines();
+          if (payload) return { status: 'parsed', payload };
+        }
       }
       text += decoder.decode();
+      if (format === 'sse') {
+        const payload = parseLines(true);
+        return payload ? { status: 'parsed', payload } : { status: malformed ? 'invalid_json' : 'no_error_event' };
+      }
       try { return { status: 'parsed', payload: JSON.parse(text) }; }
       catch { return { status: 'invalid_json' }; }
     } catch { return { status: 'unreadable' }; }
   })();
   try {
-    const result = await Promise.race([reading, new Promise(resolve => {
+    const result = await Promise.race([reading, aborted, new Promise(resolve => {
       timer = setTimeout(() => resolve({ status: 'timed_out' }), 1500);
     })]);
+    if (signal?.aborted) return;
     trace.update({ errorBody: result.status, errorBytes: bytes });
     if (result.payload) return providerError(result.payload, trace);
   } finally {
     clearTimeout(timer);
-    try { reader.cancel()?.catch?.(() => {}); } catch { /* Preserve the original HTTP failure. */ }
+    signal?.removeEventListener('abort', onAbort);
+    cancel();
     try { reader.releaseLock(); } catch { /* A cancelled read may still be closing. */ }
   }
 }
@@ -337,6 +395,7 @@ function httpFailure(status, reason) {
   if (status === 404) return failure('gemini_model', 'El modelo ' + GEMINI_MODEL + ' no está disponible para esta clave o esta versión de la API. No se ha cambiado a otro modelo.');
   if (status === 429) return failure('gemini_quota', 'Se alcanzó la cuota o el límite de consultas de Gemini. Espera un momento y revisa la cuota de tu proyecto.');
   if (status === 499) return failure('gemini_cancelled', 'Google canceló la consulta. Puedes volver a intentarlo.');
+  if (status === 503) return failure('gemini_unavailable', 'Google devolvió HTTP 503: el servicio no está disponible temporalmente. Espera un momento y vuelve a intentarlo.');
   if (status === 504) return failure('gemini_unavailable', 'Google agotó su tiempo de procesamiento. Vuelve a intentarlo más tarde.');
   if (status >= 500) return failure('gemini_unavailable', 'Gemini no está disponible ahora. Vuelve a intentarlo en unos momentos.');
   return failure('gemini_request', 'No se pudo completar la consulta a Gemini. Vuelve a intentarlo.');
@@ -422,7 +481,7 @@ async function requestAnswer(question, {
     });
     if (!response.ok) {
       trace.stage('read_error_body');
-      throw httpFailure(response.status, await readErrorDetails(response, trace));
+      throw httpFailure(response.status, await readErrorDetails(response, trace, controller.signal));
     }
     if (!['text/event-stream', 'missing'].includes(mediaType(response))) {
       cancelBody(response.body);
@@ -551,7 +610,7 @@ export async function checkGeminiConnection({ apiKey, signal, fetchImpl = global
         trace.stage('response_headers', { httpStatus, responseType: response.type, contentType: mediaType(response) });
         if (!response.ok) {
           trace.stage('read_error_body');
-          throw httpFailure(response.status, await readErrorDetails(response, trace));
+          throw httpFailure(response.status, await readErrorDetails(response, trace, controller.signal));
         }
         if (kind === 'model') await modelMetadata(response, controller.signal, trace);
         else cancelBody(response.body);

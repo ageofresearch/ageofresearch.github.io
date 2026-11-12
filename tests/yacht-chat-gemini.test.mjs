@@ -718,3 +718,225 @@ test('a cancelled probe stream returns no partial answer and never retries', asy
   assert.equal(report.metrics.textChars, 1);
   assert.equal(report.metrics.cancellationSource, 'user');
 });
+
+test('an HTTP 503 SSE error is classified immediately without waiting for EOF or rendering its payload', async () => {
+  diagnostics.clear();
+  let calls = 0, cancelled = false;
+  const privateText = 'PRIVATE PROVIDER BODY ' + KEY;
+  const body = encodeEvents([{ event_type: 'error', error: { code: 'service_unavailable', message: 'High demand and capacity: ' + privateText } }]);
+  await assert.rejects(testGeminiGeneration({
+    apiKey: KEY,
+    onText: () => assert.fail('An HTTP error must not render text'),
+    onState: () => assert.fail('An HTTP error must not render generation state'),
+    fetchImpl: async () => {
+      calls++;
+      return new Response(new ReadableStream({
+        start(controller) { controller.enqueue(new TextEncoder().encode(body)); },
+        cancel() { cancelled = true; },
+      }), { status: 503, headers: { 'content-type': 'text/event-stream; charset=utf-8', 'retry-after': '4' } });
+    },
+  }), error => error.code === 'gemini_unavailable' && /HTTP 503.*no está disponible/.test(error.message) && !error.message.includes(privateText));
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(calls, 1);
+  assert.equal(cancelled, true);
+  assert.equal(report.failureStage, 'read_error_body');
+  assert.equal(report.metrics.httpStatus, 503);
+  assert.equal(report.metrics.errorFormat, 'sse');
+  assert.equal(report.metrics.errorBody, 'parsed');
+  assert.equal(report.metrics.interactionErrorCode, 'service_unavailable');
+  assert.equal(report.metrics.providerHttpCode, 503);
+  assert.equal(report.metrics.providerHint, 'CAPACITY');
+  assert.equal(report.metrics.retryAfterSeconds, 4);
+  assert.equal(report.metrics.errorBytes, new TextEncoder().encode(body).byteLength);
+  assert.ok(!diagnostics.report().includes(privateText));
+  assert.ok(!diagnostics.report().includes(KEY));
+});
+
+test('HTTP error SSE supports fragmented UTF-8, CRLF and multiline data while retaining known numeric RPC reasons', async () => {
+  diagnostics.clear();
+  let cancelled = false;
+  const privateText = 'PRIVATE PROJECT permiso inválido ' + KEY;
+  const errorJSON = JSON.stringify({ error: {
+    code: 403, status: 'PERMISSION_DENIED', message: privateText,
+    details: [{ reason: 'API_KEY_HTTP_REFERRER_BLOCKED', metadata: { consumer: 'projects/private-project', key: KEY } }],
+  } }, null, 2);
+  const body = ': comentario español ' + KEY + '\r\n\r\nid: ' + KEY + '\r\nevent: error\r\n' +
+    errorJSON.split('\n').map(line => 'data: ' + line).join('\r\n') + '\r\n\r\n';
+  await assert.rejects(geminiAnswer('Pregunta privada', {
+    apiKey: KEY,
+    fetchImpl: async () => new Response(new ReadableStream({
+      start(controller) {
+        for (const byte of new TextEncoder().encode(body)) controller.enqueue(new Uint8Array([byte]));
+      },
+      cancel() { cancelled = true; },
+    }), { status: 403, headers: { 'content-type': 'text/event-stream' } }),
+  }), error => error.code === 'gemini_key' && /restricción de sitio/.test(error.message));
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(cancelled, true);
+  assert.equal(report.metrics.httpStatus, 403);
+  assert.equal(report.metrics.errorFormat, 'sse');
+  assert.equal(report.metrics.errorBody, 'parsed');
+  assert.equal(report.metrics.providerStatus, 'PERMISSION_DENIED');
+  assert.equal(report.metrics.providerHttpCode, 403);
+  assert.equal(report.metrics.providerReason, 'API_KEY_HTTP_REFERRER_BLOCKED');
+  assert.ok(!diagnostics.report().includes(KEY));
+  assert.ok(!diagnostics.report().includes(privateText));
+  assert.ok(!diagnostics.report().includes('private-project'));
+});
+
+test('malformed, empty, comment-only and oversized HTTP error SSE bodies preserve HTTP 503 without raw diagnostics', async () => {
+  const scenarios = [
+    { body: 'data: { malformed ' + KEY + '\n\n', expected: 'invalid_json' },
+    { body: '', expected: 'no_error_event' },
+    { body: ': PRIVATE COMMENT ' + KEY + '\n\n', expected: 'no_error_event' },
+    { body: 'event: error\n\ndata: {}\n\ndata: {"error":[]}\n\ndata: [DONE]\n\n', expected: 'no_error_event' },
+    { body: 'data: ' + KEY + 'x'.repeat(16384) + '\n\n', expected: 'too_large' },
+  ];
+  for (const { body, expected } of scenarios) {
+    diagnostics.clear();
+    let calls = 0;
+    await assert.rejects(geminiAnswer('PRIVATE QUESTION', {
+      apiKey: KEY,
+      fetchImpl: async () => { calls++; return new Response(body, { status: 503, headers: { 'content-type': 'text/event-stream' } }); },
+    }), error => error.code === 'gemini_unavailable' && /HTTP 503/.test(error.message));
+    const report = diagnostics.snapshot().reports[0];
+    assert.equal(calls, 1);
+    assert.equal(report.metrics.httpStatus, 503);
+    assert.equal(report.metrics.errorFormat, 'sse');
+    assert.equal(report.metrics.errorBody, expected);
+    assert.equal(report.failureStage, 'read_error_body');
+    assert.ok(!diagnostics.report().includes(KEY));
+    assert.ok(!diagnostics.report().includes('PRIVATE'));
+  }
+});
+
+test('a malformed SSE frame cannot hide a later useful HTTP error or expose unrecognized provider fields', async () => {
+  diagnostics.clear();
+  const body = 'data: {PRIVATE ' + KEY + '}\n\ndata: {"error":{}}\n\n' + encodeEvents([{
+    event_type: 'error', error: { code: KEY, status: KEY, message: 'PRIVATE ' + KEY, details: [{ reason: KEY }] },
+  }]);
+  await assert.rejects(geminiAnswer('Hola', {
+    apiKey: KEY, fetchImpl: async () => new Response(body, { status: 503, headers: { 'content-type': 'text/event-stream' } }),
+  }), error => error.code === 'gemini_unavailable' && /HTTP 503/.test(error.message));
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(report.metrics.errorBody, 'parsed');
+  assert.equal(report.metrics.providerStatus, 'UNKNOWN');
+  assert.equal(report.metrics.providerReason, 'OTHER');
+  assert.equal(report.metrics.interactionErrorCode, 'unknown');
+  assert.ok(!diagnostics.report().includes(KEY));
+  assert.ok(!diagnostics.report().includes('PRIVATE'));
+});
+
+test('SSE error-body comments never extend the 1500ms detail-reading limit or hide HTTP 503', async t => {
+  diagnostics.clear();
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let feed, settled = false, cancelled = false;
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY, fetchImpl: async () => new Response(new ReadableStream({
+      start(controller) { feed = controller; },
+      cancel() { cancelled = true; },
+    }), { status: 503, headers: { 'content-type': 'text/event-stream' } }),
+  });
+  request.then(() => { settled = true; }, () => { settled = true; });
+  await new Promise(resolve => setImmediate(resolve));
+  for (let round = 0; round < 2; round++) {
+    t.mock.timers.tick(500);
+    feed.enqueue(new TextEncoder().encode(': PRIVATE ' + KEY + '\n\n'));
+    await new Promise(resolve => setImmediate(resolve));
+  }
+  t.mock.timers.tick(499);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(settled, false);
+  t.mock.timers.tick(1);
+  await assert.rejects(request, error => error.code === 'gemini_unavailable' && /HTTP 503/.test(error.message));
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(settled, true);
+  assert.equal(cancelled, true);
+  assert.equal(report.metrics.httpStatus, 503);
+  assert.equal(report.metrics.errorFormat, 'sse');
+  assert.equal(report.metrics.errorBody, 'timed_out');
+  assert.ok(report.metrics.errorBytes > 0);
+  assert.ok(!diagnostics.report().includes(KEY));
+});
+
+test('a failed HTTP error-body stream falls back to its HTTP status, and unsupported bodies stay unread', async () => {
+  for (const format of ['text/event-stream', 'text/html']) {
+    diagnostics.clear();
+    let cancelled = false;
+    const stream = new ReadableStream(format === 'text/event-stream'
+      ? { start(controller) { controller.error(new Error('PRIVATE ' + KEY)); } }
+      : { cancel() { cancelled = true; } });
+    await assert.rejects(geminiAnswer('Hola', {
+      apiKey: KEY, fetchImpl: async () => new Response(stream, { status: 503, headers: { 'content-type': format } }),
+    }), error => error.code === 'gemini_unavailable' && /HTTP 503/.test(error.message));
+    const report = diagnostics.snapshot().reports[0];
+    assert.equal(report.metrics.httpStatus, 503);
+    assert.equal(report.metrics.errorFormat, format === 'text/event-stream' ? 'sse' : 'unsupported');
+    assert.equal(report.metrics.errorBody, format === 'text/event-stream' ? 'unreadable' : 'not_json');
+    if (format === 'text/html') assert.equal(cancelled, true);
+    assert.ok(!diagnostics.report().includes(KEY));
+  }
+});
+
+test('the overall generation deadline still aborts an HTTP error body before its separate reading budget', async t => {
+  diagnostics.clear();
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let cancelled = false;
+  const request = geminiAnswer('Hola', {
+    apiKey: KEY, timeoutMs: 25,
+    fetchImpl: async () => new Response(new ReadableStream({ cancel() { cancelled = true; } }), { status: 503, headers: { 'content-type': 'text/event-stream' } }),
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  t.mock.timers.tick(25);
+  await assert.rejects(request, error => error.code === 'gemini_timeout');
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(cancelled, true);
+  assert.equal(report.failureStage, 'read_error_body');
+  assert.equal(report.metrics.httpStatus, 503);
+  assert.equal(report.metrics.errorFormat, 'sse');
+  assert.equal(report.metrics.errorBody, undefined);
+  t.mock.timers.tick(1500);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(diagnostics.snapshot().reports[0], report);
+});
+
+test('user cancellation stops reading an HTTP SSE error without late diagnostics or a replacement error', async () => {
+  diagnostics.clear();
+  const controller = new AbortController();
+  let cancelled = false;
+  const request = testGeminiGeneration({
+    apiKey: KEY, signal: controller.signal,
+    fetchImpl: async () => new Response(new ReadableStream({ cancel() { cancelled = true; } }), { status: 503, headers: { 'content-type': 'text/event-stream' } }),
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  controller.abort('user');
+  await assert.rejects(request, error => error.code === 'gemini_cancelled');
+  const report = diagnostics.snapshot().reports[0];
+  assert.equal(cancelled, true);
+  assert.equal(report.state, 'cancelled');
+  assert.equal(report.metrics.httpStatus, 503);
+  assert.equal(report.metrics.errorBody, undefined);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(diagnostics.snapshot().reports[0], report);
+});
+
+test('connectivity HTTP errors also read safe SSE detail without issuing a generation', async () => {
+  diagnostics.clear();
+  const calls = [];
+  const results = await checkGeminiConnection({ apiKey: KEY, fetchImpl: async (url, options) => {
+    calls.push({ url, method: options.method });
+    if (url.includes('$discovery')) return new Response('{}', { headers: { 'content-type': 'application/json' } });
+    return new Response(encodeEvents([{ event_type: 'error', error: {
+      code: 400, status: 'INVALID_ARGUMENT', message: 'PRIVATE ' + KEY, details: [{ reason: 'API_KEY_INVALID' }],
+    } }]), { status: 400, headers: { 'content-type': 'text/event-stream' } });
+  } });
+  assert.equal(calls.length, 2);
+  assert.ok(calls.every(call => call.method === 'GET'));
+  assert.equal(results[1].ok, false);
+  assert.equal(results[1].code, 'gemini_key');
+  const report = diagnostics.snapshot().reports.find(report => report.provider === 'connectivity_model');
+  assert.equal(report.metrics.errorFormat, 'sse');
+  assert.equal(report.metrics.errorBody, 'parsed');
+  assert.equal(report.metrics.providerReason, 'API_KEY_INVALID');
+  assert.ok(!diagnostics.report().includes(KEY));
+});

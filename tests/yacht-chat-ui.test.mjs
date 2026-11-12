@@ -756,3 +756,69 @@ test('a heartbeat-only brief probe reaches its absolute deadline, retains the ke
     assertNoDOMSecret(ui, FAKE_KEY);
   });
 });
+
+test('an open HTTP 503 SSE error fails the brief probe safely and allows only a manual retry without adding chat history', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    openDiagnostics(ui);
+    const previousQuestion = 'REAL QUESTION BEFORE THE SSE ERROR';
+    await ui.api.sendQuestion(previousQuestion);
+    const log = ui.document.querySelector('[role="log"]');
+    const previousLog = log.textContent;
+    const privateDetail = 'PRIVATE_PROVIDER_ERROR_DETAIL';
+    let cancelled = false;
+    ui.respond = () => new Response(new ReadableStream({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode('event: error\ndata: ' + JSON.stringify({
+          error: { code: 'service_unavailable', status: 'UNAVAILABLE', message: 'Overloaded ' + privateDetail + ' ' + FAKE_KEY },
+        }) + '\n\n'));
+        // Keep the body open: recognizing the error must not depend on EOF.
+      },
+      cancel() { cancelled = true; },
+    }), { status: 503, headers: { 'content-type': 'text/event-stream' } });
+    click(button(ui, 'Probar respuesta breve'));
+    await settle(() => log.getAttribute('aria-busy') === 'false');
+    assert.equal(ui.calls.length, 2);
+    assert.equal(cancelled, true, 'The reader is cancelled after the error event without waiting for EOF');
+    const status = ui.document.querySelector('.ldm-chat-status');
+    assert.equal(visible(status), true);
+    assert.match(status.textContent, /no está disponible/);
+    assert.doesNotMatch(ui.document.body.textContent, /Google completó la respuesta breve|Google generó texto en la prueba breve/);
+    assert.equal(button(ui, 'Probar respuesta breve').disabled, false);
+    assert.equal(button(ui, 'Comprobar conexión').disabled, false);
+    assert.equal(button(ui, 'Cambiar clave').disabled, false);
+    assert.equal(button(ui, 'Desconectar Gemini').disabled, false);
+    assert.equal(log.textContent, previousLog);
+    click(button(ui, 'Copiar diagnóstico', { visibleOnly: false }));
+    await settle(() => ui.copiedReports.length === 1);
+    const report = JSON.parse(ui.copiedReports[0]).reports.find(item => item.provider === 'generation_probe');
+    assert.equal(report.state, 'failed');
+    assert.equal(report.failureCode, 'gemini_unavailable');
+    assert.equal(report.metrics.httpStatus, 503);
+    assert.equal(report.metrics.errorFormat, 'sse');
+    assert.equal(report.metrics.errorBody, 'parsed');
+    assert.equal(report.metrics.providerHint, 'CAPACITY');
+    assert.equal(report.metrics.interactionErrorCode, 'service_unavailable');
+    assert.equal(ui.copiedReports[0].includes(FAKE_KEY), false);
+    assert.equal(ui.copiedReports[0].includes(privateDetail), false);
+    assert.equal(ui.copiedReports[0].includes('Overloaded'), false);
+    assertNoDOMSecret(ui, FAKE_KEY, privateDetail);
+    await settle();
+    assert.equal(ui.calls.length, 2, 'An HTTP error never triggers an automatic generation retry');
+
+    ui.respond = () => interactionResponse([created(), modelStart(), textDelta('PROBE_RETRY_ONLY_RESPONSE'), stepStop(), completion()]);
+    click(button(ui, 'Probar respuesta breve'));
+    await settle(() => ui.document.body.textContent.includes('Google completó la respuesta breve.'));
+    assert.equal(ui.calls.length, 3, 'An explicit second click starts exactly one new probe');
+    assert.equal(new Headers(ui.calls[2].options.headers).get('x-goog-api-key'), FAKE_KEY);
+    assert.equal(log.textContent, previousLog);
+    ui.respond = success;
+    await ui.api.sendQuestion('REAL QUESTION AFTER THE SSE ERROR');
+    const history = JSON.parse(ui.calls[3].options.body).input;
+    assert.equal(history.length, 3);
+    assert.ok(JSON.stringify(history).includes(previousQuestion));
+    assert.doesNotMatch(JSON.stringify(history), /Responde únicamente OK\.|PROBE_RETRY_ONLY_RESPONSE|PRIVATE_PROVIDER_ERROR_DETAIL/);
+    assertNoDOMSecret(ui, FAKE_KEY, privateDetail);
+    assert.equal(ui.storageCalls.length, 0);
+  });
+});

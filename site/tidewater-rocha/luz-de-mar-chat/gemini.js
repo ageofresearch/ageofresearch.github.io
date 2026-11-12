@@ -1,7 +1,7 @@
 import { contextText, PROJECT_SOURCE } from './context.js';
 import { diagnostics } from './diagnostics.js';
 
-export const GEMINI_MODEL = 'gemini-3.8-flash';
+export const GEMINI_MODEL = 'gemini-3.5-flash-lite';
 const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/interactions?alt=sse';
 const MAX_RESPONSE_BYTES = 256 * 1024;
 const MAX_ANSWER = 12000;
@@ -70,7 +70,7 @@ const INTERACTION_ERRORS = Object.freeze({
 const BLOCKED_ERRORS = new Set(['safety', 'recitation', 'language', 'prohibited_content', 'spii', 'blocklist', 'image_safety', 'image_prohibited_content', 'image_recitation', 'image_other', 'content_blocked']);
 
 function requestedModel(value) {
-  return typeof value === 'string' && (value === GEMINI_MODEL || value === 'models/' + GEMINI_MODEL || /^(?:models\/)?gemini-3\.8-flash-\d{3,8}$/.test(value));
+  return typeof value === 'string' && (value === GEMINI_MODEL || value === 'models/' + GEMINI_MODEL || /^(?:models\/)?gemini-3\.5-flash-lite-\d{3,8}$/.test(value));
 }
 
 function providerError(payload, trace) {

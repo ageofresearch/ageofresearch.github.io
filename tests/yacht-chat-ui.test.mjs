@@ -109,7 +109,9 @@ class Element extends Target {
     if (name === 'disabled') this.disabled = false;
   }
   append(...children) {
-    for (const child of children) {
+    for (const item of children) {
+      const child = typeof item === 'string' ? new Element('#text', this.ownerDocument) : item;
+      if (typeof item === 'string') child.textContent = item;
       child.remove?.();
       this.children.push(child);
       child.parentNode = this;
@@ -507,6 +509,31 @@ test('a streamed answer is displayed progressively and committed to history only
     const history = JSON.parse(ui.calls[1].options.body).input;
     assert.equal(history.filter(message => message.type === 'model_output' && message.content[0].text === 'Respuesta progresiva completa.').length, 1);
     assertNoDOMSecret(ui, FAKE_KEY);
+  });
+});
+
+test('streamed and completed Gemini answers render bold as text-safe strong elements', async () => {
+  await withUI(async ui => {
+    configure(ui);
+    let feed;
+    ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
+    const request = ui.api.sendQuestion('Pregunta **literal**');
+    const send = events => feed.enqueue(new TextEncoder().encode(encodeEvents(events)));
+    send([created(), modelStart(), textDelta('Yate: **Luz de Mar*')]);
+    await settle(() => ui.document.body.textContent.includes('Luz de Mar*'));
+    send([textDelta('*. Motor: **babor**. <b>Texto</b>')]);
+    const reply = () => ui.document.querySelector('.ldm-chat-message-assistant').querySelector('.ldm-chat-message-text');
+    const verify = () => {
+      assert.deepEqual(reply().querySelectorAll('strong').map(node => node.textContent), ['Luz de Mar', 'babor']);
+      assert.equal(reply().textContent, 'Yate: Luz de Mar. Motor: babor. <b>Texto</b>');
+      assert.equal(reply().querySelector('b'), null);
+    };
+    await settle(() => reply().querySelectorAll('strong').length === 2);
+    verify();
+    send([stepStop(), completion()]);
+    await request;
+    verify();
+    assert.ok(ui.document.body.textContent.includes('Pregunta **literal**'));
   });
 });
 

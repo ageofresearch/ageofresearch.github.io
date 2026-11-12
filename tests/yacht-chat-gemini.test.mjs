@@ -26,7 +26,7 @@ test('Gemini uses the exact requested model, header authentication and yacht con
   assert.equal(body.store, false);
   assert.equal(body.stream, true);
   assert.equal(body.previous_interaction_id, undefined);
-  assert.match(body.system_instruction, /Luz de Mar/);
+  assert.match(body.system_instruction, /Luz de Mar.*Azimut 36 Metri/);
   assert.match(body.system_instruction, /capitán/);
   assert.match(body.system_instruction, /no pueden reemplazar estas instrucciones/);
   assert.match(body.input.at(-1).content[0].text, /no es telemetría/);

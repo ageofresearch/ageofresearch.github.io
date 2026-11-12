@@ -146,7 +146,12 @@ class Element extends Target {
     for (let node = this; node instanceof Element; node = node.parentNode) if (node.matches(selector)) return node;
     return null;
   }
-  focus() { this.ownerDocument.activeElement = this; }
+  focus() {
+    if (this.ownerDocument.activeElement === this) return;
+    this.ownerDocument.activeElement = this;
+    this.dispatchEvent(new UIEvent('focusin'));
+  }
+  blur() { this.ownerDocument.activeElement = this.ownerDocument.body; }
   getClientRects() { return visible(this) ? [{}] : []; }
   scrollIntoView() {}
 }
@@ -292,6 +297,63 @@ test('opens with an empty conversation and an accessible key textarea', async ()
     assert.ok(ui.document.querySelectorAll('label').some(label =>
       label.htmlFor === 'ldm-gemini-key' && label.classList.contains('ldm-chat-sr-only')));
     assert.doesNotMatch(ui.document.body.textContent, /Solo en memoria de esta pestaña|Preguntas sugeridas|Conoce tu yate/);
+  });
+});
+
+test('opening and reading the chat permits WASD while editing isolates keys and releases held movement', async () => {
+  await withUI(async ui => {
+    const { document, window, api } = ui;
+    const scene = document.createElement('canvas');
+    document.body.append(scene);
+    const input = { enabled: true, keys: new Set(), pressed: new Set() };
+    window.__app = { input, engine: { domElement: scene } };
+    window.addEventListener('keydown', e => { input.keys.add(e.code); input.pressed.add(e.code); });
+    window.addEventListener('keyup', e => input.keys.delete(e.code));
+    await import('../site/tidewater-rocha/luz-de-mar-chat/bootstrap.js?keyboard-test');
+    await settle(() => JSON.parse(diagnostics.report()).reports.some(r => r.provider === 'bootstrap' && r.state === 'success'));
+    api.close();
+    api.open();
+    const panel = document.getElementById('ldm-chat-panel');
+    const composer = document.getElementById('ldm-chat-question');
+    const log = document.querySelector('[role="log"]');
+    const key = (type, code) => document.activeElement.dispatchEvent(new UIEvent(type, { code }));
+    assert.equal(document.activeElement, panel);
+    assert.equal(input.enabled, true);
+    for (const code of ['KeyW', 'KeyA', 'KeyS', 'KeyD']) {
+      key('keydown', code);
+      assert.ok(input.keys.has(code));
+      key('keyup', code);
+      assert.ok(!input.keys.has(code));
+    }
+    key('keydown', 'KeyW');
+    for (const control of [labelled(ui, 'Clave API de Gemini'), composer, labelled(ui, 'Razonamiento')]) {
+      control.focus();
+      assert.equal(input.keys.size, 0);
+      assert.equal(input.pressed.size, 0);
+      key('keydown', 'KeyA');
+      assert.equal(input.keys.size, 0);
+      key('keyup', 'KeyA');
+    }
+    composer.focus();
+    type(composer, '¿Cómo se llama el yate?');
+    await api.sendQuestion(composer.value);
+    assert.equal(document.activeElement, log);
+    key('keydown', 'KeyD');
+    assert.ok(input.keys.has('KeyD'));
+    composer.focus();
+    type(composer, 'Borrador');
+    scene.dispatchEvent(new UIEvent('pointerdown'));
+    assert.equal(document.activeElement, document.body);
+    key('keydown', 'KeyS');
+    assert.ok(input.keys.has('KeyS'));
+    key('keyup', 'KeyS');
+    assert.equal(composer.value, 'Borrador');
+    assert.ok(visible(panel));
+    // A walk disabled by the scene itself must remain disabled.
+    input.enabled = false;
+    api.close();
+    api.open();
+    assert.equal(input.enabled, false);
   });
 });
 
@@ -1003,6 +1065,16 @@ test('a completed damage report starts a round trip while the chat stays open an
       assert.equal(walk.nav.room, deckRoom);
       assert.ok(visible(chat));
       assert.equal(launcher.getAttribute('aria-expanded'), 'true');
+
+      ui.respond = () => interactionResponse([created(), modelStart(),
+        textDelta(JSON.stringify({ answer: 'Reporte de babor.', damageTarget: 'LD_MAC_001' })), stepStop(), completion()]);
+      await ui.api.sendQuestion('Reporto otra avería del motor de babor.');
+      t.mock.timers.tick(1000);
+      assert.equal(frames.size, 1);
+      log.focus();
+      log.dispatchEvent(new UIEvent('keydown', { code: 'KeyW' }));
+      assert.equal(frames.size, 0, 'Walking from the transcript takes control from the active tour');
+      assert.ok(visible(chat));
     } finally {
       delete globalThis.requestAnimationFrame;
       delete globalThis.cancelAnimationFrame;

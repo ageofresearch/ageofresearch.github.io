@@ -7,6 +7,13 @@ const ROOT_ID = 'ldm-chat-widget';
 const MAX_MESSAGE = 2000;
 const MAX_ANSWER = 12000;
 const MAX_HISTORY = 8;
+const WALK_KEYS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ShiftLeft', 'ShiftRight']);
+
+function canWalkFromChat(event) {
+  return WALK_KEYS.has(event.code) && !event.ctrlKey && !event.metaKey && !event.altKey &&
+    !event.isComposing && !event.target.isContentEditable && !event.target.closest('textarea,input,select');
+}
+
 const ALLOWED_HOSTS = new Set([
   'azimutyachts.com', 'www.azimutyachts.com',
   'mtu-solutions.com', 'www.mtu-solutions.com', 'nmea.org', 'www.nmea.org',
@@ -393,6 +400,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       remember({ role: 'user', content: question });
       field.value = '';
       field.style.height = '';
+      if (document.activeElement === field || document.activeElement === send) log.focus({ preventScroll: true });
     }
     setPending(true);
     const requestVersion = connectionVersion;
@@ -500,7 +508,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     launcher.setAttribute('aria-label', 'Minimizar chat de Luz de Mar');
     try { document.exitPointerLock?.(); } catch { /* Unsupported pointer lock does not block chat. */ }
     notifyVisibility();
-    field.focus({ preventScroll: true });
+    panel.focus({ preventScroll: true });
     scrollToLatest();
   }
   function close() {
@@ -693,14 +701,32 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     event.preventDefault();
     sendQuestion(field.value);
   });
+  root.addEventListener('focusin', event => {
+    if (event.target.isContentEditable || event.target.closest('textarea,input,select')) {
+      // A walk key may still be held when the user starts editing.
+      const input = window.__app?.input;
+      input?.keys?.clear();
+      input?.pressed?.clear();
+    }
+  });
+  function focusScene(event) {
+    if (opened && event.target === window.__app?.engine?.domElement && document.activeElement?.closest('#' + ROOT_ID)) {
+      document.activeElement.blur();
+    }
+  }
+  document.addEventListener('pointerdown', focusScene, true);
   root.addEventListener('keydown', event => {
+    if (canWalkFromChat(event)) return;
     if (event.key === 'Escape' && opened) {
       event.preventDefault();
       close();
     }
     event.stopPropagation();
   });
-  for (const name of ['keyup', 'keypress', 'pointerdown', 'pointerup', 'pointermove', 'mousedown', 'mouseup', 'mousemove', 'click', 'dblclick', 'contextmenu', 'touchstart', 'touchmove', 'touchend', 'wheel']) {
+  root.addEventListener('keyup', event => {
+    if (!canWalkFromChat(event) && !window.__app?.input?.keys?.has(event.code)) event.stopPropagation();
+  });
+  for (const name of ['keypress', 'pointerdown', 'pointerup', 'pointermove', 'mousedown', 'mouseup', 'mousemove', 'click', 'dblclick', 'contextmenu', 'touchstart', 'touchmove', 'touchend', 'wheel']) {
     root.addEventListener(name, event => event.stopPropagation(), { passive: name === 'wheel' || name.startsWith('touch') });
   }
 
@@ -710,6 +736,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       if (opened) close();
       resetGemini('destroy');
       window.removeEventListener('pagehide', resetGemini);
+      document.removeEventListener('pointerdown', focusScene, true);
       disposed = true;
       root.remove();
     },

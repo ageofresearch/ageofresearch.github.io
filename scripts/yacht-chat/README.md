@@ -2,7 +2,7 @@
 
 La página publicada se mantiene en `site/tidewater-rocha/play.html` de este repositorio. GitHub Pages publica la carpeta `site/` mediante `.github/workflows/pages.yml`. El repositorio independiente `ageofresearch/tidewater-rocha` no es la fuente de esta publicación.
 
-El módulo público `site/tidewater-rocha/luz-de-mar-chat/bootstrap.js` monta una ventana de consulta para `world=rocha` y excluye benchmarks. Los paquetes del renderizador no cambian. Al abrir el chat se limpian y suspenden las entradas del recorrido; al cerrarlo se restaura su estado anterior.
+El módulo público `site/tidewater-rocha/luz-de-mar-chat/bootstrap.js` monta una ventana de consulta para `world=rocha` y excluye benchmarks. Los paquetes del renderizador no cambian. Con el chat abierto, WASD mueve al usuario por el yate. Al enfocar un campo del chat, el teclado queda disponible para escribir. Enviar la pregunta o pulsar la escena permite volver a caminar.
 
 La consulta local utiliza la documentación pública del modelo y reglas generales del PMS. No contiene conversaciones privadas, expedientes operativos, claves ni telemetría. Las dimensiones representadas y los estados ilustrativos del modelo no se presentan como medidas o inspecciones del barco real.
 

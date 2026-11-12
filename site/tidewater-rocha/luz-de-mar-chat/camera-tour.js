@@ -134,10 +134,14 @@ export function createEquipmentTour(chatRoot) {
       if (!path.includes(chatRoot) && !path.includes(panel)) stop();
     }, opts);
     window.addEventListener('keydown', event => {
-      if (event.composedPath().includes(chatRoot)) return;
-      if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); goBack(); }
-      else if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) stop();
+      if (event.key === 'Escape' && !event.composedPath().includes(chatRoot)) {
+        event.preventDefault(); event.stopImmediatePropagation(); goBack();
+      }
     }, opts);
+    // Movement keys reach the renderer and cancel the tour only when chat lets them bubble.
+    window.addEventListener('keydown', event => {
+      if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.code)) stop();
+    }, { signal: listeners.signal });
     back.addEventListener('click', goBack, { signal: listeners.signal });
     window.addEventListener('pagehide', stop, { signal: listeners.signal });
     session.frame = requestAnimationFrame(frame);

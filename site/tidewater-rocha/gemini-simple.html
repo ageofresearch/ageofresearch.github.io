@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gemini · Prueba simple</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f6f8;color:#18212c;font:16px/1.5 system-ui,sans-serif}main{max-width:760px;margin:48px auto;padding:0 24px}h1{font-size:26px;margin-bottom:4px}p{color:#586474;font-size:14px}label{display:block;font-weight:600;margin:24px 0 8px}textarea{width:100%;padding:12px;border:1px solid #b8c1cc;border-radius:8px;font:inherit;resize:vertical;background:white}textarea:focus{outline:3px solid #b9d5ff;border-color:#2463b5}button{margin-top:16px;padding:11px 24px;background:#215ca8;color:white;border:0;border-radius:8px;font:inherit;cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;border:1px solid #d6dce3;border-radius:8px;padding:16px;min-height:110px;font:inherit}#status{min-height:22px}
+</style>
+</head>
+<body>
+<main>
+<h1>Prueba simple de Gemini</h1>
+<p>gemini-3.8-flash · Cada envío consulta la API de Google y puede consumir tokens.</p>
+<form id="form">
+<label for="key">API key de Gemini</label>
+<textarea id="key" rows="2" required autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="key-note"></textarea>
+<p id="key-note">La clave permanece en esta pestaña. No se guarda.</p>
+<label for="message">Texto</label>
+<textarea id="message" rows="6" required maxlength="12000" placeholder="Escribe tu mensaje"></textarea>
+<button id="send" type="submit">Enviar</button>
+</form>
+<p id="status" role="status"></p>
+<label for="answer">Respuesta</label>
+<pre id="answer" aria-live="polite"></pre>
+</main>
+<script>
+'use strict';
+const form = document.getElementById('form');
+const keyField = document.getElementById('key');
+const messageField = document.getElementById('message');
+const send = document.getElementById('send');
+const status = document.getElementById('status');
+const answer = document.getElementById('answer');
+let active = null;
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (active) { active.abort('user'); return; }
+  const key = keyField.value.trim();
+  const message = messageField.value.trim();
+  if (!key || !message) { status.textContent = 'Introduce la clave y un texto.'; return; }
+  const controller = new AbortController();
+  active = controller;
+  let timedOut = false;
+  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 60000);
+  keyField.disabled = messageField.disabled = true;
+  send.textContent = 'Cancelar';
+  answer.textContent = '';
+  status.textContent = 'Esperando la respuesta de Google…';
+  let reader;
+  const safe = value => String(value).split(key).join('[clave omitida]');
+  try {
+    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'x-goog-api-key': key },
+      credentials: 'omit', referrerPolicy: 'strict-origin', signal: controller.signal,
+      body: JSON.stringify({ model: 'gemini-3.8-flash', input: message, stream: false, store: false }),
+    });
+    reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let raw = '', bytes = 0;
+    while (true) {
+      const { value, done } = await reader.read();
+      if (controller.signal.aborted) throw new Error('cancelled');
+      if (done) break;
+      bytes += value.byteLength;
+      if (bytes > 262144) throw new Error('La respuesta supera el tamaño permitido.');
+      raw += decoder.decode(value, { stream: true });
+    }
+    raw += decoder.decode();
+    let data;
+    try { data = JSON.parse(raw); }
+    catch { throw new Error('HTTP ' + response.status + ': Google no devolvió una respuesta JSON interpretable.'); }
+    if (!response.ok || data.error) {
+      const detail = typeof data.error?.message === 'string' ? ': ' + safe(data.error.message).slice(0, 1200) : '';
+      throw new Error('HTTP ' + response.status + detail);
+    }
+    if (data.status !== 'completed') throw new Error('Google no completó la respuesta (estado: ' + safe(data.status || 'desconocido').slice(0, 80) + ').');
+    const text = (Array.isArray(data.steps) ? data.steps : []).filter(step => step.type === 'model_output')
+      .flatMap(step => Array.isArray(step.content) ? step.content : [])
+      .filter(part => part.type === 'text' && typeof part.text === 'string')
+      .map(part => part.text).join('\n').trim();
+    if (!text) throw new Error('Google completó la consulta sin devolver texto.');
+    answer.textContent = safe(text);
+    status.textContent = 'Respuesta recibida.';
+  } catch (error) {
+    status.textContent = timedOut ? 'No llegó una respuesta completa en 60 segundos.'
+      : controller.signal.aborted ? 'Consulta cancelada.'
+      : error instanceof TypeError ? 'No se pudo completar la conexión con Google.'
+      : safe(error.message || 'No se pudo completar la consulta.');
+  } finally {
+    clearTimeout(timer);
+    try { reader?.cancel()?.catch(() => {}); } catch {}
+    try { reader?.releaseLock(); } catch {}
+    active = null;
+    keyField.disabled = messageField.disabled = false;
+    send.textContent = 'Enviar';
+  }
+});
+window.addEventListener('pagehide', () => { active?.abort(); keyField.value = ''; });
+</script>
+</body>
+</html>

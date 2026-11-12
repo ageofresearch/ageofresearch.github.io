@@ -19,6 +19,21 @@ function el(tag, className, text) {
   return node;
 }
 
+function renderAnswer(target, value) {
+  const text = clipped(value, MAX_ANSWER);
+  target.textContent = '';
+  let offset = 0;
+  // Keep code spans and escaped asterisks literal. Only paired ** delimiters produce markup.
+  const tokens = /(`+)[\s\S]*?\1|\\\*|\*\*(?!\s)([\s\S]+?)(?<!\s)\*\*/g;
+  for (const match of text.matchAll(tokens)) {
+    target.append(text.slice(offset, match.index));
+    if (match[2] !== undefined) target.append(el('strong', '', match[2]));
+    else target.append(match[0]);
+    offset = match.index + match[0].length;
+  }
+  target.append(text.slice(offset));
+}
+
 function sourceURL(value) {
   if (typeof value !== 'string') return null;
   try {
@@ -278,9 +293,12 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
 
   function addMessage(role, text, sources = []) {
     const row = el('article', 'ldm-chat-message ldm-chat-message-' + role);
+    const body = el('div', 'ldm-chat-message-text');
+    if (role === 'assistant') renderAnswer(body, text);
+    else body.textContent = clipped(text, MAX_MESSAGE);
     row.append(
       el('p', 'ldm-chat-message-label', role === 'user' ? 'Tú' : 'Luz de Mar'),
-      el('div', 'ldm-chat-message-text', clipped(text, role === 'assistant' ? MAX_ANSWER : MAX_MESSAGE)),
+      body,
     );
     if (Array.isArray(sources) && sources.length) {
       const details = el('details', 'ldm-chat-sources');
@@ -400,7 +418,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         onText(text) {
           if (disposed || controller.signal.aborted || requestVersion !== connectionVersion) return;
           if (!partial) partial = addMessage('assistant', '');
-          partial.querySelector('.ldm-chat-message-text').textContent = clipped(text, MAX_ANSWER);
+          renderAnswer(partial.querySelector('.ldm-chat-message-text'), text);
           status.textContent = 'Recibiendo la respuesta de Gemini…';
           scrollToLatest();
         },

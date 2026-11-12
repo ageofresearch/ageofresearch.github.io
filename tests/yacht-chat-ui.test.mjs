@@ -15,6 +15,7 @@ class UIEvent {
     Object.assign(this, { type, bubbles: true, cancelable: true, defaultPrevented: false }, options);
   }
   preventDefault() { if (this.cancelable) this.defaultPrevented = true; }
+  composedPath() { return this.path || []; }
   stopPropagation() { this.stopped = true; }
   stopImmediatePropagation() { this.immediate = this.stopped = true; }
 }
@@ -33,6 +34,7 @@ class Target {
     event.target ||= this;
     const path = [this];
     for (let node = this.parentNode; node; node = node.parentNode) path.push(node);
+    event.path = path;
     const invoke = (node, capture) => {
       event.currentTarget = node;
       for (const item of [...(node.listeners.get(event.type) || [])]) {
@@ -892,7 +894,7 @@ test('reasoning selector applies each level to the next Gemini request', async (
   });
 });
 
-test('the camera starts only after a completed damage report and supports returning', async t => {
+test('a completed damage report starts a round trip while the chat stays open and usable', async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });
   await withUI(async ui => {
     configure(ui);
@@ -942,6 +944,13 @@ test('the camera starts only after a completed damage report and supports return
         t.mock.timers.tick(1000);
         assert.equal(frames.size, cancel ? 0 : 1);
       }
+      const chat = ui.document.getElementById('ldm-chat-panel');
+      const input = ui.document.getElementById('ldm-chat-question');
+      const launcher = ui.document.querySelector('.ldm-chat-launcher');
+      const log = ui.document.querySelector('[role="log"]');
+      assert.ok(visible(chat));
+      assert.equal(launcher.getAttribute('aria-expanded'), 'true');
+      assert.match(log.textContent, /Reporte de babor/);
       let now = 1000;
       function tick() {
         const [id, cb] = frames.entries().next().value;
@@ -965,12 +974,35 @@ test('the camera starts only after a completed damage report and supports return
       assert.deepEqual(nav.position, [0, 0]);
       assert.equal(camera.position.y, initial.y);
       assert.equal(walk.yaw, 0);
+      input.dispatchEvent(new UIEvent('pointerdown'));
+      for (const code of ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowLeft']) {
+        input.dispatchEvent(new UIEvent('keydown', { code }));
+      }
+      assert.equal(frames.size, 1, 'Interacting with the chat keeps the camera moving');
+      tick();
+      input.dispatchEvent(new UIEvent('keydown', { key: 'Escape' }));
+      assert.ok(!visible(chat), 'Escape inside the chat minimizes it');
+      assert.equal(frames.size, 1);
+      launcher.dispatchEvent(new UIEvent('pointerdown'));
+      click(launcher);
+      assert.ok(visible(chat));
+      assert.equal(frames.size, 1, 'Reopening the chat keeps the same tour');
+      ui.respond = () => interactionResponse([created(), modelStart(),
+        textDelta(JSON.stringify({ answer: 'Puedes consultar el PMS.', damageTarget: 'none' })), stepStop(), completion()]);
+      await ui.api.sendQuestion('¿Dónde consulto el registro?');
+      t.mock.timers.tick(1000);
+      assert.equal(frames.size, 1, 'A follow-up without a new target preserves the active tour');
+      assert.match(log.textContent, /Puedes consultar el PMS/);
+      assert.match(log.textContent, /Reporte de babor/);
       finish();
+      assert.ok(visible(chat));
       assert.deepEqual(nav.position, [9.22, 0]);
       click(button(ui, 'Volver a la vista anterior'));
       finish();
       assert.deepEqual(walk.nav.position, [0, 0]);
       assert.equal(walk.nav.room, deckRoom);
+      assert.ok(visible(chat));
+      assert.equal(launcher.getAttribute('aria-expanded'), 'true');
     } finally {
       delete globalThis.requestAnimationFrame;
       delete globalThis.cancelAnimationFrame;

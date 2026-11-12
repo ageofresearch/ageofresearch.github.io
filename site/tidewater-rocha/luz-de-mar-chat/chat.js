@@ -79,7 +79,7 @@ function installStyles() {
   if (document.querySelector('link[data-ldm-chat-style]')) return;
   const link = el('link');
   link.rel = 'stylesheet';
-  link.href = new URL('./chat.css?v=equipment-focus-1', import.meta.url).href;
+  link.href = new URL('./chat.css?v=open-tour-1', import.meta.url).href;
   link.dataset.ldmChatStyle = '';
   document.head.append(link);
 }
@@ -91,7 +91,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   installGlobalDiagnostics(window);
   installStyles();
 
-  const tour = createEquipmentTour();
   let focusTimer = null;
   function cancelFocus() {
     clearTimeout(focusTimer);
@@ -105,6 +104,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   let previousFocus = null, failed = null;
   const root = el('section', 'ldm-chat');
   root.id = ROOT_ID;
+  const tour = createEquipmentTour(root);
   root.lang = 'es';
   root.setAttribute('aria-label', 'Asistente de consulta de Luz de Mar');
 
@@ -380,7 +380,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       trace.fail('chat_key_in_question');
       return;
     }
-    cancelFocus();
+    clearTimeout(focusTimer);
     trace.stage('ui_context');
     const context = viewContext();
     const prior = history.map(message => ({ ...message }));
@@ -451,7 +451,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       if (opened && result.damageTarget) {
         focusTimer = setTimeout(() => {
           if (!opened || disposed || requestVersion !== connectionVersion) return;
-          if (!tour.start(result.damageTarget, close)) {
+          if (!tour.start(result.damageTarget)) {
             status.hidden = false;
             status.textContent = 'No se encontró un recorrido transitable desde esta vista hasta la pieza.';
           }
@@ -492,7 +492,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   function open() {
     if (disposed || opened) return;
-    cancelFocus();
     previousFocus = document.activeElement;
     opened = true;
     panel.hidden = false;

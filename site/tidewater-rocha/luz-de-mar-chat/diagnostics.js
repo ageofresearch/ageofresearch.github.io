@@ -1,4 +1,4 @@
-export const CHAT_BUILD = '2026-11-11-generation-4';
+export const CHAT_BUILD = '2026-11-11-sse-errors-5';
 const STAGES = new Set([
   'start', 'bootstrap_import', 'runtime_error', 'unhandled_rejection', 'resource_error', 'security_policy',
   'validate_input', 'build_request', 'wait_response_headers', 'response_headers', 'read_error_body',
@@ -37,7 +37,8 @@ const ENUMS = {
   cancellationSource: ['user', 'pagehide', 'destroy', 'disconnect', 'external'],
   directive: ['connect-src', 'script-src', 'script-src-elem', 'style-src', 'style-src-elem', 'other'],
   resource: ['gemini_api', 'chat_script', 'chat_style', 'unknown'],
-  errorBody: ['parsed', 'unreadable', 'invalid_json', 'too_large', 'timed_out', 'not_json'],
+  errorBody: ['parsed', 'unreadable', 'invalid_json', 'too_large', 'timed_out', 'no_error_event', 'not_json'],
+  errorFormat: ['json', 'sse', 'unsupported'],
   providerHint: ['API_KEY', 'HTTP_REFERRER', 'BILLING', 'PROJECT_VERIFICATION', 'REGION', 'QUOTA', 'REQUEST_PARAMETER', 'MODEL', 'CAPACITY', 'UNKNOWN'],
   requestField: ['thinkingConfig', 'thinkingLevel', 'maxOutputTokens', 'responseMimeType', 'systemInstruction', 'contents', 'UNKNOWN'],
 };

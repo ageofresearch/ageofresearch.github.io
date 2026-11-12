@@ -453,7 +453,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
           if (!opened || disposed || requestVersion !== connectionVersion) return;
           if (!tour.start(result.damageTarget, close)) {
             status.hidden = false;
-            status.textContent = 'La vista de esta pieza no está disponible en la escena actual.';
+            status.textContent = 'No se encontró un recorrido transitable desde esta vista hasta la pieza.';
           }
         }, 900);
       }

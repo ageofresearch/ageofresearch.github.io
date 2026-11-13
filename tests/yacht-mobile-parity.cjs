@@ -18,10 +18,10 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat', base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
-    assert.ok(frame, 'Both entry points must use the exact walk-chat document');
+    assert.ok(frame, 'Expected the walk-chat renderer with the selected scene');
     await frame.waitForFunction(() => ['ready','unsupported'].includes(window.__mapsPublicStatus?.status), null, {timeout:180000});
     const state = await frame.evaluate(() => window.__mapsPublicStatus);
     assert.equal(state.status,'ready',JSON.stringify(state));
@@ -32,6 +32,16 @@ async function capture(browser, mobile) {
         walking:[...app.yachtWalk.nav.position], spawn:app.yachtWalk.model.boarding.room.spawn.slice(0,2)};
     });
     assert.deepEqual(pose.walking,pose.spawn);
+    const geometry = await frame.evaluate(() => {
+      const model = window.__app.entranceYacht;
+      let meshes = 0, triangles = 0;
+      model.group.traverse(node => {
+        if (node.geometry) { meshes++; triangles += node.geometry.index.count / 3; }
+      });
+      // Compare exact original part IDs, vertices, normals, indices and material assignments.
+      const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway )/.test(p.name));
+      return { meshes, triangles, count: model.boarding.parts.length, parts: JSON.stringify(parts) };
+    });
     // The headless compositor can present black even when the renderer draws.
     // Send one unchanged final render pass to a readable color attachment of
     // the same size and format. This hook exists only inside the test.
@@ -77,6 +87,10 @@ async function capture(browser, mobile) {
     writeFileSync(out + (mobile ? '/mobile.png' : '/walk-chat.png'),PNG.sync.write(image));
     console.log(mobile?'mobile':'walk-chat',JSON.stringify(errors));
     if (mobile) {
+      const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb)|main-[^/]+\.js)$/.test(path);
+      assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');
+      assert.equal(geometry.meshes, 1);
+      assert.equal(await frame.evaluate(() => window.__app.gangwayOnly),true);
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
       await page.getByRole('button',{name:'Recorrer la pasarela'}).click();
@@ -84,9 +98,26 @@ async function capture(browser, mobile) {
       await page.getByRole('button',{name:'Detener recorrido'}).click();
       await page.getByRole('button',{name:'Volver al inicio'}).click();
       assert.deepEqual(await frame.evaluate(()=>window.__app.yachtWalk.nav.position),pose.spawn);
+      await frame.waitForFunction(() => /^[0-9]+\.[0-9] fps$/.test(document.getElementById('fps').textContent));
+      console.log('Headless software renderer, boarding sample:', await frame.locator('#fps').innerText());
+      await panel.locator('summary').click();
+      await frame.locator('.ldm-chat-launcher').click();
+      const field = frame.locator('textarea.ldm-chat-input');
+      await field.fill('¿Dónde estoy?'); await field.press('Enter');
+      await frame.locator('.ldm-chat-log').getByText(/ubicación|ubicaci.n|Muelle|pasarela/i).first().waitFor();
+      assert.ok(![...resources].some(fullFile), 'Ordinary chat and crossing must stay isolated');
+      await frame.getByRole('button',{name:'Minimizar chat',exact:true}).click();
+      await frame.locator('[data-explore]').click();
+      await frame.getByRole('button',{name:'Explorar el yate completo'}).click();
+      await frame.waitForFunction(() => window.__app.gangwayOnly === false, null, {timeout:120000});
+      assert.ok([...resources].some(path => path.endsWith('/model.bin')));
+      assert.equal(await frame.locator('.luz-yacht-controls').count(),1);
+      assert.equal(await frame.locator('#ldm-chat-widget').count(),1);
+      await frame.locator('[data-room="MD_R02"]').click();
+      assert.equal(await frame.evaluate(() => window.__app.yachtWalk.nav.room.id),'MD_R02');
       assert.ok(![...resources].some(path=>/\/mobile\/(coast\.jpg|gangway\.bin\.gz|scene\.js|renderer\.js)/.test(path)));
     }
-    return {pose,image};
+    return {pose,image,geometry};
   } finally {await context.close();}
 }
 
@@ -95,18 +126,19 @@ async function capture(browser, mobile) {
     args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
   try {
     const original=await capture(browser,false), mobile=await capture(browser,true);
-    assert.deepEqual(mobile.pose,original.pose);
-    const {width,height,data}=original.image;
-    assert.equal(mobile.image.width,width);assert.equal(mobile.image.height,height);
-    let error=0, dark=0, light=0;
-    for(let i=0;i<data.length;i+=4){
-      if(data[i]<75)dark++;if(data[i]>135)light++;
-      for(let k=0;k<3;k++)error+=Math.abs(data[i+k]-mobile.image.data[i+k]);
+    assert.equal(mobile.geometry.parts, original.geometry.parts);
+    assert.equal(mobile.geometry.count, JSON.parse(original.geometry.parts).length);
+    assert.ok(mobile.geometry.triangles < original.geometry.triangles / 10);
+    const {width,height,data} = mobile.image;
+    let dark = 0, light = 0, changed = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i] < 110) dark++;
+      if (data[i] > 135) light++;
+      if (Math.abs(original.image.data[i] - data[i]) > 16) changed++;
     }
-    const mean=error/(width*height*3);
-    console.log(JSON.stringify({dark,light,pixels:width*height,mean}));
-    assert.ok(dark>width*height*.004 && light>width*height*.01,'Reference must contain a rendered yacht');
-    assert.ok(mean<6,'Mean image difference: '+mean);
-    console.log(JSON.stringify({viewport:[width,height],meanRgbDifference:mean,pose:original.pose}));
+    assert.ok(dark > width*height*.003 && light > width*height*.01, 'Gangway frame must show geometry and sky');
+    assert.ok(changed > width*height*.02, 'Full yacht must disappear');
+    console.log(JSON.stringify({fullTriangles:original.geometry.triangles, gangwayTriangles:mobile.geometry.triangles,
+      gangwayMeshes:mobile.geometry.meshes, parts:mobile.geometry.count, dark, light, changed}));
   } finally {await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

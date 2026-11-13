@@ -503,14 +503,18 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       }
       if (controller.signal.aborted || !target) return;
       let attempts = 0;
-      function startWhenReady() {
+      async function startWhenReady() {
         if (controller.signal.aborted) return;
         if (!window.__app?.yachtWalk && ++attempts < 60) {
           focusTimer = setTimeout(startWhenReady, 250);
           return;
         }
         let started = false;
-        try { started = tour.start(target); }
+        try {
+          if (window.__app?.gangwayOnly) await window.__app.loadFullYacht();
+          if (controller.signal.aborted) return;
+          started = tour.start(target);
+        }
         catch (error) { trace.fail('chat_unexpected', error); }
         trace.update({ tourResult: started ? 'started' : 'no_route' });
         if (!started) {

@@ -5,7 +5,8 @@ export function crossing(walk) {
   const [along, across] = nav.position;
   if (nav.deck !== boarding.room.deck || !boarding.safe(along, across, nav.radius)) return null;
   const start = boarding.room.spawn[0];
-  const target = along >= boarding.end - .04 ? start : boarding.end;
+  const end = boarding.walkEnd ?? boarding.end;
+  const target = along >= end - .04 ? start : end;
   const direction = Math.sign(target - along);
   return function advance(seconds) {
     const [x, y] = nav.position;
@@ -49,7 +50,7 @@ function attachPilot(frame) {
         timer = setTimeout(ready, 200);
         return;
       }
-      if (!app.yachtOnly || !app.yachtWalk?.model.boarding) return;
+      if (!app.gangwayOnly || !app.yachtWalk?.model.boarding) return;
       const walk = app.yachtWalk;
       const nativeFps = doc.querySelector('#fps');
       const canvas = app.engine.domElement;
@@ -72,7 +73,7 @@ function attachPilot(frame) {
       }
       function faceTravelDirection() {
         const boarding = walk.model.boarding;
-        const sign = walk.nav.position[0] < boarding.end - .04 ? 1 : -1;
+        const sign = walk.nav.position[0] < (boarding.walkEnd ?? boarding.end) - .04 ? 1 : -1;
         const forward = app.camera.position.clone().set(0,0,sign).applyQuaternion(walk.model.group.quaternion);
         return Math.atan2(-forward.x,-forward.z);
       }
@@ -101,6 +102,7 @@ function attachPilot(frame) {
       doc.addEventListener('pointerdown', stop, {...options,capture:true});
       doc.addEventListener('keydown', stop, {...options,capture:true});
       doc.addEventListener('visibilitychange', stop, options);
+      view.addEventListener('luz-de-mar:full-yacht', () => { panel.hidden = true; current.abort(); }, options);
       view.addEventListener('pagehide', () => { panel.hidden = true; current.abort(); }, options);
       panel.addEventListener('toggle', stats, options);
       const changes = new MutationObserver(() => {if (panel.open) stats();});

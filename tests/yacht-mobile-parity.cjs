@@ -32,21 +32,25 @@ async function capture(browser, mobile) {
         walking:[...app.yachtWalk.nav.position], spawn:app.yachtWalk.model.boarding.room.spawn.slice(0,2)};
     });
     assert.deepEqual(pose.walking,pose.spawn);
-    // SwiftShader can present a black compositor screenshot while the WebGPU
-    // color attachment contains the image. Read the actual presented texture
-    // on a completed frame. The published renderer requests COPY_SRC already.
+    // The headless compositor can present black even when the renderer draws.
+    // Send one unchanged final render pass to a readable color attachment of
+    // the same size and format. This hook exists only inside the test.
     const captured = await frame.evaluate(async () => {
       const app = window.__app;
       const first = app.gpu.frame;
       return new Promise((resolve, reject) => {
         const original = app.frame;
         app.frame = function(dt) {
-          original(dt);
-          if (app.gpu.frame-first < 16) return;
+          if (app.gpu.frame-first < 16) return original(dt);
           app.frame = original;
           try {
-            const gpu = app.gpu, image = gpu.context.getCurrentTexture();
-            const width = image.width, height = image.height;
+            const gpu = app.gpu, engine = app.engine;
+            const width=engine.width, height=engine.height;
+            const image=gpu.device.createTexture({size:[width,height],format:app.post.outputFormat,
+              usage:GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.COPY_SRC});
+            const previous=app.post.outputTexture;
+            app.post.outputTexture={view:options=>image.createView(options)};
+            try {original(dt);} finally {app.post.outputTexture=previous;}
             const stride = Math.ceil(width*4/256)*256;
             const output = gpu.device.createBuffer({size:stride*height,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
             const encoder = gpu.device.createCommandEncoder();
@@ -61,7 +65,7 @@ async function capture(browser, mobile) {
                 if(bgra)for(let x=0;x<row.length;x+=4)[row[x],row[x+2]]=[row[x+2],row[x]];
                 segments.push(String.fromCharCode(...row));
               }
-              output.unmap();output.destroy();
+              output.unmap();output.destroy();image.destroy();
               resolve({pixels:btoa(segments.join('')),width,height});
             },reject);
           }catch(e){reject(e);}

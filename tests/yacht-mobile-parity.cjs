@@ -11,6 +11,9 @@ async function capture(browser, mobile) {
   const context = await browser.newContext({viewport:{width:360,height:540}, deviceScaleFactor:1, hasTouch:true});
   try {
     const page = await context.newPage();
+    const errors = [];
+    page.on('pageerror', error=>errors.push(error.message.slice(0,350)));
+    page.on('console', message=>{if(message.type()==='error' && errors.length<12)errors.push(message.text().slice(0,350));});
     const resources = new Set();
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
@@ -32,7 +35,17 @@ async function capture(browser, mobile) {
     // Hide only interface chrome while comparing the underlying rendered scene.
     await frame.addStyleTag({content:'body > :not(#app) {visibility:hidden!important;}'});
     const hidePanel = mobile && await page.addStyleTag({content:'#pilot {visibility:hidden!important;}'});
+    // The app announces readiness before its presentation loop has converged.
+    await frame.evaluate(async () => {
+      const app=window.__app, start=app.gpu.frame;
+      await new Promise(resolve=>{
+        function wait(){if(app.gpu.frame-start>=16)resolve();else requestAnimationFrame(wait);}
+        wait();
+      });
+      await app.gpu.queue.onSubmittedWorkDone();
+    });
     const pixels = await page.screenshot({timeout:30000});
+    console.log(mobile?'mobile':'walk-chat',JSON.stringify(errors));
     writeFileSync(out + (mobile ? '/mobile.png' : '/walk-chat.png'),pixels);
     if (mobile) {
       await hidePanel.evaluate(e=>e.remove());
@@ -63,6 +76,7 @@ async function capture(browser, mobile) {
       for(let k=0;k<3;k++)error+=Math.abs(data[i+k]-mobile.image.data[i+k]);
     }
     const mean=error/(width*height*3);
+    console.log(JSON.stringify({dark,light,pixels:width*height,mean}));
     assert.ok(dark>width*height*.004 && light>width*height*.01,'Reference must contain a rendered yacht');
     assert.ok(mean<6,'Mean image difference: '+mean);
     console.log(JSON.stringify({viewport:[width,height],meanRgbDifference:mean,pose:original.pose}));

@@ -29,3 +29,10 @@ jobs:
             sleep 1
           done
           NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs
+      - name: Save the two reference frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gangway-comparison
+          path: /tmp/yacht-mobile-parity/*.png
+          retention-days: 3

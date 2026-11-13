@@ -56,11 +56,29 @@ async function capture(browser, mobile) {
           try {
             const gpu = app.gpu, engine = app.engine;
             const width=engine.width, height=engine.height;
-            const image=gpu.device.createTexture({size:[width,height],format:app.post.outputFormat,
+            const image=gpu.device.createTexture({size:[width,height],format:app.gangwayOnly ? gpu.format : app.post.outputFormat,
               usage:GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.COPY_SRC});
-            const previous=app.post.outputTexture;
-            app.post.outputTexture={view:options=>image.createView(options)};
-            try {original(dt);} finally {app.post.outputTexture=previous;}
+            const compact = app.gangwayOnly === true;
+            const previous = compact ? engine.currentTexture : app.post.outputTexture;
+            const passLabels = [];
+            const originalRender = GPUCommandEncoder.prototype.beginRenderPass;
+            const originalCompute = GPUCommandEncoder.prototype.beginComputePass;
+            GPUCommandEncoder.prototype.beginRenderPass = function(desc) {
+              passLabels.push(desc.label);
+              return originalRender.call(this,desc);
+            };
+            GPUCommandEncoder.prototype.beginComputePass = function(desc) {
+              passLabels.push('compute');
+              return originalCompute.call(this,desc);
+            };
+            if (compact) engine.currentTexture = () => image;
+            else app.post.outputTexture = {view:options=>image.createView(options)};
+            try {original(dt);} finally {
+              if (compact) engine.currentTexture = previous;
+              else app.post.outputTexture = previous;
+              GPUCommandEncoder.prototype.beginRenderPass = originalRender;
+              GPUCommandEncoder.prototype.beginComputePass = originalCompute;
+            }
             const stride = Math.ceil(width*4/256)*256;
             const output = gpu.device.createBuffer({size:stride*height,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
             const encoder = gpu.device.createCommandEncoder();
@@ -76,7 +94,7 @@ async function capture(browser, mobile) {
                 segments.push(String.fromCharCode(...row));
               }
               output.unmap();output.destroy();image.destroy();
-              resolve({pixels:btoa(segments.join('')),width,height});
+              resolve({pixels:btoa(segments.join('')),width,height,passLabels});
             },reject);
           }catch(e){reject(e);}
         };
@@ -91,6 +109,8 @@ async function capture(browser, mobile) {
       assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');
       assert.equal(geometry.meshes, 1);
       assert.equal(await frame.evaluate(() => window.__app.gangwayOnly),true);
+      assert.deepEqual(captured.passLabels,['Gangway to screen']);
+      assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
       await page.getByRole('button',{name:'Recorrer la pasarela'}).click();
@@ -100,6 +120,26 @@ async function capture(browser, mobile) {
       assert.deepEqual(await frame.evaluate(()=>window.__app.yachtWalk.nav.position),pose.spawn);
       await frame.waitForFunction(() => /^[0-9]+\.[0-9] fps$/.test(document.getElementById('fps').textContent));
       console.log('Headless software renderer, boarding sample:', await frame.locator('#fps').innerText());
+      const scale = panel.locator('#scale');
+      const compare = panel.locator('#compare');
+      await scale.selectOption('0.5');
+      assert.deepEqual(await frame.evaluate(() => [window.__app.engine.width,window.__app.engine.height]),[180,270]);
+      await compare.click();
+      await page.getByRole('button',{name:'Cancelar comparación'}).click();
+      assert.equal(await panel.locator('#progress').textContent(),'Prueba interrumpida');
+      assert.equal(await frame.evaluate(() => window.__app.engine.renderScale),.5);
+      await scale.selectOption('1');
+      await compare.click();
+      await panel.locator('#results li').nth(1).waitFor({timeout:190000});
+      const measurements = await panel.locator('#results li').allTextContents();
+      for (const [i,dimensions] of ['360 × 540','180 × 270'].entries()) {
+        assert.ok(measurements[i].includes(dimensions));
+        assert.match(measurements[i],/[0-9]+\.[0-9]+ FPS de media/);
+      }
+      console.log('Two real-time 60s walks, Chrome software rendering:',measurements);
+      assert.equal(await panel.locator('#progress').textContent(),'Comparación terminada');
+      assert.equal(await frame.evaluate(() => window.__app.engine.renderScale),1);
+      assert.deepEqual(await frame.evaluate(() => window.__app.yachtWalk.nav.position),pose.spawn);
       await panel.locator('summary').click();
       await frame.locator('.ldm-chat-launcher').click();
       const field = frame.locator('textarea.ldm-chat-input');
@@ -112,6 +152,7 @@ async function capture(browser, mobile) {
       await frame.waitForFunction(() => window.__app.gangwayOnly === false, null, {timeout:120000});
       assert.ok([...resources].some(path => path.endsWith('/model.bin')));
       assert.equal(await frame.locator('.luz-yacht-controls').count(),1);
+      assert.equal(await frame.evaluate(() => !!(window.__app.post && window.__app.shadows)),true);
       assert.equal(await frame.locator('#ldm-chat-widget').count(),1);
       await frame.locator('[data-room="MD_R02"]').click();
       assert.equal(await frame.evaluate(() => window.__app.yachtWalk.nav.room.id),'MD_R02');

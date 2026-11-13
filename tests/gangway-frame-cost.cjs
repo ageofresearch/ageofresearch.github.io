@@ -61,14 +61,42 @@ const { chromium } = require('playwright-core');
       }return out;
     });
     console.log('TRACE',JSON.stringify(trace));
-    const first=['baseline','no-mesh','no-post','no-shadow-update','no-bloom','no-ao','no-taa','no-motion','half-size','baseline'];
-    const second=['baseline','half-size','no-motion','no-taa','no-ao','no-bloom','no-shadow-update','no-post','no-mesh','baseline'];
-    const all={};
-    for(const mode of [...first,...second]){
-      const res=await f.evaluate(mode=>window.runSample(mode,8,3),mode);
-      const result=all[mode]??={wall:[],cpu:[]};result.wall.push(...res.wall);result.cpu.push(...res.cpu);
-    }
-    function q(v,f){v=[...v].sort((a,b)=>a-b);const i=(v.length-1)*f;return +(v[Math.floor(i)]+(v[Math.ceil(i)]-v[Math.floor(i)])*(i%1)).toFixed(2);}
-    for(const [mode,s] of Object.entries(all))console.log('RESULT',JSON.stringify({mode,n:s.wall.length,p25:q(s.wall,.25),p50:q(s.wall,.5),p75:q(s.wall,.75),cpu:q(s.cpu,.5)}));
+    const gpuPassTimes=await f.evaluate(async()=>{
+      const a=window.__app,device=a.gpu.device,queue=device.queue;
+      if(!a.gpu.hasTimestamp)return {unavailable:true};
+      const proto=GPUCommandEncoder.prototype, originals={beginRenderPass:proto.beginRenderPass,beginComputePass:proto.beginComputePass};
+      const query=device.createQuerySet({type:'timestamp',count:128});
+      const result=device.createBuffer({size:1024,usage:GPUBufferUsage.QUERY_RESOLVE|GPUBufferUsage.COPY_SRC});
+      const read=device.createBuffer({size:1024,usage:GPUBufferUsage.MAP_READ|GPUBufferUsage.COPY_DST});
+      const samples={};
+      for(const condition of ['still','walk']){
+        const records=[];
+        for(let i=-4;i<16;i++){
+          if(condition==='walk'){a.yachtWalk.nav.move(.035,0);a.yachtWalk.yaw+=.002;}
+          const names=[];
+          for(const [key,original] of Object.entries(originals)){
+            proto[key]=function(desc={}){
+              const ix=names.length*2; names.push(desc.label||'?');
+              return original.call(this,{...desc,timestampWrites:{querySet:query,beginningOfPassWriteIndex:ix,endOfPassWriteIndex:ix+1}});
+            };
+          }
+          const start=performance.now();
+          try{a.frame(1/60);}finally{Object.assign(proto,originals);}
+          const n=names.length*2,enc=device.createCommandEncoder();
+          enc.resolveQuerySet(query,0,n,result,0);enc.copyBufferToBuffer(result,0,read,0,n*8);queue.submit([enc.finish()]);
+          await read.mapAsync(GPUMapMode.READ);
+          const t=new BigUint64Array(read.getMappedRange()), row={};
+          names.forEach((label,idx)=>{row[label]=(row[label]||0)+Number(t[idx*2+1]-t[idx*2])/1e6;});
+          const span=Number(t[n-1]-t[0])/1e6;
+          read.unmap();if(i>=0)records.push({stage:row,span,wall:performance.now()-start});
+        }
+        const median=v=>{v.sort((a,b)=>a-b);return +((v[7]+v[8])/2).toFixed(2);};
+        const labels=new Set(records.flatMap(r=>Object.keys(r.stage)));
+        samples[condition]={span:median(records.map(r=>r.span)),wall:median(records.map(r=>r.wall)),
+          stages:Object.fromEntries([...labels].map(k=>[k,median(records.map(r=>r.stage[k]||0))]))};
+      }
+      query.destroy(); result.destroy(); read.destroy();return samples;
+    });
+    console.log('QUERY_TIMES',JSON.stringify(gpuPassTimes));
   }finally{await b.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

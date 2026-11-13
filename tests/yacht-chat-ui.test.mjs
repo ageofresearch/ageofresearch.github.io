@@ -956,6 +956,38 @@ test('reasoning selector applies each level to the next Gemini request', async (
   });
 });
 
+test('a second question cancels the tour review without hiding the first answer or moving late', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  await withUI(async ui => {
+    configure(ui);
+    ui.window.__app = { yachtWalk: {} };
+    let release, reviewSignal;
+    ui.respond = ({ options }) => {
+      const body = JSON.parse(options.body);
+      if (body.response_format.schema.required.join() === 'damageTarget') {
+        reviewSignal = options.signal;
+        return new Promise(resolve => { release = () => resolve(interactionResponse([created(), modelStart(),
+          textDelta('{"damageTarget":"LD_MAC_001"}'), stepStop(), completion()])); });
+      }
+      const answer = ui.calls.length === 1 ? 'El motor de babor tiene daños reportados.' : 'Puedes consultar el PMS.';
+      return interactionResponse([created(), modelStart(), textDelta(JSON.stringify({ answer, damageTarget: 'none' })), stepStop(), completion()]);
+    };
+    await ui.api.sendQuestion('¿Alguna novedad?');
+    assert.ok(release);
+    const log = ui.document.querySelector('[role="log"]');
+    assert.match(log.textContent, /daños reportados/);
+    await ui.api.sendQuestion('¿Dónde está el registro?');
+    assert.ok(reviewSignal.aborted);
+    release();
+    await settle();
+    t.mock.timers.tick(1000);
+    assert.equal(ui.calls.length, 3);
+    assert.match(log.textContent, /Puedes consultar el PMS/);
+    assert.ok(ui.document.querySelector('.ldm-chat-status').hidden);
+    assert.ok(!ui.document.querySelector('.ldm-tour-panel'));
+  });
+});
+
 test('a completed damage report starts a round trip while the chat stays open and usable', async t => {
   t.mock.timers.enable({ apis: ['setTimeout'] });
   await withUI(async ui => {
@@ -991,20 +1023,42 @@ test('a completed damage report starts a round trip while the chat stays open an
     globalThis.requestAnimationFrame = fn => { frames.set(++nextFrame, fn); return nextFrame; };
     globalThis.cancelAnimationFrame = id => frames.delete(id);
     try {
-      let feed;
-      ui.respond = () => new Response(new ReadableStream({ start(controller) { feed = controller; } }));
+      const marker = ui.document.createElement('script');
+      marker.setAttribute('data-equipment-tour', '');
+      ui.document.head.append(marker);
+      delete app.yachtWalk; // The user can ask a question before the renderer finishes starting.
+      const reported = 'Según el reporte del proyecto, se han reportado daños en el motor de babor de Luz de Mar, aunque no se especifica el componente afectado, la causa, la gravedad ni el estado de la reparación. Ten en cuenta que no tengo sensores ni comprobaciones actuales a bordo conectadas, y la escena 3D no refleja el estado técnico real del yate. ¿En qué te puedo ayudar?';
+      let feed, reviews = 0;
+      ui.respond = ({ options }) => {
+        const body = JSON.parse(options.body);
+        if (body.response_format?.schema.required.join() === 'damageTarget') {
+          reviews++;
+          assert.equal(JSON.parse(body.input).respuesta, reported);
+          assert.equal(JSON.parse(body.input).pregunta, 'pasa algo');
+          return interactionResponse([created(), modelStart(), textDelta('{"damageTarget":"LD_MAC_001"}'), stepStop(), completion()]);
+        }
+        assert.deepEqual(body.response_format.schema.required, ['answer', 'damageTarget']);
+        return new Response(new ReadableStream({ start(controller) { feed = controller; } }));
+      };
       for (const cancel of [true, false]) {
-        const task = ui.api.sendQuestion('Pasa algo?');
-        const answer = JSON.stringify({ answer: 'Hay daños reportados en el motor de babor.', damageTarget: 'LD_MAC_001' });
+        const task = ui.api.sendQuestion('pasa algo');
+        const answer = JSON.stringify({ answer: reported, damageTarget: 'none' });
         feed.enqueue(new TextEncoder().encode(encodeEvents([created(), modelStart(), textDelta(answer)])));
-        await settle(() => ui.document.body.textContent.includes('Hay daños reportados en el motor de babor.'));
+        await settle(() => ui.document.body.textContent.includes(reported));
         t.mock.timers.tick(1200);
         assert.equal(frames.size, 0);
         if (cancel) click(button(ui, 'Cancelar consulta'));
         else feed.enqueue(new TextEncoder().encode(encodeEvents([stepStop(), completion()])));
         await task;
+        if (!cancel) await settle(() => diagnostics.snapshot().reports.some(r => r.provider === 'tour_review' && r.state === 'success'));
         t.mock.timers.tick(1000);
-        assert.equal(frames.size, cancel ? 0 : 1);
+        assert.equal(frames.size, 0);
+        if (!cancel) {
+          app.yachtWalk = walk;
+          t.mock.timers.tick(250);
+          assert.equal(frames.size, 1);
+        }
+        assert.equal(reviews, cancel ? 0 : 1);
       }
       const chat = ui.document.getElementById('ldm-chat-panel');
       const input = ui.document.getElementById('ldm-chat-question');
@@ -1012,7 +1066,7 @@ test('a completed damage report starts a round trip while the chat stays open an
       const log = ui.document.querySelector('[role="log"]');
       assert.ok(visible(chat));
       assert.equal(launcher.getAttribute('aria-expanded'), 'true');
-      assert.match(log.textContent, /Hay daños reportados en el motor de babor/);
+      assert.ok(log.textContent.includes(reported));
       let now = 1000;
       function tick() {
         const [id, cb] = frames.entries().next().value;
@@ -1055,7 +1109,7 @@ test('a completed damage report starts a round trip while the chat stays open an
       t.mock.timers.tick(1000);
       assert.equal(frames.size, 1, 'A follow-up without a new target preserves the active tour');
       assert.match(log.textContent, /Puedes consultar el PMS/);
-      assert.match(log.textContent, /Hay daños reportados en el motor de babor/);
+      assert.ok(log.textContent.includes(reported));
       finish();
       assert.ok(visible(chat));
       assert.deepEqual(nav.position, [9.22, 0]);

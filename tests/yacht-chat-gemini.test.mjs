@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { GEMINI_MODEL, geminiAnswer, checkGeminiConnection, testGeminiGeneration } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
+import { GEMINI_MODEL, geminiAnswer, reviewTourTarget, checkGeminiConnection, testGeminiGeneration } from '../site/tidewater-rocha/luz-de-mar-chat/gemini.js';
 import { diagnostics } from '../site/tidewater-rocha/luz-de-mar-chat/diagnostics.js';
 import { created, modelStart, textDelta, stepStop, completion, encodeEvents, textEvents as payload, interactionResponse as response } from './yacht-chat-interactions-fixtures.mjs';
 
@@ -989,4 +989,27 @@ test('incomplete damage metadata or unfinished generation never produces a camer
       apiKey: KEY, equipmentFocus: true, fetchImpl: async () => response(events),
     }));
   }
+});
+
+test('an omitted tour target is reviewed only for a named asset and only a validated selection moves the camera', async () => {
+  let calls = 0;
+  const question = 'pasa algo';
+  const answer = 'No se ha reportado daño en el **motor de babor**.';
+  function fetchReview(id) {
+    return async (_, options) => {
+      calls++;
+      const body = JSON.parse(options.body);
+      const { candidatos, respuesta } = JSON.parse(body.input);
+      assert.equal(respuesta, answer);
+      assert.deepEqual(candidatos, [{ id: 'LD_MAC_001', name: 'Motor de babor' }]);
+      assert.deepEqual(body.response_format.schema.properties.damageTarget.enum, ['none', 'LD_MAC_001']);
+      assert.ok(!options.body.includes(KEY));
+      return response(payload(JSON.stringify({ damageTarget: id })));
+    };
+  }
+  assert.equal(await reviewTourTarget(question, 'No hay novedades.', { apiKey: KEY, fetchImpl: fetchReview('none') }), null);
+  assert.equal(calls, 0);
+  assert.equal(await reviewTourTarget(question, answer, { apiKey: KEY, fetchImpl: fetchReview('none') }), null);
+  await assert.rejects(reviewTourTarget(question, answer, { apiKey: KEY, fetchImpl: fetchReview('unknown') }), { code: 'gemini_response' });
+  assert.equal(calls, 2);
 });

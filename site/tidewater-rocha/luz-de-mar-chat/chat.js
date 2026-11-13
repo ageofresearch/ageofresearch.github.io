@@ -1,6 +1,6 @@
 import { createEquipmentTour } from './camera-tour.js';
 import { answerQuestion } from './assistant.js';
-import { GEMINI_MODEL, DEFAULT_THINKING_LEVEL, THINKING_LEVELS, checkGeminiConnection, testGeminiGeneration } from './gemini.js';
+import { GEMINI_MODEL, DEFAULT_THINKING_LEVEL, THINKING_LEVELS, checkGeminiConnection, testGeminiGeneration, reviewTourTarget } from './gemini.js';
 import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
 
 const ROOT_ID = 'ldm-chat-widget';
@@ -99,8 +99,14 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   installStyles();
 
   let focusTimer = null;
-  function cancelFocus() {
+  let focusReview;
+  function cancelPendingFocus() {
     clearTimeout(focusTimer);
+    focusReview?.abort();
+    focusReview = null;
+  }
+  function cancelFocus() {
+    cancelPendingFocus();
     tour.stop();
   }
   const history = [];
@@ -387,9 +393,10 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       trace.fail('chat_key_in_question');
       return;
     }
-    clearTimeout(focusTimer);
+    cancelPendingFocus();
     trace.stage('ui_context');
     const context = viewContext();
+    const equipmentFocus = Boolean(window.__app?.yachtWalk || document.querySelector('script[data-equipment-tour]'));
     const prior = history.map(message => ({ ...message }));
     trace.update({ historyMessages: prior.length });
     trace.stage('ui_message');
@@ -419,7 +426,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
         viewContext: context,
         endpoint,
         geminiApiKey,
-        equipmentFocus: Boolean(window.__app?.yachtWalk),
+        equipmentFocus,
         thinkingLevel: reasoningSelect.value,
         signal: controller.signal,
         trace,
@@ -456,14 +463,8 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       mode.dataset.mode = ['gemini', 'ai'].includes(result.mode) ? 'ai' : 'local';
       if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
       trace.finish();
-      if (opened && result.damageTarget) {
-        focusTimer = setTimeout(() => {
-          if (!opened || disposed || requestVersion !== connectionVersion) return;
-          if (!tour.start(result.damageTarget)) {
-            status.hidden = false;
-            status.textContent = 'No se encontró un recorrido transitable desde esta vista hasta la pieza.';
-          }
-        }, 900);
+      if (opened && equipmentFocus && result.mode === 'gemini') {
+        void focusFromAnswer(question, text, result.damageTarget, trace, prior);
       }
     } catch (error) {
       if (disposed || requestVersion !== connectionVersion) return;
@@ -495,6 +496,39 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     }
   }
 
+  async function focusFromAnswer(question, answer, target, trace, history) {
+    const controller = new AbortController();
+    focusReview = controller;
+    try {
+      if (!target) {
+        target = await reviewTourTarget(question, answer, { apiKey: geminiApiKey, signal: controller.signal, history });
+      }
+      if (controller.signal.aborted || !target) return;
+      let attempts = 0;
+      function startWhenReady() {
+        if (controller.signal.aborted) return;
+        if (!window.__app?.yachtWalk && ++attempts < 60) {
+          focusTimer = setTimeout(startWhenReady, 250);
+          return;
+        }
+        let started = false;
+        try { started = tour.start(target); }
+        catch (error) { trace.fail('chat_unexpected', error); }
+        trace.update({ tourResult: started ? 'started' : 'no_route' });
+        if (!started) {
+          status.hidden = false;
+          status.textContent = 'No se encontró un recorrido transitable desde esta vista hasta la pieza.';
+        }
+      }
+      focusTimer = setTimeout(startWhenReady, 900);
+    } catch {
+      if (!controller.signal.aborted) {
+        status.hidden = false;
+        status.textContent = 'La respuesta está disponible. No se pudo verificar qué pieza mostrar en el recorrido.';
+      }
+    }
+  }
+
   function notifyVisibility() {
     window.dispatchEvent(new CustomEvent('luz-de-mar-chat:visibility', { detail: { open: opened } }));
   }
@@ -513,7 +547,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   function close() {
     if (!opened) return;
-    clearTimeout(focusTimer);
+    cancelPendingFocus();
     opened = false;
     keyField.value = '';
     useKey.disabled = true;

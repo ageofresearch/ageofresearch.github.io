@@ -5,6 +5,9 @@ on:
       - 'site/tidewater-rocha/mobile.html'
       - 'site/tidewater-rocha/mobile/**'
       - 'site/tidewater-rocha/play.html'
+      - 'site/tidewater-rocha/assets/RochaYachtApp-*.js'
+      - 'site/tidewater-rocha/assets/RochaYachtState-*.js'
+      - 'site/tidewater-rocha/rocha/luz-de-mar/model.*'
       - 'tests/yacht-mobile-parity.cjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:

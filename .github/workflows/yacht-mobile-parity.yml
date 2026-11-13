@@ -1,4 +1,4 @@
-name: Mobile gangway visual parity
+name: Mobile gangway isolation
 on:
   pull_request:
     paths:
@@ -23,7 +23,7 @@ jobs:
           sparse-checkout: |
             site/tidewater-rocha
             tests
-      - name: Compare mobile and walk-chat at the same boarding position
+      - name: Verify the isolated gangway against the walk-chat yacht
         run: |
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &

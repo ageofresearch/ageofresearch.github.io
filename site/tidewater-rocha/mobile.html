@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>La pasarela · Luz de Mar</title>
-  <link rel="stylesheet" href="./mobile/pasarela.css">
+  <link rel="stylesheet" href="./mobile/pasarela.css?v=mobile-forward-1">
 </head>
 <body>
   <main>
@@ -14,10 +14,15 @@
       <section aria-label="Prueba de la pasarela">
         <button type="button" id="cross">Recorrer la pasarela</button>
         <button type="button" id="reset">Volver al inicio</button>
+        <label for="scale">Resolución de la escena</label>
+        <select id="scale"><option value="1">Completa · 100 %</option><option value="0.5">Reducida · 50 %</option></select>
+        <button type="button" id="compare">Comparar FPS · 2 × 60 s</button>
+        <output id="progress" aria-live="off"></output>
+        <ul id="results" aria-label="Resultados de rendimiento" aria-live="polite"></ul>
         <div class="stats"><span id="fps">— FPS</span><span id="resolution"></span></div>
       </section>
     </details>
   </main>
-  <script type="module" src="./mobile/pasarela.js?v=gangway-slice-1"></script>
+  <script type="module" src="./mobile/pasarela.js?v=mobile-forward-1"></script>
 </body>
 </html>

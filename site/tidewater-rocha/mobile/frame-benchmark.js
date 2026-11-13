@@ -1,4 +1,4 @@
-const phases = [{scale:1, label:'Completa'}, {scale:.5, label:'Reducida'}];
+const resolutionPhases = [{scale:1, label:'Completa'}, {scale:.5, label:'Reducida'}];
 const warmupMs = 2000;
 const durationMs = 60000;
 
@@ -29,7 +29,9 @@ export function createBenchmark(app, report) {
   const engine = app.engine;
   function setupPhase() {
     const r = run;
-    engine.setRenderScale(phases[r.index].scale);
+    const phase = r.phases[r.index];
+    if (engine.renderScale !== phase.scale) engine.setRenderScale(phase.scale);
+    app.gangwayRenderer?.setSamples(phase.samples);
     r.width = engine.width;
     r.height = engine.height;
     walk.enterRoom('boarding');
@@ -40,23 +42,31 @@ export function createBenchmark(app, report) {
     r.previous = undefined;
     r.intervals = [];
     r.remaining = -1;
-    report({state:'warmup', phase:phases[r.index].label, width:r.width, height:r.height});
+    report({state:'warmup', phase:r.phases[r.index].label, width:r.width, height:r.height});
   }
   function end(state) {
     if (!run) return;
     const r = run;
     run = undefined;
     if (app.gangwayOnly) {
-      engine.setRenderScale(r.originalScale);
+      if (engine.renderScale !== r.originalScale) engine.setRenderScale(r.originalScale);
+      app.gangwayRenderer?.setSamples(r.originalSamples);
       walk.enterRoom('boarding');
     }
     report({state});
   }
   return {
     get active() { return Boolean(run); },
-    start() {
+    get mode() { return run?.mode; },
+    start(mode = 'resolution') {
       if (run || !app.gangwayOnly || !walk.active || walk.controls?.open) return;
-      run = {index:0, originalScale:engine.renderScale};
+      if (mode === 'edges' && !app.gangwayRenderer?.canSmooth) return;
+      const originalScale = engine.renderScale;
+      const originalSamples = app.gangwayRenderer?.samples ?? 1;
+      const phases = mode === 'edges'
+        ? [{scale:originalScale, samples:1, label:'Sin suavizado'}, {scale:originalScale, samples:4, label:'MSAA 4×'}]
+        : resolutionPhases.map(phase => ({...phase, samples:originalSamples}));
+      run = {index:0, mode, phases, originalScale, originalSamples};
       report({state:'start'});
       setupPhase();
     },
@@ -75,7 +85,7 @@ export function createBenchmark(app, report) {
       const remaining = Math.max(0,Math.ceil((durationMs-elapsed)/1000));
       if (remaining !== r.remaining) {
         r.remaining = remaining;
-        report({state:'measuring',phase:phases[r.index].label,remaining});
+        report({state:'measuring',phase:r.phases[r.index].label,remaining});
       }
     },
     submitted(now) {
@@ -84,8 +94,8 @@ export function createBenchmark(app, report) {
       if (r.previous !== undefined) r.intervals.push(now-r.previous);
       r.previous = now;
       if (now-r.start < durationMs) return;
-      report({state:'result',phase:phases[r.index].label,...frameResult(r.intervals,r.width,r.height)});
-      if (++r.index === phases.length) end('done');
+      report({state:'result',phase:r.phases[r.index].label,...frameResult(r.intervals,r.width,r.height)});
+      if (++r.index === r.phases.length) end('done');
       else setupPhase();
     },
   };

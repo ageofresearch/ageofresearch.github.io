@@ -1,5 +1,5 @@
 // The isolated gangway is one static opaque mesh. Transform and light its native
-// vertex attributes directly; the one color attachment is the displayed canvas.
+// vertex attributes directly and resolve multisampled edges to the canvas in-pass.
 const shader = `
 struct Frame {
   clipFromLocal: mat4x4f,
@@ -52,8 +52,12 @@ export async function createForwardRenderer(app, sun) {
   const geometry = mesh.geometry;
   const attributes = ['position', 'normal', 'color', 'aSurface'].map(name => geometry.attributes[name]);
   const module = device.createShaderModule({label:'Gangway finishes', code:shader});
-  const pipeline = await device.createRenderPipelineAsync({
-    label:'Gangway direct lighting', layout:'auto',
+  const bindLayout = device.createBindGroupLayout({entries:[
+    {binding:0, visibility:GPUShaderStage.VERTEX, buffer:{type:'uniform'}},
+  ]});
+  const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
+  const makePipeline = count => device.createRenderPipelineAsync({
+    label:'Gangway direct lighting '+count+'×', layout, multisample:{count},
     vertex:{module,entryPoint:'vertex',buffers:attributes.map((a, index) => ({
       arrayStride:a.itemSize*4, attributes:[{shaderLocation:index,offset:0,format:'float32x'+a.itemSize}],
     }))},
@@ -61,6 +65,11 @@ export async function createForwardRenderer(app, sun) {
     primitive:{topology:'triangle-list',cullMode:'back'},
     depthStencil:{format:'depth24plus',depthWriteEnabled:true,depthCompare:'greater'},
   });
+  const [single, smooth] = await Promise.all([makePipeline(1), makePipeline(4).catch(error => {
+    console.warn('Gangway MSAA unavailable', error);
+    return null;
+  })]);
+  let samples = smooth ? 4 : 1;
   function upload(array, usage) {
     const buffer = device.createBuffer({size:Math.ceil(array.byteLength/4)*4,usage,mappedAtCreation:true});
     new Uint8Array(buffer.getMappedRange()).set(new Uint8Array(array.buffer,array.byteOffset,array.byteLength));
@@ -72,32 +81,41 @@ export async function createForwardRenderer(app, sun) {
   const indexFormat = geometry.index.array instanceof Uint32Array ? 'uint32' : 'uint16';
   const frame = new Float32Array(24);
   const uniform = device.createBuffer({size:frame.byteLength,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
-  const bindings = device.createBindGroup({layout:pipeline.getBindGroupLayout(0),entries:[{binding:0,resource:{buffer:uniform}}]});
+  const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}}]});
   mesh.updateWorldMatrix(true,false);
   const localFromWorld = mesh.matrixWorld.clone().invert();
   const clip = mesh.matrixWorld.clone();
   const eye = app.camera.position.clone();
   sun.clone().transformDirection(localFromWorld).toArray(frame,20);
-  let depth, depthView;
+  let depth, depthView, color, colorView;
   return {
+    get samples() { return samples; },
+    get canSmooth() { return Boolean(smooth); },
+    setSamples(value) { samples = value === 4 && smooth ? 4 : 1; },
     render() {
       const {engine, gpu, camera} = app;
-      if (depth?.width !== engine.width || depth?.height !== engine.height) {
+      if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {
         depth?.destroy();
-        depth = device.createTexture({label:'Gangway depth',size:[engine.width,engine.height],format:'depth24plus',usage:GPUTextureUsage.RENDER_ATTACHMENT});
+        color?.destroy();
+        const attachment = {size:[engine.width,engine.height],sampleCount:samples,usage:GPUTextureUsage.RENDER_ATTACHMENT};
+        depth = device.createTexture({...attachment,label:'Gangway depth',format:'depth24plus'});
         depthView = depth.createView();
+        color = samples > 1 ? device.createTexture({...attachment,label:'Gangway multisample color',format}) : null;
+        colorView = color?.createView();
       }
       camera.updateMatrixWorld();
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
       eye.copy(camera.position).applyMatrix4(localFromWorld).toArray(frame,16);
       gpu.queue.writeBuffer(uniform,0,frame);
+      const screen = engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',
-        colorAttachments:[{view:engine.currentTexture().createView(),loadOp:'clear',storeOp:'store',
+        colorAttachments:[{view:colorView ?? screen,resolveTarget:colorView ? screen : undefined,
+          loadOp:'clear',storeOp:colorView ? 'discard' : 'store',
           clearValue:{r:.64,g:.60,b:.53,a:1}}],
         depthStencilAttachment:{view:depthView,depthClearValue:0,depthLoadOp:'clear',depthStoreOp:'discard'},
       });
-      pass.setPipeline(pipeline);
+      pass.setPipeline(samples === 4 ? smooth : single);
       pass.setBindGroup(0,bindings);
       vertices.forEach((buffer,index) => pass.setVertexBuffer(index,buffer));
       pass.setIndexBuffer(indices,indexFormat);
@@ -106,7 +124,7 @@ export async function createForwardRenderer(app, sun) {
     },
     dispose() {
       vertices.forEach(buffer => buffer.destroy());
-      indices.destroy(); uniform.destroy(); depth?.destroy();
+      indices.destroy(); uniform.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

@@ -16,6 +16,8 @@
         <button type="button" id="reset">Volver al inicio</button>
         <label for="scale">Resolución de la escena</label>
         <select id="scale"><option value="1">Completa · 100 %</option><option value="0.5">Reducida · 50 %</option></select>
+        <label><input type="checkbox" id="smooth"> Suavizar bordes (MSAA 4×)</label>
+        <button type="button" id="compareEdges">Comparar suavizado · 2 × 60 s</button>
         <button type="button" id="compare">Comparar FPS · 2 × 60 s</button>
         <output id="progress" aria-live="off"></output>
         <ul id="results" aria-label="Resultados de rendimiento" aria-live="polite"></ul>
@@ -23,6 +25,6 @@
       </section>
     </details>
   </main>
-  <script type="module" src="./mobile/pasarela.js?v=mobile-forward-1"></script>
+  <script type="module" src="./mobile/pasarela.js?v=rail-msaa-1"></script>
 </body>
 </html>

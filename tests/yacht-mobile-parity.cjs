@@ -45,7 +45,7 @@ async function capture(browser, mobile) {
     // The headless compositor can present black even when the renderer draws.
     // Send one unchanged final render pass to a readable color attachment of
     // the same size and format. This hook exists only inside the test.
-    const captured = await frame.evaluate(async () => {
+    const readFrame = () => frame.evaluate(async () => {
       const app = window.__app;
       const first = app.gpu.frame;
       return new Promise((resolve, reject) => {
@@ -61,10 +61,12 @@ async function capture(browser, mobile) {
             const compact = app.gangwayOnly === true;
             const previous = compact ? engine.currentTexture : app.post.outputTexture;
             const passLabels = [];
+            let resolved = false;
             const originalRender = GPUCommandEncoder.prototype.beginRenderPass;
             const originalCompute = GPUCommandEncoder.prototype.beginComputePass;
             GPUCommandEncoder.prototype.beginRenderPass = function(desc) {
               passLabels.push(desc.label);
+              resolved ||= Boolean(desc.colorAttachments[0]?.resolveTarget);
               return originalRender.call(this,desc);
             };
             GPUCommandEncoder.prototype.beginComputePass = function(desc) {
@@ -94,12 +96,13 @@ async function capture(browser, mobile) {
                 segments.push(String.fromCharCode(...row));
               }
               output.unmap();output.destroy();image.destroy();
-              resolve({pixels:btoa(segments.join('')),width,height,passLabels});
+              resolve({pixels:btoa(segments.join('')),width,height,passLabels,resolved});
             },reject);
           }catch(e){reject(e);}
         };
       });
     });
+    const captured = await readFrame();
     const image=new PNG({width:captured.width,height:captured.height});
     image.data=Buffer.from(captured.pixels,'base64');
     writeFileSync(out + (mobile ? '/mobile.png' : '/walk-chat.png'),PNG.sync.write(image));
@@ -113,6 +116,39 @@ async function capture(browser, mobile) {
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
+      const smooth = panel.locator('#smooth');
+      assert.ok(await smooth.isChecked());
+      assert.ok(captured.resolved);
+      await smooth.uncheck();
+      const aliased = await readFrame();
+      assert.deepEqual(aliased.passLabels, captured.passLabels);
+      assert.equal(aliased.resolved,false);
+      const before = new PNG({width:aliased.width,height:aliased.height});
+      before.data = Buffer.from(aliased.pixels,'base64');
+      writeFileSync(out+'/mobile-no-aa.png',PNG.sync.write(before));
+      // A box-filtered 2× capture independently approximates the true pixel coverage.
+      // Keep the camera fixed and score the two bands containing the rails and cables.
+      await frame.evaluate(() => window.__app.engine.setRenderScale(2));
+      const reference = await readFrame();
+      const hi = Buffer.from(reference.pixels,'base64');
+      assert.equal(reference.width, image.width*2);
+      let rawError=0, smoothError=0;
+      for (let y=Math.floor(image.height*.49); y<image.height*.88; y++) {
+        for (let x=0; x<image.width; x++) {
+          if (x>image.width*.43 && x<image.width*.57) continue;
+          for (let c=0;c<3;c++) {
+            const i=4*(y*image.width+x)+c;
+            const j=4*(2*y*reference.width+2*x)+c;
+            const ref=(hi[j]+hi[j+4]+hi[j+reference.width*4]+hi[j+reference.width*4+4])/4;
+            rawError+=Math.abs(before.data[i]-ref);
+            smoothError+=Math.abs(image.data[i]-ref);
+          }
+        }
+      }
+      console.log('Rail-band error reduction vs 2× box reference, percent:',(100*(1-smoothError/rawError)).toFixed(1));
+      assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and cable edges');
+      await frame.evaluate(() => window.__app.engine.setRenderScale(1));
+      await smooth.check();
       await page.getByRole('button',{name:'Recorrer la pasarela'}).click();
       await frame.waitForFunction(start=>window.__app.yachtWalk.nav.position[0]>start+.05,pose.spawn[0],{timeout:30000});
       await page.getByRole('button',{name:'Detener recorrido'}).click();
@@ -140,6 +176,19 @@ async function capture(browser, mobile) {
       assert.equal(await panel.locator('#progress').textContent(),'Comparación terminada');
       assert.equal(await frame.evaluate(() => window.__app.engine.renderScale),1);
       assert.deepEqual(await frame.evaluate(() => window.__app.yachtWalk.nav.position),pose.spawn);
+      const compareEdges = panel.locator('#compareEdges');
+      await compareEdges.click();
+      assert.ok(!(await smooth.isChecked()));
+      await compareEdges.click();
+      assert.ok(await smooth.isChecked());
+      assert.equal(await frame.evaluate(() => window.__app.gangwayRenderer.samples),4);
+      await compareEdges.click();
+      await panel.locator('#results li').nth(1).waitFor({timeout:190000});
+      const edges = await panel.locator('#results li').allTextContents();
+      assert.ok(edges[0].startsWith('Sin suavizado (360 × 540)'));
+      assert.ok(edges[1].startsWith('MSAA 4× (360 × 540)'));
+      console.log('Fixed-resolution AA walks:',edges);
+      assert.ok(await smooth.isChecked());
       await panel.locator('summary').click();
       await frame.locator('.ldm-chat-launcher').click();
       const field = frame.locator('textarea.ldm-chat-input');

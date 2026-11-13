@@ -60,7 +60,6 @@
 #ldm-chat-widget .ldm-chat-mode { display: flex; align-items: center; gap: 7px; color: #2f6258; font-size: 11px; font-weight: 650; }
 #ldm-chat-widget .ldm-chat-mode::before { content: ''; width: 6px; height: 6px; border: 1px solid #5d8f7d; border-radius: 50%; background: #86b49c; box-shadow: 0 0 0 3px #84b29418; }
 #ldm-chat-widget .ldm-chat-mode[data-mode="ai"]::before { background: #2d8a70; }
-#ldm-chat-widget .ldm-chat-mode[data-mode="configured"]::before { background: transparent; }
 #ldm-chat-widget .ldm-chat-mode[data-mode="error"]::before { background: #b9874a; border-color: #b9874a; }
 #ldm-chat-widget .ldm-chat-connection { flex-shrink: 0; padding: 11px 16px 12px; border-bottom: 1px solid #dce4de; background: #f3f6ef; }
 #ldm-chat-widget .ldm-chat-key-status:empty { display: none; }

@@ -1,4 +1,4 @@
-import { createBenchmark } from './frame-benchmark.js?v=stern-landing-1';
+import { createBenchmark } from './frame-benchmark.js?v=visible-stern-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
@@ -129,18 +129,24 @@ function attachPilot(frame) {
         const move = advance;
         let heading = faceTravelDirection();
         let arrived = false;
+        let arrivalPitch = walk.pitch;
         advance = seconds => {
           const error = heading - walk.yaw;
           walk.yaw += Math.atan2(Math.sin(error), Math.cos(error)) * (1 - Math.exp(-3 * Math.min(.075, seconds)));
           if (arrived) {
-            walk.pitch += (-.28-walk.pitch) * (1-Math.exp(-3*Math.min(.075, seconds)));
+            walk.pitch += (arrivalPitch-walk.pitch) * (1-Math.exp(-3*Math.min(.075, seconds)));
             return Math.abs(Math.atan2(Math.sin(error), Math.cos(error))) > .015;
           }
           if (!move(seconds)) {
             const boarding = walk.model.boarding;
             if (walk.nav.position[0] < boarding.walkEnd-.04) return false;
             arrived = true;
-            heading = walk.yaw + Math.PI;
+            const [x,y,z] = boarding.room.look;
+            const basis = walk.model.group.userData.yacht;
+            const target = app.camera.position.clone().set(y*basis.sy,z-basis.seaReference,x*basis.sx-basis.length/2);
+            walk.model.group.localToWorld(target).sub(app.camera.position).normalize();
+            heading = Math.atan2(-target.x,-target.z);
+            arrivalPitch = Math.asin(target.y);
           }
           return true;
         };

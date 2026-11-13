@@ -1,6 +1,6 @@
 import { A as Group } from '../assets/common-HBn3Movl.js';
 import {
-  createBoarding, createFinishes, findBerth, l as yachtBasis,
+  createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js';
 
 // Request the two adjoining assemblies from the same generator as walk-chat.
@@ -13,7 +13,10 @@ export function buildGangway(world) {
   const materials = createFinishes(record.position[1], true, true, true, true);
   const model = { group, record };
   const lake = world.waterBodies.find(body => body.id === record.lakeId);
-  const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, materials });
+  const stern = createSternFeatures();
+  const bounds = stern.nameBounds;
+  const lettering = bounds.slice(0,3).map((min,i) => (min+bounds[i+3])/2);
+  const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, sternParts: stern.parts, materials });
   const { start, end, y, height, layout } = boarding;
   const footClearance = .18;
   boarding.walkEnd = Math.max(...layout.upperLanding.map(point => point[0])) - footClearance;
@@ -24,10 +27,10 @@ export function buildGangway(world) {
     !(x >= end-radius && x <= layout.gateEnd+radius && across <= y-layout.railOffset+radius);
   boarding.room = {
     ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + 1.6],
-    look: [end, y, height(end) + .95],
+    look: lettering,
   };
   Object.assign(model, {
-    boarding, meshes: boarding.meshes, stats: boarding.stats,
+    transom:stern, boarding, meshes: boarding.meshes, stats: boarding.stats,
     asset: { data: { rooms: [], meshes: [], levels: { MD: layout.deckHeight } } },
     // All geometry in this view is static and always eligible for drawing.
     updateVisibility() {},
@@ -54,7 +57,7 @@ export function configureWalk(walk) {
   for (const button of controls.root.querySelectorAll('[data-deck]')) {
     button.hidden = button.dataset.deck !== boarding.room.deck;
   }
-  controls.root.querySelector('[data-nav-note]').textContent = 'Pasarela y desembarco de popa de Luz de Mar.';
+  controls.root.querySelector('[data-nav-note]').textContent = 'Pasarela, plataforma de baño y espejo de popa de Luz de Mar.';
 }
 
 export function addFullYachtControl(app) {

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#16272a">
+  <title>La pasarela · Luz de Mar</title>
+  <link rel="stylesheet" href="./mobile/gangway.css">
+</head>
+<body>
+  <main id="view" aria-label="Pasarela de Luz de Mar en 3D">
+    <canvas id="scene" aria-label="Vista 3D. Arrastra para mirar. Usa las flechas o WASD para caminar." tabindex="0"></canvas>
+    <header>
+      <div class="identity"><span class="boat">Luz de Mar</span><h1>La pasarela</h1></div>
+      <details id="metrics"><summary aria-label="Rendimiento" title="Rendimiento"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h3l3-7 4 9 3-13 2 6h3"/></svg></summary>
+        <section><h2>Rendimiento</h2><dl><dt>Motor</dt><dd id="backend">—</dd><dt>Fotogramas</dt><dd id="fps">—</dd><dt>Tiempo p95</dt><dd id="p95">—</dd><dt>Resolución 3D</dt><dd id="resolution">—</dd><dt>Primera imagen</dt><dd id="ready">—</dd></dl></section>
+      </details>
+    </header>
+    <div id="loading" role="status"><span id="loadText">Preparando la pasarela…</span><a id="retry" href="" hidden>Volver a cargar</a></div>
+    <div id="controls" hidden>
+      <div id="stick" role="group" aria-label="Control de movimiento"><span id="nub"></span></div>
+      <div class="actions"><span id="hint">Arrastra para mirar</span><button type="button" id="tour">Recorrer</button><button type="button" id="reset" aria-label="Volver al inicio" title="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 7M4 5v6h6"/></svg></button></div>
+    </div>
+    <noscript>Activa JavaScript para recorrer la pasarela.</noscript>
+  </main>
+  <script type="module" src="./mobile/viewer.js"></script>
+</body>
+</html>

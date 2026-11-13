@@ -1,4 +1,4 @@
-import { createBenchmark } from './frame-benchmark.js';
+import { createBenchmark } from './frame-benchmark.js?v=rail-msaa-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
@@ -59,6 +59,9 @@ function attachPilot(frame) {
       const equipmentTour = () => Boolean(doc.querySelector('.ldm-tour-panel'));
       const scale = document.querySelector('#scale');
       const compare = document.querySelector('#compare');
+      const edges = document.querySelector('#compareEdges');
+      const smooth = document.querySelector('#smooth');
+      const renderer = app.gangwayRenderer;
       const progress = document.querySelector('#progress');
       const results = document.querySelector('#results');
       function showReport(event) {
@@ -89,8 +92,13 @@ function attachPilot(frame) {
         reset.disabled = busy || benchmark.active;
         scale.value = String(app.engine.renderScale);
         scale.disabled = benchmark.active;
-        compare.disabled = busy || !walk.active || walk.controls?.open;
-        compare.textContent = benchmark.active ? 'Cancelar comparación' : 'Comparar FPS · 2 × 60 s';
+        smooth.checked = renderer.samples === 4;
+        smooth.disabled = !renderer.canSmooth || benchmark.active;
+        const unavailable = busy || !walk.active || walk.controls?.open;
+        compare.disabled = unavailable || benchmark.mode === 'edges';
+        edges.disabled = unavailable || !renderer.canSmooth || benchmark.mode === 'resolution';
+        compare.textContent = benchmark.mode === 'resolution' ? 'Cancelar comparación' : 'Comparar FPS · 2 × 60 s';
+        edges.textContent = benchmark.mode === 'edges' ? 'Cancelar comparación' : 'Comparar suavizado · 2 × 60 s';
       }
       function tick(now) {
         if (!advance || !walk.active || walk.controls?.open || equipmentTour() || doc.hidden) return stop();
@@ -133,11 +141,17 @@ function attachPilot(frame) {
         app.engine.setRenderScale(Number(scale.value));
         stats();
       }, options);
-      compare.addEventListener('click', () => {
+      smooth.addEventListener('change', () => {
+        renderer.setSamples(smooth.checked ? 4 : 1);
+        stats();
+      }, options);
+      function compareWalks(mode) {
         stop();
         if (benchmark.active) benchmark.cancel();
-        else if (!equipmentTour()) benchmark.start();
-      }, options);
+        else if (!equipmentTour()) benchmark.start(mode);
+      }
+      compare.addEventListener('click', () => compareWalks('resolution'), options);
+      edges.addEventListener('click', () => compareWalks('edges'), options);
       function interrupt() {
         stop(); benchmark.cancel();
       }

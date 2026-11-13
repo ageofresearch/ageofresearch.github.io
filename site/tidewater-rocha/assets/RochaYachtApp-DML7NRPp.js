@@ -3,8 +3,8 @@ let O=pilot?null:C(),k=fetch(`./rocha/luz-de-mar/berth.json`).then(e=>{if(!e.ok)
 let L,B,V,H,G,forward;
 function prepareFullRenderer(){L=I.atmosphere=new c(A);const R=I.sky=new f(L);const z=m(16.2);L.sunDir.value.copy(z),r.sunDir.value.copy(z),r.sunColor.value.setRGB(3,2.9,2.7),r.skyIrradiance.value.setRGB(.25,.32,.45),r.exposure.value=.55,r.waterEnabled.value=0,r.antiAliasingQuality.value=1,r.atmosphereQuality.value=1;B=I.sceneRenderer=new u(A.meshRenderer,P,F);B.clearColor=[.7,.61,.49,1],B.waterEnabled=!1,B.refractionEnabled=!1;V=I.shadows=new o({size:2048,splits:[10,60,400],lightMargin:200,normalBias:[.015,.06,.3],bias:2e-5,cacheStatic:!0,skipUnused:!0});V.layerMask=1<<p.OPAQUE|1<<p.TRANSPARENT,N.invalidateShadows=()=>V.invalidateStatic();H=I.environment=new d(A,P,R);H.interval=1/0;let U=new i({name:`yacht air medium`,code:`fn underwaterMedium(uv:vec2f)->f32{return 0.0;}`}),W=new i({name:`yacht air composite`,code:`fn underwaterComposite(uv:vec2f,pixel:vec2f)->vec4f{return vec4f(postSceneSample(uv),1.0);}`});G=I.post=new h(A,{sceneRenderer:B,camera:F,underwater:{module:U,compositeModule:W}})}
 if(pilot){
-  const {createForwardRenderer}=await import('../mobile/forward-renderer.js');
-  forward=await createForwardRenderer(I,m(16.2));
+  const {createForwardRenderer}=await import('../mobile/forward-renderer.js?v=rail-msaa-1');
+  forward=I.gangwayRenderer=await createForwardRenderer(I,m(16.2));
 }else prepareFullRenderer();
 let K=I.yachtWalk=new y(I,N);if(pilot){
   I.gangwayOnly=true;
@@ -17,7 +17,7 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     const current=K.nav.position.slice(),yaw=K.yaw,pitch=K.pitch;
     const wasOpen=K.controls?.open;
     K.dispose();
-    forward.dispose();forward=null;A.setRenderScale(1);
+    forward.dispose();forward=null;delete I.gangwayRenderer;A.setRenderScale(1);
     N.dispose();
     N=I.entranceYacht=full;
     P.add(N.group);

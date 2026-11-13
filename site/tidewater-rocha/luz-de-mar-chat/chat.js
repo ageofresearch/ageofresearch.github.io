@@ -86,7 +86,7 @@ function installStyles() {
   if (document.querySelector('link[data-ldm-chat-style]')) return;
   const link = el('link');
   link.rel = 'stylesheet';
-  link.href = new URL('./chat.css?v=chat-labels-1', import.meta.url).href;
+  link.href = new URL('./chat.css?v=chat-labels-2', import.meta.url).href;
   link.dataset.ldmChatStyle = '';
   document.head.append(link);
 }
@@ -596,10 +596,9 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
     testGeneration.hidden = generationNote.hidden = false;
     cancelKey.hidden = false;
     useKey.disabled = true;
-    keyStatus.textContent = 'Clave cargada en esta pestaña · pendiente de consultar';
-    mode.textContent = 'Gemini configurado';
-    modeRow.hidden = false;
-    mode.dataset.mode = 'configured';
+    keyStatus.textContent = '';
+    mode.textContent = '';
+    modeRow.hidden = true;
     field.focus({ preventScroll: true });
     trace.finish();
     refreshReport();

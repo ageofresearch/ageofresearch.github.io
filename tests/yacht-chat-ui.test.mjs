@@ -360,6 +360,9 @@ test('opening and reading the chat permits WASD while editing isolates keys and 
 test('configuring Gemini clears the editor, makes no request, and stores no key in the DOM or storage', async () => {
   await withUI(async ui => {
     configure(ui);
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-context')), false);
+    assert.equal(ui.document.querySelector('.ldm-chat-key-status').textContent, '');
+    assert.doesNotMatch(ui.document.body.textContent, /Gemini configurado|Clave cargada en esta pestaña/);
     assert.equal(ui.document.body.textContent.includes(MODEL), false);
     assert.equal(visible(ui.document.querySelector('.ldm-chat-diagnostics')), false);
     for (const name of ['Cambiar clave', 'Desconectar Gemini', 'Comprobar conexión']) {

@@ -42,6 +42,16 @@ export const damageInstructions = [
   'Catálogo: ' + equipment.map(part => part.id + ' = ' + part.name).join(', '),
 ].join('\n');
 
+// Only select candidates for a semantic review. A name match never starts a tour.
+function searchable(text) {
+  return ' ' + text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ').trim() + ' ';
+}
+export function mentionedEquipment(answer, catalog = equipment) {
+  const words = searchable(answer);
+  return catalog.filter(part => [part.name, ...(part.aliases || [])].some(name => words.includes(searchable(name))));
+}
+
 // The schema has just two string properties. Decode only the answer string as
 // it streams, retaining incomplete escape sequences until the next SSE chunk.
 export function streamingAnswer(json) {

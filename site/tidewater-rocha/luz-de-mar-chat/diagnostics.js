@@ -1,4 +1,4 @@
-export const CHAT_BUILD = '2026-11-12-hydrogen-1';
+export const CHAT_BUILD = '2026-11-13-tour-review-1';
 const STAGES = new Set([
   'start', 'bootstrap_import', 'runtime_error', 'unhandled_rejection', 'resource_error', 'security_policy',
   'validate_input', 'build_request', 'wait_response_headers', 'response_headers', 'read_error_body',
@@ -21,8 +21,9 @@ const ENUMS = {
   interactionEvent: ['interaction.created', 'interaction.status_update', 'step.start', 'step.delta', 'step.stop', 'interaction.completed', 'error', 'other'],
   interactionStatus: ['queued', 'in_progress', 'completed', 'failed', 'cancelled', 'incomplete', 'requires_action', 'requires_continuation', 'unknown'],
   interactionErrorCode: ['invalid_request', 'failed_precondition', 'parameter_unknown', 'authentication', 'payment_required', 'permission_denied', 'not_found', 'model_not_found', 'out_of_range', 'rate_limit_exceeded', 'quota_exceeded', 'too_many_requests', 'cancelled', 'api_error', 'unimplemented', 'service_unavailable', 'deadline_exceeded', 'gateway_timeout', 'safety', 'recitation', 'language', 'prohibited_content', 'spii', 'blocklist', 'image_safety', 'image_prohibited_content', 'image_recitation', 'image_other', 'content_blocked', 'unknown'],
+  tourResult: ['selected', 'none', 'started', 'no_route', 'unknown'],
   requestMethod: ['GET', 'POST', 'unknown'],
-  requestKind: ['public_discovery', 'model_metadata', 'generation_stream', 'generation_probe', 'unknown'],
+  requestKind: ['public_discovery', 'model_metadata', 'generation_stream', 'generation_probe', 'tour_review', 'unknown'],
   contentType: ['text/event-stream', 'application/json', 'text/html', 'other', 'missing'],
   responseType: ['basic', 'cors', 'default', 'opaque', 'opaqueredirect', 'error'],
   providerStatus: ['INVALID_ARGUMENT', 'FAILED_PRECONDITION', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
@@ -99,7 +100,7 @@ export function createDiagnostics({ clock = () => globalThis.performance?.now?.(
     const started = clock();
     const report = {
       id: 'ldm-' + Date.now().toString(36) + '-' + (++sequence).toString(36),
-      startedAt: new Date().toISOString(), provider: ['gemini', 'local', 'server', 'bootstrap', 'runtime', 'configuration', 'connectivity_public', 'connectivity_model', 'generation_probe'].includes(provider) ? provider : 'runtime',
+      startedAt: new Date().toISOString(), provider: ['gemini', 'local', 'server', 'bootstrap', 'runtime', 'configuration', 'connectivity_public', 'connectivity_model', 'generation_probe', 'tour_review'].includes(provider) ? provider : 'runtime',
       state: 'pending', stage: 'start', environment: environment(), metrics: provider === 'gemini' ? { providerInstrumented: false } : {}, events: [],
     };
     const seen = new Set();

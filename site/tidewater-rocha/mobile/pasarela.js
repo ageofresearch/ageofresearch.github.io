@@ -1,3 +1,5 @@
+import { createBenchmark } from './frame-benchmark.js';
+
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
   const boarding = walk.model.boarding;
@@ -55,12 +57,40 @@ function attachPilot(frame) {
       const nativeFps = doc.querySelector('#fps');
       const canvas = app.engine.domElement;
       const equipmentTour = () => Boolean(doc.querySelector('.ldm-tour-panel'));
+      const scale = document.querySelector('#scale');
+      const compare = document.querySelector('#compare');
+      const progress = document.querySelector('#progress');
+      const results = document.querySelector('#results');
+      function showReport(event) {
+        switch (event.state) {
+          case 'start': results.replaceChildren(); break;
+          case 'warmup': progress.textContent = event.phase + ' · preparando ' + event.width + ' × ' + event.height; break;
+          case 'measuring': progress.textContent = event.phase + ' · quedan ' + event.remaining + ' s'; break;
+          case 'cancelled': progress.textContent = 'Prueba interrumpida'; break;
+          case 'done': progress.textContent = 'Comparación terminada'; break;
+          case 'result': {
+            const row = document.createElement('li');
+            row.textContent = event.phase + ' (' + event.width + ' × ' + event.height + ') · ' + event.fps.toFixed(1) +
+              ' FPS de media · P95 ' + event.p95.toFixed(1) + ' ms · ' + Math.round(event.onTime) + ' % de cuadros en 25 ms o menos';
+            results.append(row);
+            break;
+          }
+        }
+        stats();
+      }
+      const benchmark = app.gangwayBenchmark = createBenchmark(app, showReport);
+      results.replaceChildren();
+      progress.textContent = '';
       function stats() {
         fps.textContent = nativeFps?.textContent || '— FPS';
         resolution.textContent = canvas.width + ' × ' + canvas.height;
         const busy = equipmentTour();
-        button.disabled = !advance && (!walk.active || !crossing(walk) || busy);
-        reset.disabled = busy;
+        button.disabled = benchmark.active || !advance && (!walk.active || !crossing(walk) || busy);
+        reset.disabled = busy || benchmark.active;
+        scale.value = String(app.engine.renderScale);
+        scale.disabled = benchmark.active;
+        compare.disabled = busy || !walk.active || walk.controls?.open;
+        compare.textContent = benchmark.active ? 'Cancelar comparación' : 'Comparar FPS · 2 × 60 s';
       }
       function tick(now) {
         if (!advance || !walk.active || walk.controls?.open || equipmentTour() || doc.hidden) return stop();
@@ -99,9 +129,26 @@ function attachPilot(frame) {
         if (!equipmentTour()) walk.enterRoom('boarding');
         stats();
       },options);
-      doc.addEventListener('pointerdown', stop, {...options,capture:true});
-      doc.addEventListener('keydown', stop, {...options,capture:true});
-      doc.addEventListener('visibilitychange', stop, options);
+      scale.addEventListener('change', () => {
+        app.engine.setRenderScale(Number(scale.value));
+        stats();
+      }, options);
+      compare.addEventListener('click', () => {
+        stop();
+        if (benchmark.active) benchmark.cancel();
+        else if (!equipmentTour()) benchmark.start();
+      }, options);
+      function interrupt() {
+        stop(); benchmark.cancel();
+      }
+      current.signal.addEventListener('abort', () => {
+        benchmark.cancel();
+        delete app.gangwayBenchmark;
+      }, {once:true});
+      view.addEventListener('resize', () => benchmark.cancel(), options);
+      doc.addEventListener('pointerdown', interrupt, {...options,capture:true});
+      doc.addEventListener('keydown', interrupt, {...options,capture:true});
+      doc.addEventListener('visibilitychange', interrupt, options);
       view.addEventListener('luz-de-mar:full-yacht', () => { panel.hidden = true; current.abort(); }, options);
       view.addEventListener('pagehide', () => { panel.hidden = true; current.abort(); }, options);
       panel.addEventListener('toggle', stats, options);

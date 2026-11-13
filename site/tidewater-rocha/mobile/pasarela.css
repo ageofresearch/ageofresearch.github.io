@@ -1,0 +1,10 @@
+:root {color-scheme: dark; font: 14px/1.4 system-ui, sans-serif;}
+html, body, main {width: 100%; height: 100%; margin: 0; overflow: hidden;}
+#yacht {display: block; width: 100%; height: 100%; border: 0;}
+#pilot {position: fixed; top: max(40px, calc(env(safe-area-inset-top) + 34px)); left: max(12px, env(safe-area-inset-left)); color: #f6f3e9;}
+#pilot summary, #pilot section {background: #17252bee; border: 1px solid #d3c9af55; border-radius: 12px;}
+#pilot summary {width: max-content; padding: 8px 12px; cursor: pointer; min-height: 25px;}
+#pilot section {display: grid; gap: 5px; padding: 7px; margin-top: 4px;}
+#pilot button {font: inherit; text-align: left; min-height: 42px; background: #293a40; color: inherit; border: 0; padding: 7px 12px; border-radius: 6px; cursor: pointer;}
+#pilot button:disabled {opacity: .55;}
+.stats {display: flex; justify-content: space-between; gap: 12px; padding: 3px 5px; font-size: 12px; color: #d2dfdb; font-variant-numeric: tabular-nums;}

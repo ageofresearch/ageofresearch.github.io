@@ -1,6 +1,6 @@
 import { createEquipmentTour } from './camera-tour.js';
 import { answerQuestion } from './assistant.js';
-import { GEMINI_MODEL, DEFAULT_THINKING_LEVEL, THINKING_LEVELS, checkGeminiConnection, testGeminiGeneration, reviewTourTarget } from './gemini.js';
+import { DEFAULT_THINKING_LEVEL, THINKING_LEVELS, checkGeminiConnection, testGeminiGeneration, reviewTourTarget } from './gemini.js';
 import { CHAT_BUILD, diagnostics, installGlobalDiagnostics } from './diagnostics.js';
 
 const ROOT_ID = 'ldm-chat-widget';
@@ -86,7 +86,7 @@ function installStyles() {
   if (document.querySelector('link[data-ldm-chat-style]')) return;
   const link = el('link');
   link.rel = 'stylesheet';
-  link.href = new URL('./chat.css?v=open-tour-1', import.meta.url).href;
+  link.href = new URL('./chat.css?v=chat-labels-1', import.meta.url).href;
   link.dataset.ldmChatStyle = '';
   document.head.append(link);
 }
@@ -168,8 +168,6 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
 
   const connection = el('section', 'ldm-chat-connection');
   connection.setAttribute('aria-label', 'Conexión con Gemini');
-  const connectionTitle = el('div', 'ldm-chat-connection-title');
-  connectionTitle.append(el('strong', '', 'Gemini'), el('code', '', GEMINI_MODEL));
   const keyStatus = el('p', 'ldm-chat-key-status');
   keyStatus.setAttribute('role', 'status');
   keyStatus.setAttribute('aria-live', 'polite');
@@ -218,7 +216,7 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
   }
   reasoningSelect.value = DEFAULT_THINKING_LEVEL;
   reasoningRow.append(reasoningLabel, reasoningSelect);
-  keyConnected.append(connectionTitle, reasoningRow);
+  keyConnected.append(reasoningRow);
   connection.append(keyStatus, keyForm, keyConnected);
 
   const diagnosticPanel = el('details', 'ldm-chat-diagnostics');
@@ -458,10 +456,10 @@ export function mountYachtChat({ endpoint = configuredEndpoint(), mountPoint = d
       const text = clipped(result.answer.trim(), MAX_ANSWER);
       addMessage('assistant', text, result.sources);
       remember({ role: 'assistant', content: text, ...(result.topic ? { topic: result.topic } : {}) });
-      mode.textContent = result.mode === 'gemini' ? 'Gemini 4 Hydrogen' : result.mode === 'ai' ? 'IA conectada' : '';
+      mode.textContent = result.mode === 'ai' ? 'IA conectada' : '';
       modeRow.hidden = !mode.textContent;
       mode.dataset.mode = ['gemini', 'ai'].includes(result.mode) ? 'ai' : 'local';
-      if (result.mode === 'gemini') keyStatus.textContent = 'Gemini respondió · clave en esta pestaña';
+      if (result.mode === 'gemini') keyStatus.textContent = '';
       trace.finish();
       if (opened && equipmentFocus && result.mode === 'gemini') {
         void focusFromAnswer(question, text, result.damageTarget, trace, prior);

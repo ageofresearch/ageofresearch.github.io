@@ -63,9 +63,6 @@
 #ldm-chat-widget .ldm-chat-mode[data-mode="configured"]::before { background: transparent; }
 #ldm-chat-widget .ldm-chat-mode[data-mode="error"]::before { background: #b9874a; border-color: #b9874a; }
 #ldm-chat-widget .ldm-chat-connection { flex-shrink: 0; padding: 11px 16px 12px; border-bottom: 1px solid #dce4de; background: #f3f6ef; }
-#ldm-chat-widget .ldm-chat-connection-title { flex-basis: 100%; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-#ldm-chat-widget .ldm-chat-connection-title strong { font-size: 12px; font-weight: 650; }
-#ldm-chat-widget .ldm-chat-connection-title code { color: #526c60; font-size: 10px; }
 #ldm-chat-widget .ldm-chat-key-status:empty { display: none; }
 #ldm-chat-widget .ldm-chat-key-status { margin: 3px 0 8px; color: #526c60; font-size: 10px; }
 #ldm-chat-widget .ldm-chat-key { display: block; width: 100%; min-height: 48px; max-height: 90px; resize: vertical; padding: 8px 10px; border: 1px solid #bacdbf; border-radius: 9px; background: #fff; color: var(--ldm-ink); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
@@ -159,7 +156,6 @@
 @media (max-width: 760px) and (orientation: portrait), (max-width: 900px) and (max-height: 510px) and (orientation: landscape) {
   body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-header { padding-block: 6px; }
   body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-context,
-  body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-connection-title,
   body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-key-status { display: none; }
   body:has(.ldm-tour-panel) #ldm-chat-widget .ldm-chat-connection { padding-block: 4px; }
 }

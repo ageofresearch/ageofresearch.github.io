@@ -39,7 +39,7 @@ async function capture(browser, mobile) {
         if (node.geometry) { meshes++; triangles += node.geometry.index.count / 3; }
       });
       // Compare exact original part IDs, vertices, normals, indices and material assignments.
-      const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway )/.test(p.name));
+      const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
       return { meshes, triangles, count: model.boarding.parts.length, parts: JSON.stringify(parts) };
     });
     // The headless compositor can present black even when the renderer draws.
@@ -61,6 +61,9 @@ async function capture(browser, mobile) {
             const compact = app.gangwayOnly === true;
             const previous = compact ? engine.currentTexture : app.post.outputTexture;
             const passLabels = [];
+            let indexedDraws=0;
+            const draw=GPURenderPassEncoder.prototype.drawIndexed;
+            GPURenderPassEncoder.prototype.drawIndexed=function(...args){indexedDraws++;return draw.apply(this,args);};
             let resolved = false;
             const originalRender = GPUCommandEncoder.prototype.beginRenderPass;
             const originalCompute = GPUCommandEncoder.prototype.beginComputePass;
@@ -78,6 +81,7 @@ async function capture(browser, mobile) {
             try {original(dt);} finally {
               if (compact) engine.currentTexture = previous;
               else app.post.outputTexture = previous;
+              GPURenderPassEncoder.prototype.drawIndexed = draw;
               GPUCommandEncoder.prototype.beginRenderPass = originalRender;
               GPUCommandEncoder.prototype.beginComputePass = originalCompute;
             }
@@ -96,7 +100,7 @@ async function capture(browser, mobile) {
                 segments.push(String.fromCharCode(...row));
               }
               output.unmap();output.destroy();image.destroy();
-              resolve({pixels:btoa(segments.join('')),width,height,passLabels,resolved});
+              resolve({pixels:btoa(segments.join('')),width,height,passLabels,resolved,indexedDraws});
             },reject);
           }catch(e){reject(e);}
         };
@@ -110,9 +114,10 @@ async function capture(browser, mobile) {
     if (mobile) {
       const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb)|main-[^/]+\.js)$/.test(path);
       assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');
-      assert.equal(geometry.meshes, 1);
+      assert.equal(geometry.meshes, 2);
       assert.equal(await frame.evaluate(() => window.__app.gangwayOnly),true);
       assert.deepEqual(captured.passLabels,['Gangway to screen']);
+      assert.equal(captured.indexedDraws,2);
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
@@ -149,9 +154,26 @@ async function capture(browser, mobile) {
       assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and cable edges');
       await frame.evaluate(() => window.__app.engine.setRenderScale(1));
       await smooth.check();
-      await page.getByRole('button',{name:'Recorrer la pasarela'}).click();
+      await page.getByRole('button',{name:'Caminar hasta popa'}).click();
       await frame.waitForFunction(start=>window.__app.yachtWalk.nav.position[0]>start+.05,pose.spawn[0],{timeout:30000});
       await page.getByRole('button',{name:'Detener recorrido'}).click();
+      await page.getByRole('button',{name:'Caminar hasta popa'}).click();
+      await panel.getByRole('button',{name:'Regresar por la pasarela'}).waitFor({timeout:45000});
+      const atLanding = await frame.evaluate(() => {
+        const w=window.__app.yachtWalk, b=w.model.boarding;
+        return {room:w.nav.location().name, landed:w.nav.position[0]-b.end, level:w.nav.elevation, expected:b.layout.deckHeight,
+          lookBack:window.__app.camera.getWorldDirection(window.__app.camera.position.clone()).dot(
+            window.__app.camera.position.clone().set(0,0,-1).applyQuaternion(w.model.group.quaternion))};
+      });
+      assert.equal(atLanding.room,'Desembarco de popa');
+      assert.ok(atLanding.landed>1.2 && atLanding.lookBack>.9);
+      assert.equal(atLanding.level,atLanding.expected);
+      const back=await readFrame();
+      const backImage = new PNG({width:back.width,height:back.height});
+      backImage.data=Buffer.from(back.pixels,'base64');
+      writeFileSync(out+'/landing-look-back.png',PNG.sync.write(backImage));
+      await panel.getByRole('button',{name:'Regresar por la pasarela'}).click();
+      await frame.waitForFunction(x=>Math.abs(window.__app.yachtWalk.nav.position[0]-x)<.005,pose.spawn[0],{timeout:45000});
       await page.getByRole('button',{name:'Volver al inicio'}).click();
       assert.deepEqual(await frame.evaluate(()=>window.__app.yachtWalk.nav.position),pose.spawn);
       await frame.waitForFunction(() => /^[0-9]+\.[0-9] fps$/.test(document.getElementById('fps').textContent));

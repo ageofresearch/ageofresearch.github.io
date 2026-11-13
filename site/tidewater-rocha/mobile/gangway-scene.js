@@ -3,8 +3,7 @@ import {
   createBoarding, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js';
 
-// The original boarding generator also builds a pier and a cockpit landing.
-// Request only its telescopic sections, handrails, sockets and guard lines.
+// Request the two adjoining assemblies from the same generator as walk-chat.
 export function buildGangway(world) {
   const record = findBerth(world);
   const group = new Group();
@@ -14,12 +13,15 @@ export function buildGangway(world) {
   const materials = createFinishes(record.position[1], true, true, true, true);
   const model = { group, record };
   const lake = world.waterBodies.find(body => body.id === record.lakeId);
-  const boarding = createBoarding(model, lake, { gangwayOnly: true, materials });
-  const { start, end, y, width, height, layout } = boarding;
+  const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, materials });
+  const { start, end, y, height, layout } = boarding;
   const footClearance = .18;
-  boarding.walkEnd = end - footClearance;
-  boarding.safe = (x, across, radius = .14) =>
-    x >= start + radius && x <= end - radius && Math.abs(across - y) <= width / 2 - radius;
+  boarding.walkEnd = Math.max(...layout.upperLanding.map(point => point[0])) - footClearance;
+  const onDeck = boarding.safe;
+  // The glass gate runs alongside the arrival path. Keep the walker's body on
+  // its accessible side even where the teak flares beyond the glass.
+  boarding.safe = (x, across, radius = .14) => onDeck(x, across, radius) &&
+    !(x >= end-radius && x <= layout.gateEnd+radius && across <= y-layout.railOffset+radius);
   boarding.room = {
     ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + 1.6],
     look: [end, y, height(end) + .95],
@@ -44,14 +46,15 @@ export function configureWalk(walk) {
   const nav = walk.nav;
   nav.routes = [];
   nav.floorSafe = (x, y, deck = nav.deck) => deck === boarding.room.deck && boarding.safe(x, y, nav.radius);
-  nav.location = () => boarding.room;
+  const landing = {id:'stern-landing', deck:boarding.room.deck, name:'Desembarco de popa', displayName:'Desembarco de popa'};
+  nav.location = () => nav.position[0] >= boarding.end ? landing : boarding.room;
   const controls = walk.controls;
   if (!controls) return;
   controls.sun.closest('label').hidden = true;
   for (const button of controls.root.querySelectorAll('[data-deck]')) {
     button.hidden = button.dataset.deck !== boarding.room.deck;
   }
-  controls.root.querySelector('[data-nav-note]').textContent = 'La prueba muestra solo la pasarela de Luz de Mar.';
+  controls.root.querySelector('[data-nav-note]').textContent = 'Pasarela y desembarco de popa de Luz de Mar.';
 }
 
 export function addFullYachtControl(app) {

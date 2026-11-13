@@ -1,4 +1,4 @@
-import { createBenchmark } from './frame-benchmark.js?v=rail-msaa-1';
+import { createBenchmark } from './frame-benchmark.js?v=stern-landing-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
@@ -18,6 +18,11 @@ export function crossing(walk) {
     nav.move(direction * step, Math.max(-step, Math.min(step, boarding.y - y)));
     return Math.abs(nav.position[0] - x) > .00001 && direction * (target - nav.position[0]) > .002;
   };
+}
+
+function crossLabel(walk) {
+  return walk && walk.nav.position[0] >= walk.model.boarding.walkEnd-.04
+    ? 'Regresar por la pasarela' : 'Caminar hasta popa';
 }
 
 function attachPilot(frame) {
@@ -40,7 +45,7 @@ function attachPilot(frame) {
       view.cancelAnimationFrame(animation);
       advance = null;
       previous = undefined;
-      button.textContent = 'Recorrer la pasarela';
+      button.textContent = crossLabel(view.__app?.yachtWalk);
     }
     const cancel = () => { clearTimeout(timer); stop(); };
     current.signal.addEventListener('abort', cancel, {once:true});
@@ -88,6 +93,7 @@ function attachPilot(frame) {
         fps.textContent = nativeFps?.textContent || '— FPS';
         resolution.textContent = canvas.width + ' × ' + canvas.height;
         const busy = equipmentTour();
+        if (!advance) button.textContent = crossLabel(walk);
         button.disabled = benchmark.active || !advance && (!walk.active || !crossing(walk) || busy);
         reset.disabled = busy || benchmark.active;
         scale.value = String(app.engine.renderScale);
@@ -121,20 +127,31 @@ function attachPilot(frame) {
         advance = crossing(walk);
         if (!advance) return;
         const move = advance;
-        const heading = faceTravelDirection();
+        let heading = faceTravelDirection();
+        let arrived = false;
         advance = seconds => {
           const error = heading - walk.yaw;
           walk.yaw += Math.atan2(Math.sin(error), Math.cos(error)) * (1 - Math.exp(-3 * Math.min(.075, seconds)));
-          return move(seconds);
+          if (arrived) {
+            walk.pitch += (-.28-walk.pitch) * (1-Math.exp(-3*Math.min(.075, seconds)));
+            return Math.abs(Math.atan2(Math.sin(error), Math.cos(error))) > .015;
+          }
+          if (!move(seconds)) {
+            const boarding = walk.model.boarding;
+            if (walk.nav.position[0] < boarding.walkEnd-.04) return false;
+            arrived = true;
+            heading = walk.yaw + Math.PI;
+          }
+          return true;
         };
         previous = undefined;
         button.textContent = 'Detener recorrido';
         animation = view.requestAnimationFrame(tick);
       },options);
       reset.addEventListener('click', () => {
-        stop();
         // The iframe's own equipment tour listens for pointer input to cancel.
         if (!equipmentTour()) walk.enterRoom('boarding');
+        stop();
         stats();
       },options);
       scale.addEventListener('change', () => {

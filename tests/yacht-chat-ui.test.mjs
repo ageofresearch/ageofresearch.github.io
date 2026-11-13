@@ -291,7 +291,7 @@ test('opens with an empty conversation and an accessible key textarea', async ()
   await withUI(async ui => {
     assert.equal(ui.document.querySelector('[role="log"]').children.length, 0);
     assert.equal(visible(ui.document.querySelector('.ldm-chat-context')), false);
-    assert.equal(visible(ui.document.querySelector('.ldm-chat-connection-title')), false);
+    assert.equal(ui.document.querySelector('.ldm-chat-connection-title'), null);
     assert.equal(ui.document.querySelector('.ldm-chat-key-status').textContent, '');
     assert.ok(visible(labelled(ui, 'Clave API de Gemini')));
     assert.ok(ui.document.querySelectorAll('label').some(label =>
@@ -360,7 +360,7 @@ test('opening and reading the chat permits WASD while editing isolates keys and 
 test('configuring Gemini clears the editor, makes no request, and stores no key in the DOM or storage', async () => {
   await withUI(async ui => {
     configure(ui);
-    assert.ok(ui.document.body.textContent.includes(MODEL));
+    assert.equal(ui.document.body.textContent.includes(MODEL), false);
     assert.equal(visible(ui.document.querySelector('.ldm-chat-diagnostics')), false);
     for (const name of ['Cambiar clave', 'Desconectar Gemini', 'Comprobar conexión']) {
       assert.equal(visible(button(ui, name, { visibleOnly: false })), false);
@@ -392,6 +392,10 @@ test('sending uses the exact Gemini model and header, without putting the key in
     }
     const payload = JSON.parse(ui.calls[1].options.body);
     assert.ok(JSON.stringify(payload.input).includes('Primera pregunta sobre mantenimiento'));
+    assert.equal(visible(ui.document.querySelector('.ldm-chat-context')), false);
+    assert.equal(ui.document.querySelector('.ldm-chat-key-status').textContent, '');
+    assert.doesNotMatch(ui.document.body.textContent, /Gemini 4 Hydrogen|Gemini respondió|gemini-4-hydrogen/);
+    assert.ok(visible(labelled(ui, 'Razonamiento')));
     assert.equal(payload.model, MODEL);
     assert.equal(payload.store, false);
     assertNoDOMSecret(ui, FAKE_KEY);

@@ -40,7 +40,8 @@ async function capture(browser, mobile) {
       });
       // Compare exact original part IDs, vertices, normals, indices and material assignments.
       const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
-      return { meshes, triangles, count: model.boarding.parts.length, parts: JSON.stringify(parts) };
+      return { meshes, triangles, count: model.boarding.parts.length, parts: JSON.stringify(parts),
+        stern:model.transom.parts.filter(p=>p.deck === 'MD').map(p=>[p.id,p.materialID,p.triangles,p.bounds]) };
     });
     // The headless compositor can present black even when the renderer draws.
     // Send one unchanged final render pass to a readable color attachment of
@@ -119,6 +120,47 @@ async function capture(browser, mobile) {
       assert.deepEqual(captured.passLabels,['Gangway to screen']);
       assert.equal(captured.indexedDraws,2);
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
+      async function measureStern() {
+        // Read the displayed image at the actual pose, then omit only the
+        // original transom parts in the same two batches for a control frame.
+        const visible = await readFrame();
+        const coverage = await frame.evaluate(() => {
+          const app = window.__app, model = app.entranceYacht;
+          const basis = model.group.userData.yacht;
+          function projected(box) {
+            const points=[];
+            for (const x of [box[0],box[3]]) for (const y of [box[1],box[4]]) for (const z of [box[2],box[5]]) {
+              const p=app.camera.position.clone().set(y*basis.sy,z-basis.seaReference,x*basis.sx-basis.length/2);
+              p.applyMatrix4(model.group.matrixWorld).project(app.camera);
+              points.push([p.x,p.y,p.z]);
+            }
+            return points;
+          }
+          const letter=projected(model.transom.nameBounds);
+          return {within:letter.every(([x,y,z])=>Math.abs(x)<1 && Math.abs(y)<1 && z>0 && z<=1),
+            width:(Math.max(...letter.map(p=>p[0]))-Math.min(...letter.map(p=>p[0])))*app.engine.width/2,
+            skip:model.transom.parts.reduce((n,p)=>n+p.indices.length,0)};
+        });
+        await frame.evaluate(skip=>{
+          const native=GPURenderPassEncoder.prototype.drawIndexed;
+          window.restoreSternDraw=()=>{GPURenderPassEncoder.prototype.drawIndexed=native};
+          GPURenderPassEncoder.prototype.drawIndexed=function(count,...rest){
+            return native.call(this,count>skip ? count-skip : count,...rest);
+          };
+        },coverage.skip);
+        let omitted;
+        try { omitted=await readFrame(); }
+        finally { await frame.evaluate(()=>{window.restoreSternDraw();delete window.restoreSternDraw;}); }
+        const a=Buffer.from(visible.pixels,'base64'), b=Buffer.from(omitted.pixels,'base64');
+        let changed=0;
+        for(let i=0;i<a.length;i+=4) if(Math.max(...[0,1,2].map(k=>Math.abs(a[i+k]-b[i+k])))>12) changed++;
+        const share=changed/(visible.width*visible.height);
+        console.log('Original stern visible in frame:',{share,letterPixels:coverage.width,fullyFramed:coverage.within});
+        assert.ok(share>.09,'The stern must visibly occupy the camera frame');
+        return coverage;
+      }
+      const firstView=await measureStern();
+      assert.ok(firstView.within && firstView.width>60,'The original name must be framed on first paint');
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
       const smooth = panel.locator('#smooth');
@@ -161,17 +203,16 @@ async function capture(browser, mobile) {
       await panel.getByRole('button',{name:'Regresar por la pasarela'}).waitFor({timeout:45000});
       const atLanding = await frame.evaluate(() => {
         const w=window.__app.yachtWalk, b=w.model.boarding;
-        return {room:w.nav.location().name, landed:w.nav.position[0]-b.end, level:w.nav.elevation, expected:b.layout.deckHeight,
-          lookBack:window.__app.camera.getWorldDirection(window.__app.camera.position.clone()).dot(
-            window.__app.camera.position.clone().set(0,0,-1).applyQuaternion(w.model.group.quaternion))};
+        return {room:w.nav.location().name, landed:w.nav.position[0]-b.end, level:w.nav.elevation, expected:b.layout.deckHeight};
       });
       assert.equal(atLanding.room,'Desembarco de popa');
-      assert.ok(atLanding.landed>1.2 && atLanding.lookBack>.9);
+      assert.ok(atLanding.landed>1.2);
       assert.equal(atLanding.level,atLanding.expected);
+      await measureStern();
       const back=await readFrame();
       const backImage = new PNG({width:back.width,height:back.height});
       backImage.data=Buffer.from(back.pixels,'base64');
-      writeFileSync(out+'/landing-look-back.png',PNG.sync.write(backImage));
+      writeFileSync(out+'/landing-stern.png',PNG.sync.write(backImage));
       await panel.getByRole('button',{name:'Regresar por la pasarela'}).click();
       await frame.waitForFunction(x=>Math.abs(window.__app.yachtWalk.nav.position[0]-x)<.005,pose.spawn[0],{timeout:45000});
       await page.getByRole('button',{name:'Volver al inicio'}).click();
@@ -239,6 +280,8 @@ async function capture(browser, mobile) {
   try {
     const original=await capture(browser,false), mobile=await capture(browser,true);
     assert.equal(mobile.geometry.parts, original.geometry.parts);
+    assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
+    assert.ok(mobile.geometry.stern.some(p=>p[0].includes('LUZ-DE-MAR')));
     assert.equal(mobile.geometry.count, JSON.parse(original.geometry.parts).length);
     assert.ok(mobile.geometry.triangles < original.geometry.triangles / 10);
     const {width,height,data} = mobile.image;

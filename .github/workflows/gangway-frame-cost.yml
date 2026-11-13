@@ -1,0 +1,27 @@
+name: Isolated gangway rendering measurements
+on:
+  push:
+    branches: [diagnostics/gangway-frame-cost-20261113]
+permissions:
+  contents: read
+jobs:
+  profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            site/tidewater-rocha
+            tests/gangway-frame-cost.cjs
+          sparse-checkout-cone-mode: false
+      - name: Measure steady frames of the released scene
+        run: |
+          npm install --prefix "$RUNNER_TEMP/bench" --no-audit --no-fund playwright-core@1.56.1
+          python3 -m http.server 8874 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/gangway-http.log" 2>&1 &
+          for attempt in {1..20}; do
+            if curl -sfo /dev/null http://localhost:8874/tidewater-rocha/mobile.html; then break; fi
+            sleep 1
+          done
+          NODE_PATH="$RUNNER_TEMP/bench/node_modules" node tests/gangway-frame-cost.cjs

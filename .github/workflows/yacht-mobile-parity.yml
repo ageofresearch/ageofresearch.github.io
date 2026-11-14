@@ -1,4 +1,4 @@
-name: Mobile gangway isolation
+name: Mobile boarding and terrace isolation
 on:
   pull_request:
     paths:
@@ -11,6 +11,8 @@ on:
       - 'tests/yacht-mobile-parity.cjs'
       - 'tests/yacht-joystick.cjs'
       - 'tests/yacht-touch-look.test.mjs'
+      - 'tests/yacht-terrace.test.mjs'
+      - 'scripts/build-yacht-terrace.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
   contents: read
@@ -25,9 +27,10 @@ jobs:
           sparse-checkout: |
             site/tidewater-rocha
             tests
+            scripts/build-yacht-terrace.mjs
       - name: Verify the isolated gangway against the walk-chat yacht
         run: |
-          node --test tests/yacht-touch-look.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
           for attempt in {1..15}; do
@@ -35,7 +38,7 @@ jobs:
             sleep 1
           done
           NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs
-      - name: Save the two reference frames
+      - name: Save the reference frames
         if: always()
         uses: actions/upload-artifact@v4
         with:

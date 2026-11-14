@@ -1,3 +1,4 @@
+import { routePoint, routeSegments, nearestRoutePoint, moveAlongRoute } from './aft-terrace.js?v=aft-terrace-1';
 const resolutionPhases = [{scale:1, label:'Completa'}, {scale:.5, label:'Reducida'}];
 const warmupMs = 2000;
 const durationMs = 60000;
@@ -16,11 +17,16 @@ export function frameResult(intervals, width, height) {
 // native navigation applies the gangway bounds, slope, and eye height.
 export function placeOnRoute(walk, seconds, initialYaw) {
   const boarding = walk.model.boarding;
-  const [start, y] = boarding.room.spawn;
-  const phase = seconds * Math.PI / 6;
-  const x = start + (boarding.walkEnd-start) * (.5-.5*Math.cos(phase));
-  walk.nav.move(x-walk.nav.position[0], y-walk.nav.position[1]);
-  walk.yaw = initialYaw + Math.PI * (.5-.5*Math.tanh(3*Math.sin(phase+.24)));
+  const {length} = routeSegments(boarding.route);
+  const phase = seconds * Math.PI / 12;
+  const distance = length * (.5-.5*Math.cos(phase));
+  const previous = nearestRoutePoint(boarding,walk.nav)?.distance ?? 0;
+  moveAlongRoute(walk.nav,boarding.route,previous,distance);
+  const {direction} = routePoint(boarding.route,distance);
+  const basis = walk.model.group.userData.yacht;
+  const forward=walk.app.camera.position.clone().set(direction[1]*basis.sy,0,direction[0]*basis.sx).applyQuaternion(walk.model.group.quaternion);
+  const heading=Math.atan2(-forward.x,-forward.z);
+  walk.yaw=heading + Math.PI * (.5-.5*Math.tanh(3*Math.sin(phase+.24))) + .4*Math.sin(seconds*.6);
 }
 
 export function createBenchmark(app, report) {

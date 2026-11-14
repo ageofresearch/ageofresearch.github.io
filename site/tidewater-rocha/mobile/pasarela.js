@@ -1,28 +1,42 @@
-import { createBenchmark } from './frame-benchmark.js?v=visible-stern-1';
+import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=aft-terrace-1';
+import { createBenchmark } from './frame-benchmark.js?v=aft-terrace-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
-  const boarding = walk.model.boarding;
-  const nav = walk.nav;
-  const [along, across] = nav.position;
-  if (nav.deck !== boarding.room.deck || !boarding.safe(along, across, nav.radius)) return null;
-  const start = boarding.room.spawn[0];
-  const end = boarding.walkEnd ?? boarding.end;
-  const target = along >= end - .04 ? start : end;
-  const direction = Math.sign(target - along);
+  const boarding = walk.model.boarding, nav = walk.nav;
+  if (nav.deck !== boarding.room.deck || !boarding.safe(...nav.position,nav.radius)) return null;
+  const join = nearestRoutePoint(boarding, nav);
+  if (!join) return null;
+  const {length} = routeSegments(boarding.route);
+  let distance = join.distance, joined = join.separation < .002;
+  const target = distance >= length-.04 ? 0 : length;
+  const direction = Math.sign(target-distance);
   return function advance(seconds) {
-    const [x, y] = nav.position;
-    if (direction * (target - x) <= .002) return false;
-    const step = Math.min(Math.abs(target - x), Math.min(.075, seconds) * 1.12);
-    if (step <= 0) return true;
-    nav.move(direction * step, Math.max(-step, Math.min(step, boarding.y - y)));
-    return Math.abs(nav.position[0] - x) > .00001 && direction * (target - nav.position[0]) > .002;
+    const step = Math.min(.075,seconds)*1.12;
+    if(step<=0)return true;
+    const before = nav.position.slice();
+    if(!joined) {
+      const delta=join.point.map((v,i)=>v-nav.position[i]);
+      const remaining=Math.hypot(...delta);
+      nav.move(...delta.map(v=>v*Math.min(1,step/remaining)));
+      joined=Math.hypot(...join.point.map((v,i)=>v-nav.position[i]))<.002;
+    } else {
+      const next=distance+direction*Math.min(step,Math.abs(target-distance));
+      if(!moveAlongRoute(nav,boarding.route,distance,next))return false;
+      distance=next;
+    }
+    const delta=nav.position.map((v,i)=>v-before[i]);
+    if(Math.hypot(...delta)<.00001)return false;
+    const basis=walk.model.group.userData.yacht;
+    const forward=walk.app.camera.position.clone().set(delta[1]*basis.sy,0,delta[0]*basis.sx).applyQuaternion(walk.model.group.quaternion);
+    advance.heading=Math.atan2(-forward.x,-forward.z);
+    return !joined || Math.abs(target-distance)>.002;
   };
 }
 
 function crossLabel(walk) {
   return walk && walk.nav.position[0] >= walk.model.boarding.walkEnd-.04
-    ? 'Regresar por la pasarela' : 'Caminar hasta popa';
+    ? 'Regresar por la pasarela' : 'Caminar hasta el salón';
 }
 
 function attachPilot(frame) {
@@ -135,13 +149,15 @@ function attachPilot(frame) {
           walk.yaw += Math.atan2(Math.sin(error), Math.cos(error)) * (1 - Math.exp(-3 * Math.min(.075, seconds)));
           if (arrived) {
             walk.pitch += (arrivalPitch-walk.pitch) * (1-Math.exp(-3*Math.min(.075, seconds)));
-            return Math.abs(Math.atan2(Math.sin(error), Math.cos(error))) > .015;
+            return Math.abs(Math.atan2(Math.sin(error), Math.cos(error))) > .015 || Math.abs(arrivalPitch-walk.pitch) > .01;
           }
-          if (!move(seconds)) {
+          const moving = move(seconds);
+          heading = move.heading ?? heading;
+          if (!moving) {
             const boarding = walk.model.boarding;
             if (walk.nav.position[0] < boarding.walkEnd-.04) return false;
             arrived = true;
-            const [x,y,z] = boarding.room.look;
+            const [x,y,z] = boarding.arrivalLook ?? boarding.room.look;
             const basis = walk.model.group.userData.yacht;
             const target = app.camera.position.clone().set(y*basis.sy,z-basis.seaReference,x*basis.sx-basis.length/2);
             walk.model.group.localToWorld(target).sub(app.camera.position).normalize();

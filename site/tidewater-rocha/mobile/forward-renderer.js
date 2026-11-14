@@ -1,4 +1,4 @@
-// The boarding assembly uses one opaque batch and one pane of glazing. Both
+// The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
 const shader = `
 struct Frame {
@@ -26,7 +26,9 @@ struct Vertex {
   let reflection = reflect(-eye, n);
   let reflectedLight = mix(vec3f(.095,.087,.077), vec3f(.71,.75,.79),
                            smoothstep(-.16,.25,reflection.y));
-  let lit = albedo * (hemi + diffuse * vec3f(.82,.72,.59)) * surface.w;
+  let finish = select(albedo, vec3f(.72,.69,.61), surface.z == 9.);
+  let indirect = select(vec3f(0), vec3f(.23,.22,.20), surface.z == 9.);
+  let lit = finish * ((hemi + diffuse * vec3f(.82,.72,.59)) * surface.w + indirect);
   out.color = mix(lit, albedo * reflectedLight, surface.y)
               + gloss * (.08 + surface.y*.65);
   out.local = vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
@@ -57,13 +59,13 @@ struct GlassVertex {
   @location(0) rgba: vec4f,
 }
 @vertex fn glassVertex(@location(0) position: vec3f, @location(1) normal: vec3f,
-                       @location(2) tint: vec3f) -> GlassVertex {
+                       @location(2) tint: vec3f, @location(3) surface: vec4f) -> GlassVertex {
   let eye = normalize(frame.eyeLocal.xyz-position);
   let n = normalize(normal);
   let grazing = pow(1.-clamp(abs(dot(n,eye)),0.,1.),5.);
   let sky = smoothstep(-.16,.25,reflect(-eye,n).y);
   let glassColor = tint*mix(vec3f(.62,.64,.67),vec3f(.91,.94,.98),sky);
-  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,.06+.30*grazing));
+  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,select(.06+.30*grazing,.66+.22*grazing,surface.z<26.5)));
 }
 @fragment fn glassFragment(in: GlassVertex) -> @location(0) vec4f {
   return in.rgba;
@@ -83,7 +85,7 @@ export async function createForwardRenderer(app, sun) {
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
-    const names = glass ? attributes.slice(0,3) : attributes;
+    const names = attributes;
     return device.createRenderPipelineAsync({
       label:(glass ? 'Boarding glass ' : 'Boarding finishes ')+count+'×', layout, multisample:{count},
       vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:names.map((name,index) => {
@@ -112,7 +114,7 @@ export async function createForwardRenderer(app, sun) {
   }
   const batches = model.meshes.map(mesh => {
     const geom = mesh.geometry;
-    const names = mesh.material.transparent ? attributes.slice(0,3) : attributes;
+    const names = attributes;
     return {
       vertices:names.map(name => upload(geom.attributes[name].array,GPUBufferUsage.VERTEX)),
       indices:upload(geom.index.array,GPUBufferUsage.INDEX),

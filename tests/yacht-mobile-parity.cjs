@@ -41,7 +41,10 @@ async function capture(browser, mobile) {
       });
       // Compare exact original part IDs, vertices, normals, indices and material assignments.
       const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
+      const furniture = model.terrace ? model.terrace.parts.filter(p=>p.role==='furniture') :
+        model.exterior.parts.filter(p=>['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(p.anchor));
       return { meshes, triangles, count: model.boarding.parts.length, parts: JSON.stringify(parts),
+        furniture:furniture.map(p=>[p.id,p.materialID,p.indices.length/3,p.bounds]),
         stern:model.transom.parts.filter(p=>p.deck === 'MD').map(p=>[p.id,p.materialID,p.triangles,p.bounds]) };
     });
     // The headless compositor can present black even when the renderer draws.
@@ -224,6 +227,34 @@ async function capture(browser, mobile) {
       await frame.waitForFunction(x=>Math.abs(window.__app.yachtWalk.nav.position[0]-x)<.005,pose.spawn[0],{timeout:45000});
       await page.getByRole('button',{name:'Volver al inicio'}).click();
       assert.deepEqual(await frame.evaluate(()=>window.__app.yachtWalk.nav.position),pose.spawn);
+      // Capture the same useful close views in CI, with the native camera and
+      // collision map. The furniture remains in the same two render batches.
+      for(const {name,position,target} of [
+        {name:'terrace-landing',position:[4.5,3.1],target:[5.5,-.25,4.6]},
+        {name:'terrace-bar',position:[7.7,-.7],target:[6.48,-1.98,4.85]},
+      ]) {
+        await frame.evaluate(({position,target})=>{
+          const app=window.__app, w=app.yachtWalk, basis=w.model.group.userData.yacht;
+          if(!w.nav.floorSafe(...position))throw Error('Unsafe inspection pose');
+          w.nav.position=position;w.nav.elevation=w.nav.floorHeight(...position);
+          w.cameraElevation=w.nav.elevation;w.applyPosition();
+          const look=app.camera.position.clone().set(target[1]*basis.sy,target[2]-basis.seaReference,target[0]*basis.sx-basis.length/2);
+          w.model.group.localToWorld(look).sub(app.camera.position).normalize();
+          w.yaw=Math.atan2(-look.x,-look.z);w.pitch=Math.asin(look.y);
+        },{position,target});
+        const close=await readFrame();
+        assert.equal(close.indexedDraws,2);
+        assert.deepEqual(close.passLabels,['Gangway to screen']);
+        const png=new PNG({width:close.width,height:close.height});
+        png.data=Buffer.from(close.pixels,'base64');
+        writeFileSync(out+'/'+name+'.png',PNG.sync.write(png));
+      }
+      await frame.evaluate(()=>{
+        const w=window.__app.yachtWalk;
+        w.enterRoom('MD_R01');
+        if(!w.nav.safe(...w.nav.position))throw Error('Unsafe terrace spawn');
+        w.enterRoom('boarding');
+      });
       await frame.waitForFunction(() => /^[0-9]+\.[0-9] fps$/.test(document.getElementById('fps').textContent));
       console.log('Headless software renderer, boarding sample:', await frame.locator('#fps').innerText());
       const scale = panel.locator('#scale');
@@ -291,9 +322,11 @@ async function capture(browser, mobile) {
     const original=await capture(browser,false), mobile=await capture(browser,true);
     assert.equal(mobile.geometry.parts, original.geometry.parts);
     assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
+    assert.deepEqual(mobile.geometry.furniture,original.geometry.furniture);
+    assert.equal(mobile.geometry.furniture.length,25);
     assert.ok(mobile.geometry.stern.some(p=>p[0].includes('LUZ-DE-MAR')));
     assert.equal(mobile.geometry.count, JSON.parse(original.geometry.parts).length);
-    assert.ok(mobile.geometry.triangles < original.geometry.triangles / 10);
+    assert.ok(mobile.geometry.triangles <= 25000,'Keep the furnished scene inside its explicit mobile budget');
     const {width,height,data} = mobile.image;
     let dark = 0, light = 0, changed = 0;
     for (let i = 0; i < data.length; i += 4) {

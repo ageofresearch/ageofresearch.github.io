@@ -1,8 +1,9 @@
-// Bake only the architecture adjoining MD_R01. The phone never builds the full yacht.
+// Bake only MD_R01 and its adjoining architecture. The phone never builds the full yacht.
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { buildYachtGeometry } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import { convexHull, distanceToFootprint } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const boundsOf = vertices => [0, 1, 2].map(k => Math.min(...vertices.filter((_, i) => i % 6 === k)))
@@ -45,7 +46,7 @@ function subdivide(source, maxEdge = .7) {
   function triangle(v) {
     const lengths = v.map((a, i) => Math.hypot(...a.slice(0, 3).map((n, k) => n - v[(i + 1) % 3][k])));
     const edge = lengths.indexOf(Math.max(...lengths));
-    if (lengths[edge] > maxEdge) {
+    if (lengths[edge] > (typeof maxEdge === 'function' ? maxEdge(v) : maxEdge)) {
       const a = v[edge], b = v[(edge + 1) % 3], c = v[(edge + 2) % 3];
       const midpoint = a.map((n, k) => (n + b[k]) / 2);
       triangle([a, midpoint, c]); triangle([midpoint, b, c]);
@@ -58,6 +59,25 @@ function subdivide(source, maxEdge = .7) {
   for (let i = 0; i < source.indices.length; i += 3)
     triangle(source.indices.slice(i, i + 3).map(index => source.vertices.slice(index * 6, index * 6 + 6)));
   return { vertices, indices };
+}
+
+function footprint(parts) {
+  return convexHull(parts.flatMap(part => Array.from({length:part.vertices.length/6},
+    (_,i) => part.vertices.slice(i*6,i*6+2))));
+}
+
+function furnitureGroup(part) {
+  if (part.anchor === 'MD_FUR_003') return 'pouf';
+  if (part.anchor === 'MD_FUR_008') return 'wet-bar';
+  const chair = part.feature.match(/^director chair (\d) /);
+  if (!chair) throw Error(`Unknown terrace chair: ${part.id}`);
+  return 'chair-'+chair[1];
+}
+
+export function contactShade(x, y, footprints) {
+  const distance=Math.min(...footprints.map(({polygon}) => distanceToFootprint(x,y,polygon)));
+  const t=Math.min(1,distance/.3);
+  return 1-.22*(1-t*t*(3-2*t));
 }
 
 export function containsTriangle(x, y, triangle) {
@@ -113,6 +133,31 @@ export async function buildTerrace() {
     seen.add(part.id);
     if (/profiled white service stair enclosure|sloping white service stair ceiling|dark sidewall around D1/.test(part.feature)) add(part, region, 'enclosure');
   }
+  const furniture=model.exterior.parts.filter(part => ['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(part.anchor));
+  if (furniture.length !== 25 || new Set(furniture.map(p=>p.id)).size !== 25) throw Error('The source terrace furniture changed; review the selected assemblies');
+  for (const source of furniture) {
+    // These complete assemblies fit inside MD_R01: keep source topology and poses.
+    parts.push({id:source.id, feature:source.feature, role:'furniture', groupID:furnitureGroup(source),
+      sourceID:source.anchor, materialID:source.materialID, finish:source.finish, glass:false,
+      vertices:source.vertices, indices:source.indices, bounds:source.bounds});
+  }
+  const furnitureFootprints=Object.entries(Object.groupBy(furniture,furnitureGroup))
+    .map(([id,group])=>({id:'furniture/'+id,polygon:footprint(group)}));
+  // The broad first-delivery stair box would close the actual passage beside
+  // chair 3. Project only solid geometry at the walking body's height instead.
+  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure'].includes(p.role)).flatMap(part=>{
+    const body=clipGeometry(part,[3,-4,4.04,9,4,5.65]);
+    const polygon=footprint([body]);
+    return polygon.length>=3 ? [{id:part.id,polygon}] : [];
+  }));
+  for (const part of parts.filter(p=>p.role==='floor')) {
+    Object.assign(part,subdivide(part,triangle=>{
+      if(!triangle.every(v=>v[5]>.5))return .7;
+      const center=[0,1].map(k=>triangle.reduce((sum,v)=>sum+v[k],0)/3);
+      const near=[...triangle,center].some(p=>furnitureFootprints.some(f=>distanceToFootprint(p[0],p[1],f.polygon)<.5));
+      return near ? .22 : .7;
+    }));
+  }
   const floor = parts.filter(p => p.role === 'floor').flatMap(p => topTriangles(p, 3.95));
   const roof = parts.filter(p => p.role === 'roof').flatMap(p => topTriangles(p, 6));
   for (const part of parts) {
@@ -124,7 +169,8 @@ export async function buildTerrace() {
       const reach = Math.max(0, 5.88 - z) * .18;
       const cover = z < 5.88 ? [[0,0],[-reach,0],[reach,0],[0,-reach],[0,reach]]
         .filter(([dx,dy]) => roof.some(t => containsTriangle(x + dx, y + dy, t))).length / 5 : 0;
-      part.light.push(.96 - .38 * cover);
+      const contact=part.role==='floor' && nz>.5 ? contactShade(x,y,furnitureFootprints) : 1;
+      part.light.push((.96 - .38 * cover)*contact);
       part.surfaceTypes.push(part.role === 'floor' && nz > .5 ? 1 : part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
     }
   }
@@ -141,11 +187,11 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'aft-terrace-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'aft-terrace-2', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.
-    blockers: [[3.0,-2.3,4.17,2.3],[4.85,1.25,8.5,2.83]],
+    blockers: [[3.0,-2.3,4.17,2.3]], collisionFootprints,
   } };
 }
 
@@ -153,5 +199,5 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { manifest, binary } = await buildTerrace();
   await writeFile(new URL('mobile/aft-terrace.json', root), JSON.stringify(manifest));
   await writeFile(new URL('mobile/aft-terrace.bin', root), binary);
-  console.log(`${manifest.parts.length} architecture parts, ${manifest.triangles} triangles, ${binary.length} bytes`);
+  console.log(`${manifest.parts.length} terrace parts, ${manifest.triangles} triangles, ${binary.length} bytes`);
 }

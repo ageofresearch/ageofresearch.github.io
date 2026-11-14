@@ -12,6 +12,7 @@ struct Vertex {
   @location(0) color: vec3f,
   @location(1) local: vec2f,
   @location(2) @interpolate(flat) surfaceType: f32,
+  @location(3) finishUV: vec2f,
 }
 @vertex fn vertex(@location(0) position: vec3f, @location(1) normal: vec3f,
                   @location(2) albedo: vec3f, @location(3) surface: vec4f) -> Vertex {
@@ -33,6 +34,7 @@ struct Vertex {
               + gloss * (.08 + surface.y*.65);
   out.local = vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
   out.surfaceType = surface.z;
+  out.finishUV = vec2f(position.x+position.y*.73, position.z+position.y*.51);
   return out;
 }
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
@@ -50,7 +52,17 @@ struct Vertex {
                  (1.-smoothstep(.12,.55,endWidth));
   let variation = 1.+(.97+.045*sin(board*17.17)-1.)*(1.-smoothstep(.12,.55,footprint));
   let wood = select(1., variation*(1.-.52*max(seam,.6*endJoint)), in.surfaceType==1.);
-  let linear = clamp(in.color*wood, vec3f(0), vec3f(1));
+  // The full yacht's restrained wood grain and canvas weave, faded below a
+  // pixel to avoid swimming detail. Evaluate derivatives outside material branches.
+  let grainU = in.finishUV.x*310.;
+  let grainV = in.finishUV.y*37.;
+  let grainFade = 1.-smoothstep(.2,.5,(fwidth(grainV)+1.2*fwidth(grainU))/6.2831853);
+  let grain = mix(1.,.96+.035*sin(grainV+sin(grainU)*1.2),grainFade);
+  let yarn = in.finishUV*vec2f(430.,410.);
+  let yarnFade = 1.-smoothstep(.3,1.5,max(fwidth(yarn.x),fwidth(yarn.y)));
+  let canvas = 1.+.015*sin(yarn.x)*sin(yarn.y)*yarnFade;
+  let detail = select(1.,grain,in.surfaceType==2.)*select(1.,canvas,in.surfaceType==3.);
+  let linear = clamp(in.color*wood*detail, vec3f(0), vec3f(1));
   let srgb = select(1.055*pow(linear,vec3f(1./2.4))-.055, 12.92*linear, linear<=vec3f(.0031308));
   return vec4f(srgb,1.);
 }

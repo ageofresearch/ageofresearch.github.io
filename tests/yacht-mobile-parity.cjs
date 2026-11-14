@@ -197,23 +197,29 @@ async function capture(browser, mobile) {
       assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and cable edges');
       await frame.evaluate(() => window.__app.engine.setRenderScale(1));
       await smooth.check();
-      await page.getByRole('button',{name:'Caminar hasta popa'}).click();
+      await page.getByRole('button',{name:'Caminar hasta el salón'}).click();
       await frame.waitForFunction(start=>window.__app.yachtWalk.nav.position[0]>start+.05,pose.spawn[0],{timeout:30000});
       await page.getByRole('button',{name:'Detener recorrido'}).click();
-      await page.getByRole('button',{name:'Caminar hasta popa'}).click();
+      await page.getByRole('button',{name:'Caminar hasta el salón'}).click();
       await panel.getByRole('button',{name:'Regresar por la pasarela'}).waitFor({timeout:45000});
       const atLanding = await frame.evaluate(() => {
         const w=window.__app.yachtWalk, b=w.model.boarding;
         return {room:w.nav.location().name, landed:w.nav.position[0]-b.end, level:w.nav.elevation, expected:b.layout.deckHeight};
       });
-      assert.equal(atLanding.room,'Desembarco de popa');
-      assert.ok(atLanding.landed>1.2);
+      assert.equal(atLanding.room,'Terraza de popa');
+      assert.ok(atLanding.landed>5.8);
       assert.equal(atLanding.level,atLanding.expected);
-      await measureStern();
       const back=await readFrame();
       const backImage = new PNG({width:back.width,height:back.height});
       backImage.data=Buffer.from(back.pixels,'base64');
-      writeFileSync(out+'/landing-stern.png',PNG.sync.write(backImage));
+      writeFileSync(out+'/terrace-entrance.png',PNG.sync.write(backImage));
+      let terracePixels=0;
+      for(let i=0;i<backImage.data.length;i+=4) {
+        if(Math.max(...[0,1,2].map(k=>Math.abs(backImage.data[i+k]-[163,153,135][k])))>16)terracePixels++;
+      }
+      assert.ok(terracePixels>back.width*back.height*.2,'Arrival must frame the covered terrace, not the unloaded saloon');
+      assert.equal(back.indexedDraws,2);
+      assert.deepEqual(back.passLabels,['Gangway to screen']);
       await panel.getByRole('button',{name:'Regresar por la pasarela'}).click();
       await frame.waitForFunction(x=>Math.abs(window.__app.yachtWalk.nav.position[0]-x)<.005,pose.spawn[0],{timeout:45000});
       await page.getByRole('button',{name:'Volver al inicio'}).click();
@@ -279,7 +285,7 @@ async function capture(browser, mobile) {
 }
 
 (async()=>{
-  const browser = await chromium.launch({channel:'chrome',headless:true,
+  const browser = await chromium.launch({...(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {channel:'chrome'}),headless:true,
     args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
   try {
     const original=await capture(browser,false), mobile=await capture(browser,true);

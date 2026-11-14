@@ -1,10 +1,12 @@
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=aft-terrace-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js';
 
-// Request the two adjoining assemblies from the same generator as walk-chat.
-export function buildGangway(world) {
+// Reuse boarding and stern assemblies, plus the pre-extracted terrace architecture.
+export async function buildGangway(world) {
+  const terrace = await loadTerrace();
   const record = findBerth(world);
   const group = new Group();
   group.position.fromArray(record.position);
@@ -16,22 +18,17 @@ export function buildGangway(world) {
   const stern = createSternFeatures();
   const bounds = stern.nameBounds;
   const lettering = bounds.slice(0,3).map((min,i) => (min+bounds[i+3])/2);
-  const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, sternParts: stern.parts, materials });
-  const { start, end, y, height, layout } = boarding;
+  const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, sternParts: stern.parts, terraceParts: terrace.parts, materials });
+  const { start, y, height, layout } = boarding;
   const footClearance = .18;
-  boarding.walkEnd = Math.max(...layout.upperLanding.map(point => point[0])) - footClearance;
-  const onDeck = boarding.safe;
-  // The glass gate runs alongside the arrival path. Keep the walker's body on
-  // its accessible side even where the teak flares beyond the glass.
-  boarding.safe = (x, across, radius = .14) => onDeck(x, across, radius) &&
-    !(x >= end-radius && x <= layout.gateEnd+radius && across <= y-layout.railOffset+radius);
   boarding.room = {
     ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + 1.6],
     look: lettering,
   };
+  connectTerrace(boarding, terrace);
   Object.assign(model, {
-    transom:stern, boarding, meshes: boarding.meshes, stats: boarding.stats,
-    asset: { data: { rooms: [], meshes: [], levels: { MD: layout.deckHeight } } },
+    transom:stern, terrace, boarding, meshes: boarding.meshes, stats: boarding.stats,
+    asset: { data: { rooms: [terrace.room], meshes: [], levels: { MD: layout.deckHeight } } },
     // All geometry in this view is static and always eligible for drawing.
     updateVisibility() {},
     dispose() {
@@ -50,14 +47,14 @@ export function configureWalk(walk) {
   nav.routes = [];
   nav.floorSafe = (x, y, deck = nav.deck) => deck === boarding.room.deck && boarding.safe(x, y, nav.radius);
   const landing = {id:'stern-landing', deck:boarding.room.deck, name:'Desembarco de popa', displayName:'Desembarco de popa'};
-  nav.location = () => nav.position[0] >= boarding.end ? landing : boarding.room;
+  nav.location = () => nav.position[0] < boarding.end ? boarding.room : nav.position[0] < 3.8 && nav.position[1] > 2.48 ? landing : walk.model.terrace.room;
   const controls = walk.controls;
   if (!controls) return;
   controls.sun.closest('label').hidden = true;
   for (const button of controls.root.querySelectorAll('[data-deck]')) {
     button.hidden = button.dataset.deck !== boarding.room.deck;
   }
-  controls.root.querySelector('[data-nav-note]').textContent = 'Pasarela, plataforma de baño y espejo de popa de Luz de Mar.';
+  controls.root.querySelector('[data-nav-note]').textContent = 'Recorre la pasarela y la terraza de popa hasta la entrada del salón.';
 }
 
 export function addFullYachtControl(app) {

@@ -28,8 +28,12 @@ export function clipGeometry(source, bounds) {
       polygon = next;
     }
     for (let j = 1; j < polygon.length - 1; j++) {
+      const triangle = [polygon[0], polygon[j], polygon[j + 1]];
+      const u = triangle[1].slice(0,3).map((v,k)=>v-triangle[0][k]);
+      const v = triangle[2].slice(0,3).map((v,k)=>v-triangle[0][k]);
+      if (Math.hypot(u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]) < 1e-10) continue;
       const base = vertices.length / 6;
-      for (const vertex of [polygon[0], polygon[j], polygon[j + 1]]) vertices.push(...vertex);
+      for (const vertex of triangle) vertices.push(...vertex);
       indices.push(base, base + 1, base + 2);
     }
   }
@@ -58,6 +62,7 @@ function subdivide(source, maxEdge = .7) {
 
 export function containsTriangle(x, y, triangle) {
   const [a, b, c] = triangle;
+  if (Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])) < 1e-10) return false;
   const cross = (p, q) => (q[0] - p[0]) * (y - p[1]) - (q[1] - p[1]) * (x - p[0]);
   const signs = [cross(a, b), cross(b, c), cross(c, a)];
   return signs.every(v => v >= -1e-7) || signs.every(v => v <= 1e-7);

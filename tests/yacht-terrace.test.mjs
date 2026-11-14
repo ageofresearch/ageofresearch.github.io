@@ -38,6 +38,7 @@ test('published terrace is a reproducible subset of the refined yacht, with no f
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
   assert.ok(!manifest.parts.some(p=>/FUR_|SAN_/.test(p.id)));
+  assert.ok(manifest.floor.every(([a,b,c])=>Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>1e-10),'Degenerate faces must not open navigation holes');
   const lights=manifest.parts.flatMap(p=>Array.from(new Float32Array(generated.binary.buffer,generated.binary.byteOffset+p.light.offset,p.light.length)));
   assert.ok(Math.min(...lights)<.6 && Math.max(...lights)>.95);
 });
@@ -47,6 +48,7 @@ test('clipping interpolates crossings instead of keeping triangles beyond the zo
   assert.ok(result.indices.length>=3);
   assert.ok(result.vertices.filter((_,i)=>i%6===0).every(x=>x>=1 && x<=2));
   assert.ok(result.vertices.filter((_,i)=>i%6===5).every(z=>z===1));
+  assert.equal(clipGeometry({vertices:[0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1],indices:[0,1,2]},[-1,-1,-1,1,1,1]).indices.length,0);
 });
 
 test('native navigation reaches the saloon threshold and returns without crossing glass, stairs, or deck edges', () => {
@@ -58,7 +60,7 @@ test('native navigation reaches the saloon threshold and returns without crossin
     assert.equal(walk.nav.elevation,3.95);
     walk.nav.move(2,0);
     assert.ok(walk.nav.position[0]<=8.4-walk.nav.radius+.001);
-    const forbidden=[[2.8,2.655],[4.0,0],[5.5,1.8],[8.35,-1],[6,-3.6],[9,0],[6,3.7]];
+    const forbidden=[[-5,3.1],[-2,2.3],[2.8,2.655],[4.0,0],[5.5,1.8],[8.35,-1],[6,-3.6],[9,0],[6,3.7]];
     for(const p of forbidden)assert.equal(boarding.safe(...p),false,`Must block ${p}`);
     walk.nav.position=boarding.route.at(-1).slice();
     assert.ok(moveAlongRoute(walk.nav,boarding.route,length,0));

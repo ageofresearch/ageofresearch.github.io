@@ -17,6 +17,7 @@ export async function loadTerrace() {
 }
 
 function onTriangle(x, y, [a, b, c]) {
+  if (Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])) < 1e-10) return false;
   const cross = (p, q) => (q[0] - p[0]) * (y - p[1]) - (q[1] - p[1]) * (x - p[0]);
   const s = [cross(a,b), cross(b,c), cross(c,a)];
   return s.every(v => v >= -1e-7) || s.every(v => v <= 1e-7);

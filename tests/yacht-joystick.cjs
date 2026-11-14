@@ -57,10 +57,12 @@ module.exports = async function exerciseJoystick(page, frame, out) {
     assert.ok(reverse.x<0 && reverse.y<0,'Left and back use continuous signed axes: '+JSON.stringify(reverse));
     const yaw=await frame.evaluate(()=>window.__app.yachtWalk.yaw);
     await touch('touchMove',[left(0,-56)]);
-    await touch('touchStart',[left(0,-56),finger(2,275,240)]);
-    await touch('touchMove',[left(0,-56),finger(2,305,230)]);
+    await touch('touchStart',[left(0,-56),finger(2,165,240)]);
+    await touch('touchMove',[left(0,-56),finger(2,345,230)]);
     await advance();
-    assert.ok(Math.abs(await frame.evaluate(()=>window.__app.yachtWalk.yaw)-yaw)>.03,'Right finger must rotate while left finger walks');
+    const turn=Math.abs(await frame.evaluate(()=>window.__app.yachtWalk.yaw)-yaw)*180/Math.PI;
+    assert.ok(turn>81 && turn<99,'A 180px right-finger swipe must turn about 90 degrees while walking: '+turn);
+    console.log('Touch camera: 180px swipe turned',turn,'degrees');
     assert.ok((await vector()).y>.95,'Looking must not cancel walking');
     await page.screenshot({path:out+'/joystick-multitouch.png'});
     await touch('touchCancel',[]);

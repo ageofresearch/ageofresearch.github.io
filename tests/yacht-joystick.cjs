@@ -9,7 +9,11 @@ module.exports = async function exerciseJoystick(page, frame, out) {
   const center = {x: box.x + box.width / 2, y: box.y + box.height / 2};
   const finger = (id, x, y) => ({id, x, y, radiusX:4, radiusY:4, force:1});
   const left = (x=0,y=0) => finger(1, center.x+x, center.y+y);
-  const touch = (type, touchPoints) => cdp.send('Input.dispatchTouchEvent', {type,touchPoints});
+  const touch = async (type, touchPoints) => {
+    await cdp.send('Input.dispatchTouchEvent', {type,touchPoints});
+    // Chromium coalesces pointermove until the next animation frame.
+    await frame.evaluate(() => new Promise(resolve => requestAnimationFrame(resolve)));
+  };
   const vector = () => frame.evaluate(() => ({...window.__app.yachtWalk.touchMove}));
   const neutral = async () => assert.deepEqual(await vector(), {x:0,y:0});
   await frame.evaluate(() => {
@@ -46,11 +50,11 @@ module.exports = async function exerciseJoystick(page, frame, out) {
     assert.ok(slow>.03 && fast>slow*1.8 && fast<slow*2.8,JSON.stringify({slow,fast}));
     await touch('touchMove',[left(48,-48)]);
     const diagonal=await vector();
-    assert.ok(diagonal.x>.5 && diagonal.y>.5);
+    assert.ok(diagonal.x>.5 && diagonal.y>.5,JSON.stringify(diagonal));
     assert.ok(Math.hypot(diagonal.x,diagonal.y)<=1.000001,'Diagonal movement has a speed cap');
     await touch('touchMove',[left(-40,20)]);
     const reverse=await vector();
-    assert.ok(reverse.x<0 && reverse.y<0,'Left and back use continuous signed axes');
+    assert.ok(reverse.x<0 && reverse.y<0,'Left and back use continuous signed axes: '+JSON.stringify(reverse));
     const yaw=await frame.evaluate(()=>window.__app.yachtWalk.yaw);
     await touch('touchMove',[left(0,-56)]);
     await touch('touchStart',[left(0,-56),finger(2,275,240)]);

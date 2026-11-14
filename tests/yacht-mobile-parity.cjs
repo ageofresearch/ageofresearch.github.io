@@ -26,6 +26,7 @@ async function capture(browser, mobile) {
     const state = await frame.evaluate(() => window.__mapsPublicStatus);
     assert.equal(state.status,'ready',JSON.stringify(state));
     if (mobile) await page.locator('#pilot').waitFor({state:'visible'});
+    if (mobile) await require('./yacht-joystick.cjs')(page, frame, out);
     const pose = await frame.evaluate(() => {
       const app = window.__app;
       return {position:app.camera.position.toArray(),rotation:app.camera.quaternion.toArray(),
@@ -264,6 +265,9 @@ async function capture(browser, mobile) {
       await frame.waitForFunction(() => window.__app.gangwayOnly === false, null, {timeout:120000});
       assert.ok([...resources].some(path => path.endsWith('/model.bin')));
       assert.equal(await frame.locator('.luz-yacht-controls').count(),1);
+      await frame.locator('.luz-stick .front').waitFor();
+      assert.equal(await frame.locator('.luz-stick').count(),1);
+      assert.equal(await frame.locator('[data-key]').count(),0);
       assert.equal(await frame.evaluate(() => !!(window.__app.post && window.__app.shadows)),true);
       assert.equal(await frame.locator('#ldm-chat-widget').count(),1);
       await frame.locator('[data-room="MD_R02"]').click();

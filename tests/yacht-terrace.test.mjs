@@ -78,6 +78,21 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   }
 });
 
+// Actual vertical triangle intersections distinguish projected overlap from
+// two surfaces occupying the same volume.
+function verticalHits(part,x,y) {
+  const heights=[];
+  for(let i=0;i<part.indices.length;i+=3) {
+    const [a,b,c]=part.indices.slice(i,i+3).map(k=>part.vertices.slice(k*6,k*6+3));
+    const det=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);
+    if(Math.abs(det)<1e-10)continue;
+    const u=((b[1]-c[1])*(x-c[0])+(c[0]-b[0])*(y-c[1]))/det;
+    const v=((c[1]-a[1])*(x-c[0])+(a[0]-c[0])*(y-c[1]))/det;
+    if(u>=-1e-8 && v>=-1e-8 && u+v<=1+1e-8)heights.push(u*a[2]+v*b[2]+(1-u-v)*c[2]);
+  }
+  return heights;
+}
+
 // The deployed port gangway passes above the port swim stair in the user's
 // Beach Club reference. It is a configuration constraint, not a reason to
 // invent an outboard bridge and cut the yacht's coamings.
@@ -93,6 +108,24 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
     const coamings=stern.parts.filter(p=>/swept outer stair coaming/.test(p.feature));
     assert.equal(coamings.length,2);
     assert.equal(coamings[0].bounds[5],coamings[1].bounds[5],'Keep both original swept coamings intact');
+    assert.equal(boarding.height(boarding.end),boarding.layout.deckHeight,'Gangway arrival must meet the deck');
+    const treads=stern.parts.filter(p=>/transom port teak tread/.test(p.feature));
+    assert.equal(treads.length,6);
+    let previous=2.84;
+    for(const tread of treads) {
+      const b=tread.bounds;
+      assert.ok(Math.abs(b[5]-previous-(3.95-2.84)/7)<1e-8,'Six treads plus the deck landing require seven equal rises');
+      previous=b[5];
+      for(let ix=0;ix<9;ix++)for(let iy=0;iy<9;iy++) {
+        const x=b[0]+.03+(b[3]-b[0]-.06)*ix/8,y=b[1]+.03+(b[4]-b[1]-.06)*iy/8;
+        for(const part of boarding.parts) {
+          if(x<part.bounds[0]||x>part.bounds[3]||y<part.bounds[1]||y>part.bounds[4])continue;
+          const hits=verticalHits(part,x,y);
+          assert.ok(hits.every(z=>z>b[5]+.015),`${tread.feature}: deployed gangway penetrates tread at ${x},${y}`);
+        }
+      }
+    }
+    assert.ok(Math.abs(3.95-previous-(3.95-2.84)/7)<1e-8);
     assert.deepEqual(walk.nav.routes,[],'The mobile view must not create a descent through the deployed gangway');
     assert.equal(walk.nav.floorSafe(1.5,3.1,'LD'),false);
     assert.equal(boarding.parts.filter(p=>p.feature==='landing mounted post 1 2.3').length,0);

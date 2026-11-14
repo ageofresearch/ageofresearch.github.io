@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=aft-terrace-2';
+import { indexFootprints } from './terrace-geometry.js?v=spatial-fix-1';
 
-const version = 'aft-terrace-2';
+const version = 'spatial-fix-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));
@@ -28,10 +28,9 @@ function onTriangle(x, y, [a, b, c]) {
 
 export function connectTerrace(boarding, terrace) {
   const onBoarding = boarding.safe;
-  const { end, y, layout } = boarding;
   const hitsFootprint=indexFootprints(terrace.collisionFootprints);
   const obstacles = terrace.blockers.concat(terrace.parts
-    .filter(part => ['boundary', 'frame', 'glazing'].includes(part.role))
+    .filter(part => ['frame', 'glazing'].includes(part.role))
     .map(({ bounds: b }) => [b[0],b[1],b[3],b[4]]));
   const cells = new Map();
   for (const t of terrace.floor) {
@@ -48,8 +47,7 @@ export function connectTerrace(boarding, terrace) {
   // Test the union before applying body clearance, so the shared landing seam
   // stays walkable. Dense circumference probes also catch diagonal deck edges.
   boarding.safe = (x, across, radius = .14) => {
-    if (x >= end-radius && x <= layout.gateEnd+radius &&
-      Math.abs(across-(y-layout.railOffset)) <= radius+.025) return false;
+    if (boarding.gateCollision(x,across,radius)) return false;
     if (obstacles.some(b => x > b[0]-radius && x < b[2]+radius && across > b[1]-radius && across < b[3]+radius)) return false;
     if (hitsFootprint(x,across,radius)) return false;
     for (let i=0; i<16; i++) {
@@ -59,7 +57,7 @@ export function connectTerrace(boarding, terrace) {
     }
     return onBoarding(x,across,0) || pointOnFloor(x,across);
   };
-  boarding.route = [boarding.room.spawn.slice(0,2), [3.65,3.1], [4.5,3.1], [4.7,1.55],
+  boarding.route = [boarding.room.spawn.slice(0,2), ...[2.28,2.34,3.65,3.85].map(x=>boarding.mapPoint([x,3.1])), [4.5,3.1], [4.7,1.55],
     [4.72,1.35], [4.8,1.31], [4.9,1.26], [5.15,1.26], [5.3,1], [7.9,.1], [8.18,.1]];
   boarding.walkEnd = boarding.route.at(-1)[0];
   boarding.arrivalLook = [5.5,0,4.85];

@@ -120,7 +120,9 @@ export async function buildTerrace() {
   }
   for (const part of replacements.get('UD_DCK_001')) add(part, [3.2, -3.8, 5.87, 8.5, 3.8, 6.01], 'roof');
   for (const part of replacements.get('HULL_HUL_001')) add(part, region, 'hull');
-  for (const part of replacements.get('MD_STA_013')) add(part, region, 'stairs');
+  // Keep the visible stair assembly, including its upper rail returns. The
+  // terrace ceiling's height is not a valid clipping plane for a handrail.
+  for (const part of replacements.get('MD_STA_013')) add(part, [3.3,-3.8,3.83,8.5,3.8,7.05], 'stairs');
   for (const part of replacements.get('MD_GLA_001')) add(part, region, 'glazing');
   for (const part of model.exterior.parts) {
     if (part.feature === 'aft sliding glazing frames and mullions') add(part, region, 'frame');
@@ -145,7 +147,7 @@ export async function buildTerrace() {
     .map(([id,group])=>({id:'furniture/'+id,polygon:footprint(group)}));
   // The broad first-delivery stair box would close the actual passage beside
   // chair 3. Project only solid geometry at the walking body's height instead.
-  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure'].includes(p.role)).flatMap(part=>{
+  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure','boundary'].includes(p.role)).flatMap(part=>{
     const body=clipGeometry(part,[3,-4,4.04,9,4,5.65]);
     const polygon=footprint([body]);
     return polygon.length>=3 ? [{id:part.id,polygon}] : [];
@@ -155,7 +157,7 @@ export async function buildTerrace() {
       if(!triangle.every(v=>v[5]>.5))return .7;
       const center=[0,1].map(k=>triangle.reduce((sum,v)=>sum+v[k],0)/3);
       const near=[...triangle,center].some(p=>furnitureFootprints.some(f=>distanceToFootprint(p[0],p[1],f.polygon)<.5));
-      return near ? .22 : .7;
+      return near ? .23 : .7;
     }));
   }
   const floor = parts.filter(p => p.role === 'floor').flatMap(p => topTriangles(p, 3.95));
@@ -187,7 +189,7 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'aft-terrace-2', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'spatial-fix-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.

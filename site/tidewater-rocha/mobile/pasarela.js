@@ -1,5 +1,5 @@
-import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=aft-terrace-2';
-import { createBenchmark } from './frame-benchmark.js?v=aft-terrace-2';
+import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=spatial-fix-1';
+import { createBenchmark } from './frame-benchmark.js?v=spatial-fix-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {

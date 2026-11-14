@@ -78,6 +78,73 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   }
 });
 
+// Vertical triangle intersections use the actual emitted geometry, rather than
+// accepting a shifted bounding box as proof that the stair is unobstructed.
+function verticalHits(part,x,y) {
+  const heights=[];
+  for(let i=0;i<part.indices.length;i+=3) {
+    const [a,b,c]=part.indices.slice(i,i+3).map(k=>part.vertices.slice(k*6,k*6+3));
+    const det=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);
+    if(Math.abs(det)<1e-10)continue;
+    const u=((b[1]-c[1])*(x-c[0])+(c[0]-b[0])*(y-c[1]))/det;
+    const v=((c[1]-a[1])*(x-c[0])+(a[0]-c[0])*(y-c[1]))/det;
+    if(u>=-1e-8 && v>=-1e-8 && u+v<=1+1e-8)heights.push(u*a[2]+v*b[2]+(1-u-v)*c[2]);
+  }
+  return heights;
+}
+
+test('the exterior gangway frees the entire port stair and its adapted landing supports the route',()=>{
+  const {boarding,dispose}=walkingModel();
+  try {
+    const stern=createSternFeatures();
+    const treads=stern.parts.filter(p=>/transom port teak tread/.test(p.feature));
+    assert.equal(treads.length,6);
+    for(const tread of treads) {
+      const b=tread.bounds;
+      for(let ix=0;ix<9;ix++)for(let iy=0;iy<9;iy++) {
+        const x=b[0]+.03+(b[3]-b[0]-.06)*ix/8,y=b[1]+.03+(b[4]-b[1]-.06)*iy/8;
+        for(const part of boarding.parts) {
+          if(x<part.bounds[0]||x>part.bounds[3]||y<part.bounds[1]||y>part.bounds[4])continue;
+          const hits=verticalHits(part,x,y).filter(z=>z>b[5]+.002);
+          assert.ok(hits.every(z=>z-b[5]>1.8),`${tread.feature}: boarding blocks headroom at ${x},${y}`);
+        }
+      }
+    }
+    for(let x=2.38;x<=3.8;x+=.025) {
+      const [,y]=boarding.mapPoint([x,3.1]);
+      for(const dy of [-.15,0,.15])assert.ok(boarding.parts.some(p=>
+        /upper teak boarding landing/.test(p.feature) && verticalHits(p,x,y+dy).some(z=>Math.abs(z-3.95)<1e-5)),
+        `Adapted landing must support the walking body at ${x},${y+dy}`);
+    }
+    const gate=boarding.mapPoint([2.8,boarding.layout.y-boarding.layout.railOffset]);
+    assert.equal(boarding.safe(...gate),false,'The displaced gate must still block walking');
+    assert.equal(boarding.safe(0,3.1),false,'The old gangway position must no longer be walkable');
+    assert.equal(boarding.safe(0,4.25),true);
+    assert.equal(boarding.parts.filter(p=>p.feature==='landing mounted post 1 2.3').length,0,'No coincident terminal post');
+  }finally{dispose();}
+});
+
+test('chair and cloth clear their neighbours and upper stair rails retain the complete source height',async()=>{
+  const bench=createSternFeatures().parts.find(p=>p.feature==='covered aft seating behind transom');
+  const chair=manifest.parts.filter(p=>p.groupID==='chair-1');
+  assert.ok(Math.min(...chair.map(p=>p.bounds[0]))-bench.bounds[3]>.05,'Chair 1 must clear the bench by at least 5 cm');
+  const pouf=manifest.parts.filter(p=>p.groupID==='pouf');
+  const cloth=pouf.find(p=>/cloth/.test(p.feature));
+  assert.ok(cloth.bounds[2]-Math.max(...pouf.filter(p=>p!==cloth).map(p=>p.bounds[5]))>.003,'Cloth must sit above the cushion');
+  const data=JSON.parse(await readFile(new URL('../rocha/luz-de-mar/model.json',root)));
+  const buffer=await readFile(new URL('../rocha/luz-de-mar/model.bin',root));
+  const source=buildYachtGeometry({data,binary:buffer.buffer.slice(buffer.byteOffset,buffer.byteOffset+buffer.byteLength)},0,{mtuEngines:false,seaStrainers:false});
+  try {
+    const rails=source.interiorDetail.replacements.get('MD_STA_013').filter(p=>/handrail|post/.test(p.feature));
+    assert.ok(rails.length>=2);
+    for(const rail of rails) {
+      const mobile=manifest.parts.find(p=>p.id===rail.id);
+      assert.ok(mobile,rail.feature);
+      assert.ok(Math.abs(mobile.bounds[5]-rail.bounds[5])<1e-6,`Do not cut the top of ${rail.feature}`);
+    }
+  }finally{source.dispose();}
+});
+
 test('rotated furniture footprints retain their open corners and body clearance',()=>{
   const polygon=convexHull([[0,1],[1,0],[2,1],[1,2],[1,1],[0,1]]);
   const hit=indexFootprints([{polygon}]);

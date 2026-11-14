@@ -1,10 +1,10 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=aft-terrace-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=aft-terrace-2';
 import { A as Group } from '../assets/common-HBn3Movl.js';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js';
 
-// Reuse boarding and stern assemblies, plus the pre-extracted terrace architecture.
+// Reuse boarding and stern assemblies, plus the pre-extracted furnished terrace.
 export async function buildGangway(world) {
   const terrace = await loadTerrace();
   const record = findBerth(world);

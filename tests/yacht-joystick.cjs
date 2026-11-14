@@ -31,6 +31,11 @@ module.exports = async function exerciseJoystick(page, frame, out) {
     for(let i=0;i<5;i++)window.__joystickTest.update.call(w,.1);
     return Math.hypot(w.nav.position[0]-before[0],w.nav.position[1]-before[1]);
   });
+  const stepLook = () => frame.evaluate(() => {
+    const w=window.__app.yachtWalk;
+    window.__joystickTest.update.call(w,0);
+    return [w.yaw,w.pitch];
+  });
   try {
     await touch('touchStart',[left()]);
     await touch('touchMove',[left(2,-2)]);
@@ -58,21 +63,41 @@ module.exports = async function exerciseJoystick(page, frame, out) {
     const yaw=await frame.evaluate(()=>window.__app.yachtWalk.yaw);
     await touch('touchMove',[left(0,-56)]);
     await touch('touchStart',[left(0,-56),finger(2,165,240)]);
-    await touch('touchMove',[left(0,-56),finger(2,345,230)]);
+    const held=await stepLook();
+    for(let i=1;i<=16;i++) {
+      await touch('touchMove',[left(0,-56),finger(2,165+.8*Math.sin(i*1.7),240+.5*Math.sin(i*2.3))]);
+      assert.deepEqual(await stepLook(),held,'A resting right finger must not shake the camera');
+    }
+    for(let i=1;i<=24;i++) {
+      await touch('touchMove',[left(0,-56),finger(2,165+i*.25,240)]);
+      await stepLook();
+    }
+    const fineTurn=Math.abs((await stepLook())[0]-yaw)*180/Math.PI;
+    assert.ok(fineTurn>.8 && fineTurn<3.5,'Slow subpixel swipes must still turn: '+fineTurn);
+    for(let i=1;i<=8;i++) {
+      await touch('touchMove',[left(0,-56),finger(2,171+174*i/8,240-10*i/8)]);
+      await stepLook();
+    }
     await advance();
     const turn=Math.abs(await frame.evaluate(()=>window.__app.yachtWalk.yaw)-yaw)*180/Math.PI;
     assert.ok(turn>81 && turn<99,'A 180px right-finger swipe must turn about 90 degrees while walking: '+turn);
-    console.log('Touch camera: 180px swipe turned',turn,'degrees');
+    console.log('Touch camera: stationary jitter rejected; 6px fine swipe',fineTurn,'degrees; 180px total swipe',turn,'degrees');
     assert.ok((await vector()).y>.95,'Looking must not cancel walking');
     await page.screenshot({path:out+'/joystick-multitouch.png'});
     await touch('touchCancel',[]);
     await neutral();
+    const released=await stepLook();
+    await frame.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    assert.deepEqual(await stepLook(),released,'Release must not leave camera inertia');
     await touch('touchStart',[left()]);
     await touch('touchMove',[left(0,-56)]);
+    await touch('touchStart',[left(0,-56),finger(2,275,240)]);
+    assert.deepEqual(await stepLook(),released,'A new finger position must start without a camera jump');
     await frame.evaluate(()=>window.dispatchEvent(new Event('blur')));
     await neutral();
-    await touch('touchMove',[left(0,-50)]);
+    await touch('touchMove',[left(0,-50),finger(2,305,240)]);
     await neutral();
+    assert.deepEqual(await stepLook(),released,'Blur must cancel the right-hand gesture too');
     await touch('touchEnd',[]);
     await touch('touchStart',[left()]);
     await touch('touchMove',[left(0,-56)]);

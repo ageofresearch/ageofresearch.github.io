@@ -1,4 +1,4 @@
-import { routePoint, routeSegments, nearestRoutePoint, moveAlongRoute } from './aft-terrace.js?v=aft-terrace-2';
+import { routePoint, routeSegments, nearestRoutePoint, moveAlongRoute } from './aft-terrace.js?v=spatial-fix-1';
 const resolutionPhases = [{scale:1, label:'Completa'}, {scale:.5, label:'Reducida'}];
 const warmupMs = 2000;
 const durationMs = 60000;

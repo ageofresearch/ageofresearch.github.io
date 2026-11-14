@@ -7,6 +7,7 @@ on:
       - 'site/tidewater-rocha/play.html'
       - 'site/tidewater-rocha/assets/RochaYachtApp-*.js'
       - 'site/tidewater-rocha/assets/RochaYachtState-*.js'
+      - 'site/tidewater-rocha/assets/boarding-layout.js'
       - 'site/tidewater-rocha/rocha/luz-de-mar/model.*'
       - 'tests/yacht-mobile-parity.cjs'
       - 'tests/yacht-joystick.cjs'

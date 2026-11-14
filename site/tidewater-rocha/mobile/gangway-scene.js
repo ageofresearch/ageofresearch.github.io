@@ -1,4 +1,4 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=aft-terrace-2';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=spatial-fix-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,

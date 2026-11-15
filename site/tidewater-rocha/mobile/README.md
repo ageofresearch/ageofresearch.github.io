@@ -102,6 +102,12 @@ when viewed from lower decks, reverse-facing transom lettering, distant finish d
 new guard posts. Continuous coaming, glass and rail remain in every profile.
 The exterior profile retains the transom lettering and emblem.
 
+The `upper` opaque indices are ordered offline in half-unit depth buckets around
+the upper interior. Nearby cover reaches the depth buffer before hidden patterned
+decks, reducing overdraw in return views. Every original triangle and winding is
+retained; glass order, geometry bytes, materials, resolution and MSAA are unchanged.
+The same ordering is used in the sun, upper-interior and bridge fallback packages.
+
 Material UVs and lighting/color transfer are evaluated per vertex. Two prepared,
 mipmapped textures retain the existing wood grain, canvas, static instrument graphics and teak board layout
 (105 mm spacing in model coordinates, staggered ends and per-board variation).

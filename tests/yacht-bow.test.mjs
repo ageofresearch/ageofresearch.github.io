@@ -13,7 +13,17 @@ import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
 import {buildYachtGeometry,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {renderedParts,surfaceTriangles} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {supportedFloor} from '../site/tidewater-rocha/mobile/sun-deck-geometry.js';
+import {orderOpaqueTriangles} from '../scripts/yacht-geometry/opaque-order.mjs';
 const root=new URL('../site/tidewater-rocha/',import.meta.url),array=b=>b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);
+test('opaque depth ordering preserves every triangle and its winding',()=>{
+ const positions=Float32Array.from([10,0,0,11,0,0,10,1,0,1,0,0,2,0,0,1,1,0]);
+ const indices=Uint32Array.from([0,1,2,3,4,5,2,1,0]),before=indices.slice();
+ const ordered=orderOpaqueTriangles(positions,indices,[0,0,0]);
+ assert.deepEqual(Array.from(ordered),[3,4,5,0,1,2,2,1,0]);
+ assert.deepEqual(indices,before);
+ const triangles=a=>Array.from({length:a.length/3},(_,i)=>Array.from(a.slice(i*3,i*3+3)).join(',')).sort();
+ assert.deepEqual(triangles(ordered),triangles(indices));
+});
 async function load(name,decode){const manifest=JSON.parse(await readFile(new URL('mobile/'+name+'.json',root))),binary=await readFile(new URL('mobile/'+name+'.bin',root));return {manifest,binary,decoded:decode(manifest,array(binary))};}
 const {manifest,binary,decoded:bow}=await load('bow-deck',decodeBow);
 const {decoded:upper}=await load('upper-terrace',decodeUpper),{decoded:sun}=await load('sun-deck',decodeSun),

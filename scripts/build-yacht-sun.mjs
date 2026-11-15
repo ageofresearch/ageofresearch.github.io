@@ -1,4 +1,5 @@
 import {splitFinishBoundaries} from './yacht-geometry/finish-boundaries.mjs';
+import {orderOpaqueTriangles} from './yacht-geometry/opaque-order.mjs';
 import {interiorFinishBounds} from '../site/tidewater-rocha/mobile/upper-interior-geometry.js';
 import {bridgeFinishBounds} from '../site/tidewater-rocha/mobile/bridge-geometry.js';
 import {readFile,writeFile} from 'node:fs/promises';
@@ -69,6 +70,14 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
+      if(profile==='upper') {
+        // The interior return views see several overlapping decks. Submit the
+        // nearby opaque cover first, so hidden patterned surfaces cost depth
+        // tests instead of texture sampling. Ordering is baked, never per frame.
+        const opaque=boarding.meshes.find(mesh=>!mesh.material.transparent).geometry;
+        opaque.setIndex(Array.from(orderOpaqueTriangles(opaque.attributes.position.array,opaque.index.array,
+          [0,7.6-basis.seaReference,15.5*basis.sx-basis.length/2])));
+      }
       const batches=boarding.meshes.map(mesh=>({glass:mesh.material.transparent,
         attributes:Object.fromEntries(Object.entries(mesh.geometry.attributes).map(([name,a])=>[name,{...store(a.array),itemSize:a.itemSize}])),indices:store(mesh.geometry.index.array,Uint32Array)}));
       profiles[profile]={batches,triangles:boarding.stats.triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.length*4+Object.values(b.attributes).reduce((n,a)=>n+a.length*4,0),0),audit};

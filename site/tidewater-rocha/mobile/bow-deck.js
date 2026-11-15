@@ -46,7 +46,7 @@ export function connectBow(walk,prepared) {
       if(notice.hidden!==hidden)notice.hidden=hidden;
     };
     controls.rooms.push(zone.room);
-    controls.root.querySelector('[data-nav-note]').textContent='Accede al estar de proa por el pasillo de estribor. La punta, la conexión exterior de babor y la escalera zone del puente siguen pendientes.';
+    controls.root.querySelector('[data-nav-note]').textContent='Accede al estar de proa por el pasillo de estribor. La punta, la conexión exterior de babor y la escalera interior del puente siguen pendientes.';
     controls.syncLocation();if(controls.open)controls.renderRooms();
   }
 }

@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=starboard-access-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=stair-surfaces-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected the walk-chat renderer with the selected scene');
@@ -116,6 +116,7 @@ async function capture(browser, mobile) {
     image.data=Buffer.from(captured.pixels,'base64');
     writeFileSync(out + (mobile ? '/mobile.png' : '/walk-chat.png'),PNG.sync.write(image));
     console.log(mobile?'mobile':'walk-chat',JSON.stringify(errors));
+    if (!mobile) await require('./yacht-stair-surfaces.cjs')(frame,out,readFrame);
     if (mobile) {
       const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb)|main-[^/]+\.js)$/.test(path);
       assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');

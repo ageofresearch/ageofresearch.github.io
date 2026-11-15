@@ -24,7 +24,7 @@ function compactGeometry(part) {
   });
   return {...part,vertices,indices,light,surfaceTypes};
 }
-export async function buildSun({extend,lod}={}) {
+export async function buildSun({extend,lod,profileNames=['exterior','interior','upper','sun']}={}) {
   const lower=await buildUpper(),data=JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json',root))),b=await readFile(new URL('rocha/luz-de-mar/model.bin',root));
   const asset={data,binary:b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),nav:Object.fromEntries(Object.entries(data.nav).map(([k,n])=>[k,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
@@ -54,18 +54,18 @@ export async function buildSun({extend,lod}={}) {
     vertices:store(p.vertices),indices:store(p.indices,Uint32Array)}));
   const profiles={},materials=createFinishes(0,true,true,true,true);
   try {
-    for(const profile of ['exterior','interior','upper','sun']) {
+    for(const profile of profileNames) {
       const audit=[];
       const geometryTransform=p=>{
         const b=p.bounds||boundsOf(p.vertices),name=p.feature||p.name||'';
         const support=/teak tread|pale step|boarding landing|final riser|tread \d+ (pale inset|timber border|rounded timber edge)/.test(name);
         const stair=p.semanticParent?.startsWith('stairs/')||p.id?.startsWith('MD_STA_013/');
-        const near=profile==='sun'?b[5]>=8.08:profile==='upper'?b[5]>=5.88&&b[2]<8.08:profile==='interior'?b[3]>8.5&&b[2]<6:b[0]<8.5&&b[2]<6;
+        const near=profile==='bow'?b[3]>=10.5&&b[2]>=5.87&&b[2]<7.7:profile==='sun'?b[5]>=8.08:profile==='upper'?b[5]>=5.88&&b[2]<8.08:profile==='interior'?b[3]>8.5&&b[2]<6:b[0]<8.5&&b[2]<6;
         const error=support||p.glass?0:stair?.004:near?(profile==='upper'?.02:.012):.08;
         const choice=lod?.(p,{profile,near,error,support,stair})||{};
         const reduced=choice.omit?{...p,indices:[]}:simplify(p,choice.error??error,!support&&!stair&&!p.glass?['Permissive']:[]);
         const result=splitFinishBoundaries(reduced,{28:interiorFinishBounds,29:bridgeFinishBounds});
-        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair});return compactGeometry(result);
+        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...choice.omit&&choice.reason?{omission:choice.reason}:{}});return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
@@ -78,7 +78,7 @@ export async function buildSun({extend,lod}={}) {
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'bridge-helm-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'bow-deck-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

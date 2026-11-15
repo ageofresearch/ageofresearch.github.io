@@ -1,6 +1,6 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=bridge-helm-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=bridge-helm-1';
-import {convexHull,distanceToFootprint} from './terrace-geometry.js?v=bridge-helm-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=bow-deck-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=bow-deck-1';
+import {convexHull,distanceToFootprint} from './terrace-geometry.js?v=bow-deck-1';
 
 export const bridgeRoom={id:'UD_R03',deck:'UD',name:'Puente de mando',displayName:'Puente de mando',
   spawn:[20.5,0,7.6],look:[23.2,0,7.1]};

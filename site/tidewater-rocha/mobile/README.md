@@ -1,7 +1,7 @@
 # Mobile yacht zones
 
-Release: `bridge-helm-1`. The mobile route connects boarding, the aft terrace,
-swim platform, main saloon, upper terrace, solarium, upper interior and bridge. All zone
+Release: `bow-deck-1`. The mobile route connects boarding, the aft terrace,
+swim platform, main saloon, upper terrace, solarium, upper interior, bridge and forward lounge. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
@@ -27,9 +27,8 @@ The bridge is reached through the existing port passage around the forward
 partition, retaining the partition and service furniture. UD_R03 is **Puente de
 mando**, with safe camera spawn [20.5,0,7.6] and floor elevation 6.00. The console,
 wheel/throttles, five static displays, helm chair, side settee and eight windshield
-panels retain their shared positions. The forward deck, its furniture and the
-existing internal stair are visible context; neither is walkable on mobile.
-Their continuation notice does not invent a wall. Full-yacht bridge circulation
+panels retain their shared positions. The narrow bow tip and the existing internal stair remain visible context and
+are not walkable on mobile. Their continuation notices do not invent walls. Full-yacht bridge circulation
 and its internal staircase remain available.
 
 Extraction now honors the full renderer's existing `displayFits`, including the
@@ -50,22 +49,58 @@ the room's safe spawn. Existing stair handoffs remain unchanged.
 This is the provisional current model, not an as-built survey. The flush threshold
 is a model circulation correction; no certified onboard dimensions are claimed.
 
+## Forward lounge and starboard access
+
+UD_R04 is **Estar de proa**, with camera spawn [26.8,0,7.6], deck height 6.00.
+Its convex navigation domains connect the existing terrace through starboard to
+both sides of the sunpad, stopping at x=29.40 minus the 0.14 body radius. The bow
+clearance index also applies to overlapping older floor regions, so old terrace
+support cannot bypass a new guard. Body height remains 1.65. Location and
+full-yacht handoff use these exterior domains instead of the bridge's x cutoff.
+
+Only the missing starboard slab strips are added: x=14.25..17.91 outside y=-3.13,
+and x=17.91..18.72 outside y=-2.55. The bridge package already owns the floor
+beyond x=18.72. Teak and exterior lighting meet on the existing floor plane.
+The new shared guards start at the exact aft terrace rail endpoint, follow the
+actual slab, and protect the lounge's port edge from x=23.73. Continuous white
+coaming, clear glass and a cap at z=7.02 use supported posts spaced at most 1.25.
+The three sunpad source envelopes retain their dimensions and position, with
+rounded upholstery; the four existing sofa modules stay in place.
+
+The tip's four chairs and unresolved bordered feature stay unchanged and outside
+the mobile route. Two of those chairs have incomplete slab support; their layout
+is explicitly pending. The port connection beside the sun flight also stays
+pending. No pool, new stair, opening through the bridge glass or artificial wall
+has been introduced. Guard dimensions and upholstery are inferred model fits,
+not certified vessel measurements.
+
+`bow` activates only inside the exterior domains after x>13.8 and stays active
+until x<12.8. Interior/bridge views use `upper`; stairs retain their priority.
+The preparation loader executes all five profiles before enabling movement.
+Failures preserve the four-profile bridge route; paused retries restore the
+previous buffers and navigation on GPU failure, and register one destination
+on success. Disposal releases failed candidates and superseded buffers.
+
 ## Rendering and loading
 
-Four profiles remain resident after the final package succeeds:
+Five profiles remain resident after the final package succeeds:
 
 | Profile | Submitted triangles | GPU geometry bytes |
 | --- | ---: | ---: |
-| Exterior | 24,731 | 1,819,280 |
-| Main saloon interior | 24,849 | 1,826,260 |
-| Upper terrace, interior and bridge | 24,941 | 1,864,024 |
-| Solarium | 24,645 | 1,815,856 |
+| Exterior | 24,755 | 1,818,892 |
+| Main saloon interior | 24,399 | 1,795,744 |
+| Upper terrace, interior and bridge | 24,739 | 1,842,412 |
+| Solarium | 24,225 | 1,767,604 |
+| Starboard passage and forward lounge | 22,693 | 1,686,716 |
 
 Every profile uses two batches and one render pass, below 25,000 triangles.
-Resident indexed geometry totals 7,325,420 bytes. The final binary is
-8,267,900 bytes. Supports, treads and glass retain their geometry; distant seams,
-fasteners and enclosed bridge details are omitted in profiles where they cannot
-be seen. Forward furniture remains in the upper and sun profiles.
+Resident indexed geometry totals 8,911,368 bytes; the final binary is 9,893,496
+bytes. The fifth profile adds 1,585,948 resident bytes over `bridge-helm-1`.
+Supports, treads, glass and physical boundaries are retained. The audit records
+why each omitted detail is absent: occluded MD furniture in `bow`, the SD tap
+when viewed from lower decks, reverse-facing transom lettering, distant finish detail, or distant
+new guard posts. Continuous coaming, glass and rail remain in every profile.
+The exterior profile retains the transom lettering and emblem.
 
 Material UVs and lighting/color transfer are evaluated per vertex. Two prepared,
 mipmapped textures retain the existing wood grain, canvas, static instrument graphics and teak board layout
@@ -78,12 +113,12 @@ planes after LOD, so simplifying a floor cannot move its material boundary.
 Resolution and MSAA are unchanged. The `upper` profile spans the terrace, upper
 interior and bridge, with no profile switch at either doorway.
 
-The bridge package loads after the upper interior. Candidate profiles upload and
+The bridge package loads after the upper interior; the bow package follows the bridge. Candidate profiles upload and
 execute before geometry and navigation are enabled together. Network, timeout,
 incomplete assets or GPU preparation failures preserve the previous buffers and
 routes and show a retry. Retrying pauses walking under the loader, clears input
 and resumes only after preparation. Disposal aborts loading and releases resources.
-State is exposed as `bridgeLoadState`. Upper, sun and upper-interior packages also
+State is exposed as `bridgeLoadState` and `bowLoadState`. Upper, sun and upper-interior packages also
 carry the new version to invalidate their affected caches.
 
 ## Rebuild and verify
@@ -98,7 +133,8 @@ node scripts/build-yacht-upper.mjs
 node scripts/build-yacht-sun.mjs
 node scripts/build-yacht-upper-interior.mjs
 node scripts/build-yacht-bridge.mjs
-node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs
+node scripts/build-yacht-bow.mjs
+node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs
 ```
 
 Browser checks capture matching full/mobile views, count actual GPU submissions,
@@ -113,8 +149,21 @@ Controlled software-renderer reference (run separately from builders):
 
 ```sh
 NODE_PATH=/path/to/browser/node_modules node tests/yacht-bridge-performance.cjs
+NODE_PATH=/path/to/browser/node_modules node tests/yacht-bow-performance.cjs
 ```
 
 It uses three fresh 360×540 contexts, scale 1 and 4× MSAA, two fixed return views,
 and requires median P95 ≤25 ms at each view. Physical phone performance still
 requires measurement; these timings are a controlled regression gate.
+
+The bow benchmark holds its package to verify initial-loader blocking, then uses
+three fresh contexts to walk out/back twice, including both sunpad sides. It
+records FPS, P95, >25/50 ms frames, movement/CPU timing, resident memory, model
+requests and GPU creation. Median P95 per leg must be <=25 ms; resource creation
+and geometry requests during all four walking legs must be zero.
+
+Local controlled `bow-deck-1` run: all 12 first/repeated legs across three fresh
+contexts measured 59.79–60.00 FPS and P95 16.8–16.9 ms, at 360×540, scale 1,
+4× MSAA. No geometry requests or GPU object creation occurred while walking.
+Individual long frames remain recorded in the JSON reports; the measured result
+is a regression reference, not a promise that every frame takes less than 25 ms.

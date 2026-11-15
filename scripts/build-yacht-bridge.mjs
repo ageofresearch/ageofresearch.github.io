@@ -6,10 +6,11 @@ import {clipGeometry,subdivide,contactShade} from './build-yacht-terrace.mjs';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {bridgeRoom} from '../site/tidewater-rocha/mobile/bridge-geometry.js';
 
-export async function buildBridge() {
-  return buildUpperInterior({
-    lod(p,{near,error,support,stair,profile}) {
+export async function buildBridge({extend,lod,profileNames}={}) {
+  return buildUpperInterior({profileNames,
+    lod:lod||function(p,{near,error,support,stair,profile}) {
       if(support||stair||p.glass)return {error};
+      if(p.semanticParent==='bow-deck'&&!p.feature?.startsWith('bow guard'))return {omit:['exterior','interior'].includes(profile),error:.08};
       if(near&&p.feature==='polished helm wheel rim')return {error:0};
       const distant=!near||p.role==='forward-context'&&profile!=='upper';
       const decoration=/seam|stitch|screw|button|perforation|piping/.test(p.feature||'')||
@@ -30,6 +31,7 @@ export async function buildBridge() {
       };
       for(const p of final) {
         const anchor=p.anchor||p.id.split('/')[0];
+        if(p.feature?.startsWith('bow guard'))continue;
         if(/^UD_(?:FUR_0(?:38|39|40|41|42)|SOF_01[78]|EQU_00[1-5]|GLA_00[5-9]|GLA_01[0-2])$/.test(anchor))add(p,'bridge-furniture');
         else if(p.semanticParent==='stairs/bridge')add(p,'bridge-stair-context');
         else if(p.deck==='UD'&&p.bounds[0]>=23.72&&!['Cold_water','Hot_water','Drainage','Stairs'].includes(p.category))add(p,'forward-context');
@@ -54,9 +56,9 @@ export async function buildBridge() {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'bridge-helm-1',room:{...model.asset.data.rooms.find(r=>r.id===bridgeRoom.id),...bridgeRoom},
+      return {version:'bow-deck-1',room:{...model.asset.data.rooms.find(r=>r.id===bridgeRoom.id),...bridgeRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,
-        bridgePartIDs:additions.map(p=>p.id),evidence:'Current provisional bridge and forward layout; forward deck and internal stair are visual context only'};
+        bridgePartIDs:additions.map(p=>p.id),evidence:'Current provisional bridge and forward layout; forward deck and internal stair are visual context only',...extend?.({model,lowerParts,parts})};
     }
   });
 }

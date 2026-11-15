@@ -147,7 +147,7 @@ export async function buildTerrace() {
     .map(([id,group])=>({id:'furniture/'+id,polygon:footprint(group)}));
   // The broad first-delivery stair box would close the actual passage beside
   // chair 3. Project only solid geometry at the walking body's height instead.
-  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure','boundary'].includes(p.role)).flatMap(part=>{
+  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure'].includes(p.role)).flatMap(part=>{
     const body=clipGeometry(part,[3,-4,4.04,9,4,5.65]);
     const polygon=footprint([body]);
     return polygon.length>=3 ? [{id:part.id,polygon}] : [];
@@ -189,7 +189,7 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'spatial-fix-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'reference-boarding-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.

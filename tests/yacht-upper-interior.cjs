@@ -30,7 +30,7 @@ module.exports=async function interiorViews(frame,out,readFrame,mobile){
     writeFileSync(out+`/upper-interior-${mobile?'mobile':'full'}-${name}.png`,PNG.sync.write(png));
     if(mobile){assert.equal(shot.indexedDraws,2);assert.deepEqual(shot.passLabels,['Gangway to screen']);assert.ok(shot.indexedTriangles<=25000);
       assert.equal(await frame.evaluate(()=>__app.gangwayRenderer.activeProfile),'upper');
-      assert.equal(await frame.locator('.luz-upper-interior-limit').isVisible(),name==='return');}
+      assert.equal(await frame.locator('.luz-upper-interior-limit').isVisible(),name==='return'&&!await frame.evaluate(()=>!!__app.entranceYacht.bridge));}
   }
   await frame.evaluate(saved=>{
     const w=__app.yachtWalk;w.enterRoom('boarding');w.nav.position=saved.position;w.nav.deck=saved.deck;

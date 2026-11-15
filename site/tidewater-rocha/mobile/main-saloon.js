@@ -1,5 +1,5 @@
-import { preloadUpper } from './upper-terrace.js?v=upper-interior-1';
-import { connectTerrace } from './aft-terrace.js?v=upper-interior-1';
+import { preloadUpper } from './upper-terrace.js?v=bridge-helm-1';
+import { connectTerrace } from './aft-terrace.js?v=bridge-helm-1';
 
 export const saloonVersion = 'saloon-mobile-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};

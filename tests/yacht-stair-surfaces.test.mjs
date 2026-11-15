@@ -72,7 +72,7 @@ test('every enabled full-yacht flight supports return trips, stops, reversals an
       assert.ok(nav.floorSafe(...lower));
       const seen=new Set();
       travel(nav,[...path,upper],hz,seen);
-      assert.equal(nav.deck,route.upper);assert.equal(nav.stair,null);assert.equal(nav.elevation,f.upperHeight);
+      assert.equal(nav.deck,route.upper,`${route.id} upper landing at ${nav.position}, safe=${nav.floorSafe(...nav.position,route.upper)}`);assert.equal(nav.stair,null);assert.equal(nav.elevation,f.upperHeight);
       travel(nav,[...path.toReversed(),lower],hz,seen);
       assert.equal(nav.deck,route.lower);assert.equal(nav.stair,null);assert.equal(nav.elevation,f.lowerHeight);
       for(let i=1;i<f.riseCount;i++)assert.ok(seen.has(i),`${route.id}: skipped surface ${i}`);

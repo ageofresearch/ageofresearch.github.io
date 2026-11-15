@@ -25,14 +25,14 @@ async function capture(browser,mobile) {
       }
     });
     const held=new Promise(resolve=>{release=resolve;});
-    if(mobile)await context.route('**/upper-interior.bin?*',async route=>{await held;await route.continue();});
+    if(mobile)await context.route('**/bridge-helm.bin?*',async route=>{await held;await route.continue();});
     const page=await context.newPage(),errors=[];
     page.on('pageerror',error=>errors.push(error.message));
     await page.goto(base+(mobile?'mobile.html':'play.html?world=rocha&view=walk-chat'),{waitUntil:'domcontentloaded'});
     if(mobile)await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame=mobile?page.frames().find(f=>f.url().includes('play.html')):page.mainFrame();
     if(mobile) {
-      await frame.waitForFunction(()=>window.__app?.entranceYacht?.upperInteriorLoadState==='loading',null,{timeout:90000});
+      await frame.waitForFunction(()=>window.__app?.entranceYacht?.bridgeLoadState==='loading',null,{timeout:90000});
       assert.deepEqual(await frame.evaluate(()=>({ready:window.__mapsPublicStatus.status,
         running:window.__app.engine._running===true,loader:!document.getElementById('loader').hidden})),
         {ready:'starting',running:false,loader:true},'Background preparation cannot overlap the first walk');
@@ -43,13 +43,13 @@ async function capture(browser,mobile) {
     const ready=await frame.evaluate(()=>{
       const app=__app,w=app.yachtWalk;
       return {time:performance.now(),samples:app.gangwayRenderer?.samples,
-        upper:w.model.upperLoadState,sun:w.model.sunLoadState,upperInterior:w.model.upperInteriorLoadState,saloon:w.model.saloonLoadState,
+        upper:w.model.upperLoadState,sun:w.model.sunLoadState,bridge:w.model.bridgeLoadState,upperInterior:w.model.upperInteriorLoadState,saloon:w.model.saloonLoadState,
         mtu:w.model.mtu?.state.status,strainers:w.model.strainers?.state.status,
         prepared:[...w.nav.stairFlights.values()].map(f=>({id:f.id,count:f.clearance.preparedHeights,
           expected:new Set(f.surfaces.map(s=>s.height.toFixed(6))).size}))};
     });
     if(mobile) {
-      assert.equal(ready.upperInterior,'ready');assert.equal(ready.sun,'ready');assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
+      assert.equal(ready.bridge,'ready');assert.equal(ready.upperInterior,'ready');assert.equal(ready.sun,'ready');assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
       const result=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];let leg=0,previous;
         w.enterRoom('MD_R01');n.position=[5.2,2.21];n.stair=null;n.elevation=3.95;w.applyPosition();
@@ -130,6 +130,32 @@ async function capture(browser,mobile) {
       assert.equal(interiorResult.scale,1);assert.equal(interiorResult.samples,4);assert.ok(interiorResult.rows.every(r=>r.profile==='upper'));
       const interiorLegs=[0,1,2,3].map(leg=>({leg,...summarize(interiorResult.rows.filter(r=>r.leg===leg))}));
       writeFileSync(out+'/cold-upper-interior.json',JSON.stringify({ready,legs:interiorLegs,...interiorResult},null,2));console.log('Fresh upper interior entry/return, then repeated route:',interiorLegs);
+
+      const bridgeResult=await frame.evaluate(async()=>{
+        const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
+        w.enterRoom('UD_R01');n.position=[17.2,0];n.stair=null;n.elevation=6;w.cameraElevation=6;w.applyPosition();
+        const path=[[17.2,0],[17.2,1.7],[20.5,1.7],[20.5,0],[20.5,-.8],[21.35,-.8],[21.35,-.5]];
+        let leg=0,index=1,previous;const start=performance.now(),original=app.frame;
+        await new Promise((resolve,reject)=>{
+          app.frame=function(dt){try{
+            const t=performance.now(),points=leg%2?path.toReversed():path,to=points[index],dx=to[0]-n.position[0],dy=to[1]-n.position[1],d=Math.hypot(dx,dy),step=Math.min(d,1.12*Math.min(.075,Math.max(.001,dt)));
+            if(d>1e-7)n.move(dx/d*step,dy/d*step);
+            const move=performance.now()-t,b=w.model.group.userData.yacht;
+            const direction=app.camera.position.clone().set(dy*b.sy,0,dx*b.sx).applyQuaternion(w.model.group.quaternion);
+            w.yaw=Math.atan2(-direction.x,-direction.z);w.pitch=-.2;original(dt);
+            rows.push({leg,interval:previous===undefined?null:t-previous,move,cpu:performance.now()-t,profile:app.gangwayRenderer.activeProfile});previous=t;
+            if(Math.hypot(to[0]-n.position[0],to[1]-n.position[1])<.002){index++;if(index===points.length){index=1;leg++;}}
+            if(leg===4){app.frame=original;resolve();}else if(t-start>90000)throw Error('Bridge cold route stalled '+n.position);
+          }catch(error){app.frame=original;reject(error);}};
+        });
+        await app.gpu.queue.onSubmittedWorkDone();
+        return {rows,start,gpu:__coldGPU.filter(e=>e.time>=start),resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
+          triangles:w.model.stats.triangles,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples};
+      });
+      assert.deepEqual(bridgeResult.gpu,[]);assert.deepEqual(bridgeResult.resources,[]);assert.ok(bridgeResult.triangles<=25000);
+      assert.equal(bridgeResult.scale,1);assert.equal(bridgeResult.samples,4);assert.ok(bridgeResult.rows.every(r=>r.profile==='upper'));
+      const bridgeLegs=[0,1,2,3].map(leg=>({leg,...summarize(bridgeResult.rows.filter(r=>r.leg===leg))}));
+      writeFileSync(out+'/cold-bridge.json',JSON.stringify({ready,legs:bridgeLegs,...bridgeResult},null,2));console.log('Fresh bridge entry/return, then repeated route:',bridgeLegs);
 
     } else {
       assert.equal(ready.mtu,'ready');assert.equal(ready.strainers,'ready');

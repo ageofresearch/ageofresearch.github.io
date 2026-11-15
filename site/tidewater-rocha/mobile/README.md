@@ -1,7 +1,7 @@
 # Mobile yacht zones
 
-Release: `upper-interior-1`. The mobile route connects boarding, the aft terrace,
-swim platform, main saloon, upper terrace, solarium and upper interior. All zone
+Release: `bridge-helm-1`. The mobile route connects boarding, the aft terrace,
+swim platform, main saloon, upper terrace, solarium, upper interior and bridge. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
@@ -23,9 +23,20 @@ track ending at z=6.037. Both versions use the same geometry. The shared physica
 floor/obstacles replace stale furniture navigation masks inside the upper interior.
 Vertical triangle projections retain a numerical thickness for collision indexing,
 so tall glass/walls remain solid even when their top and bottom are outside body height.
-The mobile extent ends at the forward partition plane x=18.63233; an on-screen notice
-identifies the pending bridge continuation when approaching it. No fictitious wall
-or bridge stair is added. Full-yacht bridge circulation remains available.
+The bridge is reached through the existing port passage around the forward
+partition, retaining the partition and service furniture. UD_R03 is **Puente de
+mando**, with safe camera spawn [20.5,0,7.6] and floor elevation 6.00. The console,
+wheel/throttles, five static displays, helm chair, side settee and eight windshield
+panels retain their shared positions. The forward deck, its furniture and the
+existing internal stair are visible context; neither is walkable on mobile.
+Their continuation notice does not invent a wall. Full-yacht bridge circulation
+and its internal staircase remain available.
+
+Extraction now honors the full renderer's existing `displayFits`, including the
+service refrigerator and replacement furniture below the upper slab. Their rendered
+top is 5.87; the old raw 6.10 refrigerator bounds caused a phantom bridge obstacle.
+Normals and collision geometry use the same fit, once. The original model assets
+and the display-fit definition are unchanged.
 
 The upper interior reuses the upper floor already supplied as the MD saloon ceiling.
 Only the missing strip beyond x=17.91 and the upper ceiling beyond x=14.25 are added.
@@ -45,26 +56,35 @@ Four profiles remain resident after the final package succeeds:
 
 | Profile | Submitted triangles | GPU geometry bytes |
 | --- | ---: | ---: |
-| Exterior | 24,589 | 1,632,040 |
-| Main saloon interior | 24,853 | 1,652,212 |
-| Upper terrace and interior | 23,901 | 1,612,760 |
-| Solarium | 23,695 | 1,593,492 |
+| Exterior | 24,731 | 1,819,280 |
+| Main saloon interior | 24,849 | 1,826,260 |
+| Upper terrace, interior and bridge | 24,941 | 1,864,024 |
+| Solarium | 24,645 | 1,815,856 |
 
 Every profile uses two batches and one render pass, below 25,000 triangles.
-Resident indexed geometry totals 6,490,504 bytes, excluding render attachments,
-CPU assets and earlier packages. The final binary is 7,016,740 bytes. Offline
-compaction removes unused vertices without changing indexed attributes or triangles.
-No new texture or pipeline is introduced. Resolution and MSAA settings are retained.
-The shared UD slab selects the existing exterior/interior timber finishes at the
-doorway and window planes per fragment, so LOD triangles cannot move the joint.
-The `upper` profile covers the entire new passage, with no switch at the doorway.
+Resident indexed geometry totals 7,325,420 bytes. The final binary is
+8,267,900 bytes. Supports, treads and glass retain their geometry; distant seams,
+fasteners and enclosed bridge details are omitted in profiles where they cannot
+be seen. Forward furniture remains in the upper and sun profiles.
 
-The new package loads after the solarium. Candidate profiles upload and execute
-before geometry and navigation are enabled together. Network, timeout, incomplete
-assets or GPU preparation failures preserve the previous buffers and routes and
-show a retry. Retrying pauses walking under the loader, clears input and resumes
-only after preparation finishes. Disposal aborts outstanding loading and releases
-resources. State is exposed as `upperInteriorLoadState`.
+Material UVs and lighting/color transfer are evaluated per vertex. Two prepared,
+mipmapped textures retain the existing wood grain, canvas, static instrument graphics and teak board layout
+(105 mm spacing in model coordinates, staggered ends and per-board variation).
+They use less than 3.4 MB, generated before walking, with no texture downloads.
+This extends the original grain-only texture proposal to teak after measurements
+showed analytic per-pixel joints still exceeded the frame budget. Fine detail fades
+with mip level. Floor triangles are split at the exact interior/exterior finish
+planes after LOD, so simplifying a floor cannot move its material boundary.
+Resolution and MSAA are unchanged. The `upper` profile spans the terrace, upper
+interior and bridge, with no profile switch at either doorway.
+
+The bridge package loads after the upper interior. Candidate profiles upload and
+execute before geometry and navigation are enabled together. Network, timeout,
+incomplete assets or GPU preparation failures preserve the previous buffers and
+routes and show a retry. Retrying pauses walking under the loader, clears input
+and resumes only after preparation. Disposal aborts loading and releases resources.
+State is exposed as `bridgeLoadState`. Upper, sun and upper-interior packages also
+carry the new version to invalidate their affected caches.
 
 ## Rebuild and verify
 
@@ -77,7 +97,8 @@ node scripts/build-yacht-saloon.mjs
 node scripts/build-yacht-upper.mjs
 node scripts/build-yacht-sun.mjs
 node scripts/build-yacht-upper-interior.mjs
-node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs
+node scripts/build-yacht-bridge.mjs
+node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs
 ```
 
 Browser checks capture matching full/mobile views, count actual GPU submissions,
@@ -87,3 +108,13 @@ handoff. Navigation checks cover stops, reversals and diagonal doorway passage a
 P95, long frames, movement CPU time, model requests and GPU resource creation at
 identical resolution and MSAA. The 25 ms frame goal is measured, not assumed from
 triangle counts or guaranteed by software-renderer timings.
+
+Controlled software-renderer reference (run separately from builders):
+
+```sh
+NODE_PATH=/path/to/browser/node_modules node tests/yacht-bridge-performance.cjs
+```
+
+It uses three fresh 360×540 contexts, scale 1 and 4× MSAA, two fixed return views,
+and requires median P95 ≤25 ms at each view. Physical phone performance still
+requires measurement; these timings are a controlled regression gate.

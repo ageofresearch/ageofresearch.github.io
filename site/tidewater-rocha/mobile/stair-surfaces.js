@@ -1,6 +1,7 @@
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=upper-interior-1';
-import {describeSunFloor} from './sun-deck-geometry.js?v=upper-interior-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=upper-interior-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=bridge-helm-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=bridge-helm-1';
+import {describeSunFloor} from './sun-deck-geometry.js?v=bridge-helm-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=bridge-helm-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -76,7 +77,22 @@ export function renderedParts(model) {
       indices:new Uint16Array(binary,data.vertexBytes+mesh.iByte,mesh.iCount)});
   }
   const ids=new Set();
-  return parts.filter(p=>{if(!p?.vertices||!p?.indices || p.id && ids.has(p.id))return false;if(p.id)ids.add(p.id);return true;}).map(p=>p.bounds?p:{...p,bounds:p.bbox??bounds(Array.from({length:p.vertices.length/6},(_,i)=>Array.from(p.vertices.slice(i*6,i*6+3))))});
+  return parts.filter(p=>{if(!p?.vertices||!p?.indices || p.id && ids.has(p.id))return false;if(p.id)ids.add(p.id);return true;}).map(p=>{
+    p=p.bounds?p:{...p,bounds:p.bbox??bounds(Array.from({length:p.vertices.length/6},(_,i)=>Array.from(p.vertices.slice(i*6,i*6+3))))};
+    // The full renderer fits these source objects below the UD slab. Extraction
+    // and body/head collision must see that same final geometry, exactly once.
+    const fit=model.displayFits?.get(p.anchor||p.id);
+    if(!fit)return p;
+    const vertices=Array.from(p.vertices),box=p.bounds.slice();
+    for(let i=0;i<vertices.length;i+=6){
+      vertices[i+2]=fit.base+(vertices[i+2]-fit.base)*fit.scale;
+      vertices[i+5]/=fit.scale;
+      const length=Math.hypot(...vertices.slice(i+3,i+6));
+      if(length)for(let k=3;k<6;k++)vertices[i+k]/=length;
+    }
+    for(const k of [2,5])box[k]=fit.base+(box[k]-fit.base)*fit.scale;
+    return {...p,vertices,bounds:box,displayFit:fit.version};
+  });
 }
 
 // Remove only geometry occupying an already modeled stair volume. No new route,
@@ -320,6 +336,7 @@ export function configureModelStairs(nav,model) {
   model.stairInventory=describeFlights(model,nav.routes);
   installFlightNavigation(nav,model.stairInventory.flights);
   configureInteriorFloor(nav,model);
+  configureBridgeFloor(nav,model);
   if(model.exterior?.sunDeck) {
     const sun=describeSunFloor(model),previous=nav.floorSafe.bind(nav);
     nav.floorSafe=(x,y,deck=nav.deck)=>deck==='SD'?sun.floorSafe(x,y,nav.radius):previous(x,y,deck);

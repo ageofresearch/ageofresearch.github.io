@@ -23,19 +23,26 @@ on:
       - 'tests/yacht-saloon*'
       - 'tests/yacht-upper*'
       - 'tests/yacht-sun*'
+      - 'tests/yacht-bridge*'
       - 'tests/yacht-cold-walk.cjs'
       - 'tests/yacht-readiness.test.mjs'
       - 'scripts/build-yacht-upper.mjs'
       - 'scripts/build-yacht-sun.mjs'
       - 'scripts/build-yacht-upper-interior.mjs'
+      - 'scripts/build-yacht-bridge.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
   contents: read
 jobs:
-  compare:
+  views:
     runs-on: ubuntu-24.04
-    # Full-yacht software rendering plus sequential zone recovery exceeds 25 minutes.
+    # Separate machines keep full-yacht rendering from delaying mobile failures
+    # or contaminating its measurements. Both modes run the same assertions.
     timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [mobile, full]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -44,24 +51,51 @@ jobs:
             site/tidewater-rocha
             tests
             scripts
-      - name: Verify the isolated gangway against the walk-chat yacht
+      - name: Verify geometry and navigation
+        if: matrix.mode == 'mobile'
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs
+      - name: Verify browser views and recovery
+        env:
+          YACHT_CHECK: ${{ matrix.mode }}
+        run: |
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
           for attempt in {1..15}; do
             if curl -fsS --output /dev/null http://127.0.0.1:8764/tidewater-rocha/mobile.html; then break; fi
             sleep 1
           done
-          NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-cold-walk.cjs
+          if [ "$YACHT_CHECK" = mobile ]; then
+            NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-cold-walk.cjs
+          fi
           NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs
       - name: Save the reference frames
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: gangway-comparison
+          name: gangway-comparison-${{ matrix.mode }}
           path: |
             /tmp/yacht-mobile-parity/*.png
             /tmp/yacht-mobile-parity/*.json
           retention-days: 3
+  compare:
+    needs: views
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          sparse-checkout: tests
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: gangway-comparison-*
+          path: /tmp/yacht-mobile-parity
+          merge-multiple: true
+      - name: Compare original geometry and rendered isolation
+        env:
+          YACHT_CHECK: compare
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
+          NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs

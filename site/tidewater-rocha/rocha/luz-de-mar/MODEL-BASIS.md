@@ -165,3 +165,25 @@ The upper profile spans the exterior terrace and interior, avoiding a profile
 change at the doorway. Loading, collision indexing, buffer upload and GPU execution
 finish before access is enabled. Original source JSON/binary, deck elevations,
 outdoor furniture positions, resolution and MSAA are retained.
+
+
+## Mobile bridge and visible foredeck · bridge-helm-1
+
+The route now passes around the existing partition on its port side into UD_R03
+(Puente de mando), at z=6.00. The shared helm console, wheel, throttles, five static
+screens, helm chair, side settee and eight glass panels retain their placement.
+Missing floor and roof fragments extend existing ownership boundaries without
+covering the internal stair opening. The foredeck and internal staircase provide
+visual context only in mobile; their walking routes remain closed.
+
+The shared extractor now applies the same existing service-ceiling display fits
+as the full renderer, including anchored replacement parts. The service fridge's
+raw top at 6.10 must not obstruct a bridge that displays it fitted below 5.87.
+This fixes collision/render disagreement without moving the bridge furniture.
+
+The four final profiles submit 24,731 / 24,849 / 24,941 / 24,645 triangles, two draws
+and one pass. Precomputed grain, weave and teak patterns replace repeated pixel
+trigonometry; finish boundaries are split geometrically after LOD. Resolution and
+MSAA are retained. All patterns, buffers, collision indices and profiles are ready
+before access is enabled. These are model-based dimensions and a provisional
+layout, not certified yacht measurements or an operational helm simulation.

@@ -7,8 +7,8 @@ import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {interiorLimits,interiorRoom,interiorFinishBounds} from '../site/tidewater-rocha/mobile/upper-interior-geometry.js';
 
 const root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);
-export async function buildUpperInterior() {
-  return buildSun({extend({model,lowerParts,parts}) {
+export async function buildUpperInterior({extend,lod=(p,{profile,near,error,support,stair})=>({error:profile==='interior'&&near&&!support&&!stair&&!p.glass?Math.max(error,.013):error})}={}) {
+  return buildSun({lod,extend({model,lowerParts,parts}) {
     const final=renderedParts(model),additions=[],existing=new Set([...lowerParts,...parts].map(p=>p.id));
     const add=(source,role,box=null)=>{
       const p=normalizeRenderedPart(source,model),g=box?clipGeometry(p,box):p;
@@ -38,8 +38,8 @@ export async function buildUpperInterior() {
       for(let i=0;i<p.vertices.length;i+=6) {
         const [x,y,z,,,nz]=p.vertices.slice(i,i+6);
         if(floor&&z>5.998&&nz>.5) {
-          // One slab, two existing finishes. The shader clips their boundary
-          // to the doorway/window planes, independent of triangle density.
+          // One slab, two existing finishes. The final builder splits triangles
+          // at the doorway/window planes after LOD, keeping the joint exact.
           p.surfaceTypes[i/6]=28;
           const b=interiorFinishBounds;
           if(x>=b.start&&x<=b.end&&y>=b.minY&&y<=b.maxY)
@@ -49,9 +49,10 @@ export async function buildUpperInterior() {
     }
     parts.push(...additions);
     const compact=polygons=>[...new Map(polygons.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-    return {version:'upper-interior-1',room:{...model.asset.data.rooms.find(r=>r.id==='UD_R02'),...interiorRoom},
+    return {version:'bridge-helm-1',room:{...model.asset.data.rooms.find(r=>r.id==='UD_R02'),...interiorRoom},
       floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),limits:interiorLimits,
-      interiorPartIDs:additions.map(p=>p.id),evidence:'Current shared layout; flush threshold is a model circulation correction'};
+      interiorPartIDs:additions.map(p=>p.id),evidence:'Current shared layout; flush threshold is a model circulation correction',
+      ...extend?.({model,lowerParts,parts})};
   }});
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)) {

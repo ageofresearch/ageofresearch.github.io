@@ -22,6 +22,7 @@ module.exports=async function upperLoading(browser,base) {
     await frame.waitForFunction(()=>window.__app.entranceYacht.upperLoadState==='ready',null,{timeout:90000});
     assert.equal(await frame.evaluate(()=>window.__app.yachtWalk.nav.routes.length),2);
     await frame.evaluate(()=>{const w=window.__app.yachtWalk;w.enterRoom('UD_R01');});
+    await page.locator('#pilot summary').click();
     await page.waitForFunction(()=>document.querySelector('#cross').disabled);
     assert.equal(await page.locator('#cross').isEnabled(),false);
     await frame.evaluate(()=>window.__app.loadFullYacht());

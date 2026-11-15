@@ -6,6 +6,7 @@ module.exports=async function interiorViews(frame,out,readFrame,mobile){
   for(const {name,position,target} of [
     {name:'terrace',position:[13.8,0],target:[17,0,6.9]},
     {name:'threshold',position:[14.21,0],target:[17,0,6.65]},
+    {name:'floor-joint',position:[14.8,0],target:[14.21,0,6]},
     {name:'cabinet',position:[15.5,0],target:[18.1,1.1,6.5]},
     {name:'return',position:[18.3,-1.9],target:[14.2,0,7]},
     {name:'ceiling',position:[16,1.6],target:[14.2,1,7.65]},

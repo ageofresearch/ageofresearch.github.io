@@ -1,4 +1,5 @@
 import { nextProfile } from './main-saloon.js?v=upper-interior-1';
+import {interiorFinishBounds} from './upper-interior-geometry.js?v=upper-interior-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -51,10 +52,15 @@ struct Vertex {
   let grainFade = 1.-smoothstep(.2,.5,(fwidth(grainV)+1.2*fwidth(grainU))/6.2831853);
   let yarn = in.finishUV*vec2f(430.,410.);
   let yarnFade = 1.-smoothstep(.3,1.5,max(fwidth(yarn.x),fwidth(yarn.y)));
+  // The shared UD slab uses a fragment-exact doorway/window boundary, so
+  // changing LOD cannot move the joint between exterior and interior timber.
+  let upperFloor = in.surfaceType == 28.;
+  let upperInterior = upperFloor && in.local.x >= ${interiorFinishBounds.start} && in.local.x <= ${interiorFinishBounds.end}
+      && in.local.y >= ${interiorFinishBounds.minY} && in.local.y <= ${interiorFinishBounds.maxY};
   // Derivatives stay uniform, but only the actual finish evaluates its grain,
   // weave or seams. White hull/ceiling pixels need none of these sine functions.
   var wood = 1.;
-  if (in.surfaceType == 1.) {
+  if (in.surfaceType == 1. || (upperFloor && !upperInterior)) {
     let edge = min(fract(plank), 1.-fract(plank));
     let seam = (1.-smoothstep(0., .035+footprint, edge)) *
                (1.-smoothstep(.12,.55,footprint));
@@ -66,7 +72,7 @@ struct Vertex {
     wood = variation*(1.-.52*max(seam,.6*endJoint));
   }
   var detail = 1.;
-  if (in.surfaceType == 2.) {
+  if (in.surfaceType == 2. || upperInterior) {
     detail = mix(1.,.96+.035*sin(grainV+sin(grainU)*1.2),grainFade);
   } else if (in.surfaceType == 3.) {
     detail = 1.+.015*sin(yarn.x)*sin(yarn.y)*yarnFade;

@@ -43,16 +43,18 @@ Four profiles remain resident after the final package succeeds:
 
 | Profile | Submitted triangles | GPU geometry bytes |
 | --- | ---: | ---: |
-| Exterior | 24,583 | 1,631,708 |
-| Main saloon interior | 24,831 | 1,651,480 |
-| Upper terrace and interior | 23,879 | 1,611,924 |
-| Solarium | 23,689 | 1,593,160 |
+| Exterior | 24,589 | 1,632,040 |
+| Main saloon interior | 24,853 | 1,652,212 |
+| Upper terrace and interior | 23,901 | 1,612,760 |
+| Solarium | 23,695 | 1,593,492 |
 
 Every profile uses two batches and one render pass, below 25,000 triangles.
-Resident indexed geometry totals 6,488,272 bytes, excluding render attachments,
-CPU assets and earlier packages. The final binary is 7,014,508 bytes. Offline
+Resident indexed geometry totals 6,490,504 bytes, excluding render attachments,
+CPU assets and earlier packages. The final binary is 7,016,740 bytes. Offline
 compaction removes unused vertices without changing indexed attributes or triangles.
 No new texture or pipeline is introduced. Resolution and MSAA settings are retained.
+The shared UD slab selects the existing exterior/interior timber finishes at the
+doorway and window planes per fragment, so LOD triangles cannot move the joint.
 The `upper` profile covers the entire new passage, with no switch at the doorway.
 
 The new package loads after the solarium. Candidate profiles upload and execute

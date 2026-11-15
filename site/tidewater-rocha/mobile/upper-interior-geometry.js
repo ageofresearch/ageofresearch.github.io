@@ -3,6 +3,7 @@ import {supportedFloor} from './sun-deck-geometry.js?v=upper-interior-1';
 
 // Display coordinates from the current shared model, not surveyed dimensions.
 export const interiorLimits={start:13.8,end:18.63233,minY:-2.5224,maxY:2.116};
+export const interiorFinishBounds={start:14.249,end:18.63233,minY:-2.5,maxY:2.095};
 export const interiorRoom={id:'UD_R02',deck:'UD',name:'Interior superior',displayName:'Interior superior',
   spawn:[14.8,0,7.6],look:[18.3,0,7.1]};
 export function inUpperInterior(x,y) {

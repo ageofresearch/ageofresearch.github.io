@@ -159,8 +159,8 @@ room in both full and mobile versions. The mobile route ends at the existing
 forward partition plane; its pending bridge continuation is identified by a UI
 notice, not an invented wall. Full-yacht circulation beyond that limit is retained.
 
-The four prepared mobile profiles submit 24,583 / 24,831 / 23,879 / 23,689 triangles
-with two draws and one pass. They use 6,488,272 resident indexed geometry bytes.
+The four prepared mobile profiles submit 24,589 / 24,853 / 23,901 / 23,695 triangles
+with two draws and one pass. They use 6,490,504 resident indexed geometry bytes.
 The upper profile spans the exterior terrace and interior, avoiding a profile
 change at the doorway. Loading, collision indexing, buffer upload and GPU execution
 finish before access is enabled. Original source JSON/binary, deck elevations,

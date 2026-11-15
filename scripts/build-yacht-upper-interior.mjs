@@ -4,7 +4,7 @@ import {buildSun} from './build-yacht-sun.mjs';
 import {boundsOf,normalizeRenderedPart} from './build-yacht-saloon.mjs';
 import {clipGeometry,subdivide,contactShade} from './build-yacht-terrace.mjs';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
-import {interiorLimits,interiorRoom} from '../site/tidewater-rocha/mobile/upper-interior-geometry.js';
+import {interiorLimits,interiorRoom,interiorFinishBounds} from '../site/tidewater-rocha/mobile/upper-interior-geometry.js';
 
 const root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);
 export async function buildUpperInterior() {
@@ -37,8 +37,13 @@ export async function buildUpperInterior() {
       p.surfaceTypes=Array.from(p.surfaceTypes||Array(p.vertices.length/6).fill(p.finish[3]));
       for(let i=0;i<p.vertices.length;i+=6) {
         const [x,y,z,,,nz]=p.vertices.slice(i,i+6);
-        if(floor&&x>=14.249&&z>5.998&&nz>.5) {
-          p.light[i/6]=(.7+.12*Math.min(1,Math.abs(y)/2.5))*contactShade(x,y,contact);p.surfaceTypes[i/6]=2;
+        if(floor&&z>5.998&&nz>.5) {
+          // One slab, two existing finishes. The shader clips their boundary
+          // to the doorway/window planes, independent of triangle density.
+          p.surfaceTypes[i/6]=28;
+          const b=interiorFinishBounds;
+          if(x>=b.start&&x<=b.end&&y>=b.minY&&y<=b.maxY)
+            p.light[i/6]=(.7+.12*Math.min(1,Math.abs(y)/2.5))*contactShade(x,y,contact);
         }else if(p.role==='interior-roof'&&nz<-.5){p.light[i/6]=.82;p.surfaceTypes[i/6]=9;}
       }
     }

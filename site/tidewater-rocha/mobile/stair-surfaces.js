@@ -1,4 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=stair-ready-1';
+import {describeSunFloor} from './sun-deck-geometry.js?v=sun-deck-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=sun-deck-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -311,6 +312,11 @@ export function configureModelStairs(nav,model) {
   if(!model.interiorDetail || !model.asset?.binary)return;
   model.stairInventory=describeFlights(model,nav.routes);
   installFlightNavigation(nav,model.stairInventory.flights);
+  if(model.exterior?.sunDeck) {
+    const sun=describeSunFloor(model),previous=nav.floorSafe.bind(nav);
+    nav.floorSafe=(x,y,deck=nav.deck)=>deck==='SD'?sun.floorSafe(x,y,nav.radius):previous(x,y,deck);
+    model.sunDeckFloor=sun;
+  }
 }
 
 function savedSurface(nav,route,state) {

@@ -39,7 +39,7 @@ function floorTriangles(part) {
 
 // Weld identical attributes before simplifying. Do not move any vertices or
 // drop components; silhouettes, material boundaries and deck edges stay intact.
-export function simplify(part, error) {
+export function simplify(part, error, flags=[]) {
   if(part.indices.length<=72 || error===0)return part;
   const vertices=[], light=[], surfaceTypes=[], remap=[], keys=new Map();
   for(let i=0;i<part.vertices.length;i+=6) {
@@ -54,7 +54,7 @@ export function simplify(part, error) {
   const attrs=Float32Array.from(light.flatMap((l,i)=>[...vertices.slice(i*6+3,i*6+6),l]));
   const [reduced,actualError]=MeshoptSimplifier.simplifyWithAttributes(indices,Float32Array.from(vertices),6,
     attrs,4,[.15,.15,.15,.5],null,Math.max(36,Math.floor(indices.length*.12/3)*3),error,
-    ['ErrorAbsolute','LockBorder']);
+    ['ErrorAbsolute','LockBorder',...flags]);
   return {...part,vertices,indices:Array.from(reduced),light,surfaceTypes,lodError:actualError};
 }
 

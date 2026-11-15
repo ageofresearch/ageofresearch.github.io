@@ -1,5 +1,5 @@
-import { preloadUpper } from './upper-terrace.js?v=stair-ready-1';
-import { connectTerrace } from './aft-terrace.js?v=stair-ready-1';
+import { preloadUpper } from './upper-terrace.js?v=sun-deck-1';
+import { connectTerrace } from './aft-terrace.js?v=sun-deck-1';
 
 export const saloonVersion = 'saloon-mobile-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
@@ -52,10 +52,11 @@ export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThi
 }
 
 export function nextProfile(current, x, deck='MD', stair=null) {
+  if(deck==='SD'||stair==='sun')return 'sun';
   if(deck==='UD'||stair==='aft')return 'upper';
   if(deck!=='MD'||x<8)return 'exterior';
   if(x>9.2)return 'interior';
-  return current==='upper'?'exterior':current;
+  return ['upper','sun'].includes(current)?'exterior':current;
 }
 
 export function connectSaloon(walk,saloon) {

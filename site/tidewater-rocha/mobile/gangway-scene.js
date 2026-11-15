@@ -1,7 +1,7 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=upper-interior-1';
-import { connectSternAccess, configureSternWalk } from './stern-access.js?v=upper-interior-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=bridge-helm-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=bridge-helm-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
-export { preloadSaloon } from './main-saloon.js?v=upper-interior-1';
+export { preloadSaloon } from './main-saloon.js?v=bridge-helm-1';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js';

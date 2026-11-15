@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=upper-interior-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=bridge-helm-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected the walk-chat renderer with the selected scene');
@@ -124,6 +124,7 @@ async function capture(browser, mobile) {
     await require('./yacht-upper.cjs')(frame,out,readFrame,mobile);
     await require('./yacht-sun.cjs')(frame,out,readFrame,mobile);
     await require('./yacht-upper-interior.cjs')(frame,out,readFrame,mobile);
+    await require('./yacht-bridge.cjs')(frame,out,readFrame,mobile);
     if (mobile) {
       const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb))$|\/assets\/main-[^/]+\.js$/.test(path);
       assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');
@@ -152,7 +153,7 @@ async function capture(browser, mobile) {
           const letter=projected(model.transom.nameBounds);
           return {within:letter.every(([x,y,z])=>Math.abs(x)<1 && Math.abs(y)<1 && z>0 && z<=1),
             width:(Math.max(...letter.map(p=>p[0]))-Math.min(...letter.map(p=>p[0])))*app.engine.width/2,
-            skip:model.upperInterior.profiles.exterior.audit.filter(p=>model.transom.parts.some(s=>s.id===p.id)).reduce((n,p)=>n+p.triangles*3,0)};
+            skip:model.bridge.profiles.exterior.audit.filter(p=>model.transom.parts.some(s=>s.id===p.id)).reduce((n,p)=>n+p.triangles*3,0)};
         });
         await frame.evaluate(skip=>{
           const native=GPURenderPassEncoder.prototype.drawIndexed;
@@ -338,6 +339,7 @@ async function capture(browser, mobile) {
     await require('./yacht-upper-loading.cjs')(browser,base);
     await require('./yacht-sun-loading.cjs')(browser,base);
     await require('./yacht-upper-interior-loading.cjs')(browser,base);
+    await require('./yacht-bridge-loading.cjs')(browser,base);
     assert.equal(mobile.geometry.parts, original.geometry.parts);
     assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
     assert.deepEqual(mobile.geometry.furniture,original.geometry.furniture);

@@ -1,5 +1,5 @@
-import { nextProfile } from './main-saloon.js?v=upper-interior-1';
-import {interiorFinishBounds} from './upper-interior-geometry.js?v=upper-interior-1';
+import {createFinishPatterns} from './finish-patterns.js?v=bridge-helm-1';
+import { nextProfile } from './main-saloon.js?v=bridge-helm-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -10,12 +10,14 @@ struct Frame {
   sunLocal: vec4f,
 }
 @group(0) @binding(0) var<uniform> frame: Frame;
+@group(0) @binding(1) var patternSampler: sampler;
+@group(0) @binding(2) var patterns: texture_2d_array<f32>;
+@group(0) @binding(3) var teak: texture_2d<f32>;
 struct Vertex {
   @builtin(position) clip: vec4f,
   @location(0) color: vec3f,
-  @location(1) local: vec2f,
-  @location(2) @interpolate(flat) surfaceType: f32,
-  @location(3) finishUV: vec2f,
+  @location(1) uv: vec2f,
+  @location(2) @interpolate(flat) layer: i32,
 }
 @vertex fn vertex(@location(0) position: vec3f, @location(1) normal: vec3f,
                   @location(2) albedo: vec3f, @location(3) surface: vec4f) -> Vertex {
@@ -35,51 +37,30 @@ struct Vertex {
   let lit = finish * ((hemi + diffuse * vec3f(.82,.72,.59)) * surface.w + indirect);
   out.color = mix(lit, albedo * reflectedLight, surface.y)
               + gloss * (.08 + surface.y*.65);
-  out.local = vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
-  out.surfaceType = surface.z;
-  out.finishUV = vec2f(position.x+position.y*.73, position.z+position.y*.51);
+  out.color = toSrgb(out.color);
+  let local=vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
+  let finishUV=vec2f(position.x+position.y*.73, position.z+position.y*.51);
+  out.layer=-1;out.uv=vec2f(0);
+  if(surface.z==2.){out.layer=1;out.uv=finishUV*vec2f(310.,37.)/6.2831853;}
+  else if(surface.z==3.){out.layer=2;out.uv=finishUV*vec2f(430.,410.)/6.2831853;}
+  else if(surface.z==1.){out.layer=0;out.uv=vec2f(local.x/2.15,(local.y/.105+64.)/128.);}
   return out;
 }
+fn toSrgb(linear: vec3f) -> vec3f {
+  let c=clamp(linear,vec3f(0),vec3f(1));
+  let s1=sqrt(c);let s2=sqrt(s1);let s3=sqrt(s2);
+  return select(.662002687*s1+.684122060*s2-.323583601*s3-.022541147*c,
+                12.92*c,c<=vec3f(.0031308));
+}
+@diagnostic(off, derivative_uniformity)
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
-  // Deck seams use the source finish's 105 mm spacing in yacht coordinates.
-  let plank = in.local.y / .105;
-  let footprint = max(fwidth(plank), .001);
-  let endWidth = max(fwidth(in.local.x)/2.15, .0001);
-  // The full yacht's restrained wood grain and canvas weave, faded below a
-  // pixel to avoid swimming detail. Evaluate derivatives outside material branches.
-  let grainU = in.finishUV.x*310.;
-  let grainV = in.finishUV.y*37.;
-  let grainFade = 1.-smoothstep(.2,.5,(fwidth(grainV)+1.2*fwidth(grainU))/6.2831853);
-  let yarn = in.finishUV*vec2f(430.,410.);
-  let yarnFade = 1.-smoothstep(.3,1.5,max(fwidth(yarn.x),fwidth(yarn.y)));
-  // The shared UD slab uses a fragment-exact doorway/window boundary, so
-  // changing LOD cannot move the joint between exterior and interior timber.
-  let upperFloor = in.surfaceType == 28.;
-  let upperInterior = upperFloor && in.local.x >= ${interiorFinishBounds.start} && in.local.x <= ${interiorFinishBounds.end}
-      && in.local.y >= ${interiorFinishBounds.minY} && in.local.y <= ${interiorFinishBounds.maxY};
-  // Derivatives stay uniform, but only the actual finish evaluates its grain,
-  // weave or seams. White hull/ceiling pixels need none of these sine functions.
-  var wood = 1.;
-  if (in.surfaceType == 1. || (upperFloor && !upperInterior)) {
-    let edge = min(fract(plank), 1.-fract(plank));
-    let seam = (1.-smoothstep(0., .035+footprint, edge)) *
-               (1.-smoothstep(.12,.55,footprint));
-    let board = floor(plank);
-    let endCoord = (in.local.x+fract(board*.618034)*1.7)/2.15;
-    let endJoint = (1.-smoothstep(0.,.001+endWidth,min(fract(endCoord),1.-fract(endCoord)))) *
-                   (1.-smoothstep(.12,.55,endWidth));
-    let variation = 1.+(.97+.045*sin(board*17.17)-1.)*(1.-smoothstep(.12,.55,footprint));
-    wood = variation*(1.-.52*max(seam,.6*endJoint));
-  }
-  var detail = 1.;
-  if (in.surfaceType == 2. || upperInterior) {
-    detail = mix(1.,.96+.035*sin(grainV+sin(grainU)*1.2),grainFade);
-  } else if (in.surfaceType == 3.) {
-    detail = 1.+.015*sin(yarn.x)*sin(yarn.y)*yarnFade;
-  }
-  let linear = clamp(in.color*wood*detail, vec3f(0), vec3f(1));
-  let srgb = select(1.055*pow(linear,vec3f(1./2.4))-.055, 12.92*linear, linear<=vec3f(.0031308));
-  return vec4f(srgb,1.);
+  if(in.layer<0){return vec4f(in.color,1.);}
+  var factor=1.;
+  if(in.layer==0){factor=textureSample(teak,patternSampler,in.uv).r*1.1;}
+  else {let encoded=textureSample(patterns,patternSampler,in.uv,in.layer-1).rg;
+    factor=dot(encoded,vec2f(65280./65535.,255./65535.))*1.1;}
+
+  return vec4f(clamp((in.color+.055)*factor-.055,vec3f(0),vec3f(1)),1.);
 }
 struct GlassVertex {
   @builtin(position) clip: vec4f,
@@ -109,6 +90,9 @@ export async function createForwardRenderer(app, sun) {
   const module = device.createShaderModule({label:'Gangway finishes', code:shader});
   const bindLayout = device.createBindGroupLayout({entries:[
     {binding:0, visibility:GPUShaderStage.VERTEX, buffer:{type:'uniform'}},
+    {binding:1, visibility:GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
+    {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
+    {binding:3, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
@@ -161,7 +145,11 @@ export async function createForwardRenderer(app, sun) {
   }
   const frame = new Float32Array(24);
   const uniform = device.createBuffer({size:frame.byteLength,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
-  const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}}]});
+  const finishes=createFinishPatterns(device);
+  const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
+    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:finishes.teak.createView()}]});
+  model.stats.finishTextureBytes=finishes.bytes;
+  model.stats.materialTextures=2;
   const mesh = model.boarding.group;
   mesh.updateWorldMatrix(true,false);
   const localFromWorld = mesh.matrixWorld.clone().invert();
@@ -271,7 +259,7 @@ export async function createForwardRenderer(app, sun) {
     dispose() {
       disposed=true;
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      uniform.destroy(); depth?.destroy(); color?.destroy();
+      uniform.destroy(); finishes.texture.destroy(); finishes.teak.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

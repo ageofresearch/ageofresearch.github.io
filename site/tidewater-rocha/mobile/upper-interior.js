@@ -1,7 +1,8 @@
-import {decodeSaloon} from './main-saloon.js?v=upper-interior-1';
-import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=upper-interior-1';
+import {preloadBridge} from './bridge-helm.js?v=bridge-helm-1';
+import {decodeSaloon} from './main-saloon.js?v=bridge-helm-1';
+import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=bridge-helm-1';
 
-export const upperInteriorVersion='upper-interior-1';
+export const upperInteriorVersion='bridge-helm-1';
 export function decodeUpperInterior(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperInteriorVersion,names:['exterior','interior','upper','sun'],roomID:'UD_R02'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
@@ -42,7 +43,7 @@ export function connectUpperInterior(walk,prepared) {
     controls.hud.appendChild(notice);
     const sync=controls.syncLocation.bind(controls);
     controls.syncLocation=()=>{
-      sync();const hidden=!walk.active||controls.open||nav.deck!=='UD'||!!nav.stair||nav.position[0]<18.05;
+      sync();const hidden=!!model.bridge||!walk.active||controls.open||nav.deck!=='UD'||!!nav.stair||nav.position[0]<18.05;
       if(notice.hidden!==hidden)notice.hidden=hidden;
     };
     controls.rooms.push(interior.room);
@@ -74,6 +75,7 @@ export function preloadUpperInterior(app) {
         if(abort.signal.aborted)throw Error('Carga cancelada');connectUpperInterior(app.yachtWalk,interior);
       }});
       model.upperInteriorLoadState='ready';panel.hidden=true;window.dispatchEvent(new Event('luz-de-mar:upper-interior-ready'));
+      await preloadBridge(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;model.upperInteriorLoadState='error';status.textContent='No se pudo preparar el interior superior. El recorrido anterior sigue disponible.';retry.hidden=false;
       console.warn('Upper interior loading failed',error);

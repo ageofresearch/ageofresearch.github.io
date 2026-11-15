@@ -1,5 +1,5 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=starboard-access-1';
-import { connectSternAccess, configureSternWalk } from './stern-access.js?v=starboard-access-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=stair-surfaces-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=stair-surfaces-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,

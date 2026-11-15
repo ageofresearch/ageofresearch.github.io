@@ -1,4 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=starboard-access-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=stair-surfaces-1';
+import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=stair-surfaces-1';
 
 // Source coordinates: x toward the bow, y to port, z up. All access surfaces
 // come from the same parts that are rendered in the full and isolated yacht.
@@ -133,4 +134,9 @@ export function configureSternWalk(walk) {
     }
     return moved;
   };
+  access.flight=createFlight(access.route,walk.model.asset.data.levels,
+    access.treads.map(t=>({id:t.id,height:t.height,polygons:[t.footprint],sourceIDs:[t.id]})),
+    {lower:access.platformFloor,upper:access.upperFloor},
+    (x,y,height,radius)=>access.stairSafe(x,y,height,radius));
+  installFlightNavigation(nav,[access.flight]);
 }

@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=starboard-access-1';
+import { indexFootprints } from './terrace-geometry.js?v=stair-surfaces-1';
 
-const version = 'starboard-access-1';
+const version = 'stair-surfaces-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));

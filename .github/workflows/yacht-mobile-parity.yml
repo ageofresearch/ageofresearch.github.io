@@ -14,6 +14,8 @@ on:
       - 'tests/yacht-terrace.test.mjs'
       - 'tests/yacht-stern-access.test.mjs'
       - 'tests/yacht-stern-access.cjs'
+      - 'tests/yacht-stair-surfaces.test.mjs'
+      - 'tests/yacht-stair-surfaces.cjs'
       - 'scripts/build-yacht-terrace.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
@@ -21,7 +23,7 @@ permissions:
 jobs:
   compare:
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -32,7 +34,7 @@ jobs:
             scripts/build-yacht-terrace.mjs
       - name: Verify the isolated gangway against the walk-chat yacht
         run: |
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
           for attempt in {1..15}; do

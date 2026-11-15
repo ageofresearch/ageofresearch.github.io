@@ -63,7 +63,10 @@ export async function buildUpper() {
       if(upperSurface&&z>5.998&&nz>.5) {
         const shade=x<10.65&&Math.abs(y)<2.8?.75:.94;
         p.light[i/6]=shade*contactShade(x,y,furnitureFootprints);p.surfaceTypes[i/6]=1;
-      } else if(parts.includes(p))p.light[i/6]=p.role==='furniture'?.85:.9;
+      } else if(parts.includes(p)) {
+        p.light[i/6]=p.role==='furniture'?.85:.9;
+        if(p.sourceID==='SD_DCK_001'&&nz<-.5)p.surfaceTypes[i/6]=9;
+      }
     }
   }
   const chunks=[];let offset=0;

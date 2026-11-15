@@ -1,6 +1,6 @@
-import {decodeSaloon} from './main-saloon.js?v=upper-terrace-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=upper-terrace-1';
-import {indexFootprints} from './terrace-geometry.js?v=upper-terrace-1';
+import {decodeSaloon} from './main-saloon.js?v=stair-ready-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=stair-ready-1';
+import {indexFootprints} from './terrace-geometry.js?v=stair-ready-1';
 export const upperVersion='upper-terrace-1';
 export function decodeUpper(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','interior','upper'],roomID:'UD_R01'});
@@ -77,6 +77,7 @@ export function preloadUpper(app) {
     pending=(async()=>{
       const upper=await loadUpper({signal:abort.signal});if(abort.signal.aborted)return;
       await app.gangwayRenderer.installProfiles(upper.profiles);if(abort.signal.aborted)return;
+      await app.gangwayRenderer.prepareProfiles();if(abort.signal.aborted)return;
       connectUpper(app.yachtWalk,upper);model.upperLoadMs=performance.now()-start;
       model.upperLoadState='ready';panel.hidden=true;
       window.dispatchEvent(new Event('luz-de-mar:upper-ready'));
@@ -88,5 +89,5 @@ export function preloadUpper(app) {
   }
   retry.onclick=load;model.loadUpper=load;
   const dispose=model.dispose.bind(model);model.dispose=()=>{abort.abort();panel.remove();dispose();};
-  void load();
+  return load();
 }

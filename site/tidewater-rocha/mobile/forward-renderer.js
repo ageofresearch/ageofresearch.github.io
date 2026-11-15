@@ -1,4 +1,4 @@
-import { nextProfile } from './main-saloon.js?v=upper-terrace-1';
+import { nextProfile } from './main-saloon.js?v=stair-ready-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -42,28 +42,35 @@ struct Vertex {
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
   // Deck seams use the source finish's 105 mm spacing in yacht coordinates.
   let plank = in.local.y / .105;
-  let edge = min(fract(plank), 1.-fract(plank));
   let footprint = max(fwidth(plank), .001);
-  let seam = (1.-smoothstep(0., .035+footprint, edge)) *
-             (1.-smoothstep(.12,.55,footprint));
-  // Staggered end joints and board tint follow the original yacht's teak finish.
-  let board = floor(plank);
-  let endCoord = (in.local.x+fract(board*.618034)*1.7)/2.15;
   let endWidth = max(fwidth(in.local.x)/2.15, .0001);
-  let endJoint = (1.-smoothstep(0.,.001+endWidth,min(fract(endCoord),1.-fract(endCoord)))) *
-                 (1.-smoothstep(.12,.55,endWidth));
-  let variation = 1.+(.97+.045*sin(board*17.17)-1.)*(1.-smoothstep(.12,.55,footprint));
-  let wood = select(1., variation*(1.-.52*max(seam,.6*endJoint)), in.surfaceType==1.);
   // The full yacht's restrained wood grain and canvas weave, faded below a
   // pixel to avoid swimming detail. Evaluate derivatives outside material branches.
   let grainU = in.finishUV.x*310.;
   let grainV = in.finishUV.y*37.;
   let grainFade = 1.-smoothstep(.2,.5,(fwidth(grainV)+1.2*fwidth(grainU))/6.2831853);
-  let grain = mix(1.,.96+.035*sin(grainV+sin(grainU)*1.2),grainFade);
   let yarn = in.finishUV*vec2f(430.,410.);
   let yarnFade = 1.-smoothstep(.3,1.5,max(fwidth(yarn.x),fwidth(yarn.y)));
-  let canvas = 1.+.015*sin(yarn.x)*sin(yarn.y)*yarnFade;
-  let detail = select(1.,grain,in.surfaceType==2.)*select(1.,canvas,in.surfaceType==3.);
+  // Derivatives stay uniform, but only the actual finish evaluates its grain,
+  // weave or seams. White hull/ceiling pixels need none of these sine functions.
+  var wood = 1.;
+  if (in.surfaceType == 1.) {
+    let edge = min(fract(plank), 1.-fract(plank));
+    let seam = (1.-smoothstep(0., .035+footprint, edge)) *
+               (1.-smoothstep(.12,.55,footprint));
+    let board = floor(plank);
+    let endCoord = (in.local.x+fract(board*.618034)*1.7)/2.15;
+    let endJoint = (1.-smoothstep(0.,.001+endWidth,min(fract(endCoord),1.-fract(endCoord)))) *
+                   (1.-smoothstep(.12,.55,endWidth));
+    let variation = 1.+(.97+.045*sin(board*17.17)-1.)*(1.-smoothstep(.12,.55,footprint));
+    wood = variation*(1.-.52*max(seam,.6*endJoint));
+  }
+  var detail = 1.;
+  if (in.surfaceType == 2.) {
+    detail = mix(1.,.96+.035*sin(grainV+sin(grainU)*1.2),grainFade);
+  } else if (in.surfaceType == 3.) {
+    detail = 1.+.015*sin(yarn.x)*sin(yarn.y)*yarnFade;
+  }
   let linear = clamp(in.color*wood*detail, vec3f(0), vec3f(1));
   let srgb = select(1.055*pow(linear,vec3f(1./2.4))-.055, 12.92*linear, linear<=vec3f(.0031308));
   return vec4f(srgb,1.);
@@ -188,10 +195,25 @@ export async function createForwardRenderer(app, sun) {
     get samples() { return samples; },
     get canSmooth() { return Boolean(smooth); },
     setSamples(value) { samples = value === 4 && smooth ? 4 : 1; },
-    render() {
+    async prepareProfiles() {
+      if(!profiles||disposed)return;
+      // Exercise the actual buffers and pipelines offscreen before enabling a
+      // new route. Do not change the visitor's pose or flash a different deck.
+      const previous=activeProfile;
+      const target=device.createTexture({label:'Walk preparation',format,
+        size:[app.engine.width,app.engine.height],usage:GPUTextureUsage.RENDER_ATTACHMENT});
+      try {
+        for(const name of Object.keys(profiles)) {
+          if(disposed)return;
+          app.gpu.beginFrame();this.render(name,target.createView());app.gpu.submit();
+          await app.gpu.queue.onSubmittedWorkDone();
+        }
+      } finally { target.destroy();if(!disposed)selectProfile(previous); }
+    },
+    render(preparingProfile=null,target=null) {
       const {engine, gpu, camera} = app;
       if(profiles) {
-        const nav=app.yachtWalk.nav,name=nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id);
+        const nav=app.yachtWalk.nav,name=preparingProfile??nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id);
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {
@@ -207,7 +229,7 @@ export async function createForwardRenderer(app, sun) {
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
       eye.copy(camera.position).applyMatrix4(localFromWorld).toArray(frame,16);
       gpu.queue.writeBuffer(uniform,0,frame);
-      const screen = engine.currentTexture().createView();
+      const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',
         colorAttachments:[{view:colorView ?? screen,resolveTarget:colorView ? screen : undefined,

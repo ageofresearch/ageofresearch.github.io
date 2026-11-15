@@ -32,7 +32,7 @@ module.exports=async function upperLoading(browser,base) {
     await page.reload({waitUntil:'domcontentloaded'});
     await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const next=page.frames().find(f=>f.url().includes('play.html'));
-    await next.waitForFunction(()=>window.__app?.entranceYacht?.upperLoadState==='ready',null,{timeout:90000});
+    await next.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&window.__app?.entranceYacht?.upperLoadState==='ready',null,{timeout:90000});
     const state=await next.evaluate(()=>{
       const w=window.__app.yachtWalk,f=w.model.upper.flight,s=f.surfaces[6],pts=s.polygons.flat();
       w.nav.deck='MD';w.nav.position=[0,1].map(k=>(Math.min(...pts.map(p=>p[k]))+Math.max(...pts.map(p=>p[k])))/2);

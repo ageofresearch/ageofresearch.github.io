@@ -162,6 +162,13 @@ It uses three fresh 360×540 contexts, scale 1 and 4× MSAA, two fixed return vi
 and requires median P95 ≤25 ms at each view. Physical phone performance still
 requires measurement; these timings are a controlled regression gate.
 
+CI additionally compares the old upper return views against an immutable checkout
+of the PR base on the same runner, at the same resolution and MSAA. It rejects a
+mean-frame regression above 5%, or a P95 above both 25 ms and 105% of the base.
+The report includes both versions' absolute timings; a slow baseline is not
+reported as meeting 25 ms. The standalone controlled return-view gate remains
+unchanged, and the new bow route must meet its absolute 25 ms CI gate as well.
+
 The bow benchmark holds its package to verify initial-loader blocking, then uses
 three fresh contexts to walk out/back twice, including both sunpad sides. It
 records FPS, P95, >25/50 ms frames, movement/CPU timing, resident memory, model

@@ -1,4 +1,5 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=reference-boarding-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=starboard-access-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=starboard-access-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
@@ -25,10 +26,11 @@ export async function buildGangway(world) {
     ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + 1.6],
     look: lettering,
   };
-  connectTerrace(boarding, terrace);
+  connectTerrace(boarding, terrace, stern.access.starboard.upperFloor);
   Object.assign(model, {
     transom:stern, terrace, boarding, meshes: boarding.meshes, stats: boarding.stats,
-    asset: { data: { rooms: [terrace.room], meshes: [], levels: { MD: layout.deckHeight } } },
+    asset: { data: { rooms: [terrace.room,stern.access.starboard.room], meshes: [],
+      levels: { MD: layout.deckHeight, SP: stern.access.starboard.lowerHeight } } },
     // All geometry in this view is static and always eligible for drawing.
     updateVisibility() {},
     dispose() {
@@ -38,23 +40,19 @@ export async function buildGangway(world) {
       materials.glass.dispose();
     },
   });
+  model.sternAccess = connectSternAccess(model);
   return model;
 }
 
 export function configureWalk(walk) {
-  const { boarding } = walk.model;
-  const nav = walk.nav;
-  nav.routes = [];
-  nav.floorSafe = (x, y, deck = nav.deck) => deck === boarding.room.deck && boarding.safe(x, y, nav.radius);
-  const landing = {id:'stern-landing', deck:boarding.room.deck, name:'Desembarco de popa', displayName:'Desembarco de popa'};
-  nav.location = () => nav.position[0] < boarding.end ? boarding.room : nav.position[0] < 3.8 && nav.position[1] > 2.48 ? landing : walk.model.terrace.room;
+  configureSternWalk(walk);
   const controls = walk.controls;
   if (!controls) return;
   controls.sun.closest('label').hidden = true;
   for (const button of controls.root.querySelectorAll('[data-deck]')) {
-    button.hidden = button.dataset.deck !== boarding.room.deck;
+    button.hidden = !['MD','SP'].includes(button.dataset.deck);
   }
-  controls.root.querySelector('[data-nav-note]').textContent = 'Recorre la pasarela y la terraza de popa hasta la entrada del salón.';
+  controls.root.querySelector('[data-nav-note]').textContent = 'Recorre la terraza y baja por la escalera de estribor hasta la plataforma de baño.';
 }
 
 export function addFullYachtControl(app) {

@@ -1,10 +1,10 @@
-import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=reference-boarding-1';
-import { createBenchmark } from './frame-benchmark.js?v=reference-boarding-1';
+import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=starboard-access-1';
+import { createBenchmark } from './frame-benchmark.js?v=starboard-access-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
   const boarding = walk.model.boarding, nav = walk.nav;
-  if (nav.deck !== boarding.room.deck || !boarding.safe(...nav.position,nav.radius)) return null;
+  if (nav.stair || nav.deck !== boarding.room.deck || !boarding.safe(...nav.position,nav.radius)) return null;
   const join = nearestRoutePoint(boarding, nav);
   if (!join) return null;
   const {length} = routeSegments(boarding.route);
@@ -35,6 +35,7 @@ export function crossing(walk) {
 }
 
 function crossLabel(walk) {
+  if (walk && (walk.nav.stair || walk.nav.deck === 'SP')) return 'Recorrido al salón desde la terraza';
   return walk && walk.nav.position[0] >= walk.model.boarding.walkEnd-.04
     ? 'Regresar por la pasarela' : 'Caminar hasta el salón';
 }

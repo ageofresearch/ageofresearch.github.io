@@ -19,7 +19,7 @@ export function prepareInteriorFloor({floor,collisionFootprints}) {
 export function describeUpperInterior(model) {
   const parts=renderedParts(model);
   const floor=parts.filter(p=>(p.anchor||p.id.split('/')[0])==='UD_DCK_001').flatMap(p=>surfaceTriangles(p,6,.002));
-  const clearance=obstacles(parts,new Set(),[13.6,-2.8,6,19,2.4,7.65]);
+  const clearance=obstacles(parts,new Set(),[13.6,-2.8,6,19,2.4,7.65],{includeVerticalFaces:true});
   const collisionFootprints=clearance.footprints(6);
   return {floor,collisionFootprints,...prepareInteriorFloor({floor,collisionFootprints})};
 }

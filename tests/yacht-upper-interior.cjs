@@ -3,6 +3,14 @@ const {writeFileSync}=require('node:fs');
 const {PNG}=require('pngjs');
 module.exports=async function interiorViews(frame,out,readFrame,mobile){
   const saved=await frame.evaluate(()=>{const w=__app.yachtWalk;return {position:w.nav.position.slice(),deck:w.nav.deck,yaw:w.yaw,pitch:w.pitch};});
+  const clearance=await frame.evaluate(()=>{
+    const w=__app.yachtWalk,n=w.nav;w.enterRoom('UD_R02');
+    return [1.7,-2.1].map(y=>{
+      n.position=[15,y];for(let i=0;i<100;i++)n.move(0,Math.sign(y)*.02);
+      return {y:n.position[1],overlap:n.floorSafe(15,y>0?1.95:-2.4,'UD')};
+    });
+  });
+  assert.ok(clearance.every(p=>p.y<1.916&&p.y>-2.338&&!p.overlap),'Both glass panels stop the body in the rendered client');
   for(const {name,position,target} of [
     {name:'terrace',position:[13.8,0],target:[17,0,6.9]},
     {name:'threshold',position:[14.21,0],target:[17,0,6.65]},

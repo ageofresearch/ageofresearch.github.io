@@ -21,6 +21,8 @@ across the clear opening is removed above the floor: the existing z=6.00 slab ow
 the flush threshold, with no second coplanar cap. This corrects the previous raised
 track ending at z=6.037. Both versions use the same geometry. The shared physical
 floor/obstacles replace stale furniture navigation masks inside the upper interior.
+Vertical triangle projections retain a numerical thickness for collision indexing,
+so tall glass/walls remain solid even when their top and bottom are outside body height.
 The mobile extent ends at the forward partition plane x=18.63233; an on-screen notice
 identifies the pending bridge continuation when approaching it. No fictitious wall
 or bridge stair is added. Full-yacht bridge circulation remains available.

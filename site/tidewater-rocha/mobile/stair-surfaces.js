@@ -132,7 +132,7 @@ export function repairStairIntersections(detail,exterior,asset) {
   }
 }
 
-export function obstacles(parts,ownParts,box) {
+export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
   const triangles=[];
   for(const part of parts) {
     const b=part.bounds;
@@ -155,7 +155,13 @@ export function obstacles(parts,ownParts,box) {
       for(const t of triangles) {
         const foot=height+(t.floor && t.top<=height+.19 ? .19 : .035);
         if(t.b[5]<=foot || t.b[2]>=height+1.65)continue;
-        const polygon=convexHull(clip(clip(t.vertices,foot,true),height+1.65,false).map(p=>p.slice(0,2)));
+        const projected=clip(clip(t.vertices,foot,true),height+1.65,false).map(p=>p.slice(0,2));
+        let polygon=convexHull(projected);
+        // A vertical wall projects to a segment, not an area. Give only these
+        // degenerate projections a numerical thickness; body radius supplies
+        // the actual clearance. Keep other stair callers' behavior unchanged.
+        if(includeVerticalFaces&&polygon.length>0&&polygon.length<3)
+          polygon=convexHull(projected.flatMap(([x,y])=>[[x-.00001,y-.00001],[x+.00001,y-.00001],[x+.00001,y+.00001],[x-.00001,y+.00001]]));
         if(polygon.length>=3)footprints.push({polygon,id:t.id,name:t.name});
       }
       const test=indexFootprints(footprints);test.footprints=footprints;cache.set(key,test);

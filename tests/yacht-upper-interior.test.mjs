@@ -77,6 +77,17 @@ test('shared collision releases removed furniture but keeps glass, cabinet, bulk
     }
     for(const p of [[14.21,.5],[15,2.07],[15,-2.5],[18,1],[18.6,0],[18.65,-1.95],[19.16,-1.62],[13.85,1.5]])
       assert.equal(f.walk.nav.floorSafe(...p,'UD'),false,p.toString());
+    for(const p of [[15,1.95],[15,2.07],[15,-2.4],[15,-2.5]]){
+      assert.equal(f.walk.nav.floorSafe(...p,'UD'),false,'Body cannot overlap glass '+p);
+      assert.equal(walk.nav.floorSafe(...p,'UD'),false,'Full yacht must retain vertical glass '+p);
+    }
+    for(const y of [1.7,-2.1]){
+      for(const n of [f.walk.nav,walk.nav]){
+        n.deck='UD';n.position=[15,y];n.elevation=6;n.stair=null;
+        for(let i=0;i<100;i++)n.move(0,Math.sign(y)*.02);
+        assert.ok(n.position[1]<1.916&&n.position[1]>-2.338,'Stop at the glass with body clearance');
+      }
+    }
     for(let x=14.1;x<interiorLimits.end-.15;x+=.13)for(let y=-2.3;y<=1.9;y+=.13)
       assert.equal(f.walk.nav.floorSafe(x,y,'UD'),walk.nav.floorSafe(x,y,'UD'),`${x},${y}`);
     assert.equal(f.walk.nav.routes.some(r=>r.id==='bridge'||r.id==='port-swim'),false);

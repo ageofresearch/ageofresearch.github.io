@@ -1,5 +1,6 @@
-import {describeSunFloor} from './sun-deck-geometry.js?v=sun-deck-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=sun-deck-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=upper-interior-1';
+import {describeSunFloor} from './sun-deck-geometry.js?v=upper-interior-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=upper-interior-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -131,7 +132,7 @@ export function repairStairIntersections(detail,exterior,asset) {
   }
 }
 
-export function obstacles(parts,ownParts,box) {
+export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
   const triangles=[];
   for(const part of parts) {
     const b=part.bounds;
@@ -154,7 +155,13 @@ export function obstacles(parts,ownParts,box) {
       for(const t of triangles) {
         const foot=height+(t.floor && t.top<=height+.19 ? .19 : .035);
         if(t.b[5]<=foot || t.b[2]>=height+1.65)continue;
-        const polygon=convexHull(clip(clip(t.vertices,foot,true),height+1.65,false).map(p=>p.slice(0,2)));
+        const projected=clip(clip(t.vertices,foot,true),height+1.65,false).map(p=>p.slice(0,2));
+        let polygon=convexHull(projected);
+        // A vertical wall projects to a segment, not an area. Give only these
+        // degenerate projections a numerical thickness; body radius supplies
+        // the actual clearance. Keep other stair callers' behavior unchanged.
+        if(includeVerticalFaces&&polygon.length>0&&polygon.length<3)
+          polygon=convexHull(projected.flatMap(([x,y])=>[[x-.00001,y-.00001],[x+.00001,y-.00001],[x+.00001,y+.00001],[x-.00001,y+.00001]]));
         if(polygon.length>=3)footprints.push({polygon,id:t.id,name:t.name});
       }
       const test=indexFootprints(footprints);test.footprints=footprints;cache.set(key,test);
@@ -312,6 +319,7 @@ export function configureModelStairs(nav,model) {
   if(!model.interiorDetail || !model.asset?.binary)return;
   model.stairInventory=describeFlights(model,nav.routes);
   installFlightNavigation(nav,model.stairInventory.flights);
+  configureInteriorFloor(nav,model);
   if(model.exterior?.sunDeck) {
     const sun=describeSunFloor(model),previous=nav.floorSafe.bind(nav);
     nav.floorSafe=(x,y,deck=nav.deck)=>deck==='SD'?sun.floorSafe(x,y,nav.radius):previous(x,y,deck);

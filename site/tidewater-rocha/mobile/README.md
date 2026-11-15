@@ -1,61 +1,70 @@
 # Mobile yacht zones
 
-Release: `upper-terrace-1`. The boarding, aft terrace and swim platform are usable
-immediately. The main saloon loads next, followed by the upper aft terrace. Mobile
-never downloads or builds the complete yacht, machinery, shadow maps or postprocessing.
+Release: `upper-interior-1`. The mobile route connects boarding, the aft terrace,
+swim platform, main saloon, upper terrace, solarium and upper interior. All zone
+packages, collision indices and GPU profiles finish preparation under the initial
+loader. Mobile never downloads or constructs the full yacht, machinery, shadow
+maps or postprocessing.
 
 ## Geometry and navigation
 
-The offline builders extract the **final shared generator**, including its replacements
-and additions, rather than restoring consumed source proxies. The upper terrace includes
-the island daybed, coffee table, barbecue/wet bar, tensile shade, guardrails and six-chair
-exterior dining assembly. The dining assembly is included by final placement even though
-its old room tag is UD_R02. Source dimensions remain model interpretations, not certified
-onboard measurements or a newly verified VRCloud survey.
+The offline builders extract the **final shared generator**, including raw source
+parts without replacements. Source arrays are normalized before clipping. Furniture
+that has been consumed by a later shared revision is not restored from old room tags.
+The outdoor dining table and six chairs stay on the upper terrace; the old interior
+table and ten chair proxies stay absent. UD_R02 is **Interior superior**, retaining
+its service cabinet, glazing, partition, ceiling and fixtures. Its safe camera spawn
+is [14.8,0,7.6], with walking elevation 6.00.
 
-The upper floor is the existing MD ceiling, with only its missing forward side strips
-added. Upper-facing vertices receive teak, contact and shade lighting; underside lighting
-is retained. There is no overlapping second slab. The visible solarium stair and adjoining
-roof remain scenery; navigation stops before the upper enclosure at x=14.188.
+The central entrance keeps its existing glazing and jambs. Only the low frame segment
+across the clear opening is removed above the floor: the existing z=6.00 slab owns
+the flush threshold, with no second coplanar cap. This corrects the previous raised
+track ending at z=6.037. Both versions use the same geometry. The shared physical
+floor/obstacles replace stale furniture navigation masks inside the upper interior.
+Vertical triangle projections retain a numerical thickness for collision indexing,
+so tall glass/walls remain solid even when their top and bottom are outside body height.
+The mobile extent ends at the forward partition plane x=18.63233; an on-screen notice
+identifies the pending bridge continuation when approaching it. No fictitious wall
+or bridge stair is added. Full-yacht bridge circulation remains available.
 
-The aft port stair uses 11 intermediate treads and 12 rises, from MD z=3.95 to UD z=6.
-Support polygons and per-height body/head obstacles are extracted from the same final
-parts used in the full yacht. The mutable shared flight registry adds this route without
-nesting controllers. UD_R01 is “Terraza superior,” with safe spawn [8.35,2.21,7.6]; the
-original spawn was inside the coffee table. Both landings, stopped positions, reversals
-and diagonal movement use the same collision decision.
+The upper interior reuses the upper floor already supplied as the MD saloon ceiling.
+Only the missing strip beyond x=17.91 and the upper ceiling beyond x=14.25 are added.
+The extraction retains real holes, the service cabinet, glass and head clearance.
+The sun flight retains 13 intermediate treads and 14 rises (6.00 to 8.20); the aft
+flight retains 11 intermediate treads and 12 rises (3.95 to 6.00). The starboard swim
+access remains usable, and the port swim stair stays blocked under the gangway.
+Full-yacht handoff preserves a supported interior position; invalid positions use
+the room's safe spawn. Existing stair handoffs remain unchanged.
 
-The MD saloon route remains available only on MD. The starboard swim stair still connects
-to SP z=2.84, and the port swim descent remains blocked under the deployed gangway.
-Switching to the complete yacht preserves a supported UD or aft-stair position; an invalid
-upper pose falls back to the nearest-height safe landing. Existing swim handoff uses MD.
+This is the provisional current model, not an as-built survey. The flush threshold
+is a model circulation correction; no certified onboard dimensions are claimed.
 
 ## Rendering and loading
 
-The initial scene submits 24,566 triangles. The saloon alone retains its two previous
-profiles. Once the upper terrace succeeds, three precomputed profiles replace them:
+Four profiles remain resident after the final package succeeds:
 
 | Profile | Submitted triangles | GPU geometry bytes |
 | --- | ---: | ---: |
-| Exterior | 22,233 | 2,642,208 |
-| Saloon interior | 22,917 | 2,650,416 |
-| Upper terrace and entire aft stair | 23,125 | 2,652,912 |
+| Exterior | 24,589 | 1,632,040 |
+| Main saloon interior | 24,853 | 1,652,212 |
+| Upper terrace and interior | 23,901 | 1,612,760 |
+| Solarium | 23,695 | 1,593,492 |
 
-Every profile uses two batches and one render pass, below the 25,000-triangle limit.
-All three resident profile buffers total 7,945,536 bytes, excluding render attachments,
-initial CPU geometry and decoded asset data. The upper binary is 8,896,896 bytes and its
-navigation/metadata JSON is 3,371,001 bytes, before HTTP compression. Duplicate collision
-polygons and runtime-unused obstacle labels are omitted without changing their coordinates.
+Every profile uses two batches and one render pass, below 25,000 triangles.
+Resident indexed geometry totals 6,490,504 bytes, excluding render attachments,
+CPU assets and earlier packages. The final binary is 7,016,740 bytes. Offline
+compaction removes unused vertices without changing indexed attributes or triangles.
+No new texture or pipeline is introduced. Resolution and MSAA settings are retained.
+The shared UD slab selects the existing exterior/interior timber finishes at the
+doorway and window planes per fragment, so LOD triangles cannot move the joint.
+The `upper` profile covers the entire new passage, with no switch at the doorway.
 
-The upper profile applies throughout the aft flight, even while the navigation deck is
-still MD. Lower profile selection retains its x=8.0/9.2 hysteresis. All profiles use the
-same aft stair geometry; tread/support silhouettes are not simplified. Other detail is
-simplified offline using original vertices and locked material/component borders.
-
-The upper loader starts only after the saloon is ready. Both batches of every profile
-upload before the upper route and menu become available. Network, 45-second timeout,
-version, geometry and GPU upload failures retain the existing scene and offer a retry.
-Disposal aborts loading and frees GPU profiles. Load duration is exposed as `upperLoadMs`.
+The new package loads after the solarium. Candidate profiles upload and execute
+before geometry and navigation are enabled together. Network, timeout, incomplete
+assets or GPU preparation failures preserve the previous buffers and routes and
+show a retry. Retrying pauses walking under the loader, clears input and resumes
+only after preparation finishes. Disposal aborts outstanding loading and releases
+resources. State is exposed as `upperInteriorLoadState`.
 
 ## Rebuild and verify
 
@@ -66,12 +75,15 @@ npm ci --prefix scripts/yacht-geometry
 node scripts/build-yacht-terrace.mjs
 node scripts/build-yacht-saloon.mjs
 node scripts/build-yacht-upper.mjs
-node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs
+node scripts/build-yacht-sun.mjs
+node scripts/build-yacht-upper-interior.mjs
+node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs
 ```
 
-The browser workflow captures matching full/mobile saloon and upper views, counts actual
-GPU submissions, tests failure/retry/GPU rollback and handoff from UD and a middle tread,
-and measures matching resolutions with MSAA 1×/4×. Native navigation tests exercise every
-tread at 12/40/60 Hz and verify furniture, head clearance, deck edges and closed routes.
-Software-renderer results do not establish phone performance: 40 FPS still requires the
-same-resolution/MSAA walk on the user's handset.
+Browser checks capture matching full/mobile views, count actual GPU submissions,
+exercise corrupted/network/GPU failures and paused retries, and verify full-yacht
+handoff. Navigation checks cover stops, reversals and diagonal doorway passage at
+12/40/60 Hz. Cold-context instrumentation records first/repeated traversal FPS,
+P95, long frames, movement CPU time, model requests and GPU resource creation at
+identical resolution and MSAA. The 25 ms frame goal is measured, not assumed from
+triangle counts or guaranteed by software-renderer timings.

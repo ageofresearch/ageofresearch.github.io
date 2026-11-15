@@ -18,6 +18,21 @@ export const boundsOf = vertices => {
   }
   return b;
 };
+// Rendered source proxies can still carry typed arrays and batch-only materials.
+// Normalize them before clipping; TypedArray.map cannot return vertex arrays.
+export function normalizeRenderedPart(source,model) {
+  const p={...source,feature:source.feature||source.name,vertices:Array.from(source.vertices),indices:Array.from(source.indices)};
+  if(!p.finish&&!p.materialID) {
+    const range=model.componentRanges.find(r=>r.id===p.id),mesh=model.meshes.find(m=>m.name==='Luz de Mar · '+range?.batch);
+    if(!mesh)throw Error('No final material for '+p.id);
+    const index=mesh.geometry.index.array[range.start],color=mesh.geometry.attributes.color.array.slice(index*3,index*3+3);
+    const surface=mesh.geometry.attributes.aSurface.array.slice(index*4,index*4+3);
+    const srgb=x=>Math.round(255*(x<=.0031308?12.92*x:1.055*Math.pow(x,1/2.4)-.055));
+    p.finish=[color.reduce((n,c)=>n*256+srgb(c),0),...surface];
+  }
+  p.glass=!!p.glass||p.category==='Glazing';p.smokedGlass=p.smokedGlass??p.category==='Glazing';
+  return p;
+}
 function decode(manifest, buffer) {
   return manifest.parts.map(part => {
     const result={...part};

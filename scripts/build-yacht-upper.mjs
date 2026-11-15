@@ -1,7 +1,7 @@
 // Extract the final shared yacht assemblies; only these ready-to-draw buffers reach mobile.
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {buildSaloon,boundsOf,simplify} from './build-yacht-saloon.mjs';
+import {buildSaloon,boundsOf,simplify,normalizeRenderedPart} from './build-yacht-saloon.mjs';
 import {clipGeometry,subdivide,contactShade} from './build-yacht-terrace.mjs';
 import {buildYachtGeometry,createBoarding,createSternFeatures,createFinishes,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
@@ -25,6 +25,7 @@ export async function buildUpper() {
   const parts=[];
   function add(p,role,box) {
     if(existing.has(p.id)||parts.some(q=>q.id===p.id))return;
+    p=normalizeRenderedPart(p,model);
     const g=box?clipGeometry(p,box):{vertices:Array.from(p.vertices),indices:Array.from(p.indices)};
     if(!g.indices.length)return;
     parts.push({...p,...g,sourceID:p.anchor||p.id.split('/')[0],role,bounds:boundsOf(g.vertices)});
@@ -100,7 +101,7 @@ export async function buildUpper() {
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const compactFootprints=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-  const manifest={version:'upper-terrace-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
+  const manifest={version:'upper-interior-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
     room:{...data.rooms.find(r=>r.id==='UD_R01'),name:'Terraza superior',displayName:'Terraza superior',spawn:[8.35,2.21,7.6],look:[10.3,0,6.8]},
     navigationEnd:14.188,flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compactFootprints(flight.clearance.footprints(s.height))}))}};

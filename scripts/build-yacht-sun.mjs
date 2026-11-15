@@ -21,7 +21,7 @@ function compactGeometry(part) {
   });
   return {...part,vertices,indices,light,surfaceTypes};
 }
-export async function buildSun() {
+export async function buildSun({extend}={}) {
   const lower=await buildUpper(),data=JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json',root))),b=await readFile(new URL('rocha/luz-de-mar/model.bin',root));
   const asset={data,binary:b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),nav:Object.fromEntries(Object.entries(data.nav).map(([k,n])=>[k,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
@@ -44,6 +44,7 @@ export async function buildSun() {
       p.surfaceTypes.push(p.role==='floor'?(nz>.5?1:nz<-.5?9:0):p.finish?.[3]??0);
     }
   }
+  const extension=extend?extend({model,lowerParts,parts}):{};
   const chunks=[];let offset=0;
   function store(values,Type=Float32Array){const a=Type.from(values),c=Buffer.from(a.buffer),d={offset,length:a.length};chunks.push(c);offset+=c.length;return d;}
   const packed=parts.map(p=>({id:p.id,sourceID:p.sourceID,feature:p.feature,role:p.role,bounds:p.bounds,finish:p.finish,glass:!!p.glass,
@@ -70,10 +71,10 @@ export async function buildSun() {
       if(profiles[profile].triangles>25000)throw Error(profile+' exceeds 25,000 triangles');
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
-  const manifest={version:'sun-deck-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'upper-interior-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
-      obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))}};
+      obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};
   return {manifest,binary:Buffer.concat(chunks)};
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)) {

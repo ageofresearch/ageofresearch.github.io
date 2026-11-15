@@ -27,13 +27,15 @@ on:
       - 'tests/yacht-readiness.test.mjs'
       - 'scripts/build-yacht-upper.mjs'
       - 'scripts/build-yacht-sun.mjs'
+      - 'scripts/build-yacht-upper-interior.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
   contents: read
 jobs:
   compare:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    # Full-yacht software rendering plus sequential zone recovery exceeds 25 minutes.
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -45,7 +47,7 @@ jobs:
       - name: Verify the isolated gangway against the walk-chat yacht
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
           for attempt in {1..15}; do

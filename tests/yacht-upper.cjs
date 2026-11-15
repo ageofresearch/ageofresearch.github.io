@@ -41,19 +41,23 @@ module.exports=async function upperViews(frame,out,readFrame,mobile) {
         app.engine.setRenderScale(scale);app.gangwayRenderer.setSamples(samples);
         nav.enterRoom('UD_R01');w.applyPosition();
         const points=[[8.35,2.21],[9.9,1.5],[10.2,1.5],[10.2,.95],[13.8,.95],[13.8,.1]],route=points.concat(points.toReversed().slice(1));
-        let index=1,last,start;const intervals=[];
-        await new Promise((resolve,reject)=>{
+        let index=1,last,start;const submitted=[];
+        const originalFrame=app.frame;
+        app.frame=function(dt){const result=originalFrame(dt);submitted.push(performance.now());return result;};
+        try { await new Promise((resolve,reject)=>{
           function tick(now) {
             if(!start)start=now;
             if(last) {
               const dt=Math.min((now-last)/1000,.1),to=route[index],dx=to[0]-nav.position[0],dy=to[1]-nav.position[1],d=Math.hypot(dx,dy),step=Math.min(d,dt*1.12);
-              intervals.push(now-last);nav.move(dx/d*step,dy/d*step);w.applyPosition(dt);
+              nav.move(dx/d*step,dy/d*step);w.applyPosition(dt);
               if(Math.hypot(to[0]-nav.position[0],to[1]-nav.position[1])<.02)index=(index+1)%route.length||1;
             }
             last=now;
             if(now-start>=15000)return resolve();requestAnimationFrame(tick);
           }requestAnimationFrame(tick);
-        });
+        }); }finally{app.frame=originalFrame;}
+        const intervals=submitted.slice(1).map((t,i)=>t-submitted[i]);
+        if(intervals.length<2)throw Error('No submitted upper-terrace frames');
         const sorted=intervals.slice().sort((a,b)=>a-b);
         return {width:app.engine.width,height:app.engine.height,samples:app.gangwayRenderer.samples,
           fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),p95:sorted[Math.floor(sorted.length*.95)],max:Math.max(...intervals),

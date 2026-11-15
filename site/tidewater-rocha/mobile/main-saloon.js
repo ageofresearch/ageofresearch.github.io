@@ -1,10 +1,11 @@
-import { connectTerrace } from './aft-terrace.js?v=saloon-mobile-1';
+import { preloadUpper } from './upper-terrace.js?v=upper-terrace-1';
+import { connectTerrace } from './aft-terrace.js?v=upper-terrace-1';
 
 export const saloonVersion = 'saloon-mobile-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
-export function decodeSaloon(manifest, buffer) {
-  if(manifest.version!==saloonVersion)throw Error('Actualiza la página para cargar el salón');
+export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior','interior'],roomID='MD_R02'}={}) {
+  if(manifest.version!==version)throw Error('Actualiza la página para cargar el salón');
   function array(descriptor,Type=Float32Array) {
     if(!descriptor||!Number.isInteger(descriptor.offset)||descriptor.offset<0||descriptor.offset%4||
       !Number.isInteger(descriptor.length)||descriptor.length<=0||descriptor.offset+descriptor.length*4>buffer.byteLength)
@@ -12,7 +13,7 @@ export function decodeSaloon(manifest, buffer) {
     return new Type(buffer,descriptor.offset,descriptor.length);
   }
   const profiles={};
-  for(const name of ['exterior','interior']) {
+  for(const name of names) {
     const p=manifest.profiles?.[name];
     if(!p||p.batches.length!==2||p.triangles>25000)throw Error('Perfil del salón inválido');
     const batches=p.batches.map((batch,i)=>{
@@ -32,7 +33,7 @@ export function decodeSaloon(manifest, buffer) {
     profiles[name]={...p,batches,triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.byteLength+
       Object.values(b.attributes).reduce((sum,a)=>sum+a.byteLength,0),0)};
   }
-  if(!manifest.floor?.length||!manifest.collisionFootprints?.length||manifest.room?.id!=='MD_R02')
+  if(!manifest.floor?.length||!manifest.collisionFootprints?.length||manifest.room?.id!==roomID)
     throw Error('Navegación del salón incompleta');
   return {...manifest,profiles};
 }
@@ -50,10 +51,11 @@ export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThi
   }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
 }
 
-export function nextProfile(current, x, deck='MD') {
+export function nextProfile(current, x, deck='MD', stair=null) {
+  if(deck==='UD'||stair==='aft')return 'upper';
   if(deck!=='MD'||x<8)return 'exterior';
   if(x>9.2)return 'interior';
-  return current;
+  return current==='upper'?'exterior':current;
 }
 
 export function connectSaloon(walk,saloon) {
@@ -95,6 +97,7 @@ export function preloadSaloon(app) {
       connectSaloon(app.yachtWalk,saloon);
       model.saloonLoadState='ready';panel.hidden=true;
       window.dispatchEvent(new Event('luz-de-mar:saloon-ready'));
+      preloadUpper(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;
       model.saloonLoadState='error';status.textContent='No se pudo preparar el salón. Puedes seguir recorriendo el exterior.';retry.hidden=false;

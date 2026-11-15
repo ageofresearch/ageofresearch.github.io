@@ -20,6 +20,8 @@ on:
       - 'scripts/build-yacht-saloon.mjs'
       - 'scripts/yacht-geometry/**'
       - 'tests/yacht-saloon*'
+      - 'tests/yacht-upper*'
+      - 'scripts/build-yacht-upper.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
   contents: read
@@ -38,7 +40,7 @@ jobs:
       - name: Verify the isolated gangway against the walk-chat yacht
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
           for attempt in {1..15}; do

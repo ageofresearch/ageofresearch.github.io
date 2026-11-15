@@ -1,4 +1,4 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=saloon-mobile-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=upper-terrace-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -62,7 +62,7 @@ function clip(vertices,height,above) {
   return output;
 }
 
-function renderedParts(model) {
+export function renderedParts(model) {
   const detail=model.interiorDetail, replacements=detail.replacements;
   const parts=[...new Set([...replacements.values()].flat().concat(detail.additions,
     model.exterior?.parts||[],model.machinery?.parts||[],model.boarding?.parts||[]))];
@@ -130,7 +130,7 @@ export function repairStairIntersections(detail,exterior,asset) {
   }
 }
 
-function obstacles(parts,ownParts,box) {
+export function obstacles(parts,ownParts,box) {
   const triangles=[];
   for(const part of parts) {
     const b=part.bounds;
@@ -160,6 +160,7 @@ function obstacles(parts,ownParts,box) {
     }
     return !cache.get(key)(x,y,radius);
   };
+  clearance.footprints=height=>{clearance(0,0,height,0);return cache.get(height.toFixed(6)).footprints;};
   clearance.blockers=(x,y,height,radius)=>{clearance(x,y,height,radius);return [...new Set(cache.get(height.toFixed(6)).footprints.filter(p=>distanceToFootprint(x,y,p.polygon)<=radius).map(p=>p.id+": "+p.name))];};
   return clearance;
 }
@@ -224,6 +225,7 @@ export function describeFlights(model,routes) {
     const solidClearance=obstacles(parts,structure,box);
     const clearance=(x,y,height,radius)=>solidClearance(x,y,height,radius) &&
       !(route.id==='service' && Math.abs(height-upperHeight)<EPS && model.navigation.serviceAccess.blocked(x,y,route.upper,radius));
+    clearance.footprints=solidClearance.footprints;
     clearance.blockers=solidClearance.blockers;
     flights.push(createFlight(route,levels,steps,landings,clearance));
   }
@@ -233,6 +235,10 @@ export function describeFlights(model,routes) {
 
 // All callers (safe, entry, motion and exit) share the same support/collision decision.
 export function installFlightNavigation(nav,flights) {
+  if(nav.stairFlights) {
+    for(const flight of flights)nav.stairFlights.set(flight.id,flight);
+    return;
+  }
   const originalSafe=nav.safe.bind(nav), originalStep=nav.tryStep.bind(nav);
   const byID=new Map(flights.map(f=>[f.id,f]));
   nav.stairFlights=byID;

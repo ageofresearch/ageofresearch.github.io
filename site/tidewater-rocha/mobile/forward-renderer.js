@@ -44,6 +44,12 @@ struct Vertex {
   if(surface.z==2.){out.layer=1;out.uv=finishUV*vec2f(310.,37.)/6.2831853;}
   else if(surface.z==3.){out.layer=2;out.uv=finishUV*vec2f(430.,410.)/6.2831853;}
   else if(surface.z==1.){out.layer=0;out.uv=vec2f(local.x/2.15,(local.y/.105+64.)/128.);}
+  else if(surface.z==7.){
+    var center=vec2f(22.354615,-.05067);
+    if(local.y>.9){center=vec2f(22.03368,1.21617);}else if(local.y>.25){center=vec2f(22.27016,.59119);}
+    else if(local.y< -1.){center=vec2f(21.949225,-1.31751);}else if(local.y< -.35){center=vec2f(22.18570,-.69254);}
+    out.layer=3;out.uv=vec2f((local.y-center.y)/.48+.5,((local.x-center.x)*.659983+(position.y+2.01-7.01)*.75128)/.36+.5);
+  }
   return out;
 }
 fn toSrgb(linear: vec3f) -> vec3f {
@@ -55,6 +61,10 @@ fn toSrgb(linear: vec3f) -> vec3f {
 @diagnostic(off, derivative_uniformity)
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
   if(in.layer<0){return vec4f(in.color,1.);}
+  if(in.layer==3){
+    let instrument=textureSample(patterns,patternSampler,in.uv,2).rg;
+    return vec4f(vec3f(.022,.058,.071)+instrument.r*vec3f(.075,.22,.15)+instrument.g*vec3f(.31,.38,.25),1.);
+  }
   var factor=1.;
   if(in.layer==0){factor=textureSample(teak,patternSampler,in.uv).r*1.1;}
   else {let encoded=textureSample(patterns,patternSampler,in.uv,in.layer-1).rg;

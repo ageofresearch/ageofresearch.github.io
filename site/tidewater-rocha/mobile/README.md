@@ -68,9 +68,9 @@ fasteners and enclosed bridge details are omitted in profiles where they cannot
 be seen. Forward furniture remains in the upper and sun profiles.
 
 Material UVs and lighting/color transfer are evaluated per vertex. Two prepared,
-mipmapped textures retain the existing wood grain, canvas and teak board layout
+mipmapped textures retain the existing wood grain, canvas, static instrument graphics and teak board layout
 (105 mm spacing in model coordinates, staggered ends and per-board variation).
-They use less than 3.2 MB, generated before walking, with no texture downloads.
+They use less than 3.4 MB, generated before walking, with no texture downloads.
 This extends the original grain-only texture proposal to teak after measurements
 showed analytic per-pixel joints still exceeded the frame budget. Fine detail fades
 with mip level. Floor triangles are split at the exact interior/exterior finish

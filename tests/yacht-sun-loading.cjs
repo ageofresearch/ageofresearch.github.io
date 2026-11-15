@@ -7,7 +7,7 @@ module.exports=async function sunLoading(browser,base) {
     await page.goto(base+'mobile.html',{waitUntil:'domcontentloaded'});
     await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     let frame=page.frames().find(f=>f.url().includes('play.html'));
-    await frame.waitForFunction(()=>__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.sunLoadState==='error',null,{timeout:180000});
+    await frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.sunLoadState==='error',null,{timeout:180000});
     const before=await frame.evaluate(()=>{const a=__app;return {routes:a.yachtWalk.nav.routes.map(r=>r.id),triangles:a.entranceYacht.stats.triangles,profile:a.gangwayRenderer.activeProfile};});
     assert.deepEqual(before.routes,['starboard-swim','aft']);assert.ok(await frame.locator('[data-deck="SD"]').isHidden());
     await page.unroute('**/sun-deck.bin?*');
@@ -33,7 +33,7 @@ module.exports=async function sunLoading(browser,base) {
     assert.equal(await frame.locator('.luz-sun-load').count(),0);
     await page.reload({waitUntil:'domcontentloaded'});await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     frame=page.frames().find(f=>f.url().includes('play.html'));
-    await frame.waitForFunction(()=>__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.sunLoadState==='ready',null,{timeout:180000});
+    await frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.sunLoadState==='ready',null,{timeout:180000});
     const state=await frame.evaluate(()=>{const w=__app.yachtWalk,f=w.model.sun.flight,s=f.surfaces[7],ps=s.polygons.flat();
       w.nav.deck='UD';w.nav.position=[0,1].map(k=>(Math.min(...ps.map(p=>p[k]))+Math.max(...ps.map(p=>p[k])))/2);
       w.nav.elevation=s.height;w.nav.stair={route:f.route,surfaceIndex:s.index,d:1.8};w.applyPosition();return {position:w.nav.position,elevation:s.height};});

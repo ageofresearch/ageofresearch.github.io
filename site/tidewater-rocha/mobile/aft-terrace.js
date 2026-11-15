@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=reference-boarding-1';
+import { indexFootprints } from './terrace-geometry.js?v=starboard-access-1';
 
-const version = 'reference-boarding-1';
+const version = 'starboard-access-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));
@@ -26,7 +26,7 @@ function onTriangle(x, y, [a, b, c]) {
   return s.every(v => v >= -1e-7) || s.every(v => v <= 1e-7);
 }
 
-export function connectTerrace(boarding, terrace) {
+export function connectTerrace(boarding, terrace, sternFloor = []) {
   const onBoarding = boarding.safe;
   const { end, y, layout } = boarding;
   const hitsFootprint=indexFootprints(terrace.collisionFootprints);
@@ -34,7 +34,7 @@ export function connectTerrace(boarding, terrace) {
     .filter(part => ['boundary', 'frame', 'glazing'].includes(part.role))
     .map(({ bounds: b }) => [b[0],b[1],b[3],b[4]]));
   const cells = new Map();
-  for (const t of terrace.floor) {
+  for (const t of [...terrace.floor, ...sternFloor]) {
     const xs=t.map(p=>p[0]), ys=t.map(p=>p[1]);
     for(let x=Math.floor(Math.min(...xs)*2);x<=Math.floor(Math.max(...xs)*2);x++)
       for(let y=Math.floor(Math.min(...ys)*2);y<=Math.floor(Math.max(...ys)*2);y++) {
@@ -43,8 +43,10 @@ export function connectTerrace(boarding, terrace) {
         cells.get(key).push(t);
       }
   }
-  const pointOnFloor = (x, y) => x <= 8.4 && y >= -3.35 && y <= 3.45 &&
-    (cells.get(Math.floor(x*2)+','+Math.floor(y*2)) || []).some(triangle => onTriangle(x,y,triangle));
+  const pointOnFloor = (x, y) =>
+    (x <= 8.4 && y >= -3.35 && y <= 3.45 &&
+      (cells.get(Math.floor(x*2)+','+Math.floor(y*2)) || []).some(triangle => onTriangle(x,y,triangle))) ||
+    sternFloor.some(triangle => onTriangle(x,y,triangle));
   // Test the union before applying body clearance, so the shared landing seam
   // stays walkable. Dense circumference probes also catch diagonal deck edges.
   boarding.safe = (x, across, radius = .14) => {

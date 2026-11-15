@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=reference-boarding-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=starboard-access-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected the walk-chat renderer with the selected scene');
@@ -124,6 +124,7 @@ async function capture(browser, mobile) {
       assert.deepEqual(captured.passLabels,['Gangway to screen']);
       assert.equal(captured.indexedDraws,2);
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
+      await require('./yacht-stern-access.cjs')(page,frame,out,readFrame);
       async function measureStern() {
         // Read the displayed image at the actual pose, then omit only the
         // original transom parts in the same two batches for a control frame.
@@ -297,11 +298,16 @@ async function capture(browser, mobile) {
       await frame.locator('.ldm-chat-log').getByText(/ubicación|ubicaci.n|Muelle|pasarela/i).first().waitFor();
       assert.ok(![...resources].some(fullFile), 'Ordinary chat and crossing must stay isolated');
       await frame.getByRole('button',{name:'Minimizar chat',exact:true}).click();
+      await frame.evaluate(()=>window.__app.yachtWalk.enterRoom('swim-platform'));
       await frame.locator('[data-explore]').click();
       await frame.getByRole('button',{name:'Explorar el yate completo'}).click();
       await frame.waitForFunction(() => window.__app.gangwayOnly === false, null, {timeout:120000});
       assert.ok([...resources].some(path => path.endsWith('/model.bin')));
       assert.equal(await frame.locator('.luz-yacht-controls').count(),1);
+      assert.deepEqual(await frame.evaluate(()=>({deck:window.__app.yachtWalk.nav.deck,
+        position:window.__app.yachtWalk.nav.position,height:window.__app.yachtWalk.nav.elevation})),
+        {deck:'MD',position:[5.6,.8],height:3.95});
+      await frame.locator('[data-deck="MD"]').click();
       await frame.locator('.luz-stick .front').waitFor();
       assert.equal(await frame.locator('.luz-stick').count(),1);
       assert.equal(await frame.locator('[data-key]').count(),0);

@@ -24,8 +24,10 @@ test('sun assets reproduce the shared furniture, guards, supports and four bound
   const result=await buildSun();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   for(const [name,p]of Object.entries(sun.profiles)) {
     assert.ok(p.triangles<=25000,name);assert.equal(p.batches.length,2);assert.equal(p.triangles,p.batches.reduce((n,b)=>n+b.indices.length/3,0));
+    for(const batch of p.batches)assert.equal(new Set(batch.indices).size,batch.attributes.position.length/3,'No unreferenced uploaded vertices');
     const sd=p.audit.filter(p=>p.id.startsWith('SD'));assert.equal(new Set(sd.map(p=>p.id)).size,sd.length,'No partial SD slab or repeated stair assembly');
   }
+  assert.ok(Object.values(sun.profiles).reduce((n,p)=>n+p.geometryBytes,0)<9*1024*1024);
   const supports=Object.values(sun.profiles).map(p=>p.audit.filter(a=>a.support||a.stair).map(a=>[a.id,a.triangles,a.error]));
   for(const s of supports)assert.deepEqual(s,supports[0]);
   const {model}=full();try {

@@ -8,6 +8,19 @@ import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 const compact=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
+// LOD leaves unreferenced vertices behind. Compact every attribute together
+// before upload; triangle order, positions, normals and lighting stay exact.
+function compactGeometry(part) {
+  const remap=new Map(),vertices=[],light=[],surfaceTypes=[];
+  const indices=Array.from(part.indices,index=>{
+    if(!remap.has(index)){
+      remap.set(index,vertices.length/6);vertices.push(...part.vertices.slice(index*6,index*6+6));
+      light.push(part.light?.[index]??.96);surfaceTypes.push(part.surfaceTypes?.[index]??part.finish?.[3]??0);
+    }
+    return remap.get(index);
+  });
+  return {...part,vertices,indices,light,surfaceTypes};
+}
 export async function buildSun() {
   const lower=await buildUpper(),data=JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json',root))),b=await readFile(new URL('rocha/luz-de-mar/model.bin',root));
   const asset={data,binary:b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),nav:Object.fromEntries(Object.entries(data.nav).map(([k,n])=>[k,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
@@ -46,7 +59,7 @@ export async function buildSun() {
         const near=profile==='sun'?b[5]>=8.08:profile==='upper'?b[5]>=5.88&&b[2]<8.08:profile==='interior'?b[3]>8.5&&b[2]<6:b[0]<8.5&&b[2]<6;
         const error=support||p.glass?0:stair?.004:near?.012:.08;
         const result=simplify(p,error,!near&&!support&&!stair&&!p.glass?['Permissive']:[]);
-        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair});return result;
+        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair});return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});

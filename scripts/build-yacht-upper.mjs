@@ -31,6 +31,7 @@ export async function buildUpper() {
   }
   for(const p of final) {
     const anchor=p.anchor||p.id.split('/')[0];
+    if(p.feature?.startsWith('solarium guard'))continue;
     if(furniture.has(anchor))add(p,'furniture');
     else if(p.semanticParent==='stairs/aft')add(p,'stair');
     else if(anchor==='SD_STA_001')add(p,'closed-stair');
@@ -103,7 +104,7 @@ export async function buildUpper() {
     room:{...data.rooms.find(r=>r.id==='UD_R01'),name:'Terraza superior',displayName:'Terraza superior',spawn:[8.35,2.21,7.6],look:[10.3,0,6.8]},
     navigationEnd:14.188,flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compactFootprints(flight.clearance.footprints(s.height))}))}};
-  return {manifest,binary:Buffer.concat(chunks)};
+  return {manifest,binary:Buffer.concat(chunks),sources:{terrace,saloon,upper:parts}};
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)) {
   const {manifest,binary}=await buildUpper();

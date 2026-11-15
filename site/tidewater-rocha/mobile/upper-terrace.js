@@ -1,6 +1,7 @@
-import {decodeSaloon} from './main-saloon.js?v=stair-ready-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=stair-ready-1';
-import {indexFootprints} from './terrace-geometry.js?v=stair-ready-1';
+import {preloadSun} from './sun-deck.js?v=sun-deck-1';
+import {decodeSaloon} from './main-saloon.js?v=sun-deck-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=sun-deck-1';
+import {indexFootprints} from './terrace-geometry.js?v=sun-deck-1';
 export const upperVersion='upper-terrace-1';
 export function decodeUpper(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','interior','upper'],roomID:'UD_R01'});
@@ -81,6 +82,7 @@ export function preloadUpper(app) {
       connectUpper(app.yachtWalk,upper);model.upperLoadMs=performance.now()-start;
       model.upperLoadState='ready';panel.hidden=true;
       window.dispatchEvent(new Event('luz-de-mar:upper-ready'));
+      await preloadSun(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;
       model.upperLoadState='error';status.textContent='No se pudo preparar la terraza superior. El recorrido actual sigue disponible.';retry.hidden=false;

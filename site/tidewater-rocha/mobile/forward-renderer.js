@@ -1,4 +1,4 @@
-import { nextProfile } from './main-saloon.js?v=stair-ready-1';
+import { nextProfile } from './main-saloon.js?v=sun-deck-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -165,7 +165,7 @@ export async function createForwardRenderer(app, sun) {
   let depth, depthView, color, colorView;
   return {
     get activeProfile() { return activeProfile; },
-    async installProfiles(source) {
+    async installProfiles(source,{prepare=false,activate=()=>{}}={}) {
       if(disposed)throw Error('Renderer disposed');
       const uploaded={};
       device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
@@ -188,9 +188,23 @@ export async function createForwardRenderer(app, sun) {
         }));
         throw failure||validation||memory||Error('Renderer disposed');
       }
-      if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      profiles=uploaded;
-      selectProfile('exterior');
+      const previous={profiles,batches,name:activeProfile,stats:{...model.stats}};
+      profiles=uploaded;selectProfile(uploaded[previous.name]?previous.name:'exterior');
+      try {
+        if(prepare) {
+          device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
+          let error;try{await this.prepareProfiles();}catch(e){error=e;}
+          const invalid=await device.popErrorScope(),memory=await device.popErrorScope();
+          if(error||invalid||memory||disposed)throw error||invalid||memory||Error('Renderer disposed');
+        }
+        activate();
+      }catch(error){
+        Object.values(uploaded).forEach(p=>destroy(p.batches));
+        if(disposed){if(previous.profiles)Object.values(previous.profiles).forEach(p=>destroy(p.batches));else destroy(previous.batches);profiles=null;batches=[];}
+        else {profiles=previous.profiles;batches=previous.batches;activeProfile=previous.name;Object.assign(model.stats,previous.stats);}
+        throw error;
+      }
+      if(previous.profiles)Object.values(previous.profiles).forEach(p=>destroy(p.batches));else destroy(previous.batches);
     },
     get samples() { return samples; },
     get canSmooth() { return Boolean(smooth); },

@@ -111,3 +111,31 @@ The stern inscription uses baked Noto Serif glyph outlines under the SIL Open Fo
 ## Owner machinery survey
 
 The lower-deck equipment now uses the owner CuartoDeMaquina videos and photographs. See [machinery modelling basis](MACHINERY-BASIS.md) and [before-and-after views](machinery/). Source assets and principal dimensions remain unchanged; local equipment sizes and rack-side assignment remain inferred. New detail uses one conditional room batch and no added textures or lighting passes.
+
+
+## Mobile solarium · sun-deck-1
+
+The mobile route now continues from the upper terrace over the shared port
+sun-deck stair: 13 intermediate treads, 14 rises, model elevations 6.00–8.20.
+The full and mobile scenes share the complete SD slab, stair opening, floor
+support triangles, hardtop/equipment and the same source furniture placements.
+Rounded furniture finishes retain the source envelopes. The two raked hardtop
+supports retain their roof connections but their lower feet are fitted inside
+the narrowing SD slab; their original feet extended beyond its outline. Perimeter and opening
+guards follow the cut slab, with a clear arrival at the existing top tread;
+their 1.02-unit height, glass, white coaming and polished rail are inferred from
+the existing terrace treatment. They are not certified vessel dimensions.
+The optional deck and its R03 furniture distribution remain provisional.
+
+The mobile package has four resident profiles (exterior/interior/upper/sun),
+limited to 25,000 active triangles, two draws and one render pass. Offline LOD
+can collapse attribute seams on non-support objects within bounded error
+(0.012 near SD/MD, 0.020 near UD, 0.080 far, in source units); walking surfaces
+and stair treads are retained. No source object is omitted by that LOD policy.
+Unused vertices are removed after offline simplification, preserving all indexed
+attributes; the four resident profiles total 6,347,144 geometry bytes.
+The complete slab replaces its former partial terrace ceiling instead of
+covering it. Geometry downloads, collision indices, GPU uploads and profile
+execution finish under the loader before SD is enabled. A failed candidate
+preparation retains the previous profiles and navigation, and a retry pauses
+walking until preparation finishes. Resolution and MSAA are unchanged.

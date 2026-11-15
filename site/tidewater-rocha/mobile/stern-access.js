@@ -1,5 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=stair-surfaces-1';
-import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=stair-surfaces-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=saloon-mobile-1';
+import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=saloon-mobile-1';
 
 // Source coordinates: x toward the bow, y to port, z up. All access surfaces
 // come from the same parts that are rendered in the full and isolated yacht.
@@ -104,7 +104,8 @@ export function connectSternAccess(model) {
   access.stairSafe=(x,y,height,radius=.14)=>
     clearance(x,y,height,radius) && probes(x,y,radius,(px,py)=>onSurface(px,py,support,.006));
   const deckSafe=boarding.safe;
-  boarding.safe=(x,y,radius=.14)=>deckSafe(x,y,radius) && clearance(x,y,access.upperHeight,radius);
+  access.deckClearance=(x,y,radius=.14)=>clearance(x,y,access.upperHeight,radius);
+  boarding.safe=(x,y,radius=.14)=>deckSafe(x,y,radius) && access.deckClearance(x,y,radius);
   return access;
 }
 

@@ -1,3 +1,5 @@
+import { nextProfile } from './main-saloon.js?v=saloon-mobile-1';
+
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
 const shader = `
@@ -124,7 +126,7 @@ export async function createForwardRenderer(app, sun) {
     buffer.unmap();
     return buffer;
   }
-  const batches = model.meshes.map(mesh => {
+  let batches = model.meshes.map(mesh => {
     const geom = mesh.geometry;
     const names = attributes;
     return {
@@ -134,6 +136,16 @@ export async function createForwardRenderer(app, sun) {
       count:geom.index.count,
     };
   });
+  let profiles=null, activeProfile='exterior', disposed=false;
+  const destroy=batches=>batches.forEach(batch=>{
+    batch.vertices.forEach(buffer=>buffer.destroy());batch.indices.destroy();
+  });
+  function selectProfile(name) {
+    if(!profiles)return;
+    activeProfile=name;batches=profiles[name].batches;
+    Object.assign(model.stats,{triangles:profiles[name].triangles,geometryBytes:profiles[name].geometryBytes,
+      residentGeometryBytes:Object.values(profiles).reduce((n,p)=>n+p.geometryBytes,0),profile:name});
+  }
   const frame = new Float32Array(24);
   const uniform = device.createBuffer({size:frame.byteLength,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
   const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}}]});
@@ -145,11 +157,43 @@ export async function createForwardRenderer(app, sun) {
   sun.clone().transformDirection(localFromWorld).toArray(frame,20);
   let depth, depthView, color, colorView;
   return {
+    get activeProfile() { return activeProfile; },
+    async installProfiles(source) {
+      if(disposed)throw Error('Renderer disposed');
+      const uploaded={};
+      device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
+      let failure;
+      try {
+        for(const [name,p] of Object.entries(source)) {
+          const result=uploaded[name]={...p,batches:[]};
+          for(const b of p.batches) {
+            const batch={vertices:[],indices:null,indexFormat:'uint32',count:b.indices.length};
+            result.batches.push(batch);
+            for(const name of attributes)batch.vertices.push(upload(b.attributes[name],GPUBufferUsage.VERTEX));
+            batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
+          }
+        }
+      }catch(error){failure=error;}
+      const validation=await device.popErrorScope(),memory=await device.popErrorScope();
+      if(failure||validation||memory||disposed) {
+        Object.values(uploaded).forEach(p=>p.batches.forEach(b=>{
+          b.vertices.forEach(v=>v.destroy());b.indices?.destroy();
+        }));
+        throw failure||validation||memory||Error('Renderer disposed');
+      }
+      if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
+      profiles=uploaded;
+      selectProfile('exterior');
+    },
     get samples() { return samples; },
     get canSmooth() { return Boolean(smooth); },
     setSamples(value) { samples = value === 4 && smooth ? 4 : 1; },
     render() {
       const {engine, gpu, camera} = app;
+      if(profiles) {
+        const nav=app.yachtWalk.nav,name=nextProfile(activeProfile,nav.position[0],nav.deck);
+        if(name!==activeProfile)selectProfile(name);
+      }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {
         depth?.destroy();
         color?.destroy();
@@ -183,10 +227,8 @@ export async function createForwardRenderer(app, sun) {
       pass.end();
     },
     dispose() {
-      for (const batch of batches) {
-        batch.vertices.forEach(buffer => buffer.destroy());
-        batch.indices.destroy();
-      }
+      disposed=true;
+      if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
       uniform.destroy(); depth?.destroy(); color?.destroy();
     },
   };

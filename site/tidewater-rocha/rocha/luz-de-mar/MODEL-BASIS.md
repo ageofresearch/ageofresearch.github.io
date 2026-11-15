@@ -139,3 +139,29 @@ covering it. Geometry downloads, collision indices, GPU uploads and profile
 execution finish under the loader before SD is enabled. A failed candidate
 preparation retains the previous profiles and navigation, and a retry pauses
 walking until preparation finishes. Resolution and MSAA are unchanged.
+
+## Mobile upper interior · upper-interior-1
+
+UD_R02 is exposed as **Interior superior**, using the current final shared layout.
+The later exterior photo-layout pass consumed the old interior table and ten chair
+proxies and replaced them with the outdoor six-chair dining assembly. Earlier
+statements about retaining ten interior dining chairs describe superseded stages.
+This release does not restore them or propose a second dining arrangement. The
+existing service cabinet, glazing, partition, ceiling and fixtures are retained.
+
+The central opening's lower frame formerly reached z=6.037 and obstructed a
+geometry-based collision query. Only the segment crossing the clear opening is
+removed above the existing z=6.00 floor; that floor owns the flush threshold without
+a duplicate coplanar cap. Jambs, glazing and the upper frame retain their positions.
+This is a shared display correction for circulation, not a surveyed door-track
+construction. Shared physical collision replaces stale furniture masks within the
+room in both full and mobile versions. The mobile route ends at the existing
+forward partition plane; its pending bridge continuation is identified by a UI
+notice, not an invented wall. Full-yacht circulation beyond that limit is retained.
+
+The four prepared mobile profiles submit 24,583 / 24,831 / 23,879 / 23,689 triangles
+with two draws and one pass. They use 6,488,272 resident indexed geometry bytes.
+The upper profile spans the exterior terrace and interior, avoiding a profile
+change at the doorway. Loading, collision indexing, buffer upload and GPU execution
+finish before access is enabled. Original source JSON/binary, deck elevations,
+outdoor furniture positions, resolution and MSAA are retained.

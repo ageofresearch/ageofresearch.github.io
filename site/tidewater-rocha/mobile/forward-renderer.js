@@ -1,4 +1,4 @@
-import { nextProfile } from './main-saloon.js?v=sun-deck-1';
+import { nextProfile } from './main-saloon.js?v=upper-interior-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.

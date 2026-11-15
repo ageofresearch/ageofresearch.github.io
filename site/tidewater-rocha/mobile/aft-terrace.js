@@ -1,4 +1,4 @@
-import { indexFootprints } from './terrace-geometry.js?v=sun-deck-1';
+import { indexFootprints } from './terrace-geometry.js?v=upper-interior-1';
 
 const version = 'saloon-mobile-1';
 

@@ -5,7 +5,7 @@ const {mkdirSync,writeFileSync}=require('node:fs');
 const base=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
 const out=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
 (async()=>{
- const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/chromium',headless:true,args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
+ const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
  const runs=[];
  try{
   for(let run=0;run<3;run++){

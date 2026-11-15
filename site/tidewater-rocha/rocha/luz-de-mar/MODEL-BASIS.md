@@ -129,10 +129,11 @@ The optional deck and its R03 furniture distribution remain provisional.
 
 The mobile package has four resident profiles (exterior/interior/upper/sun),
 limited to 25,000 active triangles, two draws and one render pass. Offline LOD
-can collapse attribute seams on distant non-support objects; walking surfaces
+can collapse attribute seams on non-support objects within bounded error
+(0.012 near SD/MD, 0.020 near UD, 0.080 far, in source units); walking surfaces
 and stair treads are retained. No source object is omitted by that LOD policy.
 Unused vertices are removed after offline simplification, preserving all indexed
-attributes; the four resident profiles total 6,125,464 geometry bytes.
+attributes; the four resident profiles total 6,347,144 geometry bytes.
 The complete slab replaces its former partial terrace ceiling instead of
 covering it. Geometry downloads, collision indices, GPU uploads and profile
 execution finish under the loader before SD is enabled. A failed candidate

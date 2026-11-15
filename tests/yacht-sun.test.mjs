@@ -38,6 +38,10 @@ test('sun assets reproduce the shared furniture, guards, supports and four bound
       assert.deepEqual(p.bounds,source.bounds);
     }
     assert.equal(manifest.parts.filter(p=>p.role==='floor').length,1);
+    const stair=parts.filter(p=>p.semanticParent==='stairs/sun');assert.equal(stair.length,46);
+    assert.deepEqual(manifest.parts.filter(p=>p.role==='stair').map(p=>p.id).sort(),stair.map(p=>p.id).sort(),
+      'The SD flight is tagged UD in the shared model, but every visible assembly must be extracted');
+    for(const profile of Object.values(sun.profiles))for(const p of stair)assert.ok(profile.audit.some(a=>a.id===p.id&&a.triangles>0));
     assert.ok(manifest.parts.some(p=>p.glass));assert.ok(manifest.parts.some(p=>p.feature==='white upper equipment hardtop'));
     for(const s of data.meshes.filter(p=>p.deck==='SD'&&p.category==='Furniture'))assert.ok(manifest.parts.some(p=>p.sourceID===s.id),s.id);
     assert.deepEqual(sun.floor,model.sunDeckFloor.floor);

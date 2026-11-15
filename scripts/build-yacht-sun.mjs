@@ -29,7 +29,7 @@ export async function buildSun() {
   const final=renderedParts(model),flight=model.stairInventory.flights.find(f=>f.id==='sun');
   // Replace the partial SD slab and stair with their complete shared assemblies.
   const lowerParts=Object.values(lower.sources).flat().filter(p=>!['SD_DCK_001','SD_STA_001'].includes(p.anchor||p.sourceID));
-  const parts=final.filter(p=>p.deck==='SD'&&!['Cold_water','Hot_water','Drainage'].includes(p.category)).map(p=>({...p,
+  const parts=final.filter(p=>(p.deck==='SD'||p.semanticParent==='stairs/sun')&&!['Cold_water','Hot_water','Drainage'].includes(p.category)).map(p=>({...p,
     sourceID:p.anchor||p.id.split('/')[0],vertices:Array.from(p.vertices),indices:Array.from(p.indices),
     role:p.anchor==='SD_DCK_001'&&p.feature==='stair opening'?'floor':p.semanticParent==='stairs/sun'?'stair':p.feature?.startsWith('solarium guard')?'guard':p.semanticParent==='upper-equipment'?'equipment':'furniture'}));
   const collisionFootprints=compact(model.sunDeckFloor.collisionFootprints),floor=model.sunDeckFloor.floor;
@@ -57,8 +57,8 @@ export async function buildSun() {
         const support=/teak tread|pale step|boarding landing|final riser|tread \d+ (pale inset|timber border|rounded timber edge)/.test(name);
         const stair=p.semanticParent?.startsWith('stairs/')||p.id?.startsWith('MD_STA_013/');
         const near=profile==='sun'?b[5]>=8.08:profile==='upper'?b[5]>=5.88&&b[2]<8.08:profile==='interior'?b[3]>8.5&&b[2]<6:b[0]<8.5&&b[2]<6;
-        const error=support||p.glass?0:stair?.004:near?.012:.08;
-        const result=simplify(p,error,!near&&!support&&!stair&&!p.glass?['Permissive']:[]);
+        const error=support||p.glass?0:stair?.004:near?(profile==='upper'?.02:.012):.08;
+        const result=simplify(p,error,!support&&!stair&&!p.glass?['Permissive']:[]);
         audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair});return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,

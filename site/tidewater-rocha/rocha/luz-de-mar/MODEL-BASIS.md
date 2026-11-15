@@ -187,3 +187,23 @@ trigonometry; finish boundaries are split geometrically after LOD. Resolution an
 MSAA are retained. All patterns, buffers, collision indices and profiles are ready
 before access is enabled. These are model-based dimensions and a provisional
 layout, not certified yacht measurements or an operational helm simulation.
+
+
+## Bow lounge mobile extraction (`bow-deck-1`)
+
+The mobile route now follows starboard at UD z=6.00 from the upper terrace to the
+four existing sofa modules and both sides of the forward sunpad. The safe camera
+spawn is [26.8,0,7.6]. Navigation ends at x=29.40, allowing for the existing body
+radius. Floor, head clearance and obstacles come from the final shared geometry.
+Two missing starboard floor slices complete the extraction; the bridge extraction
+continues to own the forward slab, avoiding a second floor.
+
+New coaming/glass/rail follows the supported deck outline, joining the aft guard's
+exact endpoint and reaching z=7.02. These guards and rounded sunpad finishes are
+inferred model fits shared by mobile and full yacht. Sunpad envelopes and the four
+sofa modules retain their source placement. The narrow tip, its four loose chairs
+and the central bordered feature remain unchanged visual context. Two loose chair
+bases are partly outside the narrowing slab; their distribution needs a later
+correction. The feature's use is unresolved and is not represented as a pool.
+The port passage next to the sun stair remains outside the mobile extension.
+None of these coordinates constitutes a certified vessel measurement.

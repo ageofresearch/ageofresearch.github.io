@@ -24,12 +24,14 @@ on:
       - 'tests/yacht-upper*'
       - 'tests/yacht-sun*'
       - 'tests/yacht-bridge*'
+      - 'tests/yacht-bow*'
       - 'tests/yacht-cold-walk.cjs'
       - 'tests/yacht-readiness.test.mjs'
       - 'scripts/build-yacht-upper.mjs'
       - 'scripts/build-yacht-sun.mjs'
       - 'scripts/build-yacht-upper-interior.mjs'
       - 'scripts/build-yacht-bridge.mjs'
+      - 'scripts/build-yacht-bow.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
   contents: read
@@ -38,7 +40,7 @@ jobs:
     runs-on: ubuntu-24.04
     # Separate machines keep full-yacht rendering from delaying mobile failures
     # or contaminating its measurements. Both modes run the same assertions.
-    timeout-minutes: 35
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -51,11 +53,18 @@ jobs:
             site/tidewater-rocha
             tests
             scripts
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: matrix.mode == 'mobile'
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: performance-reference
+          sparse-checkout: site/tidewater-rocha
       - name: Verify geometry and navigation
         if: matrix.mode == 'mobile'
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs
       - name: Verify browser views and recovery
         env:
           YACHT_CHECK: ${{ matrix.mode }}
@@ -67,7 +76,14 @@ jobs:
             sleep 1
           done
           if [ "$YACHT_CHECK" = mobile ]; then
+            python3 -m http.server 8765 --bind 127.0.0.1 --directory performance-reference/site > "$RUNNER_TEMP/yacht-reference-http.log" 2>&1 &
+            for attempt in {1..15}; do
+              if curl -fsS --output /dev/null http://127.0.0.1:8765/tidewater-rocha/mobile.html; then break; fi
+              sleep 1
+            done
+            YACHT_REFERENCE_BASE=http://127.0.0.1:8765/tidewater-rocha/ NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bridge-comparison.cjs
             NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-cold-walk.cjs
+            NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bow-performance.cjs
           fi
           NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs
       - name: Save the reference frames

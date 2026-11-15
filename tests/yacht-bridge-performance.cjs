@@ -4,8 +4,8 @@ const assert=require('node:assert/strict');
 const {mkdirSync,writeFileSync}=require('node:fs');
 const base=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
 const out=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
-(async()=>{
- const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'/usr/bin/chromium',headless:true,args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
+async function measureReturnViews(base,out){
+ const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
  const runs=[];
  try{
   for(let run=0;run<3;run++){
@@ -30,5 +30,9 @@ const out=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
  }finally{await browser.close();}
  mkdirSync(out,{recursive:true});writeFileSync(out+'/bridge-controlled-performance.json',JSON.stringify(runs,null,2));console.log(runs);
  for(const r of runs){assert.equal(r.bridgeReady,'ready');assert.equal(r.scale,1);assert.equal(r.samples,4);assert.ok(r.triangles<=25000);}
+ return runs;
+}
+module.exports={measureReturnViews};
+if(require.main===module)measureReturnViews(base,out).then(runs=>{
  for(const x of [14.8,17.4])assert.ok(runs.filter(r=>r.x===x).map(r=>r.p95).sort((a,b)=>a-b)[1]<=25,'Controlled median return-view P95 exceeds 25 ms at '+x);
-})().catch(e=>{console.error(e);process.exitCode=1});
+}).catch(e=>{console.error(e);process.exitCode=1});

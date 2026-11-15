@@ -1,8 +1,8 @@
-import {preloadSun} from './sun-deck.js?v=bridge-helm-1';
-import {decodeSaloon} from './main-saloon.js?v=bridge-helm-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=bridge-helm-1';
-import {indexFootprints} from './terrace-geometry.js?v=bridge-helm-1';
-export const upperVersion='bridge-helm-1';
+import {preloadSun} from './sun-deck.js?v=bow-deck-1';
+import {decodeSaloon} from './main-saloon.js?v=bow-deck-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=bow-deck-1';
+import {indexFootprints} from './terrace-geometry.js?v=bow-deck-1';
+export const upperVersion='bow-deck-1';
 export function decodeUpper(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','interior','upper'],roomID:'UD_R01'});
   const f=result.flight;

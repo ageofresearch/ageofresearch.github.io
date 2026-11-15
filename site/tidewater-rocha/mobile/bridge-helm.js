@@ -1,7 +1,8 @@
-import {decodeSaloon} from './main-saloon.js?v=bridge-helm-1';
-import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=bridge-helm-1';
+import {preloadBow} from './bow-deck.js?v=bow-deck-1';
+import {decodeSaloon} from './main-saloon.js?v=bow-deck-1';
+import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=bow-deck-1';
 
-export const bridgeVersion='bridge-helm-1';
+export const bridgeVersion='bow-deck-1';
 export function decodeBridge(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:bridgeVersion,names:['exterior','interior','upper','sun'],roomID:'UD_R03'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
@@ -42,7 +43,9 @@ export function connectBridge(walk,prepared) {
     controls.hud.appendChild(notice);
     const sync=controls.syncLocation.bind(controls);
     controls.syncLocation=()=>{
-      sync();const hidden=!walk.active||controls.open||nav.deck!=='UD'||!!nav.stair||!(nav.position[0]<19.8&&nav.position[0]>18.7&&nav.position[1]<-.9||nav.position[0]>21.4);
+      sync();const label=model.bow?'Escalera interior · Continuación pendiente':'Escalera interior y proa · Continuación pendiente';
+      if(notice.textContent!==label)notice.textContent=label;
+      const hidden=!walk.active||controls.open||nav.deck!=='UD'||!!nav.stair||!(nav.position[0]<19.8&&nav.position[0]>18.7&&nav.position[1]<-.9||!model.bow&&nav.position[0]>21.4);
       if(notice.hidden!==hidden)notice.hidden=hidden;
     };
     controls.rooms.push(interior.room);
@@ -74,6 +77,7 @@ export function preloadBridge(app) {
         if(abort.signal.aborted)throw Error('Carga cancelada');connectBridge(app.yachtWalk,interior);
       }});
       model.bridgeLoadState='ready';panel.hidden=true;window.dispatchEvent(new Event('luz-de-mar:bridge-helm-ready'));
+      await preloadBow(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;model.bridgeLoadState='error';status.textContent='No se pudo preparar el puente de mando. El recorrido anterior sigue disponible.';retry.hidden=false;
       console.warn('Bridge loading failed',error);

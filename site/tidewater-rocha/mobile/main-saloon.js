@@ -1,5 +1,5 @@
-import { preloadUpper } from './upper-terrace.js?v=bridge-helm-1';
-import { connectTerrace } from './aft-terrace.js?v=bridge-helm-1';
+import { preloadUpper } from './upper-terrace.js?v=bow-deck-1';
+import { connectTerrace } from './aft-terrace.js?v=bow-deck-1';
 
 export const saloonVersion = 'saloon-mobile-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
@@ -51,12 +51,16 @@ export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThi
   }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
 }
 
-export function nextProfile(current, x, deck='MD', stair=null) {
+export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false) {
   if(deck==='SD'||stair==='sun')return 'sun';
-  if(deck==='UD'||stair==='aft')return 'upper';
+  if(stair==='aft')return 'upper';
+  if(deck==='UD'){
+    if(bowExterior&&(x>13.8||current==='bow'&&x>=12.8))return 'bow';
+    return 'upper';
+  }
   if(deck!=='MD'||x<8)return 'exterior';
   if(x>9.2)return 'interior';
-  return ['upper','sun'].includes(current)?'exterior':current;
+  return ['upper','sun','bow'].includes(current)?'exterior':current;
 }
 
 export function connectSaloon(walk,saloon) {

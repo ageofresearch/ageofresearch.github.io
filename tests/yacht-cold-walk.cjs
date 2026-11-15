@@ -43,13 +43,13 @@ async function capture(browser,mobile) {
     const ready=await frame.evaluate(()=>{
       const app=__app,w=app.yachtWalk;
       return {time:performance.now(),samples:app.gangwayRenderer?.samples,
-        upper:w.model.upperLoadState,sun:w.model.sunLoadState,bridge:w.model.bridgeLoadState,upperInterior:w.model.upperInteriorLoadState,saloon:w.model.saloonLoadState,
+        bow:w.model.bowLoadState,upper:w.model.upperLoadState,sun:w.model.sunLoadState,bridge:w.model.bridgeLoadState,upperInterior:w.model.upperInteriorLoadState,saloon:w.model.saloonLoadState,
         mtu:w.model.mtu?.state.status,strainers:w.model.strainers?.state.status,
         prepared:[...w.nav.stairFlights.values()].map(f=>({id:f.id,count:f.clearance.preparedHeights,
           expected:new Set(f.surfaces.map(s=>s.height.toFixed(6))).size}))};
     });
     if(mobile) {
-      assert.equal(ready.bridge,'ready');assert.equal(ready.upperInterior,'ready');assert.equal(ready.sun,'ready');assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
+      assert.equal(ready.bow,'ready');assert.equal(ready.bridge,'ready');assert.equal(ready.upperInterior,'ready');assert.equal(ready.sun,'ready');assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
       const result=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];let leg=0,previous;
         w.enterRoom('MD_R01');n.position=[5.2,2.21];n.stair=null;n.elevation=3.95;w.applyPosition();

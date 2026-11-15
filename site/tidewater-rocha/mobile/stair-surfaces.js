@@ -1,7 +1,8 @@
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=bridge-helm-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=bridge-helm-1';
-import {describeSunFloor} from './sun-deck-geometry.js?v=bridge-helm-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=bridge-helm-1';
+import {configureBowFloor} from './bow-geometry.js?v=bow-deck-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=bow-deck-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=bow-deck-1';
+import {describeSunFloor} from './sun-deck-geometry.js?v=bow-deck-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=bow-deck-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -337,6 +338,7 @@ export function configureModelStairs(nav,model) {
   installFlightNavigation(nav,model.stairInventory.flights);
   configureInteriorFloor(nav,model);
   configureBridgeFloor(nav,model);
+  configureBowFloor(nav,model);
   if(model.exterior?.sunDeck) {
     const sun=describeSunFloor(model),previous=nav.floorSafe.bind(nav);
     nav.floorSafe=(x,y,deck=nav.deck)=>deck==='SD'?sun.floorSafe(x,y,nav.radius):previous(x,y,deck);

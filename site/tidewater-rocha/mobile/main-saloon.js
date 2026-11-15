@@ -1,5 +1,5 @@
-import { preloadUpper } from './upper-terrace.js?v=upper-terrace-1';
-import { connectTerrace } from './aft-terrace.js?v=upper-terrace-1';
+import { preloadUpper } from './upper-terrace.js?v=stair-ready-1';
+import { connectTerrace } from './aft-terrace.js?v=stair-ready-1';
 
 export const saloonVersion = 'saloon-mobile-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
@@ -94,10 +94,12 @@ export function preloadSaloon(app) {
       if(abort.signal.aborted)return;
       await app.gangwayRenderer.installProfiles(saloon.profiles);
       if(abort.signal.aborted)return;
+      await app.gangwayRenderer.prepareProfiles();
+      if(abort.signal.aborted)return;
       connectSaloon(app.yachtWalk,saloon);
       model.saloonLoadState='ready';panel.hidden=true;
       window.dispatchEvent(new Event('luz-de-mar:saloon-ready'));
-      preloadUpper(app);
+      await preloadUpper(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;
       model.saloonLoadState='error';status.textContent='No se pudo preparar el salón. Puedes seguir recorriendo el exterior.';retry.hidden=false;
@@ -109,5 +111,5 @@ export function preloadSaloon(app) {
   model.loadSaloon=load;
   const dispose=model.dispose.bind(model);
   model.dispose=()=>{abort.abort();panel.remove();dispose();};
-  void load();
+  return load();
 }

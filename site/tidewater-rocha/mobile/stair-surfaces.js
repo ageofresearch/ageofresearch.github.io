@@ -1,4 +1,4 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=upper-terrace-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=stair-ready-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -162,6 +162,8 @@ export function obstacles(parts,ownParts,box) {
   };
   clearance.footprints=height=>{clearance(0,0,height,0);return cache.get(height.toFixed(6)).footprints;};
   clearance.blockers=(x,y,height,radius)=>{clearance(x,y,height,radius);return [...new Set(cache.get(height.toFixed(6)).footprints.filter(p=>distanceToFootprint(x,y,p.polygon)<=radius).map(p=>p.id+": "+p.name))];};
+  // Used to verify that traversing a prepared flight never builds another index.
+  Object.defineProperty(clearance,'preparedHeights',{get:()=>cache.size});
   return clearance;
 }
 
@@ -175,19 +177,24 @@ export function createFlight(route,levels,steps,landings,clearance=()=>true) {
   const flight={id:route.id,route,surfaces,lowerHeight,upperHeight,
     treadCount:surfaces.filter(s=>s.kind==='tread').length,riseCount:surfaces.length-1,
     evidence:'model-only',clearance};
-  flight.at=(x,y,previous)=> {
-    const candidates=surfaces.filter(s=>inside(x,y,s.polygons) &&
-      (previous===undefined || Math.abs(s.index-previous)<=1));
-    // Retain the current surface on bevel seams; never select a distant overlapping flight.
-    return candidates.find(s=>s.index===previous)||candidates.sort((a,b)=>b.index-a.index)[0];
-  };
+  // Build once, preserving each triangle and the existing joint tolerance. A
+  // hull around the whole stair would incorrectly bridge holes and water edges.
+  const support=indexFootprints(surfaces.flatMap(s=>s.polygons.map(polygon=>({polygon}))));
+  const atSurface=surfaces.map(s=>indexFootprints(s.polygons.map(polygon=>({polygon}))));
+  const valid=(i,x,y,radius)=>atSurface[i](x,y,JOINT) &&
+    (radius===undefined || clearance(x,y,surfaces[i].height,radius));
+  function findSurface(x,y,previous,radius) {
+    // Retain the current surface on bevel seams, then prefer the highest
+    // adjacent surface. No per-movement flattening, filtering or sorting.
+    if(previous!==undefined && surfaces[previous] && valid(previous,x,y,radius))return surfaces[previous];
+    const low=previous===undefined?0:Math.max(0,previous-1);
+    const high=previous===undefined?surfaces.length-1:Math.min(surfaces.length-1,previous+1);
+    for(let i=high;i>=low;i--)if(i!==previous && valid(i,x,y,radius))return surfaces[i];
+  }
+  flight.at=(x,y,previous)=>findSurface(x,y,previous);
   flight.safe=(x,y,radius,previous)=> {
-    const candidates=surfaces.filter(s=>inside(x,y,s.polygons) &&
-      (previous===undefined || Math.abs(s.index-previous)<=1));
-    candidates.sort((a,b)=>Number(b.index===previous)-Number(a.index===previous)||b.index-a.index);
-    const support=surfaces.flatMap(s=>s.polygons);
-    if(!ring.every(([dx,dy])=>inside(x+radius*dx,y+radius*dy,support)))return null;
-    return candidates.find(s=>clearance(x,y,s.height,radius))??null;
+    for(const [dx,dy] of ring)if(!support(x+radius*dx,y+radius*dy,JOINT))return null;
+    return findSurface(x,y,previous,radius)??null;
   };
   return flight;
 }
@@ -227,7 +234,12 @@ export function describeFlights(model,routes) {
       !(route.id==='service' && Math.abs(height-upperHeight)<EPS && model.navigation.serviceAccess.blocked(x,y,route.upper,radius));
     clearance.footprints=solidClearance.footprints;
     clearance.blockers=solidClearance.blockers;
-    flights.push(createFlight(route,levels,steps,landings,clearance));
+    Object.defineProperty(clearance,'preparedHeights',{get:()=>solidClearance.preparedHeights});
+    const flight=createFlight(route,levels,steps,landings,clearance);
+    // Geometry clipping belongs to scene preparation, never nav.move(). Keep
+    // the service door's live collision check separate from these static data.
+    for(const surface of flight.surfaces)solidClearance(0,0,surface.height,0);
+    flights.push(flight);
   }
   return {flights,provisionalReferences:[{ids:Array.from({length:9},(_,i)=>`MD_STA_${String(i+35).padStart(3,'0')}`),kind:'flat-reference'},
     {ids:Array.from({length:9},(_,i)=>`MD_STA_${String(i+44).padStart(3,'0')}`),kind:'flat-reference'}]};

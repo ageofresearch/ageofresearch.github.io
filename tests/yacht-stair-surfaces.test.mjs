@@ -44,6 +44,9 @@ test('inventory counts arrivals separately and derives the bridge and flared ter
   try {
     assert.deepEqual(flights.map(f=>[f.id,f.treadCount,f.riseCount]),[
       ['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13]]);
+    for(const flight of flights)assert.equal(flight.clearance.preparedHeights,
+      new Set(flight.surfaces.map(s=>s.height.toFixed(6))).size,
+      flight.id+': collision construction must finish before the first movement');
     assert.equal(model.stairInventory.provisionalReferences.length,2);
     assert.ok(model.stairInventory.provisionalReferences.flatMap(r=>r.ids).every(id=>data.meshes.some(m=>m.id===id)));
     assert.ok(model.stairInventory.provisionalReferences.flatMap(r=>r.ids).every(id=>!flights.some(f=>f.route.sourceIDs.includes(id))));
@@ -73,6 +76,8 @@ test('every enabled full-yacht flight supports return trips, stops, reversals an
       travel(nav,[...path.toReversed(),lower],hz,seen);
       assert.equal(nav.deck,route.lower);assert.equal(nav.stair,null);assert.equal(nav.elevation,f.lowerHeight);
       for(let i=1;i<f.riseCount;i++)assert.ok(seen.has(i),`${route.id}: skipped surface ${i}`);
+      assert.equal(f.clearance.preparedHeights,new Set(f.surfaces.map(s=>s.height.toFixed(6))).size,
+        'Walking may not create additional collision indices');
       // Probe every tread independently from its middle, including curved treads.
       for(const s of f.surfaces.filter(s=>s.kind==='tread')) {
         const p=s.polygons.flat(),point=[0,1].map(k=>(Math.min(...p.map(v=>v[k]))+Math.max(...p.map(v=>v[k])))/2);

@@ -20,30 +20,37 @@ export function distanceToFootprint(x, y, polygon) {
   let inside = true, distance = Infinity;
   for (let i=0; i<polygon.length; i++) {
     const a=polygon[i], b=polygon[(i+1)%polygon.length];
-    if (cross(a,b,[x,y]) < 0) inside=false;
+    if ((b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0]) < 0) inside=false;
     const dx=b[0]-a[0], dy=b[1]-a[1];
-    const t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy)));
-    distance=Math.min(distance,Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy));
+    const lengthSquared=dx*dx+dy*dy;
+    const t=lengthSquared ? Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/lengthSquared)) : 0;
+    const ex=x-a[0]-t*dx, ey=y-a[1]-t*dy;
+    distance=Math.min(distance,ex*ex+ey*ey);
   }
-  return polygon.length < 3 ? Infinity : inside ? 0 : distance;
+  return polygon.length < 3 ? Infinity : inside ? 0 : Math.sqrt(distance);
 }
 
 export function indexFootprints(footprints) {
   const cells=new Map();
   for (const {polygon} of footprints) {
     const xs=polygon.map(p=>p[0]), ys=polygon.map(p=>p[1]);
-    for(let x=Math.floor(Math.min(...xs)*2);x<=Math.floor(Math.max(...xs)*2);x++)
+    for(let x=Math.floor(Math.min(...xs)*2);x<=Math.floor(Math.max(...xs)*2);x++) {
+      let column=cells.get(x);
+      if(!column)cells.set(x,column=new Map());
       for(let y=Math.floor(Math.min(...ys)*2);y<=Math.floor(Math.max(...ys)*2);y++) {
-        const key=x+','+y;
-        if(!cells.has(key))cells.set(key,[]);
-        cells.get(key).push(polygon);
+        if(!column.has(y))column.set(y,[]);
+        column.get(y).push(polygon);
       }
+    }
   }
   return (x,y,radius) => {
-    for(let cx=Math.floor((x-radius)*2);cx<=Math.floor((x+radius)*2);cx++)
+    for(let cx=Math.floor((x-radius)*2);cx<=Math.floor((x+radius)*2);cx++) {
+      const column=cells.get(cx);
+      if(!column)continue;
       for(let cy=Math.floor((y-radius)*2);cy<=Math.floor((y+radius)*2);cy++)
-        for(const polygon of cells.get(cx+','+cy) || [])
+        for(const polygon of column.get(cy) || [])
           if(distanceToFootprint(x,y,polygon) <= radius) return true;
+    }
     return false;
   };
 }

@@ -7,6 +7,7 @@ on:
       - 'site/tidewater-rocha/play.html'
       - 'site/tidewater-rocha/assets/RochaYachtApp-*.js'
       - 'site/tidewater-rocha/assets/RochaYachtState-*.js'
+      - 'site/tidewater-rocha/assets/PostFX-*.js'
       - 'site/tidewater-rocha/rocha/luz-de-mar/model.*'
       - 'tests/yacht-mobile-parity.cjs'
       - 'tests/yacht-joystick.cjs'
@@ -21,6 +22,8 @@ on:
       - 'scripts/yacht-geometry/**'
       - 'tests/yacht-saloon*'
       - 'tests/yacht-upper*'
+      - 'tests/yacht-cold-walk.cjs'
+      - 'tests/yacht-readiness.test.mjs'
       - 'scripts/build-yacht-upper.mjs'
       - '.github/workflows/yacht-mobile-parity.yml'
 permissions:
@@ -40,18 +43,21 @@ jobs:
       - name: Verify the isolated gangway against the walk-chat yacht
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs
           npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
           python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
           for attempt in {1..15}; do
             if curl -fsS --output /dev/null http://127.0.0.1:8764/tidewater-rocha/mobile.html; then break; fi
             sleep 1
           done
+          NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-cold-walk.cjs
           NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs
       - name: Save the reference frames
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gangway-comparison
-          path: /tmp/yacht-mobile-parity/*.png
+          path: |
+            /tmp/yacht-mobile-parity/*.png
+            /tmp/yacht-mobile-parity/*.json
           retention-days: 3

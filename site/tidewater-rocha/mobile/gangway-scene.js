@@ -1,7 +1,7 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=upper-terrace-1';
-import { connectSternAccess, configureSternWalk } from './stern-access.js?v=upper-terrace-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=stair-ready-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=stair-ready-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
-export { preloadSaloon } from './main-saloon.js?v=upper-terrace-1';
+export { preloadSaloon } from './main-saloon.js?v=stair-ready-1';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js';
@@ -78,12 +78,13 @@ export function addFullYachtControl(app) {
 // step to 100 ms, which would otherwise report at least 10 fps during slow frames.
 export function createFrameMeter(label, doc = document) {
   let since, frames = 0;
-  doc.addEventListener('visibilitychange', () => {
+  const reset=() => {
     since = undefined;
     frames = 0;
     label.textContent = '— fps';
-  });
-  return now => {
+  };
+  doc.addEventListener('visibilitychange', reset);
+  const meter=now => {
     if (doc.hidden) return;
     if (since === undefined) { since = now; return; }
     frames++;
@@ -93,4 +94,6 @@ export function createFrameMeter(label, doc = document) {
     since = now;
     frames = 0;
   };
+  meter.reset=reset;
+  return meter;
 }

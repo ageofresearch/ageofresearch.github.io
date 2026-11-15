@@ -1,0 +1,122 @@
+// This must run in fresh contexts, before screenshots or warm route benchmarks.
+const assert=require('node:assert/strict');
+const {mkdirSync,writeFileSync}=require('node:fs');
+const {chromium}=require('playwright-core');
+const base=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
+const out=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
+const summarize=rows=>{
+  const intervals=rows.map(r=>r.interval).filter(Number.isFinite).sort((a,b)=>a-b);
+  return {frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),
+    p95:intervals[Math.floor(intervals.length*.95)],maxInterval:Math.max(...intervals),
+    maxMove:Math.max(...rows.map(r=>r.move)),maxCPU:Math.max(...rows.map(r=>r.cpu))};
+};
+
+async function capture(browser,mobile) {
+  const context=await browser.newContext({viewport:{width:360,height:540},hasTouch:true});
+  let release;
+  try {
+    await context.addInitScript(()=>{
+      window.__coldGPU=[];
+      for(const name of ['createBuffer','createTexture','createShaderModule','createRenderPipeline','createRenderPipelineAsync']) {
+        const original=GPUDevice.prototype[name];
+        GPUDevice.prototype[name]=function(...args){
+          __coldGPU.push({name,time:performance.now(),label:args[0]?.label});return original.apply(this,args);
+        };
+      }
+    });
+    const held=new Promise(resolve=>{release=resolve;});
+    if(mobile)await context.route('**/upper-terrace.bin?*',async route=>{await held;await route.continue();});
+    const page=await context.newPage(),errors=[];
+    page.on('pageerror',error=>errors.push(error.message));
+    await page.goto(base+(mobile?'mobile.html':'play.html?world=rocha&view=walk-chat'),{waitUntil:'domcontentloaded'});
+    if(mobile)await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
+    const frame=mobile?page.frames().find(f=>f.url().includes('play.html')):page.mainFrame();
+    if(mobile) {
+      await frame.waitForFunction(()=>window.__app?.entranceYacht?.upperLoadState==='loading',null,{timeout:90000});
+      assert.deepEqual(await frame.evaluate(()=>({ready:window.__mapsPublicStatus.status,
+        running:window.__app.engine._running===true,loader:!document.getElementById('loader').hidden})),
+        {ready:'starting',running:false,loader:true},'Background preparation cannot overlap the first walk');
+      release();
+    }
+    await frame.waitForFunction(()=>['ready','unsupported'].includes(window.__mapsPublicStatus?.status),null,{timeout:180000});
+    assert.equal(await frame.evaluate(()=>__mapsPublicStatus.status),'ready');
+    const ready=await frame.evaluate(()=>{
+      const app=__app,w=app.yachtWalk;
+      return {time:performance.now(),samples:app.gangwayRenderer?.samples,
+        upper:w.model.upperLoadState,saloon:w.model.saloonLoadState,
+        mtu:w.model.mtu?.state.status,strainers:w.model.strainers?.state.status,
+        prepared:[...w.nav.stairFlights.values()].map(f=>({id:f.id,count:f.clearance.preparedHeights,
+          expected:new Set(f.surfaces.map(s=>s.height.toFixed(6))).size}))};
+    });
+    if(mobile) {
+      assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
+      const result=await frame.evaluate(async()=>{
+        const app=__app,w=app.yachtWalk,n=w.nav,rows=[];let leg=0,previous;
+        w.enterRoom('MD_R01');n.position=[5.2,2.21];n.stair=null;n.elevation=3.95;w.applyPosition();
+        const start=performance.now(),original=app.frame;
+        await new Promise((resolve,reject)=>{
+          app.frame=function(dt){
+            try {
+              const t=performance.now(),target=leg%2?5.2:8.35,d=target-n.position[0];
+              n.move(Math.sign(d)*Math.min(Math.abs(d),1.12*Math.min(.075,Math.max(.001,dt))),0);
+              const move=performance.now()-t;
+              const forward=app.camera.position.clone().set(0,0,Math.sign(d)).applyQuaternion(w.model.group.quaternion);
+              w.yaw=Math.atan2(-forward.x,-forward.z);w.pitch=-.35;
+              original(dt);rows.push({leg,interval:previous===undefined?null:t-previous,move,cpu:performance.now()-t});previous=t;
+              if(Math.abs(n.position[0]-target)<.002)leg++;
+              if(leg===4){app.frame=original;resolve();}
+              else if(t-start>90000)throw Error('First-walk route stalled');
+            }catch(error){app.frame=original;reject(error);}
+          };
+        });
+        await app.gpu.queue.onSubmittedWorkDone();
+        return {rows,start,gpu:__coldGPU.filter(e=>e.time>=start),
+          resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
+          triangles:w.model.stats.triangles,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples};
+      });
+      assert.deepEqual(result.resources,[],'Entering a prepared stair must not fetch geometry');
+      assert.deepEqual(result.gpu,[],'First stair traversal must not create graphics resources');
+      assert.equal(result.scale,1);assert.equal(result.samples,4);assert.ok(result.triangles<=25000);
+      const legs=[0,1,2,3].map(leg=>({leg,...summarize(result.rows.filter(r=>r.leg===leg))}));
+      writeFileSync(out+'/cold-mobile.json',JSON.stringify({ready,legs,...result},null,2));
+      console.log('Fresh mobile ascent/descent, then repeated route:',legs);
+    } else {
+      assert.equal(ready.mtu,'ready');assert.equal(ready.strainers,'ready');
+      for(const f of ready.prepared)assert.equal(f.count,f.expected,f.id+' must be prepared before walking');
+      const result=await frame.evaluate(async()=>{
+        const app=__app,w=app.yachtWalk,n=w.nav;app.engine.stop();await app.gpu.queue.onSubmittedWorkDone();
+        const start=performance.now(),legs=[];
+        w.enterRoom('MD_R01');n.position=[5.2,2.21];n.elevation=3.95;n.stair=null;
+        for(let leg=0;leg<4;leg++) {
+          const target=leg%2?5.2:8.35,times=[];
+          for(let i=0;i<200&&Math.abs(n.position[0]-target)>.001;i++) {
+            const t=performance.now();n.move(Math.sign(target-n.position[0])*Math.min(.02,Math.abs(target-n.position[0])),0);
+            times.push(performance.now()-t);
+          }
+          if(Math.abs(n.position[0]-target)>.001)throw Error('Full-yacht route stalled');
+          legs.push({leg,max:Math.max(...times),total:times.reduce((a,b)=>a+b,0)});
+        }
+        n.deck='LD';n.position=[4.575,1.7];n.elevation=1.58;n.stair=null;w.cameraElevation=1.58;w.applyPosition();
+        const b=w.model.group.userData.yacht,d=app.camera.position.clone().set(0,2.7-b.seaReference,9*b.sx-b.length/2);
+        w.model.group.localToWorld(d).sub(app.camera.position).normalize();w.yaw=Math.atan2(-d.x,-d.z);w.pitch=Math.asin(d.y);
+        for(let i=0;i<3;i++){app.frame(0);await app.gpu.queue.onSubmittedWorkDone();}
+        return {legs,gpu:__coldGPU.filter(e=>e.time>=start),
+          resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start).map(e=>e.name),
+          prepared:[...n.stairFlights.values()].map(f=>({id:f.id,count:f.clearance.preparedHeights}))};
+      });
+      assert.deepEqual(result.gpu,[],'Machinery entry must reuse already executed shaders and uploaded buffers');
+      assert.deepEqual(result.resources,[],'Ordinary full-yacht walking must not fetch equipment');
+      assert.deepEqual(result.prepared,ready.prepared.map(({id,count})=>({id,count})));
+      writeFileSync(out+'/cold-full.json',JSON.stringify({ready,...result},null,2));
+      console.log('Prepared full-yacht first/repeated movement:',result.legs);
+    }
+    assert.deepEqual(errors,[]);
+  } finally {release?.();await context.close();}
+}
+
+(async()=>{
+  mkdirSync(out,{recursive:true});
+  const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,
+    args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
+  try {await capture(browser,true);await capture(browser,false);}finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

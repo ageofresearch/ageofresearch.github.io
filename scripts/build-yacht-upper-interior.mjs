@@ -38,8 +38,8 @@ export async function buildUpperInterior({extend,lod=(p,{profile,near,error,supp
       for(let i=0;i<p.vertices.length;i+=6) {
         const [x,y,z,,,nz]=p.vertices.slice(i,i+6);
         if(floor&&z>5.998&&nz>.5) {
-          // One slab, two existing finishes. The shader clips their boundary
-          // to the doorway/window planes, independent of triangle density.
+          // One slab, two existing finishes. The final builder splits triangles
+          // at the doorway/window planes after LOD, keeping the joint exact.
           p.surfaceTypes[i/6]=28;
           const b=interiorFinishBounds;
           if(x>=b.start&&x<=b.end&&y>=b.minY&&y<=b.maxY)

@@ -2,7 +2,7 @@
 const { chromium } = require('playwright-core');
 const { PNG } = require('pngjs');
 const assert = require('node:assert/strict');
-const { writeFileSync, mkdirSync } = require('node:fs');
+const { writeFileSync, readFileSync, mkdirSync } = require('node:fs');
 const base = process.env.YACHT_BASE || 'http://127.0.0.1:8764/tidewater-rocha/';
 const out = process.env.YACHT_OUTPUT || '/tmp/yacht-mobile-parity';
 mkdirSync(out, { recursive:true });
@@ -21,7 +21,7 @@ async function capture(browser, mobile) {
     const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=bridge-helm-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
-    assert.ok(frame, 'Expected the walk-chat renderer with the selected scene');
+    assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
     await frame.waitForFunction(() => ['ready','unsupported'].includes(window.__mapsPublicStatus?.status), null, {timeout:180000});
     const state = await frame.evaluate(() => window.__mapsPublicStatus);
     assert.equal(state.status,'ready',JSON.stringify(state));
@@ -330,16 +330,7 @@ async function capture(browser, mobile) {
   } finally {await context.close();}
 }
 
-(async()=>{
-  const browser = await chromium.launch({...(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {channel:'chrome'}),headless:true,
-    args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
-  try {
-    const original=await capture(browser,false), mobile=await capture(browser,true);
-    await require('./yacht-saloon-loading.cjs')(browser,base);
-    await require('./yacht-upper-loading.cjs')(browser,base);
-    await require('./yacht-sun-loading.cjs')(browser,base);
-    await require('./yacht-upper-interior-loading.cjs')(browser,base);
-    await require('./yacht-bridge-loading.cjs')(browser,base);
+function compare(original,mobile) {
     assert.equal(mobile.geometry.parts, original.geometry.parts);
     assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
     assert.deepEqual(mobile.geometry.furniture,original.geometry.furniture);
@@ -358,5 +349,33 @@ async function capture(browser, mobile) {
     assert.ok(changed > width*height*.02, 'Full yacht must disappear');
     console.log(JSON.stringify({fullTriangles:original.geometry.triangles, gangwayTriangles:mobile.geometry.triangles,
       gangwayMeshes:mobile.geometry.meshes, parts:mobile.geometry.count, dark, light, changed}));
-  } finally {await browser.close();}
+}
+(async()=>{
+  const mode=process.env.YACHT_CHECK||'all';
+  assert.ok(['all','mobile','full','compare'].includes(mode),'Unknown YACHT_CHECK '+mode);
+  if(mode==='compare'){
+    const read=name=>({...JSON.parse(readFileSync(out+'/'+name+'-result.json')),image:PNG.sync.read(readFileSync(out+(name==='full'?'/walk-chat.png':'/mobile.png')))});
+    compare(read('full'),read('mobile'));return;
+  }
+  const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,
+    args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
+  try {
+    let mobile,original;
+    if(mode!=='full'){
+      mobile=await capture(browser,true);
+      writeFileSync(out+'/mobile-result.json',JSON.stringify({pose:mobile.pose,geometry:mobile.geometry}));
+    }
+    if(mode!=='mobile'){
+      original=await capture(browser,false);
+      writeFileSync(out+'/full-result.json',JSON.stringify({pose:original.pose,geometry:original.geometry}));
+    }
+    if(mode!=='full'){
+      await require('./yacht-saloon-loading.cjs')(browser,base);
+      await require('./yacht-upper-loading.cjs')(browser,base);
+      await require('./yacht-sun-loading.cjs')(browser,base);
+      await require('./yacht-upper-interior-loading.cjs')(browser,base);
+      await require('./yacht-bridge-loading.cjs')(browser,base);
+    }
+    if(mode==='all')compare(original,mobile);
+  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

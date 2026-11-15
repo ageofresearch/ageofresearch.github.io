@@ -1,9 +1,9 @@
-import{t as e}from"./RochaStartup-DD9aAm5G.js";import{D as t,b as n,n as r,o as i,t as a}from"./Frame-CNet77I0.js";import{T as o,_ as s,c,g as l,h as u,i as d,o as f,p,s as m,t as h}from"./PostFX-0mW-sLoH.js";import{t as g}from"./GPU-CxPpnRCf.js";import"./common-HBn3Movl.js";import{t as _}from"./CameraVelocity-DbPmsWHs.js";import{a as v,i as y,n as b,o as x,t as S,u as C}from"./RochaYachtState-P5KwIGIl.js";var w=()=>new Promise(e=>requestAnimationFrame(()=>setTimeout(e,0)));async function T(){let T=performance.now(),E=new URLSearchParams(location.search),D=async(e,t)=>{document.querySelector(`.loader-status`).textContent=e,document.querySelector(`.loader-pct`).textContent=Math.round(t*100)+`%`,document.querySelector(`.loader-fill`).style.width=t*100+`%`,await w()};document.title=`Luz de Mar · Rocha`,document.querySelector(`.loader-title`).textContent=`LUZ DE MAR`,document.querySelector(`.loader-kicker`).textContent=`Rocha · solo el yate`,document.querySelector(`.loader-tagline`).textContent=`Recorre el barco caminando desde la pasarela.`,document.querySelector(`.loader-note`).textContent=`El mapa completo se carga únicamente al pedirlo.`,document.querySelector(`.loader-tips`).hidden=!0,await D(`Cargando el yate…`,.05);const pilot=E.get('scene')==='gangway'?await import('../mobile/gangway-scene.js?v=stair-surfaces-1'):null;
+import{t as e}from"./RochaStartup-DD9aAm5G.js";import{D as t,b as n,n as r,o as i,t as a}from"./Frame-CNet77I0.js";import{T as o,_ as s,c,g as l,h as u,i as d,o as f,p,s as m,t as h}from"./PostFX-0mW-sLoH.js";import{t as g}from"./GPU-CxPpnRCf.js";import"./common-HBn3Movl.js";import{t as _}from"./CameraVelocity-DbPmsWHs.js";import{a as v,i as y,n as b,o as x,t as S,u as C}from"./RochaYachtState-P5KwIGIl.js";var w=()=>new Promise(e=>requestAnimationFrame(()=>setTimeout(e,0)));async function T(){let T=performance.now(),E=new URLSearchParams(location.search),D=async(e,t)=>{document.querySelector(`.loader-status`).textContent=e,document.querySelector(`.loader-pct`).textContent=Math.round(t*100)+`%`,document.querySelector(`.loader-fill`).style.width=t*100+`%`,await w()};document.title=`Luz de Mar · Rocha`,document.querySelector(`.loader-title`).textContent=`LUZ DE MAR`,document.querySelector(`.loader-kicker`).textContent=`Rocha · solo el yate`,document.querySelector(`.loader-tagline`).textContent=`Recorre el barco caminando desde la pasarela.`,document.querySelector(`.loader-note`).textContent=`El mapa completo se carga únicamente al pedirlo.`,document.querySelector(`.loader-tips`).hidden=!0,await D(`Cargando el yate…`,.05);const pilot=E.get('scene')==='gangway'?await import('../mobile/gangway-scene.js?v=saloon-mobile-1'):null;
 let O=pilot?null:C(),k=fetch(`./rocha/luz-de-mar/berth.json`).then(e=>{if(!e.ok)throw Error(`No se pudo cargar el amarre`);return e.json()}),A=new s(document.getElementById(`app`)),[j,M]=await Promise.all([O,k,A.init()]);await D(`Preparando los detalles de Luz de Mar…`,.35);let N=pilot?await pilot.buildGangway(M):x(M,j),{scene:P,camera:F}=A;P.add(N.group),F.near=.03,F.far=400,F.updateProjectionMatrix();let I=window.__app={engine:A,scene:P,camera:F,gpu:g,worldId:`rocha`,yachtOnly:!0,entranceYacht:N,waterEnabled:!0,terrainData:{surveyed:!1},freeCam:!1,input:new l(A.domElement),player:{position:new t,velocity:new t,yaw:0,pitch:0,mode:`walk`},fly:{yaw:0,pitch:0,velocity:new t}};
 let L,B,V,H,G,forward;
 function prepareFullRenderer(){L=I.atmosphere=new c(A);const R=I.sky=new f(L);const z=m(16.2);L.sunDir.value.copy(z),r.sunDir.value.copy(z),r.sunColor.value.setRGB(3,2.9,2.7),r.skyIrradiance.value.setRGB(.25,.32,.45),r.exposure.value=.55,r.waterEnabled.value=0,r.antiAliasingQuality.value=1,r.atmosphereQuality.value=1;B=I.sceneRenderer=new u(A.meshRenderer,P,F);B.clearColor=[.7,.61,.49,1],B.waterEnabled=!1,B.refractionEnabled=!1;V=I.shadows=new o({size:2048,splits:[10,60,400],lightMargin:200,normalBias:[.015,.06,.3],bias:2e-5,cacheStatic:!0,skipUnused:!0});V.layerMask=1<<p.OPAQUE|1<<p.TRANSPARENT,N.invalidateShadows=()=>V.invalidateStatic();H=I.environment=new d(A,P,R);H.interval=1/0;let U=new i({name:`yacht air medium`,code:`fn underwaterMedium(uv:vec2f)->f32{return 0.0;}`}),W=new i({name:`yacht air composite`,code:`fn underwaterComposite(uv:vec2f,pixel:vec2f)->vec4f{return vec4f(postSceneSample(uv),1.0);}`});G=I.post=new h(A,{sceneRenderer:B,camera:F,underwater:{module:U,compositeModule:W}})}
 if(pilot){
-  const {createForwardRenderer}=await import('../mobile/forward-renderer.js?v=stair-surfaces-1');
+  const {createForwardRenderer}=await import('../mobile/forward-renderer.js?v=saloon-mobile-1');
   forward=I.gangwayRenderer=await createForwardRenderer(I,m(16.2));
 }else prepareFullRenderer();
 let K=I.yachtWalk=new y(I,N);if(pilot){
@@ -17,6 +17,8 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     const current=K.nav.position.slice(),yaw=K.yaw,pitch=K.pitch;
     const fromSwimAccess=K.nav.deck==='SP'||Boolean(K.nav.stair);
     const terraceSpawn=K.model.terrace.room.spawn.slice(0,2);
+    const fromSaloon=K.model.saloon&&current[0]>=8.4433;
+    const saloonSpawn=K.model.saloon?.room.spawn.slice(0,2);
     const wasOpen=K.controls?.open;
     K.dispose();
     forward.dispose();forward=null;delete I.gangwayRenderer;A.setRenderScale(1);
@@ -28,7 +30,9 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     K=I.yachtWalk=new y(I,N);
     K.leave=({restore=true}={})=>{if(restore)K.enterRoom('boarding')};
     K.enterRoom('boarding');
-    const destination=fromSwimAccess?terraceSpawn:current;
+    if(fromSaloon)K.nav.enterRoom('MD_R02');
+    let destination=fromSwimAccess?terraceSpawn:current;
+    if(fromSaloon&&!K.nav.floorSafe(...destination))destination=saloonSpawn;
     if(K.nav.floorSafe(...destination)){
       if(fromSwimAccess)K.nav.enterRoom('MD_R01');
       K.nav.position=destination;
@@ -44,6 +48,7 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     window.dispatchEvent(new Event('luz-de-mar:full-yacht'));
   })().catch(error=>{loading=null;throw error});
   pilot.addFullYachtControl(I);
+  pilot.preloadSaloon(I);
 }
 I.boardLuzDeMar=e=>K.enterRoom(e),K.enterRoom(!pilot&&E.has(`walk`)?v(N,E.get(`walk`)):`boarding`);let q=()=>K.enterRoom(`boarding`);K.leave=({restore:e=!0}={})=>{e&&q()},K.controls?.root.querySelector(`[data-leave]`)?.setAttribute(`aria-label`,`Volver a la pasarela`),I.leaveLuzDeMar=q;let J=document.createElement(`div`);J.className=`rocha-map-load tw-interactive`,J.innerHTML=`<style>.rocha-map-load{position:fixed;right:18px;top:18px;z-index:70;max-width:calc(100vw - 36px);font:14px system-ui;color:#efe9dd}.rocha-map-load button{padding:13px 18px;border:1px solid #bcae94;border-radius:12px;background:#f2e9d9;color:#423b31;font:600 14px system-ui;cursor:pointer}.rocha-map-load button:disabled{opacity:.7;cursor:wait}.rocha-map-load p{max-width:290px;padding:10px;background:#302e29;border-radius:8px}.rocha-map-load p:empty{display:none}@media(max-width:600px){.rocha-map-load{right:12px;top:max(12px,env(safe-area-inset-top))}.rocha-map-load button{padding:12px;font-size:12px}}</style><button type="button">Cargar mapa completo</button><p role="status" aria-live="polite"></p>`,document.body.append(J);let Y=J.querySelector(`button`),X=J.querySelector(`p`);Y.onclick=()=>{if(!Y.disabled){if(g.adapter.limits.maxSampledTexturesPerShaderStage<32){X.textContent=`Este dispositivo permite recorrer el yate. El mapa completo necesita una GPU compatible con 32 texturas por etapa.`;return}Y.disabled=!0,X.textContent=`Cargando Rocha completo…`;try{sessionStorage.setItem(S,JSON.stringify(b(K)))}catch{}location.assign(e(location.href))}};const meter=pilot?pilot.createFrameMeter(document.getElementById('fps')):null;
 let Z=0,Q=0;I.frame=e=>{

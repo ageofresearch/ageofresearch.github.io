@@ -1,4 +1,4 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=stair-surfaces-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=saloon-mobile-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.

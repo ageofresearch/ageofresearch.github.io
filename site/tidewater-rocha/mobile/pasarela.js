@@ -1,5 +1,5 @@
-import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=stair-surfaces-1';
-import { createBenchmark } from './frame-benchmark.js?v=stair-surfaces-1';
+import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=saloon-mobile-1';
+import { createBenchmark } from './frame-benchmark.js?v=saloon-mobile-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {
@@ -37,7 +37,7 @@ export function crossing(walk) {
 function crossLabel(walk) {
   if (walk && (walk.nav.stair || walk.nav.deck === 'SP')) return 'Recorrido al salón desde la terraza';
   return walk && walk.nav.position[0] >= walk.model.boarding.walkEnd-.04
-    ? 'Regresar por la pasarela' : 'Caminar hasta el salón';
+    ? 'Regresar por la pasarela' : walk?.model.saloon ? 'Entrar al salón' : 'Caminar hasta la entrada';
 }
 
 function attachPilot(frame) {

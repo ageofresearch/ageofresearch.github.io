@@ -18,14 +18,17 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=stair-surfaces-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=saloon-mobile-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected the walk-chat renderer with the selected scene');
     await frame.waitForFunction(() => ['ready','unsupported'].includes(window.__mapsPublicStatus?.status), null, {timeout:180000});
     const state = await frame.evaluate(() => window.__mapsPublicStatus);
     assert.equal(state.status,'ready',JSON.stringify(state));
-    if (mobile) await page.locator('#pilot').waitFor({state:'visible'});
+    if (mobile) {
+      await page.locator('#pilot').waitFor({state:'visible'});
+      await frame.waitForFunction(()=>window.__app.entranceYacht.saloonLoadState==='ready',null,{timeout:90000});
+    }
     if (mobile) await require('./yacht-joystick.cjs')(page, frame, out);
     const pose = await frame.evaluate(() => {
       const app = window.__app;
@@ -66,9 +69,9 @@ async function capture(browser, mobile) {
             const compact = app.gangwayOnly === true;
             const previous = compact ? engine.currentTexture : app.post.outputTexture;
             const passLabels = [];
-            let indexedDraws=0;
+            let indexedDraws=0,indexedTriangles=0;
             const draw=GPURenderPassEncoder.prototype.drawIndexed;
-            GPURenderPassEncoder.prototype.drawIndexed=function(...args){indexedDraws++;return draw.apply(this,args);};
+            GPURenderPassEncoder.prototype.drawIndexed=function(...args){indexedDraws++;indexedTriangles+=args[0]/3*(args[1]??1);return draw.apply(this,args);};
             let resolved = false;
             const originalRender = GPUCommandEncoder.prototype.beginRenderPass;
             const originalCompute = GPUCommandEncoder.prototype.beginComputePass;
@@ -105,7 +108,7 @@ async function capture(browser, mobile) {
                 segments.push(String.fromCharCode(...row));
               }
               output.unmap();output.destroy();image.destroy();
-              resolve({pixels:btoa(segments.join('')),width,height,passLabels,resolved,indexedDraws});
+              resolve({pixels:btoa(segments.join('')),width,height,passLabels,resolved,indexedDraws,indexedTriangles});
             },reject);
           }catch(e){reject(e);}
         };
@@ -117,8 +120,9 @@ async function capture(browser, mobile) {
     writeFileSync(out + (mobile ? '/mobile.png' : '/walk-chat.png'),PNG.sync.write(image));
     console.log(mobile?'mobile':'walk-chat',JSON.stringify(errors));
     if (!mobile) await require('./yacht-stair-surfaces.cjs')(frame,out,readFrame);
+    await require('./yacht-saloon.cjs')(frame,out,readFrame,mobile);
     if (mobile) {
-      const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb)|main-[^/]+\.js)$/.test(path);
+      const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb))$|\/assets\/main-[^/]+\.js$/.test(path);
       assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');
       assert.equal(geometry.meshes, 2);
       assert.equal(await frame.evaluate(() => window.__app.gangwayOnly),true);
@@ -145,7 +149,7 @@ async function capture(browser, mobile) {
           const letter=projected(model.transom.nameBounds);
           return {within:letter.every(([x,y,z])=>Math.abs(x)<1 && Math.abs(y)<1 && z>0 && z<=1),
             width:(Math.max(...letter.map(p=>p[0]))-Math.min(...letter.map(p=>p[0])))*app.engine.width/2,
-            skip:model.transom.parts.reduce((n,p)=>n+p.indices.length,0)};
+            skip:model.saloon.profiles.exterior.audit.filter(p=>model.transom.parts.some(s=>s.id===p.id)).reduce((n,p)=>n+p.triangles*3,0)};
         });
         await frame.evaluate(skip=>{
           const native=GPURenderPassEncoder.prototype.drawIndexed;
@@ -202,16 +206,16 @@ async function capture(browser, mobile) {
       assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and cable edges');
       await frame.evaluate(() => window.__app.engine.setRenderScale(1));
       await smooth.check();
-      await page.getByRole('button',{name:'Caminar hasta el salón'}).click();
+      await page.getByRole('button',{name:'Entrar al salón'}).click();
       await frame.waitForFunction(start=>window.__app.yachtWalk.nav.position[0]>start+.05,pose.spawn[0],{timeout:30000});
       await page.getByRole('button',{name:'Detener recorrido'}).click();
-      await page.getByRole('button',{name:'Caminar hasta el salón'}).click();
+      await page.getByRole('button',{name:'Entrar al salón'}).click();
       await panel.getByRole('button',{name:'Regresar por la pasarela'}).waitFor({timeout:45000});
       const atLanding = await frame.evaluate(() => {
         const w=window.__app.yachtWalk, b=w.model.boarding;
         return {room:w.nav.location().name, landed:w.nav.position[0]-b.end, level:w.nav.elevation, expected:b.layout.deckHeight};
       });
-      assert.equal(atLanding.room,'Terraza de popa');
+      assert.equal(atLanding.room,'Salón principal');
       assert.ok(atLanding.landed>5.8);
       assert.equal(atLanding.level,atLanding.expected);
       const back=await readFrame();
@@ -222,7 +226,7 @@ async function capture(browser, mobile) {
       for(let i=0;i<backImage.data.length;i+=4) {
         if(Math.max(...[0,1,2].map(k=>Math.abs(backImage.data[i+k]-[163,153,135][k])))>16)terracePixels++;
       }
-      assert.ok(terracePixels>back.width*back.height*.2,'Arrival must frame the covered terrace, not the unloaded saloon');
+      assert.ok(terracePixels>back.width*back.height*.2,'Arrival must frame the furnished saloon');
       assert.equal(back.indexedDraws,2);
       assert.deepEqual(back.passLabels,['Gangway to screen']);
       await panel.getByRole('button',{name:'Regresar por la pasarela'}).click();
@@ -327,6 +331,7 @@ async function capture(browser, mobile) {
     args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
   try {
     const original=await capture(browser,false), mobile=await capture(browser,true);
+    await require('./yacht-saloon-loading.cjs')(browser,base);
     assert.equal(mobile.geometry.parts, original.geometry.parts);
     assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
     assert.deepEqual(mobile.geometry.furniture,original.geometry.furniture);

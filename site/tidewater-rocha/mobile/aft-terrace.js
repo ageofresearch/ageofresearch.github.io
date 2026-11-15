@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=stair-surfaces-1';
+import { indexFootprints } from './terrace-geometry.js?v=saloon-mobile-1';
 
-const version = 'stair-surfaces-1';
+const version = 'saloon-mobile-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));
@@ -26,15 +26,15 @@ function onTriangle(x, y, [a, b, c]) {
   return s.every(v => v >= -1e-7) || s.every(v => v <= 1e-7);
 }
 
-export function connectTerrace(boarding, terrace, sternFloor = []) {
-  const onBoarding = boarding.safe;
+export function connectTerrace(boarding, terrace, sternFloor = [], saloon = null) {
+  const onBoarding = boarding.baseSafe ||= boarding.safe;
   const { end, y, layout } = boarding;
-  const hitsFootprint=indexFootprints(terrace.collisionFootprints);
+  const hitsFootprint=indexFootprints(terrace.collisionFootprints.concat(saloon?.collisionFootprints||[]));
   const obstacles = terrace.blockers.concat(terrace.parts
-    .filter(part => ['boundary', 'frame', 'glazing'].includes(part.role))
+    .filter(part => (saloon ? ['boundary'] : ['boundary', 'frame', 'glazing']).includes(part.role))
     .map(({ bounds: b }) => [b[0],b[1],b[3],b[4]]));
   const cells = new Map();
-  for (const t of [...terrace.floor, ...sternFloor]) {
+  for (const t of [...terrace.floor, ...sternFloor, ...(saloon?.floor||[])]) {
     const xs=t.map(p=>p[0]), ys=t.map(p=>p[1]);
     for(let x=Math.floor(Math.min(...xs)*2);x<=Math.floor(Math.max(...xs)*2);x++)
       for(let y=Math.floor(Math.min(...ys)*2);y<=Math.floor(Math.max(...ys)*2);y++) {
@@ -44,7 +44,7 @@ export function connectTerrace(boarding, terrace, sternFloor = []) {
       }
   }
   const pointOnFloor = (x, y) =>
-    (x <= 8.4 && y >= -3.35 && y <= 3.45 &&
+    (x <= (saloon?.navigationEnd??8.4) && y >= -3.35 && y <= 3.45 &&
       (cells.get(Math.floor(x*2)+','+Math.floor(y*2)) || []).some(triangle => onTriangle(x,y,triangle))) ||
     sternFloor.some(triangle => onTriangle(x,y,triangle));
   // Test the union before applying body clearance, so the shared landing seam
@@ -63,8 +63,9 @@ export function connectTerrace(boarding, terrace, sternFloor = []) {
   };
   boarding.route = [boarding.room.spawn.slice(0,2), [3.65,3.1], [4.5,3.1], [4.7,1.55],
     [4.72,1.35], [4.8,1.31], [4.9,1.26], [5.15,1.26], [5.3,1], [7.9,.1], [8.18,.1]];
+  if(saloon)boarding.route.push([9.2,.1],[10,.1]);
   boarding.walkEnd = boarding.route.at(-1)[0];
-  boarding.arrivalLook = [5.5,0,4.85];
+  boarding.arrivalLook = saloon ? [12.3,0,4.7] : [5.5,0,4.85];
   terrace.room = { ...terrace.room, name: 'Terraza de popa', displayName: 'Terraza de popa', spawn: [5.6,.8,5.55], look: [8.45,.1,5.2] };
   return terrace;
 }

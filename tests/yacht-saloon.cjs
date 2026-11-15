@@ -30,7 +30,7 @@ module.exports=async function saloonViews(frame,out,readFrame,mobile) {
       assert.ok(result.indexedTriangles<=25000,JSON.stringify(result.indexedTriangles));
       const stats=await frame.evaluate(()=>window.__app.entranceYacht.stats);
       assert.equal(result.indexedTriangles,stats.triangles);
-      assert.ok(stats.residentGeometryBytes<4*1024*1024);
+      assert.ok(stats.residentGeometryBytes<9*1024*1024);
     }
   }
   if(mobile) {

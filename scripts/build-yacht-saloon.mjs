@@ -11,7 +11,7 @@ import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const version = 'saloon-mobile-1';
-const boundsOf = vertices => {
+export const boundsOf = vertices => {
   const b = [Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];
   for (let i=0;i<vertices.length;i+=6) for(let k=0;k<3;k++) {
     b[k]=Math.min(b[k],vertices[i+k]);b[k+3]=Math.max(b[k+3],vertices[i+k]);
@@ -39,7 +39,7 @@ function floorTriangles(part) {
 
 // Weld identical attributes before simplifying. Do not move any vertices or
 // drop components; silhouettes, material boundaries and deck edges stay intact.
-function simplify(part, error) {
+export function simplify(part, error) {
   if(part.indices.length<=72 || error===0)return part;
   const vertices=[], light=[], surfaceTypes=[], remap=[], keys=new Map();
   for(let i=0;i<part.vertices.length;i+=6) {
@@ -180,7 +180,7 @@ export async function buildSaloon() {
   const manifest={version,sourceSHA256:createHash('sha256').update(json).update(bin).digest('hex'),
     room,floor,collisionFootprints,parts:packedParts,profiles,
     transition:{enter:9.2,exit:8.0,shared:[6.8,10.2]},navigationEnd:17.83};
-  return {manifest,binary:Buffer.concat(chunks)};
+  return {manifest,binary:Buffer.concat(chunks),sources:{terrace,parts}};
 }
 
 if(process.argv[1]===fileURLToPath(import.meta.url)) {

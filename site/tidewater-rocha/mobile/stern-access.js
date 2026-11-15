@@ -1,5 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=saloon-mobile-1';
-import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=saloon-mobile-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=upper-terrace-1';
+import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=upper-terrace-1';
 
 // Source coordinates: x toward the bow, y to port, z up. All access surfaces
 // come from the same parts that are rendered in the full and isolated yacht.
@@ -123,17 +123,6 @@ export function configureSternWalk(walk) {
     rooms.sort((a,b)=>Math.hypot(x-a.spawn[0],y-a.spawn[1])-Math.hypot(x-b.spawn[0],y-b.spawn[1]));
     if(!rooms.length)throw Error('No walkable floor on '+deck);
     return rooms[0].spawn.slice(0,2);
-  };
-  const nativeStep=nav.tryStep.bind(nav);
-  nav.tryStep=(x,y)=>{
-    const before={position:nav.position,deck:nav.deck,elevation:nav.elevation,room:nav.room,
-      stair:nav.stair && {...nav.stair}};
-    const moved=nativeStep(x,y);
-    if(moved && nav.stair && !access.stairSafe(x,y,nav.elevation,nav.radius)) {
-      Object.assign(nav,before);
-      return false;
-    }
-    return moved;
   };
   access.flight=createFlight(access.route,walk.model.asset.data.levels,
     access.treads.map(t=>({id:t.id,height:t.height,polygons:[t.footprint],sourceIDs:[t.id]})),

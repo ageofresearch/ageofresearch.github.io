@@ -320,3 +320,14 @@ up/down twice in three fresh 360×540 contexts at scale 1 / MSAA 4. It records
 per-leg FPS, P95, long frames, movement time, resident memory and GPU/model requests.
 It requires zero deferred resource creation and median P95 <=25 ms per leg;
 run it alone, separately from builders and other browser tests.
+
+CI runs `yacht-bridge-access-comparison.cjs` against the immutable PR base on
+the same worker. This follows the existing upper-return comparison: a CPU-limited
+software renderer reproduced P95 near 33 ms in both the base and the candidate,
+while the standalone controlled runs of both remain at 16.8–16.9 ms. An
+unqualified worker must not be reported as meeting the absolute 25 ms budget.
+The comparison always requires at least 40 FPS, rejects mean-frame regressions
+over 5%, and requires candidate P95 <=25 ms whenever the reference meets that
+budget. Otherwise it rejects a P95 regression over 5% and records
+`absoluteBudgetQualified: false`. Resource, geometry, scale and MSAA checks are
+identical in both modes. The standalone absolute gate remains unchanged.

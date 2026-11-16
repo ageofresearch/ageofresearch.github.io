@@ -1,9 +1,9 @@
-import {configureAccessFloor} from './bridge-access-geometry.js?v=spatial-correction-1';
-import {configureBowFloor} from './bow-geometry.js?v=spatial-correction-1';
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=spatial-correction-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=spatial-correction-1';
-import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=spatial-correction-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=spatial-correction-1';
+import {configureAccessFloor} from './bridge-access-geometry.js?v=gangway-teak-1';
+import {configureBowFloor} from './bow-geometry.js?v=gangway-teak-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=gangway-teak-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=gangway-teak-1';
+import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=gangway-teak-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=gangway-teak-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.

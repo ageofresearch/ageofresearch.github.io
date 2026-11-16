@@ -5,21 +5,22 @@ import {bridgeFinishBounds} from '../site/tidewater-rocha/mobile/bridge-geometry
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {buildUpper} from './build-yacht-upper.mjs';
-import {boundsOf,simplify} from './build-yacht-saloon.mjs';
+import {boundsOf,simplify,normalizeRenderedPart} from './build-yacht-saloon.mjs';
 import {subdivide,contactShade} from './build-yacht-terrace.mjs';
-import {buildYachtGeometry,createBoarding,createSternFeatures,createFinishes,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import {buildYachtGeometry,createBoarding,createSternFeatures,createFinishes,resolveYachtPartFinish,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 const compact=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
 // LOD leaves unreferenced vertices behind. Compact every attribute together
 // before upload; triangle order, positions, normals and lighting stay exact.
-function compactGeometry(part) {
+export function compactGeometry(part) {
+  const finish=resolveYachtPartFinish(part);
   const remap=new Map(),vertices=[],light=[],surfaceTypes=[];
   const indices=Array.from(part.indices,index=>{
     if(!remap.has(index)){
       remap.set(index,vertices.length/6);vertices.push(...part.vertices.slice(index*6,index*6+6));
-      light.push(part.light?.[index]??.96);surfaceTypes.push(part.surfaceTypes?.[index]??part.finish?.[3]??0);
+      light.push(part.light?.[index]??.96);surfaceTypes.push(part.surfaceTypes?.[index]??finish[3]);
     }
     return remap.get(index);
   });
@@ -34,7 +35,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
   const corrected=new Map((model.interiorDetail.spatialCorrections||[]).flatMap(r=>r.parts.map(id=>[id,r.id])));
   // Replace the partial SD slab and stair with their complete shared assemblies.
   const lowerParts=Object.values(lower.sources).flat().filter(p=>!['SD_DCK_001','SD_STA_001'].includes(p.anchor||p.sourceID));
-  const parts=final.filter(p=>(p.deck==='SD'||p.semanticParent==='stairs/sun')&&!['Cold_water','Hot_water','Drainage'].includes(p.category)).map(p=>({...p,
+  const parts=final.filter(p=>(p.deck==='SD'||p.semanticParent==='stairs/sun')&&!['Cold_water','Hot_water','Drainage'].includes(p.category)).map(p=>({...normalizeRenderedPart(p,model),
     sourceID:p.anchor||p.id.split('/')[0],vertices:Array.from(p.vertices),indices:Array.from(p.indices),
     role:p.anchor==='SD_DCK_001'&&p.feature==='stair opening'?'floor':p.semanticParent==='stairs/sun'?'stair':p.feature?.startsWith('solarium guard')?'guard':p.semanticParent==='upper-equipment'?'equipment':'furniture'}));
   const collisionFootprints=compact(model.sunDeckFloor.collisionFootprints),floor=model.sunDeckFloor.floor;
@@ -91,7 +92,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'spatial-correction-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'gangway-teak-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

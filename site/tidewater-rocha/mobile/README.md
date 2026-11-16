@@ -1,10 +1,41 @@
 # Mobile yacht zones
 
-Release: `spatial-correction-1`. The mobile route connects boarding, the aft terrace,
+Release: `gangway-teak-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge and forward lounge. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
+
+## Gangway teak finish
+
+`gangway-teak-1` fixes material inheritance before compaction and simplification.
+Raw boarding parts that supplied only `materialID` previously acquired surface
+code zero from the sun-deck package onward. The three panels now retain their
+shared material in every fallback and active profile; explicit per-vertex zero
+remains valid. Unknown materials fail offline generation.
+
+The [finish comparison](../teak-audit/) records fixed-camera views and checks.
+Each unchanged 764 mm inset uses seven 105.714 mm boards with six 4 mm seams.
+This is an approved provisional layout, not a surveyed vessel specification.
+Shared base colour is #B69A73 sRGB, roughness .80, metalness and clearcoat zero;
+board brightness varies by at most ±5%. Dark caulking and longitudinal fibres
+are filtered at a distance. Borders and landings receive the same finish, with
+cross-grain on end borders and the existing landing pitch. The lake pier and
+other deck colours are not recoloured. Geometry, support and collisions are exact.
+
+A fourth 256×256 layer in the existing RG8 material array adds 174,762 bytes
+including mipmaps. It stores RG16-encoded combined grain, board variation and caulking,
+so the mobile fragment shader remains identical to the prior release. For the
+constant-matte boarding codes 37..42, aSurface.xy carries precomputed atlas UVs;
+both renderers decode roughness .8 and metalness zero for these codes. This
+keeps the four-buffer interface and all resident geometry byte counts unchanged.
+The full renderer passes those UVs in a separate smooth varying; its existing
+material-code varying stays flat. Both renderers must pass the rendered six-seam
+probe, preventing constant UVs from silently removing the finish.
+Total mobile finish storage is 3,495,255 bytes, under 3.6 MB;
+there are still two sampled texture resources, two draws and one pass. All
+buffers, textures and pipelines are prepared before the first walk. The original
+three texture layers are checked byte-for-byte against the previous release.
 
 ## Spatial correction and evidence
 
@@ -207,7 +238,12 @@ of the PR base on the same runner, at the same resolution and MSAA. It rejects a
 mean-frame regression above 5%, or a P95 above both 25 ms and 105% of the base.
 The report includes both versions' absolute timings; a slow baseline is not
 reported as meeting 25 ms. The standalone controlled return-view gate remains
-unchanged, and the new bow route must meet its absolute 25 ms CI gate as well.
+unchanged. Bow/access comparisons use the qualification rules below; the new
+boarding route retains its absolute 25 ms CI gate.
+
+Timing routes run on separate CI workers, independently of browser recovery and
+image capture. Each route prepares its resources before measurement. The final
+comparison job depends on all timing, geometry and visual checks.
 
 The bow benchmark holds its package to verify initial-loader blocking, then uses
 three fresh contexts to walk out/back twice, including both sunpad sides. It
@@ -289,3 +325,22 @@ up/down twice in three fresh 360×540 contexts at scale 1 / MSAA 4. It records
 per-leg FPS, P95, long frames, movement time, resident memory and GPU/model requests.
 It requires zero deferred resource creation and median P95 <=25 ms per leg;
 run it alone, separately from builders and other browser tests.
+
+CI runs `yacht-route-performance-comparison.cjs bow` and
+`yacht-route-performance-comparison.cjs access` against the immutable PR base on
+their respective workers. This follows the existing upper-return comparison: a CPU-limited
+software renderer reproduced P95 near 33 ms in both the base and the candidate,
+while the standalone controlled runs of both remain at 16.8–16.9 ms. An
+unqualified worker must not be reported as meeting the absolute 25 ms budget.
+The comparison always requires at least 40 FPS and rejects mean-frame regressions
+over 5%. It qualifies the reference using the upper endpoint of a 95%
+order-statistic rank interval, computed from the recorded frame intervals. This
+independent-sample rank model exposes the uncertainty near the 16.7/33.3 ms
+refresh boundary: about 4% versus 5% missed refreshes can move the point P95
+across that gap with a much smaller change in average throughput.
+When that reference upper bound is <=25 ms, candidate P95 must stay <=25 ms.
+Otherwise candidate P95 must stay within 105% of that reference upper bound,
+and the report records `absoluteBudgetQualified: false`. Raw P95, the bound,
+FPS and long-frame counts remain visible; an unqualified worker is never
+reported as meeting 25 ms. Resource, geometry, scale and MSAA checks are
+identical in both modes. Both standalone absolute gates remain unchanged.

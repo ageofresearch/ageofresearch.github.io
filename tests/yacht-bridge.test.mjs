@@ -86,13 +86,13 @@ test('bridge network/corrupt data failures preserve the interior and retries reg
  }finally{f.dispose();}
 });
 test('prepared pattern pyramid is periodic, bounded and averages to a neutral subpixel finish',()=>{
- const mips=finishPatternMips();assert.equal(mips.length,9);assert.equal(mips.reduce((n,m)=>n+m.data.byteLength,0),524286);
+ const mips=finishPatternMips();assert.equal(mips.length,9);assert.equal(mips.reduce((n,m)=>n+m.data.byteLength,0),699048);
  for(let i=0;i<4;i+=2)assert.ok(Math.abs((mips.at(-1).data[i]*256+mips.at(-1).data[i+1])/65535*1.1-1)<.00003);assert.ok(Math.abs(mips[0].data[0]-mips[0].data[510])<15);
 });
 
 test('teak mipmaps preserve the board pattern and fit the prepared material budget',()=>{
  const levels=teakPatternMips();assert.equal(levels.length,13);assert.equal(levels[0].data.length,512*4096);
- assert.ok(levels.reduce((n,l)=>n+l.data.length,0)+524286<3.4e6);
+ assert.ok(levels.reduce((n,l)=>n+l.data.length,0)+699048<3.6e6);
  assert.ok(Math.abs(levels.at(-1).data[0]/255*1.1-1)<.003);
  const first=levels[0];
  for(const board of [30,64,80]){

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luz de Mar · Piso de la pasarela</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#e7ecea;background:#17282d}body{margin:0}main{max-width:1180px;margin:auto;padding:32px 20px}h1{font:clamp(30px,5vw,52px)/1.1 Georgia,serif}h2{font:26px Georgia,serif;margin-top:32px}p{line-height:1.65;max-width:900px}a{color:#b5e5d1}nav,.controls,.facts{display:flex;gap:16px;flex-wrap:wrap}.facts{margin:24px 0}.fact{padding:16px 20px;border:1px solid #ffffff28;border-radius:12px;background:#ffffff08}.fact b{display:block;font-size:26px}.notice{padding:16px;border-left:4px solid #d9ad72;background:#d9ad7210}.controls{align-items:center}select{font:inherit;color:inherit;background:#254049;padding:10px;border:1px solid #8eaaa9;border-radius:8px}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}figure{margin:0}img{width:100%;display:block;border-radius:10px;background:#07151a}figcaption{padding:10px 0;color:#bbccca}table{border-collapse:collapse;width:100%;margin-top:18px}th,td{padding:12px;text-align:left;border-bottom:1px solid #ffffff20}small{color:#b8c9c6}.error{color:#ffb6a5}@media(max-width:700px){.gallery{grid-template-columns:1fr}.fact{padding:12px}main{padding:24px 14px}}
+</style>
+<main>
+<nav><a href="../mobile.html?world=rocha&amp;v=gangway-teak-1">Recorrido móvil</a><a href="../play.html?world=rocha&amp;view=walk-chat&amp;v=gangway-teak-1">Yate completo</a><a href="comprobaciones.json">Comprobaciones</a></nav>
+<p><small>LUZ DE MAR · gangway-teak-1</small></p>
+<h1>La teca de la pasarela</h1>
+<p>El piso recupera las tablas, las juntas oscuras y un acabado cálido mate. El material se conserva en todos los paquetes móviles, incluidos los perfiles de respaldo, y comparte su definición con el yate completo.</p>
+<div class="facts"><div class="fact"><b>7</b>tablas por panel</div><div class="fact"><b>4 mm</b>ancho de junta</div><div class="fact"><b>105,7 mm</b>ancho de cada tabla</div><div class="fact"><b>0</b>cambios de geometría</div></div>
+<p class="notice"><b>Despiece provisional aprobado.</b> Siete tablas y seis juntas ocupan los 764 mm del panel del modelo. El color base #B69A73, la veta y la rugosidad son ajustes visuales apoyados en fotografías de popa de Luz de Mar. Una vista cercana de su pasarela desplegada sigue siendo necesaria para certificar su distribución y dimensiones reales.</p>
+<h2>Antes y después</h2>
+<p>Las imágenes usan la misma cámara y resolución. La vista «Detalle de veta» emplea una cámara de inspección baja; no representa un cambio de la altura del visitante.</p>
+<div class="controls"><label>Vista <select id="camera"><option value="panel-1">Primer panel</option><option value="panel-2">Segundo panel</option><option value="panel-3">Tercer panel</option><option value="joint-1">Primera unión telescópica</option><option value="joint-2">Segunda unión telescópica</option><option value="forward">Hacia el yate</option><option value="return">Hacia el muelle</option><option value="grain-close">Detalle de veta</option></select></label><label>Versión <select id="viewer"><option value="mobile">Móvil</option><option value="full">Completa</option></select></label></div>
+<div class="gallery"><figure><img id="before" alt="Piso anterior de la pasarela"><figcaption>Antes · spatial-correction-1</figcaption></figure><figure><img id="after" alt="Piso de teca corregido"><figcaption>Después · gangway-teak-1</figcaption></figure></div>
+<h2>Qué cambió</h2>
+<p>El compactado de los paquetes sustituía por cero el tipo de superficie de piezas que solo indicaban su material. Ahora resuelve primero ese material y conserva los códigos explícitos. Los paneles reciben siete tablas longitudinales, con juntas que terminan en sus propios bordes; desaparecen los empalmes transversales artificiales repetidos cada 2,15 m.</p>
+<p>La madera tiene variaciones suaves entre tablas y fibras finas. Los remates conservan su orientación, y los desembarcos reciben el mismo acabado con su despiece anterior. El muelle y las otras cubiertas conservan sus colores. La geometría, los apoyos y las colisiones no cambian.</p>
+<h2>Verificación</h2><div id="results"></div><p id="error" class="error"></p>
+<h2>Referencia y límites</h2>
+<p>La <a href="https://www.althausyachts.com/brokerage/luz-de-mar/">galería de Luz de Mar</a> muestra la madera de popa con tono cálido, juntas oscuras y veta visible. La propuesta conserva esa identidad visual. Las fotografías no aportan una muestra de color calibrada ni medidas de la pasarela; los valores de esta entrega corresponden al modelo.</p>
+<p>La <a href="../spatial-audit/">auditoría espacial anterior</a> conserva sus resultados y sus pendientes de referencia; esta entrega corrige el acabado de la pasarela.</p>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+function show(){const file='teak-'+$('#viewer').value+'-'+$('#camera').value+'.png';for(const phase of ['before','after'])$('#'+phase).src='images/'+phase+'/'+file+'?v=gangway-teak-1';}
+$('#camera').onchange=show;$('#viewer').onchange=show;show();
+fetch('comprobaciones.json?v=gangway-teak-1').then(r=>{if(!r.ok)throw Error('No se pudieron cargar las comprobaciones');return r.json();}).then(data=>{
+ const div=$('#results');for(const text of [data.geometry,data.materials,data.graphics,data.performance]){const p=document.createElement('p');p.textContent=text;div.append(p);}
+ const table=document.createElement('table'),thead=document.createElement('thead'),header=document.createElement('tr');for(const name of ['Perfil','Triángulos']){const th=document.createElement('th');th.textContent=name;header.append(th);}thead.append(header);table.append(thead);const tbody=document.createElement('tbody');for(const [name,count]of Object.entries(data.profiles)){const tr=document.createElement('tr');for(const value of [name,count]){const td=document.createElement('td');td.textContent=value;tr.append(td);}tbody.append(tr);}table.append(tbody);div.append(table);
+}).catch(e=>$('#error').textContent=e.message);
+</script>
+</html>

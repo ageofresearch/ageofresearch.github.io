@@ -1,5 +1,13 @@
 # Luz de Mar in Rocha
 
+## Boarding finish · gangway-teak-1
+
+The shared boarding material uses seven longitudinal teak boards per existing
+panel, 4 mm caulking and a warm matte finish. The [before/after report](../../teak-audit/)
+distinguishes vessel photographs from this approved provisional material/layout.
+No source geometry or navigation dimensions are changed. Mobile compaction now
+resolves source material IDs before preserving their surface attributes.
+
 ## Spatial correction release
 
 `spatial-correction-1` applies documented rigid physical corrections in the shared

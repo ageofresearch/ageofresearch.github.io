@@ -4,13 +4,13 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { MeshoptSimplifier } from './yacht-geometry/node_modules/meshoptimizer/index.js';
-import { buildYachtGeometry, createBoarding, createSternFeatures, createFinishes } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import { buildYachtGeometry, createBoarding, createSternFeatures, createFinishes, resolveYachtPartFinish } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs';
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'spatial-correction-1';
+const version = 'gangway-teak-1';
 export const boundsOf = vertices => {
   const b = [Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];
   for (let i=0;i<vertices.length;i+=6) for(let k=0;k<3;k++) {
@@ -22,6 +22,7 @@ export const boundsOf = vertices => {
 // Normalize them before clipping; TypedArray.map cannot return vertex arrays.
 export function normalizeRenderedPart(source,model) {
   const p={...source,feature:source.feature||source.name,vertices:Array.from(source.vertices),indices:Array.from(source.indices)};
+  if(!p.finish&&p.materialID)p.finish=resolveYachtPartFinish(p);
   if(!p.finish&&!p.materialID) {
     const range=model.componentRanges.find(r=>r.id===p.id),mesh=model.meshes.find(m=>m.name==='Luz de Mar · '+range?.batch);
     if(!mesh)throw Error('No final material for '+p.id);
@@ -55,11 +56,13 @@ function floorTriangles(part) {
 // Weld identical attributes before simplifying. Do not move any vertices or
 // drop components; silhouettes, material boundaries and deck edges stay intact.
 export function simplify(part, error, flags=[]) {
+  const materialType=part.finish?.[3]??(part.materialID?resolveYachtPartFinish(part)[3]:undefined);
   if(part.indices.length<=72 || error===0)return part;
   const vertices=[], light=[], surfaceTypes=[], remap=[], keys=new Map();
   for(let i=0;i<part.vertices.length;i+=6) {
     const row=Array.from(part.vertices.slice(i,i+6));
-    const l=part.light?.[i/6]??.96, type=part.surfaceTypes?.[i/6]??part.finish?.[3]??0;
+    const l=part.light?.[i/6]??.96, type=part.surfaceTypes?.[i/6]??materialType;
+    if(!Number.isFinite(type))throw Error('Missing surface type: '+part.id);
     const key=[...row,l,type].map(n=>n.toFixed(6)).join(',');
     let index=keys.get(key);
     if(index===undefined){index=light.length;keys.set(key,index);vertices.push(...row);light.push(l);surfaceTypes.push(type);}

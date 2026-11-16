@@ -1,16 +1,17 @@
 // Run alone: three fresh contexts, identical resolution/MSAA, no prior walk.
-const {chromium}=require('playwright-core');
 const assert=require('node:assert/strict');
+const {quantileUpper95}=require('./yacht-performance-statistics.cjs');
 const {mkdirSync,writeFileSync}=require('node:fs');
-const base=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
-const out=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
+const defaultBase=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
+const defaultOut=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
 const summarize=rows=>{
  const intervals=rows.map(r=>r.interval).filter(Number.isFinite).sort((a,b)=>a-b);
- return {frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),p95:intervals[Math.floor(intervals.length*.95)],
+ return {p95Upper95:quantileUpper95(intervals),frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),p95:intervals[Math.floor(intervals.length*.95)],
   max:intervals.at(-1),over25ms:intervals.filter(t=>t>25).length,over50ms:intervals.filter(t=>t>50).length,
   maxMove:Math.max(...rows.map(r=>r.move)),maxCPU:Math.max(...rows.map(r=>r.cpu))};
 };
-(async()=>{
+async function measureAccess(base=defaultBase,out=defaultOut){
+ const {chromium}=require('playwright-core');
  const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,
   args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
  const runs=[];mkdirSync(out,{recursive:true});
@@ -63,5 +64,10 @@ const summarize=rows=>{
   }finally{release?.();await context.close();}
  }}finally{await browser.close();}
  writeFileSync(out+'/access-performance.json',JSON.stringify(runs.map(({rows,...r})=>r),null,2));
+ return runs;
+}
+function assertAccessBudget(runs) {
  for(let leg=0;leg<4;leg++)assert.ok(runs.map(r=>r.legs[leg].p95).sort((a,b)=>a-b)[1]<=25,'Controlled median access P95 exceeds 25 ms on leg '+leg);
-})().catch(e=>{console.error(e);process.exitCode=1});
+}
+module.exports={measureAccess,assertAccessBudget};
+if(require.main===module)measureAccess().then(assertAccessBudget).catch(e=>{console.error(e);process.exitCode=1});

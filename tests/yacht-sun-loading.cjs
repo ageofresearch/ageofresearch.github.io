@@ -25,7 +25,7 @@ module.exports=async function sunLoading(browser,base) {
     assert.deepEqual(await frame.evaluate(()=>{const a=__app;return {routes:a.yachtWalk.nav.routes.map(r=>r.id),triangles:a.entranceYacht.stats.triangles,profile:a.gangwayRenderer.activeProfile};}),before);
     await frame.locator('.luz-sun-load button').click();
     await frame.waitForFunction(()=>__app.entranceYacht.sunLoadState==='ready'&&__app.engine._running,null,{timeout:90000});
-    assert.equal(await frame.evaluate(()=>__app.yachtWalk.nav.routes.length),3);
+    assert.equal(await frame.evaluate(()=>__app.yachtWalk.nav.routes.length),4);
     await frame.evaluate(()=>__app.yachtWalk.enterRoom('SD_R01'));
     await page.locator('#pilot summary').click();await page.waitForFunction(()=>document.querySelector('#cross').disabled);
     assert.equal(await page.locator('#cross').isEnabled(),false);

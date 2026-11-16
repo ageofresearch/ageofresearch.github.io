@@ -180,3 +180,72 @@ contexts measured 59.79–60.00 FPS and P95 16.8–16.9 ms, at 360×540, scale 1
 4× MSAA. No geometry requests or GPU object creation occurred while walking.
 Individual long frames remain recorded in the JSON reports; the measured result
 is a regression reference, not a promise that every frame takes less than 25 ms.
+
+## Interior bridge access (`bridge-access-1`)
+
+The mobile route now connects the main saloon, `MD_R07` (Vestíbulo interior),
+existing bridge flight and helm. The shared flight retains 11 intermediate
+treads, 12 rises, width 0.76, nominal run 0.226667 and rise 0.170833, between
+3.95 and 6.00. These are model units, not certified vessel measurements.
+
+The approved local recess moves the middle of `MD_PAR_004` (x 18.20–19.50)
++0.25 in y. A single concave solid retains the original ends, 0.08 wall
+thickness and continuous skirting. The clear lower turn grows from 0.2746 to
+approximately 0.523. Furniture is unchanged. The old doorway's skirtings end
+at y=0.68 and its switch plate moves +0.29 in y onto the retained wall.
+The shared source geometry supplies both renderers and the body/head collision;
+vertical wall faces are included explicitly for this flight and vestibule.
+
+Only the missing MD floor beyond x=17.83 and the vestibule boundaries/guest-well
+protection are extracted. Existing ceiling slabs and bridge treads remain their
+single owners. Mobile limits contain the full radius-0.14 visitor; galley,
+guest stair and forward cabins are not enabled. Entry tests use the unclamped
+approach distance so crossing the lower landing sideways cannot capture the
+visitor into the flight. The upper exit goes around the existing helm sofa.
+
+`bridge-access.json/bin` is prepared after bow during initial loading. All five
+GPU profiles and all 13 collision heights are prepared before activation. A
+failed network/decode/GPU preparation keeps bow available; retry pauses movement
+and destroys failed GPU resources. Geometry, navigation, room and flight activate
+together. Full-yacht handoff restores valid treads/poses, otherwise the closest
+safe lower or upper landing. The existing bridge pending notice disappears only
+once access succeeds.
+
+Profile selection uses `upper` on the bridge flight and MD approach (enter after
+x=17.5, retain down to x=17.1 within its real corridor). Near saloon joinery shares
+its interior detail across this transition. The stair surfaces and new support,
+walls and guards are retained exactly. Current counts are exterior 24,876,
+interior 24,520, upper 24,984, sun 24,366 and bow 22,742; each has two batches and
+one render pass, with unchanged resolution/MSAA.
+
+The audit records omitted distant fittings (hood vent trim, control marks,
+latches, bowl, shade trim, satellite joints and recessed cockpit basin details).
+Main furniture volumes remain. The upper helm-wheel rim uses the existing
+simplifier with 0.012 absolute model error. Uniformly lit vestibule flooring
+keeps the original clipped triangulation rather than redundant subdivisions.
+Every intermediate fallback package also retains its 25,000-triangle gate.
+
+The final upper profile orders opaque triangles around the bridge/vestibule,
+using conservative triangle-bound distances so wide decks and walls cover
+hidden surfaces early. This offline index permutation retains every triangle,
+winding and material; transparent ordering remains unchanged. It needs no
+per-frame sorting or GPU allocation. The galley floor-finish boundary also
+follows the recessed partition, leaving a continuous vestibule finish.
+
+Validation entry points:
+
+```sh
+node scripts/build-yacht-bridge-access.mjs
+node --test tests/yacht-bridge-access.test.mjs tests/yacht-stair-surfaces.test.mjs
+NODE_PATH=/path/to/browser/node_modules node tests/yacht-bridge-access-performance.cjs
+NODE_PATH=/path/to/browser/node_modules node tests/yacht-mobile-parity.cjs
+```
+
+The browser suite captures both models at the doorway, lower landing, middle
+of the flight, upper landing and helm return. Recovery covers unavailable and
+truncated files, injected GPU failure, paused retry and a real full-yacht switch.
+The dedicated performance test holds the package during startup, then walks
+up/down twice in three fresh 360×540 contexts at scale 1 / MSAA 4. It records
+per-leg FPS, P95, long frames, movement time, resident memory and GPU/model requests.
+It requires zero deferred resource creation and median P95 <=25 ms per leg;
+run it alone, separately from builders and other browser tests.

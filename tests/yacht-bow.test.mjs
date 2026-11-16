@@ -23,6 +23,7 @@ test('opaque depth ordering preserves every triangle and its winding',()=>{
  assert.deepEqual(indices,before);
  const triangles=a=>Array.from({length:a.length/3},(_,i)=>Array.from(a.slice(i*3,i*3+3)).join(',')).sort();
  assert.deepEqual(triangles(ordered),triangles(indices));
+ assert.deepEqual(triangles(orderOpaqueTriangles(positions,indices,[0,0,0],.25,true)),triangles(indices));
 });
 async function load(name,decode){const manifest=JSON.parse(await readFile(new URL('mobile/'+name+'.json',root))),binary=await readFile(new URL('mobile/'+name+'.bin',root));return {manifest,binary,decoded:decode(manifest,array(binary))};}
 const {manifest,binary,decoded:bow}=await load('bow-deck',decodeBow);

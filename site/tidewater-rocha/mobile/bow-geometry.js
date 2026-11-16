@@ -1,6 +1,6 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=bow-deck-1';
-import {supportedFloor,boundary} from './sun-deck-geometry.js?v=bow-deck-1';
-import {indexFootprints} from './terrace-geometry.js?v=bow-deck-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=bridge-access-1';
+import {supportedFloor,boundary} from './sun-deck-geometry.js?v=bridge-access-1';
+import {indexFootprints} from './terrace-geometry.js?v=bridge-access-1';
 
 export const bowRoom={id:'UD_R04',deck:'UD',name:'Estar de proa',displayName:'Estar de proa',
   spawn:[26.8,0,7.6],look:[28.7,0,6.8]};
@@ -92,5 +92,5 @@ export function refineBowDeck(detail,exterior,asset,{box,slab,tube,bounds,materi
   }
 
   detail.objects=[...detail.replacements.values()].flat().concat(detail.additions);
-  exterior.bowDeck={version:'bow-deck-1',guards,join};
+  exterior.bowDeck={version:'bridge-access-1',guards,join};
 }

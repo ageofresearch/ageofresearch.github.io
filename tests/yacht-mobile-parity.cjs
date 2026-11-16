@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=bow-deck-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=bridge-access-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -126,6 +126,7 @@ async function capture(browser, mobile) {
     await require('./yacht-upper-interior.cjs')(frame,out,readFrame,mobile);
     await require('./yacht-bridge.cjs')(frame,out,readFrame,mobile);
     await require('./yacht-bow.cjs')(frame,out,readFrame,mobile);
+    await require('./yacht-bridge-access.cjs')(frame,out,readFrame,mobile);
     if (mobile) {
       const fullFile = path => /\/(model\.(bin|json)|mtu[^/]*\.(bin|glb))$|\/assets\/main-[^/]+\.js$/.test(path);
       assert.ok(![...resources].some(fullFile), 'The isolated view must not fetch the complete yacht');
@@ -377,6 +378,7 @@ function compare(original,mobile) {
       await require('./yacht-upper-interior-loading.cjs')(browser,base);
       await require('./yacht-bridge-loading.cjs')(browser,base);
       await require('./yacht-bow-loading.cjs')(browser,base);
+      await require('./yacht-bridge-access-loading.cjs')(browser,base);
     }
     if(mode==='all')compare(original,mobile);
   }finally{await browser.close();}

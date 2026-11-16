@@ -1,0 +1,46 @@
+const assert=require('node:assert/strict');
+module.exports=async function accessLoading(browser,base){
+  const context=await browser.newContext({viewport:{width:360,height:540},hasTouch:true});
+  try{
+    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.route('**/bridge-access.bin?*',r=>r.fulfill({status:503,body:'Unavailable'}));
+    await page.goto(base+'mobile.html',{waitUntil:'domcontentloaded'});
+    await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
+    let frame=page.frames().find(f=>f.url().includes('play.html'));
+    const failed=()=>frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.bridgeAccessLoadState==='error',null,{timeout:180000});
+    await failed();
+    const snapshot=()=>frame.evaluate(()=>{const a=__app,w=a.yachtWalk;return {rooms:w.model.asset.data.rooms.map(r=>r.id),routes:w.nav.routes.map(r=>r.id),stats:{...w.model.stats},profile:a.gangwayRenderer.activeProfile,safe:w.nav.floorSafe(18.5,1.35,'MD')};});
+    const before=await snapshot();assert.equal(before.safe,false);assert.ok(before.rooms.includes('UD_R04'));assert.ok(!before.rooms.includes('MD_R07'));
+    await page.unroute('**/bridge-access.bin?*');
+    await page.route('**/bridge-access.bin?*',r=>r.fulfill({status:200,body:Buffer.alloc(12),contentType:'application/octet-stream'}));
+    await frame.locator('.luz-bridge-access-load button').click();await failed();assert.deepEqual(await snapshot(),before);
+    await page.unroute('**/bridge-access.bin?*');
+    await frame.evaluate(()=>{const r=__app.gangwayRenderer,original=r.prepareProfiles;
+      r.prepareProfiles=async function(){r.prepareProfiles=original;await original.call(r);await new Promise((_,reject)=>{window.failInteriorPreparation=()=>reject(Error('Injected interior GPU failure'));});};
+    });
+    await frame.locator('.luz-bridge-access-load button').click();
+    await frame.waitForFunction(()=>typeof window.failInteriorPreparation==='function',null,{timeout:90000});
+    assert.deepEqual(await frame.evaluate(()=>({running:__app.engine._running,loader:!document.getElementById('loader').hidden,bow:!!__app.entranceYacht.bridgeAccess})),{running:false,loader:true,bow:false});
+    await frame.evaluate(()=>window.failInteriorPreparation());await failed();
+    await frame.waitForFunction(()=>__app.engine._running);assert.deepEqual(await snapshot(),before);
+    await frame.locator('.luz-bridge-access-load button').click();
+    await frame.waitForFunction(()=>__app.entranceYacht.bridgeAccessLoadState==='ready'&&__app.engine._running,null,{timeout:90000});
+    assert.equal((await snapshot()).rooms.filter(r=>r==='MD_R07').length,1);
+    await frame.evaluate(()=>{const w=__app.yachtWalk;w.enterRoom('MD_R07');w.nav.position=[18.5,1.35];w.applyPosition();});
+    await page.locator('#pilot summary').click();await page.waitForFunction(()=>document.querySelector('#cross').disabled);
+    assert.equal(await page.locator('#cross').isEnabled(),false);
+    await frame.evaluate(()=>__app.loadFullYacht());
+    assert.deepEqual(await frame.evaluate(()=>{const n=__app.yachtWalk.nav;return {deck:n.deck,position:n.position,elevation:n.elevation,safe:n.floorSafe(...n.position)};}),{deck:'MD',position:[18.5,1.35],elevation:3.95,safe:true});
+    assert.equal(await frame.locator('.luz-bridge-access-load').count(),0);
+    await page.reload({waitUntil:'domcontentloaded'});await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
+    frame=page.frames().find(f=>f.url().includes('play.html'));
+    await frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.bridgeAccessLoadState==='ready',null,{timeout:180000});
+    const state=await frame.evaluate(()=>{const w=__app.yachtWalk,f=w.model.bridgeAccess.flight,s=f.surfaces[6],ps=s.polygons.flat();
+      w.nav.deck='MD';w.nav.position=[0,1].map(k=>(Math.min(...ps.map(p=>p[k]))+Math.max(...ps.map(p=>p[k])))/2);
+      w.nav.elevation=s.height;w.nav.stair={route:f.route,surfaceIndex:6,d:1.3};w.yaw=1.2;w.pitch=-.15;w.applyPosition();
+      return {position:w.nav.position,elevation:s.height,yaw:w.yaw,pitch:w.pitch};});
+    await frame.evaluate(()=>__app.loadFullYacht());
+    assert.deepEqual(await frame.evaluate(()=>{const w=__app.yachtWalk,n=w.nav;return {position:n.position,elevation:n.elevation,stair:n.stair?.route.id,index:n.stair?.surfaceIndex,yaw:w.yaw,pitch:w.pitch};}),{...state,stair:'bridge',index:6});
+    assert.deepEqual(errors,[]);console.log('Access network/corruption, GPU rollback, paused retry and vestibule/stair full-yacht handoffs passed');
+  }finally{await context.close();}
+};

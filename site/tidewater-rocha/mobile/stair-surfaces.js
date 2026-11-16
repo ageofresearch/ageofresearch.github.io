@@ -1,8 +1,9 @@
-import {configureBowFloor} from './bow-geometry.js?v=bow-deck-1';
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=bow-deck-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=bow-deck-1';
-import {describeSunFloor} from './sun-deck-geometry.js?v=bow-deck-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=bow-deck-1';
+import {configureAccessFloor} from './bridge-access-geometry.js?v=bridge-access-1';
+import {configureBowFloor} from './bow-geometry.js?v=bridge-access-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=bridge-access-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=bridge-access-1';
+import {describeSunFloor} from './sun-deck-geometry.js?v=bridge-access-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=bridge-access-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -254,7 +255,7 @@ export function describeFlights(model,routes) {
     // Handrails remain obstacles; only the flight's own step structure is exempt.
     const structure=new Set(own.filter(p=>!/rail|baluster|handhold/.test(p.feature||'')));
     landings.upper=landingPolygons(landings.upper,route,1);
-    const solidClearance=obstacles(parts,structure,box);
+    const solidClearance=obstacles(parts,structure,box,{includeVerticalFaces:route.id==='bridge'});
     const clearance=(x,y,height,radius)=>solidClearance(x,y,height,radius) &&
       !(route.id==='service' && Math.abs(height-upperHeight)<EPS && model.navigation.serviceAccess.blocked(x,y,route.upper,radius));
     clearance.footprints=solidClearance.footprints;
@@ -315,6 +316,12 @@ export function installFlightNavigation(nav,flights) {
       const end=nav.deck===route.lower?0:nav.deck===route.upper?1:-1;
       if(end<0)continue;
       const path=route.path,endpoint=end?path.at(-1):path[0],neighbor=end?path.at(-2):path[1];
+      if(route.id==='bridge') {
+        // Projection clamps the entire approach to station zero. Do not capture
+        // someone crossing the wide lower landing sideways on their way out.
+        const dx=neighbor[0]-endpoint[0],dy=neighbor[1]-endpoint[1],length=Math.hypot(dx,dy);
+        if(((x-endpoint[0])*dx+(y-endpoint[1])*dy)/length<-.065)continue;
+      }
       const direction=(x-nav.position[0])*(neighbor[0]-endpoint[0])+(y-nav.position[1])*(neighbor[1]-endpoint[1]);
       const station=project(route,x,y);
       if(direction<=EPS || Math.abs(station.d-(end?route.length:0))>.065)continue;
@@ -338,6 +345,7 @@ export function configureModelStairs(nav,model) {
   installFlightNavigation(nav,model.stairInventory.flights);
   configureInteriorFloor(nav,model);
   configureBridgeFloor(nav,model);
+  configureAccessFloor(nav,model);
   configureBowFloor(nav,model);
   if(model.exterior?.sunDeck) {
     const sun=describeSunFloor(model),previous=nav.floorSafe.bind(nav);

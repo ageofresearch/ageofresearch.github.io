@@ -1,5 +1,5 @@
-import {createFinishPatterns} from './finish-patterns.js?v=bow-deck-1';
-import { nextProfile } from './main-saloon.js?v=bow-deck-1';
+import {createFinishPatterns} from './finish-patterns.js?v=bridge-access-1';
+import { nextProfile } from './main-saloon.js?v=bridge-access-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -231,7 +231,7 @@ export async function createForwardRenderer(app, sun) {
     render(preparingProfile=null,target=null) {
       const {engine, gpu, camera} = app;
       if(profiles) {
-        const nav=app.yachtWalk.nav,name=preparingProfile??nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position));
+        const nav=app.yachtWalk.nav,name=preparingProfile??nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position));
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {

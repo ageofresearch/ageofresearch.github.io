@@ -144,18 +144,19 @@ export function boardingTextureUV(part) {
 
 export const gangwayFullSurfaceWGSL = `
 if(code>=37.0 && code<=42.0){
- var gwAcross=0.0;var gwPitch=${gangwayTeak.woodWidth.toFixed(12)};var gwBoard=0.0;var gwU=d.y;var gwSeam=0.0;
+ let gwUV=in.vs.vBoardingUV;
+ var gwAcross=0.0;var gwPitch=${gangwayTeak.woodWidth.toFixed(12)};var gwBoard=0.0;var gwU=gwUV.y;var gwSeam=0.0;
  if(code<40.0){
-  gwAcross=d.y*.764;gwPitch=${(gangwayTeak.woodWidth + gangwayTeak.joint).toFixed(12)};
-  gwBoard=clamp(floor(gwAcross/gwPitch),0.0,6.0);gwU=d.x/.75+gwBoard*.173;
+  gwAcross=gwUV.y*.764;gwPitch=${(gangwayTeak.woodWidth + gangwayTeak.joint).toFixed(12)};
+  gwBoard=clamp(floor(gwAcross/gwPitch),0.0,6.0);gwU=gwUV.x/.75+gwBoard*.173;
   let k=clamp(floor(gwAcross/gwPitch+.5),1.0,6.0);let aa=max(fwidth(gwAcross),.00005);
   gwSeam=1.0-smoothstep(.002-aa,.002+aa,abs(gwAcross-(k*gwPitch-.002)));
  }else if(code==42.0){
-  gwAcross=2.48+d.y*1.076;gwPitch=.105;gwBoard=floor(gwAcross/gwPitch);
-  gwU=(2.28+(d.x-.75)/.125*1.52)/1.7+gwBoard*.173;
+  gwAcross=2.48+gwUV.y*1.076;gwPitch=.105;gwBoard=floor(gwAcross/gwPitch);
+  gwU=(2.28+(gwUV.x-.75)/.125*1.52)/1.7+gwBoard*.173;
   let k=floor(gwAcross/gwPitch+.5);let aa=max(fwidth(gwAcross),.00005);
   gwSeam=1.0-smoothstep(.002-aa,.002+aa,abs(gwAcross-k*gwPitch));
- }else{gwAcross=(d.x-.875)/.125*${gangwayTeak.woodWidth.toFixed(12)};}
+ }else{gwAcross=(gwUV.x-.875)/.125*${gangwayTeak.woodWidth.toFixed(12)};}
  let gwV=gwAcross/gwPitch+.217;let gwTau=6.28318530718;
  let gwFootprint=max(fwidth(gwU),fwidth(gwV));
  let gwCoarse=.27*sin(gwTau*(gwV*5.0+.15*sin(gwTau*gwU)+.04*sin(gwTau*gwU*5.0)))*(1.0-smoothstep(.25,.75,gwFootprint*5.0));

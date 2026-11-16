@@ -76,7 +76,7 @@ module.exports = async (frame, out, readFrame, mobile) => {
       png = new PNG({ width: shot.width, height: shot.height });
     png.data = Buffer.from(shot.pixels, 'base64');
     writeFileSync(out + `/teak-${mobile ? 'mobile' : 'full'}-${name}.png`, PNG.sync.write(png));
-    if (mobile && name === 'panel-2' && !process.env.YACHT_REFERENCE) {
+    if (name === 'panel-2' && !process.env.YACHT_REFERENCE) {
       const samples = await frame.evaluate(() => {
         const a = __app,
           w = a.yachtWalk,

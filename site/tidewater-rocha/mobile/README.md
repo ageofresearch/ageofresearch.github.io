@@ -29,6 +29,9 @@ so the mobile fragment shader remains identical to the prior release. For the
 constant-matte boarding codes 37..42, aSurface.xy carries precomputed atlas UVs;
 both renderers decode roughness .8 and metalness zero for these codes. This
 keeps the four-buffer interface and all resident geometry byte counts unchanged.
+The full renderer passes those UVs in a separate smooth varying; its existing
+material-code varying stays flat. Both renderers must pass the rendered six-seam
+probe, preventing constant UVs from silently removing the finish.
 Total mobile finish storage is 3,495,255 bytes, under 3.6 MB;
 there are still two sampled texture resources, two draws and one pass. All
 buffers, textures and pipelines are prepared before the first walk. The original

@@ -6,7 +6,7 @@ module.exports=async function accessLoading(browser,base){
     await page.route('**/bridge-access.bin?*',r=>r.fulfill({status:503,body:'Unavailable'}));
     await page.goto(base+'mobile.html',{waitUntil:'domcontentloaded'});
     await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
-    const frame=page.frames().find(f=>f.url().includes('play.html'));
+    let frame=page.frames().find(f=>f.url().includes('play.html'));
     const failed=()=>frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.bridgeAccessLoadState==='error',null,{timeout:180000});
     await failed();
     const snapshot=()=>frame.evaluate(()=>{const a=__app,w=a.yachtWalk;return {rooms:w.model.asset.data.rooms.map(r=>r.id),routes:w.nav.routes.map(r=>r.id),stats:{...w.model.stats},profile:a.gangwayRenderer.activeProfile,safe:w.nav.floorSafe(18.5,1.35,'MD')};});
@@ -32,6 +32,15 @@ module.exports=async function accessLoading(browser,base){
     await frame.evaluate(()=>__app.loadFullYacht());
     assert.deepEqual(await frame.evaluate(()=>{const n=__app.yachtWalk.nav;return {deck:n.deck,position:n.position,elevation:n.elevation,safe:n.floorSafe(...n.position)};}),{deck:'MD',position:[18.5,1.35],elevation:3.95,safe:true});
     assert.equal(await frame.locator('.luz-bridge-access-load').count(),0);
-    assert.deepEqual(errors,[]);console.log('Access network/corruption, GPU rollback, paused retry and exterior full-yacht handoff passed');
+    await page.reload({waitUntil:'domcontentloaded'});await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
+    frame=page.frames().find(f=>f.url().includes('play.html'));
+    await frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.bridgeAccessLoadState==='ready',null,{timeout:180000});
+    const state=await frame.evaluate(()=>{const w=__app.yachtWalk,f=w.model.bridgeAccess.flight,s=f.surfaces[6],ps=s.polygons.flat();
+      w.nav.deck='MD';w.nav.position=[0,1].map(k=>(Math.min(...ps.map(p=>p[k]))+Math.max(...ps.map(p=>p[k])))/2);
+      w.nav.elevation=s.height;w.nav.stair={route:f.route,surfaceIndex:6,d:1.3};w.yaw=1.2;w.pitch=-.15;w.applyPosition();
+      return {position:w.nav.position,elevation:s.height,yaw:w.yaw,pitch:w.pitch};});
+    await frame.evaluate(()=>__app.loadFullYacht());
+    assert.deepEqual(await frame.evaluate(()=>{const w=__app.yachtWalk,n=w.nav;return {position:n.position,elevation:n.elevation,stair:n.stair?.route.id,index:n.stair?.surfaceIndex,yaw:w.yaw,pitch:w.pitch};}),{...state,stair:'bridge',index:6});
+    assert.deepEqual(errors,[]);console.log('Access network/corruption, GPU rollback, paused retry and vestibule/stair full-yacht handoffs passed');
   }finally{await context.close();}
 };

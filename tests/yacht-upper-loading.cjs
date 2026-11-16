@@ -19,8 +19,8 @@ module.exports=async function upperLoading(browser,base) {
     await frame.waitForFunction(()=>window.__app.entranceYacht.upperLoadState==='error',null,{timeout:90000});
     assert.equal(await frame.evaluate(()=>window.__app.yachtWalk.nav.routes.length),1);
     await frame.locator('.luz-upper-load button').click();
-    await frame.waitForFunction(()=>window.__app.entranceYacht.sunLoadState==='ready',null,{timeout:90000});
-    assert.equal(await frame.evaluate(()=>window.__app.yachtWalk.nav.routes.length),3);
+    await frame.waitForFunction(()=>window.__app.entranceYacht.bridgeAccessLoadState==='ready'&&window.__app.engine._running,null,{timeout:90000});
+    assert.equal(await frame.evaluate(()=>window.__app.yachtWalk.nav.routes.length),4);
     await frame.evaluate(()=>{const w=window.__app.yachtWalk;w.enterRoom('UD_R01');});
     await page.locator('#pilot summary').click();
     await page.waitForFunction(()=>document.querySelector('#cross').disabled);

@@ -32,9 +32,10 @@ test('access build is reproducible, bounded and matches the shared support and c
   for(const a of p.audit.filter(a=>a.support||manifest.accessPartIDs.includes(a.id)))assert.equal(a.triangles,a.sourceTriangles,a.id);
   for(const b of p.batches)assert.equal(new Set(b.indices).size,b.attributes.position.length/3);
  }
- const {model}=await full();try{
+ const {model,walk}=await full();try{
   assert.deepEqual(access.floor,model.bridgeAccessFloor.floor);
   const shared=model.stairInventory.flights.find(f=>f.id==='bridge');assert.deepEqual(access.flight.surfaces,shared.surfaces);
+  assert.equal(walk.nav.floorSafe(18.5,1.82,'MD'),false,'The old galley mask cannot bypass the recessed wall from its far side');
   const parts=renderedParts(model),wall=parts.find(p=>p.feature==='recessed galley partition');
   assert.ok(wall);assert.deepEqual(wall.bounds,[18,1.38887,3.95,19.63299,1.71887,5.86]);
   const triangles=new Set();for(let i=0;i<wall.indices.length;i+=3){const t=wall.indices.slice(i,i+3).map(k=>wall.vertices.slice(k*6,k*6+3).join(',')).sort().join(';');assert.ok(!triangles.has(t));triangles.add(t);}

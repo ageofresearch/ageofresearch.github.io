@@ -57,7 +57,10 @@ export function describeAccessFloor(model) {
 export function configureAccessFloor(nav,model) {
   const access=describeAccessFloor(model),floor=nav.floorSafe.bind(nav),location=nav.location.bind(nav),nearest=nav.nearest.bind(nav);
   const flight=model.stairInventory.flights.find(f=>f.id==='bridge');
-  nav.floorSafe=(x,y,deck=nav.deck)=>deck==='MD'&&inAccess(x,y)?
+  // Include the galley-facing body margin of the moved wall in the full yacht.
+  // Its former raster mask still describes the original straight partition.
+  const changedWall=(x,y)=>x>=17.85&&x<=19.79&&y>=1.23&&y<=1.87;
+  nav.floorSafe=(x,y,deck=nav.deck)=>deck==='MD'&&(inAccess(x,y)||changedWall(x,y))?
     access.floorSafe(x,y,nav.radius)||flight?.safe(x,y,nav.radius,0)?.index===0:floor(x,y,deck);
   nav.location=()=>nav.deck==='MD'&&!nav.stair&&inAccess(...nav.position)?accessRoom:location();
   nav.nearest=(x,y,deck=nav.deck)=>deck==='MD'&&inAccess(x,y)?accessRoom.spawn.slice(0,2):nearest(x,y,deck);

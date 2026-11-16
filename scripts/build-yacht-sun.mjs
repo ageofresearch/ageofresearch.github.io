@@ -31,6 +31,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
   new Walk({camera:{position:model.group.position}},model,{document:null});
   const final=renderedParts(model),flight=model.stairInventory.flights.find(f=>f.id==='sun');
+  const corrected=new Map((model.interiorDetail.spatialCorrections||[]).flatMap(r=>r.parts.map(id=>[id,r.id])));
   // Replace the partial SD slab and stair with their complete shared assemblies.
   const lowerParts=Object.values(lower.sources).flat().filter(p=>!['SD_DCK_001','SD_STA_001'].includes(p.anchor||p.sourceID));
   const parts=final.filter(p=>(p.deck==='SD'||p.semanticParent==='stairs/sun')&&!['Cold_water','Hot_water','Drainage'].includes(p.category)).map(p=>({...p,
@@ -66,7 +67,10 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
         const choice=lod?.(p,{profile,near,error,support,stair})||{};
         const reduced=choice.omit?{...p,indices:[]}:simplify(p,choice.error??error,!support&&!stair&&!p.glass?['Permissive']:[]);
         const result=splitFinishBoundaries(reduced,{28:interiorFinishBounds,29:bridgeFinishBounds});
-        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...choice.omit&&choice.reason?{omission:choice.reason}:{}});return compactGeometry(result);
+        const placement=corrected.has(p.id)&&result.indices.length?{
+          correction:corrected.get(p.id),sourceBounds:b,
+          renderedBounds:boundsOf([...new Set(result.indices)].flatMap(i=>result.vertices.slice(i*6,i*6+6)))}:{};
+        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...placement,...choice.omit&&choice.reason?{omission:choice.reason}:{}});return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
@@ -87,7 +91,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'bridge-access-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'spatial-correction-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

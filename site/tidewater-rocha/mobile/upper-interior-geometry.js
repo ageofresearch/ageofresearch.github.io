@@ -1,5 +1,5 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=bridge-access-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=bridge-access-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=spatial-correction-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=spatial-correction-1';
 
 // Display coordinates from the current shared model, not surveyed dimensions.
 export const interiorLimits={start:13.8,end:18.63233,minY:-2.5224,maxY:2.116};

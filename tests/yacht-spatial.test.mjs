@@ -1,0 +1,113 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {buildYachtGeometry,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import {renderedParts,surfaceTriangles} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
+import {indexFootprints} from '../site/tidewater-rocha/mobile/terrace-geometry.js';
+import {correctSpatialAssemblies} from '../site/tidewater-rocha/mobile/spatial-corrections.js';
+const root=new URL('../site/tidewater-rocha/',import.meta.url);
+const data=JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json',root))),buffer=await readFile(new URL('rocha/luz-de-mar/model.bin',root));
+const asset={data,binary:buffer.buffer.slice(buffer.byteOffset,buffer.byteOffset+buffer.byteLength),
+  nav:Object.fromEntries(Object.entries(data.nav).map(([id,n])=>[id,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
+const before=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false,spatialCorrections:false});
+const after=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});
+const oldParts=renderedParts(before),parts=renderedParts(after);
+const center=p=>[0,1,2].map(k=>(p.bounds[k]+p.bounds[k+3])/2);
+const byID=(ps,id)=>ps.find(p=>p.id===id);
+test.after(()=>{before.dispose();after.dispose();});
+
+test('the actual bow plinth contacts fail before the correction and fit the unchanged slab afterward',()=>{
+  const floor=parts.filter(p=>(p.anchor||p.id)==='UD_DCK_001').flatMap(p=>surfaceTriangles(p,6,.002));
+  const supported=indexFootprints(floor.map(polygon=>({polygon})));
+  for(const id of ['UD_FUR_053','UD_FUR_055']){
+    const low=p=>Array.from({length:p.vertices.length/6},(_,i)=>p.vertices.slice(i*6,i*6+3)).filter(v=>Math.abs(v[2]-6)<.001);
+    assert.ok(low(byID(oldParts,id)).some(v=>!supported(v[0],v[1],1e-6)),id+' must reproduce the original defect');
+    assert.ok(low(byID(parts,id)).every(v=>supported(v[0],v[1],1e-6)),id+' loses a load contact');
+  }
+  const a=parts.find(p=>p.id==='UD_DCK_001/stairs/stair-opening'),b=oldParts.find(p=>p.id===a.id);
+  assert.deepEqual(a.vertices,b.vertices,'Do not grow the deck to conceal an unsupported chair');
+});
+
+function facesTable(ps,n){
+  const pieces=ps.filter(p=>p.feature===`exterior dining chair ${n} upholstered form`).sort((a,b)=>a.bounds[5]-b.bounds[5]);
+  const [seat,back]=pieces.map(center),table=center(ps.find(p=>p.feature==='exterior dining square table with soft corners'));
+  return (seat[0]-back[0])*(table[0]-seat[0])+(seat[1]-back[1])*(table[1]-seat[1])>0;
+}
+test('all six dining chairs face the table, including the two formerly reversed end chairs',()=>{
+  for(const n of [5,6])assert.equal(facesTable(oldParts,n),false);
+  for(let n=1;n<=6;n++)assert.equal(facesTable(parts,n),true,'Chair '+n);
+  assert.equal(parts.filter(p=>/^exterior dining chair \d pedestal$/.test(p.feature||'')).length,6);
+  assert.ok(!parts.some(p=>/^Upper dining chair /.test(p.feature||'')),'Removed interior chairs must stay removed');
+});
+
+test('grounded assemblies retain their geometry and child relationships, and corrections apply once',()=>{
+  const records=after.interiorDetail.spatialCorrections;
+  const reshaped=new Set(records.filter(r=>r.action==='fit-recess').flatMap(r=>r.parts));
+  for(const r of records){
+    if(r.action==='remove-duplicate'){
+      for(const id of r.parts)assert.ok(!byID(parts,id),'Duplicate survives: '+id);
+      assert.ok(byID(parts,r.owner),'Owning surface was removed');continue;
+    }
+    for(const id of r.parts){
+      if(reshaped.has(id))continue;
+      const a=byID(parts,id),b=byID(oldParts,id);assert.ok(a&&b,id);
+      assert.equal(a.indices.length,b.indices.length,id);
+      // A rigid correction preserves each triangle edge, including every child.
+      for(let i=0;i<a.indices.length;i+=3)for(let j=0;j<3;j++){
+        const ia=a.indices[i+j]*6,ib=a.indices[i+(j+1)%3]*6;
+        const la=Math.hypot(...[0,1,2].map(k=>a.vertices[ia+k]-a.vertices[ib+k]));
+        const lb=Math.hypot(...[0,1,2].map(k=>b.vertices[ia+k]-b.vertices[ib+k]));
+        assert.ok(Math.abs(la-lb)<1e-5,id+' was scaled or deformed');
+      }
+    }
+    if(/^(cockpit-|upper-)/.test(r.id))assert.ok(Math.abs(r.after[2]-(r.id.startsWith('cockpit-')?3.95:6))<1e-7,r.id);
+  }
+  const vertices=JSON.stringify(parts.filter(p=>p.spatialCorrection).map(p=>p.vertices));
+  correctSpatialAssemblies(after.interiorDetail,after.exterior,asset,{});
+  assert.equal(JSON.stringify(renderedParts(after).filter(p=>p.spatialCorrection).map(p=>p.vertices)),vertices);
+});
+
+test('corrected full-view furniture has prepared collision fields and preserves the stair inventory',()=>{
+  after.group.userData={yacht:basis};
+  const walk=new Walk({camera:{position:after.group.position}},after,{document:null});
+  assert.equal(after.correctedFurnitureFields.length,3);
+  for(const [deck,x,y]of [['UD',10.94,-.78],['UD',13.32,-.78],['MD',25.72,2.21],['LD',30.05,1.13]])
+    assert.equal(walk.nav.floorSafe(x,y,deck),false,`${deck} ${x},${y}`);
+  assert.deepEqual(after.stairInventory.flights.map(f=>[f.id,f.treadCount,f.riseCount]),
+    [['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13]]);
+});
+
+test('every active mobile profile retains corrected load-contact heights',async()=>{
+  const manifest=JSON.parse(await readFile(new URL('mobile/bridge-access.json',root)));
+  for(const [name,p]of Object.entries(manifest.profiles)){
+    assert.ok(p.triangles<=25000,name);assert.equal(p.batches.length,2);
+    const changed=p.audit.filter(a=>a.correction);assert.ok(changed.length>20,name);
+    for(const a of changed){
+      const z=a.sourceBounds[2];
+      if([3.95,6].some(h=>Math.abs(z-h)<.001))assert.ok(Math.abs(a.renderedBounds[2]-z)<=.001,
+        `${name}: ${a.id} floats after simplification by ${a.renderedBounds[2]-z}`);
+    }
+  }
+});
+
+
+test('galley basin is visible through a fitted recess without changing the cabinet envelope',()=>{
+  const bodies=parts.filter(p=>p.anchor==='MD_FUR_035'&&['rounded joinery body','thin fitted top'].includes(p.feature));
+  const bowl=parts.find(p=>p.anchor==='MD_SAN_004'&&p.feature==='recessed basin bowl'),[x,y]=center(bowl);
+  assert.ok(Math.abs(bowl.bounds[5]-4.85)<1e-7);
+  for(const body of bodies){
+    assert.ok(body.indices.length>0);
+    const edges=new Map(),point=i=>body.vertices.slice(i*6,i*6+3).map(n=>n.toFixed(6)).join(',');
+    for(let i=0;i<body.indices.length;i+=3)for(let j=0;j<3;j++){
+      const key=[point(body.indices[i+j]),point(body.indices[i+(j+1)%3])].sort().join('|');
+      edges.set(key,(edges.get(key)||0)+1);
+    }
+    assert.ok([...edges.values()].every(n=>n===2),'Recess must remain a closed surface without T junctions');
+    const faces=surfaceTriangles(body,body.bounds[5],.00001);
+    assert.equal(indexFootprints(faces.map(polygon=>({polygon})))(x,y,1e-6),false,'Counter still covers the basin');
+    const old=oldParts.find(p=>p.id===body.id);
+    for(const k of [0,2,3,5])assert.ok(Math.abs(old.bounds[k]-body.bounds[k])<1e-6,'Outer cabinet size changed');
+    assert.ok(Math.abs((old.bounds[4]-old.bounds[1])-(body.bounds[4]-body.bounds[1]))<1e-6);
+  }
+  assert.ok(!parts.some(p=>p.anchor==='MD_FUR_037'),'Buried duplicate cabinet remains');
+});

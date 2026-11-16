@@ -1,10 +1,49 @@
 # Mobile yacht zones
 
-Release: `bow-deck-1`. The mobile route connects boarding, the aft terrace,
+Release: `spatial-correction-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge and forward lounge. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
+
+## Spatial correction and evidence
+
+The [spatial audit](../spatial-audit/) inventories all 6,765 original submitted
+parts, including prepared engine and strainer assets, and compares fixed cameras.
+The shared correction module moves or rotates 29 complete assemblies without
+scaling them: cockpit supports, upper dining seats/table, two forward chairs,
+galley joinery, owner window-side furniture, helm and sanitary fixtures. It also
+removes seven contained wall/lining fragments while retaining their owning walls.
+The galley sink is raised to its counter, with a fitted recess through the overlapping
+top and removal of four buried cabinet parts; the outer cabinet dimensions remain.
+The corrected complete model has 6,754 parts and 978,365 triangles (228 more).
+
+Corrections use actual deck boundaries, physical contacts and positive solid
+intersections. They are provisional physical fits, not surveyed boat positions.
+In particular, the day-head WC is rotated toward the room because a translation
+alone cannot clear both partitions. Both carved counter solids are checked for closed volume and consistent winding.
+The original model JSON/BIN remain unchanged.
+Full-view collision fields are rebuilt around corrected assemblies during initial
+preparation; mobile packages derive their geometry and obstacles from the same result.
+
+The original lower-cabin layout still has 24 solid intersections requiring specific
+Luz de Mar evidence; 20 open-surface candidates remain for review. Existing bed and
+partition contradictions are preserved explicitly, without inventing bunks or
+changing cabin dimensions. The CI audit permits only the recorded original pairs
+and volumes; new unsupported contacts, overlapping solids or duplicate faces fail.
+"Inventoried" in the report does not certify a real-vessel position.
+
+Active profile triangles are exterior 24,876; interior 24,521; upper 24,975;
+sun 24,366; bow 22,737. Every profile keeps two indexed draws, one render pass,
+render scale 1 and MSAA 4. The audit is a separate page and adds no viewer download.
+
+Reproduce the offline audit with:
+
+```sh
+python3 -m pip install --target /tmp/yacht-spatial-libs -r scripts/yacht-spatial-requirements.txt
+node scripts/audit-yacht-export.mjs /tmp/yacht-spatial-audit/current
+PYTHONPATH=/tmp/yacht-spatial-libs python3 scripts/audit-yacht-spatial.py /tmp/yacht-spatial-audit/current --check
+```
 
 ## Geometry and navigation
 
@@ -27,7 +66,7 @@ The bridge is reached through the existing port passage around the forward
 partition, retaining the partition and service furniture. UD_R03 is **Puente de
 mando**, with safe camera spawn [20.5,0,7.6] and floor elevation 6.00. The console,
 wheel/throttles, five static displays, helm chair, side settee and eight windshield
-panels retain their shared positions. The narrow bow tip and the existing internal stair remain visible context and
+panels use their shared positions, with the rigid helm adjustment recorded above. The narrow bow tip and the existing internal stair remain visible context and
 are not walkable on mobile. Their continuation notices do not invent walls. Full-yacht bridge circulation
 and its internal staircase remain available.
 
@@ -67,9 +106,10 @@ coaming, clear glass and a cap at z=7.02 use supported posts spaced at most 1.25
 The three sunpad source envelopes retain their dimensions and position, with
 rounded upholstery; the four existing sofa modules stay in place.
 
-The tip's four chairs and unresolved bordered feature stay unchanged and outside
-the mobile route. Two of those chairs have incomplete slab support; their layout
-is explicitly pending. The port connection beside the sun flight also stays
+The tip's four chairs and unresolved bordered feature remain outside
+the mobile route. The spatial correction seats the two unsupported chair bases
+inside the unchanged slab; their real-vessel placement and the central feature
+still require reference. The other two chairs retain their original positions. The port connection beside the sun flight also stays
 pending. No pool, new stair, opening through the bridge glass or artificial wall
 has been introduced. Guard dimensions and upholstery are inferred model fits,
 not certified vessel measurements.
@@ -83,7 +123,7 @@ on success. Disposal releases failed candidates and superseded buffers.
 
 ## Rendering and loading
 
-Five profiles remain resident after the final package succeeds:
+The original bow-deck-1 profile baseline was (current counts are listed above):
 
 | Profile | Submitted triangles | GPU geometry bytes |
 | --- | ---: | ---: |
@@ -214,7 +254,7 @@ once access succeeds.
 Profile selection uses `upper` on the bridge flight and MD approach (enter after
 x=17.5, retain down to x=17.1 within its real corridor). Near saloon joinery shares
 its interior detail across this transition. The stair surfaces and new support,
-walls and guards are retained exactly. Current counts are exterior 24,876,
+walls and guards are retained exactly. At bridge-access-1 the counts were exterior 24,876,
 interior 24,520, upper 24,984, sun 24,366 and bow 22,742; each has two batches and
 one render pass, with unchanged resolution/MSAA.
 

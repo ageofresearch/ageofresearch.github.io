@@ -1,0 +1,290 @@
+{
+  "note": "Existing source-model contradictions, preserved pending Luz de Mar reference. This is an exact pair/volume ceiling, not a deck-wide exception. New overlaps fail the audit.",
+  "sourceRelease": "bridge-access-1",
+  "pendingCollisions": [
+    {
+      "part": "LD_FUR_016/004",
+      "boundary": "LD_PAR_017/010",
+      "volume": 0.0001829075936324471,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_015/000",
+      "boundary": "LD_PAR_030",
+      "volume": 0.011573087504589102,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_015/000",
+      "boundary": "LD_PAR_033",
+      "volume": 0.01149310701553972,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_016/000",
+      "boundary": "LD_PAR_030",
+      "volume": 0.0019113072258344725,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_016/000",
+      "boundary": "LD_PAR_033",
+      "volume": 0.004296964211413419,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_017/000",
+      "boundary": "LD_PAR_036",
+      "volume": 0.00024504908562213737,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_019/000",
+      "boundary": "LD_PAR_036",
+      "volume": 0.00018543079760088613,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_021/000",
+      "boundary": "LD_PAR_039",
+      "volume": 0.021998449733146686,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_023/000",
+      "boundary": "LD_PAR_040",
+      "volume": 0.010536131456810685,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_023/000",
+      "boundary": "LD_PAR_042",
+      "volume": 0.009867842218962765,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_024/000",
+      "boundary": "LD_PAR_042",
+      "volume": 8.531887663872576e-05,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_025/000",
+      "boundary": "LD_PAR_042",
+      "volume": 0.010124500595632822,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SOF_026/000",
+      "boundary": "LD_PAR_042",
+      "volume": 7.839227103007718e-05,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SAN_038/000",
+      "boundary": "LD_PAR_033",
+      "volume": 0.0038215921095598494,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SAN_039/000",
+      "boundary": "LD_PAR_033",
+      "volume": 0.00039913991524267073,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SAN_039/001",
+      "boundary": "LD_PAR_033",
+      "volume": 8.732611761261307e-06,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_024",
+      "boundary": "LD_PAR_030",
+      "volume": 0.021674729226538385,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_024",
+      "boundary": "LD_PAR_033",
+      "volume": 0.021527686605441687,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_025",
+      "boundary": "LD_PAR_036",
+      "volume": 0.0006971420392135977,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_026",
+      "boundary": "LD_PAR_036",
+      "volume": 0.0005275060397398335,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_027",
+      "boundary": "LD_PAR_039",
+      "volume": 0.0442882815612767,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_028",
+      "boundary": "LD_PAR_040",
+      "volume": 0.020263253064582987,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_028",
+      "boundary": "LD_PAR_042",
+      "volume": 0.020025603583538516,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_FUR_029",
+      "boundary": "LD_PAR_042",
+      "volume": 0.02055601406421914,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SAN_042",
+      "boundary": "LD_PAR_043",
+      "volume": 0.002755495216360815,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    },
+    {
+      "part": "LD_SAN_050",
+      "boundary": "LD_PAR_045",
+      "volume": 0.002755505917180101,
+      "status": "pending-reference",
+      "note": "Original lower-cabin/service layout needs reference reconciliation"
+    }
+  ],
+  "openSurfaces": [
+    {
+      "part": "LD_FUR_008/003",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_FUR_008/004",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_FUR_008/005",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_021/000",
+      "boundary": "LD_PAR_020/stairs/guest-stair-wall-clearance",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_021/000",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_021/000",
+      "boundary": "LD_GLA_002",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_022/000",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_022/001",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_022/002",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_FUR_019/000",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_FUR_019/001",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_FUR_019/002",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_026/000",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_026/001",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_026/002",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_026/003",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_026/004",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_028/000",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_SAN_028/002",
+      "boundary": "LD_STA_001/stairs/sculpted-ivory-enclosure-1",
+      "status": "open-surface-review"
+    },
+    {
+      "part": "LD_FUR_027/000",
+      "boundary": "LD_PAR_039",
+      "status": "open-surface-review"
+    }
+  ]
+}

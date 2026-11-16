@@ -46,7 +46,7 @@ export async function buildBridgeAccess() {
       }
       parts.push(...additions);
       const physical=model.bridgeAccessFloor,flight=model.stairInventory.flights.find(f=>f.id==='bridge');
-      return {version:'bridge-access-1',room:accessRoom,route:accessRoute,
+      return {version:'spatial-correction-1',room:accessRoom,route:accessRoute,
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),domains:physical.domains,
         accessPartIDs:additions.map(p=>p.id),
         flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,

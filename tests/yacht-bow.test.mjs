@@ -65,9 +65,10 @@ test('bow package is reproducible with five compact profiles and exact shared ad
    const source=model.asset.data.meshes.find(p=>p.id===id),refined=parts.filter(p=>p.anchor===id);
    assert.ok(refined.length);for(const p of refined)for(let k=0;k<3;k++){assert.ok(p.bounds[k]>=source.bbox[k]-1e-6);assert.ok(p.bounds[k+3]<=source.bbox[k+3]+1e-6);}
   }
-  for(const source of model.asset.data.meshes.filter(p=>/^UD_FUR_0(?:5[3-9]|60)$/.test(p.id))){
-   assert.equal(model.interiorDetail.replacements.has(source.id),false,'Pending chair was changed');
-  }
+  for(const id of ['UD_FUR_053','UD_FUR_054','UD_FUR_055','UD_FUR_056'])
+   assert.ok(model.interiorDetail.replacements.has(id),'Unsupported forward chair must use its shared correction');
+  for(const id of ['UD_FUR_057','UD_FUR_058','UD_FUR_059','UD_FUR_060'])
+   assert.equal(model.interiorDetail.replacements.has(id),false,'Already supported forward chair was changed');
  }finally{model.dispose();}
 });
 test('starboard access and both sunpad sides work with stops and diagonals at 12/40/60 Hz',async()=>{

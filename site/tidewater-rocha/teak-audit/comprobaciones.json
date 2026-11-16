@@ -1,0 +1,216 @@
+{
+  "version": "gangway-teak-1",
+  "layout": {
+    "version": "gangway-teak-1",
+    "color": 11967091,
+    "caulk": 2105372,
+    "roughness": 0.8,
+    "centerY": 3.1,
+    "width": 0.764,
+    "boards": 7,
+    "joint": 0.004,
+    "breaks": [
+      -4.5,
+      -1.94,
+      0.36,
+      2.3
+    ],
+    "inset": 0.022,
+    "woodWidth": 0.10571428571428572,
+    "landingPitch": 0.105,
+    "firstPanel": 37,
+    "longBorder": 40,
+    "endBorder": 41,
+    "landing": 42
+  },
+  "geometry": "Se comprobaron 121 piezas de embarque contra sus posiciones, vértices, índices y límites anteriores: sin cambios geométricos. Las regresiones de navegación y escaleras conservan los recorridos.",
+  "materials": "Los tres paneles conservan su material en los 27 perfiles de los siete paquetes con respaldo. Las superficies explícitas de tipo cero se respetan, y los materiales desconocidos producen un error. Las tres capas de textura anteriores coinciden byte a byte.",
+  "graphics": "Texturas de acabado: 3.495.255 bytes. Dos texturas muestreadas, dos lotes y un pase en móvil, escala 1 y MSAA 4. Veta, juntas y remates revisados desde ocho cámaras en móvil y yate completo.",
+  "performance": "Tres contextos nuevos, con primera entrada y recorridos repetidos: medianas de P95 16.9 / 16.9 / 16.9 / 16.8 ms. Sin descargas de modelos ni creación de recursos gráficos durante el movimiento. Medición controlada con renderizado por software; no certifica FPS de un teléfono.",
+  "profiles": {
+    "exterior": 24876,
+    "interior": 24521,
+    "upper": 24975,
+    "sun": 24366,
+    "bow": 22737
+  },
+  "textureBytes": 3495255,
+  "geometryFixtureSHA256": "ff5795c8f42bad0f3fb9e8da6357d8fcafe0795a875f3ee96d29ea570acc782f",
+  "medianP95": [
+    16.900000005960464,
+    16.900000005960464,
+    16.900000005960464,
+    16.80000001192093
+  ],
+  "runs": [
+    {
+      "run": 0,
+      "legs": [
+        {
+          "leg": 0,
+          "frames": 354,
+          "fps": 60.00339962604114,
+          "p95": 16.900000005960464,
+          "max": 19.599999994039536,
+          "over25ms": 0,
+          "over50ms": 0,
+          "maxMove": 0.800000011920929,
+          "maxCPU": 2.0999999940395355
+        },
+        {
+          "leg": 1,
+          "frames": 354,
+          "fps": 60.00305100271459,
+          "p95": 16.900000005960464,
+          "max": 25.900000005960464,
+          "over25ms": 1,
+          "over50ms": 0,
+          "maxMove": 0.5999999940395355,
+          "maxCPU": 1.4000000059604645
+        },
+        {
+          "leg": 2,
+          "frames": 352,
+          "fps": 59.66202816990871,
+          "p95": 16.900000005960464,
+          "max": 30.400000005960464,
+          "over25ms": 2,
+          "over50ms": 0,
+          "maxMove": 6.200000017881393,
+          "maxCPU": 8.200000017881393
+        },
+        {
+          "leg": 3,
+          "frames": 353,
+          "fps": 59.8355792863802,
+          "p95": 16.80000001192093,
+          "max": 30,
+          "over25ms": 1,
+          "over50ms": 0,
+          "maxMove": 3.4000000059604645,
+          "maxCPU": 6.699999988079071
+        }
+      ],
+      "gpu": [],
+      "resources": [],
+      "scale": 1,
+      "samples": 4,
+      "finishTextureBytes": 3495255
+    },
+    {
+      "run": 1,
+      "legs": [
+        {
+          "leg": 0,
+          "frames": 354,
+          "fps": 60.00339962604114,
+          "p95": 16.900000005960464,
+          "max": 20.30000001192093,
+          "over25ms": 0,
+          "over50ms": 0,
+          "maxMove": 0.800000011920929,
+          "maxCPU": 3.699999988079071
+        },
+        {
+          "leg": 1,
+          "frames": 352,
+          "fps": 59.66303942494471,
+          "p95": 16.80000001192093,
+          "max": 36.39999997615814,
+          "over25ms": 1,
+          "over50ms": 0,
+          "maxMove": 3,
+          "maxCPU": 17.700000017881393
+        },
+        {
+          "leg": 2,
+          "frames": 347,
+          "fps": 58.814556178858865,
+          "p95": 16.900000005960464,
+          "max": 68.59999999403954,
+          "over25ms": 4,
+          "over50ms": 1,
+          "maxMove": 9.400000005960464,
+          "maxCPU": 29
+        },
+        {
+          "leg": 3,
+          "frames": 352,
+          "fps": 59.66506203816456,
+          "p95": 17,
+          "max": 36.69999998807907,
+          "over25ms": 2,
+          "over50ms": 0,
+          "maxMove": 0.800000011920929,
+          "maxCPU": 2.7000000178813934
+        }
+      ],
+      "gpu": [],
+      "resources": [],
+      "scale": 1,
+      "samples": 4,
+      "finishTextureBytes": 3495255
+    },
+    {
+      "run": 2,
+      "legs": [
+        {
+          "leg": 0,
+          "frames": 353,
+          "fps": 59.83341832398436,
+          "p95": 16.900000005960464,
+          "max": 25.600000023841858,
+          "over25ms": 1,
+          "over50ms": 0,
+          "maxMove": 2.0999999940395355,
+          "maxCPU": 3.300000011920929
+        },
+        {
+          "leg": 1,
+          "frames": 354,
+          "fps": 60.00305100241149,
+          "p95": 16.900000005960464,
+          "max": 27.900000005960464,
+          "over25ms": 1,
+          "over50ms": 0,
+          "maxMove": 1,
+          "maxCPU": 3
+        },
+        {
+          "leg": 2,
+          "frames": 353,
+          "fps": 59.83253669634053,
+          "p95": 16.899999976158142,
+          "max": 30.099999994039536,
+          "over25ms": 1,
+          "over50ms": 0,
+          "maxMove": 0.8999999761581421,
+          "maxCPU": 3.100000023841858
+        },
+        {
+          "leg": 3,
+          "frames": 354,
+          "fps": 60.00203396713189,
+          "p95": 16.80000001192093,
+          "max": 21.5,
+          "over25ms": 0,
+          "over50ms": 0,
+          "maxMove": 0.7000000178813934,
+          "maxCPU": 2.2000000178813934
+        }
+      ],
+      "gpu": [],
+      "resources": [],
+      "scale": 1,
+      "samples": 4,
+      "finishTextureBytes": 3495255
+    }
+  ],
+  "references": [
+    {
+      "url": "https://www.althausyachts.com/brokerage/luz-de-mar/",
+      "scope": "Vessel-specific aft-deck material appearance; not measured gangway layout"
+    }
+  ],
+  "caveat": "Approved provisional board layout and material values; not surveyed vessel measurements or a calibrated onboard colour sample."
+}

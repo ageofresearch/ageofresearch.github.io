@@ -46,7 +46,7 @@ const summarize=rows=>{
       const move=performance.now()-t,b=w.model.group.userData.yacht;
       const direction=app.camera.position.clone().set(dy*b.sy,0,dx*b.sx).applyQuaternion(w.model.group.quaternion);
       w.yaw=Math.atan2(-direction.x,-direction.z);w.pitch=-.2;original(dt);
-      rows.push({leg,interval:previous===undefined?null:t-previous,move,cpu:performance.now()-t,profile:app.gangwayRenderer.activeProfile,triangles:w.model.stats.triangles});previous=t;
+      rows.push({leg,position:n.position.slice(),elevation:n.elevation,interval:previous===undefined?null:t-previous,move,cpu:performance.now()-t,profile:app.gangwayRenderer.activeProfile,triangles:w.model.stats.triangles});previous=t;
       if(Math.hypot(to[0]-n.position[0],to[1]-n.position[1])<.002){index++;if(index===points.length){index=1;leg++;}}
       if(leg===4){app.frame=original;resolve();}else if(t-start>240000)throw Error('Access route stalled '+n.position);
      }catch(error){app.frame=original;reject(error);}};

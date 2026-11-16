@@ -191,7 +191,7 @@ treads, 12 rises, width 0.76, nominal run 0.226667 and rise 0.170833, between
 The approved local recess moves the middle of `MD_PAR_004` (x 18.20–19.50)
 +0.25 in y. A single concave solid retains the original ends, 0.08 wall
 thickness and continuous skirting. The clear lower turn grows from 0.2746 to
-approximately 0.525. Furniture is unchanged. The old doorway's skirtings end
+approximately 0.523. Furniture is unchanged. The old doorway's skirtings end
 at y=0.68 and its switch plate moves +0.29 in y onto the retained wall.
 The shared source geometry supplies both renderers and the body/head collision;
 vertical wall faces are included explicitly for this flight and vestibule.
@@ -224,6 +224,13 @@ Main furniture volumes remain. The upper helm-wheel rim uses the existing
 simplifier with 0.012 absolute model error. Uniformly lit vestibule flooring
 keeps the original clipped triangulation rather than redundant subdivisions.
 Every intermediate fallback package also retains its 25,000-triangle gate.
+
+The final upper profile orders opaque triangles around the bridge/vestibule,
+using conservative triangle-bound distances so wide decks and walls cover
+hidden surfaces early. This offline index permutation retains every triangle,
+winding and material; transparent ordering remains unchanged. It needs no
+per-frame sorting or GPU allocation. The galley floor-finish boundary also
+follows the recessed partition, leaving a continuous vestibule finish.
 
 Validation entry points:
 

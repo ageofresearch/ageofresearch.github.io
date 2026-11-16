@@ -1,4 +1,6 @@
 import {writeFile} from 'node:fs/promises';
+import {orderOpaqueTriangles} from './yacht-geometry/opaque-order.mjs';
+import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {fileURLToPath} from 'node:url';
 import {buildBow,bowLOD} from './build-yacht-bow.mjs';
 import {normalizeRenderedPart,boundsOf} from './build-yacht-saloon.mjs';
@@ -8,7 +10,7 @@ import {accessRoom,accessRoute} from '../site/tidewater-rocha/mobile/bridge-acce
 
 const compact=rows=>[...new Map(rows.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
 export async function buildBridgeAccess() {
-  return buildBow({
+  const result=await buildBow({
     lod(p,context){
       if(p.role?.startsWith('access-')||p.semanticParent==='stairs/bridge')return {error:0};
       const name=p.feature||'',profile=context.profile;
@@ -52,6 +54,15 @@ export async function buildBridgeAccess() {
         evidence:'Approved provisional local galley partition recess; guest stair and service rooms remain outside the mobile route'};
     }
   });
+  // The upper profile now also covers the internal descent. Order its opaque
+  // cover around the bridge/vestibule rather than the old aft-only viewpoint.
+  // This is an offline permutation: no geometry or transparency changes, and
+  // no index sorting or buffer creation is needed during movement.
+  const batch=result.manifest.profiles.upper.batches.find(b=>!b.glass),binary=result.binary;
+  const positions=new Float32Array(binary.buffer,binary.byteOffset+batch.attributes.position.offset,batch.attributes.position.length);
+  const indices=new Uint32Array(binary.buffer,binary.byteOffset+batch.indices.offset,batch.indices.length);
+  indices.set(orderOpaqueTriangles(positions,indices,[0,6.6-basis.seaReference,19*basis.sx-basis.length/2],.25,true));
+  return result;
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){
   const {manifest,binary}=await buildBridgeAccess(),root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);

@@ -24,6 +24,7 @@ on:
       - 'tests/yacht-upper*'
       - 'tests/yacht-sun*'
       - 'tests/yacht-bridge*'
+      - 'tests/yacht-route-performance-comparison*'
       - 'tests/yacht-bow*'
       - 'tests/yacht-spatial*'
       - 'tests/yacht-gangway*'
@@ -90,10 +91,63 @@ jobs:
           python3 -m pip install --target "$RUNNER_TEMP/spatial-libs" -r scripts/yacht-spatial-requirements.txt
           node scripts/audit-yacht-export.mjs "$RUNNER_TEMP/spatial-audit"
           PYTHONPATH="$RUNNER_TEMP/spatial-libs" python3 scripts/audit-yacht-spatial.py "$RUNNER_TEMP/spatial-audit" --check
+  performance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        route: [bridge, gangway, cold-walk, bow, access]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            site/tidewater-rocha
+            tests
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access'
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: performance-reference
+          sparse-checkout: site/tidewater-rocha
+      - name: Measure the route on an isolated worker
+        env:
+          YACHT_CHECK: mobile
+          YACHT_PERF_CASE: ${{ matrix.route }}
+          YACHT_REFERENCE_BASE: http://127.0.0.1:8765/tidewater-rocha/
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
+          python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
+          for attempt in {1..15}; do
+            if curl -fsS --output /dev/null http://127.0.0.1:8764/tidewater-rocha/mobile.html; then break; fi
+            sleep 1
+          done
+          if [ -d performance-reference/site ]; then
+            python3 -m http.server 8765 --bind 127.0.0.1 --directory performance-reference/site > "$RUNNER_TEMP/yacht-reference-http.log" 2>&1 &
+            for attempt in {1..15}; do
+              if curl -fsS --output /dev/null http://127.0.0.1:8765/tidewater-rocha/mobile.html; then break; fi
+              sleep 1
+            done
+          fi
+          export NODE_PATH="$RUNNER_TEMP/browser/node_modules"
+          case "$YACHT_PERF_CASE" in
+            bridge) node tests/yacht-bridge-comparison.cjs ;;
+            gangway) node tests/yacht-gangway-performance.cjs ;;
+            cold-walk) node tests/yacht-cold-walk.cjs ;;
+            bow|access) node tests/yacht-route-performance-comparison.cjs "$YACHT_PERF_CASE" ;;
+          esac
+      - name: Save timing measurements and reference qualification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-${{ matrix.route }}-${{ github.run_attempt }}
+          path: /tmp/yacht-mobile-parity/**/*.json
+          retention-days: 3
   views:
     runs-on: ubuntu-24.04
-    # Separate machines keep full-yacht rendering from delaying mobile failures
-    # or contaminating its measurements. Both modes run the same assertions.
+    # Browser recovery and visual parity run separately from timing measurements.
     timeout-minutes: 45
     strategy:
       fail-fast: false
@@ -107,18 +161,11 @@ jobs:
             site/tidewater-rocha
             tests
             scripts
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        if: matrix.mode == 'mobile'
-        with:
-          persist-credentials: false
-          ref: ${{ github.event.pull_request.base.sha }}
-          path: performance-reference
-          sparse-checkout: site/tidewater-rocha
       - name: Verify geometry and navigation
         if: matrix.mode == 'mobile'
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-bridge-access-comparison.test.cjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-route-performance-comparison.test.cjs
       - name: Verify browser views and recovery
         env:
           YACHT_CHECK: ${{ matrix.mode }}
@@ -129,18 +176,6 @@ jobs:
             if curl -fsS --output /dev/null http://127.0.0.1:8764/tidewater-rocha/mobile.html; then break; fi
             sleep 1
           done
-          if [ "$YACHT_CHECK" = mobile ]; then
-            python3 -m http.server 8765 --bind 127.0.0.1 --directory performance-reference/site > "$RUNNER_TEMP/yacht-reference-http.log" 2>&1 &
-            for attempt in {1..15}; do
-              if curl -fsS --output /dev/null http://127.0.0.1:8765/tidewater-rocha/mobile.html; then break; fi
-              sleep 1
-            done
-            YACHT_REFERENCE_BASE=http://127.0.0.1:8765/tidewater-rocha/ NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bridge-comparison.cjs
-            NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-gangway-performance.cjs
-            NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-cold-walk.cjs
-            NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bow-performance.cjs
-            YACHT_REFERENCE_BASE=http://127.0.0.1:8765/tidewater-rocha/ NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bridge-access-comparison.cjs
-          fi
           NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-mobile-parity.cjs
       - name: Save the reference frames
         if: always()
@@ -152,7 +187,7 @@ jobs:
             /tmp/yacht-mobile-parity/*.json
           retention-days: 3
   compare:
-    needs: views
+    needs: [views, performance, spatial, boarding-finish]
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

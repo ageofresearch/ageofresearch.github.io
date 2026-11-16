@@ -238,7 +238,12 @@ of the PR base on the same runner, at the same resolution and MSAA. It rejects a
 mean-frame regression above 5%, or a P95 above both 25 ms and 105% of the base.
 The report includes both versions' absolute timings; a slow baseline is not
 reported as meeting 25 ms. The standalone controlled return-view gate remains
-unchanged, and the new bow route must meet its absolute 25 ms CI gate as well.
+unchanged. Bow/access comparisons use the qualification rules below; the new
+boarding route retains its absolute 25 ms CI gate.
+
+Timing routes run on separate CI workers, independently of browser recovery and
+image capture. Each route prepares its resources before measurement. The final
+comparison job depends on all timing, geometry and visual checks.
 
 The bow benchmark holds its package to verify initial-loader blocking, then uses
 three fresh contexts to walk out/back twice, including both sunpad sides. It
@@ -321,8 +326,9 @@ per-leg FPS, P95, long frames, movement time, resident memory and GPU/model requ
 It requires zero deferred resource creation and median P95 <=25 ms per leg;
 run it alone, separately from builders and other browser tests.
 
-CI runs `yacht-bridge-access-comparison.cjs` against the immutable PR base on
-the same worker. This follows the existing upper-return comparison: a CPU-limited
+CI runs `yacht-route-performance-comparison.cjs bow` and
+`yacht-route-performance-comparison.cjs access` against the immutable PR base on
+their respective workers. This follows the existing upper-return comparison: a CPU-limited
 software renderer reproduced P95 near 33 ms in both the base and the candidate,
 while the standalone controlled runs of both remain at 16.8–16.9 ms. An
 unqualified worker must not be reported as meeting the absolute 25 ms budget.
@@ -330,4 +336,4 @@ The comparison always requires at least 40 FPS, rejects mean-frame regressions
 over 5%, and requires candidate P95 <=25 ms whenever the reference meets that
 budget. Otherwise it rejects a P95 regression over 5% and records
 `absoluteBudgetQualified: false`. Resource, geometry, scale and MSAA checks are
-identical in both modes. The standalone absolute gate remains unchanged.
+identical in both modes. Both standalone absolute gates remain unchanged.

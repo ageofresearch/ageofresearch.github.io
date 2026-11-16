@@ -7,12 +7,13 @@ function compareRoute(reference,candidate,label='access') {
  assert.equal(reference.length,3);assert.equal(candidate.length,3);
  const views=[0,1,2,3].map(leg=>{
   const summarize=runs=>({p95:median(runs.map(r=>r.legs[leg].p95)),
+   p95Upper95:median(runs.map(r=>r.legs[leg].p95Upper95)),
    meanFrame:median(runs.map(r=>1000/r.legs[leg].fps)),fps:median(runs.map(r=>r.legs[leg].fps))});
-  const r=summarize(reference),c=summarize(candidate),absoluteBudgetQualified=r.p95<=25;
+  const r=summarize(reference),c=summarize(candidate),absoluteBudgetQualified=r.p95Upper95<=25;
   assert.ok(r.fps>=40,'Reference runner cannot sustain 40 FPS on '+label+' leg '+leg);
   assert.ok(c.fps>=40,'Candidate '+label+' FPS below 40 on leg '+leg);
   assert.ok(c.meanFrame<=r.meanFrame*1.05,'Mean '+label+' frame time regressed >5% on leg '+leg);
-  assert.ok(c.p95<=(absoluteBudgetQualified?25:r.p95*1.05),label+' P95 regressed on leg '+leg);
+  assert.ok(c.p95<=(absoluteBudgetQualified?25:r.p95Upper95*1.05),label+' P95 regressed on leg '+leg);
   return {leg,reference:r,candidate:c,absoluteBudgetQualified};
  });
  return views;

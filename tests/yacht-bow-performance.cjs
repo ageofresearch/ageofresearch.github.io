@@ -1,11 +1,12 @@
 // Run alone: three fresh contexts, identical resolution/MSAA, no prior walk.
 const assert=require('node:assert/strict');
+const {quantileUpper95}=require('./yacht-performance-statistics.cjs');
 const {mkdirSync,writeFileSync}=require('node:fs');
 const defaultBase=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
 const defaultOut=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
 const summarize=rows=>{
  const intervals=rows.map(r=>r.interval).filter(Number.isFinite).sort((a,b)=>a-b);
- return {frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),p95:intervals[Math.floor(intervals.length*.95)],
+ return {p95Upper95:quantileUpper95(intervals),frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),p95:intervals[Math.floor(intervals.length*.95)],
   max:intervals.at(-1),over25ms:intervals.filter(t=>t>25).length,over50ms:intervals.filter(t=>t>50).length,
   maxMove:Math.max(...rows.map(r=>r.move)),maxCPU:Math.max(...rows.map(r=>r.cpu))};
 };

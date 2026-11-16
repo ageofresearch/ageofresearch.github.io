@@ -332,8 +332,15 @@ their respective workers. This follows the existing upper-return comparison: a C
 software renderer reproduced P95 near 33 ms in both the base and the candidate,
 while the standalone controlled runs of both remain at 16.8–16.9 ms. An
 unqualified worker must not be reported as meeting the absolute 25 ms budget.
-The comparison always requires at least 40 FPS, rejects mean-frame regressions
-over 5%, and requires candidate P95 <=25 ms whenever the reference meets that
-budget. Otherwise it rejects a P95 regression over 5% and records
-`absoluteBudgetQualified: false`. Resource, geometry, scale and MSAA checks are
+The comparison always requires at least 40 FPS and rejects mean-frame regressions
+over 5%. It qualifies the reference using the upper endpoint of a 95%
+order-statistic rank interval, computed from the recorded frame intervals. This
+independent-sample rank model exposes the uncertainty near the 16.7/33.3 ms
+refresh boundary: about 4% versus 5% missed refreshes can move the point P95
+across that gap with a much smaller change in average throughput.
+When that reference upper bound is <=25 ms, candidate P95 must stay <=25 ms.
+Otherwise candidate P95 must stay within 105% of that reference upper bound,
+and the report records `absoluteBudgetQualified: false`. Raw P95, the bound,
+FPS and long-frame counts remain visible; an unqualified worker is never
+reported as meeting 25 ms. Resource, geometry, scale and MSAA checks are
 identical in both modes. Both standalone absolute gates remain unchanged.

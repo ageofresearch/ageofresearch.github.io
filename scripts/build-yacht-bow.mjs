@@ -6,25 +6,27 @@ import {clipGeometry,contactShade} from './build-yacht-terrace.mjs';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {bowRoom,bowEnd,bowRoute} from '../site/tidewater-rocha/mobile/bow-geometry.js';
 
-export async function buildBow() {
+export function bowLOD(p,{near,error,support,stair,profile}) {
+  if(support||stair||p.glass)return {error};
+  const b=p.bounds,name=p.feature||'',id=p.sourceID||p.anchor||p.id;
+  const guard=name.startsWith('bow guard');
+  if(guard)return {omit:/ post /.test(name)&&profile!=='bow'&&(profile!=='upper'||b[0]>18),error:.025,reason:'Distant guard posts; continuous coaming, glass and rail retained'};
+  // These items are occluded by the solid UD/SD slabs from the bow route.
+  const hiddenBelow=profile==='bow'&&/^MD_(FUR|SOF|SAN)_/.test(id)&&b[0]>=8.5&&b[5]<5.88;
+  const hiddenTap=profile!=='sun'&&id==='SD_SAN_003';
+  const reverseTransom=profile!=='exterior'&&/lettering|emblem|registry/.test(name);
+  const distant=!near||p.role==='forward-context'&&!['upper','bow'].includes(profile);
+  const decoration=/seam|stitch|screw|button|perforation|piping/.test(name)||
+    p.role==='bridge-furniture'&&(/wheel|throttle|footrest|open polished helm|display|instrument bank|settee base/.test(name)||id==='UD_SOF_017');
+  const hiddenForward=['exterior','interior'].includes(profile)&&p.role==='forward-context'&&/^UD_(FUR|SOF|EQU)_/.test(id);
+  const omit=hiddenBelow||hiddenTap||reverseTransom||hiddenForward||distant&&decoration;
+  return {omit,reason:hiddenBelow?'MD furniture occluded by the UD slab':hiddenTap?'Sun-deck tap above the solid slab':reverseTransom?'Reverse-facing transom lettering':hiddenForward?'Distant forward furnishings':'Distant finish detail',error:near&&name==='polished helm wheel rim'?0:distant?.4:
+    profile==='bow'&&p.role==='forward-context'?.018:p.role?.startsWith('bridge-')?.012:near&&profile==='upper'?.04:near?.014:error};
+}
+
+export async function buildBow({extend,lod}={}) {
   return buildBridge({profileNames:['exterior','interior','upper','sun','bow'],
-    lod(p,{near,error,support,stair,profile}) {
-      if(support||stair||p.glass)return {error};
-      const b=p.bounds,name=p.feature||'',id=p.sourceID||p.anchor||p.id;
-      const guard=name.startsWith('bow guard');
-      if(guard)return {omit:/ post /.test(name)&&profile!=='bow'&&(profile!=='upper'||b[0]>18),error:.025,reason:'Distant guard posts; continuous coaming, glass and rail retained'};
-      // These items are occluded by the solid UD/SD slabs from the bow route.
-      const hiddenBelow=profile==='bow'&&/^MD_(FUR|SOF|SAN)_/.test(id)&&b[0]>=8.5&&b[5]<5.88;
-      const hiddenTap=profile!=='sun'&&id==='SD_SAN_003';
-      const reverseTransom=profile!=='exterior'&&/lettering|emblem|registry/.test(name);
-      const distant=!near||p.role==='forward-context'&&!['upper','bow'].includes(profile);
-      const decoration=/seam|stitch|screw|button|perforation|piping/.test(name)||
-        p.role==='bridge-furniture'&&(/wheel|throttle|footrest|open polished helm|display|instrument bank|settee base/.test(name)||id==='UD_SOF_017');
-      const hiddenForward=['exterior','interior'].includes(profile)&&p.role==='forward-context'&&/^UD_(FUR|SOF|EQU)_/.test(id);
-      const omit=hiddenBelow||hiddenTap||reverseTransom||hiddenForward||distant&&decoration;
-      return {omit,reason:hiddenBelow?'MD furniture occluded by the UD slab':hiddenTap?'Sun-deck tap above the solid slab':reverseTransom?'Reverse-facing transom lettering':hiddenForward?'Distant forward furnishings':'Distant finish detail',error:near&&name==='polished helm wheel rim'?0:distant?.4:
-        profile==='bow'&&p.role==='forward-context'?.018:p.role?.startsWith('bridge-')?.012:near&&profile==='upper'?.04:near?.014:error};
-    },
+    lod:lod||bowLOD,
     extend({model,lowerParts,parts}) {
       const final=renderedParts(model),additions=[];
       for(const source of final) {
@@ -49,9 +51,9 @@ export async function buildBow() {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'bow-deck-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
+      return {version:'bridge-access-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,navigationEnd:bowEnd,route:bowRoute,
-        bowPartIDs:additions.map(p=>p.id),evidence:'Provisional starboard access and forward lounge; narrow bow and port connection remain pending'};
+        bowPartIDs:additions.map(p=>p.id),evidence:'Provisional starboard access and forward lounge; narrow bow and port connection remain pending',...extend?.({model,lowerParts,parts})};
     }
   });
 }

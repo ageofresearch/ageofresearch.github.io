@@ -1,7 +1,7 @@
-import { preloadUpper } from './upper-terrace.js?v=bow-deck-1';
-import { connectTerrace } from './aft-terrace.js?v=bow-deck-1';
+import { preloadUpper } from './upper-terrace.js?v=bridge-access-1';
+import { connectTerrace } from './aft-terrace.js?v=bridge-access-1';
 
-export const saloonVersion = 'saloon-mobile-1';
+export const saloonVersion = 'bridge-access-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior','interior'],roomID='MD_R02'}={}) {
@@ -51,9 +51,10 @@ export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThi
   }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
 }
 
-export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false) {
+export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false, bridgeAccess=false) {
   if(deck==='SD'||stair==='sun')return 'sun';
-  if(stair==='aft')return 'upper';
+  if(stair==='aft'||stair==='bridge')return 'upper';
+  if(deck==='MD'&&bridgeAccess&&(x>17.5||current==='upper'&&x>=17.1))return 'upper';
   if(deck==='UD'){
     if(bowExterior&&(x>13.8||current==='bow'&&x>=12.8))return 'bow';
     return 'upper';

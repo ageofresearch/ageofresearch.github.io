@@ -1,6 +1,6 @@
 // Shared source-coordinate additions. R03 placement is provisional, not a survey.
-import {surfaceTriangles,obstacles,renderedParts} from './stair-surfaces.js?v=bow-deck-1';
-import {indexFootprints} from './terrace-geometry.js?v=bow-deck-1';
+import {surfaceTriangles,obstacles,renderedParts} from './stair-surfaces.js?v=bridge-access-1';
+import {indexFootprints} from './terrace-geometry.js?v=bridge-access-1';
 const ring=Array.from({length:32},(_,i)=>[Math.cos(i*Math.PI/16),Math.sin(i*Math.PI/16)]);
 export function supportedFloor(floor,footprints) {
   const support=indexFootprints(floor.map(polygon=>({polygon}))),hit=indexFootprints(footprints);

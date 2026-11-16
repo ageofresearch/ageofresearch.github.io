@@ -1,8 +1,8 @@
-import {preloadBridge} from './bridge-helm.js?v=bow-deck-1';
-import {decodeSaloon} from './main-saloon.js?v=bow-deck-1';
-import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=bow-deck-1';
+import {preloadBridge} from './bridge-helm.js?v=bridge-access-1';
+import {decodeSaloon} from './main-saloon.js?v=bridge-access-1';
+import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=bridge-access-1';
 
-export const upperInteriorVersion='bow-deck-1';
+export const upperInteriorVersion='bridge-access-1';
 export function decodeUpperInterior(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperInteriorVersion,names:['exterior','interior','upper','sun'],roomID:'UD_R02'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

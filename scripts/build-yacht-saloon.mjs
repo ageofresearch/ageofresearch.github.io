@@ -10,7 +10,7 @@ import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'saloon-mobile-1';
+const version = 'bridge-access-1';
 export const boundsOf = vertices => {
   const b = [Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];
   for (let i=0;i<vertices.length;i+=6) for(let k=0;k<3;k++) {

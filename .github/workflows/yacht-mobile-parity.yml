@@ -26,6 +26,10 @@ on:
       - 'tests/yacht-bridge*'
       - 'tests/yacht-bow*'
       - 'tests/yacht-spatial*'
+      - 'tests/yacht-gangway*'
+      - 'tests/yacht-frame-reader.cjs'
+      - 'tests/fixtures/yacht-gangway*'
+      - 'tests/fixtures/yacht-finish-patterns.json'
       - 'tests/fixtures/yacht-spatial-pending.json'
       - 'scripts/audit-yacht-*'
       - 'scripts/yacht-spatial-requirements.txt'
@@ -41,6 +45,35 @@ on:
 permissions:
   contents: read
 jobs:
+  boarding-finish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [mobile, full]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            site/tidewater-rocha
+            tests
+      - name: Verify boarding finish in the production renderers
+        env:
+          YACHT_CHECK: ${{ matrix.mode }}
+          YACHT_OUTPUT: /tmp/yacht-teak-views
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser" --no-audit --no-fund playwright-core@1.56.1 pngjs@7.0.0
+          python3 -m http.server 8764 --bind 127.0.0.1 --directory site > "$RUNNER_TEMP/yacht-http.log" 2>&1 &
+          NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-gangway-render.cjs
+      - name: Save boarding finish frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: boarding-finish-${{ matrix.mode }}
+          path: /tmp/yacht-teak-views/*.png
+          retention-days: 3
   spatial:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -85,7 +118,7 @@ jobs:
         if: matrix.mode == 'mobile'
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-spatial.test.mjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs
       - name: Verify browser views and recovery
         env:
           YACHT_CHECK: ${{ matrix.mode }}
@@ -103,6 +136,7 @@ jobs:
               sleep 1
             done
             YACHT_REFERENCE_BASE=http://127.0.0.1:8765/tidewater-rocha/ NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bridge-comparison.cjs
+            NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-gangway-performance.cjs
             NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-cold-walk.cjs
             NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bow-performance.cjs
             NODE_PATH="$RUNNER_TEMP/browser/node_modules" node tests/yacht-bridge-access-performance.cjs

@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=spatial-correction-1';
+import { indexFootprints } from './terrace-geometry.js?v=gangway-teak-1';
 
-const version = 'spatial-correction-1';
+const version = 'gangway-teak-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));

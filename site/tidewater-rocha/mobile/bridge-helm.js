@@ -1,8 +1,8 @@
-import {preloadBow} from './bow-deck.js?v=spatial-correction-1';
-import {decodeSaloon} from './main-saloon.js?v=spatial-correction-1';
-import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=spatial-correction-1';
+import {preloadBow} from './bow-deck.js?v=gangway-teak-1';
+import {decodeSaloon} from './main-saloon.js?v=gangway-teak-1';
+import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=gangway-teak-1';
 
-export const bridgeVersion='spatial-correction-1';
+export const bridgeVersion='gangway-teak-1';
 export function decodeBridge(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:bridgeVersion,names:['exterior','interior','upper','sun'],roomID:'UD_R03'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

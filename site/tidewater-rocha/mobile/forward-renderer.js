@@ -1,5 +1,5 @@
-import {createFinishPatterns} from './finish-patterns.js?v=spatial-correction-1';
-import { nextProfile } from './main-saloon.js?v=spatial-correction-1';
+import {createFinishPatterns} from './finish-patterns.js?v=gangway-teak-1';
+import { nextProfile } from './main-saloon.js?v=gangway-teak-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -24,19 +24,21 @@ struct Vertex {
   var out: Vertex;
   out.clip = frame.clipFromLocal * vec4f(position, 1);
   let n = normalize(normal);
+  let boarding=surface.z>=37. && surface.z<=42.;
+  let roughness=select(surface.x,.8,boarding);let metalness=select(surface.y,0.,boarding);
   let light = frame.sunLocal.xyz;
   let eye = normalize(frame.eyeLocal.xyz - position);
   let hemi = mix(vec3f(.19,.16,.13), vec3f(.62,.67,.73), n.y*.5+.5);
   let diffuse = max(dot(n, light), 0.);
-  let gloss = pow(max(dot(n, normalize(eye+light)), 0.), mix(68., 10., surface.x));
+  let gloss = pow(max(dot(n, normalize(eye+light)), 0.), mix(68., 10., roughness));
   let reflection = reflect(-eye, n);
   let reflectedLight = mix(vec3f(.095,.087,.077), vec3f(.71,.75,.79),
                            smoothstep(-.16,.25,reflection.y));
   let finish = select(albedo, vec3f(.72,.69,.61), surface.z == 9.);
   let indirect = select(vec3f(0), vec3f(.23,.22,.20), surface.z == 9.);
   let lit = finish * ((hemi + diffuse * vec3f(.82,.72,.59)) * surface.w + indirect);
-  out.color = mix(lit, albedo * reflectedLight, surface.y)
-              + gloss * (.08 + surface.y*.65);
+  out.color = mix(lit, albedo * reflectedLight, metalness)
+              + gloss * (.08 + metalness*.65);
   out.color = toSrgb(out.color);
   let local=vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
   let finishUV=vec2f(position.x+position.y*.73, position.z+position.y*.51);
@@ -50,6 +52,7 @@ struct Vertex {
     else if(local.y< -1.){center=vec2f(21.949225,-1.31751);}else if(local.y< -.35){center=vec2f(22.18570,-.69254);}
     out.layer=3;out.uv=vec2f((local.y-center.y)/.48+.5,((local.x-center.x)*.659983+(position.y+2.01-7.01)*.75128)/.36+.5);
   }
+  else if(boarding){out.layer=4;out.uv=surface.xy;}
   return out;
 }
 fn toSrgb(linear: vec3f) -> vec3f {

@@ -1,5 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=spatial-correction-1';
-import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=spatial-correction-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=gangway-teak-1';
+import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=gangway-teak-1';
 
 // Source coordinates: x toward the bow, y to port, z up. All access surfaces
 // come from the same parts that are rendered in the full and isolated yacht.

@@ -1,10 +1,38 @@
 # Mobile yacht zones
 
-Release: `spatial-correction-1`. The mobile route connects boarding, the aft terrace,
+Release: `gangway-teak-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge and forward lounge. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
+
+## Gangway teak finish
+
+`gangway-teak-1` fixes material inheritance before compaction and simplification.
+Raw boarding parts that supplied only `materialID` previously acquired surface
+code zero from the sun-deck package onward. The three panels now retain their
+shared material in every fallback and active profile; explicit per-vertex zero
+remains valid. Unknown materials fail offline generation.
+
+The [finish comparison](../teak-audit/) records fixed-camera views and checks.
+Each unchanged 764 mm inset uses seven 105.714 mm boards with six 4 mm seams.
+This is an approved provisional layout, not a surveyed vessel specification.
+Shared base colour is #B69A73 sRGB, roughness .80, metalness and clearcoat zero;
+board brightness varies by at most ±5%. Dark caulking and longitudinal fibres
+are filtered at a distance. Borders and landings receive the same finish, with
+cross-grain on end borders and the existing landing pitch. The lake pier and
+other deck colours are not recoloured. Geometry, support and collisions are exact.
+
+A fourth 256×256 layer in the existing RG8 material array adds 174,762 bytes
+including mipmaps. It stores RG16-encoded combined grain, board variation and caulking,
+so the mobile fragment shader remains identical to the prior release. For the
+constant-matte boarding codes 37..42, aSurface.xy carries precomputed atlas UVs;
+both renderers decode roughness .8 and metalness zero for these codes. This
+keeps the four-buffer interface and all resident geometry byte counts unchanged.
+Total mobile finish storage is 3,495,255 bytes, under 3.6 MB;
+there are still two sampled texture resources, two draws and one pass. All
+buffers, textures and pipelines are prepared before the first walk. The original
+three texture layers are checked byte-for-byte against the previous release.
 
 ## Spatial correction and evidence
 

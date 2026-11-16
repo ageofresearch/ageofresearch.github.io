@@ -1,0 +1,486 @@
+[
+  {
+    "id": "boarding/owner/telescopic-section-1-nested-frame",
+    "geometrySHA256": "2fc7cd3a84cc597e7523d9fe3a960d6e984baefd1ff31363ff166a4024e6a0a0"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-1-teak-inset",
+    "geometrySHA256": "97739eaa898247a7f822be200710df690ee19142e3203b3860f9ef2274f7b842"
+  },
+  {
+    "id": "boarding/owner/section-1-timber-border--1",
+    "geometrySHA256": "ab69038d658eacb668a58eef79ecd7343199af2e2b3fec6c9e37bd3443926f3c"
+  },
+  {
+    "id": "boarding/owner/section-1-inset-side-channel--1",
+    "geometrySHA256": "7db50c295a964711182ba215c9a7751bcebfbf31f2e1c95e6d1b8860710d5768"
+  },
+  {
+    "id": "boarding/owner/section-1-timber-border-1",
+    "geometrySHA256": "6a79fcd59e14c394086dcc0da595489d00a28106aadc6438695fdf7e68e2e748"
+  },
+  {
+    "id": "boarding/owner/section-1-inset-side-channel-1",
+    "geometrySHA256": "c9013c6933e0acdc38734b827fbfcb2e277a07a8aae6ab999fe84bbab10632ef"
+  },
+  {
+    "id": "boarding/owner/section-1-mitred-end-border--4.47",
+    "geometrySHA256": "df8ce8c949deb5665e539f9fbf8a8ec35cab430ba7047398ffbd5d8810e23c68"
+  },
+  {
+    "id": "boarding/owner/section-1-mitred-end-border--1.97",
+    "geometrySHA256": "13439b0ec39bc5c760f60d51e1f942c354053c3673dac4d90219308be0f9b126"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-2-nested-frame",
+    "geometrySHA256": "296b769f4e5400f28dc96a876d5b620fb880e206f7438d6b73638dc143f87204"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-2-teak-inset",
+    "geometrySHA256": "4a08491edd67864557500bcc3112a45e7bb0f978276bcb3f9272c77921ecbaf6"
+  },
+  {
+    "id": "boarding/owner/section-2-timber-border--1",
+    "geometrySHA256": "fabc8da01027e5103ff9ff2c0af6dce97ced83cb7942bdc1d84c9541136662e3"
+  },
+  {
+    "id": "boarding/owner/section-2-inset-side-channel--1",
+    "geometrySHA256": "fce5b61a4d331367cc9405d4cd760b2675aa906947d78e8321b5073074144398"
+  },
+  {
+    "id": "boarding/owner/section-2-timber-border-1",
+    "geometrySHA256": "71ddd24e0c8842123f7f9b2e7e7d8395d93ca60f1512f3998492b40ba5c8d4f9"
+  },
+  {
+    "id": "boarding/owner/section-2-inset-side-channel-1",
+    "geometrySHA256": "730784b6f668b6ab0fe8ce68822d3454efead76cca08139e9e66756df12325bd"
+  },
+  {
+    "id": "boarding/owner/section-2-mitred-end-border--1.91",
+    "geometrySHA256": "cb438df227c28fb442cada139d6053914978c6a56899466e55d36fd41046294f"
+  },
+  {
+    "id": "boarding/owner/section-2-mitred-end-border-0.32999999999999996",
+    "geometrySHA256": "58c5d41631823472dfaa4f7eb11aac96a6b83c34495ce6318787561d8989b677"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-3-nested-frame",
+    "geometrySHA256": "a98291c6b2d1e1fc4bc2378d36f37bcb2f105776017f1d9aa7a3ed58c112bb7d"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-3-teak-inset",
+    "geometrySHA256": "662f80f0ce81fb3f0ff04fc603371726ca2114b0b520c5d97c87d559e241ebe3"
+  },
+  {
+    "id": "boarding/owner/section-3-timber-border--1",
+    "geometrySHA256": "17bf7af2f5125fa7838c43ed7b5a7faa120fa222b2bc490a684699b6bae8b8c2"
+  },
+  {
+    "id": "boarding/owner/section-3-inset-side-channel--1",
+    "geometrySHA256": "72349096d525d2a0d71e21efd28f4f7b7f9be1e4512c123339f67350b061963d"
+  },
+  {
+    "id": "boarding/owner/section-3-timber-border-1",
+    "geometrySHA256": "ae4dfa1d038a1041d9fe0f4d8e6fc17ddeb67a3ec267558e7681eff90c3ba0f1"
+  },
+  {
+    "id": "boarding/owner/section-3-inset-side-channel-1",
+    "geometrySHA256": "7ee7c34787c633c88831097c1ba7167c34f7e2555ffa5f61d183ab6f31e2389e"
+  },
+  {
+    "id": "boarding/owner/section-3-mitred-end-border-0.39",
+    "geometrySHA256": "187a619114e362c16a43b3145249e4f620f32af9d94275709b93c1c74a40157b"
+  },
+  {
+    "id": "boarding/owner/section-3-mitred-end-border-2.27",
+    "geometrySHA256": "e7455b20018dccf1fec81251161c63937f209e9f3570655fc765c77b8cefeaba"
+  },
+  {
+    "id": "boarding/owner/shaped-lower-boarding-landing",
+    "geometrySHA256": "bbd387333748d431acc89384d4a4071191398ba9443c9f7305e1d72e1d9bf931"
+  },
+  {
+    "id": "boarding/owner/widened-upper-teak-boarding-landing",
+    "geometrySHA256": "0ff2f7748f3ee59b11bb836f7fc04d5339c30dd0ab6a1e45b590bc44fcb029c2"
+  },
+  {
+    "id": "boarding/owner/raised-teak-cockpit-threshold",
+    "geometrySHA256": "7f877dfd2396f736c49c04e009e0d305c3ff9d799cb6aca228dc18358f00ab52"
+  },
+  {
+    "id": "boarding/owner/rounded-teak-landing-lip",
+    "geometrySHA256": "5f237f12510754ca6ac59f57b1414db150b083534033f1f12c3c9985b50ef5b2"
+  },
+  {
+    "id": "boarding/owner/gangway-top-handrail--1",
+    "geometrySHA256": "4a21b536442f6f4d7a93c3521a97f494b746f7c7ce521f70e24adf622e8f28ec"
+  },
+  {
+    "id": "boarding/owner/landing-handhold--1",
+    "geometrySHA256": "e4b6c2132648258ddf4e2f2aeb25a2301a706f2988d94db3db344491dc70fd9e"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-0",
+    "geometrySHA256": "108c08931bf0e83f904fe864390f74768e3b648c984d07e795c44fec853e318c"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-0",
+    "geometrySHA256": "49a0f0dce46b37273e18bfe41f10552a7f23b308be33357b402b70655e3806f3"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-0-0.49",
+    "geometrySHA256": "bd0713a1f42ed40a63e635c10edac2c063008f597259fb28a9378abd58f79b71"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-0-0.76",
+    "geometrySHA256": "83971c8bb9e101eb61b3c706eb5af123b424f35791bdd1c72976fe1af88f207d"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-1",
+    "geometrySHA256": "9d8510c5b29385ef7abb697179baf59422a18a23ab0e400be880191a27207e8d"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-1",
+    "geometrySHA256": "8c364fa0fbd54dbf01169f4f80c3967de224aba8e89a17850c8319ff0c6f52ae"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-1-0.49",
+    "geometrySHA256": "926d572d307110411e0a27d29c985e31e41650f30ca3c977799e5ffbb8700040"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-1-0.49",
+    "geometrySHA256": "ec08a6ac191846455ca5e2d42de4ba9c3aea3f84a11e8ca617a19de7fcca1c97"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-1-0.76",
+    "geometrySHA256": "2108a8bc7e46fc2476a42d6726e0e0d43e4fadef99c851395da1734b81371eaa"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-1-0.76",
+    "geometrySHA256": "286ad550a5daa66bae0d4ee02918ad1f57c0cdd9257a0c06af3145036fcffa13"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-2",
+    "geometrySHA256": "d67dc8c6c18e5840fcfcb8c2abb5e532b298241739732c9afc5cd5027c7984ff"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-2",
+    "geometrySHA256": "421fac425567bb34919d51914b9bc64775bf74d66d795f735e47e455c306b10c"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-2-0.49",
+    "geometrySHA256": "d9fbdbaac911e40228f8e37aca35bd14abd649e3d16a4ada7a7e7706a84eaa49"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-2-0.49",
+    "geometrySHA256": "557cb7e31ed69fd9502ef37e95e67faa461bec7a47be28960386e84f8f3a9f2d"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-2-0.76",
+    "geometrySHA256": "0c8192b6963212cf5a3bd2f1d39d926e8790831a4fdfbe50a484d1ce54074035"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-2-0.76",
+    "geometrySHA256": "b4816de672142f83e97f97ad44a58e056ca5e00cb086906c7a0de7f7c1bc7bc7"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-3",
+    "geometrySHA256": "c2a1e6b5b83e55fd9f08a04856e315907fd872f69cba41fadd0fb76e7b326e68"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-3",
+    "geometrySHA256": "2363c730389038665a8182ebe0420aa7437437eb1df79a412c6fe6963c43e4fd"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-3-0.49",
+    "geometrySHA256": "161b6403b23073b9cead5f69bb9c33599928f87eb665e080984313cdc42c752a"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-3-0.49",
+    "geometrySHA256": "e256e41567233d4d29127dfb4731752092d49ea6478e706c5b6d90060785e094"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-3-0.76",
+    "geometrySHA256": "9e81d30f75102eedb97a13be684ad033426a50647c6abe5b5b52aa8acd0e900e"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-3-0.76",
+    "geometrySHA256": "179494b3489b6e1bab3c641f97f54a426aa4974580e72aa9c5d78a68010a4677"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-4",
+    "geometrySHA256": "b0d36632942768e2de25456eac3b2622b1664e8859a583dc92cf6d256cf66f91"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-4",
+    "geometrySHA256": "42f272c92a6503a732cac293016200955d1a010eab4025cd5c223b83861426cc"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-4-0.49",
+    "geometrySHA256": "3aea8d0865fba442047c4eb62d196b0e4a38889b395d7b49b50e74bf3566c62e"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-4-0.49",
+    "geometrySHA256": "9bc729315f2d9090af33cf935157674d2db843cb7aa10013722f59eabf8c0ab0"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-4-0.76",
+    "geometrySHA256": "c7f5baa06f9ee139ff04467ddc1b40e94fe085528b93441e96454a329557d140"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-4-0.76",
+    "geometrySHA256": "d4aad4ec1c50bc3ff6ba5e03eebd83a290df52539e3df1a1f1bd5097a3ad20ea"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-5",
+    "geometrySHA256": "e3bcd636ef76492d8735c572cae302e7287eb098b72122d927f0a0cde61befa1"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-5",
+    "geometrySHA256": "5dd6b0187c16ac9f0f209209a06903c2c6a5cc6a93c656aa80a67ffa1db36b2d"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-5-0.49",
+    "geometrySHA256": "d11cc3a54b107e871393bc936f83b5f89126862375be5cfaa863e74a5e029436"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-5-0.49",
+    "geometrySHA256": "df690a06f7e361f46b40fed50872c3c2b2a9ff08fa12a26667e53c99f7af38ad"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-5-0.76",
+    "geometrySHA256": "9831f18a1f577d032fdf7ccc062dd98b77f44cb431c6861c4654ef19e6163db9"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-5-0.76",
+    "geometrySHA256": "b804f2f80cf49245bbe0f63daa0c33575e7dd8550eb545fddc74fe58539ad32d"
+  },
+  {
+    "id": "boarding/owner/gangway--1-upright-6",
+    "geometrySHA256": "e4135865bcc644c19d39c1dd1ab51ce36a0fdc6a18f5233807eb27d4efa4db3d"
+  },
+  {
+    "id": "boarding/owner/gangway--1-seated-socket-6",
+    "geometrySHA256": "8f3dfead4a7d1cb8df6ec8d839557d70c5b116f4323c0ea45093e8b81ac089d2"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-6-0.49",
+    "geometrySHA256": "8cb44670c25b343dd29b0a8b0fb6e1eba6e1f67c6481bd5ac20a610cc54910c6"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-6-0.49",
+    "geometrySHA256": "409908ca4e7df97a4ffec43ea7181c56df2bf9e12cab6681dd4a24ef3fab47a4"
+  },
+  {
+    "id": "boarding/owner/gangway--1-rope-collar-6-0.76",
+    "geometrySHA256": "82cdc312768710cfd008a1740b85717b9eedd9225dfa835390eb3abd4d365961"
+  },
+  {
+    "id": "boarding/owner/gangway--1-hanging-guard-line-6-0.76",
+    "geometrySHA256": "d3980925df2e8dc7bcf5b937e5577137c3041602be3e26a22ee7e15d54797cbc"
+  },
+  {
+    "id": "boarding/owner/landing-mounted-post--1-3.24",
+    "geometrySHA256": "ccc5750a27682b74e7c3d82c28aeb0f92a20e37a585229f23e3368fedbae3c1e"
+  },
+  {
+    "id": "boarding/owner/landing-mounted-post--1-3.75",
+    "geometrySHA256": "6666b45e4f8ae777d9df6899d1c2b9fbf739be97ac616a0b5567e6d36c88b36e"
+  },
+  {
+    "id": "boarding/owner/gangway-top-handrail-1",
+    "geometrySHA256": "9c002f072afb7ce33a99627370229af00e7f44e942cdf0c4a8ab157d20bbc8dd"
+  },
+  {
+    "id": "boarding/owner/landing-handhold-1",
+    "geometrySHA256": "1977c7d736d8bb01fc14d60d27358ca864e04119cecc41bbecd1eb849dc610de"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-0",
+    "geometrySHA256": "ab1c090ea7a9097e27f51eb83598e8a055acb7a385fb79b327db0fa19dfbfd69"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-0",
+    "geometrySHA256": "dd0187a5c5542d72371e2ab66d551d03e24b5f5055350d416f0dcd55b75d6e4a"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-0-0.49",
+    "geometrySHA256": "6de6166221f055563ba44e36c076fe5c99a71d2d364720a78e5cd14e17165910"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-0-0.76",
+    "geometrySHA256": "e54e5035c3e540b57bfd6b2bb0b4cea2688412eea3c49fc2498d2c58d24aa936"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-1",
+    "geometrySHA256": "9675676d34fcd2a3ab271b655d3275a573895c6fe8ac4e106b5acfab79d1efb1"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-1",
+    "geometrySHA256": "90bb92f80a84764073a762fb12084dedde2199fb138f1312eb207ebf231c44dc"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-1-0.49",
+    "geometrySHA256": "ea4c35532e332825e4b5fd2973547588ac47a7f63a9f397b3a885c6b7c6cac52"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-1-0.49",
+    "geometrySHA256": "cbf31254397c232df9b43373a87f81a91efb082fc8c401038c233e79e5d7c131"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-1-0.76",
+    "geometrySHA256": "dfed08c963021c2c850a18c7127898c91a862ea40016f8ecf39c727201aceb37"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-1-0.76",
+    "geometrySHA256": "0be87b6c5deb8a01c2adbdf2f02e00c9585bee616f249821e6748ada07424c3e"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-2",
+    "geometrySHA256": "2f16d5e36aabca2dd2fca4a676978a243c4deb51abacf2306d04ce213c8a1a4a"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-2",
+    "geometrySHA256": "4d0c0b7da68371cd213b60eaf97d7c1d458415069ecea9e0d31fc99be7fbfe1a"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-2-0.49",
+    "geometrySHA256": "1b22bf82e6f0314140d366c09f0a5ca97a46fbf529a52fe7c144e0103a931227"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-2-0.49",
+    "geometrySHA256": "8a97d879176804d5c9c10897664985ccb215aa4005692a12b29548d41fd6ee97"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-2-0.76",
+    "geometrySHA256": "15edcadefadb987fec5e107b92ebbd9c6352b6a7c1aab8f24d4522c82226790e"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-2-0.76",
+    "geometrySHA256": "2e3de78344e6094e87b0ee0038afe7b913388180cf25988040ed82529b5b1e9e"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-3",
+    "geometrySHA256": "5ead526006e1a9c94794d63b87e1941703d3a848fa40aaf753ce29c64f8f2d2f"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-3",
+    "geometrySHA256": "5cb79c99f62a3b4de94e1c3e13605c24e0f61621970fd147dbfe3a1c02aad924"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-3-0.49",
+    "geometrySHA256": "510b2ff7da0e29bc09fd3f9532f04129097aa1cf9dd180e99fca10ace8d81e9b"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-3-0.49",
+    "geometrySHA256": "89ca0b83e34c468d9f90b2278ccce529a3590f66a5c6cf63964f89292bebfbe1"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-3-0.76",
+    "geometrySHA256": "8c813683213a517efb1b1adfc1de02f046be4019a6b35e0ab3b37cf9132f8134"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-3-0.76",
+    "geometrySHA256": "4e417116d6dce6576ef7c1d736faa93d409e59ab83b985f245f7cdca90625454"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-4",
+    "geometrySHA256": "612d07b6d6eb538866cef9ed07b6009cb04e1ba99b83169177f32d0a3be7403c"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-4",
+    "geometrySHA256": "9c24d83187a8522dbbb1e7e834a56fcc0539f501471002dd36a786b19bc2c273"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-4-0.49",
+    "geometrySHA256": "3fdd0db99e5647bf3d02dfa233cba5dc764a353db2cb8bc6854e0e6bc6edd804"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-4-0.49",
+    "geometrySHA256": "3cc97368af35cc57a81420c36fbdf625af5436e9e05eed6b1b78737561dcc624"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-4-0.76",
+    "geometrySHA256": "70988fbbfcb962059ca49d673c5c30e54729b61d530f044b1e1ffd8f0397d933"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-4-0.76",
+    "geometrySHA256": "e7135f0d5ee866d9fe282fb9d52d133e914d329e212234c1cedfe4829b0c2683"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-5",
+    "geometrySHA256": "4a72bf0fc9a77f0571229ff3083190a4e410d621997c804ed02f832ab163b2dd"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-5",
+    "geometrySHA256": "fd7b1f62de5beacc78a69f76561e0ab368121d64913806733f102ec5843d3644"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-5-0.49",
+    "geometrySHA256": "a15cef5e609776375035c69459ce813f586fd9e965c00040a8f8011ff1ae3542"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-5-0.49",
+    "geometrySHA256": "9bfc09570a33ce2a41d3da7fb8400b7dda800cbbd453f1856f256aa6b6eaadc1"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-5-0.76",
+    "geometrySHA256": "bac5d871631a2aa1223a740e7915174398ba06acea147eb33dae3a4810cb7897"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-5-0.76",
+    "geometrySHA256": "5f3cd7008672669d25178bb7a76ee5d966a82e75f762196e3af184fe83ff48a0"
+  },
+  {
+    "id": "boarding/owner/gangway-1-upright-6",
+    "geometrySHA256": "db1a5aa0e9f73c5960d65bb658b6aa1787d2089d74c45ad7710787bd23a5cf04"
+  },
+  {
+    "id": "boarding/owner/gangway-1-seated-socket-6",
+    "geometrySHA256": "1e89d44be1512d8ea1f1604f1468e682935baec00c50f25ed0d0d1adb24aee84"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-6-0.49",
+    "geometrySHA256": "7bcd94edb2a1aee8a4b6f6825985670d5282348bf6a5c37ce78b7446034bda1c"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-6-0.49",
+    "geometrySHA256": "13f993a766853e18df0fb449646c9b29fa9ea063900ce7b624eaf46086a68117"
+  },
+  {
+    "id": "boarding/owner/gangway-1-rope-collar-6-0.76",
+    "geometrySHA256": "8c159bdf1e55f53d40177f3ad21147cb22ed669b1969ab6b4fa5d1044fba9f91"
+  },
+  {
+    "id": "boarding/owner/gangway-1-hanging-guard-line-6-0.76",
+    "geometrySHA256": "228e87b4d5397c2d30364d0b9a9f5fab8697c401401583668f81e3dec6e74946"
+  },
+  {
+    "id": "boarding/owner/landing-mounted-post-1-4.15",
+    "geometrySHA256": "b78b8f13df1768201c0eb05bf50108fbf4c784d607ebada030f88409e8730c13"
+  },
+  {
+    "id": "boarding/owner/open-inboard-rounded-boarding-gate-frame",
+    "geometrySHA256": "1115da86b41fbc8b12d393f0e7a1dd989f4a4eeaee02351815d07418ccc42a86"
+  },
+  {
+    "id": "boarding/owner/open-inboard-boarding-gate-glass",
+    "geometrySHA256": "54b4648801832feb266b922891bb6b7f7d98619b16b13d22fe023a381e29e4e3"
+  },
+  {
+    "id": "boarding/owner/gate-polished-chevron",
+    "geometrySHA256": "6eb4bc089c61792db290de3c0c392843838e8c630cdd48fffbcde3eedd38f8f3"
+  },
+  {
+    "id": "boarding/owner/gate-hinge-4.165",
+    "geometrySHA256": "378fdc2f4d1a12d7f2e0e6b0d005ec42ee577c249c3310587a8d64611255d31e"
+  },
+  {
+    "id": "boarding/owner/gate-hinge-4.82",
+    "geometrySHA256": "e1ca68a3e6ecf249a267bc9501de42b80c42030fd7ebdad74149ec2199d1e9dc"
+  },
+  {
+    "id": "boarding/owner/gate-latch",
+    "geometrySHA256": "020aaaf58ca1b3f2d72f19a0ac1a0d480022435d8e2b17d899a3deda7d884606"
+  }
+]

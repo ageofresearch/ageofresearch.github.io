@@ -1,7 +1,7 @@
-import { preloadUpper } from './upper-terrace.js?v=spatial-correction-1';
-import { connectTerrace } from './aft-terrace.js?v=spatial-correction-1';
+import { preloadUpper } from './upper-terrace.js?v=gangway-teak-1';
+import { connectTerrace } from './aft-terrace.js?v=gangway-teak-1';
 
-export const saloonVersion = 'spatial-correction-1';
+export const saloonVersion = 'gangway-teak-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior','interior'],roomID='MD_R02'}={}) {

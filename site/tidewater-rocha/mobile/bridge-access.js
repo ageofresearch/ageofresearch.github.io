@@ -1,9 +1,9 @@
-import {decodeSaloon} from './main-saloon.js?v=spatial-correction-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=spatial-correction-1';
-import {indexFootprints} from './terrace-geometry.js?v=spatial-correction-1';
-import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=spatial-correction-1';
+import {decodeSaloon} from './main-saloon.js?v=gangway-teak-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=gangway-teak-1';
+import {indexFootprints} from './terrace-geometry.js?v=gangway-teak-1';
+import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=gangway-teak-1';
 
-export const bridgeAccessVersion='spatial-correction-1';
+export const bridgeAccessVersion='gangway-teak-1';
 export function decodeBridgeAccess(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:bridgeAccessVersion,names:['exterior','interior','upper','sun','bow'],roomID:'MD_R07'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

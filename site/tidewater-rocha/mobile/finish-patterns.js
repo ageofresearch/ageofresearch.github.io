@@ -1,9 +1,10 @@
-// Existing grain/weave and 105 mm teak boards prepared once, with mipmaps.
+import {gangwayAtlasTexel} from './gangway-finish.js?v=gangway-teak-1';
+// Existing finishes plus a dedicated boarding grain layer, prepared once.
 // Board offsets/variation cover all 128 rows including the yacht's full beam.
 const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);};
 const fract=x=>x-Math.floor(x);
 export function finishPatternMips(size=256) {
- const levels=[];let data=new Float32Array(size*size*4);
+ const levels=[];let data=new Float32Array(size*size*6);
  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
   const u=(x+.5)/size,v=(y+.5)/size,tau=Math.PI*2,i=y*size+x;
   data[i]=.96+.035*Math.sin(v*tau+1.2*Math.sin(u*tau));
@@ -11,9 +12,11 @@ export function finishPatternMips(size=256) {
   const radius=Math.hypot(u-.5,v-.5),circles=Math.min(Math.abs(radius-.17),Math.abs(radius-.30),Math.abs(radius-.42));
   data[2*size*size+i]=1-smooth(.002,.004+1/size,circles);
   data[3*size*size+i]=(1-smooth(.002,.005+1/size,Math.abs(u-.5-(v-.5)*.28)))*(v>=.5&&radius<=.42?1:0);
+  const boarding=gangwayAtlasTexel(u,v,size);
+  data[4*size*size+i]=boarding[0];data[5*size*size+i]=boarding[1];
  }
  for(let level=0;;level++){
-  const pixels=size*size,bytes=new Uint8Array(pixels*6);
+  const pixels=size*size,bytes=new Uint8Array(pixels*8);
   for(let layer=0;layer<2;layer++)for(let i=0;i<pixels;i++){
    let value=data[layer*pixels+i];
    if(layer===0)value=1+(value-1)*(1-smooth(5.5,7,level));
@@ -21,9 +24,10 @@ export function finishPatternMips(size=256) {
    bytes[at]=encoded>>8;bytes[at+1]=encoded&255;
   }
   for(let i=0;i<pixels;i++){bytes[pixels*4+i*2]=Math.round(data[pixels*2+i]*255);bytes[pixels*4+i*2+1]=Math.round(data[pixels*3+i]*255);}
+  for(let i=0;i<pixels;i++){const encoded=Math.round(Math.pow(data[pixels*4+i],1/2.4)/1.1*65535);bytes[pixels*6+i*2]=encoded>>8;bytes[pixels*6+i*2+1]=encoded&255;}
   levels.push({size,data:bytes});if(size===1)break;
-  const half=size/2,next=new Float32Array(half*half*4);
-  for(let layer=0;layer<4;layer++)for(let y=0;y<half;y++)for(let x=0;x<half;x++){
+  const half=size/2,next=new Float32Array(half*half*6);
+  for(let layer=0;layer<6;layer++)for(let y=0;y<half;y++)for(let x=0;x<half;x++){
    const i=layer*pixels+2*y*size+2*x;
    next[layer*half*half+y*half+x]=(data[i]+data[i+1]+data[i+size]+data[i+size+1])/4;
   }
@@ -54,11 +58,11 @@ export function teakPatternMips(width=512,height=4096) {
 }
 export function createFinishPatterns(device) {
  const levels=finishPatternMips(),teakLevels=teakPatternMips(),usage=GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST;
- const texture=device.createTexture({label:'Prepared timber grain, canvas and static instruments',size:[256,256,3],format:'rg8unorm',mipLevelCount:levels.length,usage});
+ const texture=device.createTexture({label:'Prepared timber, canvas, instruments and boarding teak',size:[256,256,4],format:'rg8unorm',mipLevelCount:levels.length,usage});
  let teak;
  try {
   teak=device.createTexture({label:'Prepared teak board joints',size:[512,4096],format:'r8unorm',mipLevelCount:teakLevels.length,usage});
-  levels.forEach(({size,data},mipLevel)=>device.queue.writeTexture({texture,mipLevel},data,{bytesPerRow:size*2,rowsPerImage:size},[size,size,3]));
+  levels.forEach(({size,data},mipLevel)=>device.queue.writeTexture({texture,mipLevel},data,{bytesPerRow:size*2,rowsPerImage:size},[size,size,4]));
   teakLevels.forEach(({width,height,data},mipLevel)=>device.queue.writeTexture({texture:teak,mipLevel},data,{bytesPerRow:width},[width,height]));
   return {texture,teak,bytes:[...levels,...teakLevels].reduce((n,l)=>n+l.data.byteLength,0),view:texture.createView({dimension:'2d-array'}),
    sampler:device.createSampler({addressModeU:'repeat',addressModeV:'repeat',magFilter:'linear',minFilter:'linear',mipmapFilter:'linear'})};

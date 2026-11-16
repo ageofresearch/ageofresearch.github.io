@@ -1,9 +1,9 @@
-import {configureAccessFloor} from './bridge-access-geometry.js?v=bridge-access-1';
-import {configureBowFloor} from './bow-geometry.js?v=bridge-access-1';
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=bridge-access-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=bridge-access-1';
-import {describeSunFloor} from './sun-deck-geometry.js?v=bridge-access-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=bridge-access-1';
+import {configureAccessFloor} from './bridge-access-geometry.js?v=spatial-correction-1';
+import {configureBowFloor} from './bow-geometry.js?v=spatial-correction-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=spatial-correction-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=spatial-correction-1';
+import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=spatial-correction-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=spatial-correction-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -343,6 +343,7 @@ export function configureModelStairs(nav,model) {
   if(!model.interiorDetail || !model.asset?.binary)return;
   model.stairInventory=describeFlights(model,nav.routes);
   installFlightNavigation(nav,model.stairInventory.flights);
+  configureCorrectedFurniture(nav,model);
   configureInteriorFloor(nav,model);
   configureBridgeFloor(nav,model);
   configureAccessFloor(nav,model);
@@ -352,6 +353,34 @@ export function configureModelStairs(nav,model) {
     nav.floorSafe=(x,y,deck=nav.deck)=>deck==='SD'?sun.floorSafe(x,y,nav.radius):previous(x,y,deck);
     model.sunDeckFloor=sun;
   }
+}
+
+// The full viewer's source raster still contains the original furniture poses.
+// Rebuild these local collision fields from final triangles during preparation,
+// so moved furniture cannot leave an invisible obstacle or a walk-through solid.
+function configureCorrectedFurniture(nav,model) {
+  const records=model.interiorDetail.spatialCorrections;
+  if(!records?.length)return;
+  const parts=renderedParts(model),fields=[];
+  for(const deck of ['LD','MD','UD']){
+    const height=model.asset.data.levels[deck];
+    const regions=records.filter(r=>r.parts.some(id=>id.startsWith(deck))).map(r=>[
+      Math.min(r.before[0],r.after[0])-.3,Math.min(r.before[1],r.after[1])-.3,
+      Math.max(r.before[3],r.after[3])+.3,Math.max(r.before[4],r.after[4])+.3]);
+    if(!regions.length)continue;
+    const floor=parts.filter(p=>(p.anchor||p.id.split('/')[0])===deck+'_DCK_001'||
+      deck==='MD'&&/aft-teak-floor-following/.test(p.id)).flatMap(p=>surfaceTriangles(p,height,.002));
+    const b=[Math.min(...regions.map(r=>r[0])),Math.min(...regions.map(r=>r[1])),height,
+      Math.max(...regions.map(r=>r[2])),Math.max(...regions.map(r=>r[3])),height+1.65];
+    const physical=supportedFloor(floor,obstacles(parts,new Set(),b,{includeVerticalFaces:true}).footprints(height));
+    fields.push({deck,regions,physical});
+  }
+  const previous=nav.floorSafe.bind(nav);
+  nav.floorSafe=(x,y,deck=nav.deck)=>{
+    const field=fields.find(f=>f.deck===deck&&f.regions.some(r=>x>=r[0]&&y>=r[1]&&x<=r[2]&&y<=r[3]));
+    return field?field.physical(x,y,nav.radius):previous(x,y,deck);
+  };
+  model.correctedFurnitureFields=fields;
 }
 
 function savedSurface(nav,route,state) {

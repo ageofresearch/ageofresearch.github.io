@@ -1,5 +1,22 @@
 # Luz de Mar in Rocha
 
+## Spatial correction release
+
+`spatial-correction-1` applies documented rigid physical corrections in the shared
+renderer without editing the source model files. See the [piece inventory and
+before/after views](../../spatial-audit/). Luz de Mar-specific evidence remains
+authoritative; generic Azimut photographs are not dimensional evidence.
+
+The corrections remove unsupported bases, reversed dining chairs, confirmed
+fixture/wall intersections and contained duplicate walls. The existing galley
+basin is fitted to the counter surface; a closed recess removes the overlapping
+top without changing the cabinet envelope, and the buried inner cabinet is removed. They do not reconcile
+the contradictory original lower-cabin bed layout: that needs specific reference
+or an explicitly approved redesign. Twenty open-surface candidates also remain
+identified. No measurements or provisional fits are represented as certified.
+
+
+
 Imported from the user-provided WEB R03 / corrected CAD R02 package. The 694 source component records and original mesh binary are retained. Runtime geometry is batched by deck and finish.
 
 Listing dimensions: 35.23 m length, 7.47 m beam, 2.01 m draft. The source's two-axis display normalization is preserved; vertical levels and the waterline datum remain illustrative. The model is a provisional reconstruction, not an as-built survey. The source does not establish the association between hull MD283_012 and the vessel name.

@@ -1,9 +1,9 @@
-import {preloadUpperInterior} from './upper-interior.js?v=bridge-access-1';
-import {decodeSaloon} from './main-saloon.js?v=bridge-access-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=bridge-access-1';
-import {indexFootprints} from './terrace-geometry.js?v=bridge-access-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=bridge-access-1';
-export const sunVersion='bridge-access-1';
+import {preloadUpperInterior} from './upper-interior.js?v=spatial-correction-1';
+import {decodeSaloon} from './main-saloon.js?v=spatial-correction-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=spatial-correction-1';
+import {indexFootprints} from './terrace-geometry.js?v=spatial-correction-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=spatial-correction-1';
+export const sunVersion='spatial-correction-1';
 export function decodeSun(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:sunVersion,names:['exterior','interior','upper','sun'],roomID:'SD_R01'}),f=result.flight;
   if(f?.route?.id!=='sun'||f.route.lower!=='UD'||f.route.upper!=='SD'||f.surfaces?.length!==15||f.treadCount!==13||f.riseCount!==14||

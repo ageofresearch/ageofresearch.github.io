@@ -1,4 +1,4 @@
-// Offline extraction: mobile downloads two ready-to-draw profiles, never the
+// Offline extraction: mobile downloads a ready-to-draw main deck, never the
 // complete yacht. Install tooling with npm ci --prefix scripts/yacht-geometry.
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -10,7 +10,19 @@ import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'guest-access-1';
+const version = 'saloon-continuity-1';
+
+// Budget the whole main deck together. Give the seating area more geometry
+// than the surrounding structure and keep the upper decks as distant context.
+export function mainDeckError(part,bounds) {
+  if(bounds[2]>=5.88)return .4;
+  const saloonFurnishing=part.role==='furniture'&&bounds[0]>=8.5&&bounds[5]<5.88;
+  if(!saloonFurnishing)return .055;
+  // The top and its thin surrounding rim need enough segments to read as a
+  // single curve. Coarser meshes can expose the dark rim under the tabletop.
+  if(/^(thin tabletop perimeter|inset tabletop)$/.test(part.feature))return .014;
+  return .024;
+}
 export const boundsOf = vertices => {
   const b = [Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];
   for (let i=0;i<vertices.length;i+=6) for(let k=0;k<3;k++) {
@@ -169,14 +181,13 @@ export async function buildSaloon() {
   const profiles={};
   const materials=createFinishes(0,true,true,true,true);
   try {
-    for(const profile of ['exterior','interior']) {
+    for(const profile of ['exterior']) {
       const audit=[];
       const geometryTransform=part=>{
         const b=part.bounds||boundsOf(part.vertices);
         const shared=b[3]>=6.8&&b[0]<=10.2;
         const support=/teak tread|pale step|boarding landing|final riser/.test(part.feature||part.name||'');
-        const near=profile==='exterior'?b[0]<10.2:b[3]>6.8;
-        const error=support||part.glass?0:shared?.002:near?.004:.035;
+        const error=support||part.glass?0:shared?.002:.008;
         const result=simplify(part,error);
         audit.push({id:part.id,sourceTriangles:part.indices.length/3,triangles:result.indices.length/3,
           error:result.lodError||0,shared,support});
@@ -197,7 +208,7 @@ export async function buildSaloon() {
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const manifest={version,sourceSHA256:createHash('sha256').update(json).update(bin).digest('hex'),
     room,floor,collisionFootprints,parts:packedParts,profiles,
-    transition:{enter:9.2,exit:8.0,shared:[6.8,10.2]},navigationEnd:17.83};
+    navigationEnd:17.83};
   return {manifest,binary:Buffer.concat(chunks),sources:{terrace,parts}};
 }
 

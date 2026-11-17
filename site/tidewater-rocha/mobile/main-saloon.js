@@ -1,10 +1,10 @@
-import { preloadUpper } from './upper-terrace.js?v=guest-access-1';
-import { connectTerrace } from './aft-terrace.js?v=guest-access-1';
+import { preloadUpper } from './upper-terrace.js?v=saloon-continuity-1';
+import { connectTerrace } from './aft-terrace.js?v=saloon-continuity-1';
 
-export const saloonVersion = 'guest-access-1';
+export const saloonVersion = 'saloon-continuity-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
-export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior','interior'],roomID='MD_R02'}={}) {
+export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {
   if(manifest.version!==version)throw Error('Actualiza la página para cargar el salón');
   function array(descriptor,Type=Float32Array) {
     if(!descriptor||!Number.isInteger(descriptor.offset)||descriptor.offset<0||descriptor.offset%4||
@@ -61,9 +61,7 @@ export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false
     if(bowExterior&&(x>13.8||current==='bow'&&x>=12.8))return 'bow';
     return 'upper';
   }
-  if(deck!=='MD'||x<8)return 'exterior';
-  if(x>9.2)return 'interior';
-  return ['upper','sun','bow','guest'].includes(current)?'exterior':current;
+  return 'exterior';
 }
 
 export function connectSaloon(walk,saloon) {

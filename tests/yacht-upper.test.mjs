@@ -21,14 +21,15 @@ function fullFixture() {
   });
 }
 
-test('three reproducible profiles preserve final furniture and stair supports within budget',async()=>{
+test('two reproducible profiles preserve final furniture and stair supports within budget',async()=>{
   const result=await buildUpper();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   for(const p of Object.values(upper.profiles)) {
     assert.ok(p.triangles<=25000);assert.equal(p.batches.length,2);
     assert.equal(p.triangles,p.batches.reduce((n,b)=>n+b.indices.length/3,0));
   }
   const supports=Object.values(upper.profiles).map(p=>p.audit.filter(a=>a.stair||a.support).map(a=>[a.id,a.triangles,a.error]));
-  assert.deepEqual(supports[0],supports[1]);assert.deepEqual(supports[0],supports[2]);
+  assert.equal(supports.length,2);
+  assert.deepEqual(supports[0],supports[1]);
   const {model}=await fullFixture();
   try {
     const final=renderedParts(model);

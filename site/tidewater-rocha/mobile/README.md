@@ -1,10 +1,28 @@
 # Mobile yacht zones
 
-Release: `guest-access-1`. The mobile route connects boarding, the aft terrace,
+Release: `saloon-continuity-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
+
+## Continuous saloon detail
+
+The main deck uses one fixed render profile from the gangway through the aft
+terrace and saloon. It keeps a finer mesh for the saloon furnishings and spends
+less geometry on distant context. The doorway no longer selects a profile from
+position or travel history. Upper decks, the bow and the lower guest stair still
+use their respective profiles. All profiles are prepared before movement.
+
+The main deck uses 24,700 triangles. The other active profiles use 24,947
+(upper), 24,434 (sun), 22,805 (bow) and 21,783 (guest). Each keeps two indexed
+draws, one pass, render scale 1 and MSAA 4. Removing the redundant main deck
+profile saves 16.3 MB across the staged zone packages before HTTP compression.
+
+`tests/yacht-saloon.cjs` checks identical doorway pixels after walking from
+both directions. `tests/yacht-saloon-performance.cjs` compares first and
+repeated crossings in three fresh contexts per version. Serve an immutable
+reference on a separate port and pass `YACHT_REFERENCE_BASE` to the script.
 
 ## Gangway teak finish
 
@@ -64,7 +82,7 @@ changing cabin dimensions. The CI audit permits only the recorded original pairs
 and volumes; new unsupported contacts, overlapping solids or duplicate faces fail.
 "Inventoried" in the report does not certify a real-vessel position.
 
-Active profile triangles are exterior 24,938; interior 24,589; upper 24,947;
+At `guest-access-1`, active profile triangles were exterior 24,938; interior 24,589; upper 24,947;
 sun 24,434; bow 22,805; guest 21,783. Every profile keeps two indexed draws, one render pass,
 render scale 1 and MSAA 4. The audit is a separate page and adds no viewer download.
 

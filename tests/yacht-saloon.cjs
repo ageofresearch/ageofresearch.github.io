@@ -31,21 +31,33 @@ module.exports=async function saloonViews(frame,out,readFrame,mobile) {
       const stats=await frame.evaluate(()=>window.__app.entranceYacht.stats);
       assert.equal(result.indexedTriangles,stats.triangles);
       const profiles=await frame.evaluate(()=>Object.keys((__app.entranceYacht.guestAccess||__app.entranceYacht.bow).profiles).length);
-      // Preserve the existing 9 MiB / five-profile allowance as a sixth
-      // prepared profile is added; this is resident, not per-frame storage.
+      // Preserve the existing 9 MiB / five-profile allowance for each
+      // prepared profile is installed. This measures resident geometry.
       assert.ok(stats.residentGeometryBytes<profiles*(9/5)*1024*1024);
     }
   }
   if(mobile) {
-    const transitions=await frame.evaluate(()=>{
-      const app=window.__app,w=app.yachtWalk,states=[];
-      for(const x of [9.3,9.1,8.5,8.01,7.99,8.5,9.21]) {
-        w.nav.position=[x,.1];w.nav.elevation=3.95;w.applyPosition();app.frame(0);
-        states.push(app.gangwayRenderer.activeProfile);
-      }
-      return states;
-    });
-    assert.deepEqual(transitions,['interior','interior','interior','interior','exterior','exterior','interior']);
+    async function approach(from) {
+      return frame.evaluate(from=>{
+        const app=window.__app,w=app.yachtWalk,nav=w.nav;
+        nav.enterRoom('MD_R02');nav.position=[from,.1];nav.elevation=3.95;
+        w.cameraElevation=3.95;w.yaw=.17;w.pitch=-.05;w.applyPosition();
+        const target=8.85,direction=Math.sign(target-from),profiles=new Set();
+        while(Math.abs(target-nav.position[0])>1e-6) {
+          const previous=nav.position[0];
+          nav.move(direction*Math.min(.025,Math.abs(target-previous)),0);
+          if(Math.abs(nav.position[0]-previous)<1e-6)throw Error('Saloon approach is blocked');
+          w.applyPosition();app.frame(0);profiles.add(app.gangwayRenderer.activeProfile);
+        }
+        nav.position=[target,.1];w.applyPosition();
+        return [...profiles];
+      },from);
+    }
+    assert.deepEqual(await approach(7.9),['exterior']);
+    const fromTerrace=await readFrame();
+    assert.deepEqual(await approach(10),['exterior']);
+    const fromSaloon=await readFrame();
+    assert.equal(fromTerrace.pixels,fromSaloon.pixels,'The doorway must look identical after walking from either side');
   }
   await frame.evaluate(saved=>{
     const w=window.__app.yachtWalk;

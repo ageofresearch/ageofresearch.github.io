@@ -47,7 +47,7 @@ export async function buildBridgeAccess({extend,lod=accessLOD,profileNames}={}) 
       }
       parts.push(...additions);
       const physical=model.bridgeAccessFloor,flight=model.stairInventory.flights.find(f=>f.id==='bridge');
-      return {version:'guest-access-1',room:accessRoom,route:accessRoute,
+      return {version:'saloon-continuity-1',room:accessRoom,route:accessRoute,
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),domains:physical.domains,
         accessPartIDs:additions.map(p=>p.id),
         flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,

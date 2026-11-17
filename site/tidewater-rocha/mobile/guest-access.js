@@ -1,11 +1,11 @@
-import {decodeSaloon} from './main-saloon.js?v=guest-access-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=guest-access-1';
-import {indexFootprints} from './terrace-geometry.js?v=guest-access-1';
-import {guestLandings,prepareGuestFloor,guestProfileDomain} from './guest-access-geometry.js?v=guest-access-1';
+import {decodeSaloon} from './main-saloon.js?v=saloon-continuity-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=saloon-continuity-1';
+import {indexFootprints} from './terrace-geometry.js?v=saloon-continuity-1';
+import {guestLandings,prepareGuestFloor,guestProfileDomain} from './guest-access-geometry.js?v=saloon-continuity-1';
 
-export const guestAccessVersion='guest-access-1';
+export const guestAccessVersion='saloon-continuity-1';
 export function decodeGuestAccess(manifest,buffer) {
-  const result=decodeSaloon(manifest,buffer,{version:guestAccessVersion,names:['exterior','interior','upper','sun','bow','guest'],roomID:'LD_R11'}),f=result.flight;
+  const result=decodeSaloon(manifest,buffer,{version:guestAccessVersion,names:['exterior','upper','sun','bow','guest'],roomID:'LD_R11'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
   const vector=p=>Array.isArray(p)&&p.length===3&&p.every(Number.isFinite);
   if(!result.floor?.length||!result.floor.every(polygon)||!result.domains?.length||!result.domains.every(polygon)||

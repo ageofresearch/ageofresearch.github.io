@@ -68,7 +68,10 @@ async function measureGuest(base=defaultBase,out=defaultOut){
  return runs;
 }
 function assertGuestBudget(runs) {
- for(let leg=0;leg<4;leg++)assert.ok(runs.map(r=>r.legs[leg].p95).sort((a,b)=>a-b)[1]<=25,'Controlled median guest P95 exceeds 25 ms on leg '+leg);
+ for(let leg=0;leg<4;leg++) {
+  assert.ok(runs.map(r=>r.legs[leg].p95).sort((a,b)=>a-b)[1]<=25,'Controlled median guest P95 exceeds 25 ms on leg '+leg);
+  assert.ok(runs.map(r=>r.legs[leg].fps).sort((a,b)=>a-b)[1]>=40,'Controlled median guest FPS below 40 on leg '+leg);
+ }
 }
 module.exports={measureGuest,assertGuestBudget};
 if(require.main===module)measureGuest().then(assertGuestBudget).catch(e=>{console.error(e);process.exitCode=1});

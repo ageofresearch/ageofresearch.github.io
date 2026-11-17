@@ -423,3 +423,61 @@ There were no geometry downloads, GPU resource creations or frames over 50 ms
 during movement. The 39 individual frames over 25 ms remain in the raw reports;
 this reference does not assert that every frame is under 25 ms. Resident
 geometry was 11,138,892 bytes; finish textures stayed at 3,495,255 bytes.
+
+## Uniform quality experiment
+
+`mobile.html?quality=uniform` enables the locally implemented `uniform-quality-1`
+experiment. Normal URLs retain the six existing profiles. **Do not enable or
+publish uniform quality by default:** the paired comparison failed the agreed
+25 ms P95 and 5% mean-frame regression gates. The experiment removes geometry
+switches at room/deck boundaries, but holding every zone at its best existing
+mobile detail increases the per-frame cost in several upper-deck return views.
+
+The offline builder selects each existing complete variant by lowest measured
+simplification error, then triangle detail and stable profile order. Source
+identity includes provenance, geometry, lighting and finish attributes, so the
+two different floor fragments sharing an ID remain separate. No source position,
+normal, material, collision or navigation surface is changed. It refuses stale
+legacy packages. The independent render-only package is bound to both the source
+model hash and the exact guest manifest hash.
+
+The result has 38,055 triangles, two indexed draws, one pass, and 2,640,036 bytes
+of resident geometry after the previous GPU buffers are released (previously
+11,138,892 bytes across six profiles). This is GPU geometry storage, not total
+application RAM: the CPU fallback data remains available. Resolution, 4x MSAA,
+textures and lighting equations are unchanged. Only `uniform` has a 40,000
+triangle limit; all legacy decoders/builders retain 25,000.
+
+Preparation follows the guest package and warms seven representative views
+before walking. Uniform mode bypasses positional profile selection. Network,
+version, data and GPU failures retain the complete prior route; paused retries
+clean candidate resources and restore the camera exactly. Browser verification
+also checks identical pixels at the same saloon pose after arriving from opposite
+sides, unchanged navigation, resource release and full-yacht handoff.
+
+The recorded three-context static comparison is in
+`tests/fixtures/yacht-uniform-quality-report.json`. With the retained source order,
+median P95 was about 17 ms in the saloon, but 33–36 ms in several upper/lower
+return views. A large-opaque-faces-first ordering improved the lower view but
+worsened the bow return to 48 ms; it was not retained. These are controlled
+software-rendering measurements, not a phone certification.
+
+Reproduce and review:
+
+```sh
+node scripts/build-yacht-uniform-quality.mjs
+node --test tests/yacht-uniform-quality.test.mjs
+NODE_PATH=/path/to/browser/node_modules CHROME_PATH=/path/to/chrome \
+  node tests/yacht-uniform-quality.cjs
+# Serve an immutable reference checkout on a different port. Run alone.
+YACHT_REFERENCE_BASE=http://127.0.0.1:8772/tidewater-rocha/ \
+  NODE_PATH=/path/to/browser/node_modules CHROME_PATH=/path/to/chrome \
+  node tests/yacht-uniform-quality-performance.cjs
+```
+
+The comparator alternates reference/candidate order over three fresh contexts
+per version, records first and repeated legs plus return views, and exits nonzero
+if any acceptance gate fails. `YACHT_UNIFORM_VIEWS_ONLY=1` runs the shorter static
+qualification. Default-profile regressions remain unchanged; the additional CI
+job checks the opt-in experiment and its failure recovery, not a performance
+qualification for enabling it.

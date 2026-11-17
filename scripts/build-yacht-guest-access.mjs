@@ -9,9 +9,9 @@ import {guestRoom,guestLandings,guestDomains,guestApproach} from '../site/tidewa
 import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
 const compact=rows=>[...new Map(rows.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-export async function buildGuestAccess() {
+export async function buildGuestAccess({uniform=false}={}) {
   const covers=new Map();
-  const result=await buildBridgeAccess({profileNames:['exterior','interior','upper','sun','bow','guest'],
+  const result=await buildBridgeAccess({profileNames:['exterior','interior','upper','sun','bow','guest',...uniform?['uniform']:[]],
     lod(p,context) {
       const guest=p.role?.startsWith('guest-'),flight=p.semanticParent==='stairs/guest';
       if(context.profile==='guest') {

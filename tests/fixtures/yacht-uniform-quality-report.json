@@ -1,0 +1,519 @@
+{
+  "decision": "Keep legacy profiles as the default; do not publish uniform quality as the default.",
+  "referenceCommit": "bdf5d91c4679d3c02a6899741b7b09bb0e3cd963",
+  "referenceMainCommit": "4eb4d2e2fde1516788f98216d31edb134f3d9a6e",
+  "candidateGeometrySHA256": "0bb97b9925b8124ce37dc714e35c7e7e6da129f178ba32aa1611b5fe1143f0ca",
+  "environment": {
+    "renderer": "Chromium WebGPU through SwiftShader",
+    "viewport": [
+      360,
+      540
+    ],
+    "renderScale": 1,
+    "MSAA": 4,
+    "freshContextsPerVersion": 3
+  },
+  "criteria": {
+    "medianP95MaxMs": 25,
+    "medianFPSMin": 40,
+    "meanFrameRegressionMax": 0.05
+  },
+  "trials": [
+    {
+      "name": "source-order",
+      "retained": true,
+      "comparison": [
+        {
+          "case": "saloon-return",
+          "leg": 0,
+          "reference": {
+            "p95": 16.900000005960464,
+            "fps": 60.00663389900934,
+            "mean": 16.66482412066292
+          },
+          "candidate": {
+            "p95": 17.400000005960464,
+            "fps": 59.48822193014144,
+            "mean": 16.810050251196376
+          },
+          "passed": true
+        },
+        {
+          "case": "saloon-forward",
+          "leg": 0,
+          "reference": {
+            "p95": 17.30000001192093,
+            "fps": 59.70059700575655,
+            "mean": 16.75025125634131
+          },
+          "candidate": {
+            "p95": 17.099999994039536,
+            "fps": 59.70955352888493,
+            "mean": 16.747738693377478
+          },
+          "passed": true
+        },
+        {
+          "case": "upper-return-a",
+          "leg": 0,
+          "reference": {
+            "p95": 17.5,
+            "fps": 59.410078815486656,
+            "mean": 16.83216080399015
+          },
+          "candidate": {
+            "p95": 33.70000001788139,
+            "fps": 52.37806964424384,
+            "mean": 19.09195979905488
+          },
+          "passed": false
+        },
+        {
+          "case": "upper-return-b",
+          "leg": 0,
+          "reference": {
+            "p95": 17.099999994039536,
+            "fps": 59.70059700575655,
+            "mean": 16.75025125634131
+          },
+          "candidate": {
+            "p95": 35.5,
+            "fps": 45.75028162842999,
+            "mean": 21.857788944813475
+          },
+          "passed": false
+        },
+        {
+          "case": "sun-return",
+          "leg": 0,
+          "reference": {
+            "p95": 19.799999982118607,
+            "fps": 59.698806023772775,
+            "mean": 16.750753768874173
+          },
+          "candidate": {
+            "p95": 34,
+            "fps": 54.52502945420857,
+            "mean": 18.34020100511498
+          },
+          "passed": false
+        },
+        {
+          "case": "bow-return",
+          "leg": 0,
+          "reference": {
+            "p95": 17.69999998807907,
+            "fps": 58.52769036215078,
+            "mean": 17.085929648211252
+          },
+          "candidate": {
+            "p95": 36.400000005960464,
+            "fps": 43.57823278221833,
+            "mean": 22.94723618090452
+          },
+          "passed": false
+        },
+        {
+          "case": "guest-return",
+          "leg": 0,
+          "reference": {
+            "p95": 16.80000001192093,
+            "fps": 59.99939699120067,
+            "mean": 16.666834170794367
+          },
+          "candidate": {
+            "p95": 33.29999998211861,
+            "fps": 53.99392229225142,
+            "mean": 18.520603015045424
+          },
+          "passed": false
+        }
+      ],
+      "startup": [
+        {
+          "mode": "reference",
+          "round": 0,
+          "ready": {
+            "readyMs": 3292.199999988079,
+            "stats": {
+              "batches": 2,
+              "triangles": 24938,
+              "geometryBytes": 1901272,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 11138892,
+              "profile": "exterior"
+            },
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 93191835
+          }
+        },
+        {
+          "mode": "candidate",
+          "round": 0,
+          "ready": {
+            "readyMs": 2167.0999999940395,
+            "stats": {
+              "batches": 2,
+              "triangles": 38055,
+              "geometryBytes": 2640036,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 2640036,
+              "profile": "uniform"
+            },
+            "uniform": "ready",
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 96155929
+          }
+        },
+        {
+          "mode": "candidate",
+          "round": 1,
+          "ready": {
+            "readyMs": 2120.5,
+            "stats": {
+              "batches": 2,
+              "triangles": 38055,
+              "geometryBytes": 2640036,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 2640036,
+              "profile": "uniform"
+            },
+            "uniform": "ready",
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 96155929
+          }
+        },
+        {
+          "mode": "reference",
+          "round": 1,
+          "ready": {
+            "readyMs": 2105,
+            "stats": {
+              "batches": 2,
+              "triangles": 24938,
+              "geometryBytes": 1901272,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 11138892,
+              "profile": "exterior"
+            },
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 93191835
+          }
+        },
+        {
+          "mode": "reference",
+          "round": 2,
+          "ready": {
+            "readyMs": 1995.9000000059605,
+            "stats": {
+              "batches": 2,
+              "triangles": 24938,
+              "geometryBytes": 1901272,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 11138892,
+              "profile": "exterior"
+            },
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 93191835
+          }
+        },
+        {
+          "mode": "candidate",
+          "round": 2,
+          "ready": {
+            "readyMs": 2296.9000000059605,
+            "stats": {
+              "batches": 2,
+              "triangles": 38055,
+              "geometryBytes": 2640036,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 2640036,
+              "profile": "uniform"
+            },
+            "uniform": "ready",
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 96155929
+          }
+        }
+      ]
+    },
+    {
+      "name": "large-faces-first",
+      "retained": false,
+      "comparison": [
+        {
+          "case": "saloon-return",
+          "leg": 0,
+          "reference": {
+            "p95": 16.80000001192093,
+            "fps": 60.01749253572864,
+            "mean": 16.661809045166226
+          },
+          "candidate": {
+            "p95": 16.900000005960464,
+            "fps": 60.1281121586773,
+            "mean": 16.63115577886452
+          },
+          "passed": true
+        },
+        {
+          "case": "saloon-forward",
+          "leg": 0,
+          "reference": {
+            "p95": 16.900000005960464,
+            "fps": 60.001206053961724,
+            "mean": 16.666331658411266
+          },
+          "candidate": {
+            "p95": 16.899999976158142,
+            "fps": 60.001206054500884,
+            "mean": 16.666331658261505
+          },
+          "passed": true
+        },
+        {
+          "case": "upper-return-a",
+          "leg": 0,
+          "reference": {
+            "p95": 16.900000005960464,
+            "fps": 59.4065317330264,
+            "mean": 16.833165829205633
+          },
+          "candidate": {
+            "p95": 28.700000017881393,
+            "fps": 53.06808181543073,
+            "mean": 18.843718592994776
+          },
+          "passed": false
+        },
+        {
+          "case": "upper-return-b",
+          "leg": 0,
+          "reference": {
+            "p95": 17.900000005960464,
+            "fps": 58.53285487412396,
+            "mean": 17.084422110462906
+          },
+          "candidate": {
+            "p95": 33.5,
+            "fps": 48.934025131084994,
+            "mean": 20.435678391899895
+          },
+          "passed": false
+        },
+        {
+          "case": "sun-return",
+          "leg": 0,
+          "reference": {
+            "p95": 19.5,
+            "fps": 59.4065317330264,
+            "mean": 16.833165829205633
+          },
+          "candidate": {
+            "p95": 32.30000001192093,
+            "fps": 53.30833110099116,
+            "mean": 18.758793969849247
+          },
+          "passed": false
+        },
+        {
+          "case": "bow-return",
+          "leg": 0,
+          "reference": {
+            "p95": 17.599999994039536,
+            "fps": 59.41540023267301,
+            "mean": 16.830653266391565
+          },
+          "candidate": {
+            "p95": 48.400000005960464,
+            "fps": 41.898265117115066,
+            "mean": 23.867336683387133
+          },
+          "passed": false
+        },
+        {
+          "case": "guest-return",
+          "leg": 0,
+          "reference": {
+            "p95": 16.900000005960464,
+            "fps": 60.001206054500884,
+            "mean": 16.666331658261505
+          },
+          "candidate": {
+            "p95": 20.80000001192093,
+            "fps": 58.82179066546972,
+            "mean": 17.00050251253286
+          },
+          "passed": true
+        }
+      ],
+      "startup": [
+        {
+          "mode": "reference",
+          "round": 0,
+          "ready": {
+            "readyMs": 2800.0999999940395,
+            "stats": {
+              "batches": 2,
+              "triangles": 24938,
+              "geometryBytes": 1901272,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 11138892,
+              "profile": "exterior"
+            },
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 93191835
+          }
+        },
+        {
+          "mode": "candidate",
+          "round": 0,
+          "ready": {
+            "readyMs": 2259.0999999940395,
+            "stats": {
+              "batches": 2,
+              "triangles": 38055,
+              "geometryBytes": 2640036,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 2640036,
+              "profile": "uniform"
+            },
+            "uniform": "ready",
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 96155929
+          }
+        },
+        {
+          "mode": "candidate",
+          "round": 1,
+          "ready": {
+            "readyMs": 2424.9000000059605,
+            "stats": {
+              "batches": 2,
+              "triangles": 38055,
+              "geometryBytes": 2640036,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 2640036,
+              "profile": "uniform"
+            },
+            "uniform": "ready",
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 96155929
+          }
+        },
+        {
+          "mode": "reference",
+          "round": 1,
+          "ready": {
+            "readyMs": 2049.0999999940395,
+            "stats": {
+              "batches": 2,
+              "triangles": 24938,
+              "geometryBytes": 1901272,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 11138892,
+              "profile": "exterior"
+            },
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 93191835
+          }
+        },
+        {
+          "mode": "reference",
+          "round": 2,
+          "ready": {
+            "readyMs": 1964.0999999940395,
+            "stats": {
+              "batches": 2,
+              "triangles": 24938,
+              "geometryBytes": 1901272,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 11138892,
+              "profile": "exterior"
+            },
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 93191835
+          }
+        },
+        {
+          "mode": "candidate",
+          "round": 2,
+          "ready": {
+            "readyMs": 2047,
+            "stats": {
+              "batches": 2,
+              "triangles": 38055,
+              "geometryBytes": 2640036,
+              "newTextures": 0,
+              "finishTextureBytes": 3495255,
+              "materialTextures": 2,
+              "residentGeometryBytes": 2640036,
+              "profile": "uniform"
+            },
+            "uniform": "ready",
+            "scale": 1,
+            "samples": 4,
+            "width": 360,
+            "height": 540,
+            "bytes": 96155929
+          }
+        }
+      ]
+    }
+  ]
+}

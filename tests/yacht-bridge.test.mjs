@@ -23,7 +23,7 @@ async function full(){
  const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
  const walk=new Walk({camera:{position:model.group.position.clone()},player:{position:model.group.position.clone()}},model,{document:null});return {model,walk};
 }
-test('bridge package reproduces the shared helm, windshield and visible bow within all four budgets',async()=>{
+test('bridge package reproduces the shared helm, windshield and visible bow within all three budgets',async()=>{
  const result=await buildBridge();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
  for(const [name,p]of Object.entries(bridge.profiles)){
   assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);assert.ok(p.audit.some(a=>a.id.startsWith('UD_FUR_038/')));

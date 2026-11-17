@@ -14,7 +14,7 @@ less geometry on distant context. The doorway no longer selects a profile from
 position or travel history. Upper decks, the bow and the lower guest stair still
 use their respective profiles. All profiles are prepared before movement.
 
-The main deck uses 24,800 triangles. The other active profiles use 24,947
+The main deck uses 24,700 triangles. The other active profiles use 24,947
 (upper), 24,434 (sun), 22,805 (bow) and 21,783 (guest). Each keeps two indexed
 draws, one pass, render scale 1 and MSAA 4. Removing the redundant main deck
 profile saves 16.3 MB across the staged zone packages before HTTP compression.

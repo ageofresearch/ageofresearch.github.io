@@ -20,7 +20,7 @@ function full() {
 }
 const center=s=>[0,1].map(k=>{const ps=s.polygons.flat().map(p=>p[k]);return(Math.min(...ps)+Math.max(...ps))/2;});
 
-test('sun assets reproduce the shared furniture, guards, supports and four bounded profiles',async()=>{
+test('sun assets reproduce the shared furniture, guards, supports and three bounded profiles',async()=>{
   const result=await buildSun();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   for(const [name,p]of Object.entries(sun.profiles)) {
     assert.ok(p.triangles<=25000,name);assert.equal(p.batches.length,2);assert.equal(p.triangles,p.batches.reduce((n,b)=>n+b.indices.length/3,0));

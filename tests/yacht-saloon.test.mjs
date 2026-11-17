@@ -7,7 +7,7 @@ import { nextProfile,decodeSaloon,connectSaloon,loadSaloon } from '../site/tidew
 import { moveAlongRoute,routeSegments } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { fixture,travel,saloon,saloonManifest,saloonBuffer } from './yacht-saloon-fixture.mjs';
 
-test('the shared deck profile includes the whole saloon and is reproducible and respect the mobile budget',async()=>{
+test('the shared deck profile includes the whole saloon and is reproducible and respects the mobile budget',async()=>{
   const generated=await buildSaloon();
   assert.deepEqual(generated.manifest,saloonManifest);
   assert.deepEqual(generated.binary,saloonBuffer);

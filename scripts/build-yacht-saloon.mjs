@@ -17,7 +17,11 @@ const version = 'saloon-continuity-1';
 export function mainDeckError(part,bounds) {
   if(bounds[2]>=5.88)return .4;
   const saloonFurnishing=part.role==='furniture'&&bounds[0]>=8.5&&bounds[5]<5.88;
-  return saloonFurnishing?.024:.04;
+  if(!saloonFurnishing)return .055;
+  // The top and its thin surrounding rim need enough segments to read as a
+  // single curve. Coarser meshes can expose the dark rim under the tabletop.
+  if(/^(thin tabletop perimeter|inset tabletop)$/.test(part.feature))return .014;
+  return .024;
 }
 export const boundsOf = vertices => {
   const b = [Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];

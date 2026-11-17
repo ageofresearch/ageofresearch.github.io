@@ -23,7 +23,7 @@ async function full(){
 }
 const route=[[13.8,0],[14.0,0],[14.21,0],[14.5,0],[14.8,0],[16,0],[17.4,0],[18.3,0],[18.3,-1.9]];
 
-test('upper interior reproduces four bounded profiles and final shared assemblies without old dining proxies',async()=>{
+test('upper interior reproduces three bounded profiles and final shared assemblies without old dining proxies',async()=>{
   const result=await buildUpperInterior();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   const duplicates=a=>{const counts=new Map();for(const p of a)counts.set(p.id,(counts.get(p.id)||0)+1);return [...counts].filter(([,n])=>n>1);};
   for(const [name,p] of Object.entries(interior.profiles)){

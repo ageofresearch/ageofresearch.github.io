@@ -52,9 +52,10 @@ export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThi
 }
 
 export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false, bridgeAccess=false, guestAccess=false) {
-  if(stair==='guest'||guestAccess&&['MD','LD'].includes(deck))return 'guest';
+  if(stair==='guest')return 'guest';
   if(deck==='SD'||stair==='sun')return 'sun';
   if(stair==='aft'||stair==='bridge')return 'upper';
+  if(guestAccess&&['MD','LD'].includes(deck))return 'guest';
   if(deck==='MD'&&bridgeAccess&&(x>17.5||current==='upper'&&x>=17.1))return 'upper';
   if(deck==='UD'){
     if(bowExterior&&(x>13.8||current==='bow'&&x>=12.8))return 'bow';

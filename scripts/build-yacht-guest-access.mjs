@@ -35,7 +35,7 @@ export async function buildGuestAccess() {
         return {omit:true,reason:'Small printed cockpit control marks; control panel and cabinet remain'};
       return accessLOD(p,context);
     },
-    extend({model,lowerParts,parts}) {
+    extend({model,parts}) {
       // Complete source guards replace the previous top-only extraction.
       for(let i=parts.length-1;i>=0;i--)if(parts[i].role==='access-guest-guard')parts.splice(i,1);
       const additions=[],final=renderedParts(model);

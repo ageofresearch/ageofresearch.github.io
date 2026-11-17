@@ -117,6 +117,7 @@ test('guest profile uses a bounded portal hysteresis and leaves every other rout
   assert.equal(guestProfileDomain(18.5,1.35,'interior'),false);
   assert.equal(nextProfile('interior',17.4,'MD','guest'),'guest');assert.equal(nextProfile('guest',16,'LD',null,false,false,true),'guest');
   assert.equal(nextProfile('guest',16,'MD'),'interior');assert.equal(nextProfile('guest',19,'MD','bridge'),'upper');
+  for(const stair of ['aft','bridge'])assert.equal(nextProfile('guest',17.4,'MD',stair,false,false,true),'upper');
   assert.equal(nextProfile('guest',15,'UD','sun'),'sun');assert.equal(nextProfile('upper',20,'UD',null,true),'bow');
 });
 test('corrupt, stale and unavailable guest data are rejected before navigation is connected',async()=>{

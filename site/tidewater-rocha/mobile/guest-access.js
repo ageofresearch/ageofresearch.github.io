@@ -1,7 +1,7 @@
 import {decodeSaloon} from './main-saloon.js?v=guest-access-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=guest-access-1';
 import {indexFootprints} from './terrace-geometry.js?v=guest-access-1';
-import {guestRoom,guestLandings,prepareGuestFloor,guestProfileDomain} from './guest-access-geometry.js?v=guest-access-1';
+import {guestLandings,prepareGuestFloor,guestProfileDomain} from './guest-access-geometry.js?v=guest-access-1';
 
 export const guestAccessVersion='guest-access-1';
 export function decodeGuestAccess(manifest,buffer) {

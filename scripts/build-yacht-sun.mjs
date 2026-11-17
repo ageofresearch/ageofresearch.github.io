@@ -10,6 +10,7 @@ import {subdivide,contactShade} from './build-yacht-terrace.mjs';
 import {buildYachtGeometry,createBoarding,createSternFeatures,createFinishes,resolveYachtPartFinish,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
+import {createUniformSelection} from './yacht-geometry/uniform-selection.mjs';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 const compact=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
 // LOD leaves unreferenced vertices behind. Compact every attribute together
@@ -56,10 +57,16 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
   const packed=parts.map(p=>({id:p.id,sourceID:p.sourceID,feature:p.feature,role:p.role,bounds:p.bounds,finish:p.finish,glass:!!p.glass,
     vertices:store(p.vertices),indices:store(p.indices,Uint32Array)}));
   const profiles={},materials=createFinishes(0,true,true,true,true);
+  const uniform=profileNames.includes('uniform')?createUniformSelection():null;
   try {
     for(const profile of profileNames) {
       const audit=[];
       const geometryTransform=p=>{
+        if(profile==='uniform') {
+          const selected=uniform.get(p);
+          audit.push(selected.audit);
+          return compactGeometry(selected.geometry);
+        }
         const b=p.bounds||boundsOf(p.vertices),name=p.feature||p.name||'';
         const support=/teak tread|pale step|boarding landing|final riser|tread \d+ (pale inset|timber border|rounded timber edge)/.test(name);
         const stair=p.semanticParent?.startsWith('stairs/')||p.id?.startsWith('MD_STA_013/');
@@ -72,7 +79,10 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
         const placement=corrected.has(p.id)&&result.indices.length?{
           correction:corrected.get(p.id),sourceBounds:b,
           renderedBounds:boundsOf([...new Set(result.indices)].flatMap(i=>result.vertices.slice(i*6,i*6+6)))}:{};
-        audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...placement,...choice.omit&&choice.reason?{omission:choice.reason}:{}});return compactGeometry(result);
+        const row={id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...placement,...choice.omit&&choice.reason?{omission:choice.reason}:{}};
+        audit.push(row);
+        uniform?.consider(p,result,{...row,sourceProfile:profile,complete:!choice.geometry});
+        return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
@@ -91,8 +101,8 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
 
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
-  const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
-  if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
+  const over=Object.entries(profiles).filter(([name,p])=>p.triangles>(name==='uniform'?40000:25000));
+  if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds its triangle budget');
   const manifest={version:'guest-access-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,

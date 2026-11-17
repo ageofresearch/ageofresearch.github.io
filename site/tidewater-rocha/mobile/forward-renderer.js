@@ -172,7 +172,7 @@ export async function createForwardRenderer(app, sun) {
   let depth, depthView, color, colorView;
   return {
     get activeProfile() { return activeProfile; },
-    async installProfiles(source,{prepare=false,activate=()=>{}}={}) {
+    async installProfiles(source,{prepare=false,activate=()=>{},views=[]}={}) {
       if(disposed)throw Error('Renderer disposed');
       const uploaded={};
       device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
@@ -196,11 +196,11 @@ export async function createForwardRenderer(app, sun) {
         throw failure||validation||memory||Error('Renderer disposed');
       }
       const previous={profiles,batches,name:activeProfile,stats:{...model.stats}};
-      profiles=uploaded;selectProfile(uploaded[previous.name]?previous.name:'exterior');
+      profiles=uploaded;selectProfile(uploaded.uniform?'uniform':uploaded[previous.name]?previous.name:'exterior');
       try {
         if(prepare) {
           device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
-          let error;try{await this.prepareProfiles();}catch(e){error=e;}
+          let error;try{await this.prepareProfiles(views);}catch(e){error=e;}
           const invalid=await device.popErrorScope(),memory=await device.popErrorScope();
           if(error||invalid||memory||disposed)throw error||invalid||memory||Error('Renderer disposed');
         }
@@ -216,27 +216,38 @@ export async function createForwardRenderer(app, sun) {
     get samples() { return samples; },
     get canSmooth() { return Boolean(smooth); },
     setSamples(value) { samples = value === 4 && smooth ? 4 : 1; },
-    async prepareProfiles() {
+    async prepareProfiles(views=[]) {
       if(!profiles||disposed)return;
       // Exercise the actual buffers and pipelines offscreen before enabling a
       // new route. Do not change the visitor's pose or flash a different deck.
-      const previous=activeProfile;
+      const previous=activeProfile,position=app.camera.position.clone(),rotation=app.camera.quaternion.clone();
       const target=device.createTexture({label:'Walk preparation',format,
         size:[app.engine.width,app.engine.height],usage:GPUTextureUsage.RENDER_ATTACHMENT});
       try {
         for(const name of Object.keys(profiles)) {
           if(disposed)return;
-          app.gpu.beginFrame();this.render(name,target.createView());app.gpu.submit();
-          await app.gpu.queue.onSubmittedWorkDone();
+          for(const view of views.length?views:[null]) {
+            if(view) {
+              const b=model.group.userData.yacht;
+              const point=([x,y,z])=>model.group.localToWorld(eye.clone().set(y*b.sy,z-b.seaReference,x*b.sx-b.length/2));
+              app.camera.position.copy(point(view.eye));app.camera.lookAt(point(view.target));
+            }
+            app.gpu.beginFrame();this.render(name,target.createView());app.gpu.submit();
+            await app.gpu.queue.onSubmittedWorkDone();
+          }
         }
-      } finally { target.destroy();if(!disposed)selectProfile(previous); }
+      } finally { app.camera.position.copy(position);app.camera.quaternion.copy(rotation);app.camera.updateMatrixWorld();target.destroy();if(!disposed)selectProfile(previous); }
     },
     render(preparingProfile=null,target=null) {
       const {engine, gpu, camera} = app;
       if(profiles) {
-        const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
-        const guestApproach=!!guest&&(nav.deck==='LD'||nav.deck==='MD'&&guest.profileContains(...nav.position,activeProfile)&&nav.floorSafe(...nav.position,'MD'));
-        const name=preparingProfile??nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position),guestApproach);
+        let name=preparingProfile;
+        if(!name&&profiles.uniform)name='uniform';
+        if(!name) {
+          const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
+          const guestApproach=!!guest&&(nav.deck==='LD'||nav.deck==='MD'&&guest.profileContains(...nav.position,activeProfile)&&nav.floorSafe(...nav.position,'MD'));
+          name=nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position),guestApproach);
+        }
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {

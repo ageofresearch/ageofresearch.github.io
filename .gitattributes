@@ -1,2 +1,4 @@
 # Generated vendor bundle retains upstream documentation formatting.
 site/marina-casa-de-campo/assets/yacht-parity-runtime-r110-performance1.js linguist-generated=true whitespace=-blank-at-eol,-space-before-tab
+# Packed GPU vertex streams can contain no NUL byte in their first 8 KiB.
+site/tidewater-rocha/mobile/uniform-quality.bin binary

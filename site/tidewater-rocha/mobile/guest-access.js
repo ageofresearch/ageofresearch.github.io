@@ -1,3 +1,4 @@
+import {preloadUniformQuality} from './uniform-quality.js?v=uniform-quality-1';
 import {decodeSaloon} from './main-saloon.js?v=guest-access-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=guest-access-1';
 import {indexFootprints} from './terrace-geometry.js?v=guest-access-1';
@@ -30,7 +31,9 @@ export async function loadGuestAccess({signal,fetcher=globalThis.fetch.bind(glob
   try{
     const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./guest-access.${ext}?v=${guestAccessVersion}`,import.meta.url),{signal:controller.signal})));
     if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el acceso de invitados');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);return decodeGuestAccess(manifest,buffer);
+    const [text,buffer]=await Promise.all([responses[0].text(),responses[1].arrayBuffer()]);
+    const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));
+    return {...decodeGuestAccess(JSON.parse(text),buffer),manifestSHA256:Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('')};
   }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
 }
 export function prepareGuestAccess(zone) {
@@ -97,6 +100,7 @@ export function preloadGuestAccess(app) {
         if(abort.signal.aborted)throw Error('Carga cancelada');connectGuestAccess(app.yachtWalk,zone);
       }});
       model.guestAccessLoadState='ready';panel.hidden=true;window.dispatchEvent(new Event('luz-de-mar:guest-access-ready'));
+      await preloadUniformQuality(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;model.guestAccessLoadState='error';status.textContent='No se pudo preparar el acceso de invitados. El recorrido anterior sigue disponible.';retry.hidden=false;
       console.warn('Guest access loading failed',error);

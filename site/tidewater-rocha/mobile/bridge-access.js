@@ -1,9 +1,10 @@
-import {decodeSaloon} from './main-saloon.js?v=gangway-teak-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=gangway-teak-1';
-import {indexFootprints} from './terrace-geometry.js?v=gangway-teak-1';
-import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=gangway-teak-1';
+import {decodeSaloon} from './main-saloon.js?v=guest-access-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=guest-access-1';
+import {indexFootprints} from './terrace-geometry.js?v=guest-access-1';
+import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=guest-access-1';
+import {preloadGuestAccess} from './guest-access.js?v=guest-access-1';
 
-export const bridgeAccessVersion='gangway-teak-1';
+export const bridgeAccessVersion='guest-access-1';
 export function decodeBridgeAccess(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:bridgeAccessVersion,names:['exterior','interior','upper','sun','bow'],roomID:'MD_R07'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
@@ -83,6 +84,7 @@ export function preloadBridgeAccess(app) {
         if(abort.signal.aborted)throw Error('Carga cancelada');connectBridgeAccess(app.yachtWalk,zone);
       }});
       model.bridgeAccessLoadState='ready';panel.hidden=true;window.dispatchEvent(new Event('luz-de-mar:bridge-access-ready'));
+      await preloadGuestAccess(app);
     })().catch(error=>{
       if(abort.signal.aborted)return;model.bridgeAccessLoadState='error';status.textContent='No se pudo preparar el acceso interior. El recorrido anterior sigue disponible.';retry.hidden=false;
       console.warn('Bridge access loading failed',error);

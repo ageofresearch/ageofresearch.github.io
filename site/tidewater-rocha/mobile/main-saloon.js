@@ -1,7 +1,7 @@
-import { preloadUpper } from './upper-terrace.js?v=gangway-teak-1';
-import { connectTerrace } from './aft-terrace.js?v=gangway-teak-1';
+import { preloadUpper } from './upper-terrace.js?v=guest-access-1';
+import { connectTerrace } from './aft-terrace.js?v=guest-access-1';
 
-export const saloonVersion = 'gangway-teak-1';
+export const saloonVersion = 'guest-access-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior','interior'],roomID='MD_R02'}={}) {
@@ -51,7 +51,8 @@ export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThi
   }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
 }
 
-export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false, bridgeAccess=false) {
+export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false, bridgeAccess=false, guestAccess=false) {
+  if(stair==='guest'||guestAccess&&['MD','LD'].includes(deck))return 'guest';
   if(deck==='SD'||stair==='sun')return 'sun';
   if(stair==='aft'||stair==='bridge')return 'upper';
   if(deck==='MD'&&bridgeAccess&&(x>17.5||current==='upper'&&x>=17.1))return 'upper';
@@ -61,7 +62,7 @@ export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false
   }
   if(deck!=='MD'||x<8)return 'exterior';
   if(x>9.2)return 'interior';
-  return ['upper','sun','bow'].includes(current)?'exterior':current;
+  return ['upper','sun','bow','guest'].includes(current)?'exterior':current;
 }
 
 export function connectSaloon(walk,saloon) {

@@ -1,7 +1,7 @@
 # Mobile yacht zones
 
-Release: `gangway-teak-1`. The mobile route connects boarding, the aft terrace,
-swim platform, main saloon, upper terrace, solarium, upper interior, bridge and forward lounge. All zone
+Release: `guest-access-1`. The mobile route connects boarding, the aft terrace,
+swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
@@ -47,7 +47,7 @@ galley joinery, owner window-side furniture, helm and sanitary fixtures. It also
 removes seven contained wall/lining fragments while retaining their owning walls.
 The galley sink is raised to its counter, with a fitted recess through the overlapping
 top and removal of four buried cabinet parts; the outer cabinet dimensions remain.
-The corrected complete model has 6,754 parts and 978,365 triangles (228 more).
+The corrected complete model has 6,754 parts and 978,107 triangles. Stair-prism subtraction now retains coplanar fragments once rather than duplicating them.
 
 Corrections use actual deck boundaries, physical contacts and positive solid
 intersections. They are provisional physical fits, not surveyed boat positions.
@@ -64,8 +64,8 @@ changing cabin dimensions. The CI audit permits only the recorded original pairs
 and volumes; new unsupported contacts, overlapping solids or duplicate faces fail.
 "Inventoried" in the report does not certify a real-vessel position.
 
-Active profile triangles are exterior 24,876; interior 24,521; upper 24,975;
-sun 24,366; bow 22,737. Every profile keeps two indexed draws, one render pass,
+Active profile triangles are exterior 24,938; interior 24,589; upper 24,947;
+sun 24,434; bow 22,805; guest 21,783. Every profile keeps two indexed draws, one render pass,
 render scale 1 and MSAA 4. The audit is a separate page and adds no viewer download.
 
 Reproduce the offline audit with:
@@ -344,3 +344,82 @@ and the report records `absoluteBudgetQualified: false`. Raw P95, the bound,
 FPS and long-frame counts remain visible; an unqualified worker is never
 reported as meeting 25 ms. Resource, geometry, scale and MSAA checks are
 identical in both modes. Both standalone absolute gates remain unchanged.
+
+
+## Guest stair and aft lower distributor (`guest-access-1`)
+
+The main saloon connects to the existing guest flight and the aft portion of
+`LD_R11`, displayed as **Distribuidor inferior de popa**. LD stays at 1.55;
+SP remains 2.84. Safe camera destination is [16.8, -0.1, 3.15]. The shared
+U-shaped stair retains 13 intermediate treads, 14 rises (2.4/14), nominal width
+0.76, both landings, enclosures and handrails. These are model dimensions,
+not surveyed vessel measurements. Cabins, bathrooms, the forward lower passage
+and machinery/service routes are not enabled in mobile.
+
+The LD domain starts at x=13.34178 and ends on the actual lower portal plane,
+x=17.4+(y+0.08)/3, between y=-0.55668 and 0.35256. Physical support and obstacles
+come from final submitted surfaces; pending boundaries contain the radius-0.14
+body while leaving the stair portal open. Body height remains 1.65. The shared
+full-view correction replaces local legacy masks and retains other full routes.
+Only the local aft location name changes; the full forward-passage extent remains.
+The recorded saloon approach works in both viewers without moving furnishings.
+
+Guest entry uses the existing unclamped approach-distance gate (0.065),
+preventing lateral approach capture. Vertical collision includes the sculpted
+enclosures. The fitted `LD_GLA_002` screen is cut out of the flight's collision
+copy only where actual support triangles cover it. Exposed faces remain solid,
+and the complete visible screen still participates in LD floor collision.
+This removes the false 11-to-10 descent obstruction without moving the screen.
+Coplanar prism cuts retain each fragment once, avoiding exponential preparation
+work when cutting against individual support triangles.
+
+The package extracts complete source stair assemblies, replacing the former
+upper-only guest guards. It includes the existing closed service door at the
+aft boundary, but no machinery assets or door control. The original MD bottom
+face is at Float32 z=3.8299999237; the older 3.83 extraction omitted it. The new
+package recovers only that underside over the distributor and adjacent visible
+wall tops, reusing the existing upper floor. Its faces are exact source geometry;
+there is no second floor or invented ceiling. The lower floor inherits the
+shared plank material (code 1), with the existing static ceiling finish (9).
+
+`guest-access.json/bin` loads after bridge access. Six GPU profiles and all
+15 flight collision heights are prepared before geometry, navigation and the
+destination activate together. A failed load preserves the five-profile route.
+Paused retry destroys candidate resources on failure. The `guest` profile is
+selected on the flight and LD floor; the MD upper portal enters within 0.60 and
+retains within 1.00 over valid floor. Other stairs retain their profile priority.
+The upper portal context is resident on both sides of the transition.
+
+Full guest detail is 21,783 triangles. Other profiles retain the upper landing
+and top guards; lower assemblies and the recovered underside are occluded from
+their walk domains. Upper omits 96 small printed cockpit control-mark triangles;
+the cabinet and control panel remain. All six profiles retain two batches, one
+pass, scale 1 and 4x MSAA, with 11,138,892 resident geometry bytes.
+Finish textures remain 3,495,255 bytes. Full-view handoff restores valid LD poses
+and every tread; invalid poses use the nearest safe landing by saved elevation.
+
+Validation entry points:
+
+```sh
+node scripts/build-yacht-guest-access.mjs
+node --test tests/yacht-guest-access.test.mjs tests/yacht-stair-surfaces.test.mjs
+NODE_PATH=/path/to/browser/node_modules node tests/yacht-guest-render.cjs
+YACHT_CHECK=full NODE_PATH=/path/to/browser/node_modules node tests/yacht-guest-render.cjs
+NODE_PATH=/path/to/browser/node_modules node tests/yacht-guest-access-performance.cjs
+```
+
+Coverage includes saloon-to-distributor returns at 12/40/60 Hz, each tread with
+stops/reversals/diagonals, exposed glass and guards, source ceiling coverage,
+pending boundaries, every support handoff, malformed data, network failures,
+GPU rollback without live-resource growth, paused/idempotent retry and browser
+floor/stair handoffs. The spatial gate retains the 24 explicitly pending source
+solid intersections and 20 open-surface candidates; no new exceptions are added.
+
+
+Controlled local run at 360x540, scale 1, 4x MSAA: all 12 first/repeated legs
+across three fresh contexts recorded 59.46–59.91 FPS and P95 16.8–17.8 ms.
+Median P95 by down/up/repeated-down/repeated-up leg was 17.1/16.9/17.0/17.1 ms.
+There were no geometry downloads, GPU resource creations or frames over 50 ms
+during movement. The 39 individual frames over 25 ms remain in the raw reports;
+this reference does not assert that every frame is under 25 ms. Resident
+geometry was 11,138,892 bytes; finish textures stayed at 3,495,255 bytes.

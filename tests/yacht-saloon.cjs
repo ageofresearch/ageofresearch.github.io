@@ -30,7 +30,10 @@ module.exports=async function saloonViews(frame,out,readFrame,mobile) {
       assert.ok(result.indexedTriangles<=25000,JSON.stringify(result.indexedTriangles));
       const stats=await frame.evaluate(()=>window.__app.entranceYacht.stats);
       assert.equal(result.indexedTriangles,stats.triangles);
-      assert.ok(stats.residentGeometryBytes<9*1024*1024);
+      const profiles=await frame.evaluate(()=>Object.keys((__app.entranceYacht.guestAccess||__app.entranceYacht.bow).profiles).length);
+      // Preserve the existing 9 MiB / five-profile allowance as a sixth
+      // prepared profile is added; this is resident, not per-frame storage.
+      assert.ok(stats.residentGeometryBytes<profiles*(9/5)*1024*1024);
     }
   }
   if(mobile) {

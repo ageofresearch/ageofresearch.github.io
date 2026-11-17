@@ -24,8 +24,8 @@ export function bowLOD(p,{near,error,support,stair,profile}) {
     profile==='bow'&&p.role==='forward-context'?.018:p.role?.startsWith('bridge-')?.012:near&&profile==='upper'?.04:near?.014:error};
 }
 
-export async function buildBow({extend,lod}={}) {
-  return buildBridge({profileNames:['exterior','interior','upper','sun','bow'],
+export async function buildBow({extend,lod,profileNames}={}) {
+  return buildBridge({profileNames:profileNames||['exterior','interior','upper','sun','bow'],
     lod:lod||bowLOD,
     extend({model,lowerParts,parts}) {
       const final=renderedParts(model),additions=[];
@@ -51,7 +51,7 @@ export async function buildBow({extend,lod}={}) {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'gangway-teak-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
+      return {version:'guest-access-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,navigationEnd:bowEnd,route:bowRoute,
         bowPartIDs:additions.map(p=>p.id),evidence:'Provisional starboard access and forward lounge; narrow bow and port connection remain pending',...extend?.({model,lowerParts,parts})};
     }

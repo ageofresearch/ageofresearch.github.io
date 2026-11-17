@@ -66,7 +66,8 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
         const near=profile==='bow'?b[3]>=10.5&&b[2]>=5.87&&b[2]<7.7:profile==='sun'?b[5]>=8.08:profile==='upper'?b[5]>=5.88&&b[2]<8.08:profile==='interior'?b[3]>8.5&&b[2]<6:b[0]<8.5&&b[2]<6;
         const error=support||p.glass?0:stair?.004:near?(profile==='upper'?.02:.012):.08;
         const choice=lod?.(p,{profile,near,error,support,stair})||{};
-        const reduced=choice.omit?{...p,indices:[]}:simplify(p,choice.error??error,!support&&!stair&&!p.glass?['Permissive']:[]);
+        const source=choice.geometry?{...p,...choice.geometry}:p;
+        const reduced=choice.omit?{...p,indices:[]}:simplify(source,choice.error??error,!support&&!stair&&!p.glass?['Permissive']:[]);
         const result=splitFinishBoundaries(reduced,{28:interiorFinishBounds,29:bridgeFinishBounds});
         const placement=corrected.has(p.id)&&result.indices.length?{
           correction:corrected.get(p.id),sourceBounds:b,
@@ -92,7 +93,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','interior','
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'gangway-teak-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'guest-access-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

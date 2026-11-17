@@ -101,7 +101,7 @@ export async function buildUpper() {
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const compactFootprints=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-  const manifest={version:'gangway-teak-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
+  const manifest={version:'guest-access-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
     room:{...data.rooms.find(r=>r.id==='UD_R01'),name:'Terraza superior',displayName:'Terraza superior',spawn:[8.35,2.21,7.6],look:[10.3,0,6.8]},
     navigationEnd:14.188,flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compactFootprints(flight.clearance.footprints(s.height))}))}};

@@ -1,9 +1,10 @@
-import {configureAccessFloor} from './bridge-access-geometry.js?v=gangway-teak-1';
-import {configureBowFloor} from './bow-geometry.js?v=gangway-teak-1';
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=gangway-teak-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=gangway-teak-1';
-import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=gangway-teak-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=gangway-teak-1';
+import {configureAccessFloor} from './bridge-access-geometry.js?v=guest-access-1';
+import {configureGuestFloor} from './guest-access-geometry.js?v=guest-access-1';
+import {configureBowFloor} from './bow-geometry.js?v=guest-access-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=guest-access-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=guest-access-1';
+import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=guest-access-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=guest-access-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -109,6 +110,10 @@ function subtractPrisms(part,prisms) {
       })];
       const outside=[];
       for(let pending of polygons) {
+        // A touching/coplanar triangle has no volume inside this prism. Keeping
+        // it once also prevents exponential fragment growth at shared tread
+        // edges when a collision copy is cut against individual support tops.
+        if(planes.some(plane=>pending.every(v=>plane(v)<=EPS))) {outside.push(pending);continue;}
         for(const plane of planes) {
           const fragment=clipPolygon(pending,v=>-plane(v));
           if(fragment.length>=3)outside.push(fragment);
@@ -253,9 +258,21 @@ export function describeFlights(model,routes) {
       }
     }
     // Handrails remain obstacles; only the flight's own step structure is exempt.
-    const structure=new Set(own.filter(p=>!/rail|baluster|handhold/.test(p.feature||'')));
+    const structure=new Set(own.filter(p=>!/rail|baluster|handhold/.test(p.feature||'') &&
+      !(route.id==='guest'&&/enclosure/.test(p.feature||''))));
     landings.upper=landingPolygons(landings.upper,route,1);
-    const solidClearance=obstacles(parts,structure,box,{includeVerticalFaces:route.id==='bridge'});
+    // The fitted screen is below the guest stair. Its vertical faces under a
+    // neighbouring, higher tread must not become a fictitious riser obstacle
+    // when the visitor's circular footprint straddles two steps. Subtract only
+    // the actual support triangles from this flight's collision copy. Exposed
+    // screen faces, and the complete screen on the LD floor, remain solid.
+    const collisionParts=route.id==='guest'?parts.map(p=>{
+      if(p.id!=='LD_GLA_002'||p.feature!=='shower screen fitted below guest stair soffit')return p;
+      const copy={...p,vertices:Array.from(p.vertices),indices:Array.from(p.indices)};
+      subtractPrisms(copy,steps.flatMap(s=>s.polygons.map(polygon=>({polygon,low:p.bounds[2]-1,high:s.height}))));
+      return copy;
+    }):parts;
+    const solidClearance=obstacles(collisionParts,structure,box,{includeVerticalFaces:['bridge','guest'].includes(route.id)});
     const clearance=(x,y,height,radius)=>solidClearance(x,y,height,radius) &&
       !(route.id==='service' && Math.abs(height-upperHeight)<EPS && model.navigation.serviceAccess.blocked(x,y,route.upper,radius));
     clearance.footprints=solidClearance.footprints;
@@ -316,7 +333,7 @@ export function installFlightNavigation(nav,flights) {
       const end=nav.deck===route.lower?0:nav.deck===route.upper?1:-1;
       if(end<0)continue;
       const path=route.path,endpoint=end?path.at(-1):path[0],neighbor=end?path.at(-2):path[1];
-      if(route.id==='bridge') {
+      if(route.id==='bridge'||route.id==='guest') {
         // Projection clamps the entire approach to station zero. Do not capture
         // someone crossing the wide lower landing sideways on their way out.
         const dx=neighbor[0]-endpoint[0],dy=neighbor[1]-endpoint[1],length=Math.hypot(dx,dy);
@@ -347,6 +364,7 @@ export function configureModelStairs(nav,model) {
   configureInteriorFloor(nav,model);
   configureBridgeFloor(nav,model);
   configureAccessFloor(nav,model);
+  configureGuestFloor(nav,model);
   configureBowFloor(nav,model);
   if(model.exterior?.sunDeck) {
     const sun=describeSunFloor(model),previous=nav.floorSafe.bind(nav);

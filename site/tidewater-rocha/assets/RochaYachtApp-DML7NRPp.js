@@ -1,16 +1,17 @@
-import {restoreBridgeAccessHandoff} from '../mobile/bridge-access.js?v=gangway-teak-1';
-import {restoreBowHandoff} from '../mobile/bow-deck.js?v=gangway-teak-1';
-import {restoreBridgeHandoff} from '../mobile/bridge-helm.js?v=gangway-teak-1';
-import {restoreUpperInteriorHandoff} from '../mobile/upper-interior.js?v=gangway-teak-1';
-import {restoreSunHandoff} from '../mobile/sun-deck.js?v=gangway-teak-1';
-import {restoreUpperHandoff} from '../mobile/upper-terrace.js?v=gangway-teak-1';
-import {preloadYachtExteriors,prepareYachtMeshes,warmYachtViews} from '../mobile/scene-readiness.js?v=gangway-teak-1';
-import{t as e}from"./RochaStartup-DD9aAm5G.js";import{D as t,b as n,n as r,o as i,t as a}from"./Frame-CNet77I0.js";import{T as o,_ as s,c,g as l,h as u,i as d,o as f,p,s as m,t as h}from"./PostFX-0mW-sLoH.js";import{t as g}from"./GPU-CxPpnRCf.js";import"./common-HBn3Movl.js";import{t as _}from"./CameraVelocity-DbPmsWHs.js";import{a as v,i as y,n as b,o as x,t as S,u as C}from"./RochaYachtState-P5KwIGIl.js";var w=()=>new Promise(e=>requestAnimationFrame(()=>setTimeout(e,0)));async function T(){let T=performance.now(),E=new URLSearchParams(location.search),D=async(e,t)=>{document.querySelector(`.loader-status`).textContent=e,document.querySelector(`.loader-pct`).textContent=Math.round(t*100)+`%`,document.querySelector(`.loader-fill`).style.width=t*100+`%`,await w()};document.title=`Luz de Mar · Rocha`,document.querySelector(`.loader-title`).textContent=`LUZ DE MAR`,document.querySelector(`.loader-kicker`).textContent=`Rocha · solo el yate`,document.querySelector(`.loader-tagline`).textContent=`Recorre el barco caminando desde la pasarela.`,document.querySelector(`.loader-note`).textContent=`El mapa completo se carga únicamente al pedirlo.`,document.querySelector(`.loader-tips`).hidden=!0,await D(`Cargando el yate…`,.05);const pilot=E.get('scene')==='gangway'?await import('../mobile/gangway-scene.js?v=gangway-teak-1'):null;
+import {restoreBridgeAccessHandoff} from '../mobile/bridge-access.js?v=guest-access-1';
+import {restoreGuestAccessHandoff} from '../mobile/guest-access.js?v=guest-access-1';
+import {restoreBowHandoff} from '../mobile/bow-deck.js?v=guest-access-1';
+import {restoreBridgeHandoff} from '../mobile/bridge-helm.js?v=guest-access-1';
+import {restoreUpperInteriorHandoff} from '../mobile/upper-interior.js?v=guest-access-1';
+import {restoreSunHandoff} from '../mobile/sun-deck.js?v=guest-access-1';
+import {restoreUpperHandoff} from '../mobile/upper-terrace.js?v=guest-access-1';
+import {preloadYachtExteriors,prepareYachtMeshes,warmYachtViews} from '../mobile/scene-readiness.js?v=guest-access-1';
+import{t as e}from"./RochaStartup-DD9aAm5G.js";import{D as t,b as n,n as r,o as i,t as a}from"./Frame-CNet77I0.js";import{T as o,_ as s,c,g as l,h as u,i as d,o as f,p,s as m,t as h}from"./PostFX-0mW-sLoH.js";import{t as g}from"./GPU-CxPpnRCf.js";import"./common-HBn3Movl.js";import{t as _}from"./CameraVelocity-DbPmsWHs.js";import{a as v,i as y,n as b,o as x,t as S,u as C}from"./RochaYachtState-P5KwIGIl.js";var w=()=>new Promise(e=>requestAnimationFrame(()=>setTimeout(e,0)));async function T(){let T=performance.now(),E=new URLSearchParams(location.search),D=async(e,t)=>{document.querySelector(`.loader-status`).textContent=e,document.querySelector(`.loader-pct`).textContent=Math.round(t*100)+`%`,document.querySelector(`.loader-fill`).style.width=t*100+`%`,await w()};document.title=`Luz de Mar · Rocha`,document.querySelector(`.loader-title`).textContent=`LUZ DE MAR`,document.querySelector(`.loader-kicker`).textContent=`Rocha · solo el yate`,document.querySelector(`.loader-tagline`).textContent=`Recorre el barco caminando desde la pasarela.`,document.querySelector(`.loader-note`).textContent=`El mapa completo se carga únicamente al pedirlo.`,document.querySelector(`.loader-tips`).hidden=!0,await D(`Cargando el yate…`,.05);const pilot=E.get('scene')==='gangway'?await import('../mobile/gangway-scene.js?v=guest-access-1'):null;
 let O=pilot?null:C(),k=fetch(`./rocha/luz-de-mar/berth.json`).then(e=>{if(!e.ok)throw Error(`No se pudo cargar el amarre`);return e.json()}),A=new s(document.getElementById(`app`)),[j,M]=await Promise.all([O,k,A.init()]);await D(`Preparando los detalles de Luz de Mar…`,.35);let N=pilot?await pilot.buildGangway(M):x(M,j),{scene:P,camera:F}=A;P.add(N.group),F.near=.03,F.far=400,F.updateProjectionMatrix();let I=window.__app={engine:A,scene:P,camera:F,gpu:g,worldId:`rocha`,yachtOnly:!0,entranceYacht:N,waterEnabled:!0,terrainData:{surveyed:!1},freeCam:!1,input:new l(A.domElement),player:{position:new t,velocity:new t,yaw:0,pitch:0,mode:`walk`},fly:{yaw:0,pitch:0,velocity:new t}};
 let L,B,V,H,G,forward,pilotReady;
 function prepareFullRenderer(){L=I.atmosphere=new c(A);const R=I.sky=new f(L);const z=m(16.2);L.sunDir.value.copy(z),r.sunDir.value.copy(z),r.sunColor.value.setRGB(3,2.9,2.7),r.skyIrradiance.value.setRGB(.25,.32,.45),r.exposure.value=.55,r.waterEnabled.value=0,r.antiAliasingQuality.value=1,r.atmosphereQuality.value=1;B=I.sceneRenderer=new u(A.meshRenderer,P,F);B.clearColor=[.7,.61,.49,1],B.waterEnabled=!1,B.refractionEnabled=!1;V=I.shadows=new o({size:2048,splits:[10,60,400],lightMargin:200,normalBias:[.015,.06,.3],bias:2e-5,cacheStatic:!0,skipUnused:!0});V.layerMask=1<<p.OPAQUE|1<<p.TRANSPARENT,N.invalidateShadows=()=>V.invalidateStatic();H=I.environment=new d(A,P,R);H.interval=1/0;let U=new i({name:`yacht air medium`,code:`fn underwaterMedium(uv:vec2f)->f32{return 0.0;}`}),W=new i({name:`yacht air composite`,code:`fn underwaterComposite(uv:vec2f,pixel:vec2f)->vec4f{return vec4f(postSceneSample(uv),1.0);}`});G=I.post=new h(A,{sceneRenderer:B,camera:F,underwater:{module:U,compositeModule:W}})}
 if(pilot){
-  const {createForwardRenderer}=await import('../mobile/forward-renderer.js?v=gangway-teak-1');
+  const {createForwardRenderer}=await import('../mobile/forward-renderer.js?v=guest-access-1');
   forward=I.gangwayRenderer=await createForwardRenderer(I,m(16.2));
 }else {
   await preloadYachtExteriors(N);
@@ -45,7 +46,8 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     const upperState={deck:K.nav.deck,position:current,elevation:K.nav.elevation,stair:K.nav.stair?.route.id};
     const fromSun=upperState.deck==='SD'||upperState.stair==='sun';
     const fromAccess=upperState.stair==='bridge'||upperState.deck==='MD'&&K.nav.location()?.id==='MD_R07';
-    const fromUpper=fromAccess||fromSun||upperState.deck==='UD'||upperState.stair==='aft';
+    const fromGuest=upperState.stair==='guest'||upperState.deck==='LD';
+    const fromUpper=fromGuest||fromAccess||fromSun||upperState.deck==='UD'||upperState.stair==='aft';
     const fromBow=upperState.deck==='UD'&&!upperState.stair&&K.nav.location()?.id==='UD_R04';
     const fromBridge=upperState.deck==='UD'&&!upperState.stair&&K.nav.location()?.id==='UD_R03';
     const fromUpperInterior=upperState.deck==='UD'&&!upperState.stair&&K.nav.location()?.id==='UD_R02';
@@ -68,7 +70,7 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     let destination=fromSwimAccess?terraceSpawn:current;
     if(fromSaloon&&!K.nav.floorSafe(...destination))destination=saloonSpawn;
     if(fromUpper){
-      (fromAccess?restoreBridgeAccessHandoff:fromSun?restoreSunHandoff:fromBow?restoreBowHandoff:fromBridge?restoreBridgeHandoff:fromUpperInterior?restoreUpperInteriorHandoff:restoreUpperHandoff)(K,upperState);
+      (fromGuest?restoreGuestAccessHandoff:fromAccess?restoreBridgeAccessHandoff:fromSun?restoreSunHandoff:fromBow?restoreBowHandoff:fromBridge?restoreBridgeHandoff:fromUpperInterior?restoreUpperInteriorHandoff:restoreUpperHandoff)(K,upperState);
       K.yaw=yaw;K.pitch=pitch;F.rotation.set(pitch,yaw,0,'YXZ');
     }else if(K.nav.floorSafe(...destination)){
       if(fromSwimAccess)K.nav.enterRoom('MD_R01');

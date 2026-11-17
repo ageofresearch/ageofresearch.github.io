@@ -58,6 +58,14 @@ export function connectGuestAccess(walk,prepared) {
   model.guestAccess=zone;model.asset.data.rooms.push(zone.room);
   if(walk.controls){
     const controls=walk.controls;controls.rooms.push(zone.room);
+    let button=controls.root.querySelector('[data-deck="LD"]');
+    if(!button) {
+      button=controls.doc.createElement('button');button.type='button';button.dataset.deck='LD';
+      button.innerHTML='<span>−1</span>Inferior';button.setAttribute('aria-pressed','false');
+      button.onclick=()=>{controls.selectedDeck='LD';controls.search.value='';controls.root.querySelector('[data-more]').open=false;controls.renderRooms();};
+      controls.root.querySelector('.luz-decks').prepend(button);
+    }
+    button.hidden=false;
     controls.root.querySelector('[data-nav-note]').textContent='Recorre el distribuidor inferior de popa por la escalera de invitados. Camarotes, continuación inferior hacia proa y cocina · Continuación pendiente.';
     controls.syncLocation();if(controls.open)controls.renderRooms();
   }

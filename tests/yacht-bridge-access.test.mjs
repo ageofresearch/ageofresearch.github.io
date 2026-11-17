@@ -99,8 +99,8 @@ test('preparation rejects partial packages; retries are idempotent and profile t
   }
   connectBridgeAccess(f.walk,access);connectBridgeAccess(f.walk,access);assert.equal(f.model.asset.data.rooms.filter(r=>r.id==='MD_R07').length,1);
   assert.equal(f.walk.nav.routes.filter(r=>r.id==='bridge').length,1);
-  assert.equal(nextProfile('interior',17.5,'MD',null,false,true),'interior');assert.equal(nextProfile('interior',17.51,'MD',null,false,true),'upper');
-  assert.equal(nextProfile('upper',17.1,'MD',null,false,true),'upper');assert.equal(nextProfile('upper',17.09,'MD',null,false,true),'interior');
-  assert.equal(nextProfile('interior',19.16,'MD','bridge'),'upper');assert.equal(nextProfile('upper',19,'UD','sun'),'sun');
+  assert.equal(nextProfile('exterior',17.5,'MD',null,false,true),'exterior');assert.equal(nextProfile('exterior',17.51,'MD',null,false,true),'upper');
+  assert.equal(nextProfile('upper',17.1,'MD',null,false,true),'upper');assert.equal(nextProfile('upper',17.09,'MD',null,false,true),'exterior');
+  assert.equal(nextProfile('exterior',19.16,'MD','bridge'),'upper');assert.equal(nextProfile('upper',19,'UD','sun'),'sun');
  }finally{f.dispose();}
 });

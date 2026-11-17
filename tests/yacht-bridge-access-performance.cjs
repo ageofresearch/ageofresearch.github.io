@@ -54,11 +54,11 @@ async function measureAccess(base=defaultBase,out=defaultOut){
     });
     await app.gpu.queue.onSubmittedWorkDone();
     return {rows,start,gpu:__accessGPU.filter(e=>e.time>=start),resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/\.(bin|json|glb)(\?|$)/.test(e.name)).map(e=>e.name),
-      scale:app.engine.renderScale,samples:app.gangwayRenderer.samples,collisionHeights:n.stairFlights.get('bridge').clearance.preparedHeights,residentGeometryBytes:w.model.stats.residentGeometryBytes,finishTextureBytes:w.model.stats.finishTextureBytes};
+      mainProfile:w.model.bridgeAccess.profiles.interior?'interior':'exterior',scale:app.engine.renderScale,samples:app.gangwayRenderer.samples,collisionHeights:n.stairFlights.get('bridge').clearance.preparedHeights,residentGeometryBytes:w.model.stats.residentGeometryBytes,finishTextureBytes:w.model.stats.finishTextureBytes};
    });
    assert.deepEqual(result.gpu,[]);assert.deepEqual(result.resources,[]);assert.deepEqual(errors,[]);
    assert.equal(result.collisionHeights,13);assert.equal(result.scale,1);assert.equal(result.samples,4);assert.ok(result.rows.every(r=>r.triangles<=25000));
-   assert.deepEqual([...new Set(result.rows.map(r=>r.profile))].sort(),['interior','upper']);
+   assert.deepEqual([...new Set(result.rows.map(r=>r.profile))].sort(),[result.mainProfile,'upper']);
    const legs=[0,1,2,3].map(leg=>({leg,...summarize(result.rows.filter(r=>r.leg===leg))}));
    runs.push({run,legs,...result});writeFileSync(out+`/access-cold-${run}.json`,JSON.stringify(runs.at(-1),null,2));console.log('Fresh access context',run,legs);
   }finally{release?.();await context.close();}

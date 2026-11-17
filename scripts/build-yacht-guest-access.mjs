@@ -11,7 +11,7 @@ import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGI
 const compact=rows=>[...new Map(rows.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
 export async function buildGuestAccess() {
   const covers=new Map();
-  const result=await buildBridgeAccess({profileNames:['exterior','interior','upper','sun','bow','guest'],
+  const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest'],
     lod(p,context) {
       const guest=p.role?.startsWith('guest-'),flight=p.semanticParent==='stairs/guest';
       if(context.profile==='guest') {

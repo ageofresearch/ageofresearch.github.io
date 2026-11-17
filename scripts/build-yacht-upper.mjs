@@ -77,14 +77,14 @@ export async function buildUpper() {
     vertices:store(p.vertices),indices:store(p.indices,Uint32Array)}));
   const profiles={},materials=createFinishes(0,true,true,true,true);
   try {
-    for(const profile of ['exterior','interior','upper']) {
+    for(const profile of ['exterior','upper']) {
       const audit=[];
       const geometryTransform=p=>{
         const b=p.bounds||boundsOf(p.vertices),name=p.feature||p.name||'';
         const support=/teak tread|pale step|boarding landing|final riser|tread \d+ (pale inset|timber border|rounded timber edge)/.test(name);
         const stair=p.semanticParent==='stairs/aft'||p.id?.startsWith('MD_STA_013/');
-        const near=profile==='upper'?b[5]>=5.88:profile==='interior'?b[3]>8.5&&b[2]<6:b[0]<8.5&&b[2]<6;
-        const error=support||p.glass?0:stair?.004:near?.012:.08;
+        const near=profile==='upper'?b[5]>=5.88:b[2]<5.88;
+        const error=support||p.glass?0:stair?.004:near?(profile==='upper'?.012:.016):.08;
         const result=simplify(p,error);
         audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair});
         return result;
@@ -101,7 +101,7 @@ export async function buildUpper() {
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const compactFootprints=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-  const manifest={version:'guest-access-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
+  const manifest={version:'saloon-continuity-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
     room:{...data.rooms.find(r=>r.id==='UD_R01'),name:'Terraza superior',displayName:'Terraza superior',spawn:[8.35,2.21,7.6],look:[10.3,0,6.8]},
     navigationEnd:14.188,flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compactFootprints(flight.clearance.footprints(s.height))}))}};

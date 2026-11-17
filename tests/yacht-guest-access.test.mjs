@@ -10,9 +10,9 @@ import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
 import {renderedParts,obstacles} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
-test('guest package is reproducible with six bounded profiles, exact supports and unique geometry ownership',async()=>{
+test('guest package is reproducible with five bounded profiles, exact supports and unique geometry ownership',async()=>{
   const built=await buildGuestAccess();assert.deepEqual(built.manifest,manifest);assert.deepEqual(built.binary,binary);
-  assert.deepEqual(Object.keys(guest.profiles),['exterior','interior','upper','sun','bow','guest']);
+  assert.deepEqual(Object.keys(guest.profiles),['exterior','upper','sun','bow','guest']);
   assert.equal(new Set(manifest.parts.map(p=>p.id)).size,manifest.parts.length);
   assert.ok(!manifest.parts.some(p=>p.role==='access-guest-guard'));
   const ceiling=manifest.parts.filter(p=>p.role==='guest-ceiling').flatMap(p=>{
@@ -112,11 +112,11 @@ test('handoff restores every guest support and falls back by height without chan
   }finally{g.model.dispose();}
 });
 test('guest profile uses a bounded portal hysteresis and leaves every other route intact',()=>{
-  assert.equal(guestProfileDomain(16.8,-1.42,'interior'),true);assert.equal(guestProfileDomain(16.6,-1.42,'interior'),false);
+  assert.equal(guestProfileDomain(16.8,-1.42,'exterior'),true);assert.equal(guestProfileDomain(16.6,-1.42,'exterior'),false);
   assert.equal(guestProfileDomain(16.6,-1.42,'guest'),true);assert.equal(guestProfileDomain(16.39,-1.42,'guest'),false);
-  assert.equal(guestProfileDomain(18.5,1.35,'interior'),false);
-  assert.equal(nextProfile('interior',17.4,'MD','guest'),'guest');assert.equal(nextProfile('guest',16,'LD',null,false,false,true),'guest');
-  assert.equal(nextProfile('guest',16,'MD'),'interior');assert.equal(nextProfile('guest',19,'MD','bridge'),'upper');
+  assert.equal(guestProfileDomain(18.5,1.35,'exterior'),false);
+  assert.equal(nextProfile('exterior',17.4,'MD','guest'),'guest');assert.equal(nextProfile('guest',16,'LD',null,false,false,true),'guest');
+  assert.equal(nextProfile('guest',16,'MD'),'exterior');assert.equal(nextProfile('guest',19,'MD','bridge'),'upper');
   for(const stair of ['aft','bridge'])assert.equal(nextProfile('guest',17.4,'MD',stair,false,false,true),'upper');
   assert.equal(nextProfile('guest',15,'UD','sun'),'sun');assert.equal(nextProfile('upper',20,'UD',null,true),'bow');
 });

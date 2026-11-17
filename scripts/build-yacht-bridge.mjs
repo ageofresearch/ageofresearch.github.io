@@ -16,7 +16,7 @@ export async function buildBridge({extend,lod,profileNames}={}) {
       const decoration=/seam|stitch|screw|button|perforation|piping/.test(p.feature||'')||
         p.role==='bridge-furniture'&&(/wheel|throttle|footrest|open polished helm|display|instrument bank|settee base/.test(p.feature||'')||p.sourceID==='UD_SOF_017');
       const hiddenForward=['exterior','interior'].includes(profile)&&p.role==='forward-context'&&/^UD_(FUR|SOF|EQU)_/.test(p.sourceID);
-      return {omit:hiddenForward||distant&&decoration,error:distant?.4:p.role?.startsWith('bridge-')?.012:near&&profile==='upper'?.04:near?.014:error};
+      return {omit:hiddenForward||distant&&decoration,error:distant?.4:p.role?.startsWith('bridge-')?.012:profile==='exterior'?error:near&&profile==='upper'?.04:near?.014:error};
     },
     extend({model,lowerParts,parts}) {
       const final=renderedParts(model),additions=[],existing=new Set([...lowerParts,...parts].map(p=>p.id));
@@ -56,7 +56,7 @@ export async function buildBridge({extend,lod,profileNames}={}) {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'guest-access-1',room:{...model.asset.data.rooms.find(r=>r.id===bridgeRoom.id),...bridgeRoom},
+      return {version:'saloon-continuity-1',room:{...model.asset.data.rooms.find(r=>r.id===bridgeRoom.id),...bridgeRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,
         bridgePartIDs:additions.map(p=>p.id),evidence:'Current provisional bridge and forward layout; forward deck and internal stair are visual context only',...extend?.({model,lowerParts,parts})};
     }

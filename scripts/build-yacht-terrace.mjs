@@ -189,7 +189,7 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'guest-access-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'saloon-continuity-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.

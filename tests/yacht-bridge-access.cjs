@@ -16,7 +16,7 @@ module.exports=async function accessViews(frame,out,readFrame,mobile){
    w.cameraElevation=n.elevation;w.applyPosition();const d=a.camera.position.clone().set(target[1]*b.sy,target[2]-b.seaReference,target[0]*b.sx-b.length/2);w.model.group.localToWorld(d).sub(a.camera.position).normalize();w.yaw=Math.atan2(-d.x,-d.z);w.pitch=Math.asin(d.y);
   },{position,target,step});
   const shot=await readFrame(),png=new PNG({width:shot.width,height:shot.height});png.data=Buffer.from(shot.pixels,'base64');writeFileSync(out+`/access-${mobile?'mobile':'full'}-${name}.png`,PNG.sync.write(png));
-  if(mobile){assert.equal(shot.indexedDraws,2);assert.deepEqual(shot.passLabels,['Gangway to screen']);assert.ok(shot.indexedTriangles<=25000);assert.equal(await frame.evaluate(()=>__app.gangwayRenderer.activeProfile),name==='saloon-threshold'?'interior':'upper');assert.equal(await frame.locator('.luz-bridge-helm-limit').isVisible(),false);}
+  if(mobile){assert.equal(shot.indexedDraws,2);assert.deepEqual(shot.passLabels,['Gangway to screen']);assert.ok(shot.indexedTriangles<=25000);assert.equal(await frame.evaluate(()=>__app.gangwayRenderer.activeProfile),name==='saloon-threshold'?'exterior':'upper');assert.equal(await frame.locator('.luz-bridge-helm-limit').isVisible(),false);}
  }
  await frame.evaluate(saved=>{const w=__app.yachtWalk;w.enterRoom('boarding');w.nav.position=saved.position;w.nav.deck=saved.deck;w.nav.stair=null;w.nav.elevation=w.nav.floorHeight(...saved.position);w.cameraElevation=w.nav.elevation;w.yaw=saved.yaw;w.pitch=saved.pitch;w.applyPosition();},saved);
 };

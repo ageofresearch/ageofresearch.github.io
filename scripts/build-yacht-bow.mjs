@@ -21,11 +21,11 @@ export function bowLOD(p,{near,error,support,stair,profile}) {
   const hiddenForward=['exterior','interior'].includes(profile)&&p.role==='forward-context'&&/^UD_(FUR|SOF|EQU)_/.test(id);
   const omit=hiddenBelow||hiddenTap||reverseTransom||hiddenForward||distant&&decoration;
   return {omit,reason:hiddenBelow?'MD furniture occluded by the UD slab':hiddenTap?'Sun-deck tap above the solid slab':reverseTransom?'Reverse-facing transom lettering':hiddenForward?'Distant forward furnishings':'Distant finish detail',error:near&&name==='polished helm wheel rim'?0:distant?.4:
-    profile==='bow'&&p.role==='forward-context'?.018:p.role?.startsWith('bridge-')?.012:near&&profile==='upper'?.04:near?.014:error};
+    profile==='bow'&&p.role==='forward-context'?.018:p.role?.startsWith('bridge-')?.012:profile==='exterior'?error:near&&profile==='upper'?.04:near?.014:error};
 }
 
 export async function buildBow({extend,lod,profileNames}={}) {
-  return buildBridge({profileNames:profileNames||['exterior','interior','upper','sun','bow'],
+  return buildBridge({profileNames:profileNames||['exterior','upper','sun','bow'],
     lod:lod||bowLOD,
     extend({model,lowerParts,parts}) {
       const final=renderedParts(model),additions=[];
@@ -51,7 +51,7 @@ export async function buildBow({extend,lod,profileNames}={}) {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'guest-access-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
+      return {version:'saloon-continuity-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,navigationEnd:bowEnd,route:bowRoute,
         bowPartIDs:additions.map(p=>p.id),evidence:'Provisional starboard access and forward lounge; narrow bow and port connection remain pending',...extend?.({model,lowerParts,parts})};
     }

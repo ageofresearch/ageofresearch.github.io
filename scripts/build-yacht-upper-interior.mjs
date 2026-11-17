@@ -7,7 +7,7 @@ import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {interiorLimits,interiorRoom,interiorFinishBounds} from '../site/tidewater-rocha/mobile/upper-interior-geometry.js';
 
 const root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);
-export async function buildUpperInterior({extend,profileNames,lod=(p,{profile,near,error,support,stair})=>({error:profile==='interior'&&near&&!support&&!stair&&!p.glass?Math.max(error,.013):error})}={}) {
+export async function buildUpperInterior({extend,profileNames,lod}={}) {
   return buildSun({lod,profileNames,extend({model,lowerParts,parts}) {
     const final=renderedParts(model),additions=[],existing=new Set([...lowerParts,...parts].map(p=>p.id));
     const add=(source,role,box=null)=>{
@@ -49,7 +49,7 @@ export async function buildUpperInterior({extend,profileNames,lod=(p,{profile,ne
     }
     parts.push(...additions);
     const compact=polygons=>[...new Map(polygons.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-    return {version:'guest-access-1',room:{...model.asset.data.rooms.find(r=>r.id==='UD_R02'),...interiorRoom},
+    return {version:'saloon-continuity-1',room:{...model.asset.data.rooms.find(r=>r.id==='UD_R02'),...interiorRoom},
       floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),limits:interiorLimits,
       interiorPartIDs:additions.map(p=>p.id),evidence:'Current shared layout; flush threshold is a model circulation correction',
       ...extend?.({model,lowerParts,parts})};

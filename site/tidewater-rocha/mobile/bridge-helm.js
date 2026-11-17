@@ -1,10 +1,10 @@
-import {preloadBow} from './bow-deck.js?v=guest-access-1';
-import {decodeSaloon} from './main-saloon.js?v=guest-access-1';
-import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=guest-access-1';
+import {preloadBow} from './bow-deck.js?v=saloon-continuity-1';
+import {decodeSaloon} from './main-saloon.js?v=saloon-continuity-1';
+import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=saloon-continuity-1';
 
-export const bridgeVersion='guest-access-1';
+export const bridgeVersion='saloon-continuity-1';
 export function decodeBridge(manifest,buffer) {
-  const result=decodeSaloon(manifest,buffer,{version:bridgeVersion,names:['exterior','interior','upper','sun'],roomID:'UD_R03'});
+  const result=decodeSaloon(manifest,buffer,{version:bridgeVersion,names:['exterior','upper','sun'],roomID:'UD_R03'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
   if(!result.domains?.length||!result.domains.every(polygon)||!result.floor.every(polygon)||
     !result.collisionFootprints.every(p=>polygon(p.polygon))||!result.bridgePartIDs?.length)

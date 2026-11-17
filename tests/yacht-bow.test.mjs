@@ -36,9 +36,9 @@ async function full(){
  const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
  const walk=new Walk({camera:{position:model.group.position.clone()},player:{position:model.group.position.clone()}},model,{document:null});return {model,walk};
 }
-test('bow package is reproducible with five compact profiles and exact shared additions',async()=>{
+test('bow package is reproducible with four compact profiles and exact shared additions',async()=>{
  const result=await buildBow();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
- assert.deepEqual(Object.keys(bow.profiles),['exterior','interior','upper','sun','bow']);
+ assert.deepEqual(Object.keys(bow.profiles),['exterior','upper','sun','bow']);
  const duplicates=a=>a.filter((p,i)=>a.findIndex(q=>q.id===p.id)<i).map(p=>p.id).sort();
  for(const p of Object.values(bow.profiles)){
   assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);

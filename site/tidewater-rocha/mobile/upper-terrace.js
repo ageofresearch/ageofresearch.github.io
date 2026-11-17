@@ -1,10 +1,10 @@
-import {preloadSun} from './sun-deck.js?v=guest-access-1';
-import {decodeSaloon} from './main-saloon.js?v=guest-access-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=guest-access-1';
-import {indexFootprints} from './terrace-geometry.js?v=guest-access-1';
-export const upperVersion='guest-access-1';
+import {preloadSun} from './sun-deck.js?v=saloon-continuity-1';
+import {decodeSaloon} from './main-saloon.js?v=saloon-continuity-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=saloon-continuity-1';
+import {indexFootprints} from './terrace-geometry.js?v=saloon-continuity-1';
+export const upperVersion='saloon-continuity-1';
 export function decodeUpper(manifest,buffer) {
-  const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','interior','upper'],roomID:'UD_R01'});
+  const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','upper'],roomID:'UD_R01'});
   const f=result.flight;
   if(f?.route?.id!=='aft'||f.surfaces?.length!==13||f.treadCount!==11||f.riseCount!==12||
     f.surfaces.some((s,i)=>s.index!==i||!s.polygons?.length||Math.abs(s.height-(3.95+i*2.05/12))>.00001)||

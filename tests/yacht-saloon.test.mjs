@@ -7,7 +7,7 @@ import { nextProfile,decodeSaloon,connectSaloon,loadSaloon } from '../site/tidew
 import { moveAlongRoute,routeSegments } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { fixture,travel,saloon,saloonManifest,saloonBuffer } from './yacht-saloon-fixture.mjs';
 
-test('both reproducible profiles include the whole saloon and respect the mobile budget',async()=>{
+test('the shared deck profile includes the whole saloon and is reproducible and respect the mobile budget',async()=>{
   const generated=await buildSaloon();
   assert.deepEqual(generated.manifest,saloonManifest);
   assert.deepEqual(generated.binary,saloonBuffer);
@@ -21,11 +21,9 @@ test('both reproducible profiles include the whole saloon and respect the mobile
     assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);
     assert.ok(p.geometryBytes<3*1024*1024);
   }
-  for(const [index,item] of saloonManifest.profiles.exterior.audit.entries()) {
-    if(!item.shared&&!item.support)continue;
-    assert.deepEqual(item,saloonManifest.profiles.interior.audit[index]);
-    if(item.support)assert.equal(item.sourceTriangles,item.triangles);
-  }
+  assert.deepEqual(Object.keys(saloon.profiles),['exterior']);
+  for(const item of saloonManifest.profiles.exterior.audit.filter(p=>p.support))
+    assert.equal(item.sourceTriangles,item.triangles);
   const root=new URL('../site/tidewater-rocha/rocha/luz-de-mar/',import.meta.url);
   const data=JSON.parse(await readFile(new URL('model.json',root))),bin=await readFile(new URL('model.bin',root));
   const full=buildYachtGeometry({data,binary:bin.buffer.slice(bin.byteOffset,bin.byteOffset+bin.byteLength)},0,{mtuEngines:false,seaStrainers:false});
@@ -76,12 +74,10 @@ test('floor union closes the threshold without opening glazing, furniture, servi
   }finally{f.dispose();}
 });
 
-test('profiles use hysteresis and unloaded/failed saloon stays safely outside',async()=>{
-  let p='exterior';
-  for(const x of [8.3,8.8,9.2])assert.equal(p=nextProfile(p,x),'exterior');
-  assert.equal(p=nextProfile(p,9.21),'interior');
-  for(const x of [9.1,8.5,8])assert.equal(p=nextProfile(p,x),'interior');
-  assert.equal(nextProfile(p,7.99),'exterior');assert.equal(nextProfile(p,9.5,'SP'),'exterior');
+test('the main deck keeps one profile and missing saloon data keeps visitors safely outside',async()=>{
+  for(const x of [8.3,8.8,9.2,9.21,9.1,8.5,8,7.99,10])
+    assert.equal(nextProfile('exterior',x),'exterior');
+  assert.equal(nextProfile('guest',9.5,'SP'),'exterior');
   const f=fixture({ready:false});
   try {
     assert.equal(f.walk.nav.floorSafe(9.2,0),false);

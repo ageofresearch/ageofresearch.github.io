@@ -44,8 +44,17 @@ export async function buildGuestAccess() {
         if(role==='guest-boundary'||role==='guest-ceiling'||role==='guest-finish'){
           // Broad uniform wall triangles cannot interpolate a local lamp wash.
           // Subdivide just the distributor envelope, keeping its collision mesh.
-          if(/^LD_PAR_0(?:27|28)\/guest-access$/.test(part.id)||part.feature?.includes('bookmatched door'))
-            Object.assign(part,subdivide(part,.66));
+          if(/^LD_PAR_0(?:27|28)\/guest-access$/.test(part.id)){
+            const inward=part.id.startsWith('LD_PAR_027')?-1:1;
+            const keep=[],facing=[];
+            for(let i=0;i<part.indices.length;i+=3){
+              const face=part.indices.slice(i,i+3);
+              (face.every(k=>part.vertices[k*6+4]*inward>.9)?facing:keep).push(...face);
+            }
+            const refined=subdivide({...part,indices:facing},.73),base=part.vertices.length/6;
+            part.vertices=part.vertices.concat(refined.vertices);
+            part.indices=keep.concat(refined.indices.map(k=>k+base));
+          }
           part.light=[];
           for(let i=0;i<part.vertices.length;i+=6){
             const [x,y,z]=part.vertices.slice(i,i+3);

@@ -32,8 +32,12 @@ export function prepareOpaque(source,sun,map) {
     const localX=(z+17.615)/(35.23/36),localY=x/(7.47/7.6),elevation=y+2.01;
     const code=source.aSurface[k+2],boarding=code>=37&&code<=42;
     let layer=-1,u=0,v=0;
-    if(code>=44 && code<=47) {
+    if(code>=44 && code<=47 || code===49) {
       if(code===44){color.set([.29,.48,.53],j);layer=6;u=x*.055;v=z*.13;}
+      else if(code===49){
+        const h=clamp((Math.hypot(x,z)-22)/110);
+        color.set([.285+.105*h,.473+.087*h,.522+.064*h],j);
+      }
       else if(code===47){
         const t=clamp((y+3)/88),h=t*t*(3-2*t);
         color.set([.78-.38*h,.85-.21*h,.88-.04*h],j);
@@ -74,4 +78,24 @@ export function prepareOpaque(source,sun,map) {
     surface[k]=u;surface[k+1]=v;surface[k+2]=layer;
   }
   return {position,normal,color,aSurface:surface};
+}
+
+// Keep positions and finish coordinates at full precision. The remaining GPU
+// inputs are bounded directions, display colors, a small layer index and a
+// metal weight. Pack them together for one aligned fetch per vertex.
+export function packRenderVertices(source){
+  const count=source.position.length/3,buffer=new ArrayBuffer(count*32);
+  const floats=new Float32Array(buffer),signed=new Int8Array(buffer),bytes=new Uint8Array(buffer),shorts=new Int16Array(buffer);
+  for(let i=0;i<count;i++){
+    const a=i*3,s=i*4,f=i*8,b=i*32;
+    floats[f]=source.position[a];floats[f+1]=source.position[a+1];floats[f+2]=source.position[a+2];
+    for(let c=0;c<3;c++){
+      signed[b+12+c]=Math.round(Math.max(-1,Math.min(1,source.normal[a+c]))*127);
+      bytes[b+16+c]=Math.round(clamp(source.color[a+c])*255);
+    }
+    bytes[b+19]=255;
+    floats[f+5]=source.aSurface[s];floats[f+6]=source.aSurface[s+1];
+    shorts[i*16+14]=source.aSurface[s+2];shorts[i*16+15]=Math.round(clamp(source.aSurface[s+3])*32767);
+  }
+  return bytes;
 }

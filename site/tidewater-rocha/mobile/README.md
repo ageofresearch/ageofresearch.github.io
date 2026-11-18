@@ -1,6 +1,6 @@
 # Mobile yacht zones
 
-Current release candidate `tour-fidelity-1`. The mobile route connects boarding, the aft terrace,
+Build `tour-fidelity-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
@@ -28,6 +28,13 @@ evaluated during preparation. Chrome and glazing retain view-dependent reflectio
 The single R8 finish atlas holds the original deck joints, boarding teak, timber,
 woven cloth, carpet, water and instruments. Each textured pixel uses one filtered
 sample. Active profiles keep two indexed draws in one 4× MSAA pass.
+The 32-byte vertex layout preserves float positions and texture coordinates.
+Normals, display colors and material identifiers share the same indexed buffer.
+Offshore water and sky are ordered behind the boat. The water surface ends
+inside the hull plating at its sampled flotation line, keeping the lower lobby dry.
+The joinery, ceiling lenses and wall lighting there are photographic estimates.
+The exterior, upper, sun, bow and guest profiles peak at 24,978, 24,626, 23,184,
+21,662 and 22,733 triangles, respectively.
 
 [Azimut Grande 36M tour](https://vrcloud.com/?pv=1667308298)
 

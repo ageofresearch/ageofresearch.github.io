@@ -1,4 +1,4 @@
-import {loadDeckLight,prepareOpaque} from './prepare-light.js?v=tour-fidelity-1';
+import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=tour-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=tour-fidelity-1';
 import { nextProfile } from './main-saloon.js?v=tour-fidelity-1';
 
@@ -19,21 +19,20 @@ struct Vertex {
   @location(1) uv: vec2f,
   @location(2) @interpolate(flat) layer: i32,
 }
-@vertex fn vertex(@location(0) position: vec3f, @location(1) normal: vec3f,
-                  @location(2) albedo: vec3f, @location(3) surface: vec4f) -> Vertex {
+@vertex fn vertex(@location(0) position: vec3f, @location(1) n: vec4f,
+                  @location(2) tint: vec4f, @location(3) uv: vec2f, @location(4) finish: vec2i) -> Vertex {
   var out: Vertex;
   out.clip = frame.clipFromLocal * vec4f(position, 1);
-  out.uv=surface.xy;
-  out.layer=i32(surface.z);
-  out.color=albedo;
-  if(surface.w>.02){
+  out.uv=uv;out.layer=finish.x;out.color=tint.rgb;
+  if(finish.y>655){
+    let metal=f32(finish.y)/32767.;let normal=normalize(n.xyz);
     let eye=normalize(frame.eyeLocal.xyz-position);
     let reflected=reflect(-eye,normal);
     let horizon=smoothstep(-.10,.19,reflected.y);
     let glint=max(dot(reflected,frame.sunLocal.xyz),0.);
     let reflection=mix(vec3f(.31,.42,.44),vec3f(.85,.92,.96),horizon)
       +vec3f(.30,.26,.22)*(1.-smoothstep(.015,.095,abs(reflected.y+.11)));
-    out.color=mix(albedo,albedo*reflection, surface.w)+pow(glint,26.)*.38*surface.w;
+    out.color=mix(tint.rgb,tint.rgb*reflection,metal)+pow(glint,26.)*.38*metal;
   }
   return out;
 }
@@ -48,14 +47,14 @@ struct GlassVertex {
   @builtin(position) clip: vec4f,
   @location(0) rgba: vec4f,
 }
-@vertex fn glassVertex(@location(0) position: vec3f, @location(1) normal: vec3f,
-                       @location(2) tint: vec3f, @location(3) surface: vec4f) -> GlassVertex {
+@vertex fn glassVertex(@location(0) position: vec3f, @location(1) normal: vec4f,
+                       @location(2) tint: vec4f, @location(4) finish: vec2i) -> GlassVertex {
   let eye = normalize(frame.eyeLocal.xyz-position);
-  let n = normalize(normal);
+  let n = normalize(normal.xyz);
   let grazing = pow(1.-clamp(abs(dot(n,eye)),0.,1.),5.);
   let sky = smoothstep(-.16,.25,reflect(-eye,n).y);
-  let glassColor = tint*mix(vec3f(.62,.64,.67),vec3f(.91,.94,.98),sky);
-  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,select(.06+.30*grazing,.28+.35*grazing,surface.z<26.5)));
+  let glassColor = tint.rgb*mix(vec3f(.62,.64,.67),vec3f(.91,.94,.98),sky);
+  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,select(.06+.30*grazing,.28+.35*grazing,finish.x==26)));
 }
 @fragment fn glassFragment(in: GlassVertex) -> @location(0) vec4f {
   return in.rgba;
@@ -77,13 +76,13 @@ export async function createForwardRenderer(app, sun) {
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
-    const names = attributes;
     return device.createRenderPipelineAsync({
       label:(glass ? 'Boarding glass ' : 'Boarding finishes ')+count+'×', layout, multisample:{count},
-      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:names.map((name,index) => {
-        const n = model.meshes[0].geometry.attributes[name].itemSize;
-        return {arrayStride:n*4, attributes:[{shaderLocation:index,offset:0,format:'float32x'+n}]};
-      })},
+      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:32,attributes:[
+        {shaderLocation:0,offset:0,format:'float32x3'}, {shaderLocation:1,offset:12,format:'snorm8x4'},
+        {shaderLocation:2,offset:16,format:'unorm8x4'}, {shaderLocation:3,offset:20,format:'float32x2'},
+        {shaderLocation:4,offset:28,format:'sint16x2'},
+      ]}]},
       fragment:{module,entryPoint:glass ? 'glassFragment' : 'fragment',targets:[{format,blend:glass ? blend : undefined}]},
       // The gate is a closed beveled pane, so its outward faces cover both viewing sides.
       primitive:{topology:'triangle-list',cullMode:'back'},
@@ -100,9 +99,11 @@ export async function createForwardRenderer(app, sun) {
   let samples = smooth ? 4 : 1;
   function upload(array, usage) {
     const buffer = device.createBuffer({size:Math.ceil(array.byteLength/4)*4,usage,mappedAtCreation:true});
-    new Uint8Array(buffer.getMappedRange()).set(new Uint8Array(array.buffer,array.byteOffset,array.byteLength));
-    buffer.unmap();
-    return buffer;
+    try {
+      new Uint8Array(buffer.getMappedRange()).set(new Uint8Array(array.buffer,array.byteOffset,array.byteLength));
+      buffer.unmap();
+      return buffer;
+    }catch(error){buffer.destroy();throw error;}
   }
   const mesh = model.boarding.group;
   mesh.updateWorldMatrix(true,false);
@@ -114,7 +115,7 @@ export async function createForwardRenderer(app, sun) {
   const deckLight=await loadDeckLight();
   function uploadVertices(source,glass){
     const prepared=glass?source:prepareOpaque(source,localSun,deckLight);
-    return attributes.map(name=>upload(prepared[name],GPUBufferUsage.VERTEX));
+    return upload(packRenderVertices(prepared),GPUBufferUsage.VERTEX);
   }
   let batches = model.meshes.map(mesh => {
     const geom = mesh.geometry;
@@ -128,7 +129,7 @@ export async function createForwardRenderer(app, sun) {
   });
   let profiles=null, activeProfile='exterior', disposed=false;
   const destroy=batches=>batches.forEach(batch=>{
-    batch.vertices.forEach(buffer=>buffer.destroy());batch.indices.destroy();
+    batch.vertices.destroy();batch.indices.destroy();
   });
   function selectProfile(name) {
     if(!profiles)return;
@@ -154,20 +155,20 @@ export async function createForwardRenderer(app, sun) {
       let failure;
       try {
         for(const [name,p] of Object.entries(source)) {
-          const result=uploaded[name]={...p,batches:[]};
+          const result=uploaded[name]={...p,batches:[],geometryBytes:0};
           for(const b of p.batches) {
-            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
+            const batch={vertices:null,indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
             result.batches.push(batch);
-            const prepared=result.batches.length===2?b.attributes:prepareOpaque(b.attributes,localSun,deckLight);
-            for(const name of attributes)batch.vertices.push(upload(prepared[name],GPUBufferUsage.VERTEX));
+            batch.vertices=uploadVertices(b.attributes,result.batches.length===2);
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
+            result.geometryBytes+=batch.vertices.size+batch.indices.size;
           }
         }
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
       if(failure||validation||memory||disposed) {
         Object.values(uploaded).forEach(p=>p.batches.forEach(b=>{
-          b.vertices.forEach(v=>v.destroy());b.indices?.destroy();
+          b.vertices?.destroy();b.indices?.destroy();
         }));
         throw failure||validation||memory||Error('Renderer disposed');
       }
@@ -247,7 +248,7 @@ export async function createForwardRenderer(app, sun) {
       for (let i=0; i<batches.length; i++) {
         const batch = batches[i];
         pass.setPipeline(pipelines[i]);
-        batch.vertices.forEach((buffer,index) => pass.setVertexBuffer(index,buffer));
+        pass.setVertexBuffer(0,batch.vertices);
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
           const {start,step}=profiles[activeProfile].visibility;

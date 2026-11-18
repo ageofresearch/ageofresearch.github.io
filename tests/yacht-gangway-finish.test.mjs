@@ -200,12 +200,12 @@ test('boarding fibres are deterministic and mipmapped within 3.6 MB with repeata
       'Prepared caulk seam missing',
     );
   }
-  const old = JSON.parse(await readFile(new URL('./fixtures/yacht-finish-patterns.json', import.meta.url)));
+  const approved = JSON.parse(await readFile(new URL('./fixtures/yacht-finish-patterns.json', import.meta.url)));
   for (const [i, level] of levels.entries())
     assert.equal(
       createHash('sha256')
         .update(level.data.subarray(0, level.size * level.size * 6))
         .digest('hex'),
-      old[i],
+      approved[i],
     );
 });

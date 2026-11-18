@@ -1,10 +1,10 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=tour-fidelity-1';
-import { connectSternAccess, configureSternWalk } from './stern-access.js?v=tour-fidelity-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=chair-fidelity-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
-export { preloadSaloon } from './main-saloon.js?v=tour-fidelity-1';
+export { preloadSaloon } from './main-saloon.js?v=chair-fidelity-1';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
-} from '../assets/RochaYachtState-P5KwIGIl.js?v=tour-fidelity-1';
+} from '../assets/RochaYachtState-P5KwIGIl.js?v=chair-fidelity-1';
 
 // Reuse boarding and stern assemblies, plus the pre-extracted furnished terrace.
 export async function buildGangway(world) {

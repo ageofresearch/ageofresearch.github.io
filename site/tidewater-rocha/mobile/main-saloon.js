@@ -1,7 +1,7 @@
-import { preloadUpper } from './upper-terrace.js?v=tour-fidelity-1';
-import { connectTerrace } from './aft-terrace.js?v=tour-fidelity-1';
+import { preloadUpper } from './upper-terrace.js?v=chair-fidelity-1';
+import { connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
 
-export const saloonVersion = 'tour-fidelity-1';
+export const saloonVersion = 'chair-fidelity-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {
@@ -50,8 +50,10 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
         !cone.every(v=>Number.isFinite(v)&&v>0)))throw Error('Vistas direccionales inválidas');
       let end=view?view.first+view.count:batch.ranges?.at(-1).reduce((sum,v)=>sum+v);
       for(const v of views){
+        if(v.cone && (!Array.isArray(v.cone)||v.cone.length!==3||!v.cone.every(n=>Number.isFinite(n)&&n>0)))
+          throw Error('Cono de vista direccional inválido');
         if(!Array.isArray(v.box)||v.box.length!==6||!v.box.every(Number.isFinite)||v.box.slice(0,3).some((p,k)=>p>=v.box[k+3])||
-          ![-1,1].includes(v.sign)||!Number.isSafeInteger(v.count)||v.count<=0||v.count%3||v.first!==end||
+          ![-1,0,1].includes(v.sign)||!Number.isSafeInteger(v.count)||v.count<=0||v.count%3||v.first!==end||
           (end+=v.count)>indices.length)throw Error('Vista direccional incompleta');
       }
       if(views.length&&end!==indices.length)throw Error('Índices direccionales incompletos');

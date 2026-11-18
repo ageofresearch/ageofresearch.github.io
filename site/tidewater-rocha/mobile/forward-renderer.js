@@ -1,6 +1,6 @@
-import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=tour-fidelity-1';
-import {createFinishPatterns} from './finish-patterns.js?v=tour-fidelity-1';
-import { nextProfile } from './main-saloon.js?v=tour-fidelity-1';
+import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
+import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
+import { nextProfile } from './main-saloon.js?v=chair-fidelity-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -263,8 +263,8 @@ export async function createForwardRenderer(app, sun) {
               return -component(8)+component(0)*p[8]/p[0]+component(4)*p[9]/p[5]
                 -Math.abs(component(0)/p[0])-Math.abs(component(4)/p[5])>.001;
             };
-            directional=batch.views.find(({box:b,sign})=>eye.x>=b[0]&&eye.x<=b[3]&&eye.y>=b[1]&&eye.y<=b[4]&&eye.z>=b[2]&&eye.z<=b[5]&&
-              inside(sign,0,1,batch.cone[0])&&inside(sign,0,-1,batch.cone[0])&&inside(sign,1,1,batch.cone[1])&&inside(sign,1,-1,batch.cone[2]));
+            directional=batch.views.find(({box:b,sign,cone=batch.cone})=>eye.x>=b[0]&&eye.x<=b[3]&&eye.y>=b[1]&&eye.y<=b[4]&&eye.z>=b[2]&&eye.z<=b[5]&&
+              (!sign||inside(sign,0,1,cone[0])&&inside(sign,0,-1,cone[0])&&inside(sign,1,1,cone[1])&&inside(sign,1,-1,cone[2])));
           }
           if(directional){first=directional.first;count=directional.count;}
           else if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&

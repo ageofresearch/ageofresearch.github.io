@@ -1,4 +1,4 @@
-import {waterline,hullWaterline} from './rocha-waterline.js?v=tour-fidelity-1';
+import {waterline,hullWaterline} from './rocha-waterline.js?v=chair-fidelity-1';
 
 // Shared by the prepared views. Sky, lake and two bank strips occupy the same
 // indexed opaque batch as the yacht. The original world owns its own terrain.

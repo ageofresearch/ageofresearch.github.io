@@ -1,12 +1,22 @@
 // Plane convention: GPU-local X is port, Y is up and Z is forward.
 // Bake conservative views for the platform and the two long directions of the
-// outside bow passage. Other positions, orientations and fields of view retain
+// outside bow passage, and the view aft from the cockpit aisle. Other positions, orientations and fields of view retain
 // the ordinary all-direction draw for their longitudinal band.
 const cells={
   exterior:[
     [-2.2,-3.55,4.30,.95,-1.85,4.56],[-2.2,-1.85,4.30,.95,-.35,4.56],
     [-2.2,-.35,4.30,.95,1.15,4.56],[-2.2,1.15,4.30,.95,3.55,4.56],
+    [5.52,-2.42,4.95,7.90,1.26,5.68,-1,[2.8,4.8,1.25]],
+    [8.55,-2.65,5.25,14.25,2.65,5.73,1],
+    [13.9,-2.25,5.25,18.7,.55,5.73,[-1,1,0]],
+
   ],
+  upper:[[13.7,-1.9,7.25,18.65,1.78,7.85,-1],[13.7,-1.9,7.25,18.65,1.78,7.85,1]],
+  // Enclosed distributor and stair. Turns on the treads require all azimuths.
+  guest:[[16.0,-1.95,5.00,19.4,-.90,5.72,[-1,1,0]],
+    [17.7,-1.95,3.34,19.4,.20,5.00,[-1,1,0]],
+    [13.3,-.75,2.92,17.35,.52,3.34,[-1,1,0]],
+    [17.35,-.82,2.92,19.4,.20,3.55,[-1,1,0]]],
   bow:[[13.75,-3.6,7.32,18.72,-2.55,7.85],[18.72,-3.52,7.32,23.6,-2.21,7.85],
     [23.6,-3.4,7.32,26.8,-1.9,7.85],[26.8,-2.5,7.32,29.4,2.5,7.85]],
 };
@@ -74,24 +84,26 @@ export const cone=[1.8,2.45,.95]; // horizontal, down, up tangents
 export function sightlines(profile,geometry,basis){
   if(!cells[profile])return [];
   const {faces,rectangles}=meshData(geometry),result=[];
-  for(const [x,y,z,X,Y,Z] of cells[profile]){
+  for(const [x,y,z,X,Y,Z,direction,viewCone] of cells[profile]){
     const box=[y*basis.sy,z-basis.seaReference,x*basis.sx-basis.length/2,Y*basis.sy,Z-basis.seaReference,X*basis.sx-basis.length/2];
+    const limits=viewCone??cone;
     const shadows=shadowsFor(rectangles,box);
     const possible=faces.filter(f=>{
       const d=f.n.reduce((s,n,k)=>s+n*(box[k+(n>0?3:0)]-f.v[0][k]),0);
       return d>=-.02*f.len&&!occluded(f,shadows);
     });
-    for(const sign of (profile==='exterior'?[1]:[-1,1])){
+    const directions=Array.isArray(direction)?direction:direction!==undefined?[direction]:profile==='exterior'?[1]:[-1,1];
+    for(const sign of directions){
       const visible=[];
       for(const f of possible){
         const front=sign*(sign>0?f.hi[2]-box[2]:f.lo[2]-box[5]);
-        if(front<-.02||f.hi[0]-box[0]+cone[0]*front<-.02||box[3]-f.lo[0]+cone[0]*front<-.02||
-            f.hi[1]-box[1]+cone[1]*front<-.02||box[4]-f.lo[1]+cone[2]*front<-.02)continue;
+        if(sign!==0&&(front<-.02||f.hi[0]-box[0]+limits[0]*front<-.02||box[3]-f.lo[0]+limits[0]*front<-.02||
+            f.hi[1]-box[1]+limits[1]*front<-.02||box[4]-f.lo[1]+limits[2]*front<-.02))continue;
         const dist=Math.hypot(...[0,1,2].map(k=>Math.max(0,f.lo[k]-box[k+3],box[k]-f.hi[k])));
         visible.push({ids:f.ids,order:f.background?1e6:Math.floor(dist*4)});
       }
       visible.sort((a,b)=>a.order-b.order);
-      result.push({box,sign,indices:visible.flatMap(f=>f.ids)});
+      result.push({box,sign,...(viewCone && {cone:viewCone}),indices:visible.flatMap(f=>f.ids)});
     }
   }
   return result;

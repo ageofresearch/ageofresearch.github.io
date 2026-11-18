@@ -1,5 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=tour-fidelity-1';
-import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=tour-fidelity-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=chair-fidelity-1';
+import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=chair-fidelity-1';
 
 // Source coordinates: x toward the bow, y to port, z up. All access surfaces
 // come from the same parts that are rendered in the full and isolated yacht.

@@ -111,7 +111,7 @@ jobs:
             site/tidewater-rocha
             tests
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        if: matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access' || matrix.route == 'tour'
+        if: matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access' || matrix.route == 'tour' || matrix.route == 'guest'
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.base.sha }}
@@ -140,7 +140,13 @@ jobs:
           case "$YACHT_PERF_CASE" in
             tour) node tests/yacht-tour-performance.cjs ;;
             bridge) node tests/yacht-bridge-comparison.cjs ;;
-            guest) node tests/yacht-guest-access-performance.cjs ;;
+            guest)
+              if ! node tests/yacht-guest-access-performance.cjs; then
+                # Record the PR base on this worker to diagnose an absolute-budget miss.
+                YACHT_BASE="$YACHT_REFERENCE_BASE" YACHT_OUTPUT=/tmp/yacht-mobile-parity/reference \
+                  node tests/yacht-guest-access-performance.cjs
+                exit 1
+              fi ;;
             gangway) node tests/yacht-gangway-performance.cjs ;;
             cold-walk) node tests/yacht-cold-walk.cjs ;;
             bow|access) node tests/yacht-route-performance-comparison.cjs "$YACHT_PERF_CASE" ;;

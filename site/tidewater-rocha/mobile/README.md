@@ -1,10 +1,24 @@
 # Mobile yacht zones
 
-Build `tour-fidelity-1`. The mobile route connects boarding, the aft terrace,
+Build `chair-fidelity-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
+
+## Folding chairs on the aft terrace
+
+The four backs face the aisle and the slings tuck under the dining top. The
+shared assembly uses 392 triangles per chair for the canvas sleeves, timber
+cross braces, round rail ends, fasteners and suspended fabric. Chair placement
+is estimated from the Cockpit and Cockpit – Port panoramas. The mobile collision
+footprints and deck contact lighting follow those same assemblies.
+
+With each chair scaled to 256 pixels tall, 94.5% of the visible traced contour
+in Cockpit and 96.1% in Cockpit – Port was within four pixels of the model.
+The largest cap, foot or rail-centre discrepancy was 6.8 pixels. In the port
+view only the exposed backs and caps were measured. The photographed chair
+at the head of the table is outside the four-chair row.
 
 ## Grande 36M tour reference
 

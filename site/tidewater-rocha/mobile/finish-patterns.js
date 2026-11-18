@@ -1,4 +1,4 @@
-import {gangwayAtlasTexel} from './gangway-finish.js?v=tour-fidelity-1';
+import {gangwayAtlasTexel} from './gangway-finish.js?v=chair-fidelity-1';
 // Existing finishes plus a dedicated boarding grain layer, prepared once.
 // Board offsets/variation cover all 128 rows including the yacht's full beam.
 const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);};
@@ -68,11 +68,37 @@ export function teakPatternMips(width=512,height=4096) {
  }
  return levels;
 }
+// Yarn pairs alternate over and under. Average the same periodic tile at every
+// mip so the receding chair backs converge to a stable charcoal value.
+function chairWeaveMips() {
+ const levels=[];
+ let w=512,h=256,data=new Uint8Array(w*h);
+ for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+   const u=(x+.5)/16, v=(y+.5)/8;
+   const over=(Math.floor(u)+Math.floor(v))%2===0;
+   const warp=Math.sin(Math.PI*u)**2, weft=Math.sin(Math.PI*v)**2;
+   const fleck=field(x/512,y/256,32);
+   const tone=.38+.36*(over?warp:weft)+.22*warp*weft+.20*fleck;
+   data[y*w+x]=Math.round(255*tone/1.1);
+ }
+ for(;;){
+   levels.push(data);
+   if(w===1&&h===1)return levels;
+   const W=Math.max(1,w/2),H=Math.max(1,h/2),next=new Uint8Array(W*H);
+   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+     const i=2*y*w+2*x,dx=w>1?1:0;
+     const k=h>1?i+w:i;
+     next[y*W+x]=Math.round((data[i]+data[i+dx]+data[k]+data[k+dx])/4);
+   }
+   w=W;h=H;data=next;
+ }
+}
 // One filtered sample supplies every opaque finish. A slice is eight teak
-// planks high at the original 32 texels per plank. The fourteen central
-// slices cover all yacht deck vertices (board rows 8 through 119).
+// planks high at the original 32 texels per plank. Thirteen contiguous
+// slices cover rows 8 through 111; the final slice carries the cockpit fabric.
 export function createFinishPatterns(device) {
  const source=finishPatternMips(),deck=teakPatternMips();
+ const cloth = chairWeaveMips();
  const width=512,height=256,layers=20,mipLevelCount=10;
  const texture=device.createTexture({label:'Prepared yacht finish atlas',size:[width,height,layers],format:'r8unorm',
    mipLevelCount,usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST});
@@ -91,7 +117,10 @@ export function createFinishPatterns(device) {
        data[3*n+i]=channel(3);                           // gangway caulking
        data[4*n+i]=Math.round(255*(.33+.65*grain));      // woven rug
        data[5*n+i]=Math.round(255*(.86+.25*grain)/1.1); // water
-       for(let page=0;page<14;page++){
+       // Teak rows 112–119 lie outside every mobile deck. The last slice
+       // holds the sling weave with the same sampler and fragment pipeline.
+       data[19*n+i]=cloth[mip][i];
+       for(let page=0;page<13;page++){
          const row=Math.min(teak.height-1,Math.floor(((page+1)*256+.5*(1<<mip))/(1<<mip))+y);
          data[(6+page)*n+i]=teak.data[row*teak.width+x];
        }

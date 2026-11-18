@@ -1,6 +1,6 @@
 // Model fit approved for this release, not surveyed vessel dimensions.
 export const gangwayTeak = Object.freeze({
-  version: 'tour-fidelity-1',
+  version: 'chair-fidelity-1',
   color: 0xb69a73,
   caulk: 0x20201c,
   roughness: 0.8,

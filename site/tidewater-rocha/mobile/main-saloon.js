@@ -53,7 +53,7 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
         if(v.cone && (!Array.isArray(v.cone)||v.cone.length!==3||!v.cone.every(n=>Number.isFinite(n)&&n>0)))
           throw Error('Cono de vista direccional inválido');
         if(!Array.isArray(v.box)||v.box.length!==6||!v.box.every(Number.isFinite)||v.box.slice(0,3).some((p,k)=>p>=v.box[k+3])||
-          ![-1,1].includes(v.sign)||!Number.isSafeInteger(v.count)||v.count<=0||v.count%3||v.first!==end||
+          ![-1,0,1].includes(v.sign)||!Number.isSafeInteger(v.count)||v.count<=0||v.count%3||v.first!==end||
           (end+=v.count)>indices.length)throw Error('Vista direccional incompleta');
       }
       if(views.length&&end!==indices.length)throw Error('Índices direccionales incompletos');

@@ -310,7 +310,11 @@ function compare(original,mobile) {
     assert.equal(mobile.geometry.parts, original.geometry.parts);
     assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
     assert.deepEqual(mobile.geometry.furniture,original.geometry.furniture);
-    assert.equal(mobile.geometry.furniture.length,30);
+    assert.equal(mobile.geometry.furniture.length,34);
+    for (let chair = 1; chair <= 4; chair++) {
+      const pin = 'MD_FUR_007/video/director-chair-' + chair + '-inset-fasteners';
+      assert.ok(mobile.geometry.furniture.some(([id]) => id === pin), pin);
+    }
     assert.ok(mobile.geometry.stern.some(p=>p[0].includes('beach-club-divan-seat')));
     assert.equal(mobile.geometry.count, JSON.parse(original.geometry.parts).length);
     assert.ok(mobile.geometry.triangles <= 25000,'Keep the furnished scene inside its explicit mobile budget');

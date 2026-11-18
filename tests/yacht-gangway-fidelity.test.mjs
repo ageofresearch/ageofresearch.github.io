@@ -19,7 +19,7 @@ function face(vertices, indices, offset) {
 // Keep the winding. A reversed face has the same positions, but disappears from the opposite side.
 const key = (points) => points.flat().join(',');
 
-test('every visible source face of all 24 hanging cables, the three folding chairs and the pouf piping reaches its draw', () => {
+test('every visible source face of the four folding chairs reaches its draw', () => {
   const { model, dispose } = fixture();
   try {
     const profile = decodeGuestAccess(manifest, buffer).profiles.exterior;
@@ -39,7 +39,7 @@ test('every visible source face of all 24 hanging cables, the three folding chai
       (p) => !p.glass,
     )) {
       const end = offset + part.indices.length;
-      if (/hanging-guard-line|director-chair|pouf-perimeter-piping/.test(part.id)) {
+      if (/director-chair/.test(part.id)) {
         seen.push(part.id);
         for (let i = offset; i < end; i += 3) {
           const triangle = face(geometry.attributes.position.array, reference, i);
@@ -65,9 +65,16 @@ test('every visible source face of all 24 hanging cables, the three folding chai
       offset = end;
     }
     assert.equal(offset, reference.length);
-    assert.equal(seen.filter((id) => id.includes('hanging-guard-line')).length, 24);
-    assert.equal(seen.filter((id) => id.includes('director-chair')).length, 12);
-    assert.equal(seen.filter((id) => id.includes('pouf-perimeter-piping')).length, 1);
+    assert.ok(!model.boarding.parts.some(p=>/hanging guard line|rope collar/.test(p.feature)));
+    const posts=model.boarding.parts.filter(p=>/gangway .* upright/.test(p.feature));
+    assert.equal(posts.length,14);
+    for(const p of posts){
+      const socket=model.boarding.parts.find(q=>q.feature===p.feature.replace('upright','seated socket'));
+      assert.ok(socket && socket.bounds[2]<=p.bounds[2] && socket.bounds[5]>p.bounds[2]);
+      assert.ok(p.bounds[5]-p.bounds[2]>1);
+    }
+    assert.ok(posts.filter(p=>p.bounds[3]-p.bounds[0]>.08).length>=8,'Bent tubular stanchions at section ends');
+    assert.equal(seen.filter((id) => id.includes('director-chair')).length, 16);
   } finally {
     dispose();
   }
@@ -137,5 +144,15 @@ test('incomplete, overlapping backwards or out-of-bounds draw windows fail befor
     const broken = structuredClone(manifest);
     mutate(broken.profiles.exterior.batches[0].ranges);
     assert.throws(() => decodeGuestAccess(broken, buffer), /dibujo/);
+  }
+});
+
+test('invalid directional windows cannot replace a working navigation package',()=>{
+  for(const edit of [
+    b=>{b.views[0].first+=3;}, b=>{b.views.at(-1).count-=3;},
+    b=>{b.views[0].sign=0;}, b=>{b.views[0].box[5]=b.views[0].box[2];}, b=>{b.cone[0]=NaN;},
+  ]){
+    const broken=structuredClone(manifest);edit(broken.profiles.exterior.batches[0]);
+    assert.throws(()=>decodeGuestAccess(broken,buffer),/cubierta|direccional|dibujo/);
   }
 });

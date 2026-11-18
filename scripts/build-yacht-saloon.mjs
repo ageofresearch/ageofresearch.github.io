@@ -11,7 +11,7 @@ import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'deck-fidelity-1';
+const version = 'tour-fidelity-1';
 
 // Keep the same main-deck mesh from boarding through the saloon.
 export function mainDeckError(bounds) {
@@ -146,6 +146,15 @@ export async function buildSaloon() {
   }
   for(const part of parts.filter(p=>!['floor','roof'].includes(p.role))) {
     const body=clipGeometry(part,[8.5,-3.13,4.015,17.91,3.13,5.60]);
+    if(part.id.includes('/tour/')){
+      // A single convex outline would fill the seating well inside a curved back.
+      for(let i=0;i<body.indices.length;i+=3){
+        const points=body.indices.slice(i,i+3).map(id=>body.vertices.slice(6*id,6*id+2));
+        const polygon=convexHull(points.flatMap(([x,y])=>[[x-.0001,y],[x+.0001,y],[x,y-.0001],[x,y+.0001]]));
+        if(polygon.length>=3)collisionFootprints.push({id:part.id,polygon});
+      }
+      continue;
+    }
     const polygon=convexHull(Array.from({length:body.vertices.length/6},(_,i)=>body.vertices.slice(i*6,i*6+2)));
     if(polygon.length>=3)collisionFootprints.push({id:part.id,polygon});
   }

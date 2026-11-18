@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=deck-fidelity-1';
+import { indexFootprints } from './terrace-geometry.js?v=tour-fidelity-1';
 
-const version = 'deck-fidelity-1';
+const version = 'tour-fidelity-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));
@@ -61,12 +61,12 @@ export function connectTerrace(boarding, terrace, sternFloor = [], saloon = null
     }
     return onBoarding(x,across,0) || pointOnFloor(x,across);
   };
-  boarding.route = [boarding.room.spawn.slice(0,2), [3.65,3.1], [4.5,3.1], [4.7,1.55],
-    [4.72,1.35], [4.8,1.31], [4.9,1.26], [5.15,1.26], [5.3,1], [7.9,.1], [8.18,.1]];
+  boarding.route = [boarding.room.spawn.slice(0,2), [3.65,3.1], [4.56,3.1], [4.59,1.21],
+    [5.91,1.05], [6.11,.74], [6.13,.20], [7.90,.10], [8.18,.10]];
   if(saloon)boarding.route.push([9.2,.1],[10,.1]);
   boarding.walkEnd = boarding.route.at(-1)[0];
   boarding.arrivalLook = saloon ? [12.3,0,4.7] : [5.5,0,4.85];
-  terrace.room = { ...terrace.room, name: 'Terraza de popa', displayName: 'Terraza de popa', spawn: [5.6,.8,5.55], look: [8.45,.1,5.2] };
+  terrace.room = { ...terrace.room, name: 'Terraza de popa', displayName: 'Terraza de popa', spawn: [6.68,0,5.55], look: [8.45,.1,5.2] };
   return terrace;
 }
 

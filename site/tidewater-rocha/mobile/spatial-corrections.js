@@ -2,16 +2,9 @@
 // These resolve physical inconsistencies; they are not surveyed boat positions.
 export const spatialVersion='spatial-correction-1';
 export const spatialRules=[
-  ...[1,2,3].map(n=>({id:'cockpit-chair-'+n,feature:'director chair '+n+' ',floor:3.95,
+  ...[1,2,3,4].map(n=>({id:'cockpit-chair-'+n,feature:'director chair '+n+' ',floor:3.95,
     reason:'Seat the four frame feet on the existing cockpit deck'})),
-  {id:'cockpit-pouf',anchors:['MD_FUR_003'],floor:3.95,reason:'Remove the unsupported 20 mm gap beneath the covered pouf'},
-  {id:'upper-daybed',anchors:['UD_FUR_001'],floor:6,reason:'Seat the covered daybed on the upper deck'},
   {id:'upper-coffee-table',anchors:['UD_FUR_005'],floor:6,reason:'Seat the pedestal on the upper deck; keep tabletop and bowl together'},
-  {id:'upper-dining-table',features:['exterior dining square table with soft corners','exterior dining faceted pedestal'],floor:6,
-    reason:'Seat the dining pedestal on the deck; leave the roof-mounted television fixed'},
-  ...[1,2,3,4,5,6].map(n=>({id:'upper-dining-chair-'+n,feature:'exterior dining chair '+n+' ',floor:6,
-    ...(n>=5?{angle:Math.PI,pivot:[n===5?10.94:13.32,-.78]}:{}),
-    reason:n>=5?'Turn the end chair toward the table and seat its pedestal on the deck':'Seat the complete chair and pedestal on the deck'})),
   {id:'bow-seat-port',anchors:['UD_FUR_053','UD_SOF_024','UD_FUR_054'],delta:[-.023146,-.109944,0],
     reason:'Minimum translation normal to the real deck edge, including a 1 mm joint; preserve seat, cushion and back'},
   {id:'bow-seat-starboard',anchors:['UD_FUR_055','UD_SOF_025','UD_FUR_056'],delta:[-.025497,.118591,0],

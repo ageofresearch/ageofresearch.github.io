@@ -1,5 +1,5 @@
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=deck-fidelity-1';
-import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=deck-fidelity-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=tour-fidelity-1';
+import { createFlight, installFlightNavigation } from './stair-surfaces.js?v=tour-fidelity-1';
 
 // Source coordinates: x toward the bow, y to port, z up. All access surfaces
 // come from the same parts that are rendered in the full and isolated yacht.
@@ -66,6 +66,7 @@ function clipHeight(vertices, height, above) {
 function bodyObstacles(parts, height) {
   const footprints=[];
   for (const part of parts) {
+    if(part.context)continue;
     const b=part.bounds;
     const name=part.feature || part.name;
     // Permit the last normal stair rise into its support floor, while retaining

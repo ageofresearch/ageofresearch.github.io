@@ -1,5 +1,5 @@
-import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=deck-fidelity-1';
-import { createBenchmark } from './frame-benchmark.js?v=deck-fidelity-1';
+import { nearestRoutePoint, routeSegments, routePoint, moveAlongRoute } from './aft-terrace.js?v=tour-fidelity-1';
+import { createBenchmark } from './frame-benchmark.js?v=tour-fidelity-1';
 
 // The iframe owns the world, camera, lighting and native walking controls.
 export function crossing(walk) {

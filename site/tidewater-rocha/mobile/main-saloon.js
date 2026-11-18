@@ -1,7 +1,7 @@
-import { preloadUpper } from './upper-terrace.js?v=deck-fidelity-1';
-import { connectTerrace } from './aft-terrace.js?v=deck-fidelity-1';
+import { preloadUpper } from './upper-terrace.js?v=tour-fidelity-1';
+import { connectTerrace } from './aft-terrace.js?v=tour-fidelity-1';
 
-export const saloonVersion = 'deck-fidelity-1';
+export const saloonVersion = 'tour-fidelity-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {
@@ -36,21 +36,31 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
       if(view && (!batch.ranges||view.axis!==({upper:2,exterior:1}[name])||![1,2].includes(view.axis)||!Array.isArray(view.box)||view.box.length!==6||
         !view.box.every(Number.isFinite)||view.box.slice(0,3).some((v,k)=>v>=view.box[k+3])||
         [view.first,view.count,view.lowCount].some(v=>!Number.isSafeInteger(v)||v<=0||v%3)||
-        view.lowCount>view.count||view.first+view.count!==indices.length))throw Error('Vista de cubierta inválida');
+        view.lowCount>view.count||view.first+view.count!==(batch.views?.[0]?.first??indices.length)))throw Error('Vista de cubierta inválida');
       if(batch.ranges){
         let first=0,end=0;
         for(const [offset,length] of batch.ranges){
           if(offset<first||offset>end||offset+length<end)throw Error('Secuencia de dibujo inválida');
           first=offset;end=offset+length;
         }
-        if(end!==(view?.first??indices.length))throw Error('Secuencia de dibujo incompleta');
+        if(end!==(view?.first??batch.views?.[0]?.first??indices.length))throw Error('Secuencia de dibujo incompleta');
       }
-      return {attributes:attrs,indices,ranges:batch.ranges,localView:view};
+      const views=batch.views??[],cone=batch.cone;
+      if(!Array.isArray(views)||views.length>32||views.length&&(!batch.ranges||!Array.isArray(cone)||cone.length!==3||
+        !cone.every(v=>Number.isFinite(v)&&v>0)))throw Error('Vistas direccionales inválidas');
+      let end=view?view.first+view.count:batch.ranges?.at(-1).reduce((sum,v)=>sum+v);
+      for(const v of views){
+        if(!Array.isArray(v.box)||v.box.length!==6||!v.box.every(Number.isFinite)||v.box.slice(0,3).some((p,k)=>p>=v.box[k+3])||
+          ![-1,1].includes(v.sign)||!Number.isSafeInteger(v.count)||v.count<=0||v.count%3||v.first!==end||
+          (end+=v.count)>indices.length)throw Error('Vista direccional incompleta');
+      }
+      if(views.length&&end!==indices.length)throw Error('Índices direccionales incompletos');
+      return {attributes:attrs,indices,ranges:batch.ranges,localView:view,views,cone};
     });
     const ranges=batches[0].ranges;
     if (Boolean(p.visibility)!==Boolean(ranges) || p.visibility && (!Number.isFinite(p.visibility.start) ||
         !Number.isFinite(p.visibility.step) || p.visibility.step<=0)) throw Error('Visibilidad del perfil inválida');
-    const triangles=((ranges?Math.max(batches[0].localView?.count??0,...ranges.map(r=>r[1])):batches[0].indices.length)+batches[1].indices.length)/3;
+    const triangles=((ranges?Math.max(batches[0].localView?.count??0,...batches[0].views.map(v=>v.count),...ranges.map(r=>r[1])):batches[0].indices.length)+batches[1].indices.length)/3;
     if(triangles!==p.triangles)throw Error('Recuento del salón inválido');
     profiles[name]={...p,batches,triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.byteLength+
       Object.values(b.attributes).reduce((sum,a)=>sum+a.byteLength,0),0)};

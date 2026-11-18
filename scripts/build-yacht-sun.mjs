@@ -77,13 +77,14 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
-      if(profile==='upper'||profile==='guest') {
-        // The interior return views see several overlapping decks. Submit the
-        // nearby opaque cover first, so hidden patterned surfaces cost depth
+      if(profile==='upper'||profile==='guest'||profile==='exterior'||profile==='bow') {
+        // The walks see several overlapping decks. Submit nearby opaque
+        // surfaces first, so hidden patterned surfaces cost depth
         // tests instead of texture sampling. Ordering is baked, never per frame.
         const opaque=boarding.meshes.find(mesh=>!mesh.material.transparent).geometry;
         const guest=profile==='guest',bridgeAccess=!guest && Boolean(extension.accessPartIDs);
-        const eye=guest?[-.1*basis.sy,3.15-basis.seaReference,16.8*basis.sx-basis.length/2]:
+        const eye=profile==='exterior'?[0,4.8-basis.seaReference,1.6*basis.sx-basis.length/2]:
+          profile==='bow'?[-2.6*basis.sy,7.6-basis.seaReference,22*basis.sx-basis.length/2]:guest?[-.1*basis.sy,3.15-basis.seaReference,16.8*basis.sx-basis.length/2]:
           bridgeAccess?[0,6.6-basis.seaReference,19*basis.sx-basis.length/2]:[0,7.6-basis.seaReference,15.5*basis.sx-basis.length/2];
         opaque.setIndex(Array.from(orderOpaqueTriangles(opaque.attributes.position.array,opaque.index.array,eye,
           guest||bridgeAccess? .25 : .5,Boolean(guest||bridgeAccess))));
@@ -95,7 +96,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'deck-fidelity-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'tour-fidelity-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

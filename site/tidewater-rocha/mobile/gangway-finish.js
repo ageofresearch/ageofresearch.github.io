@@ -1,6 +1,6 @@
 // Model fit approved for this release, not surveyed vessel dimensions.
 export const gangwayTeak = Object.freeze({
-  version: 'deck-fidelity-1',
+  version: 'tour-fidelity-1',
   color: 0xb69a73,
   caulk: 0x20201c,
   roughness: 0.8,
@@ -143,6 +143,14 @@ export function boardingTextureUV(part) {
 }
 
 export const gangwayFullSurfaceWGSL = `
+if(code==43.0){
+ let fiber=in.P.xz;
+ let warp=sin(fiber.x*2.7+sin(fiber.y*3.9))*sin(fiber.y*3.3+fiber.x);
+ let nap=sin(fiber.x*23.0+warp*4.0)*sin(fiber.y*18.0+warp*7.0);
+ s.albedo*=.82+.46*warp+.21*nap;
+ s.roughness=.96;
+}
+
 if(code>=37.0 && code<=42.0){
  let gwUV=in.vs.vBoardingUV;
  var gwAcross=0.0;var gwPitch=${gangwayTeak.woodWidth.toFixed(12)};var gwBoard=0.0;var gwU=gwUV.y;var gwSeam=0.0;

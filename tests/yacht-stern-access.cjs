@@ -6,7 +6,7 @@ module.exports=async function verifyStern(page,frame,out,readFrame) {
   const result=await frame.evaluate(()=>{
     const walk=window.__app.yachtWalk,nav=walk.nav,access=walk.model.sternAccess;
     walk.enterRoom('MD_R01');
-    const approach=[[6.2,.8],[7.4,-.4],[7.4,-.9],[7.1,-1.2],[5.8,-1.2],[4,-3],[4,-3.03],[2.7,-3.03]];
+    const approach=[[7.4,-1.6],[7.4,-2.5],[6.6,-3.1],[4,-3.03],[4,-3.03],[2.7,-3.03]];
     const travel=points=>{
       for(const p of points) {
         nav.move(p[0]-nav.position[0],p[1]-nav.position[1]);

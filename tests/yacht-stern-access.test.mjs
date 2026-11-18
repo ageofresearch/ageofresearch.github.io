@@ -38,7 +38,7 @@ function fixture() {
   return {walk,model,access:model.sternAccess,dispose(){boarding.dispose();materials.opaque.dispose();materials.glass.dispose();}};
 }
 
-const approach=[[5.6,.8],[6.2,.8],[7.4,-.4],[7.4,-.9],[7.1,-1.2],[5.8,-1.2],[4,-3],[4,-3.03],[2.7,-3.03]];
+const approach=[[6.68,0],[7.4,-1.6],[7.4,-2.5],[6.6,-3.1],[4,-3.03],[4,-3.03],[2.7,-3.03]];
 
 function travel(nav,points,hz=40) {
   for(const point of points) {
@@ -96,9 +96,11 @@ test('platform, stair edges, transom and deployed port gangway stop the body at 
   try {
     nav.enterRoom('swim-platform');assert.deepEqual(nav.position,[.35,-3.03]);
     assert.equal(nav.floorSafe(.35,0,'LD'),false,'The platform is not the lower deck');
-    for(const point of [[-.1,0],[.05,0],[1.3,0],[2,-3.03],[.8,-2.5],[.4,3.1]])
+    for(const point of [[-2.12,0],[-1,.85],[-.89,0],[1.45,0],[2,-3.03],[.8,-2.5],[.4,3.1]])
       assert.equal(nav.floorSafe(...point,'SP'),false,`Blocked platform point ${point}`);
-    nav.move(-2,0);assert.ok(nav.position[0]>.15,'Stop at rounded platform edge');
+    travel(nav,[[.35,0],[1.15,.30],[.35,0],[.35,-3.03]]);
+    for(let i=0;i<150;i++)nav.move(-.025,0);
+    assert.ok(nav.position[0]>-2.06&&nav.position[0]<-1.6,'Stop at the extended platform edge');
     nav.enterRoom('swim-platform');travel(nav,[[1.5,-3.03]]);
     nav.move(0,-1);assert.ok(nav.position[1]>-3.31,'Stop at outer stair coaming');
     nav.move(0,2);assert.ok(nav.position[1]<-2.7,'Stop at transom and inner stair edge');
@@ -112,4 +114,37 @@ test('platform, stair edges, transom and deployed port gangway stop the body at 
     nav.enterRoom('boarding');assert.equal(nav.stair,null);assert.equal(nav.deck,'MD');
     assert.ok(crossing(walk));
   }finally{dispose();}
+});
+
+test('Beach Club has an open central bay, supported platform chairs and a continuous shaded entrance',()=>{
+  const {model,access,dispose}=fixture();
+  try{
+    const parts=model.transom.parts;
+    assert.ok(!parts.some(p=>/rounded recessed field|roman serif lettering|PANAMA registry/.test(p.feature)));
+    const canopy=parts.find(p=>p.feature==='beach club timber soffit');
+    assert.ok(canopy.bounds[2]-access.lowerHeight>=1.65);
+    assert.equal(parts.filter(p=>p.feature.startsWith('beach club flush locker')).length,2);
+    assert.equal(parts.filter(p=>p.feature.startsWith('swim platform inclined sun chair back')).length,2);
+    assert.equal(parts.filter(p=>p.feature.startsWith('outboard stair coaming cap rail')).length,2);
+    for(const side of ['port','starboard'])
+      assert.equal(parts.filter(p=>p.feature.startsWith('transom '+side+' teak tread')).length,6);
+    for(let x=-.1;x<=1.15;x+=.025)assert.ok(access.platformSafe(x,.20,.14),'Entry blocked at '+x);
+    assert.equal(access.platformSafe(1.72,.20,.14),false,'Divan cushions block the body');
+    for(const part of parts)assert.ok(part.bounds.every(Number.isFinite)&&part.vertices.every(Number.isFinite),part.feature);
+  }finally{dispose();}
+});
+
+test('lake surrounds the hull while the guest landing and its lower passage stay dry',async()=>{
+  const {berthLandscape}=await import('../site/tidewater-rocha/mobile/berth-landscape.js');
+  const {containsTriangle}=await import('../scripts/build-yacht-terrace.mjs');
+  const {obstacles}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
+  const water=berthLandscape().find(p=>p.feature==='Rocha lake');
+  const faces=[];
+  for(let i=0;i<water.indices.length;i+=3)
+    faces.push(water.indices.slice(i,i+3).map(k=>water.vertices.slice(k*6,k*6+2)));
+  const wet=(x,y)=>faces.some(face=>containsTriangle(x,y,face));
+  for(const x of [13.7,16.8,17.21,18.6])for(const y of [-1.42,-.1,.2])assert.equal(wet(x,y),false);
+  assert.ok(wet(18,5)&&wet(18,-5));
+  const context={...water,context:true,bounds:[-250,-250,2.01,250,250,2.01]};
+  assert.equal(obstacles([context],new Set(),[0,-8,1.55,30,8,3.2]).footprints(1.55).length,0);
 });

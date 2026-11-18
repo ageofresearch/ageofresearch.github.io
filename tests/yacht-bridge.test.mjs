@@ -87,7 +87,10 @@ test('bridge network/corrupt data failures preserve the interior and retries reg
 });
 test('prepared pattern pyramid is periodic, bounded and averages to a neutral subpixel finish',()=>{
  const mips=finishPatternMips();assert.equal(mips.length,9);assert.equal(mips.reduce((n,m)=>n+m.data.byteLength,0),699048);
- for(let i=0;i<4;i+=2)assert.ok(Math.abs((mips.at(-1).data[i]*256+mips.at(-1).data[i+1])/65535*1.1-1)<.00003);assert.ok(Math.abs(mips[0].data[0]-mips[0].data[510])<15);
+ const last=mips.at(-1).data;
+ assert.ok(Math.abs((last[0]*256+last[1])/65535*1.1-1)<.00003);
+ assert.ok(Math.abs(last[2]/255*1.1-1)<.012);
+ assert.ok(last[3]>90&&last[3]<165,'The mottling channel averages to mid-grey');assert.ok(Math.abs(mips[0].data[0]-mips[0].data[510])<15);
 });
 
 test('teak mipmaps preserve the board pattern and fit the prepared material budget',()=>{
@@ -123,4 +126,29 @@ test('static bridge instruments retain rings and heading without live updates',(
  const {size,data}=finishPatternMips()[0],pixel=(u,v,c)=>data[size*size*4+(Math.floor(v*size)*size+Math.floor(u*size))*2+c];
  assert.ok(pixel(.5,.8,0)>180);assert.ok(pixel(.5,.5,1)>180);assert.equal(pixel(.1,.1,0),0);assert.equal(pixel(.1,.1,1),0);
  assert.equal(manifest.parts.filter(p=>p.feature==='inclined instrument display').length,5);
+});
+
+test('the packed atlas keeps the actual teak texels at deck coordinates and fits the mobile budget',async()=>{
+ const {createFinishPatterns}=await import('../site/tidewater-rocha/mobile/finish-patterns.js');
+ const {prepareOpaque}=await import('../site/tidewater-rocha/mobile/prepare-light.js');
+ const original=globalThis.GPUTextureUsage;
+ globalThis.GPUTextureUsage={TEXTURE_BINDING:4,COPY_DST:2};
+ try{
+   const writes=[],textures=[];
+   const device={createTexture(spec){textures.push(spec);return {createView:()=>({})};},createSampler:()=>({}),
+     queue:{writeTexture({mipLevel},data,stride,size){writes[mipLevel]={data,size};}}};
+   const atlas=createFinishPatterns(device),teak=teakPatternMips();
+   assert.equal(textures.length,1);assert.ok(atlas.bytes<3600000);assert.equal(writes.length,10);
+   for(const row of [25,40,64,76,99])for(const mip of [0,1,4,7]){
+     const {data,size:[w,h]}=writes[mip],page=Math.floor(row/8)-1,y=(row*32+16)>>mip,x=224>>mip;
+     assert.equal(data[(page+6)*w*h+(y%h)*w+x],teak[mip].data[y*w+x]);
+   }
+   const pos=new Float32Array([0,3.95-2.01,-6.2]),source={position:pos,normal:new Float32Array([0,1,0]),
+     color:new Float32Array([.4,.5,.7]),aSurface:new Float32Array([.7,0,1,.8])};
+   const sun={x:0,y:1,z:0};
+   const bright=prepareOpaque(source,sun,new Uint8Array(102400).fill(255));
+   const shadow=prepareOpaque(source,sun,new Uint8Array(102400));
+   assert.equal(bright.aSurface[1],8);assert.equal(bright.aSurface[2],0);
+   assert.ok(shadow.color.every((v,i)=>Math.abs(v/bright.color[i]-.48)<1e-6));
+ }finally{if(original)globalThis.GPUTextureUsage=original;else delete globalThis.GPUTextureUsage;}
 });

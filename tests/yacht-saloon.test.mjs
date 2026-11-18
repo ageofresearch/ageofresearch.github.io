@@ -65,9 +65,9 @@ test('floor union closes the threshold without opening glazing, furniture, servi
   const f=fixture(),{nav}=f.walk;
   try {
     for(let x=8.15;x<=10;x+=.005)assert.ok(nav.floorSafe(x,.1),'Threshold at '+x);
-    for(const p of [[8.44,-1],[8.44,1],[12,1],[12,-1],[11.95,.35],[15.9,0],[15.2,1.1],[12,3],[12,-3],[18,0],[9.2,2.8]])
+    for(const p of [[8.44,-1],[8.44,1],[12,1],[12,-1],[11.95,-.2],[15.9,0],[15.2,1.1],[12,3],[12,-3],[18,0],[9.2,2.8]])
       assert.equal(nav.floorSafe(...p),false,'Solid or unsupported point '+p);
-    nav.enterRoom('MD_R01');travel(nav,[[6.2,.8],[7.4,-.4],[7.4,-.9],[7.1,-1.2],[5.8,-1.2],[4,-3],[2.7,-3.03],[.35,-3.03],[.35,0]]);
+    nav.enterRoom('MD_R01');travel(nav,[[7.4,-1.6],[7.4,-2.5],[6.6,-3.1],[4,-3.03],[2.7,-3.03],[.35,-3.03],[.35,0]]);
     assert.equal(nav.deck,'SP');assert.equal(nav.elevation,2.84);
     assert.equal(nav.floorSafe(.4,3.1,'SP'),false,'Port stair remains blocked');
     travel(nav,[[.35,-3.03],[2.7,-3.03]]);assert.equal(nav.deck,'MD');

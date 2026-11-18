@@ -1,20 +1,21 @@
+import {sightlines,cone} from './sightlines.mjs';
 import { orderOpaqueTriangles } from './opaque-order.mjs';
 import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
 export function detailError(part, error, profile) {
   const name = part.feature || part.name || '';
+  if (part.context) return 0;
   // These deck fragments are also the visible ceiling of the main deck.
   if (profile === 'exterior' && part.id.startsWith('UD_DCK_001/stairs/stair-opening'))
     return Math.min(error, 0.012);
-  if (name.includes('hanging guard line')) return 0;
   if (
     part.id.startsWith('boarding/owner/') &&
     /handrail|handhold|upright|gate frame|gate polished/.test(name)
   ) {
     return Math.min(error, 0.003);
   }
-  if (/director chair|pouf perimeter piping/.test(name)) return 0;
-  if (/cockpit pouf|folded dark cockpit cloth|cockpit wet bar|cockpit grey counter/.test(name))
+  if (/director chair/.test(name)) return 0;
+  if (/cockpit transverse|cockpit port chaise|cockpit wet bar|cockpit grey counter/.test(name))
     return Math.min(error, 0.006);
   if (/^MD_SOF_0(?:07|08|09|10)\//.test(part.id)) return Math.min(error, 0.009);
   if (/rounded recessed coffer|gloss red organic lampshade/.test(name)) return Math.min(error, 0.014);
@@ -44,9 +45,10 @@ function faceNormal(position, a, b, c) {
 // over the eye box is linear in z. A front-facing triangle is therefore visible
 // in a prefix, a suffix, every band, or none. Sorting these four cases lets each
 // band use one contiguous draw; neighboring bands share their original faces.
-function opaqueRanges(position, indices, profile) {
+function opaqueRanges(position, indices, profile, surface) {
   const [low, high] = heights[profile],
-    groups = Array.from({ length: 2 * bands - 1 }, () => []);
+    groups = Array.from({ length: 2 * bands - 1 }, () => []),
+    background = groups.map(()=>[]);
   for (let i = 0; i < indices.length; i += 3) {
     const a = indices[i] * 3,
       b = indices[i + 1] * 3,
@@ -66,8 +68,13 @@ function opaqueRanges(position, indices, profile) {
     else if (distance < 0) continue;
     if (first > last) continue;
     const key = first > 0 ? bands - 1 + first : last;
-    groups[key].push(indices[i], indices[i + 1], indices[i + 2]);
+    const layer=surface[indices[i]*4+2];
+    const target=(layer>=44 && layer<=47 || layer===49)?background:groups;
+    target[key].push(indices[i], indices[i+1], indices[i+2]);
   }
+  // The lake and sky cover the screen. Leave them until the hull and cabin
+  // have filled depth, even when a large lake triangle has a nearby centroid.
+  groups.forEach((list,k)=>{groups[k]=list.concat(background[k]);});
   let count = 0;
   const offsets = groups.map((g) => {
     const from = count;
@@ -140,7 +147,7 @@ export function packWalkProfile(boarding, profile, audit, store) {
       glass = mesh.material.transparent;
     const submission = glass
       ? { indices: geometry.index.array }
-      : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile);
+      : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile, geometry.attributes.aSurface.array);
     let localView;
     if (!glass && viewBoxes[profile]) {
       const view = localDraw(geometry.attributes.position.array, geometry.index.array, viewBoxes[profile]);
@@ -152,6 +159,11 @@ export function packWalkProfile(boarding, profile, audit, store) {
         lowCount: view.lowCount,
       };
       submission.indices = submission.indices.concat(view.indices);
+    }
+    const views=[];
+    if(!glass)for(const v of sightlines(profile,geometry,basis)){
+      views.push({first:submission.indices.length,count:v.indices.length,box:v.box,sign:v.sign});
+      submission.indices=submission.indices.concat(v.indices);
     }
     // Compact once over the union. The ranges reference the same vertices and
     // indices even when the camera moves across a band boundary.
@@ -183,13 +195,14 @@ export function packWalkProfile(boarding, profile, audit, store) {
       attributes,
       indices,
       ...(localView && { localView }),
+      ...(views.length && {views,cone}),
       ...(submission.ranges && { ranges: submission.ranges }),
     };
   });
   const [opaque, glass] = batches;
   const triangles =
     (glass.indices.length +
-      Math.max(opaque.localView?.count ?? 0, ...opaque.ranges.map(([, count]) => count))) /
+      Math.max(opaque.localView?.count ?? 0,...(opaque.views??[]).map(v=>v.count), ...opaque.ranges.map(([, count]) => count))) /
     3;
   return { batches, triangles, geometryBytes, audit, visibility: { start, step } };
 }

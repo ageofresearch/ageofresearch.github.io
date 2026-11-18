@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=deck-fidelity-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=tour-fidelity-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -46,7 +46,7 @@ async function capture(browser, mobile) {
       const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
       const furniture = model.terrace ? model.terrace.parts.filter(p=>p.role==='furniture') :
         model.exterior.parts.filter(p=>['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(p.anchor));
-      return { meshes, triangles, count: model.boarding.parts.length, parts: JSON.stringify(parts),
+      return { meshes, triangles, count: model.boarding.parts.filter(p=>!p.context).length, parts: JSON.stringify(parts),
         furniture:furniture.map(p=>[p.id,p.materialID,p.indices.length/3,p.bounds]),
         stern:model.transom.parts.filter(p=>p.deck === 'MD').map(p=>[p.id,p.materialID,p.triangles,p.bounds]) };
     });
@@ -77,6 +77,7 @@ async function capture(browser, mobile) {
       assert.deepEqual(captured.passLabels,['Gangway to screen']);
       assert.equal(captured.indexedDraws,2);
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
+      await require('./yacht-sightlines.cjs')(frame,readFrame);
       await require('./yacht-stern-access.cjs')(page,frame,out,readFrame);
       async function measureStern() {
         // Read the displayed image at the actual pose, then omit only the
@@ -94,7 +95,7 @@ async function capture(browser, mobile) {
             }
             return points;
           }
-          const letter=projected(model.transom.nameBounds);
+          const letter=projected(model.transom.focusBounds);
           return {within:letter.every(([x,y,z])=>Math.abs(x)<1 && Math.abs(y)<1 && z>0 && z<=1),
             width:(Math.max(...letter.map(p=>p[0]))-Math.min(...letter.map(p=>p[0])))*app.engine.width/2};
         });
@@ -139,8 +140,17 @@ async function capture(browser, mobile) {
         assert.ok(share>.09,'The stern must visibly occupy the camera frame');
         return coverage;
       }
-      const firstView=await measureStern();
-      assert.ok(firstView.within && firstView.width>60,'The original name must be framed on first paint');
+      // Inspect the recessed room from the platform. The boarding camera is
+      // aligned with the port gangway, beyond the jamb of the central opening.
+      await frame.evaluate(()=>{
+        const app=window.__app,w=app.yachtWalk,b=w.model.group.userData.yacht;
+        w.enterRoom('swim-platform');w.nav.position=[-1.86,0];w.cameraElevation=2.84;w.applyPosition();
+        const target=w.model.group.localToWorld(app.camera.position.clone().set(0,3.72-b.seaReference,2.64*b.sx-b.length/2));
+        const d=target.sub(app.camera.position).normalize();w.yaw=Math.atan2(-d.x,-d.z);w.pitch=Math.asin(d.y);
+      });
+      const beachView=await measureStern();
+      assert.ok(beachView.within && beachView.width>60,'The central Beach Club must be framed from the platform');
+      await frame.evaluate(()=>window.__app.yachtWalk.enterRoom('boarding'));
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
       const smooth = panel.locator('#smooth');
@@ -154,7 +164,7 @@ async function capture(browser, mobile) {
       before.data = Buffer.from(aliased.pixels,'base64');
       writeFileSync(out+'/mobile-no-aa.png',PNG.sync.write(before));
       // A box-filtered 2× capture independently approximates the true pixel coverage.
-      // Keep the camera fixed and score the two bands containing the rails and cables.
+      // Keep the camera fixed and score the two bands containing the rails and posts.
       await frame.evaluate(() => window.__app.engine.setRenderScale(2));
       const reference = await readFrame();
       const hi = Buffer.from(reference.pixels,'base64');
@@ -173,7 +183,7 @@ async function capture(browser, mobile) {
         }
       }
       console.log('Rail-band error reduction vs 2× box reference, percent:',(100*(1-smoothError/rawError)).toFixed(1));
-      assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and cable edges');
+      assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and post edges');
       await frame.evaluate(() => window.__app.engine.setRenderScale(1));
       await smooth.check();
       await page.getByRole('button',{name:'Entrar al salón'}).click();
@@ -281,7 +291,7 @@ async function capture(browser, mobile) {
       assert.equal(await frame.locator('.luz-yacht-controls').count(),1);
       assert.deepEqual(await frame.evaluate(()=>({deck:window.__app.yachtWalk.nav.deck,
         position:window.__app.yachtWalk.nav.position,height:window.__app.yachtWalk.nav.elevation})),
-        {deck:'MD',position:[5.6,.8],height:3.95});
+        {deck:'MD',position:[6.68,0],height:3.95});
       await frame.locator('[data-deck="MD"]').click();
       await frame.locator('.luz-stick .front').waitFor();
       assert.equal(await frame.locator('.luz-stick').count(),1);
@@ -300,8 +310,8 @@ function compare(original,mobile) {
     assert.equal(mobile.geometry.parts, original.geometry.parts);
     assert.deepEqual(mobile.geometry.stern,original.geometry.stern);
     assert.deepEqual(mobile.geometry.furniture,original.geometry.furniture);
-    assert.equal(mobile.geometry.furniture.length,25);
-    assert.ok(mobile.geometry.stern.some(p=>p[0].includes('LUZ-DE-MAR')));
+    assert.equal(mobile.geometry.furniture.length,30);
+    assert.ok(mobile.geometry.stern.some(p=>p[0].includes('beach-club-divan-seat')));
     assert.equal(mobile.geometry.count, JSON.parse(original.geometry.parts).length);
     assert.ok(mobile.geometry.triangles <= 25000,'Keep the furnished scene inside its explicit mobile budget');
     const {width,height,data} = mobile.image;

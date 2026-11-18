@@ -1,5 +1,6 @@
-import {createFinishPatterns} from './finish-patterns.js?v=deck-fidelity-1';
-import { nextProfile } from './main-saloon.js?v=deck-fidelity-1';
+import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=tour-fidelity-1';
+import {createFinishPatterns} from './finish-patterns.js?v=tour-fidelity-1';
+import { nextProfile } from './main-saloon.js?v=tour-fidelity-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -12,81 +13,48 @@ struct Frame {
 @group(0) @binding(0) var<uniform> frame: Frame;
 @group(0) @binding(1) var patternSampler: sampler;
 @group(0) @binding(2) var patterns: texture_2d_array<f32>;
-@group(0) @binding(3) var teak: texture_2d<f32>;
 struct Vertex {
   @builtin(position) clip: vec4f,
   @location(0) color: vec3f,
   @location(1) uv: vec2f,
   @location(2) @interpolate(flat) layer: i32,
 }
-@vertex fn vertex(@location(0) position: vec3f, @location(1) normal: vec3f,
-                  @location(2) albedo: vec3f, @location(3) surface: vec4f) -> Vertex {
+@vertex fn vertex(@location(0) position: vec3f, @location(1) n: vec4f,
+                  @location(2) tint: vec4f, @location(3) uv: vec2f, @location(4) finish: vec2i) -> Vertex {
   var out: Vertex;
   out.clip = frame.clipFromLocal * vec4f(position, 1);
-  let n = normalize(normal);
-  let boarding=surface.z>=37. && surface.z<=42.;
-  let roughness=select(surface.x,.8,boarding);let metalness=select(surface.y,0.,boarding);
-  let light = frame.sunLocal.xyz;
-  let eye = normalize(frame.eyeLocal.xyz - position);
-  let hemi = mix(vec3f(.19,.16,.13), vec3f(.62,.67,.73), n.y*.5+.5);
-  let diffuse = max(dot(n, light), 0.);
-  let gloss = pow(max(dot(n, normalize(eye+light)), 0.), mix(68., 10., roughness));
-  let reflection = reflect(-eye, n);
-  let reflectedLight = mix(vec3f(.095,.087,.077), vec3f(.71,.75,.79),
-                           smoothstep(-.16,.25,reflection.y));
-  let finish = select(albedo, vec3f(.72,.69,.61), surface.z == 9.);
-  let indirect = select(vec3f(0), vec3f(.23,.22,.20), surface.z == 9.);
-  let lit = finish * ((hemi + diffuse * vec3f(.82,.72,.59)) * surface.w + indirect);
-  out.color = mix(lit, albedo * reflectedLight, metalness)
-              + gloss * (.08 + metalness*.65);
-  out.color = toSrgb(out.color);
-  let local=vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
-  let finishUV=vec2f(position.x+position.y*.73, position.z+position.y*.51);
-  out.layer=-1;out.uv=vec2f(0);
-  if(surface.z==2.){out.layer=1;out.uv=finishUV*vec2f(310.,37.)/6.2831853;}
-  else if(surface.z==3.){out.layer=2;out.uv=finishUV*vec2f(430.,410.)/6.2831853;}
-  else if(surface.z==1.){out.layer=0;out.uv=vec2f(local.x/2.15,(local.y/.105+64.)/128.);}
-  else if(surface.z==7.){
-    var center=vec2f(22.354615,-.05067);
-    if(local.y>.9){center=vec2f(22.03368,1.21617);}else if(local.y>.25){center=vec2f(22.27016,.59119);}
-    else if(local.y< -1.){center=vec2f(21.949225,-1.31751);}else if(local.y< -.35){center=vec2f(22.18570,-.69254);}
-    out.layer=3;out.uv=vec2f((local.y-center.y)/.48+.5,((local.x-center.x)*.659983+(position.y+2.01-7.01)*.75128)/.36+.5);
+  out.uv=uv;out.layer=finish.x;out.color=tint.rgb;
+  if(finish.y>655){
+    let metal=f32(finish.y)/32767.;let normal=normalize(n.xyz);
+    let eye=normalize(frame.eyeLocal.xyz-position);
+    let reflected=reflect(-eye,normal);
+    let horizon=smoothstep(-.10,.19,reflected.y);
+    let glint=max(dot(reflected,frame.sunLocal.xyz),0.);
+    let reflection=mix(vec3f(.31,.42,.44),vec3f(.85,.92,.96),horizon)
+      +vec3f(.30,.26,.22)*(1.-smoothstep(.015,.095,abs(reflected.y+.11)));
+    out.color=mix(tint.rgb,tint.rgb*reflection,metal)+pow(glint,26.)*.38*metal;
   }
-  else if(boarding){out.layer=4;out.uv=surface.xy;}
   return out;
-}
-fn toSrgb(linear: vec3f) -> vec3f {
-  let c=clamp(linear,vec3f(0),vec3f(1));
-  let s1=sqrt(c);let s2=sqrt(s1);let s3=sqrt(s2);
-  return select(.662002687*s1+.684122060*s2-.323583601*s3-.022541147*c,
-                12.92*c,c<=vec3f(.0031308));
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
   if(in.layer<0){return vec4f(in.color,1.);}
-  if(in.layer==3){
-    let instrument=textureSample(patterns,patternSampler,in.uv,2).rg;
-    return vec4f(vec3f(.022,.058,.071)+instrument.r*vec3f(.075,.22,.15)+instrument.g*vec3f(.31,.38,.25),1.);
-  }
-  var factor=1.;
-  if(in.layer==0){factor=textureSample(teak,patternSampler,in.uv).r*1.1;}
-  else {let encoded=textureSample(patterns,patternSampler,in.uv,in.layer-1).rg;
-    factor=dot(encoded,vec2f(65280./65535.,255./65535.))*1.1;}
-
-  return vec4f(clamp((in.color+.055)*factor-.055,vec3f(0),vec3f(1)),1.);
+  let layer=select(in.layer-1,6+clamp(i32(floor(in.uv.y))-1,0,13),in.layer==0);
+  let texel=textureSample(patterns,patternSampler,in.uv,layer).r;
+  return vec4f((in.color+.055)*(texel*1.1)-.055,1.);
 }
 struct GlassVertex {
   @builtin(position) clip: vec4f,
   @location(0) rgba: vec4f,
 }
-@vertex fn glassVertex(@location(0) position: vec3f, @location(1) normal: vec3f,
-                       @location(2) tint: vec3f, @location(3) surface: vec4f) -> GlassVertex {
+@vertex fn glassVertex(@location(0) position: vec3f, @location(1) normal: vec4f,
+                       @location(2) tint: vec4f, @location(4) finish: vec2i) -> GlassVertex {
   let eye = normalize(frame.eyeLocal.xyz-position);
-  let n = normalize(normal);
+  let n = normalize(normal.xyz);
   let grazing = pow(1.-clamp(abs(dot(n,eye)),0.,1.),5.);
   let sky = smoothstep(-.16,.25,reflect(-eye,n).y);
-  let glassColor = tint*mix(vec3f(.62,.64,.67),vec3f(.91,.94,.98),sky);
-  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,select(.06+.30*grazing,.66+.22*grazing,surface.z<26.5)));
+  let glassColor = tint.rgb*mix(vec3f(.62,.64,.67),vec3f(.91,.94,.98),sky);
+  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,select(.06+.30*grazing,.28+.35*grazing,finish.x==26)));
 }
 @fragment fn glassFragment(in: GlassVertex) -> @location(0) vec4f {
   return in.rgba;
@@ -105,17 +73,16 @@ export async function createForwardRenderer(app, sun) {
     {binding:0, visibility:GPUShaderStage.VERTEX, buffer:{type:'uniform'}},
     {binding:1, visibility:GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
-    {binding:3, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
-    const names = attributes;
     return device.createRenderPipelineAsync({
       label:(glass ? 'Boarding glass ' : 'Boarding finishes ')+count+'×', layout, multisample:{count},
-      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:names.map((name,index) => {
-        const n = model.meshes[0].geometry.attributes[name].itemSize;
-        return {arrayStride:n*4, attributes:[{shaderLocation:index,offset:0,format:'float32x'+n}]};
-      })},
+      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:32,attributes:[
+        {shaderLocation:0,offset:0,format:'float32x3'}, {shaderLocation:1,offset:12,format:'snorm8x4'},
+        {shaderLocation:2,offset:16,format:'unorm8x4'}, {shaderLocation:3,offset:20,format:'float32x2'},
+        {shaderLocation:4,offset:28,format:'sint16x2'},
+      ]}]},
       fragment:{module,entryPoint:glass ? 'glassFragment' : 'fragment',targets:[{format,blend:glass ? blend : undefined}]},
       // The gate is a closed beveled pane, so its outward faces cover both viewing sides.
       primitive:{topology:'triangle-list',cullMode:'back'},
@@ -132,15 +99,29 @@ export async function createForwardRenderer(app, sun) {
   let samples = smooth ? 4 : 1;
   function upload(array, usage) {
     const buffer = device.createBuffer({size:Math.ceil(array.byteLength/4)*4,usage,mappedAtCreation:true});
-    new Uint8Array(buffer.getMappedRange()).set(new Uint8Array(array.buffer,array.byteOffset,array.byteLength));
-    buffer.unmap();
-    return buffer;
+    try {
+      new Uint8Array(buffer.getMappedRange()).set(new Uint8Array(array.buffer,array.byteOffset,array.byteLength));
+      buffer.unmap();
+      return buffer;
+    }catch(error){buffer.destroy();throw error;}
+  }
+  const mesh = model.boarding.group;
+  mesh.updateWorldMatrix(true,false);
+  const localFromWorld = mesh.matrixWorld.clone().invert();
+  const clip = mesh.matrixWorld.clone();
+  const cameraInYacht = mesh.matrixWorld.clone();
+  const eye = app.camera.position.clone();
+  const localSun=sun.clone().transformDirection(localFromWorld);
+  const deckLight=await loadDeckLight();
+  function uploadVertices(source,glass){
+    const prepared=glass?source:prepareOpaque(source,localSun,deckLight);
+    return upload(packRenderVertices(prepared),GPUBufferUsage.VERTEX);
   }
   let batches = model.meshes.map(mesh => {
     const geom = mesh.geometry;
-    const names = attributes;
+    const source=Object.fromEntries(attributes.map(name=>[name,geom.attributes[name].array]));
     return {
-      vertices:names.map(name => upload(geom.attributes[name].array,GPUBufferUsage.VERTEX)),
+      vertices:uploadVertices(source,mesh.material.transparent),
       indices:upload(geom.index.array,GPUBufferUsage.INDEX),
       indexFormat:geom.index.array instanceof Uint32Array ? 'uint32' : 'uint16',
       count:geom.index.count,
@@ -148,7 +129,7 @@ export async function createForwardRenderer(app, sun) {
   });
   let profiles=null, activeProfile='exterior', disposed=false;
   const destroy=batches=>batches.forEach(batch=>{
-    batch.vertices.forEach(buffer=>buffer.destroy());batch.indices.destroy();
+    batch.vertices.destroy();batch.indices.destroy();
   });
   function selectProfile(name) {
     if(!profiles)return;
@@ -158,18 +139,12 @@ export async function createForwardRenderer(app, sun) {
   }
   const frame = new Float32Array(24);
   const uniform = device.createBuffer({size:frame.byteLength,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
+  localSun.toArray(frame,20);
   const finishes=createFinishPatterns(device);
   const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
-    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:finishes.teak.createView()}]});
+    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view}]});
   model.stats.finishTextureBytes=finishes.bytes;
-  model.stats.materialTextures=2;
-  const mesh = model.boarding.group;
-  mesh.updateWorldMatrix(true,false);
-  const localFromWorld = mesh.matrixWorld.clone().invert();
-  const clip = mesh.matrixWorld.clone();
-  const cameraInYacht = mesh.matrixWorld.clone();
-  const eye = app.camera.position.clone();
-  sun.clone().transformDirection(localFromWorld).toArray(frame,20);
+  model.stats.materialTextures=1;
   let depth, depthView, color, colorView;
   return {
     get activeProfile() { return activeProfile; },
@@ -180,19 +155,20 @@ export async function createForwardRenderer(app, sun) {
       let failure;
       try {
         for(const [name,p] of Object.entries(source)) {
-          const result=uploaded[name]={...p,batches:[]};
+          const result=uploaded[name]={...p,batches:[],geometryBytes:0};
           for(const b of p.batches) {
-            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
+            const batch={vertices:null,indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView,views:b.views,cone:b.cone};
             result.batches.push(batch);
-            for(const name of attributes)batch.vertices.push(upload(b.attributes[name],GPUBufferUsage.VERTEX));
+            batch.vertices=uploadVertices(b.attributes,result.batches.length===2);
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
+            result.geometryBytes+=batch.vertices.size+batch.indices.size;
           }
         }
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
       if(failure||validation||memory||disposed) {
         Object.values(uploaded).forEach(p=>p.batches.forEach(b=>{
-          b.vertices.forEach(v=>v.destroy());b.indices?.destroy();
+          b.vertices?.destroy();b.indices?.destroy();
         }));
         throw failure||validation||memory||Error('Renderer disposed');
       }
@@ -231,6 +207,7 @@ export async function createForwardRenderer(app, sun) {
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
           if(profiles[name].batches[0].localView)warmBands.push('local');
+          warmBands.push(...(profiles[name].batches[0].views??[]));
           for(const band of warmBands){
             app.gpu.beginFrame();this.render(name,target.createView(),band);app.gpu.submit();
             await app.gpu.queue.onSubmittedWorkDone();
@@ -264,7 +241,7 @@ export async function createForwardRenderer(app, sun) {
         label:'Gangway to screen',
         colorAttachments:[{view:colorView ?? screen,resolveTarget:colorView ? screen : undefined,
           loadOp:'clear',storeOp:colorView ? 'discard' : 'store',
-          clearValue:{r:.64,g:.60,b:.53,a:1}}],
+          clearValue:{r:.40,g:.64,b:.84,a:1}}],
         depthStencilAttachment:{view:depthView,depthClearValue:0,depthLoadOp:'clear',depthStoreOp:'discard'},
       });
       pass.setBindGroup(0,bindings);
@@ -272,13 +249,25 @@ export async function createForwardRenderer(app, sun) {
       for (let i=0; i<batches.length; i++) {
         const batch = batches[i];
         pass.setPipeline(pipelines[i]);
-        batch.vertices.forEach((buffer,index) => pass.setVertexBuffer(index,buffer));
+        pass.setVertexBuffer(0,batch.vertices);
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
           const {start,step}=profiles[activeProfile].visibility;
           const view=batch.localView,box=view?.box;
           let first,count;
-          if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
+          let directional=preparedBand && typeof preparedBand==='object'?preparedBand:null;
+          if(preparedBand===null&&batch.views?.length){
+            const m=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements,p=camera.projectionMatrix.elements;
+            const inside=(sign,axis,edge,tangent)=>{
+              const component=k=>sign*tangent*m[2+k]+edge*m[axis+k];
+              return -component(8)+component(0)*p[8]/p[0]+component(4)*p[9]/p[5]
+                -Math.abs(component(0)/p[0])-Math.abs(component(4)/p[5])>.001;
+            };
+            directional=batch.views.find(({box:b,sign})=>eye.x>=b[0]&&eye.x<=b[3]&&eye.y>=b[1]&&eye.y<=b[4]&&eye.z>=b[2]&&eye.z<=b[5]&&
+              inside(sign,0,1,batch.cone[0])&&inside(sign,0,-1,batch.cone[0])&&inside(sign,1,1,batch.cone[1])&&inside(sign,1,-1,batch.cone[2]));
+          }
+          if(directional){first=directional.first;count=directional.count;}
+          else if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
             eye.y>=box[1]&&eye.y<=box[4]&&eye.z>=box[2]&&eye.z<=box[5])){
             // Max component across the four frustum rays in yacht coordinates.
             // Include camera roll, projection offsets and the yacht rotation.
@@ -299,7 +288,7 @@ export async function createForwardRenderer(app, sun) {
     dispose() {
       disposed=true;
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      uniform.destroy(); finishes.texture.destroy(); finishes.teak.destroy(); depth?.destroy(); color?.destroy();
+      uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

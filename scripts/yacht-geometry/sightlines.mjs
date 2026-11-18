@@ -8,13 +8,15 @@ const cells={
     [-2.2,-.35,4.30,.95,1.15,4.56],[-2.2,1.15,4.30,.95,3.55,4.56],
     [5.52,-2.42,4.95,7.90,1.26,5.68,-1,[2.8,4.8,1.25]],
     [8.55,-2.65,5.25,14.25,2.65,5.73,1],
-    [13.9,-2.25,5.25,18.7,.55,5.73,0],
+    [13.9,-2.25,5.25,18.7,.55,5.73,[-1,1,0]],
 
   ],
   upper:[[13.7,-1.9,7.25,18.65,1.78,7.85,-1],[13.7,-1.9,7.25,18.65,1.78,7.85,1]],
   // Enclosed distributor and stair. Turns on the treads require all azimuths.
-  guest:[[16.0,-1.95,4.12,19.40,.20,5.72,0],[16.0,-1.95,2.95,19.40,.20,4.12,0],
-    [13.3,-.75,2.92,16.0,.52,3.34,0]],
+  guest:[[16.0,-1.95,5.00,19.4,-.90,5.72,[-1,1,0]],
+    [17.7,-1.95,3.34,19.4,.20,5.00,[-1,1,0]],
+    [13.3,-.75,2.92,17.35,.52,3.34,[-1,1,0]],
+    [17.35,-.82,2.92,19.4,.20,3.55,[-1,1,0]]],
   bow:[[13.75,-3.6,7.32,18.72,-2.55,7.85],[18.72,-3.52,7.32,23.6,-2.21,7.85],
     [23.6,-3.4,7.32,26.8,-1.9,7.85],[26.8,-2.5,7.32,29.4,2.5,7.85]],
 };
@@ -90,7 +92,8 @@ export function sightlines(profile,geometry,basis){
       const d=f.n.reduce((s,n,k)=>s+n*(box[k+(n>0?3:0)]-f.v[0][k]),0);
       return d>=-.02*f.len&&!occluded(f,shadows);
     });
-    for(const sign of (direction!==undefined?[direction]:profile==='exterior'?[1]:[-1,1])){
+    const directions=Array.isArray(direction)?direction:direction!==undefined?[direction]:profile==='exterior'?[1]:[-1,1];
+    for(const sign of directions){
       const visible=[];
       for(const f of possible){
         const front=sign*(sign>0?f.hi[2]-box[2]:f.lo[2]-box[5]);

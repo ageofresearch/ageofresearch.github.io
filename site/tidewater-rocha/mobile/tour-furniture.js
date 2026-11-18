@@ -1,4 +1,4 @@
-import {furnishPortCabin} from './port-guest-cabin.js?v=port-guest-1';
+import {furnishPortCabin} from './port-guest-cabin.js?v=round-carpet-1';
 import catalog from './tour-furniture-data.js?v=chair-fidelity-1';
 
 // Fit the offline r110 shell to an assembly in Rocha coordinates. Normals use
@@ -24,7 +24,7 @@ export function fittedFurniture(key,bounds,{turn=false,mirrorX=false,mirrorY=fal
   });
 }
 
-export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,materials}) {
+export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,materials,circle}) {
   if(!detail||!exterior)return;
   const source=new Map(asset.data.meshes.map(m=>[m.id,m]));
   const parts=()=>[...new Set([...detail.replacements.values()].flat().concat(detail.additions,exterior.parts))];
@@ -138,7 +138,7 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
     add('LD_DCK_001',slab(aperture,3.804,3.830,.003),'M38','lower lobby ceiling lamp trim '+x);
     add('LD_DCK_001',slab(outline(x,-.10,.106,.106,.052),3.802,3.804,0),'M99','lower lobby frosted lens '+x);
   }
-  furnishPortCabin({add,remove,source,box,slab,outline,fit});
+  furnishPortCabin({add,remove,source,box,slab,outline,fit,circle});
   for(const p of parts()){
     const id=p.anchor||p.id.split('/')[0];
     let material;

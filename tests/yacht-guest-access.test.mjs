@@ -47,6 +47,30 @@ test('guest package is reproducible with five bounded profiles, exact supports a
     }
   } finally {g.model.dispose();}
 });
+test('the blue cabin carpet has a circular rim in both rendered hull axes',async()=>{
+  const carpet=manifest.parts.find(p=>p.feature==='port cabin blue pile carpet');
+  const vertices=new Float32Array(array(binary),carpet.vertices.offset,carpet.vertices.length);
+  const viewer=await full();
+  try {
+    const source=renderedParts(viewer.model).find(p=>p.feature===carpet.feature);
+    assert.deepEqual(vertices,Float32Array.from(source.vertices));
+    const angles=[];
+    for(let i=0;i<vertices.length;i+=6){
+      if(vertices[i+5]<.999)continue; // Top face perimeter, in display coordinates.
+      const x=(vertices[i]-16.06)*basis.sx,y=(vertices[i+1]-1.9855)*basis.sy;
+      assert.ok(Math.abs(Math.hypot(x,y)-1.48)<.00001,'Uniform radius around the berth');
+      angles.push(Math.atan2(y,x));
+    }
+    angles.sort((a,b)=>a-b);
+    assert.ok(angles.length>=3);
+    angles.push(angles[0]+2*Math.PI);
+    for(let i=1;i<angles.length;i++){
+      const chordError=1.48*(1-Math.cos((angles[i]-angles[i-1])/2));
+      assert.ok(chordError<.001,'No flat edge deviates more than a millimetre');
+    }
+  } finally {viewer.model.dispose();}
+});
+
 test('continuous saloon/stair/distributor returns, every tread, stops and diagonals at 12/40/60 Hz',async()=>{
   const f=mobile(),g=await full();try {
     for(const {walk} of [f,g])for(const hz of [12,40,60]) {

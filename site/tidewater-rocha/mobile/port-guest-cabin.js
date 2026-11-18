@@ -10,7 +10,7 @@ export const portCabin = {
 };
 export const cabinWalk = [[16.48,-.1],[16.48,.88],[17.04,1.02],[17.04,2.48]];
 
-export function furnishPortCabin({add,remove,source,box,slab,outline,fit}) {
+export function furnishPortCabin({add,remove,source,box,slab,outline,fit,circle}) {
   const wall='LD_PAR_027', bounds=source.get(wall).bbox;
   const [x,y,z,X,Y,Z]=bounds;
   remove(wall);
@@ -25,9 +25,9 @@ export function furnishPortCabin({add,remove,source,box,slab,outline,fit}) {
   panel(wall,[cabinDoor.aft,y-.004,cabinDoor.head-.018,cabinDoor.forward,.477,cabinDoor.head],'M96','door head lining');
   panel(wall,[cabinDoor.aft,.325,1.555,cabinDoor.forward,.446,1.561],'M08','flush threshold');
 
-  // The runner meets the lobby runner. The sill separates its two bindings.
-  panel('LD_DCK_001',[cabinDoor.aft,.325,1.55,cabinDoor.forward,.45,1.554],'M95','threshold carpet');
-  panel('LD_DCK_001',[14.348,.446,1.55,17.772,3.525,1.559],'M95','blue pile carpet');
+  // The perimeter is circular after the hull's separate length and beam scales.
+  const carpetRim=circle(16.06,1.9855,1.48,96);
+  add('LD_DCK_001',slab(carpetRim,1.55,1.559,0),'M95','port cabin blue pile carpet');
 
   // The source partitions stop below the deck slab. The fitted soffit and
   // perimeter fascia close that joint in both renderers, including at the door.

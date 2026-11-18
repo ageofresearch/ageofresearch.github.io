@@ -1,3 +1,4 @@
+import {detailError,packWalkProfile} from './yacht-geometry/profile-geometry.mjs';
 import {splitFinishBoundaries} from './yacht-geometry/finish-boundaries.mjs';
 import {orderOpaqueTriangles} from './yacht-geometry/opaque-order.mjs';
 import {interiorFinishBounds} from '../site/tidewater-rocha/mobile/upper-interior-geometry.js';
@@ -64,10 +65,10 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
         const support=/teak tread|pale step|boarding landing|final riser|tread \d+ (pale inset|timber border|rounded timber edge)/.test(name);
         const stair=p.semanticParent?.startsWith('stairs/')||p.id?.startsWith('MD_STA_013/');
         const near=profile==='bow'?b[3]>=10.5&&b[2]>=5.87&&b[2]<7.7:profile==='sun'?b[5]>=8.08:profile==='upper'?b[5]>=5.88&&b[2]<8.08:b[2]<5.88;
-        const error=support||p.glass?0:stair?.004:profile==='exterior'?mainDeckError(p,b):near?(profile==='upper'?.02:.012):.08;
+        const error=support||p.glass?0:stair?.004:profile==='exterior'?mainDeckError(b):near?(profile==='upper'?.02:.012):.08;
         const choice=lod?.(p,{profile,near,error,support,stair})||{};
         const source=choice.geometry?{...p,...choice.geometry}:p;
-        const reduced=choice.omit?{...p,indices:[]}:simplify(source,choice.error??error,!support&&!stair&&!p.glass?['Permissive']:[]);
+        const reduced=choice.omit?{...p,indices:[]}:simplify(source,detailError(source,choice.error??error,profile),!support&&!stair&&!p.glass?['Permissive']:[]);
         const result=splitFinishBoundaries(reduced,{28:interiorFinishBounds,29:bridgeFinishBounds});
         const placement=corrected.has(p.id)&&result.indices.length?{
           correction:corrected.get(p.id),sourceBounds:b,
@@ -76,24 +77,25 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
-      if(profile==='upper') {
+      if(profile==='upper'||profile==='guest') {
         // The interior return views see several overlapping decks. Submit the
         // nearby opaque cover first, so hidden patterned surfaces cost depth
         // tests instead of texture sampling. Ordering is baked, never per frame.
         const opaque=boarding.meshes.find(mesh=>!mesh.material.transparent).geometry;
-        opaque.setIndex(Array.from(orderOpaqueTriangles(opaque.attributes.position.array,opaque.index.array,
-          [0,7.6-basis.seaReference,15.5*basis.sx-basis.length/2])));
+        const guest=profile==='guest',bridgeAccess=!guest && Boolean(extension.accessPartIDs);
+        const eye=guest?[-.1*basis.sy,3.15-basis.seaReference,16.8*basis.sx-basis.length/2]:
+          bridgeAccess?[0,6.6-basis.seaReference,19*basis.sx-basis.length/2]:[0,7.6-basis.seaReference,15.5*basis.sx-basis.length/2];
+        opaque.setIndex(Array.from(orderOpaqueTriangles(opaque.attributes.position.array,opaque.index.array,eye,
+          guest||bridgeAccess? .25 : .5,Boolean(guest||bridgeAccess))));
       }
-      const batches=boarding.meshes.map(mesh=>({glass:mesh.material.transparent,
-        attributes:Object.fromEntries(Object.entries(mesh.geometry.attributes).map(([name,a])=>[name,{...store(a.array),itemSize:a.itemSize}])),indices:store(mesh.geometry.index.array,Uint32Array)}));
-      profiles[profile]={batches,triangles:boarding.stats.triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.length*4+Object.values(b.attributes).reduce((n,a)=>n+a.length*4,0),0),audit};
+      profiles[profile]=packWalkProfile(boarding,profile,audit,store);
       boarding.dispose();console.log(profile,profiles[profile].triangles);
 
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'saloon-continuity-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'deck-fidelity-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

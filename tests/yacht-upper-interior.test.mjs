@@ -27,7 +27,7 @@ test('upper interior reproduces three bounded profiles and final shared assembli
   const result=await buildUpperInterior();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   const duplicates=a=>{const counts=new Map();for(const p of a)counts.set(p.id,(counts.get(p.id)||0)+1);return [...counts].filter(([,n])=>n>1);};
   for(const [name,p] of Object.entries(interior.profiles)){
-    assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);assert.equal(p.triangles,p.batches.reduce((n,b)=>n+b.indices.length/3,0));
+    assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);assert.equal(p.triangles,Math.max(...p.batches[0].ranges.map(([,count])=>(count+p.batches[1].indices.length)/3)));
     // The two adjacent MD floor fragments already share their source ID.
     assert.deepEqual(duplicates(p.audit),duplicates(sun.profiles[name].audit),'No newly duplicated assembly');
     for(const b of p.batches)assert.equal(new Set(b.indices).size,b.attributes.position.length/3);

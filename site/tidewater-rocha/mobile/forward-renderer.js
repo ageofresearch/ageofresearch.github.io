@@ -1,5 +1,5 @@
-import {createFinishPatterns} from './finish-patterns.js?v=saloon-continuity-1';
-import { nextProfile } from './main-saloon.js?v=saloon-continuity-1';
+import {createFinishPatterns} from './finish-patterns.js?v=deck-fidelity-1';
+import { nextProfile } from './main-saloon.js?v=deck-fidelity-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -167,6 +167,7 @@ export async function createForwardRenderer(app, sun) {
   mesh.updateWorldMatrix(true,false);
   const localFromWorld = mesh.matrixWorld.clone().invert();
   const clip = mesh.matrixWorld.clone();
+  const cameraInYacht = mesh.matrixWorld.clone();
   const eye = app.camera.position.clone();
   sun.clone().transformDirection(localFromWorld).toArray(frame,20);
   let depth, depthView, color, colorView;
@@ -181,7 +182,7 @@ export async function createForwardRenderer(app, sun) {
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[]};
           for(const b of p.batches) {
-            const batch={vertices:[],indices:null,indexFormat:'uint32',count:b.indices.length};
+            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
             result.batches.push(batch);
             for(const name of attributes)batch.vertices.push(upload(b.attributes[name],GPUBufferUsage.VERTEX));
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
@@ -226,12 +227,18 @@ export async function createForwardRenderer(app, sun) {
       try {
         for(const name of Object.keys(profiles)) {
           if(disposed)return;
-          app.gpu.beginFrame();this.render(name,target.createView());app.gpu.submit();
-          await app.gpu.queue.onSubmittedWorkDone();
+          // First and last ranges together touch the complete resident index buffer.
+          const ranges=profiles[name].batches[0].ranges;
+          const warmBands=ranges?[0,ranges.length-1]:[0];
+          if(profiles[name].batches[0].localView)warmBands.push('local');
+          for(const band of warmBands){
+            app.gpu.beginFrame();this.render(name,target.createView(),band);app.gpu.submit();
+            await app.gpu.queue.onSubmittedWorkDone();
+          }
         }
       } finally { target.destroy();if(!disposed)selectProfile(previous); }
     },
-    render(preparingProfile=null,target=null) {
+    render(preparingProfile=null,target=null,preparedBand=null) {
       const {engine, gpu, camera} = app;
       if(profiles) {
         const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
@@ -267,7 +274,25 @@ export async function createForwardRenderer(app, sun) {
         pass.setPipeline(pipelines[i]);
         batch.vertices.forEach((buffer,index) => pass.setVertexBuffer(index,buffer));
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
-        pass.drawIndexed(batch.count);
+        if (batch.ranges) {
+          const {start,step}=profiles[activeProfile].visibility;
+          const view=batch.localView,box=view?.box;
+          let first,count;
+          if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
+            eye.y>=box[1]&&eye.y<=box[4]&&eye.z>=box[2]&&eye.z<=box[5])){
+            // Max component across the four frustum rays in yacht coordinates.
+            // Include camera roll, projection offsets and the yacht rotation.
+            const m=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
+            const axis=view.axis,p=camera.projectionMatrix.elements;
+            const highestRay=-m[axis+8]+m[axis]*p[8]/p[0]+m[axis+4]*p[9]/p[5]+Math.abs(m[axis]/p[0])+Math.abs(m[axis+4]/p[5]);
+            first=view.first;count=preparedBand===null&&highestRay<-.001?view.lowCount:view.count;
+          }else{
+            const band=preparedBand??Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-start)/step)));
+            [first,count]=batch.ranges[band];
+          }
+          pass.drawIndexed(count,1,first);
+          model.stats.triangles=(count+batches[1].count)/3;
+        } else pass.drawIndexed(batch.count);
       }
       pass.end();
     },

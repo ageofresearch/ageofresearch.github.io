@@ -1,14 +1,14 @@
-import { preloadUpper } from './upper-terrace.js?v=saloon-continuity-1';
-import { connectTerrace } from './aft-terrace.js?v=saloon-continuity-1';
+import { preloadUpper } from './upper-terrace.js?v=deck-fidelity-1';
+import { connectTerrace } from './aft-terrace.js?v=deck-fidelity-1';
 
-export const saloonVersion = 'saloon-continuity-1';
+export const saloonVersion = 'deck-fidelity-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {
   if(manifest.version!==version)throw Error('Actualiza la página para cargar el salón');
   function array(descriptor,Type=Float32Array) {
     if(!descriptor||!Number.isInteger(descriptor.offset)||descriptor.offset<0||descriptor.offset%4||
-      !Number.isInteger(descriptor.length)||descriptor.length<=0||descriptor.offset+descriptor.length*4>buffer.byteLength)
+      !Number.isInteger(descriptor.length)||descriptor.length<=0||descriptor.offset+descriptor.length*Type.BYTES_PER_ELEMENT>buffer.byteLength)
       throw Error('Archivo del salón incompleto');
     return new Type(buffer,descriptor.offset,descriptor.length);
   }
@@ -23,12 +23,34 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
         if(d.itemSize!==size)throw Error('Atributos del salón inválidos');
         return [name,array(d)];
       }));
-      const count=attrs.position.length/3,indices=array(batch.indices,Uint32Array);
+      const format=batch.indices?.format??'uint32';
+      if(format!=='uint16'&&format!=='uint32')throw Error('Formato de índices inválido');
+      const count=attrs.position.length/3,indices=array(batch.indices,format==='uint16'?Uint16Array:Uint32Array);
       if(indices.length%3||Object.entries(attributes).some(([name,size])=>attrs[name].length!==count*size)||
         indices.some(i=>i>=count)||Object.values(attrs).some(a=>a.some(v=>!Number.isFinite(v))))throw Error('Geometría del salón inválida');
-      return {attributes:attrs,indices};
+      if (batch.ranges && (i!==0 || !Array.isArray(batch.ranges) || !batch.ranges.length || batch.ranges.length>1024 ||
+        batch.ranges.some(r=>!Array.isArray(r)||r.length!==2||r.some(v=>!Number.isSafeInteger(v)||v<0||v%3)||r[1]===0||r[0]+r[1]>indices.length))) {
+        throw Error('Intervalos de dibujo inválidos');
+      }
+      const view=batch.localView;
+      if(view && (!batch.ranges||view.axis!==({upper:2,exterior:1}[name])||![1,2].includes(view.axis)||!Array.isArray(view.box)||view.box.length!==6||
+        !view.box.every(Number.isFinite)||view.box.slice(0,3).some((v,k)=>v>=view.box[k+3])||
+        [view.first,view.count,view.lowCount].some(v=>!Number.isSafeInteger(v)||v<=0||v%3)||
+        view.lowCount>view.count||view.first+view.count!==indices.length))throw Error('Vista de cubierta inválida');
+      if(batch.ranges){
+        let first=0,end=0;
+        for(const [offset,length] of batch.ranges){
+          if(offset<first||offset>end||offset+length<end)throw Error('Secuencia de dibujo inválida');
+          first=offset;end=offset+length;
+        }
+        if(end!==(view?.first??indices.length))throw Error('Secuencia de dibujo incompleta');
+      }
+      return {attributes:attrs,indices,ranges:batch.ranges,localView:view};
     });
-    const triangles=batches.reduce((n,b)=>n+b.indices.length/3,0);
+    const ranges=batches[0].ranges;
+    if (Boolean(p.visibility)!==Boolean(ranges) || p.visibility && (!Number.isFinite(p.visibility.start) ||
+        !Number.isFinite(p.visibility.step) || p.visibility.step<=0)) throw Error('Visibilidad del perfil inválida');
+    const triangles=((ranges?Math.max(batches[0].localView?.count??0,...ranges.map(r=>r[1])):batches[0].indices.length)+batches[1].indices.length)/3;
     if(triangles!==p.triangles)throw Error('Recuento del salón inválido');
     profiles[name]={...p,batches,triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.byteLength+
       Object.values(b.attributes).reduce((sum,a)=>sum+a.byteLength,0),0)};

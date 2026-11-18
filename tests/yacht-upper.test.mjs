@@ -25,7 +25,7 @@ test('two reproducible profiles preserve final furniture and stair supports with
   const result=await buildUpper();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   for(const p of Object.values(upper.profiles)) {
     assert.ok(p.triangles<=25000);assert.equal(p.batches.length,2);
-    assert.equal(p.triangles,p.batches.reduce((n,b)=>n+b.indices.length/3,0));
+    assert.equal(p.triangles,Math.max(...p.batches[0].ranges.map(([,count])=>(count+p.batches[1].indices.length)/3)));
   }
   const supports=Object.values(upper.profiles).map(p=>p.audit.filter(a=>a.stair||a.support).map(a=>[a.id,a.triangles,a.error]));
   assert.equal(supports.length,2);

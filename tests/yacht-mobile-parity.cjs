@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=saloon-continuity-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=deck-fidelity-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -96,16 +96,38 @@ async function capture(browser, mobile) {
           }
           const letter=projected(model.transom.nameBounds);
           return {within:letter.every(([x,y,z])=>Math.abs(x)<1 && Math.abs(y)<1 && z>0 && z<=1),
-            width:(Math.max(...letter.map(p=>p[0]))-Math.min(...letter.map(p=>p[0])))*app.engine.width/2,
-            skip:model.bow.profiles.exterior.audit.filter(p=>model.transom.parts.some(s=>s.id===p.id)).reduce((n,p)=>n+p.triangles*3,0)};
+            width:(Math.max(...letter.map(p=>p[0]))-Math.min(...letter.map(p=>p[0])))*app.engine.width/2};
         });
-        await frame.evaluate(skip=>{
-          const native=GPURenderPassEncoder.prototype.drawIndexed;
-          window.restoreSternDraw=()=>{GPURenderPassEncoder.prototype.drawIndexed=native};
-          GPURenderPassEncoder.prototype.drawIndexed=function(count,...rest){
-            return native.call(this,count>skip ? count-skip : count,...rest);
+        await frame.evaluate(()=>{
+          const app=window.__app,model=app.entranceYacht;
+          const profile=(model.guestAccess||model.bow).profiles[app.gangwayRenderer.activeProfile];
+          const replacements=profile.batches.map((batch,index)=>{
+            // The source assembly ends with the complete stern. Match its actual
+            // vertices after simplification and offline triangle reordering.
+            const geometry=model.boarding.meshes[index].geometry,positions=geometry.attributes.position.array;
+            const original=geometry.index.array,sternCount=model.transom.parts
+              .filter(p=>Boolean(p.glass)===Boolean(index)).reduce((n,p)=>n+p.indices.length,0);
+            const positionKey=(positions,i)=>positions.subarray(i*3,i*3+3).join(',');
+            const source=new Set();
+            for(let i=original.length-sternCount;i<original.length;i++)source.add(positionKey(positions,original[i]));
+            const vertices=batch.attributes.position;
+            const stern=Array.from({length:vertices.length/3},(_,i)=>source.has(positionKey(vertices,i)));
+            const indices=batch.indices.slice();
+            for(let i=0;i<indices.length;i+=3)if(stern[indices[i]]&&stern[indices[i+1]]&&stern[indices[i+2]])indices[i+1]=indices[i];
+            const gpuBuffer=app.gpu.device.createBuffer({size:Math.ceil(indices.byteLength/4)*4,usage:GPUBufferUsage.INDEX,mappedAtCreation:true});
+            new indices.constructor(gpuBuffer.getMappedRange(),0,indices.length).set(indices);
+            gpuBuffer.unmap();return gpuBuffer;
+          });
+          const native=GPURenderPassEncoder.prototype.setIndexBuffer;
+          let index=0;
+          GPURenderPassEncoder.prototype.setIndexBuffer=function(buffer,...rest){
+            return native.call(this,replacements[index++%replacements.length],...rest);
           };
-        },coverage.skip);
+          window.restoreSternDraw=()=>{
+            GPURenderPassEncoder.prototype.setIndexBuffer=native;
+            replacements.forEach(buffer=>buffer.destroy());
+          };
+        });
         let omitted;
         try { omitted=await readFrame(); }
         finally { await frame.evaluate(()=>{window.restoreSternDraw();delete window.restoreSternDraw;}); }

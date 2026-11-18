@@ -1,3 +1,4 @@
+import {sightlines,cone} from './sightlines.mjs';
 import { orderOpaqueTriangles } from './opaque-order.mjs';
 import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
@@ -159,6 +160,11 @@ export function packWalkProfile(boarding, profile, audit, store) {
       };
       submission.indices = submission.indices.concat(view.indices);
     }
+    const views=[];
+    if(!glass)for(const v of sightlines(profile,geometry,basis)){
+      views.push({first:submission.indices.length,count:v.indices.length,box:v.box,sign:v.sign});
+      submission.indices=submission.indices.concat(v.indices);
+    }
     // Compact once over the union. The ranges reference the same vertices and
     // indices even when the camera moves across a band boundary.
     const vertexIds = [...new Set(submission.indices)],
@@ -189,13 +195,14 @@ export function packWalkProfile(boarding, profile, audit, store) {
       attributes,
       indices,
       ...(localView && { localView }),
+      ...(views.length && {views,cone}),
       ...(submission.ranges && { ranges: submission.ranges }),
     };
   });
   const [opaque, glass] = batches;
   const triangles =
     (glass.indices.length +
-      Math.max(opaque.localView?.count ?? 0, ...opaque.ranges.map(([, count]) => count))) /
+      Math.max(opaque.localView?.count ?? 0,...(opaque.views??[]).map(v=>v.count), ...opaque.ranges.map(([, count]) => count))) /
     3;
   return { batches, triangles, geometryBytes, audit, visibility: { start, step } };
 }

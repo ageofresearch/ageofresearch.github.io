@@ -36,6 +36,7 @@ on:
       - 'tests/fixtures/yacht-spatial-pending.json'
       - 'scripts/audit-yacht-*'
       - 'scripts/yacht-spatial-requirements.txt'
+      - 'tests/yacht-sightlines.cjs'
       - 'tests/yacht-tour-performance.cjs'
       - 'tests/yacht-cold-walk.cjs'
       - 'tests/yacht-readiness.test.mjs'

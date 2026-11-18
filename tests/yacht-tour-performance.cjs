@@ -75,7 +75,9 @@ async function measure(browser,base){
     for(let i=0;i<4;i++){
       const r=runs.reference.map(rows=>rows[i]),c=runs.candidate.map(rows=>rows[i]),room=c[0].room;
       const mean=med(c.map(v=>v.mean)),baseline=med(r.map(v=>v.mean)),p95=med(c.map(v=>v.p95));
-      console.log({room,mean,baseline,p95});assert.ok(1000/mean>=40&&mean<=baseline*1.05&&p95<=25,room+' timing budget exceeded');
+      console.log({room,mean,baseline,p95});
+      if(process.env.GITHUB_ACTIONS)console.log(`::notice title=Furnished walk · ${room}::Mean ${mean.toFixed(2)} ms, reference ${baseline.toFixed(2)} ms, P95 ${p95.toFixed(2)} ms`);
+      assert.ok(1000/mean>=40&&mean<=baseline*1.05&&p95<=25,room+' timing budget exceeded');
     }
   }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

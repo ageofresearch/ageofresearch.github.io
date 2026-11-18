@@ -157,7 +157,7 @@ export async function createForwardRenderer(app, sun) {
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[],geometryBytes:0};
           for(const b of p.batches) {
-            const batch={vertices:null,indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
+            const batch={vertices:null,indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView,views:b.views,cone:b.cone};
             result.batches.push(batch);
             batch.vertices=uploadVertices(b.attributes,result.batches.length===2);
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
@@ -207,6 +207,7 @@ export async function createForwardRenderer(app, sun) {
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
           if(profiles[name].batches[0].localView)warmBands.push('local');
+          warmBands.push(...(profiles[name].batches[0].views??[]));
           for(const band of warmBands){
             app.gpu.beginFrame();this.render(name,target.createView(),band);app.gpu.submit();
             await app.gpu.queue.onSubmittedWorkDone();
@@ -254,7 +255,19 @@ export async function createForwardRenderer(app, sun) {
           const {start,step}=profiles[activeProfile].visibility;
           const view=batch.localView,box=view?.box;
           let first,count;
-          if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
+          let directional=preparedBand && typeof preparedBand==='object'?preparedBand:null;
+          if(preparedBand===null&&batch.views?.length){
+            const m=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements,p=camera.projectionMatrix.elements;
+            const inside=(sign,axis,edge,tangent)=>{
+              const component=k=>sign*tangent*m[2+k]+edge*m[axis+k];
+              return -component(8)+component(0)*p[8]/p[0]+component(4)*p[9]/p[5]
+                -Math.abs(component(0)/p[0])-Math.abs(component(4)/p[5])>.001;
+            };
+            directional=batch.views.find(({box:b,sign})=>eye.x>=b[0]&&eye.x<=b[3]&&eye.y>=b[1]&&eye.y<=b[4]&&eye.z>=b[2]&&eye.z<=b[5]&&
+              inside(sign,0,1,batch.cone[0])&&inside(sign,0,-1,batch.cone[0])&&inside(sign,1,1,batch.cone[1])&&inside(sign,1,-1,batch.cone[2]));
+          }
+          if(directional){first=directional.first;count=directional.count;}
+          else if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
             eye.y>=box[1]&&eye.y<=box[4]&&eye.z>=box[2]&&eye.z<=box[5])){
             // Max component across the four frustum rays in yacht coordinates.
             // Include camera roll, projection offsets and the yacht rotation.

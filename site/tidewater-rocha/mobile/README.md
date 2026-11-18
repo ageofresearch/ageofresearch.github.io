@@ -34,7 +34,10 @@ Offshore water and sky are ordered behind the boat. The water surface ends
 inside the hull plating at its sampled flotation line, keeping the lower lobby dry.
 The joinery, ceiling lenses and wall lighting there are photographic estimates.
 The exterior, upper, sun, bow and guest profiles peak at 24,978, 24,626, 23,184,
-21,662 and 22,733 triangles, respectively.
+21,662 and 22,733 triangles, respectively. On the swim platform and bow walk,
+prepared directional index ranges remove faces outside the camera cone or fully
+hidden behind confirmed opaque source rectangles. The normal all-direction range
+covers turns outside those cones. Pixel comparisons exercise both paths.
 
 [Azimut Grande 36M tour](https://vrcloud.com/?pv=1667308298)
 

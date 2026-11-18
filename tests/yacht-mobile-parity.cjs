@@ -77,6 +77,7 @@ async function capture(browser, mobile) {
       assert.deepEqual(captured.passLabels,['Gangway to screen']);
       assert.equal(captured.indexedDraws,2);
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
+      await require('./yacht-sightlines.cjs')(frame,readFrame);
       await require('./yacht-stern-access.cjs')(page,frame,out,readFrame);
       async function measureStern() {
         // Read the displayed image at the actual pose, then omit only the

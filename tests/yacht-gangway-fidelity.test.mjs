@@ -146,3 +146,13 @@ test('incomplete, overlapping backwards or out-of-bounds draw windows fail befor
     assert.throws(() => decodeGuestAccess(broken, buffer), /dibujo/);
   }
 });
+
+test('invalid directional windows cannot replace a working navigation package',()=>{
+  for(const edit of [
+    b=>{b.views[0].first+=3;}, b=>{b.views.at(-1).count-=3;},
+    b=>{b.views[0].sign=0;}, b=>{b.views[0].box[5]=b.views[0].box[2];}, b=>{b.cone[0]=NaN;},
+  ]){
+    const broken=structuredClone(manifest);edit(broken.profiles.exterior.batches[0]);
+    assert.throws(()=>decodeGuestAccess(broken,buffer),/cubierta|direccional|dibujo/);
+  }
+});

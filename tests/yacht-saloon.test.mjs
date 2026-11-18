@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { buildYachtGeometry } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import { buildYachtGeometry, l as basis } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { buildSaloon } from '../scripts/build-yacht-saloon.mjs';
 import { nextProfile,decodeSaloon,connectSaloon,loadSaloon } from '../site/tidewater-rocha/mobile/main-saloon.js';
 import { moveAlongRoute,routeSegments } from '../site/tidewater-rocha/mobile/aft-terrace.js';
@@ -37,6 +37,31 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
       assert.deepEqual(p.finish,source.finish,p.id+' finish');
     }
   }finally{full.dispose();}
+});
+
+test('the blue rug around the main saloon coffee table has one circular outer edge in rendered space',()=>{
+  const rugs=saloon.parts.filter(p=>p.sourceID==='MD_SOF_004');
+  assert.equal(rugs.length,1,'The old outline and binding must both be removed');
+  const [rug]=rugs;
+  assert.equal(rug.materialID,'M95');
+  const buffer=saloonBuffer.buffer.slice(saloonBuffer.byteOffset,saloonBuffer.byteOffset+saloonBuffer.byteLength);
+  const vertices=new Float32Array(buffer,rug.vertices.offset,rug.vertices.length);
+  const indices=new Uint32Array(buffer,rug.indices.offset,rug.indices.length);
+  const angles=[],radius=2;
+  // Original seating-group center, converted through the yacht's unequal hull scales.
+  for(const k of new Set(indices)){
+    if(vertices[k*6+5]<.999)continue;
+    const x=(vertices[k*6]-12.15464)*basis.sx,y=(vertices[k*6+1]-.037115)*basis.sy;
+    assert.ok(Math.abs(Math.hypot(x,y)-radius)<.00001);
+    angles.push(Math.atan2(y,x));
+  }
+  angles.sort((a,b)=>a-b);
+  assert.ok(angles.length>=3);
+  angles.push(angles[0]+2*Math.PI);
+  for(let i=1;i<angles.length;i++)
+    assert.ok(radius*(1-Math.cos((angles[i]-angles[i-1])/2))<.0022,'Continuous circular perimeter');
+  const drawn=saloonManifest.profiles.exterior.audit.find(p=>p.id===rug.id);
+  assert.equal(drawn.triangles,indices.length/3,'Preserve the curve when packing the walking view');
 });
 
 test('native walking crosses the door, reaches both seating areas and returns at 12/40/60 Hz',()=>{

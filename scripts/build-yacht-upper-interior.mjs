@@ -49,7 +49,7 @@ export async function buildUpperInterior({extend,profileNames,lod}={}) {
     }
     parts.push(...additions);
     const compact=polygons=>[...new Map(polygons.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-    return {version:'chair-fidelity-1',room:{...model.asset.data.rooms.find(r=>r.id==='UD_R02'),...interiorRoom},
+    return {version:'saloon-rug-1',room:{...model.asset.data.rooms.find(r=>r.id==='UD_R02'),...interiorRoom},
       floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),limits:interiorLimits,
       interiorPartIDs:additions.map(p=>p.id),evidence:'Current shared layout; flush threshold is a model circulation correction',
       ...extend?.({model,lowerParts,parts})};

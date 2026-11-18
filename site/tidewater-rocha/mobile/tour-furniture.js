@@ -1,4 +1,4 @@
-import {furnishPortCabin} from './port-guest-cabin.js?v=round-carpet-1';
+import {furnishPortCabin} from './port-guest-cabin.js?v=saloon-rug-1';
 import catalog from './tour-furniture-data.js?v=chair-fidelity-1';
 
 // Fit the offline r110 shell to an assembly in Rocha coordinates. Normals use
@@ -56,6 +56,18 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   // Keep the coffer and lights, which share an anchor with the old sofa.
   for(const anchor of ['MD_FUR_014','MD_FUR_016'])
     remove(anchor,p=>/base|shell|seat module|loose sofa cushion/.test(p.feature));
+  const rugAnchor='MD_SOF_004';
+  const [x0,y0,floor,x1,y1,pile]=source.get(rugAnchor).bbox;
+  const rim=circle((x0+x1)/2,(y0+y1)/2,2,68);
+  const rug=slab(rim,floor,pile,0);
+  // The opaque deck covers the underside. Keep the pile and its exposed edge.
+  const visible=[];
+  for(let i=0;i<rug.indices.length;i+=3){
+    const [a,b,c]=rug.indices.slice(i,i+3);
+    if(rug.vertices[a*6+5]>=0)visible.push(a,b,c);
+  }
+  remove(rugAnchor);
+  add(rugAnchor,{vertices:rug.vertices,indices:visible},'M95','salon circular blue pile rug');
   fit('MD_FUR_014','salonSofa',[10.55,-1.15,3.955,14.11,1.69,4.78],'M39','salon curved boucle module');
   for(const [i,x] of [10.90,12.00].entries()){
     fit('MD_FUR_016','salonChair',[x,-1.69,4.01,x+.93,-.87,4.78],'M39','salon lounge chair '+(i+1));
@@ -138,11 +150,10 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
     add('LD_DCK_001',slab(aperture,3.804,3.830,.003),'M38','lower lobby ceiling lamp trim '+x);
     add('LD_DCK_001',slab(outline(x,-.10,.106,.106,.052),3.802,3.804,0),'M99','lower lobby frosted lens '+x);
   }
-  furnishPortCabin({add,remove,source,box,slab,outline,fit,circle});
+  furnishPortCabin({add,remove,source,box,slab,outline,fit});
   for(const p of parts()){
     const id=p.anchor||p.id.split('/')[0];
     let material;
-    if(id==='MD_SOF_004'&&p.feature?.includes('rug'))material='M95';
     if(id==='MD_SOF_006'&&p.feature?.includes('rug'))material='M37';
     if(p.feature==='inclined instrument display')material='M98';
     if(id==='UD_FUR_038'&&p.feature==='continuous dark instrument bank')material='M47';

@@ -14,7 +14,7 @@ export function detailError(part, error, profile) {
   ) {
     return Math.min(error, 0.003);
   }
-  if (/director chair/.test(name)) return 0;
+  if (name === 'salon circular blue pile rug' || /director chair/.test(name)) return 0;
   if (/cockpit transverse|cockpit port chaise|cockpit wet bar|cockpit grey counter/.test(name))
     return Math.min(error, 0.006);
   if (/^MD_SOF_0(?:07|08|09|10)\//.test(part.id)) return Math.min(error, 0.009);

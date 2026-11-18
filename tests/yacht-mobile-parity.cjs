@@ -106,7 +106,7 @@ async function capture(browser, mobile) {
             // vertices after simplification and offline triangle reordering.
             const geometry=model.boarding.meshes[index].geometry,positions=geometry.attributes.position.array;
             const original=geometry.index.array,sternCount=model.transom.parts
-              .filter(p=>Boolean(p.glass)===batch.glass).reduce((n,p)=>n+p.indices.length,0);
+              .filter(p=>Boolean(p.glass)===Boolean(index)).reduce((n,p)=>n+p.indices.length,0);
             const positionKey=(positions,i)=>positions.subarray(i*3,i*3+3).join(',');
             const source=new Set();
             for(let i=original.length-sternCount;i<original.length;i++)source.add(positionKey(positions,original[i]));

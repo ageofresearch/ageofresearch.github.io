@@ -1,3 +1,4 @@
+import { orderOpaqueTriangles } from './opaque-order.mjs';
 import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
 export function detailError(part, error, profile) {
@@ -29,6 +30,16 @@ const start = -6 * basis.sx - basis.length / 2,
   step = basis.sx,
   bands = 42;
 
+function faceNormal(position, a, b, c) {
+  const ux = position[b] - position[a],
+    uy = position[b + 1] - position[a + 1],
+    uz = position[b + 2] - position[a + 2];
+  const vx = position[c] - position[a],
+    vy = position[c + 1] - position[a + 1],
+    vz = position[c + 2] - position[a + 2];
+  return [uy * vz - uz * vy, uz * vx - ux * vz, ux * vy - uy * vx];
+}
+
 // In GPU-local coordinates z runs along the boat. The maximum plane distance
 // over the eye box is linear in z. A front-facing triangle is therefore visible
 // in a prefix, a suffix, every band, or none. Sorting these four cases lets each
@@ -40,15 +51,7 @@ function opaqueRanges(position, indices, profile) {
     const a = indices[i] * 3,
       b = indices[i + 1] * 3,
       c = indices[i + 2] * 3;
-    const ux = position[b] - position[a],
-      uy = position[b + 1] - position[a + 1],
-      uz = position[b + 2] - position[a + 2];
-    const vx = position[c] - position[a],
-      vy = position[c + 1] - position[a + 1],
-      vz = position[c + 2] - position[a + 2];
-    const nx = uy * vz - uz * vy,
-      ny = uz * vx - ux * vz,
-      nz = ux * vy - uy * vx;
+    const [nx, ny, nz] = faceNormal(position, a, b, c);
     const lateral = nx >= 0 ? 4.5 : -4.5,
       vertical = (ny >= 0 ? high : low) - basis.seaReference;
     const margin = 0.02 * Math.hypot(nx, ny, nz);
@@ -76,6 +79,40 @@ function opaqueRanges(position, indices, profile) {
   return { indices: groups.flat(), ranges };
 }
 
+// From the narrow boarding corridor many distant faces point away for its
+// entire length. Order the surviving opaque faces front-to-back for this view.
+// Below-eye geometry is a prefix, so looking down can also skip the upper decks.
+function boardingDraw(positions, indices) {
+  const box = [
+    2.4 * basis.sy,
+    3.3 - basis.seaReference,
+    -4.7 * basis.sx - basis.length / 2,
+    3.85 * basis.sy,
+    5.85 - basis.seaReference,
+    2.65 * basis.sx - basis.length / 2,
+  ];
+  const eye = [3.1 * basis.sy, 5.15 - basis.seaReference, -1.7 * basis.sx - basis.length / 2];
+  const low = [],
+    high = [];
+  for (let i = 0; i < indices.length; i += 3) {
+    const [ia, ib, ic] = indices.subarray(i, i + 3);
+    const a = ia * 3,
+      b = ib * 3,
+      c = ic * 3;
+    const [nx, ny, nz] = faceNormal(positions, a, b, c);
+    const far =
+      nx * (box[nx >= 0 ? 3 : 0] - positions[a]) +
+      ny * (box[ny >= 0 ? 4 : 1] - positions[a + 1]) +
+      nz * (box[nz >= 0 ? 5 : 2] - positions[a + 2]);
+    if (far < -0.02 * Math.hypot(nx, ny, nz)) continue;
+    const below = Math.min(positions[a + 1], positions[b + 1], positions[c + 1]) <= box[4] + 0.02;
+    (below ? low : high).push(ia, ib, ic);
+  }
+  const sorted = (list) =>
+    Array.from(orderOpaqueTriangles(positions, Uint32Array.from(list), eye, 0.25, true));
+  return { box, lowCount: low.length, indices: sorted(low).concat(sorted(high)) };
+}
+
 export function packWalkProfile(boarding, profile, audit, store) {
   let geometryBytes = 0;
   const batches = boarding.meshes.map((mesh) => {
@@ -84,6 +121,17 @@ export function packWalkProfile(boarding, profile, audit, store) {
     const submission = glass
       ? { indices: geometry.index.array }
       : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile);
+    let boardingView;
+    if (!glass && profile === 'exterior') {
+      const view = boardingDraw(geometry.attributes.position.array, geometry.index.array);
+      boardingView = {
+        box: view.box,
+        first: submission.indices.length,
+        count: view.indices.length,
+        lowCount: view.lowCount,
+      };
+      submission.indices = submission.indices.concat(view.indices);
+    }
     // Compact once over the union. The ranges reference the same vertices and
     // indices even when the camera moves across a band boundary.
     const vertexIds = [...new Set(submission.indices)],
@@ -109,9 +157,18 @@ export function packWalkProfile(boarding, profile, audit, store) {
       format: Type === Uint16Array ? 'uint16' : 'uint32',
     };
     geometryBytes += packed.byteLength;
-    return { glass, attributes, indices, ...(submission.ranges && { ranges: submission.ranges }) };
+    return {
+      glass,
+      attributes,
+      indices,
+      ...(boardingView && { boardingView }),
+      ...(submission.ranges && { ranges: submission.ranges }),
+    };
   });
   const [opaque, glass] = batches;
-  const triangles = Math.max(...opaque.ranges.map(([, count]) => (count + glass.indices.length) / 3));
+  const triangles =
+    (glass.indices.length +
+      Math.max(opaque.boardingView?.count ?? 0, ...opaque.ranges.map(([, count]) => count))) /
+    3;
   return { batches, triangles, geometryBytes, audit, visibility: { start, step } };
 }

@@ -181,7 +181,7 @@ export async function createForwardRenderer(app, sun) {
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[]};
           for(const b of p.batches) {
-            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges};
+            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,boardingView:b.boardingView};
             result.batches.push(batch);
             for(const name of attributes)batch.vertices.push(upload(b.attributes[name],GPUBufferUsage.VERTEX));
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
@@ -228,7 +228,9 @@ export async function createForwardRenderer(app, sun) {
           if(disposed)return;
           // First and last ranges together touch the complete resident index buffer.
           const ranges=profiles[name].batches[0].ranges;
-          for(const band of ranges?[0,ranges.length-1]:[0]){
+          const warmBands=ranges?[0,ranges.length-1]:[0];
+          if(profiles[name].batches[0].boardingView)warmBands.push('boarding');
+          for(const band of warmBands){
             app.gpu.beginFrame();this.render(name,target.createView(),band);app.gpu.submit();
             await app.gpu.queue.onSubmittedWorkDone();
           }
@@ -273,8 +275,19 @@ export async function createForwardRenderer(app, sun) {
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
           const {start,step}=profiles[activeProfile].visibility;
-          const band=preparedBand??Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-start)/step)));
-          const [first,count]=batch.ranges[band];
+          const view=batch.boardingView,box=view?.box;
+          let first,count;
+          if(view&&(preparedBand==='boarding'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
+            eye.y>=box[1]&&eye.y<=box[4]&&eye.z>=box[2]&&eye.z<=box[5])){
+            // Highest world-Y ray of the whole perspective frustum. The vessel
+            // has yaw only. Include projection offsets and camera roll.
+            const m=camera.matrixWorld.elements,p=camera.projectionMatrix.elements;
+            const highestRay=-m[9]+m[1]*p[8]/p[0]+m[5]*p[9]/p[5]+Math.abs(m[1]/p[0])+Math.abs(m[5]/p[5]);
+            first=view.first;count=preparedBand===null&&highestRay<-.001?view.lowCount:view.count;
+          }else{
+            const band=preparedBand??Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-start)/step)));
+            [first,count]=batch.ranges[band];
+          }
           pass.drawIndexed(count,1,first);
           model.stats.triangles=(count+batches[1].count)/3;
         } else pass.drawIndexed(batch.count);

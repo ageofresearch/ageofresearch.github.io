@@ -57,7 +57,7 @@ async function measure(browser, base, candidate) {
         };
       });
       await app.gpu.queue.onSubmittedWorkDone();
-      return {rows,width:app.engine.width,height:app.engine.height,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples,
+      return {rows,hasInteriorProfile:Object.hasOwn(model.guestAccess.profiles,'interior'),width:app.engine.width,height:app.engine.height,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples,
         allocations:window.renderAllocations.filter(time=>time>=start).length,
         downloads:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/\.(bin|json|glb)(\?|$)/.test(e.name)).length};
     });
@@ -66,7 +66,8 @@ async function measure(browser, base, candidate) {
     assert.equal(result.allocations,0);
     assert.equal(result.downloads,0);
     assert.ok(result.rows.every(row=>row.triangles<=25000));
-    assert.deepEqual([...new Set(result.rows.map(row=>row.profile))],candidate?['exterior']:['exterior','interior']);
+    if(candidate)assert.equal(result.hasInteriorProfile,false,'The main deck must use one continuous profile');
+    assert.deepEqual([...new Set(result.rows.map(row=>row.profile))],result.hasInteriorProfile?['exterior','interior']:['exterior']);
     const legs = [0,1,2,3].map(leg=>{
       const rows = result.rows.filter(row=>row.leg===leg);
       const times = rows.map(row=>row.interval).filter(Number.isFinite).sort((a,b)=>a-b);

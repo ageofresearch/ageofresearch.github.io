@@ -1,0 +1,88 @@
+import {fittedFurniture} from './tour-furniture.js?v=tour-fidelity-1';
+
+// Source axes are forward, port and up. The two stair landings register the
+// photographic proportions to the existing hull. These are model dimensions.
+export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extrude }) {
+  const slab = (bounds, radius, material, name) => add(box(bounds,radius),material,name);
+  const pad = (bounds, material, name, radius=.12) => {
+    const [x,y,z,X,Y,Z]=bounds;
+    return add(cushion(outline((x+X)/2,(y+Y)/2,X-x,Y-y,radius),z,Z),material,name);
+  };
+  const emit=add;
+  add=(geometry,material,name)=>{
+    const light=[];
+    for(let i=0;i<geometry.vertices.length;i+=6){
+      const [x,y,z]=geometry.vertices.slice(i,i+3);
+      const depth=Math.max(0,Math.min(1,(x-.83)/1.75)),edge=Math.min(1,Math.abs(y)/2.28);
+      light.push(z>4.56||x<.83?.96:.94-.39*depth-.065*edge);
+    }
+    return emit(geometry,material,name,{light});
+  };
+  const sill=.84, back=2.64, half=2.28, head=4.57;
+  slab([back,-half,2.84,back+.09,half,head+.08],.009,'M25','beach club aft-facing bulkhead');
+  slab([back-.024,-.87,2.84,back,.87,head],.006,'M96','beach club warm timber wall panel');
+  for(const side of [-1,1]) {
+    // Sloping jamb narrows towards its crown, as seen from the platform.
+    const profile=[[sill,side*half],[back,side*half],[back,side*(half+.19)],[sill-.10,side*(half+.19)]];
+    const cheek=extrude(profile,2.84,head+.12,.012);
+    for(let i=0;i<cheek.vertices.length;i+=6){
+      const lift=(cheek.vertices[i+2]-2.84)/(head+.12-2.84);
+      cheek.vertices[i]+=.30*lift;
+      cheek.vertices[i+1]-=side*.21*lift;
+      const nx=cheek.vertices[i+3],ny=cheek.vertices[i+4];
+      const nz=cheek.vertices[i+5]-(.30*nx-side*.21*ny)/(head+.12-2.84);
+      const length=Math.hypot(nx,ny,nz);
+      cheek.vertices[i+3]=nx/length;cheek.vertices[i+4]=ny/length;cheek.vertices[i+5]=nz/length;
+    }
+    add(cheek,'M25','beach club swept jamb '+side);
+    const y=side*1.65;
+    slab([back-.07,y-.38,2.86,back-.025,y+.38,head-.09],.015,'M37','beach club flush locker '+side);
+    slab([back-.103,y-.07,3.64,back-.072,y+.07,3.665],.004,'M19','beach club locker handle '+side);
+  }
+  slab([sill+.27,-2.20,head,back+.03,2.20,head+.105],.065,'M96','beach club timber soffit');
+  slab([sill+.22,-2.31,head+.105,back+.03,2.31,head+.18],.06,'M25','beach club canopy fascia');
+  slab([sill+.23,-2.29,head+.18,sill+.48,2.29,head+.275],.048,'M47','beach club dark rolled canopy edge');
+  for(const side of [-1,1]){
+    add(pipe([[sill-.035,side*2.28,2.85],[sill+.24,side*2.09,head-.11],[sill+.29,side*2.06,head-.02],[sill+.34,side*1.96,head+.015]],.022,8),'M19','beach club polished portal trim '+side);
+    add(post([1.41,side*1.48,head-.012],[1.41,side*1.48,head],.047,.047,10),'M38','beach club recessed soffit lamp '+side);
+  }
+  slab([1.47,-1.22,2.84,2.54,1.22,2.99],.07,'M43','beach club divan plinth');
+  for(let i=0;i<3;i++){
+    const y=-1.30+i*.87;
+    pad([1.38,y,2.98,2.51,y+.865,3.31],'M39','beach club divan seat '+i);
+    pad([2.30,y,3.26,2.57,y+.865,3.68],'M39','beach club divan back '+i);
+  }
+  pad([2.15,.36,3.30,2.40,.80,3.57],'M93','beach club ochre scatter cushion');
+  pad([2.06,.20,3.30,2.25,.53,3.48],'M94','beach club blue scatter cushion');
+  for (const side of [-1,1]) {
+    const y=side*.80;
+    slab([-1.73,y-.38,2.84,-.17,y+.38,2.96],.06,'M43','swim platform sun chair base '+side);
+    pad([-1.78,y-.40,2.95,-.57,y+.40,3.13],'M39','swim platform sun chair seat '+side);
+    const rake=cushion(outline(-.54,y,.78,.80,.055),3.02,3.15);
+    const angle=.84, pivot=-.93;
+    for(let i=0;i<rake.vertices.length;i+=6) {
+      const x=rake.vertices[i]-pivot,z=rake.vertices[i+2]-3.02;
+      rake.vertices[i]=pivot+x*Math.cos(angle)-z*Math.sin(angle);
+      rake.vertices[i+2]=3.02+x*Math.sin(angle)+z*Math.cos(angle);
+      const nx=rake.vertices[i+3],nz=rake.vertices[i+5];
+      rake.vertices[i+3]=nx*Math.cos(angle)-nz*Math.sin(angle);
+      rake.vertices[i+5]=nx*Math.sin(angle)+nz*Math.cos(angle);
+    }
+    add(rake,'M39','swim platform inclined sun chair back '+side);
+  }
+  add(post([-.89,0,2.84],[-.89,0,3.13],.05,.035,8),'M19','swim platform table pedestal');
+  slab([-1.12,-.22,3.13,-.66,.22,3.165],.17,'M43','swim platform side table');
+  add(pipe([[.96,-2.11,2.84],[.96,-2.11,4.59],[.95,-2.10,4.68],[.89,-2.08,4.74],[.77,-2.08,4.75],[.71,-2.08,4.70]],.023,8),'M19','swim platform stainless shower riser');
+  add(post([.71,-2.08,4.695],[.71,-2.08,4.714],.09,.065,12),'M19','swim platform rain head');
+  for(const side of [-1,1]){
+    const y=side*3.555;
+    add(pipe([[.64,y,3.14],[1.34,y,3.51],[2.42,y,4.102],[3.30,y,4.192]],.019,8),'M19','outboard stair coaming cap rail '+side);
+  }
+  const bench=fittedFurniture('banquette',[2.78,-2.16,4.06,3.65,2.16,4.78]);
+  // Keep one envelope for the continuous bench used by full-deck navigation.
+  const vertices=[],indices=[];
+  for(const piece of bench){const base=vertices.length/6;vertices.push(...piece.vertices);indices.push(...piece.indices.map(i=>base+i));}
+  const seat=add({vertices,indices},'M39','covered aft seating behind transom');
+  slab([2.66,-2.10,3.95,3.59,2.10,4.07],.08,'M25','cockpit banquette base');
+  return seat;
+}

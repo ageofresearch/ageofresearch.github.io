@@ -28,16 +28,12 @@ test('the actual bow plinth contacts fail before the correction and fit the unch
   assert.deepEqual(a.vertices,b.vertices,'Do not grow the deck to conceal an unsupported chair');
 });
 
-function facesTable(ps,n){
-  const pieces=ps.filter(p=>p.feature===`exterior dining chair ${n} upholstered form`).sort((a,b)=>a.bounds[5]-b.bounds[5]);
-  const [seat,back]=pieces.map(center),table=center(ps.find(p=>p.feature==='exterior dining square table with soft corners'));
-  return (seat[0]-back[0])*(table[0]-seat[0])+(seat[1]-back[1])*(table[1]-seat[1])>0;
-}
-test('all six dining chairs face the table, including the two formerly reversed end chairs',()=>{
-  for(const n of [5,6])assert.equal(facesTable(oldParts,n),false);
-  for(let n=1;n<=6;n++)assert.equal(facesTable(parts,n),true,'Chair '+n);
-  assert.equal(parts.filter(p=>/^exterior dining chair \d pedestal$/.test(p.feature||'')).length,6);
-  assert.ok(!parts.some(p=>/^Upper dining chair /.test(p.feature||'')),'Removed interior chairs must stay removed');
+test('the upper club chairs stand on two deck-mounted feet and leave a central passage',()=>{
+  const feet=parts.filter(p=>p.feature?.startsWith('upper club chair recessed foot'));
+  assert.equal(feet.length,2);
+  assert.ok(feet.every(p=>p.bounds[2]===6));
+  assert.ok(feet.some(p=>p.bounds[4]<-.14)&&feet.some(p=>p.bounds[1]>0));
+  assert.ok(!parts.some(p=>/^exterior dining (chair|square table)/.test(p.feature||'')));
 });
 
 test('grounded assemblies retain their geometry and child relationships, and corrections apply once',()=>{
@@ -71,7 +67,7 @@ test('corrected full-view furniture has prepared collision fields and preserves 
   after.group.userData={yacht:basis};
   const walk=new Walk({camera:{position:after.group.position}},after,{document:null});
   assert.equal(after.correctedFurnitureFields.length,3);
-  for(const [deck,x,y]of [['UD',10.94,-.78],['UD',13.32,-.78],['MD',25.72,2.21],['LD',30.05,1.13]])
+  for(const [deck,x,y]of [['UD',12.03,-1.18],['UD',12.03,.44],['MD',25.72,2.21],['LD',30.05,1.13]])
     assert.equal(walk.nav.floorSafe(x,y,deck),false,`${deck} ${x},${y}`);
   assert.deepEqual(after.stairInventory.flights.map(f=>[f.id,f.treadCount,f.riseCount]),
     [['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13]]);

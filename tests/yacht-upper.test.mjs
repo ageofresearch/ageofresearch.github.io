@@ -39,8 +39,9 @@ test('two reproducible profiles preserve final furniture and stair supports with
       assert.deepEqual(Array.from(new Uint32Array(buffer,p.indices.offset,p.indices.length)),Array.from(source.indices));
       assert.deepEqual(p.bounds,source.bounds);
     }
-    assert.equal(manifest.parts.filter(p=>p.sourceID==='UD_FUR_016').length,22,'Dining assembly belongs to the terrace despite old room tag');
-    assert.equal(manifest.parts.filter(p=>p.sourceID==='UD_FUR_001').length,3);
+    assert.equal(manifest.parts.filter(p=>p.feature?.startsWith('upper club chair recessed foot')).length,2);
+    assert.ok(!manifest.parts.some(p=>p.feature?.startsWith('exterior dining chair')));
+    assert.equal(manifest.parts.filter(p=>p.sourceID==='UD_FUR_001').length,6);
     assert.ok(!manifest.parts.some(p=>/UD_FUR_00[234]|UD_SOF/.test(p.sourceID)));
     assert.deepEqual(manifest.flight.surfaces,model.stairInventory.flights.find(f=>f.id==='aft').surfaces);
     assert.ok(manifest.parts.filter(p=>p.role==='floor').every(p=>p.bounds[0]>=8.5&& (p.bounds[1]>=3.13-1e-6||p.bounds[4]<=-3.13+1e-6)), 'Only missing side strips supplement the existing shared floor/ceiling');
@@ -53,7 +54,7 @@ test('mobile upper route supports every tread, stops, reversals, diagonals and b
     const nav=walk.nav,controller=nav.tryStep;connectUpper(walk,upper);
     assert.equal(nav.tryStep,controller,'Adding a flight must not nest controllers');
     const f=model.upper.flight,route=f.route;
-    const path=[[5.6,.8],[5.3,1],[5.15,1.26],[4.9,1.26],[4.8,1.31],[4.72,1.35],[4.7,1.55],[4.7,2.21],[5.2,2.21],[5.4,2.21],[8.05,2.21],[8.35,2.21],[9.9,1.5],[10.2,1.5],[10.2,.95],[13.8,.95],[13.8,.1]];
+    const path=[[6.68,0],[6,.9],[5.9,1],[4.9,1.2],[4.4,1.7],[4.7,2.21],[5.2,2.21],[5.4,2.21],[8.05,2.21],[8.35,2.21],[9.9,1.5],[10.2,1.5],[10.25,-.40],[13.8,-.40],[13.8,.1]];
     for(const hz of [12,40,60]) {
       nav.deck='MD';nav.position=path[0].slice();nav.elevation=3.95;nav.stair=null;
       travel(nav,path.slice(1),hz);assert.equal(nav.deck,'UD');assert.equal(nav.elevation,6);assert.equal(nav.stair,null);

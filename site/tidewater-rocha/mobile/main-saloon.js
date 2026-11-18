@@ -1,7 +1,7 @@
-import { preloadUpper } from './upper-terrace.js?v=deck-fidelity-1';
-import { connectTerrace } from './aft-terrace.js?v=deck-fidelity-1';
+import { preloadUpper } from './upper-terrace.js?v=tour-fidelity-1';
+import { connectTerrace } from './aft-terrace.js?v=tour-fidelity-1';
 
-export const saloonVersion = 'deck-fidelity-1';
+export const saloonVersion = 'tour-fidelity-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {

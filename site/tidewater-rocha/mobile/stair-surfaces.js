@@ -1,10 +1,10 @@
-import {configureAccessFloor} from './bridge-access-geometry.js?v=deck-fidelity-1';
-import {configureGuestFloor} from './guest-access-geometry.js?v=deck-fidelity-1';
-import {configureBowFloor} from './bow-geometry.js?v=deck-fidelity-1';
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=deck-fidelity-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=deck-fidelity-1';
-import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=deck-fidelity-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=deck-fidelity-1';
+import {configureAccessFloor} from './bridge-access-geometry.js?v=tour-fidelity-1';
+import {configureGuestFloor} from './guest-access-geometry.js?v=tour-fidelity-1';
+import {configureBowFloor} from './bow-geometry.js?v=tour-fidelity-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=tour-fidelity-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=tour-fidelity-1';
+import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=tour-fidelity-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=tour-fidelity-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.
@@ -361,6 +361,18 @@ export function configureModelStairs(nav,model) {
   model.stairInventory=describeFlights(model,nav.routes);
   installFlightNavigation(nav,model.stairInventory.flights);
   configureCorrectedFurniture(nav,model);
+  if(model.exterior?.transom){
+    const parts=renderedParts(model), floor=parts.filter(p=>p.anchor==='MD_DCK_001').flatMap(p=>surfaceTriangles(p,3.95,.002));
+    const clearance=obstacles(parts,new Set(),[3.78,-3.48,3.95,17.82,3.49,5.60],{includeVerticalFaces:true});
+    const physical=supportedFloor(floor,clearance.footprints(3.95));
+    const upperFloor=parts.filter(p=>p.anchor==='UD_DCK_001').flatMap(p=>surfaceTriangles(p,6,.002));
+    const upperObstacles=obstacles(parts,new Set(),[9.9,-2.6,6,14.0,2.5,7.65],{includeVerticalFaces:true});
+    const upper=supportedFloor(upperFloor,upperObstacles.footprints(6));
+    const previous=nav.floorSafe.bind(nav);
+    nav.floorSafe=(x,y,deck=nav.deck)=>deck==='UD'&&x>10.25&&x<13.78&&Math.abs(y)<1.8?upper(x,y,nav.radius):deck==='MD'&&x>=3.80&&x<=17.6&&
+      (x<8.5?Math.abs(y)<3.44:y>=-2.14&&y<=2.14) ? physical(x,y,nav.radius) : previous(x,y,deck);
+    model.asset.data={...model.asset.data,rooms:model.asset.data.rooms.map(r=>r.id==='MD_R01'?{...r,spawn:[6.68,0,5.55]}:r)};
+  }
   configureInteriorFloor(nav,model);
   configureBridgeFloor(nav,model);
   configureAccessFloor(nav,model);

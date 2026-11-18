@@ -1,14 +1,24 @@
-import {gangwayAtlasTexel} from './gangway-finish.js?v=deck-fidelity-1';
+import {gangwayAtlasTexel} from './gangway-finish.js?v=tour-fidelity-1';
 // Existing finishes plus a dedicated boarding grain layer, prepared once.
 // Board offsets/variation cover all 128 rows including the yacht's full beam.
 const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);};
 const fract=x=>x-Math.floor(x);
+// Periodic value noise remains continuous across repeated tiles and is filtered
+// together with the weave. The fabric layer's second channel carries mottling.
+function field(u,v,grid) {
+ const wrap=k=>(k%grid+grid)%grid;
+ const hash=(x,y)=>fract(Math.sin(wrap(x)*127.1+wrap(y)*311.7)*43758.5453);
+ const x=u*grid,y=v*grid,i=Math.floor(x),j=Math.floor(y),a=smooth(0,1,x-i),b=smooth(0,1,y-j);
+ return (hash(i,j)*(1-a)+hash(i+1,j)*a)*(1-b)+(hash(i,j+1)*(1-a)+hash(i+1,j+1)*a)*b;
+}
 export function finishPatternMips(size=256) {
- const levels=[];let data=new Float32Array(size*size*6);
+ const levels=[];let data=new Float32Array(size*size*7);
  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
   const u=(x+.5)/size,v=(y+.5)/size,tau=Math.PI*2,i=y*size+x;
-  data[i]=.96+.035*Math.sin(v*tau+1.2*Math.sin(u*tau));
-  data[size*size+i]=1+.015*Math.sin(u*tau)*Math.sin(v*tau);
+  data[i]=.97+.032*Math.sin(v*tau+1.2*Math.sin(u*tau))+.021*Math.sin(v*tau*7+1.7*Math.sin(u*tau));
+  data[size*size+i]=.985+.046*Math.sin(u*tau)*Math.sin(v*tau)+.012*Math.cos(tau*3*v);
+  const curl=field(u,v,4)*.21;
+  data[6*size*size+i]=.41*field(u,v,7)+.36*field(u+curl,v-curl,28)+.23*field(u,v,110);
   const radius=Math.hypot(u-.5,v-.5),circles=Math.min(Math.abs(radius-.17),Math.abs(radius-.30),Math.abs(radius-.42));
   data[2*size*size+i]=1-smooth(.002,.004+1/size,circles);
   data[3*size*size+i]=(1-smooth(.002,.005+1/size,Math.abs(u-.5-(v-.5)*.28)))*(v>=.5&&radius<=.42?1:0);
@@ -21,13 +31,13 @@ export function finishPatternMips(size=256) {
    let value=data[layer*pixels+i];
    if(layer===0)value=1+(value-1)*(1-smooth(5.5,7,level));
    const encoded=Math.round(Math.pow(value,1/2.4)/1.1*65535),at=(layer*pixels+i)*2;
-   bytes[at]=encoded>>8;bytes[at+1]=encoded&255;
+   bytes[at]=encoded>>8;bytes[at+1]=layer===1?Math.round(data[6*pixels+i]*255):encoded&255;
   }
   for(let i=0;i<pixels;i++){bytes[pixels*4+i*2]=Math.round(data[pixels*2+i]*255);bytes[pixels*4+i*2+1]=Math.round(data[pixels*3+i]*255);}
   for(let i=0;i<pixels;i++){const encoded=Math.round(Math.pow(data[pixels*4+i],1/2.4)/1.1*65535);bytes[pixels*6+i*2]=encoded>>8;bytes[pixels*6+i*2+1]=encoded&255;}
   levels.push({size,data:bytes});if(size===1)break;
-  const half=size/2,next=new Float32Array(half*half*6);
-  for(let layer=0;layer<6;layer++)for(let y=0;y<half;y++)for(let x=0;x<half;x++){
+  const half=size/2,next=new Float32Array(half*half*7);
+  for(let layer=0;layer<7;layer++)for(let y=0;y<half;y++)for(let x=0;x<half;x++){
    const i=layer*pixels+2*y*size+2*x;
    next[layer*half*half+y*half+x]=(data[i]+data[i+1]+data[i+size]+data[i+size+1])/4;
   }
@@ -42,7 +52,7 @@ export function teakPatternMips(width=512,height=4096) {
   const end=fract((x+.5)/width+fract(board*.618034)*1.7/2.15);
   const seam=1-smooth(0,.035+128/height,Math.min(fract(plank),1-fract(plank)));
   const joint=1-smooth(0,.001+1/width,Math.min(end,1-end));
-  data[y*width+x]=(.97+.045*Math.sin(board*17.17))*(1-.52*Math.max(seam,.6*joint));
+  data[y*width+x]=(.97+.045*Math.sin(board*17.17)+.024*Math.sin(plank*53.4+.9*Math.sin(2*Math.PI*(x+.5)/width)+board))*(1-.52*Math.max(seam,.6*joint));
  }
  for(let level=0;;level++){
   const bytes=Uint8Array.from(data,v=>Math.round(Math.pow(1+(v-1)*(1-smooth(2,5,level)),1/2.4)/1.1*255));

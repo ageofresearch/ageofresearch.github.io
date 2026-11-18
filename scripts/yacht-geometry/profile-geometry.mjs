@@ -3,18 +3,18 @@ import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5
 
 export function detailError(part, error, profile) {
   const name = part.feature || part.name || '';
+  if (part.context) return 0;
   // These deck fragments are also the visible ceiling of the main deck.
   if (profile === 'exterior' && part.id.startsWith('UD_DCK_001/stairs/stair-opening'))
     return Math.min(error, 0.012);
-  if (name.includes('hanging guard line')) return 0;
   if (
     part.id.startsWith('boarding/owner/') &&
     /handrail|handhold|upright|gate frame|gate polished/.test(name)
   ) {
     return Math.min(error, 0.003);
   }
-  if (/director chair|pouf perimeter piping/.test(name)) return 0;
-  if (/cockpit pouf|folded dark cockpit cloth|cockpit wet bar|cockpit grey counter/.test(name))
+  if (/director chair/.test(name)) return 0;
+  if (/cockpit transverse|cockpit port chaise|cockpit wet bar|cockpit grey counter/.test(name))
     return Math.min(error, 0.006);
   if (/^MD_SOF_0(?:07|08|09|10)\//.test(part.id)) return Math.min(error, 0.009);
   if (/rounded recessed coffer|gloss red organic lampshade/.test(name)) return Math.min(error, 0.014);

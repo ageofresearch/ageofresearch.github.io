@@ -67,7 +67,7 @@ function footprint(parts) {
 }
 
 function furnitureGroup(part) {
-  if (part.anchor === 'MD_FUR_003') return 'pouf';
+  if (part.anchor === 'MD_FUR_003') return part.feature.includes('chaise') ? 'port-chaise' : 'dining-table';
   if (part.anchor === 'MD_FUR_008') return 'wet-bar';
   const chair = part.feature.match(/^director chair (\d) /);
   if (!chair) throw Error(`Unknown terrace chair: ${part.id}`);
@@ -136,7 +136,10 @@ export async function buildTerrace() {
     if (/profiled white service stair enclosure|sloping white service stair ceiling|dark sidewall around D1/.test(part.feature)) add(part, region, 'enclosure');
   }
   const furniture=model.exterior.parts.filter(part => ['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(part.anchor));
-  if (furniture.length !== 25 || new Set(furniture.map(p=>p.id)).size !== 25) throw Error('The source terrace furniture changed; review the selected assemblies');
+  const groups = new Set(furniture.map(furnitureGroup));
+  for(const expected of ['port-chaise','dining-table','wet-bar',...Array.from({length:4},(_,i)=>'chair-'+(i+1))])
+    if(!groups.has(expected))throw Error('Incomplete cockpit assembly '+expected);
+  if(new Set(furniture.map(p=>p.id)).size !== furniture.length) throw Error('Duplicate cockpit geometry');
   for (const source of furniture) {
     // These complete assemblies fit inside MD_R01: keep source topology and poses.
     parts.push({id:source.id, feature:source.feature, role:'furniture', groupID:furnitureGroup(source),
@@ -189,7 +192,7 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'deck-fidelity-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'tour-fidelity-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.

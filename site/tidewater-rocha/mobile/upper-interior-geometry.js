@@ -1,5 +1,5 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=deck-fidelity-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=deck-fidelity-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=tour-fidelity-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=tour-fidelity-1';
 
 // Display coordinates from the current shared model, not surveyed dimensions.
 export const interiorLimits={start:13.8,end:18.63233,minY:-2.5224,maxY:2.116};

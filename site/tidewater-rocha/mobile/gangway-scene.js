@@ -1,10 +1,10 @@
-import { loadTerrace, connectTerrace } from './aft-terrace.js?v=deck-fidelity-1';
-import { connectSternAccess, configureSternWalk } from './stern-access.js?v=deck-fidelity-1';
+import { loadTerrace, connectTerrace } from './aft-terrace.js?v=tour-fidelity-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=tour-fidelity-1';
 import { A as Group } from '../assets/common-HBn3Movl.js';
-export { preloadSaloon } from './main-saloon.js?v=deck-fidelity-1';
+export { preloadSaloon } from './main-saloon.js?v=tour-fidelity-1';
 import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
-} from '../assets/RochaYachtState-P5KwIGIl.js';
+} from '../assets/RochaYachtState-P5KwIGIl.js?v=tour-fidelity-1';
 
 // Reuse boarding and stern assemblies, plus the pre-extracted furnished terrace.
 export async function buildGangway(world) {
@@ -18,14 +18,14 @@ export async function buildGangway(world) {
   const model = { group, record };
   const lake = world.waterBodies.find(body => body.id === record.lakeId);
   const stern = createSternFeatures();
-  const bounds = stern.nameBounds;
-  const lettering = bounds.slice(0,3).map((min,i) => (min+bounds[i+3])/2);
+  const bounds = stern.focusBounds;
+  const beachClub = bounds.slice(0,3).map((min,i) => (min+bounds[i+3])/2);
   const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, sternParts: stern.parts, terraceParts: terrace.parts, materials });
   const { start, y, height, layout } = boarding;
   const footClearance = .18;
   boarding.room = {
     ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + 1.6],
-    look: lettering,
+    look: beachClub,
   };
   connectTerrace(boarding, terrace, stern.access.starboard.upperFloor);
   Object.assign(model, {

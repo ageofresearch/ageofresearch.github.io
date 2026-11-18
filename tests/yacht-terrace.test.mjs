@@ -38,8 +38,8 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
   const furnishings=manifest.parts.filter(p=>p.role==='furniture');
-  assert.equal(furnishings.length,25);
-  assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','pouf','wet-bar']);
+  assert.equal(furnishings.length,30);
+  assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','chair-4','dining-table','port-chaise','wet-bar']);
   assert.ok(!manifest.parts.some(p=>/MD_SAN_|covered-aft-seating|oval-table/.test(p.id)));
   assert.ok(manifest.floor.every(([a,b,c])=>Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>1e-10),'Degenerate faces must not open navigation holes');
   const lights=manifest.parts.flatMap(p=>Array.from(new Float32Array(generated.binary.buffer,generated.binary.byteOffset+p.light.offset,p.light.length)));
@@ -118,7 +118,7 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
       previous=b[5];
       for(let ix=0;ix<9;ix++)for(let iy=0;iy<9;iy++) {
         const x=b[0]+.03+(b[3]-b[0]-.06)*ix/8,y=b[1]+.03+(b[4]-b[1]-.06)*iy/8;
-        for(const part of boarding.parts) {
+        for(const part of boarding.parts.filter(p=>!p.context)) {
           if(x<part.bounds[0]||x>part.bounds[3]||y<part.bounds[1]||y>part.bounds[4])continue;
           const hits=verticalHits(part,x,y);
           assert.ok(hits.every(z=>z>b[5]+.015),`${tread.feature}: deployed gangway penetrates tread at ${x},${y}`);
@@ -132,13 +132,16 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
   }finally{dispose();}
 });
 
-test('chair and cloth clear their neighbours and upper stair rails retain the complete source height',async()=>{
+test('dining chairs face the table and clear their neighbours and upper stair rails retain the complete source height',async()=>{
   const bench=createSternFeatures().parts.find(p=>p.feature==='covered aft seating behind transom');
   const chair=manifest.parts.filter(p=>p.groupID==='chair-1');
   assert.ok(Math.min(...chair.map(p=>p.bounds[0]))-bench.bounds[3]>.05,'Chair 1 must clear the bench by at least 5 cm');
-  const pouf=manifest.parts.filter(p=>p.groupID==='pouf');
-  const cloth=pouf.find(p=>/cloth/.test(p.feature));
-  assert.ok(cloth.bounds[2]-Math.max(...pouf.filter(p=>p!==cloth).map(p=>p.bounds[5]))>.003,'Cloth must sit above the cushion');
+  const table=manifest.parts.find(p=>p.feature==='cockpit transverse teak dining top');
+  for(let n=1;n<=4;n++){
+    const sling=manifest.parts.find(p=>p.feature==='director chair '+n+' canvas sling seat');
+    assert.ok(sling.bounds[0]>table.bounds[3]);
+    assert.ok(sling.bounds[1]<table.bounds[4]&&sling.bounds[4]>table.bounds[1]);
+  }
   const data=JSON.parse(await readFile(new URL('../rocha/luz-de-mar/model.json',root)));
   const buffer=await readFile(new URL('../rocha/luz-de-mar/model.bin',root));
   const source=buildYachtGeometry({data,binary:buffer.buffer.slice(buffer.byteOffset,buffer.byteOffset+buffer.byteLength)},0,{mtuEngines:false,seaStrainers:false});
@@ -191,7 +194,7 @@ test('native navigation reaches the saloon threshold and returns without crossin
     walk.nav.move(2,0);
     assert.ok(walk.nav.position[0]<=8.4-walk.nav.radius+.001);
     const forbidden=[[-5,3.1],[-2,2.3],[2.8,2.655],[4.0,0],[5.5,1.8],[8.35,-1],[6,-3.6],[9,0],[6,3.7],
-      [5.5,-.1],[4.28,-1.45],[6.85,-.65],[4.58,.93],[6.5,-2]];
+      [5.5,-.1],[4.28,-1.45],[7.1,.95],[4.58,.68],[6.5,-2]];
     for(const p of forbidden)assert.equal(boarding.safe(...p),false,`Must block ${p}`);
     walk.nav.position=boarding.route.at(-1).slice();
     assert.ok(moveAlongRoute(walk.nav,boarding.route,length,0));
@@ -208,11 +211,11 @@ test('the guided passage has extra clearance and the terrace spawn is reachable'
       assert.ok(boarding.safe(...point,.15),`15 cm clearance at ${point}`);
     }
     walk.nav.enterRoom('MD_R01');
-    assert.deepEqual(walk.nav.position,[5.6,.8]);
+    assert.deepEqual(walk.nav.position,[6.68,0]);
     assert.equal(walk.nav.elevation,3.95);
     const before=walk.nav.position.slice();
     walk.nav.move(0,-1.5);
-    assert.ok(walk.nav.position[1]>.28+walk.nav.radius,'Walking toward the puf must stop at its edge');
+    assert.ok(walk.nav.position[1]>-1.4+walk.nav.radius-.01,'Walking toward the wet bar stops at the cabinet');
     assert.ok(walk.nav.position[1]<before[1]);
   } finally {dispose();}
 });

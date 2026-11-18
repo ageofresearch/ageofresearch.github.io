@@ -32,12 +32,12 @@ test('upper interior reproduces three bounded profiles and final shared assembli
     assert.deepEqual(duplicates(p.audit),duplicates(sun.profiles[name].audit),'No newly duplicated assembly');
     for(const b of p.batches)assert.equal(new Set(b.indices).size,b.attributes.position.length/3);
     assert.ok(!p.audit.some(a=>/^UD_(SOF_00[7-9]|SOF_01[0-6]|FUR_0(1[7-9]|2[0-9]|3[0-6]))(?:\/|$)/.test(a.id)),'Consumed dining chairs must stay absent');
-    assert.equal(p.audit.filter(a=>a.id.startsWith('UD_FUR_016/photo-layout/')).length,22,'Keep the current exterior dining assembly');
+    assert.ok(p.audit.some(a=>a.id.includes('upper-club-chair-0')) && p.audit.some(a=>a.id.includes('upper-club-chair-1')),'Both exterior lounge chairs are present');
     for(const id of ['UD_GLA_001','UD_GLA_002','UD_GLA_003','UD_GLA_004'])assert.ok(p.audit.some(a=>a.id===id&&a.triangles===12),'Retain original glass panel '+id);
   }
   assert.ok(Object.values(interior.profiles).reduce((n,p)=>n+p.geometryBytes,0)<9*1024*1024);
   const {model}=await full();try {
-    const parts=renderedParts(model),own=manifest.parts.filter(p=>manifest.interiorPartIDs.includes(p.id));assert.equal(own.length,18);
+    const parts=renderedParts(model),own=manifest.parts.filter(p=>manifest.interiorPartIDs.includes(p.id));assert.equal(own.length,new Set(own.map(p=>p.id)).size);assert.ok(own.some(p=>p.feature.startsWith('skylounge swept settee')));
     for(const id of ['UD_FUR_037','UD_GLA_003','UD_GLA_004','UD_PAR_001']){
       const p=own.find(p=>p.id===id),source=parts.find(p=>p.id===id);assert.ok(p,id);
       assert.deepEqual(Array.from(new Float32Array(array(binary),p.vertices.offset,p.vertices.length)),Array.from(Float32Array.from(source.vertices)));
@@ -72,10 +72,10 @@ test('terrace/interior round trip, diagonal threshold passage, stops and reversa
 
 test('shared collision releases removed furniture but keeps glass, cabinet, bulkhead, headroom and extraction limits',async()=>{
   const f=mobile(),{model,walk}=await full();try{
-    for(const p of [[14.21,0],[15,0],[16,-1],[17,0],[18.3,0]]){
+    for(const p of [[14.21,0],[15,0],[16,.35],[17,0],[18.3,0]]){
       assert.ok(f.walk.nav.floorSafe(...p,'UD'),p.toString());assert.ok(walk.nav.floorSafe(...p,'UD'),p.toString());
     }
-    for(const p of [[14.21,.5],[15,2.07],[15,-2.5],[18,1],[18.6,0],[18.65,-1.95],[19.16,-1.62],[13.85,1.5]])
+    for(const p of [[16.49,-.49],[14.21,.5],[15,2.07],[15,-2.5],[18,1],[18.6,0],[18.65,-1.95],[19.16,-1.62],[13.85,1.5]])
       assert.equal(f.walk.nav.floorSafe(...p,'UD'),false,p.toString());
     for(const p of [[15,1.95],[15,2.07],[15,-2.4],[15,-2.5]]){
       assert.equal(f.walk.nav.floorSafe(...p,'UD'),false,'Body cannot overlap glass '+p);

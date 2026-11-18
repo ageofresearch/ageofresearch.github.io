@@ -1,12 +1,37 @@
 # Mobile yacht zones
 
-Release: `deck-fidelity-1`. The mobile route connects boarding, the aft terrace,
+Current release candidate `tour-fidelity-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
 maps or postprocessing.
 
-## Continuous saloon detail
+## Grande 36M tour reference
+
+The VRCloud Beach Club, Cockpit, Salon, Upperdeck Lounge, Skylounge, Pilothouse,
+Bow Lounge, Sundeck and Lower Lobby informed the refit. The covered stern
+recess, lockers, upholstered divan, platform loungers and shower share geometry
+with the full yacht. The cockpit has a transverse table, four dark folding
+chairs, a port chaise and a white wet bar. Both boarding handrails have open
+spans between bent stainless stanchions. The saloon and Skylounge use curved
+upholstery, cloud-patterned rugs and pale tables. The upper terrace has two
+club chairs and the bow has a pair of teak tables.
+
+Furniture shells were extracted offline from the project's Grande 36M r110
+asset. Its source SHA is checked by `scripts/yacht-geometry/bake-tour-furniture.mjs`.
+The panorama imagery is used only for visual review. The stair landings and
+the Rocha hull determine the fitted dimensions. The setting retains the mapped
+waterline of lake `water-5`. Bank elevations and vegetation are illustrative.
+
+The five contact-shadow planes have a combined GPU allocation of 102,400 bytes.
+They are prepared before walking. Rebuild them with
+`node scripts/yacht-geometry/bake-walk-light.mjs` and the waterline with
+`node scripts/yacht-geometry/bake-rocha-shore.mjs`. Rebuild the zone packages
+in dependency order after editing furnishings or circulation.
+
+[Azimut Grande 36M tour](https://vrcloud.com/?pv=1667308298)
+
+## Previous deck-fidelity-1 release
 
 The main deck uses one fixed render profile from the gangway through the aft
 terrace and saloon. It keeps a finer mesh for the saloon furnishings and spends

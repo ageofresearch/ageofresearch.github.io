@@ -38,7 +38,7 @@ function fixture() {
   return {walk,model,access:model.sternAccess,dispose(){boarding.dispose();materials.opaque.dispose();materials.glass.dispose();}};
 }
 
-const approach=[[5.6,.8],[6.2,.8],[7.4,-.4],[7.4,-.9],[7.1,-1.2],[5.8,-1.2],[4,-3],[4,-3.03],[2.7,-3.03]];
+const approach=[[6.68,0],[7.4,-1.6],[7.4,-2.5],[6.6,-3.1],[4,-3.03],[4,-3.03],[2.7,-3.03]];
 
 function travel(nav,points,hz=40) {
   for(const point of points) {
@@ -96,9 +96,11 @@ test('platform, stair edges, transom and deployed port gangway stop the body at 
   try {
     nav.enterRoom('swim-platform');assert.deepEqual(nav.position,[.35,-3.03]);
     assert.equal(nav.floorSafe(.35,0,'LD'),false,'The platform is not the lower deck');
-    for(const point of [[-.1,0],[.05,0],[1.3,0],[2,-3.03],[.8,-2.5],[.4,3.1]])
+    for(const point of [[-2.12,0],[-1,.85],[-.89,0],[1.45,0],[2,-3.03],[.8,-2.5],[.4,3.1]])
       assert.equal(nav.floorSafe(...point,'SP'),false,`Blocked platform point ${point}`);
-    nav.move(-2,0);assert.ok(nav.position[0]>.15,'Stop at rounded platform edge');
+    travel(nav,[[.35,0],[1.15,.30],[.35,0],[.35,-3.03]]);
+    for(let i=0;i<150;i++)nav.move(-.025,0);
+    assert.ok(nav.position[0]>-2.06&&nav.position[0]<-1.6,'Stop at the extended platform edge');
     nav.enterRoom('swim-platform');travel(nav,[[1.5,-3.03]]);
     nav.move(0,-1);assert.ok(nav.position[1]>-3.31,'Stop at outer stair coaming');
     nav.move(0,2);assert.ok(nav.position[1]<-2.7,'Stop at transom and inner stair edge');
@@ -111,5 +113,23 @@ test('platform, stair edges, transom and deployed port gangway stop the body at 
     }
     nav.enterRoom('boarding');assert.equal(nav.stair,null);assert.equal(nav.deck,'MD');
     assert.ok(crossing(walk));
+  }finally{dispose();}
+});
+
+test('Beach Club has an open central bay, supported platform chairs and a continuous shaded entrance',()=>{
+  const {model,access,dispose}=fixture();
+  try{
+    const parts=model.transom.parts;
+    assert.ok(!parts.some(p=>/rounded recessed field|roman serif lettering|PANAMA registry/.test(p.feature)));
+    const canopy=parts.find(p=>p.feature==='beach club timber soffit');
+    assert.ok(canopy.bounds[2]-access.lowerHeight>=1.65);
+    assert.equal(parts.filter(p=>p.feature.startsWith('beach club flush locker')).length,2);
+    assert.equal(parts.filter(p=>p.feature.startsWith('swim platform inclined sun chair back')).length,2);
+    assert.equal(parts.filter(p=>p.feature.startsWith('outboard stair coaming cap rail')).length,2);
+    for(const side of ['port','starboard'])
+      assert.equal(parts.filter(p=>p.feature.startsWith('transom '+side+' teak tread')).length,6);
+    for(let x=-.1;x<=1.15;x+=.025)assert.ok(access.platformSafe(x,.20,.14),'Entry blocked at '+x);
+    assert.equal(access.platformSafe(1.72,.20,.14),false,'Divan cushions block the body');
+    for(const part of parts)assert.ok(part.bounds.every(Number.isFinite)&&part.vertices.every(Number.isFinite),part.feature);
   }finally{dispose();}
 });

@@ -50,8 +50,10 @@ export async function buildGuestAccess() {
       };
       for(const p of final) {
         const id=p.anchor||p.id.split('/')[0];
-        if(p.semanticParent==='stairs/guest')add(p,'guest-stair');
+        if(p.feature?.startsWith('lower lobby '))add(p,'guest-finish');
+        else if(p.semanticParent==='stairs/guest')add(p,'guest-stair');
         else if(id==='LD_DCK_001')add(p,'guest-floor',[13.17,-2.26,1.429,19.8,.65,1.551]);
+
         else if(p.deck==='LD'&&/^LD_(PAR|GLA)_/.test(id))add(p,'guest-boundary',[13.17,-2.26,1.55,19.8,.65,3.831]);
         else if(id==='LD_MAC_001')add(p,'guest-boundary',[13.15,-.75,1.55,13.35,.65,3.831]);
         else if(id==='MD_DCK_001') {

@@ -23,7 +23,7 @@ const center=s=>[0,1].map(k=>{const ps=s.polygons.flat().map(p=>p[k]);return(Mat
 test('sun assets reproduce the shared furniture, guards, supports and three bounded profiles',async()=>{
   const result=await buildSun();assert.deepEqual(result.manifest,manifest);assert.deepEqual(result.binary,binary);
   for(const [name,p]of Object.entries(sun.profiles)) {
-    assert.ok(p.triangles<=25000,name);assert.equal(p.batches.length,2);assert.equal(p.triangles,p.batches.reduce((n,b)=>n+b.indices.length/3,0));
+    assert.ok(p.triangles<=25000,name);assert.equal(p.batches.length,2);assert.equal(p.triangles,Math.max(...p.batches[0].ranges.map(([,count])=>(count+p.batches[1].indices.length)/3)));
     for(const batch of p.batches)assert.equal(new Set(batch.indices).size,batch.attributes.position.length/3,'No unreferenced uploaded vertices');
     const sd=p.audit.filter(p=>p.id.startsWith('SD'));assert.equal(new Set(sd.map(p=>p.id)).size,sd.length,'No partial SD slab or repeated stair assembly');
   }

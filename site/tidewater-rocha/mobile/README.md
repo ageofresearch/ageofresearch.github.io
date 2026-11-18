@@ -1,6 +1,6 @@
 # Mobile yacht zones
 
-Release: `saloon-continuity-1`. The mobile route connects boarding, the aft terrace,
+Release: `deck-fidelity-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. Mobile never downloads or constructs the full yacht, machinery, shadow
@@ -14,10 +14,24 @@ less geometry on distant context. The doorway no longer selects a profile from
 position or travel history. Upper decks, the bow and the lower guest stair still
 use their respective profiles. All profiles are prepared before movement.
 
-The main deck uses 24,700 triangles. The other active profiles use 24,947
-(upper), 24,434 (sun), 22,805 (bow) and 21,783 (guest). Each keeps two indexed
-draws, one pass, render scale 1 and MSAA 4. Removing the redundant main deck
-profile saves 16.3 MB across the staged zone packages before HTTP compression.
+The 24 hanging guard cables, three folding chair assemblies and pouf piping
+use the source geometry. The rails, boarding gate, bar, platform rim, ceiling
+and curved saloon seats have separate simplification limits. The active
+main-deck profile submits up to 24,658 triangles. The other maxima are 24,544
+(upper), 23,549 (sun), 21,819 (bow) and 22,466 (guest). All use two indexed
+draws, one pass, render scale 1 and MSAA 4.
+
+During generation, each opaque face is checked against the walk camera's
+possible positions. A face pointing away from the entire camera volume of a
+longitudinal band can be skipped. The remaining faces occupy one contiguous
+range in the resident index buffer for that band. This uses the actual triangle
+winding and a conservative margin. Glass keeps its original ordering. Moving
+the camera selects an index offset in the same mesh. Both end ranges are
+exercised before the route opens. Across the five final profiles approximately
+8.5 MiB of geometry stays resident.
+
+`tests/yacht-gangway-fidelity.test.mjs` checks the exact source faces of the
+hanging cables, chairs and piping against the actual submitted index ranges.
 
 `tests/yacht-saloon.cjs` checks identical doorway pixels after walking from
 both directions. `tests/yacht-saloon-performance.cjs` compares first and

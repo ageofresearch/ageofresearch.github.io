@@ -1,3 +1,4 @@
+import {detailError,packWalkProfile} from './yacht-geometry/profile-geometry.mjs';
 // Offline extraction: mobile downloads a ready-to-draw main deck, never the
 // complete yacht. Install tooling with npm ci --prefix scripts/yacht-geometry.
 import { readFile, writeFile } from 'node:fs/promises';
@@ -10,18 +11,11 @@ import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'saloon-continuity-1';
+const version = 'deck-fidelity-1';
 
-// Budget the whole main deck together. Give the seating area more geometry
-// than the surrounding structure and keep the upper decks as distant context.
-export function mainDeckError(part,bounds) {
-  if(bounds[2]>=5.88)return .4;
-  const saloonFurnishing=part.role==='furniture'&&bounds[0]>=8.5&&bounds[5]<5.88;
-  if(!saloonFurnishing)return .055;
-  // The top and its thin surrounding rim need enough segments to read as a
-  // single curve. Coarser meshes can expose the dark rim under the tabletop.
-  if(/^(thin tabletop perimeter|inset tabletop)$/.test(part.feature))return .014;
-  return .024;
+// Keep the same main-deck mesh from boarding through the saloon.
+export function mainDeckError(bounds) {
+  return bounds[2]>=5.88?.4:.014;
 }
 export const boundsOf = vertices => {
   const b = [Infinity,Infinity,Infinity,-Infinity,-Infinity,-Infinity];
@@ -188,20 +182,14 @@ export async function buildSaloon() {
         const shared=b[3]>=6.8&&b[0]<=10.2;
         const support=/teak tread|pale step|boarding landing|final riser/.test(part.feature||part.name||'');
         const error=support||part.glass?0:shared?.002:.008;
-        const result=simplify(part,error);
+        const result=simplify(part,detailError(part,error,profile));
         audit.push({id:part.id,sourceTriangles:part.indices.length/3,triangles:result.indices.length/3,
           error:result.lodError||0,shared,support});
         return result;
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...terrace,...parts],geometryTransform});
-      const batches=boarding.meshes.map(mesh=>{
-        const attributes=Object.fromEntries(Object.entries(mesh.geometry.attributes)
-          .map(([name,a])=>[name,{...store(a.array),itemSize:a.itemSize}]));
-        return {glass:mesh.material.transparent,attributes,indices:store(mesh.geometry.index.array,Uint32Array)};
-      });
-      profiles[profile]={batches,triangles:boarding.stats.triangles,
-        geometryBytes:batches.reduce((n,b)=>n+b.indices.length*4+Object.values(b.attributes).reduce((n,a)=>n+a.length*4,0),0),audit};
+      profiles[profile]=packWalkProfile(boarding,profile,audit,store);
       boarding.dispose();
       if(profiles[profile].triangles>25000)throw Error(profile+' exceeds the 25,000 triangle budget');
     }

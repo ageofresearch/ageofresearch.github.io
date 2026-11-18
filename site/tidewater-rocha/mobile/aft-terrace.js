@@ -1,6 +1,6 @@
-import { indexFootprints } from './terrace-geometry.js?v=saloon-continuity-1';
+import { indexFootprints } from './terrace-geometry.js?v=deck-fidelity-1';
 
-const version = 'saloon-continuity-1';
+const version = 'deck-fidelity-1';
 
 export async function loadTerrace() {
   const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));

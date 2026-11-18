@@ -1,4 +1,4 @@
-import {gangwayAtlasTexel} from './gangway-finish.js?v=saloon-continuity-1';
+import {gangwayAtlasTexel} from './gangway-finish.js?v=deck-fidelity-1';
 // Existing finishes plus a dedicated boarding grain layer, prepared once.
 // Board offsets/variation cover all 128 rows including the yacht's full beam.
 const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t);};

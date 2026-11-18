@@ -1,3 +1,4 @@
+import {detailError,packWalkProfile} from './yacht-geometry/profile-geometry.mjs';
 // Extract the final shared yacht assemblies; only these ready-to-draw buffers reach mobile.
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
@@ -85,23 +86,20 @@ export async function buildUpper() {
         const stair=p.semanticParent==='stairs/aft'||p.id?.startsWith('MD_STA_013/');
         const near=profile==='upper'?b[5]>=5.88:b[2]<5.88;
         const error=support||p.glass?0:stair?.004:near?(profile==='upper'?.012:.016):.08;
-        const result=simplify(p,error);
+        const result=simplify(p,detailError(p,error,profile));
         audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair});
         return result;
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
         sternParts:createSternFeatures().parts,terraceParts:[...terrace,...saloon,...parts],geometryTransform});
-      const batches=boarding.meshes.map(mesh=>({glass:mesh.material.transparent,
-        attributes:Object.fromEntries(Object.entries(mesh.geometry.attributes).map(([name,a])=>[name,{...store(a.array),itemSize:a.itemSize}])),
-        indices:store(mesh.geometry.index.array,Uint32Array)}));
-      profiles[profile]={batches,triangles:boarding.stats.triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.length*4+Object.values(b.attributes).reduce((n,a)=>n+a.length*4,0),0),audit};
+      profiles[profile]=packWalkProfile(boarding,profile,audit,store);
       boarding.dispose();
       console.log(profile,profiles[profile].triangles);
       if(profiles[profile].triangles>25000)throw Error(profile+' exceeds 25,000 triangles');
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const compactFootprints=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-  const manifest={version:'saloon-continuity-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
+  const manifest={version:'deck-fidelity-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
     room:{...data.rooms.find(r=>r.id==='UD_R01'),name:'Terraza superior',displayName:'Terraza superior',spawn:[8.35,2.21,7.6],look:[10.3,0,6.8]},
     navigationEnd:14.188,flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compactFootprints(flight.clearance.footprints(s.height))}))}};

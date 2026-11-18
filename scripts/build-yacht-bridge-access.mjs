@@ -1,6 +1,4 @@
 import {writeFile} from 'node:fs/promises';
-import {orderOpaqueTriangles} from './yacht-geometry/opaque-order.mjs';
-import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {fileURLToPath} from 'node:url';
 import {buildBow,bowLOD} from './build-yacht-bow.mjs';
 import {normalizeRenderedPart,boundsOf} from './build-yacht-saloon.mjs';
@@ -47,7 +45,7 @@ export async function buildBridgeAccess({extend,lod=accessLOD,profileNames}={}) 
       }
       parts.push(...additions);
       const physical=model.bridgeAccessFloor,flight=model.stairInventory.flights.find(f=>f.id==='bridge');
-      return {version:'saloon-continuity-1',room:accessRoom,route:accessRoute,
+      return {version:'deck-fidelity-1',room:accessRoom,route:accessRoute,
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),domains:physical.domains,
         accessPartIDs:additions.map(p=>p.id),
         flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
@@ -55,14 +53,6 @@ export async function buildBridgeAccess({extend,lod=accessLOD,profileNames}={}) 
         evidence:'Approved provisional local galley partition recess; guest stair and service rooms remain outside the mobile route',...extend?.({model,lowerParts,parts})};
     }
   });
-  // The upper profile now also covers the internal descent. Order its opaque
-  // cover around the bridge/vestibule rather than the old aft-only viewpoint.
-  // This is an offline permutation: no geometry or transparency changes, and
-  // no index sorting or buffer creation is needed during movement.
-  const batch=result.manifest.profiles.upper.batches.find(b=>!b.glass),binary=result.binary;
-  const positions=new Float32Array(binary.buffer,binary.byteOffset+batch.attributes.position.offset,batch.attributes.position.length);
-  const indices=new Uint32Array(binary.buffer,binary.byteOffset+batch.indices.offset,batch.indices.length);
-  indices.set(orderOpaqueTriangles(positions,indices,[0,6.6-basis.seaReference,19*basis.sx-basis.length/2],.25,true));
   return result;
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){

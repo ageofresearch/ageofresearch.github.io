@@ -3,10 +3,8 @@ import {fileURLToPath} from 'node:url';
 import {buildBridgeAccess,accessLOD} from './build-yacht-bridge-access.mjs';
 import {normalizeRenderedPart,boundsOf} from './build-yacht-saloon.mjs';
 import {clipGeometry} from './build-yacht-terrace.mjs';
-import {orderOpaqueTriangles} from './yacht-geometry/opaque-order.mjs';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {guestRoom,guestLandings,guestDomains,guestApproach} from '../site/tidewater-rocha/mobile/guest-access-geometry.js';
-import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
 const compact=rows=>[...new Map(rows.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
 export async function buildGuestAccess() {
@@ -80,10 +78,6 @@ export async function buildGuestAccess() {
         evidence:'Provisional shared guest stair and aft distributor; cabins, forward passage and service access remain pending'};
     }
   });
-  const batch=result.manifest.profiles.guest.batches.find(b=>!b.glass),binary=result.binary;
-  const positions=new Float32Array(binary.buffer,binary.byteOffset+batch.attributes.position.offset,batch.attributes.position.length);
-  const indices=new Uint32Array(binary.buffer,binary.byteOffset+batch.indices.offset,batch.indices.length);
-  indices.set(orderOpaqueTriangles(positions,indices,[-.1*basis.sy,3.15-basis.seaReference,16.8*basis.sx-basis.length/2],.25,true));
   return result;
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)) {

@@ -169,7 +169,7 @@ jobs:
         if: matrix.mode == 'mobile'
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-guest-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-route-performance-comparison.test.cjs
+          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-guest-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-gangway-fidelity.test.mjs tests/yacht-route-performance-comparison.test.cjs
       - name: Verify browser views and recovery
         env:
           YACHT_CHECK: ${{ matrix.mode }}

@@ -159,7 +159,7 @@ export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
   const triangles=[];
   for(const part of parts) {
     const b=part.bounds;
-    if(!b || ownParts.has(part) || b[3]<box[0] || b[0]>box[3] || b[4]<box[1] || b[1]>box[4] ||
+    if(!b || part.context || ownParts.has(part) || b[3]<box[0] || b[0]>box[3] || b[4]<box[1] || b[1]>box[4] ||
       b[5]<box[2] || b[2]>box[5])continue;
     // Schematic water traces, decals and planar stair references are not physical obstacles.
     if(['Stairs','Cold_water','Hot_water','Drainage'].includes(part.category) || /label|letter|seam|stitch|shadow|^D1 /.test(part.feature||''))continue;

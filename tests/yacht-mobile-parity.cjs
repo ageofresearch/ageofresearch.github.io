@@ -139,8 +139,17 @@ async function capture(browser, mobile) {
         assert.ok(share>.09,'The stern must visibly occupy the camera frame');
         return coverage;
       }
-      const firstView=await measureStern();
-      assert.ok(firstView.within && firstView.width>60,'The recessed Beach Club must be framed on first paint');
+      // Inspect the recessed room from the platform. The boarding camera is
+      // aligned with the port gangway, beyond the jamb of the central opening.
+      await frame.evaluate(()=>{
+        const app=window.__app,w=app.yachtWalk,b=w.model.group.userData.yacht;
+        w.enterRoom('swim-platform');w.nav.position=[-1.86,0];w.cameraElevation=2.84;w.applyPosition();
+        const target=w.model.group.localToWorld(app.camera.position.clone().set(0,3.72-b.seaReference,2.64*b.sx-b.length/2));
+        const d=target.sub(app.camera.position).normalize();w.yaw=Math.atan2(-d.x,-d.z);w.pitch=Math.asin(d.y);
+      });
+      const beachView=await measureStern();
+      assert.ok(beachView.within && beachView.width>60,'The central Beach Club must be framed from the platform');
+      await frame.evaluate(()=>window.__app.yachtWalk.enterRoom('boarding'));
       const panel = page.locator('#pilot');
       await panel.locator('summary').click();
       const smooth = panel.locator('#smooth');
@@ -154,7 +163,7 @@ async function capture(browser, mobile) {
       before.data = Buffer.from(aliased.pixels,'base64');
       writeFileSync(out+'/mobile-no-aa.png',PNG.sync.write(before));
       // A box-filtered 2× capture independently approximates the true pixel coverage.
-      // Keep the camera fixed and score the two bands containing the rails and cables.
+      // Keep the camera fixed and score the two bands containing the rails and posts.
       await frame.evaluate(() => window.__app.engine.setRenderScale(2));
       const reference = await readFrame();
       const hi = Buffer.from(reference.pixels,'base64');
@@ -173,7 +182,7 @@ async function capture(browser, mobile) {
         }
       }
       console.log('Rail-band error reduction vs 2× box reference, percent:',(100*(1-smoothError/rawError)).toFixed(1));
-      assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and cable edges');
+      assert.ok(smoothError < rawError*.9,'Smoothing should improve visible rail and post edges');
       await frame.evaluate(() => window.__app.engine.setRenderScale(1));
       await smooth.check();
       await page.getByRole('button',{name:'Entrar al salón'}).click();

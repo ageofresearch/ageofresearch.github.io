@@ -23,11 +23,11 @@ The panorama imagery is used only for visual review. The stair landings and
 the Rocha hull determine the fitted dimensions. The setting retains the mapped
 waterline of lake `water-5`. Bank elevations and vegetation are illustrative.
 
-The five contact-shadow planes have a combined GPU allocation of 102,400 bytes.
-They are prepared before walking. Rebuild them with
-`node scripts/yacht-geometry/bake-walk-light.mjs` and the waterline with
-`node scripts/yacht-geometry/bake-rocha-shore.mjs`. Rebuild the zone packages
-in dependency order after editing furnishings or circulation.
+Diffuse light, material coordinates and five 320 × 64 deck contact fields are
+evaluated during preparation. Chrome and glazing retain view-dependent reflections.
+The single R8 finish atlas holds the original deck joints, boarding teak, timber,
+woven cloth, carpet, water and instruments. Each textured pixel uses one filtered
+sample. Active profiles keep two indexed draws in one 4× MSAA pass.
 
 [Azimut Grande 36M tour](https://vrcloud.com/?pv=1667308298)
 

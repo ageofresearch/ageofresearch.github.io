@@ -1,4 +1,4 @@
-import {walkLight} from './walk-light.js?v=tour-fidelity-1';
+import {loadDeckLight,prepareOpaque} from './prepare-light.js?v=tour-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=tour-fidelity-1';
 import { nextProfile } from './main-saloon.js?v=tour-fidelity-1';
 
@@ -13,101 +13,36 @@ struct Frame {
 @group(0) @binding(0) var<uniform> frame: Frame;
 @group(0) @binding(1) var patternSampler: sampler;
 @group(0) @binding(2) var patterns: texture_2d_array<f32>;
-@group(0) @binding(3) var teak: texture_2d<f32>;
-@group(0) @binding(4) var contact: texture_2d_array<f32>;
 struct Vertex {
   @builtin(position) clip: vec4f,
   @location(0) color: vec3f,
   @location(1) uv: vec2f,
   @location(2) @interpolate(flat) layer: i32,
-  @location(3) floorUV: vec3f,
 }
 @vertex fn vertex(@location(0) position: vec3f, @location(1) normal: vec3f,
                   @location(2) albedo: vec3f, @location(3) surface: vec4f) -> Vertex {
   var out: Vertex;
   out.clip = frame.clipFromLocal * vec4f(position, 1);
-  out.floorUV=vec3f(0.,0.,-1.);
-  if(surface.z>=44. && surface.z<=47.) {
-    out.layer=-1;out.uv=vec2f(0);
-    if(surface.z==44.) {
-      out.color=vec3f(.29,.48,.53);out.layer=6;out.uv=position.xz*vec2f(.055,.13);
-    }else if(surface.z==47.) {
-      out.color=mix(vec3f(.78,.85,.88),vec3f(.40,.64,.84),smoothstep(-3.,85.,position.y));
-    }else {
-      let variation=.91+.09*normal.x;
-      out.color=select(vec3f(.36,.43,.31),vec3f(.51,.57,.43),surface.z==46.)*variation;
-      out.uv=position.xz*.08;out.layer=7;
-    }
-    return out;
+  out.uv=surface.xy;
+  out.layer=i32(surface.z);
+  out.color=albedo;
+  if(surface.w>.02){
+    let eye=normalize(frame.eyeLocal.xyz-position);
+    let reflected=reflect(-eye,normal);
+    let horizon=smoothstep(-.10,.19,reflected.y);
+    let glint=max(dot(reflected,frame.sunLocal.xyz),0.);
+    let reflection=mix(vec3f(.31,.42,.44),vec3f(.85,.92,.96),horizon)
+      +vec3f(.30,.26,.22)*(1.-smoothstep(.015,.095,abs(reflected.y+.11)));
+    out.color=mix(albedo,albedo*reflection, surface.w)+pow(glint,26.)*.38*surface.w;
   }
-  let n = normalize(normal);
-  let boarding=surface.z>=37. && surface.z<=42.;
-  let roughness=select(surface.x,.8,boarding);let metalness=select(surface.y,0.,boarding);
-  let light = frame.sunLocal.xyz;
-  let eye = normalize(frame.eyeLocal.xyz - position);
-  let hemi = mix(vec3f(.19,.16,.13), vec3f(.62,.67,.73), n.y*.5+.5);
-  let diffuse = max(dot(n, light), 0.);
-  let gloss = pow(max(dot(n, normalize(eye+light)), 0.), mix(68., 10., roughness));
-  let reflection = reflect(-eye, n);
-  let reflectedLight = mix(vec3f(.09,.15,.17), vec3f(.70,.83,.92),smoothstep(-.10,.19,reflection.y))
-      +vec3f(.29,.26,.21)*(1.-smoothstep(.012,.095,abs(reflection.y+.11)));
-  let finish = select(albedo, vec3f(.72,.69,.61), surface.z == 9.);
-  let indirect = select(vec3f(0), vec3f(.23,.22,.20), surface.z == 9.);
-  let lit = finish * ((hemi + diffuse * vec3f(.82,.72,.59)) * surface.w + indirect);
-  out.color = mix(lit, albedo * reflectedLight, metalness)
-              + gloss * (.08 + metalness*.65);
-  out.color = toSrgb(out.color);
-  let local=vec2f((position.z+17.615)/(35.23/36.), position.x/(7.47/7.6));
-  if(n.y>.74){
-    let z=position.y+2.01;
-    let levels=array<f32,5>(1.55,2.84,3.95,6.,8.2);
-    for(var i=0;i<5;i++){if(abs(z-levels[i])<.032){out.floorUV=vec3f((local+vec2f(3.,4.))/vec2f(40.,8.),f32(i));}}
-  }
-  let finishUV=vec2f(position.x+position.y*.73, position.z+position.y*.51);
-  out.layer=-1;out.uv=vec2f(0);
-  if(surface.z==43.){out.layer=5;out.uv=local*.44;}
-  else if(surface.z==2.){out.layer=1;out.uv=finishUV*vec2f(310.,37.)/6.2831853;}
-  else if(surface.z==3.){out.layer=2;out.uv=finishUV*vec2f(430.,410.)/6.2831853;}
-  else if(surface.z==1.){out.layer=0;out.uv=vec2f(local.x/2.15,(local.y/.105+64.)/128.);}
-  else if(surface.z==7.){
-    var center=vec2f(22.354615,-.05067);
-    if(local.y>.9){center=vec2f(22.03368,1.21617);}else if(local.y>.25){center=vec2f(22.27016,.59119);}
-    else if(local.y< -1.){center=vec2f(21.949225,-1.31751);}else if(local.y< -.35){center=vec2f(22.18570,-.69254);}
-    out.layer=3;out.uv=vec2f((local.y-center.y)/.48+.5,((local.x-center.x)*.659983+(position.y+2.01-7.01)*.75128)/.36+.5);
-  }
-  else if(boarding){out.layer=4;out.uv=surface.xy;}
   return out;
-}
-fn toSrgb(linear: vec3f) -> vec3f {
-  let c=clamp(linear,vec3f(0),vec3f(1));
-  let s1=sqrt(c);let s2=sqrt(s1);let s3=sqrt(s2);
-  return select(.662002687*s1+.684122060*s2-.323583601*s3-.022541147*c,
-                12.92*c,c<=vec3f(.0031308));
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
-  var color=in.color;
-  if(in.floorUV.z>=0.){
-    let shade=textureSampleLevel(contact,patternSampler,clamp(in.floorUV.xy,vec2f(.001),vec2f(.999)),i32(round(in.floorUV.z)),0.).r;
-    color*=.48+.52*shade;
-  }
-  if(in.layer<0){return vec4f(color,1.);}
-  if(in.layer==5 || in.layer==6 || in.layer==7){
-    let texel=textureSample(patterns,patternSampler,in.uv,1).g;
-    if(in.layer==7){return vec4f(color*(.77+.42*texel),1.);}
-    if(in.layer==6){return vec4f(color*(.86+.25*texel),1.);}
-    return vec4f(mix(vec3f(.13,.20,.28),vec3f(.58,.65,.70),texel)*color*2.3,1.);
-  }
-  if(in.layer==3){
-    let instrument=textureSample(patterns,patternSampler,in.uv,2).rg;
-    return vec4f(vec3f(.022,.058,.071)+instrument.r*vec3f(.075,.22,.15)+instrument.g*vec3f(.31,.38,.25),1.);
-  }
-  var factor=1.;
-  if(in.layer==0){factor=textureSample(teak,patternSampler,in.uv).r*1.1;}
-  else {let encoded=textureSample(patterns,patternSampler,in.uv,in.layer-1).rg;
-    factor=select(dot(encoded,vec2f(65280./65535.,255./65535.)),encoded.r,in.layer==2)*1.1;}
-
-  return vec4f(clamp((color+.055)*factor-.055,vec3f(0),vec3f(1)),1.);
+  if(in.layer<0){return vec4f(in.color,1.);}
+  let layer=select(in.layer-1,6+clamp(i32(floor(in.uv.y))-1,0,13),in.layer==0);
+  let texel=textureSample(patterns,patternSampler,in.uv,layer).r;
+  return vec4f((in.color+.055)*(texel*1.1)-.055,1.);
 }
 struct GlassVertex {
   @builtin(position) clip: vec4f,
@@ -139,8 +74,6 @@ export async function createForwardRenderer(app, sun) {
     {binding:0, visibility:GPUShaderStage.VERTEX, buffer:{type:'uniform'}},
     {binding:1, visibility:GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
-    {binding:3, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float'}},
-    {binding:4, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
@@ -171,11 +104,23 @@ export async function createForwardRenderer(app, sun) {
     buffer.unmap();
     return buffer;
   }
+  const mesh = model.boarding.group;
+  mesh.updateWorldMatrix(true,false);
+  const localFromWorld = mesh.matrixWorld.clone().invert();
+  const clip = mesh.matrixWorld.clone();
+  const cameraInYacht = mesh.matrixWorld.clone();
+  const eye = app.camera.position.clone();
+  const localSun=sun.clone().transformDirection(localFromWorld);
+  const deckLight=await loadDeckLight();
+  function uploadVertices(source,glass){
+    const prepared=glass?source:prepareOpaque(source,localSun,deckLight);
+    return attributes.map(name=>upload(prepared[name],GPUBufferUsage.VERTEX));
+  }
   let batches = model.meshes.map(mesh => {
     const geom = mesh.geometry;
-    const names = attributes;
+    const source=Object.fromEntries(attributes.map(name=>[name,geom.attributes[name].array]));
     return {
-      vertices:names.map(name => upload(geom.attributes[name].array,GPUBufferUsage.VERTEX)),
+      vertices:uploadVertices(source,mesh.material.transparent),
       indices:upload(geom.index.array,GPUBufferUsage.INDEX),
       indexFormat:geom.index.array instanceof Uint32Array ? 'uint32' : 'uint16',
       count:geom.index.count,
@@ -193,23 +138,12 @@ export async function createForwardRenderer(app, sun) {
   }
   const frame = new Float32Array(24);
   const uniform = device.createBuffer({size:frame.byteLength,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
-  const compressed=Uint8Array.from(atob(walkLight),c=>c.charCodeAt(0));
-  const decoded=await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
-  if(decoded.byteLength!==320*64*5)throw Error('Mapa de iluminación incompleto');
-  const contact=device.createTexture({label:'Prepared deck contact shadows',size:[320,64,5],format:'r8unorm',usage:GPUTextureUsage.COPY_DST|GPUTextureUsage.TEXTURE_BINDING});
-  device.queue.writeTexture({texture:contact},decoded,{bytesPerRow:320,rowsPerImage:64},[320,64,5]);
+  localSun.toArray(frame,20);
   const finishes=createFinishPatterns(device);
   const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
-    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:finishes.teak.createView()},{binding:4,resource:contact.createView({dimension:"2d-array"})}]});
-  model.stats.finishTextureBytes=finishes.bytes+decoded.byteLength;
-  model.stats.materialTextures=2;
-  const mesh = model.boarding.group;
-  mesh.updateWorldMatrix(true,false);
-  const localFromWorld = mesh.matrixWorld.clone().invert();
-  const clip = mesh.matrixWorld.clone();
-  const cameraInYacht = mesh.matrixWorld.clone();
-  const eye = app.camera.position.clone();
-  sun.clone().transformDirection(localFromWorld).toArray(frame,20);
+    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view}]});
+  model.stats.finishTextureBytes=finishes.bytes;
+  model.stats.materialTextures=1;
   let depth, depthView, color, colorView;
   return {
     get activeProfile() { return activeProfile; },
@@ -224,7 +158,8 @@ export async function createForwardRenderer(app, sun) {
           for(const b of p.batches) {
             const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
             result.batches.push(batch);
-            for(const name of attributes)batch.vertices.push(upload(b.attributes[name],GPUBufferUsage.VERTEX));
+            const prepared=result.batches.length===2?b.attributes:prepareOpaque(b.attributes,localSun,deckLight);
+            for(const name of attributes)batch.vertices.push(upload(prepared[name],GPUBufferUsage.VERTEX));
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
           }
         }
@@ -339,7 +274,7 @@ export async function createForwardRenderer(app, sun) {
     dispose() {
       disposed=true;
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      uniform.destroy(); contact.destroy(); finishes.texture.destroy(); finishes.teak.destroy(); depth?.destroy(); color?.destroy();
+      uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

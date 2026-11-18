@@ -66,15 +66,38 @@ export function teakPatternMips(width=512,height=4096) {
  }
  return levels;
 }
+// One filtered sample supplies every opaque finish. A slice is eight teak
+// planks high at the original 32 texels per plank. The fourteen central
+// slices cover all yacht deck vertices (board rows 8 through 119).
 export function createFinishPatterns(device) {
- const levels=finishPatternMips(),teakLevels=teakPatternMips(),usage=GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST;
- const texture=device.createTexture({label:'Prepared timber, canvas, instruments and boarding teak',size:[256,256,4],format:'rg8unorm',mipLevelCount:levels.length,usage});
- let teak;
- try {
-  teak=device.createTexture({label:'Prepared teak board joints',size:[512,4096],format:'r8unorm',mipLevelCount:teakLevels.length,usage});
-  levels.forEach(({size,data},mipLevel)=>device.queue.writeTexture({texture,mipLevel},data,{bytesPerRow:size*2,rowsPerImage:size},[size,size,4]));
-  teakLevels.forEach(({width,height,data},mipLevel)=>device.queue.writeTexture({texture:teak,mipLevel},data,{bytesPerRow:width},[width,height]));
-  return {texture,teak,bytes:[...levels,...teakLevels].reduce((n,l)=>n+l.data.byteLength,0),view:texture.createView({dimension:'2d-array'}),
-   sampler:device.createSampler({addressModeU:'repeat',addressModeV:'repeat',magFilter:'linear',minFilter:'linear',mipmapFilter:'linear'})};
- }catch(error){texture.destroy();teak?.destroy();throw error;}
+ const source=finishPatternMips(),deck=teakPatternMips();
+ const width=512,height=256,layers=20,mipLevelCount=10;
+ const texture=device.createTexture({label:'Prepared yacht finish atlas',size:[width,height,layers],format:'r8unorm',
+   mipLevelCount,usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST});
+ let bytes=0;
+ try{
+   for(let mip=0;mip<mipLevelCount;mip++){
+     const w=Math.max(1,width>>mip),h=Math.max(1,height>>mip),n=w*h;
+     const data=new Uint8Array(n*layers),tile=source[Math.min(mip,source.length-1)],size=tile.size;
+     const teak=deck[mip];
+     for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+       const i=y*w+x,t=(y%size)*size+x%size,channel=layer=>tile.data[(layer*size*size+t)*2];
+       const grain=tile.data[(size*size+t)*2+1]/255;
+       data[i]=channel(0);                               // wood
+       data[n+i]=channel(1);                             // canvas
+       data[2*n+i]=Math.max(channel(2)*.58,tile.data[(2*size*size+t)*2+1]); // instruments
+       data[3*n+i]=channel(3);                           // gangway caulking
+       data[4*n+i]=Math.round(255*(.33+.65*grain));      // woven rug
+       data[5*n+i]=Math.round(255*(.86+.25*grain)/1.1); // water
+       for(let page=0;page<14;page++){
+         const row=Math.min(teak.height-1,Math.floor(((page+1)*256+.5*(1<<mip))/(1<<mip))+y);
+         data[(6+page)*n+i]=teak.data[row*teak.width+x];
+       }
+     }
+     bytes+=data.byteLength;
+     device.queue.writeTexture({texture,mipLevel:mip},data,{bytesPerRow:w,rowsPerImage:h},[w,h,layers]);
+   }
+   return {texture,bytes,view:texture.createView({dimension:'2d-array'}),
+     sampler:device.createSampler({addressModeU:'repeat',addressModeV:'repeat',magFilter:'linear',minFilter:'linear',mipmapFilter:'linear'})};
+ }catch(error){texture.destroy();throw error;}
 }

@@ -1,6 +1,6 @@
-import {preloadBridgeAccess} from './bridge-access.js?v=chair-fidelity-1';
-import {decodeSaloon} from './main-saloon.js?v=chair-fidelity-1';
-import {bowRoom,bowRoute,prepareBowFloor} from './bow-geometry.js?v=chair-fidelity-1';
+import {preloadBridgeAccess} from './bridge-access.js?v=port-guest-1';
+import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
+import {bowRoom,bowRoute,prepareBowFloor} from './bow-geometry.js?v=port-guest-1';
 
 export const bowVersion='chair-fidelity-1';
 export function decodeBow(manifest,buffer) {

@@ -1,8 +1,8 @@
-import {preloadUpperInterior} from './upper-interior.js?v=chair-fidelity-1';
-import {decodeSaloon} from './main-saloon.js?v=chair-fidelity-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=chair-fidelity-1';
+import {preloadUpperInterior} from './upper-interior.js?v=port-guest-1';
+import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=chair-fidelity-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=port-guest-1';
 export const sunVersion='chair-fidelity-1';
 export function decodeSun(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:sunVersion,names:['exterior','upper','sun'],roomID:'SD_R01'}),f=result.flight;

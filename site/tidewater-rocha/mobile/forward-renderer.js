@@ -1,6 +1,6 @@
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
-import { nextProfile } from './main-saloon.js?v=chair-fidelity-1';
+import { nextProfile } from './main-saloon.js?v=port-guest-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.

@@ -1,8 +1,8 @@
-import {decodeSaloon} from './main-saloon.js?v=chair-fidelity-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=chair-fidelity-1';
+import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
-import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=chair-fidelity-1';
-import {preloadGuestAccess} from './guest-access.js?v=chair-fidelity-1';
+import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=port-guest-1';
+import {preloadGuestAccess} from './guest-access.js?v=port-guest-1';
 
 export const bridgeAccessVersion='chair-fidelity-1';
 export function decodeBridgeAccess(manifest,buffer) {

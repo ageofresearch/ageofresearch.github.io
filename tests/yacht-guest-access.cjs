@@ -10,6 +10,9 @@ module.exports=async function guestViews(frame,out,readFrame,mobile) {
     {name:'stair-turn',step:7,target:[17.4,-.08,2.6]},
     {name:'lower-landing',position:[17.210263340389897,-.0167544467966324],target:[18.8,-.7,3],deck:'LD'},
     {name:'distributor-aft',position:[16.8,-.1],target:[13.4,-.1,2.6],deck:'LD'},
+    {name:'cabin-door',position:[16.48,-.1],target:[16.10,3.12,2.53],deck:'LD'},
+    {name:'cabin-berth',position:[17.04,1.02],target:[15.87,2.75,2.29],deck:'LD'},
+    {name:'cabin-return',position:[17.04,2.48],target:[16.48,.35,2.58],deck:'LD'},
     {name:'distributor-forward',position:[13.7,-.1],target:[17.2,-.1,2.6],deck:'LD'},
   ]) {
     await frame.evaluate(({position,target,deck,step})=>{

@@ -1,3 +1,4 @@
+import {portCabin,cabinWalk} from '../site/tidewater-rocha/mobile/port-guest-cabin.js';
 import {writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {buildBridgeAccess,accessLOD} from './build-yacht-bridge-access.mjs';
@@ -13,6 +14,9 @@ export async function buildGuestAccess() {
     lod(p,context) {
       const guest=p.role?.startsWith('guest-'),flight=p.semanticParent==='stairs/guest';
       if(context.profile==='guest') {
+        // Upper-deck furniture is above two solid ceilings from this profile.
+        if(/^(UD|SD)_(FUR|SOF|SAN|EQU)_/.test(p.sourceID||p.anchor||p.id))
+          return {omit:true,reason:'Upper-deck furnishings above the enclosed guest stair and cabin'};
         if(guest||flight)return {error:0};
         // Retain the saloon entrance and vestibule around the profile portal.
         const near=p.bounds[3]>=15.8&&p.bounds[0]<=20&&p.bounds[2]<6;
@@ -62,19 +66,32 @@ export async function buildGuestAccess() {
             const near=Math.exp(-lamp/.48),height=Math.min(1,Math.max(0,(z-1.55)/2.28));
             part.light.push(.72+.31*height+.48*near*(.32+.68*height));
           }
+        }else if(role==='guest-cabin'){
+          part.light=Array.from({length:part.vertices.length/6},(_,k)=>{
+            const y=part.vertices[k*6+1],z=part.vertices[k*6+2];
+            if(part.materialID==='M107')return 1.32;
+            return .84+.14*Math.max(0,Math.min(1,(y-.45)/3))+.06*Math.min(1,(z-1.55)/2.2);
+          });
         }else part.light=Array(part.vertices.length/6).fill(.7);
         part.surfaceTypes=Array.from({length:part.vertices.length/6},(_,i)=>{
           const nz=part.vertices[i*6+5];
-          return role==='guest-ceiling'&&nz<-.5?9:part.finish?.[3]??0;
+          return (role==='guest-ceiling'||role==='guest-cabin'&&part.sourceID==='MD_DCK_001')&&nz<-.5?9:part.finish?.[3]??0;
         });
         additions.push(part);
       };
       for(const p of final) {
         const id=p.anchor||p.id.split('/')[0];
-        if(p.feature?.startsWith('lower lobby '))add(p,'guest-finish');
+        const cabinFurniture=/^LD_(FUR_00[1-4]|SOF_00[1-3])$/.test(id);
+        if(cabinFurniture||p.feature?.startsWith('port cabin '))add(p,'guest-cabin');
+        else if(/^HULL_GLA_00[12]$/.test(id))add(p,'guest-cabin',[14.30,3.60,2.40,17.82,3.81,3.21]);
+        else if(p.feature?.startsWith('lower lobby '))add(p,'guest-finish');
         else if(p.semanticParent==='stairs/guest')add(p,'guest-stair');
-        else if(id==='LD_DCK_001')add(p,'guest-floor',[13.17,-2.26,1.429,19.8,.65,1.551]);
+        else if(id==='LD_DCK_001'){
+          add(p,'guest-floor',[13.17,-2.26,1.429,19.8,.65,1.551]);
+          add(p,'guest-cabin',[14.26,.65,1.429,17.86,3.61,1.551],'-cabin');
+        }
 
+        else if(/^LD_PAR_00[5-9]$/.test(id))add(p,'guest-cabin');
         else if(p.deck==='LD'&&/^LD_(PAR|GLA)_/.test(id))add(p,'guest-boundary',[13.17,-2.26,1.55,19.8,.65,3.831]);
         else if(id==='LD_MAC_001')add(p,'guest-boundary',[13.15,-.75,1.55,13.35,.65,3.831]);
         else if(id==='MD_DCK_001') {
@@ -87,18 +104,19 @@ export async function buildGuestAccess() {
             const face=Array.from(p.indices.slice(i,i+3));
             if(face.every(k=>Math.abs(p.vertices[k*6+2]-3.83)<.002&&p.vertices[k*6+5]<-.5))indices.push(...face);
           }
+          add({...p,indices},'guest-cabin',[14.26,.65,3.829,17.86,3.61,3.831],'-cabin');
           add({...p,indices},'guest-ceiling',[13.17,-2.26,3.829,17.83,.65,3.831],'-underside');
         }
       }
       parts.push(...additions);
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {room:guestRoom,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {version:'port-guest-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),
         flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
           obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},
-        evidence:'Provisional shared guest stair and aft distributor; cabins, forward passage and service access remain pending'};
+        evidence:'Port double cabin fitted to VRCloud; the original berth, hull openings and door jambs fix its model coordinates. Other cabins, ensuite and forward passage remain pending'};
     }
   });
   return result;

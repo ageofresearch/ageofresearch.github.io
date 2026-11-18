@@ -506,3 +506,20 @@ There were no geometry downloads, GPU resource creations or frames over 50 ms
 during movement. The 39 individual frames over 25 ms remain in the raw reports;
 this reference does not assert that every frame is under 25 ms. Resident
 geometry was 11,138,892 bytes; finish textures stayed at 3,495,255 bytes.
+
+## Aft port guest cabin (`port-guest-1`)
+
+From the main saloon, descend the guest stair and turn through the port doorway
+in the aft lower distributor. The lower-deck selector also offers **Camarote
+de invitados de popa · Babor** (`LD_R03`). Both viewers share the berth,
+window openings, dressing seat, carpet and threshold. The existing cabin and
+wardrobe footprints determine the clear aisle. The images titled *Lower Lobby*
+and *Port Double Guest Cabin* in the [Grande 36M tour](https://vrcloud.com/?pv=1667308298)
+guide the finishes and fittings. Dimensions are estimates in model coordinates.
+The dressing mirror uses the existing material lighting. The ensuite and the
+other guest cabins remain pending on mobile.
+
+The cabin is prepared in the existing guest package and uses its resident
+graphics profile throughout the doorway. Generate it with
+`node scripts/build-yacht-guest-access.mjs`. The guest navigation, visual and
+cold-entry tests exercise the return trip from the bedside.

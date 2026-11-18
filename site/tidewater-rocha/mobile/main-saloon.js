@@ -1,4 +1,4 @@
-import { preloadUpper } from './upper-terrace.js?v=chair-fidelity-1';
+import { preloadUpper } from './upper-terrace.js?v=port-guest-1';
 import { connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
 
 export const saloonVersion = 'chair-fidelity-1';

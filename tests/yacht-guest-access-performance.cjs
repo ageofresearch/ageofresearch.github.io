@@ -38,7 +38,7 @@ async function measureGuest(base=defaultBase,out=defaultOut){
     const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
     if(w.model.guestAccessLoadState!=='ready')throw Error('Guest preparation failed');
     w.enterRoom('MD_R02');n.position=[14.4,0];n.stair=null;n.elevation=3.95;w.cameraElevation=3.95;w.applyPosition();
-    const path=w.model.guestAccess.route;
+    const path=[...w.model.guestAccess.route,...(w.model.guestAccess.cabinRoute??[])];
 
     let leg=0,index=1,previous;const start=performance.now(),original=app.frame;
     await new Promise((resolve,reject)=>{

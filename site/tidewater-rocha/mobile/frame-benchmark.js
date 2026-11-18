@@ -1,4 +1,4 @@
-import { routePoint, routeSegments, nearestRoutePoint, moveAlongRoute } from './aft-terrace.js?v=tour-fidelity-1';
+import { routePoint, routeSegments, nearestRoutePoint, moveAlongRoute } from './aft-terrace.js?v=chair-fidelity-1';
 const resolutionPhases = [{scale:1, label:'Completa'}, {scale:.5, label:'Reducida'}];
 const warmupMs = 2000;
 const durationMs = 60000;

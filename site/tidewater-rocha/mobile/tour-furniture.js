@@ -1,4 +1,4 @@
-import catalog from './tour-furniture-data.js?v=tour-fidelity-1';
+import catalog from './tour-furniture-data.js?v=chair-fidelity-1';
 
 // Fit the offline r110 shell to an assembly in Rocha coordinates. Normals use
 // the inverse transpose of the same map, including any reflection.

@@ -1,4 +1,4 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=tour-fidelity-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=chair-fidelity-1';
 import {supportedFloor} from './sun-deck-geometry.js?v=gangway-teak-1';
 
 export const guestRoom={id:'LD_R11',deck:'LD',name:'Distribuidor inferior de popa',displayName:'Distribuidor inferior de popa',

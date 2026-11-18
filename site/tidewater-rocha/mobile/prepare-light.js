@@ -1,4 +1,4 @@
-import {walkLight} from './walk-light.js?v=tour-fidelity-1';
+import {walkLight} from './walk-light.js?v=chair-fidelity-1';
 
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));
@@ -62,6 +62,13 @@ export function prepareOpaque(source,sun,map) {
         if(Math.abs(ny)<.74){u=y*.65;v=(Math.abs(nx)>.70?z:x)*1.7;}
         else {u=z*.60;v=x*1.7;}
       }
+      else if(code===50 || code===51){
+        layer=21;u=(localY+localX*.72)*3.2;v=(elevation+localX*.81)*5.0;
+        if(code===51){
+          const hem=clamp((elevation-4.744)/.028);
+          for(let c=0;c<3;c++)color[j+c]*=1.12+.82*hem;
+        }
+      }
       else if(code===3){layer=2;u=fu*430/(2*Math.PI);v=fv*410/(2*Math.PI);}
       else if(code===1){layer=0;u=localX/2.15;v=(localY/.105+64)/8;}
       else if(code===7){
@@ -70,7 +77,7 @@ export function prepareOpaque(source,sun,map) {
       }else if(boarding){layer=4;u=source.aSurface[k];v=source.aSurface[k+1];}
     }
     if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;}
-    if(layer>0)u*=.5; // two identical 256-wide tiles share each 512-wide slice
+    if(layer>0 && layer!==21)u*=.5; // two identical 256-wide tiles share each 512-wide slice
     if(layer===5){
       // Slate-blue pile with pale highlights from the mottled fibre field.
       for(let c=0;c<3;c++)color[j+c]*=[.92,1.20,1.42][c];

@@ -74,7 +74,7 @@ test('every visible source face of the four folding chairs reaches its draw', ()
       assert.ok(p.bounds[5]-p.bounds[2]>1);
     }
     assert.ok(posts.filter(p=>p.bounds[3]-p.bounds[0]>.08).length>=8,'Bent tubular stanchions at section ends');
-    assert.equal(seen.filter((id) => id.includes('director-chair')).length, 16);
+    assert.equal(seen.filter((id) => id.includes('director-chair')).length, 20);
   } finally {
     dispose();
   }

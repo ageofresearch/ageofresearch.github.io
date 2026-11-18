@@ -1,10 +1,10 @@
-import {configureAccessFloor} from './bridge-access-geometry.js?v=tour-fidelity-1';
-import {configureGuestFloor} from './guest-access-geometry.js?v=tour-fidelity-1';
-import {configureBowFloor} from './bow-geometry.js?v=tour-fidelity-1';
-import {configureInteriorFloor} from './upper-interior-geometry.js?v=tour-fidelity-1';
-import {configureBridgeFloor} from './bridge-geometry.js?v=tour-fidelity-1';
-import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=tour-fidelity-1';
-import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=tour-fidelity-1';
+import {configureAccessFloor} from './bridge-access-geometry.js?v=chair-fidelity-1';
+import {configureGuestFloor} from './guest-access-geometry.js?v=chair-fidelity-1';
+import {configureBowFloor} from './bow-geometry.js?v=chair-fidelity-1';
+import {configureInteriorFloor} from './upper-interior-geometry.js?v=chair-fidelity-1';
+import {configureBridgeFloor} from './bridge-geometry.js?v=chair-fidelity-1';
+import {describeSunFloor,supportedFloor} from './sun-deck-geometry.js?v=chair-fidelity-1';
+import { convexHull, distanceToFootprint, indexFootprints } from './terrace-geometry.js?v=chair-fidelity-1';
 
 // Source coordinates throughout. Display normalization is applied only by the renderer.
 // A small joint allowance covers the modeled bevels, never an invented landing.

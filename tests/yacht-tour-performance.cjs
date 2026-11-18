@@ -24,7 +24,9 @@ async function measure(browser,base){
       function point([x,y,z]){
         return w.model.group.localToWorld(app.camera.position.clone().set(y*b.sy,z-b.seaReference,x*b.sx-b.length/2));
       }
-      for(const [room,xy,axis,target] of [
+      for(const [room,xy,axis,target,direction=1,visit=room] of [
+        ['MD_R01',[6.68,-.48],0,[5.22,-.74,4.44],-1,'cockpit-first'],
+        ['MD_R01',[6.68,-.48],0,[5.22,-.74,4.44],-1,'cockpit-repeat'],
         ['swim-platform',[.35,-1.15],1,[2.4,0,3.65]],
         ['MD_R02',[9.25,0],0,[12.6,.1,4.8]],
         ['UD_R02',[14.55,0],0,[17.2,-1,6.66]],
@@ -39,12 +41,12 @@ async function measure(browser,base){
         await new Promise(resolve=>{app.frame=function(dt){
           const t=performance.now();if(previous!==null)times.push(t-previous);previous=t;
           const v=[0,0],before=n.position[axis];
-          v[axis]=tick<60?.01:-.01;n.move(...v);travelled+=Math.abs(n.position[axis]-before);
+          v[axis]=direction*(tick<60?.01:-.01);n.move(...v);travelled+=Math.abs(n.position[axis]-before);
           move.push(performance.now()-t);original.call(app,dt);
           if(++tick===120){app.frame=original;resolve();}
         };});
         const sorted=times.toSorted((a,b)=>a-b),mean=times.reduce((a,b)=>a+b)/times.length;
-        results.push({room,mean,fps:1000/mean,p95:sorted[Math.ceil(sorted.length*.95)-1],over25:times.filter(t=>t>25).length,
+        results.push({room:visit,mean,fps:1000/mean,p95:sorted[Math.ceil(sorted.length*.95)-1],over25:times.filter(t=>t>25).length,
           over50:times.filter(t=>t>50).length,maxMovementMs:Math.max(...move),travelled,
           gpuAllocations:tourAllocations.filter(t=>t>=start).length,requests:performance.getEntriesByType('resource').filter(e=>e.startTime>=start).length,
           scale:app.engine.renderScale,samples:app.gangwayRenderer.samples,triangles:w.model.stats.triangles,geometryBytes:w.model.stats.residentGeometryBytes});
@@ -72,7 +74,7 @@ async function measure(browser,base){
         assert.ok(r.travelled>1.15,`${name} route blocked in ${r.room}, distance ${r.travelled}`);
       }
     }
-    for(let i=0;i<4;i++){
+    for(let i=0;i<runs.candidate[0].length;i++){
       const r=runs.reference.map(rows=>rows[i]),c=runs.candidate.map(rows=>rows[i]),room=c[0].room;
       const mean=med(c.map(v=>v.mean)),baseline=med(r.map(v=>v.mean)),p95=med(c.map(v=>v.p95));
       console.log({room,mean,baseline,p95});

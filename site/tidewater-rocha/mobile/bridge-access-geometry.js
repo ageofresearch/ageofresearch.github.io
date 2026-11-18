@@ -1,5 +1,5 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=tour-fidelity-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=tour-fidelity-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=chair-fidelity-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=chair-fidelity-1';
 
 export const accessRoom={id:'MD_R07',deck:'MD',name:'Vestíbulo interior',displayName:'Vestíbulo interior',
   spawn:[18.5,1.35,5.55],look:[19.16,1.1,5.2],bbox:[17.65,-.05,19.7,1.8],label:[18.5,1.35],

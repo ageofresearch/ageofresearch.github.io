@@ -1,6 +1,6 @@
-import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=tour-fidelity-1';
-import {createFinishPatterns} from './finish-patterns.js?v=tour-fidelity-1';
-import { nextProfile } from './main-saloon.js?v=tour-fidelity-1';
+import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
+import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
+import { nextProfile } from './main-saloon.js?v=chair-fidelity-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -40,7 +40,10 @@ struct Vertex {
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
   if(in.layer<0){return vec4f(in.color,1.);}
   let layer=select(in.layer-1,6+clamp(i32(floor(in.uv.y))-1,0,13),in.layer==0);
-  let texel=textureSample(patterns,patternSampler,in.uv,layer).r;
+  // Rug and water use the same filtered noise with different contrast.
+  let atlasLayer=select(select(layer,4,in.layer==6),5,in.layer==21);
+  let sampleValue=textureSample(patterns,patternSampler,in.uv,atlasLayer).r;
+  let texel=select(sampleValue,(.86+(.25/.65)*(sampleValue-.33))/1.1,in.layer==6);
   return vec4f((in.color+.055)*(texel*1.1)-.055,1.);
 }
 struct GlassVertex {

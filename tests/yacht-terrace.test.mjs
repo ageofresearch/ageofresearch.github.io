@@ -38,7 +38,7 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
   const furnishings=manifest.parts.filter(p=>p.role==='furniture');
-  assert.equal(furnishings.length,30);
+  assert.equal(furnishings.length,34);
   assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','chair-4','dining-table','port-chaise','wet-bar']);
   assert.ok(!manifest.parts.some(p=>/MD_SAN_|covered-aft-seating|oval-table/.test(p.id)));
   assert.ok(manifest.floor.every(([a,b,c])=>Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>1e-10),'Degenerate faces must not open navigation holes');
@@ -139,7 +139,16 @@ test('dining chairs face the table and clear their neighbours and upper stair ra
   const table=manifest.parts.find(p=>p.feature==='cockpit transverse teak dining top');
   for(let n=1;n<=4;n++){
     const sling=manifest.parts.find(p=>p.feature==='director chair '+n+' canvas sling seat');
-    assert.ok(sling.bounds[0]>table.bounds[3]);
+    const group=manifest.parts.filter(p=>p.groupID==='chair-'+n);
+    const back=group.find(p=>p.feature.endsWith('canvas back'));
+    const sides=group.find(p=>p.feature.endsWith('wrapped canvas legs and sides'));
+    assert.ok(back.bounds[0] > (sling.bounds[0]+sling.bounds[3])/2,'Back must face the aisle');
+    assert.ok(sling.bounds[0]<table.bounds[3] && sling.bounds[5]<table.bounds[2],'Seat tucks under the top');
+    assert.ok(back.bounds[0]>table.bounds[3] && Math.abs(sides.bounds[2]-3.95)<1e-6);
+    const cy=(back.bounds[1]+back.bounds[4])/2;
+    const footprint=manifest.collisionFootprints.find(f=>f.id==='furniture/chair-'+n);
+    assert.equal(indexFootprints([footprint])(5.25,cy,.14),true);
+    assert.equal(indexFootprints([footprint])(5.60,cy,.14),false);
     assert.ok(sling.bounds[1]<table.bounds[4]&&sling.bounds[4]>table.bounds[1]);
   }
   const data=JSON.parse(await readFile(new URL('../rocha/luz-de-mar/model.json',root)));
@@ -154,6 +163,19 @@ test('dining chairs face the table and clear their neighbours and upper stair ra
       assert.ok(Math.abs(mobile.bounds[5]-rail.bounds[5])<1e-6,`Do not cut the top of ${rail.feature}`);
     }
   }finally{source.dispose();}
+});
+
+test('the aisle behind the four backs connects both ends of the dining table',()=>{
+  const {boarding,dispose}=walkingModel();
+  try {
+    const points=[[4.50,1.06],[5.65,1.06],[5.65,-2.29],[4.50,-2.29]];
+    for(let i=1;i<points.length;i++){
+      for(let k=0;k<=100;k++){
+        const p=points[i-1].map((a,j)=>a+(points[i][j]-a)*k/100);
+        assert.ok(boarding.safe(...p,.14),'Dining aisle closed at '+p);
+      }
+    }
+  }finally{dispose();}
 });
 
 test('rotated furniture footprints retain their open corners and body clearance',()=>{

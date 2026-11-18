@@ -26,10 +26,11 @@ possible positions. A face pointing away from the entire camera volume of a
 longitudinal band can be skipped. The remaining faces occupy one contiguous
 range in the resident index buffer for that band. This uses the actual triangle
 winding and a conservative margin. Glass keeps its original ordering. Moving
-the camera selects an index offset in the same mesh. On the gangway a separate range orders the same faces from near to far. When
-the entire camera frustum points below eye level, its prefix includes every
-triangle reaching that height. All ranges are exercised before the route opens.
-Across the five final profiles approximately 8.6 MiB of geometry stays resident.
+the camera selects an index offset in the same mesh. The gangway and upper interior have separate ranges ordered from near to far.
+Their prefixes cover all potentially visible geometry when the whole frustum
+points down at the gangway or aft from the upper interior. All ranges are
+exercised before the route opens. Across the five final profiles approximately
+8.7 MiB of geometry stays resident.
 
 `tests/yacht-gangway-fidelity.test.mjs` checks the exact source faces of the
 hanging cables, chairs and piping against the actual submitted index ranges.

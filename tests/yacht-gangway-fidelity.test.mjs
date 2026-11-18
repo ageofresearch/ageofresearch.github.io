@@ -92,29 +92,31 @@ test('the packaged rails, gate, wet bar and four saloon armchairs retain their c
   assert.ok(bar.length && bar.every((p) => p.triangles > 0 && p.error <= 0.006));
 });
 
-test('both boarding draws include every face visible from the corridor or while looking down at the teak', () => {
-  const batch = decodeGuestAccess(manifest, buffer).profiles.exterior.batches[0];
-  const { box, first, count, lowCount } = batch.boardingView;
-  const all = new Set(),
-    low = new Set(),
-    indices = batch.indices,
-    vertices = batch.attributes.position;
-  const indexedKey = (i) => indices.subarray(i, i + 3).join(',');
-  for (let i = first; i < first + count; i += 3) {
-    all.add(indexedKey(i));
-    if (i < first + lowCount) low.add(indexedKey(i));
-  }
-  for (let i = 0; i < first; i += 3) {
-    const [a, b, c] = face(vertices, indices, i);
-    const u = b.map((x, k) => x - a[k]),
-      v = c.map((x, k) => x - a[k]);
-    const n = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
-    const visible = [0, 1, 2].reduce((d, k) => d + n[k] * (box[k + (n[k] > 0 ? 3 : 0)] - a[k]), 0) > 0;
-    if (!visible) continue;
-    assert.ok(all.has(indexedKey(i)), 'Missing visible face in boarding corridor');
-    if (Math.min(a[1], b[1], c[1]) <= box[4]) assert.ok(low.has(indexedKey(i)), 'Missing face below the eye');
-  }
-});
+for (const name of ['exterior', 'upper'])
+  test(name + ' local draw covers every visible face in its eye box', () => {
+    const batch = decodeGuestAccess(manifest, buffer).profiles[name].batches[0];
+    const { axis, box, first, count, lowCount } = batch.localView;
+    const all = new Set(),
+      low = new Set(),
+      indices = batch.indices,
+      vertices = batch.attributes.position;
+    const indexedKey = (i) => indices.subarray(i, i + 3).join(',');
+    for (let i = first; i < first + count; i += 3) {
+      all.add(indexedKey(i));
+      if (i < first + lowCount) low.add(indexedKey(i));
+    }
+    for (let i = 0; i < first; i += 3) {
+      const [a, b, c] = face(vertices, indices, i);
+      const u = b.map((x, k) => x - a[k]),
+        v = c.map((x, k) => x - a[k]);
+      const n = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
+      const visible = [0, 1, 2].reduce((d, k) => d + n[k] * (box[k + (n[k] > 0 ? 3 : 0)] - a[k]), 0) > 0;
+      if (!visible) continue;
+      assert.ok(all.has(indexedKey(i)), 'Missing visible face in local draw');
+      if (Math.min(a[axis], b[axis], c[axis]) <= box[axis + 3])
+        assert.ok(low.has(indexedKey(i)), 'Missing face in directional draw');
+    }
+  });
 
 test('incomplete, overlapping backwards or out-of-bounds draw windows fail before activation', () => {
   for (const change of [
@@ -123,8 +125,8 @@ test('incomplete, overlapping backwards or out-of-bounds draw windows fail befor
     (v) => (v.count -= 3),
   ]) {
     const broken = structuredClone(manifest);
-    change(broken.profiles.exterior.batches[0].boardingView);
-    assert.throws(() => decodeGuestAccess(broken, buffer), /pasarela/);
+    change(broken.profiles.exterior.batches[0].localView);
+    assert.throws(() => decodeGuestAccess(broken, buffer), /cubierta/);
   }
   for (const mutate of [
     (r) => (r[0][0] += 3),

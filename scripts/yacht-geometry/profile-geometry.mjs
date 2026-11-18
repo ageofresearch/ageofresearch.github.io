@@ -79,19 +79,38 @@ function opaqueRanges(position, indices, profile) {
   return { indices: groups.flat(), ranges };
 }
 
-// From the narrow boarding corridor many distant faces point away for its
-// entire length. Order the surviving opaque faces front-to-back for this view.
-// Below-eye geometry is a prefix, so looking down can also skip the upper decks.
-function boardingDraw(positions, indices) {
-  const box = [
-    2.4 * basis.sy,
-    3.3 - basis.seaReference,
-    -4.7 * basis.sx - basis.length / 2,
-    3.85 * basis.sy,
-    5.85 - basis.seaReference,
-    2.65 * basis.sx - basis.length / 2,
-  ];
-  const eye = [3.1 * basis.sy, 5.15 - basis.seaReference, -1.7 * basis.sx - basis.length / 2];
+// Visitors on the gangway and inside the upper interior occupy small boxes.
+// The low prefix is sufficient whenever the entire frustum points down (Y)
+// or aft (Z), respectively. Sort the surviving opaque cover front-to-back.
+const longitudinal = (x) => x * basis.sx - basis.length / 2;
+const viewBoxes = {
+  exterior: {
+    axis: 1,
+    box: [
+      2.4 * basis.sy,
+      3.3 - basis.seaReference,
+      longitudinal(-4.7),
+      3.85 * basis.sy,
+      5.85 - basis.seaReference,
+      longitudinal(2.65),
+    ],
+    eye: [3.1 * basis.sy, 5.15 - basis.seaReference, longitudinal(-1.7)],
+  },
+  upper: {
+    axis: 2,
+    box: [
+      -1.8 * basis.sy,
+      7.2 - basis.seaReference,
+      longitudinal(13),
+      1.8 * basis.sy,
+      8 - basis.seaReference,
+      longitudinal(18.65),
+    ],
+    eye: [0, 7.6 - basis.seaReference, longitudinal(15.5)],
+  },
+};
+
+function localDraw(positions, indices, { axis, box, eye }) {
   const low = [],
     high = [];
   for (let i = 0; i < indices.length; i += 3) {
@@ -105,12 +124,13 @@ function boardingDraw(positions, indices) {
       ny * (box[ny >= 0 ? 4 : 1] - positions[a + 1]) +
       nz * (box[nz >= 0 ? 5 : 2] - positions[a + 2]);
     if (far < -0.02 * Math.hypot(nx, ny, nz)) continue;
-    const below = Math.min(positions[a + 1], positions[b + 1], positions[c + 1]) <= box[4] + 0.02;
+    const below =
+      Math.min(positions[a + axis], positions[b + axis], positions[c + axis]) <= box[axis + 3] + 0.02;
     (below ? low : high).push(ia, ib, ic);
   }
   const sorted = (list) =>
     Array.from(orderOpaqueTriangles(positions, Uint32Array.from(list), eye, 0.25, true));
-  return { box, lowCount: low.length, indices: sorted(low).concat(sorted(high)) };
+  return { axis, box, lowCount: low.length, indices: sorted(low).concat(sorted(high)) };
 }
 
 export function packWalkProfile(boarding, profile, audit, store) {
@@ -121,10 +141,11 @@ export function packWalkProfile(boarding, profile, audit, store) {
     const submission = glass
       ? { indices: geometry.index.array }
       : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile);
-    let boardingView;
-    if (!glass && profile === 'exterior') {
-      const view = boardingDraw(geometry.attributes.position.array, geometry.index.array);
-      boardingView = {
+    let localView;
+    if (!glass && viewBoxes[profile]) {
+      const view = localDraw(geometry.attributes.position.array, geometry.index.array, viewBoxes[profile]);
+      localView = {
+        axis: view.axis,
         box: view.box,
         first: submission.indices.length,
         count: view.indices.length,
@@ -161,14 +182,14 @@ export function packWalkProfile(boarding, profile, audit, store) {
       glass,
       attributes,
       indices,
-      ...(boardingView && { boardingView }),
+      ...(localView && { localView }),
       ...(submission.ranges && { ranges: submission.ranges }),
     };
   });
   const [opaque, glass] = batches;
   const triangles =
     (glass.indices.length +
-      Math.max(opaque.boardingView?.count ?? 0, ...opaque.ranges.map(([, count]) => count))) /
+      Math.max(opaque.localView?.count ?? 0, ...opaque.ranges.map(([, count]) => count))) /
     3;
   return { batches, triangles, geometryBytes, audit, visibility: { start, step } };
 }

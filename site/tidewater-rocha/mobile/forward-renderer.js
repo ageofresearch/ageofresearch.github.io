@@ -167,6 +167,7 @@ export async function createForwardRenderer(app, sun) {
   mesh.updateWorldMatrix(true,false);
   const localFromWorld = mesh.matrixWorld.clone().invert();
   const clip = mesh.matrixWorld.clone();
+  const cameraInYacht = mesh.matrixWorld.clone();
   const eye = app.camera.position.clone();
   sun.clone().transformDirection(localFromWorld).toArray(frame,20);
   let depth, depthView, color, colorView;
@@ -181,7 +182,7 @@ export async function createForwardRenderer(app, sun) {
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[]};
           for(const b of p.batches) {
-            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,boardingView:b.boardingView};
+            const batch={vertices:[],indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView};
             result.batches.push(batch);
             for(const name of attributes)batch.vertices.push(upload(b.attributes[name],GPUBufferUsage.VERTEX));
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
@@ -229,7 +230,7 @@ export async function createForwardRenderer(app, sun) {
           // First and last ranges together touch the complete resident index buffer.
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
-          if(profiles[name].batches[0].boardingView)warmBands.push('boarding');
+          if(profiles[name].batches[0].localView)warmBands.push('local');
           for(const band of warmBands){
             app.gpu.beginFrame();this.render(name,target.createView(),band);app.gpu.submit();
             await app.gpu.queue.onSubmittedWorkDone();
@@ -275,14 +276,15 @@ export async function createForwardRenderer(app, sun) {
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
           const {start,step}=profiles[activeProfile].visibility;
-          const view=batch.boardingView,box=view?.box;
+          const view=batch.localView,box=view?.box;
           let first,count;
-          if(view&&(preparedBand==='boarding'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
+          if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
             eye.y>=box[1]&&eye.y<=box[4]&&eye.z>=box[2]&&eye.z<=box[5])){
-            // Highest world-Y ray of the whole perspective frustum. The vessel
-            // has yaw only. Include projection offsets and camera roll.
-            const m=camera.matrixWorld.elements,p=camera.projectionMatrix.elements;
-            const highestRay=-m[9]+m[1]*p[8]/p[0]+m[5]*p[9]/p[5]+Math.abs(m[1]/p[0])+Math.abs(m[5]/p[5]);
+            // Max component across the four frustum rays in yacht coordinates.
+            // Include camera roll, projection offsets and the yacht rotation.
+            const m=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
+            const axis=view.axis,p=camera.projectionMatrix.elements;
+            const highestRay=-m[axis+8]+m[axis]*p[8]/p[0]+m[axis+4]*p[9]/p[5]+Math.abs(m[axis]/p[0])+Math.abs(m[axis+4]/p[5]);
             first=view.first;count=preparedBand===null&&highestRay<-.001?view.lowCount:view.count;
           }else{
             const band=preparedBand??Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-start)/step)));

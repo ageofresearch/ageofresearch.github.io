@@ -15,7 +15,9 @@ export function finishPatternMips(size=256) {
  const levels=[];let data=new Float32Array(size*size*7);
  for(let y=0;y<size;y++)for(let x=0;x<size;x++){
   const u=(x+.5)/size,v=(y+.5)/size,tau=Math.PI*2,i=y*size+x;
-  data[i]=.97+.032*Math.sin(v*tau+1.2*Math.sin(u*tau))+.021*Math.sin(v*tau*7+1.7*Math.sin(u*tau));
+  const grain=v+.055*Math.sin(u*tau)+.021*Math.sin(3*u*tau+v*tau);
+  data[i]=.96+.084*Math.sin(3*tau*grain)+.042*Math.sin(23*tau*grain+.8*Math.sin(u*tau))
+    +.030*Math.sin(51*tau*grain)+.055*(field(u,v,9)-.5);
   data[size*size+i]=.985+.046*Math.sin(u*tau)*Math.sin(v*tau)+.012*Math.cos(tau*3*v);
   const curl=field(u,v,4)*.21;
   data[6*size*size+i]=.41*field(u,v,7)+.36*field(u+curl,v-curl,28)+.23*field(u,v,110);

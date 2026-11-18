@@ -36,6 +36,7 @@ on:
       - 'tests/fixtures/yacht-spatial-pending.json'
       - 'scripts/audit-yacht-*'
       - 'scripts/yacht-spatial-requirements.txt'
+      - 'tests/yacht-tour-performance.cjs'
       - 'tests/yacht-cold-walk.cjs'
       - 'tests/yacht-readiness.test.mjs'
       - 'scripts/build-yacht-upper.mjs'
@@ -100,7 +101,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        route: [bridge, gangway, cold-walk, bow, access, guest]
+        route: [bridge, gangway, cold-walk, bow, access, guest, tour]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -109,7 +110,7 @@ jobs:
             site/tidewater-rocha
             tests
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        if: matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access'
+        if: matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access' || matrix.route == 'tour'
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.base.sha }}
@@ -136,6 +137,7 @@ jobs:
           fi
           export NODE_PATH="$RUNNER_TEMP/browser/node_modules"
           case "$YACHT_PERF_CASE" in
+            tour) node tests/yacht-tour-performance.cjs ;;
             bridge) node tests/yacht-bridge-comparison.cjs ;;
             guest) node tests/yacht-guest-access-performance.cjs ;;
             gangway) node tests/yacht-gangway-performance.cjs ;;

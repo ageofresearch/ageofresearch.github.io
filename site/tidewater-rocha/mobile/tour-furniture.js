@@ -129,6 +129,14 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
     add('LD_DCK_001',box([13.345,y,1.56,13.37,y+.427,3.53],.004),'M96','lower lobby bookmatched door '+i);
     add('LD_DCK_001',box([13.371,y+(i?.035:.34),2.47,13.398,y+(i?.08:.385),2.51],.003),'M19','lower lobby door pull '+i);
   }
+  add('LD_DCK_001',box([13.342,-.548,3.539,13.369,.343,3.817],.004),'M96','lower lobby joinery transom');
+  // The overheads fit between the partition faces. Their warm wash is
+  // sampled on the surrounding finishes while the guest package is built.
+  for(const x of [13.97,15.27,16.57]){
+    const aperture=outline(x,-.10,.135,.135,.064);
+    add('LD_DCK_001',slab(aperture,3.804,3.830,.003),'M38','lower lobby ceiling lamp trim '+x);
+    add('LD_DCK_001',slab(outline(x,-.10,.106,.106,.052),3.802,3.804,0),'M99','lower lobby frosted lens '+x);
+  }
   for(const p of parts()){
     const id=p.anchor||p.id.split('/')[0];
     let material;

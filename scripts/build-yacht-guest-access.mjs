@@ -2,7 +2,7 @@ import {writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {buildBridgeAccess,accessLOD} from './build-yacht-bridge-access.mjs';
 import {normalizeRenderedPart,boundsOf} from './build-yacht-saloon.mjs';
-import {clipGeometry} from './build-yacht-terrace.mjs';
+import {clipGeometry,subdivide} from './build-yacht-terrace.mjs';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {guestRoom,guestLandings,guestDomains,guestApproach} from '../site/tidewater-rocha/mobile/guest-access-geometry.js';
 
@@ -41,7 +41,19 @@ export async function buildGuestAccess() {
         const p=normalizeRenderedPart(source,model),g=box?clipGeometry(p,box):{vertices:Array.from(p.vertices),indices:Array.from(p.indices)};
         if(!g.indices.length)return;
         const part={...p,...g,id:p.id+'/guest-access'+suffix,sourceID:p.anchor||p.id.split('/')[0],role,bounds:boundsOf(g.vertices)};
-        part.light=Array(part.vertices.length/6).fill(.7);
+        if(role==='guest-boundary'||role==='guest-ceiling'||role==='guest-finish'){
+          // Broad uniform wall triangles cannot interpolate a local lamp wash.
+          // Subdivide just the distributor envelope, keeping its collision mesh.
+          if(/^LD_PAR_0(?:27|28)\/guest-access$/.test(part.id)||part.feature?.includes('bookmatched door'))
+            Object.assign(part,subdivide(part,.66));
+          part.light=[];
+          for(let i=0;i<part.vertices.length;i+=6){
+            const [x,y,z]=part.vertices.slice(i,i+3);
+            const lamp=Math.min(...[13.97,15.27,16.57].map(l=>(x-l)**2))+(y+.10)**2;
+            const near=Math.exp(-lamp/.48),height=Math.min(1,Math.max(0,(z-1.55)/2.28));
+            part.light.push(.72+.31*height+.48*near*(.32+.68*height));
+          }
+        }else part.light=Array(part.vertices.length/6).fill(.7);
         part.surfaceTypes=Array.from({length:part.vertices.length/6},(_,i)=>{
           const nz=part.vertices[i*6+5];
           return role==='guest-ceiling'&&nz<-.5?9:part.finish?.[3]??0;

@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 // range in the same buffers, pipeline, profile, camera and render pass.
 module.exports=async function sightlineFrames(frame,readFrame){
   for(const [room,xy,target] of [
+    ['MD_R01',[6.68,-.48],[5.22,-.74,4.44]],
     ['swim-platform',[.35,-1.15],[2.4,0,3.65]],
     ['swim-platform',[.35,.5],[2.55,.25,3.72]],
     ['UD_R04',[26.86,0],[23.1,0,6.75]],

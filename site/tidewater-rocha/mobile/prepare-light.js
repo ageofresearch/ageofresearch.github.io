@@ -63,7 +63,7 @@ export function prepareOpaque(source,sun,map) {
         else {u=z*.60;v=x*1.7;}
       }
       else if(code===50 || code===51){
-        layer=21;u=(localY+localX*.72)*3.2;v=(elevation+localX*.81)*5.0;
+        layer=20;u=(localY+localX*.72)*3.2;v=(elevation+localX*.81)*5.0;
         if(code===51){
           const hem=clamp((elevation-4.744)/.028);
           for(let c=0;c<3;c++)color[j+c]*=1.12+.82*hem;
@@ -77,7 +77,7 @@ export function prepareOpaque(source,sun,map) {
       }else if(boarding){layer=4;u=source.aSurface[k];v=source.aSurface[k+1];}
     }
     if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;}
-    if(layer>0 && layer!==21)u*=.5; // two identical 256-wide tiles share each 512-wide slice
+    if(layer>0 && layer!==20)u*=.5; // two identical 256-wide tiles share each 512-wide slice
     if(layer===5){
       // Slate-blue pile with pale highlights from the mottled fibre field.
       for(let c=0;c<3;c++)color[j+c]*=[.92,1.20,1.42][c];

@@ -80,6 +80,18 @@ test('every visible source face of the four folding chairs reaches its draw', ()
   }
 });
 
+test('the chair weave occupies an atlas slice beyond the yacht deck', () => {
+  const data=decodeGuestAccess(manifest,buffer);
+  for(const profile of Object.values(data.profiles)){
+    const attrs=profile.batches[0].attributes;
+    const positions=attrs.position, surface=attrs.aSurface;
+    for(let i=0;i<positions.length/3;i++){
+      if(surface[i*4+2]===1)
+        assert.ok(positions[i*3]/basis.sy/.105+64<112,'Deck enters the cockpit canvas atlas slice');
+    }
+  }
+});
+
 test('the packaged rails, gate, wet bar and four saloon armchairs retain their curved meshes', () => {
   const audit = manifest.profiles.exterior.audit;
   for (const [pattern, pieces, minTriangles] of [
@@ -150,7 +162,7 @@ test('incomplete, overlapping backwards or out-of-bounds draw windows fail befor
 test('invalid directional windows cannot replace a working navigation package',()=>{
   for(const edit of [
     b=>{b.views[0].first+=3;}, b=>{b.views.at(-1).count-=3;},
-    b=>{b.views[0].sign=0;}, b=>{b.views[0].box[5]=b.views[0].box[2];}, b=>{b.cone[0]=NaN;},
+    b=>{b.views[0].sign=0;}, b=>{b.views[0].box[5]=b.views[0].box[2];}, b=>{b.cone[0]=NaN;}, b=>{b.views.at(-1).cone=[2.8,-1,1.25];},
   ]){
     const broken=structuredClone(manifest);edit(broken.profiles.exterior.batches[0]);
     assert.throws(()=>decodeGuestAccess(broken,buffer),/cubierta|direccional|dibujo/);

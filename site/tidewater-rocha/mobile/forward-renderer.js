@@ -40,10 +40,7 @@ struct Vertex {
 @fragment fn fragment(in: Vertex) -> @location(0) vec4f {
   if(in.layer<0){return vec4f(in.color,1.);}
   let layer=select(in.layer-1,6+clamp(i32(floor(in.uv.y))-1,0,13),in.layer==0);
-  // Rug and water use the same filtered noise with different contrast.
-  let atlasLayer=select(select(layer,4,in.layer==6),5,in.layer==21);
-  let sampleValue=textureSample(patterns,patternSampler,in.uv,atlasLayer).r;
-  let texel=select(sampleValue,(.86+(.25/.65)*(sampleValue-.33))/1.1,in.layer==6);
+  let texel=textureSample(patterns,patternSampler,in.uv,layer).r;
   return vec4f((in.color+.055)*(texel*1.1)-.055,1.);
 }
 struct GlassVertex {
@@ -266,8 +263,8 @@ export async function createForwardRenderer(app, sun) {
               return -component(8)+component(0)*p[8]/p[0]+component(4)*p[9]/p[5]
                 -Math.abs(component(0)/p[0])-Math.abs(component(4)/p[5])>.001;
             };
-            directional=batch.views.find(({box:b,sign})=>eye.x>=b[0]&&eye.x<=b[3]&&eye.y>=b[1]&&eye.y<=b[4]&&eye.z>=b[2]&&eye.z<=b[5]&&
-              inside(sign,0,1,batch.cone[0])&&inside(sign,0,-1,batch.cone[0])&&inside(sign,1,1,batch.cone[1])&&inside(sign,1,-1,batch.cone[2]));
+            directional=batch.views.find(({box:b,sign,cone=batch.cone})=>eye.x>=b[0]&&eye.x<=b[3]&&eye.y>=b[1]&&eye.y<=b[4]&&eye.z>=b[2]&&eye.z<=b[5]&&
+              inside(sign,0,1,cone[0])&&inside(sign,0,-1,cone[0])&&inside(sign,1,1,cone[1])&&inside(sign,1,-1,cone[2]));
           }
           if(directional){first=directional.first;count=directional.count;}
           else if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&

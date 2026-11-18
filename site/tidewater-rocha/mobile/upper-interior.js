@@ -1,6 +1,6 @@
-import {preloadBridge} from './bridge-helm.js?v=chair-fidelity-1';
-import {decodeSaloon} from './main-saloon.js?v=chair-fidelity-1';
-import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=chair-fidelity-1';
+import {preloadBridge} from './bridge-helm.js?v=port-guest-1';
+import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
+import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=port-guest-1';
 
 export const upperInteriorVersion='chair-fidelity-1';
 export function decodeUpperInterior(manifest,buffer) {

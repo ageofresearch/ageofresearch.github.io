@@ -1,6 +1,6 @@
-import {preloadSun} from './sun-deck.js?v=chair-fidelity-1';
-import {decodeSaloon} from './main-saloon.js?v=chair-fidelity-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=chair-fidelity-1';
+import {preloadSun} from './sun-deck.js?v=port-guest-1';
+import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
 export const upperVersion='chair-fidelity-1';
 export function decodeUpper(manifest,buffer) {

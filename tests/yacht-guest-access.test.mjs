@@ -59,6 +59,18 @@ test('continuous saloon/stair/distributor returns, every tread, stops and diagon
       assert.equal(n.deck,'MD');assert.equal(n.stair,null);assert.equal(n.elevation,3.95);
       travel(n,guestApproach.toReversed(),hz);
       travel(n,saloon.toReversed(),hz);
+      n.enterRoom('MD_R02');
+      travel(n,[...saloon,...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,...guest.cabinRoute],hz);
+      assert.equal(n.location().id,'LD_R03');
+      const atBed=n.position.slice();
+      n.move(0,0);
+      for(const offset of [-.018,.018])travel(n,[[atBed[0]+offset,atBed[1]-.035],atBed],hz);
+      travel(n,[...guest.cabinRoute.toReversed(),guestLandings.lower,...flight.route.path,...guestApproach.toReversed(),...saloon.toReversed()],hz);
+      assert.equal(n.deck,'MD');
+      for(const point of [[15.8,.35],[16.05,.37],[16.91,.37],[15.85,2.1],[17.55,2],[14.45,1.05],[17.05,3.56]])
+        assert.equal(n.floorSafe(...point,'LD'),false,'Blocked cabin furnishing or jamb '+point);
+      n.enterRoom('LD_R03');assert.equal(n.location().id,'LD_R03');
+      assert.deepEqual(n.position,guest.cabin.spawn.slice(0,2));
       for(const s of flight.surfaces.filter(s=>s.kind==='tread')) {
         const ps=s.polygons.flat(),p=[0,1].map(k=>(Math.min(...ps.map(p=>p[k]))+Math.max(...ps.map(p=>p[k])))/2);
         n.deck='LD';n.position=p;n.elevation=s.height;n.stair={route:flight.route,surfaceIndex:s.index,d:0};
@@ -87,7 +99,7 @@ test('covered shower faces no longer block descent; exposed glazing and the stai
 test('pending rooms, body margins and sideways approaches remain closed',()=>{
   const f=mobile();try {
     const n=f.walk.nav;
-    for(const p of [[13.3,-.1],[14.7,1.7],[14.7,-2.3],[20,-.1],[18,-.1],[16,.25],[16,-.5]])assert.equal(n.floorSafe(...p,'LD'),false,String(p));
+    for(const p of [[13.3,-.1],[15.6,2.1],[14.7,-2.3],[20,-.1],[18,-.1],[16,.25],[16,-.5]])assert.equal(n.floorSafe(...p,'LD'),false,String(p));
     for(const [deck,p] of [['LD',[17.1,-.1]],['MD',[17.1,-1.42]]]) {
       n.deck=deck;n.position=p.slice();n.stair=null;n.elevation=deck==='LD'?1.55:3.95;
       n.move(0,.01);assert.equal(n.stair,null,'A lateral crossing before the portal cannot capture the visitor');
@@ -125,7 +137,7 @@ test('corrupt, stale and unavailable guest data are rejected before navigation i
     assert.equal(f.model.guestAccess,undefined);assert.ok(!f.walk.nav.routes.some(r=>r.id==='guest'));
     assert.throws(()=>decodeGuestAccess({...manifest,version:'stale'},array(binary)));
     assert.throws(()=>decodeGuestAccess(manifest,new ArrayBuffer(12)));
-    for(const mutate of [m=>m.flight.surfaces.splice(5,1),m=>m.flight.obstacles.splice(5,1),m=>m.domains[0][0][0]=NaN,m=>m.profiles.guest.triangles=25001,m=>m.room.spawn=null,m=>m.flight.route.path[0][0]=25]) {
+    for(const mutate of [m=>m.cabin=null,m=>m.cabinRoute.splice(1),m=>m.domains.pop(),m=>m.flight.surfaces.splice(5,1),m=>m.flight.obstacles.splice(5,1),m=>m.domains[0][0][0]=NaN,m=>m.profiles.guest.triangles=25001,m=>m.room.spawn=null,m=>m.flight.route.path[0][0]=25]) {
       const m=structuredClone(manifest);mutate(m);assert.throws(()=>decodeGuestAccess(m,array(binary)));
     }
     await assert.rejects(loadGuestAccess({fetcher:async()=>({ok:false})}));

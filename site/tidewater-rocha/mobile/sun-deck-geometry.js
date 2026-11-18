@@ -1,5 +1,5 @@
 // Shared source-coordinate additions. R03 placement is provisional, not a survey.
-import {surfaceTriangles,obstacles,renderedParts} from './stair-surfaces.js?v=chair-fidelity-1';
+import {surfaceTriangles,obstacles,renderedParts} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
 const ring=Array.from({length:32},(_,i)=>[Math.cos(i*Math.PI/16),Math.sin(i*Math.PI/16)]);
 export function supportedFloor(floor,footprints) {

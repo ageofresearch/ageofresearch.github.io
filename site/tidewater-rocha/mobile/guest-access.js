@@ -1,14 +1,15 @@
-import {decodeSaloon} from './main-saloon.js?v=chair-fidelity-1';
-import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=chair-fidelity-1';
+import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
+import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
-import {guestLandings,prepareGuestFloor,guestProfileDomain} from './guest-access-geometry.js?v=chair-fidelity-1';
+import {guestLandings,prepareGuestFloor,guestProfileDomain,lowerRoomAt} from './guest-access-geometry.js?v=port-guest-1';
 
-export const guestAccessVersion='chair-fidelity-1';
+export const guestAccessVersion='port-guest-1';
 export function decodeGuestAccess(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:guestAccessVersion,names:['exterior','upper','sun','bow','guest'],roomID:'LD_R11'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
   const vector=p=>Array.isArray(p)&&p.length===3&&p.every(Number.isFinite);
-  if(!result.floor?.length||!result.floor.every(polygon)||!result.domains?.length||!result.domains.every(polygon)||
+  if(result.cabin?.id!=='LD_R03'||!vector(result.cabin.spawn)||!vector(result.cabin.look)||!Array.isArray(result.cabinRoute)||result.cabinRoute.length<3||
+    !result.cabinRoute.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite))||!result.floor?.length||!result.floor.every(polygon)||result.domains?.length!==3||!result.domains.every(polygon)||
     result.room.deck!=='LD'||!vector(result.room.spawn)||!vector(result.room.look)||Math.abs(result.room.spawn[2]-3.15)>1e-5||
     !result.collisionFootprints.every(p=>polygon(p.polygon))||!result.guestPartIDs?.length||
     f?.route?.id!=='guest'||f.route.lower!=='LD'||f.route.upper!=='MD'||f.treadCount!==13||f.riseCount!==14||
@@ -39,7 +40,9 @@ export function prepareGuestAccess(zone) {
   Object.defineProperty(clearance,'preparedHeights',{get:()=>indices.size});
   const flight=createFlight(f.route,{LD:1.55,MD:3.95},f.surfaces.slice(1),{lower:f.surfaces[0].polygons,upper:[]},clearance);
   const prepared={...zone,...prepareGuestFloor(zone),flight,profileContains:guestProfileDomain};
-  if(!prepared.limitSafe(...zone.room.spawn.slice(0,2))||!prepared.floorSafe(...zone.room.spawn.slice(0,2))||!flight.safe(...guestLandings.lower,.14,0)||!flight.safe(...guestLandings.upper,.14,14))
+  const cabinPoints=[zone.cabin.spawn.slice(0,2),...zone.cabinRoute];
+  if(cabinPoints.some(point=>!prepared.limitSafe(...point)||!prepared.floorSafe(...point))||
+    !prepared.limitSafe(...zone.room.spawn.slice(0,2))||!prepared.floorSafe(...zone.room.spawn.slice(0,2))||!flight.safe(...guestLandings.lower,.14,0)||!flight.safe(...guestLandings.upper,.14,14))
     throw Error('El acceso de invitados está bloqueado');
   return prepared;
 }
@@ -51,13 +54,13 @@ export function connectGuestAccess(walk,prepared) {
   nav.floorSafe=(x,y,deck=nav.deck)=>deck==='LD'?
     zone.limitSafe(x,y,nav.radius)&&(zone.floorSafe(x,y,nav.radius)||flight.safe(x,y,nav.radius,0)?.index===0):
     deck==='MD'&&flight.safe(x,y,nav.radius,14)?.index===14?true:floor(x,y,deck);
-  nav.location=()=>nav.deck==='LD'&&!nav.stair?zone.room:location();
-  nav.nearest=(x,y,deck=nav.deck)=>deck==='LD'?zone.room.spawn.slice(0,2):nearest(x,y,deck);
+  nav.location=()=>nav.deck==='LD'&&!nav.stair?lowerRoomAt(...nav.position):location();
+  nav.nearest=(x,y,deck=nav.deck)=>deck==='LD'?lowerRoomAt(x,y).spawn.slice(0,2):nearest(x,y,deck);
   model.asset.data.levels.LD=1.55;
   nav.routes.push(flight.route);installFlightNavigation(nav,[flight]);
-  model.guestAccess=zone;model.asset.data.rooms.push(zone.room);
+  model.guestAccess=zone;model.asset.data.rooms.push(zone.room,zone.cabin);
   if(walk.controls){
-    const controls=walk.controls;controls.rooms.push(zone.room);
+    const controls=walk.controls;controls.rooms.push(zone.room,zone.cabin);
     let button=controls.root.querySelector('[data-deck="LD"]');
     if(!button) {
       button=controls.doc.createElement('button');button.type='button';button.dataset.deck='LD';
@@ -66,7 +69,7 @@ export function connectGuestAccess(walk,prepared) {
       controls.root.querySelector('.luz-decks').prepend(button);
     }
     button.hidden=false;
-    controls.root.querySelector('[data-nav-note]').textContent='Recorre el distribuidor inferior de popa por la escalera de invitados. Camarotes, continuación inferior hacia proa y cocina · Continuación pendiente.';
+    controls.root.querySelector('[data-nav-note]').textContent='La escalera de invitados lleva al distribuidor y al camarote de popa de babor. Resto de camarotes, baños y cocina · Continuación pendiente.';
     controls.syncLocation();if(controls.open)controls.renderRooms();
   }
 }

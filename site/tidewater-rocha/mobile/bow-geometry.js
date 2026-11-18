@@ -1,5 +1,5 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=chair-fidelity-1';
-import {supportedFloor,boundary} from './sun-deck-geometry.js?v=chair-fidelity-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=port-guest-1';
+import {supportedFloor,boundary} from './sun-deck-geometry.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
 
 export const bowRoom={id:'UD_R04',deck:'UD',name:'Estar de proa',displayName:'Estar de proa',

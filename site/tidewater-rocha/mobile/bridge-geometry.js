@@ -1,5 +1,5 @@
-import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=chair-fidelity-1';
-import {supportedFloor} from './sun-deck-geometry.js?v=chair-fidelity-1';
+import {renderedParts,surfaceTriangles,obstacles} from './stair-surfaces.js?v=port-guest-1';
+import {supportedFloor} from './sun-deck-geometry.js?v=port-guest-1';
 import {convexHull,distanceToFootprint} from './terrace-geometry.js?v=chair-fidelity-1';
 
 export const bridgeRoom={id:'UD_R03',deck:'UD',name:'Puente de mando',displayName:'Puente de mando',

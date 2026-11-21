@@ -1,4 +1,4 @@
-// Soft contact and directional fill on the five walkable deck planes. Rasterise
+// Soft contact on the five walkable deck planes. Rasterise
 // source triangles in model coordinates once, before packaging. No runtime rays.
 import {readFile,writeFile} from 'node:fs/promises';
 import {gzipSync} from 'node:zlib';
@@ -11,15 +11,15 @@ const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});mo
 const width=320,height=64,bytes=[];
 const parts=renderedParts(model).filter(p=>!p.glass&&p.category!=='Glazing'&&!/glass|screen|glazing|glass guard/i.test(p.feature||''));
 for(const floor of [1.55,2.84,3.95,6,8.2]){
-  const maps=[new Uint8Array(width*height),new Uint8Array(width*height)];
-  function raster(v,layer,density) {
-    const coord=v.map(([x,y,z])=>[(x+3+(layer?.34:0)*(z-floor))*8-.5,(y+4+(layer?.18:0)*(z-floor))*8-.5]);
+  const map=new Uint8Array(width*height);
+  function raster(v,density) {
+    const coord=v.map(([x,y])=>[(x+3)*8-.5,(y+4)*8-.5]);
     const [[ax,ay],[bx,by],[cx,cy]]=coord,det=(bx-ax)*(cy-ay)-(by-ay)*(cx-ax);
     if(Math.abs(det)<1e-8)return;
     for(let j=Math.max(0,Math.ceil(Math.min(ay,by,cy)));j<=Math.min(height-1,Math.max(ay,by,cy));j++){
       for(let i=Math.max(0,Math.ceil(Math.min(ax,bx,cx)));i<=Math.min(width-1,Math.max(ax,bx,cx));i++){
         const u=((i-ax)*(cy-ay)-(j-ay)*(cx-ax))/det,v=((bx-ax)*(j-ay)-(by-ay)*(i-ax))/det;
-        if(u>=0&&v>=0&&u+v<=1)maps[layer][j*width+i]=Math.max(maps[layer][j*width+i],density);
+        if(u>=0&&v>=0&&u+v<=1)map[j*width+i]=Math.max(map[j*width+i],density);
       }
     }
   }
@@ -29,8 +29,7 @@ for(const floor of [1.55,2.84,3.95,6,8.2]){
       const v=Array.from(p.indices.slice(i,i+3),idx=>Array.from(p.vertices.slice(idx*6,idx*6+3)));
       const d=v.reduce((s,pt)=>s+pt[2],0)/3-floor;
       if(d<.025||d>2.25)continue;
-      if(d<1.25)raster(v,0,Math.round(130*Math.exp(-1.55*d)));
-      raster(v,1,Math.round(70-17*d));
+      if(d<1.25)raster(v,Math.round(130*Math.exp(-1.55*d)));
     }
   }
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){
@@ -38,7 +37,7 @@ for(const floor of [1.55,2.84,3.95,6,8.2]){
     let atten=0;
     for(const [dx,dy,w] of offsets){
       const i=Math.max(0,Math.min(height-1,y+dy))*width+Math.max(0,Math.min(width-1,x+dx));
-      atten+=w*(maps[0][i]+maps[1][i])/16;
+      atten+=w*map[i]/16;
     }
     bytes.push(Math.round(255-atten));
   }

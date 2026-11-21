@@ -99,7 +99,7 @@ function chairWeaveMips() {
 export function createFinishPatterns(device) {
  const source=finishPatternMips(),deck=teakPatternMips();
  const cloth = chairWeaveMips();
- const width=512,height=256,layers=20,mipLevelCount=10;
+ const width=512,height=256,layers=19,mipLevelCount=10;
  const texture=device.createTexture({label:'Prepared yacht finish atlas',size:[width,height,layers],format:'r8unorm',
    mipLevelCount,usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST});
  let bytes=0;
@@ -116,13 +116,12 @@ export function createFinishPatterns(device) {
        data[2*n+i]=Math.max(channel(2)*.58,tile.data[(2*size*size+t)*2+1]); // instruments
        data[3*n+i]=channel(3);                           // gangway caulking
        data[4*n+i]=Math.round(255*(.33+.65*grain));      // woven rug
-       data[5*n+i]=Math.round(255*(.86+.25*grain)/1.1); // water
        // Teak rows 112–119 lie outside every mobile deck. The last slice
        // holds the sling weave with the same sampler and fragment pipeline.
-       data[19*n+i]=cloth[mip][i];
+       data[18*n+i]=cloth[mip][i];
        for(let page=0;page<13;page++){
          const row=Math.min(teak.height-1,Math.floor(((page+1)*256+.5*(1<<mip))/(1<<mip))+y);
-         data[(6+page)*n+i]=teak.data[row*teak.width+x];
+         data[(5+page)*n+i]=teak.data[row*teak.width+x];
        }
      }
      bytes+=data.byteLength;

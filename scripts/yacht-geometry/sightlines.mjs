@@ -1,13 +1,17 @@
+import {planarOccluders} from './planar-occluders.mjs';
 // Plane convention: GPU-local X is port, Y is up and Z is forward.
 // Bake conservative views for the platform and the two long directions of the
 // outside bow passage, and the view aft from the cockpit aisle. Other positions, orientations and fields of view retain
 // the ordinary all-direction draw for their longitudinal band.
 const cells={
   exterior:[
+    [-4.75,2.55,4.60,-1.0,3.65,5.78,[1,-1,0]],
+    [-1.0,2.55,4.60,2.65,3.65,5.78,[1,-1,0]],
     [-2.2,-3.55,4.30,.95,-1.85,4.56],[-2.2,-1.85,4.30,.95,-.35,4.56],
     [-2.2,-.35,4.30,.95,1.15,4.56],[-2.2,1.15,4.30,.95,3.55,4.56],
     [5.52,-2.42,4.95,7.90,1.26,5.68,-1,[2.8,4.8,1.25]],
-    [8.55,-2.65,5.25,14.25,2.65,5.73,1],
+    [5.45,-1.96,5.20,7.90,1.26,5.68,[1,0]],
+    [8.55,-2.65,5.25,14.25,2.65,5.73,[1,0]],
     [13.9,-2.25,5.25,18.7,.55,5.73,[-1,1,0]],
 
   ],
@@ -35,7 +39,7 @@ function meshData(geometry) {
     const len=Math.hypot(...n),kind=surf[ids[0]*4+2];
     const lo=a.map((x,k)=>Math.min(x,b[k],c[k])),hi=a.map((x,k)=>Math.max(x,b[k],c[k]));
     const background=[44,45,46,47,49].includes(kind);
-    faces.push({ids,v,lo,hi,n,len,background});
+    faces.push({ids,v,lo,hi,n,len,background,sky:kind===47});
     if(background||len<.55)continue;
     for(let axis=0;axis<3;axis++){
       if(hi[axis]-lo[axis]>1e-5)continue;
@@ -53,7 +57,7 @@ function meshData(geometry) {
   // Opposite missing corners prove that two real opaque faces cover the
   // entire rectangle; a shared edge or a bounding box alone is insufficient.
   const rectangles=[...planes.values()].filter(r=>(r.missing&9)===9||(r.missing&6)===6);
-  return {faces,rectangles};
+  return {faces,rectangles:rectangles.concat(planarOccluders(faces))};
 }
 function shadowsFor(rectangles,box) {
   const result=[];
@@ -92,20 +96,30 @@ export function sightlines(profile,geometry,basis){
     const shadows=shadowsFor(rectangles,box);
     const possible=faces.filter(f=>{
       const d=f.n.reduce((s,n,k)=>s+n*(box[k+(n>0?3:0)]-f.v[0][k]),0);
-      return d>=-.02*f.len&&!occluded(f,shadows);
+      return f.sky || d>=-.02*f.len&&!occluded(f,shadows);
     });
     const directions=Array.isArray(direction)?direction:direction!==undefined?[direction]:profile==='exterior'?[1]:[-1,1];
     for(const sign of directions){
-      const visible=[];
+      // Nested frusta share one index range. A portrait camera only reads
+      // the narrow prefix; a wide or off-axis view still gets every visible face.
+      const cones=sign?[[.80,1.40,.78],[1.20,2.10,.90],limits].map(c=>c.map((v,k)=>Math.min(v,limits[k]))):[limits];
+      const buckets=cones.map(()=>[]);
       for(const f of possible){
         const front=sign*(sign>0?f.hi[2]-box[2]:f.lo[2]-box[5]);
-        if(sign!==0&&(front<-.02||f.hi[0]-box[0]+limits[0]*front<-.02||box[3]-f.lo[0]+limits[0]*front<-.02||
-            f.hi[1]-box[1]+limits[1]*front<-.02||box[4]-f.lo[1]+limits[2]*front<-.02))continue;
+        const bucket=f.sky||!sign?0:cones.findIndex(c=>front>=-.02&&
+          f.hi[0]-box[0]+c[0]*front>=-.02&&box[3]-f.lo[0]+c[0]*front>=-.02&&
+          f.hi[1]-box[1]+c[1]*front>=-.02&&box[4]-f.lo[1]+c[2]*front>=-.02);
+        if(bucket<0)continue;
         const dist=Math.hypot(...[0,1,2].map(k=>Math.max(0,f.lo[k]-box[k+3],box[k]-f.hi[k])));
-        visible.push({ids:f.ids,order:f.background?1e6:Math.floor(dist*4)});
+        buckets[bucket].push({ids:f.ids,order:f.background?1e6:Math.floor(dist*4)});
       }
-      visible.sort((a,b)=>a.order-b.order);
-      result.push({box,sign,...(viewCone && {cone:viewCone}),indices:visible.flatMap(f=>f.ids)});
+      const prefixes=[],indices=[];
+      for(const [i,bucket] of buckets.entries()){
+        bucket.sort((a,b)=>a.order-b.order);
+        for(const face of bucket)indices.push(...face.ids);
+        if(i<cones.length-1)prefixes.push({cone:cones[i],count:indices.length});
+      }
+      result.push({box,sign,...(viewCone && {cone:viewCone}),prefixes,indices});
     }
   }
   return result;

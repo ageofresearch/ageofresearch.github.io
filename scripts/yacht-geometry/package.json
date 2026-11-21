@@ -2,5 +2,13 @@
   "name": "yacht-offline-geometry",
   "private": true,
   "type": "module",
-  "dependencies": { "meshoptimizer": "1.3.0" }
+  "dependencies": {
+    "meshoptimizer": "1.3.0"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.9"
+  },
+  "scripts": {
+    "screen-visibility": "asc screen-visibility.ts --runtime stub -O3 --noAssert --initialMemory 1 -o ../../site/tidewater-rocha/mobile/screen-visibility.wasm"
+  }
 }

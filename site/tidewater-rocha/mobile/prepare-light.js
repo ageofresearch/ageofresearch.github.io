@@ -1,8 +1,9 @@
-import {walkLight} from './walk-light.js?v=chair-fidelity-1';
+import {walkLight} from './walk-light.js?v=yacht-daylight-1';
+import {compartment} from './yacht-daylight.js?v=yacht-daylight-1';
 
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));
-const srgb=x=>x<=.0031308?12.92*x:1.055*Math.pow(Math.min(1,x),1/2.4)-.055;
+
 
 export async function loadDeckLight() {
   const packed=Uint8Array.from(atob(walkLight),c=>c.charCodeAt(0));
@@ -21,40 +22,38 @@ function contactAt(map,x,y,z,up) {
   return .48+.52*(row(j)*(1-b)+row(Math.min(j+1,63))*b)/255;
 }
 
-// All five profiles share fixed geometry and a fixed sun. Bake the diffuse
-// response, finish coordinates and contact field once when uploading each batch.
-// Only polished metal and glass need the eye direction during the walk.
-export function prepareOpaque(source,sun,map) {
-  const {position,normal}=source,color=new Float32Array(source.color.length),surface=new Float32Array(source.aSurface.length);
-  const ground=[.19,.16,.13],sky=[.62,.67,.73],direct=[.82,.72,.59],panel=[.72,.69,.61],fill=[.23,.22,.20];
+// Encode invariant material inputs once. The sun and camera remain live uniforms.
+function smallReceivers(position,indices) {
+  const small=new Uint8Array(position.length/3).fill(1);
+  const lengthSquared=(i,j)=>{
+    const a=i*3,b=j*3,x=position[a]-position[b],y=position[a+1]-position[b+1],z=position[a+2]-position[b+2];
+    return x*x+y*y+z*z;
+  };
+  for(let i=0;i<indices.length;i+=3){
+    const a=indices[i],b=indices[i+1],c=indices[i+2];
+    if(!small[a]&&!small[b]&&!small[c])continue;
+    if(Math.max(lengthSquared(a,b),lengthSquared(b,c),lengthSquared(c,a))>.22**2)small[a]=small[b]=small[c]=0;
+  }
+  return small;
+}
+
+export function prepareOpaque(source,map,indices) {
+  const {position,normal}=source,color=new Float32Array(source.color),surface=new Float32Array(source.aSurface.length);
+  const small=indices&&smallReceivers(position,indices);
+  const count=position.length/3,roughness=new Float32Array(count),contact=new Float32Array(count),room=new Uint8Array(count);
   for(let j=0,k=0;j<position.length;j+=3,k+=4) {
     const x=position[j],y=position[j+1],z=position[j+2],nx=normal[j],ny=normal[j+1],nz=normal[j+2];
     const localX=(z+17.615)/(35.23/36),localY=x/(7.47/7.6),elevation=y+2.01;
     const code=source.aSurface[k+2],boarding=code>=37&&code<=42;
     let layer=-1,u=0,v=0;
-    if(code>=44 && code<=47 || code===49) {
-      if(code===44){color.set([.29,.48,.53],j);layer=6;u=x*.055;v=z*.13;}
-      else if(code===49){
-        const h=clamp((Math.hypot(x,z)-22)/110);
-        color.set([.285+.105*h,.473+.087*h,.522+.064*h],j);
-      }
-      else if(code===47){
-        const t=clamp((y+3)/88),h=t*t*(3-2*t);
-        color.set([.78-.38*h,.85-.21*h,.88-.04*h],j);
-      }else{
-        const f=.91+.09*nx;
-        color.set((code===46?[.51,.57,.43]:[.36,.43,.31]).map(c=>c*f),j);
-      }
-    }else{
-      const ambient=source.aSurface[k+3],hemi=ny*.5+.5,diffuse=Math.max(0,nx*sun.x+ny*sun.y+nz*sun.z);
-      const shade=contactAt(map,localX,localY,elevation,ny);
-      const metal=boarding?0:source.aSurface[k+1];
-      for(let c=0;c<3;c++){
-        const base=code===9?panel[c]:source.color[j+c];
-        const diffuseLight=(ground[c]+(sky[c]-ground[c])*hemi+direct[c]*diffuse)*ambient;
-        color[j+c]=srgb(base*(diffuseLight+(code===9?fill[c]:0)))*shade;
-      }
-      surface[k+3]=metal;
+    const index=j/3;
+    contact[index]=contactAt(map,localX,localY,elevation,ny)*(.78+.22*Math.min(1,source.aSurface[k+3]));
+    roughness[index]=boarding?.82:source.aSurface[k];
+    room[index]=compartment(localX,localY,elevation);
+    if(code===47)layer=-2;
+    else{
+      surface[k+3]=boarding?0:source.aSurface[k+1];
+      if(code===9)color.set([.72,.69,.61],j);
       const fu=x+y*.73,fv=z+y*.51;
       if(code===43){layer=5;u=localX*.44;v=localY*.44;}
       else if(code===2){
@@ -76,15 +75,15 @@ export function prepareOpaque(source,sun,map) {
         layer=3;u=(localY-cy)/.48+.5;v=((localX-cx)*.659983+(elevation-7.01)*.75128)/.36+.5;
       }else if(boarding){layer=4;u=source.aSurface[k];v=source.aSurface[k+1];}
     }
-    if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;}
+    if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;layer=-3;}
     if(layer>0 && layer!==20)u*=.5; // two identical 256-wide tiles share each 512-wide slice
     if(layer===5){
       // Slate-blue pile with pale highlights from the mottled fibre field.
       for(let c=0;c<3;c++)color[j+c]*=[.92,1.20,1.42][c];
     }else if(layer===3){color.set([.34,.55,.48],j);}
-    surface[k]=u;surface[k+1]=v;surface[k+2]=layer;
+    surface[k]=u;surface[k+1]=v;surface[k+2]=layer+(small?.[index]&&layer>=-1?64:0);
   }
-  return {position,normal,color,aSurface:surface};
+  return {position,normal,color,aSurface:surface,contact,roughness,room};
 }
 
 // Keep positions and finish coordinates at full precision. The remaining GPU
@@ -100,9 +99,10 @@ export function packRenderVertices(source){
       signed[b+12+c]=Math.round(Math.max(-1,Math.min(1,source.normal[a+c]))*127);
       bytes[b+16+c]=Math.round(clamp(source.color[a+c])*255);
     }
-    bytes[b+19]=255;
+    signed[b+15]=Math.round(clamp(source.roughness?.[i]??1)*127);
+    bytes[b+19]=Math.round(clamp(source.contact?.[i]??1)*255);
     floats[f+5]=source.aSurface[s];floats[f+6]=source.aSurface[s+1];
-    shorts[i*16+14]=source.aSurface[s+2];shorts[i*16+15]=Math.round(clamp(source.aSurface[s+3])*32767);
+    shorts[i*16+14]=source.aSurface[s+2];shorts[i*16+15]=((source.room?.[i]??0)<<8)|Math.round(clamp(source.aSurface[s+3])*255);
   }
   return bytes;
 }

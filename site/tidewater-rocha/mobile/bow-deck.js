@@ -2,7 +2,7 @@ import {preloadBridgeAccess} from './bridge-access.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {bowRoom,bowRoute,prepareBowFloor} from './bow-geometry.js?v=port-guest-1';
 
-export const bowVersion='saloon-rug-1';
+export const bowVersion='yacht-daylight-1';
 export function decodeBow(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:bowVersion,names:['exterior','upper','sun','bow'],roomID:'UD_R04'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

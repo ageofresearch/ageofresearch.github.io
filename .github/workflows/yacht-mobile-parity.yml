@@ -37,6 +37,7 @@ on:
       - 'scripts/audit-yacht-*'
       - 'scripts/yacht-spatial-requirements.txt'
       - 'tests/yacht-sightlines.cjs'
+      - 'tests/yacht-daylight*'
       - 'tests/yacht-tour-performance.cjs'
       - 'tests/yacht-cold-walk.cjs'
       - 'tests/yacht-readiness.test.mjs'
@@ -102,7 +103,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        route: [bridge, gangway, cold-walk, bow, access, guest, tour]
+        route: [bridge, gangway, cold-walk, bow, access, guest, tour, daylight]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -138,6 +139,12 @@ jobs:
           fi
           export NODE_PATH="$RUNNER_TEMP/browser/node_modules"
           case "$YACHT_PERF_CASE" in
+            daylight)
+              mkdir -p /tmp/yacht-mobile-parity/daylight
+              if ! YACHT_TIMINGS=/tmp/yacht-mobile-parity/daylight/timings.json node tests/yacht-daylight.cjs; then
+                YACHT_GPU_TIMING=1 YACHT_TIMINGS=/tmp/yacht-mobile-parity/daylight/pass-timings.json node tests/yacht-daylight.cjs
+                exit 1
+              fi ;;
             tour) node tests/yacht-tour-performance.cjs ;;
             bridge) node tests/yacht-bridge-comparison.cjs ;;
             guest)
@@ -148,7 +155,11 @@ jobs:
                 exit 1
               fi ;;
             gangway) node tests/yacht-gangway-performance.cjs ;;
-            cold-walk) node tests/yacht-cold-walk.cjs ;;
+            cold-walk)
+              if ! node tests/yacht-cold-walk.cjs; then
+                YACHT_AFT_GPU_TIMING=1 node tests/yacht-cold-walk.cjs
+                exit 1
+              fi ;;
             bow|access) node tests/yacht-route-performance-comparison.cjs "$YACHT_PERF_CASE" ;;
           esac
       - name: Save timing measurements and reference qualification
@@ -178,7 +189,9 @@ jobs:
         if: matrix.mode == 'mobile'
         run: |
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
-          node --test tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-guest-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-gangway-fidelity.test.mjs tests/yacht-route-performance-comparison.test.cjs
+          npm run --prefix scripts/yacht-geometry screen-visibility
+          git diff --exit-code -- site/tidewater-rocha/mobile/screen-visibility.wasm
+          node --test tests/yacht-daylight.test.mjs tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-guest-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-gangway-fidelity.test.mjs tests/yacht-route-performance-comparison.test.cjs
       - name: Verify browser views and recovery
         env:
           YACHT_CHECK: ${{ matrix.mode }}

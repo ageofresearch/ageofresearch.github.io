@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {createBoarding,createSternFeatures,createFinishes,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import {connectTerrace,moveAlongRoute,routeSegments} from '../site/tidewater-rocha/mobile/aft-terrace.js';
-import {connectSternAccess,onSurface} from '../site/tidewater-rocha/mobile/stern-access.js';
+import {connectSternAccess,onSurface,topTriangles} from '../site/tidewater-rocha/mobile/stern-access.js';
 import {configureWalk} from '../site/tidewater-rocha/mobile/gangway-scene.js';
 import {crossing} from '../site/tidewater-rocha/mobile/pasarela.js';
 
@@ -113,6 +113,56 @@ test('platform, stair edges, transom and deployed port gangway stop the body at 
     }
     nav.enterRoom('boarding');assert.equal(nav.stair,null);assert.equal(nav.deck,'MD');
     assert.ok(crossing(walk));
+  }finally{dispose();}
+});
+
+test('water is exposed below the curved port landing and outside the platform walking edge',()=>{
+  const {model,access,dispose}=fixture();
+  try {
+    const rim=model.transom.parts.find(p=>p.anchor==='MD_DCK_002');
+    const water=model.boarding.parts.find(p=>p.feature==='Berth water surface');
+    assert.ok(water.context && water.bounds[5]<access.lowerHeight);
+    const wet=topTriangles(water), structural=topTriangles(rim);
+    for (const [x,y] of [[-1.5,2.80],[-.45,2.70],[.15,2.65]]) {
+      assert.ok(onSurface(x,y,wet),'Water visible outside the hull');
+      assert.ok(!onSurface(x,y,structural) && !onSurface(x,y,access.platformFloor));
+      assert.equal(access.platformSafe(x,y,.14),false);
+    }
+    assert.ok(!onSurface(18,0,wet),'The isolated water surface excludes the hull interior');
+    assert.ok(access.platformSafe(-.45,2.15,.14));
+    assert.ok(!access.platformSafe(-.45,2.35,.14),'Stop the body before it overhangs the water');
+    assert.ok(access.platformSafe(.35,-3.03,.14),'Starboard arrival retains its platform');
+  }finally{dispose();}
+});
+
+test('port lower landing, kick reveal and inset footwell form separate supported surfaces',()=>{
+  const {model,access,dispose}=fixture();
+  try {
+    const part=name=>model.transom.parts.find(p=>p.feature===name);
+    const plinth=part('transom port pale step 1');
+    const bands=['perimeter lip','teak margin board','caulk seam']
+      .map(name=>part('port stair landing '+name)).concat(part('transom port teak tread 1'));
+    const kick=part('port stair recessed kick face'), shell=part('transom port pale step 2');
+    const well=part('transom port teak tread 2'), surround=part('port stair moulded footwell surround');
+    const landingZ=plinth.bounds[5],footwellZ=well.bounds[5];
+    assert.ok(access.lowerHeight<landingZ && landingZ<footwellZ);
+    assert.equal(kick.bounds[2],landingZ);
+    assert.equal(kick.bounds[5],shell.bounds[2]);
+    assert.ok(kick.bounds[0]>shell.bounds[0]+.04,'The kick is set back under the moulded nose');
+    assert.equal(shell.bounds[5],footwellZ);
+    assert.equal(surround.bounds[5],footwellZ);
+    assert.equal(topTriangles(plinth).length,0,'A second cap under the teak would flicker');
+    assert.equal(topTriangles(shell).length,0);
+    const top=bands.map(p=>topTriangles(p));
+    for(const y of [2.72,2.91,3.10,3.27])for(let x=.33;x<.92;x+=.031)
+      assert.equal(top.filter(faces=>onSurface(x,y,faces)).length,1,'Landing surface ownership at '+[x,y]);
+    assert.ok(!top.some(faces=>onSurface(.15,3.52,faces)),'Outboard aft corner follows the hull sweep');
+    assert.ok(onSurface(1.38,3.03,topTriangles(well)));
+    assert.ok(onSurface(1.15,3.03,topTriangles(surround)));
+    const treads=Array.from({length:6},(_,i)=>part('transom port teak tread '+(i+1)));
+    assert.ok(treads.every((p,i)=>p && (!i || p.bounds[5]>treads[i-1].bounds[5])));
+    assert.ok(Math.abs(treads.at(-1).bounds[5]-access.treads.at(-1).height)<1e-8);
+    assert.equal(access.platformSafe(.55,3.05,.14),false,'A visitor cannot walk inside the raised landing');
   }finally{dispose();}
 });
 

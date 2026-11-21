@@ -2,7 +2,7 @@ import {preloadBridge} from './bridge-helm.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=port-guest-1';
 
-export const upperInteriorVersion='port-water-edge-1';
+export const upperInteriorVersion='stern-grid-1';
 export function decodeUpperInterior(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperInteriorVersion,names:['exterior','upper','sun'],roomID:'UD_R02'});
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

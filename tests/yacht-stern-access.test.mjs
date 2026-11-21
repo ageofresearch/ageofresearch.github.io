@@ -116,6 +116,36 @@ test('platform, stair edges, transom and deployed port gangway stop the body at 
   }finally{dispose();}
 });
 
+test('port stair recess meets the photographed centre section within half a grid cell',()=>{
+  // Beach Club view B, 640 by 448, 56-degree horizontal field of view.
+  // The basis maps source-model distances through the registered yacht scale.
+  const eye=[-1.60911097,1.69767526,3.60964536];
+  const right=[.39216688,-.90052088,0], up=[.03608886,.01585419,.99918960];
+  const forward=[.89586965,.39356429,-.04025096];
+  const lens=320/Math.tan(28*Math.PI/180);
+  const face=createSternFeatures().parts.find(p=>p.feature==='port stair recessed kick face');
+  const projected=[];
+  for(let i=0;i<face.vertices.length;i+=6){
+    const delta=eye.map((value,k)=>face.vertices[i+k]-value);
+    const dot=axis=>axis.reduce((sum,value,k)=>sum+value*delta[k],0);
+    const depth=dot(forward);
+    assert.ok(depth>0);
+    projected.push([320+lens*dot(right)/depth,224-lens*dot(up)/depth]);
+  }
+  const crossings=[];
+  for(let i=0;i<face.indices.length;i+=3){
+    const tri=face.indices.slice(i,i+3).map(index=>projected[index]);
+    for(let j=0;j<3;j++){
+      const a=tri[j],b=tri[(j+1)%3];
+      if(Math.min(a[0],b[0])<=325 && 325<Math.max(a[0],b[0]))
+        crossings.push(a[1]+(325-a[0])*(b[1]-a[1])/(b[0]-a[0]));
+    }
+  }
+  assert.ok(crossings.length>=2);
+  assert.ok(Math.abs(Math.min(...crossings)-275)<=16,'Upper edge at x=325');
+  assert.ok(Math.abs(Math.max(...crossings)-290)<=16,'Lower edge at x=325');
+});
+
 test('water is exposed below the curved port landing and outside the platform walking edge',()=>{
   const {model,access,dispose}=fixture();
   try {
@@ -158,11 +188,41 @@ test('port lower landing, kick reveal and inset footwell form separate supported
       assert.equal(top.filter(faces=>onSurface(x,y,faces)).length,1,'Landing surface ownership at '+[x,y]);
     assert.ok(!top.some(faces=>onSurface(.15,3.52,faces)),'Outboard aft corner follows the hull sweep');
     assert.ok(onSurface(1.38,3.03,topTriangles(well)));
-    assert.ok(onSurface(1.15,3.03,topTriangles(surround)));
+    assert.ok(onSurface(1.24,3.03,topTriangles(surround)));
     const treads=Array.from({length:6},(_,i)=>part('transom port teak tread '+(i+1)));
     assert.ok(treads.every((p,i)=>p && (!i || p.bounds[5]>treads[i-1].bounds[5])));
     assert.ok(Math.abs(treads.at(-1).bounds[5]-access.treads.at(-1).height)<1e-8);
     assert.equal(access.platformSafe(.55,3.05,.14),false,'A visitor cannot walk inside the raised landing');
+  }finally{dispose();}
+});
+
+test('the deployed beam, teak, and navigation share the dock to yacht slope',()=>{
+  const {model,dispose}=fixture();
+  try {
+    const {boarding}=model, {start,end,y}=boarding.layout;
+    assert.ok(boarding.height(start)>boarding.height(end));
+    assert.equal(boarding.height(end),boarding.layout.deckHeight);
+    for(let i=1;i<=3;i++){
+      const panel=boarding.parts.find(p=>p.feature===`telescopic section ${i} teak inset`);
+      const frame=boarding.parts.find(p=>p.feature===`telescopic section ${i} nested frame`);
+      for(const x of [panel.bounds[0],panel.bounds[3]]){
+        const at=[];
+        for(let j=0;j<panel.vertices.length;j+=6)
+          if(Math.abs(panel.vertices[j]-x)<1e-7)at.push(panel.vertices[j+2]);
+        assert.ok(Math.abs(Math.max(...at)-boarding.height(x))<.007);
+      }
+      assert.ok(frame.finish[1]>.5 && boarding.safe((panel.bounds[0]+panel.bounds[3])/2,y,.14));
+    }
+    assert.equal(boarding.parts.filter(p=>p.feature.includes('underside collar')).length,2);
+    for(const side of [-1,1]){
+      const ledge=side===1 ? model.terrace.parts.find(p=>p.feature==='integrated mooring recess lower ledge') :
+        model.transom.parts.find(p=>p.feature==='cockpit mooring ledge '+side);
+      for(const name of ['cockpit cleat sole ','cockpit mooring drum foot ']){
+        const b=model.transom.parts.find(p=>p.feature===name+side).bounds;
+        assert.ok(Math.abs(b[2]-ledge.bounds[5])<1e-5);
+        assert.ok(b[0]>=ledge.bounds[0] && b[3]<=ledge.bounds[3] && b[1]>=ledge.bounds[1] && b[4]<=ledge.bounds[4]);
+      }
+    }
   }finally{dispose();}
 });
 

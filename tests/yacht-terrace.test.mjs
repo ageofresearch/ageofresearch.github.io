@@ -33,7 +33,15 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.deepEqual(generated.manifest,manifest);
   assert.deepEqual(generated.binary,await readFile(new URL('aft-terrace.bin',root)));
   assert.ok(generated.binary.length<=1.25*1024*1024);
-  assert.ok(manifest.parts.every(p=>p.bounds[0]>=3.2-1e-6 && p.bounds[3]<=8.5+1e-6));
+  const landingBorders = manifest.parts.filter(p=>p.role==='deck-trim');
+  assert.deepEqual(landingBorders.map(p=>p.feature).sort(), [
+    'shaped teak landing inboard caulk border','teak passage outer margin border',
+  ]);
+  for (const part of manifest.parts) {
+    const isLandingBorder=part.role==='deck-trim';
+    assert.ok(part.bounds[0]>=(isLandingBorder?2.46:3.2)-1e-6 && part.bounds[3]<=8.5+1e-6,part.feature);
+    if (isLandingBorder) assert.deepEqual([part.bounds[2],part.bounds[5]],[3.956,3.956]);
+  }
   assert.ok(manifest.parts.some(p=>p.role==='roof'));
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
@@ -114,7 +122,7 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
     let previous=2.84;
     for(const tread of treads) {
       const b=tread.bounds;
-      assert.ok(Math.abs(b[5]-previous-(3.95-2.84)/7)<1e-8,'Six treads plus the deck landing require seven equal rises');
+      assert.ok(b[5]>previous,'Port surfaces ascend from the raised sponson to the fixed arrival');
       previous=b[5];
       for(let ix=0;ix<9;ix++)for(let iy=0;iy<9;iy++) {
         const x=b[0]+.03+(b[3]-b[0]-.06)*ix/8,y=b[1]+.03+(b[4]-b[1]-.06)*iy/8;

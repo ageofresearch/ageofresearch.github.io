@@ -1,4 +1,5 @@
 export const viewRadius = 0.35;
+const skyVertex = 16; // The low four bits encode the frustum planes.
 
 // Four half-spaces bound a wider view. The extra space at the eye
 // allows ordinary walking without rebuilding an index list every frame.
@@ -29,12 +30,28 @@ export function coversView(planes, camera, p) {
   return true;
 }
 
-export function filterView(vertices, indices, first, count, planes, masks, eye, slots) {
+export function filterView(vertices, indices, first, count, planes, masks, eye, slots, sky = null) {
   const floats = new Float32Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 4);
   const shorts = new Int16Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 2);
   for (let v = 0; v < masks.length; v++) {
-    // The shader moves the sky dome with the eye and the sun.
-    if (shorts[v*16+14] === -2) { masks[v] = 0; continue; }
+    // Sky vertices rotate with the sun and translate with the viewer. Only
+    // angular half-spaces apply; the finite walking radius is irrelevant.
+    if (shorts[v*16+14] === -2) {
+      masks[v] = skyVertex;
+      if (!sky) continue;
+      const [ez, sx, sy, sz, ex] = sky.basis;
+      const u = floats[v*8] / .98289474, h = floats[v*8+1] + 2.01, w = floats[v*8+2] / .97861111;
+      const scale = Math.hypot(u, h, w);
+      // The vertex shader uses east*u + sun*h + cross(east,sun)*w.
+      const x = ex*u + sx*h - ez*sy*w;
+      const y = sy*h + (ez*sx-ex*sz)*w;
+      const z = ez*u + sz*h + ex*sy*w;
+      for (let i = 0; i < 4; i++) {
+        const k = 4*i;
+        if (planes[k]*x + planes[k+1]*y + planes[k+2]*z < -.025*scale) masks[v] |= 1 << i;
+      }
+      continue;
+    }
     const x = floats[v*8], y = floats[v*8+1], z = floats[v*8+2];
     let mask = 0;
     for (let i = 0; i < 4; i++) {
@@ -47,7 +64,16 @@ export function filterView(vertices, indices, first, count, planes, masks, eye, 
   let length = 0;
   for (let i = first; i < first + count; i += 3) {
     const a = indices[i], b = indices[i+1], c = indices[i+2];
-    if (masks[a] & masks[b] & masks[c]) continue;
+    const outside = masks[a] & masks[b] & masks[c];
+    if (outside & 15) {
+      if (!((masks[a] | masks[b] | masks[c]) & skyVertex)) continue;
+      if (outside & skyVertex) {
+        // Keep the source indices so that a sun change can restore them immediately.
+        const runs = sky.runs;
+        if (runs.length && runs[runs.length-1] === length) runs[runs.length-1] += 3;
+        else runs.push(length, length+3);
+      }
+    }
     if (eye && shorts[a*16+14] !== -2 && shorts[b*16+14] !== -2 && shorts[c*16+14] !== -2) {
       // The GPU back-face test has the same sign everywhere in the eye sphere
       // when its signed distance to the face plane exceeds the sphere radius.

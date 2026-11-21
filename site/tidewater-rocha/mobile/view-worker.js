@@ -1,5 +1,5 @@
 import {filterSamples} from './sample-visibility.js?v=1';
-import {filterView} from './view-volume.js?v=1';
+import {filterView} from './view-volume.js?v=2';
 let vertices, profiles, glazing, masks;
 self.onmessage = ({data}) => {
   if (data.vertices) {
@@ -16,11 +16,12 @@ self.onmessage = ({data}) => {
   }
   const {profile, first, count, planes, eye} = data;
   const slots = data.trackFaces ? new Uint32Array(count / 3) : null;
-  const {output, length} = filterView(vertices, profiles[profile], first, count, planes, masks, eye, slots);
+  const sky = data.basis && {basis:data.basis, runs:[]};
+  const {output, length} = filterView(vertices, profiles[profile], first, count, planes, masks, eye, slots, sky);
   // Glazing keeps the original blend order. Only off-screen faces can drop.
   const g=glazing[profile], glass=filterView(g.vertices,g.indices,0,g.indices.length,planes,g.masks);
   glass.trimmed=glass.length<g.indices.length;
   const transfer = [output.buffer, glass.output.buffer];
   if (slots) transfer.push(slots.buffer);
-  self.postMessage({output, length, glass, slots}, transfer);
+  self.postMessage({output, length, glass, slots, skyRuns:sky?.runs}, transfer);
 };

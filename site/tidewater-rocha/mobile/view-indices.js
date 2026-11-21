@@ -1,9 +1,9 @@
-import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=3';
-import {coversView, widenedView, viewRadius} from './view-volume.js?v=1';
+import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=4';
+import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {
   let worker;
-  try {worker = new Worker(new URL('./view-worker.js?v=1', import.meta.url), {type:'module'});}
+  try {worker = new Worker(new URL('./view-worker.js?v=2', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
   let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
@@ -18,20 +18,25 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return false;
     return true;
   }
-  const scratch = cells ? new ArrayBuffer(glassOffset) : null;
-  const compact16 = scratch && new Uint16Array(scratch), compact32 = scratch && new Uint32Array(scratch);
-  function uploadOpaque(entry, camera, projection, width, height) {
+  const scratch = new ArrayBuffer(glassOffset);
+  const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
+  function uploadOpaque(entry, camera, projection, width, height, sunRevision) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
     const offset = roomCellOffset(region, camera, projection, width, height);
-    if (entry.offset === offset) return;
+    // Sun changes invalidate only the sky exclusions. The camera and room can
+    // immediately reuse the full sky from the same prepared index list.
+    const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
+      Math.min(width*projection[0], height*projection[5]) >= 100;
+    if (entry.offset === offset && entry.trimSky === trimSky) return;
     let indices = entry.output, length = entry.rawLength;
-    if (offset >= 0) {
+    if (offset >= 0 || trimSky) {
       const compact = indices.BYTES_PER_ELEMENT === 2 ? compact16 : compact32;
-      length = filterRoomCell(cells.bits, offset, region.count, indices, length, entry.slots, compact);
+      length = filterRoomCell(cells?.bits, offset, region?.count, indices, length, entry.slots, compact, trimSky && entry.skyRuns);
       indices = compact;
     }
     if (length && length < entry.count)
       device.queue.writeBuffer(buffer, 0, indices, 0, length + (indices.BYTES_PER_ELEMENT === 2 ? length % 2 : 0));
+    entry.trimSky = trimSky;
     entry.offset = offset;
     entry.length = length;
   }
@@ -82,28 +87,28 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       return exact.length??null;
     },
-    select(profile, first, count, clip, camera, projection, width, height) {
+    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
         && coversView(entry.planes, camera, projection);
       if (pending?.result) {
         if (valid(pending)) {
-          const {length, output, glass, slots} = pending.result;
-          active = {...pending, result:null, rawLength:length, output, slots, glassLength:glass.length};
+          const {length, output, glass, slots, skyRuns} = pending.result;
+          active = {...pending, result:null, rawLength:length, output, slots, skyRuns, glassLength:glass.length};
           if(glass.trimmed && glass.length)
             device.queue.writeBuffer(buffer, glassOffset, glass.output, 0, glass.length + (glass.output.BYTES_PER_ELEMENT===2 ? glass.length%2 : 0));
         }
         pending = null;
       }
       const current=valid(active);
-      if (current) uploadOpaque(active, camera, projection, width, height);
+      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision);
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
       // A turn can leave the angular guard without moving the eye. Request the
       // next list while the outer frustum still covers the visible frame.
       if(current && distance<viewRadius*.55 && coversView(active.inner, camera, projection))return active;
       if (!pending) {
-        pending = {profile, first, count, eye:[camera[12],camera[13],camera[14]],
+        pending = {profile, first, count, sunRevision, basis:frame.slice(19,24), eye:[camera[12],camera[13],camera[14]],
           planes:widenedView(clip), inner:widenedView(clip,1.12)};
         worker.postMessage({...pending, trackFaces:Boolean(cells?.range(profile, first, count))});
       }

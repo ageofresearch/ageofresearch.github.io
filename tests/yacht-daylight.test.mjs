@@ -193,6 +193,35 @@ test('camera culling retains crossing triangles, face order and the eye-relative
   assert.deepEqual([...output.subarray(0,length)],[3,4,5,6,7,8]);
 });
 
+test('off-screen sky runs follow the sun and can be restored independently of room occlusion', async () => {
+  const {widenedView, filterView} = await import('../site/tidewater-rocha/mobile/view-volume.js');
+  const {filterRoomCell} = await import('../site/tidewater-rocha/mobile/room-visibility.js');
+  const planes = widenedView([1,0,0,0, 0,1,0,0, 0,0,0,-1, 0,0,.1,0]);
+  const bytes = new Uint8Array(12*32), positions = new Float32Array(bytes.buffer), finish = new Int16Array(bytes.buffer);
+  // Two adjacent triangles sit behind this viewer, then one crosses the edge.
+  const corners = [[0,0,2],[.1,0,2],[0,.1,2], [.1,0,2],[0,.1,2],[.1,.1,2],
+    [-.1,0,-2],[3,0,-1],[.1,.2,-2], [-.1,-.1,-1],[.2,-.1,-1],[0,.2,-1]];
+  for (const [i, [x,y,z]] of corners.entries()) {
+    if (i < 9) { positions.set([x*.98289474, y-2.01, z*.97861111], i*8); finish[i*16+14] = -2; }
+    else positions.set([x,y,z], i*8);
+  }
+  const indices = Uint16Array.from(corners.keys()), slots = new Uint32Array(4), compact = new Uint16Array(12);
+  const sky = {basis:[0,0,1,0,1], runs:[]};
+  const {output, length} = filterView(bytes, indices, 0, 12, planes, new Uint8Array(12), null, slots, sky);
+  assert.deepEqual([...output], [...indices]);
+  assert.deepEqual(sky.runs, [0,6]);
+  const room = new Uint8Array([1<<3]);
+  let count = filterRoomCell(room, 0, 12, output, length, slots, compact, sky.runs);
+  assert.deepEqual([...compact.subarray(0,count)], [6,7,8]);
+  count = filterRoomCell(room, 0, 12, output, length, slots, compact);
+  assert.deepEqual([...compact.subarray(0,count)], [...indices.slice(0,9)]);
+  count = filterRoomCell(null, -1, 0, output, length, null, compact, sky.runs);
+  assert.deepEqual([...compact.subarray(0,count)], [...indices.slice(6)]);
+  const turned = {basis:[0,0,1,0,-1], runs:[]};
+  filterView(bytes, indices, 0, 12, planes, new Uint8Array(12), null, slots, turned);
+  assert.deepEqual(turned.runs, [6,9]);
+});
+
 test('shared vertices preserve every packed byte and widen indices above 65535',async()=>{
   const {sharedVertices}=await import('../site/tidewater-rocha/mobile/shared-vertices.js');
   const input=new Uint8Array(65537*32),words=new Uint32Array(input.buffer);

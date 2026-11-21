@@ -46,8 +46,9 @@ try {
       const height = platform ? platformEye : deckEye;
       if (height < y || height > Y) continue;
       // The shortest prefix is present at every lens width for this sightline.
-      views.push({...view, profile, height, count:view.prefixes?.[0]?.count ?? view.count,
-        spacing:platform ? .16 : profile === 'bow' ? .24 : .22});
+      const mainDeck = profile === 'exterior' && !platform && view.sign === 1 && z >= -14 && z < -3;
+      views.push({...view, profile, height, mainDeck, count:view.prefixes?.[0]?.count ?? view.count,
+        spacing:mainDeck ? .15 : platform ? .16 : profile === 'bow' ? .24 : .22});
     }
   }
   // The bridge and its lower lobby share the upper profile. Outside a prepared
@@ -74,6 +75,7 @@ try {
     await writeFile(meshFile, Buffer.concat([bytes(shape), bytes(packed), bytes(faces)]));
     const nx = Math.ceil((X - x) / spacing), nz = Math.ceil((Z - z) / spacing);
     const dx = (X - x) / nx, dz = (Z - z) / nz, halfHeight = .028;
+    const halfExtent = view.mainDeck ? [dx / 2, halfHeight, dz / 2] : [];
     const radius = Math.hypot(dx / 2, dz / 2, halfHeight) + .025;
     const stride = Math.ceil(count / 24), block = Buffer.alloc(nx * nz * stride);
     regions.push({profile, first:view.first, count, box:[x, height-halfHeight, z, X, height+halfHeight, Z],
@@ -84,7 +86,7 @@ try {
       const cell = j * nx + i;
       jobs.push(async () => {
         const mask = meshFile + '-' + cell;
-        await exec(compiler, [meshFile, radius, view.sign || 1, x + (i + .5) * dx, height, z + (j + .5) * dz, mask].map(String));
+        await exec(compiler, [meshFile, radius, view.sign || 1, x + (i + .5) * dx, height, z + (j + .5) * dz, mask, ...halfExtent].map(String));
         const data = await readFile(mask);
         if (data.length !== stride) throw Error('Incomplete generated mask');
         data.copy(block, cell * stride);

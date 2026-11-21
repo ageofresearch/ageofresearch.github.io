@@ -1,6 +1,6 @@
 import {loadRoomVisibility} from './room-visibility.js?v=3';
 import {sharedVertices} from './shared-vertices.js?v=1';
-import {createViewIndices} from './view-indices.js?v=2';
+import {createViewIndices} from './view-indices.js?v=3';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-1';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
 import {createVisibilityTarget} from './visibility-target.js?v=1';
@@ -333,7 +333,7 @@ export async function createForwardRenderer(app, daylight) {
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
             if(capture)capturedSource={indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16)};
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height);
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame);
             if(visible && visible.length<count){
               pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
               first=0;count=visible.length;

@@ -53,11 +53,18 @@ export function roomCellOffset(region, camera, projection, width, height) {
   return offset + (row * nx + col) * stride;
 }
 
-export function filterRoomCell(bits, offset, prefixCount, indices, length, slots, output) {
-  let write = 0;
+export function filterRoomCell(bits, offset, prefixCount, indices, length, slots, output, skyRuns) {
+  let write = 0, run = 0;
   for (let i = 0; i < length; i += 3) {
-    const face = slots[i / 3];
-    if (face * 3 < prefixCount && (bits[offset + (face >>> 3)] & (1 << (face & 7)))) continue;
+    if (skyRuns && i === skyRuns[run]) {
+      i = skyRuns[run+1] - 3;
+      run += 2;
+      continue;
+    }
+    if (offset >= 0) {
+      const face = slots[i / 3];
+      if (face * 3 < prefixCount && (bits[offset + (face >>> 3)] & (1 << (face & 7)))) continue;
+    }
     output[write++] = indices[i];
     output[write++] = indices[i + 1];
     output[write++] = indices[i + 2];
@@ -68,7 +75,7 @@ export function filterRoomCell(bits, offset, prefixCount, indices, length, slots
 export async function loadRoomVisibility(vertices, profiles, signal) {
   try {
     const timeout = AbortSignal.timeout(10000);
-    const response = await fetch(new URL('./room-visibility.bin?v=3', import.meta.url),
+    const response = await fetch(new URL('./room-visibility.bin?v=4', import.meta.url),
       {signal:signal ? AbortSignal.any([timeout, signal]) : timeout});
     if (!response.ok) return null;
     const raw = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();

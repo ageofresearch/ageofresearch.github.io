@@ -46,7 +46,16 @@ int bin(double s) {
 // only to select candidate blockers. It never certifies an invisible face.
 vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
                          const vector<uint32_t> &indices, double radius,
-                         double sign, Point eye) {
+                         double sign, Point eye, Point halfExtent) {
+  // The deck floor cells are much shallower vertically than horizontally.
+  // The maximum of a linear form over the box occurs at a corner. Keep the
+  // same radial padding as the enclosing sphere for numerical safety.
+  const bool useBox = halfExtent.x > 0;
+  auto eyeSupport = [&](Point n) {
+    if (!useBox) return radius * len(n);
+    return abs(n.x) * halfExtent.x + abs(n.y) * halfExtent.y +
+           abs(n.z) * halfExtent.z + .025 * len(n);
+  };
   constexpr double nearReach = .065, angularMargin = .002;
   const int n = vertices.size(), k = indices.size();
   vector<Point> points;
@@ -77,7 +86,7 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
     t.normalLength = len(t.normal);
     t.level = dot(t.normal, t.corner[0]);
     if (vertices[indices[3 * i]].layer == -2 || t.normalLength < 1e-9 ||
-        t.level < (radius + nearReach + .003) * t.normalLength)
+        t.level < eyeSupport(t.normal) + (nearReach + .003) * t.normalLength)
       continue;
     int s = blockers.size();
     ownBlocker[i] = s;
@@ -128,7 +137,7 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
     double normalLength = len(nn),
            planeDistance =
                normalLength > 0
-                   ? fabs(dot(nn, target[0])) / normalLength - radius
+                   ? (fabs(dot(nn, target[0])) - eyeSupport(nn)) / normalLength
                    : 0;
     if (planeDistance < reach * .002 + .003)
       return false;
@@ -142,12 +151,12 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
     if (planeDistance * normalLength < longest * reach * reach * .000045)
       return false;
     // det(a-eye,b-eye,target-eye) is affine in eye. Its maximum change on
-    // the entire eye sphere is radius * |(b-a) cross (target-a)|. Keep a
+    // the eye cell is the support in direction (b-a) cross (target-a). Keep a
     // separate edge guard for fixed-point rasterization.
     auto stable = [&](Point a, Point b, Point t) {
-      Point n = cross(a, b);
+      Point n = cross(a, b), drift = cross(b - a, t - a);
       double d = dot(n, t),
-             margin = eyeGuard * len(cross(b - a, t - a)) +
+             margin = eyeSupport(drift) + .001 * len(drift) +
                       edgeGuard * (len(n) + eyeGuard * len(b - a));
       return d > margin ? 1 : d < -margin ? -1 : 0;
     };
@@ -177,7 +186,7 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
       for (auto corner : target)
         if (dot(t.normal, corner) <=
             t.level + (depthGuard + .0005 * reach * reach /
-                                        (t.level / t.normalLength - radius)) *
+                                        ((t.level - eyeSupport(t.normal)) / t.normalLength)) *
                           t.normalLength)
           return false;
       return true;
@@ -257,9 +266,9 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
 // that the browser will hash before accepting the result.
 int main(int argc, char **argv) {
   try {
-    if (argc != 8)
+    if (argc != 8 && argc != 11)
       throw runtime_error(
-          "Expected mesh, radius, sign, eye X/Y/Z and output path");
+          "Expected mesh, radius, sign, eye X/Y/Z, output path and optional cell half extents");
     ifstream input(argv[1], ios::binary);
     input.exceptions(ios::failbit | ios::badbit);
     uint32_t counts[2];
@@ -276,8 +285,10 @@ int main(int argc, char **argv) {
                indices.size() * sizeof(uint32_t));
     if (*max_element(indices.begin(), indices.end()) >= vertices.size())
       throw runtime_error("Invalid yacht vertex index");
+    Point halfExtent{};
+    if (argc == 11) halfExtent = {stod(argv[8]), stod(argv[9]), stod(argv[10])};
     auto bits = bakeCell(vertices, indices, stod(argv[2]), stod(argv[3]),
-                         {stod(argv[4]), stod(argv[5]), stod(argv[6])});
+                         {stod(argv[4]), stod(argv[5]), stod(argv[6])}, halfExtent);
     ofstream output(argv[7], ios::binary);
     output.exceptions(ios::failbit | ios::badbit);
     output.write(reinterpret_cast<char *>(bits.data()), bits.size());

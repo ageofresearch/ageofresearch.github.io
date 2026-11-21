@@ -26,7 +26,12 @@ guest accommodation and aft-facing bow passage. The bridge and lobby reuse
 their longitudinal index bands at their respective walking eye heights. The
 initial download stores differences between adjacent rows of camera cells. The
 platform uses 16 cm cells at its walking eye height to account for the nearby
-transom and steps. Each region applies
+transom and steps. Forward-facing views across the main saloon and aft terrace
+use 15 cm cells. The bake tests their actual horizontal and vertical extents
+when checking whether a fitting is hidden from every point in the cell.
+The camera worker also excludes sky triangles outside the viewing frustum for
+the current sun angle. It retains their original indices so the sun controls
+can restore them immediately after a change. Each region applies
 only to its original geometry, sightline, eye height and projection limits.
 The renderer prepares the table during loading. Other views, and sessions
 where the table fails validation, use the ordinary camera visibility filter.

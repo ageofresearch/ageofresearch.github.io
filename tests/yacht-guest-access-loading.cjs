@@ -16,7 +16,19 @@ module.exports=async function guestLoading(browser,base) {
     await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     let frame=page.frames().find(f=>f.url().includes('play.html'));
     const failed=()=>frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready'&&__app.entranceYacht.guestAccessLoadState==='error'&&__app.engine._running,null,{timeout:180000});
-    const snapshot=()=>frame.evaluate(()=>{const a=__app,w=a.yachtWalk;return {rooms:w.model.asset.data.rooms.map(r=>r.id),routes:w.nav.routes.map(r=>r.id),stats:{...w.model.stats},profile:a.gangwayRenderer.activeProfile,safe:w.nav.floorSafe(16.8,-.1,'LD'),deckHidden:w.controls.root.querySelector('[data-deck="LD"]')?.hidden??true,live:{buffers:__guestLive.buffers.size,textures:__guestLive.textures.size}};});
+    await frame.evaluate(()=>{
+      window.__guestSnapshot=()=>{
+        const a=__app,w=a.yachtWalk;
+        return {
+          rooms:w.model.asset.data.rooms.map(r=>r.id),routes:w.nav.routes.map(r=>r.id),
+          stats:{...w.model.stats},profile:a.gangwayRenderer.activeProfile,
+          safe:w.nav.floorSafe(16.8,-.1,'LD'),
+          deckHidden:w.controls.root.querySelector('[data-deck="LD"]')?.hidden??true,
+          live:{buffers:__guestLive.buffers.size,textures:__guestLive.textures.size},
+        };
+      };
+    });
+    const snapshot=()=>frame.evaluate(()=>window.__guestSnapshot());
     await failed();const before=await snapshot();assert.equal(before.safe,false);assert.equal(before.deckHidden,true);assert.ok(before.rooms.includes('MD_R07'));assert.ok(!before.rooms.includes('LD_R11'));assert.ok(!before.rooms.includes('LD_R03'));
     await page.unroute('**/guest-access.bin?*');
     await page.route('**/guest-access.bin?*',r=>r.fulfill({status:200,body:Buffer.alloc(12),contentType:'application/octet-stream'}));
@@ -34,8 +46,15 @@ module.exports=async function guestLoading(browser,base) {
     await frame.evaluate(()=>window.failGuestPreparation());await failed();assert.deepEqual(await snapshot(),before);
     await frame.locator('.luz-guest-access-load button').click();
     await frame.waitForFunction(()=>__app.entranceYacht.guestAccessLoadState==='ready'&&__app.engine._running,null,{timeout:90000});
-    const prepared=await snapshot();assert.equal(prepared.rooms.filter(r=>r==='LD_R11').length,1);assert.equal(prepared.rooms.filter(r=>r==='LD_R03').length,1);assert.equal(prepared.routes.filter(r=>r==='guest').length,1);assert.equal(prepared.safe,true);assert.equal(prepared.deckHidden,false);
-    await frame.evaluate(()=>__app.entranceYacht.loadGuestAccess());assert.deepEqual(await snapshot(),prepared);
+    // Observe the already-loaded call in one browser task. Between Playwright
+    // evaluations a normal display frame can independently refine the draw count.
+    const {prepared,repeated}=await frame.evaluate(async()=>{
+      const prepared=window.__guestSnapshot();
+      await __app.entranceYacht.loadGuestAccess();
+      return {prepared,repeated:window.__guestSnapshot()};
+    });
+    assert.equal(prepared.rooms.filter(r=>r==='LD_R11').length,1);assert.equal(prepared.rooms.filter(r=>r==='LD_R03').length,1);assert.equal(prepared.routes.filter(r=>r==='guest').length,1);assert.equal(prepared.safe,true);assert.equal(prepared.deckHidden,false);
+    assert.deepEqual(repeated,prepared);
     await frame.evaluate(()=>__app.yachtWalk.controls.openMenu());
     await frame.locator('[data-deck="LD"]').click();await frame.locator('[data-room="LD_R11"]').click();
     assert.deepEqual(await frame.evaluate(()=>({deck:__app.yachtWalk.nav.deck,position:__app.yachtWalk.nav.position})),{deck:'LD',position:[16.8,-.1]});

@@ -4,18 +4,21 @@ export function roomCells(header, bits, profiles) {
   const ranges = new Map();
   let extent = 0;
   for (const region of header.regions) {
-    const { profile, first, count, box, nx, nz, offset } = region;
+    const { profile, first, count, box, nx, nz, offset, heights } = region;
     if (!profiles[profile] || ![first, count, nx, nz, offset].every(Number.isSafeInteger) ||
         first < 0 || count <= 0 || first % 3 || count % 3 || first + count > profiles[profile].length ||
         nx <= 0 || nz <= 0 || offset !== extent || box.length !== 6 || !box.every(Number.isFinite) ||
         box.some((v, i) => i < 3 && v >= box[i + 3])) throw Error('Invalid yacht visibility cell');
+    if (heights !== undefined && (!Array.isArray(heights) || heights.length !== 2*nz ||
+        !heights.every((value,i) => Number.isFinite(value) && (i%2===0 || value > heights[i-1]))))
+      throw Error('Invalid boarding eye heights');
     const stride = Math.ceil(count / 24);
     extent += nx * nz * stride;
     if (!Number.isSafeInteger(extent) || extent > bits.length) throw Error('Incomplete yacht visibility data');
     if (!ranges.has(profile)) ranges.set(profile, new Map());
     const group = ranges.get(profile);
     if (!group.has(first)) group.set(first, []);
-    group.get(first).push({ box, count, offset, nx, nz, stride });
+    group.get(first).push({ box, count, offset, nx, nz, stride, heights });
   }
   if (extent !== bits.length) throw Error('Incorrect yacht visibility data size');
   if (header.version === 2) for (const {nx, nz, count, offset} of header.regions) {
@@ -50,6 +53,8 @@ export function roomCellOffset(region, camera, projection, width, height) {
   if (!(Math.min(width * fx, height * fy) >= 800 && near > 0 && nearReach <= .065)) return -1;
   const col = Math.min(nx - 1, Math.floor((x - box[0]) * nx / (box[3] - box[0])));
   const row = Math.min(nz - 1, Math.floor((z - box[2]) * nz / (box[5] - box[2])));
+  const heights = region.heights;
+  if (heights && (y < heights[2*row] || y > heights[2*row+1])) return -1;
   return offset + (row * nx + col) * stride;
 }
 
@@ -75,7 +80,7 @@ export function filterRoomCell(bits, offset, prefixCount, indices, length, slots
 export async function loadRoomVisibility(vertices, profiles, signal) {
   try {
     const timeout = AbortSignal.timeout(10000);
-    const response = await fetch(new URL('./room-visibility.bin?v=4', import.meta.url),
+    const response = await fetch(new URL('./room-visibility.bin?v=5', import.meta.url),
       {signal:signal ? AbortSignal.any([timeout, signal]) : timeout});
     if (!response.ok) return null;
     const raw = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();

@@ -313,6 +313,24 @@ test('walking masks respect the original sightline, cell boundaries and raster l
   assert.throws(() => roomCells({regions}, new Uint8Array(1), {upper:indices}), /Incomplete/);
 });
 
+test('boarding visibility follows each longitudinal row of the slope and rejects malformed heights', async () => {
+  const {roomCells, roomCellOffset} = await import('../site/tidewater-rocha/mobile/room-visibility.js');
+  const region = {profile:'exterior', first:0, count:3, nx:1, nz:2, offset:0,
+    box:[0,2,0,1,4,1], heights:[2.3,2.4,3.1,3.2]};
+  const lists = {exterior:new Uint16Array(3)}, bits = Uint8Array.of(0,1);
+  const cells = roomCells({regions:[region]}, bits, lists);
+  const group = cells.range('exterior',0,3);
+  const camera = new Float64Array(16), lens = new Float64Array(16);
+  lens[0]=lens[5]=3; lens[14]=.02; camera[12]=.5;
+  for (const [z, y, expected] of [[.25,2.35,0],[.25,3.15,-1],[.75,2.35,-1],[.75,3.15,1],[.75,3.201,-1]]) {
+    camera[14]=z; camera[13]=y;
+    assert.equal(roomCellOffset(group,camera,lens,360,540),expected);
+  }
+  for (const heights of [[2.3,2.4], [2.3,2.4,3.2,3.1], [2.3,NaN,3.1,3.2]]) {
+    assert.throws(() => roomCells({regions:[{...region,heights}]},bits,lists), /boarding eye heights/);
+  }
+});
+
 test('the shipped swim-platform cells cover the shared spawn and stop at the first riser', async () => {
   const path = new URL('../site/tidewater-rocha/mobile/room-visibility.bin', import.meta.url);
   const data = gunzipSync(await readFile(path));

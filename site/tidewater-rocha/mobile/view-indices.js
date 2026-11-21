@@ -1,4 +1,4 @@
-import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=4';
+import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=5';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {

@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { gzipSync } from 'node:zlib';
-import { createSternFeatures, l as yacht } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import { boardingHeight, createSternFeatures, l as yacht } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { loadDeckLight, prepareOpaque, packRenderVertices } from '../site/tidewater-rocha/mobile/prepare-light.js';
 import { accessProfileBounds, accessRoom } from '../site/tidewater-rocha/mobile/bridge-access-geometry.js';
 import { sharedVertices } from '../site/tidewater-rocha/mobile/shared-vertices.js';
@@ -37,18 +37,25 @@ try {
   const packed = table.finish(), regions = [], blocks = [], jobs = [];
   let total = 0;
   const platformEye = createSternFeatures().access.starboard.room.spawn[2] - yacht.seaReference;
+  const boardingEye = z => boardingHeight((z + yacht.length / 2) / yacht.sx) + 1.6 - yacht.seaReference;
+  const down = -2; // Vertical direction in the offline visibility compiler.
   const views = [];
   for (const [profile, deckEye] of [['exterior', 3.54], ['upper', 5.59], ['guest', 1.14], ['bow', 5.59]]) {
     for (const view of manifest.profiles[profile].batches[0].views) {
       const [, y, z, , Y] = view.box;
       const platform = profile === 'exterior' && platformEye >= y && platformEye <= Y;
-      if (z < -14 && !platform || profile === 'bow' && view.sign !== -1) continue;
+      const ramp = profile === 'exterior' && z < -14 && !platform;
+      if (z < -14 && !platform && !ramp || profile === 'bow' && view.sign !== -1) continue;
       const height = platform ? platformEye : deckEye;
-      if (height < y || height > Y) continue;
+      if (!ramp && (height < y || height > Y)) continue;
       // The shortest prefix is present at every lens width for this sightline.
       const mainDeck = profile === 'exterior' && !platform && view.sign === 1 && z >= -14 && z < -3;
-      views.push({...view, profile, height, mainDeck, count:view.prefixes?.[0]?.count ?? view.count,
-        spacing:mainDeck ? .15 : platform ? .16 : profile === 'bow' ? .24 : .22});
+      const cockpit = profile === 'exterior' && !view.sign && z >= -14 && z < -9.5;
+      // Unrestricted views from the boarding ramp include the hull below
+      // the planks. A visitor in the cockpit can look in either direction.
+      const directions = cockpit ? [1, -1] : ramp && !view.sign ? [1, down] : [view.sign || 1];
+      views.push({...view, profile, height, mainDeck, ramp, cockpit, directions, count:view.prefixes?.[0]?.count ?? view.count,
+        spacing:mainDeck ? .15 : (ramp || cockpit || platform) ? .16 : profile === 'bow' ? .24 : .22});
     }
   }
   // The bridge and its lower lobby share the upper profile. Outside a prepared
@@ -68,30 +75,42 @@ try {
   }
   for (const [id, view] of views.entries()) {
     const {profile, height, count, spacing} = view;
-    const [x, , z, X, , Z] = view.box;
+    const [x, y, z, X, Y, Z] = view.box;
     const faces = Uint32Array.from(indices[profile].subarray(view.first, view.first + count));
     const meshFile = join(temp, 'mesh-' + id);
     const shape = new Uint32Array([packed.length / 32, count]);
     await writeFile(meshFile, Buffer.concat([bytes(shape), bytes(packed), bytes(faces)]));
     const nx = Math.ceil((X - x) / spacing), nz = Math.ceil((Z - z) / spacing);
     const dx = (X - x) / nx, dz = (Z - z) / nz, halfHeight = .028;
-    const halfExtent = view.mainDeck ? [dx / 2, halfHeight, dz / 2] : [];
-    const radius = Math.hypot(dx / 2, dz / 2, halfHeight) + .025;
+    const heights = view.ramp ? Array.from({length:nz}, (_,j) =>
+      [boardingEye(z+j*dz)-.04, boardingEye(z+(j+1)*dz)+.04]).flat() : null;
     const stride = Math.ceil(count / 24), block = Buffer.alloc(nx * nz * stride);
-    regions.push({profile, first:view.first, count, box:[x, height-halfHeight, z, X, height+halfHeight, Z],
-      nx, nz, offset:total});
+    regions.push({profile, first:view.first, count, box:[x, heights ? y : height-halfHeight, z, X, heights ? Y : height+halfHeight, Z],
+      nx, nz, ...(heights && {heights}), offset:total});
     total += block.length;
     blocks.push(block);
-    for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
-      const cell = j * nx + i;
-      jobs.push(async () => {
-        const mask = meshFile + '-' + cell;
-        await exec(compiler, [meshFile, radius, view.sign || 1, x + (i + .5) * dx, height, z + (j + .5) * dz, mask, ...halfExtent].map(String));
-        const data = await readFile(mask);
-        if (data.length !== stride) throw Error('Incomplete generated mask');
-        data.copy(block, cell * stride);
-        await rm(mask);
-      });
+    for (let j = 0; j < nz; j++) {
+      const centre = heights ? (heights[2*j]+heights[2*j+1])/2 : height;
+      const dy = heights ? (heights[2*j+1]-heights[2*j])/2 : halfHeight;
+      const radius = Math.hypot(dx/2, dz/2, dy) + .025;
+      const halfExtent = view.mainDeck || view.ramp || view.cockpit ? [dx/2, dy, dz/2] : [];
+      for (let i = 0; i < nx; i++) {
+        const cell = j * nx + i;
+        jobs.push(async () => {
+          const mask = meshFile + '-' + cell;
+          const target = block.subarray(cell*stride, (cell+1)*stride);
+          // Each bit is independently certified throughout this cell. A proof
+          // along either beam is sufficient, including while the camera turns.
+          for (const direction of view.directions ?? [view.sign]) {
+            const eye = [x+(i+.5)*dx, centre, z+(j+.5)*dz];
+            await exec(compiler, [meshFile, radius, direction, ...eye, mask, ...halfExtent].map(String));
+            const data = await readFile(mask);
+            if (data.length !== stride) throw Error('Incomplete generated mask');
+            for (let k=0; k<stride; k++) target[k] |= data[k];
+          }
+          await rm(mask);
+        });
+      }
     }
   }
   let cursor = 0;

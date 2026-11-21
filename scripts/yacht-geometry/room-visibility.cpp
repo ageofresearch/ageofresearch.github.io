@@ -47,6 +47,16 @@ int bin(double s) {
 vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
                          const vector<uint32_t> &indices, double radius,
                          double sign, Point eye, Point halfExtent) {
+  // Rotate the downward beam onto the same forward axis. A cyclic
+  // permutation preserves the winding of the yacht's opaque surfaces.
+  if (sign != 1 && sign != -1 && sign != -2)
+    throw runtime_error("Unknown visibility beam direction");
+  const bool vertical = sign == -2;
+  if (vertical) {
+    halfExtent = {halfExtent.z, halfExtent.x, halfExtent.y};
+    eye = {eye.z, eye.x, eye.y};
+    sign = -1;
+  }
   // The deck floor cells are much shallower vertically than horizontally.
   // The maximum of a linear form over the box occurs at a corner. Keep the
   // same radial padding as the enclosing sphere for numerical safety.
@@ -67,8 +77,8 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
         welded.emplace(array<float, 3>{a[0], a[1], a[2]}, int(points.size()));
     pointIndex[i] = it.first->second;
     if (it.second) {
-      points.push_back(
-          {-sign * (a[0] - eye.x), a[1] - eye.y, sign * (a[2] - eye.z)});
+      const Point p = vertical ? Point{a[2], a[0], a[1]} : Point{a[0], a[1], a[2]};
+      points.push_back({-sign * (p.x - eye.x), p.y - eye.y, sign * (p.z - eye.z)});
     }
   }
   vector<Blocker> blockers;

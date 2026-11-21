@@ -2,11 +2,11 @@ export const viewRadius = 0.35;
 
 // Four half-spaces bound a wider view. The extra space at the eye
 // allows ordinary walking without rebuilding an index list every frame.
-export function widenedView(clip) {
+export function widenedView(clip, width = 1.25) {
   const planes = new Float64Array(16);
   for (let side = 0; side < 4; side++) {
     const axis = side >> 1, sign = side % 2 ? -1 : 1, i = side * 4;
-    for (let j = 0; j < 4; j++) planes[i+j] = 1.25 * clip[j*4+3] + sign * clip[j*4+axis];
+    for (let j = 0; j < 4; j++) planes[i+j] = width * clip[j*4+3] + sign * clip[j*4+axis];
     const norm = Math.hypot(planes[i], planes[i+1], planes[i+2]);
     for (let j = 0; j < 4; j++) planes[i+j] /= norm;
     planes[i+3] += viewRadius;

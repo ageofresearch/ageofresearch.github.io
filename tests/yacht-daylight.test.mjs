@@ -168,6 +168,11 @@ test('camera culling retains crossing triangles, face order and the eye-relative
   const camera=[1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
   const planes=widenedView(projection);
   assert.ok(coversView(planes,camera,projection));
+  const inner=widenedView(projection,1.12), pan=camera.slice();
+  const angle=.08;
+  pan[0]=pan[10]=Math.cos(angle);pan[8]=Math.sin(angle);pan[2]=-pan[8];
+  assert.ok(coversView(planes,pan,projection));
+  assert.equal(coversView(inner,pan,projection),false);
   const shifted=camera.slice();shifted[12]=.15;
   assert.ok(coversView(planes,shifted,projection));
   shifted[12]=3;

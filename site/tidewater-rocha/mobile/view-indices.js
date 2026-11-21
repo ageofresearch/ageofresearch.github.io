@@ -99,9 +99,12 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const current=valid(active);
       if (current) uploadOpaque(active, camera, projection, width, height);
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
-      if(current && distance<viewRadius*.55)return active;
+      // A turn can leave the angular guard without moving the eye. Request the
+      // next list while the outer frustum still covers the visible frame.
+      if(current && distance<viewRadius*.55 && coversView(active.inner, camera, projection))return active;
       if (!pending) {
-        pending = {profile, first, count, planes:widenedView(clip),eye:[camera[12],camera[13],camera[14]]};
+        pending = {profile, first, count, eye:[camera[12],camera[13],camera[14]],
+          planes:widenedView(clip), inner:widenedView(clip,1.12)};
         worker.postMessage({...pending, trackFaces:Boolean(cells?.range(profile, first, count))});
       }
       return current?active:null;

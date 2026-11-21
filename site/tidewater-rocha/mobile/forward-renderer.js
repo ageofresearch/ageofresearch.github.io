@@ -165,7 +165,9 @@ export async function createForwardRenderer(app, daylight) {
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
           if(profiles[name].batches[0].localView)warmBands.push('local');
-          warmBands.push(...(profiles[name].batches[0].views??[]));
+          // A parent span warms all of its narrower frustum prefixes.
+          const views=profiles[name].batches[0].views??[];
+          warmBands.push(...views.filter((v,i)=>views[i+1]?.first!==v.first));
           for(const band of warmBands){
             app.gpu.beginFrame();this.render(name,target.createView(),band);app.gpu.submit();
             await app.gpu.queue.onSubmittedWorkDone();

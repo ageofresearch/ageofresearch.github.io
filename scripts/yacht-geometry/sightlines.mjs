@@ -100,16 +100,26 @@ export function sightlines(profile,geometry,basis){
     });
     const directions=Array.isArray(direction)?direction:direction!==undefined?[direction]:profile==='exterior'?[1]:[-1,1];
     for(const sign of directions){
-      const visible=[];
+      // Nested frusta share one index range. A portrait camera only reads
+      // the narrow prefix; a wide or off-axis view still gets every visible face.
+      const cones=sign?[[.80,1.40,.78],[1.20,2.10,.90],limits].map(c=>c.map((v,k)=>Math.min(v,limits[k]))):[limits];
+      const buckets=cones.map(()=>[]);
       for(const f of possible){
         const front=sign*(sign>0?f.hi[2]-box[2]:f.lo[2]-box[5]);
-        if(!f.sky&&sign!==0&&(front<-.02||f.hi[0]-box[0]+limits[0]*front<-.02||box[3]-f.lo[0]+limits[0]*front<-.02||
-            f.hi[1]-box[1]+limits[1]*front<-.02||box[4]-f.lo[1]+limits[2]*front<-.02))continue;
+        const bucket=f.sky||!sign?0:cones.findIndex(c=>front>=-.02&&
+          f.hi[0]-box[0]+c[0]*front>=-.02&&box[3]-f.lo[0]+c[0]*front>=-.02&&
+          f.hi[1]-box[1]+c[1]*front>=-.02&&box[4]-f.lo[1]+c[2]*front>=-.02);
+        if(bucket<0)continue;
         const dist=Math.hypot(...[0,1,2].map(k=>Math.max(0,f.lo[k]-box[k+3],box[k]-f.hi[k])));
-        visible.push({ids:f.ids,order:f.background?1e6:Math.floor(dist*4)});
+        buckets[bucket].push({ids:f.ids,order:f.background?1e6:Math.floor(dist*4)});
       }
-      visible.sort((a,b)=>a.order-b.order);
-      result.push({box,sign,...(viewCone && {cone:viewCone}),indices:visible.flatMap(f=>f.ids)});
+      const prefixes=[],indices=[];
+      for(const [i,bucket] of buckets.entries()){
+        bucket.sort((a,b)=>a.order-b.order);
+        for(const face of bucket)indices.push(...face.ids);
+        if(i<cones.length-1)prefixes.push({cone:cones[i],count:indices.length});
+      }
+      result.push({box,sign,...(viewCone && {cone:viewCone}),prefixes,indices});
     }
   }
   return result;

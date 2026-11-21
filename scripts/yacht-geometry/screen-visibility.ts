@@ -118,7 +118,7 @@ function upperDepth(face: usize, projected: usize, ux: i32, uy: i32, vx: i32, vy
   return max(za,max(zb,zc))+.0003+2.1*max(smooth,rounded);
 }
 
-function keepFace(face: usize, projected: usize, grid: usize, partial: usize, full: usize, faces: usize, cols: i32): bool {
+function keepFace(face: usize, projected: usize, grid: usize, partial: usize, full: usize, faces: usize, cols: i32, depthTest: bool): bool {
   const a=facePoint(grid,face,0), b=facePoint(grid,face,1), c=facePoint(grid,face,2);
   const ma=load<i32>(a+12), mb=load<i32>(b+12), mc=load<i32>(c+12);
   if (ma&mb&mc&15) return false;
@@ -129,20 +129,25 @@ function keepFace(face: usize, projected: usize, grid: usize, partial: usize, fu
   const area=ux*vy-uy*vx, perimeter=abs(ux)+abs(uy)+abs(vx)+abs(vy)+abs(ex)+abs(ey), error=h*(perimeter+6*h);
   if (area < -error) return false;
   const left=min(ax,min(bx,cx))-h, right=max(ax,max(bx,cx))+h, bottom=min(ay,min(by,cy))-h, top=max(ay,max(by,cy))+h;
-  const tx0=left>>8, tx1=right>>8, ty0=bottom>>8, ty1=top>>8;
-  const upper=upperDepth(face,projected,ux,uy,vx,vy,h,abs(area)-error);
-  let covered=tx1-tx0<12 && ty1-ty0<12;
-  for (let y=ty0; covered && y<=ty1; y++) for (let x=tx0; x<=tx1; x++) {
-    if (load<f32>(full+((y*cols+x)<<2))<=upper) { covered=false; break; }
-  }
-  if (covered) return false;
-  if (area>=perimeter*24 || (right-left)*(top-bottom)>=1024*140 || right-left>=2048 || top-bottom>=2048) {
-    if (tx0!=tx1 || ty0!=ty1) return true;
-    const at=((ty0*cols+tx0)<<2);
-    if (load<f32>(partial+at)<=upper) return true;
-    const occ=load<usize>(faces+at);
-    return !(insideOccluder(occ,projected,<f32>ax/32,<f32>ay/32) && insideOccluder(occ,projected,<f32>bx/32,<f32>by/32) &&
-             insideOccluder(occ,projected,<f32>cx/32,<f32>cy/32));
+  const large=area>=perimeter*24 || (right-left)*(top-bottom)>=1024*140 || right-left>=2048 || top-bottom>=2048;
+  if (!depthTest && large) return true;
+  let upper:f32=0;
+  if (depthTest) {
+    const tx0=left>>8, tx1=right>>8, ty0=bottom>>8, ty1=top>>8;
+    upper=upperDepth(face,projected,ux,uy,vx,vy,h,abs(area)-error);
+    let covered=tx1-tx0<12 && ty1-ty0<12;
+    for (let y=ty0; covered && y<=ty1; y++) for (let x=tx0; x<=tx1; x++) {
+      if (load<f32>(full+((y*cols+x)<<2))<=upper) { covered=false; break; }
+    }
+    if (covered) return false;
+    if (large) {
+      if (tx0!=tx1 || ty0!=ty1) return true;
+      const at=((ty0*cols+tx0)<<2);
+      if (load<f32>(partial+at)<=upper) return true;
+      const occ=load<usize>(faces+at);
+      return !(insideOccluder(occ,projected,<f32>ax/32,<f32>ay/32) && insideOccluder(occ,projected,<f32>bx/32,<f32>by/32) &&
+               insideOccluder(occ,projected,<f32>cx/32,<f32>cy/32));
+    }
   }
   for (let sample=0; sample<4; sample++) {
     const ox=sample==0?12:sample==1?28:sample==2?4:20, oy=28-8*sample;
@@ -155,6 +160,7 @@ function keepFace(face: usize, projected: usize, grid: usize, partial: usize, fu
         const pa=abs(dx)+abs(dy), pb=abs(dbx)+abs(dby), pc=abs(dcx)+abs(dcy);
         if (ea< -(ha*pb+hb*pa+2*ha*hb) || eb< -(hb*pc+hc*pb+2*hb*hc) || ec< -(hc*pa+ha*pc+2*hc*ha)) continue;
       }
+      if (!depthTest) return true;
       const at=(((y>>3)*cols+(x>>3))<<2);
       if (load<f32>(full+at)>upper) continue;
       if (load<f32>(partial+at)<=upper ||
@@ -166,15 +172,15 @@ function keepFace(face: usize, projected: usize, grid: usize, partial: usize, fu
 
 export function filter(source: usize, unique: usize, vertexCount: i32, indices: usize, count: i32,
                        matrix: usize, projected: usize, grid: usize, tiles: usize, output: usize,
-                       width: i32, height: i32, precision: i32): i32 {
+                       width: i32, height: i32, precision: i32, depthTest: bool): i32 {
   project(source,unique,vertexCount,matrix,projected,grid,width,height,precision);
   const cols=(width+7)>>3, rows=(height+7)>>3, bytes=cols*rows*4;
   const full=tiles+bytes, faces=full+bytes;
-  buildOccluders(indices,count,projected,grid,tiles,full,faces,cols,rows);
+  if (depthTest) buildOccluders(indices,count,projected,grid,tiles,full,faces,cols,rows);
   let length=0;
   for (let i=0; i<count; i+=3) {
     const face=indices+i*2;
-    if (keepFace(face,projected,grid,tiles,full,faces,cols)) {
+    if (keepFace(face,projected,grid,tiles,full,faces,cols,depthTest)) {
       store<u32>(output+length*2,load<u32>(face));
       store<u16>(output+length*2+4,load<u16>(face+4)); length+=3;
     }

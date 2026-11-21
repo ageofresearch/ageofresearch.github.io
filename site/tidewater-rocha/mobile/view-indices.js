@@ -1,4 +1,4 @@
-import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=1';
+import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=2';
 import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=8';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
@@ -27,16 +27,17 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes);
   const scratch = new ArrayBuffer(glassOffset);
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
-  function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples, refineMovingView) {
+  function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples, refinement) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
     const offset = roomCellOffset(region, camera, projection, width, height);
     // Sun changes invalidate only the sky exclusions. The camera and room can
     // immediately reuse the full sky from the same prepared index list.
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
       Math.min(width*projection[0], height*projection[5]) >= 100;
-    const useScreen = refineMovingView && Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
+    const depthTest = refinement === 'occlusion';
+    const useScreen = refinement !== 'off' && Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
       usableScreen(width, height, samples, projection);
-    const changed = entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen;
+    const changed = entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen || entry.depthTest !== depthTest;
     if (!changed && !entry.filtered) return;
     let indices = entry.output, length = entry.rawLength;
     if (changed) {
@@ -47,11 +48,12 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       entry.baseLength = length;
       entry.useScreen = useScreen;
+      entry.depthTest = depthTest;
       // Small ranges already render cheaply. Reuse the broader worker list.
-      entry.filtered = useScreen && length >= 3500 * 3;
+      entry.filtered = useScreen && length >= (depthTest ? 3500 : 1800) * 3;
     } else length = entry.baseLength;
     if (entry.filtered) {
-      length = screen.filter(indices, length, frame, width, height, changed);
+      length = screen.filter(indices, length, frame, width, height, changed, depthTest);
       if (length === null) return;
       indices = screen.output;
     }
@@ -133,7 +135,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       return exact.length??null;
     },
-    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame, samples, refineMovingView) {
+    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame, samples, refinement) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
@@ -148,7 +150,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         pending = null;
       }
       const current=valid(active);
-      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision, frame, samples, refineMovingView);
+      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision, frame, samples, refinement);
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
       // A turn can leave the angular guard without moving the eye. Request the
       // next list while the outer frustum still covers the visible frame.

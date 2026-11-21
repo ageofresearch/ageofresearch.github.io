@@ -1,7 +1,7 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
-import {createViewIndices} from './view-indices.js?v=10';
-import {loadScreenVisibility} from './screen-visibility.js?v=1';
+import {createViewIndices} from './view-indices.js?v=11';
+import {loadScreenVisibility} from './screen-visibility.js?v=2';
 import {prepareImmediateView} from './immediate-view.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
@@ -362,13 +362,14 @@ export async function createForwardRenderer(app, daylight) {
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
             const nav=app.yachtWalk.nav;
-            // These narrow routes already use a small prepared list. Reprojecting
-            // it each frame costs more than submitting it to the GPU.
+            // The gangway has few useful occluders. Its long sightline benefits
+            // from rejecting backfaces and triangles between the four MSAA samples.
             const [x,y]=nav.position;
-            const onNarrowDeck=nav.deck==='MD'&&!nav.stair&&
-              (model.boarding.baseSafe?.(x,y,0)||model.guestAccess&&onGuestApproach(x,y));
-            const refineMovingView=activeProfile!=='guest'&&!onNarrowDeck;
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples,refineMovingView);
+            const mainDeck=nav.deck==='MD'&&!nav.stair;
+            let refinement='occlusion';
+            if(activeProfile==='guest'||mainDeck&&model.guestAccess&&onGuestApproach(x,y))refinement='off';
+            else if(mainDeck&&model.boarding.baseSafe?.(x,y,0))refinement='samples';
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples,refinement);
             if(capture)capturedSource={
               indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16),
               candidates:viewIndices.captureCandidates(visible),

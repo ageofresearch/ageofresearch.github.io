@@ -6,7 +6,7 @@ const maxTiles = Math.ceil(maxPixels / 64) + 2 * Math.ceil(maxDimension / 8) + 1
 export async function loadScreenVisibility(device, signal) {
   try {
     const timeout = AbortSignal.timeout(10000);
-    const response = await fetch(new URL('./screen-visibility.wasm?v=1', import.meta.url),
+    const response = await fetch(new URL('./screen-visibility.wasm?v=2', import.meta.url),
       {signal: signal ? AbortSignal.any([signal, timeout]) : timeout});
     if (!response.ok) return null;
     const [module, precision] = await Promise.allSettled([
@@ -60,23 +60,23 @@ export function prepareScreenVisibility(config, vertices, maxBytes) {
     const input = new Uint16Array(memory.buffer, indices, maxBytes / 2);
     const output = new Uint16Array(memory.buffer, result, maxBytes / 2 + 2);
     const matrix = new Float32Array(memory.buffer, clip, 16);
-    let used = 0, lastWidth = 0, lastHeight = 0;
+    let used = 0, lastWidth = 0, lastHeight = 0, lastDepthTest;
     return {
       output,
-      filter(list, count, frame, width, height, rebuild) {
-        if (!rebuild && width === lastWidth && height === lastHeight) {
+      filter(list, count, frame, width, height, rebuild, depthTest=true) {
+        if (!rebuild && width === lastWidth && height === lastHeight && depthTest === lastDepthTest) {
           let same = true;
           for (let i = 0; i < 16 && same; i++) same = matrix[i] === frame[i];
           if (same) return null;
         }
-        lastWidth = width; lastHeight = height;
+        lastWidth = width; lastHeight = height; lastDepthTest = depthTest;
         for (let i = 0; i < 16; i++) matrix[i] = frame[i];
         if (rebuild) {
           input.set(list.subarray(0, count));
           used = wasm.collectVertices(indices, count, unique, seen, vertexCount);
         }
         return wasm.filter(source, unique, used, indices, count, clip, projected, grid, tiles,
-          result, width, height, config.precision);
+          result, width, height, config.precision, depthTest);
       },
     };
   } catch {

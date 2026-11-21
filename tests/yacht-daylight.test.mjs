@@ -265,6 +265,9 @@ test('screen visibility retains a single covered MSAA sample and bounds a nearer
     const size=screen.filter(ids,ids.length,projection,width,height,true);
     assert.deepEqual([...screen.output.subarray(0,size)], [0,1,2,6,7,8,12,13,14,15,16,17]);
     assert.equal(screen.filter(ids,ids.length,projection,width,height,false),null);
+    // The sample-only gangway keeps covered faces even behind another surface.
+    const sampleCount=screen.filter(ids,ids.length,projection,width,height,false,false);
+    assert.deepEqual([...screen.output.subarray(0,sampleCount)],[0,1,2,3,4,5,6,7,8,12,13,14,15,16,17]);
     // Rebuilding the source list at the same camera must invalidate the cached result.
     assert.equal(screen.filter(ids.subarray(3,6),3,projection,width,height,true),3);
     assert.deepEqual([...screen.output.subarray(0,3)], [3,4,5]);

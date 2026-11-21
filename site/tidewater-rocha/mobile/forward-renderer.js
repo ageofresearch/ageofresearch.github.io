@@ -362,13 +362,13 @@ export async function createForwardRenderer(app, daylight) {
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
             const nav=app.yachtWalk.nav;
-            // The gangway has few useful occluders. Its long sightline benefits
-            // from rejecting backfaces and triangles between the four MSAA samples.
+            // The gangway and narrow cabin approaches expose many small faces.
+            // Test their native sample coverage without building an occluder grid.
             const [x,y]=nav.position;
             const mainDeck=nav.deck==='MD'&&!nav.stair;
-            let refinement='occlusion';
-            if(activeProfile==='guest'||mainDeck&&model.guestAccess&&onGuestApproach(x,y))refinement='off';
-            else if(mainDeck&&model.boarding.baseSafe?.(x,y,0))refinement='samples';
+            const samplesOnly=activeProfile==='guest'||mainDeck&&(
+              model.guestAccess&&onGuestApproach(x,y)||model.boarding.baseSafe?.(x,y,0));
+            const refinement=samplesOnly?'samples':'occlusion';
             visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples,refinement);
             if(capture)capturedSource={
               indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16),

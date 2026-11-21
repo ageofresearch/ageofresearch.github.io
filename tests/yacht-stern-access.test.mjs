@@ -235,6 +235,19 @@ test('Beach Club has an open central bay, supported platform chairs and a contin
     assert.ok(canopy.bounds[2]-access.lowerHeight>=1.65);
     assert.equal(parts.filter(p=>p.feature.startsWith('beach club flush locker')).length,2);
     assert.equal(parts.filter(p=>p.feature.startsWith('swim platform inclined sun chair back')).length,2);
+    const seats=parts.filter(p=>p.feature.startsWith('swim platform sun chair seat'));
+    const bases=parts.filter(p=>p.feature.startsWith('swim platform sun chair base'));
+    assert.equal(bases.length,2);
+    assert.equal(seats.length,2);
+    for(const [i,seat] of seats.entries()){
+      assert.equal(bases[i].bounds[2],access.lowerHeight);
+      assert.equal(bases[i].bounds[5],seat.bounds[2]);
+      assert.ok(Math.abs(seat.bounds[5]-3.024)<1e-6);
+      const [x,y,,X,Y]=seat.bounds;
+      assert.equal(access.platformSafe((x+X)/2,(y+Y)/2,.14),false);
+    }
+    assert.equal(parts.filter(p=>p.feature.startsWith('swim platform sun chair scatter')).length,2);
+    assert.ok(parts.some(p=>p.feature==='swim platform stainless shower riser'));
     assert.equal(parts.filter(p=>p.feature.startsWith('outboard stair coaming cap rail')).length,2);
     for(const side of ['port','starboard'])
       assert.equal(parts.filter(p=>p.feature.startsWith('transom '+side+' teak tread')).length,6);

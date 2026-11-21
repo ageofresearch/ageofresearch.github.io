@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { buildYachtGeometry, l as basis } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import { clipGeometry } from '../scripts/build-yacht-terrace.mjs';
+import { convexHull, distanceToFootprint } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 import { buildSaloon } from '../scripts/build-yacht-saloon.mjs';
 import { nextProfile,decodeSaloon,connectSaloon,loadSaloon } from '../site/tidewater-rocha/mobile/main-saloon.js';
 import { moveAlongRoute,routeSegments } from '../site/tidewater-rocha/mobile/aft-terrace.js';
@@ -17,6 +19,16 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
   assert.ok(saloon.parts.every(p=>p.bounds[0]>=8.5-1e-5 && p.bounds[3]<=17.91+1e-5));
   for(const id of ['MD_FUR_014','MD_FUR_016','MD_FUR_018','MD_FUR_019','MD_FUR_023','MD_SOF_007','MD_SOF_008','MD_SOF_009','MD_SOF_010'])
     assert.ok(saloon.parts.some(p=>p.sourceID===id),id);
+  const pedestals=saloon.parts.filter(p=>p.feature.startsWith('dining pedestal'));
+  const top=saloon.parts.find(p=>p.feature==='dark dining tabletop');
+  const rim=saloon.parts.find(p=>p.feature==='rounded dining table edge');
+  assert.equal(pedestals.length,2);
+  for(const pedestal of pedestals)assert.equal(pedestal.bounds[5],rim.bounds[2]);
+  assert.equal(rim.bounds[5],top.bounds[2]);
+  assert.ok(top.bounds[5]-3.95>.70);
+  assert.ok(top.bounds[4]-top.bounds[1]>1.75*(top.bounds[3]-top.bounds[0]));
+  assert.equal(top.materialID,'M40');
+  assert.ok(!saloon.parts.some(p=>['MD_FUR_032','MD_FUR_033'].includes(p.sourceID)));
   for(const p of Object.values(saloon.profiles)) {
     assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);
     assert.ok(p.geometryBytes<3*1024*1024);
@@ -29,6 +41,19 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
   const full=buildYachtGeometry({data,binary:bin.buffer.slice(bin.byteOffset,bin.byteOffset+bin.byteLength)},0,{mtuEngines:false,seaStrainers:false});
   const buffer=saloonBuffer.buffer.slice(saloonBuffer.byteOffset,saloonBuffer.byteOffset+saloonBuffer.byteLength);
   try {
+    const geometry=p=>({
+      vertices:Array.from(new Float32Array(buffer,p.vertices.offset,p.vertices.length)),
+      indices:Array.from(new Uint32Array(buffer,p.indices.offset,p.indices.length))
+    });
+    const coords=flat=>Array.from({length:flat.length/6},(_,i)=>flat.slice(6*i,6*i+2));
+    const plan=convexHull(coords(geometry(rim).vertices));
+    const shells=saloon.parts.filter(p=>p.feature==='rounded wraparound shell and arms');
+    assert.equal(shells.length,4);
+    for(const shell of shells){
+      const band=clipGeometry(geometry(shell),[...rim.bounds.slice(0,3),...rim.bounds.slice(3,5),top.bounds[5]]);
+      for(const [x,y] of coords(band.vertices))
+        assert.ok(distanceToFootprint(x,y,plan)>0,'Dining table intersects '+shell.id);
+    }
     for(const p of saloon.parts.filter(p=>p.role==='furniture')) {
       const source=full.interiorDetail.objects.find(s=>s.id===p.id);
       assert.ok(source,p.id);
@@ -72,7 +97,7 @@ test('native walking crosses the door, reaches both seating areas and returns at
       assert.deepEqual(f.model.boarding.arrivalLook,[12.3,0,4.7]);
       assert.ok(moveAlongRoute(nav,route,0,length));
       assert.ok(Math.hypot(nav.position[0]-10,nav.position[1]-.1)<.001);assert.equal(nav.location().id,'MD_R02');
-      // Side aisle around the sofas, then between the forward chairs and table.
+      // Side aisle around the sofas, then approach the aft edge of the dining table.
       const path=[[10,1.95],[14.4,1.95],[14.4,0],[14.8,0],[14.4,0],[14.4,1.95],[10,1.95],[10,.1]];
       travel(nav,path,hz);
       assert.equal(nav.elevation,3.95);
@@ -90,7 +115,7 @@ test('floor union closes the threshold without opening glazing, furniture, servi
   const f=fixture(),{nav}=f.walk;
   try {
     for(let x=8.15;x<=10;x+=.005)assert.ok(nav.floorSafe(x,.1),'Threshold at '+x);
-    for(const p of [[8.44,-1],[8.44,1],[12,1],[12,-1],[11.95,-.2],[15.9,0],[15.2,1.1],[12,3],[12,-3],[18,0],[9.2,2.8]])
+    for(const p of [[8.44,-1],[8.44,1],[12,1],[12,-1],[11.95,-.2],[15.4,0],[15.9,0],[15.2,1.1],[12,3],[12,-3],[18,0],[9.2,2.8]])
       assert.equal(nav.floorSafe(...p),false,'Solid or unsupported point '+p);
     nav.enterRoom('MD_R01');travel(nav,[[7.4,-1.6],[7.4,-2.5],[6.6,-3.1],[4,-3.03],[2.7,-3.03],[.35,-3.03],[.35,0]]);
     assert.equal(nav.deck,'SP');assert.equal(nav.elevation,2.84);

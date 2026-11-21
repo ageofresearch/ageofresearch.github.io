@@ -58,24 +58,39 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   }
   pad([2.15,.36,3.30,2.40,.80,3.57],'M93','beach club ochre scatter cushion');
   pad([2.06,.20,3.30,2.25,.53,3.48],'M94','beach club blue scatter cushion');
-  for (const side of [-1,1]) {
-    const y=side*.80;
-    slab([-1.73,y-.38,2.84,-.17,y+.38,2.96],.06,'M43','swim platform sun chair base '+side);
-    pad([-1.78,y-.40,2.95,-.57,y+.40,3.13],'M91','swim platform sun chair seat '+side);
-    const rake=cushion(outline(-.54,y,.78,.80,.055),3.02,3.15);
-    const angle=.84, pivot=-.93;
-    for(let i=0;i<rake.vertices.length;i+=6) {
-      const x=rake.vertices[i]-pivot,z=rake.vertices[i+2]-3.02;
-      rake.vertices[i]=pivot+x*Math.cos(angle)-z*Math.sin(angle);
-      rake.vertices[i+2]=3.02+x*Math.sin(angle)+z*Math.cos(angle);
-      const nx=rake.vertices[i+3],nz=rake.vertices[i+5];
-      rake.vertices[i+3]=nx*Math.cos(angle)-nz*Math.sin(angle);
-      rake.vertices[i+5]=nx*Math.sin(angle)+nz*Math.cos(angle);
+  // The toe, hinge and back of each lounger register separately against
+  // the teak. Transform positions and normals together into the deck plane.
+  const loungers = [
+    {side:1, x:-1.18, y:1.51, heading:-.72, cushionMaterial:'M93'},
+    {side:-1, x:-1.68, y:.75, heading:-1.015, cushionMaterial:'M94'}
+  ];
+  for (const {side,x,y,heading,cushionMaterial} of loungers) {
+    const cosHeading=Math.cos(heading), sinHeading=Math.sin(heading);
+    function place(geometry,material,name,rake=0) {
+      const cosRake=Math.cos(rake), sinRake=Math.sin(rake);
+      const vertices=geometry.vertices;
+      for (let i=0; i<vertices.length; i+=6) {
+        const u=vertices[i], v=vertices[i+1], z=vertices[i+2];
+        const nx=vertices[i+3], ny=vertices[i+4], nz=vertices[i+5];
+        // The back and scatter cushion pivot around the hinge at the end of the seat.
+        const along=rake ? 1+u*cosRake-(z-3.02)*sinRake : u;
+        const normalAlong=nx*cosRake-nz*sinRake;
+        vertices[i]=x+cosHeading*along-sinHeading*v;
+        vertices[i+1]=y+sinHeading*along+cosHeading*v;
+        vertices[i+2]=rake ? 3.02+u*sinRake+(z-3.02)*cosRake : z;
+        vertices[i+3]=cosHeading*normalAlong-sinHeading*ny;
+        vertices[i+4]=sinHeading*normalAlong+cosHeading*ny;
+        vertices[i+5]=nx*sinRake+nz*cosRake;
+      }
+      add(geometry,material,'swim platform '+name+' '+side);
     }
-    add(rake,'M91','swim platform inclined sun chair back '+side);
+    place(box([.025,-.25,2.84,1.25,.25,2.93],.035),'M43','sun chair base');
+    place(cushion(outline(.51,0,1.02,.58,.045),2.93,3.02),'M91','sun chair seat');
+    place(cushion(outline(.23,0,.46,.58,.045),2.96,3.02),'M91','inclined sun chair back',1.04);
+    place(cushion(outline(.11,0,.19,.31,.065),3.02,3.10),cushionMaterial,'sun chair scatter',1.04);
   }
-  add(post([-.89,0,2.84],[-.89,0,3.13],.05,.035,8),'M19','swim platform table pedestal');
-  slab([-1.12,-.22,3.13,-.66,.22,3.165],.17,'M43','swim platform side table');
+  add(post([-1.055,.69,2.84],[-1.055,.69,3.105],.05,.035,8),'M19','swim platform table pedestal');
+  slab([-1.24,.50,3.105,-.87,.88,3.135],.17,'M43','swim platform side table');
   add(pipe([[.96,-2.11,2.84],[.96,-2.11,4.59],[.95,-2.10,4.68],[.89,-2.08,4.74],[.77,-2.08,4.75],[.71,-2.08,4.70]],.023,8),'M19','swim platform stainless shower riser');
   add(post([.71,-2.08,4.695],[.71,-2.08,4.714],.09,.065,12),'M19','swim platform rain head');
   for(const side of [-1,1]){

@@ -67,9 +67,10 @@ export async function createForwardRenderer(app, daylight) {
   const eye = app.camera.position.clone();
   const deckLight=await loadDeckLight();
   let palette=createMaterialPalette(device);
-  function uploadBatch(source,glass,indices,table=palette) {
+  function uploadBatch(source,glass,indices,table=palette,glassData=null) {
     const prepared=glass?source:prepareOpaque(source,deckLight,indices);
     const packed=packRenderVertices(prepared),count=packed.length/32;
+    if(glassData)Object.assign(glassData,{vertices:packed, indices:indices.slice()});
     const lightOffset=glass?0:table.append(packed);
     const vertices=upload(packed,GPUBufferUsage.VERTEX);
     try{return {vertices,indices:upload(indices,GPUBufferUsage.INDEX),lightOffset,lightingBytes:glass?0:count*8,
@@ -113,8 +114,8 @@ export async function createForwardRenderer(app, daylight) {
       let failure, sharedBuffer, stagedViews, resident=0;
       try {
         const capacity=Object.values(source).reduce((n,p)=>n+p.batches[0].attributes.position.length/3,0);
-        const table=sharedVertices(capacity), lists={};
-        let maxIndexBytes=0;
+        const table=sharedVertices(capacity), lists={}, glazing={};
+        let maxIndexBytes=0, maxGlassBytes=0;
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[],geometryBytes:0};
           for(const b of p.batches) {
@@ -131,7 +132,8 @@ export async function createForwardRenderer(app, daylight) {
               result.geometryBytes+=batch.indices.size+packed.length/32*40;
               maxIndexBytes=Math.max(maxIndexBytes,Math.min(indices.length,p.triangles*3)*indices.BYTES_PER_ELEMENT);
             }else{
-              const batch=uploadBatch(b.attributes,true,b.indices);
+              const batch=uploadBatch(b.attributes,true,b.indices,stagedPalette,glazing[name]={});
+              maxGlassBytes=Math.max(maxGlassBytes,batch.indices.size);
               result.batches.push(batch);
               resident+=batch.indices.size+batch.vertices.size;
               result.geometryBytes+=batch.indices.size+batch.vertices.size;
@@ -145,9 +147,8 @@ export async function createForwardRenderer(app, daylight) {
         for(const p of Object.values(uploaded))p.batches[0].vertices=sharedBuffer;
         resident+=sharedBuffer.size+stagedPalette.storage.size;
         if(Object.values(uploaded).some(p=>p.batches[0].ranges) && typeof Worker!=='undefined'){
-          stagedViews=createViewIndices(device,packed,lists,maxIndexBytes);
-          await stagedViews.ready;
-          resident+=stagedViews.buffer.size;
+          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes);
+          if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size;}
         }
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
@@ -216,7 +217,8 @@ export async function createForwardRenderer(app, daylight) {
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {
         depth?.destroy();
         color?.destroy();
-        const attachment = {size:[engine.width,engine.height],sampleCount:samples,usage:GPUTextureUsage.RENDER_ATTACHMENT};
+        const attachment = {size:[engine.width,engine.height],sampleCount:samples,
+          usage:GPUTextureUsage.RENDER_ATTACHMENT | (GPUTextureUsage.TRANSIENT_ATTACHMENT ?? 0)};
         depth = device.createTexture({...attachment,label:'Gangway depth',format:'depth24plus'});
         depthView = depth.createView();
         color = samples > 1 ? device.createTexture({...attachment,label:'Gangway multisample color',format}) : null;
@@ -244,6 +246,7 @@ export async function createForwardRenderer(app, daylight) {
       });
       pass.setBindGroup(0,bindings);
       const pipelines = samples === 4 ? smooth : single;
+      let visible;
       for (let i=0; i<batches.length; i++) {
         const batch = batches[i];
         pass.setPipeline(pipelines[i]);
@@ -280,14 +283,17 @@ export async function createForwardRenderer(app, daylight) {
           }
           if(preparingProfile===null && preparedBand===null && viewIndices){
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
-            const visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements);
-            if(visible){
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements);
+            if(visible && visible.length<count){
               pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
               first=0;count=visible.length;
             }
           }
           pass.drawIndexed(count,1,first);
-          model.stats.triangles=(count+batches[1].count)/3;
+          model.stats.triangles=(count+(visible?.glassLength??batches[1].count))/3;
+        } else if(i===1 && visible && visible.glassLength<batch.count){
+          pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat,viewIndices.glassOffset);
+          pass.drawIndexed(visible.glassLength);
         } else pass.drawIndexed(batch.count);
       }
       pass.end();

@@ -39,6 +39,16 @@ test('bridge package reproduces the shared helm, windshield and visible bow with
    assert.deepEqual(Array.from(new Float32Array(array(binary),p.vertices.offset,p.vertices.length)),Array.from(Float32Array.from(source.vertices)),p.id);
   }
   assert.ok(own.filter(p=>p.role==='bridge-floor').every(p=>p.bounds[0]>=18.72-1e-7));
+  const bank=own.find(p=>p.feature==='continuous dark instrument bank');
+  const housing=own.find(p=>p.feature==='raised navigation display housing');
+  const feet=own.filter(p=>p.feature.startsWith('display bank foot'));
+  assert.equal(feet.length,2);
+  for(const foot of feet){
+    assert.equal(foot.bounds[2],bank.bounds[5]);
+    assert.equal(foot.bounds[5],housing.bounds[2]);
+  }
+  assert.equal(own.filter(p=>p.feature.startsWith('navigation glass')).length,2);
+  assert.ok(own.find(p=>p.feature==='charcoal pilothouse headlining').bounds[2]>6+1.65);
   assert.deepEqual(bridge.floor,model.bridgeFloor.floor);
  }finally{model.dispose();}
 });

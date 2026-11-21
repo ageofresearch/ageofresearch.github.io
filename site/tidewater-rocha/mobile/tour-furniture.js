@@ -80,6 +80,27 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   add('MD_FUR_018',box([11.58,-.40,3.95,12.35,-.11,4.25],.12),'M38','salon bronze table foot');
   add('MD_FUR_018',slab(outline(11.98,-.20,1.39,.83,.40),4.25,4.31,.012),'M37','salon ivory low table');
   add('MD_FUR_019',slab(outline(11.98,-.20,.59,.36,.17),4.31,4.335,.005),'M53','salon brass tray');
+  // Dining Area and Galley Entrance show one radiused dark top on two
+  // pedestals. Keep the existing four chair positions and the lobby aisle.
+  for (const anchor of ['MD_FUR_023','MD_FUR_032','MD_FUR_033']) remove(anchor);
+  const dining='MD_FUR_023';
+  for (const y of [-.64,.64])
+    add(dining,slab(outline(15.96,y,.50,.30,.14),3.9588,4.634,0),'M37','dining pedestal '+y);
+  add(dining,slab(outline(15.96,0,1.28,2.30,.63),4.634,4.681,.009),'M47','rounded dining table edge');
+  add(dining,slab(outline(15.96,0,1.26,2.28,.62),4.681,4.69,0),'M40','dark dining tabletop');
+  add(dining,slab(outline(15.96,.33,.16,.16,.075),4.69,4.79,0),'M37','centrepiece foot');
+  add(dining,slab(outline(15.96,.33,.36,.34,.15),4.79,4.85,.014),'M37','ivory centrepiece');
+  // Both pilothouse stations show a raised dark display across the console
+  // and a charcoal lining inside the front glazing. Keep the stair aft clear.
+  const helm='UD_FUR_038';
+  for(const y of [-.72,.72])
+    add(helm,box([22.06,y-.035,6.97,22.16,y+.035,7.085],0),'M47','display bank foot '+y);
+  add(helm,box([22.045,-1.01,7.085,22.16,1.01,7.39],.012),'M47','raised navigation display housing');
+  for(const y of [-.98,0])
+    add(helm,box([22.036,y+.01,7.102,22.045,y+.97,7.375],.002),'M98','navigation glass '+y);
+  const lining=[[19.68,-1.99],[22.15,-1.96],[22.90,-1.60],[23.38,-.87],
+    [23.59,-.05],[23.39,.71],[22.94,1.44],[22.08,1.83],[19.68,1.85]];
+  add(helm,slab(lining,7.659,7.670,0),'M47','charcoal pilothouse headlining');
   // Bind the curtain to the inside of each side window with vertically folded
   // linen. The narrow stack leaves the glazing and the side aisle clear.
   for(const side of [-1,1]){

@@ -11,7 +11,7 @@ import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'stern-grid-1';
+const version = 'tour-grid-1';
 
 // Keep the same main-deck mesh from boarding through the saloon.
 export function mainDeckError(bounds) {

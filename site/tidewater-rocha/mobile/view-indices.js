@@ -1,6 +1,7 @@
+import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=1';
 
-export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes) {
+export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {
   let worker;
   try {worker = new Worker(new URL('./view-worker.js?v=1', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
@@ -16,6 +17,23 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     if(!exact || exact.profile!==profile || exact.width!==width || exact.height!==height)return false;
     for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return false;
     return true;
+  }
+  const scratch = cells ? new ArrayBuffer(glassOffset) : null;
+  const compact16 = scratch && new Uint16Array(scratch), compact32 = scratch && new Uint32Array(scratch);
+  function uploadOpaque(entry, camera, projection, width, height) {
+    const region = cells?.range(entry.profile, entry.first, entry.count);
+    const offset = roomCellOffset(region, camera, projection, width, height);
+    if (entry.offset === offset) return;
+    let indices = entry.output, length = entry.rawLength;
+    if (offset >= 0) {
+      const compact = indices.BYTES_PER_ELEMENT === 2 ? compact16 : compact32;
+      length = filterRoomCell(cells.bits, offset, region.count, indices, length, entry.slots, compact);
+      indices = compact;
+    }
+    if (length && length < entry.count)
+      device.queue.writeBuffer(buffer, 0, indices, 0, length + (indices.BYTES_PER_ELEMENT === 2 ? length % 2 : 0));
+    entry.offset = offset;
+    entry.length = length;
   }
   const ready = new Promise(resolve => {finishStart = resolve;});
   function dispose() {
@@ -64,28 +82,27 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       return exact.length??null;
     },
-    select(profile, first, count, clip, camera, projection) {
+    select(profile, first, count, clip, camera, projection, width, height) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
         && coversView(entry.planes, camera, projection);
       if (pending?.result) {
         if (valid(pending)) {
-          const {length, output, glass} = pending.result;
-          active = {...pending, result:null, length, glassLength:glass.length};
-          if (length && length < count)
-            device.queue.writeBuffer(buffer, 0, output, 0, length + (output.BYTES_PER_ELEMENT === 2 ? length % 2 : 0));
+          const {length, output, glass, slots} = pending.result;
+          active = {...pending, result:null, rawLength:length, output, slots, glassLength:glass.length};
           if(glass.trimmed && glass.length)
             device.queue.writeBuffer(buffer, glassOffset, glass.output, 0, glass.length + (glass.output.BYTES_PER_ELEMENT===2 ? glass.length%2 : 0));
         }
         pending = null;
       }
       const current=valid(active);
+      if (current) uploadOpaque(active, camera, projection, width, height);
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
       if(current && distance<viewRadius*.55)return active;
       if (!pending) {
         pending = {profile, first, count, planes:widenedView(clip),eye:[camera[12],camera[13],camera[14]]};
-        worker.postMessage(pending);
+        worker.postMessage({...pending, trackFaces:Boolean(cells?.range(profile, first, count))});
       }
       return current?active:null;
     },

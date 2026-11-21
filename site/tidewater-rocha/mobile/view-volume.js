@@ -29,7 +29,7 @@ export function coversView(planes, camera, p) {
   return true;
 }
 
-export function filterView(vertices, indices, first, count, planes, masks, eye) {
+export function filterView(vertices, indices, first, count, planes, masks, eye, slots) {
   const floats = new Float32Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 4);
   const shorts = new Int16Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 2);
   for (let v = 0; v < masks.length; v++) {
@@ -64,6 +64,7 @@ export function filterView(vertices, indices, first, count, planes, masks, eye) 
       if (facing<0 && facing*facing>(viewRadius+.02)**2*area2 &&
           facing*facing>.10*far2*area2 && area2>edges*far2*.000025) continue;
     }
+    if (slots) slots[length / 3] = (i - first) / 3;
     output[length++] = a;
     output[length++] = b;
     output[length++] = c;

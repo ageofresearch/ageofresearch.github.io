@@ -1,3 +1,4 @@
+import {loadRoomVisibility} from './room-visibility.js?v=1';
 import {sharedVertices} from './shared-vertices.js?v=1';
 import {createViewIndices} from './view-indices.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-1';
@@ -114,7 +115,7 @@ export async function createForwardRenderer(app, daylight) {
   const lastClip=new Float32Array(16);
   return {
     get activeProfile() { return activeProfile; },
-    async installProfiles(source,{prepare=false,activate=()=>{}}={}) {
+    async installProfiles(source,{prepare=false,activate=()=>{},roomVisibility=false,signal}={}) {
       if(disposed)throw Error('Renderer disposed');
       const uploaded={},stagedPalette=createMaterialPalette(device);
       device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
@@ -154,7 +155,8 @@ export async function createForwardRenderer(app, daylight) {
         for(const p of Object.values(uploaded))p.batches[0].vertices=sharedBuffer;
         resident+=sharedBuffer.size+stagedPalette.storage.size;
         if(Object.values(uploaded).some(p=>p.batches[0].ranges) && typeof Worker!=='undefined'){
-          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes);
+          const cells=roomVisibility ? await loadRoomVisibility(packed,lists,signal) : null;
+          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes,cells);
           if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size+stagedViews.exactBuffer.size;}
         }
       }catch(error){failure=error;}
@@ -331,7 +333,7 @@ export async function createForwardRenderer(app, daylight) {
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
             if(capture)capturedSource={indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16)};
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements);
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height);
             if(visible && visible.length<count){
               pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
               first=0;count=visible.length;

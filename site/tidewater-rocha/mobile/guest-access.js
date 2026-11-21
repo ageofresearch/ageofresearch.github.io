@@ -96,7 +96,7 @@ export function preloadGuestAccess(app) {
     model.guestAccessLoadState='loading';panel.hidden=false;retry.hidden=true;status.textContent='Preparando el acceso de invitados…';
     pending=(async()=>{
       const zone=prepareGuestAccess(await loadGuestAccess({signal:abort.signal}));if(abort.signal.aborted)return;
-      await app.gangwayRenderer.installProfiles(zone.profiles,{prepare:true,activate:()=>{
+      await app.gangwayRenderer.installProfiles(zone.profiles,{prepare:true,roomVisibility:true,signal:abort.signal,activate:()=>{
         if(abort.signal.aborted)throw Error('Carga cancelada');connectGuestAccess(app.yachtWalk,zone);
       }});
       model.guestAccessLoadState='ready';panel.hidden=true;window.dispatchEvent(new Event('luz-de-mar:guest-access-ready'));

@@ -245,3 +245,34 @@ test('coverage tiles retain every winner, near-plane triangles and sky while dro
   assert.deepEqual(Array.from(output.subarray(0, length)),
     [1, 2, 3, 4, 5, 8, 9, 10].flatMap(i => [i, i, i]));
 });
+
+test('walking masks respect the original sightline, cell boundaries and raster limits', async () => {
+  const {roomCells, roomCellOffset, filterRoomCell} = await import('../site/tidewater-rocha/mobile/room-visibility.js');
+  const indices = new Uint16Array([0,1,2, 3,4,5, 6,7,8, 9,10,11]);
+  const regions = [{profile:'upper', first:0, count:9, box:[0,-.03,0,1,.03,1], nx:2, nz:1, offset:0}];
+  const cells = roomCells({regions}, new Uint8Array([2,4]), {upper:indices});
+  const group = cells.range('upper', 0, 12);
+  assert.equal(cells.range('exterior', 0, 12), null);
+  assert.equal(cells.range('upper', 0, 6), null);
+  const camera = Array(16).fill(0), lens = Array(16).fill(0);
+  lens[0] = 2.5; lens[5] = 1.66; lens[14] = .03; camera[14] = .5;
+  assert.equal(roomCellOffset(group, camera, lens, 360, 540), 0);
+  camera[12] = .5;
+  assert.equal(roomCellOffset(group, camera, lens, 360, 540), 1);
+  assert.equal(roomCellOffset(group, camera, lens, 180, 270), -1);
+  lens[14] = .25;
+  assert.equal(roomCellOffset(group, camera, lens, 360, 540), -1);
+  lens[14] = .03; camera[13] = .04;
+  assert.equal(roomCellOffset(group, camera, lens, 360, 540), -1);
+  camera[13] = 0; camera[12] = 1;
+  assert.equal(roomCellOffset(group, camera, lens, 360, 540), -1);
+  // The frustum worker removed source face zero. Mask bits must still address
+  // the remaining faces by their original slots, including the wider prefix.
+  const list = indices.subarray(3), slots = new Uint32Array([1, 2, 3]);
+  const output = new Uint16Array(list.length);
+  for (const [offset, expected] of [[0,[6,7,8,9,10,11]], [1,[3,4,5,9,10,11]]]) {
+    const length = filterRoomCell(cells.bits, offset, group.count, list, list.length, slots, output);
+    assert.deepEqual([...output.subarray(0,length)], expected);
+  }
+  assert.throws(() => roomCells({regions}, new Uint8Array(1), {upper:indices}), /Incomplete/);
+});

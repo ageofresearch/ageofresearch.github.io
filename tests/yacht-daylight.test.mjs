@@ -274,6 +274,32 @@ test('screen visibility retains a single covered MSAA sample and bounds a nearer
   }
 });
 
+test('worker vertex blocks cover partial index sections and reset between sightlines', async () => {
+  const {filterView, prepareViewSpans} = await import('../site/tidewater-rocha/mobile/view-volume.js');
+  const indices = new Uint32Array(6150);
+  const vertices = new Uint8Array(65540 * 32);
+  const xyz = new Float32Array(vertices.buffer), layers = new Int16Array(vertices.buffer);
+  // Include the high bit of a block word and vertices beyond the 16-bit index range.
+  indices.set([992, 993, 994], 3069);
+  indices.set([65536, 65537, 65538], 3072);
+  indices.set([32, 33, 34], 6144);
+  for (let i = 65536; i < 65539; i++) {
+    xyz[8*i] = 2;
+    layers[16*i+14] = -2;
+  }
+  const planes = new Float64Array([1,0,0,-1, -1,0,0,3, 0,1,0,1, 0,-1,0,1]);
+  const spans = prepareViewSpans(indices, vertices.length / 32);
+  const reusedMasks = new Uint8Array(vertices.length / 32).fill(255);
+  for (const [first, count] of [[3069, 6], [6144, 3], [3072, 3], [3069, 6]]) {
+    const check = (masks, selector) => {
+      const slots = new Uint32Array(count/3), sky = {basis:[0,0,1,0,1], runs:[]};
+      const {output, length} = filterView(vertices, indices, first, count, planes, masks, null, slots, sky, selector);
+      return {indices:Array.from(output.subarray(0,length)), slots:Array.from(slots.subarray(0,length/3)), runs:sky.runs};
+    };
+    assert.deepEqual(check(reusedMasks, spans), check(new Uint8Array(reusedMasks.length), null));
+  }
+});
+
 test('off-screen sky runs follow the sun and can be restored independently of room occlusion', async () => {
   const {widenedView, filterView} = await import('../site/tidewater-rocha/mobile/view-volume.js');
   const {filterRoomCell} = await import('../site/tidewater-rocha/mobile/room-visibility.js');

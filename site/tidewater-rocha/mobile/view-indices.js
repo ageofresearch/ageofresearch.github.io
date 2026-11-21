@@ -1,11 +1,11 @@
 import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=2';
 import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=8';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
-import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
+import {coversView, widenedView, viewRadius} from './view-volume.js?v=3';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null, immediate = {}, screenConfig = null) {
   let worker;
-  try {worker = new Worker(new URL('./view-worker.js?v=4', import.meta.url), {type:'module'});}
+  try {worker = new Worker(new URL('./view-worker.js?v=5', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
   let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;

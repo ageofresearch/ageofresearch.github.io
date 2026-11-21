@@ -30,35 +30,75 @@ export function coversView(planes, camera, p) {
   return true;
 }
 
-export function filterView(vertices, indices, first, count, planes, masks, eye, slots, sky = null) {
+// Adjacent index ranges overlap across deck sightlines. Record which blocks of
+// shared vertices each section can reference, once in the visibility worker.
+const indicesPerSection = 3072;
+const verticesPerBlock = 32;
+export function prepareViewSpans(indices, vertexCount) {
+  const words = Math.ceil(vertexCount / (32 * verticesPerBlock));
+  const sections = new Uint32Array(Math.ceil(indices.length / indicesPerSection) * words);
+  for (let start = 0; start < indices.length; start += indicesPerSection) {
+    const end = Math.min(start + indicesPerSection, indices.length);
+    const offset = start / indicesPerSection * words;
+    for (let i = start; i < end; i++) {
+      const block = Math.floor(indices[i] / verticesPerBlock);
+      sections[offset + (block >>> 5)] |= 1 << (block & 31);
+    }
+  }
+  const selected = new Uint32Array(words);
+  return (first, count) => {
+    selected.fill(0);
+    const begin = Math.floor(first / indicesPerSection) * words;
+    const end = Math.ceil((first + count) / indicesPerSection) * words;
+    for (let offset = begin; offset < end; offset += words) {
+      for (let w = 0; w < words; w++) selected[w] |= sections[offset + w];
+    }
+    return selected;
+  };
+}
+
+export function filterView(vertices, indices, first, count, planes, masks, eye, slots, sky = null, spans = null) {
   const floats = new Float32Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 4);
   const shorts = new Int16Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 2);
-  for (let v = 0; v < masks.length; v++) {
-    // Sky vertices rotate with the sun and translate with the viewer. Only
-    // angular half-spaces apply; the finite walking radius is irrelevant.
-    if (shorts[v*16+14] === -2) {
-      masks[v] = skyVertex;
-      if (!sky) continue;
-      const [ez, sx, sy, sz, ex] = sky.basis;
-      const u = floats[v*8] / .98289474, h = floats[v*8+1] + 2.01, w = floats[v*8+2] / .97861111;
-      const scale = Math.hypot(u, h, w);
-      // The vertex shader uses east*u + sun*h + cross(east,sun)*w.
-      const x = ex*u + sx*h - ez*sy*w;
-      const y = sy*h + (ez*sx-ex*sz)*w;
-      const z = ez*u + sz*h + ex*sy*w;
-      for (let i = 0; i < 4; i++) {
-        const k = 4*i;
-        if (planes[k]*x + planes[k+1]*y + planes[k+2]*z < -.025*scale) masks[v] |= 1 << i;
+  function projectVertices(begin, end) {
+    for (let v = begin; v < end; v++) {
+      // Sky vertices rotate with the sun and translate with the viewer. Only
+      // angular half-spaces apply; the finite walking radius is irrelevant.
+      if (shorts[v*16+14] === -2) {
+        masks[v] = skyVertex;
+        if (!sky) continue;
+        const [ez, sx, sy, sz, ex] = sky.basis;
+        const u = floats[v*8] / .98289474, h = floats[v*8+1] + 2.01, w = floats[v*8+2] / .97861111;
+        const scale = Math.hypot(u, h, w);
+        // The vertex shader uses east*u + sun*h + cross(east,sun)*w.
+        const x = ex*u + sx*h - ez*sy*w;
+        const y = sy*h + (ez*sx-ex*sz)*w;
+        const z = ez*u + sz*h + ex*sy*w;
+        for (let i = 0; i < 4; i++) {
+          const k = 4*i;
+          if (planes[k]*x + planes[k+1]*y + planes[k+2]*z < -.025*scale) masks[v] |= 1 << i;
+        }
+        continue;
       }
-      continue;
+      const x = floats[v*8], y = floats[v*8+1], z = floats[v*8+2];
+      let mask = 0;
+      for (let i = 0; i < 4; i++) {
+        const k = i*4;
+        if (x*planes[k]+y*planes[k+1]+z*planes[k+2]+planes[k+3] < -0.001) mask |= 1 << i;
+      }
+      masks[v] = mask;
     }
-    const x = floats[v*8], y = floats[v*8+1], z = floats[v*8+2];
-    let mask = 0;
-    for (let i = 0; i < 4; i++) {
-      const k = i*4;
-      if (x*planes[k]+y*planes[k+1]+z*planes[k+2]+planes[k+3] < -0.001) mask |= 1 << i;
+  }
+  if (spans) {
+    const selected = spans(first, count);
+    for (let block = 0; block * verticesPerBlock < masks.length; block++) {
+      if (selected[block >>> 5] & (1 << (block & 31))) {
+        const start = block * verticesPerBlock;
+        projectVertices(start, Math.min(start + verticesPerBlock, masks.length));
+      }
     }
-    masks[v] = mask;
+  } else {
+    projectVertices(0, masks.length);
   }
   const output = new indices.constructor(count + (indices.BYTES_PER_ELEMENT === 2 ? count % 2 : 0));
   let length = 0;

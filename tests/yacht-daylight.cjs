@@ -23,6 +23,7 @@ const fs = require('node:fs');
       const ctx = await browser.newContext({ viewport: { width: 360, height: 540 }, hasTouch: true });
       try {
         await ctx.addInitScript((measureGPU) => {
+          window.measureDaylightGPU=measureGPU;
           if (measureGPU) {
             const request = GPUAdapter.prototype.requestDevice;
             GPUAdapter.prototype.requestDevice = function (options = {}) {
@@ -77,7 +78,7 @@ const fs = require('node:fs');
             light = app.daylight,
             rows = [];
           const device=app.gpu.device, queryCount=480;
-          const query=device.features.has('timestamp-query') && device.createQuerySet({type:'timestamp',count:queryCount});
+          const query=window.measureDaylightGPU && device.features.has('timestamp-query') && device.createQuerySet({type:'timestamp',count:queryCount});
           const scratch=query && device.createBuffer({size:queryCount*8,usage:GPUBufferUsage.QUERY_RESOLVE|GPUBufferUsage.COPY_SRC});
           const readback=query && device.createBuffer({size:queryCount*8,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
           const [az, el] = document.querySelectorAll('[data-daylight] input');
@@ -116,6 +117,7 @@ const fs = require('node:fs');
                 };
               });
               const sorted = times.toSorted((a, b) => a - b);
+              const after={...daylightCounters},end=performance.now();
               const passes={};
               if (labels.length) {
                 const encoder=device.createCommandEncoder(),size=labels.length*16;
@@ -138,10 +140,10 @@ const fs = require('node:fs');
                 dragging,
                 p95: sorted[Math.ceil(times.length * 0.95) - 1],
                 fps: (1000 * times.length) / times.reduce((a, b) => a + b),
-                shadows: daylightCounters.shadows - before.shadows,
-                draws: daylightCounters.draws - before.draws,
-                allocations: daylightCounters.allocations - before.allocations,
-                requests: performance.getEntriesByType('resource').filter((r) => r.startTime >= start)
+                shadows: after.shadows - before.shadows,
+                draws: after.draws - before.draws,
+                allocations: after.allocations - before.allocations,
+                requests: performance.getEntriesByType('resource').filter((r) => r.startTime >= start && r.startTime <= end)
                   .length,
                 scale: app.engine.renderScale,
                 samples: app.gangwayRenderer.samples,

@@ -1,11 +1,11 @@
 import {loadRoomVisibility} from './room-visibility.js?v=3';
 import {sharedVertices} from './shared-vertices.js?v=1';
 import {createViewIndices} from './view-indices.js?v=4';
-import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-1';
+import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
 import {createVisibilityTarget} from './visibility-target.js?v=1';
 import {shader,visibilityShader} from './daylight-shader.js?v=yacht-daylight-1';
-import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-1';
+import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-2';
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';

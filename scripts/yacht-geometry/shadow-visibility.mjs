@@ -14,6 +14,36 @@ function direction(az, el) {
   return [-Math.sin(a) * Math.cos(h), Math.sin(h), Math.cos(a) * Math.cos(h)];
 }
 
+// At a fixed elevation the horizontal component follows a circular arc.
+// Its endpoints and their tangent intersection enclose the whole arc. Every
+// intermediate elevation is a positive combination of its two boundary rays.
+function sectorDirections(azimuth, elevation, da, dh) {
+  const rays = [];
+  for (const h of [elevation - dh / 2, elevation + dh / 2]) {
+    rays.push(direction(azimuth - da / 2, h), direction(azimuth + da / 2, h));
+    const tangent = direction(azimuth, h);
+    const scale = 1 / Math.cos(da * radians / 2);
+    rays.push([tangent[0] * scale, tangent[1], tangent[2] * scale]);
+  }
+  return rays;
+}
+
+function shadowVolume(face, rays) {
+  const sign = Math.sign(dot(face.n, rays[0]));
+  if (!rays.every(ray => sign * dot(face.n, ray) > .003 * face.area)) return null;
+  // A 512-square texel spans less than .10 model units on either axis of
+  // the fitted shadow camera. Leave room for slope bias and depth rounding.
+  const planes = [[...face.n.map(x => -sign * x), sign * dot(face.n, face.v[0]) - .13 * face.area]];
+  for (const [i, corner] of face.v.entries()) {
+    const edge = sub(face.v[(i + 1) % face.v.length], corner);
+    for (const ray of rays) {
+      const normal = cross(ray, edge).map(x => sign * x);
+      planes.push([...normal, -dot(normal, corner) - .002 * length(edge)]);
+    }
+  }
+  return planes;
+}
+
 export function shadowVisibility(positions, indices) {
   const vertices = Array.from({ length: positions.length / 3 }, (_, i) =>
     Array.from(positions.subarray(i * 3, i * 3 + 3)),
@@ -78,10 +108,11 @@ export function shadowVisibility(positions, indices) {
   faces.forEach((f, i) => {
     f.outward = open.has(root(i)) ? 0 : Math.sign(volume[root(i)]);
   });
-  const large = faces
-    .filter((f) => f.area > 1.2)
-    .sort((a, b) => b.area - a.area)
-    .slice(0, 196);
+  const ranked = faces
+    .filter((f) => f.area > 0.3)
+    .sort((a, b) => b.area - a.area);
+  const large = ranked.filter(f => f.area > 1.2).slice(0, 196);
+  const candidates = ranked.slice(0, 800);
   for (const { axis, j, k, lo, hi, normal } of planarOccluders(faces)) {
     const corners = [
       [lo[j], lo[k]],
@@ -98,7 +129,9 @@ export function shadowVisibility(positions, indices) {
     if (normal < 0) v.reverse();
     const n = [0, 0, 0];
     n[axis] = normal;
-    large.unshift({ v, n, area: 1 });
+    const rectangle = { v, n, area: 1 };
+    large.unshift(rectangle);
+    candidates.unshift(rectangle);
   }
   const banks = Math.ceil((azimuthCells * elevationCells) / 32),
     mask = new Uint32Array(faces.length * banks);
@@ -115,6 +148,8 @@ export function shadowVisibility(positions, indices) {
             [-1, 1].map((sh) => length(sub(direction(az + (sa * da) / 2, el + (sh * dh) / 2), sun))),
           ),
         ) + 1e-6;
+      const rays = sectorDirections(az, el, da, dh);
+      const volumes = candidates.map(face => shadowVolume(face, rays)).filter(Boolean);
       const blockers = [];
       for (const f of large) {
         const nd = dot(f.n, sun);
@@ -151,7 +186,11 @@ export function shadowVisibility(positions, indices) {
             }),
           );
         });
-        if (!hidden) mask[k * banks + word] |= bit;
+        if (hidden) continue;
+        // All three receiver vertices must be strictly inside every plane
+        // of the same opaque blocker throughout the angular cell.
+        const inside = volumes.some(planes => planes.every(p => f.v.every(v => dot(p, v) + p[3] > 0)));
+        if (!inside) mask[k * banks + word] |= bit;
       }
     }
   return mask;

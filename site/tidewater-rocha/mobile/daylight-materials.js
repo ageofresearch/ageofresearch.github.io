@@ -7,7 +7,8 @@ for (let i = 0; i < display.length; i++) {
   const x = i / 4096;
   display[i] = x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055;
 }
-const encode = (x) => display[Math.max(0, Math.min(4096, Math.round(x * 4096)))];
+// Clamp before the integer conversion so bright highlights saturate at the last sample.
+const encode = (x) => display[Math.min(4096, Math.max(0, x * 4096 + 0.5)) >>> 0];
 export function createMaterialPalette(device) {
   const existing = new Map(),
     records = [],

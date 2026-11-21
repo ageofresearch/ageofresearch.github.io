@@ -1,64 +1,124 @@
 // Bake the static opaque yacht once. Camera visibility, room selection and LOD
 // must never remove a caster on the other side of a window.
-import {readFile,writeFile} from 'node:fs/promises';
-import {MeshoptSimplifier as opt} from './node_modules/meshoptimizer/index.js';
-import {buildYachtGeometry,createBoarding,createSternFeatures,l as basis} from '../../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
-import {renderedParts} from '../../site/tidewater-rocha/mobile/stair-surfaces.js';
-import {normalizeRenderedPart} from '../build-yacht-saloon.mjs';
-import {shadowVisibility,azimuthCells,elevationCells} from './shadow-visibility.mjs';
-import {traceBounce} from './daylight-transfer.mjs';
-const root=new URL('../../site/tidewater-rocha/',import.meta.url);
-const data=JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json',root)));
-const bytes=await readFile(new URL('rocha/luz-de-mar/model.bin',root));
-const asset={data,binary:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)};
+import { readFile, writeFile } from 'node:fs/promises';
+import { MeshoptSimplifier as opt } from './node_modules/meshoptimizer/index.js';
+import {
+  buildYachtGeometry,
+  createBoarding,
+  createSternFeatures,
+  l as basis,
+} from '../../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import { renderedParts } from '../../site/tidewater-rocha/mobile/stair-surfaces.js';
+import { normalizeRenderedPart } from '../build-yacht-saloon.mjs';
+import { shadowVisibility, azimuthCells, elevationCells } from './shadow-visibility.mjs';
+import { traceBounce } from './daylight-transfer.mjs';
+const root = new URL('../../site/tidewater-rocha/', import.meta.url);
+const data = JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json', root)));
+const bytes = await readFile(new URL('rocha/luz-de-mar/model.bin', root));
+const asset = { data, binary: bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) };
 await opt.ready;
-const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;
-const boarding=createBoarding(model,null,{gangwayOnly:true,includeLanding:true});
-const parts=renderedParts(model).concat(createSternFeatures().parts,boarding.parts);
-const displayed=new Set(model.componentRanges.map(r=>r.id));
-const ids=new Set(),vertices=[],indices=[],casters=[],colors=[],weld=new Map();
-for(const part of parts){
-  if(ids.has(part.id)||part.context||part.glass||part.category==='Glazing'||/^(LD_(MAC|PIP)|MACH)/.test(part.id))continue;
+const model = buildYachtGeometry(asset, 0, { mtuEngines: false, seaStrainers: false });
+model.asset = asset;
+const boarding = createBoarding(model, null, { gangwayOnly: true, includeLanding: true });
+const parts = renderedParts(model).concat(createSternFeatures().parts, boarding.parts);
+const displayed = new Set(model.componentRanges.map((r) => r.id));
+const ids = new Set(),
+  vertices = [],
+  indices = [],
+  casters = [],
+  colors = [],
+  weld = new Map();
+for (const part of parts) {
+  if (
+    ids.has(part.id) ||
+    part.context ||
+    part.glass ||
+    part.category === 'Glazing' ||
+    /^(LD_(MAC|PIP)|MACH)/.test(part.id)
+  )
+    continue;
   ids.add(part.id);
-  if(!part.indices.length||(!part.finish&&!part.materialID&&!displayed.has(part.id)))continue;
-  const p=normalizeRenderedPart(part,model);
-  if(p.glass)continue;
-  const positions=Float32Array.from(p.vertices.filter((_,i)=>i%6<3));
-  const remap=opt.generatePositionRemap(positions,3);
-  const source=Uint32Array.from(p.indices,i=>remap[i]);
-  const [faces]=opt.simplify(source,positions,3,Math.min(source.length,Math.max(12,Math.floor(source.length*.13/3)*3)),.018,['ErrorAbsolute']);
+  if (!part.indices.length || (!part.finish && !part.materialID && !displayed.has(part.id))) continue;
+  const p = normalizeRenderedPart(part, model);
+  if (p.glass) continue;
+  const positions = Float32Array.from(p.vertices.filter((_, i) => i % 6 < 3));
+  const remap = opt.generatePositionRemap(positions, 3);
+  const source = Uint32Array.from(p.indices, (i) => remap[i]);
+  const [faces] = opt.simplify(
+    source,
+    positions,
+    3,
+    Math.min(source.length, Math.max(12, Math.floor((source.length * 0.13) / 3) * 3)),
+    0.018,
+    ['ErrorAbsolute'],
+  );
   // Lower machinery and utility pipework are enclosed behind opaque bulkheads.
   // Keep them in the offline bounce solution; only the shell can shadow the walk.
-  const enclosed=/^LD_R02\/(?:machinery|photo-layout)|^(LD|MD)\/service-route/.test(p.id);
-  const resolve=i=>{
-    const key=Array.from(positions.subarray(i*3,i*3+3),v=>Math.round(v*1000)).join(',');
-    if(!weld.has(key)){weld.set(key,vertices.length/3);vertices.push(...positions.subarray(i*3,i*3+3));}
+  const enclosed = /^LD_R02\/(?:machinery|photo-layout)|^(LD|MD)\/service-route/.test(p.id);
+  const resolve = (i) => {
+    const key = Array.from(positions.subarray(i * 3, i * 3 + 3), (v) => Math.round(v * 1000)).join(',');
+    if (!weld.has(key)) {
+      weld.set(key, vertices.length / 3);
+      vertices.push(...positions.subarray(i * 3, i * 3 + 3));
+    }
     return weld.get(key);
   };
-  for(let i=0;i<faces.length;i+=3){
-    const a=resolve(faces[i]),b=resolve(faces[i+1]),c=resolve(faces[i+2]);
-    if(a===b||b===c||c===a)continue;
-    if(!enclosed)casters.push(a,b,c);
-    indices.push(a,b,c);colors.push(p.finish[0]);
+  for (let i = 0; i < faces.length; i += 3) {
+    const a = resolve(faces[i]),
+      b = resolve(faces[i + 1]),
+      c = resolve(faces[i + 2]);
+    if (a === b || b === c || c === a) continue;
+    if (!enclosed) casters.push(a, b, c);
+    indices.push(a, b, c);
+    colors.push(p.finish[0]);
   }
 }
-const lighting=traceBounce(data,vertices,indices,colors);
+const lighting = traceBounce(data, vertices, indices, colors);
 // A shadow caster has no UV or material seams. Collapse those seams together
 // and discard disconnected detail smaller than a few shadow texels.
-const [silhouette]=opt.simplify(Uint32Array.from(casters),Float32Array.from(vertices),3,
-  12000*3,.045,['ErrorAbsolute','Prune','Permissive']);
-const used=[...new Set(silhouette)],remap=new Map(used.map((v,k)=>[v,k]));
-const pos=new Float32Array(used.length*3);
-used.forEach((v,k)=>{
-  pos[k*3]=vertices[v*3+1]*basis.sy;pos[k*3+1]=vertices[v*3+2]-basis.seaReference;pos[k*3+2]=vertices[v*3]*basis.sx-basis.length/2;
+const [silhouette] = opt.simplify(
+  Uint32Array.from(casters),
+  Float32Array.from(vertices),
+  3,
+  12000 * 3,
+  0.045,
+  ['ErrorAbsolute', 'Prune', 'Permissive'],
+);
+const used = [...new Set(silhouette)],
+  remap = new Map(used.map((v, k) => [v, k]));
+const pos = new Float32Array(used.length * 3);
+used.forEach((v, k) => {
+  pos[k * 3] = vertices[v * 3 + 1] * basis.sy;
+  pos[k * 3 + 1] = vertices[v * 3 + 2] - basis.seaReference;
+  pos[k * 3 + 2] = vertices[v * 3] * basis.sx - basis.length / 2;
 });
-const Index=pos.length/3<=65535?Uint16Array:Uint32Array;
-const compact=Index.from(silhouette,v=>remap.get(v)),mask=shadowVisibility(pos,compact);
-const header=new Uint32Array([0x594c4955,pos.length/3,compact.length,Index.BYTES_PER_ELEMENT,azimuthCells,elevationCells]);
-const bytesOf=a=>Buffer.from(a.buffer,a.byteOffset,a.byteLength);
-await writeFile(new URL('mobile/daylight-casters.bin',root),Buffer.concat([
-  bytesOf(header),bytesOf(pos),bytesOf(compact),Buffer.alloc((4-compact.byteLength%4)%4),bytesOf(mask)
-]));
-await writeFile(new URL('mobile/daylight-probes.js',root),'// Generated by bake-yacht-daylight.mjs. Linear RGB, one diffuse bounce.\nexport default '+JSON.stringify(lighting)+';\n');
-console.log(silhouette.length/3,'opaque caster triangles;',lighting.length,'compartment probes');
+const Index = pos.length / 3 <= 65535 ? Uint16Array : Uint32Array;
+const compact = Index.from(silhouette, (v) => remap.get(v)),
+  mask = shadowVisibility(pos, compact);
+const header = new Uint32Array([
+  0x594c4955,
+  pos.length / 3,
+  compact.length,
+  Index.BYTES_PER_ELEMENT,
+  azimuthCells,
+  elevationCells,
+]);
+const bytesOf = (a) => Buffer.from(a.buffer, a.byteOffset, a.byteLength);
+await writeFile(
+  new URL('mobile/daylight-casters.bin', root),
+  Buffer.concat([
+    bytesOf(header),
+    bytesOf(pos),
+    bytesOf(compact),
+    Buffer.alloc((4 - (compact.byteLength % 4)) % 4),
+    bytesOf(mask),
+  ]),
+);
+await writeFile(
+  new URL('mobile/daylight-probes.js', root),
+  '// Generated by bake-yacht-daylight.mjs. Linear RGB, one diffuse bounce.\nexport default ' +
+    JSON.stringify(lighting) +
+    ';\n',
+);
+console.log(silhouette.length / 3, 'opaque caster triangles;', lighting.length, 'compartment probes');
 model.dispose();

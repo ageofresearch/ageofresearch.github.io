@@ -13,6 +13,7 @@ let storage;try{storage=window.sessionStorage;}catch{}
 const daylight=I.daylight=createDaylight(m(16.2),N.group,storage);
 let L,B,V,H,G,forward,pilotReady,fullLightRevision=0;
 function applySun(){
+  daylight.flush();
   if(fullLightRevision===daylight.revision)return;
   fullLightRevision=daylight.revision;
   L.sunDir.value.copy(daylight.world);r.sunDir.value.copy(daylight.world);

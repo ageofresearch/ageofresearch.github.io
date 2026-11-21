@@ -23,18 +23,18 @@ export async function createForwardRenderer(app, daylight) {
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
     {binding:3,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,texture:{sampleType:'depth'}},
     {binding:4,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
-    {binding:5,visibility:GPUShaderStage.VERTEX,buffer:{type:'read-only-storage'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
     return device.createRenderPipelineAsync({
       label:(glass ? 'Boarding glass ' : 'Boarding finishes ')+count+'×', layout, multisample:{count},
-      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:glass?32:36,attributes:[
+      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:32,attributes:[
         {shaderLocation:0,offset:0,format:'float32x3'}, {shaderLocation:1,offset:12,format:'snorm8x4'},
         {shaderLocation:2,offset:16,format:'unorm8x4'}, {shaderLocation:3,offset:20,format:'float32x2'},
         {shaderLocation:4,offset:28,format:'sint16x2'},
-        ...glass?[]:[{shaderLocation:5,offset:32,format:'uint32'}],
-      ]}]},
+      ]},...glass?[]:[{arrayStride:8,attributes:[
+        {shaderLocation:5,offset:0,format:'unorm8x4'},{shaderLocation:6,offset:4,format:'unorm8x4'}
+      ]}]]},
       fragment:{module,entryPoint:glass ? 'glassFragment' : 'fragment',targets:[{format,blend:glass ? blend : undefined}]},
       // The gate is a closed beveled pane, so its outward faces cover both viewing sides.
       primitive:{topology:'triangle-list',cullMode:'back'},
@@ -68,16 +68,9 @@ export async function createForwardRenderer(app, daylight) {
   function uploadBatch(source,glass,indices,table=palette) {
     const prepared=glass?source:prepareOpaque(source,deckLight,indices);
     const packed=packRenderVertices(prepared),count=packed.length/32;
-    let target=packed;
-    if(!glass){
-      target=new Uint8Array(count*36);const fields=new Uint32Array(target.buffer);
-      for(let i=0;i<count;i++){
-        target.set(packed.subarray(i*32,i*32+32),i*36);
-        fields[i*9+8]=table.register(packed,i*32);
-      }
-    }
-    const vertices=upload(target,GPUBufferUsage.VERTEX);
-    try{return {vertices,indices:upload(indices,GPUBufferUsage.INDEX),
+    const lightOffset=glass?0:table.append(packed);
+    const vertices=upload(packed,GPUBufferUsage.VERTEX);
+    try{return {vertices,indices:upload(indices,GPUBufferUsage.INDEX),lightOffset,lightingBytes:glass?0:count*8,
       indexFormat:indices instanceof Uint16Array?'uint16':'uint32',count:indices.length};}
     catch(error){vertices.destroy();throw error;}
   }
@@ -103,9 +96,8 @@ export async function createForwardRenderer(app, daylight) {
   device.queue.writeBuffer(uniform,0,frame);
   const shadow=await createDaylightShadow(device,uniform,upload);
   const finishes=createFinishPatterns(device);
-  const makeBindings = table=>device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
-    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:shadow.view},{binding:4,resource:shadow.sampler},{binding:5,resource:{buffer:table.storage}}]});
-  let bindings=makeBindings(palette);
+  const bindings=device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
+    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:shadow.view},{binding:4,resource:shadow.sampler}]});
   model.stats.finishTextureBytes=finishes.bytes;
   model.stats.materialTextures=1;
   let depth, depthView, color, colorView;
@@ -114,7 +106,6 @@ export async function createForwardRenderer(app, daylight) {
     async installProfiles(source,{prepare=false,activate=()=>{}}={}) {
       if(disposed)throw Error('Renderer disposed');
       const uploaded={},stagedPalette=createMaterialPalette(device);
-      let stagedBindings;
       device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
       let failure;
       try {
@@ -123,10 +114,10 @@ export async function createForwardRenderer(app, daylight) {
           for(const b of p.batches) {
             const batch={...uploadBatch(b.attributes,result.batches.length===1,b.indices,stagedPalette),ranges:b.ranges,localView:b.localView,views:b.views,cone:b.cone};
             result.batches.push(batch);
-            result.geometryBytes+=batch.vertices.size+batch.indices.size;
+            result.geometryBytes+=batch.vertices.size+batch.indices.size+batch.lightingBytes;
           }
         }
-        stagedPalette.prepare();stagedBindings=makeBindings(stagedPalette);
+        stagedPalette.prepare();
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
       if(failure||validation||memory||disposed) {
@@ -136,8 +127,8 @@ export async function createForwardRenderer(app, daylight) {
         stagedPalette.dispose();
         throw failure||validation||memory||Error('Renderer disposed');
       }
-      const previous={profiles,batches,palette,bindings,name:activeProfile,stats:{...model.stats}};
-      palette=stagedPalette;bindings=stagedBindings;
+      const previous={profiles,batches,palette,name:activeProfile,stats:{...model.stats}};
+      palette=stagedPalette;
       profiles=uploaded;selectProfile(uploaded[previous.name]?previous.name:'exterior');
       try {
         if(prepare) {
@@ -151,7 +142,7 @@ export async function createForwardRenderer(app, daylight) {
         Object.values(uploaded).forEach(p=>destroy(p.batches));
         stagedPalette.dispose();
         if(disposed){previous.palette.dispose();if(previous.profiles)Object.values(previous.profiles).forEach(p=>destroy(p.batches));else destroy(previous.batches);profiles=null;batches=[];}
-        else {palette=previous.palette;bindings=previous.bindings;profiles=previous.profiles;batches=previous.batches;activeProfile=previous.name;Object.assign(model.stats,previous.stats);}
+        else {palette=previous.palette;profiles=previous.profiles;batches=previous.batches;activeProfile=previous.name;Object.assign(model.stats,previous.stats);}
         throw error;
       }
       previous.palette.dispose();
@@ -202,7 +193,7 @@ export async function createForwardRenderer(app, daylight) {
       camera.updateMatrixWorld();
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
       eye.copy(camera.position).applyMatrix4(localFromWorld).toArray(frame,16);
-      palette.update(daylight);
+      daylight.flush();palette.update(daylight);
       const moved=litRevision!==daylight.revision;
       if(moved){
         const bearing=daylight.state.azimuth*Math.PI/180;frame[23]=Math.cos(bearing);frame[19]=Math.sin(bearing);
@@ -225,6 +216,7 @@ export async function createForwardRenderer(app, daylight) {
         const batch = batches[i];
         pass.setPipeline(pipelines[i]);
         pass.setVertexBuffer(0,batch.vertices);
+        if(i===0)pass.setVertexBuffer(1,palette.storage,batch.lightOffset,batch.lightingBytes);
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
           const {start,step}=profiles[activeProfile].visibility;

@@ -9,7 +9,11 @@ and its height above the horizon. **Restablecer luz** returns to the reference d
 
 The mobile renderer keeps an opaque and a glass batch in one 4× MSAA pass.
 Changing the sun angle refreshes one orthographic depth map for the entire yacht.
-The map is independent of camera visibility and graphics profiles. A separate
+The 512² map covers the entire yacht, including the antenna. Each sun sector
+retains the cast-shadow surfaces that can be visible from that direction.
+The largest walking profile submits 24,656 triangles. Camera-independent
+material lighting is prepared once per solar angle. Polished metal and glass
+continue to respond to the viewing direction. A separate
 offline bake traces light from each compartment to its first opaque surface and
 then toward the sun. It records 24 incident directions and six broad reflection
 lobes per compartment. Regenerate these assets with

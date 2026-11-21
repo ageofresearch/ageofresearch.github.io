@@ -1,4 +1,4 @@
-import {filterSamples} from './sample-visibility.js?v=1';
+import {filterSamples} from './sample-visibility.js?v=2';
 import {filterView} from './view-volume.js?v=2';
 let vertices, profiles, glazing, masks;
 self.onmessage = ({data}) => {
@@ -11,7 +11,9 @@ self.onmessage = ({data}) => {
   }
   if(data.pixels){
     const {pixels,width,height,stride,profile,first,count,clip,key}=data;
-    const result=filterSamples(pixels,width,height,stride,vertices,profiles[profile],first,count,clip);
+    const source=data.candidates ?? profiles[profile];
+    const start=data.candidates ? 0 : first, size=data.candidates ? source.length : count;
+    const result=filterSamples(pixels,width,height,stride,vertices,source,start,size,clip);
     self.postMessage({...result,key},[result.output.buffer]);return;
   }
   const {profile, first, count, planes, eye} = data;

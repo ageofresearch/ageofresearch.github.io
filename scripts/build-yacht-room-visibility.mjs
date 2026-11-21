@@ -54,8 +54,14 @@ try {
       // Unrestricted views from the boarding ramp include the hull below
       // the planks. A visitor in the cockpit can look in either direction.
       const directions = cockpit ? [1, -1] : ramp && !view.sign ? [1, down] : [view.sign || 1];
-      views.push({...view, profile, height, mainDeck, ramp, cockpit, directions, count:view.prefixes?.[0]?.count ?? view.count,
-        spacing:mainDeck ? .15 : (ramp || cockpit || platform) ? .16 : profile === 'bow' ? .24 : .22});
+      // Through the terrace and saloon, a few centimetres of motion expose
+      // different fittings past the door frames. The forward lobby is shorter.
+      let spacing = profile === 'bow' ? .24 : .22;
+      if (platform) spacing = .12;
+      else if (ramp || cockpit) spacing = .16;
+      else if (mainDeck) spacing = z < -9.5 ? .055 : z < -6 ? .085 : .15;
+      views.push({...view, profile, height, mainDeck, platform, ramp, cockpit, directions, spacing,
+        count:view.prefixes?.[0]?.count ?? view.count});
     }
   }
   // The bridge and its lower lobby share the upper profile. Outside a prepared
@@ -93,7 +99,7 @@ try {
       const centre = heights ? (heights[2*j]+heights[2*j+1])/2 : height;
       const dy = heights ? (heights[2*j+1]-heights[2*j])/2 : halfHeight;
       const radius = Math.hypot(dx/2, dz/2, dy) + .025;
-      const halfExtent = view.mainDeck || view.ramp || view.cockpit ? [dx/2, dy, dz/2] : [];
+      const halfExtent = view.mainDeck || view.platform || view.ramp || view.cockpit ? [dx/2, dy, dz/2] : [];
       for (let i = 0; i < nx; i++) {
         const cell = j * nx + i;
         jobs.push(async () => {

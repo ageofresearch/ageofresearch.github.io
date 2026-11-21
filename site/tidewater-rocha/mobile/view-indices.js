@@ -1,9 +1,10 @@
-import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=5';
+import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=6';
+import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {
   let worker;
-  try {worker = new Worker(new URL('./view-worker.js?v=2', import.meta.url), {type:'module'});}
+  try {worker = new Worker(new URL('./view-worker.js?v=3', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
   let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
@@ -18,6 +19,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return false;
     return true;
   }
+  const filterSky = prepareSkyVisibility(vertices);
   const scratch = new ArrayBuffer(glassOffset);
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
   function uploadOpaque(entry, camera, projection, width, height, sunRevision) {
@@ -38,6 +40,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       device.queue.writeBuffer(buffer, 0, indices, 0, length + (indices.BYTES_PER_ELEMENT === 2 ? length % 2 : 0));
     entry.trimSky = trimSky;
     entry.offset = offset;
+    entry.regionCount = region?.count;
     entry.length = length;
   }
   const ready = new Promise(resolve => {finishStart = resolve;});
@@ -73,17 +76,41 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       if(stopped || ((!pending||pending.result)&&!exact?.analyzing))return Promise.resolve();
       return new Promise(resolve=>waiting.add(resolve));
     },
-    analyze(pixels,width,height,stride,profile,first,count,clip){
+    captureCandidates(entry){
+      if(!entry || (entry.rawLength===entry.count && entry.offset<0))return null;
+      // Snapshot the actual room and frustum while capture readback is pending.
+      // A later sun angle can reveal another part of the rotating sky.
+      const source=entry.output, copy=new source.constructor(entry.rawLength);
+      const length=filterRoomCell(cells?.bits,entry.offset,entry.regionCount,source,entry.rawLength,entry.slots,copy);
+      return copy.subarray(0,length);
+    },
+    analyze(pixels,width,height,stride,profile,first,count,clip,candidates){
       if(stopped)return;
       exact={key:++serial,analyzing:true,profile,first,count,width,height,clip:Float32Array.from(clip)};
-      worker.postMessage({...exact,pixels,stride},[pixels.buffer]);
+      worker.postMessage({...exact,pixels,stride,candidates},candidates?[pixels.buffer,candidates.buffer]:[pixels.buffer]);
     },
-    fixed(profile,first,count,clip,width,height){
-      if(!matches(profile,clip,width,height)||exact.first!==first||exact.count!==count)return null;
+    fixed(profile,first,count,frame,width,height,sunRevision){
+      if(!matches(profile,frame,width,height)||exact.first!==first||exact.count!==count)return null;
       if(exact.result){
-        const {output,length}=exact.result;
-        if(length)device.queue.writeBuffer(exactBuffer,0,output,0,length+(output.BYTES_PER_ELEMENT===2?length%2:0));
-        exact.length=length;exact.result=null;
+        const {output,length,skyStart}=exact.result;
+        if(skyStart){
+          const padded=skyStart+(output.BYTES_PER_ELEMENT===2 ? skyStart%2 : 0);
+          device.queue.writeBuffer(exactBuffer,0,output,0,padded);
+        }
+        Object.assign(exact,{output,skyStart,fullLength:length,length:skyStart,result:null});
+      }
+      if(exact.output && exact.skyStart<exact.fullLength && exact.sunRevision!==sunRevision){
+        const {output,skyStart,fullLength}=exact;
+        const short=output.BYTES_PER_ELEMENT===2;
+        const tail=short?compact16:compact32;
+        // A 16-bit index boundary can share a word with the last hull index.
+        const pad=short?skyStart%2:0;
+        if(pad)tail[0]=output[skyStart-1];
+        const kept=filterSky(output,skyStart,fullLength,frame,width,height,tail.subarray(pad));
+        const size=kept+pad;
+        if(size)device.queue.writeBuffer(exactBuffer,(skyStart-pad)*output.BYTES_PER_ELEMENT,tail,0,size+(short?size%2:0));
+        exact.sunRevision=sunRevision;
+        exact.length=skyStart+kept;
       }
       return exact.length??null;
     },

@@ -133,7 +133,7 @@ export function filterSamples(pixels, width, height, stride, vertices, indices, 
     return false;
   }
   const result = new indices.constructor(count + (indices.BYTES_PER_ELEMENT === 2 ? count % 2 : 0));
-  let length = 0;
+  let length = 0, skyStart = 0;
   for (let i = first; i < first + count; i += 3) {
     const a = indices[i],
       b = indices[i + 1],
@@ -142,7 +142,8 @@ export function filterSamples(pixels, width, height, stride, vertices, indices, 
       result[length++] = a;
       result[length++] = b;
       result[length++] = c;
+      if (layer[a * 16 + 14] !== -2) skyStart = length;
     }
   }
-  return { output: result, length };
+  return { output: result, length, skyStart };
 }

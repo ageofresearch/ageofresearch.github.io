@@ -361,3 +361,24 @@ test('rooms on different decks can share an index band and decode their camera r
   camera[14]=1;
   assert.equal(cells.range('upper',3,6,camera), null);
 });
+
+test('a stationary camera restores sky triangles when the sun turns through its view', async () => {
+  const {prepareSkyVisibility} = await import('../site/tidewater-rocha/mobile/sky-visibility.js');
+  const packed = new Uint8Array(6 * 32);
+  const pos = new Float32Array(packed.buffer), finish = new Int16Array(packed.buffer);
+  const points = [[0,-.1,-1],[.1,-.1,-1],[0,.1,-1],[0,-.1,1],[-.1,-.1,1],[0,.1,1]];
+  for(const [i,[x,y,z]] of points.entries()) {
+    pos.set([x*.98289474,y-2.01,z*.97861111],8*i);
+    finish[i*16+14]=-2;
+  }
+  const frame=new Float32Array(24);
+  frame.set([1,0,0,0, 0,1,0,0, 0,0,0,-1, 0,0,.1,0]);
+  frame[21]=1;
+  const indices=Uint16Array.of(0,1,2,3,4,5), output=new Uint16Array(6);
+  const filter=prepareSkyVisibility(packed);
+  for(const [east,expected] of [[1,[0,1,2]],[-1,[3,4,5]],[1,[0,1,2]]]) {
+    frame[23]=east;
+    const count=filter(indices,0,indices.length,frame,360,540,output);
+    assert.deepEqual([...output.subarray(0,count)],expected);
+  }
+});

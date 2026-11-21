@@ -1,6 +1,6 @@
-import {loadRoomVisibility} from './room-visibility.js?v=3';
+import {loadRoomVisibility} from './room-visibility.js?v=6';
 import {sharedVertices} from './shared-vertices.js?v=1';
-import {createViewIndices} from './view-indices.js?v=4';
+import {createViewIndices} from './view-indices.js?v=5';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
 import {createVisibilityTarget} from './visibility-target.js?v=1';
@@ -332,14 +332,17 @@ export async function createForwardRenderer(app, daylight) {
           if(preparingProfile===null && preparedBand===null && viewIndices){
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
-            if(capture)capturedSource={indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16)};
             visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame);
+            if(capture)capturedSource={
+              indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16),
+              candidates:viewIndices.captureCandidates(visible),
+            };
             if(visible && visible.length<count){
               pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
               first=0;count=visible.length;
             }
             if(!capture&&samples===4){
-              const fixed=viewIndices.fixed(activeProfile,rangeStart,rangeCount,frame,engine.width,engine.height);
+              const fixed=viewIndices.fixed(activeProfile,rangeStart,rangeCount,frame,engine.width,engine.height,daylight.revision);
               if(fixed!==null&&fixed<count){
                 pass.setIndexBuffer(viewIndices.exactBuffer,batch.indexFormat);
                 first=0;count=fixed;
@@ -355,9 +358,9 @@ export async function createForwardRenderer(app, daylight) {
       }
       pass.end();
       if(capturedSource){
-        const {indices,profile,first,count,clip}=capturedSource;
+        const {indices,profile,first,count,clip,candidates}=capturedSource;
         coverage.read(gpu.getEncoder(),(pixels,w,h,stride)=>{
-          if(!disposed && viewIndices===indices)indices.analyze(pixels,w,h,stride,profile,first,count,clip);
+          if(!disposed && viewIndices===indices)indices.analyze(pixels,w,h,stride,profile,first,count,clip,candidates);
         });
       }
     },

@@ -22,7 +22,15 @@ const fs = require('node:fs');
     for (let run = 0; run < 3; run++) {
       const ctx = await browser.newContext({ viewport: { width: 360, height: 540 }, hasTouch: true });
       try {
-        await ctx.addInitScript(() => {
+        await ctx.addInitScript((measureGPU) => {
+          if (measureGPU) {
+            const request = GPUAdapter.prototype.requestDevice;
+            GPUAdapter.prototype.requestDevice = function (options = {}) {
+              if (this.features.has('timestamp-query')) options = {...options,
+                requiredFeatures:[...new Set([...(options.requiredFeatures || []), 'timestamp-query'])]};
+              return request.call(this,options);
+            };
+          }
           const counters = (window.daylightCounters = { allocations: 0, shadows: 0, draws: 0 });
           for (const name of [
             'createBuffer',
@@ -42,11 +50,17 @@ const fs = require('node:fs');
           GPUCommandEncoder.prototype.beginRenderPass = function (desc) {
             if (desc.label === 'Yacht moving sun') counters.shadows++;
             if (desc.label === 'Gangway to screen') counters.draws++;
+            const t = window.daylightTiming;
+            if (t && (desc.label === 'Gangway to screen' || desc.label === 'Yacht moving sun')) {
+              const i = t.labels.length * 2;
+              t.labels.push(desc.label);
+              desc = {...desc, timestampWrites:{querySet:t.query, beginningOfPassWriteIndex:i, endOfPassWriteIndex:i+1}};
+            }
             return pass.call(this, desc);
           };
-        });
+        }, process.env.YACHT_GPU_TIMING === '1');
         const page = await ctx.newPage();
-        await page.goto(base + 'mobile.html?world=rocha&v=yacht-daylight-1');
+        await page.goto(base + 'mobile.html?world=rocha&v=yacht-daylight-2');
         const frame =
           page.frames().find((f) => f.url().includes('play.html')) ||
           (await page.waitForEvent('framenavigated', (f) => f.url().includes('play.html')));
@@ -62,6 +76,10 @@ const fs = require('node:fs');
             walk = app.yachtWalk,
             light = app.daylight,
             rows = [];
+          const device=app.gpu.device, queryCount=480;
+          const query=device.features.has('timestamp-query') && device.createQuerySet({type:'timestamp',count:queryCount});
+          const scratch=query && device.createBuffer({size:queryCount*8,usage:GPUBufferUsage.QUERY_RESOLVE|GPUBufferUsage.COPY_SRC});
+          const readback=query && device.createBuffer({size:queryCount*8,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
           const [az, el] = document.querySelectorAll('[data-daylight] input');
           const input = (control, v) => {
             control.value = v;
@@ -78,6 +96,7 @@ const fs = require('node:fs');
               let previous = null,
                 tick = 0;
               const original = app.frame;
+              const labels=[];
               await new Promise((resolve) => {
                 app.frame = function (dt) {
                   const now = performance.now();
@@ -87,7 +106,9 @@ const fs = require('node:fs');
                     input(az, (tick * 3) % 361);
                     input(el, 10 + (tick % 78));
                   } else walk.nav.move(tick < 60 ? 0.008 : -0.008, 0);
+                  if(query) window.daylightTiming={labels,query};
                   original.call(app, dt);
+                  window.daylightTiming=null;
                   if (++tick === 120) {
                     app.frame = original;
                     resolve();
@@ -95,7 +116,24 @@ const fs = require('node:fs');
                 };
               });
               const sorted = times.toSorted((a, b) => a - b);
+              const passes={};
+              if (labels.length) {
+                const encoder=device.createCommandEncoder(),size=labels.length*16;
+                encoder.resolveQuerySet(query,0,labels.length*2,scratch,0);
+                encoder.copyBufferToBuffer(scratch,0,readback,0,size);
+                device.queue.submit([encoder.finish()]);
+                await readback.mapAsync(GPUMapMode.READ);
+                const values=new BigUint64Array(readback.getMappedRange());
+                for(let i=0;i<labels.length;i++)
+                  (passes[labels[i]]??=[]).push(Number(values[2*i+1]-values[2*i])/1e6);
+                readback.unmap();
+                for(const [name,values] of Object.entries(passes)){
+                  values.sort((a,b)=>a-b);
+                  passes[name]={median:values[values.length>>1],p95:values[Math.ceil(.95*values.length)-1]};
+                }
+              }
               rows.push({
+                passes, longFrames:times.filter(ms=>ms>25).length,
                 room,
                 dragging,
                 p95: sorted[Math.ceil(times.length * 0.95) - 1],
@@ -109,6 +147,7 @@ const fs = require('node:fs');
                 samples: app.gangwayRenderer.samples,
               });
             }
+          query && query.destroy();scratch && scratch.destroy();readback && readback.destroy();
           input(az, 270);
           input(el, 45);
           return rows;

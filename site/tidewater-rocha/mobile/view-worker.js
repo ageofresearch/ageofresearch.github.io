@@ -7,7 +7,7 @@ self.onmessage = ({data}) => {
     self.postMessage(null);
     return;
   }
-  const {profile, first, count, planes} = data;
-  const {output, length} = filterView(vertices, profiles[profile], first, count, planes, masks);
+  const {profile, first, count, planes, eye} = data;
+  const {output, length} = filterView(vertices, profiles[profile], first, count, planes, masks, eye);
   self.postMessage({output, length}, [output.buffer]);
 };

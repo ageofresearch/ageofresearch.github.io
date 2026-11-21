@@ -27,7 +27,7 @@ mkdirSync(out, { recursive: true });
         page.on('pageerror', (e) => errors.push(e.message));
         await page.goto(
           base +
-            (mobile ? 'mobile.html?world=rocha&v=yacht-daylight-1' : 'play.html?world=rocha&view=walk-chat'),
+            (mobile ? 'mobile.html?world=rocha&v=yacht-daylight-2' : 'play.html?world=rocha&view=walk-chat'),
         );
         if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({ timeout: 90000 });
         const frame = mobile ? page.frames().find((f) => f.url().includes('play.html')) : page.mainFrame();

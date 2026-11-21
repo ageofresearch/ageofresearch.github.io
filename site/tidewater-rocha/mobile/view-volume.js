@@ -1,4 +1,6 @@
-// Four half-spaces bound a wider view. The extra half metre at the eye
+export const viewRadius = 0.35;
+
+// Four half-spaces bound a wider view. The extra space at the eye
 // allows ordinary walking without rebuilding an index list every frame.
 export function widenedView(clip) {
   const planes = new Float64Array(16);
@@ -7,7 +9,7 @@ export function widenedView(clip) {
     for (let j = 0; j < 4; j++) planes[i+j] = 1.25 * clip[j*4+3] + sign * clip[j*4+axis];
     const norm = Math.hypot(planes[i], planes[i+1], planes[i+2]);
     for (let j = 0; j < 4; j++) planes[i+j] /= norm;
-    planes[i+3] += 0.5;
+    planes[i+3] += viewRadius;
   }
   return planes;
 }
@@ -27,7 +29,7 @@ export function coversView(planes, camera, p) {
   return true;
 }
 
-export function filterView(vertices, indices, first, count, planes, masks) {
+export function filterView(vertices, indices, first, count, planes, masks, eye) {
   const floats = new Float32Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 4);
   const shorts = new Int16Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 2);
   for (let v = 0; v < masks.length; v++) {
@@ -46,6 +48,22 @@ export function filterView(vertices, indices, first, count, planes, masks) {
   for (let i = first; i < first + count; i += 3) {
     const a = indices[i], b = indices[i+1], c = indices[i+2];
     if (masks[a] & masks[b] & masks[c]) continue;
+    if (eye && shorts[a*16+14] !== -2 && shorts[b*16+14] !== -2 && shorts[c*16+14] !== -2) {
+      // The GPU back-face test has the same sign everywhere in the eye sphere
+      // when its signed distance to the face plane exceeds the sphere radius.
+      const x=floats[a*8], y=floats[a*8+1], z=floats[a*8+2];
+      const ux=floats[b*8]-x, uy=floats[b*8+1]-y, uz=floats[b*8+2]-z;
+      const vx=floats[c*8]-x, vy=floats[c*8+1]-y, vz=floats[c*8+2]-z;
+      const nx=uy*vz-uz*vy, ny=uz*vx-ux*vz, nz=ux*vy-uy*vx;
+      const facing=nx*(eye[0]-x)+ny*(eye[1]-y)+nz*(eye[2]-z);
+      const area2=nx*nx+ny*ny+nz*nz;
+      const edges=Math.max(ux*ux+uy*uy+uz*uz,vx*vx+vy*vy+vz*vz,(ux-vx)**2+(uy-vy)**2+(uz-vz)**2);
+      const far2=(x-eye[0])**2+(y-eye[1])**2+(z-eye[2])**2+edges+1;
+      // Subpixel slivers can acquire the opposite winding during rasterizer
+      // snapping. Leave small and grazing faces to the hardware.
+      if (facing<0 && facing*facing>(viewRadius+.02)**2*area2 &&
+          facing*facing>.10*far2*area2 && area2>edges*far2*.000025) continue;
+    }
     output[length++] = a;
     output[length++] = b;
     output[length++] = c;

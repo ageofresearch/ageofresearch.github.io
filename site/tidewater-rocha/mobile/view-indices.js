@@ -1,4 +1,4 @@
-import {coversView, widenedView} from './view-volume.js?v=1';
+import {coversView, widenedView, viewRadius} from './view-volume.js?v=1';
 
 export function createViewIndices(device, vertices, profiles, maxBytes) {
   const worker = new Worker(new URL('./view-worker.js?v=1', import.meta.url), {type:'module'});
@@ -14,7 +14,7 @@ export function createViewIndices(device, vertices, profiles, maxBytes) {
   try {
     buffer = device.createBuffer({label:'Yacht visible opaque indices', size:Math.ceil(maxBytes/4)*4,
       usage:GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST});
-    worker.onerror = dispose;
+    worker.onerror = worker.onmessageerror = dispose;
     worker.onmessage = ({data}) => {
       if (stopped) return;
       if (!data) {finishStart(); return;}
@@ -28,6 +28,7 @@ export function createViewIndices(device, vertices, profiles, maxBytes) {
     select(profile, first, count, clip, camera, projection) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
+        && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
         && coversView(entry.planes, camera, projection);
       if (pending?.result) {
         if (valid(pending)) {
@@ -40,7 +41,7 @@ export function createViewIndices(device, vertices, profiles, maxBytes) {
       }
       if (valid(active)) return active.length < count ? active : null;
       if (!pending) {
-        pending = {profile, first, count, planes:widenedView(clip)};
+        pending = {profile, first, count, planes:widenedView(clip),eye:[camera[12],camera[13],camera[14]]};
         worker.postMessage(pending);
       }
       return null;

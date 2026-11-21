@@ -5,7 +5,7 @@ import {travel} from './yacht-saloon-fixture.mjs';
 import {buildGuestAccess} from '../scripts/build-yacht-guest-access.mjs';
 import {containsTriangle} from '../scripts/build-yacht-terrace.mjs';
 import {decodeGuestAccess,loadGuestAccess,connectGuestAccess,restoreGuestAccessHandoff} from '../site/tidewater-rocha/mobile/guest-access.js';
-import {guestRoom,guestLandings,guestApproach,guestProfileDomain} from '../site/tidewater-rocha/mobile/guest-access-geometry.js';
+import {guestRoom,guestLandings,guestApproach,guestProfileDomain,onGuestApproach} from '../site/tidewater-rocha/mobile/guest-access-geometry.js';
 import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
 import {renderedParts,obstacles} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
@@ -47,6 +47,16 @@ test('guest package is reproducible with five bounded profiles, exact supports a
     }
   } finally {g.model.dispose();}
 });
+test('the prepared approach includes the guest corridor and excludes the adjacent saloon',()=>{
+  for(let i=1;i<guestApproach.length;i++) {
+    const [ax,ay]=guestApproach[i-1],[bx,by]=guestApproach[i];
+    assert.equal(onGuestApproach(ax,ay),true);
+    assert.equal(onGuestApproach((ax+bx)/2,(ay+by)/2),true);
+  }
+  assert.equal(onGuestApproach(...guestApproach.at(-1)),true);
+  for(const xy of [[6.7,0],[15.8,.1],[17.2,-.95],[17.2,-2.05]])assert.equal(onGuestApproach(...xy),false);
+});
+
 test('the aft port cabin keeps its fitted carpet and carpeted threshold',()=>{
   for(const [feature,footprint] of [
     ['port cabin blue pile carpet',[14.348,.446,17.772,3.525]],

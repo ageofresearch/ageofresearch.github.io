@@ -27,14 +27,14 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes);
   const scratch = new ArrayBuffer(glassOffset);
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
-  function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples) {
+  function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples, refineMovingView) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
     const offset = roomCellOffset(region, camera, projection, width, height);
     // Sun changes invalidate only the sky exclusions. The camera and room can
     // immediately reuse the full sky from the same prepared index list.
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
       Math.min(width*projection[0], height*projection[5]) >= 100;
-    const useScreen = Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
+    const useScreen = refineMovingView && Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
       usableScreen(width, height, samples, projection);
     const changed = entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen;
     if (!changed && !entry.filtered) return;
@@ -133,7 +133,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       return exact.length??null;
     },
-    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame, samples) {
+    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame, samples, refineMovingView) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
@@ -148,7 +148,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         pending = null;
       }
       const current=valid(active);
-      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision, frame, samples);
+      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision, frame, samples, refineMovingView);
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
       // A turn can leave the angular guard without moving the eye. Request the
       // next list while the outer frustum still covers the visible frame.

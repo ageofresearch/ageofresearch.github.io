@@ -1,6 +1,6 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
-import {createViewIndices} from './view-indices.js?v=9';
+import {createViewIndices} from './view-indices.js?v=10';
 import {loadScreenVisibility} from './screen-visibility.js?v=1';
 import {prepareImmediateView} from './immediate-view.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
@@ -10,6 +10,7 @@ import {shader,visibilityShader} from './daylight-shader.js?v=yacht-daylight-2';
 import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-2';
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
+import { onGuestApproach } from './guest-access-geometry.js?v=guest-visibility-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
@@ -339,7 +340,14 @@ export async function createForwardRenderer(app, daylight) {
           if(preparingProfile===null && preparedBand===null && viewIndices){
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples);
+            const nav=app.yachtWalk.nav;
+            // These narrow routes already use a small prepared list. Reprojecting
+            // it each frame costs more than submitting it to the GPU.
+            const [x,y]=nav.position;
+            const onNarrowDeck=nav.deck==='MD'&&!nav.stair&&
+              (model.boarding.baseSafe?.(x,y,0)||model.guestAccess&&onGuestApproach(x,y));
+            const refineMovingView=activeProfile!=='guest'&&!onNarrowDeck;
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples,refineMovingView);
             if(capture)capturedSource={
               indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16),
               candidates:viewIndices.captureCandidates(visible),

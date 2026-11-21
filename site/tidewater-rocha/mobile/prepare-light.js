@@ -23,8 +23,23 @@ function contactAt(map,x,y,z,up) {
 }
 
 // Encode invariant material inputs once. The sun and camera remain live uniforms.
-export function prepareOpaque(source,map) {
+function smallReceivers(position,indices) {
+  const small=new Uint8Array(position.length/3).fill(1);
+  const lengthSquared=(i,j)=>{
+    const a=i*3,b=j*3,x=position[a]-position[b],y=position[a+1]-position[b+1],z=position[a+2]-position[b+2];
+    return x*x+y*y+z*z;
+  };
+  for(let i=0;i<indices.length;i+=3){
+    const a=indices[i],b=indices[i+1],c=indices[i+2];
+    if(!small[a]&&!small[b]&&!small[c])continue;
+    if(Math.max(lengthSquared(a,b),lengthSquared(b,c),lengthSquared(c,a))>.22**2)small[a]=small[b]=small[c]=0;
+  }
+  return small;
+}
+
+export function prepareOpaque(source,map,indices) {
   const {position,normal}=source,color=new Float32Array(source.color),surface=new Float32Array(source.aSurface.length);
+  const small=indices&&smallReceivers(position,indices);
   const count=position.length/3,roughness=new Float32Array(count),contact=new Float32Array(count),room=new Uint8Array(count);
   for(let j=0,k=0;j<position.length;j+=3,k+=4) {
     const x=position[j],y=position[j+1],z=position[j+2],nx=normal[j],ny=normal[j+1],nz=normal[j+2];
@@ -66,7 +81,7 @@ export function prepareOpaque(source,map) {
       // Slate-blue pile with pale highlights from the mottled fibre field.
       for(let c=0;c<3;c++)color[j+c]*=[.92,1.20,1.42][c];
     }else if(layer===3){color.set([.34,.55,.48],j);}
-    surface[k]=u;surface[k+1]=v;surface[k+2]=layer;
+    surface[k]=u;surface[k+1]=v;surface[k+2]=layer+(small?.[index]&&layer>=-1?64:0);
   }
   return {position,normal,color,aSurface:surface,contact,roughness,room};
 }

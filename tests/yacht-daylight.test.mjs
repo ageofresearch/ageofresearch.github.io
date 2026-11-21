@@ -32,7 +32,7 @@ test('the orthographic shadow fit includes the whole yacht even with overhead su
   const light=createDaylight(reference,group),m=new Float32Array(16);
   for(const a of [0,75,180,270,360])for(const h of [5,45,90]){
     light.set(a,h);lightMatrix(light.direction,a,m);
-    for(const x of [-4,4])for(const y of [-2,9])for(const z of [-22,18]){
+    for(const x of [-4,4])for(const y of [-2.01,11.45])for(const z of [-22,18]){
       const coord=r=>m[r]*x+m[4+r]*y+m[8+r]*z+m[12+r];
       assert.ok(Math.abs(coord(0))<=1&&Math.abs(coord(1))<=1&&coord(2)>=0&&coord(2)<=1);
     }
@@ -44,5 +44,55 @@ test('every mobile profile has sky as its only surrounding geometry',async()=>{
     assert.ok(p.audit.some(a=>a.id.endsWith('/Daylight-sky')&&a.triangles>0));
     assert.ok(!p.audit.some(a=>/Rocha-(lake|sky|offshore|distant|wooded|lakeside)/.test(a.id)));
     assert.ok(p.triangles<=25000);assert.equal(p.batches.length,2);
+  }
+});
+
+test('tessellated floor occluders leave the central hatch open',async()=>{
+  const {planarOccluders}=await import('../scripts/yacht-geometry/planar-occluders.mjs');
+  const faces=[];
+  for(let x=0;x<8;x++)for(let y=0;y<8;y++){
+    if(x>=3&&x<5&&y>=3&&y<5)continue;
+    const v=[[x,y,0],[x+1,y,0],[x+1,y+1,0],[x,y+1,0]];
+    for(const ids of [[0,1,2],[0,2,3]])faces.push({v:ids.map(i=>v[i]),n:[0,0,1]});
+  }
+  const rectangles=planarOccluders(faces);
+  assert.ok(rectangles.some(({lo,hi})=>hi[0]-lo[0]>4));
+  assert.ok(rectangles.every(({lo,hi})=>hi[0]<=3||lo[0]>=5||hi[1]<=3||lo[1]>=5));
+});
+
+test('the sector draw preserves the first shadow depth from the full caster mesh',async()=>{
+  const {decodeShadow}=await import('../site/tidewater-rocha/mobile/daylight-shadow.js');
+  const bytes=await readFile(new URL('../site/tidewater-rocha/mobile/daylight-casters.bin',import.meta.url));
+  const data=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+  const mesh=decodeShadow(data),[,n,count,stride]=new Uint32Array(data,0,4);
+  const original=new (stride===2?Uint16Array:Uint32Array)(data,24+12*n,count);
+  const size=64,transformed=new Float32Array(n*3),matrix=new Float32Array(16);
+  function depth(indices){
+    const pixels=new Float32Array(size*size).fill(1);
+    for(let i=0;i<indices.length;i+=3){
+      const a=indices[i]*3,b=indices[i+1]*3,c=indices[i+2]*3;
+      const ax=transformed[a],ay=transformed[a+1],bx=transformed[b],by=transformed[b+1],cx=transformed[c],cy=transformed[c+1];
+      const det=(by-cy)*(ax-cx)+(cx-bx)*(ay-cy);if(Math.abs(det)<1e-8)continue;
+      const left=Math.max(0,Math.ceil(Math.min(ax,bx,cx))),right=Math.min(size-1,Math.floor(Math.max(ax,bx,cx)));
+      for(let y=Math.max(0,Math.ceil(Math.min(ay,by,cy)));y<=Math.min(size-1,Math.floor(Math.max(ay,by,cy)));y++)for(let x=left;x<=right;x++){
+        const u=((by-cy)*(x-cx)+(cx-bx)*(y-cy))/det,v=((cy-ay)*(x-cx)+(ax-cx)*(y-cy))/det,w=1-u-v;
+        if(Math.min(u,v,w)<-1e-7)continue;
+        const j=y*size+x,z=u*transformed[a+2]+v*transformed[b+2]+w*transformed[c+2];
+        pixels[j]=Math.min(pixels[j],z);
+      }
+    }
+    return pixels;
+  }
+  const light=createDaylight(reference,group);
+  for(const azimuth of [0,22.499,22.501,62,117,179.99,225,305,359.99])for(const elevation of [5,26.249,26.251,60,89.9,90]){
+    light.set(azimuth,elevation);lightMatrix(light.direction,azimuth,matrix);
+    for(let k=0;k<n;k++)for(let r=0;r<3;r++){
+      const z=matrix[r]*mesh.positions[k*3]+matrix[r+4]*mesh.positions[k*3+1]+matrix[r+8]*mesh.positions[k*3+2]+matrix[12+r];
+      transformed[k*3+r]=r===2?z:(z*.5+.5)*size-(r===0?.413:.537);
+    }
+    const {first,count}=mesh.range(light.state);
+    const before=depth(original),after=depth(mesh.indices.subarray(first,first+count));
+    const error=before.reduce((m,v,j)=>Math.max(m,Math.abs(v-after[j])),0);
+    assert.ok(error<.00001,'Caster depth changed at '+[azimuth,elevation,error]);
   }
 });

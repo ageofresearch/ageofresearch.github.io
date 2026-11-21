@@ -1,9 +1,12 @@
+import {planarOccluders} from './planar-occluders.mjs';
 // Plane convention: GPU-local X is port, Y is up and Z is forward.
 // Bake conservative views for the platform and the two long directions of the
 // outside bow passage, and the view aft from the cockpit aisle. Other positions, orientations and fields of view retain
 // the ordinary all-direction draw for their longitudinal band.
 const cells={
   exterior:[
+    [-4.75,2.55,4.60,-1.0,3.65,5.78,[1,-1,0]],
+    [-1.0,2.55,4.60,2.65,3.65,5.78,[1,-1,0]],
     [-2.2,-3.55,4.30,.95,-1.85,4.56],[-2.2,-1.85,4.30,.95,-.35,4.56],
     [-2.2,-.35,4.30,.95,1.15,4.56],[-2.2,1.15,4.30,.95,3.55,4.56],
     [5.52,-2.42,4.95,7.90,1.26,5.68,-1,[2.8,4.8,1.25]],
@@ -54,7 +57,7 @@ function meshData(geometry) {
   // Opposite missing corners prove that two real opaque faces cover the
   // entire rectangle; a shared edge or a bounding box alone is insufficient.
   const rectangles=[...planes.values()].filter(r=>(r.missing&9)===9||(r.missing&6)===6);
-  return {faces,rectangles};
+  return {faces,rectangles:rectangles.concat(planarOccluders(faces))};
 }
 function shadowsFor(rectangles,box) {
   const result=[];

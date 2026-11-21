@@ -63,13 +63,22 @@ struct V {
  // its vertices; the shadow map interpolates between them across the penumbra.
  let sunlit=display(o.indirect+o.direct);
  o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
- o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;return o;
+ o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
+ if(o.layer>=63){
+   o.layer-=64;
+   let lit=textureSampleCompareLevel(shadow,shadowSampler,o.light.xy*vec2f(.5,-.5)+.5,o.light.z-.00030);
+   o.indirect+=o.direct*lit;o.direct=vec3f(0.);
+ }
+ return o;
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn fragment(in:V)->@location(0) vec4f{
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
- let visibility=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
- var radiance=in.indirect+in.direct*visibility;
+ var radiance=in.indirect;
+ if(any(in.direct>vec3f(.001))){
+   let lit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
+   radiance+=in.direct*lit;
+ }
  if(in.layer>=0){
    let layer=select(in.layer-1,5+clamp(i32(floor(in.uv.y))-1,0,12),in.layer==0);
    let tile=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20)).r*1.1;

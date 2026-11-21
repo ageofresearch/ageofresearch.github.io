@@ -20,8 +20,8 @@ export async function createForwardRenderer(app, daylight) {
     {binding:0, visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT, buffer:{type:'uniform'}},
     {binding:1, visibility:GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
-    {binding:3,visibility:GPUShaderStage.FRAGMENT,texture:{sampleType:'depth'}},
-    {binding:4,visibility:GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
+    {binding:3,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,texture:{sampleType:'depth'}},
+    {binding:4,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
@@ -61,15 +61,15 @@ export async function createForwardRenderer(app, daylight) {
   const cameraInYacht = mesh.matrixWorld.clone();
   const eye = app.camera.position.clone();
   const deckLight=await loadDeckLight();
-  function uploadVertices(source,glass){
-    const prepared=glass?source:prepareOpaque(source,deckLight);
+  function uploadVertices(source,glass,indices){
+    const prepared=glass?source:prepareOpaque(source,deckLight,indices);
     return upload(packRenderVertices(prepared),GPUBufferUsage.VERTEX);
   }
   let batches = model.meshes.map(mesh => {
     const geom = mesh.geometry;
     const source=Object.fromEntries(attributes.map(name=>[name,geom.attributes[name].array]));
     return {
-      vertices:uploadVertices(source,mesh.material.transparent),
+      vertices:uploadVertices(source,mesh.material.transparent,geom.index.array),
       indices:upload(geom.index.array,GPUBufferUsage.INDEX),
       indexFormat:geom.index.array instanceof Uint32Array ? 'uint32' : 'uint16',
       count:geom.index.count,
@@ -110,7 +110,7 @@ export async function createForwardRenderer(app, daylight) {
           for(const b of p.batches) {
             const batch={vertices:null,indices:null,indexFormat:b.indices instanceof Uint16Array?'uint16':'uint32',count:b.indices.length,ranges:b.ranges,localView:b.localView,views:b.views,cone:b.cone};
             result.batches.push(batch);
-            batch.vertices=uploadVertices(b.attributes,result.batches.length===2);
+            batch.vertices=uploadVertices(b.attributes,result.batches.length===2,b.indices);
             batch.indices=upload(b.indices,GPUBufferUsage.INDEX);
             result.geometryBytes+=batch.vertices.size+batch.indices.size;
           }
@@ -193,7 +193,7 @@ export async function createForwardRenderer(app, daylight) {
         frame.set(daylight.irradiance,40);litRevision=daylight.revision;
       }
       gpu.queue.writeBuffer(uniform,0,frame,0,moved?40+daylight.irradiance.length:20);
-      if(moved)shadow.draw(gpu.getEncoder());
+      if(moved)shadow.draw(gpu.getEncoder(),daylight.state);
       const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',

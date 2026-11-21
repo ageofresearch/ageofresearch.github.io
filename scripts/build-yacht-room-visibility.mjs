@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import { gzipSync } from 'node:zlib';
+import { createSternFeatures, l as yacht } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { loadDeckLight, prepareOpaque, packRenderVertices } from '../site/tidewater-rocha/mobile/prepare-light.js';
 import { sharedVertices } from '../site/tidewater-rocha/mobile/shared-vertices.js';
 
@@ -34,19 +35,24 @@ try {
   }
   const packed = table.finish(), regions = [], blocks = [], jobs = [];
   let total = 0;
-  // Level walking in the main deck, upper interior and guest accommodation.
-  // Sloping approaches and stairs always use the general camera filter.
-  for (const [profile, height] of [['exterior', 3.54], ['upper', 5.59], ['guest', 1.14]]) {
+  const platformEye = createSternFeatures().access.starboard.room.spawn[2] - yacht.seaReference;
+  // Only bake level walking surfaces. The separated eye-height ranges in the
+  // source sightlines distinguish the swim platform from the sloping gangway.
+  for (const [profile, deckEye] of [['exterior', 3.54], ['upper', 5.59], ['guest', 1.14]]) {
     for (const view of manifest.profiles[profile].batches[0].views) {
       const [x, y, z, X, Y, Z] = view.box;
-      if (height < y || height > Y || z < -14) continue;
+      const platform = profile === 'exterior' && platformEye >= y && platformEye <= Y;
+      if (z < -14 && !platform) continue;
+      const height = platform ? platformEye : deckEye;
+      if (height < y || height > Y) continue;
       // The shortest prefix is present at every lens width that selects this sightline.
       const count = view.prefixes?.[0]?.count ?? view.count;
       const faces = Uint32Array.from(indices[profile].subarray(view.first, view.first + count));
       const meshFile = join(temp, profile + '-' + view.first);
       const shape = new Uint32Array([packed.length / 32, count]);
       await writeFile(meshFile, Buffer.concat([bytes(shape), bytes(packed), bytes(faces)]));
-      const nx = Math.ceil((X - x) / .22), nz = Math.ceil((Z - z) / .22);
+      const spacing = platform ? .16 : .22;
+      const nx = Math.ceil((X - x) / spacing), nz = Math.ceil((Z - z) / spacing);
       const dx = (X - x) / nx, dz = (Z - z) / nz, halfHeight = .028;
       const radius = Math.hypot(dx / 2, dz / 2, halfHeight) + .025;
       const stride = Math.ceil(count / 24), block = Buffer.alloc(nx * nz * stride);

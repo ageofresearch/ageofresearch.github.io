@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { gunzipSync } from 'node:zlib';
 import { D as Vector3 } from '../site/tidewater-rocha/assets/Frame-CNet77I0.js';
 import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
+import { createSternFeatures, l as yacht } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { createDaylight, compartment } from '../site/tidewater-rocha/mobile/yacht-daylight.js';
 import { lightMatrix } from '../site/tidewater-rocha/mobile/daylight-shadow.js';
 import probes from '../site/tidewater-rocha/mobile/daylight-probes.js';
@@ -280,4 +282,18 @@ test('walking masks respect the original sightline, cell boundaries and raster l
     assert.deepEqual([...output.subarray(0,length)], expected);
   }
   assert.throws(() => roomCells({regions}, new Uint8Array(1), {upper:indices}), /Incomplete/);
+});
+
+test('the shipped swim-platform cells cover the shared spawn and stop at the first riser', async () => {
+  const path = new URL('../site/tidewater-rocha/mobile/room-visibility.bin', import.meta.url);
+  const data = gunzipSync(await readFile(path));
+  const header = JSON.parse(data.toString('utf8', 4, 4 + data.readUInt32LE(0)));
+  const stairs = createSternFeatures().access.starboard;
+  const [x, y, z] = stairs.room.spawn;
+  const camera = [y * yacht.sy, z - yacht.seaReference, x * yacht.sx - yacht.length / 2];
+  const region = header.regions.find(({ profile, box }) => profile === 'exterior' &&
+    camera.every((value, i) => value >= box[i] && value < box[i + 3]));
+  assert.ok(region, 'Missing platform walking mask');
+  const firstRise = stairs.treads[0].height - stairs.lowerHeight;
+  assert.ok(region.box[4] < camera[1] + firstRise);
 });

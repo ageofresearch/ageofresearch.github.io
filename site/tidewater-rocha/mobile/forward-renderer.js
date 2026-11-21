@@ -1,4 +1,4 @@
-import {loadRoomVisibility} from './room-visibility.js?v=1';
+import {loadRoomVisibility} from './room-visibility.js?v=2';
 import {sharedVertices} from './shared-vertices.js?v=1';
 import {createViewIndices} from './view-indices.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-1';

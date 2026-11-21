@@ -1,5 +1,16 @@
 import {waterline,hullWaterline} from './rocha-waterline.js?v=chair-fidelity-1';
 
+// The isolated yacht has no world lake renderer. A single opaque surface at
+// the flotation plane supplies the water visible through the platform cutout.
+export function flatBerthWater(face) {
+  const hull = hullWaterline.map((radius,i)=>{
+    const angle = 2*Math.PI*i/hullWaterline.length;
+    return [18+Math.cos(angle)*radius/(35.23/36),Math.sin(angle)*radius/(7.47/7.6)];
+  });
+  return face([[-120,-120],[156,-120],[156,120],[-120,120]],
+    (x,y)=>({point:[x,y,2.01],normal:[0,0,1]}),[hull]);
+}
+
 // Shared by the prepared views. Sky, lake and two bank strips occupy the same
 // indexed opaque batch as the yacht. The original world owns its own terrain.
 export function berthLandscape() {

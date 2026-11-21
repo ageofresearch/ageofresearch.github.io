@@ -131,7 +131,7 @@ test('each fallback and active profile preserves the three boarding material ide
     const manifest = JSON.parse(await readFile(new URL('mobile/' + name + '.json', root)));
     const buffer = await readFile(new URL('mobile/' + name + '.bin', root)),
       data = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
-    assert.equal(manifest.version, 'yacht-daylight-1');
+    assert.equal(manifest.version, 'port-water-edge-1');
     for (const [profile, p] of Object.entries(manifest.profiles)) {
       assert.ok(p.triangles <= 25000);
       assert.equal(p.batches.length, 2);

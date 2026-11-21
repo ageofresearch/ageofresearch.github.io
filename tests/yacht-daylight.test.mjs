@@ -62,12 +62,13 @@ test('the orthographic shadow fit includes the whole yacht even with overhead su
           }
     }
 });
-test('every mobile profile has sky as its only surrounding geometry', async () => {
+test('every mobile profile keeps the simple berth water and sky within the exterior budget', async () => {
   const m = JSON.parse(
     await readFile(new URL('../site/tidewater-rocha/mobile/guest-access.json', import.meta.url)),
   );
   for (const p of Object.values(m.profiles)) {
     assert.ok(p.audit.some((a) => a.id.endsWith('/Daylight-sky') && a.triangles > 0));
+    assert.ok(p.audit.some((a) => a.id.endsWith('/Berth-water-surface') && a.triangles > 0));
     assert.ok(!p.audit.some((a) => /Rocha-(lake|sky|offshore|distant|wooded|lakeside)/.test(a.id)));
     assert.ok(p.triangles <= 25000);
     assert.equal(p.batches.length, 2);

@@ -4,7 +4,7 @@ import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5
 
 export function detailError(part, error, profile) {
   const name = part.feature || part.name || '';
-  if (part.context) return 0;
+  if (part.context || name.startsWith('port stair ')) return 0;
   // These deck fragments are also the visible ceiling of the main deck.
   if (profile === 'exterior' && part.id.startsWith('UD_DCK_001/stairs/stair-opening'))
     return Math.min(error, 0.012);

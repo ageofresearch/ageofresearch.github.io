@@ -367,6 +367,31 @@ test('the shipped swim-platform cells cover the shared spawn and stop at the fir
   assert.ok(region.box[4] < camera[1] + firstRise);
 });
 
+test('each aft and solarium stair tread has visibility data at its modeled camera height', async () => {
+  const dir = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
+  const data = gunzipSync(await readFile(new URL('room-visibility.bin', dir)));
+  const header = JSON.parse(data.toString('utf8', 4, 4 + data.readUInt32LE()));
+  const manifest = JSON.parse(await readFile(new URL('guest-access.json', dir)));
+  for (const [profile, file] of [['upper', 'upper-terrace'], ['sun', 'sun-deck']]) {
+    const {flight} = JSON.parse(await readFile(new URL(file + '.json', dir)));
+    const deck = manifest.profiles[profile];
+    for (const {polygons, height, id} of flight.surfaces) {
+      const points = polygons.flat();
+      const centre = axis => {
+        const values = points.map(p => p[axis]);
+        return (Math.min(...values) + Math.max(...values)) / 2;
+      };
+      const x = centre(1) * yacht.sy, z = centre(0) * yacht.sx - yacht.length/2;
+      const y = height + 1.6 - yacht.seaReference;
+      const band = Math.floor((z - deck.visibility.start) / deck.visibility.step);
+      const [first, count] = deck.batches[0].ranges[band];
+      assert.ok(header.regions.some(r => r.profile === profile && first === r.first && count === r.count &&
+        x >= r.box[0] && x < r.box[3] && y - .19 >= r.box[1] && y + .19 <= r.box[4] &&
+        z >= r.box[2] && z < r.box[5]), 'Missing stair eye interval at ' + id);
+    }
+  }
+});
+
 test('rooms on different decks can share an index band and decode their camera rows independently', async () => {
   const {roomCells} = await import('../site/tidewater-rocha/mobile/room-visibility.js');
   const main = {profile:'upper', first:3, count:6, nx:2, nz:2, offset:0, box:[0,3,0,1,4,1]};

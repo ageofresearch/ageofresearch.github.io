@@ -93,6 +93,43 @@ try {
         box:[left * yacht.sy, height, z, right * yacht.sy, height, Z]});
     }
   }
+  function addBands(profile, bounds, height, halfHeight, spacing, directions) {
+    const deck = manifest.profiles[profile], {start, step} = deck.visibility;
+    for (const [band, [first, count]] of deck.batches[0].ranges.entries()) {
+      const z = Math.max(start + band * step, bounds[0] * yacht.sx - yacht.length / 2);
+      const Z = Math.min(start + (band + 1) * step, bounds[2] * yacht.sx - yacht.length / 2);
+      if (Z <= z) continue;
+      views.push({profile, first, count, height, halfHeight, spacing, directions, panels:true,
+        box:[bounds[1] * yacht.sy, height, z, bounds[3] * yacht.sy, height, Z]});
+    }
+  }
+  for (const [profile, file] of [['upper', 'upper-terrace'], ['sun', 'sun-deck']]) {
+    const bundle = JSON.parse(await readFile(join(mobile, file + '.json')));
+    const route = bundle.flight.route.path;
+    for (const surface of bundle.flight.surfaces) {
+      const points = surface.polygons.flat();
+      const x = points.map(p => p[0]), y = points.map(p => p[1]);
+      const box = [Math.min(...x), Math.min(...y), Math.max(...x), Math.max(...y)];
+      const cx = (box[0] + box[2]) / 2, cy = (box[1] + box[3]) / 2;
+      // The bow-to-stern beam and its transverse counterpart cover both
+      // directions along the closest segment of the real handrail turn.
+      let axis = 1, nearest = Infinity;
+      for (let i = 1; i < route.length; i++) {
+        const [ax, ay] = route[i-1], dx = route[i][0] - ax, dy = route[i][1] - ay;
+        const t = Math.max(0, Math.min(1, ((cx-ax)*dx + (cy-ay)*dy)/(dx*dx + dy*dy)));
+        const distance = Math.hypot(cx - ax - t * dx, cy - ay - t * dy);
+        if (distance < nearest) {
+          nearest = distance;
+          axis = Math.abs(dx) >= Math.abs(dy) ? 1 : 3;
+        }
+      }
+      // Include camera easing between neighboring tread elevations. The
+      // entire vertical interval is part of the offline occlusion proof.
+      addBands(profile, box, surface.height + 1.6 - yacht.seaReference, .21, .15, [axis,-axis]);
+    }
+    // Cover level ground in both directions after the visitor leaves the flight.
+    addBands(profile, bundle.room.bbox, bundle.room.spawn[2] - yacht.seaReference, .045, .20, [1,-1]);
+  }
   for (const [id, view] of views.entries()) {
     const {profile, height, count, spacing} = view;
     const [x, y, z, X, Y, Z] = view.box;
@@ -106,7 +143,7 @@ try {
     }
     await writeFile(meshFile, Buffer.concat(meshParts));
     const nx = Math.ceil((X - x) / spacing), nz = Math.ceil((Z - z) / spacing);
-    const dx = (X - x) / nx, dz = (Z - z) / nz, halfHeight = .028;
+    const dx = (X - x) / nx, dz = (Z - z) / nz, halfHeight = view.halfHeight ?? .028;
     const heights = view.ramp ? Array.from({length:nz}, (_,j) =>
       [boardingEye(z+j*dz)-.04, boardingEye(z+(j+1)*dz)+.04]).flat() : null;
     const stride = Math.ceil(count / 24), block = Buffer.alloc(nx * nz * stride);

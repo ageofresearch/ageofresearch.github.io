@@ -122,12 +122,17 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
                          double sign, Point eye, Point halfExtent, const vector<Panel> &panels) {
   const Point physicalEye = eye, physicalHalf = halfExtent;
   const auto cones = panelCones(panels, eye, halfExtent);
-  // Rotate the downward beam onto the same forward axis. A cyclic
+  // Rotate transverse and downward beams onto the same forward axis. A cyclic
   // permutation preserves the winding of the yacht's opaque surfaces.
-  if (sign != 1 && sign != -1 && sign != -2)
+  if (sign != 1 && sign != -1 && sign != -2 && abs(sign) != 3)
     throw runtime_error("Unknown visibility beam direction");
   const bool vertical = sign == -2;
-  if (vertical) {
+  const bool transverse = abs(sign) == 3;
+  if (transverse) {
+    halfExtent = {halfExtent.y, halfExtent.z, halfExtent.x};
+    eye = {eye.y, eye.z, eye.x};
+    sign = sign > 0 ? 1 : -1;
+  } else if (vertical) {
     halfExtent = {halfExtent.z, halfExtent.x, halfExtent.y};
     eye = {eye.z, eye.x, eye.y};
     sign = -1;
@@ -152,7 +157,7 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
         welded.emplace(array<float, 3>{a[0], a[1], a[2]}, int(points.size()));
     pointIndex[i] = it.first->second;
     if (it.second) {
-      const Point p = vertical ? Point{a[2], a[0], a[1]} : Point{a[0], a[1], a[2]};
+      const Point p = vertical ? Point{a[2], a[0], a[1]} : transverse ? Point{a[1], a[2], a[0]} : Point{a[0], a[1], a[2]};
       points.push_back({-sign * (p.x - eye.x), p.y - eye.y, sign * (p.z - eye.z)});
     }
   }

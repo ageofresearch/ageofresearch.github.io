@@ -273,8 +273,13 @@ export async function createForwardRenderer(app, daylight) {
         let same=lastGeometry===batches;
         for(let i=0;i<16&&same;i++)same=frame[i]===lastClip[i];
         if(!same){lastClip.set(frame.subarray(0,16));lastGeometry=batches;stable=0;}
-        if((prepareVisitor || same&&stable<3&&++stable===3) && !coverage.busy &&
-           !viewIndices.matches(activeProfile,frame,engine.width,engine.height))capture=true;
+        else if(stable<3)stable++;
+        // A readback for the previous pose may still be in flight when this
+        // one settles. Keep the capture eligible until the buffer is available.
+        if((prepareVisitor || stable===3) && !coverage.busy){
+          stable=4;
+          capture=!viewIndices.matches(activeProfile,frame,engine.width,engine.height);
+        }
       }else lastGeometry=null;
       const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({

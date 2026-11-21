@@ -213,3 +213,35 @@ test('resolved coverage signatures recover every distinct MSAA tag including col
     assert.deepEqual(sampleRoots(...sums),[...new Set(tags)].sort((x,y)=>x-y));
   }
 });
+
+test('coverage tiles retain every winner, near-plane triangles and sky while dropping absent tags', async () => {
+  const {filterSamples, sampleRoots} = await import('../site/tidewater-rocha/mobile/sample-visibility.js');
+  const width = 32, height = 8, stride = 512;
+  const pixels = new Uint16Array(stride * height / 2);
+  function half(value) {
+    if (!value) return 0;
+    const power = Math.floor(Math.log2(value));
+    return (power + 15) * 1024 + (value / 2 ** power - 1) * 1024;
+  }
+  function write(x, y, tags) {
+    for (let n = 1; n <= 4; n++)
+      pixels[y * stride / 2 + 4 * x + n - 1] = half(tags.reduce((sum, tag) => sum + tag ** n % 251, 0) / 4);
+  }
+  write(4, 4, [1, 2, 3, 4]);
+  write(14, 4, [5, 5, 5, 5]);
+  // These sums describe x²(x²+1), which has only two of its four roots in F251.
+  assert.equal(sampleRoots(0, 249, 0, 2), null);
+  pixels.set([0, half(249 / 4), 0, half(2 / 4)], 4 * stride / 2 + 4 * 26);
+  const vertices = new Uint8Array(14 * 32);
+  const positions = new Float32Array(vertices.buffer), layers = new Int16Array(vertices.buffer);
+  for (let i = 1; i <= 13; i++) {
+    const x = i <= 4 ? 4 : i <= 7 ? 14 : 26;
+    positions.set([2 * x / width - 1, 0, i === 9 ? 0 : -1], i * 8);
+  }
+  layers[10 * 16 + 14] = -2;
+  const indices = Uint16Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].flatMap(i => [i, i, i]));
+  const clip = [1,0,0,0, 0,1,0,0, 0,0,0,-1, 0,0,1,0];
+  const {output, length} = filterSamples(pixels, width, height, stride, vertices, indices, 0, indices.length, clip);
+  assert.deepEqual(Array.from(output.subarray(0, length)),
+    [1, 2, 3, 4, 5, 8, 9, 10].flatMap(i => [i, i, i]));
+});

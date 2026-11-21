@@ -4,12 +4,25 @@
 // every winning tag, even where four different faces share one pixel.
 const prime = 251,
   tile = 8;
-const halfTimesFour = new Uint16Array(0x6000);
-for (let h = 0; h < halfTimesFour.length; h++) {
-  const exp = (h >> 10) & 31;
-  halfTimesFour[h] = Math.round((1024 + (h & 1023)) * 2 ** (exp - 23));
+const invalidSum = 0xffff;
+const halfTimesFour = new Uint16Array(65536).fill(invalidSum);
+halfTimesFour[0] = 0;
+for (let sum = 1; sum <= 4 * (prime - 1); sum++) {
+  const value = sum / 4, exponent = Math.floor(Math.log2(value));
+  const bits = (15 + exponent) * 1024 + (value / 2 ** exponent - 1) * 1024;
+  halfTimesFour[bits] = sum;
 }
 const mod = (n) => ((n % prime) + prime) % prime;
+// A pixel strictly inside a face resolves to its unmodified tag in the
+// first channel. These pixels need neither polynomial decoding nor hashing.
+const sameSample = new Uint16Array(prime * 3);
+for (let t = 0; t < prime; t++) {
+  let power = t;
+  for (let i = 0; i < 3; i++) {
+    power = (power * t) % prime;
+    sameSample[t * 3 + i] = 4 * power;
+  }
+}
 export function sampleRoots(a, b, c, d) {
   const x = mod(a * 63); // 4*63 = 1 modulo 251
   const xx = (x * x) % prime,
@@ -19,9 +32,30 @@ export function sampleRoots(a, b, c, d) {
   const e2 = mod((a * a - b) * 126);
   const e3 = mod((e2 * a - a * b + c) * 84);
   const e4 = mod((e3 * a - e2 * b + a * c - d) * 63);
-  const roots = [];
-  for (let t = 0; t < prime; t++) if (mod((((t - a) * t + e2) * t - e3) * t + e4) === 0) roots.push(t);
-  return roots;
+  return splitQuartic(mod(-a), e2, mod(-e3), e4);
+}
+
+// Divide out the roots we actually find. A malformed tuple can describe a
+// polynomial with one real tag and an irreducible factor. In that case the
+// whole tile has to retain its geometry.
+const squareRoot = new Int16Array(prime).fill(-1);
+for (let i = 0; i <= (prime - 1) / 2; i++) squareRoot[(i * i) % prime] = i;
+function splitQuartic(a, b, c, d) {
+  for (let t = 0; t < prime; t++) {
+    const j = t + a, k = (j * t + b) % prime, l = (k * t + c) % prime;
+    if ((l * t + d) % prime !== 0) continue;
+    // Synthetic division leaves x³ + j x² + k x + l.
+    for (let u = t; u < prime; u++) {
+      const m = j + u, n = (m * u + k) % prime;
+      if ((n * u + l) % prime !== 0) continue;
+      const root = squareRoot[mod(m * m - 4 * n)];
+      if (root < 0) return null;
+      const v = mod((root - m) * 126), w = mod((-root - m) * 126);
+      return [...new Set([t, u, v, w])].sort((x, y) => x - y);
+    }
+    return null;
+  }
+  return null;
 }
 export function filterSamples(pixels, width, height, stride, vertices, indices, first, count, clip) {
   const cols = Math.ceil(width / tile),
@@ -32,18 +66,30 @@ export function filterSamples(pixels, width, height, stride, vertices, indices, 
     const row = Math.floor(y / tile) * cols;
     for (let x = 0; x < width; x++) {
       const i = (y * stride) / 2 + x * 4;
-      const a = halfTimesFour[pixels[i]] % prime,
-        b = halfTimesFour[pixels[i + 1]] % prime;
-      const c = halfTimesFour[pixels[i + 2]] % prime,
-        d = halfTimesFour[pixels[i + 3]] % prime;
-      const key = ((a * prime + b) * prime + c) * prime + d;
+      const a = halfTimesFour[pixels[i]], b = halfTimesFour[pixels[i + 1]];
+      const c = halfTimesFour[pixels[i + 2]], d = halfTimesFour[pixels[i + 3]];
+      const base = (row + Math.floor(x / tile)) * 8;
+      const tag = a / 4;
+      if (Number.isInteger(tag) && tag < prime && b === sameSample[tag * 3] &&
+          c === sameSample[tag * 3 + 1] && d === sameSample[tag * 3 + 2]) {
+        bits[base + (tag >>> 5)] |= 1 << (tag & 31);
+        continue;
+      }
+      if ((a | b | c | d) === invalidSum) {
+        bits.fill(0xffffffff, base, base + 8);
+        continue;
+      }
+      const key = (((a % prime) * prime + b % prime) * prime + c % prime) * prime + d % prime;
       let roots = cache.get(key);
-      if (!roots) {
-        roots = sampleRoots(a, b, c, d);
+      if (roots === undefined) {
+        roots = sampleRoots(a % prime, b % prime, c % prime, d % prime);
         cache.set(key, roots);
       }
-      const base = (row + Math.floor(x / tile)) * 8;
-      for (const t of roots) bits[base + (t >>> 5)] |= 1 << (t & 31);
+      if (roots) {
+        for (const t of roots) bits[base + (t >>> 5)] |= 1 << (t & 31);
+      } else {
+        bits.fill(0xffffffff, base, base + 8);
+      }
     }
   }
   const f = new Float32Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 4);

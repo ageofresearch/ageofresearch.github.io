@@ -50,6 +50,9 @@ function opaqueRanges(position, indices, profile, surface) {
     groups = Array.from({ length: 2 * bands - 1 }, () => []),
     background = groups.map(()=>[]);
   for (let i = 0; i < indices.length; i += 3) {
+    if(surface[indices[i]*4+2]===47){
+      background[bands-1].push(indices[i],indices[i+1],indices[i+2]);continue;
+    }
     const a = indices[i] * 3,
       b = indices[i + 1] * 3,
       c = indices[i + 2] * 3;
@@ -117,11 +120,12 @@ const viewBoxes = {
   },
 };
 
-function localDraw(positions, indices, { axis, box, eye }) {
+function localDraw(positions, indices, surface, { axis, box, eye }) {
   const low = [],
     high = [];
   for (let i = 0; i < indices.length; i += 3) {
     const [ia, ib, ic] = indices.subarray(i, i + 3);
+    if(surface[ia*4+2]===47){low.push(ia,ib,ic);continue;}
     const a = ia * 3,
       b = ib * 3,
       c = ic * 3;
@@ -150,7 +154,7 @@ export function packWalkProfile(boarding, profile, audit, store) {
       : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile, geometry.attributes.aSurface.array);
     let localView;
     if (!glass && viewBoxes[profile]) {
-      const view = localDraw(geometry.attributes.position.array, geometry.index.array, viewBoxes[profile]);
+      const view = localDraw(geometry.attributes.position.array, geometry.index.array, geometry.attributes.aSurface.array, viewBoxes[profile]);
       localView = {
         axis: view.axis,
         box: view.box,

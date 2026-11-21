@@ -12,8 +12,12 @@ struct Frame {
 @group(0) @binding(2) var tiles:texture_2d_array<f32>;
 @group(0) @binding(3) var shadow:texture_depth_2d;
 @group(0) @binding(4) var shadowSampler:sampler_comparison;
+
 fn display(c:vec3f)->vec3f{
-  let v=max(c,vec3f(0.));return select(1.055*pow(v,vec3f(1./2.4))-.055,12.92*v,v<=vec3f(.0031308));
+  // Minimax fit on the displayable interval. Maximum sRGB error < 0.00037.
+  let v=clamp(c,vec3f(0.),vec3f(1.));let root=sqrt(v);
+  let srgb=-.07690366+.83375405*root+.29810790*sqrt(root)-.05531760*v;
+  return select(srgb,12.92*v,v<=vec3f(.0031308));
 }
 ${skyRadiance}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
@@ -24,8 +28,14 @@ struct V {
 @vertex fn vertex(@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
  @location(3) uv:vec2f,@location(4) finish:vec2i)->V {
  var o:V;o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
- if(o.layer==-2){o.indirect=pos-frame.eye.xyz;return o;}
- if(o.layer==-3){o.indirect=color.rgb;return o;}
+ if(o.layer==-2){
+   let dome=normalize((pos-vec3f(0.,-2.01,0.))/vec3f(.98289474,1.,.97861111));
+   let east=normalize(vec3f(frame.sun.w,0.,frame.eye.w));
+   let ray=east*dome.x+cross(east,frame.sun.xyz)*dome.z+frame.sun.xyz*dome.y;
+   o.clip=frame.clip*vec4f(frame.eye.xyz+120.*ray,1.);
+   o.indirect=display(sky(ray));return o;
+ }
+ if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
  let probe=frame.bounce[u32(finish.y)>>8u];
  let hemi=normal.y*.5+.5;
@@ -37,28 +47,35 @@ struct V {
  if(rough<.63 || metal>.05){
    let eye=normalize(frame.eye.xyz-pos);let reflected=reflect(-eye,normal);
    let f0=mix(vec3f(.044),color.rgb,metal);
-   let fresnel=f0+(vec3f(1.)-f0)*pow(1.-abs(dot(eye,normal)),5.);
+   let edge=1.-clamp(abs(dot(eye,normal)),0.,1.);let edge2=edge*edge;
+   let fresnel=f0+(vec3f(1.)-f0)*edge2*edge2*edge;
    let region=u32(finish.y)>>8u;
    let fittings=${sampleReflectionWGSL('frame.fittings','region','reflected')};
    let reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
    let gloss=1.-rough;
    o.indirect=o.indirect*(1.-metal)+fresnel*reflectedLight*gloss;
-   o.direct+=sunlight*fresnel*gloss*pow(max(dot(reflected,frame.sun.xyz),0.),mix(12.,110.,gloss));
+   let alignment=max(0.,dot(reflected,frame.sun.xyz));
+   let width=mix(.13,.016,gloss);
+   let lobe=width/(width+1.-alignment);
+   o.direct+=sunlight*fresnel*gloss*lobe*lobe*alignment;
  }
+ // The visibility endpoints vary smoothly across a face. Transform each once at
+ // its vertices; the shadow map interpolates between them across the penumbra.
+ let sunlit=display(o.indirect+o.direct);
+ o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;return o;
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn fragment(in:V)->@location(0) vec4f{
- if(in.layer==-2){return vec4f(display(sky(normalize(in.indirect))),1.);}
- if(in.layer==-3){return vec4f(display(in.indirect),1.);}
+ if(in.layer<=-2){return vec4f(in.indirect,1.);}
  let visibility=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
  var radiance=in.indirect+in.direct*visibility;
  if(in.layer>=0){
    let layer=select(in.layer-1,5+clamp(i32(floor(in.uv.y))-1,0,12),in.layer==0);
    let tile=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20)).r*1.1;
-   radiance*=tile*tile;
+   radiance=(radiance+.055)*tile-.055;
  }
- return vec4f(display(radiance),1.);
+ return vec4f(radiance,1.);
 }
 struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
 @vertex fn glassVertex(@location(0) pos:vec3f,@location(1) normal:vec4f,@location(2) tint:vec4f,@location(4) finish:vec2i)->Glass{

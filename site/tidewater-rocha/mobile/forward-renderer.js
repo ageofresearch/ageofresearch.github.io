@@ -188,6 +188,7 @@ export async function createForwardRenderer(app, daylight) {
       eye.copy(camera.position).applyMatrix4(localFromWorld).toArray(frame,16);
       const moved=litRevision!==daylight.revision;
       if(moved){
+        const bearing=daylight.state.azimuth*Math.PI/180;frame[23]=Math.cos(bearing);frame[19]=Math.sin(bearing);
         daylight.direction.toArray(frame,20);lightMatrix(daylight.direction,daylight.state.azimuth,shadowMatrix);
         frame.set(daylight.irradiance,40);litRevision=daylight.revision;
       }

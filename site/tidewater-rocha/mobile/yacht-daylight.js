@@ -19,11 +19,13 @@ export function createDaylight(reference,group,storage){
     world.copy(direction).applyQuaternion(group.quaternion);
     const angle=azimuth/45,i=Math.floor(angle),t=angle-i;
     const height=clamp((elevation-5)/40,0,2),j=Math.min(1,Math.floor(height)),u=height-j;
+    const offset0=(j*8+i)*3,offset1=(j*8+(i+1)%8)*3;
+    const w0=(1-t)*(1-u)/255,w1=t*(1-u)/255,w2=(1-t)*u/255,w3=t*u/255;
     irradiance.set([.035,.033,.030,1]);
     probes.forEach((p,k)=>{
       for(let c=0;c<3;c++){
-        const row=r=>(p.rgb[(r*8+i)*3+c]*(1-t)+p.rgb[(r*8+(i+1)%8)*3+c]*t)/255;
-        irradiance[4*(k+1)+c]=row(j)*(1-u)+row(j+1)*u;
+        irradiance[4*(k+1)+c]=p.rgb[offset0+c]*w0+p.rgb[offset1+c]*w1+
+          p.rgb[offset0+24+c]*w2+p.rgb[offset1+24+c]*w3;
       }
       irradiance[4*(k+1)+3]=p.sky;
     });

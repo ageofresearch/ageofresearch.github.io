@@ -139,7 +139,13 @@ test('the sky surrounds the yacht in every direction and contributes no walk obs
   const {obstacles}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
   const sky=yachtSky();
   assert.equal(sky.finish[3],47);
-  assert.equal(sky.indices.length,36);
+  // All faces must point inward so the full sky survives back-face culling.
+  for(let i=0;i<sky.indices.length;i+=3){
+    const [a,b,c]=sky.indices.slice(i,i+3).map(k=>sky.vertices.slice(k*6,k*6+3));
+    const u=b.map((x,k)=>x-a[k]),v=c.map((x,k)=>x-a[k]);
+    const n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+    assert.ok(n[0]*(a[0]-18)+n[1]*a[1]+n[2]*a[2]<0);
+  }
   const context={...sky,context:true,bounds:[-145,-145,-145,163,145,145]};
   assert.equal(obstacles([context],new Set(),[0,-8,1.55,30,8,3.2]).footprints(1.55).length,0);
 });

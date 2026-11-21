@@ -28,7 +28,7 @@ export async function createDaylightShadow(device,uniform,upload){
     vertex:{module,entryPoint:'vs',buffers:[{arrayStride:12,attributes:[{shaderLocation:0,offset:0,format:'float32x3'}]}]},
     primitive:{topology:'triangle-list',cullMode:'none'},depthStencil:{format:'depth16unorm',depthCompare:'less',depthWriteEnabled:true,depthBias:1,depthBiasSlopeScale:1}});
   const bind=device.createBindGroup({layout:pipeline.getBindGroupLayout(0),entries:[{binding:0,resource:{buffer:uniform}}]});
-  const texture=device.createTexture({label:'Cached yacht sun depth',size:[1024,1024],format:'depth16unorm',usage:GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING});
+  const texture=device.createTexture({label:'Cached yacht sun depth',size:[512,512],format:'depth16unorm',usage:GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.TEXTURE_BINDING});
   const view=texture.createView(),sampler=device.createSampler({compare:'less-equal',magFilter:'linear',minFilter:'linear'});
   const vertices=upload(new Float32Array(data,16,n*3),GPUBufferUsage.VERTEX);
   const indices=upload(new Uint8Array(data,offset),GPUBufferUsage.INDEX);

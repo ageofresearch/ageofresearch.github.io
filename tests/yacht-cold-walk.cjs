@@ -11,7 +11,8 @@ const summarize=rows=>{
     maxMove:Math.max(...rows.map(r=>r.move)),maxCPU:Math.max(...rows.map(r=>r.cpu))};
 };
 
-async function capture(browser,mobile) {
+async function capture(browser,mobile,directory=out) {
+  mkdirSync(directory,{recursive:true});
   const context=await browser.newContext({viewport:{width:360,height:540},hasTouch:true});
   let release;
   try {
@@ -48,6 +49,7 @@ async function capture(browser,mobile) {
         prepared:[...w.nav.stairFlights.values()].map(f=>({id:f.id,count:f.clearance.preparedHeights,
           expected:new Set(f.surfaces.map(s=>s.height.toFixed(6))).size}))};
     });
+    let timings;
     if(mobile) {
       assert.equal(ready.bow,'ready');assert.equal(ready.bridge,'ready');assert.equal(ready.upperInterior,'ready');assert.equal(ready.sun,'ready');assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
       const result=await frame.evaluate(async()=>{
@@ -78,7 +80,7 @@ async function capture(browser,mobile) {
       assert.deepEqual(result.gpu,[],'First stair traversal must not create graphics resources');
       assert.equal(result.scale,1);assert.equal(result.samples,4);assert.ok(result.triangles<=25000);
       const legs=[0,1,2,3].map(leg=>({leg,...summarize(result.rows.filter(r=>r.leg===leg))}));
-      writeFileSync(out+'/cold-mobile.json',JSON.stringify({ready,legs,...result},null,2));
+      writeFileSync(directory+'/cold-mobile.json',JSON.stringify({ready,legs,...result},null,2));
       console.log('Fresh mobile ascent/descent, then repeated route:',legs);
       const sunResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
@@ -103,7 +105,7 @@ async function capture(browser,mobile) {
       });
       assert.deepEqual(sunResult.gpu,[]);assert.deepEqual(sunResult.resources,[]);assert.ok(sunResult.triangles<=25000);assert.equal(sunResult.scale,1);assert.equal(sunResult.samples,4);
       const sunLegs=[0,1,2,3].map(leg=>({leg,...summarize(sunResult.rows.filter(r=>r.leg===leg))}));
-      writeFileSync(out+'/cold-sun.json',JSON.stringify({ready,legs:sunLegs,...sunResult},null,2));console.log('Fresh sun ascent/descent, then repeated route:',sunLegs);
+      writeFileSync(directory+'/cold-sun.json',JSON.stringify({ready,legs:sunLegs,...sunResult},null,2));console.log('Fresh sun ascent/descent, then repeated route:',sunLegs);
 
       const interiorResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
@@ -129,7 +131,7 @@ async function capture(browser,mobile) {
       assert.deepEqual(interiorResult.gpu,[]);assert.deepEqual(interiorResult.resources,[]);assert.ok(interiorResult.triangles<=25000);
       assert.equal(interiorResult.scale,1);assert.equal(interiorResult.samples,4);assert.ok(interiorResult.rows.every(r=>r.profile==='upper'));
       const interiorLegs=[0,1,2,3].map(leg=>({leg,...summarize(interiorResult.rows.filter(r=>r.leg===leg))}));
-      writeFileSync(out+'/cold-upper-interior.json',JSON.stringify({ready,legs:interiorLegs,...interiorResult},null,2));console.log('Fresh upper interior entry/return, then repeated route:',interiorLegs);
+      writeFileSync(directory+'/cold-upper-interior.json',JSON.stringify({ready,legs:interiorLegs,...interiorResult},null,2));console.log('Fresh upper interior entry/return, then repeated route:',interiorLegs);
 
       const bridgeResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
@@ -155,8 +157,9 @@ async function capture(browser,mobile) {
       assert.deepEqual(bridgeResult.gpu,[]);assert.deepEqual(bridgeResult.resources,[]);assert.ok(bridgeResult.triangles<=25000);
       assert.equal(bridgeResult.scale,1);assert.equal(bridgeResult.samples,4);assert.ok(bridgeResult.rows.every(r=>r.profile==='upper'));
       const bridgeLegs=[0,1,2,3].map(leg=>({leg,...summarize(bridgeResult.rows.filter(r=>r.leg===leg))}));
-      writeFileSync(out+'/cold-bridge.json',JSON.stringify({ready,legs:bridgeLegs,...bridgeResult},null,2));console.log('Fresh bridge entry/return, then repeated route:',bridgeLegs);
+      writeFileSync(directory+'/cold-bridge.json',JSON.stringify({ready,legs:bridgeLegs,...bridgeResult},null,2));console.log('Fresh bridge entry/return, then repeated route:',bridgeLegs);
 
+      timings={aft:legs,sun:sunLegs,interior:interiorLegs,bridge:bridgeLegs};
     } else {
       assert.equal(ready.mtu,'ready');assert.equal(ready.strainers,'ready');
       for(const f of ready.prepared)assert.equal(f.count,f.expected,f.id+' must be prepared before walking');
@@ -184,10 +187,11 @@ async function capture(browser,mobile) {
       assert.deepEqual(result.gpu,[],'Machinery entry must reuse already executed shaders and uploaded buffers');
       assert.deepEqual(result.resources,[],'Ordinary full-yacht walking must not fetch equipment');
       assert.deepEqual(result.prepared,ready.prepared.map(({id,count})=>({id,count})));
-      writeFileSync(out+'/cold-full.json',JSON.stringify({ready,...result},null,2));
+      writeFileSync(directory+'/cold-full.json',JSON.stringify({ready,...result},null,2));
       console.log('Prepared full-yacht first/repeated movement:',result.legs);
     }
     assert.deepEqual(errors,[]);
+    return timings;
   } finally {release?.();await context.close();}
 }
 
@@ -195,5 +199,18 @@ async function capture(browser,mobile) {
   mkdirSync(out,{recursive:true});
   const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,
     args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
-  try {await capture(browser,true);await capture(browser,false);}finally{await browser.close();}
+  try {
+    const runs=[];
+    for(let index=0;index<3;index++)runs.push(await capture(browser,true,index===0?out:out+'/cold-context-'+index));
+    await capture(browser,false);
+    const summaries=[];
+    for(const name of Object.keys(runs[0]))for(let leg=0;leg<4;leg++){
+      const p95s=runs.map(r=>r[name][leg].p95);
+      const median=p95s.toSorted((a,b)=>a-b)[1];
+      summaries.push({route:name,leg,p95s,median});
+    }
+    writeFileSync(out+'/cold-frame-budget.json',JSON.stringify(summaries,null,2));
+    const slow=summaries.filter(s=>!(s.median<=25));
+    assert.deepEqual(slow,[],'Cold walk exceeds the 25 ms median P95 frame budget');
+  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

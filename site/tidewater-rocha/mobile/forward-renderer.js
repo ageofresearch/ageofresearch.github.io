@@ -214,7 +214,27 @@ export async function createForwardRenderer(app, daylight) {
         }
       } finally { target.destroy();if(!disposed)selectProfile(previous); }
     },
-    render(preparingProfile=null,target=null,preparedBand=null) {
+    async prepareCurrentView(){
+      if(disposed||!viewIndices)return;
+      // The final camera can differ from the profile warm-up cameras. Finish
+      // both visibility lists before the visitor can move or retry a package.
+      await coverage?.pending;
+      await viewIndices.idle();
+      if(disposed)return;
+      const {gpu,engine}=app;
+      const texture=device.createTexture({label:'Initial visitor view',format,size:[engine.width,engine.height],
+        usage:GPUTextureUsage.RENDER_ATTACHMENT});
+      try {
+        const target=texture.createView();
+        gpu.beginFrame();this.render(null,target,null,true);gpu.submit();
+        await coverage?.pending;
+        await viewIndices.idle();
+        if(disposed)return;
+        gpu.beginFrame();this.render(null,target);gpu.submit();
+        await gpu.queue.onSubmittedWorkDone();
+      }finally{texture.destroy();}
+    },
+    render(preparingProfile=null,target=null,preparedBand=null,prepareVisitor=false) {
       const {engine, gpu, camera} = app;
       if(profiles) {
         const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
@@ -253,7 +273,8 @@ export async function createForwardRenderer(app, daylight) {
         let same=lastGeometry===batches;
         for(let i=0;i<16&&same;i++)same=frame[i]===lastClip[i];
         if(!same){lastClip.set(frame.subarray(0,16));lastGeometry=batches;stable=0;}
-        else if(stable<3&&!coverage.busy && ++stable===3)capture=true;
+        if((prepareVisitor || same&&stable<3&&++stable===3) && !coverage.busy &&
+           !viewIndices.matches(activeProfile,frame,engine.width,engine.height))capture=true;
       }else lastGeometry=null;
       const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
@@ -305,7 +326,7 @@ export async function createForwardRenderer(app, daylight) {
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
             if(capture)capturedSource={indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16)};
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height);
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements);
             if(visible && visible.length<count){
               pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
               first=0;count=visible.length;

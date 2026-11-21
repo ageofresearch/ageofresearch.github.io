@@ -8,6 +8,7 @@ export function createVisibilityTarget(device, width, height) {
   let msaa,
     resolved,
     readback,
+    pending = Promise.resolve(),
     busy = false,
     disposed = false;
   function dispose() {
@@ -43,6 +44,7 @@ export function createVisibilityTarget(device, width, height) {
     return {
       attachment,
       dispose,
+      get pending() { return pending; },
       get busy() {
         return busy;
       },
@@ -53,7 +55,7 @@ export function createVisibilityTarget(device, width, height) {
           height,
         ]);
         // The enclosing frame submits synchronously. Map only after submission.
-        queueMicrotask(async () => {
+        pending=Promise.resolve().then(async () => {
           try {
             if (disposed) return;
             await readback.mapAsync(GPUMapMode.READ);

@@ -36,6 +36,7 @@ async function prepareWalkRenderer() {
   await g.pipelinesReady();
   if(!forward)await warmYachtViews(I);
   for(let i=0;i<2;i++){I.frame(0);await g.queue.onSubmittedWorkDone();}
+  if(forward)await forward.prepareCurrentView();
   I.input.keys.clear();I.input.pressed.clear();I.input.look.x=I.input.look.y=0;
   meter?.reset();
 }

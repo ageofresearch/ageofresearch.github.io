@@ -6,12 +6,23 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
   let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
+  const waiting=new Set();
+  function wake(){
+    if(!stopped && (pending&&!pending.result || exact?.analyzing))return;
+    for(const resolve of waiting)resolve();
+    waiting.clear();
+  }
+  function matches(profile,clip,width,height){
+    if(!exact || exact.profile!==profile || exact.width!==width || exact.height!==height)return false;
+    for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return false;
+    return true;
+  }
   const ready = new Promise(resolve => {finishStart = resolve;});
   function dispose() {
     stopped = true;
     worker.terminate();
     buffer?.destroy();exactBuffer?.destroy();
-    active = pending = null;
+    active = pending = exact = null;wake();
     finishStart();
   }
   try {
@@ -23,25 +34,29 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       if (stopped) return;
       if (!data) {finishStart(); return;}
       if(data.key!==undefined){
-        if(exact?.key===data.key)exact.result=data;
+        if(exact?.key===data.key){exact.analyzing=false;exact.result=data;}wake();
         return;
       }
       // A stale result may arrive after a turn. Revalidate before upload.
-      if (pending) pending.result = data;
+      if (pending) pending.result = data;wake();
     };
     worker.postMessage({vertices, profiles, glazing}, [vertices.buffer, ...Object.values(profiles).map(v=>v.buffer),
       ...Object.values(glazing).flatMap(g=>[g.vertices.buffer,g.indices.buffer])]);
   } catch (error) {dispose(); throw error;}
   return {
     buffer, exactBuffer,glassOffset, ready, dispose,
+    matches,
+    idle(){
+      if(stopped || ((!pending||pending.result)&&!exact?.analyzing))return Promise.resolve();
+      return new Promise(resolve=>waiting.add(resolve));
+    },
     analyze(pixels,width,height,stride,profile,first,count,clip){
       if(stopped)return;
-      exact={key:++serial,profile,first,count,width,height,clip:Float32Array.from(clip)};
+      exact={key:++serial,analyzing:true,profile,first,count,width,height,clip:Float32Array.from(clip)};
       worker.postMessage({...exact,pixels,stride},[pixels.buffer]);
     },
     fixed(profile,first,count,clip,width,height){
-      if(!exact || exact.profile!==profile || exact.first!==first || exact.count!==count || exact.width!==width || exact.height!==height)return null;
-      for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return null;
+      if(!matches(profile,clip,width,height)||exact.first!==first||exact.count!==count)return null;
       if(exact.result){
         const {output,length}=exact.result;
         if(length)device.queue.writeBuffer(exactBuffer,0,output,0,length+(output.BYTES_PER_ELEMENT===2?length%2:0));
@@ -49,7 +64,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       return exact.length??null;
     },
-    select(profile, first, count, clip, camera, projection, width, height) {
+    select(profile, first, count, clip, camera, projection) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2

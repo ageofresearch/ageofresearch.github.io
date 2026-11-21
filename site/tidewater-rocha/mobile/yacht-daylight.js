@@ -151,14 +151,23 @@ if(v.aSurface.y>.10 && v.aSurface.z<37.){
  o.vFittings=${sampleReflectionWGSL('mat.reflectedFittings', 'region', 'reflected')};
 }
 `;
+// The material set belongs to the loaded model. Rebuild on model replacement.
+const bounceBindings = new WeakMap();
 export function applyFullBounce(model, light) {
-  const materials = new Set();
-  model.group.traverse((o) => {
-    if (o.material?.uniforms?.bounce0) materials.add(o.material);
-  });
-  for (const mat of materials)
-    for (let i = 0; i <= probes.length; i++)
-      mat.uniforms['bounce' + i].value = light.irradiance.subarray(i * 4, i * 4 + 4);
+  let cached = bounceBindings.get(model);
+  if (!cached || cached.irradiance !== light.irradiance) {
+    const materials = new Set(), bindings = [];
+    model.group.traverse(o => {
+      if (o.material?.uniforms?.bounce0) materials.add(o.material);
+    });
+    for (let i = 0; i <= probes.length; i++) {
+      const value = light.irradiance.subarray(i * 4, i * 4 + 4);
+      for (const mat of materials) bindings.push([mat.uniforms['bounce' + i], value]);
+    }
+    cached = {bindings, irradiance:light.irradiance};
+    bounceBindings.set(model, cached);
+  }
+  for (const [uniform, value] of cached.bindings) uniform.value = value;
 }
 
 export function mountDaylightControls(light, root) {

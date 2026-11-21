@@ -161,3 +161,43 @@ test('the sector draw preserves the first shadow depth from the full caster mesh
       assert.ok(error < 0.00001, 'Caster depth changed at ' + [azimuth, elevation, error]);
     }
 });
+
+test('camera culling retains crossing triangles, face order and the eye-relative sky', async () => {
+  const {widenedView,coversView,filterView}=await import('../site/tidewater-rocha/mobile/view-volume.js');
+  const projection=[1,0,0,0, 0,1,0,0, 0,0,0,-1, 0,0,.1,0];
+  const camera=[1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+  const planes=widenedView(projection);
+  assert.ok(coversView(planes,camera,projection));
+  const shifted=camera.slice();shifted[12]=.15;
+  assert.ok(coversView(planes,shifted,projection));
+  shifted[12]=3;
+  assert.equal(coversView(planes,shifted,projection),false);
+  const wider=projection.slice();wider[0]=.6;
+  assert.equal(coversView(planes,camera,wider),false);
+  const asymmetric=projection.slice();asymmetric[8]=.7;
+  assert.equal(coversView(planes,camera,asymmetric),false);
+  const turned=camera.map((v,i)=>[0,10].includes(i)?-1:v);
+  assert.equal(coversView(planes,turned,projection),false);
+  const v=new Uint8Array(9*32),f=new Float32Array(v.buffer),s=new Int16Array(v.buffer);
+  [[10,0,-1],[11,0,-1],[12,1,-1],[-9,0,-1],[8,0,-1],[0,8,-1],[15,0,-1],[16,0,-1],[15,1,-1]].forEach((p,i)=>f.set(p,i*8));
+  for(const i of [6,7,8])s[i*16+14]=-2;
+  const indices=new Uint16Array([2,1,0,3,4,5,0,1,2,6,7,8]);
+  const {output,length}=filterView(v,indices,3,9,planes,new Uint8Array(9));
+  assert.deepEqual([...output.subarray(0,length)],[3,4,5,6,7,8]);
+});
+
+test('shared vertices preserve every packed byte and widen indices above 65535',async()=>{
+  const {sharedVertices}=await import('../site/tidewater-rocha/mobile/shared-vertices.js');
+  const input=new Uint8Array(65537*32),words=new Uint32Array(input.buffer);
+  for(let i=0;i<65537;i++)words[i*8]=i;
+  const table=sharedVertices(65540);
+  const first=table.remap(input.subarray(0,64),new Uint16Array([1,0,1]));
+  const rest=table.remap(input,new Uint32Array([65536,1,0]));
+  assert.ok(first instanceof Uint16Array && rest instanceof Uint32Array);
+  assert.deepEqual([...first],[1,0,1]);assert.deepEqual([...rest],[65536,1,0]);
+  const distinct=input.slice(0,32);distinct[28]=64;
+  assert.equal(table.remap(distinct,[0])[0],65537);
+  const all=table.finish();
+  assert.deepEqual(all.subarray(0,input.length),input);
+  assert.deepEqual(all.subarray(input.length),distinct);
+});

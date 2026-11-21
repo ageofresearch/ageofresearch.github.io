@@ -1,3 +1,5 @@
+import {sharedVertices} from './shared-vertices.js?v=1';
+import {createViewIndices} from './view-indices.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-1';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
 import {shader} from './daylight-shader.js?v=yacht-daylight-1';
@@ -79,15 +81,16 @@ export async function createForwardRenderer(app, daylight) {
     return uploadBatch(Object.fromEntries(attributes.map(n=>[n,geom.attributes[n].array])),mesh.material.transparent,geom.index.array);
   });
   palette.prepare();
+  let shared=null, viewIndices=null, residentBytes=0;
   let profiles=null, activeProfile='exterior', disposed=false;
   const destroy=batches=>batches.forEach(batch=>{
-    batch.vertices.destroy();batch.indices.destroy();
+    if(!batch.shared)batch.vertices?.destroy();batch.indices.destroy();
   });
   function selectProfile(name) {
     if(!profiles)return;
     activeProfile=name;batches=profiles[name].batches;
     Object.assign(model.stats,{triangles:profiles[name].triangles,geometryBytes:profiles[name].geometryBytes,
-      residentGeometryBytes:Object.values(profiles).reduce((n,p)=>n+p.geometryBytes,0),profile:name});
+      residentGeometryBytes:residentBytes,profile:name});
   }
   const frame = new Float32Array(40+daylight.irradiance.length+localReflections.length);
   frame.set(localReflections,40+daylight.irradiance.length);
@@ -107,29 +110,55 @@ export async function createForwardRenderer(app, daylight) {
       if(disposed)throw Error('Renderer disposed');
       const uploaded={},stagedPalette=createMaterialPalette(device);
       device.pushErrorScope('out-of-memory');device.pushErrorScope('validation');
-      let failure;
+      let failure, sharedBuffer, stagedViews, resident=0;
       try {
+        const capacity=Object.values(source).reduce((n,p)=>n+p.batches[0].attributes.position.length/3,0);
+        const table=sharedVertices(capacity), lists={};
+        let maxIndexBytes=0;
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[],geometryBytes:0};
           for(const b of p.batches) {
             const views=b.views?.flatMap(v=>[...(v.prefixes??[]).map(span=>({...v,...span})),v]);
-            const batch={...uploadBatch(b.attributes,result.batches.length===1,b.indices,stagedPalette),ranges:b.ranges,localView:b.localView,views,cone:b.cone};
-            result.batches.push(batch);
-            result.geometryBytes+=batch.vertices.size+batch.indices.size+batch.lightingBytes;
+            if(result.batches.length===0){
+              const packed=packRenderVertices(prepareOpaque(b.attributes,deckLight,b.indices));
+              const indices=table.remap(packed,b.indices);
+              lists[name]=indices;
+              const batch={shared:true,indices:upload(indices,GPUBufferUsage.INDEX),
+                indexFormat:indices.BYTES_PER_ELEMENT===2?'uint16':'uint32',count:indices.length,
+                ranges:b.ranges,localView:b.localView,views,cone:b.cone};
+              result.batches.push(batch);
+              resident+=batch.indices.size;
+              result.geometryBytes+=batch.indices.size+packed.length/32*40;
+              maxIndexBytes=Math.max(maxIndexBytes,Math.min(indices.length,p.triangles*3)*indices.BYTES_PER_ELEMENT);
+            }else{
+              const batch=uploadBatch(b.attributes,true,b.indices);
+              result.batches.push(batch);
+              resident+=batch.indices.size+batch.vertices.size;
+              result.geometryBytes+=batch.indices.size+batch.vertices.size;
+            }
           }
         }
+        const packed=table.finish();
+        sharedBuffer=upload(packed,GPUBufferUsage.VERTEX);
+        stagedPalette.append(packed);
         stagedPalette.prepare();
+        for(const p of Object.values(uploaded))p.batches[0].vertices=sharedBuffer;
+        resident+=sharedBuffer.size+stagedPalette.storage.size;
+        if(Object.values(uploaded).some(p=>p.batches[0].ranges) && typeof Worker!=='undefined'){
+          stagedViews=createViewIndices(device,packed,lists,maxIndexBytes);
+          await stagedViews.ready;
+          resident+=stagedViews.buffer.size;
+        }
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
       if(failure||validation||memory||disposed) {
-        Object.values(uploaded).forEach(p=>p.batches.forEach(b=>{
-          b.vertices?.destroy();b.indices?.destroy();
-        }));
+        Object.values(uploaded).forEach(p=>destroy(p.batches));
+        sharedBuffer?.destroy();stagedViews?.dispose();
         stagedPalette.dispose();
         throw failure||validation||memory||Error('Renderer disposed');
       }
-      const previous={profiles,batches,palette,name:activeProfile,stats:{...model.stats}};
-      palette=stagedPalette;
+      const previous={profiles,batches,palette,shared,viewIndices,residentBytes,name:activeProfile,stats:{...model.stats}};
+      palette=stagedPalette;shared=sharedBuffer;viewIndices=stagedViews;residentBytes=resident;
       profiles=uploaded;selectProfile(uploaded[previous.name]?previous.name:'exterior');
       try {
         if(prepare) {
@@ -141,12 +170,12 @@ export async function createForwardRenderer(app, daylight) {
         activate();
       }catch(error){
         Object.values(uploaded).forEach(p=>destroy(p.batches));
-        stagedPalette.dispose();
-        if(disposed){previous.palette.dispose();if(previous.profiles)Object.values(previous.profiles).forEach(p=>destroy(p.batches));else destroy(previous.batches);profiles=null;batches=[];}
-        else {palette=previous.palette;profiles=previous.profiles;batches=previous.batches;activeProfile=previous.name;Object.assign(model.stats,previous.stats);}
+        stagedPalette.dispose();sharedBuffer?.destroy();stagedViews?.dispose();
+        if(disposed){previous.palette.dispose();previous.shared?.destroy();previous.viewIndices?.dispose();if(previous.profiles)Object.values(previous.profiles).forEach(p=>destroy(p.batches));else destroy(previous.batches);profiles=null;batches=[];}
+        else {shared=previous.shared;viewIndices=previous.viewIndices;residentBytes=previous.residentBytes;palette=previous.palette;profiles=previous.profiles;batches=previous.batches;activeProfile=previous.name;Object.assign(model.stats,previous.stats);}
         throw error;
       }
-      previous.palette.dispose();
+      previous.palette.dispose();previous.shared?.destroy();previous.viewIndices?.dispose();
       if(previous.profiles)Object.values(previous.profiles).forEach(p=>destroy(p.batches));else destroy(previous.batches);
     },
     get samples() { return samples; },
@@ -219,7 +248,7 @@ export async function createForwardRenderer(app, daylight) {
         const batch = batches[i];
         pass.setPipeline(pipelines[i]);
         pass.setVertexBuffer(0,batch.vertices);
-        if(i===0)pass.setVertexBuffer(1,palette.storage,batch.lightOffset,batch.lightingBytes);
+        if(i===0)pass.setVertexBuffer(1,palette.storage);
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
           const {start,step}=profiles[activeProfile].visibility;
@@ -249,6 +278,14 @@ export async function createForwardRenderer(app, daylight) {
             const band=preparedBand??Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-start)/step)));
             [first,count]=batch.ranges[band];
           }
+          if(preparingProfile===null && preparedBand===null && viewIndices){
+            const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
+            const visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements);
+            if(visible){
+              pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
+              first=0;count=visible.length;
+            }
+          }
           pass.drawIndexed(count,1,first);
           model.stats.triangles=(count+batches[1].count)/3;
         } else pass.drawIndexed(batch.count);
@@ -258,7 +295,7 @@ export async function createForwardRenderer(app, daylight) {
     dispose() {
       disposed=true;
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      palette.dispose();shadow.dispose();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
+      viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

@@ -12,6 +12,8 @@ struct Frame {
 @group(0) @binding(2) var tiles:texture_2d_array<f32>;
 @group(0) @binding(3) var shadow:texture_depth_2d;
 @group(0) @binding(4) var shadowSampler:sampler_comparison;
+struct MaterialLight { shade:vec4f, sun:vec4f }
+@group(0) @binding(5) var<storage,read> lighting:array<MaterialLight>;
 
 fn display(c:vec3f)->vec3f{
   // Minimax fit on the displayable interval. Maximum sRGB error < 0.00037.
@@ -26,7 +28,7 @@ struct V {
  @location(2) uv:vec2f,@location(3) @interpolate(flat) layer:i32,@location(4) light:vec3f
 }
 @vertex fn vertex(@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
- @location(3) uv:vec2f,@location(4) finish:vec2i)->V {
+ @location(3) uv:vec2f,@location(4) finish:vec2i,@location(5) material:u32)->V {
  var o:V;o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
  if(o.layer==-2){
    let dome=normalize((pos-vec3f(0.,-2.01,0.))/vec3f(.98289474,1.,.97861111));
@@ -37,14 +39,11 @@ struct V {
  }
  if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
- let probe=frame.bounce[u32(finish.y)>>8u];
- let hemi=normal.y*.5+.5;
- let ambient=mix(vec3f(.43,.35,.29),vec3f(.80,.83,.86),hemi)*(.86+.14*probe.w);
- o.indirect=color.rgb*(ambient+2.4*probe.rgb)*color.a;
- let nl=max(dot(normal,frame.sun.xyz),0.);
- let sunlight=mix(vec3f(1.06,.73,.49),vec3f(1.04,.98,.89),smoothstep(.09,.65,frame.sun.y));
- o.direct=color.rgb*sunlight*nl*(1.-metal);
- if(rough<.63 || metal>.05){
+ let prepared=lighting[material];
+ o.indirect=prepared.shade.rgb;o.direct=prepared.sun.rgb;
+ if(rough<.32 || metal>.05){
+   let probe=frame.bounce[u32(finish.y)>>8u];
+   let sunlight=mix(vec3f(1.06,.73,.49),vec3f(1.04,.98,.89),smoothstep(.09,.65,frame.sun.y));
    let eye=normalize(frame.eye.xyz-pos);let reflected=reflect(-eye,normal);
    let f0=mix(vec3f(.044),color.rgb,metal);
    let edge=1.-clamp(abs(dot(eye,normal)),0.,1.);let edge2=edge*edge;
@@ -53,16 +52,17 @@ struct V {
    let fittings=${sampleReflectionWGSL('frame.fittings','region','reflected')};
    let reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
    let gloss=1.-rough;
-   o.indirect=o.indirect*(1.-metal)+fresnel*reflectedLight*gloss;
+   o.indirect+=fresnel*reflectedLight*gloss;
    let alignment=max(0.,dot(reflected,frame.sun.xyz));
    let width=mix(.13,.016,gloss);
    let lobe=width/(width+1.-alignment);
    o.direct+=sunlight*fresnel*gloss*lobe*lobe*alignment;
- }
+
  // The visibility endpoints vary smoothly across a face. Transform each once at
  // its vertices; the shadow map interpolates between them across the penumbra.
  let sunlit=display(o.indirect+o.direct);
  o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
+ }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
  if(o.layer>=63){
    o.layer-=64;

@@ -171,8 +171,16 @@ export function packWalkProfile(boarding, profile, audit, store) {
     }
     // Compact once over the union. The ranges reference the same vertices and
     // indices even when the camera moves across a band boundary.
-    const vertexIds = [...new Set(submission.indices)],
-      remap = new Map(vertexIds.map((id, i) => [id, i]));
+    const vertexIds=[],remap=new Map(),welded=new Map();
+    const streams=Object.values(geometry.attributes).map(({array,itemSize})=>({
+      words:new Uint16Array(array.buffer,array.byteOffset,array.length*2),width:itemSize*2
+    }));
+    for(const id of new Set(submission.indices)){
+      const key=streams.map(({words,width})=>String.fromCharCode(...words.subarray(id*width,(id+1)*width))).join('');
+      let index=welded.get(key);
+      if(index===undefined){index=vertexIds.length;welded.set(key,index);vertexIds.push(id);}
+      remap.set(id,index);
+    }
     const attributes = {};
     for (const [name, attribute] of Object.entries(geometry.attributes)) {
       const { itemSize, array } = attribute,

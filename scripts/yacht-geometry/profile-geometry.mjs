@@ -50,6 +50,9 @@ function opaqueRanges(position, indices, profile, surface) {
     groups = Array.from({ length: 2 * bands - 1 }, () => []),
     background = groups.map(()=>[]);
   for (let i = 0; i < indices.length; i += 3) {
+    if(surface[indices[i]*4+2]===47){
+      background[bands-1].push(indices[i],indices[i+1],indices[i+2]);continue;
+    }
     const a = indices[i] * 3,
       b = indices[i + 1] * 3,
       c = indices[i + 2] * 3;
@@ -117,11 +120,12 @@ const viewBoxes = {
   },
 };
 
-function localDraw(positions, indices, { axis, box, eye }) {
+function localDraw(positions, indices, surface, { axis, box, eye }) {
   const low = [],
     high = [];
   for (let i = 0; i < indices.length; i += 3) {
     const [ia, ib, ic] = indices.subarray(i, i + 3);
+    if(surface[ia*4+2]===47){low.push(ia,ib,ic);continue;}
     const a = ia * 3,
       b = ib * 3,
       c = ic * 3;
@@ -150,7 +154,7 @@ export function packWalkProfile(boarding, profile, audit, store) {
       : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile, geometry.attributes.aSurface.array);
     let localView;
     if (!glass && viewBoxes[profile]) {
-      const view = localDraw(geometry.attributes.position.array, geometry.index.array, viewBoxes[profile]);
+      const view = localDraw(geometry.attributes.position.array, geometry.index.array, geometry.attributes.aSurface.array, viewBoxes[profile]);
       localView = {
         axis: view.axis,
         box: view.box,
@@ -162,13 +166,23 @@ export function packWalkProfile(boarding, profile, audit, store) {
     }
     const views=[];
     if(!glass)for(const v of sightlines(profile,geometry,basis)){
-      views.push({first:submission.indices.length,count:v.indices.length,box:v.box,sign:v.sign,...(v.cone && {cone:v.cone})});
+      const first=submission.indices.length;
+      views.push({first,count:v.indices.length,box:v.box,sign:v.sign,...(v.cone && {cone:v.cone}),
+        ...(v.prefixes.length && {prefixes:v.prefixes})});
       submission.indices=submission.indices.concat(v.indices);
     }
     // Compact once over the union. The ranges reference the same vertices and
     // indices even when the camera moves across a band boundary.
-    const vertexIds = [...new Set(submission.indices)],
-      remap = new Map(vertexIds.map((id, i) => [id, i]));
+    const vertexIds=[],remap=new Map(),welded=new Map();
+    const streams=Object.values(geometry.attributes).map(({array,itemSize})=>({
+      words:new Uint16Array(array.buffer,array.byteOffset,array.length*2),width:itemSize*2
+    }));
+    for(const id of new Set(submission.indices)){
+      const key=streams.map(({words,width})=>String.fromCharCode(...words.subarray(id*width,(id+1)*width))).join('');
+      let index=welded.get(key);
+      if(index===undefined){index=vertexIds.length;welded.set(key,index);vertexIds.push(id);}
+      remap.set(id,index);
+    }
     const attributes = {};
     for (const [name, attribute] of Object.entries(geometry.attributes)) {
       const { itemSize, array } = attribute,

@@ -1,0 +1,249 @@
+// Measure the public walking renderer and the real sliders at the same fixed resolution.
+const assert = require('node:assert/strict');
+const { chromium } = require('playwright-core');
+const fs = require('node:fs');
+// Draw independently identified subsamples through the production reduction,
+// including the partial workgroup, the clear color and a previously filled map.
+async function verifySampleCoverage(frame) {
+  const captures = await frame.evaluate(async () => {
+    const {prepareVisibilityPipeline, createVisibilityTarget} = await import('./mobile/visibility-target.js?v=2');
+    const device = __app.gpu.device;
+    const target = createVisibilityTarget(device, 13, 5, await prepareVisibilityPipeline(device));
+    const program = device.createShaderModule({code:`
+      @vertex fn vertex(@builtin(vertex_index) i:u32) -> @builtin(position) vec4f {
+        let points = array(vec2f(-1,-1), vec2f(3,-1), vec2f(-1,3));
+        return vec4f(points[i], 0., 1.);
+      }
+      @fragment fn fragment(@builtin(position) p:vec4f, @builtin(sample_index) s:u32) -> @location(0) vec4f {
+        let tags = array(0u, 31u, 256u, 65535u);
+        let t = select(tags[s], 509u, u32(p.x)==12u && u32(p.y)==4u);
+        return vec4f(f32(t&255u)/255., f32(t>>8u)/255., 1., 1.);
+      }`});
+    const pipeline = await device.createRenderPipelineAsync({layout:'auto', multisample:{count:4},
+      vertex:{module:program,entryPoint:'vertex'},
+      fragment:{module:program,entryPoint:'fragment',targets:[{format:'rgba8unorm'}]}});
+    try {
+      const results = [];
+      for (const draw of [true, false]) {
+        const encoder = device.createCommandEncoder();
+        const pass = encoder.beginRenderPass({colorAttachments:[target.attachment]});
+        if (draw) {
+          pass.setPipeline(pipeline);
+          pass.draw(3);
+        }
+        pass.end();
+        let observed;
+        target.read(encoder, bits => {
+          observed = [];
+          for (let tag=0; tag<bits.length*32; tag++)
+            if (bits[tag>>>5] & (1<<(tag&31))) observed.push(tag);
+        });
+        device.queue.submit([encoder.finish()]);
+        await target.pending;
+        results.push(observed);
+      }
+      return results;
+    } finally {
+      target.dispose();
+    }
+  });
+  assert.deepEqual(captures, [[0,31,256,509,65535], []]);
+}
+
+(async () => {
+  const base = process.env.YACHT_BASE || 'http://127.0.0.1:8764/tidewater-rocha/';
+  const browser = await chromium.launch({
+    ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : { channel: 'chrome' }),
+    headless: true,
+    args: [
+      '--enable-unsafe-webgpu',
+      '--enable-unsafe-swiftshader',
+      '--use-angle=swiftshader',
+      '--enable-features=Vulkan',
+      '--use-vulkan=swiftshader',
+      '--disable-vulkan-surface',
+      '--disable-gpu-watchdog',
+    ],
+  });
+  const results = [];
+  try {
+    for (let run = 0; run < 3; run++) {
+      const ctx = await browser.newContext({ viewport: { width: 360, height: 540 }, hasTouch: true });
+      try {
+        await ctx.addInitScript((measureGPU) => {
+          window.measureDaylightGPU=measureGPU;
+          if (measureGPU) {
+            const request = GPUAdapter.prototype.requestDevice;
+            GPUAdapter.prototype.requestDevice = function (options = {}) {
+              if (this.features.has('timestamp-query')) options = {...options,
+                requiredFeatures:[...new Set([...(options.requiredFeatures || []), 'timestamp-query'])]};
+              return request.call(this,options);
+            };
+          }
+          const counters = (window.daylightCounters = { allocations: 0, shadows: 0, draws: 0 });
+          for (const name of [
+            'createBuffer',
+            'createTexture',
+            'createRenderPipeline',
+            'createRenderPipelineAsync',
+            'createShaderModule',
+            'createBindGroup',
+          ]) {
+            const original = GPUDevice.prototype[name];
+            GPUDevice.prototype[name] = function (...args) {
+              counters.allocations++;
+              return original.apply(this, args);
+            };
+          }
+          const pass = GPUCommandEncoder.prototype.beginRenderPass;
+          GPUCommandEncoder.prototype.beginRenderPass = function (desc) {
+            if (desc.label === 'Yacht moving sun') counters.shadows++;
+            if (desc.label === 'Gangway to screen') counters.draws++;
+            const t = window.daylightTiming;
+            if (t && (desc.label === 'Gangway to screen' || desc.label === 'Yacht moving sun')) {
+              const i = t.labels.length * 2;
+              t.labels.push(desc.label);
+              desc = {...desc, timestampWrites:{querySet:t.query, beginningOfPassWriteIndex:i, endOfPassWriteIndex:i+1}};
+            }
+            return pass.call(this, desc);
+          };
+        }, process.env.YACHT_GPU_TIMING === '1');
+        const page = await ctx.newPage();
+        await page.goto(base + 'mobile.html?world=rocha&v=yacht-daylight-2');
+        const frame =
+          page.frames().find((f) => f.url().includes('play.html')) ||
+          (await page.waitForEvent('framenavigated', (f) => f.url().includes('play.html')));
+        await frame.waitForFunction(
+          () =>
+            window.__mapsPublicStatus?.status === 'ready' &&
+            __app.entranceYacht.guestAccessLoadState === 'ready',
+          null,
+          { timeout: 180000 },
+        );
+        const stats = await frame.evaluate(async () => {
+          const app = __app,
+            walk = app.yachtWalk,
+            light = app.daylight,
+            rows = [];
+          const device=app.gpu.device, queryCount=480;
+          const query=window.measureDaylightGPU && device.features.has('timestamp-query') && device.createQuerySet({type:'timestamp',count:queryCount});
+          const scratch=query && device.createBuffer({size:queryCount*8,usage:GPUBufferUsage.QUERY_RESOLVE|GPUBufferUsage.COPY_SRC});
+          const readback=query && device.createBuffer({size:queryCount*8,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
+          const [az, el] = document.querySelectorAll('[data-daylight] input');
+          const input = (control, v) => {
+            control.value = v;
+            control.dispatchEvent(new Event('input', { bubbles: true }));
+          };
+          for (const room of ['MD_R02', 'MD_R01'])
+            for (const dragging of [false, true]) {
+              if (!walk.enterRoom(room) || !walk.active) throw Error('Could not start walking in ' + room);
+              light.reset();
+              app.frame(0);
+              const before = { ...daylightCounters },
+                start = performance.now(),
+                times = [];
+              let previous = null,
+                tick = 0;
+              const original = app.frame;
+              const labels=[];
+              await new Promise((resolve) => {
+                app.frame = function (dt) {
+                  const now = performance.now();
+                  if (previous !== null) times.push(now - previous);
+                  previous = now;
+                  if (dragging) {
+                    input(az, (tick * 3) % 361);
+                    input(el, 10 + (tick % 78));
+                  } else walk.nav.move(tick < 60 ? 0.008 : -0.008, 0);
+                  if(query) window.daylightTiming={labels,query};
+                  original.call(app, dt);
+                  window.daylightTiming=null;
+                  if (++tick === 120) {
+                    app.frame = original;
+                    resolve();
+                  }
+                };
+              });
+              const sorted = times.toSorted((a, b) => a - b);
+              const after={...daylightCounters},end=performance.now();
+              const passes={};
+              if (labels.length) {
+                const encoder=device.createCommandEncoder(),size=labels.length*16;
+                encoder.resolveQuerySet(query,0,labels.length*2,scratch,0);
+                encoder.copyBufferToBuffer(scratch,0,readback,0,size);
+                device.queue.submit([encoder.finish()]);
+                await readback.mapAsync(GPUMapMode.READ);
+                const values=new BigUint64Array(readback.getMappedRange());
+                for(let i=0;i<labels.length;i++)
+                  (passes[labels[i]]??=[]).push(Number(values[2*i+1]-values[2*i])/1e6);
+                readback.unmap();
+                for(const [name,values] of Object.entries(passes)){
+                  values.sort((a,b)=>a-b);
+                  passes[name]={median:values[values.length>>1],p95:values[Math.ceil(.95*values.length)-1]};
+                }
+              }
+              rows.push({
+                passes, longFrames:times.filter(ms=>ms>25).length,
+                room,
+                dragging,
+                p95: sorted[Math.ceil(times.length * 0.95) - 1],
+                fps: (1000 * times.length) / times.reduce((a, b) => a + b),
+                shadows: after.shadows - before.shadows,
+                draws: after.draws - before.draws,
+                allocations: after.allocations - before.allocations,
+                requests: performance.getEntriesByType('resource').filter((r) => r.startTime >= start && r.startTime <= end)
+                  .length,
+                scale: app.engine.renderScale,
+                samples: app.gangwayRenderer.samples,
+              });
+            }
+          query && query.destroy();scratch && scratch.destroy();readback && readback.destroy();
+          input(az, 270);
+          input(el, 45);
+          return rows;
+        });
+        results.push(stats);
+        console.log(JSON.stringify(stats));
+        if (process.env.YACHT_TIMINGS) fs.writeFileSync(process.env.YACHT_TIMINGS, JSON.stringify(results));
+        for (const r of stats) {
+          assert.equal(r.allocations, 0);
+          assert.equal(r.requests, 0);
+          assert.equal(r.shadows, r.dragging ? 120 : 0);
+          assert.equal(r.draws, 120);
+          assert.equal(r.scale, 1);
+          assert.equal(r.samples, 4);
+        }
+        if (run === 2) await verifySampleCoverage(frame);
+        await Promise.all([
+          frame.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+          frame.evaluate(() => {
+            setTimeout(() => location.reload(), 0);
+          }),
+        ]);
+        await frame.waitForFunction(() => window.__mapsPublicStatus?.status === 'ready', null, {
+          timeout: 180000,
+        });
+        assert.deepEqual(await frame.evaluate(() => __app.daylight.state), { azimuth: 270, elevation: 45 });
+      } finally {
+        await ctx.close();
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+  for (let i = 0; i < results[0].length; i++) {
+    const med = (key) => results.map((r) => r[i][key]).sort((a, b) => a - b)[1];
+    assert.ok(
+      med('p95') <= 25 && med('fps') >= 40,
+      JSON.stringify({
+        case: results[0][i].room,
+        dragging: results[0][i].dragging,
+        p95: med('p95'),
+        fps: med('fps'),
+      }),
+    );
+  }
+})().catch((e) => {
+  console.error(e);
+  process.exitCode = 1;
+});

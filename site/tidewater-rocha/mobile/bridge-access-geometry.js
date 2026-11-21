@@ -8,7 +8,8 @@ export const accessRoute=[[17,.2],[18.35,.2],[18.5,1.35],[19.16,1.35],[19.16,1.1
   [19.16,1.1],[19.16,-1.62],[19.16,-1.8],[19.78,-1.8],[19.78,-1.25],[20.5,-1.25],[20.5,0]];
 export const accessDomains=[[[17.65,-.05],[19.7,-.05],[19.7,1.8],[17.65,1.8]]];
 export const inAccess=(x,y)=>x>=17.65&&x<=19.7&&y>=-.05&&y<=1.8;
-export const accessProfileDomain=(x,y)=>x>=17.1&&x<=19.7&&y>=-.05&&y<=1.8;
+export const accessProfileBounds=[17.1,accessRoom.bbox[1],accessRoom.bbox[2],accessRoom.bbox[3]];
+export const accessProfileDomain=(x,y)=>x>=accessProfileBounds[0]&&x<=accessProfileBounds[2]&&y>=accessProfileBounds[1]&&y<=accessProfileBounds[3];
 
 // One watertight concave solid, preserving the original ends and wall thickness.
 // These are model circulation adjustments, not measured boat dimensions.

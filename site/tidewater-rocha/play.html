@@ -11,30 +11,36 @@
 	<style>html,body{background:#000;width:100%;height:100%;margin:0;padding:0;overflow:hidden}#app,#app canvas{display:block}#fps{z-index:50;color:#e8f6ff;pointer-events:none;-webkit-backdrop-filter:blur(8px);letter-spacing:.02em;background:#080e168c;border-radius:6px;padding:5px 9px;font:500 12px/1.2 JetBrains Mono,ui-monospace,monospace;position:fixed;top:10px;left:12px}</style>
   <script type="importmap">{
   "imports": {
-    "./assets/RochaYachtState-P5KwIGIl.js?v=port-guest-1": "./assets/RochaYachtState-P5KwIGIl.js?v=round-carpet-1",
-    "./mobile/main-saloon.js?v=port-guest-1": "./mobile/main-saloon.js?v=saloon-rug-1",
-    "./mobile/upper-terrace.js?v=port-guest-1": "./mobile/upper-terrace.js?v=saloon-rug-1",
-    "./mobile/sun-deck.js?v=port-guest-1": "./mobile/sun-deck.js?v=saloon-rug-1",
-    "./mobile/upper-interior.js?v=port-guest-1": "./mobile/upper-interior.js?v=saloon-rug-1",
-    "./mobile/bridge-helm.js?v=port-guest-1": "./mobile/bridge-helm.js?v=saloon-rug-1",
-    "./mobile/bow-deck.js?v=port-guest-1": "./mobile/bow-deck.js?v=saloon-rug-1",
-    "./mobile/bridge-access.js?v=port-guest-1": "./mobile/bridge-access.js?v=saloon-rug-1",
-    "./mobile/guest-access.js?v=port-guest-1": "./mobile/guest-access.js?v=saloon-rug-1",
+    "./assets/RochaYachtState-P5KwIGIl.js?v=port-guest-1": "./assets/RochaYachtState-P5KwIGIl.js?v=yacht-daylight-1",
+    "./mobile/main-saloon.js?v=port-guest-1": "./mobile/main-saloon.js?v=yacht-daylight-1",
+    "./mobile/upper-terrace.js?v=port-guest-1": "./mobile/upper-terrace.js?v=yacht-daylight-1",
+    "./mobile/sun-deck.js?v=port-guest-1": "./mobile/sun-deck.js?v=yacht-daylight-1",
+    "./mobile/upper-interior.js?v=port-guest-1": "./mobile/upper-interior.js?v=yacht-daylight-1",
+    "./mobile/bridge-helm.js?v=port-guest-1": "./mobile/bridge-helm.js?v=yacht-daylight-1",
+    "./mobile/bow-deck.js?v=port-guest-1": "./mobile/bow-deck.js?v=yacht-daylight-1",
+    "./mobile/bridge-access.js?v=port-guest-1": "./mobile/bridge-access.js?v=yacht-daylight-1",
+    "./mobile/guest-access.js?v=port-guest-1": "./mobile/guest-access.js?v=yacht-daylight-1",
     "./mobile/tour-furniture.js?v=port-guest-1": "./mobile/tour-furniture.js?v=saloon-rug-1",
     "./mobile/port-guest-cabin.js?v=port-guest-1": "./mobile/port-guest-cabin.js?v=saloon-rug-1",
     "./mobile/tour-furniture.js?v=round-carpet-1": "./mobile/tour-furniture.js?v=saloon-rug-1",
-    "./assets/PostFX-0mW-sLoH.js": "./assets/PostFX-0mW-sLoH.js?v=chair-fidelity-1",
-    "./assets/RochaYachtApp-DML7NRPp.js?v=visible-stern-1": "./assets/RochaYachtApp-DML7NRPp.js?v=port-guest-1",
-    "./assets/RochaYachtApp-DML7NRPp.js": "./assets/RochaYachtApp-DML7NRPp.js?v=port-guest-1",
-    "./assets/RochaYachtState-P5KwIGIl.js?v=visible-stern-1": "./assets/RochaYachtState-P5KwIGIl.js?v=round-carpet-1",
-    "./assets/RochaYachtState-P5KwIGIl.js": "./assets/RochaYachtState-P5KwIGIl.js?v=round-carpet-1",
+    "./assets/PostFX-0mW-sLoH.js": "./assets/PostFX-0mW-sLoH.js?v=yacht-daylight-1",
+    "./assets/RochaYachtApp-DML7NRPp.js?v=visible-stern-1": "./assets/RochaYachtApp-DML7NRPp.js?v=yacht-daylight-1",
+    "./assets/RochaYachtApp-DML7NRPp.js": "./assets/RochaYachtApp-DML7NRPp.js?v=yacht-daylight-1",
+    "./assets/RochaYachtState-P5KwIGIl.js?v=visible-stern-1": "./assets/RochaYachtState-P5KwIGIl.js?v=yacht-daylight-1",
+    "./assets/RochaYachtState-P5KwIGIl.js": "./assets/RochaYachtState-P5KwIGIl.js?v=yacht-daylight-1",
     "./luz-de-mar-chat/diagnostics.js": "./luz-de-mar-chat/diagnostics.js?v=tour-review-1",
     "./luz-de-mar-chat/camera-tour.js": "./luz-de-mar-chat/camera-tour.js?v=walk-with-chat-1",
     "./luz-de-mar-chat/chat.js": "./luz-de-mar-chat/chat.js?v=visible-stern-1",
-    "./luz-de-mar-chat/equipment.js": "./luz-de-mar-chat/equipment.js?v=tour-review-1",
+    "./luz-de-mar-chat/equipment.js": "./luz-de-mar-chat/equipment.js?v=yacht-daylight-1",
     "./luz-de-mar-chat/context.js": "./luz-de-mar-chat/context.js?v=reported-equipment-1",
     "./luz-de-mar-chat/gemini.js": "./luz-de-mar-chat/gemini.js?v=tour-review-1",
-    "./luz-de-mar-chat/assistant.js": "./luz-de-mar-chat/assistant.js?v=equipment-focus-1"
+    "./luz-de-mar-chat/assistant.js": "./luz-de-mar-chat/assistant.js?v=equipment-focus-1",
+    "./mobile/prepare-light.js?v=chair-fidelity-1": "./mobile/prepare-light.js?v=yacht-daylight-1",
+    "./mobile/finish-patterns.js?v=chair-fidelity-1": "./mobile/finish-patterns.js?v=yacht-daylight-1",
+    "./mobile/yacht-daylight.js?v=yacht-daylight-1": "./mobile/yacht-daylight.js?v=yacht-daylight-2",
+    "./mobile/guest-access-geometry.js?v=port-guest-1": "./mobile/guest-access-geometry.js?v=guest-visibility-1",
+    "./mobile/forward-renderer.js?v=port-guest-1": "./mobile/forward-renderer.js?v=yacht-daylight-11",
+    "./assets/RochaYachtApp-DML7NRPp.js?v=port-guest-1": "./assets/RochaYachtApp-DML7NRPp.js?v=yacht-daylight-1"
   }
 }</script>
   <script type="module" crossorigin src="./assets/play-C5BPhl6D.js?v=port-guest-1"></script>
@@ -42,6 +48,14 @@
   <link rel="modulepreload" crossorigin href="./assets/RochaStartup-DD9aAm5G.js">
   <link rel="modulepreload" crossorigin href="./assets/preload-helper-uBIymjUX.js">
   <link rel="stylesheet" crossorigin href="./assets/play-BLPDbtK3.css">
+<style>
+.yacht-daylight{padding:8px 14px;font:500 14px system-ui;color:inherit}
+.yacht-daylight summary{cursor:pointer;padding:8px 0}
+.sun-inputs{display:grid;gap:8px;padding:6px 0}
+.sun-inputs label{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px}
+.sun-inputs input{grid-column:1/-1;width:100%;margin:0;min-height:32px;touch-action:pan-y}
+.sun-inputs output{font-variant-numeric:tabular-nums}
+</style>
 </head>
 <body>
 	<div id="app"></div>

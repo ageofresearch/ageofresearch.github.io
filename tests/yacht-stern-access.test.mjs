@@ -134,17 +134,18 @@ test('Beach Club has an open central bay, supported platform chairs and a contin
   }finally{dispose();}
 });
 
-test('lake surrounds the hull while the guest landing and its lower passage stay dry',async()=>{
-  const {berthLandscape}=await import('../site/tidewater-rocha/mobile/berth-landscape.js');
-  const {containsTriangle}=await import('../scripts/build-yacht-terrace.mjs');
+test('the sky surrounds the yacht in every direction and contributes no walk obstacles',async()=>{
+  const {yachtSky}=await import('../site/tidewater-rocha/mobile/yacht-sky.js');
   const {obstacles}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
-  const water=berthLandscape().find(p=>p.feature==='Rocha lake');
-  const faces=[];
-  for(let i=0;i<water.indices.length;i+=3)
-    faces.push(water.indices.slice(i,i+3).map(k=>water.vertices.slice(k*6,k*6+2)));
-  const wet=(x,y)=>faces.some(face=>containsTriangle(x,y,face));
-  for(const x of [13.7,16.8,17.21,18.6])for(const y of [-1.42,-.1,.2])assert.equal(wet(x,y),false);
-  assert.ok(wet(18,5)&&wet(18,-5));
-  const context={...water,context:true,bounds:[-250,-250,2.01,250,250,2.01]};
+  const sky=yachtSky();
+  assert.equal(sky.finish[3],47);
+  // All faces must point inward so the full sky survives back-face culling.
+  for(let i=0;i<sky.indices.length;i+=3){
+    const [a,b,c]=sky.indices.slice(i,i+3).map(k=>sky.vertices.slice(k*6,k*6+3));
+    const u=b.map((x,k)=>x-a[k]),v=c.map((x,k)=>x-a[k]);
+    const n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+    assert.ok(n[0]*(a[0]-18)+n[1]*a[1]+n[2]*a[2]<0);
+  }
+  const context={...sky,context:true,bounds:[-145,-145,-145,163,145,145]};
   assert.equal(obstacles([context],new Set(),[0,-8,1.55,30,8,3.2]).footprints(1.55).length,0);
 });

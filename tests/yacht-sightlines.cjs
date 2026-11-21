@@ -3,6 +3,16 @@ const assert=require('node:assert/strict');
 // Compare actual resolved color against the ordinary all-direction drawing
 // range in the same buffers, pipeline, profile, camera and render pass.
 module.exports=async function sightlineFrames(frame,readFrame){
+  async function reference(band) {
+    await frame.evaluate(band=>{
+      const r=__app.gangwayRenderer,original=r.render;
+      r.render=function(profile,target){return original.call(r,profile??r.activeProfile,target,band);};
+      globalThis.undoSightlineControl=()=>{r.render=original;};
+    },band);
+    try{return await readFrame();}
+    finally{await frame.evaluate(()=>{undoSightlineControl();delete globalThis.undoSightlineControl;});}
+  }
+  let trimmedViews=0;
   for(const [room,xy,target] of [
     ['LD_R03',[17.04,1.02],[15.85,2.75,2.38]],
     ['LD_R03',[17.04,2.48],[16.49,.35,2.59]],
@@ -26,19 +36,16 @@ module.exports=async function sightlineFrames(frame,readFrame){
       w.yaw=Math.atan2(-d.x,-d.z);w.pitch=Math.asin(d.y);a.frame(0);
       const p=w.model.guestAccess.profiles[a.gangwayRenderer.activeProfile],batch=p.batches[0];
       const eye=w.model.boarding.group.worldToLocal(a.camera.position.clone()),band=Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-p.visibility.start)/p.visibility.step)));
-      return {ordinary:batch.ranges[band],views:batch.views.map(v=>v.first),glass:p.batches[1].indices.length};
+      return {band,ordinary:batch.ranges[band],glass:p.batches[1].indices.length};
     },{room,xy,target});
     const optimized=await readFrame();
     assert.ok(optimized.indexedTriangles<(window.ordinary[1]+window.glass)/3,'Expected a directional draw at '+xy);
-    await frame.evaluate(({ordinary,views})=>{
-      const original=GPURenderPassEncoder.prototype.drawIndexed;
-      GPURenderPassEncoder.prototype.drawIndexed=function(count,instances,first,...rest){
-        return views.includes(first)?original.call(this,ordinary[1],instances,ordinary[0],...rest):original.call(this,count,instances,first,...rest);
-      };
-      globalThis.undoSightlineControl=()=>{GPURenderPassEncoder.prototype.drawIndexed=original;};
-    },window);
-    let control;
-    try{control=await readFrame();}finally{await frame.evaluate(()=>{undoSightlineControl();delete globalThis.undoSightlineControl;});}
+    const baked=await reference(null);
+    assert.equal(Buffer.compare(Buffer.from(optimized.pixels,'base64'),Buffer.from(baked.pixels,'base64')),0,
+      'View filtering changed the resolved yacht at '+xy);
+    if(optimized.indexedTriangles<baked.indexedTriangles)trimmedViews++;
+    assert.ok(baked.indexedTriangles<(window.ordinary[1]+window.glass)/3,'Baked sightline was unavailable at '+xy);
+    const control=await reference(window.band);
     const a=Buffer.from(optimized.pixels,'base64'),b=Buffer.from(control.pixels,'base64');
     let changed=0,maxRun=0;
     for(let y=0;y<optimized.height;y++){
@@ -50,6 +57,33 @@ module.exports=async function sightlineFrames(frame,readFrame){
       }
     }
     assert.ok(changed<optimized.width*optimized.height*.0005&&maxRun<8,'Lost visible color at '+xy+': '+changed+' pixels, widest run '+maxRun);
+  }
+  assert.ok(trimmedViews>0,'Expected the worker to supply a narrower visible span');
+  // A distant metal fitting projects to a subpixel sliver from the lobby.
+  // Compare the actual resolved sample against the original opaque band.
+  const lobby=await frame.evaluate(()=>{
+    const app=__app, walk=app.yachtWalk, nav=walk.nav;
+    const previous={...app.daylight.state};
+    walk.enterRoom('MD_R07');
+    nav.position=[19.350683943182233,1.1604790452797897];
+    nav.stair=null;
+    nav.elevation=nav.floorHeight(...nav.position);
+    walk.cameraElevation=nav.elevation;
+    walk.applyPosition();
+    walk.yaw=2.1227930258074514;
+    walk.pitch=-.14923940105904082;
+    app.daylight.set(40.97865639254451,43.48995272652246,false);
+    app.frame(0);
+    const eye=walk.model.boarding.group.worldToLocal(app.camera.position.clone());
+    const {start,step}=walk.model.guestAccess.profiles[app.gangwayRenderer.activeProfile].visibility;
+    return {previous,band:Math.floor((eye.z-start)/step)};
+  });
+  try {
+    const optimized=await readFrame(), control=await reference(lobby.band);
+    assert.equal(Buffer.compare(Buffer.from(optimized.pixels,'base64'),Buffer.from(control.pixels,'base64')),0,
+      'A subpixel fitting disappeared through the lobby');
+  } finally {
+    await frame.evaluate(({azimuth,elevation})=>__app.daylight.set(azimuth,elevation,false),lobby.previous);
   }
   await frame.evaluate(()=>__app.yachtWalk.enterRoom('boarding'));
 };

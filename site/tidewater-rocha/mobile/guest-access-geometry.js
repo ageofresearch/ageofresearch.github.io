@@ -7,6 +7,22 @@ export const guestRoom={id:'LD_R11',deck:'LD',name:'Distribuidor inferior de pop
   type:'Interior circulation',status:'T/I',source:'Provisional shared model'};
 export const guestLandings={lower:[17.210263340389897,-.0167544467966324],upper:[17.2,-1.42]};
 export const guestApproach=[[14.4,0],[14.7,-1.3],[15.15,-1.6],[15.8,-1.8],[17.2,-1.6],[17.2,-1.4],[17.2,-1.42]];
+// Use the width of the upper stair portal for the prepared-visibility strip
+// around its main-deck approach.
+const approachRadius=.76/2;
+const approachX=guestApproach.map(([x])=>x),approachY=guestApproach.map(([,y])=>y);
+const approachBounds=[Math.min(...approachX)-approachRadius,Math.min(...approachY)-approachRadius,
+  Math.max(...approachX)+approachRadius,Math.max(...approachY)+approachRadius];
+export function onGuestApproach(x,y) {
+  if(x<approachBounds[0]||y<approachBounds[1]||x>approachBounds[2]||y>approachBounds[3])return false;
+  for(let i=1;i<guestApproach.length;i++){
+    const [ax,ay]=guestApproach[i-1],[bx,by]=guestApproach[i];
+    const dx=bx-ax,dy=by-ay;
+    const along=Math.max(0,Math.min(1,((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy)));
+    if((x-ax-along*dx)**2+(y-ay-along*dy)**2<=approachRadius*approachRadius)return true;
+  }
+  return false;
+}
 // The lower stair portal is oblique. Its shared edge must admit a whole
 // visitor, as must the connection from the distributor through both jambs.
 const [aft,inner,forward,outer]=cabinBounds;

@@ -6,7 +6,7 @@ export const equipment = Object.freeze([
 
 export function locateEquipment(app, entry) {
   const walk = app?.yachtWalk;
-  if (!entry || !walk || !app.waterEnabled || app.terrainData?.surveyed) return null;
+  if (!entry || !walk || (!app.yachtOnly && !app.waterEnabled) || app.terrainData?.surveyed) return null;
   const { model, nav } = walk;
   if (!model?.group?.userData?.yacht || !nav?.floorSafe) return null;
   const mesh = model.asset.data.meshes.find(mesh => mesh.id === entry.id);

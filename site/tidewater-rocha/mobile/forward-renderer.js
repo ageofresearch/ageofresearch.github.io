@@ -1,66 +1,13 @@
+import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
+import {shader} from './daylight-shader.js?v=yacht-daylight-1';
+import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-1';
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
-const shader = `
-struct Frame {
-  clipFromLocal: mat4x4f,
-  eyeLocal: vec4f,
-  sunLocal: vec4f,
-}
-@group(0) @binding(0) var<uniform> frame: Frame;
-@group(0) @binding(1) var patternSampler: sampler;
-@group(0) @binding(2) var patterns: texture_2d_array<f32>;
-struct Vertex {
-  @builtin(position) clip: vec4f,
-  @location(0) color: vec3f,
-  @location(1) uv: vec2f,
-  @location(2) @interpolate(flat) layer: i32,
-}
-@vertex fn vertex(@location(0) position: vec3f, @location(1) n: vec4f,
-                  @location(2) tint: vec4f, @location(3) uv: vec2f, @location(4) finish: vec2i) -> Vertex {
-  var out: Vertex;
-  out.clip = frame.clipFromLocal * vec4f(position, 1);
-  out.uv=uv;out.layer=finish.x;out.color=tint.rgb;
-  if(finish.y>655){
-    let metal=f32(finish.y)/32767.;let normal=normalize(n.xyz);
-    let eye=normalize(frame.eyeLocal.xyz-position);
-    let reflected=reflect(-eye,normal);
-    let horizon=smoothstep(-.10,.19,reflected.y);
-    let glint=max(dot(reflected,frame.sunLocal.xyz),0.);
-    let reflection=mix(vec3f(.31,.42,.44),vec3f(.85,.92,.96),horizon)
-      +vec3f(.30,.26,.22)*(1.-smoothstep(.015,.095,abs(reflected.y+.11)));
-    out.color=mix(tint.rgb,tint.rgb*reflection,metal)+pow(glint,26.)*.38*metal;
-  }
-  return out;
-}
-@diagnostic(off, derivative_uniformity)
-@fragment fn fragment(in: Vertex) -> @location(0) vec4f {
-  if(in.layer<0){return vec4f(in.color,1.);}
-  let layer=select(in.layer-1,6+clamp(i32(floor(in.uv.y))-1,0,13),in.layer==0);
-  let texel=textureSample(patterns,patternSampler,in.uv,layer).r;
-  return vec4f((in.color+.055)*(texel*1.1)-.055,1.);
-}
-struct GlassVertex {
-  @builtin(position) clip: vec4f,
-  @location(0) rgba: vec4f,
-}
-@vertex fn glassVertex(@location(0) position: vec3f, @location(1) normal: vec4f,
-                       @location(2) tint: vec4f, @location(4) finish: vec2i) -> GlassVertex {
-  let eye = normalize(frame.eyeLocal.xyz-position);
-  let n = normalize(normal.xyz);
-  let grazing = pow(1.-clamp(abs(dot(n,eye)),0.,1.),5.);
-  let sky = smoothstep(-.16,.25,reflect(-eye,n).y);
-  let glassColor = tint.rgb*mix(vec3f(.62,.64,.67),vec3f(.91,.94,.98),sky);
-  return GlassVertex(frame.clipFromLocal*vec4f(position,1.),vec4f(glassColor,select(.06+.30*grazing,.28+.35*grazing,finish.x==26)));
-}
-@fragment fn glassFragment(in: GlassVertex) -> @location(0) vec4f {
-  return in.rgba;
-}`;
-
-export async function createForwardRenderer(app, sun) {
+export async function createForwardRenderer(app, daylight) {
   const { device, format } = app.gpu;
   const model = app.entranceYacht;
   const attributes = ['position', 'normal', 'color', 'aSurface'];
@@ -70,9 +17,11 @@ export async function createForwardRenderer(app, sun) {
   };
   const module = device.createShaderModule({label:'Gangway finishes', code:shader});
   const bindLayout = device.createBindGroupLayout({entries:[
-    {binding:0, visibility:GPUShaderStage.VERTEX, buffer:{type:'uniform'}},
+    {binding:0, visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT, buffer:{type:'uniform'}},
     {binding:1, visibility:GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
+    {binding:3,visibility:GPUShaderStage.FRAGMENT,texture:{sampleType:'depth'}},
+    {binding:4,visibility:GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   function makePipeline(count, glass) {
@@ -111,10 +60,9 @@ export async function createForwardRenderer(app, sun) {
   const clip = mesh.matrixWorld.clone();
   const cameraInYacht = mesh.matrixWorld.clone();
   const eye = app.camera.position.clone();
-  const localSun=sun.clone().transformDirection(localFromWorld);
   const deckLight=await loadDeckLight();
   function uploadVertices(source,glass){
-    const prepared=glass?source:prepareOpaque(source,localSun,deckLight);
+    const prepared=glass?source:prepareOpaque(source,deckLight);
     return upload(packRenderVertices(prepared),GPUBufferUsage.VERTEX);
   }
   let batches = model.meshes.map(mesh => {
@@ -137,12 +85,15 @@ export async function createForwardRenderer(app, sun) {
     Object.assign(model.stats,{triangles:profiles[name].triangles,geometryBytes:profiles[name].geometryBytes,
       residentGeometryBytes:Object.values(profiles).reduce((n,p)=>n+p.geometryBytes,0),profile:name});
   }
-  const frame = new Float32Array(24);
+  const frame = new Float32Array(40+daylight.irradiance.length+localReflections.length);
+  frame.set(localReflections,40+daylight.irradiance.length);
+  const shadowMatrix=frame.subarray(24,40);let litRevision=-1;
   const uniform = device.createBuffer({size:frame.byteLength,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST});
-  localSun.toArray(frame,20);
+  device.queue.writeBuffer(uniform,0,frame);
+  const shadow=await createDaylightShadow(device,uniform,upload);
   const finishes=createFinishPatterns(device);
   const bindings = device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
-    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view}]});
+    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:shadow.view},{binding:4,resource:shadow.sampler}]});
   model.stats.finishTextureBytes=finishes.bytes;
   model.stats.materialTextures=1;
   let depth, depthView, color, colorView;
@@ -235,7 +186,13 @@ export async function createForwardRenderer(app, sun) {
       camera.updateMatrixWorld();
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
       eye.copy(camera.position).applyMatrix4(localFromWorld).toArray(frame,16);
-      gpu.queue.writeBuffer(uniform,0,frame);
+      const moved=litRevision!==daylight.revision;
+      if(moved){
+        daylight.direction.toArray(frame,20);lightMatrix(daylight.direction,daylight.state.azimuth,shadowMatrix);
+        frame.set(daylight.irradiance,40);litRevision=daylight.revision;
+      }
+      gpu.queue.writeBuffer(uniform,0,frame,0,moved?40+daylight.irradiance.length:20);
+      if(moved)shadow.draw(gpu.getEncoder());
       const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',
@@ -288,7 +245,7 @@ export async function createForwardRenderer(app, sun) {
     dispose() {
       disposed=true;
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
+      shadow.dispose();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

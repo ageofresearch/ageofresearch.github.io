@@ -141,14 +141,14 @@ test('the packed atlas keeps the actual teak texels at deck coordinates and fits
    assert.equal(textures.length,1);assert.ok(atlas.bytes<3600000);assert.equal(writes.length,10);
    for(const row of [25,40,64,76,99])for(const mip of [0,1,4,7]){
      const {data,size:[w,h]}=writes[mip],page=Math.floor(row/8)-1,y=(row*32+16)>>mip,x=224>>mip;
-     assert.equal(data[(page+6)*w*h+(y%h)*w+x],teak[mip].data[y*w+x]);
+     assert.equal(data[(page+5)*w*h+(y%h)*w+x],teak[mip].data[y*w+x]);
    }
    const pos=new Float32Array([0,3.95-2.01,-6.2]),source={position:pos,normal:new Float32Array([0,1,0]),
      color:new Float32Array([.4,.5,.7]),aSurface:new Float32Array([.7,0,1,.8])};
-   const sun={x:0,y:1,z:0};
-   const bright=prepareOpaque(source,sun,new Uint8Array(102400).fill(255));
-   const shadow=prepareOpaque(source,sun,new Uint8Array(102400));
+   const bright=prepareOpaque(source,new Uint8Array(102400).fill(255));
+   const shadow=prepareOpaque(source,new Uint8Array(102400));
    assert.equal(bright.aSurface[1],8);assert.equal(bright.aSurface[2],0);
-   assert.ok(shadow.color.every((v,i)=>Math.abs(v/bright.color[i]-.48)<1e-6));
+   assert.deepEqual(shadow.color,bright.color);
+   assert.ok(Math.abs(shadow.contact[0]/bright.contact[0]-.48)<1e-6);
  }finally{if(original)globalThis.GPUTextureUsage=original;else delete globalThis.GPUTextureUsage;}
 });

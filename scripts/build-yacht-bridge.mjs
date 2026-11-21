@@ -56,7 +56,7 @@ export async function buildBridge({extend,lod,profileNames}={}) {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'saloon-rug-1',room:{...model.asset.data.rooms.find(r=>r.id===bridgeRoom.id),...bridgeRoom},
+      return {version:'yacht-daylight-1',room:{...model.asset.data.rooms.find(r=>r.id===bridgeRoom.id),...bridgeRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,
         bridgePartIDs:additions.map(p=>p.id),evidence:'Current provisional bridge and forward layout; forward deck and internal stair are visual context only',...extend?.({model,lowerParts,parts})};
     }

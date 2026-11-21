@@ -139,7 +139,12 @@ jobs:
           fi
           export NODE_PATH="$RUNNER_TEMP/browser/node_modules"
           case "$YACHT_PERF_CASE" in
-            daylight) mkdir -p /tmp/yacht-mobile-parity/daylight; YACHT_TIMINGS=/tmp/yacht-mobile-parity/daylight/timings.json node tests/yacht-daylight.cjs ;;
+            daylight)
+              mkdir -p /tmp/yacht-mobile-parity/daylight
+              if ! YACHT_TIMINGS=/tmp/yacht-mobile-parity/daylight/timings.json node tests/yacht-daylight.cjs; then
+                YACHT_GPU_TIMING=1 YACHT_TIMINGS=/tmp/yacht-mobile-parity/daylight/pass-timings.json node tests/yacht-daylight.cjs
+                exit 1
+              fi ;;
             tour) node tests/yacht-tour-performance.cjs ;;
             bridge) node tests/yacht-bridge-comparison.cjs ;;
             guest)

@@ -117,6 +117,17 @@ export async function createForwardRenderer(app, daylight) {
   model.stats.materialTextures=1;
   let depth, depthView, color, colorView,coverage,lastGeometry,stable=0;
   const lastClip=new Float32Array(16);
+  // A presented canvas keeps its image until a new surface is acquired.
+  // Explicit offscreen draws and preparation always render the requested pose.
+  const presentedView=new Float32Array(19);
+  let presentedSurface=null,presentedDepth=null,presentedBatches=null,presentedRevision=-1;
+  const invalidatePresentation=()=>{
+    presentedSurface=null;
+    presentedDepth=null;
+    presentedBatches=null;
+  };
+  document.addEventListener('visibilitychange',invalidatePresentation);
+  window.addEventListener('pageshow',invalidatePresentation);
   return {
     get activeProfile() { return activeProfile; },
     async installProfiles(source,{prepare=false,activate=()=>{},roomVisibility=false,signal}={}) {
@@ -244,7 +255,10 @@ export async function createForwardRenderer(app, daylight) {
         await gpu.queue.onSubmittedWorkDone();
       }finally{texture.destroy();}
     },
-    render(preparingProfile=null,target=null,preparedBand=null,prepareVisitor=false) {
+    present(allowReuse){
+      return this.render(null,null,null,false,allowReuse);
+    },
+    render(preparingProfile=null,target=null,preparedBand=null,prepareVisitor=false,allowReuse=false) {
       const {engine, gpu, camera} = app;
       if(profiles) {
         const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
@@ -274,8 +288,6 @@ export async function createForwardRenderer(app, daylight) {
         daylight.direction.toArray(frame,20);lightMatrix(daylight.direction,daylight.state.azimuth,shadowMatrix);
         frame.set(daylight.irradiance,40);litRevision=daylight.revision;
       }
-      gpu.queue.writeBuffer(uniform,0,frame,0,moved?40+daylight.irradiance.length:20);
-      if(moved)shadow.draw(gpu.getEncoder(),daylight.state);
       const preparingCoverage=preparedBand==='coverage';
       if(preparingCoverage)preparedBand=0;
       let capture=preparingCoverage&&coverage;
@@ -291,6 +303,15 @@ export async function createForwardRenderer(app, daylight) {
           capture=!viewIndices.matches(activeProfile,frame,engine.width,engine.height);
         }
       }else lastGeometry=null;
+      if(allowReuse && !capture && presentedSurface===engine.currentTexture && presentedDepth===depth &&
+          presentedBatches===batches && presentedRevision===daylight.revision){
+        let same=true;
+        for(let i=0;i<presentedView.length && same;i++)same=frame[i]===presentedView[i];
+        if(same)return false;
+      }
+      gpu.queue.writeBuffer(uniform,0,frame,0,moved?40+daylight.irradiance.length:20);
+      if(moved)shadow.draw(gpu.getEncoder(),daylight.state);
+      let settled=!coverage || !viewIndices;
       const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',
@@ -358,6 +379,7 @@ export async function createForwardRenderer(app, daylight) {
             }
             if(!capture&&samples===4){
               const fixed=viewIndices.fixed(activeProfile,rangeStart,rangeCount,frame,engine.width,engine.height,daylight.revision);
+              if(fixed!==null)settled=true;
               if(fixed!==null&&fixed<count){
                 pass.setIndexBuffer(viewIndices.exactBuffer,batch.indexFormat);
                 first=0;count=fixed;
@@ -372,14 +394,24 @@ export async function createForwardRenderer(app, daylight) {
         } else pass.drawIndexed(batch.count);
       }
       pass.end();
+      if(settled && !target && preparingProfile===null){
+        for(let i=0;i<presentedView.length;i++)presentedView[i]=frame[i];
+        presentedSurface=engine.currentTexture;
+        presentedDepth=depth;
+        presentedBatches=batches;
+        presentedRevision=daylight.revision;
+      }else invalidatePresentation();
       if(capturedSource){
         const {indices,profile,first,count,clip,candidates}=capturedSource;
         coverage.read(gpu.getEncoder(),(winners,w,h)=>{
           if(!disposed && viewIndices===indices)indices.analyze(winners,w,h,profile,first,count,clip,candidates);
         });
       }
+      return true;
     },
     dispose() {
+      document.removeEventListener('visibilitychange',invalidatePresentation);
+      window.removeEventListener('pageshow',invalidatePresentation);
       disposed=true;coverage?.dispose();
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
       viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();

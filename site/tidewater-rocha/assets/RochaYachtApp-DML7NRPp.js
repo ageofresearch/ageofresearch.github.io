@@ -106,12 +106,17 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
 }
 mountDaylightControls(daylight,K.controls?.menu);
 I.boardLuzDeMar=e=>K.enterRoom(e),K.enterRoom(!pilot&&E.has(`walk`)?v(N,E.get(`walk`)):`boarding`);let q=()=>K.enterRoom(`boarding`);K.leave=({restore:e=!0}={})=>{e&&q()},K.controls?.root.querySelector(`[data-leave]`)?.setAttribute(`aria-label`,`Volver a la pasarela`),I.leaveLuzDeMar=q;let J=document.createElement(`div`);J.className=`rocha-map-load tw-interactive`,J.innerHTML=`<style>.rocha-map-load{position:fixed;right:18px;top:18px;z-index:70;max-width:calc(100vw - 36px);font:14px system-ui;color:#efe9dd}.rocha-map-load button{padding:13px 18px;border:1px solid #bcae94;border-radius:12px;background:#f2e9d9;color:#423b31;font:600 14px system-ui;cursor:pointer}.rocha-map-load button:disabled{opacity:.7;cursor:wait}.rocha-map-load p{max-width:290px;padding:10px;background:#302e29;border-radius:8px}.rocha-map-load p:empty{display:none}@media(max-width:600px){.rocha-map-load{right:12px;top:max(12px,env(safe-area-inset-top))}.rocha-map-load button{padding:12px;font-size:12px}}</style><button type="button">Cargar mapa completo</button><p role="status" aria-live="polite"></p>`,document.body.append(J);let Y=J.querySelector(`button`),X=J.querySelector(`p`);Y.onclick=()=>{if(!Y.disabled){if(g.adapter.limits.maxSampledTexturesPerShaderStage<32){X.textContent=`Este dispositivo permite recorrer el yate. El mapa completo necesita una GPU compatible con 32 texturas por etapa.`;return}Y.disabled=!0,X.textContent=`Cargando Rocha completo…`;try{sessionStorage.setItem(S,JSON.stringify(b(K)))}catch{}location.assign(e(location.href))}};const meter=pilot?pilot.createFrameMeter(document.getElementById('fps')):null;
-let Z=0,Q=0;I.frame=e=>{
+let Z=0,Q=0,holdingFrame=false;I.frame=e=>{
 if(forward){
   const now=performance.now();
   I.gangwayBenchmark?.beforeFrame(now);
-  g.beginFrame();K.update(e);forward.render();g.submit();I.input.endFrame();
-  if(I.startupStats){meter(now);I.gangwayBenchmark?.submitted(now);}
+  // Acquire the encoder only when input or rendering records GPU work.
+  g.beginFrame(false);K.update(e);const drawn=forward.present(e>0&&!I.gangwayBenchmark?.active);g.submit();I.input.endFrame();
+  if(I.startupStats){
+    if(drawn){meter(now);I.gangwayBenchmark?.submitted(now);}
+    else if(!holdingFrame)meter.reset();
+    holdingFrame=!drawn;
+  }
   return;
 }
 applySun();g.beginFrame(),r.time.value+=e,r.dt.value=e,a.fields.frameIndex.value=g.frame,K.update(e),N.updateVisibility(F,!0),G.beginFrame(),L.update(e,F.position.y),L.sunTransmittance&&(r.sunColor.value.copy(new n(...L.sunTransmittance).multiplyScalar(11)),r.skyIrradiance.value.setRGB(...L.skyIrradiance),r.horizonColor.value.setRGB(...L.horizon)),H.update(e),_(F),V.render(P,A.meshRenderer,V.update(F,r.sunDir.value)),B.render(),G.render(),G.endFrame(),g.submit(),I.input.endFrame();if(meter){if(I.startupStats)meter(performance.now());return}Z+=e,Q++,Z>.5&&(document.getElementById(`fps`).textContent=Math.round(Q/Z)+` fps`,Z=0,Q=0)},await D(`Preparando las zonas del recorrido…`,.65),await pilotReady,await D(`Preparando luz y antialiasing…`,.85),await prepareWalkRenderer();return document.getElementById(`loader`).hidden=!0,document.getElementById(`loader`).style.display=`none`,I.startupStats={mode:pilot?"gangway-only":"yacht-only",readyMs:performance.now()-T,geometry:N.stats,mapLoaded:!1},window.__mapsPublicStatus={status:`ready`,world:`Rocha`,mode:`yacht-only`,...I.startupStats},A.domElement.addEventListener(`click`,()=>I.input.requestLock()),A.start(e=>I.frame(e)),window.addEventListener(`pagehide`,()=>A.stop(),{once:!0}),I}export{T as startRochaYacht};

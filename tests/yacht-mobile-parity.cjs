@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=yacht-daylight-2' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=yacht-daylight-3' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -241,13 +241,35 @@ async function capture(browser, mobile) {
         if(!w.nav.safe(...w.nav.position))throw Error('Unsafe terrace spawn');
         w.enterRoom('boarding');
       });
-      await frame.waitForFunction(() => /^[0-9]+\.[0-9] fps$/.test(document.getElementById('fps').textContent));
-      console.log('Headless software renderer, boarding sample:', await frame.locator('#fps').innerText());
+      await frame.waitForFunction(()=>document.getElementById('fps').textContent==='— fps');
+      const idle=await frame.evaluate(async()=>{
+        const app=__app,walk=app.yachtWalk,queue=GPUQueue.prototype,nativeSubmit=queue.submit;
+        let submissions=0;
+        queue.submit=function(...args){submissions++;return nativeSubmit.apply(this,args);};
+        const yaw=walk.yaw,first=app.gpu.frame;
+        try{
+          let quiet=0,previous=submissions;
+          for(let i=0;i<180 && quiet<6;i++){
+            await new Promise(requestAnimationFrame);
+            quiet=submissions===previous?quiet+1:0;previous=submissions;
+          }
+          if(quiet<6)throw Error('Boarding view did not settle');
+          for(let i=0;i<30;i++)await new Promise(requestAnimationFrame);
+          const held=submissions-previous;
+          walk.yaw+=.12;
+          await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+          return {held,woke:submissions>previous+held,frames:app.gpu.frame-first};
+        }finally{walk.yaw=yaw;queue.submit=nativeSubmit;}
+      });
+      assert.equal(idle.held,0,'A settled yacht view should keep its presented image');
+      assert.ok(idle.woke && idle.frames>=30,'Input must stay live and redraw the next view');
       const scale = panel.locator('#scale');
       const compare = panel.locator('#compare');
       await scale.selectOption('0.5');
       assert.deepEqual(await frame.evaluate(() => [window.__app.engine.width,window.__app.engine.height]),[180,270]);
       await compare.click();
+      await frame.waitForFunction(() => /^[0-9]+\.[0-9] fps$/.test(document.getElementById('fps').textContent));
+      console.log('Headless software renderer, boarding sample:', await frame.locator('#fps').innerText());
       await page.getByRole('button',{name:'Cancelar comparación'}).click();
       assert.equal(await panel.locator('#progress').textContent(),'Prueba interrumpida');
       assert.equal(await frame.evaluate(() => window.__app.engine.renderScale),.5);

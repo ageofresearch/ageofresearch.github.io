@@ -19,6 +19,7 @@ struct PackedVertex {
 };
 struct Point {
   double x, y, z;
+  double operator[](int i) const { return i == 0 ? x : i == 1 ? y : z; }
   Point operator-(Point b) const { return {x - b.x, y - b.y, z - b.z}; }
   Point operator+(Point b) const { return {x + b.x, y + b.y, z + b.z}; }
   Point operator*(double scale) const {
@@ -41,12 +42,86 @@ int bin(double s) {
   return clamp(int((s + gridExtent) / (2 * gridExtent) * binCount), 0,
                binCount - 1);
 }
+// The panel lies in a plane normal to axis. Its two in-plane axes follow
+// the cyclic axis order used by planarOccluders.
+using Panel = array<double, 7>;
+struct PanelCone {
+  int axis, sign;
+  double level, nearest;
+  struct Edge {
+    int axis, side;
+    double limit, slope, scale;
+  };
+  array<Edge, 4> edges;
+};
+
+vector<PanelCone> panelCones(const vector<Panel> &panels, Point eye, Point half) {
+  vector<PanelCone> cones;
+  for (const auto &p : panels) {
+    PanelCone cone{};
+    cone.axis = int(p[0]);
+    cone.sign = int(p[1]);
+    cone.level = p[2];
+    const int axis = cone.axis;
+    const double depth = cone.sign * (eye[axis] - cone.level);
+    cone.nearest = depth - half[axis] - .025;
+    if (cone.nearest <= .07) continue; // keep the whole panel beyond the guarded near plane
+    for (int i = 0; i < 4; i++) {
+      const int side = i % 2 ? 1 : -1, t = (axis + 1 + i / 2) % 3;
+      const double limit = p[3 + i] - side * .015;
+      // At the panel plane, the intersection of an eye-to-receiver ray must
+      // lie inside this edge. The worst projected slope is at a box corner.
+      const double top = side * (limit - eye[t]) - half[t] - .025;
+      const double slope = top / (top < 0 ? cone.nearest : depth + half[axis] + .025);
+      cone.edges[i] = {t, side, limit, slope, hypot(1., slope)};
+    }
+    cones.push_back(cone);
+  }
+  return cones;
+}
+
+bool behindPanel(const array<Point, 3> &face, const vector<PanelCone> &cones,
+                 Point eye, Point half, double radius) {
+  const Point a = face[0] - eye, b = face[1] - eye, c = face[2] - eye;
+  const Point n = cross(b - a, c - a);
+  const double area = len(n);
+  if (area < 1e-9) return false;
+  const double support = abs(n.x)*half.x + abs(n.y)*half.y + abs(n.z)*half.z + .025*area;
+  const double distance = (abs(dot(n, a)) - support) / area;
+  const double reach = max({len(a), len(b), len(c)}) + radius;
+  const double square = reach * reach;
+  if (distance < reach * .002 + .003) return false;
+  const double depthGuard = .03 + .0005 * square / distance;
+  const double edgeGuard = .004 + .002 * reach;
+  for (const auto &cone : cones) {
+    const double guard = depthGuard + .0005 * square / cone.nearest;
+    array<double, 3> delta;
+    for (int i = 0; i < 3; i++) delta[i] = cone.sign * (cone.level - face[i][cone.axis]);
+    if (min({delta[0], delta[1], delta[2]}) <= guard) continue;
+    bool inside = true;
+    for (const auto &edge : cone.edges) {
+      for (int i = 0; i < 3; i++) {
+        const double side = edge.side * (face[i][edge.axis] - edge.limit);
+        if (side + edgeGuard * edge.scale >= edge.slope * delta[i]) {
+          inside = false;
+          break;
+        }
+      }
+      if (!inside) break;
+    }
+    if (inside) return true;
+  }
+  return false;
+}
+
 // Build one CPU-authored mask. The right-handed yacht coordinates become a
 // left-handed beam space with positive forward depth. The projection is used
 // only to select candidate blockers. It never certifies an invisible face.
 vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
                          const vector<uint32_t> &indices, double radius,
-                         double sign, Point eye, Point halfExtent) {
+                         double sign, Point eye, Point halfExtent, const vector<Panel> &panels) {
+  const Point physicalEye = eye, physicalHalf = halfExtent;
+  const auto cones = panelCones(panels, eye, halfExtent);
   // Rotate the downward beam onto the same forward axis. A cyclic
   // permutation preserves the winding of the yacht's opaque surfaces.
   if (sign != 1 && sign != -1 && sign != -2)
@@ -258,13 +333,32 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
            self(self, {c, ca, bc}, selfFace, depth - 1) &&
            self(self, {ab, bc, ca}, selfFace, depth - 1);
   };
+  // GPU vertex snapping can shift the depth of a subpixel sliver, even if
+  // its mathematical surface is hidden. At the minimum admitted focal length
+  // (400 pixels), retain faces whose projected altitude can fall below 1/4 px.
+  // Check the original triangle before subdividing either visibility proof.
+  auto rasterSafe = [&](const array<Point, 3> &face) {
+    const Point normal = cross(face[1] - face[0], face[2] - face[0]);
+    const double det = abs(dot(normal, face[0])) - eyeSupport(normal);
+    const double reach = max({len(face[0]), len(face[1]), len(face[2])}) + radius;
+    const double edge = max({len(face[1] - face[0]), len(face[2] - face[1]), len(face[0] - face[2])});
+    return det > edge * reach * reach * (.25 / 400);
+  };
   vector<uint8_t> bits((total + 7) / 8);
   for (int i = 0; i < total; i++) {
     array<Point, 3> t = {points[pointIndex[indices[3 * i]]],
                          points[pointIndex[indices[3 * i + 1]]],
                          points[pointIndex[indices[3 * i + 2]]]};
-    bool occluded = vertices[indices[3 * i]].layer != -2 &&
-                    hidden(hidden, t, ownBlocker[i], 2);
+    if (vertices[indices[3 * i]].layer == -2 || !rasterSafe(t)) continue;
+    bool occluded = hidden(hidden, t, ownBlocker[i], 2);
+    if (!occluded && !cones.empty()) {
+      array<Point, 3> face;
+      for (int j = 0; j < 3; j++) {
+        const auto p = vertices[indices[3 * i + j]].pos;
+        face[j] = {p[0], p[1], p[2]};
+      }
+      occluded = behindPanel(face, cones, physicalEye, physicalHalf, radius);
+    }
     if (occluded)
       bits[i >> 3] |= 1 << (i & 7);
   }
@@ -297,8 +391,22 @@ int main(int argc, char **argv) {
       throw runtime_error("Invalid yacht vertex index");
     Point halfExtent{};
     if (argc == 11) halfExtent = {stod(argv[8]), stod(argv[9]), stod(argv[10])};
+    vector<Panel> panels;
+    if (input.peek() != char_traits<char>::eof()) {
+      uint32_t count;
+      input.read(reinterpret_cast<char *>(&count), sizeof(count));
+      if (count > 10000) throw runtime_error("Invalid panel count");
+      panels.resize(count);
+      input.read(reinterpret_cast<char *>(panels.data()), panels.size() * sizeof(Panel));
+      for (const auto &p : panels) {
+        if (!all_of(p.begin(), p.end(), [](double v) { return isfinite(v); }) ||
+            (p[0] != 0 && p[0] != 1 && p[0] != 2) || abs(p[1]) != 1 ||
+            p[3] >= p[4] || p[5] >= p[6])
+          throw runtime_error("Invalid yacht occluder panel");
+      }
+    }
     auto bits = bakeCell(vertices, indices, stod(argv[2]), stod(argv[3]),
-                         {stod(argv[4]), stod(argv[5]), stod(argv[6])}, halfExtent);
+                         {stod(argv[4]), stod(argv[5]), stod(argv[6])}, halfExtent, panels);
     ofstream output(argv[7], ios::binary);
     output.exceptions(ios::failbit | ios::badbit);
     output.write(reinterpret_cast<char *>(bits.data()), bits.size());

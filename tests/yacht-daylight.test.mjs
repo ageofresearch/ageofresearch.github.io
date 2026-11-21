@@ -97,6 +97,28 @@ test('tessellated floor occluders leave the central hatch open', async () => {
   assert.ok(rectangles.every(({ lo, hi }) => hi[0] <= 3 || lo[0] >= 5 || hi[1] <= 3 || lo[1] >= 5));
 });
 
+test('opaque wall panels preserve narrow seams between coplanar pieces', async () => {
+  const { roomPanels } = await import('../scripts/yacht-geometry/room-panels.mjs');
+  // Both edges round to 2 at five decimal places, but light can pass between them.
+  const seams = [2, Math.fround(2.000002)];
+  const positions = [];
+  const indices = [];
+  for (const [lo, hi] of [[0, seams[0]], [seams[1], 4]]) {
+    const first = positions.length;
+    positions.push([lo, 0, 0], [hi, 0, 0], [hi, 4, 0], [lo, 4, 0]);
+    indices.push(first, first+1, first+2, first, first+2, first+3);
+  }
+  const vertices = new Uint8Array(32 * positions.length);
+  const xyz = new Float32Array(vertices.buffer);
+  positions.forEach((v,i) => xyz.set(v, 8*i));
+  const panels = roomPanels(vertices, indices);
+  assert.ok(panels.length >= 14);
+  for (let i=0; i<panels.length; i+=7) {
+    assert.equal(panels[i], 2);
+    assert.ok(panels[i+4] <= seams[0] || panels[i+3] >= seams[1]);
+  }
+});
+
 test('the sector draw preserves the first shadow depth from the full caster mesh', async () => {
   const { decodeShadow } = await import('../site/tidewater-rocha/mobile/daylight-shadow.js');
   const bytes = await readFile(

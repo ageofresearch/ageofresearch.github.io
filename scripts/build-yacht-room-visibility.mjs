@@ -11,6 +11,7 @@ import { boardingHeight, createSternFeatures, l as yacht } from '../site/tidewat
 import { loadDeckLight, prepareOpaque, packRenderVertices } from '../site/tidewater-rocha/mobile/prepare-light.js';
 import { accessProfileBounds, accessRoom } from '../site/tidewater-rocha/mobile/bridge-access-geometry.js';
 import { sharedVertices } from '../site/tidewater-rocha/mobile/shared-vertices.js';
+import { roomPanels } from './yacht-geometry/room-panels.mjs';
 
 const exec = promisify(execFile);
 const mobile = fileURLToPath(new URL('../site/tidewater-rocha/mobile/', import.meta.url));
@@ -58,9 +59,11 @@ try {
       // different fittings past the door frames. The forward lobby is shorter.
       let spacing = profile === 'bow' ? .24 : .22;
       if (platform) spacing = .12;
-      else if (ramp || cockpit) spacing = .16;
+      else if (ramp) spacing = .09;
+      else if (cockpit) spacing = .16;
       else if (mainDeck) spacing = z < -9.5 ? .055 : z < -6 ? .085 : .15;
       views.push({...view, profile, height, mainDeck, platform, ramp, cockpit, directions, spacing,
+        panels: mainDeck && z < -9.5,
         count:view.prefixes?.[0]?.count ?? view.count});
     }
   }
@@ -68,14 +71,25 @@ try {
   // sightline the renderer selects a longitudinal band, including when looking
   // aft down the yacht. Certify against the exact indices of each such band.
   const helm = JSON.parse(await readFile(join(mobile, 'bridge-helm.json'))).room;
+  const bridge = JSON.parse(await readFile(join(mobile, 'bridge-access.json')));
+  const landings = bridge.flight.surfaces;
   const upper = manifest.profiles.upper, {start, step} = upper.visibility;
-  for (const [bounds, eye] of [[helm.bbox, helm.spawn[2]], [accessProfileBounds, accessRoom.spawn[2]]]) {
+  // Both decks extend past their room labels onto the modeled landings.
+  for (const [roomBounds, eye, landing] of [
+    [helm.bbox, helm.spawn[2], landings.at(-1)],
+    [accessProfileBounds, accessRoom.spawn[2], landings[0]],
+  ]) {
+    const bounds = roomBounds.slice();
+    for (const [x, y] of landing.polygons.flat()) {
+      bounds[0] = Math.min(bounds[0], x); bounds[1] = Math.min(bounds[1], y);
+      bounds[2] = Math.max(bounds[2], x); bounds[3] = Math.max(bounds[3], y);
+    }
     const [aft, left, fore, right] = bounds, height = eye - yacht.seaReference;
     for (const [band, [first, count]] of upper.batches[0].ranges.entries()) {
       const z = Math.max(start + band * step, aft * yacht.sx - yacht.length / 2);
       const Z = Math.min(start + (band + 1) * step, fore * yacht.sx - yacht.length / 2);
       if (Z <= z) continue;
-      views.push({profile:'upper', first, count, sign:-1, height, spacing:.24,
+      views.push({profile:'upper', first, count, sign:-1, height, spacing:.18, panels:true,
         box:[left * yacht.sy, height, z, right * yacht.sy, height, Z]});
     }
   }
@@ -85,7 +99,12 @@ try {
     const faces = Uint32Array.from(indices[profile].subarray(view.first, view.first + count));
     const meshFile = join(temp, 'mesh-' + id);
     const shape = new Uint32Array([packed.length / 32, count]);
-    await writeFile(meshFile, Buffer.concat([bytes(shape), bytes(packed), bytes(faces)]));
+    const meshParts = [bytes(shape), bytes(packed), bytes(faces)];
+    if (view.panels) {
+      const panels = roomPanels(packed, faces);
+      meshParts.push(bytes(Uint32Array.of(panels.length / 7)), bytes(panels));
+    }
+    await writeFile(meshFile, Buffer.concat(meshParts));
     const nx = Math.ceil((X - x) / spacing), nz = Math.ceil((Z - z) / spacing);
     const dx = (X - x) / nx, dz = (Z - z) / nz, halfHeight = .028;
     const heights = view.ramp ? Array.from({length:nz}, (_,j) =>
@@ -99,7 +118,7 @@ try {
       const centre = heights ? (heights[2*j]+heights[2*j+1])/2 : height;
       const dy = heights ? (heights[2*j+1]-heights[2*j])/2 : halfHeight;
       const radius = Math.hypot(dx/2, dz/2, dy) + .025;
-      const halfExtent = view.mainDeck || view.platform || view.ramp || view.cockpit ? [dx/2, dy, dz/2] : [];
+      const halfExtent = view.mainDeck || view.platform || view.ramp || view.cockpit || view.panels ? [dx/2, dy, dz/2] : [];
       for (let i = 0; i < nx; i++) {
         const cell = j * nx + i;
         jobs.push(async () => {

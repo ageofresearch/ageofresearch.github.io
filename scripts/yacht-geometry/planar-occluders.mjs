@@ -29,18 +29,18 @@ function largest(cells, w, h) {
   }
   return area * pitch * pitch >= 0.6 ? best : null;
 }
-export function planarOccluders(faces) {
+export function planarOccluders(faces, exact = false) {
   const groups = new Map(),
     result = [];
   for (const f of faces) {
     if (f.background) continue;
     for (let axis = 0; axis < 3; axis++) {
       const level = f.v[0][axis];
-      if (!f.v.every((v) => Math.abs(v[axis] - level) < 1e-6)) continue;
+      if (!f.v.every((v) => exact ? v[axis] === level : Math.abs(v[axis] - level) < 1e-6)) continue;
       const [j, k] = planes[axis],
         normal = Math.sign(f.n[axis]);
       if (Math.abs(f.n[axis]) < 1e-7) continue;
-      const key = [axis, normal, Math.round(level * 1e5)].join(',');
+      const key = [axis, normal, (exact ? level : Math.round(level * 1e5))].join(',');
       const group = groups.get(key) ?? { level, axis, j, k, normal, tri: [], area: 0 };
       group.tri.push(f.v.map((v) => [v[j], v[k]]));
       group.area += Math.abs(f.n[axis]) * 0.5;
@@ -54,7 +54,7 @@ export function planarOccluders(faces) {
       y0 = Infinity,
       x1 = -Infinity,
       y1 = -Infinity;
-    const key = (p) => Math.round(p[0] * 1e5) + ',' + Math.round(p[1] * 1e5);
+    const key = exact ? (p) => p.join(',') : (p) => Math.round(p[0] * 1e5) + ',' + Math.round(p[1] * 1e5);
     for (const v of tri)
       for (let i = 0; i < 3; i++) {
         const a = v[i],

@@ -1,4 +1,4 @@
-import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=6';
+import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=7';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
 

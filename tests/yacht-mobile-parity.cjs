@@ -235,15 +235,20 @@ async function capture(browser, mobile) {
         png.data=Buffer.from(close.pixels,'base64');
         writeFileSync(out+'/'+name+'.png',PNG.sync.write(png));
       }
-      await frame.evaluate(()=>{
-        const w=window.__app.yachtWalk;
+      await frame.evaluate(async()=>{
+        const app=window.__app,w=app.yachtWalk;
         w.enterRoom('MD_R01');
         if(!w.nav.safe(...w.nav.position))throw Error('Unsafe terrace spawn');
         w.enterRoom('boarding');
+        // Complete the explicit room jump and pending visibility readback
+        // before measuring an idle view.
+        w.cameraElevation=w.nav.elevation;w.applyPosition();
+        await app.gangwayRenderer.prepareCurrentView();
+        app.frame(0);
+        await app.gpu.queue.onSubmittedWorkDone();
       });
-      await frame.waitForFunction(()=>document.getElementById('fps').textContent==='— fps');
       const idle=await frame.evaluate(async()=>{
-        const app=__app,walk=app.yachtWalk,queue=GPUQueue.prototype,nativeSubmit=queue.submit;
+        const app=__app,walk=app.yachtWalk,queue=app.gpu.queue,nativeSubmit=queue.submit;
         let submissions=0;
         queue.submit=function(...args){submissions++;return nativeSubmit.apply(this,args);};
         const yaw=walk.yaw,first=app.gpu.frame;

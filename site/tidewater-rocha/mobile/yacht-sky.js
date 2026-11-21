@@ -3,7 +3,7 @@
 export function yachtSky() {
   const vertices = [],
     indices = [],
-    sectors = 20;
+    sectors = 12;
   const angles = [
     0,
     0.004,
@@ -11,18 +11,14 @@ export function yachtSky() {
     0.0155,
     0.023,
     0.11,
-    0.24,
-    0.4,
+    0.27,
     0.59,
     0.8,
     1.02,
-    1.24,
     1.46,
     1.68,
     1.9,
-    2.15,
     2.4,
-    2.68,
     2.93,
     Math.PI,
   ];

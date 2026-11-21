@@ -27,9 +27,9 @@ export function describeSternAccess(parts) {
   const treads = Array.from({length:6}, (_, i) => {
     const tread = part(`transom starboard teak tread ${i + 1}`);
     const body = part(`transom starboard pale step ${i + 1}`);
-    const [x0, y0, , x1, y1] = body.bounds;
+    const footprint=convexHull(topTriangles(body).flat());
     return {id:tread.id, height:tread.bounds[5], surface:topTriangles(tread),
-      footprint:[[x0,y0],[x1,y0],[x1,y1],[x0,y1]], bounds:body.bounds};
+      footprint, bounds:body.bounds};
   });
   const start = treads[0].bounds[0], end = treads.at(-1).bounds[3] + .26;
   const width = Math.min(...treads.map(t => t.bounds[4] - t.bounds[1]));
@@ -63,12 +63,15 @@ function clipHeight(vertices, height, above) {
 
 // Clip before projection: a raked transom or overhead gangway must block the
 // body at its actual height, not its entire 2-D bounding box.
-function bodyObstacles(parts, height) {
+function bodyObstacles(parts, height, onMainDeck) {
   const footprints=[];
   for (const part of parts) {
     if(part.context)continue;
     const b=part.bounds;
     const name=part.feature || part.name;
+    // The ramp owns its walking height. Its deck, edge strips and underside
+    // are supporting structure on MD and overhead obstacles on the swim level.
+    if(onMainDeck && part.id.startsWith('boarding/owner/') && /^(telescopic|section )/.test(name))continue;
     // Permit the last normal stair rise into its support floor, while retaining
     // shin-level collisions against the transom, rails and other solid objects.
     const foot=height+(b[5]<=height+.19 && /floor|landing final riser/.test(name) ? .19 : .035);
@@ -90,7 +93,7 @@ export function connectSternAccess(model) {
   const access=transom.access.starboard;
   const parts=[...transom.parts,...boarding.parts,...terrace.parts];
   const obstacles=new Map([access.lowerHeight,access.upperHeight,...access.treads.map(t=>t.height)]
-    .map(height=>[height.toFixed(6),bodyObstacles(parts,height)]));
+    .map(height=>[height.toFixed(6),bodyObstacles(parts,height,height===access.upperHeight)]));
   const clearance=(x,y,height,radius)=>!obstacles.get(height.toFixed(6))(x,y,radius);
   const probes=(x,y,radius,test)=>test(x,y) && Array.from({length:16},(_,i)=>i*Math.PI/8)
     .every(angle=>test(x+radius*Math.cos(angle),y+radius*Math.sin(angle)));

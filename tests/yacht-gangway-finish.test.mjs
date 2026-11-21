@@ -67,7 +67,7 @@ test('seven boards and six four-millimetre caulk seams fit every existing panel 
   }
 });
 
-test('shared finish changes only identified boarding wood and leaves physical geometry unchanged', async () => {
+test('boarding finish follows the approved deployed geometry and the independent teak panels', async () => {
   const baseline = JSON.parse(
     await readFile(new URL('./fixtures/yacht-gangway-geometry.json', import.meta.url)),
   );
@@ -92,8 +92,9 @@ test('shared finish changes only identified boarding wood and leaves physical ge
         part.id,
       );
       if (part.finish[3] >= 37 && part.finish[3] <= 42) {
-        assert.deepEqual(part.finish.slice(0, 3), [0xb69a73, 0.8, 0]);
-      } else assert.deepEqual(part.finish, resolveYachtPartFinish({ materialID: part.materialID }));
+        assert.deepEqual(part.finish.slice(0, 3), [part.finish[3]===42 ? 0x988b80 : 0xb69a73, 0.8, 0]);
+      } else if(part.feature.endsWith('nested frame'))assert.deepEqual(part.finish,[0x262729,.67,0,0]);
+      else assert.deepEqual(part.finish, resolveYachtPartFinish({ materialID: part.materialID }));
     }
     assert.equal(boarding.parts.filter((p) => p.finish[3] >= 37 && p.finish[3] <= 39).length, 3);
     assert.equal(boarding.parts.filter((p) => p.finish[3] >= 37 && p.finish[3] <= 42).length, 19);
@@ -131,7 +132,7 @@ test('each fallback and active profile preserves the three boarding material ide
     const manifest = JSON.parse(await readFile(new URL('mobile/' + name + '.json', root)));
     const buffer = await readFile(new URL('mobile/' + name + '.bin', root)),
       data = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
-    assert.equal(manifest.version, 'port-water-edge-1');
+    assert.equal(manifest.version, 'stern-grid-1');
     for (const [profile, p] of Object.entries(manifest.profiles)) {
       assert.ok(p.triangles <= 25000);
       assert.equal(p.batches.length, 2);

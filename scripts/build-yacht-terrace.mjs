@@ -125,6 +125,8 @@ export async function buildTerrace() {
   for (const part of replacements.get('MD_STA_013')) add(part, [3.3,-3.8,3.83,8.5,3.8,7.05], 'stairs');
   for (const part of replacements.get('MD_GLA_001')) add(part, region, 'glazing');
   for (const part of model.exterior.parts) {
+    if (/^(shaped teak landing inboard caulk border|teak passage outer margin border)$/.test(part.feature))
+      add(part, [2.28,-3.8,3.83,8.5,3.8,3.96], 'deck-trim');
     if (part.feature === 'aft sliding glazing frames and mullions') add(part, region, 'frame');
     if (part.id.startsWith('MD/boarding-route/') && /coaming|bulwark|recess (lower ledge|polished support)|cap above/.test(part.feature)) add(part, region, 'boundary');
   }
@@ -192,7 +194,7 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'chair-fidelity-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'stern-grid-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.

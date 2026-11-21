@@ -4,7 +4,7 @@ import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
 import {accessRoom,prepareAccessFloor,inAccess,accessProfileDomain} from './bridge-access-geometry.js?v=port-guest-1';
 import {preloadGuestAccess} from './guest-access.js?v=port-guest-1';
 
-export const bridgeAccessVersion='port-water-edge-1';
+export const bridgeAccessVersion='stern-grid-1';
 export function decodeBridgeAccess(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:bridgeAccessVersion,names:['exterior','upper','sun','bow'],roomID:'MD_R07'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

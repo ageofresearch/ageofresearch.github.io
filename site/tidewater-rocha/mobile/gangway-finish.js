@@ -47,7 +47,7 @@ export function prepareBoardingFinish(part, palette) {
         : landing
           ? 42
           : null;
-    if (code !== null) finish = [gangwayTeak.color, gangwayTeak.roughness, 0, code];
+    if (code !== null) finish = [landing ? 0x988b80 : gangwayTeak.color, gangwayTeak.roughness, 0, code];
   }
   const prepared = { ...part, finish };
   prepared.boardingUV = boardingTextureUV(prepared);

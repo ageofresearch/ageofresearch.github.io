@@ -24,7 +24,8 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   slab([back-.032,-.87,3.52,back-.024,.22,head-.10],.003,'M90','beach club central satin inset');
   for(const side of [-1,1]) {
     // Sloping jamb narrows towards its crown, as seen from the platform.
-    const profile=[[sill,side*half],[back,side*half],[back,side*(half+.19)],[sill-.10,side*(half+.19)]];
+    const outerJamb=side===1?.125:.19;
+    const profile=[[sill,side*half],[back,side*half],[back,side*(half+.19)],[sill-.10,side*(half+outerJamb)]];
     const cheek=extrude(profile,2.84,head+.12,.012);
     for(let i=0;i<cheek.vertices.length;i+=6){
       const lift=(cheek.vertices[i+2]-2.84)/(head+.12-2.84);
@@ -81,6 +82,29 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
     const y=side*3.555;
     add(pipe([[.64,y,3.14],[1.34,y,3.51],[2.42,y,4.102],[3.30,y,4.192]],.019,8),'M19','outboard stair coaming cap rail '+side);
   }
+  // The opposite cockpit panoramas show a paired horn fitting and a drum
+  // behind the open gunwale. All fittings bear on the same narrow ledge.
+  for(const side of [-1,1]){
+    const port=side===1, y=side*3.64, base=port?4.17:4.40;
+    const hardware=(a,b,r,R,name)=>add(post(a,b,r,R,8),'M19','cockpit '+name+' '+side);
+    // Port already has the ledge, rail, and raised cap in the boarding coaming.
+    if(!port){
+      slab([4.16,-3.78,3.95,5.68,-3.50,base],.012,'M89','cockpit mooring ledge '+side);
+      slab([4.16,-3.78,4.76,5.68,-3.50,4.88],0,'M89','cockpit raised mooring cap '+side);
+      for(const x of [4.20,5.64])hardware([x,y,base],[x,y,4.76],.020,.020,'mooring cap support '+x);
+    }
+    const cx=port?4.70:4.55;
+    slab([cx-.21,y-.09,base,cx+.21,y+.09,base+.025],.015,'M19','cockpit cleat sole '+side);
+    for(const dir of [-1,1]){
+      const foot=[cx+dir*.115,y,base+.025], top=[cx+dir*.17,y,base+.183];
+      hardware(foot,top,.048,.046,'cleat upright '+dir);
+      hardware([top[0]-dir*.035,y,top[2]],[top[0]+dir*.061,y,top[2]+.012],.045,.030,'cleat horn '+dir);
+    }
+    const x=port?5.20:5.40;
+    hardware([x,y,base],[x,y,base+.04],.116,.096,'mooring drum foot');
+    hardware([x,y,base+.04],[x,y,base+.22],.067,.073,'mooring drum');
+    hardware([x,y,base+.22],[x,y,base+.25],.094,.097,'mooring drum crown');
+  }
   const bench=fittedFurniture('banquette',[2.78,-2.16,4.06,3.65,2.16,4.78]);
   // Keep one envelope for the continuous bench used by full-deck navigation.
   const vertices=[],indices=[];
@@ -111,27 +135,37 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) 
   // The landing field and the recessed footwell replace the rectangular
   // surfaces of the two lowest supports. Keep every original riser elevation.
   const platformZ = 2.84, deckZ = 3.95, rise = (deckZ-platformZ)/7;
-  const landingZ = platformZ+rise, footwellZ = platformZ+2*rise;
-  const inner = 2.475, outer = 3.47, toe = .91, second = 1.28, top = 2.34;
+  // The outboard port foot is a raised sponson over water. Its landing
+  // and moulded well are higher than the traversable starboard first tread.
+  const landingZ = 3.15, footwellZ = 3.405;
+  const inner = 2.43, outer = 3.53, toe = 1.04, second = 1.45, top = 2.34;
   const recess = .052, revealTop = landingZ+.054;
   const weatheredTeak = {finish:[0x998c7c,.80,0,1]};
   const marginBoard = {finish:[0x887567,.80,0,0]};
 
   // The lower cheek sweeps forward outboard. Ease the sweep out at the
   // uppermost riser so the flight still meets the fixed boarding assembly.
-  const station = ([x,y]) => [x+.40*(y-inner)*Math.min(1,(top-x)/(top-toe)),y];
+  const station = ([x,y]) => [x+.30*(y-inner)*Math.min(1,(top-x)/(top-toe)),y];
   const surface = (loop,z) => face(loop,(x,y)=>({point:[x,y,z],normal:[0,0,1]}));
   const strip = (x,end,y,Y) => [[x,y],[end,y],[end,Y],[x,Y]].map(station);
   function landingOutline(inset) {
-    const aft = -.075, outboard = 3.56, radius = .37;
-    const loop = [[toe+recess,inner+inset],[toe+recess,outboard-inset],[aft+radius,outboard-inset]];
-    for (let i=1;i<=6;i++) {
-      const angle = Math.PI/2+i*Math.PI/12;
-      loop.push([aft+radius+(radius-inset)*Math.cos(angle),
-        outboard-radius+(radius-inset)*Math.sin(angle)]);
-    }
-    loop.push([aft+inset,inner+.125+inset]);
-    return loop.map(station);
+    // Registered points along the outer edge in Beach Club view B. Keep
+    // the forward edge common to the field, margin, and footwell surround.
+    const loop=[station([toe+recess,inner]),station([toe+recess,3.56]),
+      [.77,3.56],[.55,3.52],[.32,3.37],[.093,3.176],[-.06,3.036],
+      [-.132,2.939],[-.18,2.843],[-.23,2.717],[-.276,2.498]];
+    if(!inset)return loop;
+    const edges=loop.map(([x,y],i)=>{
+      const [X,Y]=loop[(i+1)%loop.length],length=Math.hypot(X-x,Y-y);
+      return [(y-Y)/length,(X-x)/length];
+    });
+    return loop.map(([x,y],i)=>{
+      const prev=edges[(i+edges.length-1)%edges.length],next=edges[i];
+      const before=i===1?0:inset,after=i===0?0:inset;
+      const det=prev[0]*next[1]-prev[1]*next[0];
+      return [x+(before*next[1]-after*prev[1])/det,
+        y+(after*prev[0]-before*next[0])/det];
+    });
   }
   const lip = landingOutline(0), timber = landingOutline(.026);
   const seam = landingOutline(.083), field = landingOutline(.089);
@@ -147,7 +181,7 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) 
   // The dark kick is set back under the first moulded nose. Its top cap is
   // owned by the underside of the projecting lip.
   const kick = strip(toe+recess,second,inner,outer);
-  add(withoutCap(extrude(kick,landingZ,revealTop,0),revealTop),'M47','port stair recessed kick face');
+  add(withoutCap(extrude(kick,landingZ,revealTop,0),revealTop),'M47','port stair recessed kick face',{finish:[0x121514,.65,0,0]});
   const shell = strip(toe,second,inner,outer);
   const well = [[toe+.09,inner+.095],[second,inner+.095],[second,outer-.095],
     [toe+.155,outer-.095],[toe+.108,outer-.112],[toe+.09,outer-.151]].map(station);
@@ -159,7 +193,7 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) 
   // Continue from the footwell to the original last tread beneath the gangway.
   const run = (top-second)/4;
   for(let i=0;i<4;i++) {
-    const x = second+i*run, z = platformZ+(i+3)*rise;
+    const x = second+i*run, z = footwellZ+(i+1)*(deckZ-rise-footwellZ)/4;
     const y = halfWidth(z)+.045;
     add(extrude(strip(x,x+run,y,3.45),2.82,z-.024,0),'M89','transom port pale step '+(i+3));
     add(extrude(strip(x,x+run,y+.035,3.415),z-.024,z,0),'M100','transom port teak tread '+(i+3));

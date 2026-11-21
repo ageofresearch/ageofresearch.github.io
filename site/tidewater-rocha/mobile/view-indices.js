@@ -51,13 +51,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     },
     select(profile, first, count, clip, camera, projection, width, height) {
       if (stopped) return null;
-      const focal=Math.min(Math.abs(projection[0])*width,Math.abs(projection[5])*height)/2;
-      const pixelAngle=1/Math.max(.001,focal);
-      // For either WebGPU or OpenGL perspective depth, the near plane lies
-      // at one of the NDC endpoints. The larger near corner includes offsets.
-      const near=Math.abs(projection[14])/Math.max(Math.abs(projection[10]), Math.abs(projection[10]+1),Math.abs(projection[10]-1));
-      const nearReach=2*near*Math.hypot(1,(1+Math.abs(projection[8]))/projection[0],(1+Math.abs(projection[9]))/projection[5]);
-      const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count && pixelAngle<=entry.pixelAngle && nearReach<=entry.nearReach
+      const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
         && coversView(entry.planes, camera, projection);
       if (pending?.result) {
@@ -75,7 +69,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
       if(current && distance<viewRadius*.55)return active;
       if (!pending) {
-        pending = {profile, first, count, planes:widenedView(clip),camera:Array.from(camera),nearReach:nearReach*1.01,pixelAngle:pixelAngle*1.01,eye:[camera[12],camera[13],camera[14]]};
+        pending = {profile, first, count, planes:widenedView(clip),eye:[camera[12],camera[13],camera[14]]};
         worker.postMessage(pending);
       }
       return current?active:null;

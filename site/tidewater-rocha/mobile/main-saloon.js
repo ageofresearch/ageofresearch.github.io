@@ -52,6 +52,16 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
       for(const v of views){
         if(v.cone && (!Array.isArray(v.cone)||v.cone.length!==3||!v.cone.every(n=>Number.isFinite(n)&&n>0)))
           throw Error('Cono de vista direccional inválido');
+        if(v.prefixes){
+          if(!Array.isArray(v.prefixes)||v.prefixes.length>2||!v.sign)throw Error('Subintervalos direccionales inválidos');
+          let previous=0;
+          for(const span of v.prefixes){
+            if(!Number.isSafeInteger(span.count)||span.count<=0||span.count%3||span.count<previous||span.count>v.count||
+              !Array.isArray(span.cone)||span.cone.length!==3||!span.cone.every((n,k)=>Number.isFinite(n)&&n>0&&n<=(v.cone??cone)[k]))
+              throw Error('Subintervalo direccional incompleto');
+            previous=span.count;
+          }
+        }
         if(!Array.isArray(v.box)||v.box.length!==6||!v.box.every(Number.isFinite)||v.box.slice(0,3).some((p,k)=>p>=v.box[k+3])||
           ![-1,0,1].includes(v.sign)||!Number.isSafeInteger(v.count)||v.count<=0||v.count%3||v.first!==end||
           (end+=v.count)>indices.length)throw Error('Vista direccional incompleta');

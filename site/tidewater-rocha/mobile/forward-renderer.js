@@ -112,7 +112,8 @@ export async function createForwardRenderer(app, daylight) {
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[],geometryBytes:0};
           for(const b of p.batches) {
-            const batch={...uploadBatch(b.attributes,result.batches.length===1,b.indices,stagedPalette),ranges:b.ranges,localView:b.localView,views:b.views,cone:b.cone};
+            const views=b.views?.flatMap(v=>[...(v.prefixes??[]).map(span=>({...v,...span})),v]);
+            const batch={...uploadBatch(b.attributes,result.batches.length===1,b.indices,stagedPalette),ranges:b.ranges,localView:b.localView,views,cone:b.cone};
             result.batches.push(batch);
             result.geometryBytes+=batch.vertices.size+batch.indices.size+batch.lightingBytes;
           }

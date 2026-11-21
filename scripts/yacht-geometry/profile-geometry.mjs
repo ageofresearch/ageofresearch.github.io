@@ -167,8 +167,8 @@ export function packWalkProfile(boarding, profile, audit, store) {
     const views=[];
     if(!glass)for(const v of sightlines(profile,geometry,basis)){
       const first=submission.indices.length;
-      for(const prefix of v.prefixes)views.push({first,box:v.box,sign:v.sign,...prefix});
-      views.push({first,count:v.indices.length,box:v.box,sign:v.sign,...(v.cone && {cone:v.cone})});
+      views.push({first,count:v.indices.length,box:v.box,sign:v.sign,...(v.cone && {cone:v.cone}),
+        ...(v.prefixes.length && {prefixes:v.prefixes})});
       submission.indices=submission.indices.concat(v.indices);
     }
     // Compact once over the union. The ranges reference the same vertices and

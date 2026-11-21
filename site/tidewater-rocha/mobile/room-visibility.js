@@ -14,15 +14,25 @@ export function roomCells(header, bits, profiles) {
     if (!Number.isSafeInteger(extent) || extent > bits.length) throw Error('Incomplete yacht visibility data');
     if (!ranges.has(profile)) ranges.set(profile, new Map());
     const group = ranges.get(profile);
-    if (group.has(first)) throw Error('Duplicate yacht visibility range');
-    group.set(first, { box, count, offset, nx, nz, stride });
+    if (!group.has(first)) group.set(first, []);
+    group.get(first).push({ box, count, offset, nx, nz, stride });
   }
   if (extent !== bits.length) throw Error('Incorrect yacht visibility data size');
+  if (header.version === 2) for (const {nx, nz, count, offset} of header.regions) {
+    const stride = Math.ceil(count / 24), rowBytes = nx * stride, length = nz * rowBytes;
+    for (let i = stride; i < length; i++)
+      bits[offset + i] ^= bits[offset + i - (i < rowBytes ? stride : rowBytes)];
+  }
   return {
     bits,
-    range(profile, first, count) {
-      const region = ranges.get(profile)?.get(first);
-      return region && count >= region.count ? region : null;
+    range(profile, first, count, camera) {
+      // One longitudinal index band can cover both decks. The worker only
+      // needs to know whether to preserve face slots; the draw needs its deck.
+      const regions = ranges.get(profile)?.get(first);
+      return regions?.find(r => count >= r.count && (!camera ||
+        camera[13] >= r.box[1] && camera[13] <= r.box[4] &&
+        camera[12] >= r.box[0] && camera[12] < r.box[3] &&
+        camera[14] >= r.box[2] && camera[14] < r.box[5])) ?? null;
     },
   };
 }
@@ -58,13 +68,13 @@ export function filterRoomCell(bits, offset, prefixCount, indices, length, slots
 export async function loadRoomVisibility(vertices, profiles, signal) {
   try {
     const timeout = AbortSignal.timeout(10000);
-    const response = await fetch(new URL('./room-visibility.bin?v=2', import.meta.url),
+    const response = await fetch(new URL('./room-visibility.bin?v=3', import.meta.url),
       {signal:signal ? AbortSignal.any([timeout, signal]) : timeout});
     if (!response.ok) return null;
     const raw = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
     const size = new DataView(raw).getUint32(0, true);
     const header = JSON.parse(new TextDecoder().decode(new Uint8Array(raw, 4, size)));
-    if (header.version !== 1) return null;
+    if (header.version !== 1 && header.version !== 2) return null;
     async function matches(data, expected) {
       if (!data) return false;
       const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', data));

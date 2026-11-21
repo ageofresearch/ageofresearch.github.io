@@ -1,4 +1,4 @@
-import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=2';
+import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=3';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=1';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {
@@ -21,7 +21,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const scratch = cells ? new ArrayBuffer(glassOffset) : null;
   const compact16 = scratch && new Uint16Array(scratch), compact32 = scratch && new Uint32Array(scratch);
   function uploadOpaque(entry, camera, projection, width, height) {
-    const region = cells?.range(entry.profile, entry.first, entry.count);
+    const region = cells?.range(entry.profile, entry.first, entry.count, camera);
     const offset = roomCellOffset(region, camera, projection, width, height);
     if (entry.offset === offset) return;
     let indices = entry.output, length = entry.rawLength;

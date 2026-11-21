@@ -297,3 +297,20 @@ test('the shipped swim-platform cells cover the shared spawn and stop at the fir
   const firstRise = stairs.treads[0].height - stairs.lowerHeight;
   assert.ok(region.box[4] < camera[1] + firstRise);
 });
+
+test('rooms on different decks can share an index band and decode their camera rows independently', async () => {
+  const {roomCells} = await import('../site/tidewater-rocha/mobile/room-visibility.js');
+  const main = {profile:'upper', first:3, count:6, nx:2, nz:2, offset:0, box:[0,3,0,1,4,1]};
+  const bridge = {...main, offset:4, box:[0,5,0,1,6,1]};
+  const encoded = Uint8Array.of(1,3,5,10, 8,12,10,5);
+  const cells = roomCells({version:2, regions:[main, bridge]}, encoded, {upper:new Uint16Array(9)});
+  assert.deepEqual([...cells.bits], [1,2,4,8, 8,4,2,1]);
+  const camera = new Float32Array(16);
+  camera[12]=.4; camera[14]=.5;
+  for (const [height, offset] of [[3.5,0], [4.5,undefined], [5.5,4]]) {
+    camera[13]=height;
+    assert.equal(cells.range('upper',3,6,camera)?.offset, offset);
+  }
+  camera[14]=1;
+  assert.equal(cells.range('upper',3,6,camera), null);
+});

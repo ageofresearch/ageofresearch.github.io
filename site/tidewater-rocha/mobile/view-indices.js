@@ -4,7 +4,7 @@ import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {
   let worker;
-  try {worker = new Worker(new URL('./view-worker.js?v=3', import.meta.url), {type:'module'});}
+  try {worker = new Worker(new URL('./view-worker.js?v=4', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
   let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
@@ -84,10 +84,10 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const length=filterRoomCell(cells?.bits,entry.offset,entry.regionCount,source,entry.rawLength,entry.slots,copy);
       return copy.subarray(0,length);
     },
-    analyze(pixels,width,height,stride,profile,first,count,clip,candidates){
+    analyze(winners,width,height,profile,first,count,clip,candidates){
       if(stopped)return;
       exact={key:++serial,analyzing:true,profile,first,count,width,height,clip:Float32Array.from(clip)};
-      worker.postMessage({...exact,pixels,stride,candidates},candidates?[pixels.buffer,candidates.buffer]:[pixels.buffer]);
+      worker.postMessage({...exact,winners,candidates},candidates?[winners.buffer,candidates.buffer]:[winners.buffer]);
     },
     fixed(profile,first,count,frame,width,height,sunRevision){
       if(!matches(profile,frame,width,height)||exact.first!==first||exact.count!==count)return null;

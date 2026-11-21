@@ -29,7 +29,7 @@ struct V {
 }
 @vertex fn vertex(${tagged?'@builtin(vertex_index) id:u32,':''}@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
  @location(3) uv:vec2f,@location(4) finish:vec2i,@location(5) shade:vec4f,@location(6) direct:vec4f)->V {
- var o:V;${tagged?'o.tag=id%251u;':''}o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
+ var o:V;${tagged?'o.tag=id&65535u;':''}o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
  if(o.layer==-2){
    let dome=normalize((pos-vec3f(0.,-2.01,0.))/vec3f(.98289474,1.,.97861111));
    let east=normalize(vec3f(frame.sun.w,0.,frame.eye.w));
@@ -91,8 +91,8 @@ fn shade(in:V)->vec4f{
 ${tagged?`
 struct Tagged { @location(0) color:vec4f, @location(1) powers:vec4f }
 @fragment fn tagged(in:V)->Tagged {
- let x=in.tag;let b=(x*x)%251u;let c=(b*x)%251u;let d=(c*x)%251u;
- return Tagged(shade(in),vec4f(vec4u(x,b,c,d)));
+ let tag=in.tag;
+ return Tagged(shade(in),vec4f(f32(tag&255u)/255., f32(tag>>8u)/255., 1., 1.));
 }`:''}
 struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
 @vertex fn glassVertex(@location(0) pos:vec3f,@location(1) normal:vec4f,@location(2) tint:vec4f,@location(4) finish:vec2i)->Glass{

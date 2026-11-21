@@ -260,48 +260,36 @@ test('shared vertices preserve every packed byte and widen indices above 65535',
   assert.deepEqual(all.subarray(input.length),distinct);
 });
 
-test('resolved coverage signatures recover every distinct MSAA tag including collisions and empty samples', async()=>{
-  const {sampleRoots}=await import('../site/tidewater-rocha/mobile/sample-visibility.js');
-  let seed=107;
-  const next=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)%251);
-  for(let i=0;i<1200;i++){
-    const a=next(),b=next();
-    const tags=[a,i%3?a:b,i%3===1?b:next(),i%4?next():0];
-    const sums=[1,2,3,4].map(n=>tags.reduce((s,t)=>s+t**n,0)%251);
-    assert.deepEqual(sampleRoots(...sums),[...new Set(tags)].sort((x,y)=>x-y));
-  }
+test('a settled view retains sample winners, tag collisions and the moving sky in draw order', async () => {
+  const {coverageWords, filterSamples} = await import('../site/tidewater-rocha/mobile/sample-visibility.js');
+  const winners = new Uint32Array(coverageWords);
+  for (const id of [0, 31, 65535]) winners[id >>> 5] |= 1 << (id & 31);
+  const vertices = new Uint8Array(65538 * 32);
+  new Int16Array(vertices.buffer)[7 * 16 + 14] = -2;
+  const indices = Uint32Array.of(
+    31, 0, 0,     // Outside the active source range.
+    251, 31, 0,   // Only the provoking vertex identifies the face.
+    0, 1, 2,
+    65536, 3, 4,  // Shares a tag with vertex zero.
+    31, 5, 6,
+    65535, 6, 5,
+    7, 8, 9,      // Sky may turn back into view at the next sun angle.
+    31, 0, 0
+  );
+  const {output, length, skyStart} = filterSamples(winners, vertices, indices, 3, 18);
+  assert.deepEqual([...output.subarray(0, length)], [0,1,2, 65536,3,4, 31,5,6, 65535,6,5, 7,8,9]);
+  assert.equal(skyStart, 12);
 });
 
-test('coverage tiles retain every winner, near-plane triangles and sky while dropping absent tags', async () => {
-  const {filterSamples, sampleRoots} = await import('../site/tidewater-rocha/mobile/sample-visibility.js');
-  const width = 32, height = 8, stride = 512;
-  const pixels = new Uint16Array(stride * height / 2);
-  function half(value) {
-    if (!value) return 0;
-    const power = Math.floor(Math.log2(value));
-    return (power + 15) * 1024 + (value / 2 ** power - 1) * 1024;
-  }
-  function write(x, y, tags) {
-    for (let n = 1; n <= 4; n++)
-      pixels[y * stride / 2 + 4 * x + n - 1] = half(tags.reduce((sum, tag) => sum + tag ** n % 251, 0) / 4);
-  }
-  write(4, 4, [1, 2, 3, 4]);
-  write(14, 4, [5, 5, 5, 5]);
-  // These sums describe x²(x²+1), which has only two of its four roots in F251.
-  assert.equal(sampleRoots(0, 249, 0, 2), null);
-  pixels.set([0, half(249 / 4), 0, half(2 / 4)], 4 * stride / 2 + 4 * 26);
-  const vertices = new Uint8Array(14 * 32);
-  const positions = new Float32Array(vertices.buffer), layers = new Int16Array(vertices.buffer);
-  for (let i = 1; i <= 13; i++) {
-    const x = i <= 4 ? 4 : i <= 7 ? 14 : 26;
-    positions.set([2 * x / width - 1, 0, i === 9 ? 0 : -1], i * 8);
-  }
-  layers[10 * 16 + 14] = -2;
-  const indices = Uint16Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].flatMap(i => [i, i, i]));
-  const clip = [1,0,0,0, 0,1,0,0, 0,0,0,-1, 0,0,1,0];
-  const {output, length} = filterSamples(pixels, width, height, stride, vertices, indices, 0, indices.length, clip);
-  assert.deepEqual(Array.from(output.subarray(0, length)),
-    [1, 2, 3, 4, 5, 8, 9, 10].flatMap(i => [i, i, i]));
+test('an empty coverage mask can retain just the sky and pad its 16-bit index upload', async () => {
+  const {coverageWords, filterSamples} = await import('../site/tidewater-rocha/mobile/sample-visibility.js');
+  const vertices = new Uint8Array(9 * 32);
+  new Int16Array(vertices.buffer)[6 * 16 + 14] = -2;
+  const {output, length, skyStart} = filterSamples(new Uint32Array(coverageWords), vertices,
+    Uint16Array.of(0,1,2, 3,4,5, 6,7,8), 0, 9);
+  assert.deepEqual([...output.subarray(0, length)], [6,7,8]);
+  assert.equal(output.byteLength % 4, 0);
+  assert.equal(skyStart, 0);
 });
 
 test('walking masks respect the original sightline, cell boundaries and raster limits', async () => {

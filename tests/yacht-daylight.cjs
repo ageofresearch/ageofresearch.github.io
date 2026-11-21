@@ -2,6 +2,54 @@
 const assert = require('node:assert/strict');
 const { chromium } = require('playwright-core');
 const fs = require('node:fs');
+// Draw independently identified subsamples through the production reduction,
+// including the partial workgroup, the clear color and a previously filled map.
+async function verifySampleCoverage(frame) {
+  const captures = await frame.evaluate(async () => {
+    const {prepareVisibilityPipeline, createVisibilityTarget} = await import('./mobile/visibility-target.js?v=2');
+    const device = __app.gpu.device;
+    const target = createVisibilityTarget(device, 13, 5, await prepareVisibilityPipeline(device));
+    const program = device.createShaderModule({code:`
+      @vertex fn vertex(@builtin(vertex_index) i:u32) -> @builtin(position) vec4f {
+        let points = array(vec2f(-1,-1), vec2f(3,-1), vec2f(-1,3));
+        return vec4f(points[i], 0., 1.);
+      }
+      @fragment fn fragment(@builtin(position) p:vec4f, @builtin(sample_index) s:u32) -> @location(0) vec4f {
+        let tags = array(0u, 31u, 256u, 65535u);
+        let t = select(tags[s], 509u, u32(p.x)==12u && u32(p.y)==4u);
+        return vec4f(f32(t&255u)/255., f32(t>>8u)/255., 1., 1.);
+      }`});
+    const pipeline = await device.createRenderPipelineAsync({layout:'auto', multisample:{count:4},
+      vertex:{module:program,entryPoint:'vertex'},
+      fragment:{module:program,entryPoint:'fragment',targets:[{format:'rgba8unorm'}]}});
+    try {
+      const results = [];
+      for (const draw of [true, false]) {
+        const encoder = device.createCommandEncoder();
+        const pass = encoder.beginRenderPass({colorAttachments:[target.attachment]});
+        if (draw) {
+          pass.setPipeline(pipeline);
+          pass.draw(3);
+        }
+        pass.end();
+        let observed;
+        target.read(encoder, bits => {
+          observed = [];
+          for (let tag=0; tag<bits.length*32; tag++)
+            if (bits[tag>>>5] & (1<<(tag&31))) observed.push(tag);
+        });
+        device.queue.submit([encoder.finish()]);
+        await target.pending;
+        results.push(observed);
+      }
+      return results;
+    } finally {
+      target.dispose();
+    }
+  });
+  assert.deepEqual(captures, [[0,31,256,509,65535], []]);
+}
+
 (async () => {
   const base = process.env.YACHT_BASE || 'http://127.0.0.1:8764/tidewater-rocha/';
   const browser = await chromium.launch({
@@ -165,6 +213,7 @@ const fs = require('node:fs');
           assert.equal(r.scale, 1);
           assert.equal(r.samples, 4);
         }
+        if (run === 2) await verifySampleCoverage(frame);
         await Promise.all([
           frame.waitForNavigation({ waitUntil: 'domcontentloaded' }),
           frame.evaluate(() => {

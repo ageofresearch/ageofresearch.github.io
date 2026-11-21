@@ -1,10 +1,10 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=1';
-import {createViewIndices} from './view-indices.js?v=7';
+import {createViewIndices} from './view-indices.js?v=8';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
-import {createVisibilityTarget} from './visibility-target.js?v=1';
-import {shader,visibilityShader} from './daylight-shader.js?v=yacht-daylight-1';
+import {createVisibilityTarget,prepareVisibilityPipeline} from './visibility-target.js?v=2';
+import {shader,visibilityShader} from './daylight-shader.js?v=yacht-daylight-2';
 import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-2';
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
@@ -33,7 +33,7 @@ export async function createForwardRenderer(app, daylight) {
   function makePipeline(count, glass, tagged=false) {
     const program=tagged&&!glass?taggedModule:module;
     const targets=[{format,blend:glass?blend:undefined}];
-    if(tagged)targets.push({format:'rgba16float',writeMask:glass?0:GPUColorWrite.ALL});
+    if(tagged)targets.push({format:'rgba8unorm',writeMask:glass?0:GPUColorWrite.ALL});
     return device.createRenderPipelineAsync({
       label:(glass ? 'Boarding glass ' : 'Boarding finishes ')+count+'×', layout, multisample:{count},
       vertex:{module:program,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:32,attributes:[
@@ -57,6 +57,7 @@ export async function createForwardRenderer(app, daylight) {
     return null;
   })]);
   const evidence=smooth && await makePipelines(4,true).catch(()=>null);
+  const coveragePipeline=evidence && await prepareVisibilityPipeline(device).catch(()=>null);
   let samples = smooth ? 4 : 1;
   function upload(array, usage) {
     const buffer = device.createBuffer({size:Math.ceil(array.byteLength/4)*4,usage,mappedAtCreation:true});
@@ -204,7 +205,7 @@ export async function createForwardRenderer(app, daylight) {
           // First and last ranges together touch the complete resident index buffer.
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
-          if(name===previous && evidence && samples===4)warmBands.push('coverage');
+          if(name===previous && coveragePipeline && samples===4)warmBands.push('coverage');
           if(profiles[name].batches[0].localView)warmBands.push('local');
           // A parent span warms all of its narrower frustum prefixes.
           const views=profiles[name].batches[0].views??[];
@@ -254,7 +255,7 @@ export async function createForwardRenderer(app, daylight) {
         depthView = depth.createView();
         color = samples > 1 ? device.createTexture({...attachment,label:'Gangway multisample color',format}) : null;
         colorView = color?.createView();
-        if(evidence&&samples===4)coverage=createVisibilityTarget(device,engine.width,engine.height);
+        if(coveragePipeline && samples===4)coverage=createVisibilityTarget(device,engine.width,engine.height,coveragePipeline);
       }
       camera.updateMatrixWorld();
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
@@ -359,8 +360,8 @@ export async function createForwardRenderer(app, daylight) {
       pass.end();
       if(capturedSource){
         const {indices,profile,first,count,clip,candidates}=capturedSource;
-        coverage.read(gpu.getEncoder(),(pixels,w,h,stride)=>{
-          if(!disposed && viewIndices===indices)indices.analyze(pixels,w,h,stride,profile,first,count,clip,candidates);
+        coverage.read(gpu.getEncoder(),(winners,w,h)=>{
+          if(!disposed && viewIndices===indices)indices.analyze(winners,w,h,profile,first,count,clip,candidates);
         });
       }
     },

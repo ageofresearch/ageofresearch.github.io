@@ -26,7 +26,8 @@ const fs=require('node:fs');
         const [az,el]=document.querySelectorAll('[data-daylight] input');
         const input=(control,v)=>{control.value=v;control.dispatchEvent(new Event('input',{bubbles:true}));};
         for(const room of ['MD_R02','MD_R01'])for(const dragging of [false,true]){
-          walk.enterRoom(room);light.reset();app.frame(0);
+          if(!walk.enterRoom(room)||!walk.active)throw Error('Could not start walking in '+room);
+          light.reset();app.frame(0);
           const before={...daylightCounters},start=performance.now(),times=[];
           let previous=null,tick=0;const original=app.frame;
           await new Promise(resolve=>{app.frame=function(dt){
@@ -50,7 +51,7 @@ const fs=require('node:fs');
         assert.equal(r.allocations,0);assert.equal(r.requests,0);assert.equal(r.shadows,r.dragging?120:0);assert.equal(r.draws,120);
         assert.equal(r.scale,1);assert.equal(r.samples,4);
       }
-      await frame.evaluate(()=>location.reload());
+      await Promise.all([frame.waitForNavigation({waitUntil:'domcontentloaded'}),frame.evaluate(()=>{setTimeout(()=>location.reload(),0);})]);
       await frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready',null,{timeout:180000});
       assert.deepEqual(await frame.evaluate(()=>__app.daylight.state),{azimuth:270,elevation:45});
     }finally{await ctx.close();}

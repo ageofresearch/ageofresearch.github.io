@@ -1,6 +1,8 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
-import {sharedVertices} from './shared-vertices.js?v=1';
-import {createViewIndices} from './view-indices.js?v=8';
+import {sharedVertices} from './shared-vertices.js?v=2';
+import {createViewIndices} from './view-indices.js?v=9';
+import {loadScreenVisibility} from './screen-visibility.js?v=1';
+import {prepareImmediateView} from './immediate-view.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
 import {createVisibilityTarget,prepareVisibilityPipeline} from './visibility-target.js?v=2';
@@ -123,7 +125,7 @@ export async function createForwardRenderer(app, daylight) {
       let failure, sharedBuffer, stagedViews, resident=0;
       try {
         const capacity=Object.values(source).reduce((n,p)=>n+p.batches[0].attributes.position.length/3,0);
-        const table=sharedVertices(capacity), lists={}, glazing={};
+        const table=sharedVertices(capacity), lists={}, glazing={}, immediate={};
         let maxIndexBytes=0, maxGlassBytes=0;
         for(const [name,p] of Object.entries(source)) {
           const result=uploaded[name]={...p,batches:[],geometryBytes:0};
@@ -131,7 +133,9 @@ export async function createForwardRenderer(app, daylight) {
             const views=b.views?.flatMap(v=>[...(v.prefixes??[]).map(span=>({...v,...span})),v]);
             if(result.batches.length===0){
               const packed=packRenderVertices(prepareOpaque(b.attributes,deckLight,b.indices));
-              const indices=table.remap(packed,b.indices);
+              const localIds=new Uint32Array(packed.length/32);
+              const indices=table.remap(packed,b.indices,localIds);
+              if(b.ranges)immediate[name]=prepareImmediateView(b.attributes.position,b.indices,localIds,packed);
               lists[name]=indices;
               const batch={shared:true,indices:upload(indices,GPUBufferUsage.INDEX),
                 indexFormat:indices.BYTES_PER_ELEMENT===2?'uint16':'uint32',count:indices.length,
@@ -156,8 +160,10 @@ export async function createForwardRenderer(app, daylight) {
         for(const p of Object.values(uploaded))p.batches[0].vertices=sharedBuffer;
         resident+=sharedBuffer.size+stagedPalette.storage.size;
         if(Object.values(uploaded).some(p=>p.batches[0].ranges) && typeof Worker!=='undefined'){
-          const cells=roomVisibility ? await loadRoomVisibility(packed,lists,signal) : null;
-          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes,cells);
+          const [cells, screen]=roomVisibility ? await Promise.all([
+            loadRoomVisibility(packed,lists,signal), smooth && loadScreenVisibility(device,signal),
+          ]) : [null,null];
+          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes,cells,immediate,screen);
           if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size+stagedViews.exactBuffer.size;}
         }
       }catch(error){failure=error;}
@@ -333,7 +339,7 @@ export async function createForwardRenderer(app, daylight) {
           if(preparingProfile===null && preparedBand===null && viewIndices){
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
             const rangeStart=first,rangeCount=count;
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame);
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples);
             if(capture)capturedSource={
               indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16),
               candidates:viewIndices.captureCandidates(visible),

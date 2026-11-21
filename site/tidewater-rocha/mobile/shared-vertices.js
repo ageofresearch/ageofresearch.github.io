@@ -22,9 +22,8 @@ export function sharedVertices(capacity) {
     return id;
   }
   return {
-    remap(bytes, indices) {
+    remap(bytes, indices, local = new Uint32Array(bytes.byteLength / 32)) {
       const words = new Uint32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
-      const local = new Uint32Array(bytes.length / 32);
       for (let i = 0; i < local.length; i++) local[i] = intern(words, i*8);
       const out = count <= 65536 ? new Uint16Array(indices.length) : new Uint32Array(indices.length);
       for (let i = 0; i < out.length; i++) out[i] = local[indices[i]];

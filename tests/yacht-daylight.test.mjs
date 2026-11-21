@@ -215,6 +215,62 @@ test('camera culling retains crossing triangles, face order and the eye-relative
   assert.deepEqual([...output.subarray(0,length)],[3,4,5,6,7,8]);
 });
 
+test('a rapid turn applies the current eye cell and frustum before the worker replies', async () => {
+  const {prepareImmediateView} = await import('../site/tidewater-rocha/mobile/immediate-view.js');
+  const clip = [1,0,0,0, 0,1,0,0, 0,0,0,-1, 0,0,.1,0];
+  const points = [
+    [-4,0,-1],[-3,0,-1],[-3,1,-1], // Off the left of the viewport.
+    [-3,1,1],[3,1,-2],[0,-2,-1],   // Crosses the eye plane and the viewport.
+    [0,0,-2],[.1,0,-2],[0,.1,-2],
+    [9,0,-1],[10,0,-1],[9,1,-1],    // The sky rotates into view separately.
+  ];
+  const packed = new Uint8Array(points.length * 32), layers = new Int16Array(packed.buffer);
+  for (const id of [9,10,11]) layers[16*id+14] = -2;
+  const local = Uint32Array.from(points.keys(), i => 70000+i);
+  const indices = Uint16Array.of(2,1,0, ...points.keys());
+  const filter = prepareImmediateView(Float32Array.from(points.flat()), indices, local, packed);
+  const dst = new Uint32Array(12);
+  const bytes = Uint8Array.of(0, 0b100);
+  let size = filter(3, 12, clip, 360, 540, bytes, 1, 12, dst);
+  assert.deepEqual([...dst.subarray(0,size)], [...local.slice(3,6), ...local.slice(9)]);
+  // The same source range can be used in another room cell on the next frame.
+  size = filter(3, 12, clip, 360, 540, null, -1, 0, dst);
+  assert.deepEqual([...dst.subarray(0,size)], [...local.slice(3)]);
+});
+
+test('screen visibility retains a single covered MSAA sample and bounds a nearer opaque surface', async () => {
+  const {prepareScreenVisibility, usableScreen} = await import('../site/tidewater-rocha/mobile/screen-visibility.js');
+  const module = await WebAssembly.compile(await readFile(new URL('../site/tidewater-rocha/mobile/screen-visibility.wasm',import.meta.url)));
+  const width=360, height=540, projection=Float32Array.of(1,0,0,0, 0,1,0,0, 0,0,.000075,-1, 0,0,.03,0);
+  const triangles=[
+    [[100,100],[200,100],[100,200],1],       // Near opaque triangle.
+    [[110,110],[119,110],[110,119],2],       // Entirely inside its projection, farther away.
+    [[110,110],[119,110],[110,119],.5],      // Same screen area, closer to the eye.
+    [[250.01,150.01],[250.08,150.01],[250.01,150.08],1],
+    [[250.25,150.75],[250.6,150.75],[250.25,151.1],1], // Covers sample 0.
+    [[500,150],[502,150],[500,152],1],       // The last face belongs to the moving sky.
+  ];
+  const bytes=new Uint8Array(triangles.length*3*32), positions=new Float32Array(bytes.buffer), layers=new Int16Array(bytes.buffer);
+  for(const [i,face] of triangles.entries()) for(let corner=0;corner<3;corner++){
+    const id=i*3+corner,[x,y]=face[corner],w=face[3];
+    positions.set([(x/width*2-1)*w,(y/height*2-1)*w,-w],id*8);
+    if(i===5) layers[id*16+14]=-2;
+  }
+  const ids=Uint16Array.from({length:triangles.length*3},(_,i)=>i);
+  assert.equal(usableScreen(width,height,4,projection),true);
+  assert.equal(usableScreen(width,height,1,projection),false);
+  assert.equal(usableScreen(2500,1200,4,projection),false);
+  for(const precision of [1,16]){
+    const screen=prepareScreenVisibility({module,precision},bytes,ids.byteLength);
+    const size=screen.filter(ids,ids.length,projection,width,height,true);
+    assert.deepEqual([...screen.output.subarray(0,size)], [0,1,2,6,7,8,12,13,14,15,16,17]);
+    assert.equal(screen.filter(ids,ids.length,projection,width,height,false),null);
+    // Rebuilding the source list at the same camera must invalidate the cached result.
+    assert.equal(screen.filter(ids.subarray(3,6),3,projection,width,height,true),3);
+    assert.deepEqual([...screen.output.subarray(0,3)], [3,4,5]);
+  }
+});
+
 test('off-screen sky runs follow the sun and can be restored independently of room occlusion', async () => {
   const {widenedView, filterView} = await import('../site/tidewater-rocha/mobile/view-volume.js');
   const {filterRoomCell} = await import('../site/tidewater-rocha/mobile/room-visibility.js');

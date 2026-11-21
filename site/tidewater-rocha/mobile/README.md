@@ -40,6 +40,16 @@ where the table fails validation, use the ordinary camera visibility filter.
 After rebuilding the final guest package, regenerate the table with
 `node scripts/build-yacht-room-visibility.mjs` using a C++17 compiler.
 
+During a rapid turn, the renderer immediately clips the current range while the
+camera worker prepares its replacement. At four samples per pixel, larger moving
+views also test whether each small face can reach a sample or lies behind an
+opaque surface. An offscreen coverage test measures projected vertex precision
+before walking starts. The ordinary draw handles unsupported projections and
+an unavailable accelerator. Rebuild the checked-in WebAssembly module with
+`npm ci --prefix scripts/yacht-geometry` and
+`npm run --prefix scripts/yacht-geometry screen-visibility`.
+
+
 ## Folding chairs on the aft terrace
 
 The four backs face the aisle and the slings tuck under the dining top. The

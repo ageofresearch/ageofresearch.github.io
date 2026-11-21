@@ -1,8 +1,9 @@
+import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=1';
 import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=8';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=2';
 
-export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null) {
+export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null, immediate = {}, screenConfig = null) {
   let worker;
   try {worker = new Worker(new URL('./view-worker.js?v=4', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
@@ -19,22 +20,40 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return false;
     return true;
   }
+  // The worker takes ownership of the remapped indices and glass arrays.
+  const profileFormats = Object.fromEntries(Object.entries(profiles).map(([name, indices]) =>
+    [name, { short: indices.BYTES_PER_ELEMENT === 2, glassLength: glazing[name].indices.length }]));
   const filterSky = prepareSkyVisibility(vertices);
+  const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes);
   const scratch = new ArrayBuffer(glassOffset);
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
-  function uploadOpaque(entry, camera, projection, width, height, sunRevision) {
+  function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
     const offset = roomCellOffset(region, camera, projection, width, height);
     // Sun changes invalidate only the sky exclusions. The camera and room can
     // immediately reuse the full sky from the same prepared index list.
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
       Math.min(width*projection[0], height*projection[5]) >= 100;
-    if (entry.offset === offset && entry.trimSky === trimSky) return;
+    const useScreen = Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
+      usableScreen(width, height, samples, projection);
+    const changed = entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen;
+    if (!changed && !entry.filtered) return;
     let indices = entry.output, length = entry.rawLength;
-    if (offset >= 0 || trimSky) {
-      const compact = indices.BYTES_PER_ELEMENT === 2 ? compact16 : compact32;
-      length = filterRoomCell(cells?.bits, offset, region?.count, indices, length, entry.slots, compact, trimSky && entry.skyRuns);
-      indices = compact;
+    if (changed) {
+      if (offset >= 0 || trimSky) {
+        const compact = indices.BYTES_PER_ELEMENT === 2 ? compact16 : compact32;
+        length = filterRoomCell(cells?.bits, offset, region?.count, indices, length, entry.slots, compact, trimSky && entry.skyRuns);
+        indices = compact;
+      }
+      entry.baseLength = length;
+      entry.useScreen = useScreen;
+      // Small ranges already render cheaply. Reuse the broader worker list.
+      entry.filtered = useScreen && length >= 3500 * 3;
+    } else length = entry.baseLength;
+    if (entry.filtered) {
+      length = screen.filter(indices, length, frame, width, height, changed);
+      if (length === null) return;
+      indices = screen.output;
     }
     if (length && length < entry.count)
       device.queue.writeBuffer(buffer, 0, indices, 0, length + (indices.BYTES_PER_ELEMENT === 2 ? length % 2 : 0));
@@ -77,7 +96,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       return new Promise(resolve=>waiting.add(resolve));
     },
     captureCandidates(entry){
-      if(!entry || (entry.rawLength===entry.count && entry.offset<0))return null;
+      if(!entry || entry.immediate || (entry.rawLength===entry.count && entry.offset<0))return null;
       // Snapshot the actual room and frustum while capture readback is pending.
       // A later sun angle can reveal another part of the rotating sky.
       const source=entry.output, copy=new source.constructor(entry.rawLength);
@@ -114,7 +133,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       }
       return exact.length??null;
     },
-    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame) {
+    select(profile, first, count, clip, camera, projection, width, height, sunRevision, frame, samples) {
       if (stopped) return null;
       const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
@@ -129,7 +148,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         pending = null;
       }
       const current=valid(active);
-      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision);
+      if (current) uploadOpaque(active, camera, projection, width, height, sunRevision, frame, samples);
       const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
       // A turn can leave the angular guard without moving the eye. Request the
       // next list while the outer frustum still covers the visible frame.
@@ -139,7 +158,23 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
           planes:widenedView(clip), inner:widenedView(clip,1.12)};
         worker.postMessage({...pending, trackFaces:Boolean(cells?.range(profile, first, count))});
       }
-      return current?active:null;
+      if (current) return active;
+      // On this frame a previous worker result may exclude newly visible
+      // geometry. Use the current frustum and eye cell while its replacement runs.
+      const filter = immediate[profile];
+      if (!filter) return null;
+      const region = cells?.range(profile, first, count, camera);
+      const offset = roomCellOffset(region, camera, projection, width, height);
+      const {short, glassLength} = profileFormats[profile];
+      const output = short ? compact16 : compact32;
+      const length = filter(first, count, clip, width, height, cells?.bits, offset, region?.count, output);
+      if (length && length < count) {
+        device.queue.writeBuffer(buffer, 0, output, 0, length + (short ? length % 2 : 0));
+        // Turning back can make the old worker list valid again. Its indices
+        // must be restored after this write to the same opaque buffer.
+        if (active) active.offset = undefined;
+      }
+      return {length, glassLength, immediate:true};
     },
   };
 }

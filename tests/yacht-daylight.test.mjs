@@ -201,3 +201,15 @@ test('shared vertices preserve every packed byte and widen indices above 65535',
   assert.deepEqual(all.subarray(0,input.length),input);
   assert.deepEqual(all.subarray(input.length),distinct);
 });
+
+test('resolved coverage signatures recover every distinct MSAA tag including collisions and empty samples', async()=>{
+  const {sampleRoots}=await import('../site/tidewater-rocha/mobile/sample-visibility.js');
+  let seed=107;
+  const next=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)%251);
+  for(let i=0;i<1200;i++){
+    const a=next(),b=next();
+    const tags=[a,i%3?a:b,i%3===1?b:next(),i%4?next():0];
+    const sums=[1,2,3,4].map(n=>tags.reduce((s,t)=>s+t**n,0)%251);
+    assert.deepEqual(sampleRoots(...sums),[...new Set(tags)].sort((x,y)=>x-y));
+  }
+});

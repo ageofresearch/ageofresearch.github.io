@@ -2,7 +2,8 @@ import {sharedVertices} from './shared-vertices.js?v=1';
 import {createViewIndices} from './view-indices.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-1';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
-import {shader} from './daylight-shader.js?v=yacht-daylight-1';
+import {createVisibilityTarget} from './visibility-target.js?v=1';
+import {shader,visibilityShader} from './daylight-shader.js?v=yacht-daylight-1';
 import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-1';
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
@@ -27,29 +28,34 @@ export async function createForwardRenderer(app, daylight) {
     {binding:4,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
-  function makePipeline(count, glass) {
+  const taggedModule=device.createShaderModule({label:'Yacht coverage evidence',code:visibilityShader});
+  function makePipeline(count, glass, tagged=false) {
+    const program=tagged&&!glass?taggedModule:module;
+    const targets=[{format,blend:glass?blend:undefined}];
+    if(tagged)targets.push({format:'rgba16float',writeMask:glass?0:GPUColorWrite.ALL});
     return device.createRenderPipelineAsync({
       label:(glass ? 'Boarding glass ' : 'Boarding finishes ')+count+'×', layout, multisample:{count},
-      vertex:{module,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:32,attributes:[
+      vertex:{module:program,entryPoint:glass ? 'glassVertex' : 'vertex',buffers:[{arrayStride:32,attributes:[
         {shaderLocation:0,offset:0,format:'float32x3'}, {shaderLocation:1,offset:12,format:'snorm8x4'},
         {shaderLocation:2,offset:16,format:'unorm8x4'}, {shaderLocation:3,offset:20,format:'float32x2'},
         {shaderLocation:4,offset:28,format:'sint16x2'},
       ]},...glass?[]:[{arrayStride:8,attributes:[
         {shaderLocation:5,offset:0,format:'unorm8x4'},{shaderLocation:6,offset:4,format:'unorm8x4'}
       ]}]]},
-      fragment:{module,entryPoint:glass ? 'glassFragment' : 'fragment',targets:[{format,blend:glass ? blend : undefined}]},
+      fragment:{module:program,entryPoint:glass?'glassFragment':tagged?'tagged':'fragment',targets},
       // The gate is a closed beveled pane, so its outward faces cover both viewing sides.
       primitive:{topology:'triangle-list',cullMode:'back'},
       depthStencil:{format:'depth24plus',depthWriteEnabled:!glass,depthCompare:'greater'},
     });
   }
-  function makePipelines(count) {
-    return Promise.all(model.meshes.map(mesh => makePipeline(count,mesh.material.transparent)));
+  function makePipelines(count,tagged) {
+    return Promise.all(model.meshes.map(mesh => makePipeline(count,mesh.material.transparent,tagged)));
   }
   const [single, smooth] = await Promise.all([makePipelines(1), makePipelines(4).catch(error => {
     console.warn('Gangway MSAA unavailable', error);
     return null;
   })]);
+  const evidence=smooth && await makePipelines(4,true).catch(()=>null);
   let samples = smooth ? 4 : 1;
   function upload(array, usage) {
     const buffer = device.createBuffer({size:Math.ceil(array.byteLength/4)*4,usage,mappedAtCreation:true});
@@ -104,7 +110,8 @@ export async function createForwardRenderer(app, daylight) {
     {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:shadow.view},{binding:4,resource:shadow.sampler}]});
   model.stats.finishTextureBytes=finishes.bytes;
   model.stats.materialTextures=1;
-  let depth, depthView, color, colorView;
+  let depth, depthView, color, colorView,coverage,lastGeometry,stable=0;
+  const lastClip=new Float32Array(16);
   return {
     get activeProfile() { return activeProfile; },
     async installProfiles(source,{prepare=false,activate=()=>{}}={}) {
@@ -148,7 +155,7 @@ export async function createForwardRenderer(app, daylight) {
         resident+=sharedBuffer.size+stagedPalette.storage.size;
         if(Object.values(uploaded).some(p=>p.batches[0].ranges) && typeof Worker!=='undefined'){
           stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes);
-          if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size;}
+          if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size+stagedViews.exactBuffer.size;}
         }
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
@@ -195,6 +202,7 @@ export async function createForwardRenderer(app, daylight) {
           // First and last ranges together touch the complete resident index buffer.
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
+          if(name===previous && evidence && samples===4)warmBands.push('coverage');
           if(profiles[name].batches[0].localView)warmBands.push('local');
           // A parent span warms all of its narrower frustum prefixes.
           const views=profiles[name].batches[0].views??[];
@@ -215,6 +223,7 @@ export async function createForwardRenderer(app, daylight) {
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {
+        coverage?.dispose();coverage=null;lastGeometry=null;
         depth?.destroy();
         color?.destroy();
         const attachment = {size:[engine.width,engine.height],sampleCount:samples,
@@ -223,6 +232,7 @@ export async function createForwardRenderer(app, daylight) {
         depthView = depth.createView();
         color = samples > 1 ? device.createTexture({...attachment,label:'Gangway multisample color',format}) : null;
         colorView = color?.createView();
+        if(evidence&&samples===4)coverage=createVisibilityTarget(device,engine.width,engine.height);
       }
       camera.updateMatrixWorld();
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
@@ -236,16 +246,26 @@ export async function createForwardRenderer(app, daylight) {
       }
       gpu.queue.writeBuffer(uniform,0,frame,0,moved?40+daylight.irradiance.length:20);
       if(moved)shadow.draw(gpu.getEncoder(),daylight.state);
+      const preparingCoverage=preparedBand==='coverage';
+      if(preparingCoverage)preparedBand=0;
+      let capture=preparingCoverage&&coverage;
+      if(coverage && viewIndices && preparingProfile===null){
+        let same=lastGeometry===batches;
+        for(let i=0;i<16&&same;i++)same=frame[i]===lastClip[i];
+        if(!same){lastClip.set(frame.subarray(0,16));lastGeometry=batches;stable=0;}
+        else if(stable<3&&!coverage.busy && ++stable===3)capture=true;
+      }else lastGeometry=null;
       const screen = target??engine.currentTexture().createView();
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',
         colorAttachments:[{view:colorView ?? screen,resolveTarget:colorView ? screen : undefined,
           loadOp:'clear',storeOp:colorView ? 'discard' : 'store',
-          clearValue:{r:.40,g:.64,b:.84,a:1}}],
+          clearValue:{r:.40,g:.64,b:.84,a:1}},...(capture?[coverage.attachment]:[])],
         depthStencilAttachment:{view:depthView,depthClearValue:0,depthLoadOp:'clear',depthStoreOp:'discard'},
       });
       pass.setBindGroup(0,bindings);
-      const pipelines = samples === 4 ? smooth : single;
+      const pipelines = capture?evidence:samples === 4 ? smooth : single;
+      let capturedSource;
       let visible;
       for (let i=0; i<batches.length; i++) {
         const batch = batches[i];
@@ -283,10 +303,19 @@ export async function createForwardRenderer(app, daylight) {
           }
           if(preparingProfile===null && preparedBand===null && viewIndices){
             const cameraMatrix=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements;
-            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements);
+            const rangeStart=first,rangeCount=count;
+            if(capture)capturedSource={indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16)};
+            visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height);
             if(visible && visible.length<count){
               pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat);
               first=0;count=visible.length;
+            }
+            if(!capture&&samples===4){
+              const fixed=viewIndices.fixed(activeProfile,rangeStart,rangeCount,frame,engine.width,engine.height);
+              if(fixed!==null&&fixed<count){
+                pass.setIndexBuffer(viewIndices.exactBuffer,batch.indexFormat);
+                first=0;count=fixed;
+              }
             }
           }
           pass.drawIndexed(count,1,first);
@@ -297,9 +326,15 @@ export async function createForwardRenderer(app, daylight) {
         } else pass.drawIndexed(batch.count);
       }
       pass.end();
+      if(capturedSource){
+        const {indices,profile,first,count,clip}=capturedSource;
+        coverage.read(gpu.getEncoder(),(pixels,w,h,stride)=>{
+          if(!disposed && viewIndices===indices)indices.analyze(pixels,w,h,stride,profile,first,count,clip);
+        });
+      }
     },
     dispose() {
-      disposed=true;
+      disposed=true;coverage?.dispose();
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
       viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
     },

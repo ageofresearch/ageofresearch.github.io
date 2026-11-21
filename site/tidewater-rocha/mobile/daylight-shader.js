@@ -2,7 +2,8 @@ import { sampleReflectionWGSL } from './yacht-daylight.js?v=yacht-daylight-1';
 import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 // Prepared materials are linear. Diffuse sky, reflected light and direct sun
 // meet before the one display conversion. Visibility modulates direct light only.
-export const shader = `
+function program(tagged) {
+return `
 struct Frame {
   clip:mat4x4f, eye:vec4f, sun:vec4f, light:mat4x4f,
   bounce:array<vec4f,32>, fittings:array<vec4f,192>,
@@ -22,12 +23,13 @@ fn display(c:vec3f)->vec3f{
 ${skyRadiance}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
+ ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
  @builtin(position) clip:vec4f,@location(0) indirect:vec3f,@location(1) direct:vec3f,
  @location(2) uv:vec2f,@location(3) @interpolate(flat) layer:i32,@location(4) light:vec3f
 }
-@vertex fn vertex(@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
+@vertex fn vertex(${tagged?'@builtin(vertex_index) id:u32,':''}@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
  @location(3) uv:vec2f,@location(4) finish:vec2i,@location(5) shade:vec4f,@location(6) direct:vec4f)->V {
- var o:V;o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
+ var o:V;${tagged?'o.tag=id%251u;':''}o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
  if(o.layer==-2){
    let dome=normalize((pos-vec3f(0.,-2.01,0.))/vec3f(.98289474,1.,.97861111));
    let east=normalize(vec3f(frame.sun.w,0.,frame.eye.w));
@@ -71,7 +73,7 @@ struct V {
  return o;
 }
 @diagnostic(off, derivative_uniformity)
-@fragment fn fragment(in:V)->@location(0) vec4f{
+fn shade(in:V)->vec4f{
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;
  if(any(in.direct>vec3f(.001))){
@@ -85,6 +87,13 @@ struct V {
  }
  return vec4f(radiance,1.);
 }
+@fragment fn fragment(in:V)->@location(0) vec4f{return shade(in);}
+${tagged?`
+struct Tagged { @location(0) color:vec4f, @location(1) powers:vec4f }
+@fragment fn tagged(in:V)->Tagged {
+ let x=in.tag;let b=(x*x)%251u;let c=(b*x)%251u;let d=(c*x)%251u;
+ return Tagged(shade(in),vec4f(vec4u(x,b,c,d)));
+}`:''}
 struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
 @vertex fn glassVertex(@location(0) pos:vec3f,@location(1) normal:vec4f,@location(2) tint:vec4f,@location(4) finish:vec2i)->Glass{
  let eye=normalize(frame.eye.xyz-pos);let n=normalize(normal.xyz);
@@ -94,3 +103,6 @@ struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
 }
 @fragment fn glassFragment(in:Glass)->@location(0) vec4f{return in.rgba;}
 `;
+}
+export const shader=program(false);
+export const visibilityShader=program(true);

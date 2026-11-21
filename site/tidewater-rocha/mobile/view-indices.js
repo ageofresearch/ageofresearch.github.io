@@ -5,22 +5,27 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   try {worker = new Worker(new URL('./view-worker.js?v=1', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
-  let buffer, active, pending, stopped = false, finishStart;
+  let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
   const ready = new Promise(resolve => {finishStart = resolve;});
   function dispose() {
     stopped = true;
     worker.terminate();
-    buffer?.destroy();
+    buffer?.destroy();exactBuffer?.destroy();
     active = pending = null;
     finishStart();
   }
   try {
     buffer = device.createBuffer({label:'Yacht visible opaque indices', size:glassOffset+maxGlassBytes,
       usage:GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST});
+    exactBuffer=device.createBuffer({label:'Fixed camera opaque indices',size:glassOffset,usage:GPUBufferUsage.INDEX|GPUBufferUsage.COPY_DST});
     worker.onerror = worker.onmessageerror = dispose;
     worker.onmessage = ({data}) => {
       if (stopped) return;
       if (!data) {finishStart(); return;}
+      if(data.key!==undefined){
+        if(exact?.key===data.key)exact.result=data;
+        return;
+      }
       // A stale result may arrive after a turn. Revalidate before upload.
       if (pending) pending.result = data;
     };
@@ -28,10 +33,31 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       ...Object.values(glazing).flatMap(g=>[g.vertices.buffer,g.indices.buffer])]);
   } catch (error) {dispose(); throw error;}
   return {
-    buffer, glassOffset, ready, dispose,
-    select(profile, first, count, clip, camera, projection) {
+    buffer, exactBuffer,glassOffset, ready, dispose,
+    analyze(pixels,width,height,stride,profile,first,count,clip){
+      if(stopped)return;
+      exact={key:++serial,profile,first,count,width,height,clip:Float32Array.from(clip)};
+      worker.postMessage({...exact,pixels,stride},[pixels.buffer]);
+    },
+    fixed(profile,first,count,clip,width,height){
+      if(!exact || exact.profile!==profile || exact.first!==first || exact.count!==count || exact.width!==width || exact.height!==height)return null;
+      for(let i=0;i<16;i++)if(exact.clip[i]!==clip[i])return null;
+      if(exact.result){
+        const {output,length}=exact.result;
+        if(length)device.queue.writeBuffer(exactBuffer,0,output,0,length+(output.BYTES_PER_ELEMENT===2?length%2:0));
+        exact.length=length;exact.result=null;
+      }
+      return exact.length??null;
+    },
+    select(profile, first, count, clip, camera, projection, width, height) {
       if (stopped) return null;
-      const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count
+      const focal=Math.min(Math.abs(projection[0])*width,Math.abs(projection[5])*height)/2;
+      const pixelAngle=1/Math.max(.001,focal);
+      // For either WebGPU or OpenGL perspective depth, the near plane lies
+      // at one of the NDC endpoints. The larger near corner includes offsets.
+      const near=Math.abs(projection[14])/Math.max(Math.abs(projection[10]), Math.abs(projection[10]+1),Math.abs(projection[10]-1));
+      const nearReach=2*near*Math.hypot(1,(1+Math.abs(projection[8]))/projection[0],(1+Math.abs(projection[9]))/projection[5]);
+      const valid = entry => entry && entry.profile === profile && entry.first === first && entry.count === count && pixelAngle<=entry.pixelAngle && nearReach<=entry.nearReach
         && (entry.eye[0]-camera[12])**2+(entry.eye[1]-camera[13])**2+(entry.eye[2]-camera[14])**2 <= viewRadius**2
         && coversView(entry.planes, camera, projection);
       if (pending?.result) {
@@ -45,12 +71,14 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         }
         pending = null;
       }
-      if (valid(active)) return active;
+      const current=valid(active);
+      const distance=current?Math.hypot(active.eye[0]-camera[12],active.eye[1]-camera[13],active.eye[2]-camera[14]):Infinity;
+      if(current && distance<viewRadius*.55)return active;
       if (!pending) {
-        pending = {profile, first, count, planes:widenedView(clip),eye:[camera[12],camera[13],camera[14]]};
+        pending = {profile, first, count, planes:widenedView(clip),camera:Array.from(camera),nearReach:nearReach*1.01,pixelAngle:pixelAngle*1.01,eye:[camera[12],camera[13],camera[14]]};
         worker.postMessage(pending);
       }
-      return null;
+      return current?active:null;
     },
   };
 }

@@ -8,10 +8,11 @@ import { MeshoptSimplifier } from './yacht-geometry/node_modules/meshoptimizer/i
 import { buildYachtGeometry, createBoarding, createSternFeatures, createFinishes, resolveYachtPartFinish } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs';
+import { serviceStairStraightEnd } from '../site/tidewater-rocha/mobile/cockpit-stair-foot.js';
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'gangway-profile-2';
+const version = 'cockpit-stair-floor-1';
 
 // Keep the same main-deck mesh from boarding through the saloon.
 export function mainDeckError(bounds) {
@@ -62,6 +63,17 @@ function floorTriangles(part) {
 // Weld identical attributes before simplifying. Do not move any vertices or
 // drop components; silhouettes, material boundaries and deck edges stay intact.
 export function simplify(part, error, flags=[]) {
+  // These faces line the closed service tunnel under the cockpit stair. Its
+  // outside is owned by the cheek/capping and the deck. The mobile walk has
+  // no interior service route. Keep the forward turn and the door assembly.
+  if (/^(sloping white service stair ceiling|profiled white service stair enclosure)$/.test(part.feature)) {
+    const visible=[];
+    for (let i=0;i<part.indices.length;i+=3) {
+      const face=part.indices.slice(i,i+3);
+      if (face.some(j=>part.vertices[6*j]>serviceStairStraightEnd+1e-6)) visible.push(...face);
+    }
+    part={...part,indices:visible};
+  }
   const materialType=part.finish?.[3]??(part.materialID?resolveYachtPartFinish(part)[3]:undefined);
   if(part.indices.length<=72 || error===0)return part;
   const vertices=[], light=[], surfaceTypes=[], remap=[], keys=new Map();
@@ -130,7 +142,7 @@ export async function buildSaloon() {
     add({...part,id:part.id+'/saloon'},'roof',[8.5,-3.13,5.87,17.91,3.13,6.01]);
   // Retain the real walls of the service-stair enclosure beside the doorway.
   for(const part of model.interiorDetail.objects)
-    if(/profiled white service stair enclosure|sloping white service stair ceiling|dark sidewall around D1/.test(part.feature))
+    if(/profiled white service stair enclosure|sloping white service stair ceiling|cockpit stair exterior (?:cheek|capping)|dark sidewall around D1/.test(part.feature))
       add({...part,id:part.id+'/saloon'},'boundary',region);
 
   const collisionFootprints=[];

@@ -264,8 +264,13 @@ export async function createForwardRenderer(app, daylight) {
       if(profiles) {
         const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
         const guestApproach=!!guest&&(nav.deck==='LD'||nav.deck==='MD'&&guest.profileContains(...nav.position,activeProfile)&&nav.floorSafe(...nav.position,'MD'));
-        const main=profiles.main&&nav.deck==='MD'&&!nav.stair&&!guestApproach&&(nav.position[0]>=7.8&&inMainDeck(...nav.position)||activeProfile==='main'&&nav.position[0]>17.3);
-        const name=preparingProfile??(main?'main':nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position),guestApproach));
+        const bridgeApproach=!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position);
+        // The bridge lobby opens beside the galley. Its stair and headroom
+        // belong to the upper profile, including the last level step before it.
+        const main=profiles.main&&nav.deck==='MD'&&!nav.stair&&!guestApproach&&!bridgeApproach&&
+          (nav.position[0]>=7.8&&inMainDeck(...nav.position)||activeProfile==='main'&&nav.position[0]>17.3);
+        const name=preparingProfile??(main?'main':nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,
+          !!app.entranceYacht.bow?.contains(...nav.position),bridgeApproach,guestApproach));
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {

@@ -45,7 +45,7 @@ function faceNormal(position, a, b, c) {
 // over the eye box is linear in z. A front-facing triangle is therefore visible
 // in a prefix, a suffix, every band, or none. Sorting these four cases lets each
 // band use one contiguous draw; neighboring bands share their original faces.
-function opaqueRanges(position, indices, profile, surface) {
+function opaqueRanges(position, indices, profile, surface, left, right) {
   const [low, high] = heights[profile],
     groups = Array.from({ length: 2 * bands - 1 }, () => []),
     background = groups.map(()=>[]);
@@ -57,7 +57,7 @@ function opaqueRanges(position, indices, profile, surface) {
       b = indices[i + 1] * 3,
       c = indices[i + 2] * 3;
     const [nx, ny, nz] = faceNormal(position, a, b, c);
-    const lateral = nx >= 0 ? 4.5 : -4.5,
+    const lateral = nx >= 0 ? right : left,
       vertical = (ny >= 0 ? high : low) - basis.seaReference;
     const margin = 0.02 * Math.hypot(nx, ny, nz);
     const distance =
@@ -144,14 +144,22 @@ function localDraw(positions, indices, surface, { axis, box, eye }) {
   return { axis, box, lowCount: low.length, indices: sorted(low).concat(sorted(high)) };
 }
 
-export function packWalkProfile(boarding, profile, audit, store) {
+export function packWalkProfile(boarding, profile, audit, store, withSideDecks=false) {
+  // From a single side of the yacht fewer triangles can ever face the eye.
+  // Both halves share the centreline and keep every possible front face.
+  const lateralBands=withSideDecks&&['exterior','upper','guest'].includes(profile)?bands:0;
   let geometryBytes = 0;
   const batches = boarding.meshes.map((mesh) => {
     const geometry = mesh.geometry,
       glass = mesh.material.transparent;
-    const submission = glass
-      ? { indices: geometry.index.array }
-      : opaqueRanges(geometry.attributes.position.array, geometry.index.array, profile, geometry.attributes.aSurface.array);
+    const draw=(left,right)=>opaqueRanges(geometry.attributes.position.array,geometry.index.array,
+      profile,geometry.attributes.aSurface.array,left,right);
+    const submission=glass?{indices:geometry.index.array}:draw(-4.5,lateralBands?0:4.5);
+    if(!glass&&lateralBands){
+      const port=draw(0,4.5),offset=submission.indices.length;
+      submission.ranges.push(...port.ranges.map(([first,count])=>[offset+first,count]));
+      submission.indices=submission.indices.concat(port.indices);
+    }
     let localView;
     if (!glass && viewBoxes[profile]) {
       const view = localDraw(geometry.attributes.position.array, geometry.index.array, geometry.attributes.aSurface.array, viewBoxes[profile]);
@@ -218,5 +226,5 @@ export function packWalkProfile(boarding, profile, audit, store) {
     (glass.indices.length +
       Math.max(opaque.localView?.count ?? 0,...(opaque.views??[]).map(v=>v.count), ...opaque.ranges.map(([, count]) => count))) /
     3;
-  return { batches, triangles, geometryBytes, audit, visibility: { start, step } };
+  return { batches, triangles, geometryBytes, audit, visibility: { start, step, ...(lateralBands&&{lateralBands}) } };
 }

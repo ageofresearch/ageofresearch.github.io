@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mobile,full} from './yacht-guest-fixture.mjs';
+import {mobile,full,guest} from './yacht-guest-fixture.mjs';
+import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {travel} from './yacht-saloon-fixture.mjs';
 import {mainRooms} from '../site/tidewater-rocha/mobile/main-deck.js';
 
@@ -47,5 +48,53 @@ test('the gangway joins the cockpit and all nine main deck destinations have ret
     for(const p of [[21.95,.96],[24.7,0],[29.29,1.9],[20,3.83],[22.5,3.24]])
       assert.equal(nav.floorSafe(...p,'MD'),false,'Walk through fitting or edge '+p);
     fixture.dispose?.();if(!fixture.dispose)model.dispose();
+  }
+});
+
+test('both side passages retain a supported handrail across the cockpit joint in every walking profile',()=>{
+  const stations=[6.8,8.44,8.46,10.2,11.59,11.61,16.2,20,22.2];
+  for(const [profile,data] of Object.entries(guest.profiles)){
+    const {indices,attributes:{position}}=data.batches[0];
+    for(const side of [-1,1])for(const x of stations){
+      // Inspect the actual uploaded faces in the all-direction draw at this eye.
+      const band=Math.floor((x*basis.sx-basis.length/2-data.visibility.start)/data.visibility.step)
+        +(side>0?(data.visibility.lateralBands??0):0);
+      const [first,count]=data.batches[0].ranges[band];
+      const found=new Set();
+      const base=side>0&&x<11.6?4.84:4.49;
+      for(let i=first;i<first+count&&found.size<2;i+=3){
+        const ids=indices.subarray(i,i+3),ys=Array.from(ids,k=>position[k*3]*side/basis.sy);
+        if(ys.some(y=>y<3.3||y>3.82))continue;
+        const xs=Array.from(ids,k=>(position[k*3+2]+basis.length/2)/basis.sx);
+        if(x<Math.min(...xs)||x>Math.max(...xs))continue;
+        const zs=Array.from(ids,k=>position[k*3+1]+basis.seaReference);
+        if(zs.every(z=>Math.abs(z-5.025)<.029))found.add('rail');
+        // Rounded bulwark ends can dip at the butt joint. Intersect the
+        // actual face with the station plane before checking its height.
+        for(let j=0;j<3;j++){
+          const k=(j+1)%3,dx=xs[k]-xs[j];
+          if(!dx)continue;
+          const t=(x-xs[j])/dx;
+          if(t>=0&&t<=1&&Math.abs(zs[j]+t*(zs[k]-zs[j])-base)<.05)found.add('base');
+        }
+      }
+      assert.deepEqual([...found].sort(),['base','rail'],profile+' side '+side+' at '+x);
+    }
+  }
+});
+
+test('the outside edge stops sideways movement along both main-deck passages in both viewers',async()=>{
+  for(const f of [mobile(),await full({boarding:true})]){
+    try{
+      const nav=f.walk.nav;
+      for(const side of [-1,1])for(const x of [8.8,10.2,13.1,16.2,19.8]){
+        const start=[x,3.32*side];
+        assert.ok(nav.floorSafe(...start,'MD'),'Open passage '+start);
+        nav.deck='MD';nav.position=start;nav.stair=null;nav.elevation=3.95;
+        for(let i=0;i<48;i++)nav.move(0,.018*side);
+        assert.ok(nav.position[1]*side<3.65&&nav.floorSafe(...nav.position,'MD'),'Guard at '+start);
+        assert.equal(nav.floorSafe(x,3.82*side,'MD'),false);
+      }
+    }finally{if(f.dispose)f.dispose();else f.model.dispose();}
   }
 });

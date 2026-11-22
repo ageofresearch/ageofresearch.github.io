@@ -49,10 +49,12 @@ test('every visible source face of the four folding chairs reaches its draw', ()
           const n = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]];
           const locations = actual.get(key(triangle)) || [];
           for (const [band, [first, count]] of batch.ranges.entries()) {
+            const half=profile.visibility.lateralBands;
+            const port=half&&band>=half;
             const eye = [
-              n[0] > 0 ? 4.5 : -4.5,
+              n[0]>0?(half&&!port?0:4.5):(port?0:-4.5),
               (n[1] > 0 ? 5.85 : 3.3) - basis.seaReference,
-              start + (band + Number(n[2] > 0)) * step,
+              start + ((half?band%half:band) + Number(n[2] > 0)) * step,
             ];
             if (eye.reduce((d, x, k) => d + (x - a[k]) * n[k], 0) <= 0) continue;
             assert.ok(

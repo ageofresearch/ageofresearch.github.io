@@ -73,8 +73,18 @@ try {
   const helm = JSON.parse(await readFile(join(mobile, 'bridge-helm.json'))).room;
   const bridge = JSON.parse(await readFile(join(mobile, 'bridge-access.json')));
   const landings = bridge.flight.surfaces;
-  const upper = manifest.profiles.upper, {start, step} = upper.visibility;
-  // Both decks extend past their room labels onto the modeled landings.
+  function* bandsOver(profile,bounds){
+    const deck=manifest.profiles[profile],{start,step,lateralBands}=deck.visibility;
+    const [aft,left,fore,right]=bounds;
+    for(const [index,[first,count]] of deck.batches[0].ranges.entries()){
+      const band=lateralBands?index%lateralBands:index;
+      const x=(lateralBands&&index>=lateralBands?Math.max(0,left):left)*yacht.sy;
+      const X=(lateralBands&&index<lateralBands?Math.min(0,right):right)*yacht.sy;
+      const z=Math.max(start+band*step,aft*yacht.sx-yacht.length/2);
+      const Z=Math.min(start+(band+1)*step,fore*yacht.sx-yacht.length/2);
+      if(X>x&&Z>z)yield {first,count,x,X,z,Z};
+    }
+  }
   for (const [roomBounds, eye, landing] of [
     [helm.bbox, helm.spawn[2], landings.at(-1)],
     [accessProfileBounds, accessRoom.spawn[2], landings[0]],
@@ -84,23 +94,14 @@ try {
       bounds[0] = Math.min(bounds[0], x); bounds[1] = Math.min(bounds[1], y);
       bounds[2] = Math.max(bounds[2], x); bounds[3] = Math.max(bounds[3], y);
     }
-    const [aft, left, fore, right] = bounds, height = eye - yacht.seaReference;
-    for (const [band, [first, count]] of upper.batches[0].ranges.entries()) {
-      const z = Math.max(start + band * step, aft * yacht.sx - yacht.length / 2);
-      const Z = Math.min(start + (band + 1) * step, fore * yacht.sx - yacht.length / 2);
-      if (Z <= z) continue;
-      views.push({profile:'upper', first, count, sign:-1, height, spacing:.18, panels:true,
-        box:[left * yacht.sy, height, z, right * yacht.sy, height, Z]});
+    const height=eye-yacht.seaReference;
+    for(const {first,count,x,X,z,Z} of bandsOver('upper',bounds)){
+      views.push({profile:'upper',first,count,sign:-1,height,spacing:.18,panels:true,box:[x,height,z,X,height,Z]});
     }
   }
-  function addBands(profile, bounds, height, halfHeight, spacing, directions) {
-    const deck = manifest.profiles[profile], {start, step} = deck.visibility;
-    for (const [band, [first, count]] of deck.batches[0].ranges.entries()) {
-      const z = Math.max(start + band * step, bounds[0] * yacht.sx - yacht.length / 2);
-      const Z = Math.min(start + (band + 1) * step, bounds[2] * yacht.sx - yacht.length / 2);
-      if (Z <= z) continue;
-      views.push({profile, first, count, height, halfHeight, spacing, directions, panels:true,
-        box:[bounds[1] * yacht.sy, height, z, bounds[3] * yacht.sy, height, Z]});
+  function addBands(profile,bounds,height,halfHeight,spacing,directions){
+    for(const {first,count,x,X,z,Z} of bandsOver(profile,bounds)){
+      views.push({profile,first,count,height,halfHeight,spacing,directions,panels:true,box:[x,height,z,X,height,Z]});
     }
   }
   for (const [profile, file] of [['upper', 'upper-terrace'], ['sun', 'sun-deck']]) {

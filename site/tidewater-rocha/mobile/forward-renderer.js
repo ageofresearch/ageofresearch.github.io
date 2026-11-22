@@ -224,6 +224,7 @@ export async function createForwardRenderer(app, daylight) {
           // First and last ranges together touch the complete resident index buffer.
           const ranges=profiles[name].batches[0].ranges;
           const warmBands=ranges?[0,ranges.length-1]:[0];
+          if(profiles[name].visibility?.lateralBands)warmBands.push(ranges.length/2-1,ranges.length/2);
           if(name===previous && coveragePipeline && samples===4)warmBands.push('coverage');
           if(profiles[name].batches[0].localView)warmBands.push('local');
           // A parent span warms all of its narrower frustum prefixes.
@@ -338,7 +339,7 @@ export async function createForwardRenderer(app, daylight) {
         if(i===0)pass.setVertexBuffer(1,palette.storage);
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
         if (batch.ranges) {
-          const {start,step}=profiles[activeProfile].visibility;
+          const {start,step,lateralBands}=profiles[activeProfile].visibility;
           const view=batch.localView,box=view?.box;
           let first,count;
           let directional=preparedBand && typeof preparedBand==='object'?preparedBand:null;
@@ -362,7 +363,9 @@ export async function createForwardRenderer(app, daylight) {
             const highestRay=-m[axis+8]+m[axis]*p[8]/p[0]+m[axis+4]*p[9]/p[5]+Math.abs(m[axis]/p[0])+Math.abs(m[axis+4]/p[5]);
             first=view.first;count=preparedBand===null&&highestRay<-.001?view.lowCount:view.count;
           }else{
-            const band=preparedBand??Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-start)/step)));
+            const width=lateralBands||batch.ranges.length;
+            const longitudinal=Math.max(0,Math.min(width-1,Math.floor((eye.z-start)/step)));
+            const band=preparedBand??(longitudinal+(eye.x>0&&lateralBands?width:0));
             [first,count]=batch.ranges[band];
           }
           if(preparingProfile===null && preparedBand===null && viewIndices){

@@ -13,6 +13,8 @@ export async function buildGuestAccess() {
   const covers=new Map();
   const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest','main'],
     lod(p,context) {
+      if(p.role==='main-side-guard'||/^MD\/boarding-route\/[2-5]$/.test(p.id)||
+        context.profile==='main'&&p.id.startsWith('MD/boarding-route/'))return {error:0};
       if(context.profile==='main'){
         if(p.context)return {error:0};
         if(p.role==='main-deck')return {error:p.glass?0:p.bounds[0]>=17.7?.004:.014};
@@ -45,10 +47,18 @@ export async function buildGuestAccess() {
         return {omit:true,reason:'Small printed cockpit control marks; control panel and cabinet remain'};
       return accessLOD(p,context);
     },
-    extend({model,parts}) {
+    extend({model,lowerParts,parts}) {
       // Complete source guards replace the previous top-only extraction.
       for(let i=parts.length-1;i>=0;i--)if(parts[i].role==='access-guest-guard')parts.splice(i,1);
       const additions=[],final=renderedParts(model);
+      // The cockpit package stops at x=8.5. Restore the full port bulwark
+      // and its cap to x=11.6 before drawing the rail seated on them.
+      const coamings=new Map(final.filter(p=>p.id.startsWith('MD/boarding-route/')).map(p=>[p.id,p]));
+      for(const [index,part] of lowerParts.entries()){
+        const source=coamings.get(part.id);
+        if(source&&part.bounds[3]<source.bounds[3]-.001)
+          lowerParts[index]={...normalizeRenderedPart(source,model),role:part.role,sourceID:part.sourceID};
+      }
       const add=(source,role,box,suffix='')=>{
         const p=normalizeRenderedPart(source,model),g=box?clipGeometry(p,box):{vertices:Array.from(p.vertices),indices:Array.from(p.indices)};
         if(!g.indices.length)return;
@@ -118,7 +128,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'main-deck-complete-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'side-deck-guards-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

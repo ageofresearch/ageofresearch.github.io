@@ -72,6 +72,8 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
     const ranges=batches[0].ranges;
     if (Boolean(p.visibility)!==Boolean(ranges) || p.visibility && (!Number.isFinite(p.visibility.start) ||
         !Number.isFinite(p.visibility.step) || p.visibility.step<=0)) throw Error('Visibilidad del perfil inválida');
+    if(p.visibility?.lateralBands!==undefined&&(!Number.isSafeInteger(p.visibility.lateralBands)||
+      p.visibility.lateralBands<=0||p.visibility.lateralBands*2!==ranges?.length))throw Error('Bandas laterales inválidas');
     const triangles=((ranges?Math.max(batches[0].localView?.count??0,...batches[0].views.map(v=>v.count),...ranges.map(r=>r[1])):batches[0].indices.length)+batches[1].indices.length)/3;
     if(triangles!==p.triangles)throw Error('Recuento del salón inválido');
     profiles[name]={...p,batches,triangles,geometryBytes:batches.reduce((n,b)=>n+b.indices.byteLength+

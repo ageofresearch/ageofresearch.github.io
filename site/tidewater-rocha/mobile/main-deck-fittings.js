@@ -119,29 +119,61 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
 
 }
 
-// Cross sections sampled on the modeled outside edge of MD_DCK_001.
+// The VR side passages have a polished crown over a white bulwark. Aft, the
+// crown lands on the existing raised mooring caps; the openings below stay clear.
 export function finishSideDecks({add,box}){
-  const sections=[[8.45,3.8,3.8],[11.6,3.791,3.795],[15.65,3.763,3.758],[18.05,3.739,3.709],[22.4,3.597,3.471]];
-  const anchor='MD_SUP_007';
+  const forward=[[11.6,3.791,3.795],[15.65,3.763,3.758],[18.05,3.739,3.709],[22.4,3.597,3.471]];
   for(const side of [-1,1]){
-    for(let i=1;i<sections.length;i++){
-      const a=sections[i-1],b=sections[i],k=side>0?2:1;
-      function beam(lo,hi,inset,width,label){
-        const mesh=box([a[0],-width/2,lo,b[0],width/2,hi],Math.min(.004,width*.23));
-        for(let j=0;j<mesh.vertices.length;j+=6){
-          const t=(mesh.vertices[j]-a[0])/(b[0]-a[0]);
-          mesh.vertices[j+1]+=side*(a[k]+t*(b[k]-a[k])-inset);
+    const port=side===1, start=port?3.63:3.80, endCap=port?11.6:5.92;
+    const sections=[[start,3.78],...(port?[]:[[5.92,3.78]]),[8.45,3.8],
+      ...forward.map(row=>[row[0],row[port?2:1]])];
+    const railY=y=>side*(y-.075);
+    const attach=(mesh,material,name)=>add('MD_SUP_007',mesh,material,'side deck '+name+' '+side,false);
+
+    // Sweep shared rings along the sheer. A continuous cross-section avoids
+    // overlapping segment caps, and smooth normals give the steel a highlight.
+    function tube(path,ry,rz,label){
+      const vertices=[],indices=[],sides=8;
+      for(const [x,y,z] of path){
+        for(let i=0;i<sides;i++){
+          const a=i*2*Math.PI/sides, cy=Math.cos(a),sz=Math.sin(a);
+          const ny=cy/ry,nz=sz/rz,len=Math.hypot(ny,nz);
+          vertices.push(x,y+ry*cy,z+rz*sz,0,ny/len,nz/len);
         }
-        add(anchor,mesh,label==='bulwark'?'M06':'M19','side deck '+label+' '+side+' '+i,false);
       }
-      const existing=side>0&&i===1;
-      if(!existing)beam(3.95,4.43,.065,.10,'bulwark');
-      beam(4.95,4.985,.064,.047,'polished top rail');
-      if(!existing)beam(4.65,4.667,.064,.018,'intermediate rail');
-      const posts=Math.ceil((b[0]-a[0])/1.13);
-      for(let j=0;j<posts+(i===sections.length-1?1:0);j++){
-        const t=j/posts,x=a[0]+(b[0]-a[0])*t,y=side*(a[k]+t*(b[k]-a[k])-.064);
-        add(anchor,box([x-.014,y-.014,existing?4.835:4.42,x+.014,y+.014,4.955],.004),'M19','side deck stanchion '+side+' '+i+' '+j,false);
+      for(let k=0;k<path.length-1;k++)for(let i=0;i<sides;i++){
+        const a=k*sides+i,b=k*sides+(i+1)%sides;
+        indices.push(a,b,a+sides,b,b+sides,a+sides);
+      }
+      for(const end of [0,path.length-1]){
+        const first=vertices.length/6;
+        for(let i=0;i<sides;i++)vertices.push(...vertices.slice(6*(end*sides+i),6*(end*sides+i)+3),end?1:-1,0,0);
+        for(let i=1;i<sides-1;i++)indices.push(first,first+(end?i:i+1),first+(end?i+1:i));
+      }
+      attach({vertices,indices},'M19',label);
+    }
+    tube(sections.map(([x,y])=>[x,railY(y),5.025]),.046,.026,'polished top rail');
+    tube(sections.filter(([x])=>x>=endCap).map(([x,y])=>[x,railY(y),4.72]),.014,.014,'intermediate rail');
+    for(let i=1;i<sections.length;i++){
+      const [x,y]=sections[i-1],[X,Y]=sections[i];
+      if(x>=endCap){
+        const w=.12,g=box([x,-w/2,3.95,X,w/2,4.49],0);
+        for(let k=0;k<g.vertices.length;k+=6){
+          const t=(g.vertices[k]-x)/(X-x);
+          g.vertices[k+1]+=railY(y+t*(Y-y));
+        }
+        // Adjacent bulwark runs share their end section.
+        g.indices=g.indices.filter((_,k,idx)=>{
+          const a=idx[k-k%3]*6;
+          return !(g.vertices[a+3]<-.99&&x>endCap||g.vertices[a+3]>.99&&i<sections.length-1);
+        });
+        attach(g,'M06','bulwark '+i);
+      }
+      const bays=Math.ceil((X-x)/1.22);
+      for(let j=0;j<bays+(i===sections.length-1?1:0);j++){
+        const t=j/bays,px=x+(X-x)*t,py=railY(y+(Y-y)*t);
+        const foot=px<=endCap?(port?4.838:4.858):4.487;
+        attach(box([px-.016,py-.019,foot,px+.016,py+.019,5.006],0),'M19','stanchion '+i+' '+j);
       }
     }
   }

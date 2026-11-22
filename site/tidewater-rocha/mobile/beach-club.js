@@ -1,4 +1,4 @@
-import {portMooring} from './cockpit-fittings.js?v=cockpit-grid-1';
+import {portMooring} from './cockpit-fittings.js?v=gangway-profile-2';
 import {fittedFurniture} from './tour-furniture.js?v=port-guest-1';
 
 // Source axes are forward, port and up. The two stair landings register the
@@ -150,7 +150,7 @@ export function swimPlatformOutline(roundedOutline, portWidth, inset) {
 
 // Port stern, viewed from the Beach Club. The photo establishes the layered
 // outline. Heights and radii are fitted to the existing platform and deck.
-export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) {
+export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth, merge}) {
   // The landing field and the recessed footwell replace the rectangular
   // surfaces of the two lowest supports. Keep every original riser elevation.
   const platformZ = 2.84, deckZ = 3.95, rise = (deckZ-platformZ)/7;
@@ -160,7 +160,7 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) 
   const inner = 2.43, outer = 3.53, toe = 1.04, second = 1.45, top = 2.34;
   const recess = .052, revealTop = landingZ+.054;
   const weatheredTeak = {finish:[0x998c7c,.80,0,1]};
-  const marginBoard = {finish:[0x887567,.80,0,0]};
+  const marginBoard = {finish:[0x998e83,.80,0,0]};
 
   // The lower cheek sweeps forward outboard. Ease the sweep out at the
   // uppermost riser so the flight still meets the fixed boarding assembly.
@@ -171,7 +171,7 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) 
     // Registered points along the outer edge in Beach Club view B. Keep
     // the forward edge common to the field, margin, and footwell surround.
     const loop=[station([toe+recess,inner]),station([toe+recess,3.56]),
-      [.77,3.56],[.55,3.52],[.32,3.37],[.093,3.176],[-.06,3.036],
+      [.82,3.58],[.59,3.55],[.32,3.37],[.119,3.203],[-.050,3.048],
       [-.132,2.939],[-.18,2.843],[-.23,2.717],[-.276,2.498]];
     if(!inset)return loop;
     const edges=loop.map(([x,y],i)=>{
@@ -191,11 +191,44 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth}) 
   // The top courses share the forward edge. Use open U-shaped bands so the
   // field, caulk, timber margin and moulding tile a single surface.
   const band = (outside,inside) => surface([...outside.slice(1),outside[0],inside[0],...inside.slice(1).reverse()],landingZ);
-  add(withoutCap(extrude(lip,2.765,landingZ,0),landingZ),'M89','transom port pale step 1');
+  // The moulded foot tapers below the lip, leaving water alongside its sole.
+  const soleZ=2.765, plinth=withoutCap(extrude(lip,soleZ,landingZ,0),landingZ);
+  const taper=.07/(landingZ-soleZ),verts=plinth.vertices;
+  for(let i=0;i<verts.length;i+=6){
+    const x=verts[i]-.75,y=verts[i+1]-3,scale=1+taper*(verts[i+2]-landingZ);
+    verts[i]=.75+x*scale;verts[i+1]=3+y*scale;
+    const nx=verts[i+3]/scale,ny=verts[i+4]/scale,nz=verts[i+5]-taper*(x*nx+y*ny);
+    const length=Math.hypot(nx,ny,nz);
+    verts[i+3]=nx/length;verts[i+4]=ny/length;verts[i+5]=nz/length;
+  }
+  add(plinth,'M89','transom port pale step 1');
   add(band(lip,timber),'M89','port stair landing perimeter lip');
   add(band(timber,seam),'M43','port stair landing teak margin board',marginBoard);
   add(band(seam,field),'M34','port stair landing caulk seam');
-  add(surface(field,landingZ),'M100','transom port teak tread 1',weatheredTeak);
+  // Clip the parallel caulk lines to the field. The surrounding margin board
+  // owns its own timber grain; no stripe or extra face crosses the boundary.
+  const timberFaces=[], jointFaces=[];
+  function cut(loop,edge,above){
+    const out=[];
+    for(let i=0;i<loop.length;i++){
+      const a=loop[i],b=loop[(i+1)%loop.length];
+      const inside=p=>above?p[1]>=edge:p[1]<=edge;
+      if(inside(a))out.push(a);
+      if(inside(a)!==inside(b))out.push([a[0]+(b[0]-a[0])*(edge-a[1])/(b[1]-a[1]),edge]);
+    }
+    return out;
+  }
+  let rest=field;
+  for(let y=2.49;y<3.57;y+=.096){
+    for(const [edge,faces] of [[y-.002,timberFaces],[y+.002,jointFaces]]){
+      const strip=cut(rest,edge,false);
+      if(strip.length>=3)faces.push(surface(strip,landingZ));
+      rest=cut(rest,edge,true);
+    }
+  }
+  if(rest.length>=3)timberFaces.push(surface(rest,landingZ));
+  add(merge(timberFaces),'M100','transom port teak tread 1',{finish:[0x948b85,.82,0,2]});
+  add(merge(jointFaces),'M34','port stair landing field caulking');
 
   // The dark kick is set back under the first moulded nose. Its top cap is
   // owned by the underside of the projecting lip.

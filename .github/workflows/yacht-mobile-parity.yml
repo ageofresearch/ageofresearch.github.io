@@ -112,7 +112,7 @@ jobs:
             site/tidewater-rocha
             tests
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        if: matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access' || matrix.route == 'tour' || matrix.route == 'guest'
+        if: matrix.route == 'cold-walk' || matrix.route == 'bridge' || matrix.route == 'bow' || matrix.route == 'access' || matrix.route == 'tour' || matrix.route == 'guest'
         with:
           persist-credentials: false
           ref: ${{ github.event.pull_request.base.sha }}
@@ -157,7 +157,11 @@ jobs:
             gangway) node tests/yacht-gangway-performance.cjs ;;
             cold-walk)
               if ! node tests/yacht-cold-walk.cjs; then
-                YACHT_AFT_GPU_TIMING=1 node tests/yacht-cold-walk.cjs
+                YACHT_COLD_GPU_TIMING=1 node tests/yacht-cold-walk.cjs
+                # Compare the unchanged PR base on the same worker, preserving the candidate gate.
+                export YACHT_BASE="$YACHT_REFERENCE_BASE" YACHT_OUTPUT=/tmp/yacht-mobile-parity/reference
+                YACHT_COLD_GPU_TIMING=1 node tests/yacht-cold-walk.cjs
+                node tests/yacht-cold-walk.cjs
                 exit 1
               fi ;;
             bow|access) node tests/yacht-route-performance-comparison.cjs "$YACHT_PERF_CASE" ;;

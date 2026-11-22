@@ -1,5 +1,5 @@
 import { loadTerrace, connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
-import { connectSternAccess, configureSternWalk } from './stern-access.js?v=cockpit-grid-1';
+import { connectSternAccess, configureSternWalk } from './stern-access.js?v=gangway-profile-2';
 import { A as Group } from '../assets/common-HBn3Movl.js';
 export { preloadSaloon } from './main-saloon.js?v=port-guest-1';
 import {

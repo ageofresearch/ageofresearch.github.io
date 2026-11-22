@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=cockpit-grid-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=gangway-profile-2' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -43,7 +43,7 @@ async function capture(browser, mobile) {
         if (node.geometry) { meshes++; triangles += node.geometry.index.count / 3; }
       });
       // Compare exact original part IDs, vertices, normals, indices and material assignments.
-      const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
+      const parts = model.boarding.parts.filter(p => /^(telescopic |section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
       const furniture = model.terrace ? model.terrace.parts.filter(p=>p.role==='furniture') :
         model.exterior.parts.filter(p=>['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(p.anchor));
       return { meshes, triangles, count: model.boarding.parts.filter(p=>!p.context).length, parts: JSON.stringify(parts),

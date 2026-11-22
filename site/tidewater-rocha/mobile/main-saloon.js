@@ -1,7 +1,7 @@
 import { preloadUpper } from './upper-terrace.js?v=port-guest-1';
 import { connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
 
-export const saloonVersion = 'cockpit-grid-1';
+export const saloonVersion = 'gangway-profile-2';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {

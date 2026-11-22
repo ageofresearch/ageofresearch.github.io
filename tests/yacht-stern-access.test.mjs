@@ -171,7 +171,7 @@ test('port lower landing, kick reveal and inset footwell form separate supported
     const part=name=>model.transom.parts.find(p=>p.feature===name);
     const plinth=part('transom port pale step 1');
     const bands=['perimeter lip','teak margin board','caulk seam']
-      .map(name=>part('port stair landing '+name)).concat(part('transom port teak tread 1'));
+      .map(name=>part('port stair landing '+name)).concat(part('transom port teak tread 1'),part('port stair landing field caulking'));
     const kick=part('port stair recessed kick face'), shell=part('transom port pale step 2');
     const well=part('transom port teak tread 2'), surround=part('port stair moulded footwell surround');
     const landingZ=plinth.bounds[5],footwellZ=well.bounds[5];
@@ -186,6 +186,11 @@ test('port lower landing, kick reveal and inset footwell form separate supported
     const top=bands.map(p=>topTriangles(p));
     for(const y of [2.72,2.91,3.10,3.27])for(let x=.33;x<.92;x+=.031)
       assert.equal(top.filter(faces=>onSurface(x,y,faces)).length,1,'Landing surface ownership at '+[x,y]);
+    const seams=topTriangles(part('port stair landing field caulking'));
+    for(let y=2.586;y<3.4;y+=.096){
+      assert.ok(onSurface(.8,y,seams),'Missing landing caulk at '+y);
+      assert.ok(!onSurface(.8,y+.01,seams),'Caulk must remain within its narrow strip');
+    }
     assert.ok(!top.some(faces=>onSurface(.15,3.52,faces)),'Outboard aft corner follows the hull sweep');
     assert.ok(onSurface(1.38,3.03,topTriangles(well)));
     assert.ok(onSurface(1.24,3.03,topTriangles(surround)));
@@ -193,6 +198,30 @@ test('port lower landing, kick reveal and inset footwell form separate supported
     assert.ok(treads.every((p,i)=>p && (!i || p.bounds[5]>treads[i-1].bounds[5])));
     assert.ok(Math.abs(treads.at(-1).bounds[5]-access.treads.at(-1).height)<1e-8);
     assert.equal(access.platformSafe(.55,3.05,.14),false,'A visitor cannot walk inside the raised landing');
+  }finally{dispose();}
+});
+
+test('the three gangway sleeves form a closed shell through both changes in section',()=>{
+  const {model,dispose}=fixture();
+  try{
+    const edges=new Map(),triangles=new Set();
+    const parts=model.boarding.parts.filter(p=>/nested frame|recessed underskin|inset side channel|underside collar/.test(p.feature));
+    assert.equal(parts.length,14);
+    for(const {vertices,indices} of parts){
+      const points=Array.from({length:vertices.length/6},(_,i)=>vertices.slice(i*6,i*6+3).map(v=>v.toFixed(6)).join(','));
+      for(let i=0;i<indices.length;i+=3){
+        const corners=indices.slice(i,i+3).map(j=>points[j]);
+        const key=[...corners].sort().join('|');
+        assert.ok(!triangles.has(key),'Duplicate shell face '+key);
+        triangles.add(key);
+        for(let n=0;n<3;n++){
+          const from=corners[n],to=corners[(n+1)%3],directed=from+'|'+to;
+          assert.ok(!edges.has(directed),'Duplicate directed edge '+directed);
+          edges.set(directed,to+'|'+from);
+        }
+      }
+    }
+    for(const opposite of edges.values())assert.ok(edges.has(opposite),'Unclosed sleeve edge '+opposite);
   }finally{dispose();}
 });
 
@@ -211,6 +240,11 @@ test('the deployed beam, teak, and navigation share the dock to yacht slope',()=
           if(Math.abs(panel.vertices[j]-x)<1e-7)at.push(panel.vertices[j+2]);
         assert.ok(Math.abs(Math.max(...at)-boarding.height(x))<.007);
       }
+      const liner=boarding.parts.find(p=>p.feature===`telescopic section ${i} recessed underskin`);
+      assert.ok(liner.bounds[1]>frame.bounds[1] && liner.bounds[4]<frame.bounds[4]);
+      const depth=(p)=>Math.min(...Array.from({length:p.vertices.length/6},(_,k)=>
+        p.vertices[6*k+2]-boarding.height(p.vertices[6*k])));
+      assert.ok(depth(liner)>depth(frame)+.02,'Panel must sit above both longitudinal stringers');
       assert.ok(frame.finish[1]>.5 && boarding.safe((panel.bounds[0]+panel.bounds[3])/2,y,.14));
     }
     assert.equal(boarding.parts.filter(p=>p.feature.includes('underside collar')).length,2);

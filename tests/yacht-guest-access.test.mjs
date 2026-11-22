@@ -10,9 +10,9 @@ import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
 import {renderedParts,obstacles} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 
-test('guest package is reproducible with five bounded profiles, exact supports and unique geometry ownership',async()=>{
+test('guest package is reproducible with six bounded profiles, exact supports and unique geometry ownership',async()=>{
   const built=await buildGuestAccess();assert.deepEqual(built.manifest,manifest);assert.deepEqual(built.binary,binary);
-  assert.deepEqual(Object.keys(guest.profiles),['exterior','upper','sun','bow','guest']);
+  assert.deepEqual(Object.keys(guest.profiles),['exterior','upper','sun','bow','guest','main']);
   assert.equal(new Set(manifest.parts.map(p=>p.id)).size,manifest.parts.length);
   assert.ok(!manifest.parts.some(p=>p.role==='access-guest-guard'));
   const ceiling=manifest.parts.filter(p=>p.role==='guest-ceiling').flatMap(p=>{
@@ -159,7 +159,7 @@ test('corrupt, stale and unavailable guest data are rejected before navigation i
     assert.equal(f.model.guestAccess,undefined);assert.ok(!f.walk.nav.routes.some(r=>r.id==='guest'));
     assert.throws(()=>decodeGuestAccess({...manifest,version:'stale'},array(binary)));
     assert.throws(()=>decodeGuestAccess(manifest,new ArrayBuffer(12)));
-    for(const mutate of [m=>m.cabin=null,m=>m.cabinRoute.splice(1),m=>m.domains.pop(),m=>m.flight.surfaces.splice(5,1),m=>m.flight.obstacles.splice(5,1),m=>m.domains[0][0][0]=NaN,m=>m.profiles.guest.triangles=25001,m=>m.room.spawn=null,m=>m.flight.route.path[0][0]=25]) {
+    for(const mutate of [m=>m.mainDeck.floor=[],m=>m.mainDeck.collisionFootprints[0].polygon[0][0]=NaN,m=>delete m.profiles.main,m=>m.cabin=null,m=>m.cabinRoute.splice(1),m=>m.domains.pop(),m=>m.flight.surfaces.splice(5,1),m=>m.flight.obstacles.splice(5,1),m=>m.domains[0][0][0]=NaN,m=>m.profiles.guest.triangles=25001,m=>m.room.spawn=null,m=>m.flight.route.path[0][0]=25]) {
       const m=structuredClone(manifest);mutate(m);assert.throws(()=>decodeGuestAccess(m,array(binary)));
     }
     await assert.rejects(loadGuestAccess({fetcher:async()=>({ok:false})}));

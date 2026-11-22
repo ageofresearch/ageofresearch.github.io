@@ -54,7 +54,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
   const extension=extend?extend({model,lowerParts,parts}):{};
   const chunks=[];let offset=0;
   function store(values,Type=Float32Array){const a=Type.from(values),c=Buffer.from(a.buffer),d={offset,length:a.length};chunks.push(c);offset+=c.length;return d;}
-  const packed=parts.map(p=>({id:p.id,sourceID:p.sourceID,feature:p.feature,role:p.role,bounds:p.bounds,finish:p.finish,glass:!!p.glass,
+  const packed=parts.filter(p=>p.role!=='main-deck').map(p=>({id:p.id,sourceID:p.sourceID,feature:p.feature,role:p.role,bounds:p.bounds,finish:p.finish,glass:!!p.glass,
     vertices:store(p.vertices),indices:store(p.indices,Uint32Array)}));
   const profiles={},materials=createFinishes(0,true,true,true,true);
   try {
@@ -76,7 +76,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
         audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...placement,...choice.omit&&choice.reason?{omission:choice.reason}:{}});return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
-        sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts],geometryTransform});
+        sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts.filter(p=>profile==='main'||p.role!=='main-deck')],geometryTransform});
       if(profile==='upper'||profile==='guest'||profile==='exterior'||profile==='bow') {
         // The walks see several overlapping decks. Submit nearby opaque
         // surfaces first, so hidden patterned surfaces cost depth
@@ -96,7 +96,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const over=Object.entries(profiles).filter(([,p])=>p.triangles>25000);
   if(over.length)throw Error(over.map(([id,p])=>id+': '+p.triangles).join(', ')+' exceeds 25,000 triangles');
-  const manifest={version:'cockpit-stair-floor-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
+  const manifest={version:'main-deck-complete-1',sourceSHA256:lower.manifest.sourceSHA256,profiles,parts:packed,floor,collisionFootprints,
     room:{...data.rooms.find(r=>r.id==='SD_R01'),name:'Solárium',displayName:'Solárium',spawn:[14.6,-.3,9.8],look:[17,0,9]},
     flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},...extension};

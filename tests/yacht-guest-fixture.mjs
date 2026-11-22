@@ -7,7 +7,7 @@ import {decodeBridge,connectBridge} from '../site/tidewater-rocha/mobile/bridge-
 import {decodeBow,connectBow} from '../site/tidewater-rocha/mobile/bow-deck.js';
 import {decodeBridgeAccess,connectBridgeAccess} from '../site/tidewater-rocha/mobile/bridge-access.js';
 import {decodeGuestAccess,connectGuestAccess} from '../site/tidewater-rocha/mobile/guest-access.js';
-import {buildYachtGeometry,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
+import {buildYachtGeometry,createBoarding,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 export const array=b=>b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);
 async function load(name,decode) {
@@ -25,10 +25,14 @@ export function mobile(ready=true) {
   const f=fixture();for(const s of stages)s.connect(f.walk,s.decoded);
   if(ready)connectGuestAccess(f.walk,guest);return f;
 }
-export async function full() {
+export async function full({boarding=false}={}) {
   const data=JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json',root))),b=await readFile(new URL('rocha/luz-de-mar/model.bin',root));
   const asset={data,binary:array(b),nav:Object.fromEntries(Object.entries(data.nav).map(([id,n])=>[id,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
+  if(boarding){
+    model.group.userData.isolatedBerth=true;
+    model.boarding=createBoarding(model,null,{includeLanding:true});
+  }
   const walk=new Walk({camera:{position:model.group.position.clone()},player:{position:model.group.position.clone()}},model,{document:null});
   return {model,walk};
 }

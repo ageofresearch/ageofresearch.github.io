@@ -28,6 +28,7 @@ on:
       - 'tests/yacht-performance-statistics.cjs'
       - 'tests/yacht-bow*'
       - 'tests/yacht-guest*'
+      - 'tests/yacht-main-deck.test.mjs'
       - 'tests/yacht-spatial*'
       - 'tests/yacht-gangway*'
       - 'tests/yacht-frame-reader.cjs'
@@ -195,7 +196,7 @@ jobs:
           npm ci --prefix scripts/yacht-geometry --no-audit --no-fund
           npm run --prefix scripts/yacht-geometry screen-visibility
           git diff --exit-code -- site/tidewater-rocha/mobile/screen-visibility.wasm
-          node --test tests/yacht-daylight.test.mjs tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-guest-access.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-gangway-fidelity.test.mjs tests/yacht-route-performance-comparison.test.cjs
+          node --test tests/yacht-daylight.test.mjs tests/yacht-touch-look.test.mjs tests/yacht-terrace.test.mjs tests/yacht-stern-access.test.mjs tests/yacht-stair-surfaces.test.mjs tests/yacht-saloon.test.mjs tests/yacht-upper.test.mjs tests/yacht-readiness.test.mjs tests/yacht-sun.test.mjs tests/yacht-upper-interior.test.mjs tests/yacht-bridge.test.mjs tests/yacht-bow.test.mjs tests/yacht-bridge-access.test.mjs tests/yacht-guest-access.test.mjs tests/yacht-main-deck.test.mjs tests/yacht-spatial.test.mjs tests/yacht-gangway-finish.test.mjs tests/yacht-gangway-fidelity.test.mjs tests/yacht-route-performance-comparison.test.cjs
       - name: Verify browser views and recovery
         env:
           YACHT_CHECK: ${{ matrix.mode }}

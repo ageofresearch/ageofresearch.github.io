@@ -35,7 +35,7 @@ module.exports=async function sightlineFrames(frame,readFrame){
       const d=w.model.group.localToWorld(a.camera.position.clone().set(target[1]*b.sy,target[2]-b.seaReference,target[0]*b.sx-b.length/2)).sub(a.camera.position).normalize();
       w.yaw=Math.atan2(-d.x,-d.z);w.pitch=Math.asin(d.y);a.frame(0);
       const p=w.model.guestAccess.profiles[a.gangwayRenderer.activeProfile],batch=p.batches[0];
-      const eye=w.model.boarding.group.worldToLocal(a.camera.position.clone()),band=Math.max(0,Math.min(batch.ranges.length-1,Math.floor((eye.z-p.visibility.start)/p.visibility.step)));
+      const eye=w.model.boarding.group.worldToLocal(a.camera.position.clone()),width=p.visibility.lateralBands||batch.ranges.length,band=Math.max(0,Math.min(width-1,Math.floor((eye.z-p.visibility.start)/p.visibility.step)))+(eye.x>0?(p.visibility.lateralBands??0):0);
       return {band,ordinary:batch.ranges[band],glass:p.batches[1].indices.length};
     },{room,xy,target});
     const optimized=await readFrame();
@@ -75,8 +75,8 @@ module.exports=async function sightlineFrames(frame,readFrame){
     app.daylight.set(40.97865639254451,43.48995272652246,false);
     app.frame(0);
     const eye=walk.model.boarding.group.worldToLocal(app.camera.position.clone());
-    const {start,step}=walk.model.guestAccess.profiles[app.gangwayRenderer.activeProfile].visibility;
-    return {previous,band:Math.floor((eye.z-start)/step)};
+    const {start,step,lateralBands=0}=walk.model.guestAccess.profiles[app.gangwayRenderer.activeProfile].visibility;
+    return {previous,band:Math.floor((eye.z-start)/step)+(eye.x>0?lateralBands:0)};
   });
   try {
     const optimized=await readFrame(), control=await reference(lobby.band);

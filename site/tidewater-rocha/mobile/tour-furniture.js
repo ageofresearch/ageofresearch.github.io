@@ -1,4 +1,4 @@
-import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=main-deck-complete-1';
+import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=side-deck-guards-1';
 import {furnishPortCabin} from './port-guest-cabin.js?v=saloon-rug-1';
 import catalog from './tour-furniture-data.js?v=chair-fidelity-1';
 

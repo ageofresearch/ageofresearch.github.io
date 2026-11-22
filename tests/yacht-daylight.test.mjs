@@ -458,7 +458,7 @@ test('each aft and solarium stair tread has visibility data at its modeled camer
       const x = centre(1) * yacht.sy, z = centre(0) * yacht.sx - yacht.length/2;
       const y = height + 1.6 - yacht.seaReference;
       const band = Math.floor((z - deck.visibility.start) / deck.visibility.step);
-      const [first, count] = deck.batches[0].ranges[band];
+      const [first, count] = deck.batches[0].ranges[band+(x>0?(deck.visibility.lateralBands??0):0)];
       assert.ok(header.regions.some(r => r.profile === profile && first === r.first && count === r.count &&
         x >= r.box[0] && x < r.box[3] && y - .19 >= r.box[1] && y + .19 <= r.box[4] &&
         z >= r.box[2] && z < r.box[5]), 'Missing stair eye interval at ' + id);

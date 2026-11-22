@@ -12,7 +12,7 @@ import { serviceStairStraightEnd } from '../site/tidewater-rocha/mobile/cockpit-
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'main-deck-complete-1';
+const version = 'main-deck-stability-1';
 
 // Keep the same main-deck mesh from boarding through the saloon.
 export function mainDeckError(bounds) {

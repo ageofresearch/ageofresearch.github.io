@@ -26,6 +26,7 @@ const cells={
   bow:[[13.75,-3.6,7.32,18.72,-2.55,7.85],[18.72,-3.52,7.32,23.6,-2.21,7.85],
     [23.6,-3.4,7.32,26.8,-1.9,7.85],[26.8,-2.5,7.32,29.4,2.5,7.85]],
 };
+cells.main=cells.exterior.filter(cell=>cell[0]>=3.8).concat(cells.guest.filter(cell=>cell[2]>=5));
 const axes=[[1,2],[0,2],[0,1]];
 const key=n=>Math.round(n*1e5);
 function meshData(geometry) {

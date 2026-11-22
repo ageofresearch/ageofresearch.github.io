@@ -1,3 +1,4 @@
+import {fitHullToMainDeck} from './deck-joints.js?v=main-deck-stability-1';
 import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=side-deck-guards-1';
 import {furnishPortCabin} from './port-guest-cabin.js?v=saloon-rug-1';
 import catalog from './tour-furniture-data.js?v=chair-fidelity-1';
@@ -174,6 +175,7 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   }
   furnishMainDeck({box,add,remove,slab,outline,circle});
   finishSideDecks({add,box});
+  fitHullToMainDeck(detail);
   furnishPortCabin({add,remove,source,box,slab,outline,fit});
   for(const p of parts()){
     const id=p.anchor||p.id.split('/')[0];

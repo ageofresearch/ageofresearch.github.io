@@ -2,7 +2,7 @@ import {preloadSun} from './sun-deck.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
-export const upperVersion='main-deck-complete-1';
+export const upperVersion='main-deck-stability-1';
 export function decodeUpper(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','upper'],roomID:'UD_R01'});
   const f=result.flight;

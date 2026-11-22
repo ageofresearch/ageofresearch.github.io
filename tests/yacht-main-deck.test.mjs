@@ -98,3 +98,77 @@ test('the outside edge stops sideways movement along both main-deck passages in 
     }finally{if(f.dispose)f.dispose();else f.model.dispose();}
   }
 });
+
+function insideTriangle(triangle,x,y) {
+  const sides=triangle.map(([u,v],j)=>{
+    const [U,V]=triangle[(j+1)%3];
+    return (U-u)*(y-v)-(V-v)*(x-u);
+  });
+  return sides.every(d=>d>1e-8)||sides.every(d=>d< -1e-8);
+}
+
+test('the visible band keeps the cockpit floor, the passage strips and the overhead across extraction seams',()=>{
+  function heightsAt(profile,x,y){
+    const {batches,visibility}=profile;
+    const {indices,attributes:{position},ranges}=batches[0];
+    const band=Math.floor((x*basis.sx-basis.length/2-visibility.start)/visibility.step)
+      +(y>0?(visibility.lateralBands??0):0);
+    const [first,count]=ranges[band],hits=[];
+    for(let i=first;i<first+count;i+=3){
+      const face=Array.from(indices.subarray(i,i+3),k=>[(position[3*k+2]+basis.length/2)/basis.sx,
+        position[3*k]/basis.sy,position[3*k+1]+basis.seaReference]);
+      if(insideTriangle(face,x,y)&&face.every(p=>Math.abs(p[2]-face[0][2])<1e-5))hits.push(face[0][2]);
+    }
+    return hits;
+  }
+  for(const [x,y] of [[4.96,-.32],[5.781,.202],[7.32,3.12],[7.32,-3.12],
+    [8.499,3.36],[8.501,3.36],[8.501,-3.36],[11.08,.35],[16.16,3.34],[17.84,2.9],[19.49,-3.32],[23.2,.458]]){
+    const hits=heightsAt(guest.profiles.main,x,y);
+    for(const z of [3.95,5.88])assert.equal(hits.filter(height=>Math.abs(height-z)<1e-5).length,1,
+      'Expected one visible surface at '+[x,y,z]);
+  }
+  for(const [name,profile] of Object.entries(guest.profiles)){
+    for(const [x,y] of [[8.51,3.36],[9.14,3.36],[10.22,-3.32],[19.49,-3.32]]){
+      assert.equal(heightsAt(profile,x,y).filter(z=>Math.abs(z-3.95)<1e-5).length,1,
+        name+' passage floor at '+[x,y]);
+    }
+  }
+});
+
+test('the source hull, teak edge, window reveals and gaskets each have a single exposed face',async()=>{
+  const {renderedParts}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
+  const {model}=await full();
+  try{
+    const pieces=renderedParts(model);
+    const shell=pieces.filter(p=>p.feature==='retained hull with open above-water stern stair bays'||
+      p.anchor==='MD_DCK_001'&&p.feature?.startsWith('stair opening'));
+    const reveal=pieces.filter(p=>p.id.startsWith('MD_GLA_007/'));
+    function facesAt(parts,axis,level,u,v){
+      let count=0;
+      for(const p of parts){
+        for(let i=0;i<p.indices.length;i+=3){
+          const face=Array.from(p.indices.slice(i,i+3),k=>Array.from(p.vertices.slice(k*6,k*6+3)));
+          if(face.every(pt=>Math.abs(pt[axis]-level)<1e-6)&&
+            insideTriangle(face.map(pt=>[pt[(axis+1)%3],pt[(axis+2)%3]]),u,v))count++;
+        }
+      }
+      return count;
+    }
+    for(const side of [-1,1]){
+      for(const x of [8.626,10.131,13.337]){
+        assert.equal(facesAt(shell,2,3.95,x,3.751*side),1,'teak against hull at '+x);
+        // Beyond the parallel midbody the hull tapers inside this plane.
+        if(x<11)assert.equal(facesAt(shell,1,3.8*side,3.902,x),1,'outer hull skin at '+x);
+      }
+    }
+    const profile=guest.profiles.main;
+    for(const id of ['MD/boarding-route/4','MD/boarding-route/5']){
+      assert.ok(profile.audit.some(p=>p.id===id&&p.triangles>0));
+      assert.ok(!profile.audit.some(p=>p.id.startsWith(id+'/main-deck')&&p.triangles>0));
+    }
+    for(const z of [4.251,4.31,5.783]){
+      const y=reveal.find(p=>p.id.endsWith('/000')).bounds[1];
+      assert.equal(facesAt(reveal,1,y,z,18.001),1,'window joint at '+z);
+    }
+  }finally{model.dispose();}
+});

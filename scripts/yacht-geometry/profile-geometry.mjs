@@ -147,7 +147,7 @@ function localDraw(positions, indices, surface, { axis, box, eye }) {
 export function packWalkProfile(boarding, profile, audit, store, withSideDecks=false) {
   // From a single side of the yacht fewer triangles can ever face the eye.
   // Both halves share the centreline and keep every possible front face.
-  const lateralBands=withSideDecks&&['exterior','upper','guest'].includes(profile)?bands:0;
+  const lateralBands=withSideDecks&&['main','exterior','upper','guest'].includes(profile)?bands:0;
   let geometryBytes = 0;
   const batches = boarding.meshes.map((mesh) => {
     const geometry = mesh.geometry,

@@ -53,9 +53,9 @@ module.exports=async function saloonViews(frame,out,readFrame,mobile) {
         return [...profiles];
       },from);
     }
-    assert.deepEqual(await approach(7.9),['exterior']);
+    assert.deepEqual(await approach(7.9),['main']);
     const fromTerrace=await readFrame();
-    assert.deepEqual(await approach(10),['exterior']);
+    assert.deepEqual(await approach(10),['main']);
     const fromSaloon=await readFrame();
     assert.equal(fromTerrace.pixels,fromSaloon.pixels,'The doorway must look identical after walking from either side');
   }

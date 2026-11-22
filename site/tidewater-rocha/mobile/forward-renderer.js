@@ -1,4 +1,3 @@
-import {inMainDeck} from './main-deck.js?v=main-deck-complete-1';
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
 import {createViewIndices} from './view-indices.js?v=12';
@@ -263,15 +262,20 @@ export async function createForwardRenderer(app, daylight) {
     render(preparingProfile=null,target=null,preparedBand=null,prepareVisitor=false,allowReuse=false) {
       const {engine, gpu, camera} = app;
       if(profiles) {
-        const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
-        const guestApproach=!!guest&&(nav.deck==='LD'||nav.deck==='MD'&&guest.profileContains(...nav.position,activeProfile)&&nav.floorSafe(...nav.position,'MD'));
-        const bridgeApproach=!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position);
-        // The bridge lobby opens beside the galley. Its stair and headroom
-        // belong to the upper profile, including the last level step before it.
-        const main=profiles.main&&nav.deck==='MD'&&!nav.stair&&!guestApproach&&!bridgeApproach&&
-          (nav.position[0]>=7.8&&inMainDeck(...nav.position)||activeProfile==='main'&&nav.position[0]>17.3);
-        const name=preparingProfile??(main?'main':nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,
-          !!app.entranceYacht.bow?.contains(...nav.position),bridgeApproach,guestApproach));
+        const nav=app.yachtWalk.nav;
+        let name=preparingProfile;
+        if(name===null){
+          // Keep the level deck in one scene, including both stair approaches.
+          // The landing connects to the boarding ramp at x=3.8.
+          if(profiles.main && nav.deck==='MD' && !nav.stair && nav.position[0]>=3.8){
+            name='main';
+          }else{
+            const guest=app.entranceYacht.guestAccess;
+            const guestApproach=!!guest&&(nav.deck==='LD'||nav.deck==='MD'&&guest.profileContains(...nav.position,activeProfile)&&nav.floorSafe(...nav.position,'MD'));
+            name=nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,
+              !!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position),guestApproach);
+          }
+        }
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {

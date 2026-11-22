@@ -6,6 +6,7 @@ import {buildUpper} from '../scripts/build-yacht-upper.mjs';
 import {buildYachtGeometry,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {decodeUpper,connectUpper,loadUpper,restoreUpperHandoff} from '../site/tidewater-rocha/mobile/upper-terrace.js';
+import {topTriangles,onSurface} from '../site/tidewater-rocha/mobile/stern-access.js';
 import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 const manifest=JSON.parse(await readFile(new URL('mobile/upper-terrace.json',root)));
@@ -71,6 +72,50 @@ test('mobile upper route supports every tread, stops, reversals, diagonals and b
     }
     const n=nav.routes.length;connectUpper(walk,upper);assert.equal(nav.routes.length,n);assert.equal(nav.tryStep,controller);
   }finally{dispose();}
+});
+
+test('the port stair approach has one continuous teak surface in both viewers',async()=>{
+  const mobile=fixture(),full=await fullFixture();
+  try {
+    connectUpper(mobile.walk,upper);
+    const md=full.model.interiorDetail.replacements.get('MD_DCK_001');
+    const packed=mobile.model.terrace.parts.filter(p=>p.role==='floor');
+    for (const parts of [md,packed]) {
+      const margin=parts.find(p=>p.feature==='inlaid teak cockpit stair margin');
+      const deck=parts.filter(p=>p!==margin).flatMap(p=>topTriangles(p,3.95));
+      const border=topTriangles(margin,3.95);
+      for (const [x,y] of [[4.91,1.47],[5.15,1.8],[5.2,2.04],[5.32,2.21]]) {
+        assert.ok(onSurface(x,y,deck),'Missing teak at '+[x,y]);
+        assert.equal(onSurface(x,y,border),false);
+      }
+      for (const [x,y] of [[5.37,2.21],[5.40,2.78],[5.51,2.83]]) {
+        assert.ok(onSurface(x,y,border),'Missing rounded margin at '+[x,y]);
+        assert.equal(onSurface(x,y,deck),false,'Stacked floor under margin');
+      }
+      assert.equal(onSurface(5.9,1.50,deck),false,'The rising service enclosure owns this area');
+    }
+    for (const [viewer,{walk}] of Object.entries({mobile,full})) {
+      for (const [x,y] of [[4.94,1.79],[5.10,1.96],[5.18,2.04]])
+        assert.ok(walk.nav.floorSafe(x,y,'MD'),viewer+' approach must support the body at '+[x,y]);
+      assert.equal(walk.nav.floorSafe(5.15,1.80,'MD'),false,'Body clearance at the lower handrail');
+    }
+    const nav=mobile.walk.nav;
+    const path=[[-4.3,3.1],[2.1,3.1],[3.65,3.1],[4.56,3.1],[4.59,2.40],
+      [4.75,2.10],[5.10,1.96],[5.18,2.04],[5.24,2.21],
+      [5.4,2.21],[8.05,2.21],[8.35,2.21],[9.9,1.5]];
+    for(const hz of [12,40,60]){
+      nav.enterRoom('boarding');travel(nav,path,hz);
+      assert.equal(nav.deck,'UD');assert.equal(nav.elevation,6);
+      travel(nav,path.toReversed(),hz);
+      assert.equal(nav.deck,'MD');assert.ok(Math.abs(nav.elevation-mobile.model.boarding.height(-4.3))<1e-5);
+      const fullNav=full.walk.nav, fromCockpit=path.slice(4);
+      fullNav.deck='MD';fullNav.position=fromCockpit[0].slice();fullNav.elevation=3.95;fullNav.stair=null;
+      travel(fullNav,fromCockpit,hz);
+      assert.equal(fullNav.deck,'UD');assert.equal(fullNav.elevation,6);
+      travel(fullNav,fromCockpit.toReversed(),hz);
+      assert.equal(fullNav.deck,'MD');assert.equal(fullNav.elevation,3.95);
+    }
+  } finally {mobile.dispose();full.model.dispose();}
 });
 
 test('upper boundaries retain furniture, overhead clearance, closed solarium and blocked port swim access',()=>{

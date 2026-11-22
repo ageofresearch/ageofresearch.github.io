@@ -135,7 +135,7 @@ export async function buildTerrace() {
   for (const part of service) {
     if (seen.has(part.id)) continue;
     seen.add(part.id);
-    if (/profiled white service stair enclosure|sloping white service stair ceiling|dark sidewall around D1/.test(part.feature)) add(part, region, 'enclosure');
+    if (/profiled white service stair enclosure|sloping white service stair ceiling|cockpit stair exterior (?:cheek|capping)|dark sidewall around D1/.test(part.feature)) add(part, region, 'enclosure');
   }
   const furniture=model.exterior.parts.filter(part => ['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(part.anchor));
   const groups = new Set(furniture.map(furnitureGroup));
@@ -178,7 +178,7 @@ export async function buildTerrace() {
         .filter(([dx,dy]) => roof.some(t => containsTriangle(x + dx, y + dy, t))).length / 5 : 0;
       const contact=part.role==='floor' && nz>.5 ? contactShade(x,y,furnitureFootprints) : 1;
       part.light.push((.96 - .38 * cover)*contact);
-      part.surfaceTypes.push(part.role === 'floor' && nz > .5 ? 1 : part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
+      part.surfaceTypes.push(part.role === 'floor' && nz > .5 && part.feature !== 'inlaid teak cockpit stair margin' ? 1 : part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
     }
   }
   const chunks = [];
@@ -194,7 +194,7 @@ export async function buildTerrace() {
   });
   model.dispose();
   return { binary: Buffer.concat(chunks), manifest: {
-    version: 'gangway-profile-2', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
+    version: 'cockpit-stair-floor-1', sourceSHA256: createHash('sha256').update(json).update(buffer).digest('hex'),
     room: data.rooms.find(r => r.id === 'MD_R01'), parts: manifestParts, floor,
     triangles: parts.reduce((sum, p) => sum + p.indices.length / 3, 0),
     // The upper/service stairs and the saloon are outside this first walkable zone.

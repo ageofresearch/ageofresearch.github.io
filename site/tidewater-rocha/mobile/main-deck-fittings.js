@@ -19,13 +19,17 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   for(const [lo,hi] of [[.68,1.7],[2.62,2.89]])
     panel('MD_PAR_001',[17.798,lo,3.956,17.81,hi,4.012],'M08','galley jamb skirting '+lo);
   panel('MD_PAR_001',[17.81,1.7,5.72,17.91,2.62,5.86],'M96','galley entrance lintel');
-  panel(galley,[20.13,2.42,4.85,21.32,2.815,4.879],'M26','galley dark stone worktop');
+  // The source cabinet already has a cut-out. Finish up to the four edges
+  // of the stainless rim, leaving the original recessed bowl and drain visible.
+  lining(galley,[[20.13,2.301,20.652,2.815],[21.101,2.301,21.32,2.815],
+    [20.652,2.301,21.101,2.388],[20.652,2.763,21.101,2.815]],
+    4.85,4.861,'M26','galley dark stone worktop');
   panel(galley,[21.53,1.59,4.85,22.29,2.69,4.879],'M26','galley return worktop');
   panel(galley,[21.525,1.72,4.14,21.545,2.29,4.65],'M19','oven brushed surround');
   panel(galley,[21.508,1.76,4.20,21.525,2.25,4.57],'M47','oven glazed door');
   panel(galley,[21.483,1.79,4.58,21.523,2.22,4.61],'M19','oven bar handle');
   for(const x of [20.17,20.55,20.93]){
-    panel(galley,[x,2.407,4.03,x+.36,2.426,4.78],'M23','galley flush lower door '+x);
+    panel(galley,[x,2.281,4.03,x+.36,2.299,4.78],'M23','galley flush lower door '+x);
     panel(galley,[x,2.63,5.46,x+.36,2.815,5.80],'M23','galley overhead locker '+x);
   }
   panel(galley,[20.16,2.64,5.45,21.32,2.66,5.463],'M99','galley concealed work light');
@@ -95,7 +99,7 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   }
   panel('MD_FUR_040',[20.55,-3.074,4.26,21.48,-3.067,5.72],'M96','day head timber vanity wall');
   for(const x of [20.34,20.82]){
-    panel(galley,[x,2.392,4.65,x+.16,2.407,4.666],'M19','galley cabinet pull '+x);
+    panel(galley,[x,2.264,4.65,x+.16,2.281,4.666],'M19','galley cabinet pull '+x);
   }
   panel(galley,[21.555,1.79,4.88,22.17,2.24,4.885],'M47','ceramic hob');
   for(const [x,y] of [[21.70,1.91],[22.01,1.91],[21.70,2.12],[22.01,2.12]]){

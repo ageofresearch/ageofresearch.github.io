@@ -105,5 +105,9 @@ test('galley basin is visible through a fitted recess without changing the cabin
     for(const k of [0,2,3,5])assert.ok(Math.abs(old.bounds[k]-body.bounds[k])<1e-6,'Outer cabinet size changed');
     assert.ok(Math.abs((old.bounds[4]-old.bounds[1])-(body.bounds[4]-body.bounds[1]))<1e-6);
   }
+  for(const finish of parts.filter(p=>p.feature?.startsWith('galley dark stone worktop'))){
+    const top=surfaceTriangles(finish,finish.bounds[5],.00001);
+    assert.equal(indexFootprints(top.map(polygon=>({polygon})))(x,y,1e-6),false,'Galley finish hides sink');
+  }
   assert.ok(!parts.some(p=>p.anchor==='MD_FUR_037'),'Buried duplicate cabinet remains');
 });

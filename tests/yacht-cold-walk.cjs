@@ -6,34 +6,49 @@ const base=process.env.YACHT_BASE||'http://127.0.0.1:8764/tidewater-rocha/';
 const out=process.env.YACHT_OUTPUT||'/tmp/yacht-mobile-parity';
 const summarize=rows=>{
   const intervals=rows.map(r=>r.interval).filter(Number.isFinite).sort((a,b)=>a-b);
-  return {frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),
+  const gpu=rows.map(r=>r.gpuMs).filter(Number.isFinite).sort((a,b)=>a-b);
+  const cpu=rows.map(r=>r.cpu).sort((a,b)=>a-b);
+  return {cpuP95Ms:cpu[Math.ceil(cpu.length*.95)-1],
+    ...(gpu.length?{gpuSamples:gpu.length,gpuMedianMs:gpu[gpu.length>>1],gpuP95Ms:gpu[Math.ceil(gpu.length*.95)-1]}:{}),
+    frames:rows.length,fps:intervals.length*1000/intervals.reduce((a,b)=>a+b,0),
     p95:intervals[Math.floor(intervals.length*.95)],maxInterval:Math.max(...intervals),longFrames:intervals.filter(t=>t>25).length,
     maxMove:Math.max(...rows.map(r=>r.move)),maxCPU:Math.max(...rows.map(r=>r.cpu))};
 };
 
+function summarizeLegs(result){
+  return [0,1,2,3].map(leg=>{
+    const stats=summarize(result.rows.filter(r=>r.leg===leg));
+    if(result.gpuTimestampSupported)assert.ok(stats.gpuSamples>0,'No GPU timestamps for leg '+leg);
+    return {leg,...stats};
+  });
+}
+
 // Install only in a separate diagnostic context. Frame-budget runs use the
 // normal adapter features and command stream.
-function installAftGpuTimer(){
+function installWalkGpuTimer(){
   const request=GPUAdapter.prototype.requestDevice;
   GPUAdapter.prototype.requestDevice=function(options={}){
     if(this.features.has('timestamp-query'))options={...options,
       requiredFeatures:[...new Set([...(options.requiredFeatures??[]),'timestamp-query'])]};
     return request.call(this,options);
   };
-  window.startAftGpuTimer=(device,rows)=>{
+  window.startWalkGpuTimer=(device,rows)=>{
     if(!device.features.has('timestamp-query'))return {
       finish:()=>({gpuTimestampSupported:false,sampledFrames:0})
     };
-    // Two timestamp slots per frame. Keep unsampled rows if a faster display
-    // exhausts the query set. Resolve once after the fourth leg.
-    const pairs=2048;
-    const query=device.createQuerySet({type:'timestamp',count:pairs});
-    const scratch=device.createBuffer({size:pairs*8,usage:GPUBufferUsage.QUERY_RESOLVE|GPUBufferUsage.COPY_SRC});
-    const readback=device.createBuffer({size:pairs*8,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
+    // Each route has a 90-second timeout. At most 2,001 timestamp pairs
+    // fit in that window at this cadence, regardless of display refresh.
+    const timestampSlots=4096;
+    let lastSampleTime=-Infinity;
+    const query=device.createQuerySet({type:'timestamp',count:timestampSlots});
+    const scratch=device.createBuffer({size:timestampSlots*8,usage:GPUBufferUsage.QUERY_RESOLVE|GPUBufferUsage.COPY_SRC});
+    const readback=device.createBuffer({size:timestampSlots*8,usage:GPUBufferUsage.COPY_DST|GPUBufferUsage.MAP_READ});
     const prototype=GPUCommandEncoder.prototype,begin=prototype.beginRenderPass;
     const sampledRows=[];
     prototype.beginRenderPass=function(desc){
-      if(desc.label==='Gangway to screen' && sampledRows.at(-1)!==rows.length && sampledRows.length*2<pairs){
+      const now=performance.now();
+      if(desc.label==='Gangway to screen' && now-lastSampleTime>=45 && sampledRows.at(-1)!==rows.length && sampledRows.length*2<timestampSlots){
+        lastSampleTime=now;
         const i=2*sampledRows.length;sampledRows.push(rows.length);
         desc={...desc,timestampWrites:{querySet:query,beginningOfPassWriteIndex:i,endOfPassWriteIndex:i+1}};
       }
@@ -58,12 +73,12 @@ function installAftGpuTimer(){
   };
 }
 
-async function capture(browser,mobile,directory=out,profileAft=false) {
+async function capture(browser,mobile,directory=out,profilePasses=false) {
   mkdirSync(directory,{recursive:true});
   const context=await browser.newContext({viewport:{width:360,height:540},hasTouch:true});
   let release;
   try {
-    if(profileAft)await context.addInitScript(installAftGpuTimer);
+    if(profilePasses)await context.addInitScript(installWalkGpuTimer);
     await context.addInitScript(()=>{
       window.__coldGPU=[];
       for(const name of ['createBuffer','createTexture','createShaderModule','createRenderPipeline','createRenderPipelineAsync']) {
@@ -100,10 +115,10 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
     let timings;
     if(mobile) {
       assert.equal(ready.bow,'ready');assert.equal(ready.bridge,'ready');assert.equal(ready.upperInterior,'ready');assert.equal(ready.sun,'ready');assert.equal(ready.upper,'ready');assert.equal(ready.saloon,'ready');assert.equal(ready.samples,4);
-      const result=await frame.evaluate(async(profileAft)=>{
+      const result=await frame.evaluate(async(profilePasses)=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];let leg=0,previous;
         w.enterRoom('MD_R01');n.position=[5.2,2.21];n.stair=null;n.elevation=3.95;w.applyPosition();
-        const timer=window.startAftGpuTimer?.(app.gpu.device,rows),original=app.frame;
+        const timer=window.startWalkGpuTimer?.(app.gpu.device,rows),original=app.frame;
         const start=performance.now(),firstAllocation=__coldGPU.length;
         await new Promise((resolve,reject)=>{
           app.frame=function(dt){
@@ -114,7 +129,7 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
               const forward=app.camera.position.clone().set(0,0,Math.sign(d)).applyQuaternion(w.model.group.quaternion);
               w.yaw=Math.atan2(-forward.x,-forward.z);w.pitch=-.35;
               original(dt);rows.push({leg,interval:previous===undefined?null:t-previous,move,cpu:performance.now()-t});
-              if(profileAft)Object.assign(rows.at(-1),{x:n.position[0],triangles:w.model.stats.triangles});
+              if(profilePasses)Object.assign(rows.at(-1),{x:n.position[0],triangles:w.model.stats.triangles});
               previous=t;
               if(Math.abs(n.position[0]-target)<.002)leg++;
               if(leg===4){app.frame=original;resolve();}
@@ -128,23 +143,19 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
           gpu:__coldGPU.slice(firstAllocation),
           resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
           triangles:w.model.stats.triangles,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples};
-      },profileAft);
+      },profilePasses);
       assert.deepEqual(result.resources,[],'Entering a prepared stair must not fetch geometry');
       assert.deepEqual(result.gpu,[],'First stair traversal must not create graphics resources');
       assert.equal(result.scale,1);assert.equal(result.samples,4);assert.ok(result.triangles<=25000);
-      const legs=[0,1,2,3].map(leg=>({leg,...summarize(result.rows.filter(r=>r.leg===leg))}));
-      if(profileAft)for(const row of legs){
-        const times=result.rows.filter(r=>r.leg===row.leg && Number.isFinite(r.gpuMs)).map(r=>r.gpuMs).sort((a,b)=>a-b);
-        row.gpuSamples=times.length;
-        if(times.length){row.gpuMedianMs=times[times.length>>1];row.gpuP95Ms=times[Math.ceil(times.length*.95)-1];}
-      }
+      const legs=summarizeLegs(result);
       writeFileSync(directory+'/cold-mobile.json',JSON.stringify({ready,legs,...result},null,2));
       console.log('Fresh mobile ascent/descent, then repeated route:',legs);
-      if(profileAft){assert.deepEqual(errors,[]);return;}
+      if(profilePasses==='aft'){assert.deepEqual(errors,[]);return;}
       const sunResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
         w.enterRoom('UD_R01');n.position=[11.35,2.7];n.stair=null;n.elevation=6;w.cameraElevation=6;w.applyPosition();
         const path=[[11.35,2.7],...w.model.sun.flight.route.path,[13.85,.7],[13.85,-.3],[14.6,-.3]];
+        const timer=window.startWalkGpuTimer?.(app.gpu.device,rows),firstAllocation=__coldGPU.length;
         let leg=0,index=1,previous;const start=performance.now(),original=app.frame;
         await new Promise((resolve,reject)=>{
           app.frame=function(dt){try {
@@ -158,18 +169,20 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
             if(leg===4){app.frame=original;resolve();}else if(t-start>90000)throw Error('Sun cold route stalled '+n.position);
           }catch(error){app.frame=original;reject(error);}};
         });
+        const passStats=await timer?.finish();
         await app.gpu.queue.onSubmittedWorkDone();
-        return {rows,start,gpu:__coldGPU.filter(e=>e.time>=start),resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
+        return {rows,start,...passStats,gpu:__coldGPU.slice(firstAllocation),resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
           triangles:w.model.stats.triangles,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples};
       });
       assert.deepEqual(sunResult.gpu,[]);assert.deepEqual(sunResult.resources,[]);assert.ok(sunResult.triangles<=25000);assert.equal(sunResult.scale,1);assert.equal(sunResult.samples,4);
-      const sunLegs=[0,1,2,3].map(leg=>({leg,...summarize(sunResult.rows.filter(r=>r.leg===leg))}));
+      const sunLegs=summarizeLegs(sunResult);
       writeFileSync(directory+'/cold-sun.json',JSON.stringify({ready,legs:sunLegs,...sunResult},null,2));console.log('Fresh sun ascent/descent, then repeated route:',sunLegs);
 
       const interiorResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
         w.enterRoom('UD_R01');n.position=[13.8,0];n.stair=null;n.elevation=6;w.cameraElevation=6;w.applyPosition();
         const path=[[13.8,0],[14.21,0],[14.8,0],[18.3,0],[18.3,-1.9]];
+        const timer=window.startWalkGpuTimer?.(app.gpu.device,rows),firstAllocation=__coldGPU.length;
         let leg=0,index=1,previous;const start=performance.now(),original=app.frame;
         await new Promise((resolve,reject)=>{
           app.frame=function(dt){try{
@@ -183,15 +196,17 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
             if(leg===4){app.frame=original;resolve();}else if(t-start>90000)throw Error('Interior cold route stalled '+n.position);
           }catch(error){app.frame=original;reject(error);}};
         });
+        const passStats=await timer?.finish();
         await app.gpu.queue.onSubmittedWorkDone();
-        return {rows,start,gpu:__coldGPU.filter(e=>e.time>=start),resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
+        return {rows,start,...passStats,gpu:__coldGPU.slice(firstAllocation),resources:performance.getEntriesByType('resource').filter(e=>e.startTime>=start&&/mobile\/.*\.(bin|json)/.test(e.name)).map(e=>e.name),
           triangles:w.model.stats.triangles,scale:app.engine.renderScale,samples:app.gangwayRenderer.samples};
       });
       assert.deepEqual(interiorResult.gpu,[]);assert.deepEqual(interiorResult.resources,[]);assert.ok(interiorResult.triangles<=25000);
       assert.equal(interiorResult.scale,1);assert.equal(interiorResult.samples,4);assert.ok(interiorResult.rows.every(r=>r.profile==='upper'));
-      const interiorLegs=[0,1,2,3].map(leg=>({leg,...summarize(interiorResult.rows.filter(r=>r.leg===leg))}));
+      const interiorLegs=summarizeLegs(interiorResult);
       writeFileSync(directory+'/cold-upper-interior.json',JSON.stringify({ready,legs:interiorLegs,...interiorResult},null,2));console.log('Fresh upper interior entry/return, then repeated route:',interiorLegs);
 
+      if(profilePasses){assert.deepEqual(errors,[]);return;}
       const bridgeResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
         w.enterRoom('UD_R01');n.position=[17.2,0];n.stair=null;n.elevation=6;w.cameraElevation=6;w.applyPosition();
@@ -215,7 +230,7 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
       });
       assert.deepEqual(bridgeResult.gpu,[]);assert.deepEqual(bridgeResult.resources,[]);assert.ok(bridgeResult.triangles<=25000);
       assert.equal(bridgeResult.scale,1);assert.equal(bridgeResult.samples,4);assert.ok(bridgeResult.rows.every(r=>r.profile==='upper'));
-      const bridgeLegs=[0,1,2,3].map(leg=>({leg,...summarize(bridgeResult.rows.filter(r=>r.leg===leg))}));
+      const bridgeLegs=summarizeLegs(bridgeResult);
       writeFileSync(directory+'/cold-bridge.json',JSON.stringify({ready,legs:bridgeLegs,...bridgeResult},null,2));console.log('Fresh bridge entry/return, then repeated route:',bridgeLegs);
 
       timings={aft:legs,sun:sunLegs,interior:interiorLegs,bridge:bridgeLegs};
@@ -259,8 +274,9 @@ async function capture(browser,mobile,directory=out,profileAft=false) {
   const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,
     args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
   try {
-    if(process.env.YACHT_AFT_GPU_TIMING==='1'){
-      await capture(browser,true,out+'/aft-gpu',true);
+    if(process.env.YACHT_COLD_GPU_TIMING==='1' || process.env.YACHT_AFT_GPU_TIMING==='1'){
+      const routes=process.env.YACHT_COLD_GPU_TIMING==='1'?'cold':'aft';
+      await capture(browser,true,out+'/'+routes+'-gpu',routes);
       return;
     }
     const runs=[];

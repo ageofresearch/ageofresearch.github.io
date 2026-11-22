@@ -94,6 +94,7 @@ test('boarding finish follows the approved deployed geometry and the independent
       if (part.finish[3] >= 37 && part.finish[3] <= 42) {
         assert.deepEqual(part.finish.slice(0, 3), [part.finish[3]===42 ? 0x988b80 : 0xb69a73, 0.8, 0]);
       } else if(part.feature.endsWith('nested frame'))assert.deepEqual(part.finish,[0x262729,.67,0,0]);
+      else if(part.feature.endsWith('recessed underskin') && part.materialID==='M47')assert.deepEqual(part.finish,[0x41464b,.60,0,0]);
       else assert.deepEqual(part.finish, resolveYachtPartFinish({ materialID: part.materialID }));
     }
     assert.equal(boarding.parts.filter((p) => p.finish[3] >= 37 && p.finish[3] <= 39).length, 3);
@@ -132,7 +133,7 @@ test('each fallback and active profile preserves the three boarding material ide
     const manifest = JSON.parse(await readFile(new URL('mobile/' + name + '.json', root)));
     const buffer = await readFile(new URL('mobile/' + name + '.bin', root)),
       data = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
-    assert.equal(manifest.version, 'cockpit-grid-1');
+    assert.equal(manifest.version, 'gangway-profile-2');
     for (const [profile, p] of Object.entries(manifest.profiles)) {
       assert.ok(p.triangles <= 25000);
       assert.equal(p.batches.length, 2);

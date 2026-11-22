@@ -91,21 +91,23 @@ module.exports = async (frame, out, readFrame, mobile) => {
         };
         const wood = (0.764 - 6 * 0.004) / 7,
           pitch = wood + 0.004;
-        return Array.from({ length: 6 }, (_, i) => ({
-          joint: project(2.718 + (i + 1) * pitch - 0.002),
-          wood: project(2.718 + i * pitch + wood / 2),
-        }));
+        return Array.from({ length: 6 }, (_, i) => {
+          const joint = 2.718 + (i + 1) * pitch - 0.002;
+          // Sample both shoulders of this seam, within the same local light.
+          return {joint: project(joint), wood: [-.16, -.12, .12, .16].map(offset => project(joint + offset*pitch))};
+        });
       });
       const luma = (x, y) => {
         const i = (Math.round(y) * png.width + Math.round(x)) * 4;
         return 0.2126 * png.data[i] + 0.7152 * png.data[i + 1] + 0.0722 * png.data[i + 2];
       };
       for (const [i, sample] of samples.entries()) {
-        const [x, y] = sample.joint,
-          [wx, wy] = sample.wood;
+        const [x, y] = sample.joint;
         assert.ok(x > 2 && x < png.width - 2 && y > 2 && y < png.height - 2, 'Caulking probe outside frame');
         const darkest = Math.min(...[-1, 0, 1].flatMap((dx) => [-1, 0, 1].map((dy) => luma(x + dx, y + dy))));
-        assert.ok(darkest < luma(wx, wy) * 0.8, `Rendered caulk seam ${i + 1} disappeared`);
+        const wood = sample.wood.map(([wx, wy]) => luma(wx, wy)).sort((a,b) => a-b);
+        const localWood = (wood[1] + wood[2]) / 2;
+        assert.ok(darkest < localWood * 0.8, `Rendered caulk seam ${i + 1} disappeared`);
       }
     }
     const actualEye = await frame.evaluate(() => {

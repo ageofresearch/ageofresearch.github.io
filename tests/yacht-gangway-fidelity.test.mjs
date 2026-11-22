@@ -103,6 +103,10 @@ test('the packaged rails, gate, wet bar and four saloon armchairs retain their c
     assert.equal(matches.length, pieces);
     assert.ok(matches.every((p) => p.triangles >= minTriangles));
   }
+  const sleeves=audit.filter(p=>p.id.startsWith('boarding/owner/') &&
+    /nested-frame|recessed-underskin|inset-side-channel|underside-collar/.test(p.id));
+  assert.equal(sleeves.length,14);
+  assert.ok(sleeves.every(p=>p.triangles===p.sourceTriangles),'The boarding profile must preserve the fitted shell');
   for (const n of ['007', '008', '009', '010']) {
     const shells = audit.filter((p) => p.id.startsWith('MD_SOF_' + n + '/') && p.sourceTriangles >= 100);
     assert.ok(shells.length && shells.every((p) => p.triangles > 0 && p.error <= 0.009));

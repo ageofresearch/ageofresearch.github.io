@@ -453,6 +453,14 @@ test('the resident main deck has baked visibility at the cockpit, saloon and gue
       eye.every((v,i) => region.box[i] <= v && v < region.box[i+3]) &&
       views.some(view => view.first === region.first && view.count >= region.count)), 'Missing main deck cell at '+[x,y]);
   }
+  const {visibility, batches} = manifest.profiles.main;
+  for (const side of [-1,1]) {
+    const eye = [.74*side*yacht.sy, 5.55-yacht.seaReference, 14.4*yacht.sx-yacht.length/2];
+    const band = Math.floor((eye[2]-visibility.start)/visibility.step) + (side>0 ? visibility.lateralBands : 0);
+    const [first,count] = batches[0].ranges[band];
+    assert.ok(header.regions.some(r => r.profile==='main' && r.first===first && r.count===count &&
+      eye.every((v,k)=>v>=r.box[k] && v<r.box[k+3])), 'Missing all-direction dining aisle on side '+side);
+  }
 });
 
 test('each aft and solarium stair tread has visibility data at its modeled camera height', async () => {

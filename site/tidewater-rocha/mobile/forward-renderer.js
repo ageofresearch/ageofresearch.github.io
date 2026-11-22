@@ -1,6 +1,6 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
-import {createViewIndices} from './view-indices.js?v=12';
+import {createViewIndices} from './view-indices.js?v=13';
 import {loadScreenVisibility} from './screen-visibility.js?v=2';
 import {prepareImmediateView} from './immediate-view.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
@@ -380,7 +380,9 @@ export async function createForwardRenderer(app, daylight) {
             // Test their native sample coverage without building an occluder grid.
             const [x,y]=nav.position;
             const mainDeck=nav.deck==='MD'&&!nav.stair;
-            const samplesOnly=activeProfile==='guest'||mainDeck&&(
+            // The furnished main deck can see past the lower stair approach.
+            // Its walls and furniture still occlude surfaces behind them.
+            const samplesOnly=activeProfile==='guest'||activeProfile==='exterior'&&mainDeck&&(
               model.guestAccess&&onGuestApproach(x,y)||model.boarding.baseSafe?.(x,y,0));
             const refinement=samplesOnly?'samples':'occlusion';
             visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples,refinement);

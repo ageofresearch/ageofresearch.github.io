@@ -131,6 +131,9 @@ try {
     // Cover level ground in both directions after the visitor leaves the flight.
     addBands(profile, bundle.room.bbox, bundle.room.spawn[2] - yacht.seaReference, .045, .20, [1,-1]);
   }
+  // The galley doorway interrupts the forward sightline at the dining table.
+  // Certify the ordinary lateral bands too, for turns and the aisle on either side.
+  addBands('main', [13.9,-2.65,17.83,2.65], 3.54, .028, .23, [1,-1,3,-3]);
   for (const [id, view] of views.entries()) {
     const {profile, height, count, spacing} = view;
     const [x, y, z, X, Y, Z] = view.box;

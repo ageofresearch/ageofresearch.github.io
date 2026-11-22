@@ -59,6 +59,12 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   const sourceBuffer=await readFile(new URL('../rocha/luz-de-mar/model.bin',root));
   const source=buildYachtGeometry({data,binary:sourceBuffer.buffer.slice(sourceBuffer.byteOffset,sourceBuffer.byteOffset+sourceBuffer.byteLength)},0,{mtuEngines:false,seaStrainers:false});
   try {
+    const blocked=source.navigation.wetBarBlocked;
+    assert.ok(blocked(6.87,-2.066,.14),'The full-yacht visitor cannot enter the cabinet');
+    for(let step=0;step<=40;step++) {
+      const t=step/40;
+      assert.equal(blocked(7.4-.8*t,-2.5-.6*t,.14),false,'The starboard stair approach clears the service face');
+    }
     for(const part of furnishings) {
       const original=source.exterior.parts.find(p=>p.id===part.id);
       assert.ok(original,part.id);
@@ -76,8 +82,12 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   boarding.dispose(); materials.opaque.dispose(); materials.glass.dispose();
   // The counter must still have the source sink opening, not a cap over the basin.
   const counter=decode(furnishings.find(p=>p.feature==='cockpit grey counter with pale edge'));
+  const drain=furnishings.find(p=>p.feature==='cockpit wet bar dark circular drain').bounds;
+  const x=(drain[0]+drain[3])/2, y=(drain[1]+drain[4])/2;
+  const post=furnishings.find(p=>p.feature==='cockpit polished support post above wet bar').bounds;
+  assert.ok(verticalHits(counter,(post[0]+post[3])/2,(post[1]+post[4])/2).some(z=>Math.abs(z-post[2])<.002),'The post bears on the worktop outside the sink');
   const covers=(a,b,c)=>{
-    const s=[a,b,c].map((p,i)=>{const q=[a,b,c][(i+1)%3];return(q[0]-p[0])*(-1.98-p[1])-(q[1]-p[1])*(6.48-p[0]);});
+    const s=[a,b,c].map((p,i)=>{const q=[a,b,c][(i+1)%3];return(q[0]-p[0])*(y-p[1])-(q[1]-p[1])*(x-p[0]);});
     return s.every(v=>v>=0)||s.every(v=>v<=0);
   };
   for(let i=0;i<counter.indices.length;i+=3) {
@@ -244,8 +254,10 @@ test('the guided passage has extra clearance and the terrace spawn is reachable'
     assert.deepEqual(walk.nav.position,[6.68,0]);
     assert.equal(walk.nav.elevation,3.95);
     const before=walk.nav.position.slice();
-    walk.nav.move(0,-1.5);
-    assert.ok(walk.nav.position[1]>-1.4+walk.nav.radius-.01,'Walking toward the wet bar stops at the cabinet');
+    walk.nav.move(0,-2.5);
+    const bar=manifest.collisionFootprints.find(p=>p.id==='furniture/wet-bar');
+    const clearance=distanceToFootprint(...walk.nav.position,bar.polygon);
+    assert.ok(clearance>=walk.nav.radius-1e-6 && clearance<walk.nav.radius+.06,'Stop with body clearance at the curved cabinet');
     assert.ok(walk.nav.position[1]<before[1]);
   } finally {dispose();}
 });

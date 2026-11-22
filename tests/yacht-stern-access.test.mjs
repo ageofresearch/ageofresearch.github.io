@@ -272,3 +272,45 @@ test('the sky surrounds the yacht in every direction and contributes no walk obs
   const context={...sky,context:true,bounds:[-145,-145,-145,163,145,145]};
   assert.equal(obstacles([context],new Set(),[0,-8,1.55,30,8,3.2]).footprints(1.55).length,0);
 });
+
+test('the cockpit openings expose the mooring fittings in both registered VR views',()=>{
+  const {model,dispose}=fixture();
+  try {
+    const parts=[...model.transom.parts,...model.terrace.parts,...model.boarding.parts.filter(p=>!p.context)];
+    const minus=(a,b)=>a.map((v,i)=>v-b[i]);
+    const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+    const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+    const unit=v=>v.map(n=>n/Math.hypot(...v));
+    // Test nearest surfaces through the registered pixel, including the sill
+    // and coaming. A fitting in the correct cell can still be behind a panel.
+    function surfaceAt(eye,forward,hfov,x,y) {
+      const right=unit(cross(forward,[0,0,1])),up=cross(right,forward);
+      const lens=320/Math.tan(hfov*Math.PI/360);
+      const direction=forward.map((v,i)=>(v+right[i]*(x+.5-320)/lens+up[i]*(224-y-.5)/lens)/[basis.sx,basis.sy,1][i]);
+      let nearest=Infinity,feature=null;
+      for(const part of parts){
+        const point=index=>part.vertices.slice(6*index,6*index+3);
+        for(let i=0;i<part.indices.length;i+=3){
+          const a=point(part.indices[i]),ab=minus(point(part.indices[i+1]),a),ac=minus(point(part.indices[i+2]),a);
+          const h=cross(direction,ac),det=dot(ab,h);
+          if(Math.abs(det)<1e-10)continue;
+          const s=minus(eye,a),u=dot(s,h)/det;
+          if(u<0||u>1)continue;
+          const q=cross(s,ab),v=dot(direction,q)/det;
+          if(v<0||u+v>1)continue;
+          const distance=dot(ac,q)/det;
+          if(distance>.013 && distance<nearest){nearest=distance;feature=part.feature;}
+        }
+      }
+      return feature;
+    }
+    const port=[[4.850025,1.354976,5.024169],[-.61472959,.54072586,-.57421518],84];
+    const stbd=[[6.312899,-.901079,5.027842],[-.34789153,-.82028036,-.45399518],75];
+    assert.equal(surfaceAt(...port,451,166),'cockpit cleat sole 1');
+    assert.equal(surfaceAt(...port,600,193),'cockpit mooring drum 1');
+    assert.equal(surfaceAt(...stbd,285,116),'cockpit cleat sole forward -1');
+    assert.equal(surfaceAt(...stbd,350,105),'cockpit mooring drum -1');
+    assert.equal(surfaceAt(...stbd,190,277),'rounded metallic cockpit wet bar');
+    assert.match(surfaceAt(...stbd,241,277),/stair opening/);
+  } finally {dispose();}
+});

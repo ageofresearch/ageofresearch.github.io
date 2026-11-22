@@ -41,7 +41,7 @@ try {
   const boardingEye = z => boardingHeight((z + yacht.length / 2) / yacht.sx) + 1.6 - yacht.seaReference;
   const down = -2; // Vertical direction in the offline visibility compiler.
   const views = [];
-  for (const [profile, deckEye] of [['exterior', 3.54], ['upper', 5.59], ['guest', 1.14], ['bow', 5.59]]) {
+  for (const [profile, deckEye] of [['main', 3.54], ['exterior', 3.54], ['upper', 5.59], ['guest', 1.14], ['bow', 5.59]]) {
     for (const view of manifest.profiles[profile].batches[0].views) {
       const [, y, z, , Y] = view.box;
       const platform = profile === 'exterior' && platformEye >= y && platformEye <= Y;
@@ -50,8 +50,8 @@ try {
       const height = platform ? platformEye : deckEye;
       if (!ramp && (height < y || height > Y)) continue;
       // The shortest prefix is present at every lens width for this sightline.
-      const mainDeck = profile === 'exterior' && !platform && view.sign === 1 && z >= -14 && z < -3;
-      const cockpit = profile === 'exterior' && !view.sign && z >= -14 && z < -9.5;
+      const mainDeck = (profile === 'main' || profile === 'exterior') && !platform && view.sign === 1 && z >= -14 && z < -3;
+      const cockpit = (profile === 'main' || profile === 'exterior') && !view.sign && z >= -14 && z < -9.5;
       // Unrestricted views from the boarding ramp include the hull below
       // the planks. A visitor in the cockpit can look in either direction.
       const directions = cockpit ? [1, -1] : ramp && !view.sign ? [1, down] : [view.sign || 1];
@@ -131,6 +131,9 @@ try {
     // Cover level ground in both directions after the visitor leaves the flight.
     addBands(profile, bundle.room.bbox, bundle.room.spawn[2] - yacht.seaReference, .045, .20, [1,-1]);
   }
+  // The galley doorway interrupts the forward sightline at the dining table.
+  // Certify the ordinary lateral bands too, for turns and the aisle on either side.
+  addBands('main', [13.9,-2.65,17.83,2.65], 3.54, .028, .23, [1,-1,3,-3]);
   for (const [id, view] of views.entries()) {
     const {profile, height, count, spacing} = view;
     const [x, y, z, X, Y, Z] = view.box;

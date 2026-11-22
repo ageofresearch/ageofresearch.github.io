@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=side-deck-guards-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=main-deck-stability-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -78,6 +78,7 @@ async function capture(browser, mobile) {
       assert.equal(captured.indexedDraws,2);
       assert.equal(await frame.evaluate(() => !!(window.__app.post || window.__app.shadows)),false);
       await require('./yacht-sightlines.cjs')(frame,readFrame);
+      await require('./yacht-main-deck-motion.cjs')(frame);
       await require('./yacht-stern-access.cjs')(page,frame,out,readFrame);
       async function measureStern() {
         // Read the displayed image at the actual pose, then omit only the

@@ -50,7 +50,8 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       entry.useScreen = useScreen;
       entry.depthTest = depthTest;
       // Small ranges already render cheaply. Reuse the broader worker list.
-      entry.filtered = useScreen && length >= (depthTest ? 3500 : 1800) * 3;
+      const minFaces = entry.profile === 'main' ? 1400 : depthTest ? 3500 : 1800;
+      entry.filtered = useScreen && length >= minFaces * 3;
     } else length = entry.baseLength;
     if (entry.filtered) {
       length = screen.filter(indices, length, frame, width, height, changed, depthTest);

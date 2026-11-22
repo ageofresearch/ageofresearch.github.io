@@ -28,7 +28,7 @@ on:
       - 'tests/yacht-performance-statistics.cjs'
       - 'tests/yacht-bow*'
       - 'tests/yacht-guest*'
-      - 'tests/yacht-main-deck.test.mjs'
+      - 'tests/yacht-main-deck*'
       - 'tests/yacht-spatial*'
       - 'tests/yacht-gangway*'
       - 'tests/yacht-frame-reader.cjs'

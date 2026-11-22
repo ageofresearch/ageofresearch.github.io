@@ -13,12 +13,16 @@ export async function buildGuestAccess() {
   const covers=new Map();
   const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest','main'],
     lod(p,context) {
+      if(p.role==='passage-floor')return {error:.014};
       if(p.role==='main-side-guard'||/^MD\/boarding-route\/[2-5]$/.test(p.id)||
         context.profile==='main'&&p.id.startsWith('MD/boarding-route/'))return {error:0};
       if(context.profile==='main'){
         if(p.context)return {error:0};
         if(p.role==='main-deck')return {error:p.glass?0:p.bounds[0]>=17.7?.004:.014};
-        if(p.bounds[3]<7.51&&p.bounds[2]<6)return {error:.12};
+        if(p.role==='guest-stair'||p.role==='bridge-stair-context')return {error:.012};
+        if(p.role==='guest-boundary'||p.role==='guest-floor')return {error:.035};
+        if(p.id.endsWith('/saloon')&&['roof','floor'].includes(p.role))return {error:.014};
+        if(p.bounds[3]<=8.50001&&p.bounds[2]<6)return {error:.045};
         return {omit:true,reason:'Covered by the main deck extraction or outside the main deck sightline'};
       }
       if(p.role==='main-deck')return {omit:true,reason:'Resident main-deck profile'};
@@ -128,7 +132,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'side-deck-guards-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'main-deck-stability-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

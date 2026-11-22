@@ -59,7 +59,9 @@ async function measureGuest(base=defaultBase,out=defaultOut){
    });
    assert.deepEqual(result.gpu,[]);assert.deepEqual(result.resources,[]);assert.deepEqual(errors,[]);
    assert.equal(result.collisionHeights,15);assert.equal(result.scale,1);assert.equal(result.samples,4);assert.ok(result.rows.every(r=>r.triangles<=25000));
-   assert.deepEqual([...new Set(result.rows.map(r=>r.profile))].sort(),['exterior','guest']);
+   const levelProfile=result.rows[0].profile;
+   assert.ok(['main','exterior'].includes(levelProfile),'Expected to start on the level main deck');
+   assert.deepEqual([...new Set(result.rows.map(r=>r.profile))].sort(),[levelProfile,'guest'].sort());
    const legs=[0,1,2,3].map(leg=>({leg,...summarize(result.rows.filter(r=>r.leg===leg))}));
    runs.push({run,legs,...result});writeFileSync(out+`/guest-cold-${run}.json`,JSON.stringify(runs.at(-1),null,2));console.log('Fresh guest context',run,legs);
   }finally{release?.();await context.close();}

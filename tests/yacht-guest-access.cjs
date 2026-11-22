@@ -29,7 +29,7 @@ module.exports=async function guestViews(frame,out,readFrame,mobile) {
     writeFileSync(out+`/guest-${mobile?'mobile':'full'}-${view.name}.png`,PNG.sync.write(png));
     if(mobile) {
       assert.equal(shot.indexedDraws,2);assert.deepEqual(shot.passLabels,['Gangway to screen']);assert.ok(shot.indexedTriangles<=25000);
-      assert.equal(await frame.evaluate(()=>__app.gangwayRenderer.activeProfile),view.name==='saloon-approach'?'exterior':'guest');
+      assert.equal(await frame.evaluate(()=>__app.gangwayRenderer.activeProfile),view.deck==='MD'?'main':'guest');
     }
   }
   await frame.evaluate(saved=>{const w=__app.yachtWalk;w.enterRoom('boarding');Object.assign(w.nav,{position:saved.position,deck:saved.deck,elevation:saved.elevation,stair:null});w.cameraElevation=saved.elevation;w.yaw=saved.yaw;w.pitch=saved.pitch;w.applyPosition();},saved);

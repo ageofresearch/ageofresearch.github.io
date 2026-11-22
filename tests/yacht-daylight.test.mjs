@@ -441,6 +441,28 @@ test('the shipped swim-platform cells cover the shared spawn and stop at the fir
   assert.ok(region.box[4] < camera[1] + firstRise);
 });
 
+test('the resident main deck has baked visibility at the cockpit, saloon and guest stair approach', async () => {
+  const dir = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
+  const data = gunzipSync(await readFile(new URL('room-visibility.bin', dir)));
+  const header = JSON.parse(data.toString('utf8', 4, 4 + data.readUInt32LE(0)));
+  const manifest = JSON.parse(await readFile(new URL('guest-access.json', dir)));
+  const views = manifest.profiles.main.batches[0].views;
+  for (const [x,y] of [[6.68,-.48], [9.55,0], [17.15,-1.42]]) {
+    const eye = [y*yacht.sy, 5.55-yacht.seaReference, x*yacht.sx-yacht.length/2];
+    assert.ok(header.regions.some(region => region.profile === 'main' &&
+      eye.every((v,i) => region.box[i] <= v && v < region.box[i+3]) &&
+      views.some(view => view.first === region.first && view.count >= region.count)), 'Missing main deck cell at '+[x,y]);
+  }
+  const {visibility, batches} = manifest.profiles.main;
+  for (const side of [-1,1]) {
+    const eye = [.74*side*yacht.sy, 5.55-yacht.seaReference, 14.4*yacht.sx-yacht.length/2];
+    const band = Math.floor((eye[2]-visibility.start)/visibility.step) + (side>0 ? visibility.lateralBands : 0);
+    const [first,count] = batches[0].ranges[band];
+    assert.ok(header.regions.some(r => r.profile==='main' && r.first===first && r.count===count &&
+      eye.every((v,k)=>v>=r.box[k] && v<r.box[k+3])), 'Missing all-direction dining aisle on side '+side);
+  }
+});
+
 test('each aft and solarium stair tread has visibility data at its modeled camera height', async () => {
   const dir = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
   const data = gunzipSync(await readFile(new URL('room-visibility.bin', dir)));

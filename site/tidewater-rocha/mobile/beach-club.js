@@ -1,3 +1,4 @@
+import {portMooring} from './cockpit-fittings.js?v=cockpit-grid-1';
 import {fittedFurniture} from './tour-furniture.js?v=port-guest-1';
 
 // Source axes are forward, port and up. The two stair landings register the
@@ -100,22 +101,25 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   // The opposite cockpit panoramas show a paired horn fitting and a drum
   // behind the open gunwale. All fittings bear on the same narrow ledge.
   for(const side of [-1,1]){
-    const port=side===1, y=side*3.64, base=port?4.17:4.40;
+    const port=side===1, y=port?portMooring.axis:-3.64, base=port?portMooring.sill:4.40;
     const hardware=(a,b,r,R,name)=>add(post(a,b,r,R,8),'M19','cockpit '+name+' '+side);
     // Port already has the ledge, rail, and raised cap in the boarding coaming.
     if(!port){
-      slab([4.16,-3.78,3.95,5.68,-3.50,base],.012,'M89','cockpit mooring ledge '+side);
-      slab([4.16,-3.78,4.76,5.68,-3.50,4.88],0,'M89','cockpit raised mooring cap '+side);
-      for(const x of [4.20,5.64])hardware([x,y,base],[x,y,4.76],.020,.020,'mooring cap support '+x);
+      slab([3.74,-3.78,3.95,5.92,-3.50,base],.012,'M89','cockpit mooring ledge '+side);
+      slab([3.74,-3.78,4.66,5.92,-3.50,4.86],0,'M89','cockpit raised mooring cap '+side);
+      for(const x of [3.80,5.86])hardware([x,y,base],[x,y,4.66],.020,.020,'mooring cap support '+x);
     }
-    const cx=port?4.70:4.55;
-    slab([cx-.21,y-.09,base,cx+.21,y+.09,base+.025],.015,'M19','cockpit cleat sole '+side);
-    for(const dir of [-1,1]){
-      const foot=[cx+dir*.115,y,base+.025], top=[cx+dir*.17,y,base+.183];
-      hardware(foot,top,.048,.046,'cleat upright '+dir);
-      hardware([top[0]-dir*.035,y,top[2]],[top[0]+dir*.061,y,top[2]+.012],.045,.030,'cleat horn '+dir);
+    const cleats=port?[portMooring.cleat]:[4.48,5.40];
+    for(const [index,cx] of cleats.entries()){
+      const suffix=index===0?String(side):'forward '+side;
+      slab([cx-.21,y-.09,base,cx+.21,y+.09,base+.025],.015,'M19','cockpit cleat sole '+suffix);
+      for(const dir of [-1,1]){
+        const foot=[cx+dir*.115,y,base+.025], top=[cx+dir*.17,y,base+.183];
+        hardware(foot,top,.048,.046,'cleat upright '+dir+' '+index);
+        hardware([top[0]-dir*.035,y,top[2]],[top[0]+dir*.061,y,top[2]+.012],.045,.030,'cleat horn '+dir+' '+index);
+      }
     }
-    const x=port?5.20:5.40;
+    const x=port?portMooring.drum:4.92;
     hardware([x,y,base],[x,y,base+.04],.116,.096,'mooring drum foot');
     hardware([x,y,base+.04],[x,y,base+.22],.067,.073,'mooring drum');
     hardware([x,y,base+.22],[x,y,base+.25],.094,.097,'mooring drum crown');

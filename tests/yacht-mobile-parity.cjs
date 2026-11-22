@@ -43,7 +43,7 @@ async function capture(browser, mobile) {
         if (node.geometry) { meshes++; triangles += node.geometry.index.count / 3; }
       });
       // Compare exact original part IDs, vertices, normals, indices and material assignments.
-      const parts = model.boarding.parts.filter(p => /^(telescopic section|section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
+      const parts = model.boarding.parts.filter(p => /^(telescopic |section |gangway |shaped lower boarding|widened upper teak boarding|raised teak cockpit threshold|rounded teak landing lip|landing handhold|landing mounted post|open inboard |gate )/.test(p.name));
       const furniture = model.terrace ? model.terrace.parts.filter(p=>p.role==='furniture') :
         model.exterior.parts.filter(p=>['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(p.anchor));
       return { meshes, triangles, count: model.boarding.parts.filter(p=>!p.context).length, parts: JSON.stringify(parts),

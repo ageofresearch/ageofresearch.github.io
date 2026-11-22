@@ -1,5 +1,6 @@
 import {createDaylight,mountDaylightControls,applyFullBounce} from '../mobile/yacht-daylight.js?v=yacht-daylight-1';
 import {restoreBridgeAccessHandoff} from '../mobile/bridge-access.js?v=port-guest-1';
+import {mainRooms} from '../mobile/main-deck.js?v=main-deck-complete-1';
 import {restoreGuestAccessHandoff} from '../mobile/guest-access.js?v=port-guest-1';
 import {restoreBowHandoff} from '../mobile/bow-deck.js?v=port-guest-1';
 import {restoreBridgeHandoff} from '../mobile/bridge-helm.js?v=port-guest-1';
@@ -64,7 +65,8 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     const fromUpperInterior=upperState.deck==='UD'&&!upperState.stair&&K.nav.location()?.id==='UD_R02';
     const fromSwimAccess=K.nav.deck==='SP'||K.nav.stair?.route.id==='starboard-swim';
     const terraceSpawn=K.model.terrace.room.spawn.slice(0,2);
-    const fromSaloon=!fromUpper&&K.nav.deck==='MD'&&K.model.saloon&&current[0]>=8.4433;
+    const mainRoom=upperState.deck==='MD'&&!upperState.stair&&mainRooms.find(r=>r.id===K.nav.location()?.id);
+    const fromSaloon=!mainRoom&&!fromUpper&&K.nav.deck==='MD'&&K.model.saloon&&current[0]>=8.4433;
     const saloonSpawn=K.model.saloon?.room.spawn.slice(0,2);
     const wasOpen=K.controls?.open;
     K.dispose();
@@ -78,9 +80,11 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     mountDaylightControls(daylight,K.controls?.menu);
     K.leave=({restore=true}={})=>{if(restore)K.enterRoom('boarding')};
     K.enterRoom('boarding');
-    if(fromSaloon)K.nav.enterRoom('MD_R02');
+    if(mainRoom)K.nav.enterRoom(mainRoom.id);
+    else if(fromSaloon)K.nav.enterRoom('MD_R02');
     let destination=fromSwimAccess?terraceSpawn:current;
-    if(fromSaloon&&!K.nav.floorSafe(...destination))destination=saloonSpawn;
+    if(mainRoom&&!K.nav.floorSafe(...destination))destination=K.nav.position.slice();
+    else if(fromSaloon&&!K.nav.floorSafe(...destination))destination=saloonSpawn;
     if(fromUpper){
       (fromGuest?restoreGuestAccessHandoff:fromAccess?restoreBridgeAccessHandoff:fromSun?restoreSunHandoff:fromBow?restoreBowHandoff:fromBridge?restoreBridgeHandoff:fromUpperInterior?restoreUpperInteriorHandoff:restoreUpperHandoff)(K,upperState);
       K.yaw=yaw;K.pitch=pitch;F.rotation.set(pitch,yaw,0,'YXZ');
@@ -88,6 +92,7 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
       if(fromSwimAccess)K.nav.enterRoom('MD_R01');
       K.nav.position=destination;
       K.nav.elevation=K.nav.floorHeight(...destination);
+      K.nav.room=K.nav.location();
       K.applyPosition();
       K.yaw=yaw;K.pitch=pitch;F.rotation.set(pitch,yaw,0,'YXZ');
     }

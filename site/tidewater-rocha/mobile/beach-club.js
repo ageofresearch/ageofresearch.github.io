@@ -1,4 +1,4 @@
-import {portMooring} from './cockpit-fittings.js?v=cockpit-stair-floor-1';
+import {portMooring} from './cockpit-fittings.js?v=main-deck-complete-1';
 import {fittedFurniture} from './tour-furniture.js?v=port-guest-1';
 
 // Source axes are forward, port and up. The two stair landings register the

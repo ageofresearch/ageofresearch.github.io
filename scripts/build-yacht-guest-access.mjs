@@ -1,3 +1,4 @@
+import {extractMainDeck} from './yacht-geometry/main-deck.mjs';
 import {portCabin,cabinWalk} from '../site/tidewater-rocha/mobile/port-guest-cabin.js';
 import {writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
@@ -10,8 +11,15 @@ import {guestRoom,guestLandings,guestDomains,guestApproach} from '../site/tidewa
 const compact=rows=>[...new Map(rows.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
 export async function buildGuestAccess() {
   const covers=new Map();
-  const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest'],
+  const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest','main'],
     lod(p,context) {
+      if(context.profile==='main'){
+        if(p.context)return {error:0};
+        if(p.role==='main-deck')return {error:p.glass?0:p.bounds[0]>=17.7?.004:.014};
+        if(p.bounds[3]<7.51&&p.bounds[2]<6)return {error:.12};
+        return {omit:true,reason:'Covered by the main deck extraction or outside the main deck sightline'};
+      }
+      if(p.role==='main-deck')return {omit:true,reason:'Resident main-deck profile'};
       const guest=p.role?.startsWith('guest-'),flight=p.semanticParent==='stairs/guest';
       if(context.profile==='guest') {
         // Upper-deck furniture is above two solid ceilings from this profile.
@@ -108,15 +116,15 @@ export async function buildGuestAccess() {
           add({...p,indices},'guest-ceiling',[13.17,-2.26,3.829,17.83,.65,3.831],'-underside');
         }
       }
-      parts.push(...additions);
+      parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {version:'cockpit-stair-floor-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'main-deck-complete-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),
         flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
           obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compact(flight.clearance.footprints(s.height))}))},
-        evidence:'Port double cabin fitted to VRCloud; the original berth, hull openings and door jambs fix its model coordinates. Other cabins, ensuite and forward passage remain pending'};
+        evidence:'VRCloud Grande 36M main-deck and port guest cabin stations; fittings and passage alignments estimated against the existing model. Unseen compartments and lower-deck forward passages remain pending.'};
     }
   });
   return result;

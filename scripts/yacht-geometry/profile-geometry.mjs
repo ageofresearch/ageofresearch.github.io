@@ -26,7 +26,7 @@ export function detailError(part, error, profile) {
 
 // The visitor can look in any direction. Only the eye height differs by route,
 // including stair approaches, camera easing and the close-up boarding camera.
-const heights = { exterior: [3.3, 5.85], upper: [5, 8], sun: [7, 10.5], bow: [6, 8], guest: [2.7, 6] };
+const heights = { main: [5.3,5.8], exterior: [3.3, 5.85], upper: [5, 8], sun: [7, 10.5], bow: [6, 8], guest: [2.7, 6] };
 const start = -6 * basis.sx - basis.length / 2,
   step = basis.sx,
   bands = 42;

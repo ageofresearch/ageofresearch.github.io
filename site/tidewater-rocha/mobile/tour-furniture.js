@@ -1,3 +1,4 @@
+import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=main-deck-complete-1';
 import {furnishPortCabin} from './port-guest-cabin.js?v=saloon-rug-1';
 import catalog from './tour-furniture-data.js?v=chair-fidelity-1';
 
@@ -171,6 +172,8 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
     add('LD_DCK_001',slab(aperture,3.804,3.830,.003),'M38','lower lobby ceiling lamp trim '+x);
     add('LD_DCK_001',slab(outline(x,-.10,.106,.106,.052),3.802,3.804,0),'M99','lower lobby frosted lens '+x);
   }
+  furnishMainDeck({box,add,remove,slab,outline,circle});
+  finishSideDecks({add,box});
   furnishPortCabin({add,remove,source,box,slab,outline,fit});
   for(const p of parts()){
     const id=p.anchor||p.id.split('/')[0];

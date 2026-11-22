@@ -28,7 +28,7 @@ export const spatialRules=[
     reason:'Keep the chair aligned with the corrected helm wheel'},
   {id:'day-head-wc',anchors:['MD_SAN_007','MD_SAN_008','MD_SAN_009'],delta:[-.26348,0,0],angle:-Math.PI/2,pivot:[22.1567,-2.93196],
     reason:'Provisional rigid fit: face the pan into the room and place the cistern against the side partition; translation alone intersects the service wall'},
-  ...[['owner-port-wc','MD_SAN_013','MD_SAN_014','MD_SAN_015'],['owner-starboard-wc','MD_SAN_021','MD_SAN_022','MD_SAN_023']]
+  ...[['owner-port-wc','MD_SAN_013','MD_SAN_014','MD_SAN_015']]
     .map(([id,...anchors])=>({id,anchors,delta:[-.009309,-.142277,0],reason:'Clear the sloping head partition with the complete WC assembly'})),
   ...[['forepeak-port-wc','LD_SAN_040','LD_SAN_041','LD_SAN_042'],['forepeak-starboard-wc','LD_SAN_048','LD_SAN_049','LD_SAN_050']]
     .map(([id,...anchors])=>({id,anchors,delta:[-.002417,-.032446,0],reason:'Clear the sloping forepeak partition with the complete WC assembly'})),

@@ -39,7 +39,7 @@ test('access build is reproducible, bounded and matches the shared support and c
   const parts=renderedParts(model),wall=parts.find(p=>p.feature==='recessed galley partition');
   assert.ok(wall);assert.deepEqual(wall.bounds,[18,1.38887,3.95,19.63299,1.71887,5.86]);
   const triangles=new Set();for(let i=0;i<wall.indices.length;i+=3){const t=wall.indices.slice(i,i+3).map(k=>wall.vertices.slice(k*6,k*6+3).join(',')).sort().join(';');assert.ok(!triangles.has(t));triangles.add(t);}
-  const skirts=parts.filter(p=>p.anchor==='MD_PAR_001'&&/\/00[01]$/.test(p.id));assert.equal(skirts.length,2);assert.ok(skirts.every(p=>p.bounds[1]>=.68));
+  const skirts=parts.filter(p=>p.anchor==='MD_PAR_001'&&p.feature?.startsWith('galley jamb skirting'));assert.equal(skirts.length,2);assert.ok(skirts.every(p=>p.bounds[1]>=.68));
   const plate=parts.find(p=>p.id==='MD_PAR_001/002');assert.ok(plate.bounds[1]>.83&&plate.bounds[4]<.86);
   const added=manifest.parts.filter(p=>p.role==='access-floor').map(p=>({...p,vertices:new Float32Array(array(binary),p.vertices.offset,p.vertices.length),indices:new Uint32Array(array(binary),p.indices.offset,p.indices.length)}));
   const floor=supportedFloor(added.flatMap(p=>surfaceTriangles(p,3.95,.002)),[]);assert.ok(floor(18.5,1.35));assert.ok(!floor(17.5,.2));

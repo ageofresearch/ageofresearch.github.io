@@ -1,3 +1,4 @@
+import {inMainDeck} from './main-deck.js?v=main-deck-complete-1';
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
 import {createViewIndices} from './view-indices.js?v=12';
@@ -263,7 +264,8 @@ export async function createForwardRenderer(app, daylight) {
       if(profiles) {
         const nav=app.yachtWalk.nav,guest=app.entranceYacht.guestAccess;
         const guestApproach=!!guest&&(nav.deck==='LD'||nav.deck==='MD'&&guest.profileContains(...nav.position,activeProfile)&&nav.floorSafe(...nav.position,'MD'));
-        const name=preparingProfile??nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position),guestApproach);
+        const main=profiles.main&&nav.deck==='MD'&&!nav.stair&&!guestApproach&&(nav.position[0]>=7.8&&inMainDeck(...nav.position)||activeProfile==='main'&&nav.position[0]>17.3);
+        const name=preparingProfile??(main?'main':nextProfile(activeProfile,nav.position[0],nav.deck,nav.stair?.route.id,!!app.entranceYacht.bow?.contains(...nav.position),!!app.entranceYacht.bridgeAccess?.profileContains(...nav.position),guestApproach));
         if(name!==activeProfile)selectProfile(name);
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {

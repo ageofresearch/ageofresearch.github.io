@@ -42,3 +42,9 @@ is available through the model factory's `photoLayout: false` option for tests.
 
 Exact equipment offsets, supplier finishes, hidden circulation and engineering
 dimensions require further onboard measurements or construction drawings.
+
+## Main deck walk, main-deck-complete-1
+
+The cockpit at the head of the gangway connects to the saloon and dining area, the two outside passages, the galley, the service entrance and the day head. The main corridor leads to the owner's cabin, bathroom and shower. Both viewers build the door openings, fitted furniture, window reveals and side rails from the same model coordinates. The walking surface is at model height 3.95.
+
+The photographed landmarks used for placement include the dark galley counters and cooker hood, the stacked laundry fronts, the bed and blue rug, the long vanity opposite the shower, and the outside handrails. The camera positions, rail heights, partitions and distances between panorama stations are estimates. The model uses static finishes for stone, upholstery and reflections. The service entrance ends at the visible fittings. [Grande 36M virtual tour](https://vrcloud.com/?pv=1667308298)

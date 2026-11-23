@@ -47,7 +47,9 @@ function cushion(path, halfWidth, halfHeight, rows, sides) {
     const length=Math.hypot(...vertices.slice(i,i+3));
     for(let k=0;k<3;k++)vertices[i+k]/=length;
   }
-  return {vertices,indices};
+  // Fractional powers can differ by an ulp between JS engines. Fix the source
+  // precision before the shared geometry becomes collision polygons and bounds.
+  return {vertices:vertices.map(v=>Number(v.toFixed(10))),indices};
 }
 
 // The photographic lounge chairs open towards the centre table. The forward

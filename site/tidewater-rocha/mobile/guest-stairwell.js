@@ -64,3 +64,51 @@ export function guestStairwellLining(opening, forward, portWall, aftWall, bathWa
     ['guest stairwell starboard return', extrude(rectangle(aftWall[3], outer - thickness, bathWall[0], outer), floor, soffit)]
   ];
 }
+
+// Close the curved parapets around the guest flight, including their sloping
+// undersides, which are visible from the lower landing. Order each face in
+// model coordinates so the same mesh works with single-sided materials.
+export function guestStairParapet(path, side, width, lower, upper, thickness) {
+  function section(p) {
+    const point = (offset, z) => [p.x + side * offset * p.n[0], p.y + side * offset * p.n[1], z];
+    const inner = width / 2, outer = inner + thickness;
+    return [point(inner, lower(p)), point(inner, upper(p)), point(outer, upper(p)), point(outer, lower(p))];
+  }
+  return closedStrip(path.map(section), side);
+}
+
+// The straight upper arm crosses the adjacent service compartment. Seat
+// its lining against the 85 mm tread undersides at their high ends. Stop
+// at the tangent to the turn: the open lower treads overlook the lobby.
+export function upperGuestStairLining(path, width, height) {
+  const sections = path.slice(-2).map(p => {
+    const top = height(p) - .085;
+    const point = (side, z) => [p.x + side * width/2 * p.n[0], p.y + side * width/2 * p.n[1], z];
+    return [point(-1, top-.06), point(-1, top), point(1, top), point(1, top-.06)];
+  });
+  return closedStrip(sections, 1);
+}
+
+function closedStrip(sections, side) {
+  const vertices = [], indices = [];
+  function face(a, b, c, d) {
+    if (side < 0) [b, d] = [d, b];
+    const ab = b.map((v, i) => v - a[i]), ac = c.map((v, i) => v - a[i]);
+    const n = [ab[1]*ac[2] - ab[2]*ac[1], ab[2]*ac[0] - ab[0]*ac[2], ab[0]*ac[1] - ab[1]*ac[0]];
+    const length = Math.hypot(...n);
+    const normal = n.map(v => v / length), start = vertices.length / 6;
+    for (const p of [a, b, c, d]) vertices.push(...p, ...normal);
+    indices.push(start, start+1, start+2, start, start+2, start+3);
+  }
+  let previous = sections[0];
+  face(...previous);
+  for (const next of sections.slice(1)) {
+    for (let i = 0; i < 4; i++) {
+      const j = (i + 1) % 4;
+      face(previous[i], next[i], next[j], previous[j]);
+    }
+    previous = next;
+  }
+  face(...previous.reverse());
+  return {vertices, indices};
+}

@@ -17,6 +17,7 @@ const out=process.env.YACHT_OUTPUT||'/tmp/yacht-guest';
       await frame.waitForFunction(()=>window.__mapsPublicStatus?.status==='ready',null,{timeout:180000});
       if(mobile)assert.equal(await frame.evaluate(()=>__app.entranceYacht.guestAccessLoadState),'ready');
       await require('./yacht-guest-access.cjs')(frame,out,require('./yacht-frame-reader.cjs')(frame),mobile);
+      if(mobile)console.log('Guest stair motion',await require('./yacht-main-deck-motion.cjs')(frame,true));
       assert.deepEqual(errors,[]);console.log('Guest views passed:',mobile?'mobile':'full');
     }finally{await context.close();}
     if(process.env.YACHT_CHECK!=='full'&&process.env.YACHT_SKIP_RECOVERY!=='1')await require('./yacht-guest-access-loading.cjs')(browser,base);

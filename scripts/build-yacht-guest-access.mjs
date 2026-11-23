@@ -13,6 +13,7 @@ export async function buildGuestAccess() {
   const covers=new Map();
   const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest','main'],
     lod(p,context) {
+      if(p.role==='stair-sightline')return context.profile==='guest'?{error:0}:{omit:true,reason:'Covered by the main deck outside the guest stair'};
       if(p.role==='service-bulkhead'||p.role==='stairwell-lining')return {error:0};
       if(p.role==='passage-floor')return {error:.014};
       if(p.role==='main-side-guard'||/^MD\/boarding-route\/[2-5]$/.test(p.id)||
@@ -99,13 +100,23 @@ export async function buildGuestAccess() {
         }else part.light=Array(part.vertices.length/6).fill(.7);
         part.surfaceTypes=Array.from({length:part.vertices.length/6},(_,i)=>{
           const nz=part.vertices[i*6+5];
-          return (role==='guest-ceiling'||role==='guest-cabin'&&part.sourceID==='MD_DCK_001')&&nz<-.5?9:part.finish?.[3]??0;
+          const slab=part.sourceID==='MD_DCK_001'&&['guest-ceiling','guest-cabin','stair-sightline'].includes(role);
+          return slab&&nz<-.5?9:part.finish?.[3]??0;
         });
         additions.push(part);
       };
       for(const p of final) {
         const id=p.anchor||p.id.split('/')[0];
         const cabinFurniture=/^LD_(FUR_00[1-4]|SOF_00[1-3])$/.test(id);
+        // Complete the main-deck envelope that stays visible above the curved
+        // parapet. Earlier saloon and bridge packages own the opposite
+        // halves of these cuts at x=17.91 and y=-.30 respectively.
+        if (/^MD_PAR_00[23]$/.test(id))
+          add(p,'stair-sightline',[17.91,-4,3.81,22.4,4,5.88]);
+        else if(p.feature==='corridor return wall')
+          add(p,'stair-sightline',[17.91,-4,3.81,22.4,-.3,5.88]);
+        else if (/^MD_(PAR_01[02]|EQU_002)$/.test(id))
+          add(p,'stair-sightline');
         if(cabinFurniture||p.feature?.startsWith('port cabin '))add(p,'guest-cabin');
         else if(/^HULL_GLA_00[12]$/.test(id))add(p,'guest-cabin',[14.30,3.60,2.40,17.82,3.81,3.21]);
         else if(p.feature?.startsWith('lower lobby '))add(p,'guest-finish');
@@ -119,6 +130,10 @@ export async function buildGuestAccess() {
         else if(p.deck==='LD'&&/^LD_(PAR|GLA)_/.test(id))add(p,'guest-boundary',[13.17,-2.26,1.55,19.8,.65,3.831]);
         else if(id==='LD_MAC_001')add(p,'guest-boundary',[13.15,-.75,1.55,13.35,.65,3.831]);
         else if(id==='MD_DCK_001') {
+          // Reuse the bridge floor and guest ceiling, filling only their missing
+          // perimeter and the Float32 underside clipped off the bridge floor.
+          add(p,'stair-sightline',[17.83,-3.02,3.829,19.72,-2.26,3.951],'-outboard');
+          add(p,'stair-sightline',[19.72,-3.02,3.829,22.4,1.85,3.951],'-forward');
           add(p,'guest-ceiling',[17.83,-2.26,3.829,19.72,-.3,3.951]);
           // Earlier MD extraction starts at 3.83, just above the Float32
           // underside (3.8299999237), and contains no bottom faces. Recover
@@ -128,13 +143,15 @@ export async function buildGuestAccess() {
             const face=Array.from(p.indices.slice(i,i+3));
             if(face.every(k=>Math.abs(p.vertices[k*6+2]-3.83)<.002&&p.vertices[k*6+5]<-.5))indices.push(...face);
           }
+          add({...p,indices},'stair-sightline',[17.83,-.3,3.829,19.72,.65,3.831],'-bridge-underside');
+          add({...p,indices},'stair-sightline',[17.86,.65,3.829,19.72,1.85,3.831],'-bridge-inboard');
           add({...p,indices},'guest-cabin',[14.26,.65,3.829,17.86,3.61,3.831],'-cabin');
           add({...p,indices},'guest-ceiling',[13.17,-2.26,3.829,17.83,.65,3.831],'-underside');
         }
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'guest-stairwell-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'guest-descent-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

@@ -5,10 +5,10 @@ import {coversView, widenedView, viewRadius} from './view-volume.js?v=3';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null, immediate = {}, screenConfig = null) {
   let worker;
-  try {worker = new Worker(new URL('./view-worker.js?v=stern-flag-1', import.meta.url), {type:'module'});}
+  try {worker = new Worker(new URL('./view-worker.js?v=stern-flag-region-1', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
-  let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
+  let buffer, exactBuffer,patchBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
   const waiting=new Set();
   function wake(){
     if(!stopped && (pending&&!pending.result || exact?.analyzing))return;
@@ -29,7 +29,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
   function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples, refinement) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
-    const offset = refinement === 'cloth' ? -1 : roomCellOffset(region, camera, projection, width, height);
+    const offset = roomCellOffset(region, camera, projection, width, height);
     // Sun changes invalidate only the sky exclusions. The camera and room can
     // immediately reuse the full sky from the same prepared index list.
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
@@ -69,7 +69,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   function dispose() {
     stopped = true;
     worker.terminate();
-    buffer?.destroy();exactBuffer?.destroy();
+    buffer?.destroy();exactBuffer?.destroy();patchBuffer?.destroy();
     active = pending = exact = null;wake();
     finishStart();
   }
@@ -77,6 +77,8 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     buffer = device.createBuffer({label:'Yacht visible opaque indices', size:glassOffset+maxGlassBytes,
       usage:GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST});
     exactBuffer=device.createBuffer({label:'Fixed camera opaque indices',size:glassOffset,usage:GPUBufferUsage.INDEX|GPUBufferUsage.COPY_DST});
+    patchBuffer=device.createBuffer({label:'Waving cloth and its surroundings',size:glassOffset+maxGlassBytes,
+      usage:GPUBufferUsage.INDEX|GPUBufferUsage.COPY_DST});
     worker.onerror = worker.onmessageerror = dispose;
     worker.onmessage = ({data}) => {
       if (stopped) return;
@@ -92,8 +94,9 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       ...Object.values(glazing).flatMap(g=>[g.vertices.buffer,g.indices.buffer])]);
   } catch (error) {dispose(); throw error;}
   return {
-    buffer, exactBuffer,glassOffset, ready, dispose,
+    buffer, exactBuffer,patchBuffer,glassOffset, ready, dispose,
     matches,
+    invalidateFixed(){exact=null;wake();},
     idle(){
       if(stopped || ((!pending||pending.result)&&!exact?.analyzing))return Promise.resolve();
       return new Promise(resolve=>waiting.add(resolve));
@@ -109,7 +112,13 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     analyze(winners,width,height,profile,first,count,clip,candidates,windRect){
       if(stopped)return;
       exact={key:++serial,analyzing:true,profile,first,count,width,height,clip:Float32Array.from(clip)};
-      worker.postMessage({...exact,winners,candidates,windRect},candidates?[winners.buffer,candidates.buffer]:[winners.buffer]);
+      // Include every sample touched by rounding the scissor out to whole pixels.
+      const region=windRect && [windRect[0]-4/width,windRect[1]-4/height,windRect[2]+4/width,windRect[3]+4/height];
+      worker.postMessage({...exact,winners,candidates,windRect:region},candidates?[winners.buffer,candidates.buffer]:[winners.buffer]);
+    },
+    patch(profile,frame,width,height,sunRevision){
+      if(!matches(profile,frame,width,height) || exact.patchRevision!==sunRevision)return null;
+      return exact.patchCounts;
     },
     fixed(profile,first,count,frame,width,height,sunRevision){
       if(!matches(profile,frame,width,height)||exact.first!==first||exact.count!==count)return null;
@@ -118,6 +127,15 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         if(skyStart){
           const padded=skyStart+(output.BYTES_PER_ELEMENT===2 ? skyStart%2 : 0);
           device.queue.writeBuffer(exactBuffer,0,output,0,padded);
+        }
+        const {patch,patchLength,patchSky,patchGlass}=exact.result;
+        if(patch){
+          const short=patch.BYTES_PER_ELEMENT===2;
+          const kept=filterSky(patch,patchSky,patchLength,frame,width,height,patch.subarray(patchSky));
+          const size=patchSky+kept;
+          if(size)device.queue.writeBuffer(patchBuffer,0,patch,0,size+(short?size%2:0));
+          if(patchGlass.length)device.queue.writeBuffer(patchBuffer,glassOffset,patchGlass.output);
+          exact.patchRevision=sunRevision;exact.patchCounts=[size,patchGlass.length];
         }
         Object.assign(exact,{output,skyStart,fullLength:length,length:skyStart,result:null});
       }
@@ -167,7 +185,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const filter = immediate[profile];
       if (!filter) return null;
       const region = cells?.range(profile, first, count, camera);
-      const offset = refinement === 'cloth' ? -1 : roomCellOffset(region, camera, projection, width, height);
+      const offset = roomCellOffset(region, camera, projection, width, height);
       const {short, glassLength} = profileFormats[profile];
       const output = short ? compact16 : compact32;
       const length = filter(first, count, clip, width, height, cells?.bits, offset, region?.count, output);

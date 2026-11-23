@@ -129,7 +129,7 @@ function localDraw(positions, indices, surface, { axis, box, eye }) {
     high = [];
   for (let i = 0; i < indices.length; i += 3) {
     const [ia, ib, ic] = indices.subarray(i, i + 3);
-    if(surface[ia*4+2]===47){low.push(ia,ib,ic);continue;}
+    if(surface[ia*4+2]===47 || surface[ia*4+2]===54){low.push(ia,ib,ic);continue;}
     const a = ia * 3,
       b = ib * 3,
       c = ic * 3;

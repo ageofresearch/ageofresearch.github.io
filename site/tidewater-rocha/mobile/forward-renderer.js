@@ -1,7 +1,7 @@
 import {flagRect,flagOcclusion} from './stern-flag.js?v=stern-flag-1';
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
-import {createViewIndices} from './view-indices.js?v=stern-flag-1';
+import {createViewIndices} from './view-indices.js?v=stern-flag-region-1';
 import {loadScreenVisibility} from './screen-visibility.js?v=stern-flag-1';
 import {prepareImmediateView} from './immediate-view.js?v=stern-flag-1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
@@ -13,6 +13,17 @@ import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
 import { onGuestApproach } from './guest-access-geometry.js?v=guest-visibility-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
+
+// Use native framebuffer coordinates for both the scissor and the texture
+// copies. An offscreen readback or a camera/light/profile change draws in full.
+function flagPixels(rect,width,height){
+  const left=Math.max(0,Math.floor((1+rect[0])*width/2));
+  const right=Math.min(width,Math.ceil((1+rect[2])*width/2));
+  const top=Math.max(0,Math.floor((1-rect[3])*height/2));
+  const bottom=Math.min(height,Math.ceil((1-rect[1])*height/2));
+  const w=right-left,h=bottom-top;
+  return w>0 && h>0 && w*h<width*height*.5 ? [left,top,w,h] : null;
+}
 
 // The boarding assembly uses one opaque batch and a single glazing batch. Both
 // share the same transform, depth attachment and multisampled render pass.
@@ -122,13 +133,14 @@ export async function createForwardRenderer(app, daylight) {
   model.stats.finishTextureBytes=finishes.bytes;
   model.stats.materialTextures=1;
   let depth, depthView, color, colorView,coverage,lastGeometry,stable=0;
+  let savedFrame,savedView,baseReady=false;
   const lastClip=new Float32Array(16);
   // A presented canvas keeps its image until a new surface is acquired.
   // Explicit offscreen draws and preparation always render the requested pose.
   const presentedView=new Float32Array(19);
   let presentedSurface=null,presentedDepth=null,presentedBatches=null,presentedRevision=-1;
   const invalidatePresentation=()=>{
-    presentedSurface=null;
+    baseReady=false;presentedSurface=null;
     presentedDepth=null;
     presentedBatches=null;
   };
@@ -195,7 +207,7 @@ export async function createForwardRenderer(app, daylight) {
             loadRoomVisibility(packed,lists,signal), smooth && loadScreenVisibility(device,signal),
           ]) : [null,null];
           stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes,cells,immediate,screen);
-          if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size+stagedViews.exactBuffer.size;}
+          if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size+stagedViews.exactBuffer.size+stagedViews.patchBuffer.size;}
         }
       }catch(error){failure=error;}
       const validation=await device.popErrorScope(),memory=await device.popErrorScope();
@@ -306,6 +318,7 @@ export async function createForwardRenderer(app, daylight) {
       }
       if (depth?.width !== engine.width || depth.height !== engine.height || depth.sampleCount !== samples) {
         coverage?.dispose();coverage=null;lastGeometry=null;
+        savedFrame?.destroy();savedFrame=savedView=null;baseReady=false;
         depth?.destroy();
         color?.destroy();
         const attachment = {size:[engine.width,engine.height],sampleCount:samples,
@@ -315,6 +328,11 @@ export async function createForwardRenderer(app, daylight) {
         color = samples > 1 ? device.createTexture({...attachment,label:'Gangway multisample color',format}) : null;
         colorView = color?.createView();
         if(coveragePipeline && samples===4)coverage=createVisibilityTarget(device,engine.width,engine.height,coveragePipeline);
+        if(coverage){
+          savedFrame=device.createTexture({label:'Stationary yacht frame',format,size:attachment.size,
+            usage:GPUTextureUsage.RENDER_ATTACHMENT|GPUTextureUsage.COPY_SRC});
+          savedView=savedFrame.createView();
+        }
       }
       camera.updateMatrixWorld();
       clip.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).multiply(mesh.matrixWorld).toArray(frame);
@@ -322,6 +340,7 @@ export async function createForwardRenderer(app, daylight) {
       daylight.flush();palette.update(daylight);
       const moved=litRevision!==daylight.revision;
       if(moved){
+        if(litRevision>=0){viewIndices?.invalidateFixed();lastGeometry=null;}
         const bearing=daylight.state.azimuth*Math.PI/180;frame[23]=Math.cos(bearing);frame[19]=Math.sin(bearing);
         daylight.direction.toArray(frame,20);lightMatrix(daylight.direction,daylight.state.azimuth,shadowMatrix);
         frame.set(daylight.irradiance,40);litRevision=daylight.revision;
@@ -344,24 +363,33 @@ export async function createForwardRenderer(app, daylight) {
           capture=!viewIndices.matches(activeProfile,frame,engine.width,engine.height);
         }
       }else lastGeometry=null;
-      if(allowReuse && !windRect && !capture && presentedSurface===engine.currentTexture && presentedDepth===depth &&
+      let sameView=false;
+      if(allowReuse && !capture && presentedSurface===engine.currentTexture && presentedDepth===depth &&
           presentedBatches===batches && presentedRevision===daylight.revision){
         let same=true;
         for(let i=0;i<presentedView.length && same;i++)same=frame[i]===presentedView[i];
-        if(same)return false;
+        sameView=same;
+        if(same&&!windRect)return false;
       }
       gpu.queue.writeBuffer(uniform,0,frame,0,moved?40+daylight.irradiance.length:20);
       if(waving)gpu.queue.writeBuffer(uniform,frame.byteLength-16,frame,frame.length-4,1);
       if(moved)shadow.draw(gpu.getEncoder(),daylight.state);
       let settled=!coverage || !viewIndices;
-      const screen = target??engine.currentTexture().createView();
+      const canvas=target?null:engine.currentTexture();
+      const screen=target??canvas.createView();
+      const canCache=allowReuse && !capture && windRect && stable>=3 && savedFrame && (canvas?.usage & GPUTextureUsage.COPY_DST);
+      const rect=canCache && flagPixels(windRect,engine.width,engine.height);
+      const patch=rect && baseReady && sameView && viewIndices?.patch(activeProfile,frame,engine.width,engine.height,daylight.revision);
+      const saveBase=rect && !patch;
+      const destination=saveBase?savedView:screen;
       const pass = gpu.getEncoder().beginRenderPass({
         label:'Gangway to screen',
-        colorAttachments:[{view:colorView ?? screen,resolveTarget:colorView ? screen : undefined,
+        colorAttachments:[{view:colorView ?? destination,resolveTarget:colorView ? destination : undefined,
           loadOp:'clear',storeOp:colorView ? 'discard' : 'store',
           clearValue:{r:.40,g:.64,b:.84,a:1}},...(capture?[coverage.attachment]:[])],
         depthStencilAttachment:{view:depthView,depthClearValue:0,depthLoadOp:'clear',depthStoreOp:'discard'},
       });
+      if(patch)pass.setScissorRect(...rect);
       pass.setBindGroup(0,bindings);
       const pipelines = capture?evidence:samples === 4 ? smooth : single;
       let capturedSource;
@@ -372,12 +400,16 @@ export async function createForwardRenderer(app, daylight) {
         pass.setVertexBuffer(0,batch.vertices);
         if(i===0)pass.setVertexBuffer(1,palette.storage);
         pass.setIndexBuffer(batch.indices,batch.indexFormat);
-        if (batch.ranges) {
+        if(patch){
+          pass.setIndexBuffer(viewIndices.patchBuffer,batch.indexFormat,i===0?0:viewIndices.glassOffset);
+          pass.drawIndexed(patch[i]);settled=true;
+          if(i===0)model.stats.triangles=(patch[0]+patch[1])/3;
+        }else if (batch.ranges) {
           const {start,step,lateralBands}=profiles[activeProfile].visibility;
           const view=batch.localView,box=view?.box;
           let first,count;
           let directional=preparedBand && typeof preparedBand==='object'?preparedBand:null;
-          if(!windRect&&preparedBand===null&&batch.views?.length){
+          if(preparedBand===null&&batch.views?.length){
             const m=cameraInYacht.multiplyMatrices(localFromWorld,camera.matrixWorld).elements,p=camera.projectionMatrix.elements;
             const inside=(sign,axis,edge,tangent)=>{
               const component=k=>sign*tangent*m[2+k]+edge*m[axis+k];
@@ -388,7 +420,7 @@ export async function createForwardRenderer(app, daylight) {
               (!sign||inside(sign,0,1,cone[0])&&inside(sign,0,-1,cone[0])&&inside(sign,1,1,cone[1])&&inside(sign,1,-1,cone[2])));
           }
           if(directional){first=directional.first;count=directional.count;}
-          else if(view&&(preparedBand==='local'||preparedBand===null&&!windRect&&eye.x>=box[0]&&eye.x<=box[3]&&
+          else if(view&&(preparedBand==='local'||preparedBand===null&&eye.x>=box[0]&&eye.x<=box[3]&&
             eye.y>=box[1]&&eye.y<=box[4]&&eye.z>=box[2]&&eye.z<=box[5])){
             // Max component across the four frustum rays in yacht coordinates.
             // Include camera roll, projection offsets and the yacht rotation.
@@ -441,6 +473,22 @@ export async function createForwardRenderer(app, daylight) {
         } else pass.drawIndexed(batch.count);
       }
       pass.end();
+      if(saveBase){
+        gpu.getEncoder().copyTextureToTexture({texture:savedFrame},{texture:canvas},[engine.width,engine.height]);
+      }else if(patch){
+        const [x,y,w,h]=rect;
+        const restore=(left,top,width,height)=>{
+          if(width&&height){
+            const origin=[left,top];
+            gpu.getEncoder().copyTextureToTexture({texture:savedFrame,origin},{texture:canvas,origin},[width,height]);
+          }
+        };
+        restore(0,0,engine.width,y);
+        restore(0,y+h,engine.width,engine.height-y-h);
+        restore(0,y,x,h);
+        restore(x+w,y,engine.width-x-w,h);
+      }
+      baseReady=Boolean(saveBase||patch);
       if(settled && !target && preparingProfile===null){
         for(let i=0;i<presentedView.length;i++)presentedView[i]=frame[i];
         presentedSurface=engine.currentTexture;
@@ -461,7 +509,7 @@ export async function createForwardRenderer(app, daylight) {
       window.removeEventListener('pageshow',invalidatePresentation);
       disposed=true;coverage?.dispose();
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
+      viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();savedFrame?.destroy();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

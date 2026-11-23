@@ -170,9 +170,20 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const offset = roomCellOffset(region, camera, projection, width, height);
       const {short, glassLength} = profileFormats[profile];
       const output = short ? compact16 : compact32;
-      const length = filter(first, count, clip, width, height, cells?.bits, offset, region?.count, output);
+      let length = filter(first, count, clip, width, height, cells?.bits, offset, region?.count, output);
+      let indices = output;
+      // A change of view band can occur halfway up a tread. Apply the same
+      // sample/depth proof while waiting for the worker's replacement range.
+      if (profile === 'upper' && refinement === 'occlusion' && short && screen &&
+          length >= 3500 * 3 && usableScreen(width, height, samples, projection)) {
+        length = screen.filter(output, length, frame, width, height, true, true);
+        indices = screen.output;
+        // The immediate range has replaced the worker's cached WASM input,
+        // even if the GPU subsequently uses the complete static range.
+        if (active) active.offset = undefined;
+      }
       if (length && length < count) {
-        device.queue.writeBuffer(buffer, 0, output, 0, length + (short ? length % 2 : 0));
+        device.queue.writeBuffer(buffer, 0, indices, 0, length + (short ? length % 2 : 0));
         // Turning back can make the old worker list valid again. Its indices
         // must be restored after this write to the same opaque buffer.
         if (active) active.offset = undefined;

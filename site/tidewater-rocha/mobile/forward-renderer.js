@@ -1,6 +1,6 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
-import {createViewIndices} from './view-indices.js?v=13';
+import {createViewIndices} from './view-indices.js?v=14';
 import {loadScreenVisibility} from './screen-visibility.js?v=2';
 import {prepareImmediateView} from './immediate-view.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';

@@ -1,3 +1,4 @@
+import {flagTexel} from './stern-flag.js?v=stern-flag-1';
 import {gangwayAtlasTexel} from './gangway-finish.js?v=chair-fidelity-1';
 // Existing finishes plus a dedicated boarding grain layer, prepared once.
 // Board offsets/variation cover all 128 rows including the yacht's full beam.
@@ -70,10 +71,11 @@ export function teakPatternMips(width=512,height=4096) {
 }
 // Yarn pairs alternate over and under. Average the same periodic tile at every
 // mip so the receding chair backs converge to a stable charcoal value.
-function chairWeaveMips() {
+function clothMips(flag=false) {
  const levels=[];
  let w=512,h=256,data=new Uint8Array(w*h);
  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+   if(flag){data[y*w+x]=flagTexel(x,y);continue;}
    const u=(x+.5)/16, v=(y+.5)/8;
    const over=(Math.floor(u)+Math.floor(v))%2===0;
    const warp=Math.sin(Math.PI*u)**2, weft=Math.sin(Math.PI*v)**2;
@@ -98,8 +100,8 @@ function chairWeaveMips() {
 // slices cover rows 8 through 111; the final slice carries the cockpit fabric.
 export function createFinishPatterns(device) {
  const source=finishPatternMips(),deck=teakPatternMips();
- const cloth = chairWeaveMips();
- const width=512,height=256,layers=19,mipLevelCount=10;
+ const cloth=clothMips(),flag=clothMips(true);
+ const width=512,height=256,layers=20,mipLevelCount=10;
  const texture=device.createTexture({label:'Prepared yacht finish atlas',size:[width,height,layers],format:'r8unorm',
    mipLevelCount,usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST});
  let bytes=0;
@@ -119,6 +121,7 @@ export function createFinishPatterns(device) {
        // Teak rows 112–119 lie outside every mobile deck. The last slice
        // holds the sling weave with the same sampler and fragment pipeline.
        data[18*n+i]=cloth[mip][i];
+       data[19*n+i]=flag[mip][i];
        for(let page=0;page<13;page++){
          const row=Math.min(teak.height-1,Math.floor(((page+1)*256+.5*(1<<mip))/(1<<mip))+y);
          data[(5+page)*n+i]=teak.data[row*teak.width+x];

@@ -34,7 +34,8 @@ export async function buildUpper() {
   for(const p of final) {
     const anchor=p.anchor||p.id.split('/')[0];
     if(p.feature?.startsWith('solarium guard')||p.feature?.startsWith('bow guard'))continue;
-    if(furniture.has(anchor))add(p,'furniture');
+    if (/flagpole|Panama flag cloth/.test(p.feature||''))add(p,'boundary');
+    else if(furniture.has(anchor))add(p,'furniture');
     else if(p.semanticParent==='stairs/aft')add(p,'stair');
     else if(anchor==='SD_STA_001')add(p,'closed-stair');
     else if(anchor==='UD_DCK_001') {
@@ -99,7 +100,7 @@ export async function buildUpper() {
     }
   }finally{materials.opaque.dispose();materials.glass.dispose();model.dispose();}
   const compactFootprints=footprints=>[...new Map(footprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-  const manifest={version:'guest-stairwell-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
+  const manifest={version:'stern-flag-1',sourceSHA256:lower.manifest.sourceSHA256,parts:packed,profiles,floor,collisionFootprints:compactFootprints(collisionFootprints),
     room:{...data.rooms.find(r=>r.id==='UD_R01'),name:'Terraza superior',displayName:'Terraza superior',spawn:[8.35,2.21,7.6],look:[10.3,0,6.8]},
     navigationEnd:14.188,flight:{route:flight.route,surfaces:flight.surfaces,treadCount:flight.treadCount,riseCount:flight.riseCount,
       obstacles:flight.surfaces.map(s=>({height:s.height,footprints:compactFootprints(flight.clearance.footprints(s.height))}))}};

@@ -117,7 +117,7 @@ if(forward){
   const now=performance.now();
   I.gangwayBenchmark?.beforeFrame(now);
   // Acquire the encoder only when input or rendering records GPU work.
-  g.beginFrame(false);K.update(e);const drawn=forward.present(e>0&&!I.gangwayBenchmark?.active);g.submit();I.input.endFrame();
+  g.beginFrame(false);K.update(e);r.time.value+=e;const drawn=forward.present(e>0&&!I.gangwayBenchmark?.active,r.time.value);g.submit();I.input.endFrame();
   if(I.startupStats){
     updatePose(K);
     if(drawn){meter(now);I.gangwayBenchmark?.submitted(now);}

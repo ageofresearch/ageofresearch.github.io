@@ -1,12 +1,14 @@
+import {flagVertex,mobileFlagPaint} from './stern-flag.js?v=stern-flag-1';
 import { sampleReflectionWGSL } from './yacht-daylight.js?v=yacht-daylight-1';
 import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 // Prepared materials are linear. Diffuse sky, reflected light and direct sun
 // meet before the one display conversion. Visibility modulates direct light only.
 function program(tagged) {
 return `
+override animateCloth:bool=false;
 struct Frame {
   clip:mat4x4f, eye:vec4f, sun:vec4f, light:mat4x4f,
-  bounce:array<vec4f,32>, fittings:array<vec4f,192>,
+  bounce:array<vec4f,32>, fittings:array<vec4f,192>, wind:vec4f,
 }
 @group(0) @binding(0) var<uniform> frame:Frame;
 @group(0) @binding(1) var tileSampler:sampler;
@@ -30,6 +32,19 @@ struct V {
 @vertex fn vertex(${tagged?'@builtin(vertex_index) id:u32,':''}@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
  @location(3) uv:vec2f,@location(4) finish:vec2i,@location(5) shade:vec4f,@location(6) direct:vec4f)->V {
  var o:V;${tagged?'o.tag=id&65535u;':''}o.clip=frame.clip*vec4f(pos,1.);o.uv=uv;o.layer=finish.x;
+ if(animateCloth && o.layer==-4){
+   var cloth=pos;var normal=n.xyz;
+   ${flagVertex('cloth','normal','uv','frame.wind.x')}
+   o.clip=frame.clip*vec4f(cloth,1.);
+   let sunlight=mix(vec3f(1.02,.76,.57),vec3f(1.02,.97,.90),smoothstep(.05,.63,frame.sun.y));
+   let cosine=dot(normal,frame.sun.xyz);
+   let sideLight=.5+.5*dot(normal,normalize(vec3f(-.84,.49,.23)));
+   o.indirect=vec3f(.88,.94,1.)*(.16+.49*sideLight*sideLight)+.13*frame.bounce[0].rgb;
+   o.direct=sunlight*(.14+.55*max(cosine,0.)+.14*max(-cosine,0.))*smoothstep(-.05,.18,frame.sun.y);
+   let light=(frame.light*vec4f(cloth+normal*.007,1.)).xyz;
+   let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
+   o.indirect+=o.direct*lit;return o;
+ }
  if(o.layer==-2){
    let dome=normalize((pos-vec3f(0.,-2.01,0.))/vec3f(.98289474,1.,.97861111));
    let east=normalize(vec3f(frame.sun.w,0.,frame.eye.w));
@@ -74,6 +89,10 @@ struct V {
 }
 @diagnostic(off, derivative_uniformity)
 fn shade(in:V)->vec4f{
+ if(animateCloth && in.layer==-4){
+   ${mobileFlagPaint}
+   return vec4f(display(dye*in.indirect),1.);
+ }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;
  if(any(in.direct>vec3f(.001))){

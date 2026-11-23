@@ -18,7 +18,7 @@ async function capture(browser, mobile) {
     page.on('request', request => resources.add(new URL(request.url()).pathname));
     const entry = mobile ? 'mobile.html?world=rocha' : 'play.html?world=rocha&view=walk-chat';
     await page.goto(base + entry, {waitUntil:'domcontentloaded',timeout:90000});
-    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=saloon-entry-1' : ''), base).href;
+    const canonical = new URL('play.html?world=rocha&view=walk-chat' + (mobile ? '&scene=gangway&v=walk-pose-1' : ''), base).href;
     if (mobile) await page.locator('#yacht').contentFrame().locator('#app').waitFor({timeout:90000});
     const frame = page.frames().find(f => f.url() === canonical);
     assert.ok(frame, 'Expected '+canonical+'; got '+page.frames().map(f=>f.url()).join(', '));
@@ -29,6 +29,7 @@ async function capture(browser, mobile) {
       await page.locator('#pilot').waitFor({state:'visible'});
       await frame.waitForFunction(()=>window.__app.entranceYacht.upperLoadState==='ready',null,{timeout:90000});
     }
+    await require('./yacht-walk-pose.cjs')(frame);
     if (mobile) await require('./yacht-joystick.cjs')(page, frame, out);
     const pose = await frame.evaluate(() => {
       const app = window.__app;

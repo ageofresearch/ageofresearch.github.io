@@ -94,14 +94,27 @@ struct Tagged { @location(0) color:vec4f, @location(1) powers:vec4f }
  let tag=in.tag;
  return Tagged(shade(in),vec4f(f32(tag&255u)/255., f32(tag>>8u)/255., 1., 1.));
 }`:''}
-struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
+struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f,@location(1) horizon:vec2f }
 @vertex fn glassVertex(@location(0) pos:vec3f,@location(1) normal:vec4f,@location(2) tint:vec4f,@location(4) finish:vec2i)->Glass{
  let eye=normalize(frame.eye.xyz-pos);let n=normalize(normal.xyz);
  let grazing=pow(1.-abs(dot(n,eye)),5.);
  let r=reflect(-eye,n);let reflected=sky(r);
- return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)));
+ if(finish.x==52 || finish.x==53){
+   // Transmitted daylight remains visible from inside. From the cockpit the
+   // fixed leaves read as dark smoked glass beside the actual open doorway.
+   let door=finish.x==52;
+   let outside=select(smoothstep(2.8,3.12,abs(frame.eye.x)),1.-smoothstep(-9.60,-9.16,frame.eye.z),door);
+   let opacity=mix(select(.26,.60,door),select(.62,.90,door),outside);
+   let reflection=mix(vec3f(.018,.023,.029),reflected,.045+.24*grazing);
+   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection),mix(opacity,.94,grazing)),vec2f(r.y,outside));
+ }
+ return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec2f(0.,0.));
 }
-@fragment fn glassFragment(in:Glass)->@location(0) vec4f{return in.rgba;}
+@fragment fn glassFragment(in:Glass)->@location(0) vec4f{
+ // The exterior reflects the same flat sea horizon as the isolated berth.
+ let band=(smoothstep(-.04,.04,in.horizon.x)-.60)*.16*in.horizon.y;
+ return vec4f(in.rgba.rgb+vec3f(band),in.rgba.a);
+}
 `;
 }
 export const shader=program(false);

@@ -83,6 +83,8 @@ bake('upperIsland',161,1,b=>b[0]<-9.5,65);
 bake('skylounge',139,9,()=>true,116);
 bake('salonSofa',133,9,(b,n)=>b[0]<-2.7 && ![4652,188].includes(n),132);
 bake('salonChair',133,9,b=>b[0]<-4.90&&b[2]>1&&b[3]<-4.90,148);
+// Preserve the rolled upholstery and the continuous three-metre back in close views.
+bake('salonSofaClose',133,9,(b,n)=>b[0]<-2.7 && ![4652,188].includes(n),650);
 bake('bowPort',163,1,b=>b[0]<9&&b[2]>0,96);
 bake('sunLounger',164,0,b=>b[0]<-4.45&&b[2]>0,64);
 bake('sunCorner',164,0,(b,n)=>n===4652,98);

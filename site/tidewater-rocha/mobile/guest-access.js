@@ -5,7 +5,7 @@ import {createFlight,installFlightNavigation,restorableStair,restoreStairPositio
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
 import {guestLandings,prepareGuestFloor,guestProfileDomain,lowerRoomAt} from './guest-access-geometry.js?v=port-guest-1';
 
-export const guestAccessVersion='main-deck-stability-1';
+export const guestAccessVersion='saloon-entry-1';
 export function decodeGuestAccess(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:guestAccessVersion,names:['exterior','upper','sun','bow','guest','main'],roomID:'LD_R11'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));

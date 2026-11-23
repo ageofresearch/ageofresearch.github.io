@@ -4,6 +4,7 @@ import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5
 
 export function detailError(part, error, profile) {
   const name = part.feature || part.name || '';
+  if (name === 'Panama flag cloth' || name.includes('stern flagpole')) return 0;
   if (part.context || name.startsWith('port stair ')) return 0;
   // These deck fragments are also the visible ceiling of the main deck.
   if (profile === 'exterior' && part.id.startsWith('UD_DCK_001/stairs/stair-opening'))
@@ -50,6 +51,9 @@ function opaqueRanges(position, indices, profile, surface, left, right) {
     groups = Array.from({ length: 2 * bands - 1 }, () => []),
     background = groups.map(()=>[]);
   for (let i = 0; i < indices.length; i += 3) {
+    if(surface[indices[i]*4+2]===54){
+      groups[bands-1].push(indices[i],indices[i+1],indices[i+2]);continue;
+    }
     if(surface[indices[i]*4+2]===47){
       background[bands-1].push(indices[i],indices[i+1],indices[i+2]);continue;
     }

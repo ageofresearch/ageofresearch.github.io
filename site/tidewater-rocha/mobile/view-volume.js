@@ -64,6 +64,7 @@ export function filterView(vertices, indices, first, count, planes, masks, eye, 
     for (let v = begin; v < end; v++) {
       // Sky vertices rotate with the sun and translate with the viewer. Only
       // angular half-spaces apply; the finite walking radius is irrelevant.
+      if (shorts[v*16+14] === -4) { masks[v] = 0; continue; }
       if (shorts[v*16+14] === -2) {
         masks[v] = skyVertex;
         if (!sky) continue;
@@ -114,7 +115,7 @@ export function filterView(vertices, indices, first, count, planes, masks, eye, 
         else runs.push(length, length+3);
       }
     }
-    if (eye && shorts[a*16+14] !== -2 && shorts[b*16+14] !== -2 && shorts[c*16+14] !== -2) {
+    if (eye && shorts[a*16+14] !== -4 && shorts[a*16+14] !== -2 && shorts[b*16+14] !== -2 && shorts[c*16+14] !== -2) {
       // The GPU back-face test has the same sign everywhere in the eye sphere
       // when its signed distance to the face plane exceeds the sphere radius.
       const x=floats[a*8], y=floats[a*8+1], z=floats[a*8+2];

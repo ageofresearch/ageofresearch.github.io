@@ -1,11 +1,11 @@
-import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=2';
+import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=stern-flag-1';
 import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=8';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=3';
 
 export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null, immediate = {}, screenConfig = null) {
   let worker;
-  try {worker = new Worker(new URL('./view-worker.js?v=5', import.meta.url), {type:'module'});}
+  try {worker = new Worker(new URL('./view-worker.js?v=stern-flag-1', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
   const glassOffset=Math.ceil(maxBytes/4)*4;
   let buffer, exactBuffer,exact=null,serial=0, active, pending, stopped = false, finishStart;
@@ -29,12 +29,12 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
   function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples, refinement) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
-    const offset = roomCellOffset(region, camera, projection, width, height);
+    const offset = refinement === 'cloth' ? -1 : roomCellOffset(region, camera, projection, width, height);
     // Sun changes invalidate only the sky exclusions. The camera and room can
     // immediately reuse the full sky from the same prepared index list.
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
       Math.min(width*projection[0], height*projection[5]) >= 100;
-    const depthTest = refinement === 'occlusion';
+    const depthTest = refinement === 'occlusion' || refinement === 'cloth';
     const useScreen = refinement !== 'off' && Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
       usableScreen(width, height, samples, projection);
     const changed = entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen || entry.depthTest !== depthTest;
@@ -106,10 +106,10 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const length=filterRoomCell(cells?.bits,entry.offset,entry.regionCount,source,entry.rawLength,entry.slots,copy);
       return copy.subarray(0,length);
     },
-    analyze(winners,width,height,profile,first,count,clip,candidates){
+    analyze(winners,width,height,profile,first,count,clip,candidates,windRect){
       if(stopped)return;
       exact={key:++serial,analyzing:true,profile,first,count,width,height,clip:Float32Array.from(clip)};
-      worker.postMessage({...exact,winners,candidates},candidates?[winners.buffer,candidates.buffer]:[winners.buffer]);
+      worker.postMessage({...exact,winners,candidates,windRect},candidates?[winners.buffer,candidates.buffer]:[winners.buffer]);
     },
     fixed(profile,first,count,frame,width,height,sunRevision){
       if(!matches(profile,frame,width,height)||exact.first!==first||exact.count!==count)return null;
@@ -167,7 +167,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const filter = immediate[profile];
       if (!filter) return null;
       const region = cells?.range(profile, first, count, camera);
-      const offset = roomCellOffset(region, camera, projection, width, height);
+      const offset = refinement === 'cloth' ? -1 : roomCellOffset(region, camera, projection, width, height);
       const {short, glassLength} = profileFormats[profile];
       const output = short ? compact16 : compact32;
       const length = filter(first, count, clip, width, height, cells?.bits, offset, region?.count, output);

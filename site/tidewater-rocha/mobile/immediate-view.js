@@ -4,9 +4,10 @@ export function prepareImmediateView(positions, indices, sharedIds, packed) {
   const vertexCount = positions.length / 3;
   const masks = new Uint8Array(vertexCount);
   const layers = new Int16Array(packed.buffer, packed.byteOffset, packed.byteLength / 2);
-  const sky = [];
+  const moving = [];
   for (let vertex = 0; vertex < vertexCount; vertex++) {
-    if (layers[16 * vertex + 14] === -2) sky.push(vertex);
+    const layer = layers[16 * vertex + 14];
+    if (layer === -2 || layer === -4) moving.push(vertex);
   }
 
   return function filter(first, count, clip, width, height, bits, offset, prefixCount, output) {
@@ -23,7 +24,7 @@ export function prepareImmediateView(positions, indices, sharedIds, packed) {
         (sy < -w - marginY ? 4 : 0) | (sy > w + marginY ? 8 : 0);
     }
     // The shader moves these vertices with the sun and the visitor.
-    for (const vertex of sky) masks[vertex] = 0;
+    for (const vertex of moving) masks[vertex] = 0;
 
     let length = 0;
     for (let i = 0; i < count; i += 3) {

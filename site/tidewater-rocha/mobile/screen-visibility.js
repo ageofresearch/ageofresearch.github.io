@@ -55,7 +55,8 @@ export function prepareScreenVisibility(config, vertices, maxBytes) {
     const positions = new Uint32Array(memory.buffer, source, vertexCount * 4);
     for (let i = 0; i < vertexCount; i++) {
       positions[4*i] = packed[8*i]; positions[4*i+1] = packed[8*i+1]; positions[4*i+2] = packed[8*i+2];
-      positions[4*i+3] = Number(layers[16*i+14] === -2);
+      const layer = layers[16*i+14];
+      positions[4*i+3] = Number(layer === -2 || layer === -4);
     }
     const input = new Uint16Array(memory.buffer, indices, maxBytes / 2);
     const output = new Uint16Array(memory.buffer, result, maxBytes / 2 + 2);

@@ -1,5 +1,5 @@
-import {filterSamples} from './sample-visibility.js?v=3';
-import {filterView, prepareViewSpans} from './view-volume.js?v=3';
+import {filterSamples} from './sample-visibility.js?v=stern-flag-1';
+import {filterView, prepareViewSpans} from './view-volume.js?v=stern-flag-1';
 let vertices, profiles, glazing, masks, spans;
 self.onmessage = ({data}) => {
   if (data.vertices) {
@@ -15,7 +15,7 @@ self.onmessage = ({data}) => {
     const {winners,profile,first,count,key}=data;
     const source=data.candidates ?? profiles[profile];
     const start=data.candidates ? 0 : first, size=data.candidates ? source.length : count;
-    const result=filterSamples(winners,vertices,source,start,size);
+    const result=filterSamples(winners,vertices,source,start,size,data.windRect,data.clip);
     self.postMessage({...result,key},[result.output.buffer]);return;
   }
   const {profile, first, count, planes, eye} = data;

@@ -75,6 +75,7 @@ export function prepareOpaque(source,map,indices) {
         layer=3;u=(localY-cy)/.48+.5;v=((localX-cx)*.659983+(elevation-7.01)*.75128)/.36+.5;
       }else if(boarding){layer=4;u=source.aSurface[k];v=source.aSurface[k+1];}
     }
+    if(code===54){layer=-4;u=clamp((localY-.013)/.77);v=clamp((7.48-elevation-.095*u*u)/.51);}
     if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;layer=-3;}
     if(layer>0 && layer!==20)u*=.5; // two identical 256-wide tiles share each 512-wide slice
     if(layer===5){

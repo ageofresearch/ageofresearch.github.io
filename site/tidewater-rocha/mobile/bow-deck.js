@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {preloadBridgeAccess} from './bridge-access.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {bowRoom,bowRoute,prepareBowFloor} from './bow-geometry.js?v=port-guest-1';
@@ -11,14 +12,8 @@ export function decodeBow(manifest,buffer) {
     throw Error('Estar de proa incompleto');
   return result;
 }
-export async function loadBow({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();const timer=setTimeout(abort,timeoutMs);
-  try {
-    const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./bow-deck.${ext}?v=${bowVersion}`,import.meta.url),{signal:controller.signal})));
-    if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el estar de proa');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);return decodeBow(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadBow(options) {
+  return loadZone('bow-deck', bowVersion, decodeBow, options);
 }
 export function prepareBow(zone) {
   const prepared={...zone,...prepareBowFloor(zone)};
@@ -69,15 +64,26 @@ export function preloadBow(app) {
     const oldStatus=loader?.querySelector('.loader-status')?.textContent;
     if(loader?.querySelector('.loader-status'))loader.querySelector('.loader-status').textContent='Preparando el estar de proa…';
     model.bowLoadState='loading';panel.hidden=false;retry.hidden=true;status.textContent='Preparando el estar de proa…';
+    let failureMessage='Falló la descarga o verificación de los archivos de proa.';
     pending=(async()=>{
-      const zone=prepareBow(await loadBow({signal:abort.signal}));if(abort.signal.aborted)return;
+      const data=await loadBow({signal:abort.signal});
+      if(abort.signal.aborted)return;
+      const navigationFailure='Falló la preparación del recorrido de proa.';
+      failureMessage=navigationFailure;
+      const zone=prepareBow(data);
+      failureMessage='Falló la preparación gráfica del estar de proa.';
       await app.gangwayRenderer.installProfiles(zone.profiles,{prepare:true,activate:()=>{
-        if(abort.signal.aborted)throw Error('Carga cancelada');connectBow(app.yachtWalk,zone);
+        if(abort.signal.aborted)throw Error('Carga cancelada');
+        failureMessage=navigationFailure;
+        connectBow(app.yachtWalk,zone);
       }});
       model.bowLoadState='ready';panel.hidden=true;window.dispatchEvent(new Event('luz-de-mar:bow-deck-ready'));
       await preloadBridgeAccess(app);
     })().catch(error=>{
-      if(abort.signal.aborted)return;model.bowLoadState='error';status.textContent='No se pudo preparar el estar de proa. El recorrido anterior sigue disponible.';retry.hidden=false;
+      if(abort.signal.aborted)return;
+      model.bowLoadState='error';
+      status.textContent=failureMessage+' El recorrido anterior sigue disponible.';
+      retry.hidden=false;
       console.warn('Bow loading failed',error);
     }).finally(()=>{
       pending=null;

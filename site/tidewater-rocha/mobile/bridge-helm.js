@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {preloadBow} from './bow-deck.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {bridgeRoom,prepareBridgeFloor} from './bridge-geometry.js?v=port-guest-1';
@@ -11,14 +12,8 @@ export function decodeBridge(manifest,buffer) {
     throw Error('Puente de mando incompleto');
   return result;
 }
-export async function loadBridge({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();const timer=setTimeout(abort,timeoutMs);
-  try {
-    const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./bridge-helm.${ext}?v=${bridgeVersion}`,import.meta.url),{signal:controller.signal})));
-    if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el puente de mando');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);return decodeBridge(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadBridge(options) {
+  return loadZone('bridge-helm', bridgeVersion, decodeBridge, options);
 }
 export function prepareBridge(interior) {
   const prepared={...interior,...prepareBridgeFloor(interior)};

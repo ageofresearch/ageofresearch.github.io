@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import { preloadUpper } from './upper-terrace.js?v=port-guest-1';
 import { connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
 
@@ -84,17 +85,8 @@ export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['ex
   return {...manifest,profiles};
 }
 
-export async function loadSaloon({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});
-  if(signal?.aborted)abort();
-  const timer=setTimeout(abort,timeoutMs);
-  try {
-    const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./main-saloon.${ext}?v=${saloonVersion}`,import.meta.url),{signal:controller.signal})));
-    if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el salón');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);
-    return decodeSaloon(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadSaloon(options) {
+  return loadZone('main-saloon', saloonVersion, decodeSaloon, options);
 }
 
 export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false, bridgeAccess=false, guestAccess=false) {

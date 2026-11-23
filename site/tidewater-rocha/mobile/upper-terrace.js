@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {preloadSun} from './sun-deck.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
@@ -11,16 +12,8 @@ export function decodeUpper(manifest,buffer) {
     f.obstacles?.length!==13)throw Error('Escalera superior incompleta');
   return result;
 }
-export async function loadUpper({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();
-  const timer=setTimeout(abort,timeoutMs);
-  try {
-    const r=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./upper-terrace.${ext}?v=${upperVersion}`,import.meta.url),{signal:controller.signal})));
-    if(r.some(r=>!r.ok))throw Error('No se pudo cargar la terraza superior');
-    const [manifest,buffer]=await Promise.all([r[0].json(),r[1].arrayBuffer()]);
-    return decodeUpper(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadUpper(options) {
+  return loadZone('upper-terrace', upperVersion, decodeUpper, options);
 }
 export function connectUpper(walk,upper) {
   const {model,nav}=walk;

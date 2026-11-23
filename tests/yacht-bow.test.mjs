@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {fixture,travel} from './yacht-saloon-fixture.mjs';
 import {buildBow} from '../scripts/build-yacht-bow.mjs';
+import {loadZone} from '../site/tidewater-rocha/mobile/load-zone.js';
 import {decodeUpper,connectUpper} from '../site/tidewater-rocha/mobile/upper-terrace.js';
 import {decodeSun,connectSun} from '../site/tidewater-rocha/mobile/sun-deck.js';
 import {decodeUpperInterior,connectUpperInterior} from '../site/tidewater-rocha/mobile/upper-interior.js';
@@ -120,4 +121,58 @@ test('failed bow packages retain the bridge and retries register a single destin
   const broken=structuredClone(manifest);broken.domains[0][0][0]=NaN;assert.throws(()=>decodeBow(broken,array(binary)));
   connectBow(f.walk,bow);connectBow(f.walk,bow);assert.equal(f.model.asset.data.rooms.filter(r=>r.id==='UD_R04').length,1);
  }finally{f.dispose();}
+});
+
+
+test('zone transfers can exceed the deadline while receiving data', async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const streams={}, attempts=[];
+  const fetcher=async(url,{cache})=>{
+    attempts.push(cache);
+    const ext=url.pathname.split('.').pop();
+    return new Response(new ReadableStream({start(controller){streams[ext]=controller;}}));
+  };
+  const result=loadZone('bow-deck','test',(manifest,mesh)=>[manifest,Array.from(new Uint8Array(mesh))],{fetcher,timeoutMs:45});
+  streams.json.enqueue(new TextEncoder().encode('{"ok":true}'));
+  streams.json.close();
+  for(const byte of [1,2,3,4]){
+    t.mock.timers.tick(30);
+    streams.bin.enqueue(Uint8Array.of(byte));
+    await new Promise(resolve=>setImmediate(resolve));
+  }
+  streams.bin.close();
+  assert.deepEqual(await result,[{ok:true},[1,2,3,4]]);
+  assert.deepEqual(attempts,['default','default']);
+});
+
+test('a stalled manifest is retried independently of mesh progress with a fresh pair', async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const calls=[],decode=(json,mesh)=>[json,new Uint8Array(mesh)[0]];
+  let meshStream;
+  const fetcher=async(url,{cache})=>{
+    const json=url.pathname.endsWith('.json');
+    calls.push(cache);
+    if(cache==='reload')return new Response(json?'42':Uint8Array.of(7));
+    return new Response(new ReadableStream({start(controller){if(!json)meshStream=controller;}}));
+  };
+  const result=loadZone('bow-deck','test',decode,{fetcher,timeoutMs:45});
+  await new Promise(resolve=>setImmediate(resolve));
+  t.mock.timers.tick(30);meshStream.enqueue(Uint8Array.of(1));
+  await new Promise(resolve=>setImmediate(resolve));
+  t.mock.timers.tick(16);
+  assert.deepEqual(await result,[42,7]);
+  assert.deepEqual(calls,['default','default','reload','reload']);
+});
+
+test('disposing a zone load cancels both files without retrying', async()=>{
+  const controller=new AbortController(),files=[];
+  const result=loadBow({signal:controller.signal,fetcher:async(url,{signal,cache})=>{
+    files.push({signal,cache});
+    return new Response(new ReadableStream());
+  }});
+  await new Promise(resolve=>setImmediate(resolve));
+  controller.abort();
+  await assert.rejects(result,{name:'AbortError'});
+  assert.equal(files.length,2);
+  assert.ok(files.every(f=>f.signal.aborted && f.cache==='default'));
 });

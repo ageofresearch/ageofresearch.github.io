@@ -44,9 +44,61 @@ test('guest package is reproducible with six bounded profiles, exact supports an
     for(const p of manifest.parts.filter(p=>p.role==='guest-stair')) {
       const source=parts.find(q=>q.id===p.id.replace(/\/guest-access$/,''));assert.ok(source);
       assert.deepEqual(p.bounds,source.bounds,'Stairs and guards keep their source position');
+      if(!/sculpted ivory enclosure|upper flight underside lining/.test(p.feature))continue;
+      const edges=new Map();
+      for(let i=0;i<source.indices.length;i+=3){
+        const [a,b,c]=Array.from(source.indices.slice(i,i+3),j=>source.vertices.slice(j*6,j*6+6));
+        const u=b.slice(0,3).map((v,k)=>v-a[k]), v=c.slice(0,3).map((v,k)=>v-a[k]);
+        const normal=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+        assert.ok(normal.reduce((n,x,k)=>n+x*a[3+k],0)>0,'Back-facing triangle in '+p.id);
+        for(const [start,end] of [[a,b],[b,c],[c,a]]){
+          const A=start.slice(0,3).join(','),B=end.slice(0,3).join(',');
+          const key=A<B?A+';'+B:B+';'+A;
+          edges.set(key,(edges.get(key)??0)+(A<B?1:-1));
+        }
+      }
+      assert.ok([...edges.values()].every(n=>n===0),'Unclosed stair shell '+p.id);
     }
   } finally {g.model.dispose();}
 });
+test('the active guest draw keeps the stair enclosure, partitions and slab in front of the eye',()=>{
+  const profile=guest.profiles.guest, batch=profile.batches[0], position=batch.attributes.position;
+  const vertices=Array.from({length:position.length/3},(_,i)=>[
+    (position[i*3+2]+basis.length/2)/basis.sx, position[i*3]/basis.sy, position[i*3+1]+basis.seaReference]);
+  const sub=(a,b)=>a.map((v,k)=>v-b[k]);
+  const cross=([x,y,z],[X,Y,Z])=>[y*Z-z*Y,z*X-x*Z,x*Y-y*X];
+  const dot=(a,b)=>a.reduce((sum,v,i)=>sum+v*b[i],0);
+  // Distances to the full model's first opaque surface, measured from tread
+  // centres. Test the directional front faces actually submitted for that band.
+  for(const [step,bearing,pitch,expected] of [
+    [8,312,-24,.7936],[6,354,32,.6925],       // transverse return
+    [10,252,24,1.4114],[8,264,24,1.7447],     // starboard partition
+    [8,264,-24,1.4049],[2,48,40,.5245],       // both faces of the MD slab
+    [6,54,8,1.1477],                         // equipment behind the doorway
+    [9,198,-32,1.7702],[8,204,-24,1.8479],[11,204,-56,1.5764] // under upper arm
+  ]){
+    const surface=guest.flight.surfaces[step],points=surface.polygons.flat();
+    const eye=[0,1].map(k=>(Math.min(...points.map(p=>p[k]))+Math.max(...points.map(p=>p[k])))/2);
+    eye.push(surface.height+1.6);
+    const h=bearing*Math.PI/180,t=pitch*Math.PI/180;
+    const dir=[Math.cos(h)*Math.cos(t),Math.sin(h)*Math.cos(t),Math.sin(t)];
+    const visibility=profile.visibility;
+    const band=Math.floor((eye[0]*basis.sx-basis.length/2-visibility.start)/visibility.step);
+    const [first,count]=batch.ranges[band+(eye[1]>0?visibility.lateralBands:0)];
+    let nearest=Infinity;
+    for(let i=first;i<first+count;i+=3){
+      const a=vertices[batch.indices[i]], b=vertices[batch.indices[i+1]], c=vertices[batch.indices[i+2]];
+      const ab=sub(b,a),ac=sub(c,a),p=cross(dir,ac),det=dot(ab,p);
+      if(det<1e-8)continue;
+      const origin=sub(eye,a),u=dot(origin,p);
+      if(u<0||u>det)continue;
+      const q=cross(origin,ab),v=dot(dir,q),depth=dot(ac,q)/det;
+      if(v>=0&&u+v<=det&&depth>.025)nearest=Math.min(nearest,depth);
+    }
+    assert.ok(Math.abs(nearest-expected)<.003,`Step ${step}, view ${bearing}/${pitch}: ${nearest}, expected ${expected}`);
+  }
+});
+
 test('the stairwell screens adjacent cabins from the forward saloon while leaving the flight open',async()=>{
   const eye=[17.547,-1.539,5.55],deck=3.95;
   // Intersections of sightlines from the reported 353.9°, −35.7° view

@@ -17,3 +17,10 @@ html, body, main {width: 100%; height: 100%; margin: 0; overflow: hidden;}
 #results {margin:0;padding:0 4px;list-style:none;}
 #results li {padding:4px 0;border-top:1px solid #d3c9af44;}
 #results:empty,#progress:empty {display:none;}
+
+/* Allow room for the yacht coordinates in narrow split-screen views. */
+@media (max-width:440px) {
+  #pilot[open] {top:calc(env(safe-area-inset-top) + 5.4rem);}
+  #pilot:not([open]) summary {box-sizing:border-box;max-width:calc(100vw - 210px);}
+  #pilot section {max-height:calc(100dvh - 9.5rem - env(safe-area-inset-top));}
+}

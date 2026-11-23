@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 	<title>Tidewater</title>
 
 
@@ -34,8 +34,8 @@
     "./mobile/tour-furniture.js?v=round-carpet-1": "./mobile/tour-furniture.js?v=saloon-entry-1",
     "./assets/PostFX-0mW-sLoH.js": "./assets/PostFX-0mW-sLoH.js?v=yacht-daylight-1",
     "./assets/GPU-CxPpnRCf.js": "./assets/GPU-CxPpnRCf.js?v=lazy-encoder-1",
-    "./assets/RochaYachtApp-DML7NRPp.js?v=visible-stern-1": "./assets/RochaYachtApp-DML7NRPp.js?v=saloon-entry-1",
-    "./assets/RochaYachtApp-DML7NRPp.js": "./assets/RochaYachtApp-DML7NRPp.js?v=saloon-entry-1",
+    "./assets/RochaYachtApp-DML7NRPp.js?v=visible-stern-1": "./assets/RochaYachtApp-DML7NRPp.js?v=walk-pose-1",
+    "./assets/RochaYachtApp-DML7NRPp.js": "./assets/RochaYachtApp-DML7NRPp.js?v=walk-pose-1",
     "./assets/RochaYachtState-P5KwIGIl.js?v=visible-stern-1": "./assets/RochaYachtState-P5KwIGIl.js?v=saloon-entry-1",
     "./assets/RochaYachtState-P5KwIGIl.js": "./assets/RochaYachtState-P5KwIGIl.js?v=saloon-entry-1",
     "./luz-de-mar-chat/diagnostics.js": "./luz-de-mar-chat/diagnostics.js?v=tour-review-1",
@@ -50,7 +50,7 @@
     "./mobile/yacht-daylight.js?v=yacht-daylight-1": "./mobile/yacht-daylight.js?v=yacht-daylight-2",
     "./mobile/guest-access-geometry.js?v=port-guest-1": "./mobile/guest-access-geometry.js?v=guest-visibility-1",
     "./mobile/forward-renderer.js?v=port-guest-1": "./mobile/forward-renderer.js?v=saloon-entry-1",
-    "./assets/RochaYachtApp-DML7NRPp.js?v=port-guest-1": "./assets/RochaYachtApp-DML7NRPp.js?v=saloon-entry-1"
+    "./assets/RochaYachtApp-DML7NRPp.js?v=port-guest-1": "./assets/RochaYachtApp-DML7NRPp.js?v=walk-pose-1"
   }
 }</script>
   <script type="module" crossorigin src="./assets/play-C5BPhl6D.js?v=port-guest-1"></script>
@@ -59,6 +59,13 @@
   <link rel="modulepreload" crossorigin href="./assets/preload-helper-uBIymjUX.js">
   <link rel="stylesheet" crossorigin href="./assets/play-BLPDbtK3.css">
 <style>
+.yacht-corner{position:fixed;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:70;display:grid;justify-items:end;gap:6px;pointer-events:none}
+.yacht-pose{padding:5px 8px;border-radius:6px;background:#101c23e8;color:#f3f7fa;font:500 clamp(10px,2.8vw,12px)/1.35 ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:pre;user-select:none}
+.yacht-corner>.rocha-map-load{position:static;pointer-events:none;text-align:right}
+.yacht-corner>.rocha-map-load :is(button,p){pointer-events:auto}
+@media(max-width:950px){body:has(.yacht-corner) .luz-nav-dialog[open]{inset:auto 0 0;margin:0 auto;max-height:calc(100dvh - 5.75rem - env(safe-area-inset-top))}
+body:has(.yacht-corner) .luz-nav-dialog::backdrop{background:linear-gradient(to bottom,transparent calc(5rem + env(safe-area-inset-top)),#07151c99 calc(5.75rem + env(safe-area-inset-top)))}
+}
 .yacht-daylight{padding:8px 14px;font:500 14px system-ui;color:inherit}
 .yacht-daylight summary{cursor:pointer;padding:8px 0}
 .sun-inputs{display:grid;gap:8px;padding:6px 0}

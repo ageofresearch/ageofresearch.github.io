@@ -15,8 +15,8 @@ const summarize=rows=>{
     maxMove:Math.max(...rows.map(r=>r.move)),maxCPU:Math.max(...rows.map(r=>r.cpu))};
 };
 
-function summarizeLegs(result){
-  return [0,1,2,3].map(leg=>{
+function summarizeLegs(result,count=4){
+  return Array.from({length:count},(_,leg)=>{
     const stats=summarize(result.rows.filter(r=>r.leg===leg));
     if(result.gpuTimestampSupported)assert.ok(stats.gpuSamples>0,'No GPU timestamps for leg '+leg);
     return {leg,...stats};
@@ -126,13 +126,14 @@ async function capture(browser,mobile,directory=out,profilePasses=false) {
               const t=performance.now(),target=leg%2?5.2:8.35,d=target-n.position[0];
               n.move(Math.sign(d)*Math.min(Math.abs(d),1.12*Math.min(.075,Math.max(.001,dt))),0);
               const move=performance.now()-t;
-              const forward=app.camera.position.clone().set(0,0,Math.sign(d)).applyQuaternion(w.model.group.quaternion);
+              const look=profilePasses==='orientation' ? (leg%4<2?1:-1) : Math.sign(d);
+              const forward=app.camera.position.clone().set(0,0,look).applyQuaternion(w.model.group.quaternion);
               w.yaw=Math.atan2(-forward.x,-forward.z);w.pitch=-.35;
               original(dt);rows.push({leg,interval:previous===undefined?null:t-previous,move,cpu:performance.now()-t});
-              if(profilePasses)Object.assign(rows.at(-1),{x:n.position[0],triangles:w.model.stats.triangles});
+              if(profilePasses)Object.assign(rows.at(-1),{x:n.position[0],look,profile:app.gangwayRenderer.activeProfile,triangles:w.model.stats.triangles});
               previous=t;
               if(Math.abs(n.position[0]-target)<.002)leg++;
-              if(leg===4){app.frame=original;resolve();}
+              if(leg===(profilePasses==='orientation'?8:4)){app.frame=original;resolve();}
               else if(t-start>90000)throw Error('First-walk route stalled');
             }catch(error){app.frame=original;reject(error);}
           };
@@ -147,10 +148,10 @@ async function capture(browser,mobile,directory=out,profilePasses=false) {
       assert.deepEqual(result.resources,[],'Entering a prepared stair must not fetch geometry');
       assert.deepEqual(result.gpu,[],'First stair traversal must not create graphics resources');
       assert.equal(result.scale,1);assert.equal(result.samples,4);assert.ok(result.triangles<=25000);
-      const legs=summarizeLegs(result);
+      const legs=summarizeLegs(result,profilePasses==='orientation'?8:4);
       writeFileSync(directory+'/cold-mobile.json',JSON.stringify({ready,legs,...result},null,2));
       console.log('Fresh mobile ascent/descent, then repeated route:',legs);
-      if(profilePasses==='aft'){assert.deepEqual(errors,[]);return;}
+      if(profilePasses==='aft'||profilePasses==='orientation'){assert.deepEqual(errors,[]);return;}
       const sunResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
         w.enterRoom('UD_R01');n.position=[11.35,2.7];n.stair=null;n.elevation=6;w.cameraElevation=6;w.applyPosition();
@@ -274,6 +275,10 @@ async function capture(browser,mobile,directory=out,profilePasses=false) {
   const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'}),headless:true,
     args:['--enable-unsafe-webgpu','--enable-unsafe-swiftshader','--use-angle=swiftshader','--enable-features=Vulkan','--use-vulkan=swiftshader','--disable-vulkan-surface','--disable-gpu-watchdog']});
   try {
+    if(process.env.YACHT_AFT_ORIENTATION==='1'){
+      await capture(browser,true,out+'/aft-orientation','orientation');
+      return;
+    }
     if(process.env.YACHT_COLD_GPU_TIMING==='1' || process.env.YACHT_AFT_GPU_TIMING==='1'){
       const routes=process.env.YACHT_COLD_GPU_TIMING==='1'?'cold':'aft';
       await capture(browser,true,out+'/'+routes+'-gpu',routes);

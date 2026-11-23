@@ -38,24 +38,29 @@ export function completeGuestForwardReveal(reveal, supported, front) {
   return {vertices, indices};
 }
 
-// Inside face of the guest stairwell, measured in the model's deck coordinates.
-// Return the lining to the two existing lower-deck partitions. The aft end
-// stays open at both landings. The rounded forward corner is under solid deck.
-export function guestStairwellLining(opening, forward, portPartition, starboardPartition, floor, soffit, extrude) {
-  const [, starboard, , port] = opening;
-  const side = portPartition[1], thickness = portPartition[4] - side;
-  const radius = (side - port) * .75;
+// Both flights open aft. Follow the lower port partition round to the existing
+// transverse bathroom wall, then use that wall up to the underside of the deck.
+export function guestStairwellLining(opening, forward, portWall, aftWall, bathWall, tray, floor, soffit, extrude) {
+  const side = portWall[1], thickness = portWall[4] - side;
+  const radius = (side - opening[3]) * .75;
   const cx = forward - radius, cy = side - radius;
   function edge(offset) {
     const r = radius + offset;
-    const points = [[portPartition[3], side + offset]];
+    const points = [[portWall[3], side + offset]];
     for (let i = 0; i <= 6; i++) {
       const angle = Math.PI / 2 * (1 - i / 6);
       points.push([cx + r * Math.cos(angle), cy + r * Math.sin(angle)]);
     }
-    const y = starboard - .035 - offset;
-    points.push([forward + offset, y], [starboardPartition[3], y]);
+    points.push([bathWall[offset ? 3 : 0], bathWall[4]]);
     return points;
   }
-  return extrude([...edge(0), ...edge(thickness).reverse()], floor, soffit);
+  const rectangle = (x, y, X, Y) => [[x,y],[X,y],[X,Y],[x,Y]];
+  // The high flight passes over a shower. Fit the return at the outer edge
+  // of its tray, between the two existing transverse bathroom partitions.
+  const outer = Math.min(opening[1], tray[1]);
+  return [
+    ['guest stairwell lining', extrude([...edge(0), ...edge(thickness).reverse()], floor, soffit)],
+    ['guest stairwell forward soffit', extrude(rectangle(bathWall[0], outer - thickness, bathWall[3], bathWall[4]), bathWall[5], soffit)],
+    ['guest stairwell starboard return', extrude(rectangle(aftWall[3], outer - thickness, bathWall[0], outer), floor, soffit)]
+  ];
 }

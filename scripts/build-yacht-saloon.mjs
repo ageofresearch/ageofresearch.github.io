@@ -146,7 +146,7 @@ export async function buildSaloon() {
     add({...part,id:part.id+'/saloon'},'roof',[8.5,-3.13,5.87,17.91,3.13,6.01]);
   // Retain the real walls of the service-stair enclosure beside the doorway.
   for(const part of model.interiorDetail.objects) {
-    if (part.feature === 'guest stairwell lining') {
+    if (part.feature?.startsWith('guest stairwell ')) {
       add(part,'stairwell-lining');
     } else if (['profiled white service stair enclosure', 'entry forward white tool wall'].includes(part.feature)) {
       // These lower-deck parts also form the visible port corner of the saloon.

@@ -262,7 +262,13 @@ test('screen visibility retains a single covered MSAA sample and bounds a nearer
   assert.equal(usableScreen(width,height,1,projection),false);
   assert.equal(usableScreen(2500,1200,4,projection),false);
   for(const precision of [1,16]){
-    const screen=prepareScreenVisibility({module,precision},bytes,ids.byteLength);
+    const glass={vertices:bytes,indices:Uint16Array.of(6,7,8,3,4,5,0,1,2)};
+    const screen=prepareScreenVisibility({module,precision},bytes,ids.byteLength,glass);
+    screen.filter(ids,3,projection,width,height,true);
+    // The opaque panel hides the far pane. The near and coincident panes
+    // keep their original blend order and cannot hide each other.
+    const paneCount=screen.filterGlass();
+    assert.deepEqual([...screen.glassOutput.subarray(0,paneCount)],[6,7,8,0,1,2]);
     const size=screen.filter(ids,ids.length,projection,width,height,true);
     assert.deepEqual([...screen.output.subarray(0,size)], [0,1,2,6,7,8,12,13,14,15,16,17]);
     assert.equal(screen.filter(ids,ids.length,projection,width,height,false),null);

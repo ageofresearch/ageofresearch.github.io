@@ -187,3 +187,21 @@ export function filter(source: usize, unique: usize, vertexCount: i32, indices: 
   }
   return length;
 }
+
+// Project the transparent panes into the opaque pass's existing depth grid.
+// Only opaque triangles can prove occlusion. The surviving panes keep their
+// original indices and blend order, including panes in front of other glass.
+export function filterGlass(source: usize, unique: usize, vertexCount: i32, indices: usize, count: i32,
+                            matrix: usize, projected: usize, grid: usize, tiles: usize, output: usize,
+                            width: i32, height: i32, precision: i32, base: i32): i32 {
+  project(source,unique,vertexCount,matrix,projected,grid,width,height,precision);
+  const cols=(width+7)>>3, bytes=cols*((height+7)>>3)*4;
+  let length=0;
+  for(let i=0;i<count;i+=3){
+    const face=indices+i*2;
+    if(keepFace(face,projected,grid,tiles,tiles+bytes,tiles+bytes*2,cols,true)){
+      for(let j=0;j<3;j++)store<u16>(output+2*length++,load<u16>(face+2*j)-base);
+    }
+  }
+  return length;
+}

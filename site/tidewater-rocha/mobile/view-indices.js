@@ -1,4 +1,4 @@
-import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=2';
+import {prepareScreenVisibility, usableScreen} from './screen-visibility.js?v=3';
 import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=8';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=3';
@@ -24,9 +24,20 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const profileFormats = Object.fromEntries(Object.entries(profiles).map(([name, indices]) =>
     [name, { short: indices.BYTES_PER_ELEMENT === 2, glassLength: glazing[name].indices.length }]));
   const filterSky = prepareSkyVisibility(vertices);
-  const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes);
+  const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes, glazing.upper);
+  const paneOffset = glassOffset + Math.ceil(maxGlassBytes / 4) * 4;
   const scratch = new ArrayBuffer(glassOffset);
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
+  function uploadPanes(entry, baseLength) {
+    entry.glassLength = baseLength;
+    entry.glassOffset = glassOffset;
+    if (!screen.glassOutput) return;
+    const length = screen.filterGlass();
+    if (length >= baseLength) return;
+    entry.glassLength = length;
+    entry.glassOffset = paneOffset;
+    if (length) device.queue.writeBuffer(buffer, paneOffset, screen.glassOutput, 0, length + length % 2);
+  }
   function uploadOpaque(entry, camera, projection, width, height, sunRevision, frame, samples, refinement) {
     const region = cells?.range(entry.profile, entry.first, entry.count, camera);
     const offset = roomCellOffset(region, camera, projection, width, height);
@@ -34,10 +45,11 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     // immediately reuse the full sky from the same prepared index list.
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
       Math.min(width*projection[0], height*projection[5]) >= 100;
-    const depthTest = refinement === 'occlusion';
+    const flight = refinement === 'aft';
+    const depthTest = flight || refinement === 'occlusion';
     const useScreen = refinement !== 'off' && Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
       usableScreen(width, height, samples, projection);
-    const changed = entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen || entry.depthTest !== depthTest;
+    const changed = entry.flight !== flight || entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen || entry.depthTest !== depthTest;
     if (!changed && !entry.filtered) return;
     let indices = entry.output, length = entry.rawLength;
     if (changed) {
@@ -46,6 +58,9 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         length = filterRoomCell(cells?.bits, offset, region?.count, indices, length, entry.slots, compact, trimSky && entry.skyRuns);
         indices = compact;
       }
+      entry.flight = flight;
+      entry.glassLength = entry.baseGlassLength;
+      entry.glassOffset = glassOffset;
       entry.baseLength = length;
       entry.useScreen = useScreen;
       entry.depthTest = depthTest;
@@ -57,6 +72,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       length = screen.filter(indices, length, frame, width, height, changed, depthTest);
       if (length === null) return;
       indices = screen.output;
+      if (flight) uploadPanes(entry, entry.baseGlassLength);
     }
     if (length && length < entry.count)
       device.queue.writeBuffer(buffer, 0, indices, 0, length + (indices.BYTES_PER_ELEMENT === 2 ? length % 2 : 0));
@@ -74,7 +90,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     finishStart();
   }
   try {
-    buffer = device.createBuffer({label:'Yacht visible opaque indices', size:glassOffset+maxGlassBytes,
+    buffer = device.createBuffer({label:'Yacht visible opaque indices', size:paneOffset+Math.ceil((screen?.glassOutput?.byteLength || 0)/4)*4,
       usage:GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST});
     exactBuffer=device.createBuffer({label:'Fixed camera opaque indices',size:glassOffset,usage:GPUBufferUsage.INDEX|GPUBufferUsage.COPY_DST});
     worker.onerror = worker.onmessageerror = dispose;
@@ -92,7 +108,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       ...Object.values(glazing).flatMap(g=>[g.vertices.buffer,g.indices.buffer])]);
   } catch (error) {dispose(); throw error;}
   return {
-    buffer, exactBuffer,glassOffset, ready, dispose,
+    buffer, exactBuffer, ready, dispose,
     matches,
     idle(){
       if(stopped || ((!pending||pending.result)&&!exact?.analyzing))return Promise.resolve();
@@ -144,7 +160,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       if (pending?.result) {
         if (valid(pending)) {
           const {length, output, glass, slots, skyRuns} = pending.result;
-          active = {...pending, result:null, rawLength:length, output, slots, skyRuns, glassLength:glass.length};
+          active = {...pending, result:null, rawLength:length, output, slots, skyRuns, glassLength:glass.length, baseGlassLength:glass.length};
           if(glass.trimmed && glass.length)
             device.queue.writeBuffer(buffer, glassOffset, glass.output, 0, glass.length + (glass.output.BYTES_PER_ELEMENT===2 ? glass.length%2 : 0));
         }
@@ -174,10 +190,12 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       let indices = output;
       // A change of view band can occur halfway up a tread. Apply the same
       // sample/depth proof while waiting for the worker's replacement range.
-      if (profile === 'upper' && refinement === 'occlusion' && short && screen &&
+      const result = {length, glassLength, glassOffset, immediate:true};
+      if (refinement === 'aft' && short && screen &&
           length >= 3500 * 3 && usableScreen(width, height, samples, projection)) {
         length = screen.filter(output, length, frame, width, height, true, true);
         indices = screen.output;
+        uploadPanes(result, glassLength);
         // The immediate range has replaced the worker's cached WASM input,
         // even if the GPU subsequently uses the complete static range.
         if (active) active.offset = undefined;
@@ -188,7 +206,8 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         // must be restored after this write to the same opaque buffer.
         if (active) active.offset = undefined;
       }
-      return {length, glassLength, immediate:true};
+      result.length = length;
+      return result;
     },
   };
 }

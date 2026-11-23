@@ -6,7 +6,7 @@ const maxTiles = Math.ceil(maxPixels / 64) + 2 * Math.ceil(maxDimension / 8) + 1
 export async function loadScreenVisibility(device, signal) {
   try {
     const timeout = AbortSignal.timeout(10000);
-    const response = await fetch(new URL('./screen-visibility.wasm?v=2', import.meta.url),
+    const response = await fetch(new URL('./screen-visibility.wasm?v=3', import.meta.url),
       {signal: signal ? AbortSignal.any([signal, timeout]) : timeout});
     if (!response.ok) return null;
     const [module, precision] = await Promise.allSettled([
@@ -31,7 +31,7 @@ export function usableScreen(width, height, samples, projection) {
     farInverse >= 0 && farInverse < 1/81;
 }
 
-export function prepareScreenVisibility(config, vertices, maxBytes) {
+export function prepareScreenVisibility(config, vertices, maxBytes, glass) {
   const vertexCount = vertices.byteLength / 32;
   if (!config || vertexCount > 65536) return null;
   try {
@@ -44,18 +44,36 @@ export function prepareScreenVisibility(config, vertices, maxBytes) {
       cursor += Math.ceil(bytes / 16) * 16;
       return address;
     }
-    const source = reserve(vertexCount * 16), unique = reserve(vertexCount * 2), seen = reserve(vertexCount);
+    const glassCount = glass?.vertices.byteLength / 32 || 0;
+    const includeGlass = glassCount > 0 && vertexCount + glassCount <= 65536 &&
+      glass.indices instanceof Uint16Array;
+    const total = vertexCount + (includeGlass ? glassCount : 0);
+    const glassIds = includeGlass ? reserve(glassCount * 2) : 0;
+    const glassBytes = includeGlass ? glass.indices.byteLength : 0;
+    const panes = reserve(glassBytes), visiblePanes = reserve(glassBytes + 4);
+    const source = reserve(total * 16), unique = reserve(vertexCount * 2), seen = reserve(vertexCount);
     const indices = reserve(maxBytes), result = reserve(maxBytes + 4), clip = reserve(64);
-    const projected = reserve(vertexCount * 16), grid = reserve(vertexCount * 16), tiles = reserve(maxTiles * 12);
+    const projected = reserve(total * 16), grid = reserve(total * 16), tiles = reserve(maxTiles * 12);
     const memory = wasm.memory;
     const extra = cursor - memory.buffer.byteLength;
     if (extra > 0) memory.grow(Math.ceil(extra / 65536));
     const packed = new Uint32Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 4);
     const layers = new Int16Array(vertices.buffer, vertices.byteOffset, vertices.byteLength / 2);
-    const positions = new Uint32Array(memory.buffer, source, vertexCount * 4);
+    const positions = new Uint32Array(memory.buffer, source, total * 4);
     for (let i = 0; i < vertexCount; i++) {
       positions[4*i] = packed[8*i]; positions[4*i+1] = packed[8*i+1]; positions[4*i+2] = packed[8*i+2];
       positions[4*i+3] = Number(layers[16*i+14] === -2);
+    }
+    if (includeGlass) {
+      const words = new Uint32Array(glass.vertices.buffer, glass.vertices.byteOffset, glassCount * 8);
+      const ids = new Uint16Array(memory.buffer, glassIds, glassCount);
+      for (let i = 0; i < glassCount; i++) {
+        const id = vertexCount + i;
+        ids[i] = id;
+        positions.set(words.subarray(i * 8, i * 8 + 3), id * 4);
+      }
+      const dest = new Uint16Array(memory.buffer, panes, glassBytes / 2);
+      for (let i = 0; i < dest.length; i++) dest[i] = vertexCount + glass.indices[i];
     }
     const input = new Uint16Array(memory.buffer, indices, maxBytes / 2);
     const output = new Uint16Array(memory.buffer, result, maxBytes / 2 + 2);
@@ -63,6 +81,11 @@ export function prepareScreenVisibility(config, vertices, maxBytes) {
     let used = 0, lastWidth = 0, lastHeight = 0, lastDepthTest;
     return {
       output,
+      glassOutput:includeGlass ? new Uint16Array(memory.buffer, visiblePanes, glassBytes / 2 + 2) : null,
+      filterGlass() {
+        return wasm.filterGlass(source, glassIds, glassCount, panes, glassBytes / 2, clip, projected,
+          grid, tiles, visiblePanes, lastWidth, lastHeight, config.precision, vertexCount);
+      },
       filter(list, count, frame, width, height, rebuild, depthTest=true) {
         if (!rebuild && width === lastWidth && height === lastHeight && depthTest === lastDepthTest) {
           let same = true;

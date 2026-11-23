@@ -1,7 +1,7 @@
 import {loadRoomVisibility} from './room-visibility.js?v=8';
 import {sharedVertices} from './shared-vertices.js?v=2';
 import {createViewIndices} from './view-indices.js?v=14';
-import {loadScreenVisibility} from './screen-visibility.js?v=2';
+import {loadScreenVisibility} from './screen-visibility.js?v=3';
 import {prepareImmediateView} from './immediate-view.js?v=1';
 import {createMaterialPalette} from './daylight-materials.js?v=yacht-daylight-2';
 import {localReflections} from './yacht-daylight.js?v=yacht-daylight-1';
@@ -384,7 +384,7 @@ export async function createForwardRenderer(app, daylight) {
             // Its walls and furniture still occlude surfaces behind them.
             const samplesOnly=activeProfile==='guest'||activeProfile==='exterior'&&mainDeck&&(
               model.guestAccess&&onGuestApproach(x,y)||model.boarding.baseSafe?.(x,y,0));
-            const refinement=samplesOnly?'samples':'occlusion';
+            const refinement=activeProfile==='upper' && nav.stair?.route.id==='aft' ? 'aft' : samplesOnly?'samples':'occlusion';
             visible=viewIndices.select(activeProfile,first,count,clip.elements,cameraMatrix,camera.projectionMatrix.elements,engine.width,engine.height,daylight.revision,frame,samples,refinement);
             if(capture)capturedSource={
               indices:viewIndices,profile:activeProfile,first,count,clip:frame.slice(0,16),
@@ -406,7 +406,7 @@ export async function createForwardRenderer(app, daylight) {
           pass.drawIndexed(count,1,first);
           model.stats.triangles=(count+(visible?.glassLength??batches[1].count))/3;
         } else if(i===1 && visible && visible.glassLength<batch.count){
-          pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat,viewIndices.glassOffset);
+          pass.setIndexBuffer(viewIndices.buffer,batch.indexFormat,visible.glassOffset);
           pass.drawIndexed(visible.glassLength);
         } else pass.drawIndexed(batch.count);
       }

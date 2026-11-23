@@ -13,7 +13,7 @@ export async function buildGuestAccess() {
   const covers=new Map();
   const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest','main'],
     lod(p,context) {
-      if(p.role==='service-bulkhead')return {error:0};
+      if(p.role==='service-bulkhead'||p.role==='stairwell-lining')return {error:0};
       if(p.role==='passage-floor')return {error:.014};
       if(p.role==='main-side-guard'||/^MD\/boarding-route\/[2-5]$/.test(p.id)||
         context.profile==='main'&&p.id.startsWith('MD/boarding-route/'))return {error:0};
@@ -134,7 +134,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'port-bulkhead-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'guest-stairwell-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

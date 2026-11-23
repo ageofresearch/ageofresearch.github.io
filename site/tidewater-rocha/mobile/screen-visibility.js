@@ -31,7 +31,35 @@ export function usableScreen(width, height, samples, projection) {
     farInverse >= 0 && farInverse < 1/81;
 }
 
-export function prepareScreenVisibility(config, vertices, maxBytes, glass) {
+// Mark wood and teak in the flight's authored envelope. Drawing these opaque
+// surfaces early allows the GPU to reject hidden fragments before shading.
+function treadVertices(vertices, flight, basis) {
+  if (!flight || !basis) return null;
+  let left=Infinity, right=-Infinity, back=Infinity, front=-Infinity, top=-Infinity;
+  for (const surface of flight.surfaces) {
+    if (surface.kind !== 'tread') continue;
+    top=Math.max(top,surface.height);
+    for (const polygon of surface.polygons) for (const [x,y] of polygon) {
+      back=Math.min(back,x); front=Math.max(front,x);
+      left=Math.min(left,y); right=Math.max(right,y);
+    }
+  }
+  const bottom=flight.surfaces[0].height;
+  const xyz=new Float32Array(vertices.buffer,vertices.byteOffset,vertices.byteLength/4);
+  const layers=new Int16Array(vertices.buffer,vertices.byteOffset,vertices.byteLength/2);
+  const marked=new Uint8Array(vertices.byteLength/32);
+  for(let i=0;i<marked.length;i++){
+    const layer=layers[16*i+14];
+    if(layer!==0 && layer!==1)continue;
+    const x=(xyz[i*8+2]+basis.length/2)/basis.sx, y=xyz[i*8]/basis.sy, z=xyz[i*8+1]+basis.seaReference;
+    // Include the nosings at the ends of the authored walking surfaces.
+    if(x>=back-.04 && x<=front+.04 && y>=left-.04 && y<=right+.04 && z>=bottom-.01 && z<=top+.01)
+      marked[i]=1;
+  }
+  return marked;
+}
+
+export function prepareScreenVisibility(config, vertices, maxBytes, glass, flight, basis) {
   const vertexCount = vertices.byteLength / 32;
   if (!config || vertexCount > 65536) return null;
   try {
@@ -75,6 +103,7 @@ export function prepareScreenVisibility(config, vertices, maxBytes, glass) {
       const dest = new Uint16Array(memory.buffer, panes, glassBytes / 2);
       for (let i = 0; i < dest.length; i++) dest[i] = vertexCount + glass.indices[i];
     }
+    const treads = treadVertices(vertices, flight, basis);
     const input = new Uint16Array(memory.buffer, indices, maxBytes / 2);
     const output = new Uint16Array(memory.buffer, result, maxBytes / 2 + 2);
     const matrix = new Float32Array(memory.buffer, clip, 16);
@@ -86,7 +115,7 @@ export function prepareScreenVisibility(config, vertices, maxBytes, glass) {
         return wasm.filterGlass(source, glassIds, glassCount, panes, glassBytes / 2, clip, projected,
           grid, tiles, visiblePanes, lastWidth, lastHeight, config.precision, vertexCount);
       },
-      filter(list, count, frame, width, height, rebuild, depthTest=true) {
+      filter(list, count, frame, width, height, rebuild, depthTest=true, nearFirst=false) {
         if (!rebuild && width === lastWidth && height === lastHeight && depthTest === lastDepthTest) {
           let same = true;
           for (let i = 0; i < 16 && same; i++) same = matrix[i] === frame[i];
@@ -95,7 +124,20 @@ export function prepareScreenVisibility(config, vertices, maxBytes, glass) {
         lastWidth = width; lastHeight = height; lastDepthTest = depthTest;
         for (let i = 0; i < 16; i++) matrix[i] = frame[i];
         if (rebuild) {
-          input.set(list.subarray(0, count));
+          if (nearFirst && treads) {
+            // Stable partition only when replacing the cached range. Reuse
+            // the output scratch before the sample filter fills it again.
+            let near = 0, far = 0;
+            for (let i = 0; i < count; i += 3) {
+              const a=list[i], b=list[i+1], c=list[i+2];
+              if (treads[a] && treads[b] && treads[c]) {
+                input[near++]=a; input[near++]=b; input[near++]=c;
+              } else {
+                output[far++]=a; output[far++]=b; output[far++]=c;
+              }
+            }
+            input.set(output.subarray(0,far),near);
+          } else input.set(list.subarray(0, count));
           used = wasm.collectVertices(indices, count, unique, seen, vertexCount);
         }
         return wasm.filter(source, unique, used, indices, count, clip, projected, grid, tiles,

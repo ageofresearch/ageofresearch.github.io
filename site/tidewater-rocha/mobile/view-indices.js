@@ -3,7 +3,7 @@ import {filterRoomCell, roomCellOffset} from './room-visibility.js?v=8';
 import {prepareSkyVisibility} from './sky-visibility.js?v=1';
 import {coversView, widenedView, viewRadius} from './view-volume.js?v=3';
 
-export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null, immediate = {}, screenConfig = null) {
+export function createViewIndices(device, vertices, profiles, glazing, maxBytes, maxGlassBytes, cells = null, immediate = {}, screenConfig = null, aftFlight = null, basis = null) {
   let worker;
   try {worker = new Worker(new URL('./view-worker.js?v=5', import.meta.url), {type:'module'});}
   catch {return null;} // A browser can disable workers while still supporting WebGPU.
@@ -24,7 +24,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
   const profileFormats = Object.fromEntries(Object.entries(profiles).map(([name, indices]) =>
     [name, { short: indices.BYTES_PER_ELEMENT === 2, glassLength: glazing[name].indices.length }]));
   const filterSky = prepareSkyVisibility(vertices);
-  const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes, glazing.upper);
+  const screen = prepareScreenVisibility(screenConfig, vertices, maxBytes, glazing.upper, aftFlight, basis);
   const paneOffset = glassOffset + Math.ceil(maxGlassBytes / 4) * 4;
   const scratch = new ArrayBuffer(glassOffset);
   const compact16 = new Uint16Array(scratch), compact32 = new Uint32Array(scratch);
@@ -46,10 +46,11 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
     const trimSky = entry.skyRuns?.length > 0 && entry.sunRevision === sunRevision &&
       Math.min(width*projection[0], height*projection[5]) >= 100;
     const flight = refinement === 'aft';
+    const nearFirst = flight && camera[10] < -.5;
     const depthTest = flight || refinement === 'occlusion';
     const useScreen = refinement !== 'off' && Boolean(screen) && entry.output.BYTES_PER_ELEMENT === 2 &&
       usableScreen(width, height, samples, projection);
-    const changed = entry.flight !== flight || entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen || entry.depthTest !== depthTest;
+    const changed = entry.nearFirst !== nearFirst || entry.flight !== flight || entry.offset !== offset || entry.trimSky !== trimSky || entry.useScreen !== useScreen || entry.depthTest !== depthTest;
     if (!changed && !entry.filtered) return;
     let indices = entry.output, length = entry.rawLength;
     if (changed) {
@@ -58,6 +59,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
         length = filterRoomCell(cells?.bits, offset, region?.count, indices, length, entry.slots, compact, trimSky && entry.skyRuns);
         indices = compact;
       }
+      entry.nearFirst = nearFirst;
       entry.flight = flight;
       entry.glassLength = entry.baseGlassLength;
       entry.glassOffset = glassOffset;
@@ -69,7 +71,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       entry.filtered = useScreen && length >= minFaces * 3;
     } else length = entry.baseLength;
     if (entry.filtered) {
-      length = screen.filter(indices, length, frame, width, height, changed, depthTest);
+      length = screen.filter(indices, length, frame, width, height, changed, depthTest, nearFirst);
       if (length === null) return;
       indices = screen.output;
       if (flight) uploadPanes(entry, entry.baseGlassLength);
@@ -193,7 +195,7 @@ export function createViewIndices(device, vertices, profiles, glazing, maxBytes,
       const result = {length, glassLength, glassOffset, immediate:true};
       if (refinement === 'aft' && short && screen &&
           length >= 3500 * 3 && usableScreen(width, height, samples, projection)) {
-        length = screen.filter(output, length, frame, width, height, true, true);
+        length = screen.filter(output, length, frame, width, height, true, true, camera[10] < -.5);
         indices = screen.output;
         uploadPanes(result, glassLength);
         // The immediate range has replaced the worker's cached WASM input,

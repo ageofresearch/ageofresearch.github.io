@@ -175,7 +175,8 @@ export async function createForwardRenderer(app, daylight) {
           const [cells, screen]=roomVisibility ? await Promise.all([
             loadRoomVisibility(packed,lists,signal), smooth && loadScreenVisibility(device,signal),
           ]) : [null,null];
-          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes,cells,immediate,screen);
+          stagedViews=createViewIndices(device,packed,lists,glazing,maxIndexBytes,maxGlassBytes,cells,immediate,screen,
+            model.upper?.flight,model.group.userData.yacht);
           if(stagedViews){await stagedViews.ready;resident+=stagedViews.buffer.size+stagedViews.exactBuffer.size;}
         }
       }catch(error){failure=error;}

@@ -33,7 +33,7 @@ export function planarOccluders(faces, exact = false) {
   const groups = new Map(),
     result = [];
   for (const f of faces) {
-    if (f.background) continue;
+    if (f.background || f.unbounded) continue;
     for (let axis = 0; axis < 3; axis++) {
       const level = f.v[0][axis];
       if (!f.v.every((v) => exact ? v[axis] === level : Math.abs(v[axis] - level) < 1e-6)) continue;

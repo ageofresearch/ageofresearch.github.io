@@ -40,8 +40,8 @@ function meshData(geometry) {
     const len=Math.hypot(...n),kind=surf[ids[0]*4+2];
     const lo=a.map((x,k)=>Math.min(x,b[k],c[k])),hi=a.map((x,k)=>Math.max(x,b[k],c[k]));
     const background=[44,45,46,47,49].includes(kind);
-    faces.push({ids,v,lo,hi,n,len,background,sky:kind===47});
-    if(background||len<.55)continue;
+    faces.push({ids,v,lo,hi,n,len,background,unbounded:kind===47 || kind===54});
+    if(background||kind===54||len<.55)continue;
     for(let axis=0;axis<3;axis++){
       if(hi[axis]-lo[axis]>1e-5)continue;
       const [j,k]=axes[axis],corners=v.map(p=>{
@@ -97,7 +97,7 @@ export function sightlines(profile,geometry,basis){
     const shadows=shadowsFor(rectangles,box);
     const possible=faces.filter(f=>{
       const d=f.n.reduce((s,n,k)=>s+n*(box[k+(n>0?3:0)]-f.v[0][k]),0);
-      return f.sky || d>=-.02*f.len&&!occluded(f,shadows);
+      return f.unbounded || d>=-.02*f.len&&!occluded(f,shadows);
     });
     const directions=Array.isArray(direction)?direction:direction!==undefined?[direction]:profile==='exterior'?[1]:[-1,1];
     for(const sign of directions){
@@ -107,7 +107,7 @@ export function sightlines(profile,geometry,basis){
       const buckets=cones.map(()=>[]);
       for(const f of possible){
         const front=sign*(sign>0?f.hi[2]-box[2]:f.lo[2]-box[5]);
-        const bucket=f.sky||!sign?0:cones.findIndex(c=>front>=-.02&&
+        const bucket=f.unbounded||!sign?0:cones.findIndex(c=>front>=-.02&&
           f.hi[0]-box[0]+c[0]*front>=-.02&&box[3]-f.lo[0]+c[0]*front>=-.02&&
           f.hi[1]-box[1]+c[1]*front>=-.02&&box[4]-f.lo[1]+c[2]*front>=-.02);
         if(bucket<0)continue;

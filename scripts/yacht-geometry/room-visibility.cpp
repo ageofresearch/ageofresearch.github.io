@@ -175,7 +175,7 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
     t.normal = cross(t.corner[1] - t.corner[0], t.corner[2] - t.corner[0]);
     t.normalLength = len(t.normal);
     t.level = dot(t.normal, t.corner[0]);
-    if (vertices[indices[3 * i]].layer == -2 || t.normalLength < 1e-9 ||
+    if (vertices[indices[3 * i]].layer == -2 || vertices[indices[3 * i]].layer == -4 || t.normalLength < 1e-9 ||
         t.level < eyeSupport(t.normal) + (nearReach + .003) * t.normalLength)
       continue;
     int s = blockers.size();
@@ -354,7 +354,7 @@ vector<uint8_t> bakeCell(const vector<PackedVertex> &vertices,
     array<Point, 3> t = {points[pointIndex[indices[3 * i]]],
                          points[pointIndex[indices[3 * i + 1]]],
                          points[pointIndex[indices[3 * i + 2]]]};
-    if (vertices[indices[3 * i]].layer == -2 || !rasterSafe(t)) continue;
+    if (vertices[indices[3 * i]].layer == -2 || vertices[indices[3 * i]].layer == -4 || !rasterSafe(t)) continue;
     bool occluded = hidden(hidden, t, ownBlocker[i], 2);
     if (!occluded && !cones.empty()) {
       array<Point, 3> face;

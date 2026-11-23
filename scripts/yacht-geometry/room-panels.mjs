@@ -10,7 +10,7 @@ export function roomPanels(vertices, indices) {
   const faces = [];
   for (let i = 0; i < indices.length; i += 3) {
     const ids = [indices[i], indices[i + 1], indices[i + 2]];
-    if (ids.some(id => layers[id * 16 + 14] === -2)) continue;
+    if (ids.some(id => layers[id * 16 + 14] === -2 || layers[id * 16 + 14] === -4)) continue;
     const v = ids.map(id => points[id]);
     const u = v[1].map((x, k) => x - v[0][k]);
     const w = v[2].map((x, k) => x - v[0][k]);

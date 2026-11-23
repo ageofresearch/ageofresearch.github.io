@@ -1,4 +1,4 @@
-import {filterSamples} from './sample-visibility.js?v=stern-flag-1';
+import {filterSamples,patchGlass} from './sample-visibility.js?v=stern-flag-region-1';
 import {filterView, prepareViewSpans} from './view-volume.js?v=stern-flag-1';
 let vertices, profiles, glazing, masks, spans;
 self.onmessage = ({data}) => {
@@ -16,7 +16,13 @@ self.onmessage = ({data}) => {
     const source=data.candidates ?? profiles[profile];
     const start=data.candidates ? 0 : first, size=data.candidates ? source.length : count;
     const result=filterSamples(winners,vertices,source,start,size,data.windRect,data.clip);
-    self.postMessage({...result,key},[result.output.buffer]);return;
+    const transfer=[result.output.buffer];
+    if(result.patch){
+      const g=glazing[profile];
+      result.patchGlass=patchGlass(g.vertices,g.indices,data.windRect,data.clip);
+      transfer.push(result.patch.buffer,result.patchGlass.output.buffer);
+    }
+    self.postMessage({...result,key},transfer);return;
   }
   const {profile, first, count, planes, eye} = data;
   const slots = data.trackFaces ? new Uint32Array(count / 3) : null;

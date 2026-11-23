@@ -3,6 +3,17 @@ const assert=require('node:assert/strict');
 // Compare actual resolved color against the ordinary all-direction drawing
 // range in the same buffers, pipeline, profile, camera and render pass.
 module.exports=async function sightlineFrames(frame,readFrame){
+  // The three readbacks land on different animation frames. Keep the wind
+  // phase identical so a moving star cannot look like a missing triangle.
+  await frame.evaluate(()=>{
+    const r=__app.gangwayRenderer,original=r.present;
+    r.present=function(reuse){return original.call(this,reuse,1.25);};
+    window.restoreSightlineWind=()=>{r.present=original;};
+  });
+  try{await compareSightlines(frame,readFrame);}
+  finally{await frame.evaluate(()=>{restoreSightlineWind();delete window.restoreSightlineWind;});}
+};
+async function compareSightlines(frame,readFrame){
   async function reference(band) {
     await frame.evaluate(band=>{
       const r=__app.gangwayRenderer,original=r.render;

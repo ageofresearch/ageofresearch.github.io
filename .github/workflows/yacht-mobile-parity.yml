@@ -14,7 +14,7 @@ on:
       - 'tests/yacht-touch-look.test.mjs'
       - 'tests/yacht-terrace.test.mjs'
       - 'tests/yacht-stern-access.test.mjs'
-      - 'tests/yacht-stern-flag.test.mjs'
+      - 'tests/yacht-stern-flag*'
       - 'tests/yacht-stern-access.cjs'
       - 'tests/yacht-stair-surfaces.test.mjs'
       - 'tests/yacht-stair-surfaces.cjs'

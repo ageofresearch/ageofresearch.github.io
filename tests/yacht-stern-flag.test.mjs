@@ -20,6 +20,28 @@ test('all prepared flag profiles carry the whole double-sided cloth and the staf
   }
 });
 
+test('every directional and local prefix includes both sides throughout the wind cycle',async()=>{
+  const root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);
+  const data=JSON.parse(await readFile(new URL('guest-access.json',root)));
+  const bytes=await readFile(new URL('guest-access.bin',root));
+  for(const [profile,p] of Object.entries(data.profiles)){
+    const b=p.batches[0],surface=b.attributes.aSurface;
+    const tags=new Float32Array(bytes.buffer,bytes.byteOffset+surface.offset,surface.length);
+    const Type=b.indices.format==='uint16'?Uint16Array:Uint32Array;
+    const indices=new Type(bytes.buffer,bytes.byteOffset+b.indices.offset,b.indices.length);
+    const counts=new Uint32Array(indices.length/3+1);
+    for(let i=0;i<indices.length;i+=3)
+      counts[i/3+1]=counts[i/3]+Number(tags[4*indices[i]+2]===54);
+    const ranges=[...b.ranges];
+    for(const v of b.views??[]){
+      for(const n of [v.count,...(v.prefixes??[]).map(pre=>pre.count)])ranges.push([v.first,n]);
+    }
+    if(b.localView)for(const n of [b.localView.count,b.localView.lowCount])ranges.push([b.localView.first,n]);
+    for(const [first,count] of ranges)
+      assert.equal(counts[(first+count)/3]-counts[first/3],320,profile+' at '+first);
+  }
+});
+
 test('frame reuse requires the complete sweep to be outside or behind an opaque triangle',()=>{
   const clip=Float32Array.of(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
   const box=[-.1,-.1,-2,.1,.1,-1];

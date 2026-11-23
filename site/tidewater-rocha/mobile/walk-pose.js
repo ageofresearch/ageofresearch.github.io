@@ -13,8 +13,13 @@ export function mountWalkPose(mapControl, camera) {
   panel.setAttribute('role', 'group');
   panel.setAttribute('aria-label', 'Posición del personaje y mirada de la cámara');
   panel.hidden = true;
-  const lines = Array.from({length: 4}, () => document.createElement('div'));
-  panel.append(...lines);
+  const lines = Array.from({length: 4}, () => {
+    const row = document.createElement('div');
+    const text = document.createTextNode('');
+    row.append(text);
+    panel.append(row);
+    return text;
+  });
   corner.append(panel, mapControl);
   document.body.append(corner);
 
@@ -38,21 +43,21 @@ export function mountWalkPose(mapControl, camera) {
     const pitch = Math.round(Math.atan2(-m[9], Math.hypot(m[8], m[10])) * degrees * 10);
 
     if (x !== lastX || y !== lastY) {
-      lines[0].textContent = 'X ' + decimal(x, 3) + '   Y ' + decimal(y, 3);
+      lines[0].data = 'X ' + decimal(x, 3) + '   Y ' + decimal(y, 3);
       lastX = x;
       lastY = y;
     }
     if (feet !== lastFeet || eye !== lastEye) {
-      lines[1].textContent = 'Z pies ' + decimal(feet, 3) + '   Z cámara ' + decimal(eye, 3);
+      lines[1].data = 'Z pies ' + decimal(feet, 3) + '   Z cámara ' + decimal(eye, 3);
       lastFeet = feet;
       lastEye = eye;
     }
     if (heading !== lastHeading) {
-      lines[2].textContent = 'Rumbo ' + decimal(heading, 1) + '° · ' + sides[Math.round(heading / 900) % 4];
+      lines[2].data = 'Rumbo ' + decimal(heading, 1) + '° · ' + sides[Math.round(heading / 900) % 4];
       lastHeading = heading;
     }
     if (pitch !== lastPitch) {
-      lines[3].textContent = 'Inclinación ' + decimal(pitch, 1) + '°';
+      lines[3].data = 'Inclinación ' + decimal(pitch, 1) + '°';
       lastPitch = pitch;
     }
     if (panel.hidden) panel.hidden = false;

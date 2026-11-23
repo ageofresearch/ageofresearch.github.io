@@ -23,14 +23,18 @@ module.exports = async function verifyWalkPose(frame) {
     const stairs = [];
     walk.enterRoom('MD_R01');
     const nav = walk.nav;
-    for (const [x, y] of [[7.4,-1.6], [7.4,-2.5], [6.6,-3.1], [4,-3.03], [2.7,-3.03], [1.5,-3.03], [2.2,-3.03]]) {
-      nav.move(x - nav.position[0], y - nav.position[1]);
+    const flight = nav.stairFlights.get('aft');
+    // Sample real tread poses on the shared flight in both renderers.
+    for (const tread of flight.surfaces.slice(1, 3)) {
+      const polygon = tread.polygons[0];
+      nav.deck = flight.route.lower;
+      nav.position = [0, 1].map(axis => polygon.reduce((sum, p) => sum + p[axis], 0) / polygon.length);
+      nav.stair = {route:flight.route, surfaceIndex:tread.index, d:0};
+      nav.elevation = tread.height;
       app.frame(1/60);
-      if (nav.stair) {
-        const group = walk.model.group;
-        const eye = group.worldToLocal(app.camera.position.clone()).y + group.userData.yacht.seaReference;
-        stairs.push({feet:nav.elevation, eye, label:read()[1]});
-      }
+      const group = walk.model.group;
+      const eye = group.worldToLocal(app.camera.position.clone()).y + group.userData.yacht.seaReference;
+      stairs.push({feet:nav.elevation, eye, label:read()[1]});
     }
     walk.enterRoom('boarding');
     app.frame(0);

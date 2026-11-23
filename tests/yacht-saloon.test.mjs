@@ -64,6 +64,28 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
   }finally{full.dispose();}
 });
 
+test('the sliding door, lounge seats and dining light have distinct physical footprints',()=>{
+  const f=fixture();
+  try{
+    const pane=f.model.terrace.parts.find(p=>p.feature==='smoked aft saloon sliding panels');
+    assert.ok(Math.abs(pane.bounds[1]+2.98)<.002);
+    const nav=f.walk.nav;
+    for(const y of [-2.70,-2,-1,.95])assert.equal(nav.floorSafe(8.44,y,'MD'),false);
+    for(const y of [-.22,.10,.42])assert.equal(nav.floorSafe(8.44,y,'MD'),true);
+    assert.ok(!saloon.parts.some(p=>['MD_FUR_015','MD_FUR_017'].includes(p.sourceID)));
+    assert.ok(!saloon.collisionFootprints.some(p=>/^MD_FUR_0(?:15|17)\//.test(p.id)));
+    assert.equal(saloon.parts.filter(p=>p.feature.startsWith('salon lounge chair')).length,4);
+    const lens=saloon.parts.find(p=>p.feature==='restrained cove diffuser');
+    const table=saloon.parts.find(p=>p.feature==='dark dining tabletop');
+    for(const axis of [0,1]){
+      const centre=b=>(b[axis]+b[axis+3])/2;
+      assert.ok(Math.abs(centre(lens.bounds)-centre(table.bounds))<.001);
+    }
+    assert.equal(lens.materialID,'M99');
+    assert.ok(lens.bounds[5]-lens.bounds[2]>.025);
+  }finally{f.dispose();}
+});
+
 test('the blue rug around the main saloon coffee table has one circular outer edge in rendered space',()=>{
   const rugs=saloon.parts.filter(p=>p.sourceID==='MD_SOF_004');
   assert.equal(rugs.length,1,'The old outline and binding must both be removed');

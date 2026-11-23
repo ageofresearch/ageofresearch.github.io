@@ -99,6 +99,18 @@ struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
  let eye=normalize(frame.eye.xyz-pos);let n=normalize(normal.xyz);
  let grazing=pow(1.-abs(dot(n,eye)),5.);
  let r=reflect(-eye,n);let reflected=sky(r);
+ if(finish.x==52 || finish.x==53){
+   // Transmitted daylight remains visible from inside. From the cockpit the
+   // fixed leaves read as dark smoked glass beside the actual open doorway.
+   let door=finish.x==52;
+   let outside=select(smoothstep(2.8,3.12,abs(frame.eye.x)),1.-smoothstep(-9.60,-9.16,frame.eye.z),door);
+   let opacity=mix(select(.26,.60,door),select(.62,.90,door),outside);
+   let reflection=mix(vec3f(.018,.023,.029),reflected,.045+.24*grazing);
+   // Bake the sea/sky tint into the vertex color. The hardware interpolates
+   // across each fixed light without shading the overlapping glass per pixel.
+   let horizon=(smoothstep(-.04,.04,r.y)-.60)*.16*outside;
+   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)));
+ }
  return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)));
 }
 @fragment fn glassFragment(in:Glass)->@location(0) vec4f{return in.rgba;}

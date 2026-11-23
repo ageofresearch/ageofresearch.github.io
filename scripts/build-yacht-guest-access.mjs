@@ -18,6 +18,7 @@ export async function buildGuestAccess() {
         context.profile==='main'&&p.id.startsWith('MD/boarding-route/'))return {error:0};
       if(context.profile==='main'){
         if(p.context)return {error:0};
+        if(p.role==='main-deck' && /salon (curved boucle module|lounge chair)/.test(p.feature))return {error:.004};
         if(p.role==='main-deck')return {error:p.glass?0:p.bounds[0]>=17.7?.004:.014};
         if(p.role==='guest-stair'||p.role==='bridge-stair-context')return {error:.012};
         if(p.role==='guest-boundary'||p.role==='guest-floor')return {error:.035};
@@ -132,7 +133,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'main-deck-stability-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'saloon-entry-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

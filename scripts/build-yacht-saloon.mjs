@@ -1,3 +1,4 @@
+import {distantSaloonSeats} from '../site/tidewater-rocha/mobile/tour-furniture.js';
 import {detailError,packWalkProfile} from './yacht-geometry/profile-geometry.mjs';
 // Offline extraction: mobile downloads a ready-to-draw main deck, never the
 // complete yacht. Install tooling with npm ci --prefix scripts/yacht-geometry.
@@ -12,7 +13,7 @@ import { serviceStairStraightEnd } from '../site/tidewater-rocha/mobile/cockpit-
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'main-deck-stability-1';
+const version = 'saloon-entry-1';
 
 // Keep the same main-deck mesh from boarding through the saloon.
 export function mainDeckError(bounds) {
@@ -104,7 +105,10 @@ export async function buildSaloon() {
   const terrace=decode(JSON.parse(terraceJSON),terraceBin.buffer.slice(terraceBin.byteOffset,terraceBin.byteOffset+terraceBin.byteLength));
   const parts=[],seen=new Set();
   const region=[8.5,-3.13,3.83,17.91,3.13,6.01];
+  const distantSeats=distantSaloonSeats(),closeSeats=new Map();
   function add(source,role,bounds=null) {
+    const distant=distantSeats.get(source.feature);
+    if(distant){closeSeats.set(source.id,source);source={...source,...distant};}
     if(seen.has(source.id))return;
     const geometry=bounds?clipGeometry(source,bounds):{vertices:Array.from(source.vertices),indices:Array.from(source.indices)};
     if(!geometry.indices.length)return;
@@ -191,8 +195,8 @@ export async function buildSaloon() {
     chunks.push(chunk);offset+=chunk.length;return descriptor;
   }
   const packedParts=parts.map(part=>({id:part.id,sourceID:part.sourceID,role:part.role,feature:part.feature,
-    bounds:part.bounds,finish:part.finish,materialID:part.materialID??null,glass:!!part.glass,
-    vertices:store(part.vertices),indices:store(part.indices,Uint32Array)}));
+    bounds:(closeSeats.get(part.id)??part).bounds,finish:part.finish,materialID:part.materialID??null,glass:!!part.glass,
+    vertices:store((closeSeats.get(part.id)??part).vertices),indices:store((closeSeats.get(part.id)??part).indices,Uint32Array)}));
   const profiles={};
   const materials=createFinishes(0,true,true,true,true);
   try {

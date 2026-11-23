@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mobile,full,manifest,binary,guest,array} from './yacht-guest-fixture.mjs';
-import {travel} from './yacht-saloon-fixture.mjs';
+import {saloonManifest,saloonBuffer,travel} from './yacht-saloon-fixture.mjs';
 import {buildGuestAccess} from '../scripts/build-yacht-guest-access.mjs';
-import {containsTriangle} from '../scripts/build-yacht-terrace.mjs';
+import {clipGeometry,containsTriangle} from '../scripts/build-yacht-terrace.mjs';
 import {decodeGuestAccess,loadGuestAccess,connectGuestAccess,restoreGuestAccessHandoff} from '../site/tidewater-rocha/mobile/guest-access.js';
 import {guestRoom,guestLandings,guestApproach,guestProfileDomain,onGuestApproach} from '../site/tidewater-rocha/mobile/guest-access-geometry.js';
 import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
@@ -47,6 +47,53 @@ test('guest package is reproducible with six bounded profiles, exact supports an
     }
   } finally {g.model.dispose();}
 });
+test('the stairwell screens adjacent cabins from the forward saloon while leaving the flight open',async()=>{
+  const eye=[17.547,-1.539,5.55],deck=3.95;
+  // Intersections of sightlines from the reported 353.9°, −35.7° view
+  // with the main-deck plane. They previously reached an adjacent cabin.
+  const cabinRays=[[19.362,-.190],[18.645,-.216],[18.302,-.245]];
+  function covers(part,xy) {
+    const projected=[];
+    for(let i=0;i<part.vertices.length;i+=6){
+      const t=(eye[2]-deck)/(eye[2]-part.vertices[i+2]);
+      projected.push([eye[0]+t*(part.vertices[i]-eye[0]),eye[1]+t*(part.vertices[i+1]-eye[1])]);
+    }
+    for(let i=0;i<part.indices.length;i+=3){
+      const tri=Array.from(part.indices.slice(i,i+3),k=>projected[k]);
+      if(containsTriangle(...xy,tri))return true;
+    }
+    return false;
+  }
+  const f=await full();
+  try {
+    const source=renderedParts(f.model).find(p=>p.feature==='guest stairwell lining');
+    assert.ok(source);
+    const part=saloonManifest.parts.find(p=>p.id===source.id),data=array(saloonBuffer);
+    assert.ok(part);
+    const packed={vertices:Array.from(new Float32Array(data,part.vertices.offset,part.vertices.length)),
+      indices:Array.from(new Uint32Array(data,part.indices.offset,part.indices.length))};
+    for(const mesh of [source,packed]){
+      const aboveCabins=clipGeometry(mesh,[17,-3,2.5,20,1,6]);
+      for(const xy of cabinRays)assert.ok(covers(aboveCabins,xy),'Unscreened cabin sightline '+xy);
+      const aboveTread=clipGeometry(mesh,[17,-3,3.60,20,1,6]);
+      assert.equal(covers(aboveTread,[18.17,-1.44]),false,'The wall must fall behind the upper treads');
+    }
+    const deck=renderedParts(f.model).find(p=>p.id==='MD_DCK_001/stairs/stair-opening');
+    const fascia=[];
+    for(let i=0;i<deck.indices.length;i+=3){
+      const face=Array.from(deck.indices.slice(i,i+3),k=>deck.vertices.slice(k*6,k*6+6));
+      if(face.every(v=>Math.abs(v[0]-19.58)<1e-5 && v[3]<-.99))fascia.push(face.map(v=>[v[1],v[2]]));
+    }
+    for(const y of [-1.84,-1.81,-1.76,-1.71,-1.60])for(const z of [3.84,3.89,3.94]){
+      assert.ok(fascia.some(face=>containsTriangle(y,z,face)),'Missing forward reveal at '+[y,z]);
+    }
+    for(const name of ['main','guest']){
+      const draw=manifest.profiles[name].audit.find(p=>p.id===part.id);
+      assert.equal(draw?.triangles,source.indices.length/3);
+    }
+  }finally{f.model.dispose();}
+});
+
 test('the prepared approach includes the guest corridor and excludes the adjacent saloon',()=>{
   for(let i=1;i<guestApproach.length;i++) {
     const [ax,ay]=guestApproach[i-1],[bx,by]=guestApproach[i];

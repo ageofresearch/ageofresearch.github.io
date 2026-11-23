@@ -13,7 +13,7 @@ import { serviceStairStraightEnd } from '../site/tidewater-rocha/mobile/cockpit-
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
-const version = 'port-bulkhead-1';
+const version = 'guest-stairwell-1';
 
 // Keep the same main-deck mesh from boarding through the saloon.
 export function mainDeckError(bounds) {
@@ -146,7 +146,9 @@ export async function buildSaloon() {
     add({...part,id:part.id+'/saloon'},'roof',[8.5,-3.13,5.87,17.91,3.13,6.01]);
   // Retain the real walls of the service-stair enclosure beside the doorway.
   for(const part of model.interiorDetail.objects) {
-    if (['profiled white service stair enclosure', 'entry forward white tool wall'].includes(part.feature)) {
+    if (part.feature === 'guest stairwell lining') {
+      add(part,'stairwell-lining');
+    } else if (['profiled white service stair enclosure', 'entry forward white tool wall'].includes(part.feature)) {
       // These lower-deck parts also form the visible port corner of the saloon.
       add({...part,id:part.id+'/saloon'},'service-bulkhead',region);
     } else if (/sloping white service stair ceiling|cockpit stair exterior (?:cheek|capping)|dark sidewall around D1/.test(part.feature)) {

@@ -16,7 +16,8 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
   assert.ok(saloonBuffer.byteLength<5*1024*1024);
   const ids=saloon.parts.map(p=>p.id);
   assert.equal(new Set(ids).size,ids.length);
-  assert.ok(saloon.parts.every(p=>p.bounds[0]>=8.5-1e-5 && p.bounds[3]<=17.91+1e-5));
+  // The guest stairwell is visible through the forward portal beyond the saloon.
+  assert.ok(saloon.parts.filter(p=>p.role!=='stairwell-lining').every(p=>p.bounds[0]>=8.5-1e-5 && p.bounds[3]<=17.91+1e-5));
   for(const id of ['MD_FUR_014','MD_FUR_016','MD_FUR_018','MD_FUR_019','MD_FUR_023','MD_SOF_007','MD_SOF_008','MD_SOF_009','MD_SOF_010'])
     assert.ok(saloon.parts.some(p=>p.sourceID===id),id);
   const pedestals=saloon.parts.filter(p=>p.feature.startsWith('dining pedestal'));

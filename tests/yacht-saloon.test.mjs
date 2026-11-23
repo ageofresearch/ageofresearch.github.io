@@ -111,6 +111,18 @@ test('the blue rug around the main saloon coffee table has one circular outer ed
   assert.equal(drawn.triangles,indices.length/3,'Preserve the curve when packing the walking view');
 });
 
+test('the port service bulkhead closes the aft saloon sightline in the active main profile', async () => {
+  const guest = JSON.parse(await readFile(new URL('../site/tidewater-rocha/mobile/guest-access.json', import.meta.url)));
+  const walls = saloon.parts.filter(p => p.role === 'service-bulkhead');
+  assert.equal(walls.filter(p => p.feature === 'profiled white service stair enclosure').length, 2);
+  assert.ok(walls.some(p => p.feature === 'entry forward white tool wall'));
+  for (const wall of walls) {
+    const draw = guest.profiles.main.audit.find(p => p.id === wall.id);
+    assert.ok(draw?.triangles > 0 && draw.triangles === draw.sourceTriangles, wall.id);
+    assert.ok(saloon.collisionFootprints.some(p => p.id === wall.id), wall.id);
+  }
+});
+
 test('native walking crosses the door, reaches both seating areas and returns at 12/40/60 Hz',()=>{
   for(const hz of [12,40,60]) {
     const f=fixture(),{nav}=f.walk;

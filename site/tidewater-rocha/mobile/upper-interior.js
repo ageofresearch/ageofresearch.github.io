@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {preloadBridge} from './bridge-helm.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {interiorLimits,interiorRoom,prepareInteriorFloor} from './upper-interior-geometry.js?v=port-guest-1';
@@ -11,14 +12,8 @@ export function decodeUpperInterior(manifest,buffer) {
     throw Error('Interior superior incompleto');
   return result;
 }
-export async function loadUpperInterior({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();const timer=setTimeout(abort,timeoutMs);
-  try {
-    const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./upper-interior.${ext}?v=${upperInteriorVersion}`,import.meta.url),{signal:controller.signal})));
-    if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el interior superior');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);return decodeUpperInterior(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadUpperInterior(options) {
+  return loadZone('upper-interior', upperInteriorVersion, decodeUpperInterior, options);
 }
 export function prepareUpperInterior(interior) {
   const prepared={...interior,...prepareInteriorFloor(interior)};

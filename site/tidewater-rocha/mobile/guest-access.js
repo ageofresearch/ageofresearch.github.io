@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {supportedFloor} from './sun-deck-geometry.js?v=port-guest-1';
 import {connectMainDeck,mainRooms} from './main-deck.js?v=main-deck-complete-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
@@ -30,14 +31,8 @@ export function decodeGuestAccess(manifest,buffer) {
     throw Error('Acceso de invitados incompleto');
   return result;
 }
-export async function loadGuestAccess({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();const timer=setTimeout(abort,timeoutMs);
-  try{
-    const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./guest-access.${ext}?v=${guestAccessVersion}`,import.meta.url),{signal:controller.signal})));
-    if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el acceso de invitados');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);return decodeGuestAccess(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadGuestAccess(options) {
+  return loadZone('guest-access', guestAccessVersion, decodeGuestAccess, options);
 }
 export function prepareGuestAccess(zone) {
   const f=zone.flight,indices=new Map(f.obstacles.map(s=>[s.height.toFixed(6),indexFootprints(s.footprints)]));

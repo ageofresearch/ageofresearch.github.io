@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {preloadUpperInterior} from './upper-interior.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
@@ -11,14 +12,8 @@ export function decodeSun(manifest,buffer) {
     f.obstacles?.length!==15||f.obstacles.some((s,i)=>Math.abs(s.height-f.surfaces[i].height)>1e-5||!Array.isArray(s.footprints)))throw Error('Escalera del solárium incompleta');
   return result;
 }
-export async function loadSun({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();const timer=setTimeout(abort,timeoutMs);
-  try {
-    const r=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./sun-deck.${ext}?v=${sunVersion}`,import.meta.url),{signal:controller.signal})));
-    if(r.some(r=>!r.ok))throw Error('No se pudo cargar el solárium');
-    const [manifest,buffer]=await Promise.all([r[0].json(),r[1].arrayBuffer()]);return decodeSun(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadSun(options) {
+  return loadZone('sun-deck', sunVersion, decodeSun, options);
 }
 export function prepareSun(sun) {
   const f=sun.flight,byHeight=new Map(f.obstacles.map(s=>[s.height.toFixed(6),indexFootprints(s.footprints)]));

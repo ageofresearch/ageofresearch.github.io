@@ -1,3 +1,4 @@
+import {loadZone} from './load-zone.js?v=bow-loading-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
@@ -20,14 +21,8 @@ export function decodeBridgeAccess(manifest,buffer) {
     throw Error('Acceso interior incompleto');
   return result;
 }
-export async function loadBridgeAccess({signal,fetcher=globalThis.fetch.bind(globalThis),timeoutMs=45000}={}) {
-  const controller=new AbortController(),abort=()=>controller.abort();
-  signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();const timer=setTimeout(abort,timeoutMs);
-  try{
-    const responses=await Promise.all(['json','bin'].map(ext=>fetcher(new URL(`./bridge-access.${ext}?v=${bridgeAccessVersion}`,import.meta.url),{signal:controller.signal})));
-    if(responses.some(r=>!r.ok))throw Error('No se pudo cargar el acceso interior');
-    const [manifest,buffer]=await Promise.all([responses[0].json(),responses[1].arrayBuffer()]);return decodeBridgeAccess(manifest,buffer);
-  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);controller.abort();}
+export function loadBridgeAccess(options) {
+  return loadZone('bridge-access', bridgeAccessVersion, decodeBridgeAccess, options);
 }
 export function prepareBridgeAccess(zone) {
   const f=zone.flight,indices=new Map(f.obstacles.map(s=>[s.height.toFixed(6),indexFootprints(s.footprints)]));

@@ -51,7 +51,7 @@ export async function buildBow({extend,lod,profileNames}={}) {
       }
       parts.push(...additions);
       const compact=[...new Map(physical.collisionFootprints.map(({polygon})=>[JSON.stringify(polygon),{polygon}])).values()];
-      return {version:'chair-layout-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
+      return {version:'vr-detail-1',room:{...model.asset.data.rooms.find(r=>r.id===bowRoom.id),...bowRoom},
         floor:physical.floor,collisionFootprints:compact,domains:physical.domains,navigationEnd:bowEnd,route:bowRoute,
         bowPartIDs:additions.map(p=>p.id),evidence:'Provisional starboard access and forward lounge; narrow bow and port connection remain pending',...extend?.({model,lowerParts,parts})};
     }

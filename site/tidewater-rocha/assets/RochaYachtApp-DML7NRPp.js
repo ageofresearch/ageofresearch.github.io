@@ -59,7 +59,7 @@ let K=I.yachtWalk=new y(I,N);if(pilot){
     const upperState={deck:K.nav.deck,position:current,elevation:K.nav.elevation,stair:K.nav.stair?.route.id};
     const fromSun=upperState.deck==='SD'||upperState.stair==='sun';
     const fromAccess=upperState.stair==='bridge'||upperState.deck==='MD'&&K.nav.location()?.id==='MD_R07';
-    const fromGuest=upperState.stair==='guest'||upperState.deck==='LD';
+    const fromGuest=upperState.stair==='starboard-fore'||upperState.stair==='guest'||upperState.deck==='LD';
     const fromUpper=fromGuest||fromAccess||fromSun||upperState.deck==='UD'||upperState.stair==='aft';
     const fromBow=upperState.deck==='UD'&&!upperState.stair&&K.nav.location()?.id==='UD_R04';
     const fromBridge=upperState.deck==='UD'&&!upperState.stair&&K.nav.location()?.id==='UD_R03';

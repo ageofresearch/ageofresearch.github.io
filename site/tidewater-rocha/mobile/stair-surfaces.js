@@ -1,3 +1,4 @@
+import {foreAperture} from './starboard-fore-stair.js?v=vr-detail-1';
 import {describeMainDeck,connectMainDeck} from './main-deck.js?v=main-deck-complete-1';
 import {configureAccessFloor} from './bridge-access-geometry.js?v=port-guest-1';
 import {configureGuestFloor} from './guest-access-geometry.js?v=port-guest-1';
@@ -138,6 +139,10 @@ export function repairStairIntersections(detail,exterior,asset) {
   if(!detail?.replacements)return;
   const parts=[...new Set([...detail.replacements.values()].flat().concat(detail.additions,exterior?.parts||[]))];
   const footprint=p=>convexHull(Array.from({length:p.vertices.length/6},(_,i)=>p.vertices.slice(i*6,i*6+2)));
+  for(const part of detail.replacements.get('UD_DCK_001')||[]){
+    if(part.bounds[0]<20.74 && part.bounds[3]>18.5 && part.bounds[1]<-3.13 && part.bounds[5]<=6.001)
+      subtractPrisms(part,[{polygon:foreAperture,low:5.87,high:6.01}]);
+  }
   const service=parts.filter(p=>/^brown service tread /.test(p.feature||''));
   if(service.length) {
     const prisms=service.map(p=>({polygon:footprint(p),low:p.bounds[5],high:5.8}));
@@ -168,7 +173,7 @@ export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
       const vertices=Array.from(part.indices.slice(i,i+3),k=>Array.from(part.vertices.slice(k*6,k*6+3)));
       const tb=bounds(vertices);
       if(tb[3]<box[0]||tb[0]>box[3]||tb[4]<box[1]||tb[1]>box[4])continue;
-      triangles.push({vertices,b:tb,id:part.id,name:part.feature||part.name,top:b[5],floor:/floor|landing|deck slab/.test(part.feature||part.name||'')||part.category==='Decks'});
+      triangles.push({vertices,b:tb,id:part.id,name:part.feature||part.name,top:b[5],floor:part.id==='UD_DCK_001/stairs/stair-opening'||/floor|landing|deck slab/.test(part.feature||part.name||'')||part.category==='Decks'});
     }
   }
   const cache=new Map();
@@ -334,7 +339,7 @@ export function installFlightNavigation(nav,flights) {
       const end=nav.deck===route.lower?0:nav.deck===route.upper?1:-1;
       if(end<0)continue;
       const path=route.path,endpoint=end?path.at(-1):path[0],neighbor=end?path.at(-2):path[1];
-      if(route.id==='bridge'||route.id==='guest') {
+      if(route.id==='bridge'||route.id==='guest'||route.id==='starboard-fore') {
         // Projection clamps the entire approach to station zero. Do not capture
         // someone crossing the wide lower landing sideways on their way out.
         const dx=neighbor[0]-endpoint[0],dy=neighbor[1]-endpoint[1],length=Math.hypot(dx,dy);

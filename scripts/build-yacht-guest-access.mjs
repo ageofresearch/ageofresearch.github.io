@@ -15,6 +15,7 @@ export async function buildGuestAccess() {
   const result=await buildBridgeAccess({profileNames:['exterior','upper','sun','bow','guest','main'],
     lod(p,context) {
       if(/flagpole|Panama flag cloth/.test(p.feature||''))return {error:0};
+      if(p.role==='fore-stair')return ['main','bow','upper'].includes(context.profile)?{error:0}:{omit:true,reason:'Forward passage outside this deck view'};
       if(p.role==='stair-sightline')return context.profile==='guest'?{error:0}:{omit:true,reason:'Covered by the main deck outside the guest stair'};
       if(p.role==='service-bulkhead'||p.role==='stairwell-lining')return {error:0};
       if(p.role==='passage-floor')return {error:.014};
@@ -162,7 +163,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'chair-layout-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'vr-detail-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

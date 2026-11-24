@@ -75,10 +75,19 @@ export function prepareOpaque(source,map,indices) {
         layer=3;u=(localY-cy)/.48+.5;v=((localX-cx)*.659983+(elevation-7.01)*.75128)/.36+.5;
       }else if(boarding){layer=4;u=source.aSurface[k];v=source.aSurface[k+1];}
     }
+    // Store model-space horizontal coordinates in the existing UV pair.
+    // Reconstruct the six saloon window reflections for the two polished planes.
+    if(code===56 && ny>.9 || code===9 && ny<-.9 && Math.abs(elevation-5.88)<.03){
+      layer=code===56?22:21;u=localX;v=localY;
+    }
+    if(code===57){
+      const top=Math.abs(ny)>.7,along=Math.abs(nx)>.7;
+      layer=23;u=(top||along?localX:localY)*.39;v=(top?localY:elevation)*.78;
+    }
     if(code===54){layer=-4;u=clamp((localY-.013)/.77);v=clamp((7.48-elevation-.095*u*u)/.51);}
     if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;layer=-3;}
-    if(layer>0 && layer!==20)u*=.5; // two identical 256-wide tiles share each 512-wide slice
-    if(layer===5){
+    if(layer>0 && layer<20)u*=.5; // two identical 256-wide tiles share each 512-wide slice
+    if(layer===5 && color[j+2]>color[j]*1.06){
       // Slate-blue pile with pale highlights from the mottled fibre field.
       for(let c=0;c<3;c++)color[j+c]*=[.92,1.20,1.42][c];
     }else if(layer===3){color.set([.34,.55,.48],j);}

@@ -143,6 +143,16 @@ export function boardingTextureUV(part) {
 }
 
 export const gangwayFullSurfaceWGSL = `
+if(code==56.0){
+ let grain=sin(in.P.z*31.+.78*sin(in.P.x*3.2));
+ s.albedo*=1.+.045*grain;s.roughness=.19;s.clearcoat=.72;
+}
+if(code==57.0){
+ let p=in.P.xz+vec2f(in.P.y*.62,in.P.y*.48);
+ let vein=abs(sin(dot(p,vec2f(1.64,2.83))+.38*sin(p.x*4.+p.y*2.8)+.13*sin(p.y*16.)));
+ s.albedo*=.98-.15*(1.-smoothstep(.015,.12+fwidth(vein),vein));
+ s.roughness=.28;s.clearcoat=.22;
+}
 if(code==43.0){
  let fiber=in.P.xz;
  let warp=sin(fiber.x*2.7+sin(fiber.y*3.9))*sin(fiber.y*3.3+fiber.x);

@@ -28,7 +28,7 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
   assert.equal(rim.bounds[5],top.bounds[2]);
   assert.ok(top.bounds[5]-3.95>.70);
   assert.ok(top.bounds[4]-top.bounds[1]>1.75*(top.bounds[3]-top.bounds[0]));
-  assert.equal(top.materialID,'M40');
+  assert.equal(top.materialID,'M112');
   assert.ok(!saloon.parts.some(p=>['MD_FUR_032','MD_FUR_033'].includes(p.sourceID)));
   for(const p of Object.values(saloon.profiles)) {
     assert.equal(p.batches.length,2);assert.ok(p.triangles<=25000);

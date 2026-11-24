@@ -81,15 +81,16 @@ struct V {
  }
  if(cloth){
    let view=normalize(frame.eye.xyz-pos);
-   let window=yachtWindowLight(pos.x,frame.fittings[region*6u].w,frame.fittings[region*6u+1u].w);
+   let beam=shade.a*2.-1.;
+   let window=vec3f(beam,sqrt(max(0.,1.-beam*beam)),0.);
    let bounce=frame.bounce[region].rgb;
    if(finishLayer==6){
-     o.indirect *= mix(1.,mix(.91,1.15,yachtPile(window.direction,view)),window.strength);
+     o.indirect *= mix(1.,mix(.91,1.15,yachtPile(window,view)),direct.a);
      o.direct *= mix(.84,1.14,yachtPile(frame.sun.xyz,view));
    }else{
      if(finishLayer==24){o.uv*=1.35;}
-     let edge=yachtFibreEdge(normal,view,window.direction);
-     let sheen=color.rgb*(vec3f(.54,.72,1.)*.36*window.strength+bounce)*color.a;
+     let edge=yachtFibreEdge(normal,view,window);
+     let sheen=color.rgb*(vec3f(.54,.72,1.)*.36*direct.a+bounce)*color.a;
      o.indirect+=sheen*edge;
      o.direct*=1.+.22*yachtFibreEdge(normal,view,frame.sun.xyz);
    }
@@ -160,7 +161,6 @@ fn shade(in:V)->vec4f{
    let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
    let tile=weaveValue*1.1;
    var reflectance=tile;
-   if(in.layer==6){reflectance=.73+.43*weaveValue;}
    if(upholstery){reflectance=1.+(weaveValue-.615)*1.5;}
    // The atlas encodes the reflectance multiplier in the sRGB power domain
    // so it can be applied to the interpolated endpoints without a pixel pow.

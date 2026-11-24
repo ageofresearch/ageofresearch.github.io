@@ -13,6 +13,8 @@ const display = Float32Array.from({length:8193}, (_, i) => {
   return (v <= .0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - .055) * 255;
 });
 const displayByte = x => display[Math.min(8192, Math.round(x * 4096))];
+const clothLayers = new Set([6, 20, 24]);
+const recordSize = 19;
 export function createMaterialPalette(device) {
   const existing = new Map(),
     records = [],
@@ -36,17 +38,29 @@ export function createMaterialPalette(device) {
     // Gloss and cloth still apply their live angular response in the vertex stage.
     const layer = (bytes[offset + 28] << 24) >> 24;
     const finish = layer >= 63 ? layer - 64 : layer;
-    const dynamic = rough < .32 || metal > .05 || [6, 20, 21, 22, 24].includes(finish);
+    const cloth = clothLayers.has(finish);
+    const dynamic = rough < .32 || metal > .05 || cloth || finish === 21 || finish === 22;
     const p = offset / 4;
     const window = region !== 0 && metal <= .05
       ? Math.round(255 * windowFill(positions[p], positions[p + 1], positions[p + 2], nx, ny, nz))
       : 0;
+    let windowDirection = 0, windowStrength = 0;
+    if (cloth) {
+      const side = Math.min(.9, Math.max(-.9, positions[p] / 3));
+      const left = localReflections[region * 24 + 3] * (1 - side);
+      const right = localReflections[region * 24 + 7] * (1 + side);
+      const x = 2.4 * (right - left), y = .08 + .4 * (left + right);
+      windowDirection = Math.round((x / Math.hypot(x, y) * .5 + .5) * 255);
+      windowStrength = Math.round(Math.min(1, (left + right) * 2.5) * 255);
+    }
     const key = String.fromCharCode(
       ...bytes.subarray(offset + 12, offset + 20),
       bytes[offset + 30],
       region,
       window,
       Number(dynamic),
+      windowDirection,
+      windowStrength,
     );
     let index = existing.get(key);
     if (index !== undefined) return index;
@@ -87,6 +101,8 @@ export function createMaterialPalette(device) {
       hemi,
       ...diffuseReflection,
       Number(dynamic),
+      windowDirection,
+      windowStrength,
     ]);
     return index;
   }
@@ -99,6 +115,10 @@ export function createMaterialPalette(device) {
   function prepare() {
     inputs = new Float32Array(records.flat());
     lit = new Uint8ClampedArray(Math.max(1, records.length) * 8);
+    for (let i = 0; i < records.length; i++) {
+      lit[i * 8 + 3] = inputs[i * recordSize + 17];
+      lit[i * 8 + 7] = inputs[i * recordSize + 18];
+    }
     vertexKeys = Uint32Array.from(vertices);
     vertices.length = 0;
     colors = new Uint32Array(Math.max(1, vertexKeys.length) * 2);
@@ -117,7 +137,7 @@ export function createMaterialPalette(device) {
     const t = Math.max(0, Math.min(1, (y - 0.09) / 0.56)),
       blend = t * t * (3 - 2 * t);
     const sun = [1.06 - 0.02 * blend, 0.73 + 0.25 * blend, 0.49 + 0.4 * blend];
-    for (let k = 0, o = 0; k < inputs.length; k += 17, o += 8) {
+    for (let k = 0, o = 0; k < inputs.length; k += recordSize, o += 8) {
       const nl = Math.max(0, inputs[k] * x + inputs[k + 1] * y + inputs[k + 2] * z);
       const r = inputs[k + 3],
         sky = probe[r + 3],

@@ -76,6 +76,24 @@ function surfaceMips(finish) {
  let w=512,h=256,data=new Uint8Array(w*h);
  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
    if(finish==='flag'){data[y*w+x]=flagTexel(x,y);continue;}
+   if(finish==='suite-pile'||finish==='suite-linen'){
+     const u=(x+.5)/w,v=(y+.5)/h;
+     if(finish==='suite-pile'){
+       const drift=field(u,v,9)-.5;
+       const patch=.26*field(u,v,13)+.41*field(u+drift*.043,v-drift*.049,32)
+         +.22*field(u,v,73)+.11*field(u,v,133);
+       // Narrow brushed strands ride over the larger crushed-velour patches.
+       const tuft=field(u*2.1+drift*.028,v*.51,89)-.5;
+       const fibres=field(u*.62,v*1.4,131)-.5;
+       const tone=.29+.73*smooth(.23,.71,patch)+.176*smooth(.48,.76,patch)+.22*tuft+.094*fibres;
+       data[y*w+x]=Math.round(Math.max(0,Math.min(1,tone/1.1))*255);
+     }else{
+       const warp=Math.sin(u*Math.PI*2*107),weft=Math.sin(v*Math.PI*2*101);
+       const crease=field(u,v,13),soft=field(u+.023*crease,v,27);
+       data[y*w+x]=Math.round((.947+.026*warp*weft+.043*soft)/1.1*255);
+     }
+     continue;
+   }
    if(finish==='stone'){
      const u=x/w,v=y/h;
      const phase=2*Math.PI*(u+v+.20*field(u,v,4)+.055*field(u,v,16));
@@ -111,6 +129,9 @@ function surfaceMips(finish) {
 export function createFinishPatterns(device) {
  const source=finishPatternMips(),deck=teakPatternMips();
  const cloth=surfaceMips('cloth'),flag=surfaceMips('flag'),stone=surfaceMips('stone');
+ // The yacht's teak starts at row 27. Rows 8–23 are outside the hull
+ // and their two pages can store the owner's finishes at no memory cost.
+ const roomPile=surfaceMips('suite-pile'),roomLinen=surfaceMips('suite-linen');
  const width=512,height=256,layers=20,mipLevelCount=10;
  const texture=device.createTexture({label:'Prepared yacht finish atlas',size:[width,height,layers],format:'r8unorm',
    mipLevelCount,usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST});
@@ -135,7 +156,9 @@ export function createFinishPatterns(device) {
        // holds the sling weave with the same sampler and fragment pipeline.
        data[18*n+i]=cloth[mip][i];
        data[19*n+i]=flag[mip][i];
-       for(let page=0;page<13;page++){
+       data[5*n+i]=roomPile[mip][i];
+       data[6*n+i]=roomLinen[mip][i];
+       for(let page=2;page<13;page++){
          const row=Math.min(teak.height-1,Math.floor(((page+1)*256+.5*(1<<mip))/(1<<mip))+y);
          data[(5+page)*n+i]=teak.data[row*teak.width+x];
        }

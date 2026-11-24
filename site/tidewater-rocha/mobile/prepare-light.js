@@ -56,6 +56,10 @@ export function prepareOpaque(source,map,indices) {
       if(code===9)color.set([.72,.69,.61],j);
       const fu=x+y*.73,fv=z+y*.51;
       if(code===43){layer=5;u=localX*.44;v=localY*.44;}
+      else if(code===59){layer=6;u=(localX-24.08)/2.77;v=(localY+2.08)/4.20;}
+      else if(code===60){
+        layer=7;u=localX*.81+elevation*.63;v=localY*.76+elevation*.49;
+      }
       else if(code===2){
         layer=1;
         if(Math.abs(ny)<.74){u=y*.65;v=(Math.abs(nx)>.70?z:x)*1.7;}
@@ -86,7 +90,7 @@ export function prepareOpaque(source,map,indices) {
     }
     if(code===54){layer=-4;u=clamp((localY-.013)/.77);v=clamp((7.48-elevation-.095*u*u)/.51);}
     if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;layer=-3;}
-    if(layer>0 && layer<20)u*=.5; // two identical 256-wide tiles share each 512-wide slice
+    if(layer>0 && layer<20 && code!==59 && code!==60)u*=.5; // other patterned slices repeat twice
     if(layer===5 && color[j+2]>color[j]*1.06){
       // Slate-blue pile with pale highlights from the mottled fibre field.
       for(let c=0;c<3;c++)color[j+c]*=[.92,1.20,1.42][c];

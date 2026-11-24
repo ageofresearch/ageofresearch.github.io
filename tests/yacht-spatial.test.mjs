@@ -131,7 +131,7 @@ test('chair backs and headrests face the photographed fixtures and open deck',()
   const helm=named('helm chair captainPads'),hardware=named('helm chair captainHardware');
   assert.ok(highEdge(helm,0)<21 && helm.every(p=>p.materialID==='M109'));
   assert.ok(hardware.length>=3 && Math.min(...hardware.map(p=>p.bounds[2]))<6.01);
-  const writing=named('suite cobalt writing stool'),desk=named('window writing surface')[0];
+  const writing=named('suite cobalt writing stool'),desk=named('suite window writing surface')[0];
   assert.ok(writing.length===2 && highEdge(writing,1)>desk.bounds[4]);
   assert.ok(Math.abs(center(desk)[0]-center(writing[0])[0])<.04);
   assert.ok(!parts.some(p=>p.anchor==='MD_FUR_053'),'Occasional table intersects the writing stool');

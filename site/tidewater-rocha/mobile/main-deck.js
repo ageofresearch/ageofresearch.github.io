@@ -18,6 +18,8 @@ const stations=[
 export const mainRooms=stations.map(([id,name,bbox,xy,look])=>({
   id,deck:'MD',name,displayName:name,bbox,spawn:[...xy,5.55],look:[...look,id==='MD_R09'?4.52:4.93],label:xy
 }));
+const suiteHeadPassage={...mainRooms.find(room=>room.id==='MD_R04'),name:'Paso entre la suite y el baño',
+  displayName:'Paso entre la suite y el baño'};
 export const onSideDeck=(x,y)=>x>=4.55 && x<=22.4 && (y>2.94||y < -3.10);
 export function inMainDeck(x,y){
   return onSideDeck(x,y)||x>=17.4&&x<=17.84&&y>1.65&&y<2.66||x>=17.83&&x<=29.31&&Math.abs(y)<=3.79;
@@ -58,7 +60,7 @@ export function connectMainDeck(nav,model,data,controls) {
   nav.location=()=>{
     const [x,y]=nav.position;
     if(nav.deck==='MD'&&!nav.stair&&inMainDeck(x,y)&&!vestibule(x,y))
-      return roomAt(x,y)??nav.passages.MD;
+      return x>=27.17&&x<=27.60&&y>=-.64&&y<=.66?suiteHeadPassage:roomAt(x,y)??nav.passages.MD;
     return previousLocation();
   };
   nav.nearest=(x,y,deck=nav.deck)=>{

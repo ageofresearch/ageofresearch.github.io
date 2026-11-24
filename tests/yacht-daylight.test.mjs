@@ -8,10 +8,29 @@ import { createSternFeatures, l as yacht } from '../site/tidewater-rocha/assets/
 import { createDaylight, compartment } from '../site/tidewater-rocha/mobile/yacht-daylight.js';
 import { lightMatrix } from '../site/tidewater-rocha/mobile/daylight-shadow.js';
 import { windowFill } from '../site/tidewater-rocha/mobile/surface-lighting.js';
+import { decodeOwnerContact, ownerContactBounds, ownerContactSize } from '../site/tidewater-rocha/mobile/owner-contact.js';
 import probes from '../site/tidewater-rocha/mobile/daylight-probes.js';
 const group = new Group();
 group.rotation.y = Math.PI / 2;
 const reference = new Vector3(1, 1, 0).normalize();
+test('suite contact remains under the fitted furniture and clears the open walk', () => {
+  const texels = decodeOwnerContact(), size = ownerContactSize;
+  const [x0, y0, x1, y1] = ownerContactBounds;
+  const sample = (x, y) => {
+    const col = Math.floor((x - x0) / (x1 - x0) * size);
+    const row = Math.floor((y - y0) / (y1 - y0) * size);
+    return texels[row * size + col] / 255;
+  };
+  assert.equal(texels.length, size * size);
+  assert.ok(sample(25.945, 0) < .60);          // edge of the berth plinth
+  assert.ok(sample(24.26, 1.322) < .65);      // bedside cabinet
+  assert.ok(sample(24.08, 2.21) < .60);       // beside a lounge chair foot
+  assert.ok(sample(26.31, -1.75) < .68);      // beside the blue chair support
+  assert.equal(sample(26.62, 0), 1);          // end of the carpet
+  assert.equal(sample(26.99, 0), 1);          // clear passage to the head
+  assert.ok(texels.slice(0, size).every(value => value >= 235));
+});
+
 test('aperture bounce favours the window side and stops at the suite bulkhead', () => {
   const fill = (x, y, z = 3.95) => windowFill(y * yacht.sy, z - yacht.seaReference,
     x * yacht.sx - yacht.length / 2, 0, 1, 0);

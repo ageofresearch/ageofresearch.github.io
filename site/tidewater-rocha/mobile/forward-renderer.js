@@ -11,6 +11,7 @@ import {shader,visibilityShader} from './daylight-shader.js?v=stern-flag-1';
 import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-daylight-2';
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
+import { ownerContactSize, uploadOwnerContact } from './owner-contact.js?v=owner-contact-1';
 import { onGuestApproach } from './guest-access-geometry.js?v=guest-visibility-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
 
@@ -42,6 +43,7 @@ export async function createForwardRenderer(app, daylight) {
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
     {binding:3,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,texture:{sampleType:'depth'}},
     {binding:4,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
+    {binding:5,visibility:GPUShaderStage.FRAGMENT,texture:{sampleType:'float'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   const taggedModule=device.createShaderModule({label:'Yacht coverage evidence',code:visibilityShader});
@@ -128,10 +130,12 @@ export async function createForwardRenderer(app, daylight) {
   device.queue.writeBuffer(uniform,0,frame);
   const shadow=await createDaylightShadow(device,uniform,upload);
   const finishes=createFinishPatterns(device);
+  const ownerContact=uploadOwnerContact(device);
   const bindings=device.createBindGroup({layout:bindLayout,entries:[{binding:0,resource:{buffer:uniform}},
-    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:shadow.view},{binding:4,resource:shadow.sampler}]});
-  model.stats.finishTextureBytes=finishes.bytes;
-  model.stats.materialTextures=1;
+    {binding:1,resource:finishes.sampler},{binding:2,resource:finishes.view},{binding:3,resource:shadow.view},{binding:4,resource:shadow.sampler},
+    {binding:5,resource:ownerContact.createView()}]});
+  model.stats.finishTextureBytes=finishes.bytes+ownerContactSize**2;
+  model.stats.materialTextures=2;
   let depth, depthView, color, colorView,coverage,lastGeometry,stable=0;
   let savedFrame,savedView,baseReady=false;
   const lastClip=new Float32Array(16);
@@ -509,7 +513,7 @@ export async function createForwardRenderer(app, daylight) {
       window.removeEventListener('pageshow',invalidatePresentation);
       disposed=true;coverage?.dispose();
       if(profiles)Object.values(profiles).forEach(p=>destroy(p.batches));else destroy(batches);
-      viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();savedFrame?.destroy();uniform.destroy(); finishes.texture.destroy(); depth?.destroy(); color?.destroy();
+      viewIndices?.dispose();shared?.destroy();palette.dispose();shadow.dispose();savedFrame?.destroy();uniform.destroy(); finishes.texture.destroy();ownerContact.destroy(); depth?.destroy(); color?.destroy();
     },
   };
 }

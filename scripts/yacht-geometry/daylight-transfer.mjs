@@ -19,8 +19,8 @@ function buildTree(faces) {
   const mid = faces.length >> 1;
   return { lo, hi, left: buildTree(faces.slice(0, mid)), right: buildTree(faces.slice(mid)) };
 }
-function ray(tree, origin, dir) {
-  let distance = Infinity,
+function ray(tree, origin, dir, limit = Infinity) {
+  let distance = limit,
     face = null;
   function visit(n) {
     let near = 0.002,
@@ -60,6 +60,48 @@ function ray(tree, origin, dir) {
   }
   visit(tree);
   return face && { face, point: add(origin, dir, distance) };
+}
+export function traceFloorContact(triangles, bounds, height, size) {
+  const faces = [];
+  for (const [a, b, c] of triangles) {
+    const u = sub(b, a), v = sub(c, a);
+    if (Math.hypot(...cross(u, v)) < 1e-8) continue;
+    faces.push({
+      a, u, v,
+      lo: a.map((value, axis) => Math.min(value, b[axis], c[axis])),
+      hi: a.map((value, axis) => Math.max(value, b[axis], c[axis])),
+      center: a.map((value, axis) => (value + b[axis] + c[axis]) / 3),
+    });
+  }
+  if (!faces.length) throw Error('Missing suite contact casters');
+  const tree = buildTree(faces), samples = 48, reach = .66;
+  // A fixed cosine-weighted hemisphere gives stable footprints across texels.
+  const directions = Array.from({ length: samples }, (_, i) => {
+    const radius = Math.sqrt((i + .5) / samples), theta = i * 2.39996322972865;
+    return [radius * Math.cos(theta), radius * Math.sin(theta), Math.sqrt(1 - radius * radius)];
+  });
+  const [x0, y0, x1, y1] = bounds, texels = new Uint8Array(size * size);
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      const x = x0 + (col + .5) / size * (x1 - x0);
+      const y = y0 + (row + .5) / size * (y1 - y0);
+      const origin = [x, y, height];
+      let occlusion = 0;
+      for (const direction of directions) {
+        const hit = ray(tree, origin, direction, reach);
+        if (hit) {
+          const distance = Math.hypot(hit.point[0] - x, hit.point[1] - y, hit.point[2] - height);
+          const weight = 1 - distance / reach;
+          occlusion += weight * weight;
+        }
+      }
+      // Fade to unity at the perimeter, including the doorway to the head.
+      const edge = Math.min(1, Math.min(x - x0, x1 - x, y - y0, y1 - y) / .10);
+      const visibility = 1 - Math.min(.74, 1.22 * occlusion / samples) * edge;
+      texels[row * size + col] = Math.round(255 * visibility);
+    }
+  }
+  return texels;
 }
 const linear = (c) => {
   c /= 255;

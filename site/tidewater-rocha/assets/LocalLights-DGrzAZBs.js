@@ -195,6 +195,10 @@ struct Surface {
 	ior: f32,
 	clearcoatNormal: vec3f,
 	envIntensity: f32,
+#if LUZ_SURFACE_LIGHT
+	roomIrradiance: vec3f,
+	roomReflection: vec3f,
+#endif
 };
 
 fn defaultSurface( N: vec3f ) -> Surface {
@@ -203,6 +207,10 @@ fn defaultSurface( N: vec3f ) -> Surface {
 	s.emissive = vec3f( 0.0 ); s.translucency = vec3f( 0.0 ); s.ao = 1.0; s.sheenColor = vec3f( 0.0 );
 	s.specularIntensity = 1.0; s.clearcoat = 0.0; s.clearcoatRoughness = 0.0; s.sheenRoughness = 1.0;
 	s.ior = 1.5; s.clearcoatNormal = N; s.envIntensity = 1.0;
+#if LUZ_SURFACE_LIGHT
+	s.roomIrradiance = vec3f( 0.0 );
+	s.roomReflection = vec3f( 0.0 );
+#endif
 	return s;
 }
 
@@ -580,7 +588,10 @@ fn shadeSurface( s: Surface, P: vec3f, V: vec3f, pixel: vec2f ) -> vec3f {
 	// Keep direct GGX peaks, scalar energy compensation, and the final
 	// accumulator f32. Only bounded diffuse/IBL RGB intermediates use f16.
 	var color = vec3f( vec3h( acc.directDiffuse ) ) + acc.directSpecular;
-	let envIrrH = vec3h( hookEnvDiffuse( N ) * PI * s.envIntensity );
+	var envIrrH = vec3h( hookEnvDiffuse( N ) * PI * s.envIntensity );
+#if LUZ_SURFACE_LIGHT
+	envIrrH += vec3h( s.roomIrradiance * PI );
+#endif
 	var single = vec3f( 0.0 ); var multi = vec3f( 0.0 );
 #if YACHT_DIELECTRIC_SCALAR
 	var diffuseMS = vec3f( 0.0 );
@@ -621,7 +632,10 @@ fn shadeSurface( s: Surface, P: vec3f, V: vec3f, pixel: vec2f ) -> vec3f {
 #else
 	let Rr = normalize( mix( R, N, rough * rough ) );
 #endif
-	let radianceH = vec3h( hookEnvSpecular( Rr, rough ) * s.envIntensity );
+	var radianceH = vec3h( hookEnvSpecular( Rr, rough ) * s.envIntensity );
+#if LUZ_SURFACE_LIGHT
+	radianceH += vec3h( s.roomReflection );
+#endif
 	var indirectSpecularH = vec3h( acc.indirectSpecular );
 	indirectSpecularH += radianceH * vec3h( single ) + vec3h( multi ) * envIrrH * f16( INV_PI );
 	indirectSpecularH *= f16( specAO );
@@ -633,7 +647,10 @@ fn shadeSurface( s: Surface, P: vec3f, V: vec3f, pixel: vec2f ) -> vec3f {
 	// contribution before the next expensive texture sample. This schedule
 	// is installed only with the yacht's pure baked-environment hooks.
 	var color = acc.directDiffuse + acc.directSpecular;
-	let envIrr = hookEnvDiffuse( N ) * PI * s.envIntensity;
+	var envIrr = hookEnvDiffuse( N ) * PI * s.envIntensity;
+#if LUZ_SURFACE_LIGHT
+	envIrr += s.roomIrradiance * PI;
+#endif
 	var single = vec3f( 0.0 ); var multi = vec3f( 0.0 );
 #if YACHT_DIELECTRIC_SCALAR
 	var diffuseMS = vec3f( 0.0 );
@@ -672,7 +689,10 @@ fn shadeSurface( s: Surface, P: vec3f, V: vec3f, pixel: vec2f ) -> vec3f {
 #else
 	let Rr = normalize( mix( R, N, rough * rough ) );
 #endif
-	let radiance = hookEnvSpecular( Rr, rough ) * s.envIntensity;
+	var radiance = hookEnvSpecular( Rr, rough ) * s.envIntensity;
+#if LUZ_SURFACE_LIGHT
+	radiance += s.roomReflection;
+#endif
 	acc.indirectSpecular += radiance * single + multi * envIrr * INV_PI;
 	acc.indirectSpecular *= specAO;
 	acc.indirectSpecular *= amb;
@@ -695,8 +715,14 @@ fn shadeSurface( s: Surface, P: vec3f, V: vec3f, pixel: vec2f ) -> vec3f {
 	let envIrr = studioEnvDiffuse( N ) * PI * s.envIntensity;
 	let radiance = studioEnvSpecular( Rr, rough ) * s.envIntensity;
 #else
-	let envIrr = hookEnvDiffuse( N ) * PI * s.envIntensity;
-	let radiance = hookEnvSpecular( Rr, rough ) * s.envIntensity;
+	var envIrr = hookEnvDiffuse( N ) * PI * s.envIntensity;
+#if LUZ_SURFACE_LIGHT
+	envIrr += s.roomIrradiance * PI;
+#endif
+	var radiance = hookEnvSpecular( Rr, rough ) * s.envIntensity;
+#if LUZ_SURFACE_LIGHT
+	radiance += s.roomReflection;
+#endif
 #endif
 	var single = vec3f( 0.0 ); var multi = vec3f( 0.0 );
 #if YACHT_DIELECTRIC_SCALAR

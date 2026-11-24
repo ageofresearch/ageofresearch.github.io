@@ -1,6 +1,6 @@
 # Mobile yacht zones
 
-Build `owner-contours-1`. The mobile route connects boarding, the aft terrace,
+Build `owner-writing-chair-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. The standalone mobile and full tours use open sky around the yacht.
@@ -69,8 +69,9 @@ The other rooms use photographic comparisons and model-space clearance checks.
 
 The saloon dining table has ten ivory wraparound chairs on dark legs.
 The upper club chairs face aft, the sunbed headrests face the bar and the
-helm chair faces the console. The owner's desk stool faces the starboard
-window. The shared generator fits each upholstery shell and its hardware
+helm chair faces the console. The owner's upholstered desk chair faces the starboard
+window, with a low bolster, a recessed seat seam and two broad supports. Its
+fabric uses the prepared weave atlas. The shared generator fits each upholstery shell and its hardware
 in a common frame before the mobile builders extract the meshes.
 
 ## Grande 36M tour reference
@@ -93,7 +94,7 @@ The packed 32-byte walking vertices carry the underlying material, roughness,
 contact and compartment. The filtered finish atlas covers deck joints, boarding
 teak, timber, woven cloth, carpet and instruments. The maximum triangle counts
 for exterior, upper, sun, bow, guest and main are 24,851, 24,958, 22,844,
-22,179, 24,928 and 24,877 respectively. On the swim platform and bow walk,
+22,179, 24,928 and 24,942 respectively. On the swim platform and bow walk,
 prepared directional index ranges remove faces outside the camera cone or fully
 hidden behind confirmed opaque source rectangles. The normal all-direction range
 covers turns outside those cones. Pixel comparisons exercise both paths.

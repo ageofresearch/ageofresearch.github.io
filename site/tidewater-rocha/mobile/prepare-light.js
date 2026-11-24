@@ -60,6 +60,11 @@ export function prepareOpaque(source,map,indices) {
       else if(code===60){
         layer=7;u=localX*.81+elevation*.63;v=localY*.76+elevation*.49;
       }
+      else if(code===61){
+        layer=24;
+        u=(localX*.76+localY*.65)*6;
+        v=(elevation*.88+localY*.52-localX*.45)*6;
+      }
       else if(code===2){
         layer=1;
         if(Math.abs(ny)<.74){u=y*.65;v=(Math.abs(nx)>.70?z:x)*1.7;}

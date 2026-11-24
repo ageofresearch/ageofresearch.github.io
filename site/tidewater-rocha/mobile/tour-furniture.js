@@ -4,7 +4,8 @@ import {saloonBack,saloonChaise,saloonChairShells} from './saloon-upholstery.js?
 import {fitHullToMainDeck} from './deck-joints.js?v=saloon-entry-1';
 import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=side-deck-guards-1';
 import {furnishPortCabin} from './port-guest-cabin.js?v=vr-detail-1';
-import catalog from './tour-furniture-data.js?v=vr-detail-1';
+import {ownerWritingChair} from './owner-writing-chair.js?v=owner-writing-chair-1';
+import catalog from './tour-furniture-data.js?v=owner-writing-chair-1';
 
 // Fit the offline r110 shell to an assembly in Rocha coordinates. Normals use
 // the inverse transpose of the same map, including any reflection.
@@ -248,11 +249,9 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
         mat,'suite port lounge chair '+(i+1)+' '+key);
   }
   for(const id of ['MD_SOF_017','MD_FUR_051','MD_FUR_052','MD_FUR_053'])remove(id);
-  const stool='MD_SOF_017';
-  chairPart(stool,'writingStool',[8.25,2.57,2.00],[26.40,-1.68,3.95],[.88,.9,1.08],0,
-    'M49','suite cobalt writing stool');
-  for(const x of [26.19,26.57])
-    add(stool,box([x,-1.86,3.95,x+.042,-1.52,4.28],.012),'M49','suite stool upholstered side '+x);
+  const writingParts=['seat', 'bolster', 'aft support', 'forward support'];
+  ownerWritingChair().forEach((geometry,i)=>
+    add('MD_SOF_017',geometry,'M126','suite cobalt writing chair '+writingParts[i]));
   // Floor finishes belong to the existing slabs. The guest mat covers only the
   // distributor and stops before the first stair tread.
   floorMat('LD_DCK_001',[13.36,-.545,1.551,17.09,.33,1.56],'lower lobby cloud pile runner');

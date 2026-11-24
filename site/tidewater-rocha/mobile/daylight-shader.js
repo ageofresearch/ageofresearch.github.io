@@ -2,9 +2,8 @@ import {flagVertex,mobileFlagPaint} from './stern-flag.js?v=stern-flag-1';
 import { sampleReflectionWGSL } from './yacht-daylight.js?v=yacht-daylight-1';
 import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2';
-import { mobileOutputWGSL, surfaceLightWGSL } from './surface-lighting.js?v=surface-lighting-1';
-// Prepare the lit and shadow endpoints from linear radiance. The fragment
-// stage applies the shadow comparison and filtered finish to those endpoints.
+// Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
+// finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
 return `
 override animateCloth:bool=false;
@@ -18,8 +17,12 @@ struct Frame {
 @group(0) @binding(3) var shadow:texture_depth_2d;
 @group(0) @binding(4) var shadowSampler:sampler_comparison;
 
-${mobileOutputWGSL}
-${surfaceLightWGSL}
+fn display(c:vec3f)->vec3f{
+  // Minimax fit on the displayable interval. Maximum sRGB error < 0.00037.
+  let v=clamp(c,vec3f(0.),vec3f(1.));let root=sqrt(v);
+  let srgb=-.07690366+.83375405*root+.29810790*sqrt(root)-.05531760*v;
+  return select(srgb,12.92*v,v<=vec3f(.0031308));
+}
 ${skyRadiance}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
@@ -48,28 +51,20 @@ struct V {
    let east=normalize(vec3f(frame.sun.w,0.,frame.eye.w));
    let ray=east*dome.x+cross(east,frame.sun.xyz)*dome.z+frame.sun.xyz*dome.y;
    o.clip=frame.clip*vec4f(frame.eye.xyz+120.*ray,1.);
-   o.indirect=yachtDisplay(sky(ray));return o;
+   o.indirect=display(sky(ray));return o;
  }
- if(o.layer==-3){o.indirect=yachtDisplay(color.rgb);return o;}
+ if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
- let region=u32(finish.y)>>8u;
- let finishLayer=select(o.layer,o.layer-64,o.layer>=63);
- let shiny=rough<.32 || metal>.05;
- let cloth=finishLayer==20 || finishLayer==6 || finishLayer==24;
- let varnish=finishLayer==21 || finishLayer==22;
- let angular=shiny || varnish;
  o.indirect=shade.rgb;o.direct=direct.rgb;
- if(angular){
-   o.indirect=${packedRadianceScale}. *shade.rgb*shade.rgb;
-   o.direct=${packedRadianceScale}. *direct.rgb*direct.rgb;
- }
- if(shiny){
-   let probe=frame.bounce[region];
+ if(rough<.32 || metal>.05){
+   o.indirect*=${packedRadianceScale}.*shade.rgb;o.direct*=${packedRadianceScale}.*direct.rgb;
+   let probe=frame.bounce[u32(finish.y)>>8u];
    let sunlight=mix(vec3f(1.06,.73,.49),vec3f(1.04,.98,.89),smoothstep(.09,.65,frame.sun.y));
    let eye=normalize(frame.eye.xyz-pos);let reflected=reflect(-eye,normal);
    let f0=mix(vec3f(.044),color.rgb,metal);
    let edge=1.-clamp(abs(dot(eye,normal)),0.,1.);let edge2=edge*edge;
    let fresnel=f0+(vec3f(1.)-f0)*edge2*edge2*edge;
+   let region=u32(finish.y)>>8u;
    let fittings=${sampleReflectionWGSL('frame.fittings', 'region', 'reflected')};
    let reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
    let gloss=1.-rough;
@@ -78,29 +73,30 @@ struct V {
    let width=mix(.13,.016,gloss);
    let lobe=width/(width+1.-alignment);
    o.direct+=sunlight*fresnel*gloss*lobe*lobe*alignment*max(0.,dot(normal,frame.sun.xyz));
+
+ // The visibility endpoints vary smoothly across a face. Transform each once at
+ // its vertices; the shadow map interpolates between them across the penumbra.
+ let sunlit=display(o.indirect+o.direct);
+ o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
  }
- if(cloth){
+ if(o.layer==6 || o.layer==70){
+   let view=normalize(frame.eye.xyz-pos);
+   let across=.33*view.x*(shade.a*2.-1.);
+   let nap=smoothstep(-.86,.86,view.z+across);
+   o.indirect*=1.+direct.a*.10*(nap-.5);
+   o.direct*=1.+.11*(smoothstep(-.86,.86,view.z+frame.sun.z)-.5);
+ }
+ if(o.layer==20 || o.layer==84 || o.layer==24 || o.layer==88){
+   if(o.layer==24 || o.layer==88){o.uv*=1.35;}
    let view=normalize(frame.eye.xyz-pos);
    let beam=shade.a*2.-1.;
-   let window=vec3f(beam,sqrt(max(0.,1.-beam*beam)),0.);
-   let bounce=frame.bounce[region].rgb;
-   // The cloth gains are small. The slope of the sRGB power preserves the
-   // prepared diffuse endpoints while the nap and rim follow the light angle.
-   let response=select(.42,1.,angular);
-   if(finishLayer==6){
-     o.indirect *= 1.+response*direct.a*mix(-.09,.15,yachtPile(window,view));
-     o.direct *= 1.+response*mix(-.16,.14,yachtPile(frame.sun.xyz,view));
-   }else{
-     if(finishLayer==24){o.uv*=1.35;}
-     let edge=yachtFibreEdge(normal,view,window);
-     let sheen=(vec3f(.54,.72,1.)*.36*direct.a+bounce)*color.a;
-     o.indirect+=select(o.indirect*response,color.rgb,angular)*sheen*edge;
-     o.direct*=1.+.22*response*yachtFibreEdge(normal,view,frame.sun.xyz);
-   }
+   let edge=1.-clamp(abs(dot(normal,view)),0.,1.);
+   let sky=direct.a*(.25+.75*max(.0,dot(normal,vec3f(beam,.45,0.))));
+   o.indirect*=1.+vec3f(.13,.17,.21)*sky*edge*edge;
  }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
- if(varnish){
-   let table=finishLayer==22;
+ if(o.layer==21 || o.layer==22 || o.layer==85 || o.layer==86){
+   let table=o.layer==22 || o.layer==86;
    let compact=o.layer>=64;
    // Fold the rough window response into the lighting at the receiving
    // vertices. The standard wood sample still supplies the close grain.
@@ -117,7 +113,7 @@ struct V {
      let frameEdge=min(min(span,mullion),min(hit.z-4.24,5.80-hit.z));
      let window=smoothstep(-.30,.20,frameEdge);
      let horizon=smoothstep(-.32,.26,ray.z/max(length(ray.xy),.001));
-     o.indirect+=window*mix(vec3f(.011,.016,.022),vec3f(.095,.11,.13),horizon)*select(.74,1.,table);
+     o.indirect+=window*mix(vec3f(.026,.032,.040),vec3f(.16,.18,.20),horizon)*select(.74,1.,table);
    }
  }
  if(o.layer==23 || o.layer==87){
@@ -133,11 +129,6 @@ struct V {
    o.uv=vec2f(.502+.496*clamp(across,0.,1.),.003+.994*clamp(up,0.,1.));
    o.layer-=20;
  }else if(o.layer==3 || o.layer==67){o.uv=clamp(o.uv,vec2f(.001,.002),vec2f(.499,.998));}
- if(angular){
-   let sunlit=yachtDisplay(o.indirect+o.direct);
-   o.indirect=yachtDisplay(o.indirect);
-   o.direct=sunlit-o.indirect;
- }
  if(o.layer>=63){
    o.layer-=64;
    if(any(o.direct>vec3f(.001))){
@@ -150,7 +141,7 @@ struct V {
 fn shade(in:V)->vec4f{
  if(animateCloth && in.layer==-4){
    ${mobileFlagPaint}
-   return vec4f(yachtDisplay(dye*in.indirect),1.);
+   return vec4f(display(dye*in.indirect),1.);
  }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;
@@ -162,12 +153,9 @@ fn shade(in:V)->vec4f{
    let layer=select(in.layer-1,5+clamp(i32(floor(in.uv.y))-1,0,12),in.layer==0);
    let upholstery=in.layer==24;
    let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
-   let tile=weaveValue*1.1;
-   var reflectance=tile;
-   if(upholstery){reflectance=.94+(weaveValue-.615)*2.05;}
-   // The atlas encodes the reflectance multiplier in the sRGB power domain
-   // so it can be applied to the interpolated endpoints without a pixel pow.
-   radiance=(radiance+.055)*reflectance-.055;
+   var tile=weaveValue*1.1;
+   if(upholstery){tile=.94+(weaveValue-.615)*2.05;}
+   radiance=(radiance+.055)*tile-.055;
  }
  return vec4f(radiance,1.);
 }
@@ -202,9 +190,9 @@ struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f,@location(1
      let side=sign(point.y);let divisor=side*delta.y;let gap=3.70-abs(point.y);
      railRay=vec3f(point.x*divisor+gap*delta.x,point.z*divisor+gap*delta.z,divisor);
    }
-   return Glass(frame.clip*vec4f(pos,1.),vec4f(yachtDisplay(reflection)+vec3f(horizon),mix(opacity,.94,grazing)),railRay);
+   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)),railRay);
  }
- return Glass(frame.clip*vec4f(pos,1.),vec4f(yachtDisplay(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec3f(0.));
+ return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec3f(0.));
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn glassFragment(in:Glass)->@location(0) vec4f{

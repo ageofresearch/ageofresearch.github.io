@@ -115,12 +115,3 @@ fn yachtWindowIrradiance(visibility:f32) -> vec3f {
   return ${vector(windowSky)}*visibility;
 }
 `;
-
-export const mobileOutputWGSL = `
-fn yachtDisplay(value:vec3f) -> vec3f {
-  let v=clamp(value,vec3f(0.),vec3f(.83))+.54*clamp(value-.83,vec3f(0.),vec3f(.3148));
-  let root=sqrt(v);
-  let srgb=-.07690366+.83375405*root+.29810790*sqrt(root)-.05531760*v;
-  return select(srgb,12.92*v,v<=vec3f(.0031308));
-}
-`;

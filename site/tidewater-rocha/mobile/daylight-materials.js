@@ -38,7 +38,7 @@ export function createMaterialPalette(device) {
     const layer = (bytes[offset + 28] << 24) >> 24;
     const finish = layer >= 63 ? layer - 64 : layer;
     const cloth = clothLayers.has(finish);
-    const dynamic = rough < .32 || metal > .05 || finish === 21 || finish === 22;
+    const dynamic = rough < .32 || metal > .05;
     const p = offset / 4;
     const window = region !== 0 && metal <= .05
       ? Math.round(255 * windowFill(positions[p], positions[p + 1], positions[p + 2], nx, ny, nz))

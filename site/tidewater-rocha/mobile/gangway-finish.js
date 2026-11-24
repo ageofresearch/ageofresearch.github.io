@@ -168,8 +168,8 @@ if(code==61.0){
  let u=(in.P.z*.76+in.P.x*.65)*2430.;
  let v=(in.P.y*.88+in.P.x*.52-in.P.z*.45)*2360.;
  let weave=sin(u)*sin(v+.3*sin(u));
- let filter=1.-smoothstep(.55,3.14,max(fwidth(u),fwidth(v)));
- s.albedo*=1.+.26*weave*filter;
+ let threadFade=1.-smoothstep(.55,3.14,max(fwidth(u),fwidth(v)));
+ s.albedo*=1.+.26*weave*threadFade;
 }
 if(code==43.0){
  let fiber=in.P.xz;

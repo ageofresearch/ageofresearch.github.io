@@ -34,12 +34,11 @@ export function createMaterialPalette(device) {
     const metal = bytes[offset + 30] / 255;
     const region = bytes[offset + 31];
     const rough = signed(3) / 127;
-    // View-independent finishes can prepare both shadow endpoints just once.
-    // Gloss and cloth still apply their live angular response in the vertex stage.
+    // Prepare the display endpoints unless the finish adds a reflected lobe.
     const layer = (bytes[offset + 28] << 24) >> 24;
     const finish = layer >= 63 ? layer - 64 : layer;
     const cloth = clothLayers.has(finish);
-    const dynamic = rough < .32 || metal > .05 || cloth || finish === 21 || finish === 22;
+    const dynamic = rough < .32 || metal > .05 || finish === 21 || finish === 22;
     const p = offset / 4;
     const window = region !== 0 && metal <= .05
       ? Math.round(255 * windowFill(positions[p], positions[p + 1], positions[p + 2], nx, ny, nz))

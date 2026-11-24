@@ -57,7 +57,7 @@ struct V {
  let shiny=rough<.32 || metal>.05;
  let cloth=finishLayer==20 || finishLayer==6 || finishLayer==24;
  let varnish=finishLayer==21 || finishLayer==22;
- let angular=shiny || cloth || varnish;
+ let angular=shiny || varnish;
  o.indirect=shade.rgb;o.direct=direct.rgb;
  if(angular){
    o.indirect=${packedRadianceScale}. *shade.rgb*shade.rgb;
@@ -84,15 +84,18 @@ struct V {
    let beam=shade.a*2.-1.;
    let window=vec3f(beam,sqrt(max(0.,1.-beam*beam)),0.);
    let bounce=frame.bounce[region].rgb;
+   // The cloth gains are small. The slope of the sRGB power preserves the
+   // prepared diffuse endpoints while the nap and rim follow the light angle.
+   let response=select(.42,1.,angular);
    if(finishLayer==6){
-     o.indirect *= mix(1.,mix(.91,1.15,yachtPile(window,view)),direct.a);
-     o.direct *= mix(.84,1.14,yachtPile(frame.sun.xyz,view));
+     o.indirect *= 1.+response*direct.a*mix(-.09,.15,yachtPile(window,view));
+     o.direct *= 1.+response*mix(-.16,.14,yachtPile(frame.sun.xyz,view));
    }else{
      if(finishLayer==24){o.uv*=1.35;}
      let edge=yachtFibreEdge(normal,view,window);
-     let sheen=color.rgb*(vec3f(.54,.72,1.)*.36*direct.a+bounce)*color.a;
-     o.indirect+=sheen*edge;
-     o.direct*=1.+.22*yachtFibreEdge(normal,view,frame.sun.xyz);
+     let sheen=(vec3f(.54,.72,1.)*.36*direct.a+bounce)*color.a;
+     o.indirect+=select(o.indirect*response,color.rgb,angular)*sheen*edge;
+     o.direct*=1.+.22*response*yachtFibreEdge(normal,view,frame.sun.xyz);
    }
  }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
@@ -161,7 +164,7 @@ fn shade(in:V)->vec4f{
    let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
    let tile=weaveValue*1.1;
    var reflectance=tile;
-   if(upholstery){reflectance=1.+(weaveValue-.615)*1.5;}
+   if(upholstery){reflectance=.94+(weaveValue-.615)*2.05;}
    // The atlas encodes the reflectance multiplier in the sRGB power domain
    // so it can be applied to the interpolated endpoints without a pixel pow.
    radiance=(radiance+.055)*reflectance-.055;

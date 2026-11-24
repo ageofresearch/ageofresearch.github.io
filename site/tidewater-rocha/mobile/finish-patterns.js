@@ -86,8 +86,9 @@ function surfaceMips(finish) {
        const tuft=field(u*2.1+drift*.028,v*.51,89)-.5;
        const fibres=field(u*.62,v*1.4,131)-.5;
        const tone=.29+.73*smooth(.23,.71,patch)+.176*smooth(.48,.76,patch)+.22*tuft+.094*fibres;
-       const transfer=.73+.43*Math.max(0,Math.min(1,tone/1.1));
-       data[y*w+x]=Math.round(Math.min(1,transfer/1.1)*255);
+       const pile=Math.max(0,Math.min(1,tone/1.1));
+       const transfer=.09+.86*pile*Math.sqrt(pile);
+       data[y*w+x]=Math.round(transfer/1.1*255);
      }else{
        const warp=Math.sin(u*Math.PI*2*107),weft=Math.sin(v*Math.PI*2*101);
        const crease=field(u,v,13),soft=field(u+.023*crease,v,27);

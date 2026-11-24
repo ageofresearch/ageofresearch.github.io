@@ -1,11 +1,11 @@
 # Mobile yacht zones
 
-Build `owner-berth-1`. The mobile route connects boarding, the aft terrace,
+Build `owner-contours-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. The standalone mobile and full tours use open sky around the yacht.
 The forward exterior starboard flight connects MD and UD via thirteen intermediate treads. Its rises are fitted to the existing model levels. The two laundry machines share one counter. The saloon tabletop and ceiling reflect the modelled side window spans, and the cockpit canvas uses a filtered weave.
-The owner suite has a fitted headwall, draped bedding, one shaped carpet and a recessed ceiling. Both side walks reach the transition to the head. The rug outline follows the two cabin panoramas, with an inset on starboard. The bed uses an asymmetric drape with fringe on port. Two unused texture-atlas pages carry the pile and linen patterns.
+The owner suite has a fitted headwall, draped bedding, one shaped carpet and a recessed ceiling. Both side walks reach the transition to the head. The rug outline follows the two cabin panoramas, with an inset on starboard. The walking mesh retains the shared carpet perimeter and shares side vertices to keep the 16-bit visibility filter active. The bed uses an asymmetric drape with fringe on port. Two unused texture-atlas pages carry the pile and linen patterns.
 Open **Luz solar** in the walking menu to set the sun direction relative to the bow
 and its height above the horizon. **Restablecer luz** returns to the reference daylight.
 
@@ -93,7 +93,7 @@ The packed 32-byte walking vertices carry the underlying material, roughness,
 contact and compartment. The filtered finish atlas covers deck joints, boarding
 teak, timber, woven cloth, carpet and instruments. The maximum triangle counts
 for exterior, upper, sun, bow, guest and main are 24,851, 24,958, 22,844,
-22,179, 24,928 and 24,501 respectively. On the swim platform and bow walk,
+22,179, 24,928 and 24,877 respectively. On the swim platform and bow walk,
 prepared directional index ranges remove faces outside the camera cone or fully
 hidden behind confirmed opaque source rectangles. The normal all-direction range
 covers turns outside those cones. Pixel comparisons exercise both paths.

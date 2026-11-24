@@ -262,6 +262,16 @@ test('the owner suite keeps its two routes and the camera at the head passage',a
     }
     for(const x of [25.215,25.309,25.480,25.787,25.803])
       assert.ok(heightAt(blanket,x,.956)>heightAt(duvet,x,.956)+.003,'No linen pokes through at '+x);
+    const carpetDraw=guest.profiles.main.audit.find(p=>p.id.endsWith('suite-single-shaped-navy-carpet/main-deck'));
+    assert.equal(carpetDraw.triangles,rug.indices.length/3,'Packaging preserves the complete carpet silhouette');
+    assert.equal(carpetDraw.error,0);
+    const {ownerRugOutline}=await import('../site/tidewater-rocha/mobile/owner-berth.js');
+    const contour=ownerRugOutline();
+    assert.ok(contour.length>=160);
+    assert.ok(contour.every(([x,y],i)=>{
+      const [X,Y]=contour[(i+1)%contour.length];
+      return Math.hypot(X-x,Y-y)<=.12;
+    }),'No long chord replaces a curved stretch of the perimeter');
     assert.ok(parts.filter(p=>p.feature?.startsWith('suite ')).every(p=>p.vertices.every(Number.isFinite)));
   }finally{model.dispose();}
 });

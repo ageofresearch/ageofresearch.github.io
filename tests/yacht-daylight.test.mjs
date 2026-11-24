@@ -346,6 +346,24 @@ test('shared vertices preserve every packed byte and widen indices above 65535',
   assert.deepEqual(all.subarray(input.length),distinct);
 });
 
+test('the assembled mobile main deck keeps the 16-bit screen filter',async()=>{
+  const root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);
+  const [{profiles},file,{sharedVertices},{loadDeckLight,prepareOpaque,packRenderVertices}]=await Promise.all([
+    readFile(new URL('guest-access.json',root),'utf8').then(JSON.parse),readFile(new URL('guest-access.bin',root)),
+    import('../site/tidewater-rocha/mobile/shared-vertices.js'),import('../site/tidewater-rocha/mobile/prepare-light.js'),
+  ]);
+  const batches=Object.values(profiles).map(profile=>profile.batches[0]);
+  const table=sharedVertices(batches.reduce((total,batch)=>total+batch.attributes.position.length/3,0));
+  const light=await loadDeckLight();
+  for(const {attributes,indices} of batches){
+    const view=(type,{offset,length})=>new type(file.buffer,file.byteOffset+offset,length);
+    const source=Object.fromEntries(Object.entries(attributes).map(([key,value])=>[key,view(Float32Array,value)]));
+    const index=view(indices.format==='uint32'?Uint32Array:Uint16Array,indices);
+    const remapped=table.remap(packRenderVertices(prepareOpaque(source,light,index)),index);
+    assert.ok(remapped instanceof Uint16Array,'Wider indices bypass the screen filter during motion');
+  }
+});
+
 test('a settled view retains sample winners, tag collisions and the moving sky in draw order', async () => {
   const {coverageWords, filterSamples} = await import('../site/tidewater-rocha/mobile/sample-visibility.js');
   const winners = new Uint32Array(coverageWords);

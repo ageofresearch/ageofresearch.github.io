@@ -52,6 +52,9 @@ module.exports = (frame) => () =>
             GPUCommandEncoder.prototype.beginRenderPass = originalRender;
             GPUCommandEncoder.prototype.beginComputePass = originalCompute;
           }
+          // A later animation frame can submit only the moving flag region.
+          // Capture the model counter for the same pass as the GPU draw calls.
+          const reportedTriangles = compact ? app.entranceYacht.stats.triangles : null;
           const stride = Math.ceil((width * 4) / 256) * 256;
           const output = gpu.device.createBuffer({
             size: stride * height,
@@ -81,6 +84,7 @@ module.exports = (frame) => () =>
               height,
               passLabels,
               resolved,
+              reportedTriangles,
               indexedDraws,
               indexedTriangles,
             });

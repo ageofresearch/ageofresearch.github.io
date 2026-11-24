@@ -94,6 +94,8 @@ struct V {
    o.indirect*=mix(.88,1.31,nap);
  }
  if(o.layer==24 || o.layer==88){
+   // Match the tighter weave of the chair with the prepared cloth texture.
+   o.uv*=1.35;
    // The cobalt cloth picks up cool light on the window-facing pile.
    let view=normalize(frame.eye.xyz-pos);
    let grazing=1.-clamp(abs(dot(normal,view)),0.,1.);
@@ -161,13 +163,7 @@ fn shade(in:V)->vec4f{
    let upholstery=in.layer==24;
    let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
    var tile=weaveValue*1.1;
-   if(upholstery){
-     let yarn=in.uv*vec2f(76.,91.);
-     let detail=1.-smoothstep(.24,.76,max(fwidth(yarn.x),fwidth(yarn.y)));
-     let thread=sin(yarn.x*6.2831853)*sin((yarn.y+.22*yarn.x)*6.2831853);
-     let fleck=fract(sin(dot(floor(yarn),vec2f(53.13,113.27)))*17147.7)-.5;
-     tile=.99+(weaveValue-.615)*1.55+detail*(.18*thread+.17*fleck);
-   }
+   if(upholstery){tile=.99+(weaveValue-.615)*2.25;}
    radiance=(radiance+.055)*tile-.055;
  }
  return vec4f(radiance,1.);

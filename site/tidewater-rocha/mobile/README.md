@@ -1,6 +1,6 @@
 # Mobile yacht zones
 
-Build `owner-writing-chair-1`. The mobile route connects boarding, the aft terrace,
+Build `owner-writing-chair-2`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. The standalone mobile and full tours use open sky around the yacht.

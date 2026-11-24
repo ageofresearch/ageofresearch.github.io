@@ -1,10 +1,12 @@
+import {furnishOwnerSuite} from './owner-suite.js?v=owner-suite-1';
+
 // Registered to the Galley, Day Head, Master Cabin, Master Head and Master Shower panoramas.
 export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   function panel(anchor,bounds,mat,label,r=.006){add(anchor,box(bounds,Math.min(r,...bounds.slice(3).map((v,i)=>(v-bounds[i])*.35))),mat,label);}
   function oval(anchor,x,y,w,d,z,Z,mat,label){
     add(anchor,slab(outline(x,y,w,d,Math.min(w,d)*.44),z,Z,.003),mat,label);
   }
-  const galley='MD_FUR_035',suite='MD_FUR_041',bath='MD_FUR_055';
+  const galley='MD_FUR_035',bath='MD_FUR_055';
   // Tile the finish between the existing partitions, beams and stair coamings.
   // Adjacent strips meet edge to edge. Every slab has a closed perimeter.
   function lining(anchor,strips,bottom,top,material,label){
@@ -73,16 +75,7 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   lining('MD_FUR_040',dayHeadStrips,5.80,5.83,'M107','day head overhead');
   // The forward dresser and aft settee cross the two photographed doorways in the schematic model.
   for(const a of ['MD_FUR_044','MD_FUR_045','MD_SOF_014','MD_FUR_054'])remove(a);
-  panel(suite,[26.76,1.15,3.96,27.12,2.32,4.82],'M96','suite fitted forward cabinetry',.025);
-  oval(suite,24.95,0,3.48,3.39,3.951,3.961,'M95','suite deep blue rug');
-  panel(suite,[24.07,-.94,4.51,24.14,.94,5.16],'M39','suite upholstered headboard',.047);
-  panel(suite,[25.39,-.9,4.486,25.94,.91,4.543],'M111','suite woven bed runner',.024);
-  panel(suite,[26.33,-2.40,3.95,26.65,-2.12,4.65],'M96','window desk pedestal',.04);
-  oval(suite,26.40,-2.16,1.06,.57,4.65,4.70,'M37','window writing surface');
-  for(const y of [-1.31,1.32]){
-    panel(suite,[23.77,y-.045,5.05,23.84,y+.045,5.41],'M21','suite brass reading lamp '+y,.022);
-    panel(suite,[23.83,y-.026,5.10,23.85,y+.026,5.36],'M99','suite lamp diffuser '+y,.01);
-  }
+  furnishOwnerSuite({box,add,remove,slab,outline,circle});
   // One bathroom spans the beam. The separate shower sits opposite the vanity.
   for(const anchor of ['MD_PAR_019','MD_FUR_056','MD_GLA_002','MD_SAN_019','MD_SAN_020','MD_SAN_021','MD_SAN_022','MD_SAN_023','MD_SAN_024','MD_SAN_025','MD_SAN_026','MD_SAN_027'])remove(anchor);
   // Extend the original sink cabinet along the wall, leaving its recessed bowl open.
@@ -101,10 +94,6 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
     [27.25,.67,29.238,2.24],[27.25,-.689,28.35,.67],[28.434,-.689,29.238,.67]],
     5.802,5.84,'M107','bathroom ivory overhead');
   panel(bath,[29.24,-.982,3.95,29.28,.870,5.83],'M39','vanity backing infill');
-  panel(suite,[22.663,-2.50,5.81,27.162,2.531,5.85],'M107','suite overhead');
-  for(const y of [-2.15,2.15]){
-    panel(suite,[22.94,y,5.795,26.85,y+.035,5.811],'M99','suite ceiling reveal '+y);
-  }
   panel('MD_FUR_040',[20.55,-3.074,4.26,21.48,-3.067,5.72],'M96','day head timber vanity wall');
   for(const x of [20.34,20.82]){
     panel(galley,[x,2.264,4.65,x+.16,2.281,4.666],'M19','galley cabinet pull '+x);

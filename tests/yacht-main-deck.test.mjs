@@ -209,3 +209,33 @@ test('the forward starboard stair has body clearance and joins both decks in bot
     }finally{if(fixture.dispose)fixture.dispose();else fixture.model.dispose();}
   }
 });
+
+test('the owner suite keeps its two routes and the camera at the head passage',async()=>{
+  for(const fixture of [mobile(),await full({boarding:true})]){
+    const {model,walk:{nav}}=fixture;
+    try{
+      const threshold=[27.532,-.161];
+      for(const [side,y] of [[-1,-1.7],[1,1.75]]){
+        const path=[[23.6,y],[24.8,y],[25.4,1.49*side],[25.83,1.36*side],
+          [26.23,1.05*side],[26.55,y*.48],[27.05,0],threshold];
+        nav.deck='MD';nav.position=path[0].slice();nav.elevation=3.95;nav.stair=null;
+        travel(nav,path,40);
+        assert.equal(nav.location().displayName,'Paso entre la suite y el baño');
+        assert.ok(nav.floorSafe(...threshold));
+        travel(nav,path.toReversed(),40);
+      }
+      assert.equal(nav.floorSafe(25,0,'MD'),false,'The bed remains a solid obstacle');
+    }finally{if(fixture.dispose)fixture.dispose();else model.dispose();}
+  }
+  const {model}=await full();
+  try{
+    const {renderedParts}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
+    const parts=renderedParts(model);
+    const count=pattern=>parts.filter(p=>p.anchor==='MD_FUR_041'&&pattern.test(p.feature||'')).length;
+    assert.equal(count(/^suite.*(?:carpet|rug)$|^shaped owner rug$/),1);
+    assert.equal(count(/^suite.*(?:coverlet|runner)$/),1);
+    assert.ok(parts.every(p=>p.anchor!=='MD_SOF_011'||p.feature!=='folded coverlet with hanging edge'));
+    assert.equal(count(/^suite coffer band/),3);
+    assert.ok(parts.filter(p=>p.feature?.startsWith('suite ')).every(p=>p.vertices.every(Number.isFinite)));
+  }finally{model.dispose();}
+});

@@ -18,8 +18,6 @@ export const spatialRules=[
     reason:'Clear the partition and turn cabinet handles toward the room, preserving its ceiling display fit'})),
   {id:'galley-refrigerator',anchors:['MD_EQU_002'],delta:[.05957,0,0],
     reason:'Clear the same galley partition with the fitted refrigerator'},
-  {id:'owner-port-side-table',anchors:['MD_FUR_050'],delta:[0,-.021,0],floor:3.95,
-    reason:'Clear the glazing with the tabletop; move legs and decoration together'},
   {id:'helm-console',anchors:['UD_FUR_038'],delta:[0,-.072,0],floor:6,
     reason:'Clear the port glazing and seat the console body on the bridge floor'},
   {id:'day-head-wc',anchors:['MD_SAN_007','MD_SAN_008','MD_SAN_009'],delta:[-.26348,0,0],angle:-Math.PI/2,pivot:[22.1567,-2.93196],

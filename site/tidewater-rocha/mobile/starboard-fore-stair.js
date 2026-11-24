@@ -44,7 +44,7 @@ export function foreFlightDefinition(){
   const path=[[x,y],[end+.20,y],[end+.20,inner+.22]];
   const distances=[0,path[1][0]-path[0][0],path[1][0]-path[0][0]+path[2][1]-y];
   const route={id:'starboard-fore',name:'Escalera exterior de estribor',lower:'MD',upper:'UD',
-    path,distances,length:distances[2],width,steps:count};
+    path,distances,length:distances[2],width,steps:count,sourceIDs:['MD_SUP_007','UD_DCK_001']};
   const steps=Array.from({length:count},(_,i)=>({id:route.id+'/'+(i+1),height:height(i+1),
     polygons:[rect(x+i*run,outer,x+(i+1)*run,inner)]}));
   return {route,steps,landings:{lower:[rect(x-.47,outer,x,inner)],

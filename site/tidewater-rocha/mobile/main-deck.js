@@ -82,7 +82,9 @@ export function connectMainDeck(nav,model,data,controls) {
       height,indexFootprints(polygons.map(polygon=>({polygon})))
     ]));
     const clear=(x,y,height,radius)=>!obstaclesByHeight.get(height)(x,y,radius);
+    Object.defineProperty(clear,'preparedHeights',{value:obstaclesByHeight.size});
     const flight=createFlight(route,{MD:3.95,UD:6},steps,landings,clear);
+    model.stairInventory?.flights.push(flight);
     const deckSafe=nav.floorSafe.bind(nav);
     nav.floorSafe=(x,y,deck=nav.deck)=>{
       const endpoint=deck==='MD'?0:deck==='UD'?flight.riseCount:-1;

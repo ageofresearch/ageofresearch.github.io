@@ -43,7 +43,7 @@ test('inventory counts arrivals separately and derives the bridge and flared ter
   const {model,flights}=fixture();
   try {
     assert.deepEqual(flights.map(f=>[f.id,f.treadCount,f.riseCount]),[
-      ['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13]]);
+      ['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13],['starboard-fore',13,14]]);
     for(const flight of flights)assert.equal(flight.clearance.preparedHeights,
       new Set(flight.surfaces.map(s=>s.height.toFixed(6))).size,
       flight.id+': collision construction must finish before the first movement');

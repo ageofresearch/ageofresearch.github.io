@@ -78,7 +78,50 @@ struct V {
  let sunlit=display(o.indirect+o.direct);
  o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
  }
+ if(o.layer==20 || o.layer==84){
+   // Grazing skylight catches the yarn around the sleeves and folded hem.
+   // The lower side returns are shaded by the seat and tabletop.
+   let view=normalize(frame.eye.xyz-pos);
+   let edge=1.-clamp(abs(dot(normal,view)),0.,1.);
+   let exposed=smoothstep(4.38,4.78,pos.y+2.01);
+   o.indirect=o.indirect*mix(.79,1.,exposed)
+     +vec3f(.07,.077,.086)*edge*edge*(.38+.62*exposed);
+ }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
+ if(o.layer==21 || o.layer==22 || o.layer==85 || o.layer==86){
+   let table=o.layer==22 || o.layer==86;
+   let compact=o.layer>=64;
+   // Fold the rough window response into the lighting at the receiving
+   // vertices. The standard wood sample still supplies the close grain.
+   o.layer=select(-1,1,table)+select(0,64,compact);
+   o.uv=vec2f(uv.x*.52,uv.y*1.7);
+   let surface=vec3f(uv.x,uv.y,select(5.88,4.69,table));
+   if(surface.x>8.48 && surface.x<17.90 && abs(surface.y)<3.04){
+     let eye=vec3f((frame.eye.z+17.615)/.978611,frame.eye.x/.982895,frame.eye.y+2.01);
+     let ray=(surface-eye)*vec3f(1.,1.,-1.);
+     let distance=(select(-3.01,3.01,ray.y>=0.)-surface.y)/max(abs(ray.y),.001)*sign(ray.y);
+     let hit=surface+distance*ray;
+     let span=min(hit.x-8.60,17.9-hit.x);
+     let mullion=min(abs(hit.x-11.55),abs(hit.x-15.05))-.05;
+     let frameEdge=min(min(span,mullion),min(hit.z-4.24,5.80-hit.z));
+     let window=smoothstep(-.30,.20,frameEdge);
+     let horizon=smoothstep(-.32,.26,ray.z/max(length(ray.xy),.001));
+     o.indirect+=window*mix(vec3f(.026,.032,.040),vec3f(.16,.18,.20),horizon)*select(.74,1.,table);
+   }
+ }
+ if(o.layer==23 || o.layer==87){
+   // Use the bounded second half of the instrument slice. Coordinates are
+   // continuous across adjoining panels of the same stone installation.
+   let modelX=(pos.z+17.615)/.978611;
+   let modelY=pos.x/.982895;
+   let upright=abs(normal.y)<.7;
+   let along=abs(normal.x)>.7;
+   let start=select(20.4,27.1,modelX>26.);
+   let across=select((modelX-start)/2.3,(modelY+3.2)/6.4,upright&&!along);
+   let up=select((modelY+3.2)/6.4,(pos.y+2.01-3.94)/1.93,upright);
+   o.uv=vec2f(.502+.496*clamp(across,0.,1.),.003+.994*clamp(up,0.,1.));
+   o.layer-=20;
+ }else if(o.layer==3 || o.layer==67){o.uv=clamp(o.uv,vec2f(.001,.002),vec2f(.499,.998));}
  if(o.layer>=63){
    o.layer-=64;
    if(any(o.direct>vec3f(.001))){
@@ -113,7 +156,7 @@ struct Tagged { @location(0) color:vec4f, @location(1) powers:vec4f }
  let tag=in.tag;
  return Tagged(shade(in),vec4f(f32(tag&255u)/255., f32(tag>>8u)/255., 1., 1.));
 }`:''}
-struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
+struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f,@location(1) railRay:vec3f }
 @vertex fn glassVertex(@location(0) pos:vec3f,@location(1) normal:vec4f,@location(2) tint:vec4f,@location(4) finish:vec2i)->Glass{
  let eye=normalize(frame.eye.xyz-pos);let n=normalize(normal.xyz);
  let grazing=pow(1.-abs(dot(n,eye)),5.);
@@ -128,11 +171,28 @@ struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f }
    // Bake the sea/sky tint into the vertex color. The hardware interpolates
    // across each fixed light without shading the overlapping glass per pixel.
    let horizon=(smoothstep(-.04,.04,r.y)-.60)*.16*outside;
-   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)));
+   // Project the fixed outer rail onto the side glass. Homogeneous interpolation
+   // keeps the reflected rail continuous across large, differently split panes.
+   var railRay=vec3f(0.);
+   if(!door){
+     let point=vec3f((pos.z+17.615)/.978611,pos.x/.982895,pos.y+2.01);
+     let delta=vec3f((pos.z-frame.eye.z)/.978611,-(pos.x-frame.eye.x)/.982895,pos.y-frame.eye.y);
+     let side=sign(point.y);let divisor=side*delta.y;let gap=3.70-abs(point.y);
+     railRay=vec3f(point.x*divisor+gap*delta.x,point.z*divisor+gap*delta.z,divisor);
+   }
+   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)),railRay);
  }
- return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)));
+ return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec3f(0.));
 }
-@fragment fn glassFragment(in:Glass)->@location(0) vec4f{return in.rgba;}
+@diagnostic(off, derivative_uniformity)
+@fragment fn glassFragment(in:Glass)->@location(0) vec4f{
+ if(in.railRay.z<=.02){return in.rgba;}
+ let p=in.railRay.xy/in.railRay.z;
+ let feather=max(fwidth(p.y),.008);
+ let stripe=1.-smoothstep(.014,.014+feather,abs(p.y-5.005));
+ let span=smoothstep(6.,8.5,p.x)*(1.-smoothstep(17.9,20.,p.x));
+ return vec4f(in.rgba.rgb+vec3f(.16,.17,.17)*stripe*span,in.rgba.a);
+}
 `;
 }
 export const shader=program(false);

@@ -6,14 +6,16 @@ import {createFlight,installFlightNavigation,restorableStair,restoreStairPositio
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
 import {guestLandings,prepareGuestFloor,guestProfileDomain,lowerRoomAt} from './guest-access-geometry.js?v=port-guest-1';
 
-export const guestAccessVersion='chair-layout-1';
+export const guestAccessVersion='vr-detail-1';
 export function decodeGuestAccess(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:guestAccessVersion,names:['exterior','upper','sun','bow','guest','main'],roomID:'LD_R11'}),f=result.flight;
   const polygon=p=>Array.isArray(p)&&p.length>=3&&p.every(v=>Array.isArray(v)&&v.length===2&&v.every(Number.isFinite));
   const vector=p=>Array.isArray(p)&&p.length===3&&p.every(Number.isFinite);
   const main=result.mainDeck;
   if(!main?.floor?.length||!main.floor.every(polygon)||!main.collisionFootprints?.length||
-    !main.collisionFootprints.every(p=>polygon(p.polygon)))throw Error('Cubierta principal incompleta');
+    !main.collisionFootprints.every(p=>polygon(p.polygon))||main.foreObstacles?.length!==15||
+    main.foreObstacles.some((s,i)=>!Number.isFinite(s.height)||Math.abs(s.height-(3.95+2.05*i/14))>1e-8||
+      !Array.isArray(s.polygons)||!s.polygons.every(polygon)))throw Error('Cubierta principal incompleta');
   if(result.cabin?.id!=='LD_R03'||!vector(result.cabin.spawn)||!vector(result.cabin.look)||!Array.isArray(result.cabinRoute)||result.cabinRoute.length<3||
     !result.cabinRoute.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite))||!result.floor?.length||!result.floor.every(polygon)||result.domains?.length!==3||!result.domains.every(polygon)||
     result.room.deck!=='LD'||!vector(result.room.spawn)||!vector(result.room.look)||Math.abs(result.room.spawn[2]-3.15)>1e-5||
@@ -78,8 +80,12 @@ export function connectGuestAccess(walk,prepared) {
   }
 }
 export function restoreGuestAccessHandoff(walk,state) {
-  const nav=walk.nav,route=nav.routes.find(r=>r.id==='guest');nav.deck=state.deck;nav.position=state.position.slice();nav.stair=null;
-  if(state.stair==='guest'&&route&&restorableStair(nav,route,state))restoreStairPosition(nav,route,state);
+  const nav=walk.nav,route=nav.routes.find(r=>r.id===(state.stair==='starboard-fore'?'starboard-fore':'guest'));nav.deck=state.deck;nav.position=state.position.slice();nav.stair=null;
+  if((state.stair==='guest'||state.stair==='starboard-fore')&&route&&restorableStair(nav,route,state))restoreStairPosition(nav,route,state);
+  else if(state.stair==='starboard-fore'&&route){
+    const upper=state.elevation>=4.975;nav.deck=upper?'UD':'MD';
+    nav.position=upper?[20.93,-2.90]:[18.4,-3.397];nav.elevation=upper?6:3.95;
+  }
   else if(!state.stair&&['LD','MD'].includes(state.deck)&&nav.floorSafe(...state.position,state.deck))nav.elevation=state.deck==='LD'?1.55:3.95;
   else{nav.deck=Number.isFinite(state.elevation)&&state.elevation<2.75?'LD':'MD';nav.position=(nav.deck==='LD'?guestLandings.lower:guestLandings.upper).slice();nav.elevation=nav.deck==='LD'?1.55:3.95;}
   if(!nav.stair&&!nav.floorSafe(...nav.position,nav.deck))throw Error('No hay desembarco seguro para el acceso de invitados');

@@ -46,6 +46,18 @@ export function refineBowDeck(detail,exterior,asset,{box,slab,tube,bounds,materi
     const radius=Math.min(cushion?.045:.025,(b[3]-b[0])/5,(b[4]-b[1])/5,(b[5]-b[2])/3);
     detail.replacements.set(id,[make(id,box(b,radius),cushion?'M39':'M43',s.name.toLowerCase())]);
   }
+  // Fair the two starboard deck-edge stations around the outboard stringer.
+  // Top, soffit and fascia share these coordinates. The guard is then built
+  // on the resulting solid deck edge, clear of the entire ascending body.
+  for(const deck of detail.replacements.get('UD_DCK_001')){
+    for(let i=0;i<deck.vertices.length;i+=6){
+      const x=deck.vertices[i],y=deck.vertices[i+1];
+      const t=(x-16.29068)/(21.35804-16.29068);
+      const edgeY=-3.68228+t*.15194;
+      if(t>=-.00001&&t<=1.00001&&Math.abs(y-edgeY)<.001)deck.vertices[i+1]=-3.79;
+    }
+    deck.bounds=bounds(deck);
+  }
   const floor=detail.replacements.get('UD_DCK_001').flatMap(p=>surfaceTriangles(p,6,.002));
   const edges=boundary(floor),support=indexFootprints(floor.map(polygon=>({polygon})));
   // The existing aft guard uses this radial inset. Reuse its exact endpoint.

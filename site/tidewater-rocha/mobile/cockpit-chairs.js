@@ -95,7 +95,7 @@ export function furnishCockpitChairs({add, obstacle, tube, patch, merge}) {
     // skylight; the free bottom edge bows slightly between the two sleeves.
     // The port head chair has a lower top hem between the same capped posts.
     const hemDrop=i===4?.007:0;
-    const backAt = (u,h,depth) => point(depth+.011*Math.sin(Math.PI*u),
+    const backAt = (u,h,depth) => point(depth+(.011+.0035*Math.cos(3*Math.PI*u)*(1-(h-.6256)/.2161))*Math.sin(Math.PI*u),
       .538*(u-.5),h-.0045*Math.sin(Math.PI*u)-hemDrop*(h-.6256)/(.8417-.6256));
     const back = merge([[.6256,.8001,-.0366,-.0083],[.8001,.8278,-.0083,-.0096],
       [.8278,.8417,-.0096,-.021]].map(([low,high,x0,x1]) =>

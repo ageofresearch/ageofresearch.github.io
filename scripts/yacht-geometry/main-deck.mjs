@@ -7,6 +7,10 @@ export function extractMainDeck(model) {
   const aft=8.5,end=29.55;
   for(const source of renderedParts(model)){
     const anchor=source.anchor||source.id.split('/')[0],b=source.bounds;
+    if(source.feature?.startsWith('forward side stair ')){
+      parts.push({...normalizeRenderedPart(source,model),sourceID:anchor,role:'fore-stair'});
+      continue;
+    }
     if(source.feature?.startsWith('side deck ')){
       parts.push({...normalizeRenderedPart(source,model),sourceID:anchor,role:'main-side-guard'});
       continue;

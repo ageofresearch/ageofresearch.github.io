@@ -1,9 +1,10 @@
+import {furnishForeStair} from './starboard-fore-stair.js?v=vr-detail-1';
 import {saloonOval,finishSaloonEntry} from './saloon-entry.js?v=saloon-entry-1';
 import {saloonBack,saloonChaise,saloonChairShells} from './saloon-upholstery.js?v=saloon-entry-1';
 import {fitHullToMainDeck} from './deck-joints.js?v=saloon-entry-1';
 import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=side-deck-guards-1';
-import {furnishPortCabin} from './port-guest-cabin.js?v=chair-layout-1';
-import catalog from './tour-furniture-data.js?v=chair-layout-1';
+import {furnishPortCabin} from './port-guest-cabin.js?v=vr-detail-1';
+import catalog from './tour-furniture-data.js?v=vr-detail-1';
 
 // Fit the offline r110 shell to an assembly in Rocha coordinates. Normals use
 // the inverse transpose of the same map, including any reflection.
@@ -163,7 +164,7 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   for (const y of [-.64,.64])
     add(dining,slab(outline(15.96,y,.50,.30,.14),3.9588,4.634,0),'M37','dining pedestal '+y);
   add(dining,slab(outline(15.96,0,1.28,2.30,.63),4.634,4.681,.009),'M47','rounded dining table edge');
-  add(dining,slab(outline(15.96,0,1.26,2.28,.62),4.681,4.69,0),'M40','dark dining tabletop');
+  add(dining,slab(outline(15.96,0,1.26,2.28,.62),4.681,4.69,0),'M112','dark dining tabletop');
   add(dining,slab(outline(15.96,.33,.16,.16,.075),4.69,4.79,0),'M37','centrepiece foot');
   add(dining,slab(outline(15.96,.33,.36,.34,.15),4.79,4.85,.014),'M37','ivory centrepiece');
   // Both pilothouse stations show a raised dark display across the console
@@ -271,13 +272,14 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   }
   furnishMainDeck({box,add,remove,slab,outline,circle});
   finishSideDecks({add,box});
+  furnishForeStair({add,box});
   fitHullToMainDeck(detail);
   furnishPortCabin({add,remove,source,box,slab,outline,fit});
   for(const p of parts()){
     finishSaloonEntry(p,source,{bounds,box,materials});
     const id=p.anchor||p.id.split('/')[0];
     let material;
-    if(id==='MD_SOF_006'&&p.feature?.includes('rug'))material='M37';
+    if(id==='MD_SOF_006'&&p.feature?.includes('rug'))material='M110';
     if(p.feature==='inclined instrument display')material='M98';
     if(id==='UD_FUR_038'&&p.feature==='continuous dark instrument bank')material='M47';
     if(material){p.materialID=material;p.finish=materials[material];}

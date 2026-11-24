@@ -33,9 +33,9 @@ module.exports=async function verifyFlights(frame,out,readFrame) {
       registry:[...nav.stairFlights.keys()],
       bridge:flights.find(f=>f.id==='bridge').surfaces.slice(1,4).map(s=>Math.max(...s.polygons.flat().map(p=>p[1])))};
   });
-  assert.deepEqual(result.inventory,[['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13]]);
+  assert.deepEqual(result.inventory,[['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13],['starboard-fore',13,14]]);
   assert.deepEqual(result.provisional,[9,9]);
-  assert.equal(result.registry.length,5);assert.ok(result.bridge.every(y=>y<=1.11));
+  assert.deepEqual(result.registry.toSorted(),result.inventory.map(([id])=>id).toSorted());assert.ok(result.bridge.every(y=>y<=1.11));
   await capture(frame,out,readFrame);
   console.log('Shared stair surfaces in the browser:',result);
 };

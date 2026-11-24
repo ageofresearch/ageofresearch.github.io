@@ -47,28 +47,36 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   lining(galley,galleyStrips,5.815,5.85,'M107','galley ivory overhead');
   panel(galley,[21.53,1.62,5.45,22.30,1.93,5.80],'M39','cooker hood housing');
   panel(galley,[21.55,1.61,5.42,22.27,1.94,5.45],'M19','brushed hood underside');
-  // A service door and the stacked laundry fronts are visible from Crew Entrance.
-  panel(galley,[21.94,.64,3.96,22.36,1.29,5.68],'M39','service laundry cabinet');
-  for(const z of [4.02,4.84]){
-    panel(galley,[21.92,.66,z,21.943,1.27,z+.76],'M107','service appliance front '+z);
-    const drum=slab(circle(.965,z+.35,.218,32),0,.014,.003);
-    for(let i=0;i<drum.vertices.length;i+=6){
-      const [y,h,x,ny,nh,nx]=drum.vertices.slice(i,i+6);
-      drum.vertices.splice(i,6,21.904+x,y,h,nx,ny,nh);
+  // The Crew Entrance panorama shows two front loaders beneath one timber return.
+  const laundryFront=21.88, z=3.98;
+  panel(galley,[laundryFront+.045,.29,3.96,22.36,1.55,4.78],'M39','service laundry cabinet');
+  panel(galley,[laundryFront-.032,.28,4.78,22.36,1.56,4.83],'M96','service laundry counter');
+  panel(galley,[22.13,.29,4.83,22.36,1.55,5.30],'M96','service overhead cabinet');
+  for(const [i,y] of [.61,1.23].entries()){
+    panel(galley,[laundryFront+.018,y-.308,z,laundryFront+.045,y+.308,z+.80],'M107','service appliance front '+i);
+    function disc(cy,cz,r,x0,x1,mat,label){
+      const g=slab(circle(cy,cz,r,24),x0,x1,0);
+      for(let j=0;j<g.vertices.length;j+=6){
+        const [v,h,x,nv,nh,nx]=g.vertices.slice(j,j+6);
+        g.vertices.splice(j,6,x,v,h,nx,nv,nh);
+      }
+      add(galley,g,mat,label+' '+i);
     }
-    add(galley,drum,'M47','laundry drum glass '+z);
-    panel(galley,[21.902,.71,z+.61,21.920,.98,z+.69],'M19','laundry control strip '+z);
-    panel(galley,[21.899,.74,z+.628,21.903,.84,z+.672],'M47','laundry display '+z);
+    disc(y,z+.345,.238,laundryFront-.004,laundryFront+.018,'M19','laundry door bezel');
+    disc(y,z+.345,.203,laundryFront-.011,laundryFront-.004,'M47','laundry drum glass');
+    disc(y,z+.337,.157,laundryFront-.014,laundryFront-.011,'M113','laundry inner drum');
+    disc(y+.163,z+.681,.042,laundryFront-.004,laundryFront+.018,'M19','laundry selector');
+    panel(galley,[laundryFront+.012,y-.22,z+.627,laundryFront+.018,y+.061,z+.72],'M47','laundry display '+i);
   }
   const dayHeadStrips=[[20.454,-3.003,20.502,-2.18],[20.502,-3.13,21.617,-2.18],[21.617,-3.13,22.13,-2.66],[21.617,-2.573,22.13,-2.18]];
-  lining('MD_FUR_040',dayHeadStrips,3.951,3.962,'M37','day head stone floor');
+  lining('MD_FUR_040',dayHeadStrips,3.951,3.962,'M115','day head stone floor');
   lining('MD_FUR_040',dayHeadStrips,5.80,5.83,'M107','day head overhead');
   // The forward dresser and aft settee cross the two photographed doorways in the schematic model.
   for(const a of ['MD_FUR_044','MD_FUR_045','MD_SOF_014','MD_FUR_054'])remove(a);
   panel(suite,[26.76,1.15,3.96,27.12,2.32,4.82],'M96','suite fitted forward cabinetry',.025);
   oval(suite,24.95,0,3.48,3.39,3.951,3.961,'M95','suite deep blue rug');
   panel(suite,[24.07,-.94,4.51,24.14,.94,5.16],'M39','suite upholstered headboard',.047);
-  panel(suite,[25.39,-.9,4.486,25.94,.91,4.543],'M94','suite blue bed runner',.024);
+  panel(suite,[25.39,-.9,4.486,25.94,.91,4.543],'M111','suite woven bed runner',.024);
   panel(suite,[26.33,-2.40,3.95,26.65,-2.12,4.65],'M96','window desk pedestal',.04);
   oval(suite,26.40,-2.16,1.06,.57,4.65,4.70,'M37','window writing surface');
   for(const y of [-1.31,1.32]){
@@ -78,17 +86,17 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   // One bathroom spans the beam. The separate shower sits opposite the vanity.
   for(const anchor of ['MD_PAR_019','MD_FUR_056','MD_GLA_002','MD_SAN_019','MD_SAN_020','MD_SAN_021','MD_SAN_022','MD_SAN_023','MD_SAN_024','MD_SAN_025','MD_SAN_026','MD_SAN_027'])remove(anchor);
   // Extend the original sink cabinet along the wall, leaving its recessed bowl open.
-  panel(bath,[28.79,-.62,3.96,29.19,1.391,4.74],'M37','stone vanity apron',.026);
+  panel(bath,[28.79,-.62,3.96,29.19,1.391,4.74],'M115','stone vanity apron',.026);
   lining(bath,[[28.71,-.65,29.23,1.41],[28.71,1.78,29.23,1.95]],
-    4.74,4.798,'M37','stone vanity ledge');
+    4.74,4.798,'M115','stone vanity ledge');
   panel(bath,[29.20,-.66,4.88,29.23,1.96,5.70],'M20','mirror above stone ledge');
   panel(bath,[29.12,-.60,5.71,29.20,1.90,5.74],'M99','mirror concealed light');
-  panel(bath,[27.32,-2.35,3.955,28.284,-1.32,3.966],'M37','flush shower stone tray');
+  panel(bath,[27.32,-2.35,3.955,28.284,-1.32,3.966],'M115','flush shower stone tray');
   panel(bath,[27.66,-2.14,3.967,27.98,-2.11,3.972],'M19','shower linear drain');
   // The centre bay contains the modeled stair coaming. Keep its footprint exposed.
   const wings=[[27.25,-2.36,28.284,-.688],[28.313,-2.36,29.238,-.688],
     [27.25,.67,29.238,2.24],[27.25,-.688,27.258,.67],[28.434,-.688,29.238,.67]];
-  lining(bath,wings,3.951,3.954,'M37','bathroom stone floor');
+  lining(bath,wings,3.951,3.954,'M115','bathroom stone floor');
   lining(bath,[[27.25,-2.36,28.284,-.689],[28.313,-2.36,29.238,-.689],
     [27.25,.67,29.238,2.24],[27.25,-.689,28.35,.67],[28.434,-.689,29.238,.67]],
     5.802,5.84,'M107','bathroom ivory overhead');
@@ -109,10 +117,10 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
   const shower='MD_SAN_028';
   // The original fitting is in the middle of the cubicle. Attach the new riser to the window jamb.
   remove(shower);
-  panel(shower,[27.25,-2.41,3.96,29.22,-2.37,4.70],'M37','shower window lower reveal');
-  panel(shower,[27.25,-2.41,5.39,29.22,-2.37,5.81],'M37','shower window upper reveal');
+  panel(shower,[27.25,-2.41,3.96,29.22,-2.37,4.70],'M115','shower window lower reveal');
+  panel(shower,[27.25,-2.41,5.39,29.22,-2.37,5.81],'M115','shower window upper reveal');
   for(const [a,b] of [[27.25,27.87],[28.81,29.22]])
-    panel(shower,[a,-2.41,4.69,b,-2.37,5.40],'M37','shower window side reveal '+a);
+    panel(shower,[a,-2.41,4.69,b,-2.37,5.40],'M115','shower window side reveal '+a);
   panel(shower,[27.50,-2.368,4.16,27.55,-2.33,5.59],'M19','shower mixer rail');
   panel(shower,[27.46,-2.35,4.91,27.66,-2.324,4.98],'M19','shower mixer and controls',.011);
   panel(shower,[27.47,-2.34,5.58,27.59,-2.16,5.61],'M19','shower head');

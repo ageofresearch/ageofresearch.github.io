@@ -80,7 +80,13 @@ function bodyObstacles(parts, height, onMainDeck) {
     const points=[];
     for (let i=0; i<part.indices.length; i+=3) {
       const triangle=part.indices.slice(i,i+3).map(index=>Array.from(part.vertices.slice(index*6,index*6+3)));
-      points.push(...clipHeight(clipHeight(triangle,foot,true),height+1.65,false).map(p=>p.slice(0,2)));
+      const projected=clipHeight(clipHeight(triangle,foot,true),height+1.65,false).map(p=>p.slice(0,2));
+      // Below the top of an arch its two jambs are disconnected. A hull of
+      // both clipped sides would incorrectly close the central passage.
+      if(name==='beach club rolled portal reveal'){
+        const polygon=convexHull(projected);
+        if(polygon.length>=3)footprints.push({polygon});
+      }else points.push(...projected);
     }
     const polygon=convexHull(points);
     if(polygon.length>=3)footprints.push({polygon});

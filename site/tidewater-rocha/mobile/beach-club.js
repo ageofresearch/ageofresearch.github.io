@@ -37,15 +37,22 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
       const length=Math.hypot(nx,ny,nz);
       cheek.vertices[i+3]=nx/length;cheek.vertices[i+4]=ny/length;cheek.vertices[i+5]=nz/length;
     }
-    add(cheek,'M89','beach club swept jamb '+side);
+    add(cheek,'M113','beach club swept jamb '+side);
     const y=side*1.65;
     slab([back-.038,y-.391,2.851,back-.027,y+.391,head-.079],.005,'M47','beach club locker reveal '+side);
     slab([back-.07,y-.38,2.86,back-.025,y+.38,head-.09],.015,'M90','beach club flush locker '+side);
     slab([back-.103,y-.07,3.64,back-.072,y+.07,3.665],.004,'M19','beach club locker handle '+side);
   }
   slab([sill+.27,-2.20,head,back+.03,2.20,head+.105],.065,'M92','beach club timber soffit');
-  slab([sill+.22,-2.31,head+.105,back+.03,2.31,head+.18],.06,'M89','beach club canopy fascia');
+  slab([sill+.22,-2.31,head+.105,back+.03,2.31,head+.18],.06,'M113','beach club canopy fascia');
   slab([sill+.23,-2.29,head+.18,sill+.48,2.29,head+.275],.048,'M47','beach club dark rolled canopy edge');
+  // One continuous rolled reveal follows both sloping jambs and turns
+  // through the radiused corners beneath the fascia, as in the stern view.
+  const archLeft=[[sill-.034,2.27,2.86],[sill+.205,2.091,head-.18],
+    [sill+.233,2.079,head-.095],[sill+.250,2.047,head-.037],
+    [sill+.260,1.996,head+.006],[sill+.264,1.924,head+.028]];
+  const portal=[...archLeft,...archLeft.slice().reverse().map(([x,y,z])=>[x,-y,z])];
+  add(pipe(portal,.031,8),'M113','beach club rolled portal reveal');
   for(const side of [-1,1]){
     add(pipe([[sill-.035,side*2.28,2.85],[sill+.24,side*2.09,head-.11],[sill+.29,side*2.06,head-.02],[sill+.34,side*1.96,head+.015]],.022,8),'M19','beach club polished portal trim '+side);
     add(post([1.41,side*1.48,head-.012],[1.41,side*1.48,head],.047,.047,10),'M38','beach club recessed soffit lamp '+side);
@@ -158,7 +165,7 @@ export function buildPortStairFoot(add, {extrude, face, withoutCap, halfWidth, m
   // and moulded well are higher than the traversable starboard first tread.
   const landingZ = 3.15, footwellZ = 3.405;
   const inner = 2.43, outer = 3.53, toe = 1.04, second = 1.45, top = 2.34;
-  const recess = .052, revealTop = landingZ+.054;
+  const recess = .052, revealTop = landingZ+.068;
   const weatheredTeak = {finish:[0x998c7c,.80,0,1]};
   const marginBoard = {finish:[0x998e83,.80,0,0]};
 

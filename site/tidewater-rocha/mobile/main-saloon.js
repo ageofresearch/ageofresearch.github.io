@@ -2,7 +2,7 @@ import {loadZone} from './load-zone.js?v=bow-loading-1';
 import { preloadUpper } from './upper-terrace.js?v=port-guest-1';
 import { connectTerrace } from './aft-terrace.js?v=chair-fidelity-1';
 
-export const saloonVersion = 'chair-layout-1';
+export const saloonVersion = 'vr-detail-1';
 const attributes={position:3,normal:3,color:3,aSurface:4};
 
 export function decodeSaloon(manifest, buffer, {version=saloonVersion,names=['exterior'],roomID='MD_R02'}={}) {
@@ -90,6 +90,7 @@ export function loadSaloon(options) {
 }
 
 export function nextProfile(current, x, deck='MD', stair=null, bowExterior=false, bridgeAccess=false, guestAccess=false) {
+  if(stair==='starboard-fore')return 'main';
   if(stair==='guest')return 'guest';
   if(deck==='SD'||stair==='sun')return 'sun';
   if(stair==='aft'||stair==='bridge')return 'upper';

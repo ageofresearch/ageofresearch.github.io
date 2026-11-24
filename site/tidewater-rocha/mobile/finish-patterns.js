@@ -71,16 +71,26 @@ export function teakPatternMips(width=512,height=4096) {
 }
 // Yarn pairs alternate over and under. Average the same periodic tile at every
 // mip so the receding chair backs converge to a stable charcoal value.
-function clothMips(flag=false) {
+function surfaceMips(finish) {
  const levels=[];
  let w=512,h=256,data=new Uint8Array(w*h);
  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
-   if(flag){data[y*w+x]=flagTexel(x,y);continue;}
+   if(finish==='flag'){data[y*w+x]=flagTexel(x,y);continue;}
+   if(finish==='stone'){
+     const u=x/w,v=y/h;
+     const phase=2*Math.PI*(u+v+.20*field(u,v,4)+.055*field(u,v,16));
+     const vein=Math.abs(Math.sin(phase)),branch=Math.abs(Math.sin(phase*2+.4*field(v,u,8)));
+     data[y*w+x]=Math.round(255*(.986-.15*(1-smooth(.012,.12,vein))-.065*(1-smooth(.015,.09,branch)))/1.1);
+     continue;
+   }
    const u=(x+.5)/8, v=(y+.5)/4;
    const over=(Math.floor(u)+Math.floor(v))%2===0;
    const warp=Math.sin(Math.PI*u)**2, weft=Math.sin(Math.PI*v)**2;
    const fleck=field(x/512,y/256,32);
-   const tone=.59+.095*(over?warp:weft)+.055*warp*weft+.075*fleck;
+   // The low-frequency folds modulate both yarn directions. Their frequencies
+   // wrap exactly at the tile boundary and are filtered with the weave.
+   const fold=Math.cos(2*Math.PI*(y/256*3+.15*Math.sin(2*Math.PI*x/512)));
+   const tone=.578+.098*(over?warp:weft)+.048*warp*weft+.098*fleck+.012*fold;
    data[y*w+x]=Math.round(255*tone/1.1);
  }
  for(;;){
@@ -97,10 +107,10 @@ function clothMips(flag=false) {
 }
 // One filtered sample supplies every opaque finish. A slice is eight teak
 // planks high at the original 32 texels per plank. Thirteen contiguous
-// slices cover rows 8 through 111; the final slice carries the cockpit fabric.
+// slices cover rows 8 through 111. The last two carry cockpit fabric and the flag.
 export function createFinishPatterns(device) {
  const source=finishPatternMips(),deck=teakPatternMips();
- const cloth=clothMips(),flag=clothMips(true);
+ const cloth=surfaceMips('cloth'),flag=surfaceMips('flag'),stone=surfaceMips('stone');
  const width=512,height=256,layers=20,mipLevelCount=10;
  const texture=device.createTexture({label:'Prepared yacht finish atlas',size:[width,height,layers],format:'r8unorm',
    mipLevelCount,usage:GPUTextureUsage.TEXTURE_BINDING|GPUTextureUsage.COPY_DST});
@@ -115,7 +125,10 @@ export function createFinishPatterns(device) {
        const grain=tile.data[(size*size+t)*2+1]/255;
        data[i]=channel(0);                               // wood
        data[n+i]=channel(1);                             // canvas
-       data[2*n+i]=Math.max(channel(2)*.58,tile.data[(2*size*size+t)*2+1]); // instruments
+       // The six bounded instrument faces use the left half. The right
+       // half carries stone, filtered from its own source at every mip.
+       data[2*n+i]=x<w/2?Math.max(channel(2)*.58,tile.data[(2*size*size+t)*2+1]):
+         stone[mip][y*w+Math.min(w-1,(x-Math.floor(w/2))*2)];
        data[3*n+i]=channel(3);                           // gangway caulking
        data[4*n+i]=Math.round(255*(.33+.65*grain));      // woven rug
        // Teak rows 112–119 lie outside every mobile deck. The last slice

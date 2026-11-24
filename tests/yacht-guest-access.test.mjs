@@ -200,7 +200,7 @@ test('continuous saloon/stair/distributor returns, every tread, stops and diagon
       }
       assert.equal(flight.clearance.preparedHeights,15);
     }
-    assert.equal(f.walk.nav.routes.length,5);connectGuestAccess(f.walk,guest);assert.equal(f.walk.nav.routes.length,5);
+    assert.equal(f.walk.nav.routes.length,6);connectGuestAccess(f.walk,guest);assert.equal(f.walk.nav.routes.length,6);
     f.walk.nav.enterRoom('LD_R11');assert.deepEqual(f.walk.nav.position,[16.8,-.1]);assert.equal(f.walk.nav.elevation,1.55);
     assert.equal(f.walk.nav.location().displayName,guestRoom.displayName);assert.equal(f.model.asset.data.levels.SP,2.84);
   }finally{f.dispose();g.model.dispose();}

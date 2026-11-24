@@ -163,6 +163,7 @@ test('the packed atlas keeps the actual teak texels at deck coordinates and fits
    const shadow=prepareOpaque(source,new Uint8Array(102400));
    assert.equal(bright.aSurface[1],8);assert.equal(bright.aSurface[2],0);
    assert.deepEqual(shadow.color,bright.color);
-   assert.ok(Math.abs(shadow.contact[0]/bright.contact[0]-.48)<1e-6);
+   assert.ok(Math.abs(bright.contact[0]-(.78+.22*.8))<1e-6);
+   assert.ok(Math.abs(shadow.contact[0]-.48)<1e-6);
  }finally{if(original)globalThis.GPUTextureUsage=original;else delete globalThis.GPUTextureUsage;}
 });

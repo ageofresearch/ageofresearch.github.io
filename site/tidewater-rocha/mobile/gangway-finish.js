@@ -154,11 +154,12 @@ if(code==57.0){
  s.roughness=.28;s.clearcoat=.22;
 }
 if(code==59.0){
- let q=in.P.xz;
+ let q=in.vs.vLocal.xz;
  let m=sin(q.x*17.1+3.2*sin(q.y*10.8))*sin(q.y*14.7-q.x*4.6);
- let nap=sin(q.x*51.3+q.y*73.+4.3*m);
- s.albedo*=.86+.31*m+.095*nap;
- s.roughness=.72;
+ let phase=q.x*104.3+q.y*46.7+4.3*m;
+ let nap=sin(phase)*(1.-smoothstep(.4,2.6,fwidth(phase)));
+ s.albedo*=.80+.18*m+.08*nap;
+ s.roughness=.84;
 }
 if(code==60.0){
  let yarn=sin(in.P.x*118.+in.P.y*41.)*sin(in.P.z*152.+in.P.y*57.);

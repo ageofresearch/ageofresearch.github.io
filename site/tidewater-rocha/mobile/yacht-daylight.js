@@ -144,10 +144,15 @@ var region=0u;o.vBounce=mat.bounce0;
     )
     .join('\n') +
   `
-if(v.aSurface.y>.10 && v.aSurface.z<37.){
+if(region!=0u && mat.bounce0.w>.5){
+  o.vWindow=vec3f(mat.reflectedFittings[region*6u].w,mat.reflectedFittings[region*6u+1u].w,
+    yachtWindowFill(v.position,normalize(v.normal)));
+}
+if((v.aSurface.y>.05 || v.aSurface.x<.63) && v.aSurface.z!=54.){
  let modelRotation=mat3x3f(draw.model[0].xyz,draw.model[1].xyz,draw.model[2].xyz);
  let look=normalize(transpose(modelRotation)*(frame.cameraPos-(draw.model*vec4f(v.position,1.)).xyz));
- let reflected=reflect(-look,normalize(v.normal));
+ let normal=normalize(v.normal);
+ let reflected=mix(reflect(-look,normal),normal,v.aSurface.x*v.aSurface.x);
  o.vFittings=${sampleReflectionWGSL('mat.reflectedFittings', 'region', 'reflected')};
 }
 `;

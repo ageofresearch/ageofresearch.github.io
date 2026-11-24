@@ -7,10 +7,21 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import { createSternFeatures, l as yacht } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { createDaylight, compartment } from '../site/tidewater-rocha/mobile/yacht-daylight.js';
 import { lightMatrix } from '../site/tidewater-rocha/mobile/daylight-shadow.js';
+import { windowFill } from '../site/tidewater-rocha/mobile/surface-lighting.js';
 import probes from '../site/tidewater-rocha/mobile/daylight-probes.js';
 const group = new Group();
 group.rotation.y = Math.PI / 2;
 const reference = new Vector3(1, 1, 0).normalize();
+test('aperture bounce favours the window side and stops at the suite bulkhead', () => {
+  const fill = (x, y, z = 3.95) => windowFill(y * yacht.sy, z - yacht.seaReference,
+    x * yacht.sx - yacht.length / 2, 0, 1, 0);
+  assert.ok(fill(26, 1.9) > 1.5 * fill(26, 0));
+  assert.ok(Math.abs(fill(26, 1.9) - fill(26, -1.9)) < 1e-6);
+  assert.ok(Math.abs(fill(25.049, 1.9) - fill(25.051, 1.9)) < .003);
+  assert.equal(fill(27.25, 1.9), 0);
+  assert.equal(fill(26, 1.9, 6), 0);
+});
+
 test('sun angles use the yacht axes and restore exactly through a session', () => {
   const items = new Map(),
     storage = { setItem: (k, v) => items.set(k, v), getItem: (k) => items.get(k) };

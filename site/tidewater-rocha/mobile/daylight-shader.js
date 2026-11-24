@@ -1,8 +1,9 @@
 import {flagVertex,mobileFlagPaint} from './stern-flag.js?v=stern-flag-1';
 import { sampleReflectionWGSL } from './yacht-daylight.js?v=yacht-daylight-1';
 import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
-// Prepared materials are linear. Diffuse sky, reflected light and direct sun
-// meet before the one display conversion. Visibility modulates direct light only.
+import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2';
+// Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
+// finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
 return `
 override animateCloth:bool=false;
@@ -56,7 +57,7 @@ struct V {
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
  o.indirect=shade.rgb;o.direct=direct.rgb;
  if(rough<.32 || metal>.05){
-   o.indirect*=2.*shade.rgb;o.direct*=2.*direct.rgb;
+   o.indirect*=${packedRadianceScale}.*shade.rgb;o.direct*=${packedRadianceScale}.*direct.rgb;
    let probe=frame.bounce[u32(finish.y)>>8u];
    let sunlight=mix(vec3f(1.06,.73,.49),vec3f(1.04,.98,.89),smoothstep(.09,.65,frame.sun.y));
    let eye=normalize(frame.eye.xyz-pos);let reflected=reflect(-eye,normal);
@@ -67,41 +68,31 @@ struct V {
    let fittings=${sampleReflectionWGSL('frame.fittings', 'region', 'reflected')};
    let reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
    let gloss=1.-rough;
-   o.indirect+=fresnel*reflectedLight*gloss;
+   o.indirect+=fresnel*reflectedLight*gloss*mix(.15,1.,color.a);
    let alignment=max(0.,dot(reflected,frame.sun.xyz));
    let width=mix(.13,.016,gloss);
    let lobe=width/(width+1.-alignment);
-   o.direct+=sunlight*fresnel*gloss*lobe*lobe*alignment;
+   o.direct+=sunlight*fresnel*gloss*lobe*lobe*alignment*max(0.,dot(normal,frame.sun.xyz));
 
  // The visibility endpoints vary smoothly across a face. Transform each once at
  // its vertices; the shadow map interpolates between them across the penumbra.
  let sunlit=display(o.indirect+o.direct);
  o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
  }
- if(o.layer==20 || o.layer==84){
-   // Grazing skylight catches the yarn around the sleeves and folded hem.
-   // The lower side returns are shaded by the seat and tabletop.
-   let view=normalize(frame.eye.xyz-pos);
-   let edge=1.-clamp(abs(dot(normal,view)),0.,1.);
-   let exposed=smoothstep(4.38,4.78,pos.y+2.01);
-   o.indirect=o.indirect*mix(.79,1.,exposed)
-     +vec3f(.07,.077,.086)*edge*edge*(.38+.62*exposed);
- }
  if(o.layer==6 || o.layer==70){
-   // Directional pile reflects much more window light across the nap.
    let view=normalize(frame.eye.xyz-pos);
-   let nap=smoothstep(-.58,.73,view.x+.18*view.z);
-   o.indirect*=mix(.88,1.31,nap);
+   let across=.33*view.x*(shade.a*2.-1.);
+   let nap=smoothstep(-.86,.86,view.z+across);
+   o.indirect*=1.+direct.a*.10*(nap-.5);
+   o.direct*=1.+.11*(smoothstep(-.86,.86,view.z+frame.sun.z)-.5);
  }
- if(o.layer==24 || o.layer==88){
-   // Match the tighter weave of the chair with the prepared cloth texture.
-   o.uv*=1.35;
-   // The cobalt cloth picks up cool light on the window-facing pile.
+ if(o.layer==20 || o.layer==84 || o.layer==24 || o.layer==88){
+   if(o.layer==24 || o.layer==88){o.uv*=1.35;}
    let view=normalize(frame.eye.xyz-pos);
-   let grazing=1.-clamp(abs(dot(normal,view)),0.,1.);
-   let window=smoothstep(-.45,.65,-normal.x+.32*normal.y);
-   o.indirect*=mix(vec3f(.80,.85,.92),vec3f(1.06,1.09,1.18),window);
-   o.indirect+=vec3f(.030,.041,.070)*grazing*grazing*window;
+   let beam=shade.a*2.-1.;
+   let edge=1.-clamp(abs(dot(normal,view)),0.,1.);
+   let sky=direct.a*(.25+.75*max(.0,dot(normal,vec3f(beam,.45,0.))));
+   o.indirect*=1.+vec3f(.13,.17,.21)*sky*edge*edge;
  }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
  if(o.layer==21 || o.layer==22 || o.layer==85 || o.layer==86){
@@ -163,7 +154,7 @@ fn shade(in:V)->vec4f{
    let upholstery=in.layer==24;
    let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
    var tile=weaveValue*1.1;
-   if(upholstery){tile=.99+(weaveValue-.615)*2.25;}
+   if(upholstery){tile=.94+(weaveValue-.615)*2.05;}
    radiance=(radiance+.055)*tile-.055;
  }
  return vec4f(radiance,1.);

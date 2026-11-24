@@ -47,7 +47,9 @@ export function prepareOpaque(source,map,indices) {
     const code=source.aSurface[k+2],boarding=code>=37&&code<=42;
     let layer=-1,u=0,v=0;
     const index=j/3;
-    contact[index]=contactAt(map,localX,localY,elevation,ny)*(.78+.22*Math.min(1,source.aSurface[k+3]));
+    contact[index]=Math.min(
+      contactAt(map,localX,localY,elevation,ny), .78+.22*clamp(source.aSurface[k+3]),
+    );
     roughness[index]=boarding?.82:source.aSurface[k];
     room[index]=compartment(localX,localY,elevation);
     if(code===47)layer=-2;
@@ -106,7 +108,7 @@ export function prepareOpaque(source,map,indices) {
 }
 
 // Keep positions and finish coordinates at full precision. The remaining GPU
-// inputs are bounded directions, display colors, a small layer index and a
+// inputs are bounded directions, linear colors, a small layer index and a
 // metal weight. Pack them together for one aligned fetch per vertex.
 export function packRenderVertices(source){
   const count=source.position.length/3,buffer=new ArrayBuffer(count*32);

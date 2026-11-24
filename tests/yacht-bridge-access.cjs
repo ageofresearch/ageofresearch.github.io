@@ -3,7 +3,7 @@ const {writeFileSync}=require('node:fs');const {PNG}=require('pngjs');
 module.exports=async function accessViews(frame,out,readFrame,mobile){
  const saved=await frame.evaluate(()=>{const w=__app.yachtWalk;return {position:w.nav.position.slice(),deck:w.nav.deck,yaw:w.yaw,pitch:w.pitch};});
  for(const {name,position,target,step}of [
-  {name:'saloon-threshold',position:[17,.2],target:[18.7,1.1,4.7]},
+  {name:'saloon-threshold',position:[17.3,.2],target:[18.7,1.1,4.7]},
   {name:'lobby',position:[18.5,1.35],target:[19.16,.2,5.2]},
   {name:'stair-middle',position:[19.16,-.1466666667],target:[19.16,-1.8,6.4],step:6},
   {name:'upper-landing',position:[19.16,-1.8],target:[19.16,.6,4.9],step:12},

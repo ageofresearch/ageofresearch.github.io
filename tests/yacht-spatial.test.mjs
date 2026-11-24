@@ -111,3 +111,28 @@ test('galley basin is visible through a fitted recess without changing the cabin
   }
   assert.ok(!parts.some(p=>p.anchor==='MD_FUR_037'),'Buried duplicate cabinet remains');
 });
+
+test('chair backs and headrests face the photographed fixtures and open deck',()=>{
+  const named=label=>parts.filter(p=>p.feature?.startsWith(label));
+  function highEdge(chunks,axis){
+    const vertices=chunks.flatMap(p=>Array.from({length:p.vertices.length/6},(_,i)=>p.vertices.slice(i*6,i*6+3)));
+    const top=Math.max(...vertices.map(v=>v[2]));
+    const edge=vertices.filter(v=>v[2]>top-.04);
+    return edge.reduce((sum,v)=>sum+v[axis],0)/edge.length;
+  }
+  for(const i of [0,1]){
+    const club=named('upper club chair '+i+' ');
+    assert.ok(club.length>=2 && highEdge(club,0)>12.26,'Club chair should open aft');
+  }
+  for(const n of ['001','003']){
+    const pads=named('solarium reclining lounger').filter(p=>p.anchor==='SD_SOF_'+n);
+    assert.ok(pads.length>=2 && highEdge(pads,0)>12.60,'Sunbed head should face the bar');
+  }
+  const helm=named('helm chair captainPads'),hardware=named('helm chair captainHardware');
+  assert.ok(highEdge(helm,0)<21 && helm.every(p=>p.materialID==='M109'));
+  assert.ok(hardware.length>=3 && Math.min(...hardware.map(p=>p.bounds[2]))<6.01);
+  const writing=named('suite cobalt writing stool'),desk=named('window writing surface')[0];
+  assert.ok(writing.length===2 && highEdge(writing,1)>desk.bounds[4]);
+  assert.ok(Math.abs(center(desk)[0]-center(writing[0])[0])<.04);
+  assert.ok(!parts.some(p=>p.anchor==='MD_FUR_053'),'Occasional table intersects the writing stool');
+});

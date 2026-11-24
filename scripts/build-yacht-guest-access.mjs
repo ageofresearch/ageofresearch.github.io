@@ -1,3 +1,4 @@
+import {MeshoptSimplifier} from './yacht-geometry/node_modules/meshoptimizer/index.js';
 import {extractMainDeck} from './yacht-geometry/main-deck.mjs';
 import {portCabin,cabinWalk} from '../site/tidewater-rocha/mobile/port-guest-cabin.js';
 import {writeFile} from 'node:fs/promises';
@@ -30,6 +31,15 @@ export async function buildGuestAccess() {
         return {omit:true,reason:'Covered by the main deck extraction or outside the main deck sightline'};
       }
       if(p.role==='main-deck')return {omit:true,reason:'Resident main-deck profile'};
+      // Through the aft glass or up the guest stair the rolled upholstery is
+      // small on screen. Reduce each pad separately, retaining its placement,
+      // smooth normals and original vertices; the close main profile is above.
+      if(['exterior','guest'].includes(context.profile)&&p.feature?.includes('diningWrap')){
+        const [indices]=MeshoptSimplifier.simplify(Uint32Array.from(p.indices),
+          Float32Array.from(p.vertices),6,Math.floor(p.indices.length*.36/3)*3,.024,
+          ['ErrorAbsolute','Permissive']);
+        return {error:0,geometry:{...p,indices:Array.from(indices)}};
+      }
       const guest=p.role?.startsWith('guest-'),flight=p.semanticParent==='stairs/guest';
       if(context.profile==='guest') {
         // Upper-deck furniture is above two solid ceilings from this profile.
@@ -152,7 +162,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'stern-flag-region-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'chair-layout-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

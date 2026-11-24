@@ -2,7 +2,7 @@
 // These resolve physical inconsistencies; they are not surveyed boat positions.
 export const spatialVersion='spatial-correction-1';
 export const spatialRules=[
-  ...[1,2,3,4].map(n=>({id:'cockpit-chair-'+n,feature:'director chair '+n+' ',floor:3.95,
+  ...[1,2,3,4,5,6].map(n=>({id:'cockpit-chair-'+n,feature:'director chair '+n+' ',floor:3.95,
     reason:'Seat the four frame feet on the existing cockpit deck'})),
   {id:'upper-coffee-table',anchors:['UD_FUR_005'],floor:6,reason:'Seat the pedestal on the upper deck; keep tabletop and bowl together'},
   {id:'bow-seat-port',anchors:['UD_FUR_053','UD_SOF_024','UD_FUR_054'],delta:[-.023146,-.109944,0],
@@ -18,14 +18,10 @@ export const spatialRules=[
     reason:'Clear the partition and turn cabinet handles toward the room, preserving its ceiling display fit'})),
   {id:'galley-refrigerator',anchors:['MD_EQU_002'],delta:[.05957,0,0],
     reason:'Clear the same galley partition with the fitted refrigerator'},
-  {id:'owner-port-armchair',anchors:['MD_SOF_016'],delta:[0,-.068,0],floor:3.95,
-    reason:'Clear the window and sill with the complete armchair and seat its feet on the deck'},
   {id:'owner-port-side-table',anchors:['MD_FUR_050'],delta:[0,-.021,0],floor:3.95,
     reason:'Clear the glazing with the tabletop; move legs and decoration together'},
   {id:'helm-console',anchors:['UD_FUR_038'],delta:[0,-.072,0],floor:6,
     reason:'Clear the port glazing and seat the console body on the bridge floor'},
-  {id:'helm-chair',anchors:['UD_SOF_017','UD_FUR_039','UD_FUR_040'],delta:[0,-.072,0],
-    reason:'Keep the chair aligned with the corrected helm wheel'},
   {id:'day-head-wc',anchors:['MD_SAN_007','MD_SAN_008','MD_SAN_009'],delta:[-.26348,0,0],angle:-Math.PI/2,pivot:[22.1567,-2.93196],
     reason:'Provisional rigid fit: face the pan into the room and place the cistern against the side partition; translation alone intersects the service wall'},
   ...[['owner-port-wc','MD_SAN_013','MD_SAN_014','MD_SAN_015']]

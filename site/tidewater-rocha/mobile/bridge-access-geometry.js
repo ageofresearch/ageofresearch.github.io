@@ -4,7 +4,7 @@ import {supportedFloor} from './sun-deck-geometry.js?v=port-guest-1';
 export const accessRoom={id:'MD_R07',deck:'MD',name:'Vestíbulo interior',displayName:'Vestíbulo interior',
   spawn:[18.5,1.35,5.55],look:[19.16,1.1,5.2],bbox:[17.65,-.05,19.7,1.8],label:[18.5,1.35],
   type:'Interior circulation',status:'T/I',source:'Provisional shared model'};
-export const accessRoute=[[17,.2],[18.35,.2],[18.5,1.35],[19.16,1.35],[19.16,1.15],
+export const accessRoute=[[17.3,.2],[18.35,.2],[18.5,1.35],[19.16,1.35],[19.16,1.15],
   [19.16,1.1],[19.16,-1.62],[19.16,-1.8],[19.78,-1.8],[19.78,-1.25],[20.5,-1.25],[20.5,0]];
 export const accessDomains=[[[17.65,-.05],[19.7,-.05],[19.7,1.8],[17.65,1.8]]];
 export const inAccess=(x,y)=>x>=17.65&&x<=19.7&&y>=-.05&&y<=1.8;

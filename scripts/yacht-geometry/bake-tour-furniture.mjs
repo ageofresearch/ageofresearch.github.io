@@ -53,7 +53,7 @@ function pieces(mesh,primitive){
   });
 }
 const catalog={};
-function bake(name,mesh,primitive,select,maxFaces){
+function bake(name,mesh,primitive,select,maxFaces,keepFrame=false){
   const selected=pieces(mesh,primitive).filter(p=>select(p.bounds,p.faces.length/3));
   if(!selected.length)throw Error('Empty '+name);
   const allBounds=[0,1,2].map(k=>Math.min(...selected.map(p=>p.bounds[k])))
@@ -64,8 +64,9 @@ function bake(name,mesh,primitive,select,maxFaces){
     const refs=new Map(ids.map((id,i)=>[id,i]));
     const pos=Float32Array.from(ids.flatMap(i=>xyz[i]));
     const smooth=Float32Array.from(ids.flatMap(i=>normals[i]));
+    const target=typeof maxFaces==='function'?maxFaces(faces.length/3):maxFaces;
     const [indices]=MeshoptSimplifier.simplifyWithAttributes(Uint32Array.from(faces,i=>refs.get(i)),pos,3,
-      smooth,3,[.35,.35,.35],null,Math.min(maxFaces*3,faces.length),1,['Permissive']);
+      smooth,3,[.35,.35,.35],null,Math.min(target*3,faces.length),1,['Permissive']);
     const kept=Array.from(new Set(indices)),remap=new Map(kept.map((i,k)=>[i,k]));
     const data=[];
     for(const i of kept){
@@ -74,7 +75,7 @@ function bake(name,mesh,primitive,select,maxFaces){
     }
     entries.push([encode(Int16Array.from(data)),encode(Uint16Array.from(indices,i=>remap.get(i)))]);
   }
-  catalog[name]={size:allBounds.slice(3).map((x,k)=>x-allBounds[k]),pieces:entries};
+  catalog[name]={size:allBounds.slice(3).map((x,k)=>x-allBounds[k]),pieces:entries,...keepFrame&&{frame:allBounds}};
 }
 bake('scatter',159,6,(b,n)=>n===2496 && b[0]<-16,72);
 bake('banquette',159,4,b=>b[0]>-14&&b[3]<-12.5,95);
@@ -88,5 +89,16 @@ bake('salonSofaClose',133,9,(b,n)=>b[0]<-2.7 && ![4652,188].includes(n),650);
 bake('bowPort',163,1,b=>b[0]<9&&b[2]>0,96);
 bake('sunLounger',164,0,b=>b[0]<-4.45&&b[2]>0,64);
 bake('sunCorner',164,0,(b,n)=>n===4652,98);
+// Store the original component frame so feet, upholstery and hardware share
+// one rigid placement. Bounds select one chair in a batch with many copies.
+const dining=b=>b[0]>-2.45&&b[3]<-1.81&&b[2]>-.70&&b[5]<0;
+bake('diningWrap',133,9,dining,n=>n>1000?120:40,true);
+bake('diningLegs',133,10,(b,n)=>dining(b)&&n===20,12,true);
+bake('captainPads',140,5,b=>b[0]>2.89&&b[3]<3.57&&b[2]>-.40&&b[5]<.40,105,true);
+bake('captainHardware',140,9,b=>b[0]>2.85&&b[3]<3.45&&b[5]<.38&&b[1]<6.3,50,true);
+bake('ownerWrap',135,9,b=>b[0]>6.7&&b[3]<7.54&&b[2]<-1.7,135,true);
+bake('ownerFeet',135,5,(b,n)=>b[0]>6.9&&b[3]<7.4&&b[2]<-1.8&&n===316,18,true);
+bake('writingStool',135,22,()=>true,80,true);
+bake('loungerTimber',164,1,(b,n)=>b[0]<-4.45&&b[2]>0&&n===20,20,true);
 const output=new URL('../../site/tidewater-rocha/mobile/tour-furniture-data.js',import.meta.url);
 await writeFile(output,'// Generated from the pinned Grande 36M r110 by bake-tour-furniture.mjs.\nexport default '+JSON.stringify(catalog)+';\n');

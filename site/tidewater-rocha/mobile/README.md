@@ -50,26 +50,33 @@ an unavailable accelerator. Rebuild the checked-in WebAssembly module with
 `npm run --prefix scripts/yacht-geometry screen-visibility`.
 
 
-## Folding chairs on the aft terrace
+## Chair layout in the walking tour
 
-The four backs face the aisle and the slings tuck under the dining top. The
-shared assembly uses 392 triangles per chair for the canvas sleeves, timber
-cross braces, round rail ends, fasteners and suspended fabric. Chair placement
-is estimated from the Cockpit and Cockpit – Port panoramas. The mobile collision
-footprints and deck contact lighting follow those same assemblies.
+Four folding chairs face the long edge of the cockpit table. One more faces
+each end. The Cockpit, Cockpit – Port and Cockpit – Stbd panoramas register
+the cap centres, slings and crossed timber rails against the tabletop.
+Each 392-triangle assembly supplies its own collision footprint and contact
+shadow. The exposed top hem sits slightly lower on the port end chair.
 
-With each chair scaled to 256 pixels tall, 94.5% of the visible traced contour
-in Cockpit and 96.1% in Cockpit – Port was within four pixels of the model.
-The largest cap, foot or rail-centre discrepancy was 6.8 pixels. In the port
-view only the exposed backs and caps were measured. The photographed chair
-at the head of the table is outside the four-chair row.
+At a projected chair height of 256 pixels, 95.2% of the traced samples on
+the row in Cockpit and 97.1% in Cockpit – Port fall within four pixels of
+the corresponding model contour. The separate end-chair closeups reach
+98.5% at port and 99.3% at starboard. The largest displacement of an
+individually registered cap, foot or rail centre on the row is 7.6 pixels.
+The other rooms use photographic comparisons and model-space clearance checks.
+
+The saloon dining table has ten ivory wraparound chairs on dark legs.
+The upper club chairs face aft, the sunbed headrests face the bar and the
+helm chair faces the console. The owner's desk stool faces the starboard
+window. The shared generator fits each upholstery shell and its hardware
+in a common frame before the mobile builders extract the meshes.
 
 ## Grande 36M tour reference
 
 The VRCloud Beach Club, Cockpit, Salon, Upperdeck Lounge, Skylounge, Pilothouse,
 Bow Lounge, Sundeck and Lower Lobby informed the refit. The covered stern
 recess, lockers, upholstered divan, platform loungers and shower share geometry
-with the full yacht. The cockpit has a transverse table, four dark folding
+with the full yacht. The cockpit has a transverse table, six dark folding
 chairs, a port chaise and a white wet bar. Both boarding handrails have open
 spans between bent stainless stanchions. The saloon and Skylounge use curved
 upholstery, cloud-patterned rugs and pale tables. The upper terrace has two
@@ -200,8 +207,8 @@ PYTHONPATH=/tmp/yacht-spatial-libs python3 scripts/audit-yacht-spatial.py /tmp/y
 The offline builders extract the **final shared generator**, including raw source
 parts without replacements. Source arrays are normalized before clipping. Furniture
 that has been consumed by a later shared revision is not restored from old room tags.
-The outdoor dining table and six chairs stay on the upper terrace; the old interior
-table and ten chair proxies stay absent. UD_R02 is **Interior superior**, retaining
+The upper terrace has two club chairs facing the aft lounge. The former upper
+dining suite was removed in the VR refit. UD_R02 is **Interior superior**, retaining
 its service cabinet, glazing, partition, ceiling and fixtures. Its safe camera spawn
 is [14.8,0,7.6], with walking elevation 6.00.
 

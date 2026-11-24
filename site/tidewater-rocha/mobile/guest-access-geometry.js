@@ -6,7 +6,7 @@ export const guestRoom={id:'LD_R11',deck:'LD',name:'Distribuidor inferior de pop
   spawn:[16.8,-.1,3.15],look:[14.5,-.1,3],bbox:[13.34178,-.55668,17.545,.35256],label:[15.7,-.1],
   type:'Interior circulation',status:'T/I',source:'Provisional shared model'};
 export const guestLandings={lower:[17.210263340389897,-.0167544467966324],upper:[17.2,-1.42]};
-export const guestApproach=[[14.4,0],[14.7,-1.3],[15.15,-1.6],[15.8,-1.8],[17.2,-1.6],[17.2,-1.4],[17.2,-1.42]];
+export const guestApproach=[[14.4,0],[14.7,-1.3],[15.15,-1.6],[15.8,-1.8],[16.9,-1.7],[17.2,-1.42]];
 // Use the width of the upper stair portal for the prepared-visibility strip
 // around its main-deck approach.
 const approachRadius=.76/2;

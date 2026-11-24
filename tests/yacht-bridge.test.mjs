@@ -78,8 +78,8 @@ test('bridge entry/return, diagonal turns and stopped reversals work at 12/40/60
 });
 test('windshield, furniture, stair well and forward limits stay solid; full handoff preserves valid poses',async()=>{
  const f=mobile(),g=await full();try{
-  for(const p of [[21,1.93],[21,-2.09],[20.9,0],[20.4,-1.7],[22.3,0],[19.16,0],[25,0],[19.2,2.4]])assert.equal(f.walk.nav.floorSafe(...p,'UD'),false,p.toString());
-  for(const p of [[19.6,1.7],[20.5,0],[20.5,-.8],[21.35,-.5]]){
+  for(const p of [[21,1.93],[21,-2.09],[20.9,0],[21.35,-.5],[20.4,-1.7],[22.3,0],[19.16,0],[25,0],[19.2,2.4]])assert.equal(f.walk.nav.floorSafe(...p,'UD'),false,p.toString());
+  for(const p of [[19.6,1.7],[20.5,0],[20.5,-.8],[21.35,-.74]]){
    assert.ok(f.walk.nav.floorSafe(...p,'UD'),p.toString());restoreBridgeHandoff(g.walk,{deck:'UD',position:p});assert.deepEqual(g.walk.nav.position,p);assert.equal(g.walk.nav.elevation,6);
   }
   restoreBridgeHandoff(g.walk,{deck:'UD',position:[100,100]});assert.deepEqual(g.walk.nav.position,bridgeRoom.spawn.slice(0,2));

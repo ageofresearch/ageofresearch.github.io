@@ -1,6 +1,6 @@
 # Mobile yacht zones
 
-Build `yacht-daylight-1`. The mobile route connects boarding, the aft terrace,
+Build `chair-layout-1`. The mobile route connects boarding, the aft terrace,
 swim platform, main saloon, upper terrace, solarium, upper interior, bridge, forward lounge and aft lower guest distributor. All zone
 packages, collision indices and GPU profiles finish preparation under the initial
 loader. The standalone mobile and full tours use open sky around the yacht.
@@ -11,7 +11,7 @@ The mobile renderer keeps an opaque and a glass batch in one 4× MSAA pass.
 Changing the sun angle refreshes one orthographic depth map for the entire yacht.
 The 512² map covers the entire yacht, including the antenna. Each sun sector
 retains the cast-shadow surfaces that can be visible from that direction.
-The largest walking profile submits 24,656 triangles. Camera-independent
+The largest walking profile submits up to 24,810 triangles before camera culling. Camera-independent
 material lighting is prepared once per solar angle. Polished metal and glass
 continue to respond to the viewing direction. A separate
 offline bake traces light from each compartment to its first opaque surface and
@@ -90,8 +90,8 @@ the Rocha hull determine the fitted dimensions. The Rocha map has its own terrai
 The packed 32-byte walking vertices carry the underlying material, roughness,
 contact and compartment. The filtered finish atlas covers deck joints, boarding
 teak, timber, woven cloth, carpet and instruments. The maximum triangle counts
-for exterior, upper, sun, bow and guest are 23,948, 23,865, 22,419, 20,849 and
-23,519 respectively. On the swim platform and bow walk,
+for exterior, upper, sun, bow, guest and main are 24,702, 24,598, 22,831,
+21,930, 24,810 and 24,002 respectively. On the swim platform and bow walk,
 prepared directional index ranges remove faces outside the camera cone or fully
 hidden behind confirmed opaque source rectangles. The normal all-direction range
 covers turns outside those cones. Pixel comparisons exercise both paths.

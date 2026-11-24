@@ -5,7 +5,7 @@ module.exports=async function guestViews(frame,out,readFrame,mobile) {
   const saved=await frame.evaluate(()=>{const w=__app.yachtWalk;return {position:w.nav.position.slice(),deck:w.nav.deck,elevation:w.nav.elevation,yaw:w.yaw,pitch:w.pitch};});
   for(const view of [
     {name:'saloon-approach',position:[14.4,0],target:[17.4,-1.42,4.4],deck:'MD'},
-    {name:'upper-landing',position:[17.2,-1.42],target:[18.75,-1.35,3.6],deck:'MD'},
+    {name:'upper-landing',position:[17.4,-1.42],target:[18.75,-1.35,3.6],deck:'MD'},
     {name:'stair-upper',step:12,target:[18.9,-.85,3.2]},
     {name:'stair-turn',step:7,target:[17.4,-.08,2.6]},
     {name:'lower-landing',position:[17.210263340389897,-.0167544467966324],target:[18.8,-.7,3],deck:'LD'},

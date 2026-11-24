@@ -19,7 +19,7 @@ function face(vertices, indices, offset) {
 // Keep the winding. A reversed face has the same positions, but disappears from the opposite side.
 const key = (points) => points.flat().join(',');
 
-test('every visible source face of the four folding chairs reaches its draw', () => {
+test('every visible source face of the six folding chairs reaches its draw', () => {
   const { model, dispose } = fixture();
   try {
     const profile = decodeGuestAccess(manifest, buffer).profiles.exterior;
@@ -76,7 +76,7 @@ test('every visible source face of the four folding chairs reaches its draw', ()
       assert.ok(p.bounds[5]-p.bounds[2]>1);
     }
     assert.ok(posts.filter(p=>p.bounds[3]-p.bounds[0]>.08).length>=8,'Bent tubular stanchions at section ends');
-    assert.equal(seen.filter((id) => id.includes('director-chair')).length, 20);
+    assert.equal(seen.filter((id) => id.includes('director-chair')).length, 30);
   } finally {
     dispose();
   }
@@ -94,7 +94,7 @@ test('the chair weave occupies an atlas slice beyond the yacht deck', () => {
   }
 });
 
-test('the packaged rails, gate, wet bar and four saloon armchairs retain their curved meshes', () => {
+test('the packaged rails, gate, wet bar and saloon dining chairs retain their curved meshes', () => {
   const audit = manifest.profiles.exterior.audit;
   for (const [pattern, pieces, minTriangles] of [
     [/gangway-top-handrail/, 2, 96],

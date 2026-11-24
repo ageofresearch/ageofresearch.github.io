@@ -2,8 +2,8 @@ import {saloonOval,finishSaloonEntry} from './saloon-entry.js?v=saloon-entry-1';
 import {saloonBack,saloonChaise,saloonChairShells} from './saloon-upholstery.js?v=saloon-entry-1';
 import {fitHullToMainDeck} from './deck-joints.js?v=saloon-entry-1';
 import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=side-deck-guards-1';
-import {furnishPortCabin} from './port-guest-cabin.js?v=saloon-rug-1';
-import catalog from './tour-furniture-data.js?v=saloon-entry-1';
+import {furnishPortCabin} from './port-guest-cabin.js?v=chair-layout-1';
+import catalog from './tour-furniture-data.js?v=chair-layout-1';
 
 // Fit the offline r110 shell to an assembly in Rocha coordinates. Normals use
 // the inverse transpose of the same map, including any reflection.
@@ -37,6 +37,22 @@ export function saloonGlassCode(id){
 const sofaBounds=[10.55,-1.15,3.955,14.11,1.69,4.78];
 const chairBounds=[10.90,12.00].map(x=>[x,-1.69,4.01,x+.93,-.87,4.78]);
 
+function turnOnDeck(g,cx,cy,angle){
+  const c=Math.cos(angle),s=Math.sin(angle);
+  for(let j=0;j<g.vertices.length;j+=6){
+    const x=g.vertices[j]-cx,y=g.vertices[j+1]-cy,nx=g.vertices[j+3],ny=g.vertices[j+4];
+    g.vertices[j]=cx+x*c-y*s;g.vertices[j+1]=cy+x*s+y*c;
+    g.vertices[j+3]=nx*c-ny*s;g.vertices[j+4]=nx*s+ny*c;
+  }
+  return g;
+}
+
+// The aft wrap is canted towards the coffee table; the forward one is
+// parallel to the side window. Use the same pose for each prepared profile.
+function saloonSeatPose(g,i){
+  return i===0?turnOnDeck(g,chairBounds[i][0]+.465,-1.28,-Math.PI/4):g;
+}
+
 // The smaller shells share the donor components and transforms with the close
 // shells. They serve the intermediate download and the other decks' sightlines.
 export function distantSaloonSeats(){
@@ -48,7 +64,7 @@ export function distantSaloonSeats(){
   result.set('salon curved boucle module 6',saloonChaise(false));
   result.set('salon curved boucle module 7',saloonBack(false));
   chairBounds.forEach((b,i)=>saloonChairShells(b[0],false).forEach((g,j)=>
-    result.set('salon lounge chair '+(i+1)+' '+(j+1),g)));
+    result.set('salon lounge chair '+(i+1)+' '+(j+1),saloonSeatPose(g,i))));
   return result;
 }
 
@@ -76,6 +92,22 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   function fit(anchor,key,b,mat,label,options,inside=true){
     fittedFurniture(key,b,options).forEach((g,i)=>add(anchor,g,mat,label+' '+(i+1),inside));
   }
+  // The donor uses Y up and its transverse axis points to starboard. Keep
+  // the photographed assemblies together while fitting them to the Rocha deck.
+  function chairPart(anchor,key,origin,position,scale,heading,mat,label,inside=true){
+    const b=catalog[key].frame, [x,y,z]=position, [u,h,v]=origin;
+    const [sx,sy,sz]=scale, c=Math.cos(heading), s=Math.sin(heading);
+    const local=[(b[0]-u)*sx,(v-b[5])*sy,(b[1]-h)*sz,
+                 (b[3]-u)*sx,(v-b[2])*sy,(b[4]-h)*sz];
+    for(const [i,g] of fittedFurniture(key,local).entries()){
+      for(let j=0;j<g.vertices.length;j+=6){
+        const [a,b,d,nx,ny]=g.vertices.slice(j,j+5);
+        g.vertices[j]=x+a*c-b*s; g.vertices[j+1]=y+a*s+b*c; g.vertices[j+2]=z+d;
+        g.vertices[j+3]=nx*c-ny*s; g.vertices[j+4]=nx*s+ny*c;
+      }
+      add(anchor,g,mat,label+' '+(i+1),inside);
+    }
+  }
   function floorMat(anchor,b,label){
     const [x,y,z,X,Y,Z]=b;
     add(anchor,slab(outline((x+X)/2,(y+Y)/2,X-x,Y-y,Math.min(.48,(Y-y)/4)),z,Z,0),'M95',label);
@@ -102,8 +134,8 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   for(const [i,b] of chairBounds.entries()){
     const x=b[0];
     saloonChairShells(x,true).forEach((g,j)=>
-      add('MD_FUR_016',g,'M39','salon lounge chair '+(i+1)+' '+(j+1)));
-    add('MD_FUR_016',box([x+.17,-1.55,3.95,x+.76,-1.02,4.06],.045),'M38','salon chair plinth '+i);
+      add('MD_FUR_016',saloonSeatPose(g,i),'M39','salon lounge chair '+(i+1)+' '+(j+1)));
+    add('MD_FUR_016',saloonSeatPose(box([x+.17,-1.55,3.95,x+.76,-1.02,4.06],.045),i),'M38','salon chair plinth '+i);
   }
   fit('MD_FUR_014','scatter',[11.69,1.15,4.34,12.12,1.42,4.60],'M94','salon blue scatter');
   fit('MD_FUR_014','scatter',[13.50,-.04,4.34,13.76,.41,4.61],'M106','salon ochre scatter');
@@ -113,8 +145,20 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   add('MD_FUR_018',slab(saloonOval(11.98,-.20,.415,.695,40),4.25,4.31,.009),'M37','salon ivory low table');
   add('MD_FUR_019',slab(saloonOval(11.98,-.20,.115,.245,24),4.31,4.325,0),'M53','salon brass tray');
   // Dining Area and Galley Entrance show one radiused dark top on two
-  // pedestals. Keep the existing four chair positions and the lobby aisle.
+  // pedestals. The two end chairs turn across the four opposing pairs.
   for (const anchor of ['MD_FUR_023','MD_FUR_032','MD_FUR_033']) remove(anchor);
+  const diningAnchors=['MD_SOF_007','MD_SOF_008','MD_SOF_009','MD_SOF_010',
+    ...Array.from({length:8},(_,i)=>'MD_FUR_0'+(24+i))];
+  for(const anchor of diningAnchors)remove(anchor);
+  const places=[];
+  for(const side of [-1,1])for(const y of [-.83,-.28,.28,.83])
+    places.push([15.96+side*.81,y,side<0?0:Math.PI]);
+  places.push([15.96,-1.37,Math.PI/2],[15.96,1.37,-Math.PI/2]);
+  for(const [i,[x,y,angle]] of places.entries()){
+    for(const [key,mat] of [['diningWrap','M39'],['diningLegs','M34']])
+      chairPart(diningAnchors[i],key,[-2.14,2.60,-.35],[x,y,3.959],[.88,.79,1.02],angle,
+        mat,'dining chair '+(i+1)+' '+key);
+  }
   const dining='MD_FUR_023';
   for (const y of [-.64,.64])
     add(dining,slab(outline(15.96,y,.50,.30,.14),3.9588,4.634,0),'M37','dining pedestal '+y);
@@ -124,6 +168,9 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   add(dining,slab(outline(15.96,.33,.36,.34,.15),4.79,4.85,.014),'M37','ivory centrepiece');
   // Both pilothouse stations show a raised dark display across the console
   // and a charcoal lining inside the front glazing. Keep the stair aft clear.
+  for(const anchor of ['UD_SOF_017','UD_FUR_039','UD_FUR_040'])remove(anchor);
+  for(const [key,mat] of [['captainPads','M109'],['captainHardware','M19']])
+    chairPart('UD_SOF_017',key,[3.24,5,0],[21,-.106,6],[1,1,1],0,mat,'helm chair '+key);
   const helm='UD_FUR_038';
   for(const y of [-.72,.72])
     add(helm,box([22.06,y-.035,6.97,22.16,y+.035,7.085],0),'M47','display bank foot '+y);
@@ -158,7 +205,7 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   for(const [i,y] of [-1.18,.44].entries()){
     const anchor='UD_FUR_016',x=11.72;
     add(anchor,box([x+.12,y-.33,6,x+.72,y+.33,6.16],.075),'M38','upper club chair recessed foot '+i,false);
-    fit(anchor,'upperChair',[x,y-.45,6.11,x+.90,y+.45,6.86],'M39','upper club chair '+i,{mirrorX:true},false);
+    fit(anchor,'upperChair',[x,y-.45,6.11,x+.90,y+.45,6.86],'M39','upper club chair '+i,{},false);
   }
   // The port-side passage to the wheelhouse remains open around this seating.
   const upper='UD_FUR_037';
@@ -182,10 +229,29 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   }
   for(const [seat,pillow,y] of [['001','002',.16],['003','004',-1.09]]){
     remove('SD_SOF_'+seat);remove('SD_SOF_'+pillow);
-    fit('SD_SOF_'+seat,'sunLounger',[11.36,y,8.574,13.37,y+.62,8.98],'M39','solarium reclining lounger',{mirrorX:true},false);
+    fit('SD_SOF_'+seat,'sunLounger',[11.36,y,8.574,13.37,y+.62,8.98],'M39','solarium reclining lounger',{},false);
   }
   for(const id of ['005','006'])remove('SD_SOF_'+id);
   fit('SD_SOF_005','sunCorner',[14.42,.29,8.54,17.07,2.12,9.16],'M39','solarium corner sofa',{mirrorY:true},false);
+  for(const [i,y] of [.47,-.78].entries()){
+    const anchor='SD_FUR_00'+(i+1);
+    remove(anchor);
+    chairPart(anchor,'loungerTimber',[-5.4,7.51,.95],[12.365,y,8.2],[1.06,.84,1.225],
+      0,'M43','solarium lounger teak frame '+(i+1),false);
+  }
+  for(const [i,x] of [24.27,25.72].entries()){
+    const anchor='MD_SOF_0'+(15+i);
+    for(const id of [anchor,'MD_FUR_0'+(46+i*2),'MD_FUR_0'+(47+i*2)])remove(id);
+    for(const [key,mat] of [['ownerWrap','M39'],['ownerFeet','M34']])
+      chairPart(anchor,key,[7.15,2.57,-2.07],[x,i?2.17:2.30,3.95],[.96,1,1],i?-1.12:1.12,
+        mat,'suite port lounge chair '+(i+1)+' '+key);
+  }
+  for(const id of ['MD_SOF_017','MD_FUR_051','MD_FUR_052','MD_FUR_053'])remove(id);
+  const stool='MD_SOF_017';
+  chairPart(stool,'writingStool',[8.25,2.57,2.00],[26.40,-1.68,3.95],[.88,.9,1.08],0,
+    'M49','suite cobalt writing stool');
+  for(const x of [26.19,26.57])
+    add(stool,box([x,-1.86,3.95,x+.042,-1.52,4.28],.012),'M49','suite stool upholstered side '+x);
   // Floor finishes belong to the existing slabs. The guest mat covers only the
   // distributor and stops before the first stair tread.
   floorMat('LD_DCK_001',[13.36,-.545,1.551,17.09,.33,1.56],'lower lobby cloud pile runner');
@@ -214,7 +280,6 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
     if(id==='MD_SOF_006'&&p.feature?.includes('rug'))material='M37';
     if(p.feature==='inclined instrument display')material='M98';
     if(id==='UD_FUR_038'&&p.feature==='continuous dark instrument bank')material='M47';
-    if(id==='UD_SOF_017'&&p.finish?.[3]===3)material='M69';
     if(material){p.materialID=material;p.finish=materials[material];}
   }
   detail.objects=[...detail.replacements.values()].flat().concat(detail.additions);

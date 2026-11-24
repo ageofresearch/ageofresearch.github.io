@@ -37,8 +37,8 @@ async function measureAccess(base=defaultBase,out=defaultOut){
    const result=await frame.evaluate(async()=>{
     const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
     if(w.model.bridgeAccessLoadState!=='ready')throw Error('Access preparation failed');
-    w.enterRoom('MD_R02');n.position=[17,.2];n.stair=null;n.elevation=3.95;w.cameraElevation=3.95;w.applyPosition();
-    const path=[[17,.2],[18.35,.2],[18.5,1.35],[19.16,1.35],[19.16,1.15],[19.16,1.1],[19.16,-1.62],[19.16,-1.8],[19.78,-1.8],[19.78,-1.25],[20.5,-1.25],[20.5,0]];
+    w.enterRoom('MD_R02');n.position=[17.3,.2];n.stair=null;n.elevation=3.95;w.cameraElevation=3.95;w.applyPosition();
+    const path=[[17.3,.2],[18.35,.2],[18.5,1.35],[19.16,1.35],[19.16,1.15],[19.16,1.1],[19.16,-1.62],[19.16,-1.8],[19.78,-1.8],[19.78,-1.25],[20.5,-1.25],[20.5,0]];
     let leg=0,index=1,previous;const start=performance.now(),original=app.frame;
     await new Promise((resolve,reject)=>{
      app.frame=function(dt){try{

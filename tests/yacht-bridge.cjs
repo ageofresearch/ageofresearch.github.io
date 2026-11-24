@@ -5,7 +5,7 @@ module.exports=async function bridgeViews(frame,out,readFrame,mobile){
  for(const {name,position,target}of [
   {name:'passage',position:[18.3,1.7],target:[20.5,1.2,6.8]},
   {name:'helm',position:[20.5,0],target:[22.4,0,6.95]},
-  {name:'screens',position:[21.35,-.5],target:[22.3,0,7.05]},
+  {name:'screens',position:[21.35,-.74],target:[22.3,0,7.05]},
   {name:'bow',position:[21.35,.7],target:[29,0,6.5]},
   {name:'stairs',position:[20.4,-.7],target:[19.16,-.2,5.5]},
   {name:'return',position:[20.5,1.7],target:[17.2,1.7,6.7]},

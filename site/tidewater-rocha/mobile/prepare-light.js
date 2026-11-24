@@ -65,7 +65,7 @@ export function prepareOpaque(source,map,indices) {
         layer=20;u=(localY+localX*.72)*3.2;v=(elevation+localX*.81)*5.0;
         if(code===51){
           const hem=clamp((elevation-4.744)/.028);
-          for(let c=0;c<3;c++)color[j+c]*=1.12+.82*hem;
+          for(let c=0;c<3;c++)color[j+c]*=1.08+.18*hem;
         }
       }
       else if(code===3){layer=2;u=fu*430/(2*Math.PI);v=fv*410/(2*Math.PI);}

@@ -1,10 +1,13 @@
-// The cockpit and port panoramas constrain the four backs, the tabletop and
+// The cockpit and port panoramas constrain the row, both end chairs, the tabletop and
 // the visible feet. Dimensions are a photographic fit in Rocha model units.
 const floor = 3.95;
 // Rear cap centreline (x, y) and rotation about the deck normal.
 const placements = [
-  [5.3467, -1.6422, -.01302], [5.3597, -1.0304, .00263],
-  [5.3570, -.4407, .00173], [5.3522, .1485, -.02152],
+  [5.347115, -1.642679, -0.017638],
+  [5.364700, -1.028647, 0.002630],
+  [5.359502, -0.445600, -0.006270],
+  [5.350306, 0.147861, -0.021520],
+  [4.5714, .9370, 1.5461], [4.4367, -2.3500, -1.6243],
 ];
 
 export function furnishCockpitChairs({add, obstacle, tube, patch, merge}) {
@@ -90,8 +93,10 @@ export function furnishCockpitChairs({add, obstacle, tube, patch, merge}) {
       .477-.021*Math.sin(Math.PI*u)-.004*Math.sin(Math.PI*v)),{both:true});
     // Turn the fabric over its upper hem. The narrow upward-facing fold catches
     // skylight; the free bottom edge bows slightly between the two sleeves.
+    // The port head chair has a lower top hem between the same capped posts.
+    const hemDrop=i===4?.007:0;
     const backAt = (u,h,depth) => point(depth+.011*Math.sin(Math.PI*u),
-      .538*(u-.5),h-.0045*Math.sin(Math.PI*u));
+      .538*(u-.5),h-.0045*Math.sin(Math.PI*u)-hemDrop*(h-.6256)/(.8417-.6256));
     const back = merge([[.6256,.8001,-.0366,-.0083],[.8001,.8278,-.0083,-.0096],
       [.8278,.8417,-.0096,-.021]].map(([low,high,x0,x1]) =>
       patch(5,1,(u,v) => backAt(u,low+(high-low)*v,x0+(x1-x0)*v),{both:true})));

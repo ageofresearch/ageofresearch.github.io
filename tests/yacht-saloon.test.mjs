@@ -48,8 +48,18 @@ test('the shared deck profile includes the whole saloon and is reproducible and 
     });
     const coords=flat=>Array.from({length:flat.length/6},(_,i)=>flat.slice(6*i,6*i+2));
     const plan=convexHull(coords(geometry(rim).vertices));
-    const shells=saloon.parts.filter(p=>p.feature==='rounded wraparound shell and arms');
-    assert.equal(shells.length,4);
+    const shells=saloon.parts.filter(p=>/diningWrap/.test(p.feature));
+    assert.equal(shells.length,20);
+    const seats=saloon.parts.filter(p=>p.feature.includes('diningLegs'));
+    assert.equal(seats.length,40);
+    for(let i=1;i<=10;i++){
+      const pieces=shells.filter(p=>p.feature.startsWith('dining chair '+i+' '));
+      const back=pieces.toSorted((a,b)=>b.bounds[5]-a.bounds[5])[0], cushion=pieces.find(p=>p!==back);
+      const mid=(p,k)=>(p.bounds[k]+p.bounds[k+3])/2;
+      const facing=[0,1].map(k=>mid(cushion,k)-mid(back,k));
+      const toTable=[0,1].map(k=>mid(top,k)-mid(back,k));
+      assert.ok(facing[0]*toTable[0]+facing[1]*toTable[1]>.015,'Dining chair '+i+' faces away');
+    }
     for(const shell of shells){
       const band=clipGeometry(geometry(shell),[...rim.bounds.slice(0,3),...rim.bounds.slice(3,5),top.bounds[5]]);
       for(const [x,y] of coords(band.vertices))

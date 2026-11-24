@@ -76,11 +76,11 @@ function clothMips(flag=false) {
  let w=512,h=256,data=new Uint8Array(w*h);
  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
    if(flag){data[y*w+x]=flagTexel(x,y);continue;}
-   const u=(x+.5)/16, v=(y+.5)/8;
+   const u=(x+.5)/8, v=(y+.5)/4;
    const over=(Math.floor(u)+Math.floor(v))%2===0;
    const warp=Math.sin(Math.PI*u)**2, weft=Math.sin(Math.PI*v)**2;
    const fleck=field(x/512,y/256,32);
-   const tone=.38+.36*(over?warp:weft)+.22*warp*weft+.20*fleck;
+   const tone=.59+.095*(over?warp:weft)+.055*warp*weft+.075*fleck;
    data[y*w+x]=Math.round(255*tone/1.1);
  }
  for(;;){

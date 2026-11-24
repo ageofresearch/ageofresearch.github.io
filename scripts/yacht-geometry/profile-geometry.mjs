@@ -148,18 +148,17 @@ function localDraw(positions, indices, surface, { axis, box, eye }) {
   return { axis, box, lowCount: low.length, indices: sorted(low).concat(sorted(high)) };
 }
 
-export function packWalkProfile(boarding, profile, audit, store, withSideDecks=false) {
+export function packWalkProfile(boarding, profile, audit, store) {
   // From a single side of the yacht fewer triangles can ever face the eye.
   // Both halves share the centreline and keep every possible front face.
-  const lateralBands=withSideDecks&&['main','exterior','upper','guest'].includes(profile)?bands:0;
   let geometryBytes = 0;
   const batches = boarding.meshes.map((mesh) => {
     const geometry = mesh.geometry,
       glass = mesh.material.transparent;
     const draw=(left,right)=>opaqueRanges(geometry.attributes.position.array,geometry.index.array,
       profile,geometry.attributes.aSurface.array,left,right);
-    const submission=glass?{indices:geometry.index.array}:draw(-4.5,lateralBands?0:4.5);
-    if(!glass&&lateralBands){
+    const submission=glass?{indices:geometry.index.array}:draw(-4.5,0);
+    if(!glass){
       const port=draw(0,4.5),offset=submission.indices.length;
       submission.ranges.push(...port.ranges.map(([first,count])=>[offset+first,count]));
       submission.indices=submission.indices.concat(port.indices);
@@ -230,5 +229,5 @@ export function packWalkProfile(boarding, profile, audit, store, withSideDecks=f
     (glass.indices.length +
       Math.max(opaque.localView?.count ?? 0,...(opaque.views??[]).map(v=>v.count), ...opaque.ranges.map(([, count]) => count))) /
     3;
-  return { batches, triangles, geometryBytes, audit, visibility: { start, step, ...(lateralBands&&{lateralBands}) } };
+  return { batches, triangles, geometryBytes, audit, visibility: { start, step, lateralBands: bands } };
 }

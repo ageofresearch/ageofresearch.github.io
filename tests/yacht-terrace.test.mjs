@@ -46,8 +46,8 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
   const furnishings=manifest.parts.filter(p=>p.role==='furniture');
-  assert.equal(furnishings.length,34);
-  assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','chair-4','dining-table','port-chaise','wet-bar']);
+  assert.equal(furnishings.length,44);
+  assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','chair-4','chair-5','chair-6','dining-table','port-chaise','wet-bar']);
   assert.ok(!manifest.parts.some(p=>/MD_SAN_|covered-aft-seating|oval-table/.test(p.id)));
   assert.ok(manifest.floor.every(([a,b,c])=>Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>1e-10),'Degenerate faces must not open navigation holes');
   const lights=manifest.parts.flatMap(p=>Array.from(new Float32Array(generated.binary.buffer,generated.binary.byteOffset+p.light.offset,p.light.length)));
@@ -169,6 +169,17 @@ test('dining chairs face the table and clear their neighbours and upper stair ra
     assert.equal(indexFootprints([footprint])(5.60,cy,.14),false);
     assert.ok(sling.bounds[1]<table.bounds[4]&&sling.bounds[4]>table.bounds[1]);
   }
+  for(const [n,side] of [[5,1],[6,-1]]){
+    const group=manifest.parts.filter(p=>p.groupID==='chair-'+n);
+    const back=group.find(p=>p.feature.endsWith('canvas back')).bounds;
+    const seat=group.find(p=>p.feature.endsWith('sling seat')).bounds;
+    const cx=(seat[0]+seat[3])/2,cy=(seat[1]+seat[4])/2;
+    assert.ok(side*((back[1]+back[4])/2-cy)>.18);
+    assert.ok(side>0?back[1]>table.bounds[4]:back[4]<table.bounds[1]);
+    assert.ok(seat[5]<table.bounds[2]&&cx>table.bounds[0]&&cx<table.bounds[3]);
+    const footprint=manifest.collisionFootprints.find(f=>f.id==='furniture/chair-'+n);
+    assert.ok(indexFootprints([footprint])(cx,cy,.14));
+  }
   const data=JSON.parse(await readFile(new URL('../rocha/luz-de-mar/model.json',root)));
   const buffer=await readFile(new URL('../rocha/luz-de-mar/model.bin',root));
   const source=buildYachtGeometry({data,binary:buffer.buffer.slice(buffer.byteOffset,buffer.byteOffset+buffer.byteLength)},0,{mtuEngines:false,seaStrainers:false});
@@ -186,7 +197,7 @@ test('dining chairs face the table and clear their neighbours and upper stair ra
 test('the aisle behind the four backs connects both ends of the dining table',()=>{
   const {boarding,dispose}=walkingModel();
   try {
-    const points=[[4.50,1.06],[5.65,1.06],[5.65,-2.29],[4.50,-2.29]];
+    const points=[[4.55,1.17],[5.65,1.17],[5.65,-2.68],[4.55,-2.68]];
     for(let i=1;i<points.length;i++){
       for(let k=0;k<=100;k++){
         const p=points[i-1].map((a,j)=>a+(points[i][j]-a)*k/100);

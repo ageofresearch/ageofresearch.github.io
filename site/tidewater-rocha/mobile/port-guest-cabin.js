@@ -70,7 +70,16 @@ export function furnishPortCabin({add,remove,source,box,slab,outline,fit}) {
   const pad=(b,r,mat,name)=>add(dressing,slab(outline((b[0]+b[3])/2,(b[1]+b[4])/2,b[3]-b[0],b[4]-b[1],r),b[2],b[5],.015),mat,'port cabin '+name);
   pad([14.36,.53,1.56,14.77,1.50,1.88],.16,'M18','dressing seat recessed base');
   pad([14.36,.50,1.85,14.87,1.53,2.00],.18,'M39','curved upholstered dressing seat');
-  pad([14.36,.53,1.96,14.49,1.47,2.17],.06,'M39','dressing seat back');
+  // Follow the vanity wall around the end of the cushion, leaving the
+  // opening towards the berth. The shelf sits at the opposite end.
+  const wrap=[];
+  for(let i=0;i<=12;i++){
+    const a=Math.PI+i*Math.PI/24;
+    wrap.push([14.66+.29*Math.cos(a),.80+.28*Math.sin(a)]);
+  }
+  const inner=wrap.map(([x,y])=>[14.66+(x-14.66)*.61,.80+(y-.80)*.60]);
+  add(dressing,slab([[14.37,1.45],...wrap,...inner.reverse(),[14.483,1.45]],1.96,2.17,.018),
+    'M39','port cabin dressing seat back');
   pad([14.36,1.39,2.10,14.73,1.80,2.14],.16,'M17','oval dressing shelf');
 
   // Warm wood and dark edging frame the two existing hull-window openings.

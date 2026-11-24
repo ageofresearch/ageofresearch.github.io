@@ -210,7 +210,7 @@ async function capture(browser,mobile,directory=out,profilePasses=false) {
       const bridgeResult=await frame.evaluate(async()=>{
         const app=__app,w=app.yachtWalk,n=w.nav,rows=[];
         w.enterRoom('UD_R01');n.position=[17.2,0];n.stair=null;n.elevation=6;w.cameraElevation=6;w.applyPosition();
-        const path=[[17.2,0],[17.2,1.7],[20.5,1.7],[20.5,0],[20.5,-.8],[21.35,-.8],[21.35,-.5]];
+        const path=[[17.2,0],[17.2,1.7],[20.5,1.7],[20.5,0],[20.5,-.8],[21.35,-.8],[21.35,-.74]];
         let leg=0,index=1,previous;const start=performance.now(),original=app.frame;
         await new Promise((resolve,reject)=>{
           app.frame=function(dt){try{

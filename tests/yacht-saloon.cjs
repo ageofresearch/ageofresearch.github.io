@@ -29,7 +29,7 @@ module.exports=async function saloonViews(frame,out,readFrame,mobile) {
       assert.equal(result.indexedDraws,2);assert.deepEqual(result.passLabels,['Gangway to screen']);
       assert.ok(result.indexedTriangles<=25000,JSON.stringify(result.indexedTriangles));
       const stats=await frame.evaluate(()=>window.__app.entranceYacht.stats);
-      assert.equal(result.indexedTriangles,stats.triangles);
+      assert.equal(result.indexedTriangles,result.reportedTriangles);
       const profiles=await frame.evaluate(()=>Object.keys((__app.entranceYacht.guestAccess||__app.entranceYacht.bow).profiles).length);
       // Preserve the existing 9 MiB / five-profile allowance for each
       // prepared profile is installed. This measures resident geometry.

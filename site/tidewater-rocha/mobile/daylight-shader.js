@@ -135,17 +135,19 @@ struct V {
  // The sole and rug already carry model-space coordinates in their UVs.
  let compact=o.layer>=63;
  if(compact){o.layer-=64;}
- let contactReceiver=(o.layer==0 || o.layer==6) && n.y>.78 && abs(pos.y-1.94)<.022 &&
-   pos.z>=${ownerContactBounds[0]*.9786111111-17.615} && pos.z<=${ownerContactBounds[2]*.9786111111-17.615} && abs(pos.x)<2.56;
+ var contactReceiver=false;
+ if((o.layer==0 || o.layer==6) && n.y>.78 && abs(pos.y-1.94)<.022){
+   let modelX=(pos.z+17.615)/.9786111111;
+   contactReceiver=modelX>=${ownerContactBounds[0]} && modelX<=${ownerContactBounds[2]} && abs(pos.x)<2.56;
+ }
  if(compact){
    if(any(o.direct>vec3f(.001))){
      let lit=textureSampleCompareLevel(shadow,shadowSampler,o.light.xy*vec2f(.5,-.5)+.5,o.light.z-.00030);
      o.direct*=lit;
    }else{o.direct=vec3f(0.);}
-   if(contactReceiver){o.light.z=0.;}
-   else{o.indirect+=o.direct;o.direct=vec3f(0.);}
+   if(!contactReceiver){o.indirect+=o.direct;o.direct=vec3f(0.);}
  }
- if(contactReceiver){o.layer+=64;}
+ if(contactReceiver){o.layer+=select(64,128,compact);}
  return o;
 }
 @diagnostic(off, derivative_uniformity)
@@ -155,31 +157,24 @@ fn shade(in:V)->vec4f{
    return vec4f(display(dye*in.indirect),1.);
  }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
- if(in.layer>=64){
-   let rug=in.layer==70;
-   let solePoint=vec2f(in.uv.x*2.15,(in.uv.y*8.-64.)*.105);
-   let rugPoint=in.uv*vec2f(2.77,4.20)+vec2f(24.08,-2.08);
-   let contact=suiteContactVisibility(select(solePoint,rugPoint,rug),ownerContactMap,tileSampler);
-   // Room contact attenuates ambient. Direct sun uses the solar shadow map.
-   var radiance=max(vec3f(0.),(in.indirect+.055)*sqrt(contact)-.055);
-   if(any(in.direct>vec3f(.001))){
-     var lit=1.;
-     if(in.light.z>.0){lit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);}
-     radiance+=in.direct*lit;
-   }
-   let layer=select(5+clamp(i32(floor(in.uv.y))-1,0,12),5,rug);
-   let tile=textureSample(tiles,tileSampler,in.uv,layer).r*1.1;
-   return vec4f(clamp((radiance+.055)*tile-.055,vec3f(0.),vec3f(1.)),1.);
- }
  var radiance=in.indirect;
- if(any(in.direct>vec3f(.001))){
+ let finish=in.layer & 63;
+ if(in.layer>=64){
+   let sole=vec2f(in.uv.x*2.15,(in.uv.y*8.-64.)*.105);
+   let rug=in.uv*vec2f(2.77,4.20)+vec2f(24.08,-2.08);
+   let contact=suiteContactVisibility(select(sole,rug,finish==6),ownerContactMap,tileSampler);
+   // The ambient endpoint is in the sRGB power domain. Sunlight is added below.
+   radiance=max(vec3f(0.),(radiance+.055)*sqrt(contact)-.055);
+ }
+ if(in.layer>=128){radiance+=in.direct;}
+ else if(any(in.direct>vec3f(.001))){
    let lit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
    radiance+=in.direct*lit;
  }
  if(in.layer>=0){
-   let layer=select(in.layer-1,5+clamp(i32(floor(in.uv.y))-1,0,12),in.layer==0);
-   let upholstery=in.layer==24;
-   let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
+   let layer=select(finish-1,5+clamp(i32(floor(in.uv.y))-1,0,12),finish==0);
+   let upholstery=finish==24;
+   let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,finish==20 || upholstery)).r;
    var tile=weaveValue*1.1;
    if(upholstery){tile=.94+(weaveValue-.615)*2.05;}
    radiance=(radiance+.055)*tile-.055;

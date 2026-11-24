@@ -1,87 +1,23 @@
+import {furnishOwnerBerth} from './owner-berth.js?v=owner-berth-1';
+
 // Suite finishes are registered to the port and starboard Master Cabin
 // panoramas. Keep the bed footprint and the two existing routes to the head.
 export function furnishOwnerSuite({add,remove,box,slab,outline,circle}){
   const suite='MD_FUR_041';
   const put=(anchor,geometry,material,name)=>add(anchor,geometry,material,'suite '+name);
   const fit=(anchor,b,mat,name,r=0)=>put(anchor,box(b,r),mat,name);
-  const center=.018;
   function round(anchor,x,y,w,d,b,t,mat,name){
     put(anchor,slab(outline(x,y,w,d,Math.min(w,d)*.49),b,t,0),mat,name);
   }
   remove(suite,p=>!/speaker/.test(p.feature||''));
   for(const id of ['MD_SOF_011','MD_SOF_012','MD_SOF_013','MD_FUR_042','MD_FUR_043','MD_FUR_050'])remove(id);
 
-  fit(suite,[24.11,-.85,3.95,25.91,.88,4.050],'M18','recessed berth plinth',.037);
-  const berthRim=outline(25,center,1.948,1.893,.096);
-  // Use one contour for the gold band and dark welt. Each ring owns its side
-  // faces. The two rings share a horizontal edge with no overlapping caps.
-  const trim=(bottom,top,material,name)=>{
-    const vertices=[],indices=[];
-    for(let i=0;i<berthRim.length;i++){
-      const p=berthRim[i],q=berthRim[(i+1)%berthRim.length];
-      const dx=q[0]-p[0],dy=q[1]-p[1],len=Math.hypot(dx,dy),base=vertices.length/6;
-      for(const [r,z] of [[p,bottom],[q,bottom],[p,top],[q,top]])vertices.push(...r,z,dy/len,-dx/len,0);
-      indices.push(base,base+1,base+2,base+2,base+1,base+3);
-    }
-    put(suite,{vertices,indices},material,name);
-  };
-  // The closed lower support and duvet seal the stack behind the trim.
-  fit(suite,[24.104,-.871,4.047,25.926,.901,4.218],'M18','berth support behind welt');
-  trim(4.082,4.099,'M21','slim warm berth trim');
-  trim(4.099,4.238,'M18','upholstered lower berth');
-  fit(suite,[24.08,-.910,4.208,25.946,.947,4.493],'M13','rounded linen duvet',.068);
+  furnishOwnerBerth(put,{box,slab,outline});
   fit(suite,[23.992,-1.052,4.232,24.160,1.087,5.015],'M16','curved padded headboard',.074);
-  for(const [i,y] of [-.427,.45].entries()){
-    const anchor=i?'MD_SOF_012':'MD_SOF_013';
-    fit(anchor,[24.17,y-.382,4.489,24.560,y+.382,4.619],'M13','sleeping pillow '+i,.061);
-    const pillow=box([24.42,y-.195,4.530,24.662,y+.195,4.710],.067);
-    // Tilt the scatter pillows back into the bedding.
-    for(let j=0;j<pillow.vertices.length;j+=6){
-      const a=pillow.vertices[j]-24.54,b=pillow.vertices[j+2]-4.53;
-      const nx=pillow.vertices[j+3],nz=pillow.vertices[j+5],c=.87462,s=.48481;
-      pillow.vertices[j]=24.54+c*a-s*b;pillow.vertices[j+2]=4.53+s*a+c*b;
-      pillow.vertices[j+3]=c*nx-s*nz;pillow.vertices[j+5]=s*nx+c*nz;
-    }
-    put(anchor,pillow,'M117','warm scatter pillow '+i);
-  }
 
   // Lay the pale cabin boards inside the partitions and window sills.
   put(suite,slab([[22.661,-2.51],[25.08,-2.51],[27.164,-2.47],
     [27.164,2.46],[25.08,2.52],[22.661,2.52]],3.9504,3.951,0),'M118','pale oak sole');
-
-  // The coverlet follows the crown of the duvet and bends around both edges.
-  const halfDrape=[[0,4.512],[.22,4.512],[.44,4.512],[.66,4.512],[.855,4.515],
-    [.908,4.504],[.940,4.462],[.953,4.388],[.955,4.310]];
-  const across=halfDrape.slice(1).reverse().map(([y,z])=>[-y,z]).concat(halfDrape);
-  const along=[25.25,25.36,25.56,25.73,25.853];
-  const vertices=[],indices=[];
-  function cloth(x,[u,height]){
-    const edge=Math.max(0,Math.abs(u)-.66)/.292;
-    const fold=Math.sin(x*30+u*33)+.35*Math.cos(x*62-u*46);
-    return [x+.024*u*u+edge*.005*fold,center+u+.007*edge*fold,height+.006*fold];
-  }
-  for(let i=0;i<along.length;i++)for(let j=0;j<across.length;j++){
-    const point=cloth(along[i],across[j]);
-    const a=cloth(along[Math.max(0,i-1)],across[j]),b=cloth(along[Math.min(along.length-1,i+1)],across[j]);
-    const c=cloth(along[i],across[Math.max(0,j-1)]),d=cloth(along[i],across[Math.min(across.length-1,j+1)]);
-    const [ux,uy,uz]=b.map((v,k)=>v-a[k]),[vx,vy,vz]=d.map((v,k)=>v-c[k]);
-    const normal=[uy*vz-uz*vy,uz*vx-ux*vz,ux*vy-uy*vx],len=Math.hypot(...normal);
-    vertices.push(...point,...normal.map(v=>v/len));
-  }
-  for(let i=0;i<along.length-1;i++)for(let j=0;j<across.length-1;j++){
-    const a=i*across.length+j,b=a+across.length;
-    indices.push(a,b,a+1,b,b+1,a+1);
-  }
-  put(suite,{vertices,indices},'M111','draped gray coverlet');
-
-  // One textile surface. The curved cut-in keeps the lounge-side floor visible.
-  const rug=[];
-  for(let i=0;i<48;i++){
-    const a=i*Math.PI/24,y=Math.sin(a)*1.61;
-    const scoop=.54*Math.exp(-((y+1.13)**2)/.13)*Math.max(0,Math.cos(a));
-    rug.push([24.91+1.71*Math.cos(a)-scoop,y+.04]);
-  }
-  put(suite,slab(rug,3.951,3.960,0),'M95','single shaped navy carpet');
 
   // Rounded textile panels, a warm accent and inlaid dark joints run behind
   // the berth. The central backing leaves the walks beside the nightstands open.

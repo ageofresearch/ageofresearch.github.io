@@ -229,13 +229,39 @@ test('the owner suite keeps its two routes and the camera at the head passage',a
   }
   const {model}=await full();
   try{
-    const {renderedParts}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
+    const {renderedParts,surfaceTriangles}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
+    const {indexFootprints}=await import('../site/tidewater-rocha/mobile/terrace-geometry.js');
     const parts=renderedParts(model);
     const count=pattern=>parts.filter(p=>p.anchor==='MD_FUR_041'&&pattern.test(p.feature||'')).length;
     assert.equal(count(/^suite.*(?:carpet|rug)$|^shaped owner rug$/),1);
     assert.equal(count(/^suite.*(?:coverlet|runner)$/),1);
     assert.ok(parts.every(p=>p.anchor!=='MD_SOF_011'||p.feature!=='folded coverlet with hanging edge'));
     assert.equal(count(/^suite coffer band/),3);
+    const rug=parts.find(p=>p.feature==='suite single shaped navy carpet');
+    const insideRug=indexFootprints(surfaceTriangles(rug,3.958,.0001).map(polygon=>({polygon})));
+    assert.equal(insideRug(24.60,-1.55,0),false,'The deep starboard cut-in exposes oak');
+    assert.equal(insideRug(25.28,-1.80,0),true,'The starboard tip remains underfoot');
+    assert.equal(insideRug(25.47,1.91,0),true,'The wider port shoulder follows the reference');
+    assert.equal(insideRug(26.59,.14,0),true,'The front of the rug runs under the end of the bed');
+    const blanket=parts.find(p=>p.feature==='suite draped gray coverlet');
+    assert.ok(blanket.bounds[1]>-.79&&blanket.bounds[4]>.99,'Only the port edge hangs down');
+    assert.ok(parts.some(p=>p.feature==='suite ivory woven fringe'&&p.bounds[2]<4.24));
+    // A ray through the visible port fold must hit the throw before the
+    // duvet. This caught white triangles poking through the gray fabric.
+    const duvet=parts.find(p=>p.feature==='suite folded white duvet');
+    function heightAt(part,x,y){
+      let height=-Infinity;
+      for(let i=0;i<part.indices.length;i+=3){
+        const [a,b,c]=part.indices.slice(i,i+3).map(id=>part.vertices.slice(id*6,id*6+3));
+        const ux=b[0]-a[0],uy=b[1]-a[1],vx=c[0]-a[0],vy=c[1]-a[1],det=ux*vy-uy*vx;
+        if(Math.abs(det)<1e-9)continue;
+        const u=((x-a[0])*vy-(y-a[1])*vx)/det,v=(ux*(y-a[1])-uy*(x-a[0]))/det;
+        if(u>=0&&v>=0&&u+v<=1)height=Math.max(height,a[2]+u*(b[2]-a[2])+v*(c[2]-a[2]));
+      }
+      return height;
+    }
+    for(const x of [25.215,25.309,25.480,25.787,25.803])
+      assert.ok(heightAt(blanket,x,.956)>heightAt(duvet,x,.956)+.003,'No linen pokes through at '+x);
     assert.ok(parts.filter(p=>p.feature?.startsWith('suite ')).every(p=>p.vertices.every(Number.isFinite)));
   }finally{model.dispose();}
 });

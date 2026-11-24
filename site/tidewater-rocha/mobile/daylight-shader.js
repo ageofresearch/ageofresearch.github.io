@@ -87,6 +87,12 @@ struct V {
    o.indirect=o.indirect*mix(.79,1.,exposed)
      +vec3f(.07,.077,.086)*edge*edge*(.38+.62*exposed);
  }
+ if(o.layer==6 || o.layer==70){
+   // Directional pile reflects much more window light across the nap.
+   let view=normalize(frame.eye.xyz-pos);
+   let nap=smoothstep(-.58,.73,view.x+.18*view.z);
+   o.indirect*=mix(.88,1.31,nap);
+ }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
  if(o.layer==21 || o.layer==22 || o.layer==85 || o.layer==86){
    let table=o.layer==22 || o.layer==86;

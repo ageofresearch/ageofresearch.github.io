@@ -149,6 +149,10 @@ test('the packed atlas keeps the actual teak texels at deck coordinates and fits
      queue:{writeTexture({mipLevel},data,stride,size){writes[mipLevel]={data,size};}}};
    const atlas=createFinishPatterns(device),teak=teakPatternMips();
    assert.equal(textures.length,1);assert.ok(atlas.bytes<3600000);assert.equal(writes.length,10);
+   const {data,size:[w,h]}=writes[0],n=w*h;
+   // The suite finishes occupy pages outside the supported teak range.
+   assert.ok(Math.max(...data.subarray(5*n,5*n+512))-Math.min(...data.subarray(5*n,5*n+512))>30);
+   assert.notDeepEqual(data.subarray(5*n,5*n+32),data.subarray(6*n,6*n+32));
    for(const row of [25,40,64,76,99])for(const mip of [0,1,4,7]){
      const {data,size:[w,h]}=writes[mip],page=Math.floor(row/8)-1,y=(row*32+16)>>mip,x=224>>mip;
      assert.equal(data[(page+5)*w*h+(y%h)*w+x],teak[mip].data[y*w+x]);

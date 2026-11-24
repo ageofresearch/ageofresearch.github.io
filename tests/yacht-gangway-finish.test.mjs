@@ -18,6 +18,7 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import { simplify } from '../scripts/build-yacht-saloon.mjs';
 import { compactGeometry } from '../scripts/build-yacht-sun.mjs';
 import { finishPatternMips, teakPatternMips } from '../site/tidewater-rocha/mobile/finish-patterns.js';
+import { guestAccessVersion } from '../site/tidewater-rocha/mobile/guest-access.js';
 import { MeshoptSimplifier } from '../scripts/yacht-geometry/node_modules/meshoptimizer/index.js';
 await MeshoptSimplifier.ready;
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
@@ -133,7 +134,7 @@ test('each fallback and active profile preserves the three boarding material ide
     const manifest = JSON.parse(await readFile(new URL('mobile/' + name + '.json', root)));
     const buffer = await readFile(new URL('mobile/' + name + '.bin', root)),
       data = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
-    assert.equal(manifest.version, 'vr-detail-1');
+    assert.equal(manifest.version, name === 'guest-access' ? guestAccessVersion : 'vr-detail-1');
     for (const [profile, p] of Object.entries(manifest.profiles)) {
       assert.ok(p.triangles <= 25000);
       assert.equal(p.batches.length, 2);

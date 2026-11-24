@@ -12,7 +12,7 @@ export function furnishOwnerSuite({add,remove,box,slab,outline,circle}){
   remove(suite,p=>!/speaker/.test(p.feature||''));
   for(const id of ['MD_SOF_011','MD_SOF_012','MD_SOF_013','MD_FUR_042','MD_FUR_043','MD_FUR_050'])remove(id);
 
-  furnishOwnerBerth(put,{box,slab,outline});
+  furnishOwnerBerth(put,{box,slab});
   fit(suite,[23.992,-1.052,4.232,24.160,1.087,5.015],'M16','curved padded headboard',.074);
 
   // Lay the pale cabin boards inside the partitions and window sills.

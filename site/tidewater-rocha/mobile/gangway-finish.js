@@ -164,6 +164,13 @@ if(code==60.0){
  let yarn=sin(in.P.x*118.+in.P.y*41.)*sin(in.P.z*152.+in.P.y*57.);
  s.albedo*=.972+.025*yarn;
 }
+if(code==61.0){
+ let u=(in.P.z*.76+in.P.x*.65)*2430.;
+ let v=(in.P.y*.88+in.P.x*.52-in.P.z*.45)*2360.;
+ let weave=sin(u)*sin(v+.3*sin(u));
+ let filter=1.-smoothstep(.55,3.14,max(fwidth(u),fwidth(v)));
+ s.albedo*=1.+.26*weave*filter;
+}
 if(code==43.0){
  let fiber=in.P.xz;
  let warp=sin(fiber.x*2.7+sin(fiber.y*3.9))*sin(fiber.y*3.3+fiber.x);

@@ -98,7 +98,6 @@ bake('captainPads',140,5,b=>b[0]>2.89&&b[3]<3.57&&b[2]>-.40&&b[5]<.40,105,true);
 bake('captainHardware',140,9,b=>b[0]>2.85&&b[3]<3.45&&b[5]<.38&&b[1]<6.3,50,true);
 bake('ownerWrap',135,9,b=>b[0]>6.7&&b[3]<7.54&&b[2]<-1.7,135,true);
 bake('ownerFeet',135,5,(b,n)=>b[0]>6.9&&b[3]<7.4&&b[2]<-1.8&&n===316,18,true);
-bake('writingStool',135,22,()=>true,80,true);
 bake('loungerTimber',164,1,(b,n)=>b[0]<-4.45&&b[2]>0&&n===20,20,true);
 const output=new URL('../../site/tidewater-rocha/mobile/tour-furniture-data.js',import.meta.url);
 await writeFile(output,'// Generated from the pinned Grande 36M r110 by bake-tour-furniture.mjs.\nexport default '+JSON.stringify(catalog)+';\n');

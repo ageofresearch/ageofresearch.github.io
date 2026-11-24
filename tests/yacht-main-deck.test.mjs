@@ -265,6 +265,11 @@ test('the owner suite keeps its two routes and the camera at the head passage',a
     const carpetDraw=guest.profiles.main.audit.find(p=>p.id.endsWith('suite-single-shaped-navy-carpet/main-deck'));
     assert.equal(carpetDraw.triangles,rug.indices.length/3,'Packaging preserves the complete carpet silhouette');
     assert.equal(carpetDraw.error,0);
+    const chairParts=parts.filter(p=>p.feature?.startsWith('suite cobalt writing chair '));
+    const chairDraws=guest.profiles.main.audit.filter(p=>p.id.includes('suite-cobalt-writing-chair-'));
+    assert.equal(chairParts.length,4);
+    assert.deepEqual(chairDraws.map(p=>p.triangles),chairParts.map(p=>p.indices.length/3));
+    assert.ok(chairDraws.every(p=>p.error===0),'Mobile preserves the rounded upholstery and bolster');
     const {ownerRugOutline}=await import('../site/tidewater-rocha/mobile/owner-berth.js');
     const contour=ownerRugOutline();
     assert.ok(contour.length>=160);

@@ -131,8 +131,18 @@ test('chair backs and headrests face the photographed fixtures and open deck',()
   const helm=named('helm chair captainPads'),hardware=named('helm chair captainHardware');
   assert.ok(highEdge(helm,0)<21 && helm.every(p=>p.materialID==='M109'));
   assert.ok(hardware.length>=3 && Math.min(...hardware.map(p=>p.bounds[2]))<6.01);
-  const writing=named('suite cobalt writing stool'),desk=named('suite window writing surface')[0];
-  assert.ok(writing.length===2 && highEdge(writing,1)>desk.bounds[4]);
-  assert.ok(Math.abs(center(desk)[0]-center(writing[0])[0])<.04);
+  const writing=named('suite cobalt writing chair '),desk=named('suite window writing surface')[0];
+  const seat=named('suite cobalt writing chair seat')[0],roll=named('suite cobalt writing chair bolster')[0];
+  const feet=writing.filter(p=>p.feature.endsWith('support'));
+  assert.equal(writing.length,4);
+  assert.ok(writing.every(p=>p.materialID==='M126'&&p.vertices.every(Number.isFinite)));
+  assert.ok(highEdge([roll],1)>center(seat)[1],'The low bolster is on the cabin side');
+  assert.ok(Math.abs(center(desk)[0]-center(seat)[0])<.04);
+  assert.ok(roll.bounds[5]-seat.bounds[5]<.10,'The bolster remains low above the seat');
+  assert.equal(feet.length,2);
+  for(const foot of feet){
+    assert.ok(foot.bounds[2]>=3.95&&foot.bounds[2]<=3.956&&foot.bounds[5]>seat.bounds[2]);
+    assert.ok(foot.bounds[4]-foot.bounds[1]>.30,'Each upholstered support is a full-depth panel');
+  }
   assert.ok(!parts.some(p=>p.anchor==='MD_FUR_053'),'Occasional table intersects the writing stool');
 });

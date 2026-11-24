@@ -24,7 +24,7 @@ export async function buildGuestAccess() {
       if(context.profile==='main'){
         if(p.context)return {error:0};
         if(p.role==='main-deck' && /salon (curved boucle module|lounge chair)/.test(p.feature))return {error:.004};
-        if(p.feature==='suite single shaped navy carpet')return {error:0};
+        if(p.feature==='suite single shaped navy carpet'||p.feature?.startsWith('suite cobalt writing chair '))return {error:0};
         if(/^suite (continuous navy welt|low warm berth trim)$/.test(p.feature))return {error:.002};
         if(p.role==='main-deck')return {error:p.glass?0:p.bounds[0]>=17.7?.004:.014};
         if(p.role==='guest-stair'||p.role==='bridge-stair-context')return {error:.012};
@@ -165,7 +165,7 @@ export async function buildGuestAccess() {
       }
       parts.push(...additions,...extractMainDeck(model));
       const physical=model.guestFloor,flight=model.stairInventory.flights.find(f=>f.id==='guest');
-      return {mainDeck:model.mainDeck,version:'owner-contours-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
+      return {mainDeck:model.mainDeck,version:'owner-writing-chair-1',room:guestRoom,cabin:portCabin,cabinRoute:cabinWalk,landings:guestLandings,domains:guestDomains,guestPartIDs:additions.map(p=>p.id),
         accessPartIDs:parts.filter(p=>p.role?.startsWith('access-')).map(p=>p.id),
         route:[...guestApproach,...flight.route.path.toReversed(),guestLandings.lower,[16.8,-.1],[13.7,-.1]],
         floor:physical.floor,collisionFootprints:compact(physical.collisionFootprints),

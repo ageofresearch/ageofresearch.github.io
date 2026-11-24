@@ -93,6 +93,14 @@ struct V {
    let nap=smoothstep(-.58,.73,view.x+.18*view.z);
    o.indirect*=mix(.88,1.31,nap);
  }
+ if(o.layer==24 || o.layer==88){
+   // The cobalt cloth picks up cool light on the window-facing pile.
+   let view=normalize(frame.eye.xyz-pos);
+   let grazing=1.-clamp(abs(dot(normal,view)),0.,1.);
+   let window=smoothstep(-.45,.65,-normal.x+.32*normal.y);
+   o.indirect*=mix(vec3f(.80,.85,.92),vec3f(1.06,1.09,1.18),window);
+   o.indirect+=vec3f(.030,.041,.070)*grazing*grazing*window;
+ }
  o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
  if(o.layer==21 || o.layer==22 || o.layer==85 || o.layer==86){
    let table=o.layer==22 || o.layer==86;
@@ -150,7 +158,16 @@ fn shade(in:V)->vec4f{
  }
  if(in.layer>=0){
    let layer=select(in.layer-1,5+clamp(i32(floor(in.uv.y))-1,0,12),in.layer==0);
-   let tile=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20)).r*1.1;
+   let upholstery=in.layer==24;
+   let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,in.layer==20 || upholstery)).r;
+   var tile=weaveValue*1.1;
+   if(upholstery){
+     let yarn=in.uv*vec2f(76.,91.);
+     let detail=1.-smoothstep(.24,.76,max(fwidth(yarn.x),fwidth(yarn.y)));
+     let thread=sin(yarn.x*6.2831853)*sin((yarn.y+.22*yarn.x)*6.2831853);
+     let fleck=fract(sin(dot(floor(yarn),vec2f(53.13,113.27)))*17147.7)-.5;
+     tile=.99+(weaveValue-.615)*1.55+detail*(.18*thread+.17*fleck);
+   }
    radiance=(radiance+.055)*tile-.055;
  }
  return vec4f(radiance,1.);

@@ -122,10 +122,11 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
     assert.equal(boarding.safe(0,4.25),false,'No invented outboard walkway');
     const landing=boarding.parts.find(p=>p.feature==='widened upper teak boarding landing');
     assert.ok(landing.bounds[4]<3.6,'The landing must join the existing deck footprint');
-    const stern=createSternFeatures();
+    const stern=createSternFeatures({mobile:true});
     const coamings=stern.parts.filter(p=>/swept outer stair coaming/.test(p.feature));
     assert.equal(coamings.length,2);
-    assert.equal(coamings[0].bounds[5],coamings[1].bounds[5],'Keep both original swept coamings intact');
+    const originalStarboard=createSternFeatures().parts.find(p=>p.feature==='transom starboard swept outer stair coaming');
+    assert.deepEqual(coamings.find(p=>p.feature===originalStarboard.feature),originalStarboard);
     assert.equal(boarding.height(boarding.end),boarding.layout.deckHeight,'Gangway arrival must meet the deck');
     const treads=stern.parts.filter(p=>/transom port teak tread/.test(p.feature));
     assert.equal(treads.length,6);

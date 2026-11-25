@@ -16,7 +16,7 @@ const tb=arrayBuffer(await readFile(new URL('aft-terrace.bin',root)));
 
 export function fixture({ready=true}={}) {
   const group=new Group();group.userData={yacht:basis};
-  const model={group},transom=createSternFeatures(),terrace=structuredClone(terraceManifest);
+  const model={group},transom=createSternFeatures({mobile:true}),terrace=structuredClone(terraceManifest);
   terrace.parts=terrace.parts.map(part=>{
     const result={...part};
     for(const key of ['vertices','indices','light','surfaceTypes']) {

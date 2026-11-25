@@ -15,7 +15,7 @@ const buffer=bin.buffer.slice(bin.byteOffset,bin.byteOffset+bin.byteLength);
 
 function fixture() {
   const group=new Group();group.userData={yacht:basis};
-  const model={group}, transom=createSternFeatures();
+  const model={group}, transom=createSternFeatures({mobile:true});
   const terrace=structuredClone(manifest);
   terrace.parts=terrace.parts.map(part=>{
     const result={...part};
@@ -189,15 +189,23 @@ test('port lower landing, kick reveal and inset footwell form separate supported
   try {
     const part=name=>model.transom.parts.find(p=>p.feature===name);
     const plinth=part('transom port pale step 1');
-    const bands=['perimeter lip','teak margin board','caulk seam']
+    const bands=['perimeter lip','teak margin board']
       .map(name=>part('port stair landing '+name)).concat(part('transom port teak tread 1'),part('port stair landing field caulking'));
     const kick=part('port stair recessed kick face'), shell=part('transom port pale step 2');
     const well=part('transom port teak tread 2'), surround=part('port stair moulded footwell surround');
     const landingZ=plinth.bounds[5],footwellZ=well.bounds[5];
     assert.ok(access.lowerHeight<landingZ && landingZ<footwellZ);
     assert.equal(kick.bounds[2],landingZ);
-    assert.equal(kick.bounds[5],shell.bounds[2]);
+    assert.ok(kick.bounds[5]>shell.bounds[2],'The moulding overlaps the recessed face in elevation');
     assert.ok(kick.bounds[0]>shell.bounds[0]+.04,'The kick is set back under the moulded nose');
+    assert.equal(landingZ,3.04);
+    assert.ok(plinth.bounds[0]<-.5 && plinth.bounds[2]<2.7,'The sponson projects aft and rounds down to its sole');
+    const profile=Array.from({length:plinth.vertices.length/6},(_,i)=>plinth.vertices.slice(i*6,i*6+3));
+    const aftAt=z=>Math.min(...profile.filter(point=>Math.abs(point[2]-z)<1e-8).map(point=>point[0]));
+    assert.ok(aftAt(2.815)<aftAt(landingZ)-.17,'The front pushes out towards the water below the teak');
+    assert.ok(aftAt(2.815)<aftAt(plinth.bounds[2])-.11,'The front returns smoothly at the sole');
+    const inboard=part('port stair sponson inboard skin');
+    assert.ok(inboard.bounds[1]>=2.44,'The flare leaves the inboard water gap open');
     assert.equal(shell.bounds[5],footwellZ);
     assert.equal(surround.bounds[5],footwellZ);
     assert.equal(topTriangles(plinth).length,0,'A second cap under the teak would flicker');
@@ -206,13 +214,21 @@ test('port lower landing, kick reveal and inset footwell form separate supported
     for(const y of [2.72,2.91,3.10,3.27])for(let x=.33;x<.92;x+=.031)
       assert.equal(top.filter(faces=>onSurface(x,y,faces)).length,1,'Landing surface ownership at '+[x,y]);
     const seams=topTriangles(part('port stair landing field caulking'));
-    for(let y=2.586;y<3.4;y+=.096){
+    for(let row=0;row<9;row++){
+      const y=2.58+row*.104;
       assert.ok(onSurface(.8,y,seams),'Missing landing caulk at '+y);
       assert.ok(!onSurface(.8,y+.01,seams),'Caulk must remain within its narrow strip');
     }
-    assert.ok(!top.some(faces=>onSurface(.15,3.52,faces)),'Outboard aft corner follows the hull sweep');
+    assert.ok(!top.some(faces=>onSurface(-.36,3.51,faces)),'Outboard aft corner follows the hull sweep');
     assert.ok(onSurface(1.38,3.03,topTriangles(well)));
-    assert.ok(onSurface(1.24,3.03,topTriangles(surround)));
+    assert.ok(onSurface(1.074,3.03,topTriangles(surround)));
+    assert.ok(!onSurface(1.38,3.03,topTriangles(surround)),'Well and collar have distinct surfaces');
+    for(const riser of [shell,part('transom port pale step 3'),part('transom port pale step 4'),part('transom port pale step 5')]){
+      const normals=Array.from({length:riser.vertices.length/6},(_,i)=>riser.vertices[i*6+3]);
+      assert.ok(normals.every(x=>x<-.6),'Recess and riser faces must face aft with back-face culling');
+    }
+    const jamb=part('beach club swept jamb 1'),cover=part('port stair flush service cover');
+    assert.ok(cover.bounds[1]>jamb.bounds[1] && cover.bounds[4]<jamb.bounds[4],'Cover is within its moulded jamb');
     const treads=Array.from({length:6},(_,i)=>part('transom port teak tread '+(i+1)));
     assert.ok(treads.every((p,i)=>p && (!i || p.bounds[5]>treads[i-1].bounds[5])));
     assert.ok(Math.abs(treads.at(-1).bounds[5]-access.treads.at(-1).height)<1e-8);

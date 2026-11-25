@@ -1,25 +1,26 @@
 import {portMooring} from './cockpit-fittings.js?v=main-deck-complete-1';
 import {fittedFurniture} from './tour-furniture.js?v=port-guest-1';
+import {portStairGelcoat} from './port-stair.js?v=port-stair-2';
 
 export const beachClubCanopyTop = 4.845;
 
 // Source axes are forward, port and up. The two stair landings register the
 // photographic proportions to the existing hull. These are model dimensions.
-export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extrude }) {
+export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extrude, face }, { mobile = false } = {}) {
   const slab = (bounds, radius, material, name) => add(box(bounds,radius),material,name);
   const pad = (bounds, material, name, radius=.12) => {
     const [x,y,z,X,Y,Z]=bounds;
     return add(cushion(outline((x+X)/2,(y+Y)/2,X-x,Y-y,radius),z,Z),material,name);
   };
   const emit=add;
-  add=(geometry,material,name)=>{
+  add=(geometry,material,name,extra={})=>{
     const light=[];
     for(let i=0;i<geometry.vertices.length;i+=6){
       const [x,y,z]=geometry.vertices.slice(i,i+3);
       const depth=Math.max(0,Math.min(1,(x-.83)/1.75)),edge=Math.min(1,Math.abs(y)/2.28);
       light.push(z>4.56||x<.83?.96:.94-.39*depth-.065*edge);
     }
-    return emit(geometry,material,name,{light});
+    return emit(geometry,material,name,{...extra,light});
   };
   const sill=.84, back=2.64, half=2.28, head=4.57;
   slab([back,-half,2.84,back+.09,half,head+.08],.009,'M89','beach club aft-facing bulkhead');
@@ -27,7 +28,8 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   slab([back-.032,-.87,3.52,back-.024,.22,head-.10],.003,'M90','beach club central satin inset');
   for(const side of [-1,1]) {
     // Sloping jamb narrows towards its crown, as seen from the platform.
-    const outerJamb=side===1?.125:.19;
+    const besidePortStair=mobile && side===1;
+    const outerJamb=besidePortStair?.29:side===1?.125:.19;
     const profile=[[sill,side*half],[back,side*half],[back,side*(half+.19)],[sill-.10,side*(half+outerJamb)]];
     const cheek=extrude(profile,2.84,head+.12,.012);
     for(let i=0;i<cheek.vertices.length;i+=6){
@@ -39,7 +41,18 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
       const length=Math.hypot(nx,ny,nz);
       cheek.vertices[i+3]=nx/length;cheek.vertices[i+4]=ny/length;cheek.vertices[i+5]=nz/length;
     }
-    add(cheek,'M113','beach club swept jamb '+side);
+    if(besidePortStair){
+      add(cheek,'M89','beach club swept jamb '+side,portStairGelcoat);
+      // Set the inspection cover on the same raked surface as its surround.
+      const cover=(loop,depth)=>face(loop,(u,z)=>{
+        const lift=(z-2.84)/(head+.12-2.84);
+        return {point:[sill-.10*u+.30*lift-depth,half+outerJamb*u-.21*lift,z],normal:[-.925,-.319,.115]};
+      });
+      add(cover([[.22,3.67],[.89,3.67],[.89,3.93],[.22,3.93]],.002),
+        'M47','port stair service cover reveal');
+      add(cover([[.24,3.678],[.87,3.678],[.87,3.922],[.24,3.922]],.004),
+        'M89','port stair flush service cover',{finish:[0x7583a0,.29,.16,4]});
+    }else add(cheek,'M113','beach club swept jamb '+side);
     const y=side*1.65;
     slab([back-.038,y-.391,2.851,back-.027,y+.391,head-.079],.005,'M47','beach club locker reveal '+side);
     slab([back-.07,y-.38,2.86,back-.025,y+.38,head-.09],.015,'M90','beach club flush locker '+side);
@@ -104,6 +117,7 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   add(pipe([[.96,-2.11,2.84],[.96,-2.11,4.59],[.95,-2.10,4.68],[.89,-2.08,4.74],[.77,-2.08,4.75],[.71,-2.08,4.70]],.023,8),'M19','swim platform stainless shower riser');
   add(post([.71,-2.08,4.695],[.71,-2.08,4.714],.09,.065,12),'M19','swim platform rain head');
   for(const side of [-1,1]){
+    if (mobile && side === 1) continue;
     const y=side*3.555;
     add(pipe([[.64,y,3.14],[1.34,y,3.51],[2.42,y,4.102],[3.30,y,4.192]],.019,8),'M19','outboard stair coaming cap rail '+side);
   }

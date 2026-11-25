@@ -112,7 +112,12 @@ struct V {
    let sky=direct.a*(.25+.75*max(.0,dot(normal,vec3f(beam,.45,0.))));
    o.indirect*=1.+vec3f(.13,.17,.21)*sky*edge*edge;
  }
- o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
+ // The steep port jamb is nearly parallel to the sun at the Beach Club.
+ // Move its receiver off the 512 px depth map's stepped self-shadow.
+ let portJamb=pos.x>1.98 && pos.x<2.55 && pos.z> -16.94 && pos.z< -14.68 &&
+              pos.y>.90 && pos.y<2.69 && abs(normal.y)<.50;
+ let shadowOffset=select(.009,.064,portJamb);
+ o.light=(frame.light*vec4f(pos+normal*shadowOffset,1.)).xyz;
  if(o.layer==21 || o.layer==22 || o.layer==85 || o.layer==86){
    let table=o.layer==22 || o.layer==86;
    let compact=o.layer>=64;

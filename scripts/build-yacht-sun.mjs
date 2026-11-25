@@ -76,7 +76,7 @@ export async function buildSun({extend,lod,profileNames=['exterior','upper','sun
         audit.push({id:p.id,sourceTriangles:p.indices.length/3,triangles:result.indices.length/3,error:result.lodError||0,support,stair,...placement,...choice.omit&&choice.reason?{omission:choice.reason}:{}});return compactGeometry(result);
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
-        sternParts:createSternFeatures().parts,terraceParts:[...lowerParts,...parts.filter(p=>profile==='main'||p.role!=='main-deck')],geometryTransform});
+        sternParts:createSternFeatures({ mobile: true }).parts,terraceParts:[...lowerParts,...parts.filter(p=>profile==='main'||p.role!=='main-deck')],geometryTransform});
       if(profile==='upper'||profile==='guest'||profile==='exterior'||profile==='bow') {
         // The walks see several overlapping decks. Submit nearby opaque
         // surfaces first, so hidden patterned surfaces cost depth

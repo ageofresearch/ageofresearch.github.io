@@ -92,7 +92,7 @@ export async function buildUpper() {
         return result;
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
-        sternParts:createSternFeatures().parts,terraceParts:[...terrace,...saloon,...parts],geometryTransform});
+        sternParts:createSternFeatures({ mobile: true }).parts,terraceParts:[...terrace,...saloon,...parts],geometryTransform});
       profiles[profile]=packWalkProfile(boarding,profile,audit,store);
       boarding.dispose();
       console.log(profile,profiles[profile].triangles);

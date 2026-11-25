@@ -19,7 +19,7 @@ export async function buildGangway(world) {
   const materials = createFinishes(record.position[1], true, true, true, true);
   const model = { group, record };
   const lake = world.waterBodies.find(body => body.id === record.lakeId);
-  const stern = createSternFeatures();
+  const stern = createSternFeatures({ mobile: true });
   const bounds = stern.focusBounds;
   const beachClub = bounds.slice(0,3).map((min,i) => (min+bounds[i+3])/2);
   const boarding = createBoarding(model, lake, { gangwayOnly: true, includeLanding: true, sternParts: stern.parts, terraceParts: terrace.parts, materials });

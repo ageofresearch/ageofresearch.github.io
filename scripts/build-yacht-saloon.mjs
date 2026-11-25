@@ -220,7 +220,7 @@ export async function buildSaloon() {
         return result;
       };
       const boarding=createBoarding({group:new Group()},null,{gangwayOnly:true,includeLanding:true,materials,
-        sternParts:createSternFeatures().parts,terraceParts:[...terrace,...parts],geometryTransform});
+        sternParts:createSternFeatures({ mobile: true }).parts,terraceParts:[...terrace,...parts],geometryTransform});
       profiles[profile]=packWalkProfile(boarding,profile,audit,store);
       boarding.dispose();
       if(profiles[profile].triangles>25000)throw Error(profile+' exceeds the 25,000 triangle budget');

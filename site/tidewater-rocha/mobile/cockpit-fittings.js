@@ -17,6 +17,6 @@ export function wetBarOutline() {
 // Keep the ledge outside the boarding path and give the sole and drum a
 // continuous bearing surface. The fittings and coaming use the same datum.
 export const portMooring = Object.freeze({
-  start:3.56, end:5.58, inner:3.27, outer:3.79, axis:3.42, sill:4.04,
-  cleat:3.85, drum:4.56,
+  start:3.08, end:5.58, inner:3.284, outer:3.79, axis:3.48, sill:4.34,
+  cleat:3.51, drum:4.158, forwardCleat:4.665,
 });

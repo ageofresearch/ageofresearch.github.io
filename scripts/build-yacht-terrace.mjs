@@ -108,7 +108,8 @@ export async function buildTerrace() {
     if (!geometry.indices.length) return;
     if (role === 'floor' || role === 'roof' || role === 'hull') geometry = subdivide(geometry);
     parts.push({ id: source.id, feature: source.feature, role, materialID: source.materialID,
-      finish: source.finish, glass: !!source.glass, smokedGlass: !!source.glass,
+      finish: role==='floor' ? [0x9e9999,.77,0,1] : source.finish,
+      glass: !!source.glass, smokedGlass: !!source.glass,
       ...geometry, bounds: boundsOf(geometry.vertices) });
   }
   const replacements = model.interiorDetail.replacements;
@@ -128,7 +129,10 @@ export async function buildTerrace() {
     if (/^(shaped teak landing inboard caulk border|teak passage outer margin border)$/.test(part.feature))
       add(part, [2.28,-3.8,3.83,8.5,3.8,3.96], 'deck-trim');
     if (part.feature === 'aft sliding glazing frames and mullions') add(part, region, 'frame');
-    if (part.id.startsWith('MD/boarding-route/') && /coaming|bulwark|recess (lower ledge|polished support)|cap above/.test(part.feature)) add(part, region, 'boundary');
+    if (part.id.startsWith('MD/boarding-route/') && /coaming|bulwark|recess lower ledge|^port mooring/.test(part.feature)) {
+      const role = part.feature === 'port mooring curved sole margin' ? 'deck-trim' : 'boundary';
+      add(part, [2.31,-3.8,3.83,8.5,3.8,6.12], role);
+    }
   }
   const service = [...model.interiorDetail.objects, ...model.machinery.parts];
   const seen = new Set();
@@ -152,7 +156,8 @@ export async function buildTerrace() {
     .map(([id,group])=>({id:'furniture/'+id,polygon:footprint(group)}));
   // The broad first-delivery stair box would close the actual passage beside
   // chair 3. Project only solid geometry at the walking body's height instead.
-  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure'].includes(p.role)).flatMap(part=>{
+  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure'].includes(p.role) ||
+    p.feature==='integrated mooring recess lower ledge').flatMap(part=>{
     const body=clipGeometry(part,[3,-4,4.04,9,4,5.65]);
     const polygon=footprint([body]);
     return polygon.length>=3 ? [{id:part.id,polygon}] : [];

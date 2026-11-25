@@ -19,6 +19,8 @@ export async function buildGuestAccess() {
       if(p.role==='stair-sightline')return context.profile==='guest'?{error:0}:{omit:true,reason:'Covered by the main deck outside the guest stair'};
       if(p.role==='service-bulkhead'||p.role==='stairwell-lining')return {error:0};
       if(p.role==='passage-floor')return {error:.014};
+      if(context.profile==='main' && /^port mooring (?:polished support|socket |circular catch|satin upper coaming|broad end bracket)|^integrated mooring recess lower ledge/.test(p.feature))
+        return {error:.014};
       if(p.role==='main-side-guard'||/^MD\/boarding-route\/[2-5]$/.test(p.id)||
         context.profile==='main'&&p.id.startsWith('MD/boarding-route/'))return {error:0};
       if(context.profile==='main'){

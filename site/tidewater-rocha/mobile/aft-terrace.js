@@ -3,7 +3,7 @@ import { indexFootprints } from './terrace-geometry.js?v=chair-fidelity-1';
 const version = 'vr-detail-1';
 
 export async function loadTerrace() {
-  const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}`, import.meta.url))));
+  const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}&geometry=port-cockpit-1`, import.meta.url))));
   if (responses.some(response => !response.ok)) throw Error('No se pudo cargar la terraza de popa');
   const [manifest, buffer] = await Promise.all([responses[0].json(), responses[1].arrayBuffer()]);
   if (manifest.version !== version) throw Error('Actualiza la página para cargar la terraza');
@@ -33,6 +33,11 @@ export function connectTerrace(boarding, terrace, sternFloor = [], saloon = null
   const obstacles = terrace.blockers.concat(terrace.parts
     .filter(part => (saloon ? ['boundary'] : ['boundary', 'frame', 'glazing']).includes(part.role))
     .map(({ bounds: b }) => [b[0],b[1],b[3],b[4]]));
+  for (const part of boarding.parts || []) {
+    if (part.feature !== 'port cockpit seat swept gelcoat arm') continue;
+    const [x,y,,X,Y]=part.bounds;
+    obstacles.push([x,y,X,Y]);
+  }
   const cells = new Map();
   for (const t of [...terrace.floor, ...sternFloor, ...(saloon?.floor||[])]) {
     const xs=t.map(p=>p[0]), ys=t.map(p=>p[1]);

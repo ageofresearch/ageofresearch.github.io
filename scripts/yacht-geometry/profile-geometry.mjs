@@ -6,6 +6,8 @@ export function detailError(part, error, profile) {
   const name = part.feature || part.name || '';
   if (name === 'Panama flag cloth' || name.includes('stern flagpole')) return 0;
   if (part.context || name.startsWith('port stair ')) return 0;
+  if (profile === 'exterior' && /cockpit port (?:cast twin horn|cleat oval crown|capstan flared)|cockpit mooring drum.* 1$|port cockpit seat polished/.test(name))
+    return Math.min(error, .0105);
   // These deck fragments are also the visible ceiling of the main deck.
   if (profile === 'exterior' && part.id.startsWith('UD_DCK_001/stairs/stair-opening'))
     return Math.min(error, 0.012);

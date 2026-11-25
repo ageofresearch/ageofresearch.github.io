@@ -1,6 +1,6 @@
-import {portMooring} from './cockpit-fittings.js?v=main-deck-complete-1';
 import {fittedFurniture} from './tour-furniture.js?v=port-guest-1';
 import {portStairGelcoat} from './port-stair.js?v=port-stair-2';
+import {buildPortMooringHardware,buildPortCockpitSeat} from './port-cockpit.js?v=port-cockpit-1';
 
 export const beachClubCanopyTop = 4.845;
 
@@ -124,15 +124,16 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   // The opposite cockpit panoramas show a paired horn fitting and a drum
   // behind the open gunwale. All fittings bear on the same narrow ledge.
   for(const side of [-1,1]){
-    const port=side===1, y=port?portMooring.axis:-3.64, base=port?portMooring.sill:4.40;
-    const hardware=(a,b,r,R,name)=>add(post(a,b,r,R,8),'M19','cockpit '+name+' '+side);
-    // Port already has the ledge, rail, and raised cap in the boarding coaming.
-    if(!port){
-      slab([3.74,-3.78,3.95,5.92,-3.50,base],.012,'M89','cockpit mooring ledge '+side);
-      slab([3.74,-3.78,4.66,5.92,-3.50,4.86],0,'M89','cockpit raised mooring cap '+side);
-      for(const x of [3.80,5.86])hardware([x,y,base],[x,y,4.66],.020,.020,'mooring cap support '+x);
+    if(side===1){
+      buildPortMooringHardware(add,{extrude,outline,post,pipe});
+      continue;
     }
-    const cleats=port?[portMooring.cleat]:[4.48,5.40];
+    const y=-3.64, base=4.40;
+    const hardware=(a,b,r,R,name)=>add(post(a,b,r,R,8),'M19','cockpit '+name+' '+side);
+    slab([3.74,-3.78,3.95,5.92,-3.50,base],.012,'M89','cockpit mooring ledge '+side);
+    slab([3.74,-3.78,4.66,5.92,-3.50,4.86],0,'M89','cockpit raised mooring cap '+side);
+    for(const x of [3.80,5.86])hardware([x,y,base],[x,y,4.66],.020,.020,'mooring cap support '+x);
+    const cleats=[4.48,5.40];
     for(const [index,cx] of cleats.entries()){
       const suffix=index===0?String(side):'forward '+side;
       slab([cx-.21,y-.09,base,cx+.21,y+.09,base+.025],.015,'M19','cockpit cleat sole '+suffix);
@@ -142,17 +143,20 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
         hardware([top[0]-dir*.035,y,top[2]],[top[0]+dir*.061,y,top[2]+.012],.045,.030,'cleat horn '+dir+' '+index);
       }
     }
-    const x=port?portMooring.drum:4.92;
+    const x=4.92;
     hardware([x,y,base],[x,y,base+.04],.116,.096,'mooring drum foot');
     hardware([x,y,base+.04],[x,y,base+.22],.067,.073,'mooring drum');
     hardware([x,y,base+.22],[x,y,base+.25],.094,.097,'mooring drum crown');
   }
-  const bench=fittedFurniture('banquette',[2.78,-2.16,4.06,3.65,2.16,4.78]);
+  const bench=fittedFurniture('banquette',[2.78,-2.16,4.06,3.65,mobile?1.66:2.16,4.78]);
   // Keep one envelope for the continuous bench used by full-deck navigation.
   const vertices=[],indices=[];
   for(const piece of bench){const base=vertices.length/6;vertices.push(...piece.vertices);indices.push(...piece.indices.map(i=>base+i));}
-  const seat=add({vertices,indices},'M39','covered aft seating behind transom');
-  slab([2.66,-2.10,3.95,3.59,2.10,4.07],.08,'M25','cockpit banquette base');
+  const seat=add({vertices,indices},'M39','covered aft seating behind transom',
+    mobile?{finish:[0xc0c3ce,.82,0,50]}:undefined);
+  add(box([2.66,-2.10,3.95,3.59,mobile?1.99:2.10,4.07],.08),'M25','cockpit banquette base',
+    mobile?{finish:[0x8692ab,.29,.13,4]}:undefined);
+  if(mobile)buildPortCockpitSeat(add,{extrude,outline,pipe,cushion,face});
   return seat;
 }
 

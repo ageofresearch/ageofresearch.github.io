@@ -115,7 +115,7 @@ test('the chair weave occupies an atlas slice beyond the yacht deck', () => {
   }
 });
 
-test('the packaged rails, gate, wet bar and saloon dining chairs retain their curved meshes', () => {
+test('the packaged rails, wet bar and saloon dining chairs retain their curved meshes', () => {
   const audit = manifest.profiles.exterior.audit;
   for (const [name, profile] of Object.entries(manifest.profiles)) {
     const rails = profile.audit.filter(part => /gangway-(?:top-handrail|-?1-(?:upright|seated-socket))/.test(part.id));
@@ -124,8 +124,6 @@ test('the packaged rails, gate, wet bar and saloon dining chairs retain their cu
   }
   for (const [pattern, pieces, minTriangles] of [
     [/gangway-top-handrail/, 4, 48],
-    [/open-inboard-rounded-boarding-gate-frame/, 1, 250],
-    [/gate-polished-chevron/, 1, 48],
   ]) {
     const matches = audit.filter((p) => pattern.test(p.id));
     assert.equal(matches.length, pieces);

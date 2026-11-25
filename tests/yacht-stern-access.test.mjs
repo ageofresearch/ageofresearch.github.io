@@ -300,16 +300,42 @@ test('the deployed beam, teak, and navigation share the dock to yacht slope',()=
       assert.ok(frame.finish[1]>.5 && boarding.safe((panel.bounds[0]+panel.bounds[3])/2,y,.14));
     }
     assert.equal(boarding.parts.filter(p=>p.feature.includes('underside collar')).length,2);
-    for(const side of [-1,1]){
-      const ledge=side===1 ? model.terrace.parts.find(p=>p.feature==='integrated mooring recess lower ledge') :
-        model.transom.parts.find(p=>p.feature==='cockpit mooring ledge '+side);
-      for(const name of ['cockpit cleat sole ','cockpit mooring drum foot ']){
-        const b=model.transom.parts.find(p=>p.feature===name+side).bounds;
-        assert.ok(Math.abs(b[2]-ledge.bounds[5])<1e-5);
-        assert.ok(b[0]>=ledge.bounds[0] && b[3]<=ledge.bounds[3] && b[1]>=ledge.bounds[1] && b[4]<=ledge.bounds[4]);
-      }
+    const starboard=model.transom.parts.find(p=>p.feature==='cockpit mooring ledge -1');
+    for(const name of ['cockpit cleat sole -1','cockpit mooring drum foot -1']){
+      const b=model.transom.parts.find(p=>p.feature===name).bounds;
+      assert.ok(Math.abs(b[2]-starboard.bounds[5])<1e-5);
+      assert.ok(b[0]>=starboard.bounds[0] && b[3]<=starboard.bounds[3] &&
+        b[1]>=starboard.bounds[1] && b[4]<=starboard.bounds[4]);
     }
   }finally{dispose();}
+});
+
+test('the port mooring fittings seat on the inset teak and leave a slot under the coaming',()=>{
+  const {model,dispose}=fixture();
+  try {
+    const parts=[...model.terrace.parts,...model.transom.parts];
+    const find=name=>parts.find(p=>p.feature===name);
+    const shelf=find('port mooring shelf teak').bounds;
+    const cover=find('port mooring satin upper coaming').bounds;
+    assert.ok(cover[2]-shelf[5]>.27);
+    assert.equal(parts.filter(p=>p.feature.startsWith('port mooring polished support ')).length,5);
+    assert.equal(parts.filter(p=>p.feature.startsWith('port mooring flush upper cover ')).length,2);
+    assert.equal(parts.filter(p=>p.feature.startsWith('port mooring socket centre ')).length,2);
+    const fittings=[
+      ['cockpit port cleat gasket 1','cockpit cleat sole 1'],
+      ['cockpit port cleat gasket forward 1','cockpit cleat sole forward 1'],
+      ['cockpit port drum seating gasket','cockpit mooring drum foot 1'],
+    ];
+    for(const [gasket,foot] of fittings){
+      const b=find(gasket).bounds, mount=find(foot);
+      assert.ok(b[2]<=shelf[5] && b[5]>=shelf[5]);
+      assert.ok(b[0]>=shelf[0] && b[3]<=shelf[3] && b[1]>=shelf[1] && b[4]<=shelf[4]);
+      assert.ok(Math.abs(mount.bounds[2]-b[5])<1e-5);
+      assert.deepEqual(mount.finish.slice(1),[.12,1,65]);
+    }
+    for(const name of ['swept gelcoat arm','warm teak inset','soft grey cushion','polished return grip'])
+      assert.ok(find('port cockpit seat '+name),name);
+  } finally {dispose();}
 });
 
 test('Beach Club has an open central bay, supported platform chairs and a continuous shaded entrance',()=>{
@@ -392,8 +418,9 @@ test('the cockpit openings expose the mooring fittings in both registered VR vie
     }
     const port=[[4.850025,1.354976,5.024169],[-.61472959,.54072586,-.57421518],84];
     const stbd=[[6.312899,-.901079,5.027842],[-.34789153,-.82028036,-.45399518],75];
-    assert.equal(surfaceAt(...port,451,166),'cockpit cleat sole 1');
-    assert.equal(surfaceAt(...port,600,193),'cockpit mooring drum 1');
+    assert.equal(surfaceAt(...port,421,101),'cockpit cleat sole 1');
+    assert.equal(surfaceAt(...port,529,103),'cockpit mooring drum 1');
+    assert.equal(surfaceAt(...port,634,155),'cockpit cleat sole forward 1');
     assert.equal(surfaceAt(...stbd,285,116),'cockpit cleat sole forward -1');
     assert.equal(surfaceAt(...stbd,350,105),'cockpit mooring drum -1');
     assert.equal(surfaceAt(...stbd,190,277),'rounded metallic cockpit wet bar');

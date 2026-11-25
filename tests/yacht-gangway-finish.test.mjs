@@ -106,7 +106,9 @@ test('boarding finish follows the approved deployed geometry and the independent
     });
   try {
     const rail = /gangway-(?:top-handrail|-?1-(?:upright|seated-socket)|.*(?:hanging-guard-line|rope-collar))/;
-    const retained = baseline.filter(p => !rail.test(p.id));
+    const parked = /boarding\/owner\/(?:landing-handhold|landing-mounted-post|open-inboard-|gate-)/;
+    assert.ok(boarding.parts.every(p => !parked.test(p.id)));
+    const retained = baseline.filter(p => !rail.test(p.id) && !parked.test(p.id));
     const hardware = boarding.parts.filter(p => !p.context && !rail.test(p.id));
     assert.equal(hardware.length,retained.length);
     for (const part of hardware) {

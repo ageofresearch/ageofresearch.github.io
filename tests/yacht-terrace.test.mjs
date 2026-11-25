@@ -35,12 +35,16 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.ok(generated.binary.length<=1.25*1024*1024);
   const landingBorders = manifest.parts.filter(p=>p.role==='deck-trim');
   assert.deepEqual(landingBorders.map(p=>p.feature).sort(), [
-    'shaped teak landing inboard caulk border','teak passage outer margin border',
+    'port mooring curved sole margin','shaped teak landing inboard caulk border','teak passage outer margin border',
   ]);
   for (const part of manifest.parts) {
     const isLandingBorder=part.role==='deck-trim';
-    assert.ok(part.bounds[0]>=(isLandingBorder?2.46:3.2)-1e-6 && part.bounds[3]<=8.5+1e-6,part.feature);
-    if (isLandingBorder) assert.deepEqual([part.bounds[2],part.bounds[5]],[3.956,3.956]);
+    const portMooring = /^port mooring|integrated mooring recess/.test(part.feature);
+    assert.ok(part.bounds[0]>=(portMooring?2.31:isLandingBorder?2.46:3.2)-1e-6 && part.bounds[3]<=8.5+1e-6,part.feature);
+    if (isLandingBorder) {
+      const level=portMooring?3.954:3.956;
+      assert.deepEqual([part.bounds[2],part.bounds[5]],[level,level]);
+    }
   }
   assert.ok(manifest.parts.some(p=>p.role==='roof'));
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));

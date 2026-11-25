@@ -1,6 +1,8 @@
 import {portMooring} from './cockpit-fittings.js?v=main-deck-complete-1';
 import {fittedFurniture} from './tour-furniture.js?v=port-guest-1';
 
+export const beachClubCanopyTop = 4.845;
+
 // Source axes are forward, port and up. The two stair landings register the
 // photographic proportions to the existing hull. These are model dimensions.
 export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extrude }) {
@@ -45,7 +47,7 @@ export function furnishBeachClub(add, { box, cushion, outline, post, pipe, extru
   }
   slab([sill+.27,-2.20,head,back+.03,2.20,head+.105],.065,'M92','beach club timber soffit');
   slab([sill+.22,-2.31,head+.105,back+.03,2.31,head+.18],.06,'M113','beach club canopy fascia');
-  slab([sill+.23,-2.29,head+.18,sill+.48,2.29,head+.275],.048,'M47','beach club dark rolled canopy edge');
+  slab([sill+.23,-2.29,head+.18,sill+.48,2.29,beachClubCanopyTop],.048,'M47','beach club dark rolled canopy edge');
   // One continuous rolled reveal follows both sloping jambs and turns
   // through the radiused corners beneath the fascia, as in the stern view.
   const archLeft=[[sill-.034,2.27,2.86],[sill+.205,2.091,head-.18],

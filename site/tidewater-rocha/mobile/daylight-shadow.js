@@ -71,7 +71,7 @@ export function decodeShadow(data) {
   return { positions, indices: sorted, indexFormat: stride === 2 ? 'uint16' : 'uint32', range };
 }
 export async function createDaylightShadow(device, uniform, upload) {
-  const response = await fetch(new URL('./daylight-casters.bin?v=vr-rails-6', import.meta.url));
+  const response = await fetch(new URL('./daylight-casters.bin?v=vr-rails-7', import.meta.url));
   if (!response.ok) throw Error('No se pudo cargar la geometría de sombra');
   const { positions, indices: faces, indexFormat, range } = decodeShadow(await response.arrayBuffer());
   const module = device.createShaderModule({

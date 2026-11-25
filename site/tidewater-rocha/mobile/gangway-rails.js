@@ -1,3 +1,5 @@
+import { beachClubCanopyTop } from './beach-club.js?v=main-deck-complete-1';
+
 // Source-space stations reconstructed from the Beach Club cube. The short
 // grips extend slightly over the landing. The lower fixed guards are separate.
 const sides = [
@@ -75,7 +77,7 @@ export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, pa
     const y = layout.y + sign * 0.441;
     const sectionFit = mobile ? mobileCrossSections[sign] : null;
     const elevations = mobileElevations[sign];
-    const grips = sectionFit ? referenceGrips.map((stations, section) => {
+    const fittedGrips = sectionFit ? referenceGrips.map((stations, section) => {
       const [startLift, endLift] = elevations.grips[section];
       const firstX = stations[0][0], run = stations.at(-1)[0] - firstX;
       return stations.map(([x, z, radius]) => {
@@ -83,6 +85,13 @@ export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, pa
         return [x, z + sectionFit.gripLift[section] + lift, radius * sectionFit.gripRadius[section]];
       });
     }) : referenceGrips;
+    const grips = mobile ? fittedGrips.map(stations => {
+      // Seat the upper edge of each landing tip at the Beach Club canopy
+      // height while retaining the slope and the rounded return of its tube.
+      const [, tipElevation, tipRadius] = stations.at(-1);
+      const lowering = tipElevation + tipRadius - beachClubCanopyTop;
+      return stations.map(([x, z, radius]) => [x, z - lowering, radius]);
+    }) : fittedGrips;
     for (const [section, stations] of grips.entries()) {
       const points = stations.map(([x, z]) => [x, y, z]);
       const mesh = tube(points, 1, radialSegments);
@@ -111,12 +120,14 @@ export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, pa
       const z = height(x);
       const radius = sectionFit?.radius ?? (sign === -1 ? 0.016 : 0.0135);
       const foot = [x, y, z - .015];
-      const grip = grips[index < 4 ? 0 : 1];
+      const section = index < 4 ? 0 : 1;
       const lean = sectionFit?.lean[index] ?? 0;
-      const top = [topX + lean, y, elevationAt(grip, topX + lean)];
+      const top = [topX + lean, y, elevationAt(grips[section], topX + lean)];
       const bendLift = mobile ? elevations.bends[index] : null;
+      const compression = mobile ?
+        (top[2] - foot[2]) / (elevationAt(fittedGrips[section], top[0]) - foot[2]) : 1;
       const spine = [foot, ...knees.map(([x, z], knee) =>
-        [x + lean, y, z + (bendLift?.[knee] ?? 0)]), top];
+        [x + lean, y, foot[2] + (z + (bendLift?.[knee] ?? 0) - foot[2]) * compression]), top];
       add(tube(bend(spine, .042, 1), radius, radialSegments, openEnds), 'M19',
         `gangway ${sign} upright ${index}`, { finish: polished });
       const seat = cylinder([x, y, z - .014], [x, y, z + .02], .024, radius + .002, 4);

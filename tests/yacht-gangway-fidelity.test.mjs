@@ -85,7 +85,6 @@ test('both mobile guard rails have a separate outer and inner grip and six suppo
       assert.equal(posts.length, 6);
       assert.ok(grips[0].points[0][0] > layout.start);
       assert.ok(grips[1].points.at(-1)[0] < layout.gateEnd);
-      assert.ok(grips[1].points.at(-1)[2] > layout.deckHeight + 1.15);
       const end = grips[0].points.at(-1), start = grips[1].points[0];
       assert.ok(Math.hypot(...end.map((value, axis) => value - start[axis])) > 0.045);
       assert.ok(posts.filter(p => p.bounds[3] - p.bounds[0] > 0.08).length >= 4);
@@ -94,7 +93,8 @@ test('both mobile guard rails have a separate outer and inner grip and six suppo
         const x = (socket.bounds[0] + socket.bounds[3]) / 2;
         assert.ok(socket.bounds[2] < height(x) && height(x) < socket.bounds[5]);
         assert.ok(post.bounds[2] < socket.bounds[5] && post.bounds[5] > socket.bounds[2]);
-        assert.ok(post.bounds[5] - post.bounds[2] > 0.86);
+        const rise = post.bounds[5] - height(x);
+        assert.ok(rise > 0.78 && rise < 1.05);
         assert.ok(post.finish[1] < socket.finish[1]);
       }
     }

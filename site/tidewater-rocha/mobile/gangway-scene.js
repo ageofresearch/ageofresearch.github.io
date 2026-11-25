@@ -6,6 +6,8 @@ import {
   createBoarding, createSternFeatures, createFinishes, findBerth, l as yachtBasis,
 } from '../assets/RochaYachtState-P5KwIGIl.js?v=port-guest-1';
 
+const mobileEyeHeight = 1.6 * 2 / 3;
+
 // Reuse boarding and stern assemblies, plus the pre-extracted furnished terrace.
 export async function buildGangway(world) {
   const terrace = await loadTerrace();
@@ -24,7 +26,7 @@ export async function buildGangway(world) {
   const { start, y, height, layout } = boarding;
   const footClearance = .18;
   boarding.room = {
-    ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + 1.6],
+    ...boarding.room, name: 'Pasarela', displayName: 'Pasarela', spawn: [start + footClearance, y, height(start + footClearance) + mobileEyeHeight],
     look: beachClub,
   };
   connectTerrace(boarding, terrace, stern.access.starboard.upperFloor);
@@ -46,6 +48,7 @@ export async function buildGangway(world) {
 }
 
 export function configureWalk(walk) {
+  walk.eyeHeight = mobileEyeHeight;
   configureSternWalk(walk);
   const controls = walk.controls;
   if (!controls) return;

@@ -49,6 +49,25 @@ function travel(nav,points,hz=40) {
   }
 }
 
+test('the mobile camera walks one third lower at both the deck and swim platform elevations',()=>{
+  const {walk,model,dispose}=fixture();
+  try {
+    const camera=walk.app.camera.position=model.group.position.clone();
+    const player=walk.app.player={position:camera.clone()};
+    for(const room of ['boarding','swim-platform']){
+      walk.nav.enterRoom(room);
+      walk.applyPosition();
+      const feet=walk.nav.elevation;
+      const cameraZ=model.group.worldToLocal(camera.clone()).y+basis.seaReference;
+      const playerZ=model.group.worldToLocal(player.position.clone()).y+basis.seaReference;
+      assert.ok(Math.abs(cameraZ-feet-16/15)<1e-9);
+      assert.ok(Math.abs(playerZ-feet)<1e-9);
+    }
+    const fullMapWalk=new Walk(walk.app,model,{document:null});
+    assert.equal(fullMapWalk.eyeHeight,1.6);
+  }finally{dispose();}
+});
+
 test('the actual upper floor closes the 1.44-unit gap and meets tread six and the main deck',()=>{
   const {model,access,dispose}=fixture();
   try {

@@ -36,6 +36,7 @@ mkdirSync(out, { recursive: true });
         });
         const readFrame = require('./yacht-frame-reader.cjs')(frame);
         await require('./yacht-gangway-views.cjs')(frame, out, readFrame, mobile);
+        if (mobile) await require('./yacht-gangway-steel.cjs')(page, frame, out, readFrame);
         assert.deepEqual(errors, []);
         console.log(mobile ? 'BOARDING MOBILE VIEWS PASS' : 'BOARDING FULL VIEWS PASS');
       } finally {

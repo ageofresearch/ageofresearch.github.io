@@ -13,7 +13,7 @@ import {flatBerthWater} from '../mobile/berth-landscape.js?v=main-deck-complete-
 import {yachtSky,skyRadiance} from '../mobile/yacht-sky.js?v=main-deck-complete-1';
 import {furnishTourRooms,saloonGlassCode} from '../mobile/tour-furniture.js?v=round-carpet-1';
 import {furnishBeachClub,buildPortStairFoot,swimPlatformOutline} from '../mobile/beach-club.js?v=main-deck-complete-1';
-import { makeGangwayRails } from '../mobile/gangway-rails.js?v=vr-rails-2';
+import { makeGangwayRails } from '../mobile/gangway-rails.js?v=vr-rails-3';
 import {prepareBoardingFinish,resolvePartFinish,gangwayFullSurfaceWGSL,gangwaySteelWGSL,gangwayTeak} from '../mobile/gangway-finish.js?v=vr-rails-2';
 import {correctSpatialAssemblies} from '../mobile/spatial-corrections.js?v=vr-detail-1';
 import {refineBridgeAccess} from '../mobile/bridge-access-geometry.js?v=port-guest-1';
@@ -594,7 +594,7 @@ for (let section=0;section<3;section++) {
     beam(x-.007,-.39,.001,x+.007,.39,.004,'M43',`section ${section+1} mitred end border ${x}`);
 
 }
-if(includeLanding)f(k(X.lowerLanding,X.arrivalHeight-.125,X.arrivalHeight,.015),`M42`,`shaped lower boarding landing`),f(k(X.upperLanding,3.83,X.deckHeight,.012),`M42`,`widened upper teak boarding landing`),f(ii([X.stepX-.034,2.49,X.arrivalHeight,X.stepX+.026,3.55,X.deckHeight+.005],.012),`M43`,`raised teak cockpit threshold`),f(ii([X.stepX-.036,2.51,X.deckHeight+.005,X.stepX+.105,3.53,X.deckHeight+.012],.018),`M42`,`rounded teak landing lip`);makeGangwayRails({layout:X,height:Jn,tube:V,bend:B,cylinder:R,add:f,paths:c,radialSegments:gangwayOnly?6:8});
+if(includeLanding)f(k(X.lowerLanding,X.arrivalHeight-.125,X.arrivalHeight,.015),`M42`,`shaped lower boarding landing`),f(k(X.upperLanding,3.83,X.deckHeight,.012),`M42`,`widened upper teak boarding landing`),f(ii([X.stepX-.034,2.49,X.arrivalHeight,X.stepX+.026,3.55,X.deckHeight+.005],.012),`M43`,`raised teak cockpit threshold`),f(ii([X.stepX-.036,2.51,X.deckHeight+.005,X.stepX+.105,3.53,X.deckHeight+.012],.018),`M42`,`rounded teak landing lip`);makeGangwayRails({layout:X,height:Jn,tube:V,bend:B,cylinder:R,add:f,paths:c,radialSegments:gangwayOnly?6:8,mobile:gangwayOnly});
 for(let e of[-1,1]){
   let t=X.y+e*X.railOffset,r=X.arrivalHeight+1.04;
   if(dock){

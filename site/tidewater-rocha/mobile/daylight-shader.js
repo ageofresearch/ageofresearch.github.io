@@ -4,6 +4,7 @@ import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2';
 import { ownerContactBounds, ownerContactWGSL } from './owner-contact-layout.js?v=owner-contact-1';
 import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
+import { gangwayRadianceWGSL } from './gangway-radiance.js?v=vr-rails-3';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -29,10 +30,11 @@ fn display(c:vec3f)->vec3f{
 }
 ${skyRadiance}
 ${gangwaySteelWGSL}
+${gangwayRadianceWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
- @builtin(position) clip:vec4f,@location(0) indirect:vec3f,@location(1) direct:vec3f,
+ @builtin(position) clip:vec4f,@location(0) @interpolate(perspective,centroid) indirect:vec3f,@location(1) @interpolate(perspective,centroid) direct:vec3f,
  @location(2) uv:vec2f,@location(3) @interpolate(flat) layer:i32,@location(4) light:vec3f
 }
 @vertex fn vertex(${tagged?'@builtin(vertex_index) id:u32,':''}@location(0) pos:vec3f,@location(1) n:vec4f,@location(2) color:vec4f,
@@ -61,10 +63,11 @@ struct V {
  if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
  if(isGangwaySteel(pos,rough,metal)){
-   let eye=normalize(frame.eye.xyz-pos);
    let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
    let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
-   o.layer=-5;o.indirect=display(gangwaySteel(pos,normal,eye,frame.sun.xyz,rough,lit));
+   // For these tubes the fragment reads the smooth cylinder normal before
+   // reflection. Interpolating a finished color would erase the mirror band.
+   o.layer=-5;o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,lit);
    return o;
  }
  o.indirect=shade.rgb;o.direct=direct.rgb;
@@ -164,6 +167,9 @@ fn shade(in:V)->vec4f{
  if(animateCloth && in.layer==-4){
    ${mobileFlagPaint}
    return vec4f(display(dye*in.indirect),1.);
+ }
+ if(in.layer==-5){
+   return vec4f(display(polishedGangway(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
  }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;

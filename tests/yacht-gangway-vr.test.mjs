@@ -70,6 +70,27 @@ function checkOpenings(triangles) {
   }
 }
 
+function checkMobileEdges(shapes) {
+  const errors = [];
+  for (const [part, axis, at, first, last] of reference.mobileEdges) {
+    const crossings = [];
+    for (const triangle of shapes.get(part)) {
+      for (let i = 0; i < 3; i++) {
+        const start = triangle[i], end = triangle[(i + 1) % 3];
+        const span = end[axis] - start[axis];
+        if (span === 0) continue;
+        const t = (at - start[axis]) / span;
+        if (t >= 0 && t <= 1) crossings.push(start[1 - axis] + (end[1 - axis] - start[1 - axis]) * t);
+      }
+    }
+    assert.ok(crossings.length, `${part} must cross the scan line at ${at}`);
+    errors.push(Math.abs(Math.min(...crossings) - first), Math.abs(Math.max(...crossings) - last));
+  }
+  assert.ok(Math.max(...errors) <= 3.6, `Largest contour deviation: ${Math.max(...errors)} px`);
+  const mean = errors.reduce((sum, value) => sum + value, 0) / errors.length;
+  assert.ok(mean < 1.4, `Mean contour deviation: ${mean} px`);
+}
+
 for (const mode of ['mobile', 'map']) {
   test(`${mode}: the actual rail mesh reaches the VR silhouette and preserves its openings`, () => {
     const group = new Group();
@@ -81,6 +102,7 @@ for (const mode of ['mobile', 'map']) {
       const shapes = outlines(visibleParts);
       checkLandmarks(part => shapes.get(part) ?? []);
       checkOpenings([...shapes.values()].flat());
+      if (mode === 'mobile') checkMobileEdges(shapes);
     } finally {
       boarding.dispose();
       materials.opaque.dispose();

@@ -40,6 +40,12 @@ const sides = [
 const polished = [0xd9dce1, 0.095, 1, 5];
 const sockets = [0xaab1b7, 0.24, 0.97, 5];
 const openEnds = { startCap: false, endCap: false };
+// Small mobile refinements measured across the visible tube edges at Beach
+// Club. The distant feet behind the telescopic beam retain their fitted seat.
+const mobileCrossSections = {
+  '-1': { gripLift: [.0115, .008], gripRadius: [1.18, 1.12], lean: [.004, -.006, .001, .014, .009, .003], radius: .018 },
+  '1': { gripLift: [.012, -.006], gripRadius: [1.17, 1.14], lean: [.014, 0, .019, .026, .012, .007], radius: .0165 },
+};
 
 function elevationAt(stations, x) {
   const end = stations.findIndex(point => point[0] >= x);
@@ -49,9 +55,13 @@ function elevationAt(stations, x) {
   return a[1] + (b[1] - a[1]) * fraction;
 }
 
-export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, paths, radialSegments }) {
-  for (const { sign, grips, posts } of sides) {
+export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, paths, radialSegments, mobile = false }) {
+  for (const { sign, grips: referenceGrips, posts } of sides) {
     const y = layout.y + sign * 0.441;
+    const sectionFit = mobile ? mobileCrossSections[sign] : null;
+    const grips = sectionFit ? referenceGrips.map((stations, section) =>
+      stations.map(([x, z, radius]) =>
+        [x, z + sectionFit.gripLift[section], radius * sectionFit.gripRadius[section]])) : referenceGrips;
     for (const [section, stations] of grips.entries()) {
       const points = stations.map(([x, z]) => [x, y, z]);
       const mesh = tube(points, 1, radialSegments);
@@ -69,11 +79,12 @@ export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, pa
     }
     for (const [index, [x, knees, topX]] of posts.entries()) {
       const z = height(x);
-      const radius = sign === -1 ? 0.016 : 0.0135;
+      const radius = sectionFit?.radius ?? (sign === -1 ? 0.016 : 0.0135);
       const foot = [x, y, z - .015];
       const grip = grips[index < 4 ? 0 : 1];
-      const top = [topX, y, elevationAt(grip, topX)];
-      const spine = [foot, ...knees.map(([x, z]) => [x, y, z]), top];
+      const lean = sectionFit?.lean[index] ?? 0;
+      const top = [topX + lean, y, elevationAt(grip, topX + lean)];
+      const spine = [foot, ...knees.map(([x, z]) => [x + lean, y, z]), top];
       add(tube(bend(spine, .042, 1), radius, radialSegments, openEnds), 'M19',
         `gangway ${sign} upright ${index}`, { finish: polished });
       const seat = cylinder([x, y, z - .014], [x, y, z + .02], .024, radius + .002, 4);

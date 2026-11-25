@@ -33,23 +33,12 @@ fn gangwayProbe(ray:vec3f, x:f32)->vec3f {
  return textureSampleLevel(gangwayProbes,tileSampler,vec3f(uv,station),0.).rgb;
 }
 
-fn sleeveChrome(pos:vec3f, normal:vec3f, guide:bool)->vec3f {
- let x=(pos.z+17.615)/.97861111;
- // Keep the reflection continuous across the shallow folds of the distal
- // cheek. Its beveled silhouette and the normals of the guides stay sharp.
- var finishNormal=normal;
- if(!guide && x< -2.88 && normal.y<-.30 && abs(normal.x)>.25){
-   finishNormal=normalize(vec3f(normal.x,-.022,normal.z*.16));
- }
- let ray=reflect(normalize(pos-frame.eye.xyz),finishNormal);
- let environment=gangwayProbe(ray,x);
+fn sleeveGuideChrome(pos:vec3f, normal:vec3f)->vec3f {
+ let ray=reflect(normalize(pos-frame.eye.xyz),normal);
+ let environment=gangwayProbe(ray,(pos.z+17.615)/.97861111);
  let sky=smoothstep(-.18,.21,ray.y);
- let skyBand=mix(vec3f(.132,.228,.505),vec3f(.295,.414,.602),smoothstep(-.52,.52,ray.z));
- let cool=mix(vec3f(.029,.052,.094),skyBand,sky);
- let cheek=mix(cool,environment,.22+.67*smoothstep(-1.18,-.94,x));
- let lowerGuide=mix(vec3f(.017,.021,.029),environment,.48)*mix(.79,1.,sky);
  let day=smoothstep(-.12,.17,frame.sun.y);
- return select(cheek,lowerGuide,guide)*mix(.14,1.,day);
+ return mix(vec3f(.017,.021,.029),environment,.48)*mix(.79,1.,sky)*mix(.14,1.,day);
 }
 
 fn polishedGangway(pos:vec3f, normal:vec3f, rough:f32, lit:f32)->vec3f {

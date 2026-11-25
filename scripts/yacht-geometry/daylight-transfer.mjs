@@ -4,7 +4,7 @@ const add = (p, d, t) => p.map((v, i) => v + d[i] * t);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const sub = (a, b) => a.map((v, i) => v - b[i]);
 const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
-function buildTree(faces) {
+export function buildTree(faces) {
   const lo = [Infinity, Infinity, Infinity],
     hi = lo.map((v) => -v);
   for (const f of faces)
@@ -19,7 +19,7 @@ function buildTree(faces) {
   const mid = faces.length >> 1;
   return { lo, hi, left: buildTree(faces.slice(0, mid)), right: buildTree(faces.slice(mid)) };
 }
-function ray(tree, origin, dir, limit = Infinity) {
+export function ray(tree, origin, dir, limit = Infinity) {
   let distance = limit,
     face = null;
   function visit(n) {

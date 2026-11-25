@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { gunzipSync } from 'node:zlib';
 import {
   gangwayTeak,
   gangwaySample,
@@ -18,6 +19,7 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import { simplify } from '../scripts/build-yacht-saloon.mjs';
 import { compactGeometry } from '../scripts/build-yacht-sun.mjs';
 import { finishPatternMips, teakPatternMips } from '../site/tidewater-rocha/mobile/finish-patterns.js';
+import sleeveGeometry, { layout } from '../site/tidewater-rocha/mobile/sleeve-reflection-data.js';
 import { guestAccessVersion } from '../site/tidewater-rocha/mobile/guest-access.js';
 import { MeshoptSimplifier } from '../scripts/yacht-geometry/node_modules/meshoptimizer/index.js';
 await MeshoptSimplifier.ready;
@@ -28,6 +30,30 @@ const raw = {
   vertices: [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
   indices: [0, 1, 2],
 };
+
+test('the sleeve atlas contains timber, hull and clear directions on both sides', () => {
+  const bytes = gunzipSync(Buffer.from(sleeveGeometry, 'base64'));
+  const { size, stations, bands } = layout;
+  const stride = bands.length * stations * size * size * 4;
+  assert.equal(bands.length, 6);
+  assert.equal(bytes.length, stride * 2);
+  assert.ok(bytes.length <= 840 * 1024);
+  for (let side = 0; side < 2; side++) {
+    let air = 0, timber = 0, hull = 0;
+    for (let i = side * stride / 2; i < (side + 1) * stride / 2; i += 4) {
+      const [r, g, b, alpha] = bytes.subarray(i, i + 4);
+      const distance = bytes[stride + i + 3];
+      if (alpha === 0) { air++; assert.equal(distance, 0); }
+      else {
+        assert.equal(alpha, 255);
+        assert.ok(distance > 0);
+        if (r > b + 19 && r > g + 12) timber++;
+        if (r > 45 && b >= r) hull++;
+      }
+    }
+    assert.ok(air > 0 && timber > 0 && hull > 0);
+  }
+});
 
 test('raw material-only parts retain their pattern through compaction and simplification, including explicit zero', () => {
   assert.equal(raw.finish, undefined);

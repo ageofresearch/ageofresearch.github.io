@@ -6,10 +6,10 @@ const { size, views, sleeve } = require('./fixtures/yacht-gangway-vr-steel.json'
 module.exports = async (page, frame, out, readFrame) => {
   const finishBytes = await frame.evaluate(() => __app.entranceYacht.stats.finishTextureBytes);
   assert.ok(finishBytes <= 3600000);
-  async function capture(pose, dimensions) {
+  async function capture(pose, dimensions, sun = [174.31892336154965, 27.063938270393358]) {
     await page.setViewportSize({ width: dimensions[0], height: dimensions[1] });
     await frame.waitForFunction(([w, h]) => __app.engine.width === w && __app.engine.height === h, dimensions);
-    await frame.evaluate(({ xyz, target, roll, fov }) => {
+    await frame.evaluate(({ xyz, target, roll, fov, sun }) => {
       const app = __app, walk = app.yachtWalk, camera = app.camera;
       const group = walk.model.group, basis = group.userData.yacht;
       const world = ([x, y, z]) => group.localToWorld(camera.position.clone()
@@ -24,8 +24,8 @@ module.exports = async (page, frame, out, readFrame) => {
       walk.update();
       camera.fov = fov;
       camera.updateProjectionMatrix();
-      app.daylight.set(174.31892336154965, 27.063938270393358, false);
-    }, pose);
+      app.daylight.set(...sun, false);
+    }, { ...pose, sun });
     const shot = await readFrame();
     const { width, height, pixels } = shot;
     assert.deepEqual([width, height], dimensions);
@@ -67,4 +67,20 @@ module.exports = async (page, frame, out, readFrame) => {
     console.log(`${label}: mean RGB deviation ${mean.toFixed(1)} / 255`);
   }
   writeFileSync(`${out}/steel-mobile-sleeve.png`, PNG.sync.write(image));
+
+  // This patch is on the long steel panel, over the Beach Club steps. Its
+  // warm colour comes from the timber wall, which darkens in lateral light.
+  function meanTimber(sheet) {
+    const rgb = [0, 0, 0];
+    for (let y = 737; y < 746; y++) for (let x = 1550; x < 1590; x++) {
+      const index = (y * sheet.width + x) * 4;
+      for (let c = 0; c < 3; c++) rgb[c] += sheet.data[index + c] / 360;
+    }
+    return rgb;
+  }
+  const initial = meanTimber(image);
+  const lateral = await capture(sleeve.pose, sleeve.size, [90, 35]);
+  assert.ok(initial[0] - initial[2] > 18, 'The stainless panel reflects the nearby timber');
+  assert.ok(initial[0] - meanTimber(lateral)[0] > 6, 'Moving the sun darkens the timber reflected in the panel');
+  writeFileSync(`${out}/steel-mobile-sleeve-side-light.png`, PNG.sync.write(lateral));
 };

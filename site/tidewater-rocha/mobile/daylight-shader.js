@@ -4,7 +4,8 @@ import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2';
 import { ownerContactBounds, ownerContactWGSL } from './owner-contact-layout.js?v=owner-contact-1';
 import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
-import { gangwayRadianceWGSL } from './gangway-radiance.js?v=vr-rails-5';
+import { gangwayRadianceWGSL } from './gangway-radiance.js?v=sleeve-reflections-1';
+import { sleeveReflectionWGSL } from './sleeve-reflections.js?v=sleeve-reflections-1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -31,6 +32,7 @@ fn display(c:vec3f)->vec3f{
 ${skyRadiance}
 ${gangwaySteelWGSL}
 ${gangwayRadianceWGSL}
+${sleeveReflectionWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
@@ -62,8 +64,11 @@ struct V {
  }
  if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
- if(o.layer==-6 || o.layer==-7){
-   o.indirect=display(sleeveChrome(pos,normal,o.layer==-7));return o;
+ if(o.layer==-6){
+   o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,0.);return o;
+ }
+ if(o.layer==-7){
+   o.indirect=display(sleeveGuideChrome(pos,normal));return o;
  }
  if(isGangwaySteel(pos,rough,metal)){
    let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
@@ -178,6 +183,11 @@ fn shade(in:V)->vec4f{
  }
  if(in.layer==-5){
    return vec4f(display(polishedGangway(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
+ }
+ if(in.layer==-6){
+   // Preparation frames only touch the resident index ranges and are discarded.
+   if(frame.wind.y>0.){return vec4f(.36,.42,.50,1.);}
+   return vec4f(display(sleeveChrome(in.indirect,normalize(in.direct),in.uv.x)),1.);
  }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;

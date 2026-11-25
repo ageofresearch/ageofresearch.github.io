@@ -4,7 +4,7 @@ import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2';
 import { ownerContactBounds, ownerContactWGSL } from './owner-contact-layout.js?v=owner-contact-1';
 import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
-import { gangwayRadianceWGSL } from './gangway-radiance.js?v=vr-rails-4';
+import { gangwayRadianceWGSL } from './gangway-radiance.js?v=vr-rails-5';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {

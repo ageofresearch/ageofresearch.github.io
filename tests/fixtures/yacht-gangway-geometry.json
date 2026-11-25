@@ -1,15 +1,15 @@
 [
   {
     "id": "boarding/owner/telescopic-section-1-nested-frame",
-    "geometrySHA256": "5c3796979455073592aed003ad3f43bff306242d299d82f132b32e4b8e6888a3"
+    "geometrySHA256": "9ba3bd332aa861b9a77484b6a181dc608c53bb141ecf1d15a07c988e2eda4294"
   },
   {
     "id": "boarding/owner/telescopic-section-1-recessed-underskin",
-    "geometrySHA256": "170c0209c6b6216fd31b0cc728caf9aef895c13db8726032db44145aec326d6d"
+    "geometrySHA256": "68ee18ed05f9bc856df7e8d4cf4d05a8a8fcd4e1f0036118249780637ed3feb4"
   },
   {
     "id": "boarding/owner/telescopic-section-1-inset-side-channel-lower-guide",
-    "geometrySHA256": "47ac0f88c034a706330a6c2f52034becc0ee30bf0b50ed0bff4755a93932a2b0"
+    "geometrySHA256": "64b18013e88b472519f641376cb1a427e233881591d0329e38f193e45792f8fd"
   },
   {
     "id": "boarding/owner/telescopic-section-1-teak-inset",
@@ -21,7 +21,7 @@
   },
   {
     "id": "boarding/owner/section-1-inset-side-channel--1",
-    "geometrySHA256": "afee4b208259cf06cf4a916a551c91040676a35fe7ca7f7fab0ee39acf5791ac"
+    "geometrySHA256": "09ca4ccbdde71e8116edb5ad55dc69d21a99a7fe866ad37d424ad11eeff3f3f3"
   },
   {
     "id": "boarding/owner/section-1-timber-border-1",
@@ -29,7 +29,7 @@
   },
   {
     "id": "boarding/owner/section-1-inset-side-channel-1",
-    "geometrySHA256": "fd4cfe7e9f6c33e79eaa9ddf365885744e9ffd9f01f4bf148c49b3e819f5f7c9"
+    "geometrySHA256": "2a0d89192b6d8eb97cd5627c498fae0dfc43ea5de900d6a72cd92a81f9da16be"
   },
   {
     "id": "boarding/owner/section-1-mitred-end-border--4.47",

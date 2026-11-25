@@ -6,12 +6,11 @@ import { createBoarding, createFinishes, l as basis } from '../site/tidewater-ro
 import { decodeGuestAccess } from '../site/tidewater-rocha/mobile/guest-access.js';
 
 const reference = JSON.parse(await readFile(new URL('./fixtures/yacht-gangway-vr-landmarks.json', import.meta.url)));
+const { sleeve } = JSON.parse(await readFile(new URL('./fixtures/yacht-gangway-vr-steel.json', import.meta.url)));
 const dot = (a, b) => a.reduce((sum, value, index) => sum + value * b[index], 0);
 
-function camera() {
-  const { xyz, heading, pitch, roll } = reference.camera;
-  const [w, h] = reference.size;
-  const focal = h / 2 / Math.tan(reference.panoView.verticalFov * Math.PI / 360);
+function camera({ xyz, heading, pitch, roll }, [w, h], fov) {
+  const focal = h / 2 / Math.tan(fov * Math.PI / 360);
   const along = [Math.cos(heading), Math.sin(heading), 0];
   const right = [along[1], -along[0], 0];
   const up = along.map((v, i) => i === 2 ? Math.cos(pitch) : -v * Math.sin(pitch));
@@ -25,6 +24,17 @@ function camera() {
   };
 }
 
+const projectRails = camera(reference.camera, reference.size, reference.panoView.verticalFov);
+const tipPose = sleeve.pose;
+const tipDirection = tipPose.target.map((value, axis) =>
+  (value - tipPose.xyz[axis]) * [basis.sx, basis.sy, 1][axis]);
+const projectTip = camera({
+  xyz: tipPose.xyz,
+  heading: Math.atan2(tipDirection[1], tipDirection[0]),
+  pitch: Math.atan2(tipDirection[2], Math.hypot(...tipDirection.slice(0, 2))),
+  roll: tipPose.roll,
+}, sleeve.size, tipPose.fov);
+
 const side = ([x, y], [a, b], [c, d]) => (c - a) * (y - b) - (d - b) * (x - a);
 
 function distanceToTriangle(p, triangle) {
@@ -37,8 +47,7 @@ function distanceToTriangle(p, triangle) {
   }));
 }
 
-function outlines(parts) {
-  const project = camera();
+function outlines(parts, project = projectRails) {
   return new Map(parts.map(({ feature, vertices, indices }) => {
     const tris = [];
     for (let i = 0; i < indices.length; i += 3) {
@@ -49,6 +58,20 @@ function outlines(parts) {
     }
     return [feature.slice('gangway '.length), tris];
   }));
+}
+
+function crossSection(triangles, axis, at) {
+  const crossings = [];
+  for (const triangle of triangles) {
+    for (let i = 0; i < 3; i++) {
+      const start = triangle[i], end = triangle[(i + 1) % 3];
+      const span = end[axis] - start[axis];
+      if (span === 0) continue;
+      const t = (at - start[axis]) / span;
+      if (t >= 0 && t <= 1) crossings.push(start[1 - axis] + (end[1 - axis] - start[1 - axis]) * t);
+    }
+  }
+  return crossings;
 }
 
 function measure(triangles, x, y) {
@@ -73,22 +96,22 @@ function checkOpenings(triangles) {
 function checkMobileEdges(shapes) {
   const errors = [];
   for (const [part, axis, at, first, last] of reference.mobileEdges) {
-    const crossings = [];
-    for (const triangle of shapes.get(part)) {
-      for (let i = 0; i < 3; i++) {
-        const start = triangle[i], end = triangle[(i + 1) % 3];
-        const span = end[axis] - start[axis];
-        if (span === 0) continue;
-        const t = (at - start[axis]) / span;
-        if (t >= 0 && t <= 1) crossings.push(start[1 - axis] + (end[1 - axis] - start[1 - axis]) * t);
-      }
-    }
+    const crossings = crossSection(shapes.get(part), axis, at);
     assert.ok(crossings.length, `${part} must cross the scan line at ${at}`);
     errors.push(Math.abs(Math.min(...crossings) - first), Math.abs(Math.max(...crossings) - last));
   }
   assert.ok(Math.max(...errors) <= 3.6, `Largest contour deviation: ${Math.max(...errors)} px`);
   const mean = errors.reduce((sum, value) => sum + value, 0) / errors.length;
   assert.ok(mean < 1.4, `Mean contour deviation: ${mean} px`);
+}
+
+function checkTip(triangles) {
+  for (const [x, upper, lower] of sleeve.tipScans) {
+    const ys = crossSection(triangles, 0, x);
+    assert.ok(ys.length, `Missing tip at x=${x} in the Beach Club view`);
+    assert.ok(Math.abs(Math.min(...ys) - upper) <= 7 && Math.abs(Math.max(...ys) - lower) <= 7,
+      `Tip at x=${x} has edges ${Math.min(...ys)}, ${Math.max(...ys)} instead of ${upper}, ${lower}`);
+  }
 }
 
 for (const mode of ['mobile', 'map']) {
@@ -102,7 +125,11 @@ for (const mode of ['mobile', 'map']) {
       const shapes = outlines(visibleParts);
       checkLandmarks(part => shapes.get(part) ?? []);
       checkOpenings([...shapes.values()].flat());
-      if (mode === 'mobile') checkMobileEdges(shapes);
+      if (mode === 'mobile') {
+        checkMobileEdges(shapes);
+        const firstSection = boarding.parts.filter(p => /^(?:telescopic section|section) 1\b/.test(p.feature));
+        checkTip([...outlines(firstSection, projectTip).values()].flat());
+      }
     } finally {
       boarding.dispose();
       materials.opaque.dispose();
@@ -117,8 +144,7 @@ test('the downloaded mobile exterior profile preserves the reference through mes
   const bytes = await readFile(new URL(zone.href + '.bin'));
   const { profiles } = decodeGuestAccess(manifest, bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
   const { indices, attributes: { position, aSurface } } = profiles.exterior.batches[0];
-  const project = camera();
-  const railVertices = new Map();
+  const railVertices = new Map(), tipVertices = new Map();
   for (let i = 0; i < position.length / 3; i++) {
     const [lateral, elevation, longitudinal] = position.subarray(i * 3, i * 3 + 3);
     const x = (longitudinal + basis.length / 2) / basis.sx;
@@ -126,13 +152,19 @@ test('the downloaded mobile exterior profile preserves the reference through mes
     const [roughness, metalness, finish] = aSurface.subarray(i * 4, i * 4 + 3);
     if (x >= -4.51 && x < 3 && Math.abs(Math.abs(y - 3.1) - .44) < .05 &&
         Math.abs(roughness - .095) < .0001 && metalness === 1 && finish === 5) {
-      railVertices.set(i, project(x, y, elevation + basis.seaReference));
+      railVertices.set(i, projectRails(x, y, elevation + basis.seaReference));
+    }
+    if (x >= -4.72 && x <= -2.88 && Math.abs(y - 3.1) < .49 && elevation > 1.89 && elevation < 2.275) {
+      tipVertices.set(i, projectTip(x, y, elevation + basis.seaReference));
     }
   }
-  const triangles = [];
+  const triangles = [], noseTriangles = [];
   const seen = new Set();
   for (let i = 0; i < indices.length; i += 3) {
     const a = indices[i], b = indices[i + 1], c = indices[i + 2];
+    if (tipVertices.has(a) && tipVertices.has(b) && tipVertices.has(c)) {
+      noseTriangles.push([tipVertices.get(a), tipVertices.get(b), tipVertices.get(c)]);
+    }
     if (!(railVertices.has(a) && railVertices.has(b) && railVertices.has(c))) continue;
     const key = [a, b, c].join(',');
     if (seen.has(key)) continue;
@@ -141,6 +173,7 @@ test('the downloaded mobile exterior profile preserves the reference through mes
   }
   checkLandmarks(() => triangles);
   checkOpenings(triangles);
+  checkTip(noseTriangles);
   assert.equal(profiles.exterior.batches.length, 2);
   assert.ok(profiles.exterior.triangles <= 25000);
 });

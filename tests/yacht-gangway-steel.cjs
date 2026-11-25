@@ -52,7 +52,7 @@ module.exports = async (page, frame, out, readFrame) => {
     writeFileSync(`${out}/steel-mobile-${view}.png`, PNG.sync.write(image));
   }
   const image = await capture(sleeve.pose, sleeve.size);
-  for (const [label, samples, limit] of [['cheek', sleeve.cheek, 43], ['guide', sleeve.guide, 58]]) {
+  for (const [label, samples, limit] of [['cheek', sleeve.cheek, 43], ['guide', sleeve.guide, 58], ['tip', sleeve.tipColor, 42]]) {
     let error = 0;
     for (const [x, y, ...expected] of samples) {
       const total = [0, 0, 0];

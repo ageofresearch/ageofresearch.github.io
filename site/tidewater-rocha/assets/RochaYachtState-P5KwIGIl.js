@@ -559,24 +559,34 @@ for (let section=0;section<3;section++) {
   }
   const shape=profile(width,depthFor(section),section===2),frame=Ze(),liner=Ze(),channels=[Ze(),Ze()],guide=Ze();
   function depthFor(index){return gangwayOnly ? .250+index*.024 : .074+index*.013;}
-  const world=(x,[y,z])=>{
-    // The free end of the bright cheek projects slightly ahead of the
-    // running gear. The tread and the walking obstacle remain at start.
-    const rake=gangwayOnly && x===X.start && Math.abs(y)>.42 ?
-      (z >= -.18 ? -.041 * Math.min(1, Math.max(0,-z/.16)) : .040) : 0;
-    return [x+rake,X.y+y,X.pierHeight+z];
-  };
-  function quad(mesh,points){
-    const [p,q,r,s]=points;
-    const normal=(a,b,c)=>{
-      const u=b.map((v,j)=>v-a[j]),v=c.map((value,j)=>value-a[j]);
-      return [u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
-    };
+  const world=(x,[y,z])=>[x,X.y+y,X.pierHeight+z];
+  // Beach Club outline from the deck face to the recessed running gear.
+  // Mirror the hidden half around the walking centerline.
+  const nose=gangwayOnly&&section===0?[
+    [0,.404,-.022],[-.001,.468,-.010],[-.070,.461,-.0626],[-.100,.456,-.063],
+    [-.189,.357,-.108],[-.179,.337,-.125],[-.155,.279,-.156],
+    [-.044,.098,-.209],[.016,.090,-.213],[.031,.060,-.215],
+  ]:null;
+  const nosePoint=([dx,y,z],side)=>world(start+dx,[side*y,z]);
+  const rim=nose?.filter((_,index)=>index!==2);
+  const front=rim?[...rim.map(p=>nosePoint(p,-1)),...rim.toReversed().map(p=>nosePoint(p,1))]:
+    shape.map(p=>world(start,p));
+  function triangle(mesh,p,q,r){
+    const u=q.map((v,j)=>v-p[j]),v=r.map((value,j)=>value-p[j]);
+    const n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+    const length=Math.hypot(...n);
     // On a joint one corner can coincide because the two liners share a width.
-    for(const tri of [[p,q,r],[p,r,s]]){
-      const n=normal(...tri),length=Math.hypot(...n);
-      if(length>1e-9)$e(mesh,tri,n.map(v=>v/length));
-    }
+    if(length>1e-9)$e(mesh,[p,q,r],n.map(v=>v/length));
+  }
+  function quad(mesh,[p,q,r,s]){
+    triangle(mesh,p,q,r);
+    triangle(mesh,p,r,s);
+  }
+  function capAt(mesh,points,sign){
+    const cap=cn(points.map(([x,y,z])=>[y,z,x]),(y,z,x)=>({point:[x,y,z],normal:[sign,0,0]}));
+    if(sign<0)for(let i=0;i<cap.indices.length;i+=3)[cap.indices[i],cap.indices[i+1]]=[cap.indices[i+1],cap.indices[i]];
+    const offset=mesh.vertices.length/6;mesh.vertices.push(...cap.vertices);
+    mesh.indices.push(...cap.indices.map(i=>i+offset));
   }
   const previous=section?profile(widthFor(section-1),depthFor(section-1)):null,shoulder=Ze();
   for(let i=0;i<shape.length;i++){
@@ -586,16 +596,20 @@ for (let section=0;section<3;section++) {
       edge===4||edge===6 ? guide : edge>=0&&edge<=3 ? channel : edge>=7 ? liner : frame :
       edge>=0&&edge<=4||edge===7 ? channel : edge>=8 ? liner : frame;
     // The section loop is counterclockwise when seen from the yacht end.
-    quad(mesh,[world(start,shape[i]),world(start,shape[j]),world(end,shape[j]),world(end,shape[i])]);
+    const rear=world(end,shape[i]),rearNext=world(end,shape[j]);
+    if(nose&&edge===1){
+      const shoulderPoint=nosePoint(nose[2],Math.sign(shape[i][0]));
+      triangle(mesh,front[i],shoulderPoint,rear);
+      quad(mesh,[shoulderPoint,front[j],rearNext,rear]);
+    }else quad(mesh,[front[i],front[j],rearNext,rear]);
     if(previous)quad(shoulder,[world(start,previous[i]),world(start,previous[j]),world(start,shape[j]),world(start,shape[i])]);
   }
-  for(const [x,sign] of [[start,-1],[end,1]]){
-    if(x!==X.start && x!==X.end)continue;
-    const cap=cn(shape,(y,z)=>({point:world(x,[y,z]),normal:[sign,0,0]}));
-    if(sign<0)for(let i=0;i<cap.indices.length;i+=3)[cap.indices[i],cap.indices[i+1]]=[cap.indices[i+1],cap.indices[i]];
-    const offset=frame.vertices.length/6;frame.vertices.push(...cap.vertices);
-    frame.indices.push(...cap.indices.map(i=>i+offset));
-  }
+  if(nose){
+    const upper=nose.slice(0,6),lower=nose.slice(5);
+    capAt(channels[0],[...upper.map(p=>nosePoint(p,-1)),...upper.toReversed().map(p=>nosePoint(p,1))],-1);
+    capAt(frame,[...lower.map(p=>nosePoint(p,-1)),...lower.toReversed().map(p=>nosePoint(p,1))],-1);
+  }else if(start===X.start)capAt(frame,front,-1);
+  if(end===X.end)capAt(frame,shape.map(p=>world(end,p)),1);
   f(_(frame),'M47',`telescopic section ${section+1} nested frame`,{finish:[0x262729,.67,0,0]});
   f(_(liner),section===0?'M43':'M47',`telescopic section ${section+1} recessed underskin`,
     section===0?{}:{finish:[0x41464b,.60,0,0]});

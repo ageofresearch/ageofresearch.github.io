@@ -12,7 +12,7 @@ import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-day
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
 import { ownerContactSize, uploadOwnerContact } from './owner-contact.js?v=owner-contact-1';
-import { uploadGangwayRadiance } from './gangway-radiance.js?v=vr-rails-4';
+import { uploadGangwayRadiance } from './gangway-radiance.js?v=vr-rails-5';
 import { onGuestApproach } from './guest-access-geometry.js?v=guest-visibility-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
 

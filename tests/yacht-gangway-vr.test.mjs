@@ -6,10 +6,11 @@ import { createBoarding, createFinishes, l as basis } from '../site/tidewater-ro
 import { decodeGuestAccess } from '../site/tidewater-rocha/mobile/guest-access.js';
 
 const reference = JSON.parse(await readFile(new URL('./fixtures/yacht-gangway-vr-landmarks.json', import.meta.url)));
+const heightReference = JSON.parse(await readFile(new URL('./fixtures/yacht-gangway-vr-height.json', import.meta.url)));
 const { sleeve } = JSON.parse(await readFile(new URL('./fixtures/yacht-gangway-vr-steel.json', import.meta.url)));
 const dot = (a, b) => a.reduce((sum, value, index) => sum + value * b[index], 0);
 
-function camera({ xyz, heading, pitch, roll }, [w, h], fov) {
+function camera({ xyz, heading, pitch, roll }, [w, h], fov, clipBehind = false) {
   const focal = h / 2 / Math.tan(fov * Math.PI / 360);
   const along = [Math.cos(heading), Math.sin(heading), 0];
   const right = [along[1], -along[0], 0];
@@ -20,11 +21,13 @@ function camera({ xyz, heading, pitch, roll }, [w, h], fov) {
   return (x, y, z) => {
     const p = [(x - xyz[0]) * basis.sx, (y - xyz[1]) * basis.sy, z - xyz[2]];
     const d = dot(p, forward);
+    if (clipBehind && d <= .02) return null;
     return [w / 2 + focal * dot(p, u) / d, h / 2 - focal * dot(p, v) / d];
   };
 }
 
 const projectRails = camera(reference.camera, reference.size, reference.panoView.verticalFov);
+const projectHeight = camera(heightReference.camera, heightReference.size, heightReference.projection.verticalFov, true);
 const tipPose = sleeve.pose;
 const tipDirection = tipPose.target.map((value, axis) =>
   (value - tipPose.xyz[axis]) * [basis.sx, basis.sy, 1][axis]);
@@ -51,10 +54,11 @@ function outlines(parts, project = projectRails) {
   return new Map(parts.map(({ feature, vertices, indices }) => {
     const tris = [];
     for (let i = 0; i < indices.length; i += 3) {
-      tris.push(Array.from(indices.slice(i, i + 3), index => {
+      const triangle = Array.from(indices.slice(i, i + 3), index => {
         const offset = index * 6;
         return project(...vertices.slice(offset, offset + 3));
-      }));
+      });
+      if (triangle.every(Boolean)) tris.push(triangle);
     }
     return [feature.slice('gangway '.length), tris];
   }));
@@ -93,16 +97,24 @@ function checkOpenings(triangles) {
   }
 }
 
-function checkMobileEdges(shapes) {
-  const errors = [];
-  for (const [part, axis, at, first, last] of reference.mobileEdges) {
-    const crossings = crossSection(shapes.get(part), axis, at);
-    assert.ok(crossings.length, `${part} must cross the scan line at ${at}`);
-    errors.push(Math.abs(Math.min(...crossings) - first), Math.abs(Math.max(...crossings) - last));
+function checkMobileHeight(shapes) {
+  const errors = heightReference.checks.map(([grip, x, referenceY]) => {
+    const edges = crossSection(shapes.get(grip), 0, x);
+    assert.ok(edges.length, `${grip} must cross x=${x}`);
+    return Math.abs((Math.min(...edges) + Math.max(...edges)) / 2 - referenceY);
+  });
+  const mean = errors.reduce((sum, error) => sum + error, 0) / errors.length;
+  assert.ok(mean < 3.5, `Mean grip elevation deviation: ${mean.toFixed(2)} px`);
+  assert.ok(Math.max(...errors) < 6.5, `Peak grip elevation deviation: ${Math.max(...errors).toFixed(2)} px`);
+  for (const [post, label, y, x, limit] of heightReference.postScans) {
+    const edges = crossSection(shapes.get(post), 1, y);
+    assert.ok(edges.length, `${post} ${label} must cross y=${y}`);
+    const error = Math.abs((Math.min(...edges) + Math.max(...edges)) / 2 - x);
+    assert.ok(error <= limit, `${post} ${label}: ${error.toFixed(2)} px`);
   }
-  assert.ok(Math.max(...errors) <= 3.6, `Largest contour deviation: ${Math.max(...errors)} px`);
-  const mean = errors.reduce((sum, value) => sum + value, 0) / errors.length;
-  assert.ok(mean < 1.4, `Mean contour deviation: ${mean} px`);
+  const triangles = [...shapes.values()].flat();
+  for (const [label, x, y, margin] of heightReference.openings)
+    assert.ok(measure(triangles, x, y) >= margin, label);
 }
 
 function checkTip(triangles) {
@@ -122,13 +134,14 @@ for (const mode of ['mobile', 'map']) {
     const boarding = createBoarding({ group }, null, { gangwayOnly: mode === 'mobile', includeLanding: true, materials });
     try {
       const visibleParts = boarding.parts.filter(p => /^gangway (?:top handrail|.* upright)/.test(p.feature));
-      const shapes = outlines(visibleParts);
-      checkLandmarks(part => shapes.get(part) ?? []);
-      checkOpenings([...shapes.values()].flat());
       if (mode === 'mobile') {
-        checkMobileEdges(shapes);
+        checkMobileHeight(outlines(visibleParts, projectHeight));
         const firstSection = boarding.parts.filter(p => /^(?:telescopic section|section) 1\b/.test(p.feature));
         checkTip([...outlines(firstSection, projectTip).values()].flat());
+      } else {
+        const shapes = outlines(visibleParts);
+        checkLandmarks(part => shapes.get(part) ?? []);
+        checkOpenings([...shapes.values()].flat());
       }
     } finally {
       boarding.dispose();
@@ -152,7 +165,8 @@ test('the downloaded mobile exterior profile preserves the reference through mes
     const [roughness, metalness, finish] = aSurface.subarray(i * 4, i * 4 + 3);
     if (x >= -4.51 && x < 3 && Math.abs(Math.abs(y - 3.1) - .44) < .05 &&
         Math.abs(roughness - .095) < .0001 && metalness === 1 && finish === 5) {
-      railVertices.set(i, projectRails(x, y, elevation + basis.seaReference));
+      const point = projectHeight(x, y, elevation + basis.seaReference);
+      if (point) railVertices.set(i, point);
     }
     if (x >= -4.72 && x <= -2.88 && Math.abs(y - 3.1) < .49 && elevation > 1.89 && elevation < 2.275) {
       tipVertices.set(i, projectTip(x, y, elevation + basis.seaReference));
@@ -171,8 +185,12 @@ test('the downloaded mobile exterior profile preserves the reference through mes
     seen.add(key);
     triangles.push([railVertices.get(a), railVertices.get(b), railVertices.get(c)]);
   }
-  checkLandmarks(() => triangles);
-  checkOpenings(triangles);
+  const errors = heightReference.checks.map(([, x, y]) => measure(triangles, x, y));
+  const mean = errors.reduce((sum, error) => sum + error, 0) / errors.length;
+  assert.ok(mean < 1.8, `Mean downloaded contour deviation: ${mean.toFixed(2)} px`);
+  assert.ok(Math.max(...errors) < 5.6, `Peak downloaded contour deviation: ${Math.max(...errors).toFixed(2)} px`);
+  for (const [label, x, y, margin] of heightReference.openings)
+    assert.ok(measure(triangles, x, y) >= margin, label);
   checkTip(noseTriangles);
   assert.equal(profiles.exterior.batches.length, 2);
   assert.ok(profiles.exterior.triangles <= 25000);

@@ -1,0 +1,66 @@
+{
+  "source": "https://vrcloud.com/?pv=1667308298",
+  "panorama": "Beach Club",
+  "projection": {
+    "yaw": 252.5277380545189,
+    "pitchDown": -14.45604066617164,
+    "roll": -0.0016055081029307204,
+    "verticalFov": 74.40499085298325
+  },
+  "camera": {
+    "xyz": [
+      -2.707244806321969,
+      0.5367382353432288,
+      3.2759732013468144
+    ],
+    "heading": 0.39578066529809697,
+    "pitch": 0.2523055064268896,
+    "roll": -0.0016055081029307204
+  },
+  "size": [
+    2048,
+    1058
+  ],
+  "calibration": "Leveled cube, registered on the nose and two telescopic seams. Rail samples in this view are excluded from the height fit.",
+  "checks": [
+    ["top handrail -1 0", 733, 142.1],
+    ["top handrail -1 0", 760, 169.3],
+    ["top handrail -1 0", 800, 208.8],
+    ["top handrail -1 0", 835, 243.3],
+    ["top handrail -1 0", 865, 272.3],
+    ["top handrail -1 0", 899, 305.8],
+    ["top handrail -1 0", 925, 331.0],
+    ["top handrail -1 1", 954, 380.4],
+    ["top handrail -1 1", 976, 399.8],
+    ["top handrail -1 1", 995, 416.3],
+    ["top handrail -1 1", 1014, 433.0],
+    ["top handrail 1 0", 492, 122.9],
+    ["top handrail 1 0", 545, 162.3],
+    ["top handrail 1 0", 590, 194.5],
+    ["top handrail 1 0", 645, 235.3],
+    ["top handrail 1 0", 704, 279.4],
+    ["top handrail 1 0", 758, 320.6],
+    ["top handrail 1 0", 793, 346.5],
+    ["top handrail 1 0", 845, 384.7],
+    ["top handrail 1 1", 873, 396.6],
+    ["top handrail 1 1", 890, 409.3],
+    ["top handrail 1 1", 911, 424.9],
+    ["top handrail 1 1", 933, 442.4]
+  ],
+  "postScans": [
+    ["-1 upright 2", "lower bend", 364, 628, 6],
+    ["-1 upright 2", "upper bend", 291, 666, 7],
+    ["-1 upright 2", "foot", 434, 617, 14],
+    ["-1 upright 3", "lower bend", 503, 908, 5],
+    ["-1 upright 3", "upper bend", 464, 928, 5],
+    ["-1 upright 3", "foot", 550, 904, 8],
+    ["1 upright 2", "visible bend", 338, 519, 6],
+    ["1 upright 2", "last visible point", 398, 528, 10],
+    ["1 upright 3", "visible bend", 482, 813, 7]
+  ],
+  "openings": [
+    ["between the long grips", 748, 248, 14],
+    ["open space below the grips", 773, 410, 23],
+    ["between the sections at the landing", 951, 370, 3]
+  ]
+}

@@ -40,7 +40,7 @@ module.exports = async (page, frame, out, readFrame) => {
     const image = await capture(pose, size);
     for (const [side, samples, limit] of [['near', near, 40], ['far', far, 48]]) {
       let error = 0;
-      for (const [x, y, expected] of samples) {
+      for (const [photoX, photoY, expected, x = photoX, y = photoY] of samples) {
         const i = (y * image.width + x) * 4;
         const actual = .2126 * image.data[i] + .7152 * image.data[i + 1] + .0722 * image.data[i + 2];
         error += Math.abs(actual - expected);

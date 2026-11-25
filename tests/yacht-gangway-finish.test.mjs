@@ -97,6 +97,8 @@ test('boarding finish follows the approved deployed geometry and the independent
         assert.deepEqual(part.finish.slice(0, 3), [part.finish[3]===42 ? 0x988b80 : 0xb69a73, 0.8, 0]);
       } else if(part.feature.endsWith('nested frame'))assert.deepEqual(part.finish,[0x262729,.67,0,0]);
       else if(part.feature.endsWith('recessed underskin') && part.materialID==='M47')assert.deepEqual(part.finish,[0x41464b,.60,0,0]);
+      else if(/lower guide|underside collar/.test(part.feature))assert.deepEqual(part.finish,[0xafb6bd,.16,1,63]);
+      else if(part.feature.includes('inset side channel'))assert.deepEqual(part.finish,[0xc4cdd5,.10,1,62]);
       else assert.deepEqual(part.finish, resolveYachtPartFinish({ materialID: part.materialID }));
     }
     assert.equal(boarding.parts.filter((p) => p.finish[3] >= 37 && p.finish[3] <= 39).length, 3);
@@ -144,10 +146,12 @@ test('each fallback and active profile preserves the three boarding material ide
       const positions = attr('position'),
         normal = attr('normal'),
         surface = attr('aSurface');
-      const seen = new Set();
+      const seen = new Set(), hardware = new Set();
       for (let i = 0; i < positions.length / 3; i++) {
         const x = (positions[i * 3 + 2] + 17.615) / (35.23 / 36),
           y = positions[i * 3] / (7.47 / 7.6);
+        const code = surface[i * 4 + 2];
+        if ((code === 62 || code === 63) && x >= -4.55 && x <= 2.31) hardware.add(code);
         if (x < -4.5 || x > 2.3 || y < 2.7179 || y > 3.4821 || normal[i * 3 + 1] < 0.95) continue;
         for (let panel = 0; panel < 3; panel++)
           if (
@@ -170,6 +174,7 @@ test('each fallback and active profile preserves the three boarding material ide
           }
       }
       assert.equal(seen.size, 3, `${name}/${profile}`);
+      assert.deepEqual([...hardware].sort(), [62, 63], `${name}/${profile} lost the cheek or running guide`);
     }
   }
 });

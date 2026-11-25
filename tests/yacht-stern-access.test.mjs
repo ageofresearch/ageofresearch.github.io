@@ -206,7 +206,7 @@ test('the three gangway sleeves form a closed shell through both changes in sect
   try{
     const edges=new Map(),triangles=new Set();
     const parts=model.boarding.parts.filter(p=>/nested frame|recessed underskin|inset side channel|underside collar/.test(p.feature));
-    assert.equal(parts.length,14);
+    assert.equal(parts.length,17);
     for(const {vertices,indices} of parts){
       const points=Array.from({length:vertices.length/6},(_,i)=>vertices.slice(i*6,i*6+3).map(v=>v.toFixed(6)).join(','));
       for(let i=0;i<indices.length;i+=3){

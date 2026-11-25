@@ -12,7 +12,7 @@ import {createDaylightShadow,lightMatrix} from './daylight-shadow.js?v=yacht-day
 import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js?v=chair-fidelity-1';
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
 import { ownerContactSize, uploadOwnerContact } from './owner-contact.js?v=owner-contact-1';
-import { uploadGangwayRadiance } from './gangway-radiance.js?v=vr-rails-3';
+import { uploadGangwayRadiance } from './gangway-radiance.js?v=vr-rails-4';
 import { onGuestApproach } from './guest-access-geometry.js?v=guest-visibility-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
 
@@ -40,12 +40,12 @@ export async function createForwardRenderer(app, daylight) {
   const module = device.createShaderModule({label:'Gangway finishes', code:shader});
   const bindLayout = device.createBindGroupLayout({entries:[
     {binding:0, visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT, buffer:{type:'uniform'}},
-    {binding:1, visibility:GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
+    {binding:1, visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT, sampler:{type:'filtering'}},
     {binding:2, visibility:GPUShaderStage.FRAGMENT, texture:{sampleType:'float',viewDimension:'2d-array'}},
     {binding:3,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,texture:{sampleType:'depth'}},
     {binding:4,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,sampler:{type:'comparison'}},
     {binding:5,visibility:GPUShaderStage.FRAGMENT,texture:{sampleType:'float'}},
-    {binding:6,visibility:GPUShaderStage.FRAGMENT,texture:{sampleType:'float',viewDimension:'3d'}},
+    {binding:6,visibility:GPUShaderStage.VERTEX|GPUShaderStage.FRAGMENT,texture:{sampleType:'float',viewDimension:'3d'}},
   ]});
   const layout = device.createPipelineLayout({bindGroupLayouts:[bindLayout]});
   const taggedModule=device.createShaderModule({label:'Yacht coverage evidence',code:visibilityShader});

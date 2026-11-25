@@ -52,7 +52,8 @@ export function prepareOpaque(source,map,indices) {
     );
     roughness[index]=boarding?.82:source.aSurface[k];
     room[index]=compartment(localX,localY,elevation);
-    if(code===47)layer=-2;
+    if(code===62 || code===63)layer=code===62?-6:-7;
+    else if(code===47)layer=-2;
     else{
       surface[k+3]=boarding?0:source.aSurface[k+1];
       if(code===9)color.set([.72,.69,.61],j);

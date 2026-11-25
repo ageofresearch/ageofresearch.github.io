@@ -133,7 +133,7 @@ test('the packaged rails, gate, wet bar and saloon dining chairs retain their cu
   }
   const sleeves=audit.filter(p=>p.id.startsWith('boarding/owner/') &&
     /nested-frame|recessed-underskin|inset-side-channel|underside-collar/.test(p.id));
-  assert.equal(sleeves.length,14);
+  assert.equal(sleeves.length,17);
   assert.ok(sleeves.every(p=>p.triangles===p.sourceTriangles),'The boarding profile must preserve the fitted shell');
   for (const n of ['007', '008', '009', '010']) {
     const shells = audit.filter((p) => p.id.startsWith('MD_SOF_' + n + '/') && p.sourceTriangles >= 100);

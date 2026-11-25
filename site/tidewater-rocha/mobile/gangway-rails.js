@@ -73,6 +73,15 @@ export function makeGangwayRails({ layout, height, tube, bend, cylinder, add, pa
             mesh.vertices[offset + axis] = point[axis] + mesh.vertices[offset + axis + 3] * radius;
         }
       }
+      if (mobile) {
+        // Round off the two exposed plugs inside the original cap fan.
+        // Each tip follows the direction of the last segment.
+        const capStart = points.length * radialSegments * 6;
+        for (const [index, length] of [[0, .009], [1, .006]]) {
+          const cap = capStart + index * 6;
+          for (let axis = 0; axis < 3; axis++) mesh.vertices[cap + axis] += length * mesh.vertices[cap + axis + 3];
+        }
+      }
       const name = `gangway top handrail ${sign} ${section}`;
       add(mesh, 'M19', name, { finish: polished });
       paths.push({ id: `gangway/${sign}/${section}`, side: sign, points });

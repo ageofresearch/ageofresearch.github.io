@@ -1,11 +1,15 @@
 [
   {
     "id": "boarding/owner/telescopic-section-1-nested-frame",
-    "geometrySHA256": "bae6e231fed63d2b372fdd7e70df4f4ed66146826cecb0bdbf9b5daf3c04303e"
+    "geometrySHA256": "5c3796979455073592aed003ad3f43bff306242d299d82f132b32e4b8e6888a3"
   },
   {
     "id": "boarding/owner/telescopic-section-1-recessed-underskin",
-    "geometrySHA256": "7a130a370bef3ed60ea0214f479dbaebb5b0b483f232fccc2d2f06a7c2ece729"
+    "geometrySHA256": "170c0209c6b6216fd31b0cc728caf9aef895c13db8726032db44145aec326d6d"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-1-inset-side-channel-lower-guide",
+    "geometrySHA256": "47ac0f88c034a706330a6c2f52034becc0ee30bf0b50ed0bff4755a93932a2b0"
   },
   {
     "id": "boarding/owner/telescopic-section-1-teak-inset",
@@ -17,7 +21,7 @@
   },
   {
     "id": "boarding/owner/section-1-inset-side-channel--1",
-    "geometrySHA256": "958e5b942b9ebcd60a33564d0abb3a1a067657ec993f01a879fbe9f6103dd61c"
+    "geometrySHA256": "afee4b208259cf06cf4a916a551c91040676a35fe7ca7f7fab0ee39acf5791ac"
   },
   {
     "id": "boarding/owner/section-1-timber-border-1",
@@ -25,7 +29,7 @@
   },
   {
     "id": "boarding/owner/section-1-inset-side-channel-1",
-    "geometrySHA256": "312fa8966f2573ba6a07e9fc64135f2f75b27bdfbe2298540f926693218afcea"
+    "geometrySHA256": "fd4cfe7e9f6c33e79eaa9ddf365885744e9ffd9f01f4bf148c49b3e819f5f7c9"
   },
   {
     "id": "boarding/owner/section-1-mitred-end-border--4.47",
@@ -37,15 +41,19 @@
   },
   {
     "id": "boarding/owner/telescopic-section-2-nested-frame",
-    "geometrySHA256": "61f3d36db471dc4ecc2001e3ebf561e28811ea05621303223b592539f834b0de"
+    "geometrySHA256": "5501e114ddb30dd49cd658d0427536d273dea07965bde8f6cb5b0080a4b029b9"
   },
   {
     "id": "boarding/owner/telescopic-section-2-recessed-underskin",
-    "geometrySHA256": "a6f2b2bb09a73accef24db6455de02a321de5768b7b45056a11b1c311389220c"
+    "geometrySHA256": "1ec4d0f3db37c5ad822bd3bc536be3dcb3c5a3bcba2f835f1342a0ecc11d2ced"
   },
   {
     "id": "boarding/owner/telescopic-underside-collar-1",
-    "geometrySHA256": "da889afaeab042e90440870ab011a34f5c285951d93ebbdf9bd7a0b78cd98aa7"
+    "geometrySHA256": "f0bc88766950523e3ac2e281a14542affba8e4c57a9f4609e07f248422e27095"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-2-inset-side-channel-lower-guide",
+    "geometrySHA256": "02190f82df44f795e8b1b552c001a20801859ee99efa4473ca35e9cc2fc26212"
   },
   {
     "id": "boarding/owner/telescopic-section-2-teak-inset",
@@ -57,7 +65,7 @@
   },
   {
     "id": "boarding/owner/section-2-inset-side-channel--1",
-    "geometrySHA256": "65e0f81a8cbef12fa1592e37f5e3bc6aa5c36987f8716e718ece658e2d681e1b"
+    "geometrySHA256": "488333cb1d2d613f86d8e2e8a4feea5786df958fa6989905c4a470cec0103ccb"
   },
   {
     "id": "boarding/owner/section-2-timber-border-1",
@@ -65,7 +73,7 @@
   },
   {
     "id": "boarding/owner/section-2-inset-side-channel-1",
-    "geometrySHA256": "846c9c7ef21e989fd84b6abf7c54a9229ab4f6a53ef1751369c0f96bfc421610"
+    "geometrySHA256": "61917c2484e4eb15374a6c0f2adeb7a2a286576f81f76ee8bf627ef15af124f0"
   },
   {
     "id": "boarding/owner/section-2-mitred-end-border--2.8600000000000003",
@@ -77,15 +85,19 @@
   },
   {
     "id": "boarding/owner/telescopic-section-3-nested-frame",
-    "geometrySHA256": "d9b93b27779d420f2ed547ac778ad8cd88d738d80d32a80ead2afec227beef27"
+    "geometrySHA256": "a2ff9774b3209d6961bd11bdb8e9d79679965df3802e8a03d5601f07e817bd3c"
   },
   {
     "id": "boarding/owner/telescopic-section-3-recessed-underskin",
-    "geometrySHA256": "6931c3a29c6e343ce2dc87ae3333fe3f296eb37c6c9bc405d3e98b5e6370f4d5"
+    "geometrySHA256": "59b95a79515f89541929c19e3d8de4629f2a3f5ba762f42ca62b3dbcb877a2e3"
   },
   {
     "id": "boarding/owner/telescopic-underside-collar-2",
-    "geometrySHA256": "c7f1f3343423ae632f94ba8d3070ab36125e79c96eb72f7bdef65652d1942216"
+    "geometrySHA256": "f921d98f91342b83b4bb24df9a3403fc160986e1a4e38830d06081f7cb63d5f3"
+  },
+  {
+    "id": "boarding/owner/telescopic-section-3-inset-side-channel-lower-guide",
+    "geometrySHA256": "d9d9d33a7148415dcd7651a2759b479310f1471ac50cacf9e48192a34ca7aec5"
   },
   {
     "id": "boarding/owner/telescopic-section-3-teak-inset",
@@ -97,7 +109,7 @@
   },
   {
     "id": "boarding/owner/section-3-inset-side-channel--1",
-    "geometrySHA256": "13d00b021a844964deff42198b272f096ad53dfd8b38adfd899e5f185f90dcd9"
+    "geometrySHA256": "ba1ae6c5adf1bdb02dff098914e7d7d380460c36bd91ea5a28685c3134824f5b"
   },
   {
     "id": "boarding/owner/section-3-timber-border-1",
@@ -105,7 +117,7 @@
   },
   {
     "id": "boarding/owner/section-3-inset-side-channel-1",
-    "geometrySHA256": "558cfd81da5eab351b9cf313caa315112d0325f40946e2ed640631ecb26e990d"
+    "geometrySHA256": "37c956a842c7b90fd90aaeb309ebbe822a6bbcc6271d06bb88326d17fc47c909"
   },
   {
     "id": "boarding/owner/section-3-mitred-end-border--1.14",
@@ -130,14 +142,6 @@
   {
     "id": "boarding/owner/rounded-teak-landing-lip",
     "geometrySHA256": "5f237f12510754ca6ac59f57b1414db150b083534033f1f12c3c9985b50ef5b2"
-  },
-  {
-    "id": "boarding/owner/gangway-top-handrail--1",
-    "geometrySHA256": "4b26955d6dd8f27a1d874a4821e9630e0e200f36889700be2c5c55cef074ae11"
-  },
-  {
-    "id": "boarding/owner/landing-handhold--1",
-    "geometrySHA256": "e4b6c2132648258ddf4e2f2aeb25a2301a706f2988d94db3db344491dc70fd9e"
   },
   {
     "id": "boarding/owner/gangway--1-upright-0",
@@ -188,30 +192,6 @@
     "geometrySHA256": "391720e4e16e33cf5377325162b99fc84d2f5a86717db979ec9d6e22cd17e08a"
   },
   {
-    "id": "boarding/owner/gangway--1-upright-6",
-    "geometrySHA256": "e2e325bcfd4c7016823a8c333d93c4c7b2c39f0bba5398457d49b1c19fbd7596"
-  },
-  {
-    "id": "boarding/owner/gangway--1-seated-socket-6",
-    "geometrySHA256": "01f5f92aabda179c3dc6dd151732c08a224254ae4c5d3a13de4456f13f1298a1"
-  },
-  {
-    "id": "boarding/owner/landing-mounted-post--1-3.24",
-    "geometrySHA256": "ccc5750a27682b74e7c3d82c28aeb0f92a20e37a585229f23e3368fedbae3c1e"
-  },
-  {
-    "id": "boarding/owner/landing-mounted-post--1-3.75",
-    "geometrySHA256": "6666b45e4f8ae777d9df6899d1c2b9fbf739be97ac616a0b5567e6d36c88b36e"
-  },
-  {
-    "id": "boarding/owner/gangway-top-handrail-1",
-    "geometrySHA256": "b4a33ad7a25d4619910c22ac11a88589cd2afa64f1851068555f017f28d1334f"
-  },
-  {
-    "id": "boarding/owner/landing-handhold-1",
-    "geometrySHA256": "1977c7d736d8bb01fc14d60d27358ca864e04119cecc41bbecd1eb849dc610de"
-  },
-  {
     "id": "boarding/owner/gangway-1-upright-0",
     "geometrySHA256": "0bc411a168a1e36700d53aae510ec16aa8b9eb113c2c2b056e266bba49c2152d"
   },
@@ -260,12 +240,20 @@
     "geometrySHA256": "d0d319b4e00487605e87e1a148ab1dcaa184fca1e6b1e89b73a5decbfdca1a28"
   },
   {
-    "id": "boarding/owner/gangway-1-upright-6",
-    "geometrySHA256": "460567058476895bf5224db8776f6a8f22cc92d9cd26778c71ebdc812ba0c632"
+    "id": "boarding/owner/landing-handhold--1",
+    "geometrySHA256": "e4b6c2132648258ddf4e2f2aeb25a2301a706f2988d94db3db344491dc70fd9e"
   },
   {
-    "id": "boarding/owner/gangway-1-seated-socket-6",
-    "geometrySHA256": "b03f2306573326e9b703b474756b628a8b2b22556115219cf31f6466faa8b861"
+    "id": "boarding/owner/landing-mounted-post--1-3.24",
+    "geometrySHA256": "ccc5750a27682b74e7c3d82c28aeb0f92a20e37a585229f23e3368fedbae3c1e"
+  },
+  {
+    "id": "boarding/owner/landing-mounted-post--1-3.75",
+    "geometrySHA256": "6666b45e4f8ae777d9df6899d1c2b9fbf739be97ac616a0b5567e6d36c88b36e"
+  },
+  {
+    "id": "boarding/owner/landing-handhold-1",
+    "geometrySHA256": "1977c7d736d8bb01fc14d60d27358ca864e04119cecc41bbecd1eb849dc610de"
   },
   {
     "id": "boarding/owner/landing-mounted-post-1-4.15",

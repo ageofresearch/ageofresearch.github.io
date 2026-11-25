@@ -79,13 +79,14 @@ test('boarding finish follows the approved deployed geometry and the independent
       materials,
     });
   try {
-    const retained=baseline.filter(p=>!/hanging-guard-line|rope-collar/.test(p.id));
-    const hardware=boarding.parts.filter(p=>!p.context);
+    const rail = /gangway-(?:top-handrail|-?1-(?:upright|seated-socket)|.*(?:hanging-guard-line|rope-collar))/;
+    const retained = baseline.filter(p => !rail.test(p.id));
+    const hardware = boarding.parts.filter(p => !p.context && !rail.test(p.id));
     assert.equal(hardware.length,retained.length);
     for (const part of hardware) {
       const old = baseline.find((p) => p.id === part.id);
       assert.ok(old, part.id);
-      if(!/upright|seated socket/.test(part.feature))assert.equal(
+      assert.equal(
         createHash('sha256')
           .update(JSON.stringify([part.vertices, part.indices, part.bounds]))
           .digest('hex'),

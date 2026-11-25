@@ -68,15 +68,35 @@ test('every visible source face of the six folding chairs reaches its draw', () 
     }
     assert.equal(offset, reference.length);
     assert.ok(!model.boarding.parts.some(p=>/hanging guard line|rope collar/.test(p.feature)));
-    const posts=model.boarding.parts.filter(p=>/gangway .* upright/.test(p.feature));
-    assert.equal(posts.length,14);
-    for(const p of posts){
-      const socket=model.boarding.parts.find(q=>q.feature===p.feature.replace('upright','seated socket'));
-      assert.ok(socket && socket.bounds[2]<=p.bounds[2] && socket.bounds[5]>p.bounds[2]);
-      assert.ok(p.bounds[5]-p.bounds[2]>1);
-    }
-    assert.ok(posts.filter(p=>p.bounds[3]-p.bounds[0]>.08).length>=8,'Bent tubular stanchions at section ends');
     assert.equal(seen.filter((id) => id.includes('director-chair')).length, 30);
+  } finally {
+    dispose();
+  }
+});
+
+test('both mobile guard rails have a separate outer and inner grip and six supported uprights', () => {
+  const { model, dispose } = fixture();
+  try {
+    const { parts, railPaths, layout, height } = model.boarding;
+    for (const side of [-1, 1]) {
+      const grips = railPaths.filter(p => p.id.startsWith(`gangway/${side}/`));
+      const posts = parts.filter(p => p.feature.startsWith(`gangway ${side} upright `));
+      assert.equal(grips.length, 2);
+      assert.equal(posts.length, 6);
+      assert.ok(grips[0].points[0][0] > layout.start);
+      assert.ok(grips[1].points.at(-1)[0] < layout.end);
+      const end = grips[0].points.at(-1), start = grips[1].points[0];
+      assert.ok(Math.hypot(...end.map((value, axis) => value - start[axis])) > 0.045);
+      assert.ok(posts.filter(p => p.bounds[3] - p.bounds[0] > 0.08).length >= 4);
+      for (const post of posts) {
+        const socket = parts.find(p => p.feature === post.feature.replace('upright', 'seated socket'));
+        const x = (socket.bounds[0] + socket.bounds[3]) / 2;
+        assert.ok(socket.bounds[2] < height(x) && height(x) < socket.bounds[5]);
+        assert.ok(post.bounds[2] < socket.bounds[5] && post.bounds[5] > socket.bounds[2]);
+        assert.ok(post.bounds[5] - post.bounds[2] > 0.86);
+        assert.ok(post.finish[1] < socket.finish[1]);
+      }
+    }
   } finally {
     dispose();
   }
@@ -96,8 +116,13 @@ test('the chair weave occupies an atlas slice beyond the yacht deck', () => {
 
 test('the packaged rails, gate, wet bar and saloon dining chairs retain their curved meshes', () => {
   const audit = manifest.profiles.exterior.audit;
+  for (const [name, profile] of Object.entries(manifest.profiles)) {
+    const rails = profile.audit.filter(part => /gangway-(?:top-handrail|-?1-(?:upright|seated-socket))/.test(part.id));
+    assert.equal(rails.length, 28, name);
+    assert.ok(rails.every(part => part.triangles > 0), name);
+  }
   for (const [pattern, pieces, minTriangles] of [
-    [/gangway-top-handrail/, 2, 96],
+    [/gangway-top-handrail/, 4, 48],
     [/open-inboard-rounded-boarding-gate-frame/, 1, 250],
     [/gate-polished-chevron/, 1, 48],
   ]) {

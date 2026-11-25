@@ -28,6 +28,21 @@ fn display(c:vec3f)->vec3f{
 }
 ${skyRadiance}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
+fn boardingReflection(pos:vec3f,ray:vec3f,rough:f32)->vec3f{
+  let x=(pos.z+17.615)/.97861111;
+  let surface=4.27-.32*clamp((x+4.50)/6.80,0.,1.)-2.01;
+  let slope=-.32/(6.80*.97861111);
+  let descent=ray.y-ray.z*slope;
+  let travel=max(0.,pos.y-surface)/max(.001,-descent);
+  let hit=pos+ray*travel;
+  let across=1.-smoothstep(.36,.42,abs(hit.x/.98289474-3.1));
+  let along=smoothstep(-22.06,-21.89,hit.z)*(1.-smoothstep(-15.40,-15.27,hit.z));
+  let teak=across*along*smoothstep(.04,.20,-descent);
+  let water=vec3f(.063,.132,.187);
+  let ground=mix(water,vec3f(.47,.34,.22),teak);
+  let horizon=smoothstep(-rough,rough,ray.y);
+  return mix(ground,yachtDaySky(ray,frame.sun.xyz,false),horizon);
+}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
  @builtin(position) clip:vec4f,@location(0) indirect:vec3f,@location(1) direct:vec3f,
@@ -69,7 +84,13 @@ struct V {
    let fresnel=f0+(vec3f(1.)-f0)*edge2*edge2*edge;
    let region=u32(finish.y)>>8u;
    let fittings=${sampleReflectionWGSL('frame.fittings', 'region', 'reflected')};
-   let reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
+   var reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
+   // The exposed polished grips and posts overhang the water. Their low
+   // roughness and narrow position band distinguish them from the fixed gate.
+   if(rough<.145 && metal>.99 && pos.z>=-22.03 && pos.z< -15.35 && pos.y>1.90 &&
+      abs(abs(pos.x/.98289474-3.1)-.44)<.05){
+     reflectedLight=boardingReflection(pos,reflected,rough);
+   }
    let gloss=1.-rough;
    o.indirect+=fresnel*reflectedLight*gloss*mix(.15,1.,color.a);
    let alignment=max(0.,dot(reflected,frame.sun.xyz));

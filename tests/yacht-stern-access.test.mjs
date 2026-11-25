@@ -5,7 +5,7 @@ import {createBoarding,createSternFeatures,createFinishes,i as Walk,l as basis} 
 import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import {connectTerrace,moveAlongRoute,routeSegments} from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import {connectSternAccess,onSurface,topTriangles} from '../site/tidewater-rocha/mobile/stern-access.js';
-import {configureWalk} from '../site/tidewater-rocha/mobile/gangway-scene.js';
+import {configureCamera,configureWalk} from '../site/tidewater-rocha/mobile/gangway-scene.js';
 import {crossing} from '../site/tidewater-rocha/mobile/pasarela.js';
 
 const root=new URL('../site/tidewater-rocha/mobile/',import.meta.url);
@@ -48,6 +48,23 @@ function travel(nav,points,hz=40) {
       `Blocked toward ${point}: ${JSON.stringify({at:nav.position,height:nav.elevation,deck:nav.deck,stair:!!nav.stair})}`);
   }
 }
+
+test('the mobile projection keeps the requested field of view on rotation and resolution changes',()=>{
+  const projectionUpdates=[];
+  const camera={aspect:16/9,fov:62,updateProjectionMatrix(){projectionUpdates.push(this.fov);}};
+  const onResize=[];
+  const horizontalFov=()=>2*Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect)*180/Math.PI;
+  configureCamera({camera,onResize});
+  assert.ok(Math.abs(horizontalFov()-110)<1e-9);
+  onResize[0]();
+  assert.equal(projectionUpdates.length,1);
+  camera.aspect=9/16;
+  onResize[0]();
+  assert.equal(camera.fov,75);
+  camera.aspect=21/9;
+  onResize[0]();
+  assert.ok(Math.abs(horizontalFov()-110)<1e-9);
+});
 
 test('the mobile camera walks one third lower at both the deck and swim platform elevations',()=>{
   const {walk,model,dispose}=fixture();

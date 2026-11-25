@@ -23,6 +23,7 @@ function applySun(){
 }
 function prepareFullRenderer(){L=I.atmosphere=new c(A);const R=I.sky=new f(L);R.yachtDaylight=true;const z=daylight.world;L.sunDir.value.copy(z),r.sunDir.value.copy(z),r.sunColor.value.setRGB(3,2.9,2.7),r.skyIrradiance.value.setRGB(.25,.32,.45),r.exposure.value=.55,r.waterEnabled.value=0,r.antiAliasingQuality.value=1,r.atmosphereQuality.value=1;B=I.sceneRenderer=new u(A.meshRenderer,P,F);B.background=R.background;B.clearColor=[.67,.76,.84,1],B.waterEnabled=!1,B.refractionEnabled=!1;V=I.shadows=new o({size:2048,splits:[10,60,400],lightMargin:200,normalBias:[.015,.06,.3],bias:2e-5,cacheStatic:!0,skipUnused:!0});V.layerMask=1<<p.OPAQUE,N.invalidateShadows=()=>V.invalidateStatic();H=I.environment=new d(A,P,R);H.interval=1/0;let U=new i({name:`yacht air medium`,code:`fn underwaterMedium(uv:vec2f)->f32{return 0.0;}`}),W=new i({name:`yacht air composite`,code:`fn underwaterComposite(uv:vec2f,pixel:vec2f)->vec4f{return vec4f(postSceneSample(uv),1.0);}`});G=I.post=new h(A,{sceneRenderer:B,camera:F,underwater:{module:U,compositeModule:W}})}
 if(pilot){
+  pilot.configureCamera(A);
   const {createForwardRenderer}=await import('../mobile/forward-renderer.js?v=port-guest-1');
   forward=I.gangwayRenderer=await createForwardRenderer(I,daylight);
 }else {

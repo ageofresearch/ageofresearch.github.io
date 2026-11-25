@@ -8,6 +8,24 @@ import {
 
 const mobileEyeHeight = 1.6 * 2 / 3;
 
+export function configureCamera({ camera, onResize }) {
+  const wideAspect = 16 / 9;
+  const portraitFov = 75;
+  const horizontalHalf = 55 * Math.PI / 180;
+  let previousAspect;
+  function updateFov() {
+    const { aspect } = camera;
+    if (aspect === previousAspect) return;
+    previousAspect = aspect;
+    const wideFov = 2 * Math.atan(Math.tan(horizontalHalf) / Math.max(aspect, wideAspect)) * 180 / Math.PI;
+    const blend = Math.min(1, Math.max(0, (aspect - 1) / (wideAspect - 1)));
+    camera.fov = portraitFov + blend * (wideFov - portraitFov);
+    camera.updateProjectionMatrix();
+  }
+  updateFov();
+  onResize.push(updateFov);
+}
+
 // Reuse boarding and stern assemblies, plus the pre-extracted furnished terrace.
 export async function buildGangway(world) {
   const terrace = await loadTerrace();

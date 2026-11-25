@@ -14,10 +14,10 @@ module.exports = async (frame, out, readFrame, mobile) => {
   });
   const views = [
     ['panel-1', -3.3, 0.7],
-    ['panel-2', -0.9, 0.7],
+    ['panel-2', -2.6, 0.7],
     ['panel-3', 1.25, 0.7],
-    ['joint-1', -2.2, 0.4],
-    ['joint-2', 0.1, 0.4],
+    ['joint-1', -3.29, 0.4],
+    ['joint-2', -1.57, 0.4],
     ['forward', -4.1, 5.5],
     ['return', 1.8, -6],
     ['grain-close', -3.3, 0.15, 0.45],
@@ -82,7 +82,7 @@ module.exports = async (frame, out, readFrame, mobile) => {
           w = a.yachtWalk,
           b = w.model.group.userData.yacht;
         const project = (y) => {
-          const x = -0.25,
+          const x = -1.95,
             p = a.camera.position
               .clone()
               .set(y * b.sy, w.model.boarding.height(x) - b.seaReference, x * b.sx - b.length / 2);

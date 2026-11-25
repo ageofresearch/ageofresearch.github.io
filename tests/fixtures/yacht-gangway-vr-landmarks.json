@@ -1,0 +1,37 @@
+{
+  "source": "https://vrcloud.com/?pv=1667308298",
+  "panorama": "Beach Club",
+  "sample": "Rectilinear observations from the 2048 px cube faces. Coordinates are in the 1440 by 1000 frame. Inferred, occluded feet are excluded.",
+  "panoView": {"heading": 197, "pitchDown": -26, "verticalFov": 94},
+  "size": [1440, 1000],
+  "camera": {"xyz": [-2.81261068, 0.55527849, 3.30509699], "heading": 1.33663753, "pitch": 0.43814127, "roll": -0.02029365},
+  "points": [
+    ["top handrail -1 0", "outer end", 331, 223, 5],
+    ["-1 upright 0", "foot at the sleeve", 252, 468, 6],
+    ["-1 upright 0", "lower bend", 276, 422, 7],
+    ["-1 upright 0", "upper bend", 287, 352, 7],
+    ["-1 upright 1", "grip weld", 630, 298, 7],
+    ["-1 upright 1", "foot at first seam", 602, 510, 7],
+    ["-1 upright 2", "foot at second seam", 912, 542, 7],
+    ["-1 upright 2", "upper bend", 910, 457, 7],
+    ["-1 upright 3", "upper bend", 1167, 491, 7],
+    ["-1 upright 3", "lower bend", 1158, 535, 7],
+    ["top handrail -1 0", "end of long grip", 1162, 397, 6],
+    ["top handrail -1 1", "start of short grip", 1145, 405, 6],
+    ["-1 upright 4", "middle of sloping stem", 1226, 507, 8],
+    ["top handrail -1 1", "turned end near fixed guard", 1294, 432, 8],
+    ["top handrail 1 0", "outer end", 395, 341, 6],
+    ["1 upright 0", "bend exposed above the inboard beam", 370, 444, 7],
+    ["1 upright 1", "grip weld", 627, 385, 7],
+    ["1 upright 2", "upper bend", 845, 514, 7],
+    ["1 upright 3", "upper bend", 1056, 538, 7],
+    ["top handrail 1 0", "end of long grip", 1065, 455, 6],
+    ["top handrail 1 1", "start of short grip", 1070, 449, 6],
+    ["top handrail 1 1", "turned end", 1195, 473, 7]
+  ],
+  "clear": [
+    ["distal opening", 521, 331, 9],
+    ["middle opening", 756, 435, 7],
+    ["approach opening", 971, 480, 8]
+  ]
+}

@@ -8,7 +8,7 @@ export const gangwayTeak = Object.freeze({
   width: 0.764,
   boards: 7,
   joint: 0.004,
-  breaks: Object.freeze([-4.5, -1.94, 0.36, 2.3]),
+  breaks: Object.freeze([-4.5, -2.89, -1.17, 2.3]),
   inset: 0.022,
   woodWidth: (0.764 - 6 * 0.004) / 7,
   landingPitch: 0.105,
@@ -207,3 +207,35 @@ if(code>=37.0 && code<=42.0){
  s.normal=boatBumpNormal(in.P,in.N,(gwGrain-.5)*.00006);
 }
 `;
+
+// Yacht-local coordinates (starboard, up, forward). The environment sampled
+// by the steel has a water horizon, the teak deck and the pale transom.
+export const gangwaySteelWGSL = `
+fn isGangwaySteel(pos:vec3f, rough:f32, metal:f32)->bool {
+ return rough<.145 && metal>.99 && pos.z>=-22.03 && pos.z< -14.72 && pos.y>1.90 &&
+        abs(abs(pos.x/.98289474-3.1)-.44)<.05;
+}
+fn gangwaySteel(pos:vec3f, normal:vec3f, eye:vec3f, sun:vec3f, rough:f32, lit:f32)->vec3f {
+ let ray=reflect(-eye,normal);
+ let x=(pos.z+17.615)/.97861111;
+ let deck=2.26-.32*clamp((x+4.5)/6.8,0.,1.);
+ let descent=ray.y+ray.z*(.32/(6.8*.97861111));
+ let floorHit=pos+ray*max(0.,pos.y-deck)/max(.001,-descent);
+ let across=1.-smoothstep(.36,.42,abs(floorHit.x/.98289474-3.1));
+ let along=smoothstep(-22.06,-21.89,floorHit.z)*(1.-smoothstep(-15.40,-15.27,floorHit.z));
+ let teak=across*along*smoothstep(.04,.20,-descent);
+ let hullHit=pos+ray*max(0.,-14.65-pos.z)/max(.001,ray.z);
+ let hull=smoothstep(.07,.20,ray.z)*smoothstep(1.43,1.90,hullHit.y)*
+          (1.-smoothstep(4.88,5.18,hullHit.y))*(1.-smoothstep(3.45,3.74,abs(hullHit.x)));
+ let water=mix(vec3f(.023,.037,.043),vec3f(.074,.12,.154),smoothstep(-.66,-.035,ray.y));
+ let sky=yachtDaySky(ray,sun,false);
+ let horizon=smoothstep(-rough*.34,rough*.65,ray.y);
+ let env=mix(mix(mix(water,vec3f(.42,.28,.16),teak),sky,horizon),vec3f(.73,.73,.70),hull);
+ let grazing=1.-clamp(abs(dot(normal,eye)),0.,1.);
+ let reflectance=mix(vec3f(.64,.67,.71),vec3f(1.),pow(grazing,5.));
+ let width=rough*rough;
+ let glint=width/(width+1.-clamp(dot(ray,sun),0.,1.));
+ let day=smoothstep(-.12,.16,sun.y);
+ return reflectance*(env*mix(.14,.91,day)+
+        vec3f(1.,.90,.74)*(lit*day*1.25*glint*glint*max(0.,dot(normal,sun))));
+}`;

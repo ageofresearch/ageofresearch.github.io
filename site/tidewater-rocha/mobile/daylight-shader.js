@@ -3,6 +3,7 @@ import { sampleReflectionWGSL } from './yacht-daylight.js?v=yacht-daylight-1';
 import { skyRadiance } from './yacht-sky.js?v=yacht-daylight-1';
 import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2';
 import { ownerContactBounds, ownerContactWGSL } from './owner-contact-layout.js?v=owner-contact-1';
+import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -27,22 +28,8 @@ fn display(c:vec3f)->vec3f{
   return select(srgb,12.92*v,v<=vec3f(.0031308));
 }
 ${skyRadiance}
+${gangwaySteelWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
-fn boardingReflection(pos:vec3f,ray:vec3f,rough:f32)->vec3f{
-  let x=(pos.z+17.615)/.97861111;
-  let surface=4.27-.32*clamp((x+4.50)/6.80,0.,1.)-2.01;
-  let slope=-.32/(6.80*.97861111);
-  let descent=ray.y-ray.z*slope;
-  let travel=max(0.,pos.y-surface)/max(.001,-descent);
-  let hit=pos+ray*travel;
-  let across=1.-smoothstep(.36,.42,abs(hit.x/.98289474-3.1));
-  let along=smoothstep(-22.06,-21.89,hit.z)*(1.-smoothstep(-15.40,-15.27,hit.z));
-  let teak=across*along*smoothstep(.04,.20,-descent);
-  let water=vec3f(.063,.132,.187);
-  let ground=mix(water,vec3f(.47,.34,.22),teak);
-  let horizon=smoothstep(-rough,rough,ray.y);
-  return mix(ground,yachtDaySky(ray,frame.sun.xyz,false),horizon);
-}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
  @builtin(position) clip:vec4f,@location(0) indirect:vec3f,@location(1) direct:vec3f,
@@ -73,6 +60,13 @@ struct V {
  }
  if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
+ if(isGangwaySteel(pos,rough,metal)){
+   let eye=normalize(frame.eye.xyz-pos);
+   let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
+   let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
+   o.layer=-5;o.indirect=display(gangwaySteel(pos,normal,eye,frame.sun.xyz,rough,lit));
+   return o;
+ }
  o.indirect=shade.rgb;o.direct=direct.rgb;
  if(rough<.32 || metal>.05){
    o.indirect*=${packedRadianceScale}.*shade.rgb;o.direct*=${packedRadianceScale}.*direct.rgb;
@@ -84,13 +78,7 @@ struct V {
    let fresnel=f0+(vec3f(1.)-f0)*edge2*edge2*edge;
    let region=u32(finish.y)>>8u;
    let fittings=${sampleReflectionWGSL('frame.fittings', 'region', 'reflected')};
-   var reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
-   // The exposed polished grips and posts overhang the water. Their low
-   // roughness and narrow position band distinguish them from the fixed gate.
-   if(rough<.145 && metal>.99 && pos.z>=-22.03 && pos.z< -15.35 && pos.y>1.90 &&
-      abs(abs(pos.x/.98289474-3.1)-.44)<.05){
-     reflectedLight=boardingReflection(pos,reflected,rough);
-   }
+   let reflectedLight=fittings.rgb*(.78+probe.rgb)+fittings.w*yachtDaySky(reflected,frame.sun.xyz,false);
    let gloss=1.-rough;
    o.indirect+=fresnel*reflectedLight*gloss*mix(.15,1.,color.a);
    let alignment=max(0.,dot(reflected,frame.sun.xyz));

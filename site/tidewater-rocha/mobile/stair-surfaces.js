@@ -161,7 +161,7 @@ export function repairStairIntersections(detail,exterior,asset) {
   }
 }
 
-export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
+export function obstacles(parts,ownParts,box,{includeVerticalFaces=false,stepAllowance=.19,stairLandingRim}={}) {
   const triangles=[];
   for(const part of parts) {
     const b=part.bounds;
@@ -173,7 +173,9 @@ export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
       const vertices=Array.from(part.indices.slice(i,i+3),k=>Array.from(part.vertices.slice(k*6,k*6+3)));
       const tb=bounds(vertices);
       if(tb[3]<box[0]||tb[0]>box[3]||tb[4]<box[1]||tb[1]>box[4])continue;
-      triangles.push({vertices,b:tb,id:part.id,name:part.feature||part.name,top:b[5],floor:part.id==='UD_DCK_001/stairs/stair-opening'||/floor|landing|deck slab/.test(part.feature||part.name||'')||part.category==='Decks'});
+      triangles.push({vertices,b:tb,id:part.id,name:part.feature||part.name,top:b[5],
+        floor:part.id==='UD_DCK_001/stairs/stair-opening'||stairLandingRim?.(part)||
+          /floor|landing|deck slab/.test(part.feature||part.name||'')||part.category==='Decks'});
     }
   }
   const cache=new Map();
@@ -182,7 +184,7 @@ export function obstacles(parts,ownParts,box,{includeVerticalFaces=false}={}) {
     if(!cache.has(key)) {
       const footprints=[];
       for(const t of triangles) {
-        const foot=height+(t.floor && t.top<=height+.19 ? .19 : .035);
+        const foot=height+(t.floor && t.top<=height+stepAllowance ? stepAllowance : .035);
         if(t.b[5]<=foot || t.b[2]>=height+1.65)continue;
         const projected=clip(clip(t.vertices,foot,true),height+1.65,false).map(p=>p.slice(0,2));
         let polygon=convexHull(projected);
@@ -278,7 +280,13 @@ export function describeFlights(model,routes) {
       subtractPrisms(copy,steps.flatMap(s=>s.polygons.map(polygon=>({polygon,low:p.bounds[2]-1,high:s.height}))));
       return copy;
     }):parts;
-    const solidClearance=obstacles(collisionParts,structure,box,{includeVerticalFaces:['bridge','guest'].includes(route.id)});
+    // At the aft landing the forward moulded lip is the final riser below the
+    // walkable threshold. In particular it must leave clearance for toes as
+    // the body straddles the penultimate tread and the upper deck.
+    const solidClearance=obstacles(collisionParts,structure,box,route.id==='aft' ? {
+      stepAllowance: upperHeight-steps.at(-2).height+.002,
+      stairLandingRim: part=>part.feature==='cockpit ceiling moulded stair reveal',
+    } : {includeVerticalFaces:['bridge','guest'].includes(route.id)});
     const clearance=(x,y,height,radius)=>solidClearance(x,y,height,radius) &&
       !(route.id==='service' && Math.abs(height-upperHeight)<EPS && model.navigation.serviceAccess.blocked(x,y,route.upper,radius));
     clearance.footprints=solidClearance.footprints;

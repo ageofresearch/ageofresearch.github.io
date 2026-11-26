@@ -39,11 +39,11 @@ function travel(nav,points,hz,seen) {
   }
 }
 
-test('inventory counts arrivals separately and derives the bridge and flared terrace from final geometry',()=>{
+test('inventory counts arrivals separately and derives the revised cockpit run from final geometry',()=>{
   const {model,flights}=fixture();
   try {
     assert.deepEqual(flights.map(f=>[f.id,f.treadCount,f.riseCount]),[
-      ['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13],['starboard-fore',13,14]]);
+      ['guest',13,14],['bridge',11,12],['aft',9,10],['sun',13,14],['service',12,13],['starboard-fore',13,14]]);
     for(const flight of flights)assert.equal(flight.clearance.preparedHeights,
       new Set(flight.surfaces.map(s=>s.height.toFixed(6))).size,
       flight.id+': collision construction must finish before the first movement');
@@ -56,9 +56,28 @@ test('inventory counts arrivals separately and derives the bridge and flared ter
       assert.ok(s.polygons.flat().every(([x,y])=>x>18.7&&x<19.6&&y<1.11&&y>.41),
         'The terrace widening must never move bridge steps to y=2.21');
     }
-    const ys=aft.surfaces[1].polygons.flat().map(p=>p[1]);
-    assert.ok(Math.max(...ys)-Math.min(...ys)>1.15);
-    assert.equal(aft.safe(5.51,2.51,.14,1),null,'A widened tread does not permit crossing its existing handrail');
+    const parts=model.interiorDetail.replacements.get('MD_STA_013');
+    const treads=parts.filter(p=>/timber border$/.test(p.feature));
+    const width=p=>p.bounds[4]-p.bounds[1], depth=p=>p.bounds[3]-p.bounds[0];
+    assert.equal(treads.length,10);
+    assert.ok(Math.abs(width(treads[0])-.94)<1e-8,'Only the first tread flares at the plinth');
+    assert.ok(treads.slice(1).every(p=>Math.abs(width(p)-.74)<1e-8));
+    const centre=aft.route.path[0][1],toe=treads[0].bounds[0];
+    assert.ok(aft.safe(toe+.03,centre,.14,1));
+    assert.equal(aft.safe(toe+.02,centre+.50,.14,1),null,'The rounded corner does not support the whole body');
+    assert.ok(depth(treads[0])>.3);
+    assert.ok(treads.slice(1,-1).every(p=>depth(p)>.22 && depth(p)<.24));
+    const threshold=treads.at(-1);
+    assert.equal(threshold.bounds[3],aft.route.path.at(-1)[0]);
+    const cheeks=parts.filter(p=>p.feature.startsWith('gloss black stair cheek'));
+    assert.equal(cheeks.length,2);
+    assert.ok(cheeks.every(p=>p.bounds[3]===threshold.bounds[3] && p.bounds[5]===aft.upperHeight),
+      'Both cheeks meet the landing below the fixed upper railing');
+    assert.equal(aft.surfaces.at(-1).height,6);
+    assert.equal(aft.surfaces[0].height,3.95);
+    assert.ok(aft.surfaces[1].height-aft.lowerHeight<.18);
+    assert.ok(aft.surfaces.slice(2).every((s,i)=>s.height-aft.surfaces[i+1].height<.223));
+    assert.equal(aft.safe(6.24,2.60,.14,2),null,'The lower rail stays solid');
   }finally{model.dispose();}
 });
 

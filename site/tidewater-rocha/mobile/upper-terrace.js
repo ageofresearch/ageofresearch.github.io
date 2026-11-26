@@ -3,13 +3,15 @@ import {preloadSun} from './sun-deck.js?v=port-guest-1';
 import {decodeSaloon} from './main-saloon.js?v=port-guest-1';
 import {createFlight,installFlightNavigation,restorableStair,restoreStairPosition} from './stair-surfaces.js?v=port-guest-1';
 import {indexFootprints} from './terrace-geometry.js?v=chair-fidelity-1';
+import {aftCockpitHeights} from './aft-cockpit-stair.js?v=cockpit-stair-vr-1';
 export const upperVersion='vr-detail-1';
 export function decodeUpper(manifest,buffer) {
   const result=decodeSaloon(manifest,buffer,{version:upperVersion,names:['exterior','upper'],roomID:'UD_R01'});
   const f=result.flight;
-  if(f?.route?.id!=='aft'||f.surfaces?.length!==13||f.treadCount!==11||f.riseCount!==12||
-    f.surfaces.some((s,i)=>s.index!==i||!s.polygons?.length||Math.abs(s.height-(3.95+i*2.05/12))>.00001)||
-    f.obstacles?.length!==13)throw Error('Escalera superior incompleta');
+  const count=aftCockpitHeights.length;
+  if(f?.route?.id!=='aft'||f.surfaces?.length!==count||f.treadCount!==count-2||f.riseCount!==count-1||
+    f.surfaces.some((s,i)=>s.index!==i||!s.polygons?.length||Math.abs(s.height-aftCockpitHeights[i])>.00001)||
+    f.obstacles?.length!==count)throw Error('Escalera superior incompleta');
   return result;
 }
 export function loadUpper(options) {
@@ -51,7 +53,8 @@ export function restoreUpperHandoff(walk,state) {
   else if(state.deck==='UD'&&!state.stair&&nav.floorSafe(...state.position,'UD'))nav.elevation=6;
   else {
     nav.deck=state.elevation>(3.95+6)/2?'UD':'MD';
-    nav.position=nav.deck==='UD'?[8.35,2.21]:[5.2,2.21];
+    const end=route?.path[nav.deck==='UD'?1:0];
+    nav.position=end?[end[0]+(nav.deck==='UD'?.30:-.64),end[1]]:nav.nearest(...state.position,nav.deck);
     if(!nav.floorSafe(...nav.position,nav.deck))nav.position=nav.nearest(...nav.position,nav.deck);
     nav.elevation=nav.floorHeight(...nav.position);
   }

@@ -55,7 +55,7 @@ test('mobile upper route supports every tread, stops, reversals, diagonals and b
     const nav=walk.nav,controller=nav.tryStep;connectUpper(walk,upper);
     assert.equal(nav.tryStep,controller,'Adding a flight must not nest controllers');
     const f=model.upper.flight,route=f.route;
-    const path=[[6.68,0],[6,.9],[5.9,1],[4.9,1.2],[4.4,1.7],[4.7,2.21],[5.2,2.21],[5.4,2.21],[8.05,2.21],[8.35,2.21],[9.9,1.5],[10.2,1.5],[10.25,-.40],[13.8,-.40],[13.8,.1]];
+    const path=[[6.68,0],[6,.9],[5.9,1],[4.9,1.2],[4.4,1.7],[4.7,2.28],[5.72,2.28],...route.path,[8.35,2.28],[9.9,1.5],[10.2,1.5],[10.25,-.40],[13.8,-.40],[13.8,.1]];
     for(const hz of [12,40,60]) {
       nav.deck='MD';nav.position=path[0].slice();nav.elevation=3.95;nav.stair=null;
       travel(nav,path.slice(1),hz);assert.equal(nav.deck,'UD');assert.equal(nav.elevation,6);assert.equal(nav.stair,null);
@@ -88,7 +88,7 @@ test('the port stair approach has one continuous teak surface in both viewers',a
         assert.ok(onSurface(x,y,deck),'Missing teak at '+[x,y]);
         assert.equal(onSurface(x,y,border),false);
       }
-      for (const [x,y] of [[5.37,2.21],[5.40,2.78],[5.51,2.83]]) {
+      for (const [x,y] of [[5.89,2.28],[6.01,2.78],[6.24,2.83]]) {
         assert.ok(onSurface(x,y,border),'Missing rounded margin at '+[x,y]);
         assert.equal(onSurface(x,y,deck),false,'Stacked floor under margin');
       }
@@ -97,12 +97,12 @@ test('the port stair approach has one continuous teak surface in both viewers',a
     for (const [viewer,{walk}] of Object.entries({mobile,full})) {
       for (const [x,y] of [[4.94,1.79],[5.10,1.96],[5.18,2.04]])
         assert.ok(walk.nav.floorSafe(x,y,'MD'),viewer+' approach must support the body at '+[x,y]);
-      assert.equal(walk.nav.floorSafe(5.15,1.80,'MD'),false,'Body clearance at the lower handrail');
+      assert.equal(walk.nav.floorSafe(5.64,2.08,'MD'),false,'Body clearance at the rising service housing');
     }
     const nav=mobile.walk.nav;
     const path=[[-4.3,3.1],[2.1,3.1],[3.65,3.1],[4.56,3.1],[4.59,2.40],
-      [4.75,2.10],[5.10,1.96],[5.18,2.04],[5.24,2.21],
-      [5.4,2.21],[8.05,2.21],[8.35,2.21],[9.9,1.5]];
+      [4.75,2.10],[5.10,1.96],[5.18,2.04],[5.24,2.28],
+      ...upper.flight.route.path,[8.35,2.28],[9.9,1.5]];
     for(const hz of [12,40,60]){
       nav.enterRoom('boarding');travel(nav,path,hz);
       assert.equal(nav.deck,'UD');assert.equal(nav.elevation,6);
@@ -125,9 +125,9 @@ test('upper boundaries retain furniture, overhead clearance, closed solarium and
     for(const p of [[8.9,-.5],[6.1,0],[8,-2.4],[12.1,-.8],[14.15,.1],[14.3,0],[6.5,3.7],[11.65,2.7],[13.8,1.5]])assert.equal(nav.floorSafe(...p,'UD'),false,p.toString());
     assert.equal(nav.floorSafe(1.4,3.03,'SP'),false);
     assert.equal(nav.routes.some(r=>r.id==='sun'||r.id==='port-swim'),false);
-    nav.deck='MD';nav.position=[5.51,2.21];nav.elevation=upper.flight.surfaces[1].height;nav.stair={route:f.model.upper.flight.route,surfaceIndex:1,d:.1};
-    assert.equal(nav.tryStep(6,2.21),false,'Cannot skip treads');
-    assert.equal(f.model.upper.flight.safe(5.51,2.51,.14,1),null,'Rail stays solid');
+    nav.deck='MD';nav.position=[6.06,2.28];nav.elevation=upper.flight.surfaces[1].height;nav.stair={route:f.model.upper.flight.route,surfaceIndex:1,d:.1};
+    assert.equal(nav.tryStep(6.53,2.28),false,'Cannot skip treads');
+    assert.equal(f.model.upper.flight.safe(6.24,2.60,.14,2),null,'Rail stays solid');
     nav.stair=null;nav.enterRoom('UD_R01');assert.ok(nav.floorSafe(...nav.position));assert.equal(nav.elevation,6);
     nav.enterRoom('swim-platform');travel(nav,[[.35,-3.03],[.52,-3.03],[2.6,-3.03],[3,-3.03]]);assert.equal(nav.deck,'MD');
   }finally{f.dispose();}
@@ -156,9 +156,10 @@ test('complete-yacht handoff preserves UD and each actual tread, with nearest-la
       restoreUpperHandoff(walk,{deck:'MD',stair:'aft',position,elevation:s.height});
       assert.deepEqual(walk.nav.position,position);assert.equal(walk.nav.stair?.surfaceIndex,s.index);assert.equal(walk.nav.elevation,s.height);
     }
-    for(const [elevation,deck,position]of [[4.1,'MD',[5.2,2.21]],[5.9,'UD',[8.35,2.21]]]) {
+    for(const [elevation,deck,position]of [[4.1,'MD',[5.28,2.28]],[5.9,'UD',[8.35,2.28]]]) {
       restoreUpperHandoff(walk,{deck:'MD',stair:'aft',position:[100,100],elevation});
-      assert.equal(walk.nav.deck,deck);assert.deepEqual(walk.nav.position,position);assert.equal(walk.nav.stair,null);
+      assert.equal(walk.nav.deck,deck);assert.equal(walk.nav.stair,null);
+      assert.ok(Math.hypot(...walk.nav.position.map((v,k)=>v-position[k]))<1e-9);
     }
   }finally{model.dispose();}
 });

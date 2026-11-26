@@ -240,7 +240,7 @@ The upper interior reuses the upper floor already supplied as the MD saloon ceil
 Only the missing strip beyond x=17.91 and the upper ceiling beyond x=14.25 are added.
 The extraction retains real holes, the service cabinet, glass and head clearance.
 The sun flight retains 13 intermediate treads and 14 rises (6.00 to 8.20); the aft
-flight retains 11 intermediate treads and 12 rises (3.95 to 6.00). The starboard swim
+flight uses nine intermediate treads and ten rises (3.95 to 6.00) with a flush upper threshold, fitted to Cockpit (Port). The starboard swim
 access remains usable, and the port swim stair stays blocked under the gangway.
 Full-yacht handoff preserves a supported interior position; invalid positions use
 the room's safe spawn. Existing stair handoffs remain unchanged.

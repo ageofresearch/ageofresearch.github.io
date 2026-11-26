@@ -1,3 +1,5 @@
+import {cockpitPlinthOutline} from './aft-cockpit-stair.js?v=cockpit-stair-vr-1';
+
 // The port service stair passes underneath the exterior cockpit stair.
 export const serviceStairStraightEnd = 8.1;
 const deckZ = 3.95;
@@ -44,6 +46,21 @@ function appendFace(mesh, corners) {
   for (let j = 2; j < corners.length; j++) mesh.indices.push(offset, offset + j - 1, offset + j);
 }
 
+// The inner lip of the lower stair casing flares into the cockpit flight in
+// the source model. Bring the lip in next to the first treads. Below the lip
+// the footwell keeps the full width of the original service stair.
+function fitServiceLip(corners) {
+  return corners.map(vertex => {
+    const [x, y, z, nx, ny, nz] = vertex;
+    const weight = Math.max(0, Math.min(1, (x - 5.48) / .37, (7.12 - x) / .37, (z - deckZ + .10) / .13));
+    if (!weight || y <= 1.80) return vertex;
+    const fittedY = 1.80 + .30 * (y - 1.80);
+    const normalScale = 1 - .70 * weight;
+    const length = Math.hypot(nx, ny / normalScale, nz);
+    return [x, y + weight * (fittedY - y), z, nx / length, ny / normalScale / length, nz / length];
+  });
+}
+
 // The underside and inner walls belong to the white service lining. Split the
 // outside at deck height for the timber cap and dark cheek visible above.
 function splitCladding(part, straightStart, straightEnd, centreY) {
@@ -58,28 +75,36 @@ function splitCladding(part, straightStart, straightEnd, centreY) {
     if (roof && Math.abs(nx) > .999999 && x > straightStart + 1e-7 && x < straightEnd - 1e-7) continue;
     const outside = nz > .1 || (Math.abs(nz) < .1 && (roof || ny * (y - centreY) > 0));
     if (!outside || corners.some(v => v[0] > straightEnd + 1e-7) || corners.every(v => v[2] <= deckZ)) {
-      appendFace(lining, corners);
+      appendFace(lining, fitServiceLip(corners));
     } else {
-      appendFace(nz > .1 ? cap : skin, clipAtDeck(corners, true));
-      appendFace(lining, clipAtDeck(corners, false));
+      appendFace(nz > .1 ? cap : skin, fitServiceLip(clipAtDeck(corners, true)));
+      appendFace(lining, fitServiceLip(clipAtDeck(corners, false)));
     }
   }
   return {lining, skin, cap};
 }
 
 export function finishCockpitStairFoot(detail, serviceParts, straightCut, geometry) {
-  const {replace, merge, subtract, surface, rounded} = geometry;
+  const {replace, merge, subtract, surface} = geometry;
   const deckParts = detail.replacements.get('MD_DCK_001');
   const slab = deckParts.find(part => part.id.endsWith('/cockpit-teak')) ?? deckParts[0];
-  const tread = detail.replacements.get('MD_STA_013').find(part => part.feature === 'tread 1 closed black riser');
+  const tread = detail.replacements.get('MD_STA_013').find(part => part.feature === 'tread 1 timber border');
   const [start, inner, end, outer] = straightCut;
   const roofs = serviceParts.filter(part => part.feature === 'sloping white service stair ceiling');
   const crossing = roofCrossing(roofs);
-  const [x, y, , X, Y] = tread.bounds, margin = .052;
-  const width = X - x, depth = Y - y;
-  const outline = rounded((x + X) / 2, (y + Y) / 2, width + 2 * margin, depth + 2 * margin, Math.min(.085, width * .4) + margin);
+  const [x, y, , X, Y] = tread.bounds, margin = .062;
+  const outline = cockpitPlinthOutline(x - margin, X + margin, (y + Y) / 2, Y - y + 2 * margin, .111 + margin);
   const approach = surface(rectangle(start, inner, crossing, outer), deckVertex);
   const exposed = rectangle(crossing, inner, end, outer);
+
+  // Fill the portion of the deck that the fitted lip now clears. Its inner
+  // edge rests on the service lining, clear of the lower stair's footwell.
+  const returnAt = (x, y) => fitServiceLip([[x,y,deckZ,0,0,1]])[0][1];
+  const returnXs = [crossing, 5.61, 5.97, 6.32, 6.68, 7.03, 7.12];
+  const lidReturn = returnXs.slice(1).map((x, i) => {
+    const startX = returnXs[i];
+    return surface([[startX,returnAt(startX,outer)],[x,returnAt(x,outer)],[x,outer],[startX,outer]],deckVertex);
+  });
 
   // Only partition horizontal deck triangles that can meet the inlaid margin.
   const local = [], retained = [];
@@ -91,7 +116,7 @@ export function finishCockpitStairFoot(detail, serviceParts, straightCut, geomet
       && !points.every(v => v[1] < y - margin) && !points.every(v => v[1] > Y + margin);
     (touches ? local : retained).push(...face);
   }
-  const field = subtract(merge([{vertices: slab.vertices, indices: local}, approach]), [outline]);
+  const field = subtract(merge([{vertices: slab.vertices, indices: local}, approach, ...lidReturn]), [outline]);
   replace(slab, merge([{vertices: slab.vertices, indices: retained}, field]));
   const rim = {...slab, id: slab.id + '/stair-foot-margin', feature: 'inlaid teak cockpit stair margin',
     materialID: 'M43', finish: [0xa48a6f, .75, 0, 2]};
@@ -103,8 +128,8 @@ export function finishCockpitStairFoot(detail, serviceParts, straightCut, geomet
     const {lining, skin, cap} = splitCladding(part, start, end, (inner + outer) / 2);
     replace(part, lining);
     for (const [name, mesh, material, finish] of [
-      ['cheek', skin, 'M47', [0x403832, .34, 0, 0]],
-      ['capping', cap, 'M43', rim.finish],
+      ['cheek', skin, 'M47', [0x25232a, .21, .62, 5]],
+      ['capping', cap, 'M47', [0x25232a, .21, .62, 5]],
     ]) {
       if (!mesh.indices.length) continue;
       const exterior = {...part, id: part.id + '/cockpit-' + name, deck: 'MD', interior: false,

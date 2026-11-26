@@ -70,7 +70,7 @@ test('corrected full-view furniture has prepared collision fields and preserves 
   for(const [deck,x,y]of [['UD',12.03,-1.18],['UD',12.03,.44],['MD',25.72,2.21],['LD',30.05,1.13]])
     assert.equal(walk.nav.floorSafe(x,y,deck),false,`${deck} ${x},${y}`);
   assert.deepEqual(after.stairInventory.flights.map(f=>[f.id,f.treadCount,f.riseCount]),
-    [['guest',13,14],['bridge',11,12],['aft',11,12],['sun',13,14],['service',12,13],['starboard-fore',13,14]]);
+    [['guest',13,14],['bridge',11,12],['aft',9,10],['sun',13,14],['service',12,13],['starboard-fore',13,14]]);
 });
 
 test('every active mobile profile retains corrected load-contact heights',async()=>{

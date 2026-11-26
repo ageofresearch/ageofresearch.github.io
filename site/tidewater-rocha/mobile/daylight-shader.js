@@ -5,10 +5,11 @@ import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2'
 import { ownerContactBounds, ownerContactWGSL } from './owner-contact-layout.js?v=owner-contact-1';
 import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
 import { gangwayRadianceWGSL } from './gangway-radiance.js?v=sleeve-reflections-1';
-import { sleeveReflectionWGSL } from './sleeve-reflections.js?v=wet-bar-vr-1';
+import { sleeveReflectionWGSL } from './sleeve-reflections.js?v=cockpit-ceiling-vr-1';
 import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
+import { cockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -37,6 +38,7 @@ ${gangwaySteelWGSL}
 ${gangwayRadianceWGSL}
 ${sleeveReflectionWGSL}
 ${cockpitSteelWGSL}
+${cockpitOverheadWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
@@ -110,6 +112,10 @@ struct V {
  // its vertices; the shadow map interpolates between them across the penumbra.
  let sunlit=display(o.indirect+o.direct);
  o.indirect=display(o.indirect);o.direct=sunlit-o.indirect;
+ }
+ if(o.layer==-9){
+   o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
+   return o;
  }
  if(o.layer==6 || o.layer==70){
    let view=normalize(frame.eye.xyz-pos);
@@ -201,6 +207,21 @@ fn shade(in:V)->vec4f{
  if(in.layer==-8){
    if(frame.wind.y>0.){return vec4f(.45,.49,.54,1.);}
    return vec4f(display(cockpitSteel(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
+ }
+ if(in.layer==-9){
+   if(frame.wind.y>0.){return vec4f(in.indirect,1.);}
+   let eye=vec3f((frame.eye.z+17.615)/.9786111111,frame.eye.x/.9828947368,frame.eye.y+2.01);
+   let finish=cockpitPanelFinish(in.uv,eye,true);
+   let p=vec3f(in.uv.y*.9828947368,3.87,in.uv.x*.9786111111-17.615);
+   let view=normalize(frame.eye.xyz-p);
+   let glow=.023*(1.-abs(view.y))*(.57+.43*max(0.,frame.sun.y));
+   var base=in.indirect+vec3f(.80,.91,1.)*glow;
+   if(any(in.direct>vec3f(.001))){
+     base+=in.direct*textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
+   }
+   // Neutral satin calibration from the shaded cockpit reference.
+   let lining=base*vec3f(.882,.913,.936)*finish.x;
+   return vec4f(lining+vec3f(.18,.115,.071)*finish.y,1.);
  }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;

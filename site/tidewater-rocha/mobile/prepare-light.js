@@ -1,5 +1,6 @@
 import {walkLight} from './walk-light.js?v=yacht-daylight-1';
 import {compartment} from './yacht-daylight.js?v=yacht-daylight-1';
+import {cockpitOverheadFinish} from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
 
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));
@@ -99,6 +100,7 @@ export function prepareOpaque(source,map,indices) {
     }
     if(code===54){layer=-4;u=clamp((localY-.013)/.77);v=clamp((7.48-elevation-.095*u*u)/.51);}
     if(code===48){color.set([1,.94,.82],j);surface[k+3]=0;layer=-3;}
+    if(code===cockpitOverheadFinish){layer=-9;u=localX;v=localY;}
     if(layer>0 && layer<20 && code!==59 && code!==60)u*=.5; // other patterned slices repeat twice
     if(layer===5 && color[j+2]>color[j]*1.06){
       // Slate-blue pile with pale highlights from the mottled fibre field.

@@ -13,7 +13,7 @@ import {loadDeckLight,prepareOpaque,packRenderVertices} from './prepare-light.js
 import {createFinishPatterns} from './finish-patterns.js?v=chair-fidelity-1';
 import { ownerContactSize, uploadOwnerContact } from './owner-contact.js?v=owner-contact-1';
 import { uploadGangwayRadiance } from './gangway-radiance.js?v=sleeve-reflections-1';
-import { uploadSleeveReflections } from './sleeve-reflections.js?v=wet-bar-vr-1';
+import { uploadSleeveReflections } from './sleeve-reflections.js?v=cockpit-ceiling-vr-1';
 import { onGuestApproach } from './guest-access-geometry.js?v=guest-visibility-1';
 import { nextProfile } from './main-saloon.js?v=port-guest-1';
 

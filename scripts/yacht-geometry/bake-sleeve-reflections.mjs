@@ -22,6 +22,7 @@ const boarding = createBoarding(model, null, { gangwayOnly: true, includeLanding
 const sternSurface = /^(full width|transom (?:port|starboard)|port stair (?:landing|sponson|recessed|inboard|moulded)|beach club (?:aft-facing|warm timber|central satin|swept jamb|timber soffit|canopy|dark rolled)|starboard upper landing|aft teak floor)/;
 const boardingSurface = /(?:teak inset|teak boarding landing|teak cockpit threshold|teak landing lip|timber border)/;
 const hull = renderedParts(model).filter(({ id, feature }) => id.includes('stair-opening') ||
+  /^cockpit ceiling (satin panel field|rounded exterior fascia|moulded stair reveal)$/.test(feature || '') ||
   id.startsWith('MD/boarding-route/') && /coaming|recess lower ledge/.test(feature) ||
   id.startsWith('MD/transom/retained-hull'));
 const parts = [...hull, ...stern.filter(p => sternSurface.test(p.feature)),

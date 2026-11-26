@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { buildTerrace, clipGeometry, contactShade } from '../scripts/build-yacht-terrace.mjs';
+import { buildTerrace, clipGeometry, contactShade, containsTriangle } from '../scripts/build-yacht-terrace.mjs';
+import {cockpitOverheadFinish} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 import { crossing } from '../site/tidewater-rocha/mobile/pasarela.js';
@@ -11,6 +12,32 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 
 const root = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('aft-terrace.json', root)));
+
+test('the cockpit lining keeps a real stair aperture and seats the meshed fittings', async () => {
+  const packed=await readFile(new URL('aft-terrace.bin',root));
+  const ceiling=manifest.parts.filter(p=>p.feature.startsWith('cockpit ceiling '));
+  const find=feature=>ceiling.find(p=>p.feature==='cockpit ceiling '+feature);
+  const mesh=part=>{
+    const vertices=new Float32Array(packed.buffer,packed.byteOffset+part.vertices.offset,part.vertices.length);
+    const indices=new Uint32Array(packed.buffer,packed.byteOffset+part.indices.offset,part.indices.length);
+    return Array.from({length:indices.length/3},(_,i)=>Array.from(indices.slice(3*i,3*i+3),k=>vertices.slice(k*6,k*6+3)));
+  };
+  const face=find('satin panel field');
+  assert.equal(face.finish[3],cockpitOverheadFinish);
+  const panels=mesh(face);
+  for(const [x,y] of [[5.55,2.10],[7.92,2.55],[5.13,1.70]])
+    assert.ok(!panels.some(t=>containsTriangle(x,y,t)), 'Stair aperture '+[x,y]);
+  for(const [x,y] of [[5.55,0],[7.92,2.97],[8.499,3.36]])
+    assert.equal(panels.some(t=>containsTriangle(x,y,t)),true,'Lining '+[x,y]);
+  assert.equal(ceiling.filter(p=>/warm lens [12]$/.test(p.feature)&&p.finish[3]===48).length,2);
+  for(const i of [1,2]) {
+    assert.equal(find('polished column collar '+i).bounds[5],5.88);
+    assert.equal(find('polished column collar '+i).bounds[2],5.87);
+  }
+  const column=find('port support column');
+  assert.deepEqual([column.bounds[2],column.bounds[5]],[3.95,5.87]);
+  assert.ok(manifest.collisionFootprints.some(p=>p.id===column.id));
+});
 
 function walkingModel() {
   const group = new Group(); group.userData = { yacht:basis };

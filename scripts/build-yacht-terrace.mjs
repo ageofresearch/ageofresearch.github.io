@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { buildYachtGeometry } from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import { convexHull, distanceToFootprint } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
+import {mobileCockpitFitting} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const boundsOf = vertices => [0, 1, 2].map(k => Math.min(...vertices.filter((_, i) => i % 6 === k)))
@@ -106,7 +107,9 @@ export async function buildTerrace() {
   function add(source, bounds, role) {
     let geometry = clipGeometry(source, bounds);
     if (!geometry.indices.length) return;
-    if (role === 'floor' || role === 'roof' || role === 'hull') geometry = subdivide(geometry);
+    // The upper face of this slab has a constant baked sky weight. Keep its
+    // original triangulation so the flattened lining and small fittings fit.
+    if (role === 'floor' || role === 'hull') geometry = subdivide(geometry);
     parts.push({ id: source.id, feature: source.feature, role, materialID: source.materialID,
       finish: role==='floor' ? [0x9e9999,.77,0,1] : source.finish,
       glass: !!source.glass, smokedGlass: !!source.glass,
@@ -126,6 +129,10 @@ export async function buildTerrace() {
   for (const part of replacements.get('MD_STA_013')) add(part, [3.3,-3.8,3.83,8.5,3.8,7.05], 'stairs');
   for (const part of replacements.get('MD_GLA_001')) add(part, region, 'glazing');
   for (const part of model.exterior.parts) {
+    if(part.feature?.startsWith('cockpit ceiling ')&&mobileCockpitFitting(part.feature)){
+      const role=part.feature==='cockpit ceiling port support column'?'roof-support':'roof-detail';
+      add(part,[3.2,-3.8,3.95,8.5,3.8,6.01],role);
+    }
     if (/^(shaped teak landing inboard caulk border|teak passage outer margin border)$/.test(part.feature))
       add(part, [2.28,-3.8,3.83,8.5,3.8,3.96], 'deck-trim');
     if (part.feature === 'aft sliding glazing frames and mullions') add(part, region, 'frame');
@@ -156,7 +163,7 @@ export async function buildTerrace() {
     .map(([id,group])=>({id:'furniture/'+id,polygon:footprint(group)}));
   // The broad first-delivery stair box would close the actual passage beside
   // chair 3. Project only solid geometry at the walking body's height instead.
-  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure'].includes(p.role) ||
+  const collisionFootprints=furnitureFootprints.concat(parts.filter(p=>['stairs','enclosure','roof-support'].includes(p.role) ||
     p.feature==='integrated mooring recess lower ledge').flatMap(part=>{
     const body=clipGeometry(part,[3,-4,4.04,9,4,5.65]);
     const polygon=footprint([body]);

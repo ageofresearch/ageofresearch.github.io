@@ -4,6 +4,7 @@ import {saloonBack,saloonChaise,saloonChairShells} from './saloon-upholstery.js?
 import {fitHullToMainDeck} from './deck-joints.js?v=saloon-entry-1';
 import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=port-passage-vr-1';
 import {finishPortSideWall,portSideGlassCode} from './port-side-wall.js?v=port-passage-vr-1';
+import {furnishCockpitOverhead} from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
 import {furnishPortCabin} from './port-guest-cabin.js?v=vr-detail-1';
 import {ownerWritingChair} from './owner-writing-chair.js?v=owner-writing-chair-1';
 import catalog from './tour-furniture-data.js?v=owner-writing-chair-1';
@@ -72,7 +73,7 @@ export function distantSaloonSeats(){
   return result;
 }
 
-export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,materials,circle}) {
+export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,materials,circle,face}) {
   if(!detail||!exterior)return;
   const source=new Map(asset.data.meshes.map(m=>[m.id,m]));
   const parts=()=>[...new Set([...detail.replacements.values()].flat().concat(detail.additions,exterior.parts))];
@@ -274,6 +275,7 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   }
   furnishMainDeck({box,add,remove,slab,outline,circle});
   finishSideDecks({add,box});
+  furnishCockpitOverhead({decks:detail.replacements.get('UD_DCK_001')||[],parts:parts(),face,add,remove});
   finishPortSideWall({
     source,parts:parts(),box,add,
     tint(part,material){part.materialID=material;part.finish=materials[material];},

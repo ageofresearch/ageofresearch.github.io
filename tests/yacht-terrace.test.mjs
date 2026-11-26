@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { buildTerrace, clipGeometry, contactShade, containsTriangle } from '../scripts/build-yacht-terrace.mjs';
 import {cockpitOverheadFinish} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
+import {aftTeakFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-teak.js';
+import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 import { crossing } from '../site/tidewater-rocha/mobile/pasarela.js';
@@ -12,6 +14,30 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 
 const root = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('aft-terrace.json', root)));
+
+test('mobile teak caps keep a single walkable top and a genuinely rounded nose', async () => {
+  const binary=await readFile(new URL('aft-terrace.bin',root));
+  const caps=manifest.parts.filter(p=>p.finish?.[3]===aftTeakFinish);
+  assert.equal(caps.length,aftCockpitTreads.length);
+  assert.ok(!manifest.parts.some(p=>p.role==='stairs' && /pale inset$/.test(p.feature)));
+  for(const [i,cap] of caps.entries()) {
+    const {front,back,left,right,top,thickness}=aftCockpitTreads[i];
+    const vertices=new Float32Array(binary.buffer,binary.byteOffset+cap.vertices.offset,cap.vertices.length);
+    const indices=new Uint32Array(binary.buffer,binary.byteOffset+cap.indices.offset,cap.indices.length);
+    const hits=[];
+    const near=[];
+    const y=left+(right-left)*.38;
+    for(let j=0;j<indices.length;j+=3) {
+      const face=Array.from(indices.subarray(j,j+3),k=>vertices.subarray(k*6,k*6+6));
+      if(face.every(p=>p[5]>.99)&&containsTriangle(front+(back-front)*.46,y,face))hits.push(face[0][2]);
+      near.push(...face.filter(p=>p[0]<front+.009&&p[3]<-.4&&p[5]>.4));
+    }
+    assert.equal(hits.length,1,cap.feature);
+    assert.ok(Math.abs(hits[0]-top)<.000001,cap.feature);
+    assert.ok(Math.abs(cap.bounds[2]-(top-thickness))<.000001,cap.feature);
+    assert.ok(near.length,`${cap.feature}: interpolated normal on the nose radius`);
+  }
+});
 
 test('the cockpit lining keeps a real stair aperture and seats the meshed fittings', async () => {
   const packed=await readFile(new URL('aft-terrace.bin',root));

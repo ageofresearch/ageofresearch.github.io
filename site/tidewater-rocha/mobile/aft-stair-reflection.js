@@ -21,7 +21,11 @@ const tubeEnds=tubes.map(([,b])=>vec(b)).join(',');
 // Local, opaque reflections. Rays intersect the receiving stair's own treads,
 // teak sole, overhead opening and the nearby coaming and support in model space.
 // Illumination and viewing direction are evaluated in the normal surface pass.
-export const aftStairReflectionWGSL = `
+export function makeAftStairReflectionWGSL({
+  treadSample = 'aftStairStock(hit,up,rough,distance)',
+  treadCovers = 'aftStairInside(hit.xy,treads[i])',
+} = {}) {
+  return `
 fn aftStairSafe(v:f32)->f32{
   return select(min(v,-.00001),max(v,.00001),v>=0.);
 }
@@ -129,8 +133,8 @@ fn aftStairReflection(pos:vec3f,normal:vec3f,eye:vec3f,sun:vec3f,rough:f32,sunVi
     let up=axis.z<0.;let height=select(levels[i].y,levels[i].x,up);
     let distance=(height-p.z)/denominZ;
     let hit=p+axis*max(distance,0.);
-    if(distance>.008 && distance<nearest && aftStairInside(hit.xy,treads[i])){
-      nearest=distance;light=aftStairStock(hit,up,rough,distance);
+    if(distance>.008 && distance<nearest && ${treadCovers}){
+      nearest=distance;light=${treadSample};
     }
   }
   let grazing=pow(1.-clamp(abs(dot(eye,normal)),0.,1.),5.);
@@ -147,3 +151,6 @@ fn aftStairReflection(pos:vec3f,normal:vec3f,eye:vec3f,sun:vec3f,rough:f32,sunVi
   return (neutral+light*day*smoked*(.50+.37*grazing))*aftStairPanelShade(p)+vec3f(.92,.83,.70)*glint;
 }
 `;
+}
+
+export const aftStairReflectionWGSL = makeAftStairReflectionWGSL();

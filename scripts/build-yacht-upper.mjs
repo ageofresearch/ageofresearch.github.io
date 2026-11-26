@@ -7,6 +7,7 @@ import {clipGeometry,subdivide,contactShade} from './build-yacht-terrace.mjs';
 import {buildYachtGeometry,createBoarding,createSternFeatures,createFinishes,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {A as Group} from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import {renderedParts,obstacles,surfaceTriangles} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
+import {mobileAftTeak} from './yacht-geometry/aft-cockpit-teak.mjs';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 export async function buildUpper() {
   const lower=await buildSaloon(),json=await readFile(new URL('rocha/luz-de-mar/model.json',root));
@@ -15,7 +16,7 @@ export async function buildUpper() {
     nav:Object.fromEntries(Object.entries(data.nav).map(([k,n])=>[k,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
   new Walk({camera:{position:model.group.position}},model,{document:null});
-  const final=renderedParts(model),flight=model.stairInventory.flights.find(f=>f.id==='aft');
+  const final=mobileAftTeak(renderedParts(model)),flight=model.stairInventory.flights.find(f=>f.id==='aft');
   const {terrace,parts:saloon}=lower.sources;
   for(let i=0;i<terrace.length;i++) {
     const p=final.find(p=>p.id===terrace[i].id&&p.semanticParent==='stairs/aft');

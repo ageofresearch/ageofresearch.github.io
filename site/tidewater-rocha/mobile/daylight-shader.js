@@ -10,7 +10,8 @@ import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 import { cockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
-import { aftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-risers-v1';
+import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-teak-v1';
+import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -40,7 +41,8 @@ ${gangwayRadianceWGSL}
 ${sleeveReflectionWGSL}
 ${cockpitSteelWGSL}
 ${cockpitOverheadWGSL}
-${aftStairReflectionWGSL}
+${aftTeakWGSL}
+${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)'})}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
@@ -72,6 +74,11 @@ struct V {
  }
  if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
+ if(o.layer==-11){
+   o.indirect=pos;o.direct=normal;o.uv=vec2f(shade.r,direct.r);
+   o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
+   return o;
+ }
  if(o.layer==-8 || o.layer==-10){
    let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
    let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
@@ -215,6 +222,22 @@ fn shade(in:V)->vec4f{
    let eye=normalize(frame.eye.xyz-in.indirect);
    let reflected=aftStairReflection(in.indirect,normalize(in.direct),eye,frame.sun.xyz,in.uv.x,in.uv.y);
    return vec4f(display(reflected),1.);
+ }
+ if(in.layer==-11){
+   if(frame.wind.y>0.){return vec4f(.65,.55,.45,1.);}
+   let pos=in.indirect;
+   let p=vec3f((pos.z+17.615)/.9786111111,pos.x/.9828947368,pos.y+2.01);
+   let n=normalize(in.direct);
+   let edge=min(.018,max(fwidth(p.x),fwidth(p.y))*.57);
+   let wood=aftTeakPaint(p,n,aftTeakIndex(p.z),edge);
+   let sunlit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
+   let red=in.uv.x+in.uv.y*sunlit;
+   let energy=pow((red+.055)/1.055,2.4)/.509;
+   let view=normalize(frame.eye.xyz-pos);
+   let alignment=max(0.,dot(reflect(-view,n),frame.sun.xyz));
+   let lobe=.12/(1.12-alignment);
+   let satin=.045*sunlit*lobe*lobe*max(0.,dot(n,frame.sun.xyz));
+   return vec4f(display(wood*energy+vec3f(1.,.90,.79)*satin),1.);
  }
  if(in.layer==-9){
    if(frame.wind.y>0.){return vec4f(in.indirect,1.);}

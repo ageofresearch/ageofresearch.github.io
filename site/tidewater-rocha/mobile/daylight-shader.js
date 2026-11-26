@@ -10,6 +10,7 @@ import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 import { cockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
+import { aftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-risers-v1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -39,6 +40,7 @@ ${gangwayRadianceWGSL}
 ${sleeveReflectionWGSL}
 ${cockpitSteelWGSL}
 ${cockpitOverheadWGSL}
+${aftStairReflectionWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
@@ -70,7 +72,7 @@ struct V {
  }
  if(o.layer==-3){o.indirect=display(color.rgb);return o;}
  let normal=normalize(n.xyz);let rough=n.w;let metal=f32(finish.y & 255)/255.;
- if(o.layer==-8){
+ if(o.layer==-8 || o.layer==-10){
    let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
    let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
    o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,lit);return o;
@@ -207,6 +209,12 @@ fn shade(in:V)->vec4f{
  if(in.layer==-8){
    if(frame.wind.y>0.){return vec4f(.45,.49,.54,1.);}
    return vec4f(display(cockpitSteel(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
+ }
+ if(in.layer==-10){
+   if(frame.wind.y>0.){return vec4f(.14,.15,.17,1.);}
+   let eye=normalize(frame.eye.xyz-in.indirect);
+   let reflected=aftStairReflection(in.indirect,normalize(in.direct),eye,frame.sun.xyz,in.uv.x,in.uv.y);
+   return vec4f(display(reflected),1.);
  }
  if(in.layer==-9){
    if(frame.wind.y>0.){return vec4f(in.indirect,1.);}

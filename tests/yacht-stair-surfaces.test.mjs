@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {buildYachtGeometry,i as Walk,l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGIl.js';
 import {createFlight,restorableStair,restoreStairPosition} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
+import {aftStairMirrorFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 
 const root=new URL('../site/tidewater-rocha/rocha/luz-de-mar/',import.meta.url);
 const data=JSON.parse(await readFile(new URL('model.json',root)));
@@ -73,6 +74,26 @@ test('inventory counts arrivals separately and derives the revised cockpit run f
     assert.equal(cheeks.length,2);
     assert.ok(cheeks.every(p=>p.bounds[3]===threshold.bounds[3] && p.bounds[5]===aft.upperHeight),
       'Both cheeks meet the landing below the fixed upper railing');
+    const risers=parts.filter(p=>/polished riser$/.test(p.feature));
+    assert.equal(risers.length,9);
+    assert.equal(parts.find(p=>p.feature==='first rounded stair plinth').finish[3],aftStairMirrorFinish);
+    for(const [i,panel] of risers.entries()){
+      const [x,y,z,X,Y,Z]=panel.bounds;
+      const above=treads[i+1].bounds;
+      assert.equal(panel.finish[3],aftStairMirrorFinish);
+      assert.ok(above[0]<x && X<above[3],`Riser ${i+2} must fit under the teak nose`);
+      assert.ok(Math.abs(z-(aft.surfaces[i+1].height+.003))<1e-8);
+      assert.ok(above[2]-Z>.003 && above[2]-Z<.005,'Keep the fine upper reveal');
+      assert.ok(Y-y>.72 && Z-z>.15,'The reflective face closes the centre of the interval');
+    }
+    const seats=parts.find(p=>p.feature==='aft stair folded end seats');
+    for (const tread of treads.slice(1)) {
+      for(const y of [tread.bounds[1],tread.bounds[4]]){
+        assert.ok(seats.vertices.some((x,i)=>i%6===0 && x>tread.bounds[0] && x<tread.bounds[3] &&
+          Math.abs(seats.vertices[i+1]-y)<.004 && Math.abs(seats.vertices[i+2]-tread.bounds[2])<.002),
+        'Both folded seats connect to the underside of their tread');
+      }
+    }
     assert.equal(aft.surfaces.at(-1).height,6);
     assert.equal(aft.surfaces[0].height,3.95);
     assert.ok(aft.surfaces[1].height-aft.lowerHeight<.18);

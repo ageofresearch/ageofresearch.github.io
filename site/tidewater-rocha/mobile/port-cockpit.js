@@ -151,7 +151,7 @@ fn cockpitSteel(pos:vec3f, normal:vec3f, roughness:f32, lit:f32)->vec3f{
  let underside=select(4.658,4.647,starboard);
  let cover=model+axis*(underside-model.z)/rising;
  let beneathCover=axis.z>.001 && model.z<underside && cover.x>2.36 &&
-  cover.x<select(5.62,${starboardMooring.end},starboard) && cover.y*side>select(3.30,3.404,starboard) && cover.y*side<3.75;
+  cover.x<select(5.62,${starboardMooring.end},starboard) && cover.y*side>select(3.30,${starboardMooring.fascia},starboard) && cover.y*side<3.75;
  let water=mix(vec3f(.039,.076,.095),vec3f(.11,.19,.26),smoothstep(-.76,-.04,ray.y));
  let sky=yachtDaySky(ray,frame.sun.xyz,false);
  var radiance=mix(water*.52,sky*.87,smoothstep(-.045,.055,ray.y));

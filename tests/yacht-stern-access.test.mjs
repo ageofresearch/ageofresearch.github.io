@@ -342,6 +342,9 @@ test('the starboard mooring hardware is seated on the shelf and the stair passag
     assert.equal(parts.filter(p=>p.feature.startsWith('starboard mooring polished support ')).length,5);
     assert.equal(parts.filter(p=>p.feature.startsWith('starboard mooring flush upper cover ')).length,2);
     assert.equal(parts.filter(p=>p.feature.startsWith('starboard mooring socket bezel ')).length,2);
+    // The inboard edges of the fitting heads are visible ahead of the fascia.
+    for(const p of parts.filter(p=>/^starboard mooring oval horn head/.test(p.feature)))
+      assert.ok(p.bounds[4]>cover[4]);
     const footings=['cockpit cleat sole -1','cockpit cleat sole forward -1','starboard mooring capstan gasket'];
     for(const name of footings){
       const b=find(name).bounds;

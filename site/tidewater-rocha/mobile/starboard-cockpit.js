@@ -10,7 +10,7 @@ const rectangle = (x,z,X,Z) => [[x,z],[X,z],[X,Z],[x,Z]];
 const starboard = points => points.map(([x,y]) => [x,-y]);
 
 export function buildStarboardMooring(add,{extrude,face,post,pipe}) {
-  const {start,end,inner,outer,sill,axis,dockside,drum,forward}=station;
+  const {start,end,inner,outer,sill,axis,fascia,dockside,drum,forward}=station;
   const body = (points,z,Z,r) => extrude(starboard(points),z,Z,r);
   const horizontal = (points,level) =>
     face(starboard(points),(x,y)=>({point:[x,y,level(x)],normal:[0,0,1]}));
@@ -62,10 +62,10 @@ export function buildStarboardMooring(add,{extrude,face,post,pipe}) {
       'starboard mooring socket '+x,{finish:[color,.39,0,0]});
   }
 
-  const high=[[2.85,3.404],[end-.03,3.404],[end,3.41],[end,3.74],[2.85,3.74]];
+  const high=[[2.85,fascia],[end-.03,fascia],[end,3.576],[end,3.74],[2.85,3.74]];
   skin(body(high,4.647,4.974,.018),'satin upper fascia',satin);
   // The real aft cap tapers out into a polished bracket beside the stair.
-  const tip=body([[2.38,3.50],[2.59,3.438],[2.85,3.404],[2.85,3.74],[2.56,3.74],[2.42,3.66]],4.647,4.974,.016);
+  const tip=body([[2.38,3.602],[2.59,3.561],[2.85,fascia],[2.85,3.74],[2.56,3.74],[2.42,3.686]],4.647,4.974,.016);
   for(let i=0;i<tip.vertices.length;i+=6){
     const [x,,z]=tip.vertices.slice(i,i+3);
     tip.vertices[i+2]+=(2.85-x)/.47*(4.962-z)*.63;
@@ -74,10 +74,10 @@ export function buildStarboardMooring(add,{extrude,face,post,pipe}) {
   chrome(body([[2.56,3.52],[2.76,3.43],[2.79,3.67],[2.58,3.70]],4.25,4.825,.014),
     'starboard mooring tapered end bracket');
   for(const [a,b] of [[2.98,3.48],[3.86,5.71]]){
-    add(panel(rectangle(a,4.679,b,4.944),3.402),'M47','starboard mooring upper cover reveal '+a,seam);
-    skin(panel(rectangle(a+.006,4.686,b-.006,4.938),3.401),'flush upper cover '+a,panelFinish);
+    add(panel(rectangle(a,4.679,b,4.944),fascia-.002),'M47','starboard mooring upper cover reveal '+a,seam);
+    skin(panel(rectangle(a+.006,4.686,b-.006,4.938),fascia-.003),'flush upper cover '+a,panelFinish);
   }
-  chrome(disk(2.765,4.789,3.410,.017),'starboard mooring round catch');
+  chrome(disk(2.765,4.789,fascia+.003,.017),'starboard mooring round catch');
   skin(body([[2.73,3.685],[end,3.685],[end,3.755],[2.73,3.755]],sill+.008,sill+.04,.006),
     'outer lower window sill',satin);
   for(const x of [3.06,3.66,4.44,5.23,5.79])

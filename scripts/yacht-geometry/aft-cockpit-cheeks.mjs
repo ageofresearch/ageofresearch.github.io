@@ -80,14 +80,25 @@ export function mobileAftServiceSkin(part) {
   const vertices=Array.from(part.vertices);
   for(let i=0;i<vertices.length;i+=6){
     const [x,,z,nx,ny,nz]=vertices.slice(i,i+6);
-    const t=Math.max(0,Math.min(1,(x-5.94)/1.70));
-    const height=.105+.895*t*t*(3-2*t);
-    const slope=.895*6*t*(1-t)/1.70*(z-sole);
+    const rise=1.41;
+    const t=Math.max(0,Math.min(1,(x-6.29)/rise));
+    const height=.025+.975*t*t*(3-2*t);
+    const slope=.975*6*t*(1-t)/rise*(z-sole);
     vertices[i+2]=sole+(z-sole)*height;
     const normal=unit([nx-slope*nz/height,ny,nz/height]);
     vertices.splice(i+3,3,...normal);
   }
   const bounds=meshBounds(vertices);
-  const foot=part.feature.endsWith('capping') && bounds[3]<6.0;
+  const foot=part.feature.endsWith('capping') && bounds[3]<6.68;
   return {...part,vertices,bounds,finish:foot?[0x9e9999,.77,0,1]:lacquer};
 }
+
+// A shallow return closes the small joint between the rounded plinth margin
+// and the service cover. Recess it below the adjacent deck's wear surface.
+export const mobileAftFootReturn = {
+  id:'MD_STA_013/mobile-service-cover-return',
+  feature:'cockpit teak return below the inboard stringer foot',
+  materialID:'M43',finish:[0xa48a6f,.75,0,2],
+  vertices:[[5.54,1.88],[6.26,1.88],[6.26,2.082],[5.54,2.082]].flatMap(p=>[...p,3.946,0,0,1]),
+  indices:[0,1,2,0,2,3],
+};

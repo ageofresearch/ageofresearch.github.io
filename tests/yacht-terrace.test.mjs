@@ -45,6 +45,9 @@ test('both mobile stair stringers have asymmetric solid profiles and supported p
   }
   const cap=manifest.parts.find(p=>p.id==='LD/service-route/45/cockpit-capping');
   assert.ok(cap.bounds[2]>=3.95&&cap.bounds[5]<4.0,'The service cover stays closed and low at the foot');
+  const seam=manifest.parts.find(p=>p.feature==='cockpit teak return below the inboard stringer foot');
+  assert.ok(seam.bounds[2]===3.946 && seam.bounds[1]<1.91 && seam.bounds[4]>2.07,
+    'The recessed cover straddles the gap below the rounded margin');
 });
 
 test('mobile teak caps keep a single walkable top and a genuinely rounded nose', async () => {

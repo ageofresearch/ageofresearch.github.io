@@ -6,7 +6,7 @@ import { buildYachtGeometry } from '../site/tidewater-rocha/assets/RochaYachtSta
 import { convexHull, distanceToFootprint } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 import {mobileCockpitFitting} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 import {mobileAftTeak} from './yacht-geometry/aft-cockpit-teak.mjs';
-import {mobileAftCheeks,mobileAftServiceSkin} from './yacht-geometry/aft-cockpit-cheeks.mjs';
+import {mobileAftCheeks,mobileAftFootReturn,mobileAftServiceSkin} from './yacht-geometry/aft-cockpit-cheeks.mjs';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const boundsOf = vertices => [0, 1, 2].map(k => Math.min(...vertices.filter((_, i) => i % 6 === k)))
@@ -130,6 +130,7 @@ export async function buildTerrace() {
   // terrace ceiling's height is not a valid clipping plane for a handrail.
   for (const part of mobileAftCheeks(mobileAftTeak(replacements.get('MD_STA_013'))))
     add(part, [3.3,-3.8,3.83,8.5,3.8,7.05], 'stairs');
+  add(mobileAftFootReturn, region, 'enclosure');
   for (const part of replacements.get('MD_GLA_001')) add(part, region, 'glazing');
   for (const part of model.exterior.parts) {
     if(part.feature?.startsWith('cockpit ceiling ')&&mobileCockpitFitting(part.feature)){

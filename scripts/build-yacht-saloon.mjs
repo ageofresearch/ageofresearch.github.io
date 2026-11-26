@@ -11,6 +11,7 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 import { clipGeometry, subdivide, contactShade } from './build-yacht-terrace.mjs';
 import { serviceStairStraightEnd } from '../site/tidewater-rocha/mobile/cockpit-stair-foot.js';
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
+import { mobileAftServiceSkin } from './yacht-geometry/aft-cockpit-cheeks.mjs';
 
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const version = 'vr-detail-1';
@@ -152,7 +153,7 @@ export async function buildSaloon() {
       // These lower-deck parts also form the visible port corner of the saloon.
       add({...part,id:part.id+'/saloon'},'service-bulkhead',region);
     } else if (/sloping white service stair ceiling|cockpit stair exterior (?:cheek|capping)|dark sidewall around D1/.test(part.feature)) {
-      add({...part,id:part.id+'/saloon'},'boundary',region);
+      add({...mobileAftServiceSkin(part),id:part.id+'/saloon'},'boundary',region);
     }
   }
 

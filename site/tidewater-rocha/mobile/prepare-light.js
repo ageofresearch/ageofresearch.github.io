@@ -3,6 +3,7 @@ import {compartment} from './yacht-daylight.js?v=yacht-daylight-1';
 import {cockpitOverheadFinish} from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
 import {aftStairMirrorFinish} from './aft-cockpit-stair.js?v=cockpit-risers-v1';
 import {aftTeakFinish} from './aft-cockpit-teak.js?v=cockpit-teak-v2';
+import {aftCheekFinish,aftCheekToeFinish} from './aft-cockpit-cheeks.js?v=cockpit-cheeks-v1';
 
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));
@@ -57,6 +58,7 @@ export function prepareOpaque(source,map,indices) {
     room[index]=compartment(localX,localY,elevation);
     if(code===aftStairMirrorFinish)layer=-10;
     else if(code===aftTeakFinish)layer=-11;
+    else if(code===aftCheekFinish || code===aftCheekToeFinish)layer=code===aftCheekFinish?-12:-13;
     else if(code===65)layer=-8;
     else if(code===62 || code===63)layer=code===62?-6:-7;
     else if(code===47)layer=-2;

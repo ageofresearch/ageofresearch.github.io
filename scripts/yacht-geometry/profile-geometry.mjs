@@ -11,6 +11,7 @@ export function detailError(part, error, profile) {
   if (/^(?:starboard mooring |starboard cockpit seat |cockpit (?:mooring drum|cleat sole).* -1$)/.test(name))
     return Math.max(error, profile === 'exterior' ? .060 : .080);
   if (part.context || name.startsWith('port stair ')) return 0;
+  if (/^(gloss black stair cheek|aft stair polished cheek toe)/.test(name)) return 0;
   if (profile === 'exterior' && /cockpit port (?:cast twin horn|cleat oval crown|capstan flared)|cockpit mooring drum.* 1$|port cockpit seat polished/.test(name))
     return Math.min(error, .0105);
   // These deck fragments are also the visible ceiling of the main deck.

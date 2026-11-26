@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { buildTerrace, clipGeometry, contactShade, containsTriangle } from '../scripts/build-yacht-terrace.mjs';
 import {cockpitOverheadFinish} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 import {aftTeakFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-teak.js';
+import {aftCheekFinish,aftCheekToeFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
 import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
@@ -14,6 +15,37 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 
 const root = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('aft-terrace.json', root)));
+
+test('both mobile stair stringers have asymmetric solid profiles and supported polished toes', async () => {
+  const binary=await readFile(new URL('aft-terrace.bin',root));
+  const left=manifest.parts.find(p=>p.feature==='gloss black stair cheek 1');
+  const right=manifest.parts.find(p=>p.feature==='gloss black stair cheek -1');
+  assert.equal(left.finish[3],aftCheekFinish);
+  assert.equal(right.finish[3],aftCheekFinish);
+  assert.ok(right.bounds[4]-right.bounds[1]>left.bounds[4]-left.bounds[1]);
+  assert.ok(Math.abs(left.bounds[1]-aftCockpitTreads[1].right)<1e-9);
+  assert.ok(Math.abs(right.bounds[4]-aftCockpitTreads[1].left)<1e-9);
+  assert.ok(left.bounds[0]<aftCockpitTreads[0].back && left.bounds[2]<aftCockpitTreads[0].top);
+  assert.equal(right.bounds[2],3.95);
+  assert.deepEqual([left.bounds[5],right.bounds[5]],[6,6]);
+  const toes=manifest.parts.filter(p=>p.finish?.[3]===aftCheekToeFinish);
+  assert.equal(toes.length,2);
+  const span=p=>p.bounds[3]-p.bounds[0];
+  assert.ok(span(toes.find(p=>p.id.startsWith(left.id)))>span(toes.find(p=>p.id.startsWith(right.id))));
+  for(const part of [left,right,...toes]) {
+    const v=new Float32Array(binary.buffer,binary.byteOffset+part.vertices.offset,part.vertices.length);
+    const indices=new Uint32Array(binary.buffer,binary.byteOffset+part.indices.offset,part.indices.length);
+    for(let i=0;i<indices.length;i+=3){
+      const [a,b,c]=Array.from(indices.subarray(i,i+3),k=>v.subarray(k*6,k*6+6));
+      const [x,y,z]=Array.from(a.subarray(0,3),(n,k)=>b[k]-n);
+      const [X,Y,Z]=Array.from(a.subarray(0,3),(n,k)=>c[k]-n);
+      const face=[y*Z-z*Y,z*X-x*Z,x*Y-y*X];
+      assert.ok(face.reduce((sum,n,k)=>sum+n*(a[k+3]+b[k+3]+c[k+3]),0)>0,part.feature);
+    }
+  }
+  const cap=manifest.parts.find(p=>p.id==='LD/service-route/45/cockpit-capping');
+  assert.ok(cap.bounds[2]>=3.95&&cap.bounds[5]<4.0,'The service cover stays closed and low at the foot');
+});
 
 test('mobile teak caps keep a single walkable top and a genuinely rounded nose', async () => {
   const binary=await readFile(new URL('aft-terrace.bin',root));

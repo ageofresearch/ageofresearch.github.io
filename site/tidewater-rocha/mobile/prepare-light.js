@@ -2,7 +2,7 @@ import {walkLight} from './walk-light.js?v=yacht-daylight-1';
 import {compartment} from './yacht-daylight.js?v=yacht-daylight-1';
 import {cockpitOverheadFinish} from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
 import {aftStairMirrorFinish} from './aft-cockpit-stair.js?v=cockpit-risers-v1';
-import {aftTeakFinish} from './aft-cockpit-teak.js?v=cockpit-teak-v1';
+import {aftTeakFinish} from './aft-cockpit-teak.js?v=cockpit-teak-v2';
 
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));

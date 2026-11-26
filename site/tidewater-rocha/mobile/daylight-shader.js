@@ -11,7 +11,7 @@ import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 import { cockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-ceiling-vr-1';
 import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-teak-v1';
-import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v1';
+import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v2';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {

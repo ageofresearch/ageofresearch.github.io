@@ -99,9 +99,10 @@ fn aftTeakPaint(p:vec3f,normal:vec3f,index:i32,blur:f32)->vec3f{
   let tint=select(0.,boardTone[i32(board)],fieldWood);
   let fascia=(1.-smoothstep(.0004,.0018+blur,abs(level.x-p.z-.023)))*select(0.,.066,plinth && !horizontal && normal.z<-.3);
   let shade=1.+tint+.032*sin(seed+along*9.)+grain*usable-fascia;
-  let teak=mix(vec3f(.487,.360,.247),vec3f(.529,.417,.305),select(.18,.68,fieldWood));
+  let teak=mix(vec3f(.332,.231,.150),vec3f(.356,.254,.177),select(.18,.68,fieldWood));
+  let plinthFascia=select(vec3f(1.),vec3f(1.06,1.09,1.17),plinth && !horizontal);
   let joint=1.-smoothstep(select(.0008,.00115,plinth)-blur*.20,select(.00150,.00195,plinth)+blur,caulkDistance);
-  return mix(teak*shade,vec3f(.036,.030,.026),joint*.96);
+  return mix(teak*plinthFascia*shade,vec3f(.036,.030,.026),joint*.96);
 }
 
 fn aftTeakCovers(p:vec2f,index:i32,up:bool)->bool{

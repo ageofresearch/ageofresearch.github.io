@@ -5,6 +5,9 @@ import {l as basis} from '../site/tidewater-rocha/assets/RochaYachtState-P5KwIGI
 import {travel} from './yacht-saloon-fixture.mjs';
 import {restoreGuestAccessHandoff} from '../site/tidewater-rocha/mobile/guest-access.js';
 import {mainRooms} from '../site/tidewater-rocha/mobile/main-deck.js';
+import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
+import {portSideGlassCode} from '../site/tidewater-rocha/mobile/port-side-wall.js';
+import {portSideLights} from '../site/tidewater-rocha/mobile/side-deck-layout.js';
 
 const dining=[[6.7,0],[9.25,0],[9.25,-1.8],[10,-1.8],[12.4,-1.9],[17.2,-1.9],[17.2,0.1],[17.3,0.1],[17.3,0.2],[17.6,0.2],[17.6,1.8],[17.7,1.8],[17.7,1.9]];
 const lobby=[...dining,[21.3,1.9],[21.3,1.5],[21.4,1.5],[21.4,1.4]];
@@ -142,7 +145,6 @@ test('the visible band keeps the cockpit floor, the passage strips and the overh
 });
 
 test('the source hull, teak edge, window reveals and gaskets each have a single exposed face',async()=>{
-  const {renderedParts}=await import('../site/tidewater-rocha/mobile/stair-surfaces.js');
   const {model}=await full();
   try{
     const pieces=renderedParts(model);
@@ -176,6 +178,33 @@ test('the source hull, teak edge, window reveals and gaskets each have a single 
       const y=reveal.find(p=>p.id.endsWith('/000')).bounds[1];
       assert.equal(facesAt(reveal,1,y,z,18.001),1,'window joint at '+z);
     }
+  }finally{model.dispose();}
+});
+
+test('the port passage keeps one glazing finish, joined sill lights and an ivory underside',async()=>{
+  const {model}=await full();
+  try {
+    const pieces=renderedParts(model);
+    const sill=pieces.filter(p=>p.feature==='port passage warm sill light').sort((a,b)=>a.bounds[0]-b.bounds[0]);
+    assert.equal(sill.length,3);
+    for(const [i,part] of sill.entries()){
+      assert.equal(part.indices.length,6);
+      assert.equal(part.finish[3],48);
+      assert.ok(Math.abs(part.bounds[5]-part.bounds[2]-.016)<1e-6);
+      if(i){
+        const preceding=sill[i-1].bounds;
+        assert.ok(Math.abs(preceding[3]-part.bounds[0])<1e-6);
+        assert.ok(Math.abs(preceding[4]-part.bounds[1])<1e-6);
+      }
+    }
+    const soffit=pieces.find(p=>p.feature==='port passage ivory soffit');
+    assert.ok(soffit?.indices.length && soffit.vertices.every((v,i)=>i%6!==5||v<-.98));
+    const lights=pieces.find(p=>p.feature==='port passage recessed downlights');
+    assert.equal(lights.indices.length,portSideLights.length*6);
+    const glass=guest.profiles.main.batches[1].attributes;
+    const codes = new Set(Array.from(glass.aSurface).filter((_,i)=>i%4===2));
+    assert.ok(codes.has(portSideGlassCode) && codes.has(53));
+    assert.ok(guest.profiles.main.audit.some(row=>row.id.includes('port-passage-forward-return')));
   }finally{model.dispose();}
 });
 

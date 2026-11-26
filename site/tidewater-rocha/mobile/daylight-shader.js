@@ -7,6 +7,8 @@ import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
 import { gangwayRadianceWGSL } from './gangway-radiance.js?v=sleeve-reflections-1';
 import { sleeveReflectionWGSL } from './sleeve-reflections.js?v=wet-bar-vr-1';
 import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
+import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
+import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -232,12 +234,17 @@ struct Tagged { @location(0) color:vec4f, @location(1) powers:vec4f }
  let tag=in.tag;
  return Tagged(shade(in),vec4f(f32(tag&255u)/255., f32(tag>>8u)/255., 1., 1.));
 }`:''}
-struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f,@location(1) railRay:vec3f }
+${portSideReflectionWGSL}
+struct Glass {
+ @builtin(position) clip:vec4f,@location(0) rgba:vec4f,@location(1) railRay:vec3f,
+ @location(2) point:vec3f,@location(3) normal:vec3f,@location(4) @interpolate(flat) port:u32,
+}
 @vertex fn glassVertex(@location(0) pos:vec3f,@location(1) normal:vec4f,@location(2) tint:vec4f,@location(4) finish:vec2i)->Glass{
  let eye=normalize(frame.eye.xyz-pos);let n=normalize(normal.xyz);
  let grazing=pow(1.-abs(dot(n,eye)),5.);
  let r=reflect(-eye,n);let reflected=sky(r);
- if(finish.x==52 || finish.x==53){
+ let port=finish.x==${portSideGlassCode};
+ if(finish.x==52 || finish.x==53 || port){
    // Transmitted daylight remains visible from inside. From the cockpit the
    // fixed leaves read as dark smoked glass beside the actual open doorway.
    let door=finish.x==52;
@@ -256,12 +263,20 @@ struct Glass { @builtin(position) clip:vec4f,@location(0) rgba:vec4f,@location(1
      let side=sign(point.y);let divisor=side*delta.y;let gap=3.70-abs(point.y);
      railRay=vec3f(point.x*divisor+gap*delta.x,point.z*divisor+gap*delta.z,divisor);
    }
-   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)),railRay);
+   return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)),railRay,pos,n,select(0u,1u,port));
  }
- return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec3f(0.));
+ return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec3f(0.),pos,n,0u);
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn glassFragment(in:Glass)->@location(0) vec4f{
+ if(in.port!=0u && frame.wind.y==0. && frame.eye.x>in.point.x+.026 && abs(in.normal.x)>.65){
+   let ray=normalize(in.point-frame.eye.xyz);
+   let normal=normalize(in.normal);
+   let reflected=reflect(ray,normal);
+   let coating=portSideOptics(dot(ray,normal));
+   let light=portSideRadiance(in.point,reflected,frame.sun.xyz);
+   return vec4f(display(light*vec3f(.79,.88,.98)*coating.x),coating.y);
+ }
  if(in.railRay.z<=.02){return in.rgba;}
  let p=in.railRay.xy/in.railRay.z;
  let feather=max(fwidth(p.y),.008);

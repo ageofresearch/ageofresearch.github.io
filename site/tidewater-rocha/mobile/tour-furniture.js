@@ -2,7 +2,8 @@ import {furnishForeStair} from './starboard-fore-stair.js?v=vr-detail-1';
 import {saloonOval,finishSaloonEntry} from './saloon-entry.js?v=saloon-entry-1';
 import {saloonBack,saloonChaise,saloonChairShells} from './saloon-upholstery.js?v=saloon-entry-1';
 import {fitHullToMainDeck} from './deck-joints.js?v=saloon-entry-1';
-import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=side-deck-guards-1';
+import {furnishMainDeck,finishSideDecks} from './main-deck-fittings.js?v=port-passage-vr-1';
+import {finishPortSideWall,portSideGlassCode} from './port-side-wall.js?v=port-passage-vr-1';
 import {furnishPortCabin} from './port-guest-cabin.js?v=vr-detail-1';
 import {ownerWritingChair} from './owner-writing-chair.js?v=owner-writing-chair-1';
 import catalog from './tour-furniture-data.js?v=owner-writing-chair-1';
@@ -33,7 +34,8 @@ export function fittedFurniture(key,bounds,{turn=false,mirrorX=false,mirrorY=fal
 export function saloonGlassCode(id){
   const anchor=id?.split('/')[0];
   if(anchor==='MD_GLA_001')return 52;
-  if(/^MD_GLA_0(?:0[4-6]|1[0-2])$/.test(anchor))return 53;
+  if(/^MD_GLA_00[4-7]$/.test(anchor))return portSideGlassCode;
+  if(/^MD_GLA_01[0-2]$/.test(anchor))return 53;
 }
 
 const sofaBounds=[10.55,-1.15,3.955,14.11,1.69,4.78];
@@ -90,6 +92,7 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
       evidence:'VRCloud Grande 36M, photo-estimated fit in Rocha model coordinates'};
     detail.additions.push(part);
     if(!inside)exterior.parts.push(part);
+    return part;
   }
   function fit(anchor,key,b,mat,label,options,inside=true){
     fittedFurniture(key,b,options).forEach((g,i)=>add(anchor,g,mat,label+' '+(i+1),inside));
@@ -271,6 +274,17 @@ export function furnishTourRooms(detail,exterior,asset,{box,slab,outline,bounds,
   }
   furnishMainDeck({box,add,remove,slab,outline,circle});
   finishSideDecks({add,box});
+  finishPortSideWall({
+    source,parts:parts(),box,add,
+    tint(part,material){part.materialID=material;part.finish=materials[material];},
+    replace(anchor,pieces){
+      remove(anchor,p=>!p.id.includes('/tour/'));
+      const replacements=pieces.map(([g,material,label])=>add(anchor,g,material,label,false));
+      detail.additions=detail.additions.filter(p=>!replacements.includes(p));
+      detail.replacements.set(anchor,replacements);
+    },
+    addSoffit(g,material,label){add('UD_DCK_001',g,material,label,false);},
+  });
   furnishForeStair({add,box});
   fitHullToMainDeck(detail);
   furnishPortCabin({add,remove,source,box,slab,outline,fit});

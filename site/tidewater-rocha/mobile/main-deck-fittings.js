@@ -1,4 +1,5 @@
 import {furnishOwnerSuite} from './owner-suite.js?v=owner-suite-1';
+import {sideDeckSections,sideDeckBays,sideDeckRail} from './side-deck-layout.js?v=port-passage-vr-1';
 
 // Registered to the Galley, Day Head, Master Cabin, Master Head and Master Shower panoramas.
 export function furnishMainDeck({box,add,remove,slab,outline,circle}){
@@ -119,12 +120,11 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
 // The VR side passages have a polished crown over a white bulwark. Aft, the
 // crown lands on the existing raised mooring caps; the openings below stay clear.
 export function finishSideDecks({add,box}){
-  const forward=[[11.6,3.791,3.795],[15.65,3.763,3.758],[18.05,3.739,3.709],[22.4,3.597,3.471]];
+  const rail=sideDeckRail;
   for(const side of [-1,1]){
-    const port=side===1, start=port?5.63:5.92, endCap=port?11.6:5.92;
-    const sections=[[start,3.78],[8.45,3.8],
-      ...forward.map(row=>[row[0],row[port?2:1]])];
-    const railY=y=>side*(y-.075);
+    const port=side===1, endCap=port?11.6:5.92;
+    const sections=sideDeckSections(side);
+    const railY=y=>side*(y-rail.inset);
     const attach=(mesh,material,name)=>add('MD_SUP_007',mesh,material,'side deck '+name+' '+side,false);
 
     // Sweep shared rings along the sheer. A continuous cross-section avoids
@@ -149,12 +149,12 @@ export function finishSideDecks({add,box}){
       }
       attach({vertices,indices},'M19',label);
     }
-    tube(sections.map(([x,y])=>[x,railY(y),5.025]),.046,.026,'polished top rail');
-    tube(sections.filter(([x])=>x>=endCap).map(([x,y])=>[x,railY(y),4.72]),.014,.014,'intermediate rail');
+    tube(sections.map(([x,y])=>[x,railY(y),rail.top]),rail.topHalfWidth,rail.topRadius,'polished top rail');
+    tube(sections.filter(([x])=>x>=endCap).map(([x,y])=>[x,railY(y),rail.middle]),rail.middleRadius,rail.middleRadius,'intermediate rail');
     for(let i=1;i<sections.length;i++){
       const [x,y]=sections[i-1],[X,Y]=sections[i];
       if(x>=endCap){
-        const w=.12,g=box([x,-w/2,3.95,X,w/2,4.49],0);
+        const w=.12,g=box([x,-w/2,rail.floor,X,w/2,rail.bulwarkTop],0);
         for(let k=0;k<g.vertices.length;k+=6){
           const t=(g.vertices[k]-x)/(X-x);
           g.vertices[k+1]+=railY(y+t*(Y-y));
@@ -166,11 +166,11 @@ export function finishSideDecks({add,box}){
         });
         attach(g,'M06','bulwark '+i);
       }
-      const bays=Math.ceil((X-x)/1.22);
+      const bays=sideDeckBays(x,X);
       for(let j=0;j<bays+(i===sections.length-1?1:0);j++){
         const t=j/bays,px=x+(X-x)*t,py=railY(y+(Y-y)*t);
         const foot=px<=endCap?(port?4.838:4.858):4.487;
-        attach(box([px-.016,py-.019,foot,px+.016,py+.019,5.006],0),'M19','stanchion '+i+' '+j);
+        attach(box([px-rail.postHalfWidth,py-.019,foot,px+rail.postHalfWidth,py+.019,rail.postTop],0),'M19','stanchion '+i+' '+j);
       }
     }
   }

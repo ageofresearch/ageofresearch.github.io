@@ -5,8 +5,8 @@ import { packedRadianceScale } from './daylight-materials.js?v=yacht-daylight-2'
 import { ownerContactBounds, ownerContactWGSL } from './owner-contact-layout.js?v=owner-contact-1';
 import { gangwaySteelWGSL } from './gangway-finish.js?v=vr-rails-2';
 import { gangwayRadianceWGSL } from './gangway-radiance.js?v=sleeve-reflections-1';
-import { sleeveReflectionWGSL } from './sleeve-reflections.js?v=port-cockpit-1';
-import { portCockpitSteelWGSL } from './port-cockpit.js?v=port-cockpit-1';
+import { sleeveReflectionWGSL } from './sleeve-reflections.js?v=stbd-cockpit-1';
+import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -34,7 +34,7 @@ ${skyRadiance}
 ${gangwaySteelWGSL}
 ${gangwayRadianceWGSL}
 ${sleeveReflectionWGSL}
-${portCockpitSteelWGSL}
+${cockpitSteelWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
@@ -198,7 +198,7 @@ fn shade(in:V)->vec4f{
  }
  if(in.layer==-8){
    if(frame.wind.y>0.){return vec4f(.45,.49,.54,1.);}
-   return vec4f(display(portCockpitSteel(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
+   return vec4f(display(cockpitSteel(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
  }
  if(in.layer<=-2){return vec4f(in.indirect,1.);}
  var radiance=in.indirect;

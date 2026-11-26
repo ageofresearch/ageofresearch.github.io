@@ -20,3 +20,8 @@ export const portMooring = Object.freeze({
   start:3.08, end:5.58, inner:3.284, outer:3.79, axis:3.48, sill:4.34,
   cleat:3.51, drum:4.158, forwardCleat:4.665,
 });
+
+export const starboardMooring = Object.freeze({
+  start:3.10, end:5.92, inner:3.388, outer:3.79, axis:3.567, sill:4.353,
+  dockside:3.60, drum:4.19, forward:4.76,
+});

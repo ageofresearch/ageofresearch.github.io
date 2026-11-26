@@ -1,4 +1,4 @@
-import packed, { layout } from './sleeve-reflection-data.js?v=port-cockpit-1';
+import packed, { layout } from './sleeve-reflection-data.js?v=stbd-cockpit-1';
 
 const depth = layout.bands.length * layout.stations * 2;
 

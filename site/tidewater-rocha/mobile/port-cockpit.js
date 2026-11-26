@@ -1,4 +1,4 @@
-import {portMooring} from './cockpit-fittings.js?v=port-cockpit-1';
+import {portMooring,starboardMooring} from './cockpit-fittings.js?v=stbd-cockpit-1';
 
 const gelcoat = {finish:[0x8995ac,.29,.13,4]};
 const satin = {finish:[0x7d8290,.31,.20,4]};
@@ -129,23 +129,29 @@ export function buildPortCockpitSeat(add,{extrude,outline,pipe,cushion,face}) {
 
 // Local approach to the yacht's nearest broad reflecting surfaces. The
 // polished castings use live normals, eye and sun, in the existing draw.
-export const portCockpitSteelWGSL = `
-fn portCockpitSteel(pos:vec3f, normal:vec3f, roughness:f32, lit:f32)->vec3f{
+export const cockpitSteelWGSL = `
+fn cockpitSteel(pos:vec3f, normal:vec3f, roughness:f32, lit:f32)->vec3f{
  let eye=normalize(frame.eye.xyz-pos);
  let ray=reflect(-eye,normal);
  let model=vec3f((pos.z+17.615)/.97861111,pos.x/.98289474,pos.y+2.01);
  let axis=vec3f(ray.z/.97861111,ray.x/.98289474,ray.y);
  let descent=max(.0001,-axis.z);
- let shelf=model+axis*(model.z-${portMooring.sill})/descent;
+ let starboard=model.y<0.;
+ let side=select(1.,-1.,starboard);
+ let sill=select(${portMooring.sill},${starboardMooring.sill},starboard);
+ let shelf=model+axis*(model.z-sill)/descent;
  let sole=model+axis*(model.z-3.95)/descent;
- let onShelf=axis.z<-.001 && model.z>${portMooring.sill} &&
-  shelf.x>${portMooring.start} && shelf.x<${portMooring.end} &&
-  shelf.y>${portMooring.inner} && shelf.y<${portMooring.outer};
+ let onShelf=axis.z<-.001 && model.z>sill &&
+  shelf.x>select(${portMooring.start},${starboardMooring.start},starboard) &&
+  shelf.x<select(${portMooring.end},${starboardMooring.end},starboard) &&
+  shelf.y*side>select(${portMooring.inner},${starboardMooring.inner},starboard) &&
+  shelf.y*side<${portMooring.outer};
  let onDeck=axis.z<-.001 && sole.x>2.32 && sole.x<8.5 && abs(sole.y)<3.25;
  let rising=max(.0001,axis.z);
- let cover=model+axis*(4.658-model.z)/rising;
- let beneathCover=axis.z>.001 && model.z<4.658 &&
-  cover.x>2.36 && cover.x<5.62 && cover.y>3.30 && cover.y<3.75;
+ let underside=select(4.658,4.647,starboard);
+ let cover=model+axis*(underside-model.z)/rising;
+ let beneathCover=axis.z>.001 && model.z<underside && cover.x>2.36 &&
+  cover.x<select(5.62,${starboardMooring.end},starboard) && cover.y*side>select(3.30,3.404,starboard) && cover.y*side<3.75;
  let water=mix(vec3f(.039,.076,.095),vec3f(.11,.19,.26),smoothstep(-.76,-.04,ray.y));
  let sky=yachtDaySky(ray,frame.sun.xyz,false);
  var radiance=mix(water*.52,sky*.87,smoothstep(-.045,.055,ray.y));

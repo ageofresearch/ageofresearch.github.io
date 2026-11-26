@@ -121,8 +121,8 @@ export function furnishMainDeck({box,add,remove,slab,outline,circle}){
 export function finishSideDecks({add,box}){
   const forward=[[11.6,3.791,3.795],[15.65,3.763,3.758],[18.05,3.739,3.709],[22.4,3.597,3.471]];
   for(const side of [-1,1]){
-    const port=side===1, start=port?5.63:3.80, endCap=port?11.6:5.92;
-    const sections=[[start,3.78],...(port?[]:[[5.92,3.78]]),[8.45,3.8],
+    const port=side===1, start=port?5.63:5.92, endCap=port?11.6:5.92;
+    const sections=[[start,3.78],[8.45,3.8],
       ...forward.map(row=>[row[0],row[port?2:1]])];
     const railY=y=>side*(y-.075);
     const attach=(mesh,material,name)=>add('MD_SUP_007',mesh,material,'side deck '+name+' '+side,false);

@@ -3,8 +3,8 @@ import {flagCloth,flagVertex,flagUV,flagPaint} from '../mobile/stern-flag.js?v=s
 import {completeGuestForwardReveal,guestStairwellFront,guestStairwellLining,guestStairParapet,upperGuestStairLining} from '../mobile/guest-stairwell.js?v=guest-descent-1';
 import {finishCockpitStairFoot,serviceStairStraightEnd} from '../mobile/cockpit-stair-foot.js?v=main-deck-complete-1';
 import {convexHull as cockpitHull,indexFootprints} from '../mobile/terrace-geometry.js?v=chair-fidelity-1';
-import {wetBarOutline,portMooring} from '../mobile/cockpit-fittings.js?v=port-cockpit-1';
-import {buildPortMooringCoaming} from '../mobile/port-cockpit.js?v=port-cockpit-1';
+import {wetBarOutline,portMooring} from '../mobile/cockpit-fittings.js?v=stbd-cockpit-1';
+import {buildPortMooringCoaming} from '../mobile/port-cockpit.js?v=stbd-cockpit-1';
 import {bounceUniforms,bounceVertex} from '../mobile/yacht-daylight.js?v=yacht-daylight-1';
 import {surfaceLightWGSL} from '../mobile/surface-lighting.js?v=surface-lighting-1';
 import {decodeOwnerContact, ownerContactSize, ownerContactWGSL} from '../mobile/owner-contact.js?v=owner-contact-1';
@@ -411,7 +411,7 @@ function fr(e,t){let n=[],r=new Set(e.parts.filter(e=>/port stern (LUZ DE MAR|su
       {...part,...cockpit,id:part.id+'/cockpit-teak',bounds:P(cockpit),finish:[0x988b80,.79,0,1]}]
       .filter(p=>p.indices.length);
   }));
-  for(let t=7;t<=12;t++){let n=`MD_STA_${String(t).padStart(3,`0`)}`;e.replacements.set(n,[]),e.consumed.add(n)}for(const part of stern.parts.filter(p=>p.feature.startsWith('cockpit mooring ledge '))) {
+  for(let t=7;t<=12;t++){let n=`MD_STA_${String(t).padStart(3,`0`)}`;e.replacements.set(n,[]),e.consumed.add(n)}for(const part of stern.parts.filter(p=>/^starboard mooring (?:cabinet|molded stair return)$/.test(p.feature))) {
     const [x,y,,X,Y]=part.bounds;
     e.obstacles.MD.push([x,y,X,Y]);
   }

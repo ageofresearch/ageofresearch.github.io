@@ -4,7 +4,12 @@ import { l as basis } from '../../site/tidewater-rocha/assets/RochaYachtState-P5
 
 export function detailError(part, error, profile) {
   const name = part.feature || part.name || '';
+  // The two molded ends have their own meshes. Use one compact upholstered
+  // span in all profiles so its vertices can share the 16-bit index table.
+  if (name === 'covered aft seating behind transom') return .13;
   if (name === 'Panama flag cloth' || name.includes('stern flagpole')) return 0;
+  if (/^(?:starboard mooring |starboard cockpit seat |cockpit (?:mooring drum|cleat sole).* -1$)/.test(name))
+    return Math.max(error, profile === 'exterior' ? .060 : .080);
   if (part.context || name.startsWith('port stair ')) return 0;
   if (profile === 'exterior' && /cockpit port (?:cast twin horn|cleat oval crown|capstan flared)|cockpit mooring drum.* 1$|port cockpit seat polished/.test(name))
     return Math.min(error, .0105);
@@ -22,7 +27,7 @@ export function detailError(part, error, profile) {
     return Math.min(error, 0.006);
   if (/^MD_SOF_0(?:07|08|09|10)\//.test(part.id)) return Math.min(error, 0.009);
   if (/rounded recessed coffer|gloss red organic lampshade/.test(name)) return Math.min(error, 0.014);
-  if (/full width .*swim platform|transom full width ivory|covered aft seating behind transom/.test(name))
+  if (/full width .*swim platform|transom full width ivory/.test(name))
     return Math.min(error, 0.014);
   return error;
 }

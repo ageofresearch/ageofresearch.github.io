@@ -14,11 +14,10 @@ export function accessLOD(p,context) {
     return bowLOD(p,{...context,profile:'interior',near:true});
   if(profile==='upper'&&/hood fine folded louver lips|folded dark cockpit cloth/.test(name))
     return {omit:true,reason:'Fine vent lips (vent banks retained) and distant folded cockpit cloth'};
-  if(profile==='upper'&&/cockpit wet bar recessed|cockpit wet bar dark circular drain/.test(name))
+  if(['upper','sun','bow','guest'].includes(profile) && /cockpit wet bar recessed (?:metal basin walls|basin bottom)|cockpit wet bar dark circular drain/.test(name))
     return {omit:true,reason:'Distant recessed cockpit basin interior, below the upper-deck sightline'};
   if(profile!=='upper'&&/louver|circular control markings|polished latch rim|shell-shaped bowl|shade reinforced perimeter tape/.test(name)||
-    profile!=='sun'&&/narrow housing joint/.test(name)||
-    ['upper','sun','bow'].includes(profile)&&/cockpit wet bar inset polished sink rim/.test(name))
+    profile!=='sun'&&/narrow housing joint/.test(name))
     return {omit:true,reason:'Distant fittings: hood vents, control marks, latches, bowl, shade trim, satellite joints or cockpit sink rim; main volumes retained'};
   if(name==='polished helm wheel rim'&&profile==='upper')return {error:.012};
   return bowLOD(p,context);

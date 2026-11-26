@@ -50,7 +50,7 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
   const furnishings=manifest.parts.filter(p=>p.role==='furniture');
-  assert.equal(furnishings.length,44);
+  assert.equal(furnishings.length,51);
   assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','chair-4','chair-5','chair-6','dining-table','port-chaise','wet-bar']);
   assert.ok(!manifest.parts.some(p=>/MD_SAN_|covered-aft-seating|oval-table/.test(p.id)));
   assert.ok(manifest.floor.every(([a,b,c])=>Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>1e-10),'Degenerate faces must not open navigation holes');
@@ -84,20 +84,34 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.equal(boarding.meshes.length,2);
   assert.ok(boarding.stats.triangles<=25000,JSON.stringify(boarding.stats));
   boarding.dispose(); materials.opaque.dispose(); materials.glass.dispose();
-  // The counter must still have the source sink opening, not a cap over the basin.
-  const counter=decode(furnishings.find(p=>p.feature==='cockpit grey counter with pale edge'));
-  const drain=furnishings.find(p=>p.feature==='cockpit wet bar dark circular drain').bounds;
-  const x=(drain[0]+drain[3])/2, y=(drain[1]+drain[4])/2;
-  const post=furnishings.find(p=>p.feature==='cockpit polished support post above wet bar').bounds;
-  assert.ok(verticalHits(counter,(post[0]+post[3])/2,(post[1]+post[4])/2).some(z=>Math.abs(z-post[2])<.002),'The post bears on the worktop outside the sink');
-  const covers=(a,b,c)=>{
-    const s=[a,b,c].map((p,i)=>{const q=[a,b,c][(i+1)%3];return(q[0]-p[0])*(y-p[1])-(q[1]-p[1])*(x-p[0]);});
-    return s.every(v=>v>=0)||s.every(v=>v<=0);
-  };
-  for(let i=0;i<counter.indices.length;i+=3) {
-    const t=counter.indices.slice(i,i+3).map(k=>counter.vertices.slice(k*6,k*6+6));
-    if(t.every(v=>v[5]>.5))assert.equal(covers(...t),false,'The sink must stay open');
+  const bar=feature=>decode(furnishings.find(p=>p.feature===feature));
+  const worktop=bar('cockpit wet bar inset white worktop');
+  const drain=bar('cockpit wet bar dark circular drain');
+  const lid=bar('cockpit wet bar flush service lid');
+  const x=(drain.bounds[0]+drain.bounds[3])/2, y=(drain.bounds[1]+drain.bounds[4])/2;
+  assert.equal(verticalHits(worktop,x,y).length,0,'The tray leaves the sink cavity open below its own lid');
+  assert.ok(verticalHits(lid,x,y).some(z=>Math.abs(z-4.9615)<.001));
+  const body=bar('rounded molded cockpit wet bar');
+  assert.equal(verticalHits(body,x,y).length,0,'The casing has no cap cutting across the hidden basin');
+  const post=bar('cockpit polished support post above wet bar');
+  const seat=bar('cockpit wet bar polished column seat');
+  assert.equal(post.bounds[2],seat.bounds[5]);
+  assert.ok(verticalHits(worktop,(post.bounds[0]+post.bounds[3])/2,(post.bounds[1]+post.bounds[4])/2)
+    .some(z=>Math.abs(z-seat.bounds[2])<.002),'The column bears on the worktop outside the sink');
+
+  const rim=bar('cockpit wet bar rolled tray rim');
+  const shelf=bar('cockpit wet bar raised shelf white edge');
+  assert.ok(rim.bounds[5]>worktop.bounds[5]+.015);
+  assert.ok(shelf.bounds[2]>worktop.bounds[5]+.19);
+  assert.ok(shelf.bounds[5]-shelf.bounds[2]<.032);
+  for(const i of [1,2]){
+    const support=bar('cockpit wet bar swept shelf support '+i);
+    assert.ok(support.bounds[2]<=worktop.bounds[5] && support.bounds[5]>=shelf.bounds[2]);
   }
+  assert.ok(bar('cockpit wet bar curved service-door reveal').bounds[5]>4.8);
+  const toe=bar('cockpit wet bar recessed warm toe');
+  assert.ok(toe.bounds[2]<3.955 && toe.bounds[5]>body.bounds[2]);
+
 });
 
 // Actual vertical triangle intersections distinguish projected overlap from
@@ -210,6 +224,19 @@ test('the aisle behind the four backs connects both ends of the dining table',()
       }
     }
   }finally{dispose();}
+});
+
+test('the passage between the wet bar and chairs stays open in both directions',()=>{
+  const {walk,dispose}=walkingModel();
+  try {
+    const route=[[6.68,0],[6.12,-.95],[5.63,-1.84],[5.66,-2.79],[6.60,-3.10]];
+    walk.nav.enterRoom('MD_R01');
+    const {length}=routeSegments(route);
+    assert.ok(moveAlongRoute(walk.nav,route,0,length));
+    assert.ok(moveAlongRoute(walk.nav,route,length,0));
+    assert.ok(Math.hypot(...walk.nav.position.map((x,i)=>x-route[0][i]))<.001);
+    assert.equal(walk.nav.elevation,3.95);
+  } finally {dispose();}
 });
 
 test('rotated furniture footprints retain their open corners and body clearance',()=>{

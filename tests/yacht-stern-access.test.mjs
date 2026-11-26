@@ -452,7 +452,7 @@ test('the cockpit openings expose the mooring fittings in both registered VR vie
     assert.equal(surfaceAt(...stbd,379,116),'cockpit cleat sole forward -1');
     assert.equal(surfaceAt(...stbd,503,103),'cockpit cleat sole -1');
     assert.equal(surfaceAt(...stbd,445,92),'cockpit mooring drum -1');
-    assert.equal(surfaceAt(...stbd,190,277),'rounded metallic cockpit wet bar');
+    assert.equal(surfaceAt(...stbd,190,277),'rounded molded cockpit wet bar');
     assert.match(surfaceAt(...stbd,241,277),/stair opening/);
   } finally {dispose();}
 });

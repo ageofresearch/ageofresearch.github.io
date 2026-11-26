@@ -4,11 +4,12 @@ import {aftCockpitTreads} from './aft-cockpit-stair.js?v=cockpit-risers-v1';
 
 export const aftCheekFinish = 70;
 export const aftCheekToeFinish = 71;
+export const aftHandrailFinish = 72;
 
 // The faces alongside the treads are lacquered black. The approach sees
 // mostly the shaded cockpit, except where a rake or a bevel looks outboard.
 export const aftCheekWGSL = /* wgsl */ `
-fn aftCheekReflection(pos:vec3f,n:vec3f,rough:f32,visible:f32,toe:bool)->vec3f{
+fn aftCheekReflection(pos:vec3f,n:vec3f,rough:f32,visible:f32,finish:i32)->vec3f{
   let eye=normalize(frame.eye.xyz-pos);
   let ray=reflect(-eye,n);
   let p=vec3f((pos.z+17.615)/.9786111111,pos.x/.9828947368,pos.y+2.01);
@@ -47,7 +48,8 @@ fn aftCheekReflection(pos:vec3f,n:vec3f,rough:f32,visible:f32,toe:bool)->vec3f{
     nearest=coamingT;
     light=vec3f(.174,.197,.238);
   }
-  if(abs(dz)>.04){
+  let leavingTreads=(p.y>2.84 && direction.y>=0.) || (p.y<1.90 && direction.y<=0.);
+  if(abs(dz)>.04 && !leavingTreads){
     for(var i=0;i<${aftCockpitTreads.length};i++){
       let up=direction.z<0.;
       let level=select(aftTeakLevels[i].y,aftTeakLevels[i].x,up);
@@ -68,7 +70,8 @@ fn aftCheekReflection(pos:vec3f,n:vec3f,rough:f32,visible:f32,toe:bool)->vec3f{
   let sun=width/(width+1.-max(0.,dot(ray,frame.sun.xyz)));
   let lacquer=(vec3f(.009,.011,.015)+light*(.105+.32*fresnel))*day;
   let polished=(vec3f(.010,.014,.020)+light*(.50+.32*fresnel))*day;
-  let glint=(.28+.41*fresnel)*visible*facing*sun*sun;
-  return select(lacquer,polished,toe)+vec3f(1.,.89,.73)*glint;
+  let chrome=(vec3f(.019,.021,.025)+light*(.79+.19*fresnel))*day;
+  let glint=(select(.28,.53,finish==2)+.41*fresnel)*visible*facing*sun*sun;
+  return select(select(lacquer,polished,finish==1),chrome,finish==2)+vec3f(1.,.89,.73)*glint;
 }
 `;

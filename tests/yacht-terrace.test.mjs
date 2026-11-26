@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { buildTerrace, clipGeometry, contactShade, containsTriangle } from '../scripts/build-yacht-terrace.mjs';
 import {cockpitOverheadFinish} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 import {aftTeakFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-teak.js';
-import {aftCheekFinish,aftCheekToeFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
+import {aftCheekFinish,aftCheekToeFinish,aftHandrailFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
 import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
@@ -15,6 +15,33 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 
 const root = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('aft-terrace.json', root)));
+
+test('the mobile port handrail has a closed beveled section, two bends and a low return',async()=>{
+  const part=manifest.parts.find(p=>p.feature==='polished handrail 1');
+  assert.equal(part.finish[3],aftHandrailFinish);
+  assert.ok(!manifest.parts.some(p=>p.feature==='slender handrail posts 1'));
+  assert.ok(manifest.parts.some(p=>p.feature==='slender handrail posts -1'));
+  const binary=await readFile(new URL('aft-terrace.bin',root));
+  const vertices=new Float32Array(binary.buffer,binary.byteOffset+part.vertices.offset,part.vertices.length);
+  const indices=new Uint32Array(binary.buffer,binary.byteOffset+part.indices.offset,part.indices.length);
+  const rows=Array.from({length:vertices.length/6},(_,i)=>vertices.subarray(i*6,i*6+6));
+  const first=rows.filter(v=>v[2]>5.14&&v[2]<5.17&&v[0]<6.315);
+  assert.ok(first.length>0,'A straight upright enters the bottom tangent');
+  assert.ok(first.some(v=>Math.abs(v[3])>.99)&&first.some(v=>Math.abs(v[4])>.99),
+    'Wide and narrow faces have distinct planar normals');
+  assert.ok(rows.some(v=>v[2]>5.19&&v[2]<5.23&&Math.abs(v[3])>.25&&Math.abs(v[5])>.25),
+    'The elbow rolls the planar face into the incline');
+  const returns=rows.filter(v=>v[0]>7.70);
+  assert.ok(returns.length && returns.every(v=>v[2]>5.83&&v[2]<5.86));
+  assert.ok(part.bounds[5]<5.90,'The rail never joins the upper guard');
+  for(let i=0;i<indices.length;i+=3){
+    const [a,b,c]=Array.from(indices.subarray(i,i+3),k=>rows[k]);
+    const [x,y,z]=Array.from(a.subarray(0,3),(v,k)=>b[k]-v);
+    const [X,Y,Z]=Array.from(a.subarray(0,3),(v,k)=>c[k]-v);
+    const n=[y*Z-z*Y,z*X-x*Z,x*Y-y*X];
+    assert.ok(n.reduce((sum,v,k)=>sum+v*(a[k+3]+b[k+3]+c[k+3]),0)>0);
+  }
+});
 
 test('both mobile stair stringers have asymmetric solid profiles and supported polished toes', async () => {
   const binary=await readFile(new URL('aft-terrace.bin',root));
@@ -257,7 +284,7 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
   }finally{dispose();}
 });
 
-test('dining chairs face the table and clear their neighbours and upper stair rails retain the complete source height',async()=>{
+test('dining chairs fit the table and the opposite stair rails retain their source height',async()=>{
   const bench=createSternFeatures().parts.find(p=>p.feature==='covered aft seating behind transom');
   const chair=manifest.parts.filter(p=>p.groupID==='chair-1');
   assert.ok(Math.min(...chair.map(p=>p.bounds[0]))-bench.bounds[3]>.05,'Chair 1 must clear the bench by at least 5 cm');
@@ -291,8 +318,8 @@ test('dining chairs face the table and clear their neighbours and upper stair ra
   const buffer=await readFile(new URL('../rocha/luz-de-mar/model.bin',root));
   const source=buildYachtGeometry({data,binary:buffer.buffer.slice(buffer.byteOffset,buffer.byteOffset+buffer.byteLength)},0,{mtuEngines:false,seaStrainers:false});
   try {
-    const rails=source.interiorDetail.replacements.get('MD_STA_013').filter(p=>/handrail|post/.test(p.feature));
-    assert.ok(rails.length>=2);
+    const rails=source.interiorDetail.replacements.get('MD_STA_013').filter(p=>/^(polished handrail|slender handrail posts) -1$/.test(p.feature));
+    assert.equal(rails.length,2);
     for(const rail of rails) {
       const mobile=manifest.parts.find(p=>p.id===rail.id);
       assert.ok(mobile,rail.feature);

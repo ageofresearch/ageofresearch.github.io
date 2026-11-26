@@ -14,6 +14,7 @@ import { shadowVisibility, azimuthCells, elevationCells } from './shadow-visibil
 import { traceBounce } from './daylight-transfer.mjs';
 import { mobileAftTeak } from './aft-cockpit-teak.mjs';
 import { mobileAftCheeks, mobileAftServiceSkin } from './aft-cockpit-cheeks.mjs';
+import { mobileAftHandrail } from './aft-cockpit-handrail.mjs';
 const root = new URL('../../site/tidewater-rocha/', import.meta.url);
 const mobileCasters = process.argv.includes('--mobile-casters');
 const data = JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json', root)));
@@ -26,7 +27,7 @@ const boarding = createBoarding(model, null, { gangwayOnly: true, includeLanding
 const rendered = renderedParts(model);
 const stern = createSternFeatures({ mobile: mobileCasters }).parts;
 const parts = (mobileCasters
-  ? mobileAftCheeks(mobileAftTeak(rendered.filter(part => !part.id.startsWith('MD/transom/')))).map(mobileAftServiceSkin)
+  ? mobileAftHandrail(mobileAftCheeks(mobileAftTeak(rendered.filter(part => !part.id.startsWith('MD/transom/'))))).map(mobileAftServiceSkin)
   : rendered)
   .concat(stern, boarding.parts);
 const displayed = new Set(model.componentRanges.map((r) => r.id));

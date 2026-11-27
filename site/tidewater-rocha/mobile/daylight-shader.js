@@ -10,10 +10,10 @@ import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 import { makeCockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-opening-v2';
-import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-joins-v1';
+import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-finishes-v1';
 import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v2';
-import { aftCheekWGSL } from './aft-cockpit-cheeks.js?v=cockpit-handrail-v1';
-import { aftColumn, aftColumnWGSL } from './aft-cockpit-column.js?v=cockpit-column-v1';
+import { aftColumn } from './aft-cockpit-column.js?v=cockpit-column-v1';
+import { aftCockpitLightWGSL } from './aft-cockpit-light.js?v=1';
 import { aftOpeningJoints, aftOpeningWGSL } from './aft-cockpit-opening.js?v=cockpit-joins-v1';
 import {aftJoinsWGSL,cockpitPlankPitch,upperPlankPitch,aftLandingGuard} from './aft-cockpit-joins.js?v=1';
 import {cockpitAftGlassFinish,cockpitLoungeWGSL} from './aft-cockpit-lounge.js?v=cockpit-joins-v1';
@@ -48,9 +48,8 @@ ${cockpitSteelWGSL}
 ${makeCockpitOverheadWGSL({portLip:[...aftColumn.xy,aftColumn.openingRadius],portSocket:false,panelJoints:aftOpeningJoints})}
 ${aftTeakWGSL}
 ${aftJoinsWGSL}
-${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)',support:aftColumn,guard:aftLandingGuard})}
-${aftCheekWGSL}
-${aftColumnWGSL}
+${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)',support:aftColumn,guard:aftLandingGuard,panelShade:'aftCockpitRiserContact(p)'})}
+${aftCockpitLightWGSL}
 ${aftOpeningWGSL}
 ${cockpitLoungeWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
@@ -92,7 +91,7 @@ struct V {
  if(o.layer==-8 || o.layer==-10 || (o.layer<=-12 && o.layer>=-18)){
    let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
    let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
-   o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,lit);return o;
+   o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,lit);o.light=light;return o;
  }
  if(o.layer==-6){
    o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,0.);return o;
@@ -234,21 +233,18 @@ fn shade(in:V)->vec4f{
    let contact=mix(.52,1.,smoothstep(3.951,3.988,in.indirect.y+2.01));
    return vec4f(display(reflected*contact),1.);
  }
- if(in.layer<=-12 && in.layer>=-14){
+ if(in.layer<=-12 && in.layer>=-15){
    if(frame.wind.y>0.){return vec4f(.20,.22,.25,1.);}
    let normal=normalize(in.direct);
-   let sample=aftCheekReflection(in.indirect,normal,in.uv.x,in.uv.y,-12-in.layer);
+   let lit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
+   let sample=aftCockpitCoat(in.indirect,normal,in.uv.x,lit,-12-in.layer);
    let p=cockpitLoungeLocal(in.indirect);
    if(in.layer==-12 && p.x>7.75 && p.x<8.052 && p.z>5.73 && normal.y>.25){
-     let polished=aftOpeningReflection(in.indirect,normal,.106,in.uv.y);
+     let polished=aftCockpitCoat(in.indirect,normal,.106,lit,1);
      let turned=smoothstep(7.75,7.88,p.x)*smoothstep(.25,.62,normal.y);
      return vec4f(display(mix(sample,polished,turned*.73)),1.);
    }
    return vec4f(display(sample),1.);
- }
- if(in.layer==-15){
-   if(frame.wind.y>0.){return vec4f(.42,.46,.52,1.);}
-   return vec4f(display(aftColumnReflection(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
  }
  if(in.layer==-17 || in.layer==-18){
    if(frame.wind.y>0.){return vec4f(.14,.15,.17,1.);}
@@ -256,7 +252,13 @@ fn shade(in:V)->vec4f{
  }
  if(in.layer==-16){
    if(frame.wind.y>0.){return vec4f(.34,.36,.39,1.);}
-   return vec4f(display(aftOpeningReflection(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
+   let normal=normalize(in.direct);
+   let z=in.indirect.y+2.01;
+   if(z>6.001 && z<6.005 && normal.y>.91){
+     let lit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
+     return vec4f(display(aftCockpitCoat(in.indirect,normal,in.uv.x,lit,4)),1.);
+   }
+   return vec4f(display(aftOpeningReflection(in.indirect,normal,in.uv.x,in.uv.y)),1.);
  }
  if(in.layer==-11){
    if(frame.wind.y>0.){return vec4f(.65,.55,.45,1.);}
@@ -264,7 +266,8 @@ fn shade(in:V)->vec4f{
    let p=vec3f((pos.z+17.615)/.9786111111,pos.x/.9828947368,pos.y+2.01);
    let n=normalize(in.direct);
    let edge=min(.018,max(fwidth(p.x),fwidth(p.y))*.57);
-   let wood=aftTeakPaint(p,n,aftTeakIndex(p.z),edge);
+   let tread=aftTeakIndex(p.z);
+   let wood=aftTeakPaint(p,n,tread,edge);
    let sunlit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
    if(p.z>5.962 && p.z<5.987 && p.x>8.021 && p.x<8.026 && n.z<-.70){
      return vec4f(display(aftOpeningReflection(pos,n,.105,sunlit)*.59),1.);
@@ -272,10 +275,7 @@ fn shade(in:V)->vec4f{
    let red=in.uv.x+in.uv.y*sunlit;
    let energy=pow((red+.055)/1.055,2.4)/.509;
    let view=normalize(frame.eye.xyz-pos);
-   let alignment=max(0.,dot(reflect(-view,n),frame.sun.xyz));
-   let lobe=.12/(1.12-alignment);
-   let satin=.045*sunlit*lobe*lobe*max(0.,dot(n,frame.sun.xyz));
-   return vec4f(display(wood*energy+vec3f(1.,.90,.79)*satin),1.);
+   return vec4f(display(aftCockpitTeakLight(p,n,view,tread,wood,energy,sunlit)),1.);
  }
  if(in.layer==-9){
    if(frame.wind.y>0.){return vec4f(in.indirect,1.);}

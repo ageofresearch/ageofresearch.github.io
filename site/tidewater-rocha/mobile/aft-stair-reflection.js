@@ -17,6 +17,7 @@ export function makeAftStairReflectionWGSL({
   treadCovers = 'aftStairInside(hit.xy,treads[i])',
   support = {xy:cockpitPortColumn,bottom:3.95,top:5.87,radius:.055},
   guard = aftCockpitGuard,
+  panelShade = 'aftStairPanelShade(p)',
 } = {}) {
   const tubes=[guard.middle,guard.top].flatMap((z,i)=>{
     const [a,b]=guard.sides, radius=i?.022:.012;
@@ -149,7 +150,7 @@ fn aftStairReflection(pos:vec3f,normal:vec3f,eye:vec3f,sun:vec3f,rough:f32,sunVi
   let glint=sunVisible*select(1.,0.,covered)*max(0.,dot(normal,sun))*solarLobe*solarLobe;
   let neutral=vec3f(.009,.009,.012);
   let smoked=.42+.58*smoothstep(4.48,5.47,p.z);
-  return (neutral+light*day*smoked*(.50+.37*grazing))*aftStairPanelShade(p)+vec3f(.92,.83,.70)*glint;
+  return (neutral+light*day*smoked*(.50+.37*grazing))*${panelShade}+vec3f(.92,.83,.70)*glint;
 }
 `;
 }

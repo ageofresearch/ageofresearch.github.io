@@ -33,7 +33,7 @@ export async function loadZone(name, version, decode, {
     const abort = () => controller.abort(signal.reason);
     signal?.addEventListener('abort', abort, {once: true});
     try {
-      const file = (ext, format) => readFile(new URL(`./${name}.${ext}?v=${version}&geometry=cockpit-opening-v2`, import.meta.url),
+      const file = (ext, format) => readFile(new URL(`./${name}.${ext}?v=${version}&geometry=cockpit-lounge-v1`, import.meta.url),
         format, controller, fetcher, timeoutMs, cache);
       const [manifest, mesh] = await Promise.all([file('json', 'json'), file('bin', 'arrayBuffer')]);
       return decode(manifest, mesh);

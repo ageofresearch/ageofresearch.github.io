@@ -80,7 +80,7 @@ export function filterRoomCell(bits, offset, prefixCount, indices, length, slots
 export async function loadRoomVisibility(vertices, profiles, signal) {
   try {
     const timeout = AbortSignal.timeout(10000);
-    const response = await fetch(new URL('./room-visibility.bin?v=cockpit-opening-v2', import.meta.url),
+    const response = await fetch(new URL('./room-visibility.bin?v=cockpit-lounge-v1', import.meta.url),
       {signal:signal ? AbortSignal.any([timeout, signal]) : timeout});
     if (!response.ok) return null;
     const raw = await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();

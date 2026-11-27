@@ -8,6 +8,8 @@ import {aftColumnFinish} from './aft-cockpit-column.js?v=cockpit-column-v1';
 
 import {aftOpeningFinish} from './aft-cockpit-opening.js?v=cockpit-opening-v1';
 
+import {cockpitLacquerFinish,cockpitPortalFinish,cockpitSoleFinish,cockpitUpholsteryFinish} from './aft-cockpit-lounge.js?v=1';
+
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));
 
@@ -65,6 +67,7 @@ export function prepareOpaque(source,map,indices) {
     else if(code===aftHandrailFinish)layer=-14;
     else if(code===aftColumnFinish)layer=-15;
     else if(code===aftOpeningFinish)layer=-16;
+    else if(code===cockpitLacquerFinish||code===cockpitPortalFinish)layer=code===cockpitLacquerFinish?-17:-18;
     else if(code===65)layer=-8;
     else if(code===62 || code===63)layer=code===62?-6:-7;
     else if(code===47)layer=-2;
@@ -76,6 +79,11 @@ export function prepareOpaque(source,map,indices) {
       else if(code===59){layer=6;u=(localX-24.08)/2.77;v=(localY+2.08)/4.20;}
       else if(code===60){
         layer=7;u=localX*.81+elevation*.63;v=localY*.76+elevation*.49;
+      }
+      else if(code===cockpitUpholsteryFinish){
+        layer=25;
+        u=(localX*.76+localY*.65)*23.;
+        v=(elevation*.88+localY*.52-localX*.45)*23.;
       }
       else if(code===61){
         layer=24;
@@ -95,7 +103,9 @@ export function prepareOpaque(source,map,indices) {
         }
       }
       else if(code===3){layer=2;u=fu*430/(2*Math.PI);v=fv*410/(2*Math.PI);}
-      else if(code===1){layer=0;u=localX/2.15;v=(localY/.105+64)/8;}
+      else if(code===1 || code===cockpitSoleFinish){
+        layer=code===cockpitSoleFinish?26:0;u=localX/2.15;v=(localY/(code===cockpitSoleFinish?.077:.105)+64)/8;
+      }
       else if(code===7){
         const [cx,cy]=localY>.9?[22.03368,1.21617]:localY>.25?[22.27016,.59119]:localY< -1?[21.949225,-1.31751]:localY< -.35?[22.18570,-.69254]:[22.354615,-.05067];
         layer=3;u=(localY-cy)/.48+.5;v=((localX-cx)*.659983+(elevation-7.01)*.75128)/.36+.5;

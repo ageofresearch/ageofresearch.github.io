@@ -11,6 +11,9 @@ import {mobileAftHandrail} from './yacht-geometry/aft-cockpit-handrail.mjs';
 import {mobileAftColumn} from './yacht-geometry/aft-cockpit-column.mjs';
 import {mobileAftOpening} from './yacht-geometry/aft-cockpit-opening.mjs';
 
+import {mobileCockpitChaise,mobileCockpitEnclosure,mobileCockpitPortal} from './yacht-geometry/aft-cockpit-lounge.mjs';
+import {cockpitSoleFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-lounge.js';
+
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const boundsOf = vertices => [0, 1, 2].map(k => Math.min(...vertices.filter((_, i) => i % 6 === k)))
   .concat([0, 1, 2].map(k => Math.max(...vertices.filter((_, i) => i % 6 === k))));
@@ -116,7 +119,7 @@ export async function buildTerrace() {
     // original triangulation so the flattened lining and small fittings fit.
     if (role === 'floor' || role === 'hull') geometry = subdivide(geometry);
     parts.push({ id: source.id, feature: source.feature, role, materialID: source.materialID,
-      finish: role==='floor' ? [0x9e9999,.77,0,1] : source.finish,
+      finish: role==='floor' ? [0xb08d6d,.71,0,source.feature==='inlaid teak cockpit stair margin'?1:cockpitSoleFinish] : source.finish,
       glass: !!source.glass, smokedGlass: !!source.glass,
       ...geometry, bounds: boundsOf(geometry.vertices) });
   }
@@ -135,7 +138,7 @@ export async function buildTerrace() {
   for (const part of stairParts)
     add(part, [3.3,-3.8,3.83,8.5,3.8,7.05], 'stairs');
   add(mobileAftFootReturn, region, 'enclosure');
-  for (const part of replacements.get('MD_GLA_001')) add(part, region, 'glazing');
+  for (const part of replacements.get('MD_GLA_001')) add(mobileCockpitPortal(part), region, 'glazing');
   for (const part of mobileAftOpening(mobileAftColumn(model.exterior.parts))) {
     if(part.feature?.startsWith('cockpit ceiling ')&&mobileCockpitFitting(part.feature)){
       const role=part.feature==='cockpit ceiling port support column'?'roof-support':'roof-detail';
@@ -143,21 +146,21 @@ export async function buildTerrace() {
     }
     if (/^(shaped teak landing inboard caulk border|teak passage outer margin border)$/.test(part.feature))
       add(part, [2.28,-3.8,3.83,8.5,3.8,3.96], 'deck-trim');
-    if (part.feature === 'aft sliding glazing frames and mullions') add(part, region, 'frame');
+    if (part.feature === 'aft sliding glazing frames and mullions') add(mobileCockpitPortal(part), region, 'frame');
     if (part.id.startsWith('MD/boarding-route/') && /coaming|bulwark|recess lower ledge|^port mooring/.test(part.feature)) {
       const role = part.feature === 'port mooring curved sole margin' ? 'deck-trim' : 'boundary';
       add(part, [2.31,-3.8,3.83,8.5,3.8,6.12], role);
     }
   }
-  const service = [...model.interiorDetail.objects, ...model.machinery.parts];
+  const service = mobileCockpitEnclosure([...model.interiorDetail.objects, ...model.machinery.parts]);
   const seen = new Set();
   for (const part of service) {
     if (seen.has(part.id)) continue;
     seen.add(part.id);
-    if (/profiled white service stair enclosure|sloping white service stair ceiling|cockpit stair exterior (?:cheek|capping)|dark sidewall around D1/.test(part.feature))
+    if (/profiled white service stair enclosure|sloping white service stair ceiling|cockpit stair exterior (?:cheek|capping)|dark sidewall around D1|canted lacquered service locker|service control escutcheons|polished service push buttons|polished edge on service locker/.test(part.feature))
       add(mobileAftServiceSkin(part), region, 'enclosure');
   }
-  const furniture=model.exterior.parts.filter(part => ['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(part.anchor));
+  const furniture=mobileCockpitChaise(model.exterior.parts.filter(part => ['MD_FUR_003','MD_FUR_007','MD_FUR_008'].includes(part.anchor)));
   const groups = new Set(furniture.map(furnitureGroup));
   for(const expected of ['port-chaise','dining-table','wet-bar',...Array.from({length:4},(_,i)=>'chair-'+(i+1))])
     if(!groups.has(expected))throw Error('Incomplete cockpit assembly '+expected);
@@ -199,7 +202,7 @@ export async function buildTerrace() {
         .filter(([dx,dy]) => roof.some(t => containsTriangle(x + dx, y + dy, t))).length / 5 : 0;
       const contact=part.role==='floor' && nz>.5 ? contactShade(x,y,furnitureFootprints) : 1;
       part.light.push((.96 - .38 * cover)*contact);
-      part.surfaceTypes.push(part.role === 'floor' && nz > .5 && part.feature !== 'inlaid teak cockpit stair margin' ? 1 : part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
+      part.surfaceTypes.push(part.role === 'floor' && nz <= .5 ? 1 : part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
     }
   }
   const chunks = [];

@@ -7,6 +7,7 @@ import {aftTeakFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-teak.js'
 import {aftCheekFinish,aftCheekToeFinish,aftHandrailFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
 import {aftOpening,aftOpeningFinish,aftOpeningJoints} from '../site/tidewater-rocha/mobile/aft-cockpit-opening.js';
 import {aftColumn,aftColumnFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-column.js';
+import {cockpitLacquerFinish,cockpitAftGlassFinish,cockpitPortalFinish,cockpitSoleFinish,cockpitUpholsteryFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-lounge.js';
 import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
@@ -200,7 +201,7 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.ok(manifest.parts.some(p=>p.role==='enclosure'));
   assert.ok(manifest.parts.some(p=>p.glass));
   const furnishings=manifest.parts.filter(p=>p.role==='furniture');
-  assert.equal(furnishings.length,51);
+  assert.equal(furnishings.length,55);
   assert.deepEqual([...new Set(furnishings.map(p=>p.groupID))].sort(),['chair-1','chair-2','chair-3','chair-4','chair-5','chair-6','dining-table','port-chaise','wet-bar']);
   assert.ok(!manifest.parts.some(p=>/MD_SAN_|covered-aft-seating|oval-table/.test(p.id)));
   assert.ok(manifest.floor.every(([a,b,c])=>Math.abs((b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]))>1e-10),'Degenerate faces must not open navigation holes');
@@ -219,7 +220,7 @@ test('published furnishings reproduce the source geometry and stay inside the mo
       const t=step/40;
       assert.equal(blocked(7.4-.8*t,-2.5-.6*t,.14),false,'The starboard stair approach clears the service face');
     }
-    for(const part of furnishings) {
+    for(const part of furnishings.filter(p=>p.groupID!=='port-chaise')) {
       const original=source.exterior.parts.find(p=>p.id===part.id);
       assert.ok(original,part.id);
       assert.deepEqual(decode(part).vertices,Float32Array.from(original.vertices));
@@ -234,6 +235,24 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   assert.equal(boarding.meshes.length,2);
   assert.ok(boarding.stats.triangles<=25000,JSON.stringify(boarding.stats));
   boarding.dispose(); materials.opaque.dispose(); materials.glass.dispose();
+  const chaise=furnishings.filter(p=>p.groupID==='port-chaise');
+  const chaiseSeat=decode(chaise.find(p=>p.feature==='cockpit port chaise seat'));
+  const plinth=chaise.find(p=>p.feature.endsWith('recessed plinth'));
+  assert.ok(chaiseSeat.bounds[3]-chaiseSeat.bounds[0]>1.92);
+  assert.ok(verticalHits(chaiseSeat,6.45,.47).length);
+  assert.equal(verticalHits(chaiseSeat,7.12,.47).length,0,'The front edge curves inward through the waist');
+  assert.ok(plinth.bounds[2]<chaiseSeat.bounds[2]&&plinth.bounds[5]===chaiseSeat.bounds[2]);
+  assert.equal(chaise.filter(p=>p.feature.endsWith('cushion')).length,3);
+  assert.equal(chaiseSeat.finish[3],cockpitUpholsteryFinish);
+  const amber=chaise.find(p=>p.feature.endsWith('amber cushion'));
+  const blue=chaise.find(p=>p.feature.endsWith('blue cushion'));
+  assert.ok(amber.bounds[2]>blue.bounds[2]&&amber.bounds[5]>blue.bounds[5],'The amber pillow rises behind the blue pillow');
+  const casing=manifest.parts.find(p=>p.feature==='canted lacquered service locker under the aft stair');
+  assert.equal(casing.finish[3],cockpitLacquerFinish);
+  assert.ok(casing.bounds[5]>5.87&&casing.bounds[2]===3.95);
+  assert.equal(manifest.parts.find(p=>p.feature==='smoked aft saloon sliding panels').finish[3],cockpitAftGlassFinish);
+  assert.equal(manifest.parts.find(p=>p.role==='frame').finish[3],cockpitPortalFinish);
+  assert.ok(manifest.parts.some(p=>p.role==='floor'&&p.finish[3]===cockpitSoleFinish));
   const bar=feature=>decode(furnishings.find(p=>p.feature===feature));
   const worktop=bar('cockpit wet bar inset white worktop');
   const drain=bar('cockpit wet bar dark circular drain');

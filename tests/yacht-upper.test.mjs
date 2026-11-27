@@ -55,7 +55,7 @@ test('mobile upper route supports every tread, stops, reversals, diagonals and b
     const nav=walk.nav,controller=nav.tryStep;connectUpper(walk,upper);
     assert.equal(nav.tryStep,controller,'Adding a flight must not nest controllers');
     const f=model.upper.flight,route=f.route;
-    const path=[[6.68,0],[6,.9],[5.9,1],[4.9,1.2],[4.4,1.7],[4.7,2.28],[5.72,2.28],...route.path,[8.35,2.28],[9.9,1.5],[10.2,1.5],[10.25,-.40],[13.8,-.40],[13.8,.1]];
+    const path=[[6.68,0],[5.82,.30],[5.78,.84],[5.68,1.04],[4.9,1.2],[4.4,1.7],[4.7,2.28],[5.72,2.28],...route.path,[8.35,2.28],[9.9,1.5],[10.2,1.5],[10.25,-.40],[13.8,-.40],[13.8,.1]];
     for(const hz of [12,40,60]) {
       nav.deck='MD';nav.position=path[0].slice();nav.elevation=3.95;nav.stair=null;
       travel(nav,path.slice(1),hz);assert.equal(nav.deck,'UD');assert.equal(nav.elevation,6);assert.equal(nav.stair,null);

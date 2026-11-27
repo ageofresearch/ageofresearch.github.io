@@ -17,6 +17,7 @@ import { mobileAftCheeks, mobileAftServiceSkin } from './aft-cockpit-cheeks.mjs'
 import { mobileAftHandrail } from './aft-cockpit-handrail.mjs';
 import { mobileAftColumn } from './aft-cockpit-column.mjs';
 import { mobileAftOpening } from './aft-cockpit-opening.mjs';
+import { mobileCockpitParts } from './aft-cockpit-lounge.mjs';
 const root = new URL('../../site/tidewater-rocha/', import.meta.url);
 const mobileCasters = process.argv.includes('--mobile-casters');
 const data = JSON.parse(await readFile(new URL('rocha/luz-de-mar/model.json', root)));
@@ -29,7 +30,9 @@ const boarding = createBoarding(model, null, { gangwayOnly: true, includeLanding
 const rendered = renderedParts(model);
 const stern = createSternFeatures({ mobile: mobileCasters }).parts;
 const parts = (mobileCasters
-  ? mobileAftOpening(mobileAftColumn(mobileAftHandrail(mobileAftCheeks(mobileAftTeak(rendered.filter(part => !part.id.startsWith('MD/transom/'))))))).map(mobileAftServiceSkin)
+  ? mobileCockpitParts(
+    mobileAftOpening(mobileAftColumn(mobileAftHandrail(mobileAftCheeks(mobileAftTeak(rendered.filter(part => !part.id.startsWith('MD/transom/')))))))
+  ).map(mobileAftServiceSkin)
   : rendered)
   .concat(stern, boarding.parts);
 const displayed = new Set(model.componentRanges.map((r) => r.id));

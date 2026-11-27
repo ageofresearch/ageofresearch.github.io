@@ -3,7 +3,7 @@ import { indexFootprints } from './terrace-geometry.js?v=chair-fidelity-1';
 const version = 'vr-detail-1';
 
 export async function loadTerrace() {
-  const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}&geometry=cockpit-opening-v2`, import.meta.url))));
+  const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}&geometry=cockpit-lounge-v1`, import.meta.url))));
   if (responses.some(response => !response.ok)) throw Error('No se pudo cargar la terraza de popa');
   const [manifest, buffer] = await Promise.all([responses[0].json(), responses[1].arrayBuffer()]);
   if (manifest.version !== version) throw Error('Actualiza la página para cargar la terraza');
@@ -67,7 +67,7 @@ export function connectTerrace(boarding, terrace, sternFloor = [], saloon = null
     return onBoarding(x,across,0) || pointOnFloor(x,across);
   };
   boarding.route = [boarding.room.spawn.slice(0,2), [3.65,3.1], [4.56,3.1], [4.59,1.21],
-    [5.91,1.05], [6.11,.74], [6.13,.20], [7.90,.10], [8.18,.10]];
+    [5.68,1.04], [5.78,.84], [5.80,.34], [6.18,.19], [7.90,.10], [8.18,.10]];
   if(saloon)boarding.route.push([9.2,.1],[10,.1]);
   boarding.walkEnd = boarding.route.at(-1)[0];
   boarding.arrivalLook = saloon ? [12.3,0,4.7] : [5.5,0,4.85];

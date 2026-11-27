@@ -14,7 +14,8 @@ import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-
 import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v2';
 import { aftCheekWGSL } from './aft-cockpit-cheeks.js?v=cockpit-handrail-v1';
 import { aftColumn, aftColumnWGSL } from './aft-cockpit-column.js?v=cockpit-column-v1';
-import { aftOpeningJoints, aftOpeningWGSL } from './aft-cockpit-opening.js?v=cockpit-opening-v1';
+import { aftOpeningJoints, aftOpeningWGSL } from './aft-cockpit-opening.js?v=cockpit-lounge-v1';
+import {cockpitAftGlassFinish,cockpitLoungeWGSL} from './aft-cockpit-lounge.js?v=1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -49,6 +50,7 @@ ${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distan
 ${aftCheekWGSL}
 ${aftColumnWGSL}
 ${aftOpeningWGSL}
+${cockpitLoungeWGSL}
 fn sky(dir:vec3f)->vec3f{return yachtDaySky(dir,frame.sun.xyz,true);}
 struct V {
  ${tagged?'@location(5) @interpolate(flat) tag:u32,':''}
@@ -85,7 +87,7 @@ struct V {
    o.light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
    return o;
  }
- if(o.layer==-8 || o.layer==-10 || (o.layer<=-12 && o.layer>=-16)){
+ if(o.layer==-8 || o.layer==-10 || (o.layer<=-12 && o.layer>=-18)){
    let light=(frame.light*vec4f(pos+normal*.009,1.)).xyz;
    let lit=textureSampleCompareLevel(shadow,shadowSampler,light.xy*vec2f(.5,-.5)+.5,light.z-.00030);
    o.indirect=pos;o.direct=normal;o.uv=vec2f(rough,lit);return o;
@@ -237,6 +239,10 @@ fn shade(in:V)->vec4f{
    if(frame.wind.y>0.){return vec4f(.42,.46,.52,1.);}
    return vec4f(display(aftColumnReflection(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
  }
+ if(in.layer==-17 || in.layer==-18){
+   if(frame.wind.y>0.){return vec4f(.14,.15,.17,1.);}
+   return vec4f(display(cockpitLoungeCoat(in.indirect,normalize(in.direct),in.uv.x,in.uv.y,in.layer==-18)),1.);
+ }
  if(in.layer==-16){
    if(frame.wind.y>0.){return vec4f(.34,.36,.39,1.);}
    return vec4f(display(aftOpeningReflection(in.indirect,normalize(in.direct),in.uv.x,in.uv.y)),1.);
@@ -288,11 +294,17 @@ fn shade(in:V)->vec4f{
    radiance+=in.direct*lit;
  }
  if(in.layer>=0){
-   let layer=select(finish-1,5+clamp(i32(floor(in.uv.y))-1,0,12),finish==0);
-   let upholstery=finish==24;
+   let layer=select(finish-1,5+clamp(i32(floor(in.uv.y))-1,0,12),finish==0 || finish==26);
+   let upholstery=finish==24 || finish==25;
    let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,finish==20 || upholstery)).r;
    var tile=weaveValue*1.1;
-   if(upholstery){tile=.94+(weaveValue-.615)*2.05;}
+   if(upholstery){tile=.94+(weaveValue-.615)*select(2.05,.54,finish==25);}
+   if(finish==26){
+     let boards=in.uv.y*8.;
+     let seam=abs(fract(boards+.5)-.5);
+     let aa=clamp(fwidth(boards)*.55,.005,.18);
+     tile*=.41+.59*smoothstep(.012,.016+aa,seam);
+   }
    radiance=(radiance+.055)*tile-.055;
  }
  return vec4f(radiance,1.);
@@ -314,32 +326,39 @@ struct Glass {
  let grazing=pow(1.-abs(dot(n,eye)),5.);
  let r=reflect(-eye,n);let reflected=sky(r);
  let port=finish.x==${portSideGlassCode};
- if(finish.x==52 || finish.x==53 || port){
-   // Transmitted daylight remains visible from inside. From the cockpit the
-   // fixed leaves read as dark smoked glass beside the actual open doorway.
-   let door=finish.x==52;
-   let outside=select(smoothstep(2.8,3.12,abs(frame.eye.x)),1.-smoothstep(-9.60,-9.16,frame.eye.z),door);
-   let opacity=mix(select(.26,.60,door),select(.62,.90,door),outside);
+ if(finish.x==${cockpitAftGlassFinish}){
+   return Glass(frame.clip*vec4f(pos,1.),vec4f(.105,.114,.126,.72),vec3f(0.),pos,n,2u);
+ }
+ if(finish.x==53 || port){
+   let outside=smoothstep(2.8,3.12,abs(frame.eye.x));
+   let opacity=mix(.60,.90,outside);
    let reflection=mix(vec3f(.018,.023,.029),reflected,.045+.24*grazing);
    // Bake the sea/sky tint into the vertex color. The hardware interpolates
    // across each fixed light without shading the overlapping glass per pixel.
    let horizon=(smoothstep(-.04,.04,r.y)-.60)*.16*outside;
    // Project the fixed outer rail onto the side glass. Homogeneous interpolation
    // keeps the reflected rail continuous across large, differently split panes.
-   var railRay=vec3f(0.);
-   if(!door){
-     let point=vec3f((pos.z+17.615)/.978611,pos.x/.982895,pos.y+2.01);
-     let delta=vec3f((pos.z-frame.eye.z)/.978611,-(pos.x-frame.eye.x)/.982895,pos.y-frame.eye.y);
-     let side=sign(point.y);let divisor=side*delta.y;let gap=3.70-abs(point.y);
-     railRay=vec3f(point.x*divisor+gap*delta.x,point.z*divisor+gap*delta.z,divisor);
-   }
+   let point=vec3f((pos.z+17.615)/.978611,pos.x/.982895,pos.y+2.01);
+   let delta=vec3f((pos.z-frame.eye.z)/.978611,-(pos.x-frame.eye.x)/.982895,pos.y-frame.eye.y);
+   let side=sign(point.y);let divisor=side*delta.y;let gap=3.70-abs(point.y);
+   let railRay=vec3f(point.x*divisor+gap*delta.x,point.z*divisor+gap*delta.z,divisor);
    return Glass(frame.clip*vec4f(pos,1.),vec4f(display(reflection)+vec3f(horizon),mix(opacity,.94,grazing)),railRay,pos,n,select(0u,1u,port));
  }
  return Glass(frame.clip*vec4f(pos,1.),vec4f(display(mix(tint.rgb,reflected,.48+.45*grazing)),select(.06+.30*grazing,.24+.37*grazing,finish.x==26)),vec3f(0.),pos,n,0u);
 }
 @diagnostic(off, derivative_uniformity)
 @fragment fn glassFragment(in:Glass)->@location(0) vec4f{
- if(in.port!=0u && frame.wind.y==0. && frame.eye.x>in.point.x+.026 && abs(in.normal.x)>.65){
+ if(in.port==2u && frame.wind.y==0.){
+   let ray=normalize(in.point-frame.eye.xyz);
+   let normal=normalize(in.normal);
+   let incidence=abs(dot(ray,normal));
+   let edge=1.-incidence;
+   let reflected=cockpitLoungeRadiance(cockpitLoungeLocal(in.point),reflect(ray,normal),.085);
+   let outside=1.-smoothstep(-9.51,-9.29,frame.eye.z);
+   let coat=mix(.13,.74,outside)*(.73+.27*edge);
+   return vec4f(display(vec3f(.007,.008,.011)+reflected*coat),mix(.30,.81,outside)+.11*edge);
+ }
+ if(in.port==1u && frame.wind.y==0. && frame.eye.x>in.point.x+.026 && abs(in.normal.x)>.65){
    let ray=normalize(in.point-frame.eye.xyz);
    let normal=normalize(in.normal);
    let reflected=reflect(ray,normal);

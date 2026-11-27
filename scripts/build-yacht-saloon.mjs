@@ -13,6 +13,7 @@ import { serviceStairStraightEnd } from '../site/tidewater-rocha/mobile/cockpit-
 import { convexHull } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 import { mobileAftServiceSkin } from './yacht-geometry/aft-cockpit-cheeks.mjs';
 
+import {mobileCockpitInterior} from './yacht-geometry/aft-cockpit-lounge.mjs';
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const version = 'vr-detail-1';
 
@@ -138,11 +139,11 @@ export async function buildSaloon() {
       &&source.id!=='MD_GLA_001';
     if(!furniture&&!architecture)continue;
     const replacements=model.interiorDetail.replacements.get(source.id)??[original(source)];
-    for(const part of replacements)add(part,furniture?'furniture':source.category==='Glazing'?'glazing':'boundary',furniture?null:region);
+    for(const part of replacements)add(mobileCockpitInterior(part),furniture?'furniture':source.category==='Glazing'?'glazing':'boundary',furniture?null:region);
   }
   for(const part of model.interiorDetail.additions)if(ids.has(part.anchor))add(part,'furniture');
   for(const part of model.interiorDetail.replacements.get('MD_DCK_001'))
-    add({...part,id:part.id+'/saloon'},'floor',[8.5,-3.02,3.83,17.83,3.02,3.96]);
+    add({...part,id:part.id+'/saloon',finish:[0xad9d8c,.69,0,2]},'floor',[8.5,-3.02,3.83,17.83,3.02,3.96]);
   for(const part of model.interiorDetail.replacements.get('UD_DCK_001'))
     add({...part,id:part.id+'/saloon'},'roof',[8.5,-3.13,5.87,17.91,3.13,6.01]);
   // Retain the real walls of the service-stair enclosure beside the doorway.

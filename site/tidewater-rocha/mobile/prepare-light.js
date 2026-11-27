@@ -6,6 +6,8 @@ import {aftTeakFinish} from './aft-cockpit-teak.js?v=cockpit-teak-v2';
 import {aftCheekFinish,aftCheekToeFinish,aftHandrailFinish} from './aft-cockpit-cheeks.js?v=cockpit-handrail-v1';
 import {aftColumnFinish} from './aft-cockpit-column.js?v=cockpit-column-v1';
 
+import {aftOpeningFinish} from './aft-cockpit-opening.js?v=cockpit-opening-v1';
+
 const elevations=[1.55,2.84,3.95,6,8.2];
 const clamp=x=>Math.max(0,Math.min(1,x));
 
@@ -62,6 +64,7 @@ export function prepareOpaque(source,map,indices) {
     else if(code===aftCheekFinish || code===aftCheekToeFinish)layer=code===aftCheekFinish?-12:-13;
     else if(code===aftHandrailFinish)layer=-14;
     else if(code===aftColumnFinish)layer=-15;
+    else if(code===aftOpeningFinish)layer=-16;
     else if(code===65)layer=-8;
     else if(code===62 || code===63)layer=code===62?-6:-7;
     else if(code===47)layer=-2;

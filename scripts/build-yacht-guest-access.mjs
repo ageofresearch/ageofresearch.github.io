@@ -1,4 +1,5 @@
 import {MeshoptSimplifier} from './yacht-geometry/node_modules/meshoptimizer/index.js';
+import {aftOpeningGuardForMain} from './yacht-geometry/aft-cockpit-opening.mjs';
 import {extractMainDeck} from './yacht-geometry/main-deck.mjs';
 import {portCabin,cabinWalk} from '../site/tidewater-rocha/mobile/port-guest-cabin.js';
 import {writeFile} from 'node:fs/promises';
@@ -23,6 +24,11 @@ export async function buildGuestAccess() {
         return {error:.014};
       if(p.role==='main-side-guard'||/^MD\/boarding-route\/[2-5]$/.test(p.id)||
         context.profile==='main'&&p.id.startsWith('MD/boarding-route/'))return {error:0};
+      if(context.profile==='main' && /^UD_DCK_001\/video\/(?:connected-stairwell|stairwell-guard-posts)/.test(p.id)){
+        // Draw the outboard side through the cut from the main deck. The
+        // inboard side is hidden behind the broad return around the socket.
+        return {error:0,geometry:aftOpeningGuardForMain(p)};
+      }
       if(context.profile==='main'){
         if(p.context)return {error:0};
         if(p.role==='main-deck' && /salon (curved boucle module|lounge chair)/.test(p.feature))return {error:.004};

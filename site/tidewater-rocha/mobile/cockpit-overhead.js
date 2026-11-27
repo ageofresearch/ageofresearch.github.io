@@ -189,7 +189,12 @@ const darkRecesses=recesses.map(p=>`distance(uv,${v2(p)})`).reduce((a,b)=>`min($
 const light=lamps.map(([x,y,r])=>`exp(-distance(uv,${v2([x,y])})/${f(r*1.2)})`).join('+');
 const speakerDistance=speakers.map(p=>`distance(faceUV,${v2(p)})`).reduce((a,b)=>`min(${a},${b})`);
 
-export function makeCockpitOverheadWGSL({portLip=[...portColumn,.105],portSocket=true}={}) {
+export function makeCockpitOverheadWGSL({portLip=[...portColumn,.105],portSocket=true,panelJoints}={}) {
+ const grooveWidth=panelJoints?'.0017':'.0025';
+ const bevelOffset=panelJoints?'.0047':'.0065';
+ const grooveShade=panelJoints?'.35':'.50';
+ const bevelLight=panelJoints?'.11':'.16';
+ const jointSegments=panelJoints?.flatMap(line=>line.slice(1).map((p,i)=>[line[i],p]))??paths;
  const rings=[...speakers.map(([x,y])=>[x,y,.102]),...lamps.map(([x,y,r])=>[x,y,r]),portLip,[...starboardColumn,.078]];
  const contact=rings.map(([x,y,r])=>`abs(distance(uv,${v2([x,y])})-${f(r)})`).reduce((a,b)=>`min(${a},${b})`);
  const wells=portSocket?[[portColumn,.089],[starboardColumn,.062]]:[[starboardColumn,.062]];
@@ -202,15 +207,15 @@ fn cockpitSegment(uv:vec2f,a:vec2f,b:vec2f)->f32{
 @diagnostic(off,derivative_uniformity)
 fn cockpitPanelFinish(uv:vec2f,eye:vec3f,compact:bool)->vec2f{
   var joint=12.;
-  ${paths.map(([a,b])=>`joint=min(joint,cockpitSegment(uv,${v2(a)},${v2(b)}));`).join('\n  ')}
-  // Rounded gasket around the actual stair cut. Each family is measured in
+  ${jointSegments.map(([a,b])=>`joint=min(joint,cockpitSegment(uv,${v2(a)},${v2(b)}));`).join('\n  ')}
+${panelJoints ? '' : `  // Rounded gasket around the actual stair cut. Each family is measured in
   // the same deck coordinates, so highlights stay anchored during a walk.
   let edge=abs(uv-vec2f(6.575,2.21))-vec2f(1.56,.61);
   let surround=abs(length(max(edge,vec2f(0.)))+min(max(edge.x,edge.y),0.)-.28);
-  joint=min(joint,surround);
+  joint=min(joint,surround);`}
   let aa=max(min(length(fwidth(uv))*.55,.024),.001);
-  let groove=1.-smoothstep(.0025,.0025+aa,joint);
-  let bevel=1.-smoothstep(.0025,.0025+aa,abs(joint-.0065));
+  let groove=1.-smoothstep(${grooveWidth},${grooveWidth}+aa,joint);
+  let bevel=1.-smoothstep(${grooveWidth},${grooveWidth}+aa,abs(joint-${bevelOffset}));
   let screw=${darkRecesses};
   let opening=1.-smoothstep(.005,.005+aa,screw);
   let metal=1.-smoothstep(.004,.004+aa,abs(screw-.011));
@@ -227,7 +232,7 @@ fn cockpitPanelFinish(uv:vec2f,eye:vec3f,compact:bool)->vec2f{
   let lensCoverage=1.-smoothstep(.007,.009+aa,lens);
   var warm=${light};
   let hardware=.37*domeLip*select(1.,-.7,uv.y<-.47);
-  var value=(1.-.50*groove+.16*bevel-.81*opening+.16*metal)*shade+hardware+
+  var value=(1.-${grooveShade}*groove+${bevelLight}*bevel-.81*opening+.16*metal)*shade+hardware+
     podCoverage*(.18-.40*podDelta.y)-.78*lensCoverage;
   if(compact){
     // Intersect the same sight ray with the faces below the panel. This

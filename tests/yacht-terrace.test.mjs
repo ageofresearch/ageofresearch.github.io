@@ -5,6 +5,7 @@ import { buildTerrace, clipGeometry, contactShade, containsTriangle } from '../s
 import {cockpitOverheadFinish} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 import {aftTeakFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-teak.js';
 import {aftCheekFinish,aftCheekToeFinish,aftHandrailFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
+import {aftOpening,aftOpeningFinish,aftOpeningJoints} from '../site/tidewater-rocha/mobile/aft-cockpit-opening.js';
 import {aftColumn,aftColumnFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-column.js';
 import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
@@ -114,19 +115,27 @@ test('the cockpit lining keeps a real stair aperture and seats the meshed fittin
   const face=find('satin panel field');
   assert.equal(face.finish[3],cockpitOverheadFinish);
   const panels=mesh(face);
-  for(const [x,y] of [[5.55,2.10],[7.92,2.55],[5.13,1.70]])
+  for(const [x,y] of [[5.78,2.38],[6.10,2.15],[7.92,2.55],[7.96,2.30]])
     assert.ok(!panels.some(t=>containsTriangle(x,y,t)), 'Stair aperture '+[x,y]);
-  for(const [x,y] of [[5.55,0],[7.92,2.97],[8.499,3.36]])
+  for(const [x,y] of [[5.55,0],[5.60,2.38],[5.74,2.73],[6.60,1.968],[7.92,2.97],[8.499,3.36]])
     assert.equal(panels.some(t=>containsTriangle(x,y,t)),true,'Lining '+[x,y]);
   assert.equal(ceiling.filter(p=>/warm lens [12]$/.test(p.feature)&&p.finish[3]===48).length,2);
   const starboard=find('polished column collar 2');
   assert.deepEqual([starboard.bounds[2],starboard.bounds[5]],[5.87,5.88]);
   const [cx,cy]=aftColumn.xy;
-  const returnPanel=mesh(find('port ceiling return around socket'));
-  const opening=[...panels,...returnPanel];
+  const reveal=find('moulded stair reveal');
+  assert.equal(reveal.finish[3],aftOpeningFinish);
+  assert.deepEqual([reveal.bounds[2],reveal.bounds[5]],[aftOpening.underside,aftOpening.deck]);
+  assert.notDeepEqual(aftOpening.radii.port,aftOpening.radii.inboard);
+  const junction=aftOpeningJoints[1][0];
+  assert.ok(aftOpeningJoints[0].some(([x,y])=>x===junction[0]&&y===junction[1]),'The transverse seam ends on the curved seam');
+  const rim=mesh(reveal).flat();
+  for(const [x,y] of aftOpening.outline)
+    assert.ok(rim.some(v=>Math.hypot(v[0]-x,v[1]-y,v[2]-aftOpening.underside)<1e-6));
+  const opening=panels;
   for(const point of [[cx,cy],[cx+.056,cy],[cx,cy-.056]])
     assert.ok(!opening.some(t=>containsTriangle(...point,t)),'Clear space inside the real recess');
-  for(const point of [[cx-.12,cy],[cx+.12,cy],[cx,cy-.12],[cx,cy+.105]])
+  for(const point of [[cx-.12,cy],[cx+.12,cy],[cx,cy-.12],[cx,cy+.107]])
     assert.ok(opening.some(t=>containsTriangle(...point,t)),'Continuous ceiling beyond the collar');
   const well=find('recessed port support well');
   assert.equal(well.bounds[5],aftColumn.top);
@@ -140,6 +149,14 @@ test('the cockpit lining keeps a real stair aperture and seats the meshed fittin
   assert.ok(Math.abs(column.bounds[3]-column.bounds[0]-2*aftColumn.radius)<1e-9);
   assert.ok(column.bounds[2]>aftCockpitTreads[2].top && column.bounds[2]<aftCockpitTreads[3].top);
   assert.equal(column.bounds[5],aftColumn.top);
+  const guest=JSON.parse(await readFile(new URL('guest-access.json',root)));
+  const guard=guest.profiles.main.audit.filter(p=>/connected-stairwell|stairwell-guard-posts/.test(p.id));
+  assert.equal(guard.length,3);
+  assert.ok(guard.every(p=>p.triangles>0),'The outboard guard stays visible from below');
+  for(const profile of Object.values(guest.profiles)){
+    assert.ok(profile.triangles<=25000);
+    assert.equal(profile.batches.length,2);
+  }
   const shoe=find('inclined port column shoe');
   assert.ok(shoe.bounds[2]<column.bounds[2]&&shoe.bounds[5]>aftColumn.bottom);
   assert.ok(manifest.collisionFootprints.some(p=>p.id===column.id));

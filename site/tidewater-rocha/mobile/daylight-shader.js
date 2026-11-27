@@ -10,13 +10,13 @@ import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 import { makeCockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-opening-v2';
-import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-finishes-v1';
+import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-black-v1';
 import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v2';
 import { aftColumn } from './aft-cockpit-column.js?v=cockpit-column-v1';
-import { aftCockpitLightWGSL } from './aft-cockpit-light.js?v=2';
+import { aftCockpitLightWGSL } from './aft-cockpit-light.js?v=3';
 import { aftOpeningJoints, aftOpeningWGSL } from './aft-cockpit-opening.js?v=cockpit-joins-v1';
 import {aftJoinsWGSL,cockpitPlankPitch,upperPlankPitch,aftLandingGuard} from './aft-cockpit-joins.js?v=1';
-import {cockpitAftGlassFinish,cockpitLoungeWGSL} from './aft-cockpit-lounge.js?v=cockpit-joins-v1';
+import {cockpitAftGlassFinish,cockpitLoungeWGSL} from './aft-cockpit-lounge.js?v=cockpit-black-v1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -48,7 +48,7 @@ ${cockpitSteelWGSL}
 ${makeCockpitOverheadWGSL({portLip:[...aftColumn.xy,aftColumn.openingRadius],portSocket:false,panelJoints:aftOpeningJoints})}
 ${aftTeakWGSL}
 ${aftJoinsWGSL}
-${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)',support:aftColumn,guard:aftLandingGuard,panelShade:'aftCockpitRiserContact(p)'})}
+${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)',support:aftColumn,guard:aftLandingGuard,panelShade:'aftCockpitRiserContact(p)',panelGain:.71})}
 ${aftCockpitLightWGSL}
 ${aftOpeningWGSL}
 ${cockpitLoungeWGSL}

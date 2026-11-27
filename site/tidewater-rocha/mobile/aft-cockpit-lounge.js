@@ -92,7 +92,7 @@ fn cockpitLoungeCoat(pos:vec3f,n:vec3f,rough:f32,lit:f32,frameMetal:bool)->vec3f
   let gap=1.-smoothstep(.0015,.0025+aa,abs(doorDistance));
   let lip=1.-smoothstep(.0015,.0045+aa,abs(doorDistance-.006));
   let fiber=(.985+.015*sin(p.x*117.+.6*sin(p.z*4.)));
-  return (vec3f(.0076,.0072,.0079)+reflected*(.068+.26*edge*edge*edge))*
+  return (vec3f(.0037,.0035,.0040)+reflected*(.046+.26*edge*edge*edge))*
     (fiber-.39*gap+.16*lip)+vec3f(.94,.90,.80)*sun;
 }
 `;

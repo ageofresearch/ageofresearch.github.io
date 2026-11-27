@@ -183,11 +183,13 @@ fn aftCockpitCoat(pos:vec3f,n:vec3f,stockRoughness:f32,lit:f32,finish:i32)->vec3
   let lobe=width/(width+1.-max(0.,dot(ray,frame.sun.xyz)));
   let solar=vec3f(.99,.91,.80)*lit*lobe*lobe*max(0.,dot(n,frame.sun.xyz));
   if(lacquer){
-    let bright=(.153+.087*bevel)+fresnel*(.27+.10*bevel);
+    // Dark lacquer absorbs more light face-on. The grazing reflection and
+    // the direct glint still come from the same clear coat.
+    let bright=(.102+.062*bevel)+fresnel*(.27+.10*bevel);
     let floor=mix(.56,1.,smoothstep(3.951,4.022,p.z));
     let socket=1.-smoothstep(.047,.095,distance(p.xy,vec2f(${column.join(',')})));
     let contact=mix(1.,aftCockpitAnchor(p),socket);
-    return ((vec3f(.0065,.0073,.0095)+reflected*bright)*day+solar*(.31+.23*bevel))*min(floor,contact);
+    return ((vec3f(.0035,.0040,.0052)+reflected*bright)*day+solar*(.31+.23*bevel))*min(floor,contact);
   }
   var contact=1.;
   if(column){

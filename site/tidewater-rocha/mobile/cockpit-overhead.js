@@ -186,13 +186,15 @@ export function furnishCockpitOverhead({decks,parts,face,add,remove}) {
 const f=v=>v.toFixed(5), v2=p=>'vec2f('+p.map(f).join(',')+')';
 const paths=seams.flatMap(line=>line.slice(1).map((p,i)=>[line[i],p]));
 const darkRecesses=recesses.map(p=>`distance(uv,${v2(p)})`).reduce((a,b)=>`min(${a},${b})`);
-const rings=[...speakers.map(([x,y])=>[x,y,.102]),...lamps.map(([x,y,r])=>[x,y,r]),[...portColumn,.105],[...starboardColumn,.078]];
-const contact=rings.map(([x,y,r])=>`abs(distance(uv,${v2([x,y])})-${f(r)})`).reduce((a,b)=>`min(${a},${b})`);
 const light=lamps.map(([x,y,r])=>`exp(-distance(uv,${v2([x,y])})/${f(r*1.2)})`).join('+');
 const speakerDistance=speakers.map(p=>`distance(faceUV,${v2(p)})`).reduce((a,b)=>`min(${a},${b})`);
-const sockets=[[portColumn,.089],[starboardColumn,.062]].map(([p,r])=>`(distance(uv,${v2(p)})-${f(r)})`).reduce((a,b)=>`min(${a},${b})`);
 
-export const cockpitOverheadWGSL = `
+export function makeCockpitOverheadWGSL({portLip=[...portColumn,.105],portSocket=true}={}) {
+ const rings=[...speakers.map(([x,y])=>[x,y,.102]),...lamps.map(([x,y,r])=>[x,y,r]),portLip,[...starboardColumn,.078]];
+ const contact=rings.map(([x,y,r])=>`abs(distance(uv,${v2([x,y])})-${f(r)})`).reduce((a,b)=>`min(${a},${b})`);
+ const wells=portSocket?[[portColumn,.089],[starboardColumn,.062]]:[[starboardColumn,.062]];
+ const sockets=wells.map(([p,r])=>`(distance(uv,${v2(p)})-${f(r)})`).reduce((a,b)=>`min(${a},${b})`);
+ return `
 fn cockpitSegment(uv:vec2f,a:vec2f,b:vec2f)->f32{
   let d=b-a;
   return length(uv-a-d*clamp(dot(uv-a,d)/dot(d,d),0.,1.));
@@ -247,3 +249,6 @@ fn cockpitPanelFinish(uv:vec2f,eye:vec3f,compact:bool)->vec2f{
   return vec2f(value,warm);
 }
 `;
+}
+
+export const cockpitOverheadWGSL=makeCockpitOverheadWGSL();

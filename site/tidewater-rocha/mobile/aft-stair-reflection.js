@@ -24,7 +24,9 @@ const tubeEnds=tubes.map(([,b])=>vec(b)).join(',');
 export function makeAftStairReflectionWGSL({
   treadSample = 'aftStairStock(hit,up,rough,distance)',
   treadCovers = 'aftStairInside(hit.xy,treads[i])',
+  support = {xy:cockpitPortColumn,bottom:3.95,top:5.87,radius:.055},
 } = {}) {
+  const radius=String(support.radius).replace(/^0\./,'.');
   return `
 fn aftStairSafe(v:f32)->f32{
   return select(min(v,-.00001),max(v,.00001),v>=0.);
@@ -104,13 +106,13 @@ fn aftStairReflection(pos:vec3f,normal:vec3f,eye:vec3f,sun:vec3f,rough:f32,sunVi
   if(sideT>.006 && sideT<nearest && aftStairInside(coaming.xz,vec4f(${f(portMooring.start)},4.658,${f(portMooring.end)},4.964))){
     nearest=sideT;light=select(vec3f(.098,.110,.129),vec3f(.212,.239,.283),coaming.z>4.932);
   }
-  let column=${vec(cockpitPortColumn)};
+  let column=${vec(support.xy)};
   let rel=p.xy-column;
   let a=max(.0001,dot(axis.xy,axis.xy));let b=dot(rel,axis.xy);
-  let det=b*b-a*(dot(rel,rel)-.055*.055);
+  let det=b*b-a*(dot(rel,rel)-${radius}*${radius});
   let columnT=(-b-sqrt(max(0.,det)))/a;
   let columnZ=p.z+axis.z*columnT;
-  if(det>=0. && columnT>.006 && columnT<nearest && columnZ>3.95 && columnZ<5.87){
+  if(det>=0. && columnT>.006 && columnT<nearest && columnZ>${support.bottom} && columnZ<${support.top}){
     let h=normalize(rel+columnT*axis.xy);
     nearest=columnT;light=mix(vec3f(.038,.059,.084),vec3f(.61,.69,.79),smoothstep(-.24,.62,h.y));
   }

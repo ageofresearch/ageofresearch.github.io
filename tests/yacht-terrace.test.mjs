@@ -5,6 +5,7 @@ import { buildTerrace, clipGeometry, contactShade, containsTriangle } from '../s
 import {cockpitOverheadFinish} from '../site/tidewater-rocha/mobile/cockpit-overhead.js';
 import {aftTeakFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-teak.js';
 import {aftCheekFinish,aftCheekToeFinish,aftHandrailFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
+import {aftColumn,aftColumnFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-column.js';
 import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
@@ -20,7 +21,7 @@ test('the mobile port handrail has a closed beveled section, two bends and a low
   const part=manifest.parts.find(p=>p.feature==='polished handrail 1');
   assert.equal(part.finish[3],aftHandrailFinish);
   assert.ok(!manifest.parts.some(p=>p.feature==='slender handrail posts 1'));
-  assert.ok(manifest.parts.some(p=>p.feature==='slender handrail posts -1'));
+  assert.ok(!manifest.parts.some(p=>/^(polished handrail|slender handrail posts) -1$/.test(p.feature)));
   const binary=await readFile(new URL('aft-terrace.bin',root));
   const vertices=new Float32Array(binary.buffer,binary.byteOffset+part.vertices.offset,part.vertices.length);
   const indices=new Uint32Array(binary.buffer,binary.byteOffset+part.indices.offset,part.indices.length);
@@ -118,12 +119,29 @@ test('the cockpit lining keeps a real stair aperture and seats the meshed fittin
   for(const [x,y] of [[5.55,0],[7.92,2.97],[8.499,3.36]])
     assert.equal(panels.some(t=>containsTriangle(x,y,t)),true,'Lining '+[x,y]);
   assert.equal(ceiling.filter(p=>/warm lens [12]$/.test(p.feature)&&p.finish[3]===48).length,2);
-  for(const i of [1,2]) {
-    assert.equal(find('polished column collar '+i).bounds[5],5.88);
-    assert.equal(find('polished column collar '+i).bounds[2],5.87);
-  }
+  const starboard=find('polished column collar 2');
+  assert.deepEqual([starboard.bounds[2],starboard.bounds[5]],[5.87,5.88]);
+  const [cx,cy]=aftColumn.xy;
+  const returnPanel=mesh(find('port ceiling return around socket'));
+  const opening=[...panels,...returnPanel];
+  for(const point of [[cx,cy],[cx+.056,cy],[cx,cy-.056]])
+    assert.ok(!opening.some(t=>containsTriangle(...point,t)),'Clear space inside the real recess');
+  for(const point of [[cx-.12,cy],[cx+.12,cy],[cx,cy-.12],[cx,cy+.105]])
+    assert.ok(opening.some(t=>containsTriangle(...point,t)),'Continuous ceiling beyond the collar');
+  const well=find('recessed port support well');
+  assert.equal(well.bounds[5],aftColumn.top);
+  assert.ok(well.bounds[2]>aftColumn.ceiling);
+  const lip=find('polished column collar 1');
+  assert.deepEqual([lip.bounds[2],lip.bounds[5]],[5.877,5.887]);
   const column=find('port support column');
-  assert.deepEqual([column.bounds[2],column.bounds[5]],[3.95,5.87]);
+  assert.equal(column.finish[3],aftColumnFinish);
+  assert.ok(Math.abs((column.bounds[0]+column.bounds[3])/2-cx)<1e-9);
+  assert.ok(Math.abs((column.bounds[1]+column.bounds[4])/2-cy)<1e-9);
+  assert.ok(Math.abs(column.bounds[3]-column.bounds[0]-2*aftColumn.radius)<1e-9);
+  assert.ok(column.bounds[2]>aftCockpitTreads[2].top && column.bounds[2]<aftCockpitTreads[3].top);
+  assert.equal(column.bounds[5],aftColumn.top);
+  const shoe=find('inclined port column shoe');
+  assert.ok(shoe.bounds[2]<column.bounds[2]&&shoe.bounds[5]>aftColumn.bottom);
   assert.ok(manifest.collisionFootprints.some(p=>p.id===column.id));
 });
 
@@ -284,7 +302,7 @@ test('boarding preserves the reference alignment, landing and closed lower-deck 
   }finally{dispose();}
 });
 
-test('dining chairs fit the table and the opposite stair rails retain their source height',async()=>{
+test('dining chairs fit the table and clear their neighbours',()=>{
   const bench=createSternFeatures().parts.find(p=>p.feature==='covered aft seating behind transom');
   const chair=manifest.parts.filter(p=>p.groupID==='chair-1');
   assert.ok(Math.min(...chair.map(p=>p.bounds[0]))-bench.bounds[3]>.05,'Chair 1 must clear the bench by at least 5 cm');
@@ -314,18 +332,6 @@ test('dining chairs fit the table and the opposite stair rails retain their sour
     const footprint=manifest.collisionFootprints.find(f=>f.id==='furniture/chair-'+n);
     assert.ok(indexFootprints([footprint])(cx,cy,.14));
   }
-  const data=JSON.parse(await readFile(new URL('../rocha/luz-de-mar/model.json',root)));
-  const buffer=await readFile(new URL('../rocha/luz-de-mar/model.bin',root));
-  const source=buildYachtGeometry({data,binary:buffer.buffer.slice(buffer.byteOffset,buffer.byteOffset+buffer.byteLength)},0,{mtuEngines:false,seaStrainers:false});
-  try {
-    const rails=source.interiorDetail.replacements.get('MD_STA_013').filter(p=>/^(polished handrail|slender handrail posts) -1$/.test(p.feature));
-    assert.equal(rails.length,2);
-    for(const rail of rails) {
-      const mobile=manifest.parts.find(p=>p.id===rail.id);
-      assert.ok(mobile,rail.feature);
-      assert.ok(Math.abs(mobile.bounds[5]-rail.bounds[5])<1e-6,`Do not cut the top of ${rail.feature}`);
-    }
-  }finally{source.dispose();}
 });
 
 test('the aisle behind the four backs connects both ends of the dining table',()=>{

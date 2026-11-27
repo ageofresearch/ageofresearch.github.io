@@ -10,6 +10,7 @@ import {renderedParts,obstacles,surfaceTriangles} from '../site/tidewater-rocha/
 import {mobileAftTeak} from './yacht-geometry/aft-cockpit-teak.mjs';
 import {mobileAftCheeks} from './yacht-geometry/aft-cockpit-cheeks.mjs';
 import {mobileAftHandrail} from './yacht-geometry/aft-cockpit-handrail.mjs';
+import {mobileAftColumn} from './yacht-geometry/aft-cockpit-column.mjs';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 export async function buildUpper() {
   const lower=await buildSaloon(),json=await readFile(new URL('rocha/luz-de-mar/model.json',root));
@@ -18,7 +19,7 @@ export async function buildUpper() {
     nav:Object.fromEntries(Object.entries(data.nav).map(([k,n])=>[k,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
   new Walk({camera:{position:model.group.position}},model,{document:null});
-  const final=mobileAftHandrail(mobileAftCheeks(mobileAftTeak(renderedParts(model))));
+  const final=mobileAftColumn(mobileAftHandrail(mobileAftCheeks(mobileAftTeak(renderedParts(model)))));
   const flight=model.stairInventory.flights.find(f=>f.id==='aft');
   const {terrace,parts:saloon}=lower.sources;
   for(let i=0;i<terrace.length;i++) {

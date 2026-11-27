@@ -353,10 +353,12 @@ struct Glass {
    let normal=normalize(in.normal);
    let incidence=abs(dot(ray,normal));
    let edge=1.-incidence;
-   let reflected=cockpitLoungeRadiance(cockpitLoungeLocal(in.point),reflect(ray,normal),.085);
+   let reflectedRay=reflect(ray,normal);
+   let reflected=cockpitLoungeRadiance(cockpitLoungeLocal(in.point),reflectedRay,.085);
    let outside=1.-smoothstep(-9.51,-9.29,frame.eye.z);
-   let coat=mix(.13,.74,outside)*(.73+.27*edge);
-   return vec4f(display(vec3f(.007,.008,.011)+reflected*coat),mix(.30,.81,outside)+.11*edge);
+   let upperGlare=1.-.43*smoothstep(.074,.28,reflectedRay.y)*outside;
+   let coat=mix(.11,.158,outside)*(.73+.27*edge)*upperGlare;
+   return vec4f(display(vec3f(.0028,.0031,.0040)+reflected*coat),mix(.30,.91,outside)+.062*edge);
  }
  if(in.port==1u && frame.wind.y==0. && frame.eye.x>in.point.x+.026 && abs(in.normal.x)>.65){
    let ray=normalize(in.point-frame.eye.xyz);

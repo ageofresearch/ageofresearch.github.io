@@ -20,6 +20,19 @@ import { A as Group } from '../site/tidewater-rocha/assets/common-HBn3Movl.js';
 const root = new URL('../site/tidewater-rocha/mobile/', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('aft-terrace.json', root)));
 
+function assertClosedSeams(faces, feature) {
+  const edges=new Map();
+  const point=vertex=>Array.from(vertex.slice(0,3),n=>Math.round(n*1e6)).join(',');
+  for(const triangle of faces) {
+    const corners=triangle.map(point);
+    for(let i=0;i<3;i++){
+      const key=[corners[i],corners[(i+1)%3]].sort().join(':');
+      edges.set(key,(edges.get(key)??0)+1);
+    }
+  }
+  assert.ok(edges.size>0&&[...edges.values()].every(count=>count===2),`${feature}: every joined edge has two faces`);
+}
+
 test('the mobile port handrail has a closed beveled section, two bends and a low return',async()=>{
   const part=manifest.parts.find(p=>p.feature==='polished handrail 1');
   assert.equal(part.finish[3],aftHandrailFinish);
@@ -38,13 +51,16 @@ test('the mobile port handrail has a closed beveled section, two bends and a low
   const returns=rows.filter(v=>v[0]>7.70);
   assert.ok(returns.length && returns.every(v=>v[2]>5.83&&v[2]<5.86));
   assert.ok(part.bounds[5]<5.90,'The rail never joins the upper guard');
+  const faces=[];
   for(let i=0;i<indices.length;i+=3){
     const [a,b,c]=Array.from(indices.subarray(i,i+3),k=>rows[k]);
+    faces.push([a,b,c]);
     const [x,y,z]=Array.from(a.subarray(0,3),(v,k)=>b[k]-v);
     const [X,Y,Z]=Array.from(a.subarray(0,3),(v,k)=>c[k]-v);
     const n=[y*Z-z*Y,z*X-x*Z,x*Y-y*X];
     assert.ok(n.reduce((sum,v,k)=>sum+v*(a[k+3]+b[k+3]+c[k+3]),0)>0);
   }
+  assertClosedSeams(faces,part.feature);
 });
 
 test('both mobile stair stringers have asymmetric solid profiles and supported polished toes', async () => {
@@ -63,16 +79,24 @@ test('both mobile stair stringers have asymmetric solid profiles and supported p
   assert.equal(toes.length,2);
   const span=p=>p.bounds[3]-p.bounds[0];
   assert.ok(span(toes.find(p=>p.id.startsWith(left.id)))>span(toes.find(p=>p.id.startsWith(right.id))));
+  const faces=new Map();
   for(const part of [left,right,...toes]) {
     const v=new Float32Array(binary.buffer,binary.byteOffset+part.vertices.offset,part.vertices.length);
     const indices=new Uint32Array(binary.buffer,binary.byteOffset+part.indices.offset,part.indices.length);
+    const triangles=[];
     for(let i=0;i<indices.length;i+=3){
       const [a,b,c]=Array.from(indices.subarray(i,i+3),k=>v.subarray(k*6,k*6+6));
+      triangles.push([a,b,c]);
       const [x,y,z]=Array.from(a.subarray(0,3),(n,k)=>b[k]-n);
       const [X,Y,Z]=Array.from(a.subarray(0,3),(n,k)=>c[k]-n);
       const face=[y*Z-z*Y,z*X-x*Z,x*Y-y*X];
       assert.ok(face.reduce((sum,n,k)=>sum+n*(a[k+3]+b[k+3]+c[k+3]),0)>0,part.feature);
     }
+    faces.set(part.id,triangles);
+  }
+  for(const cheek of [left,right]){
+    const toe=toes.find(part=>part.id.startsWith(cheek.id));
+    assertClosedSeams([...faces.get(cheek.id),...faces.get(toe.id)],cheek.feature);
   }
   const cap=manifest.parts.find(p=>p.id==='LD/service-route/45/cockpit-capping');
   assert.ok(cap.bounds[2]>=3.95&&cap.bounds[5]<4.0,'The service cover stays closed and low at the foot');

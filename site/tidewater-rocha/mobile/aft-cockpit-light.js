@@ -234,7 +234,11 @@ fn aftCockpitTeakLight(p:vec3f,n:vec3f,eye:vec3f,index:i32,wood:vec3f,energy:f32
   let satin=sunlit*lobe*lobe*max(0.,dot(n,frame.sun.xyz))*mix(.028,.072,top);
   let day=smoothstep(-.07,.22,frame.sun.y);
   let skylight=.018*day*grazing*grazing*top*smoothstep(.0,.62,ray.y);
+  // Only the rounded front edge picks up this ambient sheen. The vertical
+  // face stays shaded when the tread above it blocks the direct sun.
+  let noseRoll=max(0.,-n.z)*max(0.,n.y)*(1.-top);
+  let shadedNose=.032*day*noseRoll*(.47+.53*grazing)*(1.-.60*sunlit);
   return wood*energy*finished*cheek*mix(1.,shadow,top)+
-    (vec3f(1.,.91,.81)*satin+vec3f(.78,.88,1.)*skylight)*cheek;
+    (vec3f(1.,.91,.81)*satin+vec3f(.78,.88,1.)*(skylight+shadedNose))*cheek;
 }
 `;

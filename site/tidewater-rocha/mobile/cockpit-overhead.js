@@ -194,7 +194,21 @@ export function makeCockpitOverheadWGSL({portLip=[...portColumn,.105],portSocket
  const bevelOffset=panelJoints?'.0047':'.0065';
  const grooveShade=panelJoints?'.35':'.50';
  const bevelLight=panelJoints?'.11':'.16';
- const jointSegments=panelJoints?.flatMap(line=>line.slice(1).map((p,i)=>[line[i],p]))??paths;
+ const jointDistances=segments=>segments.map(([a,b])=>
+   `joint=min(joint,cockpitSegment(uv,${v2(a)},${v2(b)}));`).join('\n  ');
+ // Outside the largest antialias footprint this group cannot reach either
+ // side of a seam. Bound each section to save distance tests across the panel.
+ const jointCode=panelJoints ? panelJoints.flatMap(line=>{
+   const groups=[];
+   for(let i=0;i+1<line.length;i+=4){
+     const points=line.slice(i,i+5),pad=.032;
+     const low=[0,1].map(k=>Math.min(...points.map(p=>p[k]))-pad);
+     const high=[0,1].map(k=>Math.max(...points.map(p=>p[k]))+pad);
+     const distances=jointDistances(points.slice(1).map((p,j)=>[points[j],p]));
+     groups.push(`if(all(uv>=${v2(low)}) && all(uv<=${v2(high)})){${distances}}`);
+   }
+   return groups;
+ }).join('\n  ') : jointDistances(paths);
  const rings=[...speakers.map(([x,y])=>[x,y,.102]),...lamps.map(([x,y,r])=>[x,y,r]),portLip,[...starboardColumn,.078]];
  const contact=rings.map(([x,y,r])=>`abs(distance(uv,${v2([x,y])})-${f(r)})`).reduce((a,b)=>`min(${a},${b})`);
  const wells=portSocket?[[portColumn,.089],[starboardColumn,.062]]:[[starboardColumn,.062]];
@@ -207,7 +221,7 @@ fn cockpitSegment(uv:vec2f,a:vec2f,b:vec2f)->f32{
 @diagnostic(off,derivative_uniformity)
 fn cockpitPanelFinish(uv:vec2f,eye:vec3f,compact:bool)->vec2f{
   var joint=12.;
-  ${jointSegments.map(([a,b])=>`joint=min(joint,cockpitSegment(uv,${v2(a)},${v2(b)}));`).join('\n  ')}
+  ${jointCode}
 ${panelJoints ? '' : `  // Rounded gasket around the actual stair cut. Each family is measured in
   // the same deck coordinates, so highlights stay anchored during a walk.
   let edge=abs(uv-vec2f(6.575,2.21))-vec2f(1.56,.61);

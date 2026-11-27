@@ -98,11 +98,11 @@ export function mobileAftOpening(parts){
 export function aftOpeningGuardForMain(part){
   const {aft,fore,sides,middle,top,posts,floor}=aftCockpitGuard;
   const vertices=[],indices=[];
-  const sidesCount=6;
   function tube(a,b,radius,vertical){
+    const sidesCount=vertical?4:6;
     const base=vertices.length/6;
     for(const center of [a,b])for(let i=0;i<sidesCount;i++){
-      const angle=i*2*Math.PI/sidesCount,c=Math.cos(angle),s=Math.sin(angle);
+      const angle=i*2*Math.PI/sidesCount+(vertical?Math.PI/4:0),c=Math.cos(angle),s=Math.sin(angle);
       const n=vertical?[c,s,0]:[0,c,s];
       vertices.push(...center.map((value,k)=>value+radius*n[k]),...n);
     }
@@ -113,7 +113,7 @@ export function aftOpeningGuardForMain(part){
   }
   const y=sides[1];
   if(part.feature==='stairwell guard posts on solid deck'){
-    for(const x of posts.slice(1,-1))tube([x,y,floor],[x,y,top],.014,true);
+    for(const x of posts.slice(1))tube([x,y,floor],[x,y,top],.014*Math.SQRT2,true);
   }else{
     const upperRail=part.feature==='connected stairwell guard top';
     const [z,radius]=upperRail?[top,.022]:[middle,.012];

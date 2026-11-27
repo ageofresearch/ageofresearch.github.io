@@ -3,7 +3,7 @@ import { indexFootprints } from './terrace-geometry.js?v=chair-fidelity-1';
 const version = 'vr-detail-1';
 
 export async function loadTerrace() {
-  const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}&geometry=cockpit-opening-v1`, import.meta.url))));
+  const responses = await Promise.all(['json', 'bin'].map(extension => fetch(new URL(`./aft-terrace.${extension}?v=${version}&geometry=cockpit-opening-v2`, import.meta.url))));
   if (responses.some(response => !response.ok)) throw Error('No se pudo cargar la terraza de popa');
   const [manifest, buffer] = await Promise.all([responses[0].json(), responses[1].arrayBuffer()]);
   if (manifest.version !== version) throw Error('Actualiza la página para cargar la terraza');

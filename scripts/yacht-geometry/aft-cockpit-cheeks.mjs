@@ -1,3 +1,4 @@
+import {cockpitSoleFinish} from '../../site/tidewater-rocha/mobile/aft-cockpit-lounge.js';
 import {aftCheekFinish, aftCheekToeFinish} from '../../site/tidewater-rocha/mobile/aft-cockpit-cheeks.js';
 
 // Each station gives x, underside, inner and outer crown heights, and width.
@@ -90,7 +91,7 @@ export function mobileAftServiceSkin(part) {
   }
   const bounds=meshBounds(vertices);
   const foot=part.feature.endsWith('capping') && bounds[3]<6.68;
-  return {...part,vertices,bounds,finish:foot?[0x9e9999,.77,0,1]:lacquer};
+  return {...part,vertices,bounds,finish:foot?[0xb08d6d,.71,0,cockpitSoleFinish]:lacquer};
 }
 
 // A shallow return closes the small joint between the rounded plinth margin
@@ -98,7 +99,7 @@ export function mobileAftServiceSkin(part) {
 export const mobileAftFootReturn = {
   id:'MD_STA_013/mobile-service-cover-return',
   feature:'cockpit teak return below the inboard stringer foot',
-  materialID:'M43',finish:[0xa48a6f,.75,0,2],
+  materialID:'M43',finish:[0xb08d6d,.71,0,cockpitSoleFinish],
   vertices:[[5.54,1.88],[6.26,1.88],[6.26,2.082],[5.54,2.082]].flatMap(p=>[...p,3.946,0,0,1]),
   indices:[0,1,2,0,2,3],
 };

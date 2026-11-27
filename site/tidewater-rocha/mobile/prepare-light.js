@@ -8,6 +8,7 @@ import {aftColumnFinish} from './aft-cockpit-column.js?v=cockpit-column-v1';
 
 import {aftOpeningFinish} from './aft-cockpit-opening.js?v=cockpit-opening-v1';
 
+import {aftFootMarginFinish,aftUpperDeckFinish,cockpitPlankPitch,upperPlankPitch} from './aft-cockpit-joins.js?v=1';
 import {cockpitLacquerFinish,cockpitPortalFinish,cockpitSoleFinish,cockpitUpholsteryFinish} from './aft-cockpit-lounge.js?v=1';
 
 const elevations=[1.55,2.84,3.95,6,8.2];
@@ -103,8 +104,10 @@ export function prepareOpaque(source,map,indices) {
         }
       }
       else if(code===3){layer=2;u=fu*430/(2*Math.PI);v=fv*410/(2*Math.PI);}
-      else if(code===1 || code===cockpitSoleFinish){
-        layer=code===cockpitSoleFinish?26:0;u=localX/2.15;v=(localY/(code===cockpitSoleFinish?.077:.105)+64)/8;
+      else if(code===1 || code===cockpitSoleFinish || code===aftFootMarginFinish || code===aftUpperDeckFinish){
+        const pitch=code===aftUpperDeckFinish?upperPlankPitch:code===1?.105:cockpitPlankPitch;
+        layer=code===1?0:code===aftUpperDeckFinish?28:code===aftFootMarginFinish?27:26;
+        u=localX/2.15;v=(localY/pitch+64)/8;
       }
       else if(code===7){
         const [cx,cy]=localY>.9?[22.03368,1.21617]:localY>.25?[22.27016,.59119]:localY< -1?[21.949225,-1.31751]:localY< -.35?[22.18570,-.69254]:[22.354615,-.05067];

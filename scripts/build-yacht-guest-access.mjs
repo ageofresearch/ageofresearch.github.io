@@ -38,6 +38,9 @@ export async function buildGuestAccess() {
         if(p.role==='guest-stair'||p.role==='bridge-stair-context')return {error:.012};
         if(p.role==='guest-boundary'||p.role==='guest-floor')return {error:.035};
         if(p.id.endsWith('/saloon')&&['roof','floor'].includes(p.role))return {error:.014};
+        // This flat field carries the boards and foot joints analytically.
+        // Allow its lighting mesh to absorb the changed chaise contact bake.
+        if(p.role==='floor'&&p.id.endsWith('/cockpit-teak'))return {error:.057};
         if(p.bounds[3]<=8.50001&&p.bounds[2]<6)return {error:.045};
         return {omit:true,reason:'Covered by the main deck extraction or outside the main deck sightline'};
       }

@@ -11,6 +11,8 @@ import {mobileAftTeak} from './yacht-geometry/aft-cockpit-teak.mjs';
 import {mobileAftCheeks} from './yacht-geometry/aft-cockpit-cheeks.mjs';
 import {mobileAftHandrail} from './yacht-geometry/aft-cockpit-handrail.mjs';
 import {mobileAftColumn} from './yacht-geometry/aft-cockpit-column.mjs';
+import {aftLandingPlates,mobileAftLandingGuard} from './yacht-geometry/aft-cockpit-joins.mjs';
+import {aftUpperDeckFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-joins.js';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 export async function buildUpper() {
   const lower=await buildSaloon(),json=await readFile(new URL('rocha/luz-de-mar/model.json',root));
@@ -19,7 +21,7 @@ export async function buildUpper() {
     nav:Object.fromEntries(Object.entries(data.nav).map(([k,n])=>[k,{...n,bits:Uint8Array.from(atob(n.mask),c=>c.charCodeAt(0))}]))};
   const model=buildYachtGeometry(asset,0,{mtuEngines:false,seaStrainers:false});model.asset=asset;model.group.userData={yacht:basis};
   new Walk({camera:{position:model.group.position}},model,{document:null});
-  const final=mobileAftColumn(mobileAftHandrail(mobileAftCheeks(mobileAftTeak(renderedParts(model)))));
+  const final=mobileAftColumn(mobileAftHandrail(mobileAftCheeks(mobileAftTeak(renderedParts(model))))).map(mobileAftLandingGuard);
   const flight=model.stairInventory.flights.find(f=>f.id==='aft');
   const {terrace,parts:saloon}=lower.sources;
   for(let i=0;i<terrace.length;i++) {
@@ -46,7 +48,8 @@ export async function buildUpper() {
     else if(anchor==='UD_DCK_001') {
       // The slab/reveal below z=6 already exists as the MD roof in both slices.
       if(p.bounds[5]<=6.001)continue;
-      add(p,'boundary',[3.2,-3.8,6.01,14.25,3.8,9.3]);
+      const bearing=p.feature==='stairwell guard posts on solid deck'?6.0025:6.01;
+      add(p,'boundary',[3.2,-3.8,bearing,14.25,3.8,9.3]);
     }else if(['SD_DCK_001','UD_SUP_001','UD_GLA_001','UD_GLA_002'].includes(anchor))
       add(p,'boundary',[3.2,-3.8,6,14.25,3.8,9.3]);
   }
@@ -55,6 +58,7 @@ export async function buildUpper() {
   const slab=final.find(p=>(p.anchor||p.id.split('/')[0])==='UD_DCK_001' && p.bounds[2]<5.89&&p.bounds[3]>30);
   for(const [name,box] of [['port',[8.5,3.13,5.87,14.25,3.8,6.01]],['starboard',[8.5,-3.8,5.87,14.25,-3.13,6.01]]])
     add({...slab,id:slab.id+'/upper-'+name},'floor',box);
+  for(const plate of aftLandingPlates())add(plate,'upper-deck-rim');
   const floorParts=[...terrace,...saloon,...parts].filter(p=>p.role==='roof'||p.role==='floor');
   const floor=floorParts.flatMap(p=>surfaceTriangles(p,6,.002));
   const physical=final.filter(p=>!p.feature?.startsWith('bow guard')&&!['Cold_water','Hot_water','Drainage','Stairs'].includes(p.category));
@@ -71,7 +75,7 @@ export async function buildUpper() {
       const [x,y,z,,,nz]=p.vertices.slice(i,i+6);
       if(upperSurface&&z>5.998&&nz>.5) {
         const shade=x<10.65&&Math.abs(y)<2.8?.75:.94;
-        p.light[i/6]=shade*contactShade(x,y,furnitureFootprints);p.surfaceTypes[i/6]=1;
+        p.light[i/6]=shade*contactShade(x,y,furnitureFootprints);p.surfaceTypes[i/6]=p.bounds[3]<=8.50001?aftUpperDeckFinish:1;
       } else if(parts.includes(p)) {
         p.light[i/6]=p.role==='furniture'?.85:.9;
         if(p.sourceID==='SD_DCK_001'&&nz<-.5)p.surfaceTypes[i/6]=9;

@@ -9,15 +9,6 @@ const woodBounds=aftCockpitTreads.map(footprint).join(',');
 const woodLevels=aftCockpitTreads.map(t=>vec([t.top,t.top-t.thickness])).join(',');
 const panelRows=[{bottom:3.95,top:4.087,left:1.925,right:2.815},...aftCockpitRisers]
   .map(t=>vec([t.bottom,t.top,t.left,t.right])).join(',');
-const guard=aftCockpitGuard;
-const tubes=[guard.middle,guard.top].flatMap((z,i)=>{
-  const [a,b]=guard.sides, radius=i?.022:.012;
-  return [...guard.sides.map(y=>[[guard.aft,y,z],[guard.fore,y,z],radius]),
-    [[guard.aft,a,z],[guard.aft,b,z],radius]];
-}).concat(guard.sides.flatMap(y=>guard.posts.map(x=>[[x,y,guard.floor],[x,y,guard.top],.014])));
-const tubeStarts=tubes.map(([a,,r])=>vec([...a,r])).join(',');
-const tubeEnds=tubes.map(([,b])=>vec(b)).join(',');
-
 // Local, opaque reflections. Rays intersect the receiving stair's own treads,
 // teak sole, overhead opening and the nearby coaming and support in model space.
 // Illumination and viewing direction are evaluated in the normal surface pass.
@@ -25,7 +16,15 @@ export function makeAftStairReflectionWGSL({
   treadSample = 'aftStairStock(hit,up,rough,distance)',
   treadCovers = 'aftStairInside(hit.xy,treads[i])',
   support = {xy:cockpitPortColumn,bottom:3.95,top:5.87,radius:.055},
+  guard = aftCockpitGuard,
 } = {}) {
+  const tubes=[guard.middle,guard.top].flatMap((z,i)=>{
+    const [a,b]=guard.sides, radius=i?.022:.012;
+    return [...guard.sides.map(y=>[[guard.aft,y,z],[guard.fore,y,z],radius]),
+      [[guard.aft,a,z],[guard.aft,b,z],radius]];
+  }).concat(guard.sides.flatMap(y=>guard.posts.map(x=>[[x,y,guard.floor],[x,y,guard.top],.014])));
+  const tubeStarts=tubes.map(([a,,r])=>vec([...a,r])).join(',');
+  const tubeEnds=tubes.map(([,b])=>vec(b)).join(',');
   const radius=String(support.radius).replace(/^0\./,'.');
   return `
 fn aftStairSafe(v:f32)->f32{

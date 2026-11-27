@@ -9,6 +9,7 @@ import {aftOpening,aftOpeningFinish,aftOpeningJoints} from '../site/tidewater-ro
 import {aftColumn,aftColumnFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-column.js';
 import {cockpitLacquerFinish,cockpitAftGlassFinish,cockpitPortalFinish,cockpitSoleFinish,cockpitUpholsteryFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-lounge.js';
 import {aftCockpitTreads} from '../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
+import {aftFootMarginFinish,chaiseTowardStair} from '../site/tidewater-rocha/mobile/aft-cockpit-joins.js';
 import { connectTerrace, moveAlongRoute, routeSegments, routePoint } from '../site/tidewater-rocha/mobile/aft-terrace.js';
 import { convexHull, distanceToFootprint, indexFootprints } from '../site/tidewater-rocha/mobile/terrace-geometry.js';
 import { crossing } from '../site/tidewater-rocha/mobile/pasarela.js';
@@ -239,8 +240,8 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   const chaiseSeat=decode(chaise.find(p=>p.feature==='cockpit port chaise seat'));
   const plinth=chaise.find(p=>p.feature.endsWith('recessed plinth'));
   assert.ok(chaiseSeat.bounds[3]-chaiseSeat.bounds[0]>1.92);
-  assert.ok(verticalHits(chaiseSeat,6.45,.47).length);
-  assert.equal(verticalHits(chaiseSeat,7.12,.47).length,0,'The front edge curves inward through the waist');
+  assert.ok(verticalHits(chaiseSeat,6.45,.47+chaiseTowardStair).length);
+  assert.equal(verticalHits(chaiseSeat,7.12,.47+chaiseTowardStair).length,0,'The front edge curves inward through the waist');
   assert.ok(plinth.bounds[2]<chaiseSeat.bounds[2]&&plinth.bounds[5]===chaiseSeat.bounds[2]);
   assert.equal(chaise.filter(p=>p.feature.endsWith('cushion')).length,3);
   assert.equal(chaiseSeat.finish[3],cockpitUpholsteryFinish);
@@ -248,11 +249,16 @@ test('published furnishings reproduce the source geometry and stay inside the mo
   const blue=chaise.find(p=>p.feature.endsWith('blue cushion'));
   assert.ok(amber.bounds[2]>blue.bounds[2]&&amber.bounds[5]>blue.bounds[5],'The amber pillow rises behind the blue pillow');
   const casing=manifest.parts.find(p=>p.feature==='canted lacquered service locker under the aft stair');
+  const back=chaise.find(p=>p.feature==='cockpit port chaise back');
+  const cheek=manifest.parts.find(p=>p.feature==='gloss black stair cheek -1');
+  const gap=cheek.bounds[1]-back.bounds[4];
+  assert.ok(gap>.42&&gap<.45,'The closer chaise back preserves a visible gap to the locker');
   assert.equal(casing.finish[3],cockpitLacquerFinish);
   assert.ok(casing.bounds[5]>5.87&&casing.bounds[2]===3.95);
   assert.equal(manifest.parts.find(p=>p.feature==='smoked aft saloon sliding panels').finish[3],cockpitAftGlassFinish);
   assert.equal(manifest.parts.find(p=>p.role==='frame').finish[3],cockpitPortalFinish);
   assert.ok(manifest.parts.some(p=>p.role==='floor'&&p.finish[3]===cockpitSoleFinish));
+  assert.equal(manifest.parts.find(p=>p.feature==='inlaid teak cockpit stair margin').finish[3],aftFootMarginFinish);
   const bar=feature=>decode(furnishings.find(p=>p.feature===feature));
   const worktop=bar('cockpit wet bar inset white worktop');
   const drain=bar('cockpit wet bar dark circular drain');

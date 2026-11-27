@@ -1,4 +1,5 @@
 import { o as ShapeUtils } from '../../site/tidewater-rocha/assets/Materials-CAztm2ge.js';
+import {chaiseTowardStair} from '../../site/tidewater-rocha/mobile/aft-cockpit-joins.js';
 import {cockpitLocker,cockpitLacquerFinish,cockpitAftGlassFinish,cockpitPortalFinish,cockpitUpholsteryFinish} from '../../site/tidewater-rocha/mobile/aft-cockpit-lounge.js';
 
 const unit=([x,y,z])=>{const d=Math.hypot(x,y,z);return [x/d,y/d,z/d];};
@@ -75,6 +76,11 @@ function cushion(cx,cy,cz,width,height,depth,lean){
   return g;
 }
 
+function seatPart(part,g,finish,feature,suffix){
+  for(let i=1;i<g.vertices.length;i+=6)g.vertices[i]+=chaiseTowardStair;
+  return fitted(part,g,finish,feature,suffix);
+}
+
 export function mobileCockpitChaise(parts){
   return parts.flatMap(part=>{
     if(part.feature==='cockpit port chaise seat'){
@@ -82,8 +88,8 @@ export function mobileCockpitChaise(parts){
       const sole=loft(seatOutline,center,[[.90,.85,3.961,-.30],[.987,.98,4.044,.44]]);
       const seat=loft(seatOutline,center,[[.978,.963,4.044,-.69],[1.,1.,4.154,0],[.938,.914,4.342,1.24]]);
       return [
-        fitted(part,seat,[0xc5c3c7,.84,0,cockpitUpholsteryFinish]),
-        fitted(part,sole,[0x77717b,.35,.21,5],'cockpit port chaise recessed plinth','plinth'),
+        seatPart(part,seat,[0xc5c3c7,.84,0,cockpitUpholsteryFinish]),
+        seatPart(part,sole,[0x77717b,.35,.21,5],'cockpit port chaise recessed plinth','plinth'),
       ];
     }
     if(part.feature!=='cockpit port chaise back')return [part];
@@ -94,9 +100,9 @@ export function mobileCockpitChaise(parts){
       ['amber',7.623,.949,4.529,.385,.233,.152,.029,0xc99132],
       ['blue',7.506,.891,4.463,.330,.204,.132,.030,0x7a92af],
       ['ivory',7.237,.917,4.424,.345,.145,.124,.027,0xe6e1d8],
-    ].map(([name,x,y,z,w,h,d,lean,color])=>fitted(part,cushion(x,y,z,w,h,d,lean),
+    ].map(([name,x,y,z,w,h,d,lean,color])=>seatPart(part,cushion(x,y,z,w,h,d,lean),
       [color,.88,0,cockpitUpholsteryFinish],`cockpit port chaise ${name} cushion`,name));
-    return [fitted(part,back,[0xc2c2c5,.86,0,cockpitUpholsteryFinish]),...pillows];
+    return [seatPart(part,back,[0xc2c2c5,.86,0,cockpitUpholsteryFinish]),...pillows];
   });
 }
 

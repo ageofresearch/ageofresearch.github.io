@@ -10,12 +10,13 @@ import { cockpitSteelWGSL } from './port-cockpit.js?v=stbd-cockpit-1';
 import { portSideReflectionWGSL } from './port-side-reflection.js?v=port-passage-vr-1';
 import { portSideGlassCode } from './port-side-wall.js?v=port-passage-vr-1';
 import { makeCockpitOverheadWGSL } from './cockpit-overhead.js?v=cockpit-opening-v2';
-import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-column-v1';
+import { makeAftStairReflectionWGSL } from './aft-stair-reflection.js?v=cockpit-joins-v1';
 import { aftTeakWGSL } from './aft-cockpit-teak.js?v=cockpit-teak-v2';
 import { aftCheekWGSL } from './aft-cockpit-cheeks.js?v=cockpit-handrail-v1';
 import { aftColumn, aftColumnWGSL } from './aft-cockpit-column.js?v=cockpit-column-v1';
-import { aftOpeningJoints, aftOpeningWGSL } from './aft-cockpit-opening.js?v=cockpit-lounge-v1';
-import {cockpitAftGlassFinish,cockpitLoungeWGSL} from './aft-cockpit-lounge.js?v=1';
+import { aftOpeningJoints, aftOpeningWGSL } from './aft-cockpit-opening.js?v=cockpit-joins-v1';
+import {aftJoinsWGSL,cockpitPlankPitch,upperPlankPitch,aftLandingGuard} from './aft-cockpit-joins.js?v=1';
+import {cockpitAftGlassFinish,cockpitLoungeWGSL} from './aft-cockpit-lounge.js?v=cockpit-joins-v1';
 // Diffuse finishes receive prepared shadow and sunlit endpoints. Glossy
 // finishes add reflections in linear light before preparing those endpoints.
 function program(tagged) {
@@ -46,7 +47,8 @@ ${sleeveReflectionWGSL}
 ${cockpitSteelWGSL}
 ${makeCockpitOverheadWGSL({portLip:[...aftColumn.xy,aftColumn.openingRadius],portSocket:false,panelJoints:aftOpeningJoints})}
 ${aftTeakWGSL}
-${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)',support:aftColumn})}
+${aftJoinsWGSL}
+${makeAftStairReflectionWGSL({treadSample:'aftTeakReflection(hit,up,rough,distance,i)',treadCovers:'aftTeakCovers(hit.xy,i,up)',support:aftColumn,guard:aftLandingGuard})}
 ${aftCheekWGSL}
 ${aftColumnWGSL}
 ${aftOpeningWGSL}
@@ -229,11 +231,20 @@ fn shade(in:V)->vec4f{
    if(frame.wind.y>0.){return vec4f(.14,.15,.17,1.);}
    let eye=normalize(frame.eye.xyz-in.indirect);
    let reflected=aftStairReflection(in.indirect,normalize(in.direct),eye,frame.sun.xyz,in.uv.x,in.uv.y);
-   return vec4f(display(reflected),1.);
+   let contact=mix(.52,1.,smoothstep(3.951,3.988,in.indirect.y+2.01));
+   return vec4f(display(reflected*contact),1.);
  }
  if(in.layer<=-12 && in.layer>=-14){
    if(frame.wind.y>0.){return vec4f(.20,.22,.25,1.);}
-   return vec4f(display(aftCheekReflection(in.indirect,normalize(in.direct),in.uv.x,in.uv.y,-12-in.layer)),1.);
+   let normal=normalize(in.direct);
+   let sample=aftCheekReflection(in.indirect,normal,in.uv.x,in.uv.y,-12-in.layer);
+   let p=cockpitLoungeLocal(in.indirect);
+   if(in.layer==-12 && p.x>7.75 && p.x<8.052 && p.z>5.73 && normal.y>.25){
+     let polished=aftOpeningReflection(in.indirect,normal,.106,in.uv.y);
+     let turned=smoothstep(7.75,7.88,p.x)*smoothstep(.25,.62,normal.y);
+     return vec4f(display(mix(sample,polished,turned*.73)),1.);
+   }
+   return vec4f(display(sample),1.);
  }
  if(in.layer==-15){
    if(frame.wind.y>0.){return vec4f(.42,.46,.52,1.);}
@@ -255,6 +266,9 @@ fn shade(in:V)->vec4f{
    let edge=min(.018,max(fwidth(p.x),fwidth(p.y))*.57);
    let wood=aftTeakPaint(p,n,aftTeakIndex(p.z),edge);
    let sunlit=textureSampleCompareLevel(shadow,shadowSampler,in.light.xy*vec2f(.5,-.5)+.5,in.light.z-.00030);
+   if(p.z>5.962 && p.z<5.987 && p.x>8.021 && p.x<8.026 && n.z<-.70){
+     return vec4f(display(aftOpeningReflection(pos,n,.105,sunlit)*.59),1.);
+   }
    let red=in.uv.x+in.uv.y*sunlit;
    let energy=pow((red+.055)/1.055,2.4)/.509;
    let view=normalize(frame.eye.xyz-pos);
@@ -294,16 +308,27 @@ fn shade(in:V)->vec4f{
    radiance+=in.direct*lit;
  }
  if(in.layer>=0){
-   let layer=select(finish-1,5+clamp(i32(floor(in.uv.y))-1,0,12),finish==0 || finish==26);
+   let xy=vec2f(in.uv.x*2.15,(in.uv.y*8.-64.)*select(${cockpitPlankPitch},${upperPlankPitch},finish==28));
+   // The upper plank field shares the stock deck UV at the adjoining slab.
+   let stockUV=select(in.uv,vec2f(in.uv.x,(xy.y/.105+64.)/8.),finish==28);
+   let layer=select(finish-1,5+clamp(i32(floor(stockUV.y))-1,0,12),finish==0 || (finish>=26 && finish<=28));
    let upholstery=finish==24 || finish==25;
-   let weaveValue=textureSample(tiles,tileSampler,in.uv,select(layer,18,finish==20 || upholstery)).r;
+   let weaveValue=textureSample(tiles,tileSampler,stockUV,select(layer,18,finish==20 || upholstery)).r;
    var tile=weaveValue*1.1;
    if(upholstery){tile=.94+(weaveValue-.615)*select(2.05,.54,finish==25);}
-   if(finish==26){
-     let boards=in.uv.y*8.;
+   if(finish>=26 && finish<=28){
+     let boards=stockUV.y*8.;
      let seam=abs(fract(boards+.5)-.5);
      let aa=clamp(fwidth(boards)*.55,.005,.18);
-     tile*=.41+.59*smoothstep(.012,.016+aa,seam);
+     let grouted=tile*(.41+.59*smoothstep(.012,.016+aa,seam));
+     let pixel=max(fwidth(xy.x),fwidth(xy.y));
+     if(finish==28){
+       let lipping=aftUpperLipping(xy);
+       tile=aftUpperWood(xy,mix(tile,grouted,lipping),pixel);
+       radiance=mix(radiance,radiance*vec3f(.76,.87,1.04),lipping*.76);
+     }else{
+       tile=aftFootWood(xy,grouted,finish==27,pixel);
+     }
    }
    radiance=(radiance+.055)*tile-.055;
  }

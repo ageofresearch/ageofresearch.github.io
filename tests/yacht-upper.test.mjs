@@ -8,6 +8,8 @@ import {renderedParts} from '../site/tidewater-rocha/mobile/stair-surfaces.js';
 import {decodeUpper,connectUpper,loadUpper,restoreUpperHandoff} from '../site/tidewater-rocha/mobile/upper-terrace.js';
 import {topTriangles,onSurface} from '../site/tidewater-rocha/mobile/stern-access.js';
 import {nextProfile} from '../site/tidewater-rocha/mobile/main-saloon.js';
+import {aftLanding,aftLandingGuard} from '../site/tidewater-rocha/mobile/aft-cockpit-joins.js';
+import {aftOpeningFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-opening.js';
 const root=new URL('../site/tidewater-rocha/',import.meta.url);
 const manifest=JSON.parse(await readFile(new URL('mobile/upper-terrace.json',root)));
 const binary=await readFile(new URL('mobile/upper-terrace.bin',root));
@@ -31,6 +33,16 @@ test('two reproducible profiles preserve final furniture and stair supports with
   const supports=Object.values(upper.profiles).map(p=>p.audit.filter(a=>a.stair||a.support).map(a=>[a.id,a.triangles,a.error]));
   assert.equal(supports.length,2);
   assert.deepEqual(supports[0],supports[1]);
+  const [inner,outer,aft]=['inboard','port','aft'].map(side=>
+    manifest.parts.find(p=>p.feature===`aft landing polished ${side} saddle`));
+  assert.ok([inner,outer,aft].every(p=>p.finish[3]===aftOpeningFinish&&p.bounds[2]===6.0025));
+  assert.equal(inner.bounds[4],aftLanding.edge[0]);
+  assert.equal(outer.bounds[1],aftLanding.edge[1]);
+  assert.equal(aft.bounds[3],5.1);
+  const posts=manifest.parts.find(p=>p.feature==='stairwell guard posts on solid deck');
+  assert.equal(posts.bounds[2],inner.bounds[2],'The fixed guard sits on the polished saddles');
+  assert.ok(aftLandingGuard.sides[0]>inner.bounds[1]&&aftLandingGuard.sides[0]<inner.bounds[4]);
+  assert.ok(aftLandingGuard.sides[1]>outer.bounds[1]&&aftLandingGuard.sides[1]<outer.bounds[4]);
   const {model}=await fullFixture();
   try {
     const final=renderedParts(model);

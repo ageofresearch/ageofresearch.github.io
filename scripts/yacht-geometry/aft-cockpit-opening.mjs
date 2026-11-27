@@ -1,5 +1,5 @@
 import { o as ShapeUtils } from '../../site/tidewater-rocha/assets/Materials-CAztm2ge.js';
-import { aftCockpitGuard } from '../../site/tidewater-rocha/mobile/aft-cockpit-stair.js';
+import { aftLandingGuard } from '../../site/tidewater-rocha/mobile/aft-cockpit-joins.js';
 import { aftColumn } from '../../site/tidewater-rocha/mobile/aft-cockpit-column.js';
 import { aftOpening, aftOpeningFinish } from '../../site/tidewater-rocha/mobile/aft-cockpit-opening.js';
 import { cockpitOverheadOpening } from '../../site/tidewater-rocha/mobile/cockpit-overhead.js';
@@ -96,15 +96,17 @@ export function mobileAftOpening(parts){
 // Reduced outboard guard seen through the aperture from the main deck.
 // The ends sit behind the ceiling or the landing, outside this sightline.
 export function aftOpeningGuardForMain(part){
-  const {aft,fore,sides,middle,top,posts,floor}=aftCockpitGuard;
+  const {aft,fore,sides,middle,top,posts,floor,topHeightScale,midHeightScale}=aftLandingGuard;
   const vertices=[],indices=[];
-  function tube(a,b,radius,vertical){
+  function tube(a,b,radius,vertical,zScale=1){
     const sidesCount=vertical?4:6;
     const base=vertices.length/6;
     for(const center of [a,b])for(let i=0;i<sidesCount;i++){
       const angle=i*2*Math.PI/sidesCount+(vertical?Math.PI/4:0),c=Math.cos(angle),s=Math.sin(angle);
-      const n=vertical?[c,s,0]:[0,c,s];
-      vertices.push(...center.map((value,k)=>value+radius*n[k]),...n);
+      const level=vertical?[c,s,0]:[0,c,s*zScale];
+      const n=vertical?[c,s,0]:[0,c,s/zScale];
+      const length=Math.hypot(...n);
+      vertices.push(...center.map((value,k)=>value+radius*level[k]),...n.map(v=>v/length));
     }
     for(let i=0;i<sidesCount;i++){
       const a=base+i,b=base+(i+1)%sidesCount;
@@ -117,7 +119,7 @@ export function aftOpeningGuardForMain(part){
   }else{
     const upperRail=part.feature==='connected stairwell guard top';
     const [z,radius]=upperRail?[top,.022]:[middle,.012];
-    tube([aft,y,z],[fore,y,z],radius,false);
+    tube([aft,y,z],[fore,y,z],radius,false,upperRail?topHeightScale:midHeightScale);
   }
   return {...fitted(part,vertices,indices),light:Array(vertices.length/6).fill(.90),
     surfaceTypes:Array(vertices.length/6).fill(part.finish[3])};

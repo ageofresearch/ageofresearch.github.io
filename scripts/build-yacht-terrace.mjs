@@ -14,6 +14,8 @@ import {mobileAftOpening} from './yacht-geometry/aft-cockpit-opening.mjs';
 import {mobileCockpitChaise,mobileCockpitEnclosure,mobileCockpitPortal} from './yacht-geometry/aft-cockpit-lounge.mjs';
 import {cockpitSoleFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-lounge.js';
 
+import {aftFootMarginFinish,aftUpperDeckFinish} from '../site/tidewater-rocha/mobile/aft-cockpit-joins.js';
+
 const root = new URL('../site/tidewater-rocha/', import.meta.url);
 const boundsOf = vertices => [0, 1, 2].map(k => Math.min(...vertices.filter((_, i) => i % 6 === k)))
   .concat([0, 1, 2].map(k => Math.max(...vertices.filter((_, i) => i % 6 === k))));
@@ -119,7 +121,7 @@ export async function buildTerrace() {
     // original triangulation so the flattened lining and small fittings fit.
     if (role === 'floor' || role === 'hull') geometry = subdivide(geometry);
     parts.push({ id: source.id, feature: source.feature, role, materialID: source.materialID,
-      finish: role==='floor' ? [0xb08d6d,.71,0,source.feature==='inlaid teak cockpit stair margin'?1:cockpitSoleFinish] : source.finish,
+      finish: role==='floor' ? [0xb08d6d,.71,0,source.feature==='inlaid teak cockpit stair margin'?aftFootMarginFinish:cockpitSoleFinish] : source.finish,
       glass: !!source.glass, smokedGlass: !!source.glass,
       ...geometry, bounds: boundsOf(geometry.vertices) });
   }
@@ -202,7 +204,9 @@ export async function buildTerrace() {
         .filter(([dx,dy]) => roof.some(t => containsTriangle(x + dx, y + dy, t))).length / 5 : 0;
       const contact=part.role==='floor' && nz>.5 ? contactShade(x,y,furnitureFootprints) : 1;
       part.light.push((.96 - .38 * cover)*contact);
-      part.surfaceTypes.push(part.role === 'floor' && nz <= .5 ? 1 : part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
+      part.surfaceTypes.push(part.role === 'floor' && nz <= .5 ? 1 :
+        part.role==='roof'&&nz>.8&&z>=5.999 ? aftUpperDeckFinish :
+        part.role === 'roof' && nz < -.5 ? 9 : part.finish[3]);
     }
   }
   const chunks = [];

@@ -1,3 +1,5 @@
+import {chaiseTowardStair} from './aft-cockpit-joins.js?v=1';
+
 export const cockpitSoleFinish = 75;
 export const cockpitLacquerFinish = 76;
 export const cockpitAftGlassFinish = 52;
@@ -41,7 +43,7 @@ fn cockpitLoungeRadiance(p:vec3f,ray:vec3f,rough:f32)->vec3f{
     let highlight=1.-smoothstep(.04,.16,abs(roof.x-8.41));
     light=vec3f(.218,.220,.223)+highlight*vec3f(.092,.095,.101);
   }
-  let seatT=(1.08-p.y)/aftStairSafe(d.y);
+  let seatT=(${1.08+chaiseTowardStair}-p.y)/aftStairSafe(d.y);
   let cushion=p+seatT*d;
   if(seatT>.008 && seatT<nearest && d.y<0. && cushion.x>6.01 && cushion.x<8.06 &&
      cushion.z>4.025 && cushion.z<4.664){
@@ -78,8 +80,9 @@ fn cockpitLoungeCoat(pos:vec3f,n:vec3f,rough:f32,lit:f32,frameMetal:bool)->vec3f
   if(frameMetal){
     let seam=min(min(abs(p.y-.728),abs(p.y-1.365)),min(abs(p.y+.554),abs(p.y+2.970)));
     let track=min(abs(p.z-3.957),abs(p.z-5.847));
-    let smallFeature=min(seam,track);
-    let metal=select(.34+.62*(1.-smoothstep(.009,.025,smallFeature)),.74,p.x<8.37);
+    let rail=1.-smoothstep(.007,.019,track);
+    let bevel=1.-smoothstep(.002,.009,abs(seam-.006));
+    let metal=select(.16+.75*max(rail,bevel),.74,p.x<8.37);
     return (.016+reflected*metal)+vec3f(.94,.89,.82)*sun;
   }
   let door=vec4f(${cockpitLocker.door.join(',')});

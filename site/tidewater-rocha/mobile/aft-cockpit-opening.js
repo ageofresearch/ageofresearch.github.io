@@ -52,7 +52,7 @@ fn aftOpeningReflection(pos:vec3f,n:vec3f,rough:f32,lit:f32)->vec3f{
   let seam=1.-smoothstep(.004,.013,p.z-5.88);
   let outboard=smoothstep(2.56,2.67,p.y);
   let end=(1.-smoothstep(5.64,5.91,p.x));
-  let mirror=max(outboard,end);
+  let mirror=select(max(outboard,end),1.,rough<.13 && p.z>5.95);
   let edge=pow(1.-abs(dot(n,eye)),4.);
   let halfWidth=.001+rough*rough*.07;
   let lobe=halfWidth/(halfWidth+1.-max(0.,dot(ray,frame.sun.xyz)));

@@ -8,6 +8,7 @@ export const aftColumn = Object.freeze({
 });
 
 export const aftColumnWGSL = /* wgsl */ `
+@diagnostic(off,derivative_uniformity)
 fn aftColumnReflection(pos:vec3f,n:vec3f,rough:f32,lit:f32)->vec3f{
   let eye=normalize(frame.eye.xyz-pos);
   let ray=reflect(-eye,n);
@@ -20,9 +21,11 @@ fn aftColumnReflection(pos:vec3f,n:vec3f,rough:f32,lit:f32)->vec3f{
   var nearest=45.;
   let deckT=(3.95-p.z)/aftStairSafe(d.z);
   let deck=p+deckT*d;
+  let footprint=min(.052,fwidth(deck.y)*.6+rough*.013);
   if(deckT>.006 && deckT<nearest && aftStairInside(deck.xy,vec4f(2.34,-3.35,8.50,3.53))){
-    let plank=1.-smoothstep(.006,.018+rough*.018,abs(fract(deck.y/.104+.5)-.5)*.104);
-    light=vec3f(.299,.233,.172)*(1.-.50*plank);
+    let groove=abs(fract(deck.y/.104+.5)-.5)*.104;
+    let plank=(1.-smoothstep(.003,.008+footprint,groove))*(1.-smoothstep(.022,.047,footprint));
+    light=vec3f(.299,.233,.172)*(1.-.43*plank);
     nearest=deckT;
   }
   let roofT=(${aftColumn.ceiling}-p.z)/aftStairSafe(d.z);
